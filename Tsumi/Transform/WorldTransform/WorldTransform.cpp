@@ -21,6 +21,7 @@ void WorldTransform::UpdateMatrix() {
 		matWorld = matWorld * parent->matWorld;
 	}
 
+	// 行列の計算・転送
 	TransferMatrix();
 }
 
@@ -63,4 +64,15 @@ void WorldTransform::TransferMatrix() {
 	constMap->WVP = matWorld;
 	constMap->World = matWorld;
 	UnMap();
+}
+
+// ワールド座標の取得
+Vector3 WorldTransform::GetWorldPos() {
+
+	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
+}
+
+// 親子関係を結ぶ
+void WorldTransform::SetParent(const WorldTransform* parentTransform) {
+	parent = parentTransform;
 }

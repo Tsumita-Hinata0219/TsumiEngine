@@ -209,6 +209,9 @@
     <Filter Include="Project\GameObject\Terrain\Skydome">
       <UniqueIdentifier>{ba3965a0-6478-4ceb-b31c-abf3a1ffba07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Character\Player\Bullet">
+      <UniqueIdentifier>{6ad5bace-2d45-488d-a868-d382e0b70202}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -364,6 +367,9 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp">
       <Filter>Project\GameObject\Terrain\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp">
+      <Filter>Project\GameObject\Character\Player\Bullet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -570,6 +576,9 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h">
       <Filter>Project\GameObject\Terrain\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h">
+      <Filter>Project\GameObject\Character\Player\Bullet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

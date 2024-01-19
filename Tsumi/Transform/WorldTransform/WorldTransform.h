@@ -16,11 +16,11 @@ struct TransformationMatrix {
 struct WorldTransform {
 
 	// ローカルスケール
-	Vector3 scale = { 1.0f, 1.0f, 1.0f };
+	Vector3 scale = Vector3::one;
 	// ローカル回転軸
-	Vector3 rotate = { 0.0f, 0.0f, 0.0f };
+	Vector3 rotate = Vector3::zero;
 	// ローカル座標
-	Vector3 translate = { 0.0f, 0.0f, 0.0f };
+	Vector3 translate = Vector3::zero;
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};
@@ -33,7 +33,6 @@ struct WorldTransform {
 
 	//// マッピング済みアドレス
 	TransformationMatrix* constMap;
-	//TransformationMatrix* buffMap;
 
 	/// <summary>
 	/// 初期化処理
@@ -44,6 +43,26 @@ struct WorldTransform {
 	/// 行列の更新処理
 	/// </summary>
 	void UpdateMatrix();
+
+
+#pragma region Get
+
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	Vector3 GetWorldPos();
+
+#pragma endregion
+
+#pragma region Set
+
+	/// <summary>
+	/// 親子関係を結ぶ
+	/// </summary>
+	void SetParent(const WorldTransform* parentTransform);
+
+#pragma endregion
+
 
 	/// <summary>
 	/// 定数バッファの生成

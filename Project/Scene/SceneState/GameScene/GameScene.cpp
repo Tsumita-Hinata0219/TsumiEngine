@@ -2,6 +2,20 @@
 
 
 
+
+/// <summary>
+/// デストラクタ
+/// </summary>
+GameScene::~GameScene() {
+
+	/* ----- プレイヤー Player ----- */
+	for (PlayerBullet* bullet : playerBullets_) {
+		delete bullet;
+	}
+}
+
+
+
 /// <summary>
 /// 初期化処理
 /// </summary>
@@ -12,19 +26,20 @@ void GameScene::Initialize() {
 	GameCamera_.translate = { 0.0f, 5.0f, -40.0f };
 
 
-	// スカイドーム
+	/* ----- Skydome スカイドーム ----- */
 	skydome_ = make_unique<Skydome>();
 	skydome_->Initialize();
 
 
-	// グラウンド
+	/* ----- Ground グラウンド ----- */
 	ground_ = make_unique<Ground>();
 	ground_->Initialize();
 
-	// プレイヤー
+
+	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Initialize();
-
+	player_->SetRegisterScene(this); // シーンの設定
 }
 
 
@@ -37,16 +52,19 @@ void GameScene::Update(GameManager* state) {
 	GameCamera_.UpdateMatrix();
 
 
-	// スカイドーム
+	/* ----- Skydome スカイドーム ----- */
 	skydome_->Update();
 
 
-	// グラウンド
+	/* ----- Ground グラウンド ----- */
 	ground_->Update();
 
 
-	// プレイヤー
+	/* ----- Player プレイヤー ----- */
 	player_->Update();
+	for (PlayerBullet* bullet : playerBullets_) {
+		bullet->Update();
+	}
 
 
 #ifdef _DEBUG
@@ -75,15 +93,17 @@ void GameScene::BackSpriteDraw() {
 /// </summary>
 void GameScene::ModelDraw() {
 
-	// スカイドーム
+	/* ----- Skydome スカイドーム ----- */
 	skydome_->Draw(GameCamera_);
 
-	// グラウンド
+	/* ----- Ground グラウンド ----- */
 	ground_->Draw(GameCamera_);
 
-	// プレイヤー
+	/* ----- Player プレイヤー ----- */
 	player_->Draw(GameCamera_);
-
+	for (PlayerBullet* bullet : playerBullets_) {
+		bullet->Draw(GameCamera_);
+	}
 }
 
 

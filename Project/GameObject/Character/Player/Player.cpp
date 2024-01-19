@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "GameManager.h"
 
 
 // 初期化処理
@@ -19,6 +19,15 @@ void Player::Initialize()
 	// 移動量
 	move_ = Vector3::zero;
 	moveSpeed_ = 0.5f;
+
+
+
+	// バレットモデルの初期化
+	modelBullet_ = make_unique<Model>();
+	modelBullet_->CreateFromObj("PlayerBullet");
+
+	// バレットの移動速度
+	bulletVelocity_ = { 0.0f, 0.0f, 4.0f };
 }
 
 
@@ -28,22 +37,20 @@ void Player::Update()
 	// 移動処理
 	Move();
 
+	// 射撃処理
+	Attack();
+
 
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
-
-
 
 
 #ifdef _DEBUG
 
 	if (ImGui::TreeNode("Player")) 
 	{
-		ImGui::DragFloat3("Scale", &worldTransform_.scale.x, 0.01f);
 		ImGui::DragFloat3("Rotate", &worldTransform_.rotate.x, 0.01f);
 		ImGui::DragFloat3("Translate", &worldTransform_.translate.x, 0.01f);
-		ImGui::DragFloat3("Velocity", &velocity_.x, 0.01f);
-		ImGui::DragFloat3("Move", &move_.x, 0.01f);
 		ImGui::TreePop();
 	}
 
@@ -55,7 +62,6 @@ void Player::Update()
 void Player::Draw(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
-
 }
 
 
@@ -89,5 +95,27 @@ void Player::Move() {
 	// 速度を常に加算
 	velocity_ += move_;
 	worldTransform_.translate += velocity_;
+}
+
+
+// 射撃処理
+void Player::Attack() {
+
+	if (KeyInput::TriggerKey(DIK_SPACE)) {
+		PushBackBulletList();
+	}
+}
+
+
+// バレットリストの登録
+void Player::PushBackBulletList()
+{
+	PlayerBullet* newBullet = new PlayerBullet();
+	Vector3 newPos = worldTransform_.GetWorldPos();
+	Vector3 newVel = TransformNormal(bulletVelocity_, worldTransform_.matWorld);
+
+	newBullet->Initialize((*modelBullet_), newPos, newVel);
+
+	GameScene_->AddPlayerBulletList(newBullet);
 }
 

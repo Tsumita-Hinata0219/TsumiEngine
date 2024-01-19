@@ -1,7 +1,12 @@
-﻿#pragma once
+#pragma once
 
 #include "IScene.h"
 #include "GameManager.h"
+
+#include "ViewProjection.h"
+#include "Player/Player.h"
+#include "Skydome/Skydome.h"
+#include "Ground/Ground.h"
 
 
 class GameScene : public IScene {
@@ -46,6 +51,16 @@ public:
 
 private:
 
+	// メインカメラ
+	ViewProjection GameCamera_{};
 
+	// プレイヤー
+	std::unique_ptr<Player> player_ = nullptr;
+
+	// スカイドーム
+	std::unique_ptr<Skydome> skydome_ = nullptr;
+
+	// グラウンド
+	std::unique_ptr<Ground> ground_ = nullptr;
 };
 

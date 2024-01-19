@@ -38,6 +38,7 @@ void Tsumi::Initialize() {
 
 	// Inputの初期化処理
 	Input::Initialize();
+	KeyInput::Initialize();
 
 	// Audioの初期化処理
 	Audio::Initialize();
@@ -66,6 +67,7 @@ void Tsumi::BeginFlame() {
 	DirectXCommon::PreDraw();
 	ImGuiManager::BeginFrame();
 	Input::BeginFrame();
+	KeyInput::BeginFrame();
 	DescriptorManager::BeginFrame();
 }
 

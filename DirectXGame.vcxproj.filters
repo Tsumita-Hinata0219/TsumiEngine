@@ -194,8 +194,20 @@
     <Filter Include="Tsumi\Input">
       <UniqueIdentifier>{49ea0ea1-2e38-4d0a-879c-314b1a687ea8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Project\GameObject\Player">
+    <Filter Include="Project\GameObject\Terrain">
+      <UniqueIdentifier>{0e872c09-bcb3-4647-90c2-36f128e07af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character">
+      <UniqueIdentifier>{1b631594-120a-42d3-9ff1-6d133e09fc8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\Player">
       <UniqueIdentifier>{c241a4a2-3218-44d7-818d-f60fdf0ca9c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Terrain\Ground">
+      <UniqueIdentifier>{b8328902-884b-4376-8837-1294eb2318b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Terrain\Skydome">
+      <UniqueIdentifier>{ba3965a0-6478-4ceb-b31c-abf3a1ffba07}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -343,6 +355,15 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Input\Input.cpp">
       <Filter>Tsumi\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp">
+      <Filter>Project\GameObject\Terrain\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp">
+      <Filter>Project\GameObject\Terrain\Ground</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -540,6 +561,15 @@
     </ClInclude>
     <ClInclude Include="Tsumi\Input\Input.h">
       <Filter>Tsumi\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Player.h">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h">
+      <Filter>Project\GameObject\Terrain\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h">
+      <Filter>Project\GameObject\Terrain\Ground</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

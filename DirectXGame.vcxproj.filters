@@ -194,6 +194,9 @@
     <Filter Include="Tsumi\Input">
       <UniqueIdentifier>{49ea0ea1-2e38-4d0a-879c-314b1a687ea8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Player">
+      <UniqueIdentifier>{c241a4a2-3218-44d7-818d-f60fdf0ca9c8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">

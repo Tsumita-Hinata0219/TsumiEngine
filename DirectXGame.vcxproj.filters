@@ -1,0 +1,587 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="リソース ファイル">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="リソース ファイル\shaders">
+      <UniqueIdentifier>{00b8048a-8066-4c78-aced-9b5a9c8cdc9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="externals">
+      <UniqueIdentifier>{a71d56a4-0df8-4b8d-80ad-ae62242eaef2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="externals\imgui">
+      <UniqueIdentifier>{d46bcfbd-ff0b-454e-ac17-083e2c39cda5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project">
+      <UniqueIdentifier>{e0f3d3c5-5509-4775-9db0-88613708bb4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject">
+      <UniqueIdentifier>{d4c3b252-12fa-45d0-a8df-ed30ab616ed5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameManager">
+      <UniqueIdentifier>{2c43ed14-4585-4202-b992-5b02ef0e6773}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene">
+      <UniqueIdentifier>{a87e714d-6ef3-47aa-aa3d-6789d4bb2b0a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\SceneState">
+      <UniqueIdentifier>{116c6e4c-b3ee-4e08-99cd-1670ba95f382}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi">
+      <UniqueIdentifier>{7f336eca-0916-4e0d-a05a-189c691263c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\2D">
+      <UniqueIdentifier>{29a466d3-6a06-4240-a76c-8fafb8b3092d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D">
+      <UniqueIdentifier>{84ba9a78-87c4-458b-8c08-7f338e692b21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model">
+      <UniqueIdentifier>{7f960782-1a91-4d97-85d4-4a5f9e20b87b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model\ModelObj">
+      <UniqueIdentifier>{c076c4d6-ebcb-4a42-a84a-5949ee257c4c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform">
+      <UniqueIdentifier>{410c4d1c-9e0d-4acb-8b3d-5a7a47545713}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform\WorldTransform">
+      <UniqueIdentifier>{8481eb3c-dd2c-44dd-9cb1-7f601271a0f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform\ViewProjection">
+      <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\DebugTools">
+      <UniqueIdentifier>{b2321114-df5e-4b1e-acbc-8abb24f9b03a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\DebugTools\DebugCamera">
+      <UniqueIdentifier>{53e9d30f-cbab-4b47-951c-306fbb66304c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\DebugTools\HowToUseEngine">
+      <UniqueIdentifier>{e482edd3-d5c9-44ea-ac14-94f3f11769a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\CreateResource">
+      <UniqueIdentifier>{1d9f1210-1048-46a4-82e4-d59cd23eeeed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base">
+      <UniqueIdentifier>{e6b94072-9335-4c36-938b-cfca9390a282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\WinApp">
+      <UniqueIdentifier>{8cf1c134-ac91-4673-9110-27e00c59335d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\DXCommon">
+      <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic">
+      <UniqueIdentifier>{ed37e39a-0754-4546-b8b8-761c2d815f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager">
+      <UniqueIdentifier>{7bd3a32e-fa6b-49e8-9fb1-12e002060921}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\PipelineStateObject">
+      <UniqueIdentifier>{edc602cb-9680-4364-9933-a0fa73b391dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\ShaderManager">
+      <UniqueIdentifier>{427500a4-c1e3-4fd7-964f-16f66b11948a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Audio">
+      <UniqueIdentifier>{9a0b0b13-3dee-443a-ae52-871254dc45af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Audio\AudioDataResource">
+      <UniqueIdentifier>{8b720fe9-2b98-40ae-9219-5301b5816d86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\DescriptorManager">
+      <UniqueIdentifier>{778508fb-90d8-446d-bdb3-eb10629e872d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\TextureManager">
+      <UniqueIdentifier>{0608ac8f-1c0b-4d5d-9f7e-8445a1cf9d3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\TextureManager\TextureDataResource">
+      <UniqueIdentifier>{76ac3ab1-676a-4be6-b960-1691278c5c20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities">
+      <UniqueIdentifier>{2c32b687-6c19-47a6-aa68-8e00d4109980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\ImGuiManager">
+      <UniqueIdentifier>{bea82438-5571-4273-b304-be57de0bea14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\CollisionManager">
+      <UniqueIdentifier>{9722b94c-73e5-43ad-b6be-638440c27121}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\CollisionManager\Collider">
+      <UniqueIdentifier>{0e727eb4-70c8-41e5-8f7e-2352a8ffc4cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\CollisionManager\CollisionStructures">
+      <UniqueIdentifier>{dfbd90c8-d58b-4f44-aba8-d5e07ad1fb62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\CollisionManager\GeometryCollision">
+      <UniqueIdentifier>{5d1fe9db-3ba2-449f-b3dc-1577409607bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\CollisionManager\IsCollision">
+      <UniqueIdentifier>{71571632-e559-4d7c-9ecb-acc0e033ac55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\SceneState\DebugScene">
+      <UniqueIdentifier>{5031506f-037a-47ee-b567-e57ec5678b47}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\SceneState\GameScene">
+      <UniqueIdentifier>{8ddca8e6-ed4c-46c8-baac-ef2581b7fa04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model\ModelObj\ObjDataResource">
+      <UniqueIdentifier>{f4285403-e9ff-4af2-9bcc-674eb83f8b22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model\ModelManager">
+      <UniqueIdentifier>{03b665b6-4594-44c2-942a-d335b22dacc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\2D\state">
+      <UniqueIdentifier>{9dc60469-254f-4de8-b168-70438b891779}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\2D\state\SpriteBoxState">
+      <UniqueIdentifier>{53d52cc1-c380-49bb-9784-bf4bc42590db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Particle">
+      <UniqueIdentifier>{e00c537e-0498-4f7e-90de-0f819054f4bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Particle\ParticlePlane">
+      <UniqueIdentifier>{313e4394-fc5f-4510-9c21-cb410989d7b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model\ModelSphere">
+      <UniqueIdentifier>{a41ff7e1-5fa5-4f65-a0fa-4a224d71c475}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\3D\Model\ModelPlane">
+      <UniqueIdentifier>{56a52767-94a9-4da5-ad27-5118ab8d8c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Light">
+      <UniqueIdentifier>{82bd8b4a-4aa1-49e3-89ff-ad75113bb390}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Normal">
+      <UniqueIdentifier>{eee5e0c4-7c8d-4275-9872-16ce799af843}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Particle">
+      <UniqueIdentifier>{4f8bff12-a776-4cb6-bdc8-a21735c8cabf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Sprite">
+      <UniqueIdentifier>{29110776-b866-4729-bb8d-20c89b34cfbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Camera">
+      <UniqueIdentifier>{24509859-5a3f-4020-9443-ada0186ed22f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\RandomGenerator">
+      <UniqueIdentifier>{789707df-a11b-48e0-998c-88a760911e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math">
+      <UniqueIdentifier>{54521541-bbdb-4dfd-9717-5f6e364402b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathFunction">
+      <UniqueIdentifier>{cbb07098-6a66-4874-99f7-82875660df4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathOperations">
+      <UniqueIdentifier>{b79778bb-2c4c-40e5-93e2-b3ac61ed554c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathStructure">
+      <UniqueIdentifier>{56713aad-a8ab-40b7-9829-6c8a9f86d700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathStructure\Matrix">
+      <UniqueIdentifier>{6f9b0e27-4c35-4bee-81fa-605ab11495fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathStructure\Vector">
+      <UniqueIdentifier>{09c2550a-c7bb-4b97-88ed-3fc2268e6dbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Math\MathQuaternion">
+      <UniqueIdentifier>{0b8bd0f7-c92a-44e0-9320-3ece1762735a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Input">
+      <UniqueIdentifier>{49ea0ea1-2e38-4d0a-879c-314b1a687ea8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="externals\imgui\imgui.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_demo.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_draw.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_impl_dx12.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_impl_win32.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_tables.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="externals\imgui\imgui_widgets.cpp">
+      <Filter>externals\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Project\GameManager\GameManager.cpp">
+      <Filter>Project\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp">
+      <Filter>Tsumi\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp">
+      <Filter>Tsumi\CreateResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\ModelObj\ModelObjState.cpp">
+      <Filter>Tsumi\3D\Model\ModelObj</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\Model.cpp">
+      <Filter>Tsumi\3D\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp">
+      <Filter>Tsumi\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Base\DXCommon\DirectXCommon.cpp">
+      <Filter>Tsumi\Base\DXCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Base\WinApp\WinApp.cpp">
+      <Filter>Tsumi\Base\WinApp</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\ShaderManager\ShaderManager.cpp">
+      <Filter>Tsumi\Graphic\ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\DebugTools\DebugCamera\DebugCamera.cpp">
+      <Filter>Tsumi\DebugTools\DebugCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.cpp">
+      <Filter>Tsumi\DebugTools\HowToUseEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp">
+      <Filter>Tsumi\Transform\WorldTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Transform\ViewProjection\ViewProjection.cpp">
+      <Filter>Tsumi\Transform\ViewProjection</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Audio\Audio.cpp">
+      <Filter>Tsumi\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Audio\AudioDataResource\AudioDataResource.cpp">
+      <Filter>Tsumi\Audio\AudioDataResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp">
+      <Filter>Tsumi\DescriptorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp">
+      <Filter>Tsumi\TextureManager\TextureDataResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.cpp">
+      <Filter>Tsumi\Utilities\ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.cpp">
+      <Filter>Tsumi\Utilities\CollisionManager\GeometryCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.cpp">
+      <Filter>Tsumi\Utilities\CollisionManager\IsCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\CollisionManager\CollisionManager.cpp">
+      <Filter>Tsumi\Utilities\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\SceneState\DebugScene\DebugScene.cpp">
+      <Filter>Project\Scene\SceneState\DebugScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp">
+      <Filter>Project\Scene\SceneState\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Tsumi.cpp">
+      <Filter>Tsumi</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.cpp">
+      <Filter>Tsumi\3D\Model\ModelObj\ObjDataResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\ModelManager\ModelManager.cpp">
+      <Filter>Tsumi\3D\Model\ModelManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.cpp">
+      <Filter>Tsumi\2D\state\SpriteBoxState</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Particle\Particle.cpp">
+      <Filter>Tsumi\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.cpp">
+      <Filter>Tsumi\3D\Model\ModelSphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.cpp">
+      <Filter>Tsumi\3D\Model\ModelPlane</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Particle\ParticlePlane\ParticlePlane.cpp">
+      <Filter>Tsumi\Particle\ParticlePlane</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Light</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Normal</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MathFunction\MathFunction.cpp">
+      <Filter>Project\Math\MathFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MathQuaternion\MathQuaternion.cpp">
+      <Filter>Project\Math\MathQuaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector.cpp">
+      <Filter>Project\Math\MathStructure\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp">
+      <Filter>Project\Math\MathStructure\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Input\Input.cpp">
+      <Filter>Tsumi\Input</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="externals\imgui\imconfig.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imgui.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imgui_impl_dx12.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imgui_impl_win32.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imgui_internal.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imstb_rectpack.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imstb_textedit.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="externals\imgui\imstb_truetype.h">
+      <Filter>externals\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\math\Struct.h">
+      <Filter>Project\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameManager\GameManager.h">
+      <Filter>Project\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\IScene.h">
+      <Filter>Project\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\2D\Sprite\Sprite.h">
+      <Filter>Tsumi\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\CreateResource\CreateResource.h">
+      <Filter>Tsumi\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\ModelObj\ModelObjState.h">
+      <Filter>Tsumi\3D\Model\ModelObj</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\IModelState.h">
+      <Filter>Tsumi\3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\Model.h">
+      <Filter>Tsumi\3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\TextureManager\TextureManager.h">
+      <Filter>Tsumi\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h">
+      <Filter>Tsumi\Base\DXCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Base\WinApp\WinApp.h">
+      <Filter>Tsumi\Base\WinApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\ShaderManager\ShaderManager.h">
+      <Filter>Tsumi\Graphic\ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\DebugTools\DebugCamera\DebugCamera.h">
+      <Filter>Tsumi\DebugTools\DebugCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.h">
+      <Filter>Tsumi\DebugTools\HowToUseEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h">
+      <Filter>Tsumi\Transform\WorldTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Transform\ViewProjection\ViewProjection.h">
+      <Filter>Tsumi\Transform\ViewProjection</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Audio\Audio.h">
+      <Filter>Tsumi\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Audio\AudioDataResource\AudioDataResource.h">
+      <Filter>Tsumi\Audio\AudioDataResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h">
+      <Filter>Tsumi\DescriptorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h">
+      <Filter>Tsumi\TextureManager\TextureDataResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.h">
+      <Filter>Tsumi\Utilities\ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionStructures\CollisionStructures.h">
+      <Filter>Tsumi\Utilities\CollisionManager\CollisionStructures</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\AABBCollider.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\ColliderConfig.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\OBBCollider.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SegmentCollider.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SphereCollider.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.h">
+      <Filter>Tsumi\Utilities\CollisionManager\GeometryCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.h">
+      <Filter>Tsumi\Utilities\CollisionManager\IsCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionManager.h">
+      <Filter>Tsumi\Utilities\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\SceneState\DebugScene\DebugScene.h">
+      <Filter>Project\Scene\SceneState\DebugScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h">
+      <Filter>Project\Scene\SceneState\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Tsumi.h">
+      <Filter>Tsumi</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h">
+      <Filter>Tsumi\3D\Model\ModelObj\ObjDataResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\ModelManager\ModelManager.h">
+      <Filter>Tsumi\3D\Model\ModelManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\2D\Sprite\state\ISpriteState.h">
+      <Filter>Tsumi\2D\state</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.h">
+      <Filter>Tsumi\2D\state\SpriteBoxState</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Particle\Particle.h">
+      <Filter>Tsumi\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Particle\IParticleState.h">
+      <Filter>Tsumi\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.h">
+      <Filter>Tsumi\3D\Model\ModelSphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.h">
+      <Filter>Tsumi\3D\Model\ModelPlane</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Particle\ParticlePlane\ParticlePlane.h">
+      <Filter>Tsumi\Particle\ParticlePlane</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\GameObject.h">
+      <Filter>Project\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineStructure.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Light</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Normal</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\RandomGenerator\RandomGenerator.h">
+      <Filter>Tsumi\Utilities\RandomGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MathFunction\MathFunction.h">
+      <Filter>Project\Math\MathFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MathOperations\MathOperations.h">
+      <Filter>Project\Math\MathOperations</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MathQuaternion\MathQuaternion.h">
+      <Filter>Project\Math\MathQuaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MathStructure\Vector\Vector.h">
+      <Filter>Project\Math\MathStructure\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MathStructure\Matrix\Matrix.h">
+      <Filter>Project\Math\MathStructure\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MyMath.h">
+      <Filter>Project\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Input\Input.h">
+      <Filter>Tsumi\Input</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\SpriteObject3d.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\LightObject.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\LightObject.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\NormalObject3d.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\NormalObject3d.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleObject3D.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\ParticleObject3D.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="externals\imgui\LICENSE.txt">
+      <Filter>externals\imgui</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shaders\LightObject.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\SpriteObject3d.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\NormalObject3d.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\ParticleObject3D.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+  </ItemGroup>
+</Project>

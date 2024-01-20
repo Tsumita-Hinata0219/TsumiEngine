@@ -16,6 +16,9 @@ GameScene::~GameScene() {
 	for (Enemy* enemy : enemys_) {
 		delete enemy;
 	}
+	for (EnemyBullet* bullet : enemyBullets_) {
+		delete bullet;
+	}
 }
 
 
@@ -48,6 +51,7 @@ void GameScene::Initialize() {
 	/* ----- Enemy エネミー ----- */
 	enemyManager_ = make_unique<EnemyManager>();
 	enemyManager_->Initialize();
+	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->SetRegisterScene(this);
 }
 
@@ -78,11 +82,12 @@ void GameScene::Update(GameManager* state) {
 
 	/* ----- Enemy エネミー ----- */
 	enemyManager_->Update();
-	enemyManager_->SetPlayer(player_.get());
 	for (Enemy* enemy : enemys_) {
 		enemy->Update();
 	}
-
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Update();
+	}
 
 #ifdef _DEBUG
 
@@ -125,6 +130,9 @@ void GameScene::ModelDraw() {
 	/* ----- Enemy エネミー ----- */
 	for (Enemy* enemy : enemys_) {
 		enemy->Draw(GameCamera_);
+	}
+	for (EnemyBullet* bullet : enemyBullets_) {
+		bullet->Draw(GameCamera_);
 	}
 }
 

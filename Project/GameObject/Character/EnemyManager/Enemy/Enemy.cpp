@@ -22,6 +22,17 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 
 	// ムーブフェーズの初期化処理
 	MovePhaseInit();
+
+
+	// バレットモデルの初期化
+	modelBullet_ = make_unique<Model>();
+	modelBullet_->CreateFromObj("EnemyBullet");
+
+	// バレットの移動速度
+	bulletVelocity_ = { 0.0f, 0.0f, 4.0f };
+
+	// 一回の処理で何発撃つか
+	bulletsPerSpanw_ = 1;
 }
 
 
@@ -30,6 +41,11 @@ void Enemy::Update()
 {
 	// 移動のステートパターン処理
 	MovePhaseUpdate();
+
+
+	if (KeyInput::TriggerKey(DIK_B)) {
+		Attack();
+	}
 
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
@@ -40,6 +56,28 @@ void Enemy::Update()
 void Enemy::Draw(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+}
+
+
+// 射撃処理
+void Enemy::Attack() {
+
+	for (int i = 0; i < bulletsPerSpanw_; i++) {
+		PushBackBulletList();
+	}
+}
+
+
+// バレットリストの登録
+void Enemy::PushBackBulletList() 
+{
+	EnemyBullet* newBullet = new EnemyBullet();
+	Vector3 newPos = worldTransform_.GetWorldPos();
+	Vector3 newVel = TransformNormal(bulletVelocity_, worldTransform_.matWorld);
+
+	newBullet->Initialize((*modelBullet_), newPos, newVel);
+
+	GameScene_->AddEnemyBulletList(newBullet);
 }
 
 

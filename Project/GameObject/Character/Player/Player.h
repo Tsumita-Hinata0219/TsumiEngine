@@ -11,7 +11,7 @@ class GameScene;
 /* Playerクラス */
 class Player {
 
-public: // メンバ関数
+public: // プレイヤー本体 : メンバ関数
 
 	/// <summary>
 	/// コンストラクタ
@@ -57,8 +57,7 @@ public: // メンバ関数
 
 #pragma endregion
 
-
-private: // メンバ関数
+private: // プレイヤー本体 : メンバ関数
 
 	/// <summary>
 	/// 移動処理
@@ -70,16 +69,7 @@ private: // メンバ関数
 	/// </summary>
 	void Attack();
 
-
-private: // メンバ関数
-
-	/// <summary>
-	/// バレットリストの登録
-	/// </summary>
-	void PushBackBulletList();
-
-
-private: // メンバ変数
+private: // プレイヤー本体 : メンバ変数
 
 	// モデル
 	std::unique_ptr<Model> model_ = nullptr;
@@ -98,7 +88,14 @@ private: // メンバ変数
 	const VHInfo vhInfo = { 12.5f, 1.5f, 14.5f, -14.5f };
 
 
-private: //メンバ変数
+private: // プレイヤーバレット : メンバ関数
+
+	/// <summary>
+	/// バレットリストの登録
+	/// </summary>
+	void PushBackBulletList();
+
+private: // プレイヤーバレット : メンバ変数
 
 	// 登録先シーン
 	GameScene* GameScene_ = nullptr;
@@ -108,7 +105,6 @@ private: //メンバ変数
 
 	// 移動速度
 	Vector3 bulletVelocity_ = Vector3::zero;
-
 
 };
 

@@ -8,7 +8,6 @@
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "Player/Player.h"
-#include "Player/Bullet/PlayerBullet.h"
 #include "EnemyManager/EnemyManager.h"
 
 
@@ -64,6 +63,14 @@ public: // メンバ関数
 	/// </summary>
 	void AddEnemyList(Enemy* enemy) { enemys_.push_back(enemy); }
 
+	/// <summary>
+	/// エネミーバレットを追加する
+	/// </summary>
+	void AddEnemyBulletList(EnemyBullet* enemyBullet) { 
+		
+		enemyBullets_.push_back(enemyBullet);
+	}
+
 	
 private:
 
@@ -87,5 +94,6 @@ private:
 	/* ----- Enemy エネミー ----- */
 	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 	std::list<Enemy*> enemys_{};
+	std::list<EnemyBullet*> enemyBullets_{};
 };
 

@@ -21,7 +21,6 @@ void Player::Initialize()
 	moveSpeed_ = 0.5f;
 
 
-
 	// バレットモデルの初期化
 	modelBullet_ = make_unique<Model>();
 	modelBullet_->CreateFromObj("PlayerBullet");

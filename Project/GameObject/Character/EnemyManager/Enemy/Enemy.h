@@ -2,6 +2,8 @@
 
 #include "GameObject.h"
 
+#include "EnemyBullet/EnemyBullet.h"
+
 #include "EnemyManager/MovePhase/IEnemyMovePhaseState.h"
 #include "EnemyManager/MovePhase/Approach/IEnemyMoveApproachState.h"
 #include "EnemyManager/MovePhase/Leave/IEnemyMoveLeaveState.h"
@@ -16,7 +18,7 @@ class GameScene;
 /* Enemyクラス */
 class Enemy {
 
-public: // メンバ関数
+public: // エネミー本体 : メンバ関数
 
 	/// <summary>
 	/// コンストラクタ
@@ -49,6 +51,11 @@ public: // メンバ関数
 	void MoveApproach();
 	void MoveLeave();
 
+	/// <summary>
+	/// 射撃処理
+	/// </summary>
+	void Attack();
+
 
 #pragma region Get
 
@@ -77,20 +84,21 @@ public: // メンバ関数
 	void SetPlayer(Player* player) { this->player_ = player; }
 
 	/// <summary>
+	/// GameSceneの設定
+	/// </summary>
+	void SetRegisterScene(GameScene* scene) { GameScene_ = scene; }
+
+	/// <summary>
 	/// 死亡フラグの設定
 	/// </summary>
 	void SetIsDead(bool flag) { this->isDead_ = flag; }
 
 #pragma endregion 
 
+private: // エネミー本体 : メンバ関数
 
-private: // メンバ関数
 
-
-private: // メンバ変数
-
-	// 登録先シーン
-	GameScene* GameScene_ = nullptr;
+private: // エネミー本体 : メンバ変数
 
 	// プレイヤー
 	Player* player_ = nullptr;
@@ -111,7 +119,29 @@ private: // メンバ変数
 	bool isDead_ = false;
 
 
-public: // メンバ関数
+private: // エネミーバレット : メンバ関数
+
+	/// <summary>
+	/// バレットリストの登録
+	/// </summary>
+	void PushBackBulletList();
+
+private: // エネミーバレット : メンバ変数
+
+	// 登録先シーン
+	GameScene* GameScene_ = nullptr;
+
+	// モデル
+	std::unique_ptr<Model> modelBullet_ = nullptr;
+
+	// 移動速度
+	Vector3 bulletVelocity_ = Vector3::zero;
+
+	// 一回に撃つ弾の数
+	int bulletsPerSpanw_;
+
+
+public: // ムーブフェーズ : メンバ関数
 
 #pragma region Get
 
@@ -131,8 +161,7 @@ public: // メンバ関数
 
 #pragma endregion 
 
-
-private: // メンバ関数
+private: // ムーブフェーズ : メンバ関数
 
 	/// <summary>
 	/// ムーブフェーズの初期化処理
@@ -144,8 +173,7 @@ private: // メンバ関数
 	/// </summary>
 	void MovePhaseUpdate();
 
-
-private: // メンバ変数
+private: // ムーブフェーズ : メンバ変数
 
 	// ムーブフェーズ
 	std::unique_ptr<IEnemyMovePhaseState> movePhaseArr_[2];
@@ -154,6 +182,3 @@ private: // メンバ変数
 	int prevMovePhase_;
 
 };
-
-
-

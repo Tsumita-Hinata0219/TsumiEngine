@@ -68,6 +68,7 @@ void EnemyManager::PushBackEnemy()
 	Vector3 newMov = { 0.0f, 0.0f, -0.1f };
 
 	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetRegisterScene(GameScene_);
 	newEnemy->Initialize((*modelEnemy_), newPos, newMov);
 
 	GameScene_->AddEnemyList(newEnemy);

@@ -4,6 +4,9 @@
 #include "Enemy/Enemy.h"
 
 
+// Playerの前方宣言
+class Player;
+
 // GameSceneの前方宣言
 class GameScene;
 
@@ -54,6 +57,11 @@ public:
 	/// </summary>
 	void SetScope(Scope scope) { this->scope_ = scope; }
 
+	/// <summary>
+	/// Playerの設定
+	/// </summary>
+	void SetPlayer(Player* player) { this->player_ = player; }
+
 #pragma endregion
 
 
@@ -74,6 +82,9 @@ private:
 
 	// エネミー登録先シーン
 	GameScene* GameScene_ = nullptr;
+
+	// プレイヤー
+	Player* player_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> modelEnemy_ = nullptr;

@@ -218,6 +218,15 @@
     <Filter Include="Project\GameObject\Character\EnemyManager\Enemy">
       <UniqueIdentifier>{2cab8b43-2460-4ad9-848d-597e40db5f09}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase">
+      <UniqueIdentifier>{22df8531-ebc4-4263-bc34-3c4cf24a2802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach">
+      <UniqueIdentifier>{76b4fe8b-3270-4c47-9fe7-c0fd7888f3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave">
+      <UniqueIdentifier>{db545c69-5b32-434a-b9b9-ac66f79dda6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -382,6 +391,12 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp">
       <Filter>Project\GameObject\Character\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Leave</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Approach</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -597,6 +612,15 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h">
       <Filter>Project\GameObject\Character\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Leave</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Approach</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\IEnemyMovePhaseState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

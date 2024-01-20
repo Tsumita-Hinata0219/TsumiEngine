@@ -10,7 +10,7 @@ void EnemyManager::Initialize()
 	modelEnemy_->CreateFromObj("Enemy");
 
 	// スポーン範囲
-	scope_ = { {-12.0f, 12.0f}, {5.0f, 5.0f}, {5.0f, 50.0f} };
+	scope_ = { {-12.0f, 12.0f}, {5.0f, 5.0f}, {15.0f, 50.0f} };
 
 	intervalFrame_ = 250;	   // スポーンインターバル
 	spawnFrame_ = 0;		   // スポーンタイマー
@@ -67,6 +67,7 @@ void EnemyManager::PushBackEnemy()
 	Vector3 newPos = RandomGenerator::getRandom(scope_.X, scope_.Y, scope_.Z);
 	Vector3 newMov = { 0.0f, 0.0f, -0.1f };
 
+	newEnemy->SetPlayer(this->player_);
 	newEnemy->Initialize((*modelEnemy_), newPos, newMov);
 
 	GameScene_->AddEnemyList(newEnemy);

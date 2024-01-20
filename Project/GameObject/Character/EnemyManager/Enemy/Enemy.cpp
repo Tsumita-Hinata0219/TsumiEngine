@@ -19,14 +19,17 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 
 	// 移動量の設定
 	move_ = move;
+
+	// ムーブフェーズの初期化処理
+	MovePhaseInit();
 }
 
 
 // 更新処理
 void Enemy::Update()
 {
-	// 移動処理
-	Move();
+	// 移動のステートパターン処理
+	MovePhaseUpdate();
 
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
@@ -41,9 +44,44 @@ void Enemy::Draw(ViewProjection view)
 
 
 // 移動処理
-void Enemy::Move()
+void Enemy::MoveApproach()
 {
 	// 速度を常に加算
 	velocity_ = move_;
 	worldTransform_.translate += velocity_;
+}
+void Enemy::MoveLeave()
+{
+	// 速度を常に減算
+	velocity_ = move_;
+	worldTransform_.translate -= velocity_;
+}
+
+
+// ムーブフェーズの初期化処理
+void Enemy::MovePhaseInit() {
+
+	// 各ムーブフェーズの配列設定
+	movePhaseArr_[Approach] = make_unique<IEnemyMoveApproachState>();
+	movePhaseArr_[Leave] = make_unique<IEnemyMoveLeaveState>();
+	movePhaseNum_ = Approach;
+	movePhaseArr_[currMovePhase_]->InitState(this);
+}
+
+// ムーブフェーズの更新処理
+void Enemy::MovePhaseUpdate() {
+
+	// フェーズチェック
+	prevMovePhase_ = currMovePhase_;
+	currMovePhase_ = movePhaseNum_;
+
+	// フェーズ変更チェック
+	if (prevMovePhase_ != currMovePhase_) {
+
+		// 変更していたら初期化処理
+		movePhaseArr_[currMovePhase_]->InitState(this);
+	}
+
+	// 更新処理
+	movePhaseArr_[currMovePhase_]->UpdateState();
 }

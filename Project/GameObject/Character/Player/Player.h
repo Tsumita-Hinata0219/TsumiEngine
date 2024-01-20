@@ -41,6 +41,10 @@ public: // メンバ関数
 
 #pragma region Get
 
+	/// <summary>
+	/// ワールドトランスフォームの取得
+	/// </summary>
+	WorldTransform GetWorldTransform() { return this->worldTransform_; }
 
 #pragma endregion
 

@@ -78,6 +78,7 @@ void GameScene::Update(GameManager* state) {
 
 	/* ----- Enemy エネミー ----- */
 	enemyManager_->Update();
+	enemyManager_->SetPlayer(player_.get());
 	for (Enemy* enemy : enemys_) {
 		enemy->Update();
 	}

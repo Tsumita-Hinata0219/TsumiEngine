@@ -30,9 +30,7 @@ void IEnemyMoveLeaveState::UpdateState()
 // 初期化処理
 void IEnemyMoveLeaveState::ExitState()
 {
-
-
-
+	enemy_->Attack();
 }
 
 

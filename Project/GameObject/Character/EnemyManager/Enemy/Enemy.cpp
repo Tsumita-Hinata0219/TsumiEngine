@@ -2,6 +2,14 @@
 #include "GameManager.h"
 
 
+// デストラクタ
+Enemy::~Enemy() {
+
+	// timedCalls_の解放
+	ClearTimedCall();
+}
+
+
 // 初期化処理
 void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 {
@@ -33,12 +41,18 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 
 	// 一回の処理で何発撃つか
 	bulletsPerSpanw_ = 1;
+
+	// TimedCallリストの登録
+	PushBackTimedCall();
 }
 
 
 // 更新処理
 void Enemy::Update()
 {
+	// バレットの更新処理
+	BulletUpdate();
+
 	// 移動のステートパターン処理
 	MovePhaseUpdate();
 
@@ -64,6 +78,59 @@ void Enemy::Attack() {
 
 	for (int i = 0; i < bulletsPerSpanw_; i++) {
 		PushBackBulletList();
+	}
+}
+
+
+// バレットの更新処理
+void Enemy::BulletUpdate() {
+
+	// 終了したタイマーを削除
+	timedCalls_.remove_if([](TimedCall* timedCall) {
+		if (timedCall->IsFinished()) {
+			delete timedCall;
+			return true;
+		}
+		return false;
+	});
+
+	// 範囲forでリストの全要素について回す
+	for (TimedCall* timedCall : timedCalls_) {
+		timedCall->Update();
+	}
+}
+
+
+// 射撃して、タイマーをリセットするコールバック関数
+void Enemy::FireAndReset() 
+{
+	// 射撃
+	Attack();
+
+	// TimedCallリストの登録
+	PushBackTimedCall();
+}
+
+
+// TimedCallリストの登録
+void Enemy::PushBackTimedCall()
+{
+	// メンバ関数と呼び出し元をbindしてstd::functionに代入
+	std::function<void(void)> callback = std::bind(&Enemy::FireAndReset, this);
+
+	// 時限発動イベントを生成
+	TimedCall* timedCall = new TimedCall(callback, 120);
+
+	// 時限発動イベントを時限発動イベントリストに追加
+	timedCalls_.push_back(timedCall);
+}
+
+
+// タイムコールリストを削除
+void Enemy::ClearTimedCall()
+{
+	for (TimedCall* timedCall : timedCalls_) {
+		delete timedCall;
 	}
 }
 

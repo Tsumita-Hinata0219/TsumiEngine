@@ -230,6 +230,9 @@
     <Filter Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet">
       <UniqueIdentifier>{52af988c-eb2e-4c97-bde5-badbaab3f94c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tsumi\Utilities\TimedCall">
+      <UniqueIdentifier>{011cef97-c010-49c0-98e8-9dd2d32379c7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -403,6 +406,9 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet\EnemyBullet.cpp">
       <Filter>Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp">
+      <Filter>Tsumi\Utilities\TimedCall</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -630,6 +636,9 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet\EnemyBullet.h">
       <Filter>Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\TimedCall\TimedCall.h">
+      <Filter>Tsumi\Utilities\TimedCall</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

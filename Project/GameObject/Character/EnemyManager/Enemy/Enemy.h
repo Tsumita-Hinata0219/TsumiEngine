@@ -28,7 +28,7 @@ public: // エネミー本体 : メンバ関数
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~Enemy() {};
+	~Enemy();
 
 	/// <summary>
 	/// 初期化処理
@@ -122,6 +122,26 @@ private: // エネミー本体 : メンバ変数
 private: // エネミーバレット : メンバ関数
 
 	/// <summary>
+	/// バレットの更新処理
+	/// </summary>
+	void BulletUpdate();
+
+	/// <summary>
+	/// 射撃して、タイマーをリセットするコールバック関数
+	/// </summary>
+	void FireAndReset();
+
+	/// <summary>
+	/// TimedCallリストの登録
+	/// </summary>
+	void PushBackTimedCall();
+
+	/// <summary>
+	/// タイムコールリストを削除
+	/// </summary>
+	void ClearTimedCall();
+
+	/// <summary>
 	/// バレットリストの登録
 	/// </summary>
 	void PushBackBulletList();
@@ -139,6 +159,9 @@ private: // エネミーバレット : メンバ変数
 
 	// 一回に撃つ弾の数
 	int bulletsPerSpanw_;
+
+	// 時限発動のリスト
+	std::list<TimedCall*> timedCalls_{};
 
 
 public: // ムーブフェーズ : メンバ関数

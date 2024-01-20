@@ -9,4 +9,5 @@
 #include "ImGuiManager.h"
 #include "Particle.h"
 #include "MyMath.h"
-#include "RandomGenerator/RandomGenerator.h"
+#include "RandomGenerator.h"
+#include "TimedCall.h"

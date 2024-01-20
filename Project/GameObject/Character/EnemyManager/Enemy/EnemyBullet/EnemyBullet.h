@@ -3,20 +3,20 @@
 #include "GameObject.h"
 
 
-/* PlayerBulletクラス */
-class PlayerBullet {
+/* EnemyBulletクラス */
+class EnemyBullet {
 
 public: // メンバ関数
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	PlayerBullet() {};
+	EnemyBullet() {};
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~PlayerBullet() {};
+	~EnemyBullet() {};
 
 	/// <summary>
 	/// 初期化処理

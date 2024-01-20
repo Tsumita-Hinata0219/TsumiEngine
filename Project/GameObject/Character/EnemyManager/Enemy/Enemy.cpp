@@ -29,7 +29,7 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 	modelBullet_->CreateFromObj("EnemyBullet");
 
 	// バレットの移動速度
-	bulletVelocity_ = { 0.0f, 0.0f, 4.0f };
+	bulletVelocity_ = { 0.0f, 0.0f, 1.0f };
 
 	// 一回の処理で何発撃つか
 	bulletsPerSpanw_ = 1;

@@ -7,6 +7,7 @@
 void IEnemyMoveApproachState::InitState(Enemy* enemy)
 {
 	enemy_ = enemy;
+	enemy_->Attack();
 }
 
 

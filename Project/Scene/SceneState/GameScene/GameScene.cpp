@@ -2,7 +2,6 @@
 
 
 
-
 /// <summary>
 /// デストラクタ
 /// </summary>
@@ -11,6 +10,11 @@ GameScene::~GameScene() {
 	/* ----- プレイヤー Player ----- */
 	for (PlayerBullet* bullet : playerBullets_) {
 		delete bullet;
+	}
+
+	/* ----- Enemy エネミー ----- */
+	for (Enemy* enemy : enemys_) {
+		delete enemy;
 	}
 }
 
@@ -40,6 +44,11 @@ void GameScene::Initialize() {
 	player_ = make_unique<Player>();
 	player_->Initialize();
 	player_->SetRegisterScene(this); // シーンの設定
+
+	/* ----- Enemy エネミー ----- */
+	enemyManager_ = make_unique<EnemyManager>();
+	enemyManager_->Initialize();
+	enemyManager_->SetRegisterScene(this);
 }
 
 
@@ -64,6 +73,13 @@ void GameScene::Update(GameManager* state) {
 	player_->Update();
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Update();
+	}
+
+
+	/* ----- Enemy エネミー ----- */
+	enemyManager_->Update();
+	for (Enemy* enemy : enemys_) {
+		enemy->Update();
 	}
 
 
@@ -103,6 +119,11 @@ void GameScene::ModelDraw() {
 	player_->Draw(GameCamera_);
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Draw(GameCamera_);
+	}
+
+	/* ----- Enemy エネミー ----- */
+	for (Enemy* enemy : enemys_) {
+		enemy->Draw(GameCamera_);
 	}
 }
 

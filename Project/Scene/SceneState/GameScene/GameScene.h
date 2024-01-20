@@ -9,6 +9,7 @@
 #include "Ground/Ground.h"
 #include "Player/Player.h"
 #include "Player/Bullet/PlayerBullet.h"
+#include "EnemyManager/EnemyManager.h"
 
 
 class GameScene : public IScene {
@@ -58,6 +59,11 @@ public: // メンバ関数
 	/// </summary>
 	void AddPlayerBulletList(PlayerBullet* playerBullet) { playerBullets_.push_back(playerBullet); }
 
+	/// <summary>
+	/// エネミーを追加する
+	/// </summary>
+	void AddEnemyList(Enemy* enemy) { enemys_.push_back(enemy); }
+
 	
 private:
 
@@ -78,5 +84,8 @@ private:
 	std::list<PlayerBullet*> playerBullets_{};
 
 
+	/* ----- Enemy エネミー ----- */
+	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
+	std::list<Enemy*> enemys_{};
 };
 

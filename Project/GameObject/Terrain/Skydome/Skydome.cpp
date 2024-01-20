@@ -3,14 +3,16 @@
 
 
 // インスタンスの取得
-Skydome* Skydome::GetInstance() {
+Skydome* Skydome::GetInstance() 
+{
 	static Skydome instance;
 	return &instance;
 }
 
 
 // 初期化処理
-void Skydome::Initialize() {
+void Skydome::Initialize() 
+{
 
 	Skydome::GetInstance()->model_ = make_unique<Model>();
 	Skydome::GetInstance()->model_->CreateFromObj("Skydome");
@@ -20,14 +22,16 @@ void Skydome::Initialize() {
 
 
 // 更新処理
-void Skydome::Update() {
-
+void Skydome::Update() 
+{
+	// ワールド座標の更新
 	Skydome::GetInstance()->worldTransform_.UpdateMatrix();
 }
 
 
 // 描画処理
-void Skydome::Draw(ViewProjection view) {
+void Skydome::Draw(ViewProjection view) 
+{
 
 	Skydome::GetInstance()->model_->Draw(Skydome::GetInstance()->worldTransform_, view);
 }

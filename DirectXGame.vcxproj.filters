@@ -212,6 +212,12 @@
     <Filter Include="Project\GameObject\Character\Player\Bullet">
       <UniqueIdentifier>{6ad5bace-2d45-488d-a868-d382e0b70202}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager">
+      <UniqueIdentifier>{3f13d875-7be5-480c-bbdd-3f6636ffdd5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\Enemy">
+      <UniqueIdentifier>{2cab8b43-2460-4ad9-848d-597e40db5f09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -370,6 +376,12 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp">
       <Filter>Project\GameObject\Character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -579,6 +591,12 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h">
       <Filter>Project\GameObject\Character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h">
+      <Filter>Project\GameObject\Character\EnemyManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

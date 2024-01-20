@@ -3,14 +3,16 @@
 
 
 // インスタンスの取得
-Ground* Ground::GetInstance() {
+Ground* Ground::GetInstance() 
+{
 	static Ground instance;
 	return&instance;
 }
 
 
 // 初期化処理
-void Ground::Initialize() {
+void Ground::Initialize() 
+{
 
 	Ground::GetInstance()->model_ = make_unique<Model>();
 	Ground::GetInstance()->model_->CreateFromObj("Ground");
@@ -20,15 +22,16 @@ void Ground::Initialize() {
 
 
 // 更新処理
-void Ground::Update() {
-
+void Ground::Update() 
+{
+	// ワールド座標の更新
 	Ground::GetInstance()->worldTransform_.UpdateMatrix();
-
 }
 
 
 // 描画処理
-void Ground::Draw(ViewProjection view) {
+void Ground::Draw(ViewProjection view) 
+{
 
 	Ground::GetInstance()->model_->Draw(Ground::GetInstance()->worldTransform_, view);
 }

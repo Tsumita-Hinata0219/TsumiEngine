@@ -96,6 +96,7 @@ private: // メンバ変数
 
 private: //メンバ変数
 
+	// 登録先シーン
 	GameScene* GameScene_ = nullptr;
 
 	// モデル

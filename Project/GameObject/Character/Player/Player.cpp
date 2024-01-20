@@ -40,7 +40,6 @@ void Player::Update()
 	// 射撃処理
 	Attack();
 
-
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
 
@@ -93,7 +92,7 @@ void Player::Move() {
 	}
 
 	// 速度を常に加算
-	velocity_ += move_;
+	velocity_ = move_;
 	worldTransform_.translate += velocity_;
 }
 

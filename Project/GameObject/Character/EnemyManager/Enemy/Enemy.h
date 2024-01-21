@@ -119,6 +119,19 @@ private: // エネミー本体 : メンバ変数
 	bool isDead_ = false;
 
 
+public: // エネミーバレット : メンバ関数
+
+	/// <summary>
+	/// TimedCallリストの登録
+	/// </summary>
+	void PushBackTimedCall();
+
+	/// <summary>
+	/// タイムコールリストを削除
+	/// </summary>
+	void ClearTimedCall();
+
+
 private: // エネミーバレット : メンバ関数
 
 	/// <summary>
@@ -130,16 +143,6 @@ private: // エネミーバレット : メンバ関数
 	/// 射撃して、タイマーをリセットするコールバック関数
 	/// </summary>
 	void FireAndReset();
-
-	/// <summary>
-	/// TimedCallリストの登録
-	/// </summary>
-	void PushBackTimedCall();
-
-	/// <summary>
-	/// タイムコールリストを削除
-	/// </summary>
-	void ClearTimedCall();
 
 	/// <summary>
 	/// バレットリストの登録

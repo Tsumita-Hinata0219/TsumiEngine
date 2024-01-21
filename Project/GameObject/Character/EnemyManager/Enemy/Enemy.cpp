@@ -6,7 +6,9 @@
 Enemy::~Enemy() {
 
 	// timedCalls_の解放
-	ClearTimedCall();
+	for (TimedCall* timedCall : timedCalls_) {
+		delete timedCall;
+	}
 }
 
 
@@ -41,9 +43,6 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 
 	// 一回の処理で何発撃つか
 	bulletsPerSpanw_ = 1;
-
-	// TimedCallリストの登録
-	PushBackTimedCall();
 }
 
 
@@ -58,7 +57,7 @@ void Enemy::Update()
 
 
 	if (KeyInput::TriggerKey(DIK_B)) {
-		Attack();
+		ClearTimedCall();
 	}
 
 	// ワールド座標の更新
@@ -109,6 +108,7 @@ void Enemy::FireAndReset()
 
 	// TimedCallリストの登録
 	PushBackTimedCall();
+
 }
 
 
@@ -119,7 +119,7 @@ void Enemy::PushBackTimedCall()
 	std::function<void(void)> callback = std::bind(&Enemy::FireAndReset, this);
 
 	// 時限発動イベントを生成
-	TimedCall* timedCall = new TimedCall(callback, 120);
+	TimedCall* timedCall = new TimedCall(callback, 60);
 
 	// 時限発動イベントを時限発動イベントリストに追加
 	timedCalls_.push_back(timedCall);
@@ -129,9 +129,7 @@ void Enemy::PushBackTimedCall()
 // タイムコールリストを削除
 void Enemy::ClearTimedCall()
 {
-	for (TimedCall* timedCall : timedCalls_) {
-		delete timedCall;
-	}
+	timedCalls_.clear();
 }
 
 

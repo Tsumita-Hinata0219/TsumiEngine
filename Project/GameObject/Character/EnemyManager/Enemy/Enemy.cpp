@@ -152,6 +152,7 @@ void Enemy::PushBackBulletList()
 	Vector3 newPos = worldTransform_.GetWorldPos();
 	Vector3 newVel = CalcDirection();
 
+	newBullet->SetPlayer(player_);
 	newBullet->Initialize((*modelBullet_), newPos, newVel);
 
 	GameScene_->AddEnemyBulletList(newBullet);

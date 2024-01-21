@@ -1,4 +1,5 @@
 #include "EnemyBullet.h"
+#include "Player/Player.h"
 
 
 
@@ -14,14 +15,14 @@ void EnemyBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 	worldTransform_.translate = pos;
 	worldTransform_.scale = { 1.0f, 1.0f, 2.0f };
 
-	// Y軸周り角度(θy)
-	worldTransform_.rotate.y = std::atan2(vel.x, vel.z);
+	//// Y軸周り角度(θy)
+	//worldTransform_.rotate.y = std::atan2(vel.x, vel.z);
 
-	float velZ = std::sqrt((vel.x * vel.x) + (vel.z * vel.z));
-	float height = -vel.y;
-	
-	// X軸周り角度(θx)
-	worldTransform_.rotate.x = std::atan2(height, velZ);
+	//float velZ = std::sqrt((vel.x * vel.x) + (vel.z * vel.z));
+	//float height = -vel.y;
+	//
+	//// X軸周り角度(θx)
+	//worldTransform_.rotate.x = std::atan2(height, velZ);
 
 	// 加算速度
 	velocity_ = Vector3::zero;
@@ -49,10 +50,37 @@ void EnemyBullet::Draw(ViewProjection view)
 }
 
 
+// プレイヤーへのホーミング処理
+void EnemyBullet::HomingToPlayer()
+{
+	// 敵弾から自キャラへのベクトル
+	Vector3 toPlayer = worldTransform_.translate - player_->GetWorldTransform().translate;
+
+	// ベクトルの正規化
+	toPlayer = Normalize(toPlayer);
+	move_ = Normalize(move_);
+
+	// 球面線形補間により、今の速度を自キャラへのベクトルえお内挿し、新たな速度する
+	move_ = SLerp(move_, toPlayer, 0.08f);
+
+	// Y軸周り角度(θy)
+	worldTransform_.rotate.y = std::atan2(move_.x, move_.z);
+
+	float velZ = std::sqrt((move_.x * move_.x) + (move_.z * move_.z));
+	float height = -move_.y;
+
+	// X軸周り角度(θx)
+	worldTransform_.rotate.x = std::atan2(height, velZ);
+}
+
+
 // 移動処理
 void EnemyBullet::Move()
 {
+	// ホーミングの処理
+	HomingToPlayer();
+
 	// 速度を常に加算
 	velocity_ = move_;
-	worldTransform_.translate += velocity_;
+	worldTransform_.translate -= velocity_;
 }

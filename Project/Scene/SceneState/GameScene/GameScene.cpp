@@ -116,10 +116,10 @@ void GameScene::BackSpriteDraw() {
 void GameScene::ModelDraw() {
 
 	/* ----- Skydome スカイドーム ----- */
-	skydome_->Draw(GameCamera_);
+	//skydome_->Draw(GameCamera_);
 
 	/* ----- Ground グラウンド ----- */
-	ground_->Draw(GameCamera_);
+	//ground_->Draw(GameCamera_);
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw(GameCamera_);

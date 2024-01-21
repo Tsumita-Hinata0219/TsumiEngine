@@ -113,6 +113,20 @@ Vector3 Lerp(const Vector3& start, const Vector3& end, const float t) {
 	return start + t * (end - start);
 }
 
+// 球面線形補間
+Vector3 SLerp(const Vector3& start, const Vector3& end, const float t) {
+	float dot = Dot(start, end);
+	float theta = std::acos(dot) * t;
+	Vector3 relative = { end.x - start.x * dot, end.y - start.y * dot, end.z - start.z * dot };
+	relative = Normalize(relative);
+	Vector3 result = {
+		start.x * std::cosf(theta) + relative.x * std::sinf(theta),
+		start.y * std::cosf(theta) + relative.y * std::sinf(theta),
+		start.z * std::cosf(theta) + relative.z * std::sinf(theta),
+	};
+	return result;
+}
+
 // 最近接線
 Vector3 ClosestPoint(const Vector3& p, const Segment& s) {
 	float length = Length(p);

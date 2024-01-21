@@ -3,6 +3,9 @@
 #include "GameObject.h"
 
 
+// Playerの前方宣言
+class Player;
+
 /* EnemyBulletクラス */
 class EnemyBullet {
 
@@ -34,7 +37,32 @@ public: // メンバ関数
 	void Draw(ViewProjection view);
 
 
+
+#pragma region Get
+
+	/// <summary>
+	/// Playerの取得
+	/// </summary>
+	Player* GetPlayer() { return this->player_; }
+
+#pragma endregion 
+
+#pragma region Set
+
+	/// <summary>
+	/// Playerの設定
+	/// </summary>
+	void SetPlayer(Player* player) { this->player_ = player; }
+
+#pragma endregion 
+
+
 private: // メンバ関数
+
+	/// <summary>
+	/// プレイヤーへのホーミング処理
+	/// </summary>
+	void HomingToPlayer();
 
 	/// <summary>
 	/// 移動処理
@@ -43,6 +71,9 @@ private: // メンバ関数
 
 
 private: // メンバ変数
+
+	// プレイヤー
+	Player* player_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_ = nullptr;

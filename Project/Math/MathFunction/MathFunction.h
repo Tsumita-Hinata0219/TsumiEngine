@@ -70,6 +70,8 @@ Vector3 Normalize(const Vector3& v);
 Vector3 Project(const Vector3& v1, const Vector3& v2);
 // 線形補間
 Vector3 Lerp(const Vector3& start, const Vector3& end, const float t);
+// 球面線形補間
+Vector3 SLerp(const Vector3& start, const Vector3& end, const float t);
 // 最近接線
 Vector3 ClosestPoint(const Vector3& p, const Segment& s);
 // 法線ベクトル

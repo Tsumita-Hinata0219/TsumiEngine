@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Player/Player.h"
 #include "GameManager.h"
 
 
@@ -133,12 +134,23 @@ void Enemy::ClearTimedCall()
 }
 
 
+// バレットの進行方向の計算
+Vector3 Enemy::CalcDirection()
+{
+	Vector3 PlayerPos = player_->GetWorldTransform().GetWorldPos();
+	Vector3 EnemyPos = worldTransform_.GetWorldPos();
+	Vector3 EneToPla = PlayerPos - EnemyPos;
+	EneToPla = Normalize(EneToPla);
+	return { EneToPla.x, EneToPla.y, EneToPla.z * kBulletSpeed_ };
+}
+
+
 // バレットリストの登録
 void Enemy::PushBackBulletList() 
 {
 	EnemyBullet* newBullet = new EnemyBullet();
 	Vector3 newPos = worldTransform_.GetWorldPos();
-	Vector3 newVel = TransformNormal(bulletVelocity_, worldTransform_.matWorld);
+	Vector3 newVel = CalcDirection();
 
 	newBullet->Initialize((*modelBullet_), newPos, newVel);
 

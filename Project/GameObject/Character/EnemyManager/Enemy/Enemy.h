@@ -145,6 +145,11 @@ private: // エネミーバレット : メンバ関数
 	void FireAndReset();
 
 	/// <summary>
+	/// バレットの進行方向の計算
+	/// </summary>
+	Vector3 CalcDirection();
+
+	/// <summary>
 	/// バレットリストの登録
 	/// </summary>
 	void PushBackBulletList();
@@ -159,6 +164,9 @@ private: // エネミーバレット : メンバ変数
 
 	// 移動速度
 	Vector3 bulletVelocity_ = Vector3::zero;
+
+	// バレットの速度
+	const float kBulletSpeed_ = 1.0f;
 
 	// 一回に撃つ弾の数
 	int bulletsPerSpanw_;

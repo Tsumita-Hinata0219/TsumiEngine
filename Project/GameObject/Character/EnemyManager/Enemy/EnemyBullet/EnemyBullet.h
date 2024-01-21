@@ -7,7 +7,7 @@
 class Player;
 
 /* EnemyBulletクラス */
-class EnemyBullet {
+class EnemyBullet : public OBBCollider {
 
 public: // メンバ関数
 
@@ -36,6 +36,10 @@ public: // メンバ関数
 	/// </summary>
 	void Draw(ViewProjection view);
 
+	/// <summary>
+	/// 衝突時コールバック関数
+	/// </summary>
+	void OnCollision(ObjectBit id) override;
 
 
 #pragma region Get
@@ -44,6 +48,21 @@ public: // メンバ関数
 	/// Playerの取得
 	/// </summary>
 	Player* GetPlayer() { return this->player_; }
+
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	Vector3 GetWorldPosition() override { return this->worldTransform_.GetWorldPos(); }
+
+	/// <summary>
+	/// Rotateの取得
+	/// </summary>
+	Vector3 GetRotate() override { return this->worldTransform_.rotate; }
+
+	/// <summary>
+	/// Sizeの取得
+	/// </summary>
+	Vector3 GetSize() override { return this->size_; }
 
 #pragma endregion 
 
@@ -69,6 +88,11 @@ private: // メンバ関数
 	/// </summary>
 	void Move();
 
+	/// <summary>
+	/// OBBの設定
+	/// </summary>
+	void SettingOBBProperties();
+
 
 private: // メンバ変数
 
@@ -86,5 +110,8 @@ private: // メンバ変数
 
 	// 移動量
 	Vector3 move_{};
+
+	// サイズ
+	Vector3 size_{};
 };
 

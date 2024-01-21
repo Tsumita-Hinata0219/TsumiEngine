@@ -3,7 +3,7 @@
 #include "IScene.h"
 #include "GameManager.h"
 
-#include "ViewProjection.h"
+#include "GameObject.h"
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
@@ -54,6 +54,11 @@ public:
 public: // メンバ関数
 
 	/// <summary>
+	/// 衝突判定と応答
+	/// </summary>
+	void CheckAllCollision();
+
+	/// <summary>
 	/// プレイヤーバレットを追加する
 	/// </summary>
 	void AddPlayerBulletList(PlayerBullet* playerBullet) { playerBullets_.push_back(playerBullet); }
@@ -76,6 +81,9 @@ private:
 
 	// メインカメラ
 	ViewProjection GameCamera_{};
+
+	/* ----- CollisionManager コリジョンマネージャー ----- */
+	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;
 
 
 	/* ----- Skydome スカイドーム ----- */

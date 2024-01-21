@@ -4,7 +4,7 @@
 
 
 /* Groundクラス */
-class Ground {
+class Ground : public OBBCollider {
 
 public:
 
@@ -38,6 +38,31 @@ public:
 	/// </summary>
 	void Draw(ViewProjection view);
 
+	/// <summary>
+	/// 衝突時コールバック関数
+	/// </summary>
+	void OnCollision(ObjectBit id) override;
+
+
+#pragma region Get
+
+	// ワールド座標の取得
+	Vector3 GetWorldPosition() override { return this->worldTransform_.GetWorldPos(); }
+
+	// Rotateの取得
+	Vector3 GetRotate() override { return this->worldTransform_.rotate; }
+
+	// Sizeの取得
+	Vector3 GetSize() override { return this->size_; }
+
+#pragma endregion 
+
+
+private:
+
+	// OBBの設定
+	void SettingOBBProperties();
+
 
 private:
 
@@ -46,6 +71,9 @@ private:
 
 	// ワールドトランスフォーム
 	WorldTransform worldTransform_{};
+
+	// サイズ
+	Vector3 size_{};
 
 };
 

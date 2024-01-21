@@ -13,6 +13,12 @@ inline Vector2 operator+(const Vector2& v) {
 inline Vector2 operator-(const Vector2& v) {
 	return { -v.x, -v.y };
 }
+inline constexpr bool operator==(const Vector2& rhs, const float& val) {
+	return val == rhs.x || val == rhs.y;
+}
+inline constexpr bool operator!=(const Vector2& rhs, const float& val) {
+	return val != rhs.x || val != rhs.y;
+}
 
 // 加算
 inline Vector2 operator+(const Vector2& v, const float& n) {
@@ -88,6 +94,12 @@ inline Vector3 operator+(const Vector3& v) {
 }
 inline Vector3 operator-(const Vector3& v) {
 	return { -v.x, -v.y, -v.z };
+}
+inline constexpr bool operator==(const Vector3& rhs, const float& val) {
+	return val == rhs.x || val == rhs.y || val == rhs.z;
+}
+inline constexpr bool operator!=(const Vector3& rhs, const float& val) {
+	return val != rhs.x || val != rhs.y || val != rhs.z;
 }
 
 // 加算

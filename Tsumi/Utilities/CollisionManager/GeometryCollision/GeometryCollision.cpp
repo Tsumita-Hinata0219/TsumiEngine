@@ -98,10 +98,7 @@ namespace GeometryCollision {
 		result.orientations[2].y = rotateMat.m[2][1];
 		result.orientations[2].z = rotateMat.m[2][2];
 
-		result.halfSize = {
-			c->GetSize().x / 2.0f,
-			c->GetSize().y / 2.0f,
-			c->GetSize().z / 2.0f};
+		result.halfSize = c->GetSize() / 2.0f;
 
 		return result;
 	}
@@ -111,14 +108,8 @@ namespace GeometryCollision {
 
 		AABB result{};
 
-		result.min = {
-			c->GetWorldPosition().x - (c->GetSize().x / 2.0f),
-			c->GetWorldPosition().y - (c->GetSize().y / 2.0f),
-			c->GetWorldPosition().z - (c->GetSize().z / 2.0f)};
-		result.max = {
-			c->GetWorldPosition().x + (c->GetSize().x / 2.0f),
-			c->GetWorldPosition().y + (c->GetSize().y / 2.0f),
-			c->GetWorldPosition().z + (c->GetSize().z / 2.0f)};
+		result.min = c->GetWorldPosition() - (c->GetSize() / 2.0f);
+		result.max = c->GetWorldPosition() + (c->GetSize() / 2.0f);
 
 		return result;
 	}

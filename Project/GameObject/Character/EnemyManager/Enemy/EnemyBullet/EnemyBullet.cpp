@@ -15,20 +15,19 @@ void EnemyBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 	worldTransform_.translate = pos;
 	worldTransform_.scale = { 1.0f, 1.0f, 2.0f };
 
-	//// Y軸周り角度(θy)
-	//worldTransform_.rotate.y = std::atan2(vel.x, vel.z);
-
-	//float velZ = std::sqrt((vel.x * vel.x) + (vel.z * vel.z));
-	//float height = -vel.y;
-	//
-	//// X軸周り角度(θx)
-	//worldTransform_.rotate.x = std::atan2(height, velZ);
-
 	// 加算速度
 	velocity_ = Vector3::zero;
 
 	// 移動量の設定
 	move_ = vel;
+
+	// サイズ
+	size_ = 1.0f * worldTransform_.scale;
+
+	// コライダー
+	OBBCollider::SetID(ObjectBit::EnemyBullet);
+	OBBCollider::SetCollosionAttribute(static_cast<uint32_t>(ObjectFilter::Enemy));
+	OBBCollider::SetCollisionMask(static_cast<uint32_t>(ObjectFilter::Enemy));
 }
 
 
@@ -47,6 +46,16 @@ void EnemyBullet::Update()
 void EnemyBullet::Draw(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+}
+
+
+// 衝突時コールバック関数
+void EnemyBullet::OnCollision(ObjectBit id)
+{
+	if (id == ObjectBit::Terrain) {
+
+	}
+
 }
 
 
@@ -83,4 +92,12 @@ void EnemyBullet::Move()
 	// 速度を常に加算
 	velocity_ = move_;
 	worldTransform_.translate -= velocity_;
+}
+
+
+// OBBの設定
+void EnemyBullet::SettingOBBProperties()
+{
+	OBBCollider::SetSize(this->size_);
+	OBBCollider::SetRotate(this->worldTransform_.rotate);
 }

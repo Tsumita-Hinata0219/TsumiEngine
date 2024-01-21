@@ -22,7 +22,6 @@ GameScene::~GameScene() {
 }
 
 
-
 /// <summary>
 /// 初期化処理
 /// </summary>
@@ -31,6 +30,10 @@ void GameScene::Initialize() {
 	// メインカメラ
 	GameCamera_.Initialize();
 	GameCamera_.translate = { 0.0f, 5.0f, -40.0f };
+
+
+	/* ----- CollisionManager コリジョンマネージャー ----- */
+	collisionManager_ = make_unique<CollisionManager>();
 
 
 	/* ----- Skydome スカイドーム ----- */
@@ -89,6 +92,12 @@ void GameScene::Update(GameManager* state) {
 		bullet->Update();
 	}
 
+
+	/* ----- Enemy エネミー ----- */
+	CheckAllCollision();
+
+
+
 #ifdef _DEBUG
 
 	ImGui::Begin("GameScene");
@@ -143,4 +152,23 @@ void GameScene::ModelDraw() {
 void GameScene::FrontSpriteDraw() {
 
 
+}
+
+
+/// <summary>
+/// 衝突判定と応答
+/// </summary>
+void GameScene::CheckAllCollision() {
+
+	// 登録されたコライダーリストをクリアする
+	collisionManager_->ClliderClear();
+
+	// コライダーをリストに登録する
+	collisionManager_->AddOBBColliders(ground_.get());
+	for (EnemyBullet* bullet : enemyBullets_) {
+		collisionManager_->AddOBBColliders(bullet);
+	}
+
+	// すべてのコライダーに対して衝突を検出
+	collisionManager_->CheckAllCollision();
 }

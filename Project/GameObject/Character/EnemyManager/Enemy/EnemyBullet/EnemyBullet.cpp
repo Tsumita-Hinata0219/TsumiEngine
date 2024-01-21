@@ -12,6 +12,16 @@ void EnemyBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
 	worldTransform_.translate = pos;
+	worldTransform_.scale = { 1.0f, 1.0f, 2.0f };
+
+	// Y軸周り角度(θy)
+	worldTransform_.rotate.y = std::atan2(vel.x, vel.z);
+
+	float velZ = std::sqrt((vel.x * vel.x) + (vel.z * vel.z));
+	float height = -vel.y;
+	
+	// X軸周り角度(θx)
+	worldTransform_.rotate.x = std::atan2(height, velZ);
 
 	// 加算速度
 	velocity_ = Vector3::zero;

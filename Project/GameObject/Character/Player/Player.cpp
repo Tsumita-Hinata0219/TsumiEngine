@@ -20,6 +20,13 @@ void Player::Initialize()
 	move_ = Vector3::zero;
 	moveSpeed_ = 0.5f;
 
+	// サイズ
+	this->size_ = 2.0f * worldTransform_.scale;
+
+	// コライダー
+	OBBCollider::SetID(ObjectBit::Player);
+	OBBCollider::SetCollosionAttribute(ObjectFileter::Player);
+	OBBCollider::SetCollisionMask(ObjectFileter::Player);
 
 	// バレットモデルの初期化
 	modelBullet_ = make_unique<Model>();
@@ -33,6 +40,9 @@ void Player::Initialize()
 // 更新処理
 void Player::Update()
 {
+	// OBBの設定
+	SettingOBBProperties();
+
 	// 移動処理
 	Move();
 
@@ -60,6 +70,16 @@ void Player::Update()
 void Player::Draw(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+}
+
+
+// 衝突時コールバック関数
+void Player::OnCollision(uint32_t id)
+{
+	if (id == ObjectBit::EnemyBullet) {
+		Log("isHit Player x EnemyBullet!!");
+	}
+
 }
 
 
@@ -102,6 +122,14 @@ void Player::Attack() {
 	if (KeyInput::TriggerKey(DIK_SPACE)) {
 		PushBackBulletList();
 	}
+}
+
+
+// OBBの設定
+void Player::SettingOBBProperties()
+{
+	OBBCollider::SetSize(this->size_);
+	OBBCollider::SetRotate(this->worldTransform_.rotate);
 }
 
 

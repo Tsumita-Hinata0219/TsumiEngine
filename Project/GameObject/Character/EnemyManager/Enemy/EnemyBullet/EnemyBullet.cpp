@@ -52,10 +52,13 @@ void EnemyBullet::Draw(ViewProjection view)
 // 衝突時コールバック関数
 void EnemyBullet::OnCollision(uint32_t id)
 {
-	if (id == ObjectBit::Terrain) {
-		isDead_ = true;
+	if (id == ObjectBit::Player) {
+		this->isDead_ = true;
 	}
-
+	else if (id == ObjectBit::Terrain) {
+		this->isDead_ = true;
+	}
+	this->isDead_ = true;
 }
 
 
@@ -70,7 +73,7 @@ void EnemyBullet::HomingToPlayer()
 	move_ = Normalize(move_);
 
 	// 球面線形補間により、今の速度を自キャラへのベクトルえお内挿し、新たな速度する
-	move_ = SLerp(move_, toPlayer, 0.08f);
+	move_ = SLerp(move_, toPlayer, 0.05f) * kbulletSpeed;
 
 	// Y軸周り角度(θy)
 	worldTransform_.rotate.y = std::atan2(move_.x, move_.z);

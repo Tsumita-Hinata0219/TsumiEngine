@@ -9,7 +9,7 @@
 class GameScene;
 
 /* Playerクラス */
-class Player {
+class Player : public OBBCollider {
 
 public: // プレイヤー本体 : メンバ関数
 
@@ -38,6 +38,11 @@ public: // プレイヤー本体 : メンバ関数
 	/// </summary>
 	void Draw(ViewProjection view);
 
+	/// <summary>
+	/// 衝突時コールバック関数
+	/// </summary>
+	void OnCollision(uint32_t id) override;
+
 
 #pragma region Get
 
@@ -45,6 +50,21 @@ public: // プレイヤー本体 : メンバ関数
 	/// ワールドトランスフォームの取得
 	/// </summary>
 	WorldTransform GetWorldTransform() { return this->worldTransform_; }
+
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	Vector3 GetWorldPosition() override { return this->worldTransform_.GetWorldPos(); }
+
+	/// <summary>
+	/// 回転軸の取得
+	/// </summary>
+	Vector3 GetRotate() override { return this->worldTransform_.rotate; }
+
+	/// <summary>
+	/// サイズの取得
+	/// </summary>
+	Vector3 GetSize() override { return this->size_; }
 
 #pragma endregion
 
@@ -69,6 +89,11 @@ private: // プレイヤー本体 : メンバ関数
 	/// </summary>
 	void Attack();
 
+	/// <summary>
+	/// OBBの設定
+	/// </summary>
+	void SettingOBBProperties();
+
 private: // プレイヤー本体 : メンバ変数
 
 	// モデル
@@ -86,6 +111,9 @@ private: // プレイヤー本体 : メンバ変数
 
 	// 移動限界
 	const VHInfo vhInfo = { 12.5f, 1.5f, 14.5f, -14.5f };
+
+	// サイズ
+	Vector3 size_{};
 
 
 private: // プレイヤーバレット : メンバ関数

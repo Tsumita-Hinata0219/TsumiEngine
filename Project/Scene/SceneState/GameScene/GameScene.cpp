@@ -91,16 +91,16 @@ void GameScene::Update(GameManager* state) {
 	for (EnemyBullet* bullet : enemyBullets_) {
 		bullet->Update();
 	}
-	enemyBullets_.remove_if([](EnemyBullet* bullet) {
-		if (bullet->IsDead()) {
-			delete bullet;
+	enemyBullets_.remove_if([](EnemyBullet* eneBul) {
+		if (eneBul->IsDead()) {
+			delete eneBul;
 			return true;
 		}
 		return false;
 	});
 
 
-	/* ----- Enemy エネミー ----- */
+	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CheckAllCollision();
 
 
@@ -111,6 +111,7 @@ void GameScene::Update(GameManager* state) {
 	ImGui::Text("GameCamera");
 	ImGui::DragFloat3("Rotate", &GameCamera_.rotate.x, 0.01f);
 	ImGui::DragFloat3("Translate", &GameCamera_.translate.x, 0.01f);
+	ImGui::Text("%d", int32_t(enemyBullets_.size()));
 	ImGui::End();
 
 #endif // _DEBUG
@@ -172,6 +173,7 @@ void GameScene::CheckAllCollision() {
 
 	// コライダーをリストに登録する
 	collisionManager_->AddOBBColliders(ground_.get());
+	collisionManager_->AddOBBColliders(player_.get());
 	for (EnemyBullet* bullet : enemyBullets_) {
 		collisionManager_->AddOBBColliders(bullet);
 	}

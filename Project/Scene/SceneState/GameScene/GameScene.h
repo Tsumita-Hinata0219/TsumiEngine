@@ -71,10 +71,7 @@ public: // メンバ関数
 	/// <summary>
 	/// エネミーバレットを追加する
 	/// </summary>
-	void AddEnemyBulletList(EnemyBullet* enemyBullet) { 
-		
-		enemyBullets_.push_back(enemyBullet);
-	}
+	void AddEnemyBulletList(EnemyBullet* enemyBullet) { enemyBullets_.push_back(enemyBullet); }
 
 	
 private:

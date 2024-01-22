@@ -116,6 +116,8 @@ private: // メンバ変数
 	// 移動量
 	Vector3 move_{};
 
+	float kbulletSpeed = 1.0f;
+
 	// サイズ
 	Vector3 size_{};
 

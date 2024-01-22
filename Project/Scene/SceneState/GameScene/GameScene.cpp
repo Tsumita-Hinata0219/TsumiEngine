@@ -91,6 +91,13 @@ void GameScene::Update(GameManager* state) {
 	for (EnemyBullet* bullet : enemyBullets_) {
 		bullet->Update();
 	}
+	enemyBullets_.remove_if([](EnemyBullet* bullet) {
+		if (bullet->IsDead()) {
+			delete bullet;
+			return true;
+		}
+		return false;
+	});
 
 
 	/* ----- Enemy エネミー ----- */

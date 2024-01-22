@@ -11,7 +11,7 @@ public:
 	/// <summary>
 	/// 衝突時コールバック関数
 	/// </summary>
-	virtual void OnCollision(ObjectBit id) = 0;
+	virtual void OnCollision(uint32_t id) = 0;
 
 	/// <summary>
 	/// ワールド座標の取得
@@ -51,12 +51,12 @@ public:
 	/// <summary>
 	/// IDの取得
 	/// </summary>
-	ObjectBit GetID() { return id_; }
+	uint32_t GetID() { return id_; }
 
 	/// <summary>
 	/// IDの設定
 	/// </summary>
-	void SetID(ObjectBit id) { id_ = id; }
+	void SetID(uint32_t id) { id_ = id; }
 
 #pragma endregion 
 
@@ -93,7 +93,7 @@ private:
 
 	OBB obb_{};
 
-	ObjectBit id_ = ObjectBit::None;
+	uint32_t id_ = ObjectBit::None;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 

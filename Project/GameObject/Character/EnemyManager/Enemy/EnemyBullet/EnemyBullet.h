@@ -39,7 +39,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 衝突時コールバック関数
 	/// </summary>
-	void OnCollision(ObjectBit id) override;
+	void OnCollision(uint32_t id) override;
 
 
 #pragma region Get
@@ -48,6 +48,11 @@ public: // メンバ関数
 	/// Playerの取得
 	/// </summary>
 	Player* GetPlayer() { return this->player_; }
+
+	/// <summary>
+	/// 死亡フラグの取得
+	/// </summary>
+	bool IsDead() { return this->isDead_; }
 
 	/// <summary>
 	/// ワールド座標の取得
@@ -113,5 +118,8 @@ private: // メンバ変数
 
 	// サイズ
 	Vector3 size_{};
+
+	// 死亡フラグ
+	bool isDead_ = false;
 };
 

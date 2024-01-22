@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// 衝突時コールバック関数
 	/// </summary>
-	void OnCollision(ObjectBit id) override;
+	void OnCollision(uint32_t id) override;
 
 
 #pragma region Get

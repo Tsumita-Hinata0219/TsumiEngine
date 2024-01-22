@@ -26,8 +26,8 @@ void EnemyBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 
 	// コライダー
 	OBBCollider::SetID(ObjectBit::EnemyBullet);
-	OBBCollider::SetCollosionAttribute(static_cast<uint32_t>(ObjectFilter::Enemy));
-	OBBCollider::SetCollisionMask(static_cast<uint32_t>(ObjectFilter::Enemy));
+	OBBCollider::SetCollosionAttribute(ObjectFileter::Enemy);
+	OBBCollider::SetCollisionMask(ObjectFileter::Enemy);
 }
 
 
@@ -50,10 +50,10 @@ void EnemyBullet::Draw(ViewProjection view)
 
 
 // 衝突時コールバック関数
-void EnemyBullet::OnCollision(ObjectBit id)
+void EnemyBullet::OnCollision(uint32_t id)
 {
 	if (id == ObjectBit::Terrain) {
-
+		isDead_ = true;
 	}
 
 }

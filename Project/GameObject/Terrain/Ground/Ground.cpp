@@ -22,8 +22,8 @@ void Ground::Initialize()
 
 	// コライダー
 	OBBCollider::SetID(ObjectBit::Terrain);
-	OBBCollider::SetCollosionAttribute(static_cast<uint32_t>(ObjectFilter::Terrain));
-	OBBCollider::SetCollisionMask(static_cast<uint32_t>(ObjectFilter::Terrain));
+	OBBCollider::SetCollosionAttribute(ObjectFileter::Terrain);
+	OBBCollider::SetCollisionMask(ObjectFileter::Terrain);
 }
 
 
@@ -46,7 +46,7 @@ void Ground::Draw(ViewProjection view)
 
 
 /// 衝突時コールバック関数
-void Ground::OnCollision(ObjectBit id)
+void Ground::OnCollision(uint32_t id)
 {
 	id;
 }

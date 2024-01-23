@@ -16,7 +16,7 @@ class Player;
 class GameScene;
 
 /* Enemyクラス */
-class Enemy {
+class Enemy : public OBBCollider {
 
 public: // エネミー本体 : メンバ関数
 
@@ -44,6 +44,11 @@ public: // エネミー本体 : メンバ関数
 	/// 描画処理
 	/// </summary>
 	void Draw(ViewProjection view);
+
+	/// <summary>
+	/// 衝突時コールバック関数
+	/// </summary>
+	void OnCollision(uint32_t id) override;
 
 	/// <summary>
 	/// 移動処理
@@ -74,6 +79,21 @@ public: // エネミー本体 : メンバ関数
 	/// </summary>
 	bool IsDead() { return this->isDead_; }
 
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	Vector3 GetWorldPosition() override { return this->worldTransform_.GetWorldPos(); }
+
+	/// <summary>
+	/// 回転軸の取得
+	/// </summary>
+	Vector3 GetRotate() override { return this->worldTransform_.rotate; }
+
+	/// <summary>
+	/// サイズの取得
+	/// </summary>
+	Vector3 GetSize() override { return this->size_; }
+
 #pragma endregion 
 
 #pragma region Set
@@ -97,6 +117,11 @@ public: // エネミー本体 : メンバ関数
 
 private: // エネミー本体 : メンバ関数
 
+	/// <summary>
+	/// OBBの設定
+	/// </summary>
+	void SettingOBBProperties();
+
 
 private: // エネミー本体 : メンバ変数
 
@@ -115,6 +140,9 @@ private: // エネミー本体 : メンバ変数
 	// 移動量
 	Vector3 move_{};
 
+	// サイズ
+	Vector3 size_{};
+
 	// 死亡フラグ
 	bool isDead_ = false;
 
@@ -122,27 +150,16 @@ private: // エネミー本体 : メンバ変数
 public: // エネミーバレット : メンバ関数
 
 	/// <summary>
-	/// TimedCallリストの登録
+	/// バレットの初期化処理
 	/// </summary>
-	void PushBackTimedCall();
-
-	/// <summary>
-	/// タイムコールリストを削除
-	/// </summary>
-	void ClearTimedCall();
-
-
-private: // エネミーバレット : メンバ関数
+	void BulletInit();
 
 	/// <summary>
 	/// バレットの更新処理
 	/// </summary>
 	void BulletUpdate();
 
-	/// <summary>
-	/// 射撃して、タイマーをリセットするコールバック関数
-	/// </summary>
-	void FireAndReset();
+private: // エネミーバレット : メンバ関数
 
 	/// <summary>
 	/// バレットの進行方向の計算
@@ -171,8 +188,9 @@ private: // エネミーバレット : メンバ変数
 	// 一回に撃つ弾の数
 	int bulletsPerSpanw_;
 
-	// 時限発動のリスト
-	std::list<TimedCall*> timedCalls_{};
+	// 射撃タイマーとインターバル
+	int32_t FireInterval_;
+	int32_t FireTimer_;
 
 
 public: // ムーブフェーズ : メンバ関数

@@ -1,19 +1,16 @@
 #pragma once
 
-#include "WorldTransform.h"
-#include "ViewProjection.h"
-#include "MyMath.h"
-#include "ImGuiManager.h"
+#include "GameObject.h"
 
-/* DebugCameraクラス */
-class DebugCamera {
+/* RailCameraクラス */
+class RailCamera {
 
 public:
 
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Initialize(Vector3 rotate, Vector3 translate);
 
 	/// <summary>
 	/// 更新処理
@@ -30,16 +27,6 @@ public:
 	/// </summary>
 	ViewProjection& GetViewProjection() { return viewProjection_; }
 
-	/// <summary>
-	/// カメラのアクティブフラグの取得
-	/// </summary>
-	bool& GetIsActive() { return IsActive_; }
-
-	/// <summary>
-	/// 有効フラグの設定
-	/// </summary>
-	void SetIsActive(bool state) { IsActive_ = state; }
-
 private:
 
 	// ワールドトランスフォーム
@@ -47,9 +34,5 @@ private:
 
 	// ビュープロジェクション
 	ViewProjection viewProjection_{};
-
-	/// <summary>
-	/// デバッグカメラが有効か
-	/// </summary>
-	bool IsActive_ = false;
 };
+

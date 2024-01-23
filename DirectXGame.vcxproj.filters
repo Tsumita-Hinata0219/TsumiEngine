@@ -233,6 +233,12 @@
     <Filter Include="Tsumi\Utilities\TimedCall">
       <UniqueIdentifier>{011cef97-c010-49c0-98e8-9dd2d32379c7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Camera\RailCamera">
+      <UniqueIdentifier>{e2b77b0c-a0a3-4ac4-a5cc-edb0319a1a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\Player\Reticle">
+      <UniqueIdentifier>{5889fff3-9aa6-4d95-b04b-f1fbf4d3792c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -409,6 +415,12 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp">
       <Filter>Tsumi\Utilities\TimedCall</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Camera\RailCamera\RailCamera.cpp">
+      <Filter>Project\GameObject\Camera\RailCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.cpp">
+      <Filter>Project\GameObject\Character\Player\Reticle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -639,6 +651,12 @@
     </ClInclude>
     <ClInclude Include="Tsumi\Utilities\TimedCall\TimedCall.h">
       <Filter>Tsumi\Utilities\TimedCall</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Camera\RailCamera\RailCamera.h">
+      <Filter>Project\GameObject\Camera\RailCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.h">
+      <Filter>Project\GameObject\Character\Player\Reticle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

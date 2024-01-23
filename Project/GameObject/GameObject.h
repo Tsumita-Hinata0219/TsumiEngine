@@ -13,3 +13,4 @@
 #include "RandomGenerator.h"
 #include "TimedCall.h"
 #include "CollisionManager.h"
+#include "DebugCamera.h"

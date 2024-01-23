@@ -1,32 +1,33 @@
-#include "DebugCamera.h"
+#include "RailCamera.h"
 
 
 
 // 初期化処理
-void DebugCamera::Initialize()
+void RailCamera::Initialize(Vector3 rotate, Vector3 translate)
 {
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
-	worldTransform_.rotate = Vector3::zero;
-	worldTransform_.translate = Vector3::zero;
+	worldTransform_.rotate = rotate;
+	worldTransform_.translate = translate;
 
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
-	viewProjection_.farZ = 1200.0f;
+	//viewProjection_.farZ = 1200.0f;
 }
 
 
 // 更新処理
-void DebugCamera::Update()
+void RailCamera::Update()
 {
+	viewProjection_.rotate = worldTransform_.rotate;
+	viewProjection_.translate = worldTransform_.translate;
+	viewProjection_.matView = Inverse(worldTransform_.matWorld);
+
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
 
 	// ビューの更新
 	viewProjection_.UpdateMatrix();
-
-	// ビューの計算
-	viewProjection_.matView = Inverse(worldTransform_.matWorld);
 
 #ifdef _DEBUG
 

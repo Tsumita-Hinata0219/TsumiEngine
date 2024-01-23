@@ -58,7 +58,6 @@ void EnemyBullet::OnCollision(uint32_t id)
 	else if (id == ObjectBit::Terrain) {
 		this->isDead_ = true;
 	}
-	this->isDead_ = true;
 }
 
 

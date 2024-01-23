@@ -3,6 +3,7 @@
 #include "GameObject.h"
 
 #include "Player/Bullet/PlayerBullet.h"
+#include "Player/Reticle/PlayerReticle.h"
 
 
 // GameSceneの前方宣言
@@ -26,7 +27,7 @@ public: // プレイヤー本体 : メンバ関数
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Initialize(Vector3 initTranslate);
 
 	/// <summary>
 	/// 更新処理
@@ -74,6 +75,11 @@ public: // プレイヤー本体 : メンバ関数
 	/// GameSceneの設定
 	/// </summary>
 	void SetRegisterScene(GameScene* scene) { GameScene_ = scene; }
+
+	/// <summary>
+	/// ペアレントの設定
+	/// </summary>
+	void SetParent(WorldTransform* parent) { worldTransform_.SetParent(parent); }
 
 #pragma endregion
 
@@ -133,6 +139,20 @@ private: // プレイヤーバレット : メンバ変数
 
 	// 移動速度
 	Vector3 bulletVelocity_ = Vector3::zero;
+
+
+private: // プレイヤーのレティクル : メンバ関数
+
+	/// <summary>
+	/// レティクルの更新処理
+	/// </summary>
+	void ReticleUpdate();
+
+
+private: // プレイヤーのレティクル : メンバ変数
+
+	// レティクル
+	std::unique_ptr<PlayerReticle> reticle_ = nullptr;
 
 };
 

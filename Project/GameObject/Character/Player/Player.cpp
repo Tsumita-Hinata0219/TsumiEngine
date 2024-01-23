@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void Player::Initialize() 
+void Player::Initialize(Vector3 initTranslate)
 {
 	// モデルの初期化
 	model_ = make_unique<Model>();
@@ -11,7 +11,8 @@ void Player::Initialize()
 
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
-	worldTransform_.translate.y = 5.0f;
+	worldTransform_.translate = initTranslate;
+	worldTransform_.UpdateMatrix();
 
 	// 加算速度
 	velocity_ = Vector3::zero;
@@ -34,6 +35,11 @@ void Player::Initialize()
 
 	// バレットの移動速度
 	bulletVelocity_ = { 0.0f, 0.0f, 4.0f };
+
+	// レティクルの初期化
+	reticle_ = make_unique<PlayerReticle>();
+	reticle_->SetPlayer(this);
+	reticle_->Initialize((*model_), worldTransform_.GetWorldPos());
 }
 
 
@@ -42,6 +48,9 @@ void Player::Update()
 {
 	// OBBの設定
 	SettingOBBProperties();
+
+	// レティクルの更新処理
+	ReticleUpdate();
 
 	// 移動処理
 	Move();
@@ -70,6 +79,7 @@ void Player::Update()
 void Player::Draw(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+	reticle_->Draw(view);
 }
 
 
@@ -87,10 +97,10 @@ void Player::OnCollision(uint32_t id)
 void Player::Move() {
 
 	// 見えない壁。移動処理限界
-	worldTransform_.translate.y = min(worldTransform_.translate.y, vhInfo.up);
-	worldTransform_.translate.y = max(worldTransform_.translate.y, vhInfo.down);
-	worldTransform_.translate.x = min(worldTransform_.translate.x, vhInfo.left);
-	worldTransform_.translate.x = max(worldTransform_.translate.x, vhInfo.right);
+	//worldTransform_.translate.y = min(worldTransform_.translate.y, vhInfo.up);
+	//worldTransform_.translate.y = max(worldTransform_.translate.y, vhInfo.down);
+	//worldTransform_.translate.x = min(worldTransform_.translate.x, vhInfo.left);
+	//worldTransform_.translate.x = max(worldTransform_.translate.x, vhInfo.right);
 
 	// move_は毎フレーム０代入
 	// move_を増やすことで移動
@@ -143,5 +153,12 @@ void Player::PushBackBulletList()
 	newBullet->Initialize((*modelBullet_), newPos, newVel);
 
 	GameScene_->AddPlayerBulletList(newBullet);
+}
+
+
+// レティクルの更新処理
+void Player::ReticleUpdate()
+{
+	reticle_->Update();
 }
 

@@ -7,14 +7,16 @@
 void IEnemyMoveApproachState::InitState(Enemy* enemy)
 {
 	enemy_ = enemy;
-	// TimedCallリストの登録
-	enemy_->PushBackTimedCall();
+	enemy_->BulletInit();
 }
 
 
 // 初期化処理
 void IEnemyMoveApproachState::UpdateState()
 {
+	// 射撃処理
+	enemy_->BulletUpdate();
+
 	// 移動処理
 	enemy_->MoveApproach();
 
@@ -33,7 +35,6 @@ void IEnemyMoveApproachState::UpdateState()
 void IEnemyMoveApproachState::ExitState()
 {
 
-	enemy_->ClearTimedCall();
 }
 
 

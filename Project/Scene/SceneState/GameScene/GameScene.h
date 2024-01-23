@@ -5,6 +5,7 @@
 
 #include "GameObject.h"
 
+#include "RailCamera/RailCamera.h"
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "Player/Player.h"
@@ -78,6 +79,14 @@ private:
 
 	// メインカメラ
 	ViewProjection GameCamera_{};
+
+	/* ----- DebugCamera デバッグカメラ----- */
+	std::unique_ptr<DebugCamera> debugCamera_ = nullptr;
+
+
+	/* ----- RailCamera レールカメラ----- */
+	std::unique_ptr<RailCamera> railCamera_ = nullptr;
+
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	std::unique_ptr<CollisionManager> collisionManager_ = nullptr;

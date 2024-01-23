@@ -4,13 +4,7 @@
 
 
 // デストラクタ
-Enemy::~Enemy() {
-
-	// timedCalls_の解放
-	for (TimedCall* timedCall : timedCalls_) {
-		delete timedCall;
-	}
-}
+Enemy::~Enemy() {}
 
 
 // 初期化処理
@@ -31,9 +25,16 @@ void Enemy::Initialize(Model& modelEnemy, Vector3 pos, Vector3 move)
 	// 移動量の設定
 	move_ = move;
 
+	// サイズ
+	this->size_ = 2.0f * worldTransform_.scale;
+
 	// ムーブフェーズの初期化処理
 	MovePhaseInit();
 
+	// コライダー
+	OBBCollider::SetID(ObjectBit::Enemy);
+	OBBCollider::SetCollosionAttribute(ObjectFileter::Enemy);
+	OBBCollider::SetCollisionMask(ObjectFileter::Enemy);
 
 	// バレットモデルの初期化
 	modelBullet_ = make_unique<Model>();
@@ -57,10 +58,6 @@ void Enemy::Update()
 	MovePhaseUpdate();
 
 
-	if (KeyInput::TriggerKey(DIK_B)) {
-		ClearTimedCall();
-	}
-
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();
 }
@@ -73,64 +70,46 @@ void Enemy::Draw(ViewProjection view)
 }
 
 
+// 衝突時コールバック関数
+void Enemy::OnCollision(uint32_t id)
+{
+	if (id == ObjectBit::PlayerBullet) {
+		this->isDead_ = true;
+	}
+}
+
+
 // 射撃処理
 void Enemy::Attack() {
 
-	for (int i = 0; i < bulletsPerSpanw_; i++) {
-		PushBackBulletList();
-	}
+	CalcDirection();
+	PushBackBulletList();
+}
+
+
+// バレットの初期化処理
+void Enemy::BulletInit()
+{
+	FireInterval_ = 80;
+	FireTimer_ = int32_t(RandomGenerator::getRandom({ 5.0f, 300.0f }));
 }
 
 
 // バレットの更新処理
 void Enemy::BulletUpdate() {
 
-	// 終了したタイマーを削除
-	timedCalls_.remove_if([](TimedCall* timedCall) {
-		if (timedCall->IsFinished()) {
-			delete timedCall;
-			return true;
-		}
-		return false;
-	});
+	/*FireTimer_--;
 
-	// 範囲forでリストの全要素について回す
-	for (TimedCall* timedCall : timedCalls_) {
-		timedCall->Update();
+	if (FireTimer_ <= 0) {
+
+		Attack();
+		FireTimer_ = FireInterval_;
+	}*/
+
+	if (KeyInput::TriggerKey(DIK_B)) {
+		Attack();
 	}
-}
 
-
-// 射撃して、タイマーをリセットするコールバック関数
-void Enemy::FireAndReset() 
-{
-	// 射撃
-	Attack();
-
-	// TimedCallリストの登録
-	PushBackTimedCall();
-
-}
-
-
-// TimedCallリストの登録
-void Enemy::PushBackTimedCall()
-{
-	// メンバ関数と呼び出し元をbindしてstd::functionに代入
-	std::function<void(void)> callback = std::bind(&Enemy::FireAndReset, this);
-
-	// 時限発動イベントを生成
-	TimedCall* timedCall = new TimedCall(callback, 60);
-
-	// 時限発動イベントを時限発動イベントリストに追加
-	timedCalls_.push_back(timedCall);
-}
-
-
-// タイムコールリストを削除
-void Enemy::ClearTimedCall()
-{
-	timedCalls_.clear();
 }
 
 
@@ -146,7 +125,7 @@ Vector3 Enemy::CalcDirection()
 
 
 // バレットリストの登録
-void Enemy::PushBackBulletList() 
+void Enemy::PushBackBulletList()
 {
 	EnemyBullet* newBullet = new EnemyBullet();
 	Vector3 newPos = worldTransform_.GetWorldPos();
@@ -200,4 +179,12 @@ void Enemy::MovePhaseUpdate() {
 
 	// 更新処理
 	movePhaseArr_[currMovePhase_]->UpdateState();
+}
+
+
+// OBBの設定
+void Enemy::SettingOBBProperties()
+{
+	OBBCollider::SetSize(this->size_);
+	OBBCollider::SetRotate(this->worldTransform_.rotate);
 }

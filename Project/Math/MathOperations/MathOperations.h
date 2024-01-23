@@ -101,6 +101,9 @@ inline constexpr bool operator==(const Vector3& rhs, const float& val) {
 inline constexpr bool operator!=(const Vector3& rhs, const float& val) {
 	return val != rhs.x || val != rhs.y || val != rhs.z;
 }
+inline Vector3 operator-(Vector3& v) {
+	return { -v.x, -v.y, -v.z };
+}
 
 // 加算
 inline Vector3 operator+(const Vector3& v, const float& n) {

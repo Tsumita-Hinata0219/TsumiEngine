@@ -74,9 +74,12 @@ void Player::Update()
 
 
 // 描画処理
-void Player::Draw(ViewProjection view)
+void Player::Draw3D(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+}
+void Player::Draw2DFront(ViewProjection view)
+{
 	reticle_->Draw(view);
 }
 

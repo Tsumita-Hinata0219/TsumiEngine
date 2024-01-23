@@ -67,6 +67,15 @@ private: // メンバ変数
 	// モデル
 	std::unique_ptr<Model> model_ = nullptr;
 
+	// スプライト
+	std::unique_ptr<Sprite> sprite_ = nullptr;
+
+	// 2D座標
+	Vector2 position_{};
+
+	// テクスチャハンドル
+	uint32_t reticleTexHD_;
+
 	// ワールドトランスフォーム
 	WorldTransform wt_{};
 

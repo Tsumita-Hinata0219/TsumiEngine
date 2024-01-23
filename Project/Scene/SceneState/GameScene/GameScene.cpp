@@ -184,7 +184,7 @@ void GameScene::ModelDraw() {
 	ground_->Draw(GameCamera_);
 
 	/* ----- Player プレイヤー ----- */
-	player_->Draw(GameCamera_);
+	player_->Draw3D(GameCamera_);
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Draw(GameCamera_);
 	}
@@ -204,7 +204,8 @@ void GameScene::ModelDraw() {
 /// </summary>
 void GameScene::FrontSpriteDraw() {
 
-
+	/* ----- Player プレイヤー ----- */
+	player_->Draw2DFront(GameCamera_);
 }
 
 

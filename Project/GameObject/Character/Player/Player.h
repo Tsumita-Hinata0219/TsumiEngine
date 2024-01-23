@@ -37,7 +37,8 @@ public: // プレイヤー本体 : メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(ViewProjection view);
+	void Draw3D(ViewProjection view);
+	void Draw2DFront(ViewProjection view);
 
 	/// <summary>
 	/// 衝突時コールバック関数

@@ -22,17 +22,16 @@ void PlayerReticle::Initialize(Model& modelHD, Vector3 initTranslate)
 // 更新処理
 void PlayerReticle::Update()
 {
-	// レティクルの計算
-	offsetVec_ = Vector3::oneZ;
-	offsetVec_ = TransformNormal(offsetVec_, player_->GetWorldTransform().matWorld);
-	offsetVec_ = Normalize(offsetVec_) * kDistReticle_;
-	offsetVec_ += player_->GetWorldPosition();
-
-	// 座標を入れる
-	wt_.translate = offsetVec_;
-
 	// ワールド座標の更新
 	wt_.UpdateMatrix();
+
+
+	if (KeyInput::PressKeys(DIK_LEFT)) {
+		wt_.translate.x -= 0.3f;
+	}
+	if (KeyInput::PressKeys(DIK_RIGHT)) {
+		wt_.translate.x += 0.3f;
+	}
 }
 
 

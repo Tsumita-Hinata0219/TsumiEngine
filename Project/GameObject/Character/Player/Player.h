@@ -129,6 +129,11 @@ private: // プレイヤーバレット : メンバ関数
 	/// </summary>
 	void PushBackBulletList();
 
+	/// <summary>
+	/// バレットの進行方向の計算
+	/// </summary>
+	Vector3 CalcDirection();
+
 private: // プレイヤーバレット : メンバ変数
 
 	// 登録先シーン
@@ -138,7 +143,7 @@ private: // プレイヤーバレット : メンバ変数
 	std::unique_ptr<Model> modelBullet_ = nullptr;
 
 	// 移動速度
-	Vector3 bulletVelocity_ = Vector3::zero;
+	const float kBulletSpeed_ = 4.0f;
 
 
 private: // プレイヤーのレティクル : メンバ関数

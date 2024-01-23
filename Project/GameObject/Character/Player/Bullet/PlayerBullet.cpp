@@ -16,6 +16,13 @@ void PlayerBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 	// 加算速度
 	velocity_ = Vector3::zero;
 
+	// Y軸周り角度(θy)
+	worldTransform_.rotate.y = std::atan2(vel.x, vel.z);
+	float velZ = std::sqrt((vel.x * vel.x) + (vel.z * vel.z));
+	float height = -vel.y;
+	// X軸周り角度(θx)
+	worldTransform_.rotate.x = std::atan2(height, velZ);
+
 	// 移動量の設定
 	move_ = vel;
 

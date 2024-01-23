@@ -26,12 +26,32 @@ public: // メンバ関数
 	/// </summary>
 	void Draw(ViewProjection view);
 
+
+#pragma region Get
+
+	/// <summary>
+	/// ワールドトランスフォームの取得
+	/// </summary>
+	WorldTransform GetWorldTransform() { return this->wt_; }
+
+	/// <summary>
+	/// ワールド座標の取得
+	/// </summary>
+	Vector3 GetWorldPosition() { return this->wt_.GetWorldPos(); }
+
+#pragma endregion
+
 #pragma region Set
 
 	/// <summary>
 	/// Playerの設定
 	/// </summary>
 	void SetPlayer(Player* player) { this->player_ = player; }
+	
+	/// <summary>
+	/// ペアレントの設定
+	/// </summary>
+	void SetParent(WorldTransform* parent) { this->wt_.parent = parent; }
 
 #pragma endregion
 

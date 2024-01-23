@@ -33,13 +33,11 @@ void Player::Initialize(Vector3 initTranslate)
 	modelBullet_ = make_unique<Model>();
 	modelBullet_->CreateFromObj("PlayerBullet");
 
-	// バレットの移動速度
-	bulletVelocity_ = { 0.0f, 0.0f, 4.0f };
-
 	// レティクルの初期化
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->SetPlayer(this);
-	reticle_->Initialize((*model_), worldTransform_.GetWorldPos());
+	reticle_->Initialize((*model_), { 0.0f, 0.0f, 50.0f });
+	reticle_->SetParent(&worldTransform_);
 }
 
 
@@ -148,11 +146,20 @@ void Player::PushBackBulletList()
 {
 	PlayerBullet* newBullet = new PlayerBullet();
 	Vector3 newPos = worldTransform_.GetWorldPos();
-	Vector3 newVel = TransformNormal(bulletVelocity_, worldTransform_.matWorld);
+	Vector3 newVel = CalcDirection();
 
 	newBullet->Initialize((*modelBullet_), newPos, newVel);
 
 	GameScene_->AddPlayerBulletList(newBullet);
+}
+
+
+// バレットの進行方向の計算
+Vector3 Player::CalcDirection()
+{
+	Vector3 ReticlePos = reticle_->GetWorldPosition();
+	Vector3 PlaToRet = Normalize(ReticlePos - worldTransform_.GetWorldPos());
+	return { PlaToRet.x, PlaToRet.y, PlaToRet.z * kBulletSpeed_ };
 }
 
 

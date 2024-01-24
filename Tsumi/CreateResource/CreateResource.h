@@ -1,28 +1,6 @@
 #pragma once
 #include "DirectXCommon.h"
 #include "Struct.h"
-#include "CreateResource.h"
-
-
-//
-//struct TransformationMatrix {
-//	Matrix4x4 WVP;
-//	Matrix4x4 World;
-//};
-
-struct TransformationViewMatrix {
-	Matrix4x4 view;
-	Matrix4x4 viewProjection;
-	Matrix4x4 orthoGraphic;
-	Vector3 position;
-};
-
-struct ParticleTransformationMatrix {
-	Matrix4x4 WVP;
-	Matrix4x4 World;
-	Vector4 Color;
-	Matrix4x4 uvTansform;
-};
 
 
 struct ResourcePeroperty {

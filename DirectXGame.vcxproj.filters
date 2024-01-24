@@ -65,15 +65,6 @@
     <Filter Include="Tsumi\CreateResource">
       <UniqueIdentifier>{1d9f1210-1048-46a4-82e4-d59cd23eeeed}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tsumi\Base">
-      <UniqueIdentifier>{e6b94072-9335-4c36-938b-cfca9390a282}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tsumi\Base\WinApp">
-      <UniqueIdentifier>{8cf1c134-ac91-4673-9110-27e00c59335d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tsumi\Base\DXCommon">
-      <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tsumi\Graphic">
       <UniqueIdentifier>{ed37e39a-0754-4546-b8b8-761c2d815f68}</UniqueIdentifier>
     </Filter>
@@ -238,6 +229,15 @@
     </Filter>
     <Filter Include="Project\GameObject\Character\Player\Reticle">
       <UniqueIdentifier>{5889fff3-9aa6-4d95-b04b-f1fbf4d3792c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base">
+      <UniqueIdentifier>{e6b94072-9335-4c36-938b-cfca9390a282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\WinApp">
+      <UniqueIdentifier>{8cf1c134-ac91-4673-9110-27e00c59335d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\DXCommon">
+      <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

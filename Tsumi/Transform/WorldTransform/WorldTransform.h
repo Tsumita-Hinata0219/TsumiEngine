@@ -1,14 +1,17 @@
 #pragma once
 #include "MyMath.h"
 #include "CreateResource.h"
+#include "Struct.h"
 
 #include <vector>
 
+//
+//struct TransformationMatrix {
+//	Matrix4x4 WVP;
+//	Matrix4x4 World;
+//};
+//
 
-struct TransformationMatrix {
-	Matrix4x4 WVP;
-	Matrix4x4 World;
-};
 
 /// <summary>
 /// ワールド変換データ
@@ -31,7 +34,7 @@ struct WorldTransform {
 	// 定数バッファー
 	ComPtr<ID3D12Resource> constBuffer = nullptr;
 
-	//// マッピング済みアドレス
+	// マッピング済みアドレス
 	TransformationMatrix* constMap;
 
 	/// <summary>

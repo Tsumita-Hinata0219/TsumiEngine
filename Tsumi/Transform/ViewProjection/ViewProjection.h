@@ -3,8 +3,7 @@
 #include "WinApp.h"
 #include "MyMath.h"
 #include "CreateResource.h"
-#include <Struct.h>
-
+#include "Struct.h"
 
 
 /* ビュープロジェクション変換データ */

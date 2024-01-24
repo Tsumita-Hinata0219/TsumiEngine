@@ -77,6 +77,13 @@ Vector2 Lerp(const Vector2& start, const Vector2& end, const float t) {
 	return start + t * (end - start);
 }
 
+// Vector3 -> Vector2 への変換 今はそのまま対する値を送ってるだけだけど今後はもっと変換処理作っていく
+Vector2 ConvertVector(const Vector3& v, const ViewProjection& view) {
+	Vector3 worldPos = v;
+	//Matrix4x4 matView = view.matViewPort;
+	return Vector2();
+}
+
 
 
 
@@ -182,6 +189,11 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 	result.z = v.x * m.m[0][2] + v.y * m.m[1][2] + v.z * m.m[2][2];
 
 	return result;
+}
+
+// Vector2 -> Vector3 への変換
+Vector3 ConvertVector(const Vector2& v) {
+	return { v.x, v.y, 0.0f };
 }
 
 

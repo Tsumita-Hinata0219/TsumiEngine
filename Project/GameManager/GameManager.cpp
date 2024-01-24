@@ -8,7 +8,7 @@
 GameManager::GameManager() {
 
 	Tsumi::Initialize();
-	Scene_ = new GameScene();
+	Scene_ = new DebugScene();
 	Scene_->Initialize();
 }
 

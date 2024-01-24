@@ -27,9 +27,6 @@ void EngineManual::Initialize() {
 	mokugyoHD_ = Audio::LoadSound("mokugyo.wav");
 	kakkoiiHD_ = Audio::LoadSound("kakkoii.wav");
 
-	//Audio::PlayOnSound(kakkoiiHD_, true, 1.0f);
-
-
 	// スプライト
 	spriteFront_ = make_unique<Sprite>();
 	spriteFront_->Initialize({ 0.0f, 0.0f }, { 400.0f, 300.0f });
@@ -65,11 +62,11 @@ void EngineManual::Update() {
 	ImGui::Text("SpriteFront");
 	ImGui::DragFloat3("SpriteF_Scale", &spriteFrontTrans_.scale.x, 0.01f);
 	ImGui::DragFloat3("SpriteF_Rotate", &spriteFrontTrans_.rotate.x, 0.01f);
-	ImGui::DragFloat3("SpriteF_Translate", &spriteFrontTrans_.translate.x, 0.01f);
+	ImGui::DragFloat3("SpriteF_Translate", &spriteFrontTrans_.translate.x, 0.1f);
 	ImGui::Text("SpriteBack");
 	ImGui::DragFloat3("SpriteB_Scale", &spriteBackTrans_.scale.x, 0.01f);
 	ImGui::DragFloat3("SpriteB_Rotate", &spriteBackTrans_.rotate.x, 0.01f);
-	ImGui::DragFloat3("SpriteB_Translate", &spriteBackTrans_.translate.x, 0.01f);
+	ImGui::DragFloat3("SpriteB_Translate", &spriteBackTrans_.translate.x, 0.1f);
 	ImGui::Text("Axis");
 	ImGui::DragFloat3("Axis_Scale", &modelTrans_.scale.x, 0.01f);
 	ImGui::DragFloat3("Axis_Rotate", &modelTrans_.rotate.x, 0.01f);

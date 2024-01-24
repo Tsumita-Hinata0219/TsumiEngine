@@ -77,10 +77,11 @@ void Player::Update()
 void Player::Draw3D(ViewProjection view)
 {
 	model_->Draw(worldTransform_, view);
+	reticle_->Draw(view);
 }
 void Player::Draw2DFront(ViewProjection view)
 {
-	reticle_->Draw(view);
+	/*reticle_->Draw(view);*/
 }
 
 

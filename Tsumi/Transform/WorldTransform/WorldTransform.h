@@ -5,12 +5,12 @@
 
 #include <vector>
 
-//
-//struct TransformationMatrix {
-//	Matrix4x4 WVP;
-//	Matrix4x4 World;
-//};
-//
+
+struct TransformationMatrix {
+	Matrix4x4 WVP;
+	Matrix4x4 World;
+};
+
 
 
 /// <summary>

@@ -6,6 +6,10 @@
 #include "Struct.h"
 
 
+
+// 前方宣言
+struct TransformationViewMatrix;
+
 /* ビュープロジェクション変換データ */
 struct ViewProjection {
 
@@ -45,6 +49,9 @@ struct ViewProjection {
 
 	// 正射影行列
 	Matrix4x4 orthoGraphicMat{};
+
+	// ビューポート行列
+	Matrix4x4 matViewPort{};
 
 
 	// 定数バッファ

@@ -1,4 +1,5 @@
 #pragma once
+
 #include "MyMath.h"
 #include "CreateResource.h"
 #include "Struct.h"
@@ -9,23 +10,18 @@
 // 前方宣言
 struct TransformationMatrix;
 
-/// <summary>
-/// ワールド変換データ
-/// </summary>
-struct WorldTransform {
+/* Sprite用のワールド変換データ */
+class SpriteTransform {
 
 	// ローカルスケール
-	Vector3 scale = Vector3::one;
+	Vector2 scale = Vector2::one;
 	// ローカル回転軸
-	Vector3 rotate = Vector3::zero;
+	Vector2 rotate = Vector2::zero;
 	// ローカル座標
-	Vector3 translate = Vector3::zero;
+	Vector2 translate = Vector2::zero;
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};
-
-	// ペアレント
-	const WorldTransform* parent{};
 
 	// 定数バッファー
 	ComPtr<ID3D12Resource> constBuffer = nullptr;
@@ -83,3 +79,4 @@ struct WorldTransform {
 	/// </summary>
 	void TransferMatrix();
 };
+

@@ -23,6 +23,9 @@
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 
+// 前方宣言
+struct ViewProjection;
+
 
 
 /// -------------------------------------------------------------------------
@@ -54,7 +57,7 @@ Vector2 Project(const Vector2& v1, const Vector2& v2);
 // 線形補間
 Vector2 Lerp(const Vector2& start, const Vector2& end, const float t);
 // Vector3 -> Vector2 への変換
-//Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
+Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
 
 
 
@@ -85,6 +88,8 @@ Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 // Vector2 -> Vector3 への変換
 Vector3 ConvertVector(const Vector2& v);
+// Vector2をそのままVector3に入れる
+Vector3 CreateVector3FromVector2(const Vector2& v);
 
 
 

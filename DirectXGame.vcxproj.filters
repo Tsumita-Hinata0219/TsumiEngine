@@ -50,9 +50,6 @@
     <Filter Include="Tsumi\Transform\WorldTransform">
       <UniqueIdentifier>{8481eb3c-dd2c-44dd-9cb1-7f601271a0f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tsumi\Transform\ViewProjection">
-      <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tsumi\DebugTools">
       <UniqueIdentifier>{b2321114-df5e-4b1e-acbc-8abb24f9b03a}</UniqueIdentifier>
     </Filter>
@@ -239,6 +236,12 @@
     <Filter Include="Tsumi\Base\DXCommon">
       <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tsumi\Transform\SpriteTransform">
+      <UniqueIdentifier>{1fbc66a2-72ab-4025-a9cc-8c2b12c3ef33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform\ViewProjection">
+      <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -421,6 +424,9 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.cpp">
       <Filter>Project\GameObject\Character\Player\Reticle</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.cpp">
+      <Filter>Tsumi\Transform\SpriteTransform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -657,6 +663,9 @@
     </ClInclude>
     <ClInclude Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.h">
       <Filter>Project\GameObject\Character\Player\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.h">
+      <Filter>Tsumi\Transform\SpriteTransform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

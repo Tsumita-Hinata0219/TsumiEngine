@@ -5,6 +5,7 @@
 #include "TextureManager.h"
 #include "Audio.h"
 #include "Input.h"
+#include "SpriteTransform.h"
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 #include "ImGuiManager.h"

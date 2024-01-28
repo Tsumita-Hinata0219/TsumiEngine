@@ -26,7 +26,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update(ViewProjection view);
 
 	/// <summary>
 	/// 背景スプライトの描画処理
@@ -55,9 +55,9 @@ private: // メンバ変数
 
 	// スプライト
 	std::unique_ptr<Sprite> spriteFront_ = nullptr;
-	WorldTransform spriteFrontTrans_{};
+	SpriteTransform spriteFrontTrans_{};
 	std::unique_ptr<Sprite> spriteBack_ = nullptr;
-	WorldTransform spriteBackTrans_{};
+	SpriteTransform spriteBackTrans_{};
 
 	// Obj
 	std::unique_ptr<Model> modelObj_ = nullptr;
@@ -77,5 +77,8 @@ private: // メンバ変数
 
 
 	int bgmStartTimer = 0;
+
+
+	SpriteTransform st_{};
 
 };

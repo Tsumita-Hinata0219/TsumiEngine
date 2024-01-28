@@ -87,7 +87,7 @@ Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
 // ベクトル変換
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 // Vector2 -> Vector3 への変換
-Vector3 ConvertVector(const Vector2& v);
+//Vector3 ConvertVector(const Vector2& v);
 // Vector2をそのままVector3に入れる
 Vector3 CreateVector3FromVector2(const Vector2& v);
 

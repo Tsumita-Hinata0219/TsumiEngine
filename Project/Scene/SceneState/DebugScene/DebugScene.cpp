@@ -28,7 +28,7 @@ void DebugScene::Initialize() {
 /// </summary>
 void DebugScene::Update(GameManager* state) {
 
-	engineManual_->Update();
+	engineManual_->Update(viewProjection_);
 
 	viewProjection_.UpdateMatrix();
 

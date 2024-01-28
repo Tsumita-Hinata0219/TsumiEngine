@@ -425,7 +425,7 @@
     <ClCompile Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.cpp">
       <Filter>Project\GameObject\Character\Player\Reticle</Filter>
     </ClCompile>
-    <ClCompile Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.cpp">
+    <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp">
       <Filter>Tsumi\Transform\SpriteTransform</Filter>
     </ClCompile>
   </ItemGroup>
@@ -664,7 +664,7 @@
     <ClInclude Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.h">
       <Filter>Project\GameObject\Character\Player\Reticle</Filter>
     </ClInclude>
-    <ClInclude Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.h">
+    <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h">
       <Filter>Tsumi\Transform\SpriteTransform</Filter>
     </ClInclude>
   </ItemGroup>

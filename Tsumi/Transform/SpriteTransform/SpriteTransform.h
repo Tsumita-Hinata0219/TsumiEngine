@@ -11,7 +11,7 @@
 struct TransformationMatrix;
 
 /* Sprite用のワールド変換データ */
-class SpriteTransform {
+struct SpriteTransform {
 
 	// ローカルスケール
 	Vector2 scale = Vector2::one;

@@ -1,43 +1,37 @@
-#include "WorldTransform.h"
+#include "SpriteTransform.h"
 
 
 
 // 初期化処理
-void WorldTransform::Initialize() {
-
+void SpriteTransform::Initialize() {
+	
 	CreateBuffer();
 	matWorld = Matrix4x4::identity;
 	UpdateMatrix();
 }
 
 // 更新処理
-void WorldTransform::UpdateMatrix() {
+void SpriteTransform::UpdateMatrix() {
+
+	// Vector2をVector3に変換してmatWorldを作る
+	Vector3 vector3Scale = CreateVector3FromVector2(scale);
+	Vector3 vector3Rotate = CreateVector3FromVector2(rotate);
+	Vector3 vector3Translate = CreateVector3FromVector2(translate);
 
 	// スケール、回転、並列移動を合成して行列を計算する
-	matWorld = MakeAffineMatrix(scale, rotate, translate);
-
-	// 親があれば親のワールド行列を掛ける
-	if (parent) {
-		matWorld *= parent->matWorld;
-	}
+	matWorld = MakeAffineMatrix(vector3Scale, vector3Rotate, vector3Translate);
 
 	// 行列の計算・転送
 	TransferMatrix();
 }
 
 // ワールド座標の取得
-Vector3 WorldTransform::GetWorldPos() {
-
+Vector3 SpriteTransform::GetWorldPos() {
 	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
 }
 
-// 親子関係を結ぶ
-void WorldTransform::SetParent(const WorldTransform* parentTransform) {
-	parent = parentTransform;
-}
-
 // 定数バッファの生成
-void WorldTransform::CreateBuffer() {
+void SpriteTransform::CreateBuffer() {
 
 	CreateResource::CreateBufferResource(sizeof(TransformationMatrix), constBuffer);
 
@@ -48,7 +42,7 @@ void WorldTransform::CreateBuffer() {
 }
 
 // マッピングする
-void WorldTransform::Map() {
+void SpriteTransform::Map() {
 
 	// constBuffer が nullptr の場合はエラーハンドリング
 	if (!constBuffer) {
@@ -63,13 +57,13 @@ void WorldTransform::Map() {
 }
 
 // マッピング終了
-void WorldTransform::UnMap() {
+void SpriteTransform::UnMap() {
 
 	constBuffer->Unmap(0, nullptr);
 }
 
 // 行列の計算・転送
-void WorldTransform::TransferMatrix() {
+void SpriteTransform::TransferMatrix() {
 
 	Map();
 	constMap->WVP = matWorld;

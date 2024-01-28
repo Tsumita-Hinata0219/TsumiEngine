@@ -2,6 +2,7 @@
 
 #include "MyMath.h"
 #include "Struct.h"
+#include "SpriteTransform.h"
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 #include "TextureManager.h"
@@ -10,13 +11,6 @@
 #include "SpriteGraphicPipeline.h"
 #include "CreateResource.h"
 #include "DescriptorManager.h"
-
-
-struct SpriteTransform {
-	Vector2 scale{};
-	Vector2 rotate{};
-	Vector2 translate{};
-};
 
 
 class Sprite {
@@ -37,13 +31,13 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize(Vector2 pos, Vector2 size);
+	void Initialize(Vector2 pos = Vector2::zero, Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
 
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(uint32_t texHandle, WorldTransform& transform, ViewProjection view);
+	void Draw(uint32_t texHandle, SpriteTransform& transform, ViewProjection view);
 
 	/// <summary>
 	/// 色の変換
@@ -68,14 +62,16 @@ private:
 	/// <summary>
 	/// 頂点データを設定する
 	/// </summary>
-	void SetVertex(WorldTransform transform);
+	void SetVertex(SpriteTransform transform);
 
 
 private:
 
+	// スプライトトランスフォーム
+	SpriteTransform spriteTransform_{};
+
 	// ワールドトランスフォーム
 	WorldTransform worldTansform_;
-	SpriteTransform spriteTransform_{};
 
 	// 座標
 	Vector2 pos_;

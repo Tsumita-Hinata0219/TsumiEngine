@@ -5,13 +5,16 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void Sprite::Initialize(Vector2 pos, Vector2 size) {
+void Sprite::Initialize(Vector2 pos, Vector2 size, Vector4 color) {
 
 	// 初期座標の設定
 	pos_ = pos;
 
 	// サイズの設定
 	size_ = size;
+
+	// 色の設定
+	color_ = color;
 
 	// uvTransformの設定
 	uvTransform_ = {
@@ -23,9 +26,6 @@ void Sprite::Initialize(Vector2 pos, Vector2 size) {
 	// テクスチャの設定
 	// デフォルトではuvCheckerを使う
 	useTexture_ = 1;
-
-	// 色の設定
-	color_ = { 1.0f, 1.0f, 1.0f, 1.0f };
 
 	// リソースの作成
 	resource_.Vertex = CreateResource::CreateBufferResource(sizeof(VertexData) * 4);
@@ -40,10 +40,10 @@ void Sprite::Initialize(Vector2 pos, Vector2 size) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void Sprite::Draw(uint32_t texHandle, WorldTransform& worldTransform, ViewProjection view) {
+void Sprite::Draw(uint32_t texHandle, SpriteTransform& transform, ViewProjection view) {
 
 	// 頂点データを設定する
-	SetVertex(worldTransform);
+	SetVertex(transform);
 
 	// RootSignatureを設定。
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
@@ -61,7 +61,7 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& worldTransform, ViewProjec
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// wvp用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, worldTransform.constBuffer->GetGPUVirtualAddress());
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(2, view.constBuffer->GetGPUVirtualAddress());
@@ -80,7 +80,7 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& worldTransform, ViewProjec
 /// <summary>
 /// 頂点データを設定する
 /// </summary>
-void Sprite::SetVertex(WorldTransform worldTransform) {
+void Sprite::SetVertex(SpriteTransform transform) {
 
 	VertexData* vertexData = nullptr;
 	MaterialSprite* materialData = nullptr;
@@ -91,9 +91,7 @@ void Sprite::SetVertex(WorldTransform worldTransform) {
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
-	pos_ = { 
-		worldTansform_.translate.x, 
-		worldTansform_.translate.y };
+	pos_ = transform.translate;
 
 	// 左下
 	vertexData[0].position = { pos_.x, pos_.y + size_.y, 0.0f, 1.0f };

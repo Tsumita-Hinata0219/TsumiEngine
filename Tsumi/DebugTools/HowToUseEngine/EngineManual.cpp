@@ -40,14 +40,19 @@ void EngineManual::Initialize() {
 	modelObj_ = make_unique<Model>();
 	modelObj_->CreateFromObj("axis");
 	modelTrans_.Initialize();
+	modelTrans_.translate = { 0.0f, 0.0f, 23.0f };
 
+	st_.Initialize();
+	st_.scale = { 2.0f, 2.0f };
+	st_.rotate = { 5.0f, 6.0f };
+	st_.translate = { 100.0f, 100.0f };
 }
 
 
 /// <summary>
 /// 更新処理
 /// </summary>
-void EngineManual::Update() {
+void EngineManual::Update(ViewProjection view) {
 
 	AudioUpdate();
 
@@ -56,17 +61,21 @@ void EngineManual::Update() {
 	spriteBackTrans_.UpdateMatrix();
 	modelTrans_.UpdateMatrix();
 
+	st_.UpdateMatrix();
+
+	st_.translate = ConvertVector(modelTrans_.GetWorldPos(), view);
+
 #ifdef _DEBUG
 
 	ImGui::Begin("EngineManual");
 	ImGui::Text("SpriteFront");
-	ImGui::DragFloat3("SpriteF_Scale", &spriteFrontTrans_.scale.x, 0.01f);
-	ImGui::DragFloat3("SpriteF_Rotate", &spriteFrontTrans_.rotate.x, 0.01f);
-	ImGui::DragFloat3("SpriteF_Translate", &spriteFrontTrans_.translate.x, 0.1f);
+	ImGui::DragFloat2("SpriteF_Scale", &spriteFrontTrans_.scale.x, 0.01f);
+	ImGui::DragFloat2("SpriteF_Rotate", &spriteFrontTrans_.rotate.x, 0.01f);
+	ImGui::DragFloat2("SpriteF_Translate", &spriteFrontTrans_.translate.x, 0.1f);
 	ImGui::Text("SpriteBack");
-	ImGui::DragFloat3("SpriteB_Scale", &spriteBackTrans_.scale.x, 0.01f);
-	ImGui::DragFloat3("SpriteB_Rotate", &spriteBackTrans_.rotate.x, 0.01f);
-	ImGui::DragFloat3("SpriteB_Translate", &spriteBackTrans_.translate.x, 0.1f);
+	ImGui::DragFloat2("SpriteB_Scale", &spriteBackTrans_.scale.x, 0.01f);
+	ImGui::DragFloat2("SpriteB_Rotate", &spriteBackTrans_.rotate.x, 0.01f);
+	ImGui::DragFloat2("SpriteB_Translate", &spriteBackTrans_.translate.x, 0.1f);
 	ImGui::Text("Axis");
 	ImGui::DragFloat3("Axis_Scale", &modelTrans_.scale.x, 0.01f);
 	ImGui::DragFloat3("Axis_Rotate", &modelTrans_.rotate.x, 0.01f);

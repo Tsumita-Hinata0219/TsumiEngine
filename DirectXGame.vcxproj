@@ -140,7 +140,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Particle\ParticlePlane\ParticlePlane.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
-    <ClCompile Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.cpp" />
+    <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp" />
     <ClCompile Include="Tsumi\Transform\ViewProjection\ViewProjection.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -215,7 +215,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Particle\ParticlePlane\ParticlePlane.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
-    <ClInclude Include="Tsumi\Transform\SpriteWorldTransform\SpriteTransform.h" />
+    <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h" />
     <ClInclude Include="Tsumi\Transform\ViewProjection\ViewProjection.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />

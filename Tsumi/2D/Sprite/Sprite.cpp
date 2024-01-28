@@ -19,7 +19,7 @@ void Sprite::Initialize(Vector2 pos, Vector2 size, Vector4 color) {
 	// uvTransformの設定
 	uvTransform_ = {
 		{ 1.0f, 1.0f, 1.0f },
-		{ 0.0f, 1.0f, 0.0f },
+		{ 0.0f, 0.0f, 0.0f },
 		{ 0.0f, 0.0f, 0.0f },
 	};
 

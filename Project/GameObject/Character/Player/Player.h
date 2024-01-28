@@ -32,7 +32,7 @@ public: // プレイヤー本体 : メンバ関数
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update(ViewProjection view);
 
 	/// <summary>
 	/// 描画処理
@@ -152,7 +152,7 @@ private: // プレイヤーのレティクル : メンバ関数
 	/// <summary>
 	/// レティクルの更新処理
 	/// </summary>
-	void ReticleUpdate();
+	void ReticleUpdate(ViewProjection view);
 
 
 private: // プレイヤーのレティクル : メンバ変数

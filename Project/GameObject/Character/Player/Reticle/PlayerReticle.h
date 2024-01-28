@@ -19,7 +19,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update(ViewProjection view);
 
 	/// <summary>
 	/// 描画処理
@@ -70,11 +70,11 @@ private: // メンバ変数
 	// スプライト
 	std::unique_ptr<Sprite> sprite_ = nullptr;
 
-	// 2D座標
-	Vector2 position_{};
-
 	// テクスチャハンドル
 	uint32_t reticleTexHD_;
+
+	// スプライトトランスフォーム
+	SpriteTransform st_{};
 
 	// ワールドトランスフォーム
 	WorldTransform wt_{};

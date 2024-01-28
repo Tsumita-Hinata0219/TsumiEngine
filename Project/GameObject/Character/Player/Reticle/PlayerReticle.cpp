@@ -14,12 +14,27 @@ void PlayerReticle::Initialize(Model& modelHD, Vector3 initTranslate)
 	wt_.translate = initTranslate;
 	// オフセット
 	offsetVec_ = Vector3::oneZ;
+
+	// テクスチャの読み込み
+	reticleTexHD_ = TextureManager::LoadTexture("PlayerReticle.png");
+
+	// スプライトの初期化
+	sprite_ = make_unique<Sprite>();
+	sprite_->Initialize(Vector2::zero, { 64.0f, 64.0f });
+
+	// スプライトトランスフォームの初期化
+	st_.Initialize();
 }
 
 
 // 更新処理
-void PlayerReticle::Update()
+void PlayerReticle::Update(ViewProjection view)
 {
+	// ワールド座標の更新
+	wt_.UpdateMatrix();
+	st_.UpdateMatrix();
+
+
 	// レティクルの計算
 	offsetVec_ = Vector3::oneZ;
 	offsetVec_ = TransformNormal(offsetVec_, player_->GetWorldTransform().matWorld);
@@ -29,8 +44,8 @@ void PlayerReticle::Update()
 	// 座標を入れる
 	wt_.translate = offsetVec_;
 
-	// ワールド座標の更新
-	wt_.UpdateMatrix();
+	// 3D -> 2D へ
+	st_.translate = ConvertVector(wt_.GetWorldPos(), view) / 2.0f;
 
 
 	/*if (KeyInput::PressKeys(DIK_LEFT)) {
@@ -58,4 +73,5 @@ void PlayerReticle::Update()
 void PlayerReticle::Draw(ViewProjection view)
 {
 	model_->Draw(wt_, view);
+	sprite_->Draw(reticleTexHD_, st_, view);
 }

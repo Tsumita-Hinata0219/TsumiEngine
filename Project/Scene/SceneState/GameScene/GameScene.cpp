@@ -106,7 +106,7 @@ void GameScene::Update(GameManager* state) {
 
 
 	/* ----- Player プレイヤー ----- */
-	player_->Update();
+	player_->Update(GameCamera_);
 	for (PlayerBullet* bullet : playerBullets_) {
 		bullet->Update();
 	}

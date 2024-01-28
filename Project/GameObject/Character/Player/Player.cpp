@@ -42,13 +42,13 @@ void Player::Initialize(Vector3 initTranslate)
 
 
 // 更新処理
-void Player::Update()
+void Player::Update(ViewProjection view)
 {
 	// OBBの設定
 	SettingOBBProperties();
 
 	// レティクルの更新処理
-	ReticleUpdate();
+	ReticleUpdate(view);
 
 	// 移動処理
 	Move();
@@ -168,8 +168,8 @@ Vector3 Player::CalcDirection()
 
 
 // レティクルの更新処理
-void Player::ReticleUpdate()
+void Player::ReticleUpdate(ViewProjection view)
 {
-	reticle_->Update();
+	reticle_->Update(view);
 }
 

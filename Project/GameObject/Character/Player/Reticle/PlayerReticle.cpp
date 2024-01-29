@@ -47,7 +47,7 @@ void PlayerReticle::Update(ViewProjection view)
 	// 3D -> 2D へ
 	st_.translate = (ConvertVector(wt_.GetWorldPos(), view) / 2.0f);
 	Vector2 size = { 32.0f, 32.0f };
-	st_.translate.x -= (size.x / 2.0f);
+	//st_.translate.x -= (size.x / 2.0f);
 
 
 	/*if (KeyInput::PressKeys(DIK_LEFT)) {

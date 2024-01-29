@@ -90,7 +90,10 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 //Vector3 ConvertVector(const Vector2& v);
 // Vector2をそのままVector3に入れる
 Vector3 CreateVector3FromVector2(const Vector2& v);
-
+// CatmullRom補間
+Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t);
+// CatmullRomスプライン曲線上の座標を得る
+Vector3 CatmullRomPosition(const std::vector<Vector3>& points, float t);
 
 
 

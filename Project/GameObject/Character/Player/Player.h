@@ -122,6 +122,9 @@ private: // プレイヤー本体 : メンバ変数
 	// サイズ
 	Vector3 size_{};
 
+	// ジョイコン
+	// XINPUT_STATE joyState_{};
+
 
 private: // プレイヤーバレット : メンバ関数
 

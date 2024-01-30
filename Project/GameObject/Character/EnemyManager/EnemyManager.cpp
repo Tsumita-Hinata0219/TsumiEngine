@@ -22,7 +22,7 @@ void EnemyManager::Initialize()
 // 更新処理
 void EnemyManager::Update()
 {
-	if (KeyInput::TriggerKey(DIK_R)) {
+	if (KeysInput::TriggerKey(DIK_R)) {
 		PushBackEnemy();
 	}
 

@@ -2,8 +2,11 @@
 
 #define DIRECTINPUT_VERSION 0x0800 // DirectInputnoバージョン指定
 #include <dinput.h>
+#include <Xinput.h>
+#define XINPUT_GAMEPAD_MAX 16
 
 #pragma comment(lib, "dinput8.lib")
+#pragma comment(lib,"xinput.lib")
 #pragma comment(lib, "dxguid.lib")
 
 #include "WinApp.h"
@@ -15,34 +18,13 @@
 
 
 
-// -------------------------------------------------------------------------
-// 入力
-// -------------------------------------------------------------------------
-// 
-// -------------------------------------------------------------------------
-class Input {
-
-public: // メンバ関数
-
-	/// <summary>
-	/// インスタンスの取得
-	/// </summary>
-	static Input* GetInstance() {
-		static Input instance;
-		return &instance;
-	}
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	static void Initialize() {}
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	static void BeginFrame() {}
+struct PadData {
+	Vector2 stickR_;
+	Vector2 stickL_;
+	WORD button_;
+	float triggerR_;
+	float triggerL_;
 };
-
 
 
 
@@ -51,14 +33,14 @@ public: // メンバ関数
 // -------------------------------------------------------------------------
 // KeyInput : キーボード
 // -------------------------------------------------------------------------
-class KeyInput {
+class KeysInput {
 
 public: // メンバ関数
 
 	/// <summary>
 	/// インスタンスの取得
 	/// </summary>
-	static KeyInput* GetInstance();
+	static KeysInput* GetInstance();
 
 	/// <summary>
 	/// 初期化処理
@@ -102,35 +84,73 @@ private: // メンバ変数
 
 
 
-//
-//
-//// -------------------------------------------------------------------------
-//// 入力
-//// -------------------------------------------------------------------------
-//// GamePadInput : ゲームパッド
-//// -------------------------------------------------------------------------
-//class GamePadInput {
-//
-//public: // メンバ関数
-//
-//	/// <summary>
-//	/// インスタンスの取得
-//	/// </summary>
-//	static GamePadInput* GetInstance();
-//
-//	/// <summary>
-//	/// 初期化処理
-//	/// </summary>
-//	static void Initialize();
-//
-//	/// <summary>
-//	/// 更新処理
-//	/// </summary>
-//	static void BeginFrame();
-//
-//
-//
-//private: // メンバ変数
-//
-//
-//};
+
+
+// -------------------------------------------------------------------------
+// 入力
+// -------------------------------------------------------------------------
+// GamePadInput : ゲームパッド
+// -------------------------------------------------------------------------
+class GamePadInput {
+
+public: // メンバ関数
+
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
+	static GamePadInput* GetInstance();
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	static void Initialize();
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	static void BeginFrame();
+
+	/// <summary>
+	/// パッドの更新
+	/// </summary>
+	static bool GetJoyState();
+
+	/// <summary>
+	/// 各ボタンのトリガー状態の初期化処理
+	/// </summary>
+	void ResetButtonTriggers();
+
+	/// <summary>
+	/// ジョイコンの入力の取得
+	/// </summary>
+	static bool GetJoyStickState(XINPUT_STATE& state);
+
+	/// <summary>
+	/// 押されていない
+	/// </summary>
+	static bool NoneButton(uint32_t button);
+
+	/// <summary>
+	/// 押した瞬間
+	/// </summary>
+	static bool TriggerButton(uint32_t button);
+
+	/// <summary>
+	/// 押しっぱなし
+	/// </summary>
+	static bool PressButton(const XINPUT_STATE& state, WORD button);
+
+	/// <summary>
+	/// 離された瞬間
+	/// </summary>
+	static bool ReleaseButton(uint32_t button);
+
+
+
+private: // メンバ変数
+
+	XINPUT_STATE joyState_{};
+	XINPUT_STATE preJoyState_{};
+
+	WORD buttonTriggers[XINPUT_GAMEPAD_MAX];
+};

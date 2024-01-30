@@ -110,5 +110,9 @@ private:
 	std::unique_ptr<EnemyManager> enemyManager_ = nullptr;
 	std::list<Enemy*> enemys_{};
 	std::list<EnemyBullet*> enemyBullets_{};
+
+	// ジョイコン
+	XINPUT_STATE joyState_{};
+	bool funcFade_ = false;
 };
 

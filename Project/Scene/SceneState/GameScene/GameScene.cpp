@@ -75,6 +75,7 @@ void GameScene::Initialize() {
 	/* ----- Parent 親子関係ペアレント ----- */
 	player_->SetParent(&railCamera_->GetWorldTransform());
 
+	funcFade_ = false;
 }
 
 
@@ -98,6 +99,25 @@ void GameScene::Update(GameManager* state) {
 	}
 
 	FadeManager::IsFadeOut();
+
+	// ゲームパッドを見接続なら何もせず抜ける
+	if (!GamePadInput::GetJoyStickState(joyState_)) {
+		return;
+	}
+	if (KeysInput::TriggerKey(DIK_O)) {
+		funcFade_ = true;
+	}
+
+	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_B)) {
+		funcFade_ = true;
+	}
+	if (funcFade_) {
+		if (FadeManager::IsFadeIn()) {
+
+			state->ChangeSceneState(new TitleScene());
+			return;
+		}
+	}
 
 
 	/* ----- Skydome スカイドーム ----- */

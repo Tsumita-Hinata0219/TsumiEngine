@@ -138,8 +138,8 @@ bool FadeManager::IsFadeOut()
 
 	// 補間が終了したら、ステートの設定して、trueを返す
 	if (FadeManager::GetInstance()->time_ >= 1.0f) {
-		FadeManager::GetInstance()->state_.isFadeIn = true;
-		FadeManager::GetInstance()->state_.isFadeOut = false;
+		FadeManager::GetInstance()->state_.isFadeIn = false;
+		FadeManager::GetInstance()->state_.isFadeOut = true;
 		FadeManager::FrameInit();
 		return true;
 	}

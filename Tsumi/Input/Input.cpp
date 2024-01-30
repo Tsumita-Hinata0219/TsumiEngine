@@ -2,84 +2,83 @@
 
 
 
-
 // -------------------------------------------------------------------------
 // KeyInput : キーボード
 // -------------------------------------------------------------------------
 
 // インスタンスの取得
-KeyInput* KeyInput::GetInstance() {
-	static KeyInput instance;
+KeysInput* KeysInput::GetInstance() {
+	static KeysInput instance;
 	return &instance;
 }
 
 // 初期化処理
-void KeyInput::Initialize() {
+void KeysInput::Initialize() {
 
 	// DirectInputのインスタンス生成
 	HRESULT result = DirectInput8Create(
 		WinApp::GetWc().hInstance, DIRECTINPUT_VERSION, 
-		IID_IDirectInput8, (void**)&KeyInput::GetInstance()->directInput_, nullptr);
+		IID_IDirectInput8, (void**)&KeysInput::GetInstance()->directInput_, nullptr);
 	assert(SUCCEEDED(result));
 
 	// キーボードデバイス生成
-	result = KeyInput::GetInstance()->directInput_->CreateDevice(GUID_SysKeyboard, &KeyInput::GetInstance()->keyboard_, NULL);
+	result = KeysInput::GetInstance()->directInput_->CreateDevice(GUID_SysKeyboard, &KeysInput::GetInstance()->keyboard_, NULL);
 	assert(SUCCEEDED(result));
 
 	// 入力データ形式のセット
-	result = KeyInput::GetInstance()->keyboard_->SetDataFormat(&c_dfDIKeyboard);
+	result = KeysInput::GetInstance()->keyboard_->SetDataFormat(&c_dfDIKeyboard);
 	assert(SUCCEEDED(result));
 
 	// 排他制御レベルのセット
-	result = KeyInput::GetInstance()->keyboard_->SetCooperativeLevel(
+	result = KeysInput::GetInstance()->keyboard_->SetCooperativeLevel(
 		WinApp::GetHwnd(), DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
 	assert(SUCCEEDED(result));
 }
 
 // 更新処理
-void KeyInput::BeginFrame() {
+void KeysInput::BeginFrame() {
 
 	// メモリコピー
-	memcpy(KeyInput::GetInstance()->preKeys, KeyInput::GetInstance()->Keys, 256);
+	memcpy(KeysInput::GetInstance()->preKeys, KeysInput::GetInstance()->Keys, 256);
 
 	// キーボード情報の取得開始
-	KeyInput::GetInstance()->keyboard_->Acquire();
+	KeysInput::GetInstance()->keyboard_->Acquire();
 
 	// 全キーの入力状態を取得する
-	KeyInput::GetInstance()->keyboard_->GetDeviceState(sizeof(KeyInput::GetInstance()->Keys), KeyInput::GetInstance()->Keys);
+	KeysInput::GetInstance()->keyboard_->GetDeviceState(sizeof(KeysInput::GetInstance()->Keys), KeysInput::GetInstance()->Keys);
 }
 
 // 押されていない
-bool KeyInput::NoneKey(uint32_t keyNum) {
+bool KeysInput::NoneKey(uint32_t keyNum) {
 
-	if (KeyInput::GetInstance()->preKeys[keyNum] == 0x00 && KeyInput::GetInstance()->Keys[keyNum] == 0x00) {
+	if (KeysInput::GetInstance()->preKeys[keyNum] == 0x00 && KeysInput::GetInstance()->Keys[keyNum] == 0x00) {
 		return true;
 	}
 	return false;
 }
 
 // 押した瞬間
-bool KeyInput::TriggerKey(uint32_t keyNum) {
+bool KeysInput::TriggerKey(uint32_t keyNum) {
 
-	if (KeyInput::GetInstance()->preKeys[keyNum] == 0x00 && KeyInput::GetInstance()->Keys[keyNum] == 0x80) {
+	if (KeysInput::GetInstance()->preKeys[keyNum] == 0x00 && KeysInput::GetInstance()->Keys[keyNum] == 0x80) {
 		return true;
 	}
 	return false;
 }
 
 // 押しっぱなし
-bool KeyInput::PressKeys(uint32_t keyNum) {
+bool KeysInput::PressKeys(uint32_t keyNum) {
 
-	if (KeyInput::GetInstance()->preKeys[keyNum] == 0x80 && KeyInput::GetInstance()->Keys[keyNum] == 0x80) {
+	if (KeysInput::GetInstance()->preKeys[keyNum] == 0x80 && KeysInput::GetInstance()->Keys[keyNum] == 0x80) {
 		return true;
 	}
 	return false;
 }
 
 // 離された瞬間
-bool KeyInput::ReleaseKeys(uint32_t keyNum) {
+bool KeysInput::ReleaseKeys(uint32_t keyNum) {
 
-	if (KeyInput::GetInstance()->preKeys[keyNum] == 0x80 && KeyInput::GetInstance()->Keys[keyNum] == 0x00) {
+	if (KeysInput::GetInstance()->preKeys[keyNum] == 0x80 && KeysInput::GetInstance()->Keys[keyNum] == 0x00) {
 		return true;
 	}
 	return false;
@@ -90,31 +89,105 @@ bool KeyInput::ReleaseKeys(uint32_t keyNum) {
 // -------------------------------------------------------------------------
 
 
-//
-//
-//
-//// -------------------------------------------------------------------------
-//// GamePadInput : ゲームパッド
-//// -------------------------------------------------------------------------
-//
-//// インスタンスの取得
-//GamePadInput* GamePadInput::GetInstance() {
-//	static GamePadInput instance;
-//	return &instance;
-//}
-//
-//// 初期化処理
-//void GamePadInput::Initialize() {
-//
-//}
-//
-//// 更新処理
-//void GamePadInput::BeginFrame() {
-//
-//}
-//
-//
-//// -------------------------------------------------------------------------
-//// GamePadInput : ゲームパッド
-//// -------------------------------------------------------------------------
-//
+
+
+
+// -------------------------------------------------------------------------
+// GamePadInput : ゲームパッド
+// -------------------------------------------------------------------------
+
+// インスタンスの取得
+GamePadInput* GamePadInput::GetInstance() {
+	static GamePadInput instance;
+	return &instance;
+}
+
+// 初期化処理
+void GamePadInput::Initialize() {
+
+	// 各ボタンのトリガー状態の初期化処理
+	GamePadInput::GetInstance()->ResetButtonTriggers();
+}
+
+// 更新処理
+void GamePadInput::BeginFrame() {
+
+	// メモリコピー
+	//GamePadInput::GetInstance()->preJoyState_ = GamePadInput::GetInstance()->joyState_;
+
+	// ジョイスティックの状態をポーリング
+	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i) {
+		XINPUT_STATE state;
+		ZeroMemory(&state, sizeof(XINPUT_STATE));
+	}
+}
+
+// パッドの状態更新
+bool GamePadInput::GetJoyState()
+{
+	/*DWORD dwResult = XInputGetState(0, &GamePadInput::GetInstance()->joyState_);
+	if (dwResult == ERROR_SUCCESS) {
+		return true;
+	}
+	return false;*/
+	return false;
+}
+
+// 各ボタンのトリガー状態の初期化処理
+void GamePadInput::ResetButtonTriggers()
+{
+	ZeroMemory(buttonTriggers, sizeof(buttonTriggers));
+}
+
+// ジョイコンの入力の取得
+bool GamePadInput::GetJoyStickState(XINPUT_STATE& state)
+{
+	DWORD dwresult = XInputGetState(0, &state);
+
+	if (dwresult == ERROR_SUCCESS) {
+		return true;
+	}
+	return false;
+}
+
+// 押されていない
+bool GamePadInput::NoneButton(uint32_t button)
+{
+	return false;
+}
+
+// 押した瞬間
+bool GamePadInput::TriggerButton(uint32_t button)
+{
+	bool preFlag = false;
+
+	if (GamePadInput::GetInstance()->preJoyState_.Gamepad.wButtons & button)
+	{
+		preFlag = true;
+	}
+
+	if (!preFlag && GamePadInput::GetInstance()->joyState_.Gamepad.wButtons & button)
+	{
+		return true;
+	}
+
+	return false;
+}
+
+// 押しっぱなし
+bool GamePadInput::PressButton(const XINPUT_STATE& state, WORD button)
+{
+	// ボタンが押された瞬間だけを判定
+	return((state.Gamepad.wButtons & button) != 0) && ((GamePadInput::GetInstance()->buttonTriggers[button] & button) == 0);
+}
+
+// 離された瞬間
+bool GamePadInput::ReleaseButton(uint32_t button)
+{
+	return false;
+}
+
+// -------------------------------------------------------------------------
+// GamePadInput : ゲームパッド
+// -------------------------------------------------------------------------
+

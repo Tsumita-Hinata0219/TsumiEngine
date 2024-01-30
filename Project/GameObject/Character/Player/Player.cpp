@@ -104,23 +104,40 @@ void Player::Move() {
 	//worldTransform_.translate.x = min(worldTransform_.translate.x, vhInfo.left);
 	//worldTransform_.translate.x = max(worldTransform_.translate.x, vhInfo.right);
 
+	/*if (!GamePadInput::GetJoyStickState(joyState_)) {
+		return;
+	}*/
+
 	// move_は毎フレーム０代入
 	// move_を増やすことで移動
 	move_ = Vector3::zero;
 	velocity_ = Vector3::zero;
 
-	if (KeyInput::PressKeys(DIK_W)) {
+	if (KeysInput::PressKeys(DIK_W)) {
 		move_.y = moveSpeed_;
 	}
-	if (KeyInput::PressKeys(DIK_A)) {
+	if (KeysInput::PressKeys(DIK_A)) {
 		move_.x = -moveSpeed_;
 	}
-	if (KeyInput::PressKeys(DIK_S)) {
+	if (KeysInput::PressKeys(DIK_S)) {
 		move_.y = -moveSpeed_;
 	}
-	if (KeyInput::PressKeys(DIK_D)) {
+	if (KeysInput::PressKeys(DIK_D)) {
 		move_.x = moveSpeed_;
 	}
+
+	/*if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_DPAD_UP)) {
+		move_.y = moveSpeed_;
+	}
+	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_DPAD_LEFT)) {
+		move_.x = -moveSpeed_;
+	}
+	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_DPAD_DOWN)) {
+		move_.y = -moveSpeed_;
+	}
+	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_DPAD_RIGHT)) {
+		move_.x = moveSpeed_;
+	}*/
 
 	// 速度を常に加算
 	velocity_ = move_;
@@ -131,7 +148,7 @@ void Player::Move() {
 // 射撃処理
 void Player::Attack() {
 
-	if (KeyInput::TriggerKey(DIK_SPACE)) {
+	if (KeysInput::TriggerKey(DIK_SPACE)) {
 		PushBackBulletList();
 	}
 }

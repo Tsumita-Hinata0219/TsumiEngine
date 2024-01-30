@@ -21,7 +21,15 @@ void TitleScene::Update(GameManager* state)
 	/* ----- GameCamera ゲームカメラ----- */
 	GameCamera_.UpdateMatrix();
 
-	if (KeyInput::TriggerKey(DIK_SPACE)) {
+	if (KeysInput::TriggerKey(DIK_I)) {
+		funcFade_ = true;
+	}
+	
+	// ゲームパッドを見接続なら何もせず抜ける
+	if (!GamePadInput::GetJoyStickState(joyState_)) {
+		return;
+	}
+	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_B)) {
 		funcFade_ = true;
 	}
 

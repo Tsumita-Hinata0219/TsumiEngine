@@ -81,4 +81,7 @@ private: // メンバ変数
 
 	SpriteTransform st_{};
 
+	// ジョイコン
+	XINPUT_STATE joyState_{};
+
 };

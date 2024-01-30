@@ -98,15 +98,15 @@ void Enemy::BulletInit()
 // バレットの更新処理
 void Enemy::BulletUpdate() {
 
-	/*FireTimer_--;
+	FireTimer_--;
 
 	if (FireTimer_ <= 0) {
 
 		Attack();
 		FireTimer_ = FireInterval_;
-	}*/
+	}
 
-	if (KeyInput::TriggerKey(DIK_B)) {
+	if (KeysInput::TriggerKey(DIK_B)) {
 		Attack();
 	}
 

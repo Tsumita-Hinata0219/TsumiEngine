@@ -54,4 +54,8 @@ private:
 	ViewProjection GameCamera_{};
 
 	bool funcFade_ = false;
+
+
+	// ジョイコン
+	XINPUT_STATE joyState_{};
 };

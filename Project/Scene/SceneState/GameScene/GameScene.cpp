@@ -97,7 +97,9 @@ void GameScene::Update(GameManager* state) {
 		railCamera_->Update();
 		GameCamera_ = railCamera_->GetViewProjection();
 	}
-
+	if (KeysInput::TriggerKey(DIK_I)) {
+		funcFade_ = true;
+	}
 	FadeManager::IsFadeOut();
 
 	// ゲームパッドを見接続なら何もせず抜ける

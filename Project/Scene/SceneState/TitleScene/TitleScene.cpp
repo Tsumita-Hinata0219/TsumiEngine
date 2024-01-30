@@ -9,8 +9,9 @@ void TitleScene::Initialize()
 	GameCamera_.Initialize();
 
 	// フェードの処理
-	FadeManager::Initialize();
+	FadeManager::Initialize(func_FadeIn);
 
+	funcFade_ = false;
 }
 
 
@@ -20,7 +21,17 @@ void TitleScene::Update(GameManager* state)
 	/* ----- GameCamera ゲームカメラ----- */
 	GameCamera_.UpdateMatrix();
 
+	if (KeyInput::TriggerKey(DIK_SPACE)) {
+		funcFade_ = true;
+	}
 
+	if (funcFade_) {
+		if (FadeManager::IsFadeIn()) {
+
+			state->ChangeSceneState(new GameScene());
+			return;
+		}
+	}
 
 #ifdef _DEBUG
 
@@ -38,6 +49,7 @@ void TitleScene::Update(GameManager* state)
 void TitleScene::BackSpriteDraw()
 {
 
+
 }
 
 
@@ -52,5 +64,4 @@ void TitleScene::ModelDraw()
 void TitleScene::FrontSpriteDraw()
 {
 	FadeManager::Draw(GameCamera_);
-
 }

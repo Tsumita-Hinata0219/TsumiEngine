@@ -49,7 +49,7 @@ void Log(const std::string& message) {
 /// float
 /// -------------------------------------------------------------------------
 float Lerp(const float& start, const float& end, float t) {
-	return start + t * (end - start);
+	return start + (end - start) * t;
 }
 
 

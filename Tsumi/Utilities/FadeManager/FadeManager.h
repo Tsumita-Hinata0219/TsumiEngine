@@ -40,7 +40,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	static void Initialize();
+	static void Initialize(FunctionFade func);
 
 	/// <summary>
 	/// 描画処理

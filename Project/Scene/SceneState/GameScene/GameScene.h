@@ -10,6 +10,7 @@
 #include "Ground/Ground.h"
 #include "Player/Player.h"
 #include "EnemyManager/EnemyManager.h"
+#include "FadeManager.h"
 
 
 class GameScene : public IScene {

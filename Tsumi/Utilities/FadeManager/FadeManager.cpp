@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void FadeManager::Initialize()
+void FadeManager::Initialize(FunctionFade func)
 {
 	// テクスチャの読み込み
 	FadeManager::GetInstance()->texHD_ = TextureManager::LoadTexture("Fade.png");
@@ -15,8 +15,26 @@ void FadeManager::Initialize()
 	// スプライトトランスフォームの初期化
 	FadeManager::GetInstance()->st_.Initialize();
 
-	// カラーの設定
-	FadeManager::GetInstance()->color_ = Vector4::oneW;
+	if (func == func_FadeIn) {
+
+		// カラーの設定
+		FadeManager::GetInstance()->color_ = Vector4::zero;
+		FadeManager::GetInstance()->state_.isFadeIn = false;
+		FadeManager::GetInstance()->state_.isFadeOut = true;
+
+		// フレームなどの変数初期化
+		FadeManager::FrameInit();
+	}
+	else if (func == func_FadeOut) {
+
+		// カラーの設定
+		FadeManager::GetInstance()->color_ = Vector4::oneW;
+		FadeManager::GetInstance()->state_.isFadeOut = true;
+		FadeManager::GetInstance()->state_.isFadeOut = false;
+
+		// フレームなどの変数初期化
+		FadeManager::FrameInit();
+	}
 }
 
 
@@ -35,7 +53,10 @@ void FadeManager::Draw(ViewProjection view)
 
 	if (ImGui::TreeNode("Fade"))
 	{
-		ImGui::ColorEdit4("Color", &FadeManager::GetInstance()->color_.x);
+		ImGui::Text("startFrame = %.2f", FadeManager::GetInstance()->startFrame_);
+		ImGui::Text("finishFrame = %.2f", FadeManager::GetInstance()->finishFrame_);
+		ImGui::Text("time = %.2f", FadeManager::GetInstance()->time_);
+		ImGui::DragFloat4("color", &FadeManager::GetInstance()->color_.x, 0.01f, 0.0f, 1.0f);
 		ImGui::TreePop();
 	}
 
@@ -47,22 +68,37 @@ void FadeManager::Draw(ViewProjection view)
 bool FadeManager::IsFadeIn()
 {
 	// すでに画面が真っ暗の状態なら早期リターン
-	if (FadeManager::GetInstance()->state_.isFadeIn && 
+	if (FadeManager::GetInstance()->state_.isFadeIn &&
 		!FadeManager::GetInstance()->state_.isFadeOut) {
 		return false;
 	}
 
-	// フレームなどの変数初期化
-	FadeManager::FrameInit();
+	// 値をとってくる
+	int start = FadeManager::GetInstance()->startFrame_;
+	int finish = FadeManager::GetInstance()->finishFrame_;
+	float t = FadeManager::GetInstance()->time_;
+	Vector4 color = FadeManager::GetInstance()->color_;
 
-	// 補間の計算
-	FadeManager::FrameUpdate(func_FadeIn);
+	// フレームの加算
+	start++;
+
+	// 補間割合の計算
+	t = float(start) / float(finish);
+
+	// 補間の処理
+	color.w = Lerp(float(0.0f), float(1.0f), t);
+
+	FadeManager::GetInstance()->startFrame_ = start;
+	FadeManager::GetInstance()->finishFrame_ = finish;
+	FadeManager::GetInstance()->time_ = t;
+	FadeManager::GetInstance()->color_ = color;
+	FadeManager::GetInstance()->sprite_->SetColor(FadeManager::GetInstance()->color_);
 
 	// 補間が終了したら、ステートの設定して、trueを返す
 	if (FadeManager::GetInstance()->time_ >= 1.0f) {
 		FadeManager::GetInstance()->state_.isFadeIn = true;
 		FadeManager::GetInstance()->state_.isFadeOut = false;
-
+		FadeManager::FrameInit();
 		return true;
 	}
 
@@ -73,22 +109,38 @@ bool FadeManager::IsFadeIn()
 // フェードアウト処理
 bool FadeManager::IsFadeOut()
 {
-	// すでに画面が開けた状態なら早期リターン
-	if (FadeManager::GetInstance()->state_.isFadeOut) {
+	// すでに画面が真っ暗の状態なら早期リターン
+	if (!FadeManager::GetInstance()->state_.isFadeIn &&
+		FadeManager::GetInstance()->state_.isFadeOut) {
 		return false;
 	}
 
-	// フレームなどの変数初期化
-	FadeManager::FrameInit();
+	// 値をとってくる
+	int start = FadeManager::GetInstance()->startFrame_;
+	int finish = FadeManager::GetInstance()->finishFrame_;
+	float t = FadeManager::GetInstance()->time_;
+	Vector4 color = FadeManager::GetInstance()->color_;
 
-	// 補間の計算
-	FadeManager::FrameUpdate(func_FadeOut);
+	// フレームの加算
+	start++;
+
+	// 補間割合の計算
+	t = float(start) / float(finish);
+
+	// 補間の処理
+	color.w = Lerp(float(1.0f), float(0.0f), t);
+
+	FadeManager::GetInstance()->startFrame_ = start;
+	FadeManager::GetInstance()->finishFrame_ = finish;
+	FadeManager::GetInstance()->time_ = t;
+	FadeManager::GetInstance()->color_ = color;
+	FadeManager::GetInstance()->sprite_->SetColor(FadeManager::GetInstance()->color_);
 
 	// 補間が終了したら、ステートの設定して、trueを返す
 	if (FadeManager::GetInstance()->time_ >= 1.0f) {
 		FadeManager::GetInstance()->state_.isFadeIn = true;
 		FadeManager::GetInstance()->state_.isFadeOut = false;
-
+		FadeManager::FrameInit();
 		return true;
 	}
 
@@ -100,7 +152,7 @@ bool FadeManager::IsFadeOut()
 void FadeManager::FrameInit()
 {
 	FadeManager::GetInstance()->startFrame_ = 0;
-	FadeManager::GetInstance()->finishFrame_ = 600;
+	FadeManager::GetInstance()->finishFrame_ = 120;
 	FadeManager::GetInstance()->time_ = 0.0f;
 }
 
@@ -109,30 +161,26 @@ void FadeManager::FrameInit()
 void FadeManager::FrameUpdate(FunctionFade func)
 {
 	// フレームの加算
-	FadeManager::GetInstance()->startFrame_++;
+	int start = FadeManager::GetInstance()->startFrame_;
+	int finish = FadeManager::GetInstance()->finishFrame_;
+	float t = FadeManager::GetInstance()->time_;
+	Vector4 color = FadeManager::GetInstance()->color_;
 
 	// 補間割合の計算
-	FadeManager::GetInstance()->time_ = 
-		float(FadeManager::GetInstance()->startFrame_ / FadeManager::GetInstance()->finishFrame_);
+	t = float(start / finish);
 
 	// 補間の処理
 	if (func == func_FadeIn) {
 
-		FadeManager::GetInstance()->color_.w =
-			Lerp(
-				float(0.0f),
-				float(1.0f),
-				FadeManager::GetInstance()->time_);
+		color.w = Lerp(float(0.0f), float(1.0f), t);
 	}
 	else if (func == func_FadeOut) {
 
-		FadeManager::GetInstance()->color_.w =
-			Lerp(
-				float(1.0f),
-				float(0.0f),
-				FadeManager::GetInstance()->time_);
+		color.w = Lerp(float(1.0f), float(0.0f), t);
 	}
 
-	// カラーの設定
-	FadeManager::GetInstance()->sprite_->SetColor(FadeManager::GetInstance()->color_);
+	FadeManager::GetInstance()->startFrame_ = start;
+	FadeManager::GetInstance()->finishFrame_ = finish;
+	FadeManager::GetInstance()->time_ = t;
+	FadeManager::GetInstance()->sprite_->SetColor(color);
 }

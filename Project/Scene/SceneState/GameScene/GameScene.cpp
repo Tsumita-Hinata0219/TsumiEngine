@@ -97,6 +97,8 @@ void GameScene::Update(GameManager* state) {
 		GameCamera_ = railCamera_->GetViewProjection();
 	}
 
+	FadeManager::IsFadeOut();
+
 
 	/* ----- Skydome スカイドーム ----- */
 	skydome_->Update();
@@ -204,6 +206,8 @@ void GameScene::ModelDraw() {
 /// 前景スプライトの描画処理
 /// </summary>
 void GameScene::FrontSpriteDraw() {
+
+	FadeManager::Draw(GameCamera_);
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront(GameCamera_);

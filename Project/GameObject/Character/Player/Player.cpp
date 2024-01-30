@@ -36,7 +36,7 @@ void Player::Initialize(Vector3 initTranslate)
 	// レティクルの初期化
 	reticle_ = make_unique<PlayerReticle>();
 	reticle_->SetPlayer(this);
-	reticle_->Initialize((*model_), { 0.0f, 0.0f, 50.0f });
+	reticle_->Initialize((*model_), { 0.0f, 0.0f, 0.0f });
 	reticle_->SetParent(&worldTransform_);
 }
 
@@ -44,11 +44,11 @@ void Player::Initialize(Vector3 initTranslate)
 // 更新処理
 void Player::Update(ViewProjection view)
 {
+	// ワールド座標の更新
+	worldTransform_.UpdateMatrix();
+
 	// OBBの設定
 	SettingOBBProperties();
-
-	// レティクルの更新処理
-	ReticleUpdate(view);
 
 	// 移動処理
 	Move();
@@ -56,8 +56,8 @@ void Player::Update(ViewProjection view)
 	// 射撃処理
 	Attack();
 
-	// ワールド座標の更新
-	worldTransform_.UpdateMatrix();
+	// レティクルの更新処理
+	ReticleUpdate(view);
 
 
 #ifdef _DEBUG

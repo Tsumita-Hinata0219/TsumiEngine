@@ -41,7 +41,8 @@ void PlayerReticle::Update(ViewProjection view)
 	// レティクルの計算
 	offsetVec_ = Vector3::oneZ;
 	offsetVec_ = TransformNormal(offsetVec_, player_->GetWorldTransform().matWorld);
-	offsetVec_ = Normalize(offsetVec_) * kDistReticle_;
+	offsetVec_ = player_->GetWorldPosition();
+	offsetVec_ = Normalize(offsetVec_);// * kDistReticle_;
 
 	// 座標を入れる
 	wt_.translate = offsetVec_;
@@ -67,7 +68,7 @@ void PlayerReticle::Update(ViewProjection view)
 // 描画処理
 void PlayerReticle::Draw3D(ViewProjection view)
 {
-	view;//model_->Draw(wt_, view);
+	model_->Draw(wt_, view);
 }
 
 void PlayerReticle::Draw2D(ViewProjection view)

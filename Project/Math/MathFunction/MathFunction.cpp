@@ -226,17 +226,13 @@ Vector3 CreateVector3FromVector2(const Vector2& v) {
 // CatmullRom補間
 Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t) {
 
-	//const float s = 0.5f;
-
-	//float t2 = t * t;  // tの２乗
-	//float t3 = t2 * t; // tの３乗
-
-	//Vector3 e3 = -p0 + (3 * p1) - (3 * p2) + p3;
-	//Vector3 e2 = (2 * p0) - (5 * p1) + (4 * p2) - p3;
-	//Vector3 e1 = p0 + p2;
-	//Vector3 e0 = 2 * p1;
-
-	//return s * (e3 * t3 + e2 * t2 + e1 * t + e0);
+	//float s = 0.5f;
+	//float t2 = t * t;
+	//float t3 = t * t * t;
+	//Vector3 hr1 = (-p0 + (3.0f * p1) - (3.0f * p2) + p3) * t3;
+	//Vector3 hr2 = ((2.0f * p0) - (5.0f * p1) + (4.0f * p2) - p3) * t2;
+	//Vector3 hr3 = ((-p0 + p2) * t) + (2.0f + p1);
+	//return (s * (hr1 + hr2 + hr3));
 
 	float t2 = t * t;
 	float t3 = t * t * t;

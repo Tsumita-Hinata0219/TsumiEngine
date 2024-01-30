@@ -20,12 +20,6 @@ void TitleScene::Update(GameManager* state)
 	/* ----- GameCamera ゲームカメラ----- */
 	GameCamera_.UpdateMatrix();
 
-	if (KeyInput::TriggerKey(DIK_I)) {
-		FadeManager::IsFadeIn();
-	}
-	if (KeyInput::TriggerKey(DIK_O)) {
-		FadeManager::IsFadeOut();
-	}
 
 
 #ifdef _DEBUG

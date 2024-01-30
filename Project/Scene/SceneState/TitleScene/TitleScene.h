@@ -52,4 +52,6 @@ private:
 
 	// メインカメラ
 	ViewProjection GameCamera_{};
+
+	bool funcFade_ = false;
 };

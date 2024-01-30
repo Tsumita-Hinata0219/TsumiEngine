@@ -16,7 +16,8 @@ void Ground::Initialize()
 	this->model_ = make_unique<Model>();
 	this->model_->CreateFromObj("Ground");
 	this->worldTransform_.Initialize();
-	this->worldTransform_.scale = { 100.0f, 1.0f, 100.0f };
+	this->worldTransform_.scale = { 1000.0f, 1.0f, 1000.0f };
+	this->worldTransform_.translate.y = -10.0f;
 	this->size_ = 2.0f * worldTransform_.scale;
 	this->size_.y = 0.01f * worldTransform_.scale.y;
 

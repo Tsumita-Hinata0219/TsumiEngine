@@ -18,9 +18,12 @@ void PlayerReticle::Initialize(Model& modelHD, Vector3 initTranslate)
 	// テクスチャの読み込み
 	reticleTexHD_ = TextureManager::LoadTexture("PlayerReticle.png");
 
+	// テクスチャサイズ
+	size_ = { 64.0f, 64.0f };
+
 	// スプライトの初期化
 	sprite_ = make_unique<Sprite>();
-	sprite_->Initialize(Vector2::zero, { 64.0f, 64.0f });
+	sprite_->Initialize(Vector2::zero, size_);
 
 	// スプライトトランスフォームの初期化
 	st_.Initialize();
@@ -39,23 +42,13 @@ void PlayerReticle::Update(ViewProjection view)
 	offsetVec_ = Vector3::oneZ;
 	offsetVec_ = TransformNormal(offsetVec_, player_->GetWorldTransform().matWorld);
 	offsetVec_ = Normalize(offsetVec_) * kDistReticle_;
-	offsetVec_ += player_->GetWorldPosition();
 
 	// 座標を入れる
 	wt_.translate = offsetVec_;
 
 	// 3D -> 2D へ
 	st_.translate = (ConvertVector(wt_.GetWorldPos(), view) / 2.0f);
-	Vector2 size = { 32.0f, 32.0f };
-	//st_.translate.x -= (size.x / 2.0f);
-
-
-	/*if (KeyInput::PressKeys(DIK_LEFT)) {
-		wt_.translate.x -= 0.3f;
-	}
-	if (KeyInput::PressKeys(DIK_RIGHT)) {
-		wt_.translate.x += 0.3f;
-	}*/
+	st_.translate -= (size_ / 4.0f);
 
 
 #ifdef _DEBUG
@@ -72,8 +65,12 @@ void PlayerReticle::Update(ViewProjection view)
 
 
 // 描画処理
-void PlayerReticle::Draw(ViewProjection view)
+void PlayerReticle::Draw3D(ViewProjection view)
 {
-	//model_->Draw(wt_, view);
+	view;//model_->Draw(wt_, view);
+}
+
+void PlayerReticle::Draw2D(ViewProjection view)
+{
 	sprite_->Draw(reticleTexHD_, st_, view);
 }

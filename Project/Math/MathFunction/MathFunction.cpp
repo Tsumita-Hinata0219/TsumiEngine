@@ -44,6 +44,17 @@ void Log(const std::string& message) {
 
 
 
+
+/// -------------------------------------------------------------------------
+/// float
+/// -------------------------------------------------------------------------
+float Lerp(const float& start, const float& end, float t) {
+	return start + t * (end - start);
+}
+
+
+
+
 /// -------------------------------------------------------------------------
 /// 2次元ベクトル
 /// -------------------------------------------------------------------------
@@ -60,6 +71,11 @@ float Cross(const Vector2& v1, const Vector2& v2) {
 // 長さ
 float Length(const Vector2& v) {
 	return std::sqrt(Dot(v, v));
+}
+
+// 絶対値
+Vector2 Absolute(const Vector2& v) {
+	return { std::abs(v.x), std::abs(v.y) };
 }
 
 // 正規化
@@ -104,6 +120,11 @@ Vector3 Cross(const Vector3& v1, const Vector3& v2) {
 // 長さ
 float Length(const Vector3& v) {
 	return std::sqrt(Dot(v, v));
+}
+
+// 絶対値
+Vector3 Absolute(const Vector3& v) {
+	return { std::abs(v.x), std::abs(v.y), std::abs(v.z) };
 }
 
 // 正規化
@@ -205,63 +226,49 @@ Vector3 CreateVector3FromVector2(const Vector2& v) {
 // CatmullRom補間
 Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t) {
 
-	const float s = 0.5f;
+	//const float s = 0.5f;
 
-	float t2 = t * t;  // tの２乗
-	float t3 = t2 * t; // tの３乗
+	//float t2 = t * t;  // tの２乗
+	//float t3 = t2 * t; // tの３乗
 
-	Vector3 e3 = -p0 + (3 * p1) - (3 * p2) + p3;
-	Vector3 e2 = (2 * p0) - (5 * p1) + (4 * p2) - p3;
-	Vector3 e1 = p0 + p2;
-	Vector3 e0 = 2 * p1;
+	//Vector3 e3 = -p0 + (3 * p1) - (3 * p2) + p3;
+	//Vector3 e2 = (2 * p0) - (5 * p1) + (4 * p2) - p3;
+	//Vector3 e1 = p0 + p2;
+	//Vector3 e0 = 2 * p1;
 
-	return s * (e3 * t3 + e2 * t2 + e1 * t + e0);
+	//return s * (e3 * t3 + e2 * t2 + e1 * t + e0);
+
+	float t2 = t * t;
+	float t3 = t * t * t;
+	return Vector3(
+		//x
+		0.5f * ((-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3 +
+			(2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + p2.x) * t + 2 * p1.x),
+		//y
+		0.5f * ((-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3 +
+			(2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + p2.y) * t + 2 * p1.y),
+		//z
+		0.5f * ((-p0.z + 3 * p1.z - 3 * p2.z + p3.z) * t3 +
+			(2 * p0.z - 5 * p1.z + 4 * p2.z - p3.z) * t2 + (-p0.z + p2.z) * t + 2 * p1.z)
+	);
 }
 
 // CatmullRomスプライン曲線上の座標を得る
-Vector3 CatmullRomPosition(const std::vector<Vector3>& points, float t) {
+Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, float t) {
 
-	assert(points.size() >= 4 && "制御点は４点以上必要です");
+	const uint32_t kIndex = uint32_t(points.size() - 1);
 
-	// 区画数は制御点の数-1
-	size_t division = points.size() - 1;
-	// 1区画間の長さ(全体を1.0fとした割合)
-	float areaWidth = 1.0f / division;
+	int index0 = ((index - 1) + kIndex) % kIndex;
+	int index1 = index;
+	int index2 = (index + 1) % kIndex;
+	int index3 = (index + 2) % kIndex;
 
-	// 区画内の始点を0.0f、終点を1.0fとしたときの現在位置
-	float t_2 = std::fmod(t, areaWidth) * division;
-	// 下限(0.0f)と上限(1.0f)の範囲に収める
-	t_2 = std::clamp(t_2, 0.0f, 1.0f);
-
-	// 区画番号
-	size_t index = static_cast<size_t>(t / areaWidth);
-	// 区画番号が上限を超えないように収める
-	index = int(std::clamp(float(index), float(0), float(4)));
-
-	// ４点分のインデックス
-	size_t index0 = index - 1;
-	size_t index1 = index;
-	size_t index2 = index + 1;
-	size_t index3 = index + 2;
-
-	// 最初の区間のp0はp1を重複使用する
-	if (index == 0) {
-		index0 = index1;
-	}
-
-	// 最後の区間のp3はp2を重複使用する
-	if (index3 >= points.size()) {
-		index3 = index2;
-	}
-
-	// 4点の座標
-	const Vector3& p0 = points[0];
-	const Vector3& p1 = points[1];
-	const Vector3& p2 = points[2];
-	const Vector3& p3 = points[3];
-
-	// ４点を指定してCatmull-Pom補間
-	return CatmullRomInterpolation(p0, p1, p2, p3, t_2);
+	Vector3 p0 = points[index0];
+	Vector3 p1 = points[index1];
+	Vector3 p2 = points[index2];
+	Vector3 p3 = points[index3];
+	
+	return CatmullRomInterpolation(p0, p1, p2, p3, t);
 }
 
 

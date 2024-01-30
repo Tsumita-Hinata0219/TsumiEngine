@@ -242,6 +242,12 @@
     <Filter Include="Tsumi\Transform\ViewProjection">
       <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tsumi\Utilities\FadeManager">
+      <UniqueIdentifier>{a1692427-0cfb-45d8-8ce7-8c0c525104a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\SceneState\TitleScene">
+      <UniqueIdentifier>{e0089013-2f47-4330-9382-8baeaec28083}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -427,6 +433,12 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp">
       <Filter>Tsumi\Transform\SpriteTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\FadeManager\FadeManager.cpp">
+      <Filter>Tsumi\Utilities\FadeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\SceneState\TitleScene\TitleScene.cpp">
+      <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -666,6 +678,12 @@
     </ClInclude>
     <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h">
       <Filter>Tsumi\Transform\SpriteTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h">
+      <Filter>Tsumi\Utilities\FadeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\SceneState\TitleScene\TitleScene.h">
+      <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

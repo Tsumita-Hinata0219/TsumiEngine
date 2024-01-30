@@ -6,6 +6,7 @@
 #include "imgui.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
+#include "Vector.h"
 
 
 
@@ -41,6 +42,7 @@ public: ///// メンバ関数 /////
 	/// </summary>
 	static int32_t GetClientWidth() { return WinApp::GetInstance()->ClientWidth_; }
 	static int32_t GetCliendHeight() { return WinApp::GetInstance()->ClientHeight_; }
+	static Vector2 WindowSize() { return { float(WinApp::GetInstance()->ClientWidth_), float(WinApp::GetInstance()->ClientHeight_) }; }
 
 	/// <summary>
 	/// ウィンドウハンドルの取得

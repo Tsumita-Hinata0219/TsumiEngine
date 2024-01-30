@@ -24,8 +24,11 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(ViewProjection view);
-
+	void Draw3D(ViewProjection view);
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	void Draw2D(ViewProjection view);
 
 
 
@@ -82,8 +85,11 @@ private: // メンバ変数
 	WorldTransform wt_{};
 
 	// 自機から3Dレティクルへの距離
-	const float kDistReticle_ = 10.0f;
+	const float kDistReticle_ = 60.0f;
 
 	// 自機から3Dレティクルへのオフセット(Z+向き)
 	Vector3 offsetVec_;
+
+	// レティクルのテクスチャサイズの半分
+	Vector2 size_{};
 };

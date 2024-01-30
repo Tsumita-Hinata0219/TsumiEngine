@@ -74,6 +74,7 @@ void GameScene::Initialize() {
 
 	/* ----- Parent 親子関係ペアレント ----- */
 	player_->SetParent(&railCamera_->GetWorldTransform());
+
 }
 
 
@@ -206,6 +207,7 @@ void GameScene::FrontSpriteDraw() {
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront(GameCamera_);
+
 }
 
 

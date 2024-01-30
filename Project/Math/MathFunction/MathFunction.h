@@ -42,6 +42,13 @@ void Log(const std::string& message);
 
 
 /// -------------------------------------------------------------------------
+/// float
+/// -------------------------------------------------------------------------
+float Lerp(const float& start, const float& end, float t);
+
+
+
+/// -------------------------------------------------------------------------
 /// 2次元ベクトル
 /// -------------------------------------------------------------------------
 // 内積
@@ -50,6 +57,8 @@ float Dot(const Vector2& v1, const Vector2& v2);
 float Cross(const Vector2& v1, const Vector2& v2);
 // 長さ
 float Length(const Vector2& v);
+// 絶対値
+Vector2 Absolute(const Vector2& v);
 // 正規化
 Vector2 Normalize(const Vector2& v);
 // 正射影ベクトル
@@ -70,6 +79,8 @@ float Dot(const Vector3& v1, const Vector3& v2);
 Vector3 Cross(const Vector3& v1, const Vector3& v2);
 // 長さ
 float Length(const Vector3& v);
+// 絶対値
+Vector3 Absolute(const Vector3& v);
 // 正規化
 Vector3 Normalize(const Vector3& v);
 // 正射影ベクトル
@@ -93,7 +104,7 @@ Vector3 CreateVector3FromVector2(const Vector2& v);
 // CatmullRom補間
 Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t);
 // CatmullRomスプライン曲線上の座標を得る
-Vector3 CatmullRomPosition(const std::vector<Vector3>& points, float t);
+Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, float t);
 
 
 

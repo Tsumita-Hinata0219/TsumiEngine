@@ -92,4 +92,12 @@ private: // メンバ変数
 
 	// レティクルのテクスチャサイズの半分
 	Vector2 size_{};
+
+	Vector3 move_{};
+
+	Vector3 velocity_{};
+
+	Vector2 RStick_{};
+
+	Vector2 spritePos_{};
 };

@@ -26,6 +26,7 @@ void ViewProjection::UpdateMatrix() {
 	matViewPort = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::GetClientWidth()), float(WinApp::GetCliendHeight()), 0.0f, 1.0f);
 	matViewProjectionViewPort = matView * (matProjection * matViewPort);
 	matInverseVPV = Inverse(matViewProjectionViewPort);
+	Matrix4x4 de = matInverseVPV * matViewProjectionViewPort;
 
 	TransferMatrix();
 }

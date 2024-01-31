@@ -123,7 +123,7 @@ public: // メンバ関数
 	/// <summary>
 	/// ジョイコンの入力の取得
 	/// </summary>
-	static bool GetJoyStickState(XINPUT_STATE& state);
+	static bool GetJoyStickState();
 
 	/// <summary>
 	/// 押されていない
@@ -144,6 +144,16 @@ public: // メンバ関数
 	/// 離された瞬間
 	/// </summary>
 	static bool ReleaseButton(uint32_t button);
+
+	/// <summary>
+	/// Lスティック
+	/// </summary>
+	static Vector2 GetLStick(const float& mode = SHRT_MAX);
+
+	/// <summary>
+	/// Rスティック
+	/// </summary>
+	static Vector2 GetRStick(const float& mode = SHRT_MAX);
 
 
 

@@ -142,9 +142,9 @@ void GamePadInput::ResetButtonTriggers()
 }
 
 // ジョイコンの入力の取得
-bool GamePadInput::GetJoyStickState(XINPUT_STATE& state)
+bool GamePadInput::GetJoyStickState()
 {
-	DWORD dwresult = XInputGetState(0, &state);
+	DWORD dwresult = XInputGetState(0, &GamePadInput::GetInstance()->joyState_);
 
 	if (dwresult == ERROR_SUCCESS) {
 		return true;
@@ -190,6 +190,22 @@ bool GamePadInput::PressButton(uint32_t button)
 bool GamePadInput::ReleaseButton(uint32_t button)
 {
 	return false;
+}
+
+// Lスティック
+Vector2 GamePadInput::GetLStick(const float& mode)
+{
+	return {
+		GamePadInput::GetInstance()->joyState_.Gamepad.sThumbLX / mode,
+		GamePadInput::GetInstance()->joyState_.Gamepad.sThumbLY / mode };
+}
+
+// Rスティック
+Vector2 GamePadInput::GetRStick(const float& mode)
+{
+	return {
+		GamePadInput::GetInstance()->joyState_.Gamepad.sThumbRX / mode,
+		GamePadInput::GetInstance()->joyState_.Gamepad.sThumbRY / mode };
 }
 
 // -------------------------------------------------------------------------

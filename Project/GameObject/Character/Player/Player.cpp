@@ -179,7 +179,7 @@ Vector3 Player::CalcDirection()
 {
 	Vector3 ReticlePos = reticle_->GetWorldPosition();
 	Vector3 PlaToRet = Normalize(ReticlePos - worldTransform_.GetWorldPos());
-	return { PlaToRet.x, PlaToRet.y, PlaToRet.z * kBulletSpeed_ };
+	return PlaToRet * kBulletSpeed_;
 }
 
 

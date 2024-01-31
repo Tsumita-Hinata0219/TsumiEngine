@@ -65,16 +65,7 @@ void EngineManual::Update(ViewProjection view) {
 
 	spriteBackTrans_.translate = ConvertVector(modelTrans_.GetWorldPos(), view) / 2.0f;
 
-	/*if (GamePadInput::TriggerButton(XINPUT_GAMEPAD_A)) {
-		Log("trigger Button A");
-	}*/
-
-	// ゲームパッドを見接続なら何もせず抜ける
-	if (!GamePadInput::GetJoyStickState(joyState_)) {
-		return;
-	}
-
-
+	
 #ifdef _DEBUG
 
 	ImGui::Begin("EngineManual");

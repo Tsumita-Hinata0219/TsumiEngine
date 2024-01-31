@@ -220,7 +220,7 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 
 // Vector2をそのままVector3に入れる
 Vector3 CreateVector3FromVector2(const Vector2& v) {
-	return { v.x, v.y, 0.0f };
+	return { v.x, v.y, 1.0f };
 }
 
 // CatmullRom補間
@@ -614,10 +614,10 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 }
 
 // 透視投影行列
-Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip, float farClip) {
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip) {
 	Matrix4x4 result{};
 
-	result.m[0][0] = (1 / aspecrRatio) * 1 / std::tan(fovY / 2);
+	result.m[0][0] = (1 / aspectRatio) * 1 / std::tan(fovY / 2);
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
 	result.m[0][3] = 0.0f;
@@ -643,30 +643,31 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip
 // 正射影行列
 Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float nearClip, float farClip) {
 
-	assert(left != right);
-	assert(top != bottom);
+	float width = right - left;
+	float height = top - bottom;
+	float zLength = farClip - nearClip;
 
 	Matrix4x4 result{};
 
-	result.m[0][0] = 2 / (right - left);
+	result.m[0][0] = 2 / width;
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
 	result.m[0][3] = 0.0f;
 
 	result.m[1][0] = 0.0f;
-	result.m[1][1] = 2 / (top - bottom);
+	result.m[1][1] = 2 / height;
 	result.m[1][2] = 0.0f;
 	result.m[1][3] = 0.0f;
 
 	result.m[2][0] = 0.0f;
 	result.m[2][1] = 0.0f;
-	result.m[2][2] = 1 / (farClip - nearClip);
+	result.m[2][2] = 1 / zLength;
 	result.m[2][3] = 0.0f;
 
 	result.m[3][0] = (left + right) / (left - right);
 	result.m[3][1] = (top + bottom) / (bottom - top);
 	result.m[3][2] = nearClip / (nearClip - farClip);
-	result.m[3][3] = 1.0f;
+	result.m[3][3] = 1;
 
 	return result;
 }

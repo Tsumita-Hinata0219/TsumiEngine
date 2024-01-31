@@ -43,9 +43,9 @@ void EngineManual::Initialize() {
 	modelTrans_.translate = { 0.0f, 0.0f, 0.0f };
 
 	st_.Initialize();
-	st_.scale = { 2.0f, 2.0f };
-	st_.rotate = { 5.0f, 6.0f };
-	st_.translate = { 100.0f, 100.0f };
+	
+	int w = WinApp::kWindowWidth;
+	int h = WinApp::kWindowHeight;
 }
 
 
@@ -63,7 +63,7 @@ void EngineManual::Update(ViewProjection view) {
 
 	st_.UpdateMatrix();
 
-	spriteBackTrans_.translate = ConvertVector(modelTrans_.GetWorldPos(), view) / 2.0f;
+	//spriteBackTrans_.translate = ConvertVector(modelTrans_.GetWorldPos(), view) / 2.0f;
 
 	
 #ifdef _DEBUG
@@ -71,11 +71,11 @@ void EngineManual::Update(ViewProjection view) {
 	ImGui::Begin("EngineManual");
 	ImGui::Text("SpriteFront");
 	ImGui::DragFloat2("SpriteF_Scale", &spriteFrontTrans_.scale.x, 0.01f);
-	ImGui::DragFloat2("SpriteF_Rotate", &spriteFrontTrans_.rotate.x, 0.01f);
+	ImGui::DragFloat("SpriteF_Rotate", &spriteFrontTrans_.rotate, 0.01f);
 	ImGui::DragFloat2("SpriteF_Translate", &spriteFrontTrans_.translate.x, 1.0f);
 	ImGui::Text("SpriteBack");
 	ImGui::DragFloat2("SpriteB_Scale", &spriteBackTrans_.scale.x, 0.01f);
-	ImGui::DragFloat2("SpriteB_Rotate", &spriteBackTrans_.rotate.x, 0.01f);
+	ImGui::DragFloat("SpriteB_Rotate", &spriteBackTrans_.rotate, 0.01f);
 	ImGui::DragFloat2("SpriteB_Translate", &spriteBackTrans_.translate.x, 1.0f);
 	ImGui::Text("Axis");
 	ImGui::DragFloat3("Axis_Scale", &modelTrans_.scale.x, 0.01f);
@@ -93,7 +93,7 @@ void EngineManual::Update(ViewProjection view) {
 /// </summary>
 void EngineManual::BackSpriteDraw(ViewProjection view) {
 
-	spriteBack_->Draw(asanohaHD_, spriteBackTrans_, view);
+	//spriteBack_->Draw(asanohaHD_, spriteBackTrans_, view);
 }
 
 
@@ -102,7 +102,7 @@ void EngineManual::BackSpriteDraw(ViewProjection view) {
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) {
 
-	modelObj_->Draw(modelTrans_, view);
+	//modelObj_->Draw(modelTrans_, view);
 }
 
 

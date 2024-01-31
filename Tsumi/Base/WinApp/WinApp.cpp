@@ -44,7 +44,7 @@ void WinApp::CreateGameWindow() {
 	/* --- ウィンドウサイズを決める --- */
 
 	// クライアント領域のサイズ
-	RECT wrc = { 0, 0, WinApp::GetInstance()->ClientWidth_, WinApp::GetInstance()->ClientHeight_ };
+	RECT wrc = { 0, 0, WinApp::GetInstance()->kWindowWidth, WinApp::GetInstance()->kWindowHeight };
 	// クライアント領域をもとに実際のサイズにwrcを変更してもらう
 	AdjustWindowRect(&wrc, WS_OVERLAPPEDWINDOW, false);
 

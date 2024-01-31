@@ -92,23 +92,24 @@ void Sprite::SetVertex(SpriteTransform transform) {
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
 	pos_ = transform.translate;
+
 	Vector2 halfSize = size_ / 2.0f;
 
 	// 左下
-	vertexData[0].position = { pos_.x, pos_.y + size_.y, 0.0f, 1.0f };
+	vertexData[0].position = { pos_.x - halfSize.x, pos_.y + halfSize.y, 0.0f, 1.0f };
 	vertexData[0].texCoord = { 0.0f, 1.0f };
 
 	// 左上
-	vertexData[1].position = { pos_.x, pos_.y, 0.0f, 1.0f };
+	vertexData[1].position = { pos_.x - halfSize.x, pos_.y - halfSize.y, 0.0f, 1.0f };
 	vertexData[1].texCoord = { 0.0f, 0.0f };
 
 
 	// 右下
-	vertexData[2].position = { pos_.x + size_.x, pos_.y + size_.y, 0.0f, 1.0f };
+	vertexData[2].position = { pos_.x + halfSize.x, pos_.y + halfSize.y, 0.0f, 1.0f };
 	vertexData[2].texCoord = { 1.0f, 1.0f };
 	
 	// 右上
-	vertexData[3].position = { pos_.x + size_.x, pos_.y, 0.0f, 1.0f };
+	vertexData[3].position = { pos_.x + halfSize.x, pos_.y - halfSize.y, 0.0f, 1.0f };
 	vertexData[3].texCoord = { 1.0f, 0.0f };
 
 

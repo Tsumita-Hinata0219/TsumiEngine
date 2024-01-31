@@ -30,7 +30,7 @@ struct ViewProjection {
 	float fov = 0.45f;
 
 	// ビューポートのアスペクト比
-	float aspectRatio = float(WinApp::GetClientWidth()) / float(WinApp::GetCliendHeight());
+	float aspectRatio = float(WinApp::kWindowWidth) / float(WinApp::kWindowHeight);
 
 	// 深度限界 (手前側)
 	float nearZ = 0.1f;

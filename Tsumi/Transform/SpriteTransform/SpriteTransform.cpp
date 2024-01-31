@@ -15,7 +15,7 @@ void SpriteTransform::UpdateMatrix() {
 
 	// Vector2をVector3に変換してmatWorldを作る
 	Vector3 vector3Scale = CreateVector3FromVector2(scale);
-	Vector3 vector3Rotate = CreateVector3FromVector2(rotate);
+	Vector3 vector3Rotate = { 0.0f, 0.0f, rotate };
 	Vector3 vector3Translate = CreateVector3FromVector2(translate);
 
 	// スケール、回転、並列移動を合成して行列を計算する

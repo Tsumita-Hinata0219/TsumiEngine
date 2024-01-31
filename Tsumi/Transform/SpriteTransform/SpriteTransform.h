@@ -16,7 +16,7 @@ struct SpriteTransform {
 	// ローカルスケール
 	Vector2 scale = Vector2::one;
 	// ローカル回転軸
-	Vector2 rotate = Vector2::zero;
+	float rotate = 0.0f;
 	// ローカル座標
 	Vector2 translate = Vector2::zero;
 

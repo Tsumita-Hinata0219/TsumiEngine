@@ -12,6 +12,11 @@ void TitleScene::Initialize()
 	FadeManager::Initialize(func_FadeIn);
 
 	funcFade_ = false;
+
+	texHD_ = TextureManager::LoadTexture("Title.png");
+	sprite_ = make_unique<Sprite>();
+	sprite_->Initialize(Vector2::zero, WinApp::WindowSize());
+	st_.Initialize();
 }
 
 
@@ -41,6 +46,8 @@ void TitleScene::Update(GameManager* state)
 		}
 	}
 
+	st_.UpdateMatrix();
+
 #ifdef _DEBUG
 
 	ImGui::Begin("TitleScene");
@@ -56,7 +63,7 @@ void TitleScene::Update(GameManager* state)
 // 背景スプライトの描画処理
 void TitleScene::BackSpriteDraw()
 {
-
+	sprite_->Draw(texHD_, st_, GameCamera_);
 
 }
 

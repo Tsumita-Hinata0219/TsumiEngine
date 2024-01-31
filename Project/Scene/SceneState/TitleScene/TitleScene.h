@@ -55,6 +55,10 @@ private:
 
 	bool funcFade_ = false;
 
+	unique_ptr<Sprite> sprite_ = nullptr;
+	SpriteTransform st_{};
+	uint32_t texHD_;
+
 
 	// ジョイコン
 	XINPUT_STATE joyState_{};

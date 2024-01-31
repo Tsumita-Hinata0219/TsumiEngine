@@ -10,12 +10,17 @@ void EnemyManager::Initialize()
 	modelEnemy_->CreateFromObj("Enemy");
 
 	// スポーン範囲
-	scope_ = { {-12.0f, 12.0f}, {5.0f, 5.0f}, {15.0f, 50.0f} };
+	scope_ = { {-12.0f, 12.0f}, {5.0f, 5.0f}, {100.0f, 200.0f} };
 
 	intervalFrame_ = 250;	   // スポーンインターバル
 	spawnFrame_ = 0;		   // スポーンタイマー
 	instanceEnemyCount_ = 1;   // 一回に沸く数
 	thresholdEnemysCount_ = 3; // マップ内の最低限のエネミー数
+
+	res_ = true;
+	timer = 0;
+
+	LoadEnemyPopDate();
 }
 
 
@@ -25,6 +30,20 @@ void EnemyManager::Update()
 	if (KeysInput::TriggerKey(DIK_R)) {
 		PushBackEnemy();
 	}
+	
+	/*if (res_ == true) {
+		timer++;
+	}
+
+	if (timer >= 120) {
+		timer = 0;
+		res_ = false;
+
+		for (int i = 0; i < 2; i++) {
+			PushBackEnemy();
+		}
+	}*/
+	UpdateEnemyPopCommands();
 
 #ifdef _DEBUG
 
@@ -72,4 +91,47 @@ void EnemyManager::PushBackEnemy()
 	newEnemy->Initialize((*modelEnemy_), newPos, newMov);
 
 	GameScene_->AddEnemyList(newEnemy);
+}
+
+void EnemyManager::LoadEnemyPopDate()
+{
+	// ファイルを開く
+	std::ifstream file;
+	file.open("Resources/Parameter/enemyPop.csv");
+	assert(file.is_open());
+
+	// ファイルの内容を文字列ストリームにコピー
+	enemyPopCommands << file.rdbuf();
+
+	// ファイルを閉じる
+	file.close();
+}
+
+void EnemyManager::UpdateEnemyPopCommands()
+{
+	// 1行分の文字列を入れる関数
+	std::string line;
+
+	// コマンド実行ループ
+	while (std::getline(enemyPopCommands, line)) {
+
+		// 1行分の文字列をストリームに変換して解析しやすくする
+		std::istringstream line_stream(line);
+
+		std::string word;
+		// , 区切りで行の先頭文字列を取得
+		std::getline(line_stream, word, ',');
+
+		// "//"から始まる行はコメント
+		if (word.find("//") == 0) {
+			// コメント行を飛ばす
+			continue;
+		}
+
+		// POPコマンド
+		if (word.find("POP") == 0) {
+
+			PushBackEnemy();
+		}
+	}
 }

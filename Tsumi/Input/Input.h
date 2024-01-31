@@ -138,7 +138,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 押しっぱなし
 	/// </summary>
-	static bool PressButton(const XINPUT_STATE& state, WORD button);
+	static bool PressButton(uint32_t button);
 
 	/// <summary>
 	/// 離された瞬間

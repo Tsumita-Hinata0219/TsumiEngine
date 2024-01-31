@@ -16,7 +16,7 @@ void RailCamera::Initialize(Vector3 rotate, Vector3 translate)
 
 	// スプライン曲線制御点(通過点)
 	controlPoints_ = {
-		{0, 0, 0},
+		translate,
 		{0, 0, 4 },
 		{0, 0, 8 },
 		{0, 5, 16 },
@@ -42,6 +42,8 @@ void RailCamera::Initialize(Vector3 rotate, Vector3 translate)
 	Vector3 i = { 100.0f, 100.0f, 50.0f };
 	Vector3 j = { 60.0f, 120.0f, 50.0f };
 	Vector3 k = i - j;
+
+	supurain_ = false;
 }
 
 
@@ -54,33 +56,39 @@ void RailCamera::Update()
 	// ビューの更新
 	viewProjection_.UpdateMatrix();
 
-
-	const uint32_t kIndex = uint32_t(controlPoints_.size() - 1);
-
-	if (targetIndex_ >= kIndex) {
-		eye_T_ = 0.0f;
-		eyeIndex_ = 0;
-		target_T_ = 0.1f;
-		targetIndex_ = 0;
-		return;
+	if (GamePadInput::TriggerButton(XINPUT_GAMEPAD_Y)) {
+		supurain_ = true;
 	}
 
-	UpdateFrame(eye_T_, eyeIndex_);
-	UpdateFrame(target_T_, targetIndex_);
+	if (supurain_) {
+		const uint32_t kIndex = uint32_t(controlPoints_.size() - 1);
 
-	eye_ = CatmullRomInt(eyeIndex_, eye_T_);
-	target_ = CatmullRomInt(targetIndex_, target_T_);
+		if (targetIndex_ >= kIndex) {
+			eye_T_ = 0.0f;
+			eyeIndex_ = 0;
+			target_T_ = 0.1f;
+			targetIndex_ = 0;
+			return;
+		}
 
-	worldTransform_.translate = eye_;
+		UpdateFrame(eye_T_, eyeIndex_);
+		UpdateFrame(target_T_, targetIndex_);
+
+		eye_ = CatmullRomInt(eyeIndex_, eye_T_);
+		target_ = CatmullRomInt(targetIndex_, target_T_);
+
+		worldTransform_.translate = eye_;
 
 
-	// 視点の回転
-	Vector3 diff = target_ - eye_;
-	Vector3 diffRotate = Normalize(target_ - eye_);
-	worldTransform_.rotate.y = std::atan2(diffRotate.x, diffRotate.z);
-	float velZ = std::sqrt((diffRotate.x * diffRotate.x) + (diffRotate.z * diffRotate.z));
-	float height = -diffRotate.y;
-	worldTransform_.rotate.x = std::atan2(height, velZ);
+		// 視点の回転
+		Vector3 diff = target_ - eye_;
+		Vector3 diffRotate = Normalize(target_ - eye_);
+		worldTransform_.rotate.y = std::atan2(diffRotate.x, diffRotate.z);
+		float velZ = std::sqrt((diffRotate.x * diffRotate.x) + (diffRotate.z * diffRotate.z));
+		float height = -diffRotate.y;
+		worldTransform_.rotate.x = std::atan2(height, velZ);
+	}
+
 
 
 	viewProjection_.rotate = worldTransform_.rotate;
@@ -99,7 +107,7 @@ void RailCamera::Update()
 		ImGui::Text("target_t = %.2f", target_T_);
 		ImGui::Text("target_Index = %d", targetIndex_);
 		ImGui::DragFloat3("target_Translate", &target_.x, 0.01f);
-		ImGui::Text("diff = { %.2f, %.2f, %.2f }", diff.x, diff.y, diff.z);
+		//ImGui::Text("diff = { %.2f, %.2f, %.2f }", diff.x, diff.y, diff.z);
 		ImGui::TreePop();
 	}
 

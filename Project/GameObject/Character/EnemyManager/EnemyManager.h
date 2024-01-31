@@ -77,6 +77,10 @@ private:
 	/// </summary>
 	void PushBackEnemy();
 
+	void LoadEnemyPopDate();
+
+	void UpdateEnemyPopCommands();
+
 
 private:
 
@@ -104,5 +108,11 @@ private:
 	// エネミー最低限数
 	int thresholdEnemysCount_;
 
+	uint32_t timer;
+
+	bool res_;
+
+	// 敵発生コマンド
+	std::stringstream enemyPopCommands;
 };
 

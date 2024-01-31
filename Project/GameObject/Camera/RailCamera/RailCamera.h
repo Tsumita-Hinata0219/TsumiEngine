@@ -62,5 +62,7 @@ private:
 	float target_T_;
 	Vector3 target_{};
 	uint32_t targetIndex_;
+
+	bool supurain_;
 };
 

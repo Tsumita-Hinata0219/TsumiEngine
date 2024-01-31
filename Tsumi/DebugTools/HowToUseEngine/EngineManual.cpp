@@ -74,10 +74,6 @@ void EngineManual::Update(ViewProjection view) {
 		return;
 	}
 
-	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_B)) {
-		Log("press Button B");
-	}
-
 
 #ifdef _DEBUG
 

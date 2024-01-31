@@ -28,6 +28,8 @@ void EnemyBullet::Initialize(Model& modelHD, Vector3 pos, Vector3 vel)
 	OBBCollider::SetID(ObjectBit::EnemyBullet);
 	OBBCollider::SetCollosionAttribute(ObjectFileter::Enemy);
 	OBBCollider::SetCollisionMask(ObjectFileter::Enemy);
+
+	timer;
 }
 
 
@@ -36,6 +38,12 @@ void EnemyBullet::Update()
 {
 	// 移動処理
 	Move();
+
+	timer++;
+
+	if (timer >= 60 * 10) {
+		isDead_ = true;
+	}
 
 	// ワールド座標の更新
 	worldTransform_.UpdateMatrix();

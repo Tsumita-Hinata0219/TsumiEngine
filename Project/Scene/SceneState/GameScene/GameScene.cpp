@@ -19,6 +19,8 @@ GameScene::~GameScene() {
 	for (EnemyBullet* bullet : enemyBullets_) {
 		delete bullet;
 	}
+
+	Audio::SoundUnload();
 }
 
 
@@ -26,6 +28,8 @@ GameScene::~GameScene() {
 /// 初期化処理
 /// </summary>
 void GameScene::Initialize() {
+
+	kakkoiiHD_ = Audio::LoadSound("kakkoii.wav");
 
 	// メインカメラ
 	GameCamera_.Initialize();
@@ -76,6 +80,10 @@ void GameScene::Initialize() {
 	player_->SetParent(&railCamera_->GetWorldTransform());
 
 	funcFade_ = false;
+
+	timer_ = 0;
+
+	Audio::PlayOnSound(kakkoiiHD_, true, 0.5f);
 }
 
 
@@ -102,15 +110,16 @@ void GameScene::Update(GameManager* state) {
 	}
 	FadeManager::IsFadeOut();
 
-	// ゲームパッドを見接続なら何もせず抜ける
-	if (!GamePadInput::GetJoyStickState(joyState_)) {
-		return;
+	if (GamePadInput::TriggerButton(XINPUT_GAMEPAD_B)) {
+		funcFade_ = true;
 	}
 	if (KeysInput::TriggerKey(DIK_O)) {
 		funcFade_ = true;
 	}
 
-	if (GamePadInput::PressButton(joyState_, XINPUT_GAMEPAD_B)) {
+	timer_++;
+
+	if (timer_ >= 1200) {
 		funcFade_ = true;
 	}
 	if (funcFade_) {
@@ -246,7 +255,7 @@ void GameScene::CheckAllCollision() {
 	collisionManager_->ClliderClear();
 
 	// コライダーをリストに登録する
-	collisionManager_->AddOBBColliders(ground_.get());
+	//collisionManager_->AddOBBColliders(ground_.get());
 	collisionManager_->AddOBBColliders(player_.get());
 	for (PlayerBullet* bullet : playerBullets_) {
 		collisionManager_->AddOBBColliders(bullet);

@@ -113,7 +113,9 @@ void GamePadInput::Initialize() {
 void GamePadInput::BeginFrame() {
 
 	// メモリコピー
-	//GamePadInput::GetInstance()->preJoyState_ = GamePadInput::GetInstance()->joyState_;
+	GamePadInput::GetInstance()->preJoyState_ = GamePadInput::GetInstance()->joyState_;
+
+	GamePadInput::GetInstance()->GetJoyState();
 
 	// ジョイスティックの状態をポーリング
 	for (DWORD i = 0; i < XUSER_MAX_COUNT; ++i) {
@@ -125,11 +127,11 @@ void GamePadInput::BeginFrame() {
 // パッドの状態更新
 bool GamePadInput::GetJoyState()
 {
-	/*DWORD dwResult = XInputGetState(0, &GamePadInput::GetInstance()->joyState_);
+	DWORD dwResult = XInputGetState(0, &GamePadInput::GetInstance()->joyState_);
 	if (dwResult == ERROR_SUCCESS) {
 		return true;
 	}
-	return false;*/
+	return false;
 	return false;
 }
 
@@ -175,10 +177,13 @@ bool GamePadInput::TriggerButton(uint32_t button)
 }
 
 // 押しっぱなし
-bool GamePadInput::PressButton(const XINPUT_STATE& state, WORD button)
+bool GamePadInput::PressButton(uint32_t button)
 {
-	// ボタンが押された瞬間だけを判定
-	return((state.Gamepad.wButtons & button) != 0) && ((GamePadInput::GetInstance()->buttonTriggers[button] & button) == 0);
+	if (GamePadInput::GetInstance()->joyState_.Gamepad.wButtons & button)
+	{
+		return true;
+	}
+	return false;
 }
 
 // 離された瞬間

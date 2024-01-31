@@ -123,5 +123,7 @@ private: // メンバ変数
 
 	// 死亡フラグ
 	bool isDead_ = false;
+
+	int timer;
 };
 

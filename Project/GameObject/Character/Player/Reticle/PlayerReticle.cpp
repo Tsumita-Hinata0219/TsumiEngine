@@ -42,7 +42,7 @@ void PlayerReticle::Update(ViewProjection view)
 	offsetVec_ = Vector3::oneZ;
 	offsetVec_ = TransformNormal(offsetVec_, player_->GetWorldTransform().matWorld);
 	offsetVec_ = player_->GetWorldPosition();
-	offsetVec_ = Normalize(offsetVec_);// * kDistReticle_;
+	offsetVec_ = Normalize(offsetVec_) * kDistReticle_;
 
 	// 座標を入れる
 	wt_.translate = offsetVec_;
@@ -50,6 +50,21 @@ void PlayerReticle::Update(ViewProjection view)
 	// 3D -> 2D へ
 	st_.translate = (ConvertVector(wt_.GetWorldPos(), view) / 2.0f);
 	st_.translate -= (size_ / 4.0f);
+
+
+	// スクリーン座標
+	/*Vector3 Near = Vector3(st_.translate.x, st_.translate.y, 0.0f);
+	Vector3 Far = Vector3(st_.translate.x, st_.translate.y, 1.0f);
+
+	Near = TransformByMatrix(Near, view.matInverseVPV);
+	Far = TransformByMatrix(Far, view.matInverseVPV);
+
+	Vector3 direction = Near - Far;
+	direction = Near + Far;
+	direction = Normalize(direction);
+	float distobj = 100.0f;
+
+	wt_.translate = Near + direction * distobj;*/
 
 
 #ifdef _DEBUG

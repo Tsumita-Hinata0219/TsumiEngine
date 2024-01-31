@@ -24,6 +24,8 @@ void ViewProjection::UpdateMatrix() {
 	matProjection = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
 	orthoGraphicMat = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::GetClientWidth()), float(WinApp::GetCliendHeight()), 0.0f, 100.0f);
 	matViewPort = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::GetClientWidth()), float(WinApp::GetCliendHeight()), 0.0f, 1.0f);
+	matViewProjectionViewPort = matView * (matProjection * matViewPort);
+	matInverseVPV = Inverse(matViewProjectionViewPort);
 
 	TransferMatrix();
 }

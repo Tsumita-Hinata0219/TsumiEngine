@@ -115,9 +115,6 @@ private:
 	XINPUT_STATE joyState_{};
 	bool funcFade_ = false;
 
-	uint32_t kakkoiiHD_;
-
-
 	uint32_t timer_;
 };
 

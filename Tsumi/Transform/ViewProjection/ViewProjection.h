@@ -53,6 +53,11 @@ struct ViewProjection {
 	// ビューポート行列
 	Matrix4x4 matViewPort{};
 
+	// ビュープロジェクションビューポート合成行列
+	Matrix4x4 matViewProjectionViewPort{};
+
+	// 合成行列の逆行列
+	Matrix4x4 matInverseVPV{};
 
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffer;

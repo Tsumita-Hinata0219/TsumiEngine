@@ -19,8 +19,6 @@ GameScene::~GameScene() {
 	for (EnemyBullet* bullet : enemyBullets_) {
 		delete bullet;
 	}
-
-	Audio::SoundUnload();
 }
 
 
@@ -28,8 +26,6 @@ GameScene::~GameScene() {
 /// 初期化処理
 /// </summary>
 void GameScene::Initialize() {
-
-	kakkoiiHD_ = Audio::LoadSound("kakkoii.wav");
 
 	// メインカメラ
 	GameCamera_.Initialize();
@@ -83,7 +79,6 @@ void GameScene::Initialize() {
 
 	timer_ = 0;
 
-	Audio::PlayOnSound(kakkoiiHD_, true, 0.5f);
 }
 
 

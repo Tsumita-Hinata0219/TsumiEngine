@@ -6,6 +6,8 @@
 #include "GameObject.h"
 
 #include "FadeManager.h"
+#include "Skydome/Skydome.h"
+#include "Ground/Ground.h"
 
 
 
@@ -62,4 +64,12 @@ private:
 
 	// ジョイコン
 	XINPUT_STATE joyState_{};
+
+	/* ----- Skydome スカイドーム ----- */
+	std::unique_ptr<Skydome> skydome_ = nullptr;
+
+
+	/* ----- Ground グラウンド ----- */
+	std::unique_ptr<Ground> ground_ = nullptr;
+
 };

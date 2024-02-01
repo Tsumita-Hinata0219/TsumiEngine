@@ -5,83 +5,53 @@
 /// <summary>
 /// デストラクタ
 /// </summary>
-EngineManual::~EngineManual() {
+EngineManual::~EngineManual() 
+{
 
-	Audio::SoundUnload();
+
 }
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EngineManual::Initialize() {
-
-	// テクスチャの読み込み
+void EngineManual::Initialize() 
+{
 	uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
-	monsterBallHD_ = TextureManager::LoadTexture("monsterBall.png");
-	asanohaHD_ = TextureManager::LoadTexture("asanoha.png");
-	skyHD_ = TextureManager::LoadTexture("sky.png");
 
+	particle_ = make_unique<Particle>();
+	particle_->Initialize(new ParticlePlane, NumInstance_);
+	for (int i = 0; i < NumInstance_; i++) {
 
-	// サウンドの読み込み
-	mokugyoHD_ = Audio::LoadSound("mokugyo.wav");
-	kakkoiiHD_ = Audio::LoadSound("kakkoii.wav");
+		particlePrope_[i].worldTransform.scale = { 1.0f, 1.0f, 1.0f };
+		particlePrope_[i].worldTransform.rotate = { 0.0f, 0.0f, 0.0f };
+		particlePrope_[i].worldTransform.translate = {
+			i * 0.1f,
+			i * 0.1f ,
+			i * 0.1f,
+		};
+		particlePrope_[i].color = { 1.0f, 1.0f, 1.0f, 1.0f };
+		particlePrope_[i].velocity = { 0.0f, 1.0f, 0.0f };
+		particlePrope_[i].uvTransform.scale = { 1.0f, 1.0f, 1.0f };
+		particlePrope_[i].uvTransform.rotate = { 0.0f, 0.0f, 0.0f };
+		particlePrope_[i].uvTransform.translate = { 0.0f, 0.0f, 0.0f };
 
-	// スプライト
-	spriteFront_ = make_unique<Sprite>();
-	spriteFront_->Initialize({ 0.0f, 0.0f }, { 400.0f, 300.0f });
-	spriteFrontTrans_.Initialize();
+		particle_->PushBackParticles(particlePrope_[i]);
+	}
 
-	spriteBack_ = make_unique<Sprite>();
-	spriteBack_->Initialize({ 0.0f, 0.0f }, { 1280.0f, 720.0f });
-	spriteBackTrans_.Initialize();
-
-	// Obj
-	modelObj_ = make_unique<Model>();
-	modelObj_->CreateFromObj("axis");
-	modelTrans_.Initialize();
-	modelTrans_.translate = { 0.0f, 0.0f, 0.0f };
-
-	st_.Initialize();
-	
-	int w = WinApp::kWindowWidth;
-	int h = WinApp::kWindowHeight;
 }
 
 
 /// <summary>
 /// 更新処理
 /// </summary>
-void EngineManual::Update(ViewProjection view) {
+void EngineManual::Update(ViewProjection view) 
+{
 
-	AudioUpdate();
+	particle_->Update();
 
-	
-	spriteFrontTrans_.UpdateMatrix();
-	spriteBackTrans_.UpdateMatrix();
-	modelTrans_.UpdateMatrix();
-
-	st_.UpdateMatrix();
-
-	//spriteBackTrans_.translate = ConvertVector(modelTrans_.GetWorldPos(), view) / 2.0f;
-
-	
 #ifdef _DEBUG
 
-	ImGui::Begin("EngineManual");
-	ImGui::Text("SpriteFront");
-	ImGui::DragFloat2("SpriteF_Scale", &spriteFrontTrans_.scale.x, 0.01f);
-	ImGui::DragFloat("SpriteF_Rotate", &spriteFrontTrans_.rotate, 0.01f);
-	ImGui::DragFloat2("SpriteF_Translate", &spriteFrontTrans_.translate.x, 1.0f);
-	ImGui::Text("SpriteBack");
-	ImGui::DragFloat2("SpriteB_Scale", &spriteBackTrans_.scale.x, 0.01f);
-	ImGui::DragFloat("SpriteB_Rotate", &spriteBackTrans_.rotate, 0.01f);
-	ImGui::DragFloat2("SpriteB_Translate", &spriteBackTrans_.translate.x, 1.0f);
-	ImGui::Text("Axis");
-	ImGui::DragFloat3("Axis_Scale", &modelTrans_.scale.x, 0.01f);
-	ImGui::DragFloat3("Axis_Rotate", &modelTrans_.rotate.x, 0.01f);
-	ImGui::DragFloat3("Axis_Translate", &modelTrans_.translate.x, 0.01f);
-	ImGui::End();
 
 #endif // _DEBUG
 
@@ -91,83 +61,44 @@ void EngineManual::Update(ViewProjection view) {
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void EngineManual::BackSpriteDraw(ViewProjection view) {
+void EngineManual::BackSpriteDraw(ViewProjection view) 
+{
 
-	//spriteBack_->Draw(asanohaHD_, spriteBackTrans_, view);
+
 }
 
 
 /// <summary>
 /// ３Dオブジェクトの描画処理
 /// </summary>
-void EngineManual::ModelDraw(ViewProjection view) {
+void EngineManual::ModelDraw(ViewProjection view) 
+{
+	particle_->Draw(view);
 
-	//modelObj_->Draw(modelTrans_, view);
 }
 
 
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void EngineManual::FrontSpriteDraw(ViewProjection view) {
+void EngineManual::FrontSpriteDraw(ViewProjection view) 
+{
 
-	spriteFront_->Draw(monsterBallHD_, spriteFrontTrans_, view);
+
 }
 
 
 /// <summary>
 /// Audioに関する処理まとめたやつ
 /// </summary>
-void EngineManual::AudioUpdate() {
+void EngineManual::AudioUpdate() 
+{
 
-	//if (KeyInput::PressKeys(DIK_B)) {
-
-	//	if (KeyInput::TriggerKey(DIK_1)) {
-	//		Audio::PlayOnSound(mokugyoHD_, true, 1.0f);
-	//	}
-
-	//	if (KeyInput::TriggerKey(DIK_2)) {
-	//		Audio::PlayOnSound(mokugyoHD_, false, 1.0f);
-	//	}
-
-	//	if (KeyInput::TriggerKey(DIK_3)) {
-	//		Audio::PlayOnSound(kakkoiiHD_, false, 1.0f);
-	//	}
-	//}
-	//if (KeyInput::PressKeys(DIK_S)) {
-
-	//	if (KeyInput::TriggerKey(DIK_1)) {
-	//		Audio::StopOnSound(mokugyoHD_);
-	//	}
-
-	//	if (KeyInput::TriggerKey(DIK_2)) {
-	//		Audio::StopOnSound(kakkoiiHD_);
-	//	}
-	//}
 
 
 #ifdef _DEBUG
 
 
-	ImGui::Begin("Audio");
-
-	ImGui::Text("mokugyo : B + 1 -> Loop");
-	ImGui::Text("          B + 2 -> nonLoop");
-	if (Audio::IsPlaying(mokugyoHD_)) {
-		ImGui::Text("mokugyo_isPlaying : true");
-	}
-	else {
-		ImGui::Text("mokugyo_isPlaying : false");
-	}
-
-	ImGui::Text("\nkakkoii : B + 3 -> nonLoop");
-	if (Audio::IsPlaying(kakkoiiHD_)) {
-		ImGui::Text("nkakkoii_isPlaying : true");
-	}
-	else {
-		ImGui::Text("nkakkoii_isPlaying : false");
-	}
-	ImGui::End();
 
 #endif // _DEBUG
 }

@@ -70,7 +70,8 @@ void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, Vi
 
 	// マテリアルの設定
 	materialData->color = { 1.0f, 1.0f, 1.0f, 1.0f };
-	materialData->uvTransform = MakeAffineMatrix({ 1.0f, 1.0f, 1.0f }, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
+	materialData->uvTransform = 
+		MakeAffineMatrix(Vector3::one, Vector3::zero, Vector3::zero);
 
 
 	itrNum_ = 0;
@@ -126,4 +127,13 @@ void ParticlePlane::CommandCall(uint32_t texHandle) {
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	DirectXCommon::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, NumInstance_, 0, 0, 0);
+}
+
+
+// ビルボードの処理
+void ParticlePlane::CalcBillBord(ViewProjection view)
+{
+
+
+
 }

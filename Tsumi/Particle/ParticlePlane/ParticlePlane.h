@@ -33,6 +33,11 @@ private: // メンバ関数
 	/// </summary>
 	void CommandCall(uint32_t texHandle);
 
+	/// <summary>
+	/// ビルボードの処理
+	/// </summary>
+	void CalcBillBord(ViewProjection view);
+
 
 private: // メンバ変数
 

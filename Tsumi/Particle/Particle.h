@@ -6,13 +6,19 @@
 #include "MyMath.h"
 
 
-
 /* Particleクラス */
 class Particle {
 
 public: // メンバ関数
 
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	Particle() {};
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~Particle() {};
 
 	/// <summary>
@@ -37,24 +43,30 @@ public: // メンバ関数
 	void PushBackParticles(ParticleProperties prope);
 
 
-#pragma region Get
+#pragma region Get 取得
 
-	// instanceNum
+	/// <summary>
+	/// インスタンス数の取得
+	/// </summary>
 	uint32_t GetInstanceNum() { return instanceNum_; }
 
-	// UseTexture
+	/// <summary>
+	/// 使用するテクスチャハンドルの取得
+	/// </summary>
 	uint32_t GetUseTexture() { return this->useTexture_; }
 
-	// Size
+	/// <summary>
+	/// 何かのサイズの取得
+	/// </summary>
 	float GetSize() { return this->size_; }
-
 
 #pragma endregion
 
+#pragma region Set 設定
 
-#pragma region Set
-
-	// TextureHandle
+	/// <summary>
+	/// テクスチャハンドルの設定
+	/// </summary>
 	void SetTexHandle(uint32_t texHD) { this->useTexture_ = texHD; }
 
 #pragma endregion 
@@ -66,6 +78,7 @@ private: // メンバ関数
 	/// 移動処理
 	/// </summary>
 	void Move();
+
 
 private: // メンバ変数
 

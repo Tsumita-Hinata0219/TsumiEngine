@@ -53,35 +53,10 @@ private: // メンバ関数
 
 private: // メンバ変数
 
-	// スプライト
-	std::unique_ptr<Sprite> spriteFront_ = nullptr;
-	SpriteTransform spriteFrontTrans_{};
-	std::unique_ptr<Sprite> spriteBack_ = nullptr;
-	SpriteTransform spriteBackTrans_{};
+	// Particle
+	std::unique_ptr<Particle> particle_ = nullptr;
+	static constexpr uint32_t NumInstance_ = 10;
+	ParticleProperties particlePrope_[NumInstance_]{};
 
-	// Obj
-	std::unique_ptr<Model> modelObj_ = nullptr;
-	WorldTransform modelTrans_{};
-
-
-	// texHandle
 	uint32_t uvCheckerHD_;
-	uint32_t monsterBallHD_;
-	uint32_t asanohaHD_;
-	uint32_t skyHD_;
-
-
-	// SoundHandle
-	uint32_t mokugyoHD_;
-	uint32_t kakkoiiHD_;
-
-
-	int bgmStartTimer = 0;
-
-
-	SpriteTransform st_{};
-
-	// ジョイコン
-	XINPUT_STATE joyState_{};
-
 };

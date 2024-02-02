@@ -83,7 +83,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 		&srvDesc,
 		DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU);
 
-
+	int idne = DescriptorManager::GetInstance()->index_;
 	return DescriptorManager::GetInstance()->index_;
 }
 

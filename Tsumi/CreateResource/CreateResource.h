@@ -35,7 +35,7 @@ public:
 	/// <summary>
 	/// 頂点バッファリソースを作成する
 	/// </summary>
-	static ID3D12Resource* CreateBufferResource(size_t sizeInBytes);
+	static ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
 
 	static void CreateBufferResource(size_t sizeInBytes, ComPtr<ID3D12Resource>& resource);
 

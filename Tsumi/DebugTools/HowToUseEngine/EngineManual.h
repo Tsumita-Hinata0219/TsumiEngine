@@ -59,4 +59,9 @@ private: // メンバ変数
 	ParticleProperties particlePrope_[NumInstance_]{};
 
 	uint32_t uvCheckerHD_;
+
+
+
+	// パーティクルリスト
+	std::list<ParticleProperties> particlePropes_{};
 };

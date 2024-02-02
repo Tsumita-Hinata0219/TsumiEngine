@@ -15,9 +15,9 @@ CreateResource* CreateResource::GetInstance() {
 /// <summary>
 /// 頂点バッファリソースを作成する
 /// </summary>
-ID3D12Resource* CreateResource::CreateBufferResource(size_t sizeInBytes) {
+ComPtr<ID3D12Resource> CreateResource::CreateBufferResource(size_t sizeInBytes) {
 
-	ID3D12Resource* resultResource;
+	ComPtr<ID3D12Resource> resultResource;
 
 	// 頂点リソース用のヒープ設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};

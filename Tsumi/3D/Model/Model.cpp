@@ -16,13 +16,13 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 	// 色の設定
 	this->color_ = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-	// Lightingを有効にする
-	this->enableLighting_ = false;
-
 	// 光の設定
 	this->light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	this->light_.direction = { 0.0f, -1.0f, 0.0f };
+	//this->light_.SpecularFColor = { 1.0f, 1.0f, 1.0f };
 	this->light_.intensity = 1.0f;
+	this->light_.sininess = 1.0f;
+	this->light_.enableLightting = false;
 
 	// ステートパターンの初期化処理
 	this->state_ = state;

@@ -48,9 +48,6 @@ public: // メンバ関数
 	// DirectionalLight
 	DirectionalLight GetDirectionalLight() { return this->light_; }
 
-	// SphereEnableLighting
-	uint32_t GetEnableLighting() { return this->enableLighting_; }
-
 	// SphereRadius
 	float GetRadius() { return this->radius_; }
 
@@ -73,11 +70,10 @@ public: // メンバ関数
 	// Color
 	void SetColor(Vector4 color) { this->color_ = color; }
 
-#pragma endregion 
+	// Light
+	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
 
-
-private: // メンバ関数
-
+#pragma endregion
 
 
 private: // メンバ変数
@@ -96,9 +92,6 @@ private: // メンバ変数
 
 	// 光データ
 	DirectionalLight light_;
-
-	// スフィアのマテリアル
-	uint32_t enableLighting_;
 
 	// スフィアの半径
 	float radius_ = 1.0f;

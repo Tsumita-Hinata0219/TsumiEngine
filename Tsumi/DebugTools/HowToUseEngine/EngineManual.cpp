@@ -15,22 +15,20 @@ EngineManual::~EngineManual()
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EngineManual::Initialize() 
+void EngineManual::Initialize()
 {
 	uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
 
-	particle_ = make_unique<Particle>();
-	particle_->Initialize(NumInstance_, uvCheckerHD_);
-	Scope scope = {
-		.X = {-2.0f, 2.0f},
-		.Y = {-2.0f, 2.0f},
-		.Z = Vector2::zero,
-	};
-	for (int i = 0; i < NumInstance_; i++) {
-
-		particlePrope_[i] = Particle::ParticleGenerators(scope);
-		particlePropes_.push_back(particlePrope_[i]);
-	}
+	// モデルの初期化
+	ballObj_ = make_unique<Model>();
+	ballObj_->CreateFromObj("ball");
+	ballWT_.Initialize();
+	light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	light_.direction = { 0.0f, -1.0f, 0.0f };
+	//light_.SpecularFColor = { 1.0f, 1.0f, 1.0f };
+	light_.intensity = 1.0f;
+	light_.sininess = 140.0f;
+	light_.enableLightting = true;
 }
 
 
@@ -39,11 +37,15 @@ void EngineManual::Initialize()
 /// </summary>
 void EngineManual::Update(ViewProjection view) 
 {
-
-	particle_->Update();
+	ballWT_.UpdateMatrix();
+	ballObj_->SetDirectionalLight(light_);
 
 #ifdef _DEBUG
 
+	ImGui::Begin("BallObj");
+	ImGui::ColorEdit4("LightColor", &light_.color.x);
+	ImGui::DragFloat3("LightDirection", &light_.direction.x, 0.01f, -1.0f, 1.0f);
+	ImGui::End();
 
 #endif // _DEBUG
 
@@ -65,8 +67,7 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) 
 {
-	particle_->Draw(particlePropes_, view);
-
+	ballObj_->Draw(ballWT_, view);
 }
 
 

@@ -28,7 +28,6 @@ void ViewProjection::UpdateMatrix() {
 	matViewPort = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 1.0f);
 	matViewProjectionViewPort = matView * (matProjection * matViewPort);
 	matInverseVPV = Inverse(matViewProjectionViewPort);
-	Matrix4x4 de = matInverseVPV * matViewProjectionViewPort;
 
 	TransferMatrix();
 }
@@ -77,8 +76,7 @@ void ViewProjection::TransferMatrix() {
 	constMap->view = matView;
 	constMap->viewProjection = matProjection;
 	constMap->orthoGraphic = orthoGraphicMat;
-	
-	constMap->position = translate;
+	constMap->cameraPosition = translate;
 
 	UnMap();
 }

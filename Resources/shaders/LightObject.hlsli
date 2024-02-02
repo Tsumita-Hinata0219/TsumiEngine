@@ -3,6 +3,7 @@ struct VertexShaderOutput {
     float2 texcoord : TEXCOORD0;
     float3 normal : NORMAL0;
     float3 worldPosition : WORLDPOSITION0;
+    float3 cameraPosition : CAMERAPOSITION0;
 };
 
 struct TransformationViewMatrix {

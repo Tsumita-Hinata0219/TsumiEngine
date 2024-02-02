@@ -29,23 +29,15 @@ void ModelSphereState::Initialize(Model* pModel) {
 void ModelSphereState::Draw(Model* pModel, WorldTransform worldTransform, ViewProjection view) {
 
 	VertexData* vertexData = nullptr;
-	TransformationMatrix* transformaationMatData = nullptr;
 	Material* materialData = nullptr;
 	DirectionalLight* lightData = nullptr;
 	uint32_t* indexData = nullptr;
 
 	// 書き込みができるようにする
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	resource_.TransformationMatrix->Map(0, nullptr, reinterpret_cast<void**>(&transformaationMatData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&materialData));
 	resource_.Lighting->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
-
-	// Sphere用のWorldViewProjectionMatrixを作る
-	Matrix4x4 worldMatrixSphere = MakeAffineMatrix(worldTransform.scale, worldTransform.rotate, worldTransform.translate);
-	transformaationMatData->WVP = worldMatrixSphere * view.matProjection;
-	transformaationMatData->World = Matrix4x4::identity;
-
 
 	// 経度分割の1つ分の角度
 	const float lonEvery = float(std::numbers::pi) * 2.0f / float(subdivision_);
@@ -154,22 +146,22 @@ void ModelSphereState::Draw(Model* pModel, WorldTransform worldTransform, ViewPr
 
 	// マテリアルの設定
 	materialData->color = pModel->GetColor();
-	materialData->enableLightting = pModel->GetEnableLighting();
 
 	// ライティングの設定
 	lightData->color = pModel->GetDirectionalLight().color;
 	lightData->direction = pModel->GetDirectionalLight().direction;
 	lightData->intensity = pModel->GetDirectionalLight().intensity;
+	lightData->enableLightting = pModel->GetDirectionalLight().enableLightting;
 
 	// コマンドコール
-	CommandCall(pModel->GetUseTexture());
+	CommandCall(pModel->GetObjData().textureHD, worldTransform, view);
 }
 
 
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelSphereState::CommandCall(uint32_t texture) {
+void ModelSphereState::CommandCall(uint32_t texture, WorldTransform worldTransform, ViewProjection view) {
 
 	// RootSignatureを設定。
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LightGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
@@ -184,11 +176,14 @@ void ModelSphereState::CommandCall(uint32_t texture) {
 	//形状を設定
 	DirectXCommon::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-	// 色用のCBufferの場所を設定
+	// CBVを設定する
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// wvp用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, resource_.TransformationMatrix->GetGPUVirtualAddress());
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, worldTransform.constBuffer->GetGPUVirtualAddress());
+
+	// View用のCBufferの場所を設定
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(2, view.constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
 	if (!texture == 0) {
@@ -196,7 +191,7 @@ void ModelSphereState::CommandCall(uint32_t texture) {
 	}
 
 	// 光用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(3, resource_.Lighting->GetGPUVirtualAddress());
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(4, resource_.Lighting->GetGPUVirtualAddress());
 
 	// 描画！ (DrawCall / ドローコール)
 	DirectXCommon::GetInstance()->GetCommandList()->DrawIndexedInstanced(subdivision_ * subdivision_ * 6, 1, 0, 0, 0);

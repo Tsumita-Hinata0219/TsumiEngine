@@ -52,7 +52,6 @@ struct SphereData {
 // マテリアル
 struct Material {
 	Vector4 color;
-	int32_t enableLightting;
 };
 struct MaterialSprite {
 	Vector4 color;
@@ -79,9 +78,12 @@ struct ModelData {
 
 // 平行光源
 struct DirectionalLight {
-	Vector4 color;     // ライトの色
-	Vector3 direction; // ライトの向き
-	float intensity;   // 輝度
+	Vector4 color;          // ライトの色
+	Vector3 direction;      // ライトの向き
+	//Vector3 SpecularFColor; // 鏡面反射色
+	float intensity;        // 輝度
+	float sininess;         // 光沢度
+	bool enableLightting;   // ライティングするか
 };
 
 
@@ -116,7 +118,7 @@ struct TransformationViewMatrix {
 	Matrix4x4 view;
 	Matrix4x4 viewProjection;
 	Matrix4x4 orthoGraphic;
-	Vector3 position;
+	Vector3 cameraPosition;
 };
 
 

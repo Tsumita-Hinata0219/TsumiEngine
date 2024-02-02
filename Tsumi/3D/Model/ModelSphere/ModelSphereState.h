@@ -36,7 +36,7 @@ private: // メンバ関数
 	/// <summary>
 	/// コマンドコール処理
 	/// </summary>
-	void CommandCall(uint32_t texture);
+	void CommandCall(uint32_t texture, WorldTransform worldTransform, ViewProjection view);
 
 
 private: // メンバ関数

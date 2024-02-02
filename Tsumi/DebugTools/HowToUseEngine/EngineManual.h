@@ -53,15 +53,10 @@ private: // メンバ関数
 
 private: // メンバ変数
 
-	// Particle
-	std::unique_ptr<Particle> particle_ = nullptr;
-	static constexpr uint32_t NumInstance_ = 10;
-	ParticleProperties particlePrope_[NumInstance_]{};
+	unique_ptr<Model> ballObj_ = nullptr;
+	WorldTransform ballWT_{};
+	DirectionalLight light_{};
 
 	uint32_t uvCheckerHD_;
 
-
-
-	// パーティクルリスト
-	std::list<ParticleProperties> particlePropes_{};
 };

@@ -46,7 +46,10 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, ViewProje
 	// ライティングの設定
 	lightData->color = pModel->GetDirectionalLight().color;
 	lightData->direction = pModel->GetDirectionalLight().direction;
+	//lightData->SpecularFColor = pModel->GetDirectionalLight().SpecularFColor;
 	lightData->intensity = pModel->GetDirectionalLight().intensity;
+	lightData->sininess = pModel->GetDirectionalLight().sininess;
+	lightData->enableLightting = pModel->GetDirectionalLight().enableLightting;
 
 
 	// コマンドコール

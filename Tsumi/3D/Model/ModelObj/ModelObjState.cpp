@@ -53,14 +53,14 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, ViewProje
 
 
 	// コマンドコール
-	CommandCall(pModel->GetObjData().textureHD, worldTransform, view);
+	CommandCall(pModel, pModel->GetObjData().textureHD, worldTransform, view);
 }
 
 
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelObjState::CommandCall(uint32_t texture, WorldTransform worldTransform, ViewProjection view) {
+void ModelObjState::CommandCall(Model* pModel, uint32_t texture, WorldTransform worldTransform, ViewProjection view) {
 
 	// RootSignatureを設定。
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LightGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
@@ -90,6 +90,9 @@ void ModelObjState::CommandCall(uint32_t texture, WorldTransform worldTransform,
 
 	// 光用のCBufferの場所を設定
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(4, resource_.Lighting->GetGPUVirtualAddress());
+
+	// 
+	DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	DirectXCommon::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);

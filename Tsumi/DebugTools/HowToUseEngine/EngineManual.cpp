@@ -18,10 +18,12 @@ EngineManual::~EngineManual()
 void EngineManual::Initialize()
 {
 	uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
+	otherTex_ = TextureManager::LoadTexture("normalMap.png");
 
 	// モデルの初期化
 	ballObj_ = make_unique<Model>();
 	ballObj_->CreateFromObj("ball");
+	ballObj_->SetNormalMapTex(otherTex_);
 	ballWT_.Initialize();
 	light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	light_.direction = { 0.0f, -1.0f, 0.0f };

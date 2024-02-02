@@ -18,25 +18,30 @@ ConstantBuffer<TransformationViewMatrix> gTransformationViewMatrix : register(b2
 
 
 Texture2D<float4> gTexture : register(t0);
+Texture2D<float4> gTextureNormal : register(t1);
 SamplerState gSampler : register(s0);
 
 struct PixcelShaderOutput {
     float4 color : SV_TARGET0;
 };
 
+static float3 N;
 
 PixcelShaderOutput main(VertexShaderOutput input){
     PixcelShaderOutput output;
     float4 textureColor = gTexture.Sample(gSampler, input.texcoord);
+    float4 textureColorNormal = gTextureNormal.Sample(gSampler, input.texcoord);\
+
+    N = normalize(input.normal + textureColorNormal.rgb);
     
     if (gDirectionalLight.enableLighting != 0)
     {
-        float NdotL = dot(normalize(input.normal), normalize(gDirectionalLight.direction));
+        float NdotL = dot(normalize(N), normalize(gDirectionalLight.direction));
         float cos = pow(NdotL*0.5f+0.5f,2.0f);
         float3 toEye = normalize(input.cameraPosition - input.worldPosition);
-        float3 reflectLight = reflect(normalize(gDirectionalLight.direction), normalize(input.normal));
+        float3 reflectLight = reflect(normalize(gDirectionalLight.direction), normalize(N));
         float3 halfVector = normalize(gDirectionalLight.direction + toEye);
-        float NdotH = dot(normalize(input.normal), halfVector);
+        float NdotH = dot(normalize(N), halfVector);
         float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
         
         if (textureColor.a == 0.0f) {

@@ -41,6 +41,7 @@ public: // メンバ関数
 
 	// UseTexture
 	uint32_t GetUseTexture() { return this->useTexture_; }
+	uint32_t GetNormalMapTex() { return this->normalMapTex_; }
 
 	// Color
 	Vector4 GetColor() { return this->color_; }
@@ -66,6 +67,7 @@ public: // メンバ関数
 
 	// TextureHandle
 	void SetTexHandle(uint32_t texHD) { this->useTexture_ = texHD; }
+	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
 
 	// Color
 	void SetColor(Vector4 color) { this->color_ = color; }
@@ -86,6 +88,7 @@ private: // メンバ変数
 
 	// テクスチャ
 	uint32_t useTexture_;
+	uint32_t normalMapTex_;
 
 	// 色データ
 	Vector4 color_{};

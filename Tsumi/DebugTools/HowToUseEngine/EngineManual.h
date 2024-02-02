@@ -58,5 +58,6 @@ private: // メンバ変数
 	DirectionalLight light_{};
 
 	uint32_t uvCheckerHD_;
+	uint32_t otherTex_;
 
 };

@@ -91,7 +91,8 @@ void Enemy::Attack() {
 void Enemy::BulletInit()
 {
 	FireInterval_ = 80;
-	FireTimer_ = int32_t(RandomGenerator::getRandom({ 5.0f, 300.0f }));
+	Scope scope = { 5.0f, 300.0f };
+	FireTimer_ = int32_t(RandomGenerator::getRandom(scope));
 }
 
 

@@ -5,6 +5,7 @@
 #include "ParticleGraphicPipeline.h"
 #include "CreateResource.h"
 #include "DescriptorManager.h"
+#define INSTANCE_MAX 1000;
 
 
 /* ParticlePlaneクラス */
@@ -50,8 +51,8 @@ private: // メンバ変数
 	Vector4 pos_ = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float size_ = 0.5f;
 
-	int instanceCount_;
-	uint32_t NumInstance_;
+	const uint32_t kMaxInstanceNum_ = INSTANCE_MAX;
+	uint32_t instanceNum_;
 
 	uint32_t itrNum_ = 0;
 

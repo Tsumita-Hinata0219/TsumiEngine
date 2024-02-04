@@ -45,7 +45,11 @@ public: // メンバ関数
 	/// <summary>
 	/// パーティクルの生成器
 	/// </summary>
-	static ParticleProperties ParticleGenerators(Scope scope);
+	static ParticleProperties ParticleGenerators(
+		Scope lifeTimeScope,
+		ScopeVec3 posScope,
+		ScopeVec3 velScope = { .X {0.0f, 0.0f}, .Y {0.0f, 0.0f}, .Z {0.0f, 0.0f} },
+		ScopeVec4 colorScope = { .X {256.0f, 256.0f}, .Y {256.0f, 256.0f}, .Z {256.0f, 256.0f}, .W {256.0f, 256.0f} });
 
 
 #pragma region Get 取得

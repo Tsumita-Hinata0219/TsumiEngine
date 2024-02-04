@@ -29,11 +29,12 @@ list<ParticleProperties> Particle::RetrieveFront()
 {
 	for (list<ParticleProperties>::iterator itr = particlePropes_.begin(); itr != particlePropes_.end();) {
 
-		if (!(*itr).isActive) {
-			particlePropes_.erase(itr);
+		if ((*itr).isActive) {
+			++itr;
 		}
 		else {
-			++itr;
+			particlePropes_.erase(itr);
+			continue;
 		}
 	}
 
@@ -51,19 +52,20 @@ void Particle::PushBackList(ParticleProperties prope) {
 
 
 // パーティクルの生成器
-ParticleProperties Particle::ParticleGenerators(Scope scope)
+ParticleProperties Particle::ParticleGenerators(Scope lifeTimeScope, ScopeVec3 posScope, ScopeVec3 velScope, ScopeVec4 colorScope)
 {
 	ParticleProperties particlePrope{};
 	particlePrope.worldTransform.Initialize();
 	particlePrope.worldTransform.scale = Vector3::one;
 	particlePrope.worldTransform.rotate = Vector3::zero;
-	particlePrope.worldTransform.translate =
-		RandomGenerator::getRandom(scope.X, scope.Y, scope.Z);
-	particlePrope.color = Vector4::one;
-	particlePrope.velocity = Vector3::oneY / 50.0f;
+	particlePrope.worldTransform.translate = RandomGenerator::getRandom(posScope);
+	particlePrope.color = RandomGenerator::getColorRandom(colorScope);
+	particlePrope.velocity = RandomGenerator::getRandom(velScope) / 100.0f;
 	particlePrope.uvTransform.scale = Vector3::one;
 	particlePrope.uvTransform.rotate = Vector3::zero;
 	particlePrope.uvTransform.translate = Vector3::zero;
+	particlePrope.lifeTime = uint32_t(RandomGenerator::getRandom(lifeTimeScope) * 60.0f);
+	particlePrope.currentTime = 0;
 	particlePrope.isActive = true;
 
 	return particlePrope;

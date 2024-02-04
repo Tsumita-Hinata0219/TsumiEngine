@@ -101,9 +101,6 @@ inline constexpr bool operator==(const Vector3& rhs, const float& val) {
 inline constexpr bool operator!=(const Vector3& rhs, const float& val) {
 	return val != rhs.x || val != rhs.y || val != rhs.z;
 }
-inline Vector3 operator-(Vector3& v) {
-	return { -v.x, -v.y, -v.z };
-}
 
 // 加算
 inline Vector3 operator+(const Vector3& v, const float& n) {
@@ -164,6 +161,88 @@ inline Vector3 operator/(const Vector3& v1, const Vector3& v2) {
 	return { v1.x / v2.x, v1.y / v2.y, v1.z / v2.z };
 }
 inline Vector3& operator/=(Vector3& v1, const Vector3& v2) {
+	return v1 = v1 / v2;
+}
+
+
+
+
+
+/// -------------------------------------------------------------------------
+/// 4次元ベクトル
+/// -------------------------------------------------------------------------
+inline Vector4 operator+(const Vector4& v) {
+	return { +v.x, +v.y, +v.z, +v.w };
+}
+inline Vector4 operator-(const Vector4& v) {
+	return { -v.x, -v.y, -v.z, -v.w };
+}
+inline constexpr bool operator==(const Vector4& rhs, const float& val) {
+	return val == rhs.x || val == rhs.y || val == rhs.z || val == rhs.w;
+}
+inline constexpr bool operator!=(const Vector4& rhs, const float& val) {
+	return val != rhs.x || val != rhs.y || val != rhs.z || val != rhs.w;
+}
+
+// 加算
+inline Vector4 operator+(const Vector4& v, const float& n) {
+	return { v.x + n, v.y + n, v.z + n, v.w + n };
+}
+inline Vector4 operator+(const float& n, const Vector4& v) {
+	return { v.x + n, v.y + n, v.z + n, v.w + n };
+}
+inline Vector4 operator+(const Vector4& v1, const Vector4& v2) {
+	return { v1.x + v2.x, v1.y + v2.y, v1.z + v2.z, v1.w + v2.w };
+}
+inline Vector4& operator+=(Vector4& v1, const Vector4& v2) {
+	return v1 = v1 + v2;
+}
+
+// 減算
+inline Vector4 operator-(const Vector4& v, const float& n) {
+	return { v.x - n, v.y - n, v.z - n, v.w - n };
+}
+inline Vector4 operator-(const float& n, const Vector4& v) {
+	return { v.x - n, v.y - n, v.z - n, v.w - n };
+}
+inline Vector4 operator-(const Vector4& v1, const Vector4& v2) {
+	return { v1.x - v2.x, v1.y - v2.y, v1.z - v2.z, v1.w - v2.w };
+}
+inline Vector4& operator-=(Vector4& v1, const Vector4& v2) {
+	return v1 = v1 - v2;
+}
+
+// 乗算
+inline Vector4 operator*(const Vector4& v, const float& s) {
+	return { v.x * s, v.y * s, v.z * s, v.w * s };
+}
+inline Vector4 operator*(const float& s, const Vector4& v) {
+	return { v.x * s, v.y * s, v.z * s, v.w * s };
+}
+inline Vector4& operator*=(Vector4& v, const float& s) {
+	return v = v * s;
+}
+inline Vector4 operator*(const Vector4& v1, const Vector4& v2) {
+	return { v1.x * v2.x, v1.y * v2.y, v1.z * v2.z, v1.w * v2.w };
+}
+inline Vector4& operator*=(Vector4& v1, const Vector4& v2) {
+	return v1 = v1 * v2;
+}
+
+// 除算
+inline Vector4 operator/(const Vector4& v, const float& s) {
+	return { v.x / s, v.y / s, v.z / s, v.w / s };
+}
+inline Vector4 operator/(const float& s, const Vector4& v) {
+	return { v.x / s, v.y / s, v.z / s, v.w / s };
+}
+inline Vector4 operator/=(Vector4& v, const float& s) {
+	return v = v / s;
+}
+inline Vector4 operator/(const Vector4& v1, const Vector4& v2) {
+	return { v1.x / v2.x, v1.y / v2.y, v1.z / v2.z, v1.w / v2.w };
+}
+inline Vector4& operator/=(Vector4& v1, const Vector4& v2) {
 	return v1 = v1 / v2;
 }
 

@@ -83,7 +83,7 @@ void EnemyManager::SpawnEnemysPeriodically()
 void EnemyManager::PushBackEnemy()
 {
 	Enemy* newEnemy = new Enemy();
-	Vector3 newPos = RandomGenerator::getRandom(scope_.X, scope_.Y, scope_.Z);
+	Vector3 newPos = RandomGenerator::getRandom(scope_);
 	Vector3 newMov = { 0.0f, 0.0f, -0.1f };
 
 	newEnemy->SetPlayer(this->player_);

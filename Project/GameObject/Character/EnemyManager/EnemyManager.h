@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// スコープの取得
 	/// </summary>
-	Scope GetScope() { return this->scope_; }
+	ScopeVec3 GetScope() { return this->scope_; }
 
 #pragma endregion
 
@@ -55,7 +55,7 @@ public:
 	/// <summary>
 	/// スコープの設定
 	/// </summary>
-	void SetScope(Scope scope) { this->scope_ = scope; }
+	void SetScope(ScopeVec3 scope) { this->scope_ = scope; }
 
 	/// <summary>
 	/// Playerの設定
@@ -94,7 +94,7 @@ private:
 	std::unique_ptr<Model> modelEnemy_ = nullptr;
 
 	// スポーン範囲
-	Scope scope_{};
+	ScopeVec3 scope_{};
 
 	// スポーンインターバル
 	int intervalFrame_;

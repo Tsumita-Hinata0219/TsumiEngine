@@ -34,10 +34,3 @@ struct VHInfo {
 	VHInfo() : up(0.0f), down(0.0f), left(0.0f), right(0.0f) {};
 	VHInfo(float u, float d, float l, float r) : up(u), down(d), left(l), right(r) {};
 };
-
-// 範囲
-struct Scope {
-	Vector2 X;
-	Vector2 Y;
-	Vector2 Z;
-};

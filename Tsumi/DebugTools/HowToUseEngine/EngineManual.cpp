@@ -20,7 +20,7 @@ void EngineManual::Initialize()
 	uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
 
 	particle_ = make_unique<Particle>();
-	particle_->Initialize(NumInstance_, uvCheckerHD_);
+	particle_->Initialize(new ParticlePlane(), NumInstance_, uvCheckerHD_);
 	Scope scope = {
 		.X = {-2.0f, 2.0f},
 		.Y = {-2.0f, 2.0f},
@@ -29,7 +29,7 @@ void EngineManual::Initialize()
 	for (int i = 0; i < NumInstance_; i++) {
 
 		particlePrope_[i] = Particle::ParticleGenerators(scope);
-		particlePropes_.push_back(particlePrope_[i]);
+		particle_->PushBackList(particlePrope_[i]);
 	}
 }
 
@@ -40,7 +40,11 @@ void EngineManual::Initialize()
 void EngineManual::Update(ViewProjection view) 
 {
 
-	particle_->Update();
+	particlePropes_ = particle_->RetrieveFront();
+	for (ParticleProperties& prope : particlePropes_) {
+		prope.worldTransform.translate += prope.velocity;
+		particle_->PushBackList(prope);
+	}
 
 #ifdef _DEBUG
 
@@ -65,8 +69,7 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) 
 {
-	particle_->Draw(particlePropes_, view);
-
+	particle_->Draw(view);
 }
 
 

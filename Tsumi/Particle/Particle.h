@@ -25,22 +25,22 @@ public: // メンバ関数
 	/// 初期化処理
 	/// </summary>
 	/// <param name="state"></param>
-	void Initialize(uint32_t instanceNum, uint32_t texHD);
+	void Initialize(IParticleState* state, uint32_t instanceNum, uint32_t useTex = 1);
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(list<ParticleProperties> prope, ViewProjection view);
+	void Draw(ViewProjection view);
 
 	/// <summary>
-	/// 更新処理
+	/// 先頭から情報を取り出す
 	/// </summary>
-	void Update();
+	list<ParticleProperties> RetrieveFront();
 
 	/// <summary>
 	/// リストの登録
 	/// </summary>
-	void PushBackParticles(ParticleProperties prope);
+	void PushBackList(ParticleProperties prope);
 
 	/// <summary>
 	/// パーティクルの生成器
@@ -77,23 +77,6 @@ public: // メンバ関数
 #pragma endregion 
 
 
-private: // メンバ関数
-
-	/// <summary>
-	/// 移動処理
-	/// </summary>
-	void Move();
-
-	/// <summary>
-	/// コマンドコール
-	/// </summary>
-	void CommandCall(uint32_t texHandle);
-
-	/// <summary>
-	/// ビルボードの処理
-	/// </summary>
-	void CalcBillBord(ViewProjection view);
-
 
 private: // メンバ変数
 
@@ -114,22 +97,6 @@ private: // メンバ変数
 
 	// Δタイム
 	const float kDeltaTimer = 1.0f / 60.0f;
-
-	Vector4 pos_ = Vector4::oneW;
-
-	uint32_t itrNum_ = 0;
-
-	list<ParticleProperties> partoclePrope_{};
-
-	//uint32_t instanceNum_;
-
-	uint32_t texHD_;
-
-	const float kDeltaTime = 1.0f / 60.0f;
-
-	ResourcePeroperty resource_{};
-
-	uint32_t dsvIndex_ = 0;
 
 };
 

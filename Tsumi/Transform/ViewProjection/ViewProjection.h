@@ -21,6 +21,9 @@ struct ViewProjection {
 	// ローカル座標
 	Vector3 translate = { 0.0f, 0.0f, -15.0f };
 
+	Matrix4x4 rotateMat{};
+	Matrix4x4 translateMat{};
+
 #pragma endregion 
 
 

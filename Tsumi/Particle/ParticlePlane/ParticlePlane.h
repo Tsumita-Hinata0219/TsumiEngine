@@ -37,7 +37,7 @@ private: // メンバ関数
 	/// <summary>
 	/// ビルボードの処理
 	/// </summary>
-	void CalcBillBord(ViewProjection view);
+	Matrix4x4 CalcBillBord(ViewProjection view);
 
 
 private: // メンバ変数

@@ -73,6 +73,9 @@ void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, Vi
 	materialData->uvTransform = 
 		MakeAffineMatrix(Vector3::one, Vector3::zero, Vector3::zero);
 
+	// ビルボードの計算
+	Matrix4x4 billMat = CalcBillBord(view);
+
 
 	instanceNum_ = 0;
 	for (list<ParticleProperties>::iterator itr = prope.begin(); itr != prope.end();) {
@@ -86,7 +89,9 @@ void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, Vi
 				continue;
 			}*/
 
-			Matrix4x4 worldPos = MakeAffineMatrix((*itr).worldTransform.scale, (*itr).worldTransform.rotate, (*itr).worldTransform.translate);
+			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.scale);
+			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.translate);
+			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
 			Matrix4x4 worldView = view.matView * view.matProjection;
 			Matrix4x4 matWorld = worldPos * worldView;
 
@@ -142,9 +147,12 @@ void ParticlePlane::CommandCall(uint32_t texHandle) {
 
 
 // ビルボードの処理
-void ParticlePlane::CalcBillBord(ViewProjection view)
+Matrix4x4 ParticlePlane::CalcBillBord(ViewProjection view)
 {
-
-
-
+	Matrix4x4 backToFrontMat = Matrix4x4::identity;
+	Matrix4x4 billBoardMat = backToFrontMat * view.rotateMat;
+	billBoardMat.m[3][0] = 0.0f;
+	billBoardMat.m[3][1] = 0.0f;
+	billBoardMat.m[3][2] = 0.0f;
+	return billBoardMat;
 }

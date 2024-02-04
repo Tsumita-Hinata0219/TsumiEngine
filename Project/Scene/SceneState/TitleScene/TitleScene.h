@@ -5,7 +5,8 @@
 
 #include "GameObject.h"
 
-#include "FadeManager.h"
+//#include "FadeManager.h"
+#include "FadeManager/FadeManager.h"
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 

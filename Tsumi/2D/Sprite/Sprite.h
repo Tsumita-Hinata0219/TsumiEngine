@@ -2,7 +2,7 @@
 
 #include "MyMath.h"
 #include "Struct.h"
-#include "SpriteTransform.h"
+#include "SpriteTransform/SpriteTransform.h"
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 #include "TextureManager.h"

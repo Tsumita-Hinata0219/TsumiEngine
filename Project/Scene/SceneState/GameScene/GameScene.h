@@ -5,12 +5,14 @@
 
 #include "GameObject.h"
 
-#include "RailCamera/RailCamera.h"
+//#include "RailCamera/RailCamera.h"
+#include "Camera/RailCamera/RailCamera.h"
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "Player/Player.h"
 #include "EnemyManager/EnemyManager.h"
-#include "FadeManager.h"
+//#include "FadeManager.h"
+#include "FadeManager/FadeManager.h"
 
 
 class GameScene : public IScene {

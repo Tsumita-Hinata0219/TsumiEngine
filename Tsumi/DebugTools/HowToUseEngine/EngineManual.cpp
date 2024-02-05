@@ -26,8 +26,8 @@ void EngineManual::Initialize()
 	monsBall_->Initialize();
 
 	// 光子パーティクル
-	photon_ = make_unique<Photon>();
-	photon_->Initialize();
+	//photon_ = make_unique<Photon>();
+	//photon_->Initialize();
 
 	// BGM
 	bgm_ = make_unique<BGM>();
@@ -47,7 +47,7 @@ void EngineManual::Update(ViewProjection view)
 	monsBall_->Update();
 
 	// 光子パーティクル
-	photon_->Update();
+	//photon_->Update();
 
 	// BGM
 	bgm_->Update();
@@ -66,7 +66,7 @@ void EngineManual::Update(ViewProjection view)
 void EngineManual::BackSpriteDraw(ViewProjection view) 
 {
 	// 雲模様背景
-	//cloudBG_->Draw(view);
+	cloudBG_->Draw(view);
 
 }
 
@@ -80,7 +80,7 @@ void EngineManual::ModelDraw(ViewProjection view)
 	monsBall_->Draw(view);
 
 	// 光子パーティクル
-	photon_->Draw(view);
+	//photon_->Draw(view);
 }
 
 

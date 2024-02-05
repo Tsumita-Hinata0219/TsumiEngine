@@ -21,32 +21,34 @@ void EngineManual::Initialize()
 	circleHD_ = TextureManager::LoadTexture("circle.png");
 
 	particle_ = make_unique<Particle>();
-	particle_->Initialize(new ParticlePlane(), kNumInstanceNum_, circleHD_);
-	Scope lifeTimeScope = {
+
+	emitter_.worldTransform.Initialize();
+	emitter_.worldTransform.translate.x = 0.0f;
+	emitter_.count = 10;
+	emitter_.frequency = 1.0f * 60.0f;
+	emitter_.frequencyTime = 0;
+
+	lifeTimeScope_ = {
 		.min = 1,
 		.max = 3,
 	};
-	ScopeVec3 posScope = {
-		.X = {-1.0f, 1.0f},
-		.Y = {-1.0f, 1.0f},
+	posScope_ = {
+		.X = {-0.5, 0.5f},
+		.Y = {-0.5, 0.5f},
 		.Z = {0.0f, 0.0f},
 	};
-	ScopeVec3 velScope = {
+	velScope_ = {
 		.X = {-1.0f, 1.0f},
 		.Y = {-1.0f, 1.0f},
 		.Z = {-1.0f, 1.0f},
 	};
-	ScopeVec4 colorScope = {
+	colorScope_ = {
 		.X = {0.0f, 256.0f},
 		.Y = {0.0f, 256.0f},
 		.Z = {0.0f, 256.0f},
 		.W = {256.0f, 256.0f},
 	};
-	for (int i = 0; i < kNumInstanceNum_; i++) {
-
-		particlePrope_[i] = Particle::ParticleGenerators(lifeTimeScope, posScope, velScope, colorScope);
-		particle_->PushBackList(particlePrope_[i]);
-	}
+	particle_->Initialize(new ParticlePlane(), emitter_.count);
 }
 
 
@@ -55,6 +57,12 @@ void EngineManual::Initialize()
 /// </summary>
 void EngineManual::Update(ViewProjection view) 
 {
+	emitter_.frequencyTime += 1.0f;
+
+	if (emitter_.frequencyTime >= emitter_.frequency) {
+		emitter_.frequencyTime = 0.0f;
+		particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
+	}
 
 	particlePropes_ = particle_->RetrieveFront();
 	for (ParticleProperties& prope : particlePropes_) {
@@ -99,7 +107,7 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) 
 {
-	particle_->Draw(view);
+	particle_->Draw(circleHD_, view);
 }
 
 

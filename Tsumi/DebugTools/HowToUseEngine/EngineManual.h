@@ -55,8 +55,6 @@ private: // メンバ変数
 
 	// Particle
 	std::unique_ptr<Particle> particle_ = nullptr;
-	static constexpr uint32_t kNumInstanceNum_ = 10;
-	ParticleProperties particlePrope_[kNumInstanceNum_]{};
 
 	uint32_t uvCheckerHD_;
 	uint32_t circleHD_;
@@ -64,4 +62,9 @@ private: // メンバ変数
 
 	// パーティクルリスト
 	std::list<ParticleProperties> particlePropes_{};
+	Emitter emitter_{};
+	Scope lifeTimeScope_{};
+	ScopeVec3 posScope_{};
+	ScopeVec3 velScope_{};
+	ScopeVec4 colorScope_{};
 };

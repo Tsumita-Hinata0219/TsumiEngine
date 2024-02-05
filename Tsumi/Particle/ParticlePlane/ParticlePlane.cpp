@@ -28,7 +28,7 @@ void ParticlePlane::Initialize(Particle* pParticle) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, ViewProjection view) {
+void ParticlePlane::Draw(uint32_t texHD, Particle* pParticle, list<ParticleProperties> prope, ViewProjection view) {
 
 	VertexData* vertexData = nullptr;
 	MaterialParticle* materialData = nullptr;
@@ -83,12 +83,6 @@ void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, Vi
 		// 最大描画数を超えないようにする
 		if (instanceNum_ <= kMaxInstanceNum_) {
 
-			// Particleが死んでいたら描画しない
-			/*if (!(*itr).isActive) {
-				itr = prope.erase(itr);
-				continue;
-			}*/
-
 			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.scale);
 			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
@@ -109,7 +103,7 @@ void ParticlePlane::Draw(Particle* pParticle, list<ParticleProperties> prope, Vi
 
 
 	// コマンドコール
-	CommandCall(pParticle->GetUseTexture());
+	CommandCall(texHD);
 }
 
 

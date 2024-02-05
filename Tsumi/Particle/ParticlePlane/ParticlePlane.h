@@ -24,7 +24,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(Particle* pParticle, list<ParticleProperties> prope , ViewProjection view) override;
+	void Draw(uint32_t texHD, Particle* pParticle, list<ParticleProperties> prope , ViewProjection view) override;
 
 
 private: // メンバ関数

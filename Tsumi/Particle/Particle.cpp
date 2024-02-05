@@ -18,9 +18,9 @@ void Particle::Initialize(IParticleState* state, uint32_t instanceNum, uint32_t 
 
 
 // 描画処理
-void Particle::Draw(ViewProjection view) {
+void Particle::Draw(uint32_t texHD, ViewProjection view) {
 
-	state_->Draw(this, particlePropes_, view);
+	state_->Draw(texHD, this, particlePropes_, view);
 }
 
 
@@ -69,5 +69,18 @@ ParticleProperties Particle::ParticleGenerators(Scope lifeTimeScope, ScopeVec3 p
 	particlePrope.isActive = true;
 
 	return particlePrope;
+}
+
+
+// Emitterにによるパーティクル生成
+void Particle::Emit(const Emitter& emitter, Scope lifeTimeScope, ScopeVec3 posScope, ScopeVec3 velScope, ScopeVec4 colorScope)
+{
+	// エミッターのカウント分パーティクルを生成する
+	for (int count = 0; count < int(emitter.count); ++count) {
+		ParticleProperties prope{};
+		prope = ParticleGenerators(lifeTimeScope, posScope, velScope, colorScope);
+		prope.worldTransform.translate += emitter.worldTransform.translate;
+		PushBackList(prope);
+	}
 }
 

@@ -6,10 +6,26 @@
 #include "MyMath.h"
 
 
+// Emitter
+struct Emitter {
+	WorldTransform worldTransform; // !< エミッタのワールドトランスフォーム
+	uint32_t count; // !< 発生数
+	float frequency; // !< 発生頻度
+	float frequencyTime; // !< 頻度用時刻
+};
+
 /* Particleクラス */
 class Particle {
 
 public: // メンバ関数
+
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
+	static Particle* GetInstance() {
+		static Particle instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// コンストラクタ
@@ -30,7 +46,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(ViewProjection view);
+	void Draw(uint32_t useTex, ViewProjection view);
 
 	/// <summary>
 	/// 先頭から情報を取り出す
@@ -51,6 +67,15 @@ public: // メンバ関数
 		ScopeVec3 velScope = { .X {0.0f, 0.0f}, .Y {0.0f, 0.0f}, .Z {0.0f, 0.0f} },
 		ScopeVec4 colorScope = { .X {256.0f, 256.0f}, .Y {256.0f, 256.0f}, .Z {256.0f, 256.0f}, .W {256.0f, 256.0f} });
 
+	/// <summary>
+	/// Emitterにによるパーティクル生成
+	/// </summary>
+	void Emit(
+		const Emitter& emitter, 
+		Scope lifeTimeScope,
+		ScopeVec3 posScope,
+		ScopeVec3 velScope = { .X {0.0f, 0.0f}, .Y {0.0f, 0.0f}, .Z {0.0f, 0.0f} },
+		ScopeVec4 colorScope = { .X {256.0f, 256.0f}, .Y {256.0f, 256.0f}, .Z {256.0f, 256.0f}, .W {256.0f, 256.0f} });
 
 #pragma region Get 取得
 

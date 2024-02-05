@@ -27,11 +27,12 @@ void LightGraphicPipeline::SetupLightPso() {
 
 
 	/* --- InputLayoutを設定する --- */
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4]{};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
 	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lightGraphicPipeline->SetupInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	lightGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));

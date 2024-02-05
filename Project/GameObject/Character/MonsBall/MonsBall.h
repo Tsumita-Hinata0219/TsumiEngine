@@ -32,5 +32,8 @@ private:
 	// ワールドトランスフォーム
 	WorldTransform wt_{};
 
+	// ライト
+	DirectionalLight light_{};
+
 };
 

@@ -14,6 +14,13 @@ void MonsBall::Initialize()
 
 	// ワールドトランスフォームの初期化
 	wt_.Initialize();
+
+	// ライトの初期化
+	light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
+	light_.direction = { 0.0f, -1.0f, 0.0f };
+	light_.intensity = 1.0f;
+	light_.sininess = 100.0f;
+	light_.enableLightting = true;
 }
 
 
@@ -22,6 +29,22 @@ void MonsBall::Update()
 {
 	// ワールドトランスフォームの更新
 	wt_.UpdateMatrix();
+
+	// ライトの設定
+	monsBall_->SetDirectionalLight(light_);
+
+#ifdef _DEBUG
+
+	if (ImGui::TreeNode("MonsBall")) {
+
+		ImGui::ColorEdit4("LightColor", &light_.color.x);
+		ImGui::DragFloat3("LightDirection", &light_.direction.x, 0.01f, -1.0f, 1.0f);
+		ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
+		ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
+		ImGui::TreePop();
+	}
+
+#endif // _DEBUG
 }
 
 

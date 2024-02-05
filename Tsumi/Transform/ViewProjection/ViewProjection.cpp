@@ -17,18 +17,17 @@ void ViewProjection::Initialize(Vector3 initRotate, Vector3 initTranslate) {
 // 更新処理
 void ViewProjection::UpdateMatrix() {
 
-	rotateMat = MakeRotateXYZMatrix(rotate.x, rotate.y, rotate.z);
-	translateMat = MakeTranslateMatrix(translate);
+	Matrix4x4 translateMat = MakeTranslateMatrix(translate);
+	Matrix4x4 rotateMat = MakeRotateXYZMatrix(rotate.x, rotate.y, rotate.z);
 
 	matView = Inverse(translateMat) * Inverse(rotateMat);
 	matProjection = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
-	
+
 	orthoGraphicMat = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 100.0f);
-	
+
 	matViewPort = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 1.0f);
 	matViewProjectionViewPort = matView * (matProjection * matViewPort);
 	matInverseVPV = Inverse(matViewProjectionViewPort);
-	Matrix4x4 de = matInverseVPV * matViewProjectionViewPort;
 
 	TransferMatrix();
 }
@@ -77,8 +76,7 @@ void ViewProjection::TransferMatrix() {
 	constMap->view = matView;
 	constMap->viewProjection = matProjection;
 	constMap->orthoGraphic = orthoGraphicMat;
-	
-	constMap->position = translate;
+	constMap->cameraPosition = translate;
 
 	UnMap();
 }

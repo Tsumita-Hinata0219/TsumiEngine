@@ -62,7 +62,14 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, ViewProje
 /// </summary>
 void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, ViewProjection view) {
 	
-	if (pModel->GetModelDrawType() == Lambert) {
+	if (pModel->GetModelDrawType() == Non) {
+
+		// RootSignatureを設定。
+		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+		// PSOを設定
+		DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	}
+	else if (pModel->GetModelDrawType() == Lambert) {
 
 		// RootSignatureを設定。
 		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LambertGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);

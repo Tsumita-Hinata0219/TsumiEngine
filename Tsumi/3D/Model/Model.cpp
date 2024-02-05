@@ -47,6 +47,14 @@ void Model::CreateFromObj(const std::string& directoryPath, WorldTransform world
 	// 色の設定
 	this->color_ = Vector4::one;
 
+	// 光の設定
+	this->light_.color = Vector4::one;
+	this->light_.direction = { 0.0f, -1.0f, 0.0f };
+	//this->light_.SpecularFColor = { 1.0f, 1.0f, 1.0f };
+	this->light_.intensity = 1.0f;
+	this->light_.sininess = 1.0f;
+	this->light_.enableLightting = false;
+
 	// Objファイルパス
 	this->directoryPath_ = directoryPath;
 

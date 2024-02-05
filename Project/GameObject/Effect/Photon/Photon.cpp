@@ -52,10 +52,10 @@ void Photon::Update()
 
 	// タイマーが既定値になったら
 	if (emitter_.frequencyTime >= emitter_.frequency) {
-		
+
 		// タイマーを０で代入
 		emitter_.frequencyTime = 0.0f;
-		
+
 		// パーティクルの出現
 		particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
 	}
@@ -84,6 +84,7 @@ void Photon::Update()
 		// リストにプッシュバック
 		particle_->PushBackList(prope);
 	}
+
 }
 
 

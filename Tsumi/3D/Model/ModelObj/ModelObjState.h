@@ -16,6 +16,7 @@
 
 
 enum ModelDrawType {
+	Non,
 	Lambert,
 	Phong,
 	PhongNormalMap,

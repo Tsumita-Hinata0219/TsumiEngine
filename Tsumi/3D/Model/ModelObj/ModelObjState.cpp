@@ -53,19 +53,44 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, ViewProje
 
 
 	// コマンドコール
-	CommandCall(pModel->GetObjData().textureHD, worldTransform, view);
+	CommandCall(pModel, worldTransform, view);
 }
 
 
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelObjState::CommandCall(uint32_t texture, WorldTransform worldTransform, ViewProjection view) {
+void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, ViewProjection view) {
+	
+	if (pModel->GetModelDrawType() == Non) {
 
-	// RootSignatureを設定。
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LightGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(LightGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+		// RootSignatureを設定。
+		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+		// PSOを設定
+		DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	}
+	else if (pModel->GetModelDrawType() == Lambert) {
+
+		// RootSignatureを設定。
+		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LambertGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+		// PSOを設定
+		DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(LambertGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	}
+	else if (pModel->GetModelDrawType() == Phong) {
+
+		// RootSignatureを設定。
+		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+		// PSOを設定
+		DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	}
+	else if (pModel->GetModelDrawType() == PhongNormalMap) {
+
+		// RootSignatureを設定。
+		DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PhongNormalMap::GetInstance()->GetPsoProperty().rootSignature);
+		// PSOを設定
+		DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(PhongNormalMap::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	}
+
 
 	///// いざ描画！！！！！
 	// VBVを設定
@@ -84,12 +109,17 @@ void ModelObjState::CommandCall(uint32_t texture, WorldTransform worldTransform,
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(2, view.constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
-	if (!texture == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, texture);
+	if (!pModel->GetObjData().textureHD == 0) {
+		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
 	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(4, resource_.Lighting->GetGPUVirtualAddress());
+
+	// ノーマルマップ用のテクスチャの設定
+	if (pModel->GetModelDrawType() == PhongNormalMap) {
+		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+	}
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	DirectXCommon::GetInstance()->GetCommandList()->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);

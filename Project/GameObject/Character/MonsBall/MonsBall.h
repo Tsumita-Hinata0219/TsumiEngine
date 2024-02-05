@@ -27,10 +27,10 @@ private:
 	uint32_t normalMapTexHD_;
 
 	// モデル
-	std::unique_ptr<Model> monsBall_ = nullptr;
+	std::unique_ptr<Model> monsBall_[4];
 
 	// ワールドトランスフォーム
-	WorldTransform wt_{};
+	WorldTransform wt_[4];
 
 	// ライト
 	DirectionalLight light_{};

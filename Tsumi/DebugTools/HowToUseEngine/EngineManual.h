@@ -5,6 +5,7 @@
 #include "Cloud/Cloud.h"
 #include "MonsBall/MonsBall.h"
 #include "Photon/Photon.h"
+#include "BGM/BGM.h"
 
 
 /* EngineManualクラス */
@@ -65,4 +66,7 @@ private: // メンバ変数
 
 	// 光子パーティクル
 	unique_ptr<Photon> photon_ = nullptr;
+
+	// BGM
+	unique_ptr<BGM> bgm_ = nullptr;
 };

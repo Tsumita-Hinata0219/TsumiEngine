@@ -42,6 +42,9 @@ public: // メンバ関数
 	// UseTexture
 	uint32_t GetUseTexture() { return this->useTexture_; }
 
+	// NormalMapTexture
+	uint32_t GetNormalMapTex() { return this->normalMapTex_; }
+
 	// Color
 	Vector4 GetColor() { return this->color_; }
 
@@ -59,6 +62,10 @@ public: // メンバ関数
 
 	ObjData GetObjData() { return objData_; }
 
+	ModelDrawType GetModelDrawType() { return modelDrawType_; }
+
+
+
 #pragma endregion 
 
 
@@ -66,12 +73,19 @@ public: // メンバ関数
 
 	// TextureHandle
 	void SetTexHandle(uint32_t texHD) { this->useTexture_ = texHD; }
+	
+	// NormalMapTexture
+	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
+
 
 	// Color
 	void SetColor(Vector4 color) { this->color_ = color; }
 
 	// Light
 	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
+
+	// DrawType
+	void SetModelDrawType(ModelDrawType type) { modelDrawType_ = type; }
 
 #pragma endregion
 
@@ -86,6 +100,7 @@ private: // メンバ変数
 
 	// テクスチャ
 	uint32_t useTexture_;
+	uint32_t normalMapTex_;
 
 	// 色データ
 	Vector4 color_{};
@@ -105,5 +120,7 @@ private: // メンバ変数
 	ModelData modelData_{};
 
 	ObjData objData_{};
+
+	ModelDrawType modelDrawType_;
 
 };

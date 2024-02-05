@@ -20,6 +20,10 @@ void Particle::Initialize(IParticleState* state, uint32_t instanceNum, uint32_t 
 // 描画処理
 void Particle::Draw(uint32_t texHD, ViewProjection view) {
 
+	ImGui::Begin("Particle");
+	ImGui::Text("ParticleSize = %d", particlePropes_.size());
+	ImGui::End();
+
 	state_->Draw(texHD, this, particlePropes_, view);
 }
 

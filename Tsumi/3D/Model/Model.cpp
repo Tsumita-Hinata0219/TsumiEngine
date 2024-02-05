@@ -24,6 +24,9 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 	this->light_.sininess = 1.0f;
 	this->light_.enableLightting = false;
 
+	// モデルの描画タイプ
+	modelDrawType_ = Phong;
+
 	// ステートパターンの初期化処理
 	this->state_ = state;
 	this->state_->Initialize(this);
@@ -44,11 +47,22 @@ void Model::CreateFromObj(const std::string& directoryPath, WorldTransform world
 	// 色の設定
 	this->color_ = Vector4::one;
 
+	// 光の設定
+	this->light_.color = Vector4::one;
+	this->light_.direction = { 0.0f, -1.0f, 0.0f };
+	//this->light_.SpecularFColor = { 1.0f, 1.0f, 1.0f };
+	this->light_.intensity = 1.0f;
+	this->light_.sininess = 1.0f;
+	this->light_.enableLightting = false;
+
 	// Objファイルパス
 	this->directoryPath_ = directoryPath;
 
 	// Objの読み込み
 	objData_ = ModelManager::LoadObjFile(directoryPath_);
+
+	// モデルの描画タイプ
+	modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelObjState();

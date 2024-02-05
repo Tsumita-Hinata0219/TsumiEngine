@@ -10,6 +10,9 @@
 #include "NormalGraphicPipeline.h"
 #include "SpriteGraphicPipeline.h"
 #include "LightGraphicPipeline.h"
+#include "LambertGraphicPipeline.h"
+#include "PhongGraphicPipeline.h"
+#include "PhongNormalMap.h"
 #include "ParticleGraphicPipeline.h"
 
 

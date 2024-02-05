@@ -260,6 +260,15 @@
     <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Phong">
       <UniqueIdentifier>{3c489502-54a5-42cd-9279-be941d9226b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Lambert">
+      <UniqueIdentifier>{b2eeea05-34ab-4430-8e6c-09c014b34cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap">
+      <UniqueIdentifier>{92b6702c-8f07-424a-99a2-0be0f4c3f1b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Effect\BGM">
+      <UniqueIdentifier>{85a93f25-043a-4b84-a7bf-d9e97d84e674}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -398,9 +407,6 @@
     <ClCompile Include="Project\Math\MathQuaternion\MathQuaternion.cpp">
       <Filter>Project\Math\MathQuaternion</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Project\Math\MathStructure\Vector</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp">
       <Filter>Project\Math\MathStructure\Matrix</Filter>
     </ClCompile>
@@ -463,6 +469,18 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\Phong</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp">
+      <Filter>Project\Math\MathStructure\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Lambert</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Effect\BGM\BGM.cpp">
+      <Filter>Project\GameObject\Effect\BGM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -721,6 +739,15 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\Phong</Filter>
     </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Lambert</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Effect\BGM\BGM.h">
+      <Filter>Project\GameObject\Effect\BGM</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">
@@ -753,6 +780,18 @@
     <FxCompile Include="PhongObject.PS.hlsl">
       <Filter>リソース ファイル\shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\LambertObject.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\LambertObject.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PhongNormalMap.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PhongNormalMap.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">
@@ -773,6 +812,12 @@
       <Filter>リソース ファイル\shaders</Filter>
     </None>
     <None Include="PhongObject.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\LambertObject.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\PhongNormalMap.hlsli">
       <Filter>リソース ファイル\shaders</Filter>
     </None>
   </ItemGroup>

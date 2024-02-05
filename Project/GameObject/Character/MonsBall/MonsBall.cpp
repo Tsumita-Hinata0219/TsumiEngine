@@ -6,14 +6,28 @@
 void MonsBall::Initialize()
 {
 	// ノーマルマップ用テクスチャの読み込み
-	//normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
+	normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
+
+
+	ModelDrawType type[4] = { Non, Lambert, Phong, PhongNormalMap };
+	float pos[4] = { -4.5f, -1.5f, 1.5f, 4.5f };
 
 	// モデルの初期化
-	monsBall_ = make_unique<Model>();
-	monsBall_->CreateFromObj("ball");
+	for (int i = 0; i < 4; ++i) {
 
-	// ワールドトランスフォームの初期化
-	wt_.Initialize();
+		// モデルの初期化
+		monsBall_[i] = make_unique<Model>();
+		monsBall_[i]->CreateFromObj("ball");
+		monsBall_[i]->SetModelDrawType(type[i]);
+
+		if (i == 3) {
+			monsBall_[i]->SetNormalMapTex(normalMapTexHD_);
+		}
+
+		// ワールドトランスフォームの初期化
+		wt_[i].Initialize();
+		wt_[i].translate.x = pos[i];
+	}
 
 	// ライトの初期化
 	light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
@@ -27,11 +41,14 @@ void MonsBall::Initialize()
 // 更新処理
 void MonsBall::Update()
 {
-	// ワールドトランスフォームの更新
-	wt_.UpdateMatrix();
-
-	// ライトの設定
-	monsBall_->SetDirectionalLight(light_);
+	// ワールドトランスフォームの更新 & 回転させる
+	for (int i = 0; i < 4; ++i) {
+		wt_[i].UpdateMatrix();
+		wt_[i].rotate.y += 0.01f;
+	}
+	for (int i = 1; i < 4; ++i) {
+		monsBall_[i]->SetDirectionalLight(light_);
+	}
 
 #ifdef _DEBUG
 
@@ -51,5 +68,7 @@ void MonsBall::Update()
 // 描画処理
 void MonsBall::Draw(ViewProjection view)
 {
-	monsBall_->Draw(wt_, view);
+	for (int i = 0; i < 4; ++i) {
+		monsBall_[i]->Draw(wt_[i], view);
+	}
 }

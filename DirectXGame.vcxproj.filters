@@ -398,9 +398,6 @@
     <ClCompile Include="Project\Math\MathQuaternion\MathQuaternion.cpp">
       <Filter>Project\Math\MathQuaternion</Filter>
     </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Project\Math\MathStructure\Vector</Filter>
-    </ClCompile>
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp">
       <Filter>Project\Math\MathStructure\Matrix</Filter>
     </ClCompile>
@@ -463,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\Phong</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp">
+      <Filter>Project\Math\MathStructure\Vector</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

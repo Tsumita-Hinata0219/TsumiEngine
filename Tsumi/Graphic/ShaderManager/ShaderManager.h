@@ -30,6 +30,7 @@ struct ShadersType {
 	ShadersMode Noraml;
 	ShadersMode Sprite;
 	ShadersMode Light;
+	ShadersMode phong;
 	ShadersMode Particle;
 };
 
@@ -106,6 +107,11 @@ private: // メンバ関数
 	/// 
 	/// </summary>
 	static void LightShader();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	static void PhongShader();
 
 	/// <summary>
 	/// 

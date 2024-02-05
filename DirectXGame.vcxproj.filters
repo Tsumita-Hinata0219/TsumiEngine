@@ -68,9 +68,6 @@
     <Filter Include="Tsumi\Graphic\GraphicPipelineManager">
       <UniqueIdentifier>{7bd3a32e-fa6b-49e8-9fb1-12e002060921}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tsumi\Graphic\PipelineStateObject">
-      <UniqueIdentifier>{edc602cb-9680-4364-9933-a0fa73b391dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tsumi\Graphic\ShaderManager">
       <UniqueIdentifier>{427500a4-c1e3-4fd7-964f-16f66b11948a}</UniqueIdentifier>
     </Filter>
@@ -259,6 +256,9 @@
     </Filter>
     <Filter Include="Project\GameObject\Character\MonsBall">
       <UniqueIdentifier>{a14cbcce-686f-46db-a5d4-5ffdebecb7e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Phong">
+      <UniqueIdentifier>{3c489502-54a5-42cd-9279-be941d9226b7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -460,6 +460,9 @@
     </ClCompile>
     <ClCompile Include="Project\GameObject\Character\MonsBall\MonsBall.cpp">
       <Filter>Project\GameObject\Character\MonsBall</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Phong</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -715,6 +718,9 @@
     <ClInclude Include="Project\GameObject\Character\MonsBall\MonsBall.h">
       <Filter>Project\GameObject\Character\MonsBall</Filter>
     </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\Phong</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">
@@ -741,6 +747,12 @@
     <FxCompile Include="Resources\shaders\ParticleObject3D.VS.hlsl">
       <Filter>リソース ファイル\shaders</Filter>
     </FxCompile>
+    <FxCompile Include="PhongObject.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongObject.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">
@@ -758,6 +770,9 @@
       <Filter>リソース ファイル\shaders</Filter>
     </None>
     <None Include="Resources\shaders\ParticleObject3D.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="PhongObject.hlsli">
       <Filter>リソース ファイル\shaders</Filter>
     </None>
   </ItemGroup>

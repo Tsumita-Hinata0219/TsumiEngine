@@ -138,6 +138,7 @@ void ShaderManager::ShadersCompiles() {
 	NormalShader();
 	SpriteShader();
 	LightShader();
+	PhongShader();
 	ParticleShader();
 }
 
@@ -195,6 +196,24 @@ void ShaderManager::LightShader() {
 			L"Resources/shaders/LightObject.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Light = shader;
+}
+
+
+/// <summary>
+/// 
+/// </summary>
+void ShaderManager::PhongShader()
+{
+	ShadersMode shader{};
+
+	shader.VertexBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PhongObject.VS.hlsl", L"vs_6_0");
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PhongObject.PS.hlsl", L"ps_6_0");
+
+	ShaderManager::GetInstance()->shaders_.phong = shader;
 }
 
 

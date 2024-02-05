@@ -41,12 +41,6 @@ void Photon::Initialize()
 	// パーティクルの初期化
 	particle_ = make_unique<Particle>();
 	particle_->Initialize(new ParticlePlane(), emitter_.count);
-
-
-	if (ImGui::TreeNode("Photon")) {
-		ImGui::DragFloat3("Emitter_Translate", &emitter_.worldTransform.translate.x, 0.01f);
-		ImGui::TreePop();
-	}
 }
 
 
@@ -89,6 +83,13 @@ void Photon::Update()
 
 		// リストにプッシュバック
 		particle_->PushBackList(prope);
+	}
+
+
+
+	if (ImGui::TreeNode("Photon")) {
+		ImGui::DragFloat3("Emitter_Translate", &emitter_.worldTransform.translate.x, 0.01f);
+		ImGui::TreePop();
 	}
 }
 

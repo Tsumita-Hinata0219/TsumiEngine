@@ -17,7 +17,7 @@ EngineManual::~EngineManual()
 /// </summary>
 void EngineManual::Initialize() 
 {
-	uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
+	/*uvCheckerHD_ = TextureManager::LoadTexture("uvChecker.png");
 	circleHD_ = TextureManager::LoadTexture("circle.png");
 
 	particle_ = make_unique<Particle>();
@@ -48,7 +48,16 @@ void EngineManual::Initialize()
 		.Z = {0.0f, 256.0f},
 		.W = {256.0f, 256.0f},
 	};
-	particle_->Initialize(new ParticlePlane(), emitter_.count);
+	particle_->Initialize(new ParticlePlane(), emitter_.count);*/
+
+
+	// 雲模様背景
+	cloudBG_ = make_unique<Cloud>();
+	cloudBG_->Initialize();
+
+	// 光子パーティクル
+	photon_ = make_unique<Photon>();
+	photon_->Initialize();
 }
 
 
@@ -57,32 +66,38 @@ void EngineManual::Initialize()
 /// </summary>
 void EngineManual::Update(ViewProjection view) 
 {
-	emitter_.frequencyTime += 1.0f;
+	//emitter_.frequencyTime += 1.0f;
 
-	if (emitter_.frequencyTime >= emitter_.frequency) {
-		emitter_.frequencyTime = 0.0f;
-		particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
-	}
+	//if (emitter_.frequencyTime >= emitter_.frequency) {
+	//	emitter_.frequencyTime = 0.0f;
+	//	particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
+	//}
 
-	particlePropes_ = particle_->RetrieveFront();
-	for (ParticleProperties& prope : particlePropes_) {
+	//particlePropes_ = particle_->RetrieveFront();
+	//for (ParticleProperties& prope : particlePropes_) {
 
-		// 速度を座標に加算
-		prope.worldTransform.translate += prope.velocity;
+	//	// 速度を座標に加算
+	//	prope.worldTransform.translate += prope.velocity;
 
-		// 寿命の処理
-		prope.currentTime++;
+	//	// 寿命の処理
+	//	prope.currentTime++;
 
-		// alphaの処理
-		float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
-		prope.color.w = alpha;
+	//	// alphaの処理
+	//	float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
+	//	prope.color.w = alpha;
 
-		if (prope.currentTime >= prope.lifeTime) {
-			continue;
-		}
+	//	if (prope.currentTime >= prope.lifeTime) {
+	//		continue;
+	//	}
 
-		particle_->PushBackList(prope);
-	}
+	//	particle_->PushBackList(prope);
+	//}
+
+	// 雲模様背景
+	cloudBG_->Update();
+
+	// 光子パーティクル
+	photon_->Update();
 
 #ifdef _DEBUG
 
@@ -97,7 +112,8 @@ void EngineManual::Update(ViewProjection view)
 /// </summary>
 void EngineManual::BackSpriteDraw(ViewProjection view) 
 {
-
+	// 雲模様背景
+	cloudBG_->Draw(view);
 
 }
 
@@ -107,7 +123,9 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) 
 {
-	particle_->Draw(circleHD_, view);
+
+	// 光子パーティクル
+	photon_->Draw(view);
 }
 
 

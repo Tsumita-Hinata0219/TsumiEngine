@@ -6,6 +6,7 @@
 #include "imgui.h"
 #include "imgui_impl_dx12.h"
 #include "imgui_impl_win32.h"
+#include "Vector.h"
 
 
 
@@ -37,10 +38,10 @@ public: ///// メンバ関数 /////
 #pragma region Get 取得
 
 	/// <summary>
-	/// クライアントサイズの取得
+	/// ウィンドウサイズの取得
 	/// </summary>
-	static int32_t GetClientWidth() { return WinApp::GetInstance()->ClientWidth_; }
-	static int32_t GetCliendHeight() { return WinApp::GetInstance()->ClientHeight_; }
+	/// <returns></returns>
+	static Vector2 WindowSize() { return { float(WinApp::GetInstance()->kWindowWidth), float(WinApp::GetInstance()->kWindowHeight) }; }
 
 	/// <summary>
 	/// ウィンドウハンドルの取得
@@ -77,14 +78,17 @@ private: ///// メンバ関数 /////
 	static void CreateGameWindow();
 
 
+public:
+
+	// クライアントサイズ
+	static const int32_t kWindowWidth = 1280;
+	static const int32_t kWindowHeight = 720;
+
 
 private: ///// メンバ変数 /////
 
 	// タイトルバー
 	const wchar_t* title_;
-	// クライアントサイズ
-	static const int32_t ClientWidth_ = 1280;
-	static const int32_t ClientHeight_ = 720;
 
 	// メッセージ
 	MSG msg_{};

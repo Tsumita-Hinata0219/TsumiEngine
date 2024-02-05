@@ -44,6 +44,17 @@ void Log(const std::string& message) {
 
 
 
+
+/// -------------------------------------------------------------------------
+/// float
+/// -------------------------------------------------------------------------
+float Lerp(const float& start, const float& end, float t) {
+	return start + (end - start) * t;
+}
+
+
+
+
 /// -------------------------------------------------------------------------
 /// 2次元ベクトル
 /// -------------------------------------------------------------------------
@@ -62,6 +73,11 @@ float Length(const Vector2& v) {
 	return std::sqrt(Dot(v, v));
 }
 
+// 絶対値
+Vector2 Absolute(const Vector2& v) {
+	return { std::abs(v.x), std::abs(v.y) };
+}
+
 // 正規化
 Vector2 Normalize(const Vector2& v) {
 	return v * (1.0f / Length(v));
@@ -75,6 +91,14 @@ Vector2 Project(const Vector2& v1, const Vector2& v2) {
 // 線形補間
 Vector2 Lerp(const Vector2& start, const Vector2& end, const float t) {
 	return start + t * (end - start);
+}
+
+// Vector3 -> Vector2 への変換 今はそのまま対する値を送ってるだけだけど今後はもっと変換処理作っていく
+Vector2 ConvertVector(const Vector3& v, const ViewProjection& view) {
+	Vector3 worldPos = v;
+	Matrix4x4 matViewProjectionViewPort = view.matView * view.matProjection * view.matViewPort;
+	worldPos = TransformByMatrix(worldPos, matViewProjectionViewPort);
+	return { worldPos.x, worldPos.y };
 }
 
 
@@ -98,6 +122,11 @@ float Length(const Vector3& v) {
 	return std::sqrt(Dot(v, v));
 }
 
+// 絶対値
+Vector3 Absolute(const Vector3& v) {
+	return { std::abs(v.x), std::abs(v.y), std::abs(v.z) };
+}
+
 // 正規化
 Vector3 Normalize(const Vector3& v) {
 	return v * (1.0f / Length(v));
@@ -111,6 +140,20 @@ Vector3 Project(const Vector3& v1, const Vector3& v2) {
 // 線形補間
 Vector3 Lerp(const Vector3& start, const Vector3& end, const float t) {
 	return start + t * (end - start);
+}
+
+// 球面線形補間
+Vector3 SLerp(const Vector3& start, const Vector3& end, const float t) {
+	float dot = Dot(start, end);
+	float theta = std::acos(dot) * t;
+	Vector3 relative = { end.x - start.x * dot, end.y - start.y * dot, end.z - start.z * dot };
+	relative = Normalize(relative);
+	Vector3 result = {
+		start.x * std::cosf(theta) + relative.x * std::sinf(theta),
+		start.y * std::cosf(theta) + relative.y * std::sinf(theta),
+		start.z * std::cosf(theta) + relative.z * std::sinf(theta),
+	};
+	return result;
 }
 
 // 最近接線
@@ -168,6 +211,60 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 	result.z = v.x * m.m[0][2] + v.y * m.m[1][2] + v.z * m.m[2][2];
 
 	return result;
+}
+
+// Vector2 -> Vector3 への変換
+//Vector3 ConvertVector(const Vector2& v) {
+//	return { v.x, v.y, 0.0f };
+//}
+
+// Vector2をそのままVector3に入れる
+Vector3 CreateVector3FromVector2(const Vector2& v) {
+	return { v.x, v.y, 1.0f };
+}
+
+// CatmullRom補間
+Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t) {
+
+	//float s = 0.5f;
+	//float t2 = t * t;
+	//float t3 = t * t * t;
+	//Vector3 hr1 = (-p0 + (3.0f * p1) - (3.0f * p2) + p3) * t3;
+	//Vector3 hr2 = ((2.0f * p0) - (5.0f * p1) + (4.0f * p2) - p3) * t2;
+	//Vector3 hr3 = ((-p0 + p2) * t) + (2.0f + p1);
+	//return (s * (hr1 + hr2 + hr3));
+
+	float t2 = t * t;
+	float t3 = t * t * t;
+	return Vector3(
+		//x
+		0.5f * ((-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * t3 +
+			(2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * t2 + (-p0.x + p2.x) * t + 2 * p1.x),
+		//y
+		0.5f * ((-p0.y + 3 * p1.y - 3 * p2.y + p3.y) * t3 +
+			(2 * p0.y - 5 * p1.y + 4 * p2.y - p3.y) * t2 + (-p0.y + p2.y) * t + 2 * p1.y),
+		//z
+		0.5f * ((-p0.z + 3 * p1.z - 3 * p2.z + p3.z) * t3 +
+			(2 * p0.z - 5 * p1.z + 4 * p2.z - p3.z) * t2 + (-p0.z + p2.z) * t + 2 * p1.z)
+	);
+}
+
+// CatmullRomスプライン曲線上の座標を得る
+Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, float t) {
+
+	const uint32_t kIndex = uint32_t(points.size() - 1);
+
+	int index0 = ((index - 1) + kIndex) % kIndex;
+	int index1 = index;
+	int index2 = (index + 1) % kIndex;
+	int index3 = (index + 2) % kIndex;
+
+	Vector3 p0 = points[index0];
+	Vector3 p1 = points[index1];
+	Vector3 p2 = points[index2];
+	Vector3 p3 = points[index3];
+	
+	return CatmullRomInterpolation(p0, p1, p2, p3, t);
 }
 
 
@@ -517,10 +614,10 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 }
 
 // 透視投影行列
-Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip, float farClip) {
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip) {
 	Matrix4x4 result{};
 
-	result.m[0][0] = (1 / aspecrRatio) * 1 / std::tan(fovY / 2);
+	result.m[0][0] = (1 / aspectRatio) * 1 / std::tan(fovY / 2);
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
 	result.m[0][3] = 0.0f;
@@ -546,30 +643,31 @@ Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip
 // 正射影行列
 Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float nearClip, float farClip) {
 
-	assert(left != right);
-	assert(top != bottom);
+	float width = right - left;
+	float height = top - bottom;
+	float zLength = farClip - nearClip;
 
 	Matrix4x4 result{};
 
-	result.m[0][0] = 2 / (right - left);
+	result.m[0][0] = 2 / width;
 	result.m[0][1] = 0.0f;
 	result.m[0][2] = 0.0f;
 	result.m[0][3] = 0.0f;
 
 	result.m[1][0] = 0.0f;
-	result.m[1][1] = 2 / (top - bottom);
+	result.m[1][1] = 2 / height;
 	result.m[1][2] = 0.0f;
 	result.m[1][3] = 0.0f;
 
 	result.m[2][0] = 0.0f;
 	result.m[2][1] = 0.0f;
-	result.m[2][2] = 1 / (farClip - nearClip);
+	result.m[2][2] = 1 / zLength;
 	result.m[2][3] = 0.0f;
 
 	result.m[3][0] = (left + right) / (left - right);
 	result.m[3][1] = (top + bottom) / (bottom - top);
 	result.m[3][2] = nearClip / (nearClip - farClip);
-	result.m[3][3] = 1.0f;
+	result.m[3][3] = 1;
 
 	return result;
 }

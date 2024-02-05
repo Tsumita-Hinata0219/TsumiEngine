@@ -20,6 +20,11 @@
 #include "MathQuaternion.h"
 #include "MathOperations.h"
 #include "CollisionStructures.h"
+#include "WorldTransform.h"
+#include "ViewProjection.h"
+
+// 前方宣言
+struct ViewProjection;
 
 
 
@@ -37,6 +42,13 @@ void Log(const std::string& message);
 
 
 /// -------------------------------------------------------------------------
+/// float
+/// -------------------------------------------------------------------------
+float Lerp(const float& start, const float& end, float t);
+
+
+
+/// -------------------------------------------------------------------------
 /// 2次元ベクトル
 /// -------------------------------------------------------------------------
 // 内積
@@ -45,13 +57,16 @@ float Dot(const Vector2& v1, const Vector2& v2);
 float Cross(const Vector2& v1, const Vector2& v2);
 // 長さ
 float Length(const Vector2& v);
+// 絶対値
+Vector2 Absolute(const Vector2& v);
 // 正規化
 Vector2 Normalize(const Vector2& v);
 // 正射影ベクトル
 Vector2 Project(const Vector2& v1, const Vector2& v2);
 // 線形補間
 Vector2 Lerp(const Vector2& start, const Vector2& end, const float t);
-
+// Vector3 -> Vector2 への変換
+Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
 
 
 
@@ -64,12 +79,16 @@ float Dot(const Vector3& v1, const Vector3& v2);
 Vector3 Cross(const Vector3& v1, const Vector3& v2);
 // 長さ
 float Length(const Vector3& v);
+// 絶対値
+Vector3 Absolute(const Vector3& v);
 // 正規化
 Vector3 Normalize(const Vector3& v);
 // 正射影ベクトル
 Vector3 Project(const Vector3& v1, const Vector3& v2);
 // 線形補間
 Vector3 Lerp(const Vector3& start, const Vector3& end, const float t);
+// 球面線形補間
+Vector3 SLerp(const Vector3& start, const Vector3& end, const float t);
 // 最近接線
 Vector3 ClosestPoint(const Vector3& p, const Segment& s);
 // 法線ベクトル
@@ -78,7 +97,14 @@ Vector3 Perpendicular(const Vector3& v);
 Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
 // ベクトル変換
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
-
+// Vector2 -> Vector3 への変換
+//Vector3 ConvertVector(const Vector2& v);
+// Vector2をそのままVector3に入れる
+Vector3 CreateVector3FromVector2(const Vector2& v);
+// CatmullRom補間
+Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t);
+// CatmullRomスプライン曲線上の座標を得る
+Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, float t);
 
 
 
@@ -111,7 +137,7 @@ Matrix4x4 MakeTranslateMatrix(const Vector3 translate);
 // 3次元アフィン変換行列 (W = SRT)
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
 // 透視投影行列
-Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspecrRatio, float nearClip, float farClip);
+Matrix4x4 MakePerspectiveFovMatrix(float fovY, float aspectRatio, float nearClip, float farClip);
 // 正射影行列
 Matrix4x4 MakeOrthographicMatrix(float left, float top, float right, float bottom, float nearClip, float farClip);
 // ビューポート変換行列

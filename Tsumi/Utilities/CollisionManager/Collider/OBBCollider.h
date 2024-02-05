@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CollisionStructures.h"
+#include "ColliderConfig.h"
 #include<cstdint>
 
 class OBBCollider {
@@ -36,7 +37,7 @@ public:
 	/// <summary>
 	/// Rotateの取得
 	/// </summary>
-	Vector3 GetRotate() { return rotate_; }
+	virtual Vector3 GetRotate() = 0;
 
 	/// <summary>
 	/// Rotateの設定
@@ -92,7 +93,7 @@ private:
 
 	OBB obb_{};
 
-	uint32_t id_ = 0xffffffff;
+	uint32_t id_ = ObjectBit::None;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 

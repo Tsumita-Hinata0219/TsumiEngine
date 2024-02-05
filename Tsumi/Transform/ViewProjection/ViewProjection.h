@@ -3,9 +3,12 @@
 #include "WinApp.h"
 #include "MyMath.h"
 #include "CreateResource.h"
-#include <Struct.h>
+#include "Struct.h"
 
 
+
+// 前方宣言
+struct TransformationViewMatrix;
 
 /* ビュープロジェクション変換データ */
 struct ViewProjection {
@@ -18,6 +21,9 @@ struct ViewProjection {
 	// ローカル座標
 	Vector3 translate = { 0.0f, 0.0f, -15.0f };
 
+	Matrix4x4 rotateMat{};
+	Matrix4x4 translateMat{};
+
 #pragma endregion 
 
 
@@ -27,7 +33,7 @@ struct ViewProjection {
 	float fov = 0.45f;
 
 	// ビューポートのアスペクト比
-	float aspectRatio = float(WinApp::GetClientWidth()) / float(WinApp::GetCliendHeight());
+	float aspectRatio = float(WinApp::kWindowWidth) / float(WinApp::kWindowHeight);
 
 	// 深度限界 (手前側)
 	float nearZ = 0.1f;
@@ -47,6 +53,14 @@ struct ViewProjection {
 	// 正射影行列
 	Matrix4x4 orthoGraphicMat{};
 
+	// ビューポート行列
+	Matrix4x4 matViewPort{};
+
+	// ビュープロジェクションビューポート合成行列
+	Matrix4x4 matViewProjectionViewPort{};
+
+	// 合成行列の逆行列
+	Matrix4x4 matInverseVPV{};
 
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffer;

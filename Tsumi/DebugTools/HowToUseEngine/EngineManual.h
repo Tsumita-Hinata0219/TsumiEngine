@@ -26,7 +26,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update(ViewProjection view);
 
 	/// <summary>
 	/// 背景スプライトの描画処理
@@ -53,29 +53,18 @@ private: // メンバ関数
 
 private: // メンバ変数
 
-	// スプライト
-	std::unique_ptr<Sprite> spriteFront_ = nullptr;
-	WorldTransform spriteFrontTrans_{};
-	std::unique_ptr<Sprite> spriteBack_ = nullptr;
-	WorldTransform spriteBackTrans_{};
+	// Particle
+	std::unique_ptr<Particle> particle_ = nullptr;
 
-	// Obj
-	std::unique_ptr<Model> modelObj_ = nullptr;
-	WorldTransform modelTrans_{};
-
-
-	// texHandle
 	uint32_t uvCheckerHD_;
-	uint32_t monsterBallHD_;
-	uint32_t asanohaHD_;
-	uint32_t skyHD_;
+	uint32_t circleHD_;
 
 
-	// SoundHandle
-	uint32_t mokugyoHD_;
-	uint32_t kakkoiiHD_;
-
-
-	int bgmStartTimer = 0;
-
+	// パーティクルリスト
+	std::list<ParticleProperties> particlePropes_{};
+	Emitter emitter_{};
+	Scope lifeTimeScope_{};
+	ScopeVec3 posScope_{};
+	ScopeVec3 velScope_{};
+	ScopeVec4 colorScope_{};
 };

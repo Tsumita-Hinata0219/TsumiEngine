@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CollisionStructures.h"
+#include "ColliderConfig.h"
 #include<cstdint>
 
 
@@ -79,7 +80,7 @@ private:
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	uint32_t id_ = 0xffffffff;
+	uint32_t id_ = ObjectBit::None;
 
 	float radius_ = 0.5f;
 };

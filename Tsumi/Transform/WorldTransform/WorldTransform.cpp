@@ -18,10 +18,22 @@ void WorldTransform::UpdateMatrix() {
 
 	// 親があれば親のワールド行列を掛ける
 	if (parent) {
-		matWorld = matWorld * parent->matWorld;
+		matWorld *= parent->matWorld;
 	}
 
+	// 行列の計算・転送
 	TransferMatrix();
+}
+
+// ワールド座標の取得
+Vector3 WorldTransform::GetWorldPos() {
+
+	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
+}
+
+// 親子関係を結ぶ
+void WorldTransform::SetParent(const WorldTransform* parentTransform) {
+	parent = parentTransform;
 }
 
 // 定数バッファの生成

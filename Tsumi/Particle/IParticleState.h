@@ -9,6 +9,8 @@ struct ParticleProperties {
 	WorldTransform uvTransform;
 	Vector4 color;
 	Vector3 velocity;
+	uint32_t lifeTime;
+	uint32_t currentTime;
 	bool isActive;
 };
 
@@ -34,7 +36,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	virtual void Draw(Particle* pParticle, list<ParticleProperties> prope, ViewProjection view) = 0;
+	virtual void Draw(uint32_t texHD, Particle* pParticle, list<ParticleProperties> prope, ViewProjection view) = 0;
 
 
 private: // メンバ変数

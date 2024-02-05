@@ -30,7 +30,7 @@ void ParticleGraphicPipeline::SetupParticlePso() {
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[3]{};
 	particleGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	particleGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	particleGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "COLOR", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	particleGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	particleGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
@@ -40,7 +40,7 @@ void ParticleGraphicPipeline::SetupParticlePso() {
 	// 全ての色要素を書き込む
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& pBlendDesc = blendDesc.RenderTarget[0];
-	particleGraphicPipeline->SetupBlendState(pBlendDesc, BlendNone);
+	particleGraphicPipeline->SetupBlendState(pBlendDesc, BlendAdd);
 
 
 	/* --- RasiterzerStateを設定する --- */
@@ -92,7 +92,7 @@ void ParticleGraphicPipeline::SetupParticlePso() {
 	// Depthの機能を有効化する
 	depthStencilDesc.DepthEnable = true;
 	// 書き込む
-	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 	// 比較関数はLessEqual。つまり、近ければ描画される
 	depthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 

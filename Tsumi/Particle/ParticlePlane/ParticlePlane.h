@@ -5,6 +5,7 @@
 #include "ParticleGraphicPipeline.h"
 #include "CreateResource.h"
 #include "DescriptorManager.h"
+#define INSTANCE_MAX 1000;
 
 
 /* ParticlePlaneクラス */
@@ -23,7 +24,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(Particle* pParticle, list<ParticleProperties> prope , ViewProjection view) override;
+	void Draw(uint32_t texHD, Particle* pParticle, list<ParticleProperties> prope , ViewProjection view) override;
 
 
 private: // メンバ関数
@@ -32,6 +33,11 @@ private: // メンバ関数
 	/// コマンドコール
 	/// </summary>
 	void CommandCall(uint32_t texHandle);
+
+	/// <summary>
+	/// ビルボードの処理
+	/// </summary>
+	Matrix4x4 CalcBillBord(ViewProjection view);
 
 
 private: // メンバ変数
@@ -45,8 +51,8 @@ private: // メンバ変数
 	Vector4 pos_ = { 0.0f, 0.0f, 0.0f, 1.0f };
 	float size_ = 0.5f;
 
-	int instanceCount_;
-	uint32_t NumInstance_;
+	const uint32_t kMaxInstanceNum_ = INSTANCE_MAX;
+	uint32_t instanceNum_;
 
 	uint32_t itrNum_ = 0;
 

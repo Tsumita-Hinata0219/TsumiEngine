@@ -50,9 +50,6 @@
     <Filter Include="Tsumi\Transform\WorldTransform">
       <UniqueIdentifier>{8481eb3c-dd2c-44dd-9cb1-7f601271a0f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Tsumi\Transform\ViewProjection">
-      <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Tsumi\DebugTools">
       <UniqueIdentifier>{b2321114-df5e-4b1e-acbc-8abb24f9b03a}</UniqueIdentifier>
     </Filter>
@@ -64,15 +61,6 @@
     </Filter>
     <Filter Include="Tsumi\CreateResource">
       <UniqueIdentifier>{1d9f1210-1048-46a4-82e4-d59cd23eeeed}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tsumi\Base">
-      <UniqueIdentifier>{e6b94072-9335-4c36-938b-cfca9390a282}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tsumi\Base\WinApp">
-      <UniqueIdentifier>{8cf1c134-ac91-4673-9110-27e00c59335d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tsumi\Base\DXCommon">
-      <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Tsumi\Graphic">
       <UniqueIdentifier>{ed37e39a-0754-4546-b8b8-761c2d815f68}</UniqueIdentifier>
@@ -193,6 +181,72 @@
     </Filter>
     <Filter Include="Tsumi\Input">
       <UniqueIdentifier>{49ea0ea1-2e38-4d0a-879c-314b1a687ea8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Terrain">
+      <UniqueIdentifier>{0e872c09-bcb3-4647-90c2-36f128e07af7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character">
+      <UniqueIdentifier>{1b631594-120a-42d3-9ff1-6d133e09fc8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\Player">
+      <UniqueIdentifier>{c241a4a2-3218-44d7-818d-f60fdf0ca9c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Terrain\Ground">
+      <UniqueIdentifier>{b8328902-884b-4376-8837-1294eb2318b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Terrain\Skydome">
+      <UniqueIdentifier>{ba3965a0-6478-4ceb-b31c-abf3a1ffba07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\Player\Bullet">
+      <UniqueIdentifier>{6ad5bace-2d45-488d-a868-d382e0b70202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager">
+      <UniqueIdentifier>{3f13d875-7be5-480c-bbdd-3f6636ffdd5f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\Enemy">
+      <UniqueIdentifier>{2cab8b43-2460-4ad9-848d-597e40db5f09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase">
+      <UniqueIdentifier>{22df8531-ebc4-4263-bc34-3c4cf24a2802}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach">
+      <UniqueIdentifier>{76b4fe8b-3270-4c47-9fe7-c0fd7888f3c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave">
+      <UniqueIdentifier>{db545c69-5b32-434a-b9b9-ac66f79dda6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet">
+      <UniqueIdentifier>{52af988c-eb2e-4c97-bde5-badbaab3f94c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\TimedCall">
+      <UniqueIdentifier>{011cef97-c010-49c0-98e8-9dd2d32379c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Camera\RailCamera">
+      <UniqueIdentifier>{e2b77b0c-a0a3-4ac4-a5cc-edb0319a1a3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Character\Player\Reticle">
+      <UniqueIdentifier>{5889fff3-9aa6-4d95-b04b-f1fbf4d3792c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base">
+      <UniqueIdentifier>{e6b94072-9335-4c36-938b-cfca9390a282}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\WinApp">
+      <UniqueIdentifier>{8cf1c134-ac91-4673-9110-27e00c59335d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Base\DXCommon">
+      <UniqueIdentifier>{90865941-f2f5-4a27-ac79-d25a8ffa4e7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform\SpriteTransform">
+      <UniqueIdentifier>{1fbc66a2-72ab-4025-a9cc-8c2b12c3ef33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Transform\ViewProjection">
+      <UniqueIdentifier>{c555cb79-232b-4432-829e-4736b61bb9ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tsumi\Utilities\FadeManager">
+      <UniqueIdentifier>{a1692427-0cfb-45d8-8ce7-8c0c525104a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\Scene\SceneState\TitleScene">
+      <UniqueIdentifier>{e0089013-2f47-4330-9382-8baeaec28083}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -340,6 +394,51 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Input\Input.cpp">
       <Filter>Tsumi\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp">
+      <Filter>Project\GameObject\Terrain\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp">
+      <Filter>Project\GameObject\Terrain\Ground</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp">
+      <Filter>Project\GameObject\Character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Leave</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Approach</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet\EnemyBullet.cpp">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp">
+      <Filter>Tsumi\Utilities\TimedCall</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Camera\RailCamera\RailCamera.cpp">
+      <Filter>Project\GameObject\Camera\RailCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.cpp">
+      <Filter>Project\GameObject\Character\Player\Reticle</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp">
+      <Filter>Tsumi\Transform\SpriteTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Utilities\FadeManager\FadeManager.cpp">
+      <Filter>Tsumi\Utilities\FadeManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Scene\SceneState\TitleScene\TitleScene.cpp">
+      <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -537,6 +636,54 @@
     </ClInclude>
     <ClInclude Include="Tsumi\Input\Input.h">
       <Filter>Tsumi\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Player.h">
+      <Filter>Project\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h">
+      <Filter>Project\GameObject\Terrain\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h">
+      <Filter>Project\GameObject\Terrain\Ground</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h">
+      <Filter>Project\GameObject\Character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h">
+      <Filter>Project\GameObject\Character\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Leave</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase\Approach</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\IEnemyMovePhaseState.h">
+      <Filter>Project\GameObject\Character\EnemyManager\MovePhase</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet\EnemyBullet.h">
+      <Filter>Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\TimedCall\TimedCall.h">
+      <Filter>Tsumi\Utilities\TimedCall</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Camera\RailCamera\RailCamera.h">
+      <Filter>Project\GameObject\Camera\RailCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.h">
+      <Filter>Project\GameObject\Character\Player\Reticle</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h">
+      <Filter>Tsumi\Transform\SpriteTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h">
+      <Filter>Tsumi\Utilities\FadeManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Scene\SceneState\TitleScene\TitleScene.h">
+      <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

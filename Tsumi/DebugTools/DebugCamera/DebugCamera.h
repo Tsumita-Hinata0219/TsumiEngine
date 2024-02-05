@@ -5,50 +5,51 @@
 #include "MyMath.h"
 #include "ImGuiManager.h"
 
-
+/* DebugCameraクラス */
 class DebugCamera {
 
 public:
 
 	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	DebugCamera() {};
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~DebugCamera() {};
-
-	/// <summary>
-	/// インスタンスの取得
-	/// </summary>
-	static DebugCamera* GetInstance();
-
-	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	static void Initialize();
+	void Initialize();
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	static void Update();
+	void Update();
 
 	/// <summary>
-	/// 描画処理
+	/// ワールド変換データを取得
 	/// </summary>
-	static void Draw();
+	WorldTransform& GetWorldTransform() { return worldTransform_; };
+
+	/// <summary>
+	/// ビュープロジェクションの取得関数
+	/// </summary>
+	ViewProjection& GetViewProjection() { return viewProjection_; }
+
+	/// <summary>
+	/// カメラのアクティブフラグの取得
+	/// </summary>
+	bool& GetIsActive() { return IsActive_; }
+
+	/// <summary>
+	/// 有効フラグの設定
+	/// </summary>
+	void SetIsActive(bool state) { IsActive_ = state; }
 
 private:
 
+	// ワールドトランスフォーム
 	WorldTransform worldTransform_{};
-	ViewProjection DebugViewProjection_{};
-	
-	Matrix4x4 matRotate_{};
 
-	Vector3 offset_;
+	// ビュープロジェクション
+	ViewProjection viewProjection_{};
 
-	bool isDebugCamera_ = false;
-
+	/// <summary>
+	/// デバッグカメラが有効か
+	/// </summary>
+	bool IsActive_ = false;
 };

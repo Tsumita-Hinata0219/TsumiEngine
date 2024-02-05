@@ -4,6 +4,7 @@
 #include "OBBCollider.h"
 #include "AABBCollider.h"
 #include "SegmentCollider.h"
+#include "ColliderConfig.h"
 #include "MyMath.h"
 #include "Struct.h"
 #include "IsCollision/IsCollision.h"
@@ -26,10 +27,10 @@ public:
     /// <summary>
     /// 各種コライダーをリストに登録するメソッド
     /// </summary>
-    void ColliderSpherePushBack(SphereCollider* collider) { sphereColliders_.push_back(collider); }
-    void ColliderSegmentPushBack(SegmentCollider* collider) { segmentColliders_.push_back(collider); }
-    void ColliderAABBPushBack(AABBCollider* collider) { aabbColliders_.push_back(collider); }
-    void ColliderOBBPushBack(OBBCollider* collider) { obbColliders_.push_back(collider); }
+    void AddSphereColliders(SphereCollider* collider) { sphereColliders_.push_back(collider); }
+    void AddSegmentColliders(SegmentCollider* collider) { segmentColliders_.push_back(collider); }
+    void AddAABBColliders(AABBCollider* collider) { aabbColliders_.push_back(collider); }
+    void AddOBBColliders(OBBCollider* collider) { obbColliders_.push_back(collider); }
 
     /// <summary>
     /// 登録されたコライダーリストをクリアするメソッド

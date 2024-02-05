@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CollisionStructures.h"
+#include "ColliderConfig.h"
 #include<cstdint>
 
 class SegmentCollider {
@@ -78,7 +79,7 @@ private:
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	uint32_t id_ = 0xffffffff;
+	uint32_t id_ = ObjectBit::None;
 
 	Segment segment_{};
 };

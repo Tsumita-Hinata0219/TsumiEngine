@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CollisionStructures.h"
+#include "ColliderConfig.h"
 #include <cstdint>
 
 
@@ -93,7 +94,7 @@ private:
 
 	AABB aabb_{};
 
-	uint32_t id_ = 0xffffffff;
+	uint32_t id_ = ObjectBit::None;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 

@@ -2,66 +2,40 @@
 
 
 
-/// <summary>
-/// インスタンスの取得
-/// </summary>
-DebugCamera* DebugCamera::GetInstance() {
-	static DebugCamera instance;
-	return &instance;
+// 初期化処理
+void DebugCamera::Initialize()
+{
+	// ワールドトランスフォームの初期化
+	worldTransform_.Initialize();
+	worldTransform_.rotate = Vector3::zero;
+	worldTransform_.translate = Vector3::zero;
+
+	// ビュープロジェクションの初期化
+	viewProjection_.Initialize();
+	viewProjection_.farZ = 1200.0f;
 }
 
 
-/// <summary>
-/// 初期化処理
-/// </summary>
-void DebugCamera::Initialize() {
+// 更新処理
+void DebugCamera::Update()
+{
+	// ワールド座標の更新
+	worldTransform_.UpdateMatrix();
 
-	DebugCamera::GetInstance()->DebugViewProjection_.Initialize();
-	DebugCamera::GetInstance()->matRotate_ = Matrix4x4::identity;
-	DebugCamera::GetInstance()->worldTransform_.Initialize();
-}
+	// ビューの更新
+	viewProjection_.UpdateMatrix();
 
+	// ビューの計算
+	viewProjection_.matView = Inverse(worldTransform_.matWorld);
 
-/// <summary>
-/// 更新処理
-/// </summary>
-void DebugCamera::Update() {
+#ifdef _DEBUG
 
-	DebugCamera::GetInstance()->worldTransform_.UpdateMatrix();
-	DebugCamera::GetInstance()->DebugViewProjection_.UpdateMatrix();
+	if (ImGui::TreeNode("RailCamera"))
+	{
+		ImGui::DragFloat3("Rotate", &worldTransform_.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &worldTransform_.translate.x, 0.01f);
+		ImGui::TreePop();
+	}
 
-
-	// 中心からずらす
-	Vector3 offset = DebugCamera::GetInstance()->offset_;
-	offset = TransformNormal(offset, DebugCamera::GetInstance()->matRotate_);
-	DebugCamera::GetInstance()->worldTransform_.translate = offset;
-
-
-	// Translateの更新
-	Matrix4x4 translateMat = MakeTranslateMatrix(
-		DebugCamera::GetInstance()->worldTransform_.translate);
-
-	// worldTransformの更新
-	DebugCamera::GetInstance()->worldTransform_.matWorld =
-		DebugCamera::GetInstance()->matRotate_ * translateMat;
-
-	// view行列の更新
-	DebugCamera::GetInstance()->DebugViewProjection_.matView =
-		Inverse(translateMat) * Inverse(DebugCamera::GetInstance()->matRotate_);
-
-
-	ImGui::Begin("DebugCamera");
-	ImGui::Checkbox("isDebugCamera", &DebugCamera::GetInstance()->isDebugCamera_);
-	ImGui::DragFloat3("Rotate", &DebugCamera::GetInstance()->worldTransform_.rotate.x, 0.01f);
-	ImGui::DragFloat3("translate", &DebugCamera::GetInstance()->worldTransform_.translate.x, 0.1f);
-	ImGui::End();
-}
-
-
-/// <summary>
-/// 描画処理
-/// </summary>
-void DebugCamera::Draw() {
-
-
+#endif // _DEBUG
 }

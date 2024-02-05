@@ -28,7 +28,7 @@ void DebugScene::Initialize() {
 /// </summary>
 void DebugScene::Update(GameManager* state) {
 
-	engineManual_->Update();
+	engineManual_->Update(viewProjection_);
 
 	viewProjection_.UpdateMatrix();
 
@@ -40,7 +40,7 @@ void DebugScene::Update(GameManager* state) {
 
 	ImGui::Begin("Camera");
 	ImGui::DragFloat3("Rotate", &viewProjection_.rotate.x, 0.005f);
-	ImGui::DragFloat3("Translate", &viewProjection_.translate.x, 1.0f);
+	ImGui::DragFloat3("Translate", &viewProjection_.translate.x, 0.01f);
 	ImGui::End();
 
 #endif // _DEBUG

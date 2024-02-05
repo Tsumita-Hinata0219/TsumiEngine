@@ -6,6 +6,7 @@
 #include "MathOperations.h"
 #include "MathFunction.h"
 #include "CollisionStructures.h"
+#include "RandomGenerator.h"
 
 
 
@@ -25,3 +26,11 @@ namespace Math {
 	constexpr float Half_PI = PI * 0.5f;
 }
 
+// 前後左右の構造体 V:Vertical H;Horizontal
+struct VHInfo {
+
+	float up, down, left, right;
+
+	VHInfo() : up(0.0f), down(0.0f), left(0.0f), right(0.0f) {};
+	VHInfo(float u, float d, float l, float r) : up(u), down(d), left(l), right(r) {};
+};

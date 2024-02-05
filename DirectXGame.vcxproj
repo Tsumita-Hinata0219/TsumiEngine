@@ -105,6 +105,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\EnemyBullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\MonsBall\MonsBall.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.cpp" />
@@ -174,6 +175,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Approach\IEnemyMoveApproachState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\IEnemyMovePhaseState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\MovePhase\Leave\IEnemyMoveLeaveState.h" />
+    <ClInclude Include="Project\GameObject\Character\MonsBall\MonsBall.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Reticle\PlayerReticle.h" />

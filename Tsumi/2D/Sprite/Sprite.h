@@ -37,7 +37,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(uint32_t texHandle, SpriteTransform& transform, ViewProjection view);
+	void Draw(uint32_t texHandle, WorldTransform& transform, ViewProjection view);
 
 	/// <summary>
 	/// 色の変換
@@ -61,13 +61,13 @@ private:
 	/// <summary>
 	/// 頂点データを設定する
 	/// </summary>
-	void SetVertex(SpriteTransform transform);
+	void SetVertex(WorldTransform transform);
 
 
 private:
 
 	// スプライトトランスフォーム
-	SpriteTransform spriteTransform_{};
+	WorldTransform worldTransform_{};
 
 	// 座標
 	Vector2 pos_;

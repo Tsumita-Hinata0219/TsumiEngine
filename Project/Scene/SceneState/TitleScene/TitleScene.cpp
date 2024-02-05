@@ -16,7 +16,7 @@ void TitleScene::Initialize()
 	texHD_ = TextureManager::LoadTexture("Title.png");
 	sprite_ = make_unique<Sprite>();
 	sprite_->Initialize(Vector2::zero, WinApp::WindowSize());
-	st_.Initialize();
+	wt_.Initialize();
 
 	/* ----- Skydome スカイドーム ----- */
 	skydome_ = make_unique<Skydome>();
@@ -63,7 +63,7 @@ void TitleScene::Update(GameManager* state)
 	/* ----- Ground グラウンド ----- */
 	ground_->Update();
 
-	st_.UpdateMatrix();
+	wt_.UpdateMatrix();
 
 #ifdef _DEBUG
 
@@ -98,6 +98,6 @@ void TitleScene::ModelDraw()
 // 前景スプライトの描画処理
 void TitleScene::FrontSpriteDraw()
 {
-	sprite_->Draw(texHD_, st_, GameCamera_);
+	sprite_->Draw(texHD_, wt_, GameCamera_);
 	FadeManager::Draw(GameCamera_);
 }

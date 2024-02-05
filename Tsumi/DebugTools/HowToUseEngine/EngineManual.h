@@ -2,6 +2,8 @@
 
 #include "GameObject.h"
 
+#include "Cloud/Cloud.h"
+#include "Photon/Photon.h"
 
 /* EngineManualクラス */
 class EngineManual {

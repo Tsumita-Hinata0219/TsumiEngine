@@ -58,7 +58,7 @@ private:
 	bool funcFade_ = false;
 
 	unique_ptr<Sprite> sprite_ = nullptr;
-	SpriteTransform st_{};
+	WorldTransform wt_{};
 	uint32_t texHD_;
 
 

@@ -10,8 +10,8 @@ void PlayerReticle::Initialize(Model& modelHD, Vector3 initTranslate)
 	model_ = make_unique<Model>();
 	(*model_) = modelHD;
 	// ワールドトランスフォームの初期化
-	wt_.Initialize();
-	wt_.translate = initTranslate;
+	wt3D_.Initialize();
+	wt3D_.translate = initTranslate;
 	// オフセット
 	offsetVec_ = Vector3::oneZ;
 
@@ -26,10 +26,9 @@ void PlayerReticle::Initialize(Model& modelHD, Vector3 initTranslate)
 	sprite_->Initialize(Vector2::zero, size_);
 
 	// スプライトトランスフォームの初期化
-	st_.Initialize();
-	spritePos_ = WinApp::WindowSize() / 4;
-	spritePos_ -= (size_ / 4.0f);
-	st_.translate = spritePos_;
+	wt2D_.Initialize();
+	spritePos_ = WinApp::WindowSize() / 2;
+	wt2D_.translate = { spritePos_.x, spritePos_.y, 0.0f };
 
 	move_ = Vector3::zero;
 
@@ -47,15 +46,15 @@ void PlayerReticle::Update(ViewProjection view)
 
 	// 座標を入れる
 	Vector3 pos = player_->GetWorldPosition();
-	wt_.translate = offsetVec_ + pos;
+	wt3D_.translate = offsetVec_ + pos;
 
 	// 3D -> 2D へ
 	RStick_ = GamePadInput::GetRStick();
 	Vector2 vel = { RStick_.x, RStick_.y };
 	spritePos_.x = vel.x * 10.0f + spritePos_.x;
 	spritePos_.y = vel.y * -10.0f + spritePos_.y;
-	st_.translate = spritePos_;
-	st_.translate -= (size_ / 4.0f);
+	wt2D_.translate = { spritePos_.x, spritePos_.y, 0.0f };
+	
 
 
 	// スクリーン座標
@@ -70,20 +69,20 @@ void PlayerReticle::Update(ViewProjection view)
 	direction = Normalize(direction);	
 	float distobj = -50.0f;
 
-	wt_.translate = Near + direction * distobj;
+	wt3D_.translate = Near + direction * distobj;
 
 	// ワールド座標の更新
-	wt_.UpdateMatrix();
-	wt_.TransferMatrix();
-	st_.UpdateMatrix();
+	wt3D_.UpdateMatrix();
+	wt3D_.TransferMatrix();
+	wt2D_.UpdateMatrix();
 
 #ifdef _DEBUG
 
 	if (ImGui::TreeNode("PlayerReticle"))
 	{
-		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.01f);
-		ImGui::DragFloat3("3D_Translate", &wt_.translate.x, 0.01f);
-		ImGui::DragFloat2("2D_Translate", &st_.translate.x, 0.01f);
+		ImGui::DragFloat3("Rotate", &wt3D_.rotate.x, 0.01f);
+		ImGui::DragFloat3("3D_Translate", &wt3D_.translate.x, 0.01f);
+		ImGui::DragFloat2("2D_Translate", &wt2D_.translate.x, 0.01f);
 		ImGui::TreePop();
 	}
 
@@ -94,10 +93,10 @@ void PlayerReticle::Update(ViewProjection view)
 // 描画処理
 void PlayerReticle::Draw3D(ViewProjection view)
 {
-	model_->Draw(wt_, view);
+	model_->Draw(wt3D_, view);
 }
 
 void PlayerReticle::Draw2D(ViewProjection view)
 {
-	sprite_->Draw(reticleTexHD_, st_, view);
+	sprite_->Draw(reticleTexHD_, wt2D_, view);
 }

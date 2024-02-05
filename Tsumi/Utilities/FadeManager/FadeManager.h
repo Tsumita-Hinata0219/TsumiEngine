@@ -79,7 +79,7 @@ private:
 	uint32_t texHD_;
 
 	// スプライト用トランスフォーム
-	SpriteTransform st_{};
+	WorldTransform wt_{};
 
 	// カラー
 	Vector4 color_{};

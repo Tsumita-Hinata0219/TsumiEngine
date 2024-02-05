@@ -452,7 +452,7 @@
     <ClCompile Include="Project\GameObject\Terrain\Cloud\Cloud.cpp">
       <Filter>Project\GameObject\Terrain\Cloud</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Effect\Photon.cpp">
+    <ClCompile Include="Project\GameObject\Effect\Photon\Photon.cpp">
       <Filter>Project\GameObject\Effect\Photon</Filter>
     </ClCompile>
   </ItemGroup>
@@ -703,7 +703,7 @@
     <ClInclude Include="Project\GameObject\Terrain\Cloud\Cloud.h">
       <Filter>Project\GameObject\Terrain\Cloud</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Effect\Photon.h">
+    <ClInclude Include="Project\GameObject\Effect\Photon\Photon.h">
       <Filter>Project\GameObject\Effect\Photon</Filter>
     </ClInclude>
   </ItemGroup>

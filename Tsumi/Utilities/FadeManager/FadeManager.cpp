@@ -13,7 +13,7 @@ void FadeManager::Initialize(FunctionFade func)
 	FadeManager::GetInstance()->sprite_->Initialize(Vector2::zero, WinApp::WindowSize());
 
 	// スプライトトランスフォームの初期化
-	FadeManager::GetInstance()->st_.Initialize();
+	FadeManager::GetInstance()->wt_.Initialize();
 
 	if (func == func_FadeIn) {
 
@@ -45,7 +45,7 @@ void FadeManager::Draw(ViewProjection view)
 	FadeManager::GetInstance()->sprite_->SetColor(FadeManager::GetInstance()->color_);
 
 	uint32_t texHandle = FadeManager::GetInstance()->texHD_;
-	SpriteTransform spriteTransform = FadeManager::GetInstance()->st_;
+	WorldTransform spriteTransform = FadeManager::GetInstance()->wt_;
 	FadeManager::GetInstance()->sprite_->Draw(texHandle, spriteTransform, view);
 
 

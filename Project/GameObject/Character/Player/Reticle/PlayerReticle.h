@@ -37,12 +37,12 @@ public: // メンバ関数
 	/// <summary>
 	/// ワールドトランスフォームの取得
 	/// </summary>
-	WorldTransform GetWorldTransform() { return this->wt_; }
+	WorldTransform GetWorldTransform() { return this->wt3D_; }
 
 	/// <summary>
 	/// ワールド座標の取得
 	/// </summary>
-	Vector3 GetWorldPosition() { return this->wt_.GetWorldPos(); }
+	Vector3 GetWorldPosition() { return this->wt3D_.GetWorldPos(); }
 
 #pragma endregion
 
@@ -56,7 +56,7 @@ public: // メンバ関数
 	/// <summary>
 	/// ペアレントの設定
 	/// </summary>
-	void SetParent(WorldTransform* parent) { this->wt_.parent = parent; }
+	void SetParent(WorldTransform* parent) { this->wt3D_.parent = parent; }
 
 #pragma endregion
 
@@ -78,11 +78,9 @@ private: // メンバ変数
 	// テクスチャハンドル
 	uint32_t reticleTexHD_;
 
-	// スプライトトランスフォーム
-	SpriteTransform st_{};
-
 	// ワールドトランスフォーム
-	WorldTransform wt_{};
+	WorldTransform wt3D_{};
+	WorldTransform wt2D_{};
 
 	// 自機から3Dレティクルへの距離
 	const float kDistReticle_ = 60.0f;

@@ -40,7 +40,7 @@ void Sprite::Initialize(Vector2 pos, Vector2 size, Vector4 color) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void Sprite::Draw(uint32_t texHandle, SpriteTransform& transform, ViewProjection view) {
+void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, ViewProjection view) {
 
 	// 頂点データを設定する
 	SetVertex(transform);
@@ -80,7 +80,7 @@ void Sprite::Draw(uint32_t texHandle, SpriteTransform& transform, ViewProjection
 /// <summary>
 /// 頂点データを設定する
 /// </summary>
-void Sprite::SetVertex(SpriteTransform transform) {
+void Sprite::SetVertex(WorldTransform transform) {
 
 	VertexData* vertexData = nullptr;
 	MaterialSprite* materialData = nullptr;

@@ -248,6 +248,15 @@
     <Filter Include="Project\Scene\SceneState\TitleScene">
       <UniqueIdentifier>{e0089013-2f47-4330-9382-8baeaec28083}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Terrain\Cloud">
+      <UniqueIdentifier>{667695c8-ef5a-493c-9cd3-75bd5cba25fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Effect">
+      <UniqueIdentifier>{0bbd53ad-720d-4c74-b060-f4cd150f7acf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Project\GameObject\Effect\Photon">
+      <UniqueIdentifier>{165c7fb4-1e84-4c66-8f29-40324eafd0b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -440,6 +449,10 @@
     <ClCompile Include="Project\Scene\SceneState\TitleScene\TitleScene.cpp">
       <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClCompile>
+    <ClCompile Include="Project\GameObject\Terrain\Cloud\Cloud.cpp">
+      <Filter>Project\GameObject\Terrain\Cloud</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Effect\Photon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -685,6 +698,10 @@
     <ClInclude Include="Project\Scene\SceneState\TitleScene\TitleScene.h">
       <Filter>Project\Scene\SceneState\TitleScene</Filter>
     </ClInclude>
+    <ClInclude Include="Project\GameObject\Terrain\Cloud\Cloud.h">
+      <Filter>Project\GameObject\Terrain\Cloud</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Effect\Photon.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">

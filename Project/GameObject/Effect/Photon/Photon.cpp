@@ -17,8 +17,8 @@ void Photon::Initialize()
 
 	// 各スコープの初期化
 	lifeTimeScope_ = {
-		.min = 1,
-		.max = 3,
+		.min = 2,
+		.max = 5,
 	};
 	posScope_ = {
 		.X = {-0.5, 0.5f},
@@ -31,9 +31,9 @@ void Photon::Initialize()
 		.Z = {-1.0f, 1.0f},
 	};
 	colorScope_ = {
-		.X = {0.0f, 256.0f},
-		.Y = {0.0f, 256.0f},
-		.Z = {0.0f, 256.0f},
+		.X = {256.0f, 256.0f},
+		.Y = {256.0f, 256.0f},
+		.Z = {256.0f, 256.0f},
 		.W = {256.0f, 256.0f},
 	};
 
@@ -60,6 +60,10 @@ void Photon::Update()
 		particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
 	}
 
+	if (KeysInput::TriggerKey(DIK_P)) {
+		// パーティクルの出現
+		particle_->Emit(emitter_, lifeTimeScope_, posScope_, velScope_, colorScope_);
+	}
 
 	// パーティクルリストの取得
 	particlePropes_ = particle_->RetrieveFront();
@@ -72,9 +76,9 @@ void Photon::Update()
 		// 寿命の処理
 		prope.currentTime++;
 
-		// alphaの処理
-		float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
-		prope.color.w = alpha;
+		//// alphaの処理
+		//float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
+		//prope.color.w = alpha;
 
 		// 寿命が尽きたらコンティニュー
 		if (prope.currentTime >= prope.lifeTime) {

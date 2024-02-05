@@ -49,17 +49,17 @@ void EngineManual::Update(ViewProjection view)
 	ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
 	ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
 	ImGui::End();
-
-#ifdef _DEBUG
-
-	ImGui::Begin("BallObj");
-	ImGui::ColorEdit4("LightColor", &light_.color.x);
-	ImGui::DragFloat3("LightDirection", &light_.direction.x, 0.01f, -1.0f, 1.0f);
-	ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
-	ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
-	ImGui::End();
-
-#endif // _DEBUG
+//
+//#ifdef _DEBUG
+//
+//	ImGui::Begin("BallObj");
+//	ImGui::ColorEdit4("LightColor", &light_.color.x);
+//	ImGui::DragFloat3("LightDirection", &light_.direction.x, 0.01f, -1.0f, 1.0f);
+//	ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
+//	ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
+//	ImGui::End();
+//
+//#endif // _DEBUG
 
 }
 

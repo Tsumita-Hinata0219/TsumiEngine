@@ -28,6 +28,10 @@ void EngineManual::Initialize()
 	// 光子パーティクル
 	photon_ = make_unique<Photon>();
 	photon_->Initialize();
+
+	// BGM
+	bgm_ = make_unique<BGM>();
+	bgm_->Initialize();
 }
 
 
@@ -44,6 +48,9 @@ void EngineManual::Update(ViewProjection view)
 
 	// 光子パーティクル
 	photon_->Update();
+
+	// BGM
+	bgm_->Update();
 
 #ifdef _DEBUG
 
@@ -82,7 +89,8 @@ void EngineManual::ModelDraw(ViewProjection view)
 /// </summary>
 void EngineManual::FrontSpriteDraw(ViewProjection view) 
 {
-
+	// BGM
+	bgm_->Draw(view);
 
 }
 

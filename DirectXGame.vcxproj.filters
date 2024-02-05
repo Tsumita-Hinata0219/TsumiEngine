@@ -266,6 +266,9 @@
     <Filter Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap">
       <UniqueIdentifier>{92b6702c-8f07-424a-99a2-0be0f4c3f1b6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\GameObject\Effect\BGM">
+      <UniqueIdentifier>{85a93f25-043a-4b84-a7bf-d9e97d84e674}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -475,6 +478,9 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\GameObject\Effect\BGM\BGM.cpp">
+      <Filter>Project\GameObject\Effect\BGM</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -738,6 +744,9 @@
     </ClInclude>
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\GameObject\Effect\BGM\BGM.h">
+      <Filter>Project\GameObject\Effect\BGM</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

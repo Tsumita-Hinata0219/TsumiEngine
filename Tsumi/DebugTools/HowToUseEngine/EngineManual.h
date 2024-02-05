@@ -3,7 +3,9 @@
 #include "GameObject.h"
 
 #include "Cloud/Cloud.h"
+#include "MonsBall/MonsBall.h"
 #include "Photon/Photon.h"
+
 
 /* EngineManualクラス */
 class EngineManual {
@@ -57,6 +59,9 @@ private: // メンバ変数
 
 	// 雲模様背景
 	unique_ptr<Cloud> cloudBG_ = nullptr;
+
+	// モンスターボール
+	unique_ptr<MonsBall> monsBall_ = nullptr;
 
 	// 光子パーティクル
 	unique_ptr<Photon> photon_ = nullptr;

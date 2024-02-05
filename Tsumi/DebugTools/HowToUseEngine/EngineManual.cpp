@@ -21,6 +21,10 @@ void EngineManual::Initialize()
 	cloudBG_ = make_unique<Cloud>();
 	cloudBG_->Initialize();
 
+	// モンスターボール
+	monsBall_ = make_unique<MonsBall>();
+	monsBall_->Initialize();
+
 	// 光子パーティクル
 	photon_ = make_unique<Photon>();
 	photon_->Initialize();
@@ -34,6 +38,9 @@ void EngineManual::Update(ViewProjection view)
 {
 	// 雲模様背景
 	cloudBG_->Update();
+
+	// モンスターボール
+	monsBall_->Update();
 
 	// 光子パーティクル
 	photon_->Update();
@@ -62,6 +69,8 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 /// </summary>
 void EngineManual::ModelDraw(ViewProjection view) 
 {
+	// モンスターボール
+	monsBall_->Draw(view);
 
 	// 光子パーティクル
 	photon_->Draw(view);

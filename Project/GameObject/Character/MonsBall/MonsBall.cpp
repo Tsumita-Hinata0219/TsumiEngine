@@ -6,7 +6,7 @@
 void MonsBall::Initialize()
 {
 	// ノーマルマップ用テクスチャの読み込み
-	normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
+	//normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
 
 	// モデルの初期化
 	monsBall_ = make_unique<Model>();
@@ -14,23 +14,19 @@ void MonsBall::Initialize()
 
 	// ワールドトランスフォームの初期化
 	wt_.Initialize();
-
 }
 
 
 // 更新処理
 void MonsBall::Update()
 {
-
-
-
+	// ワールドトランスフォームの更新
+	wt_.UpdateMatrix();
 }
 
 
 // 描画処理
 void MonsBall::Draw(ViewProjection view)
 {
-
-
-
+	monsBall_->Draw(wt_, view);
 }

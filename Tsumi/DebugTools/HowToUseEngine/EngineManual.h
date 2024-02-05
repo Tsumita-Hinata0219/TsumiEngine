@@ -64,8 +64,8 @@ private: // メンバ変数
 	// モンスターボール
 	unique_ptr<MonsBall> monsBall_ = nullptr;
 
-	// 光子パーティクル
-	unique_ptr<Photon> photon_ = nullptr;
+	//// 光子パーティクル
+	//unique_ptr<Photon> photon_ = nullptr;
 
 	// BGM
 	unique_ptr<BGM> bgm_ = nullptr;

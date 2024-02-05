@@ -84,13 +84,6 @@ void Photon::Update()
 		// リストにプッシュバック
 		particle_->PushBackList(prope);
 	}
-
-
-
-	if (ImGui::TreeNode("Photon")) {
-		ImGui::DragFloat3("Emitter_Translate", &emitter_.worldTransform.translate.x, 0.01f);
-		ImGui::TreePop();
-	}
 }
 
 

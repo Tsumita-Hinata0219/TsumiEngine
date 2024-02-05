@@ -263,6 +263,9 @@
     <Filter Include="Tsumi\Graphic\GraphicPipelineManager\Lambert">
       <UniqueIdentifier>{b2eeea05-34ab-4430-8e6c-09c014b34cec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap">
+      <UniqueIdentifier>{92b6702c-8f07-424a-99a2-0be0f4c3f1b6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -469,6 +472,9 @@
     </ClCompile>
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.cpp">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\Lambert</Filter>
+    </ClCompile>
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -730,6 +736,9 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h">
       <Filter>Tsumi\Graphic\GraphicPipelineManager\Lambert</Filter>
     </ClInclude>
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h">
+      <Filter>Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">
@@ -768,6 +777,12 @@
     <FxCompile Include="Resources\shaders\LambertObject.VS.hlsl">
       <Filter>リソース ファイル\shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\shaders\PhongNormalMap.PS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\shaders\PhongNormalMap.VS.hlsl">
+      <Filter>リソース ファイル\shaders</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">
@@ -791,6 +806,9 @@
       <Filter>リソース ファイル\shaders</Filter>
     </None>
     <None Include="Resources\shaders\LambertObject.hlsli">
+      <Filter>リソース ファイル\shaders</Filter>
+    </None>
+    <None Include="Resources\shaders\PhongNormalMap.hlsli">
       <Filter>リソース ファイル\shaders</Filter>
     </None>
   </ItemGroup>

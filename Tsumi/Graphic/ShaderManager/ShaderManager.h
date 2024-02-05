@@ -32,6 +32,7 @@ struct ShadersType {
 	ShadersMode Light;
 	ShadersMode Lambert;
 	ShadersMode Phong;
+	ShadersMode PhongNormalMap;
 	ShadersMode Particle;
 };
 
@@ -109,7 +110,6 @@ private: // メンバ関数
 	/// </summary>
 	static void LightShader();
 
-
 	/// <summary>
 	/// 
 	/// </summary>
@@ -119,6 +119,11 @@ private: // メンバ関数
 	/// 
 	/// </summary>
 	static void PhongShader();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	static void PhongNormalMapShader();
 
 	/// <summary>
 	/// 

@@ -6,11 +6,13 @@
 void MonsBall::Initialize()
 {
 	// ノーマルマップ用テクスチャの読み込み
-	//normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
+	normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
 
 	// モデルの初期化
 	monsBall_ = make_unique<Model>();
 	monsBall_->CreateFromObj("ball");
+	monsBall_->SetModelDrawType(PhongNormalMap);
+	monsBall_->SetNormalMapTex(normalMapTexHD_);
 
 	// ワールドトランスフォームの初期化
 	wt_.Initialize();
@@ -29,6 +31,9 @@ void MonsBall::Update()
 {
 	// ワールドトランスフォームの更新
 	wt_.UpdateMatrix();
+
+	// 回転させる
+	wt_.rotate.y += 0.02f;
 
 	// ライトの設定
 	monsBall_->SetDirectionalLight(light_);

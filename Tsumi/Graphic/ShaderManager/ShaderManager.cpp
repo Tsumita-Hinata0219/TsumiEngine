@@ -140,6 +140,7 @@ void ShaderManager::ShadersCompiles() {
 	LightShader();
 	LambertShader();
 	PhongShader();
+	PhongNormalMapShader();
 	ParticleShader();
 }
 
@@ -161,7 +162,6 @@ void ShaderManager::NormalShader() {
 
 	ShaderManager::GetInstance()->shaders_.Noraml = shader;
 }
-
 
 
 /// <summary>
@@ -233,6 +233,24 @@ void ShaderManager::PhongShader()
 			L"Resources/shaders/PhongObject.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Phong = shader;
+}
+
+
+/// <summary>
+/// 
+/// </summary>
+void ShaderManager::PhongNormalMapShader()
+{
+	ShadersMode shader{};
+
+	shader.VertexBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PhongNormalMap.VS.hlsl", L"vs_6_0");
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PhongNormalMap.PS.hlsl", L"ps_6_0");
+
+	ShaderManager::GetInstance()->shaders_.PhongNormalMap = shader;
 }
 
 

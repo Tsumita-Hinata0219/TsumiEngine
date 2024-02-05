@@ -22,6 +22,7 @@ void GraphicPipelineManager::Initialize() {
 	LightGraphicPipeline::SetupLightPso();
 	LambertGraphicPipeline::SetupLightPso();
 	PhongGraphicPipeline::SetupLightPso();
+	PhongNormalMap::SetupLightPso();
 	ParticleGraphicPipeline::SetupParticlePso();
 }
 

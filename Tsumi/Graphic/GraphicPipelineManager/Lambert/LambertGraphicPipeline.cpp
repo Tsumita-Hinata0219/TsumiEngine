@@ -1,17 +1,17 @@
-#include "PhongGraphicPipeline.h"
+#include "LambertGraphicPipeline.h"
 
 
 
-// PhongGraphicPipelineクラスのインスタンス取得
-PhongGraphicPipeline* PhongGraphicPipeline::GetInstance()
+// LambertGraphicPipelineクラスのインスタンス取得
+LambertGraphicPipeline* LambertGraphicPipeline::GetInstance()
 {
-	static PhongGraphicPipeline instance;
+	static LambertGraphicPipeline instance;
 	return &instance;
 }
 
 
 // 初期化処理
-void PhongGraphicPipeline::Initialize()
+void LambertGraphicPipeline::Initialize()
 {
 
 
@@ -20,50 +20,50 @@ void PhongGraphicPipeline::Initialize()
 
 
 // PSOを構築する
-void PhongGraphicPipeline::SetupLightPso()
+void LambertGraphicPipeline::SetupLightPso()
 {
-	PhongGraphicPipeline* phongGraphicPipeline = PhongGraphicPipeline::GetInstance();
+	LambertGraphicPipeline* lambertGraphicPipeline = LambertGraphicPipeline::GetInstance();
 
 
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
-	phongGraphicPipeline->SetupRootSignature(descriptionRootSignature);
+	lambertGraphicPipeline->SetupRootSignature(descriptionRootSignature);
 
 
 	/* --- InputLayoutを設定する --- */
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
-	phongGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	phongGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	phongGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	phongGraphicPipeline->SetupInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	phongGraphicPipeline->SetupInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lambertGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lambertGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lambertGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lambertGraphicPipeline->SetupInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	lambertGraphicPipeline->SetupInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	phongGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
+	lambertGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
 
 
 	/* --- BlendStateを設定する --- */
 	// 全ての色要素を書き込む
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& pBlendDesc = blendDesc.RenderTarget[0];
-	phongGraphicPipeline->SetupBlendState(pBlendDesc, BlendNone);
+	lambertGraphicPipeline->SetupBlendState(pBlendDesc, BlendNone);
 
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	phongGraphicPipeline->SetupRasterizerState(rasterizerDesc);
+	lambertGraphicPipeline->SetupRasterizerState(rasterizerDesc);
 
 
 	/* --- Shaderをcompileする --- */
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	phongGraphicPipeline->CompileShaders(vertexShaderBlob, pixelShaderBlob);
+	lambertGraphicPipeline->CompileShaders(vertexShaderBlob, pixelShaderBlob);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
-	graphicsPipelineStateDesc.pRootSignature = PhongGraphicPipeline::GetInstance()->phongPso_.rootSignature; // RootSignature
+	graphicsPipelineStateDesc.pRootSignature = LambertGraphicPipeline::GetInstance()->LambertPso_.rootSignature; // RootSignature
 
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; // InputLayout
 
@@ -111,14 +111,14 @@ void PhongGraphicPipeline::SetupLightPso()
 	HRESULT hr{};
 	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
-		IID_PPV_ARGS(&PhongGraphicPipeline::GetInstance()->phongPso_.graphicsPipelineState));
+		IID_PPV_ARGS(&LambertGraphicPipeline::GetInstance()->LambertPso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 }
 
 
 
 // RootSignatureのセットアップ
-void PhongGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void LambertGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
@@ -184,10 +184,10 @@ void PhongGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descrip
 	HRESULT hr_ = D3D12SerializeRootSignature(
 		&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1,
-		&PhongGraphicPipeline::GetInstance()->phongPso_.signatureBlob,
-		&PhongGraphicPipeline::GetInstance()->phongPso_.errorBlob);
+		&LambertGraphicPipeline::GetInstance()->LambertPso_.signatureBlob,
+		&LambertGraphicPipeline::GetInstance()->LambertPso_.errorBlob);
 	if (FAILED(hr_)) {
-		Log(reinterpret_cast<char*>(PhongGraphicPipeline::GetInstance()->phongPso_.errorBlob->GetBufferPointer()));
+		Log(reinterpret_cast<char*>(LambertGraphicPipeline::GetInstance()->LambertPso_.errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
@@ -195,22 +195,22 @@ void PhongGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descrip
 	// バイナリを元に生成
 	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
-		PhongGraphicPipeline::GetInstance()->phongPso_.signatureBlob->GetBufferPointer(),
-		PhongGraphicPipeline::GetInstance()->phongPso_.signatureBlob->GetBufferSize(),
-		IID_PPV_ARGS(&PhongGraphicPipeline::GetInstance()->phongPso_.rootSignature));
+		LambertGraphicPipeline::GetInstance()->LambertPso_.signatureBlob->GetBufferPointer(),
+		LambertGraphicPipeline::GetInstance()->LambertPso_.signatureBlob->GetBufferSize(),
+		IID_PPV_ARGS(&LambertGraphicPipeline::GetInstance()->LambertPso_.rootSignature));
 	assert(SUCCEEDED(hr_));
 }
 
 
 // InputLayoutのセットアップ
-void PhongGraphicPipeline::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
+void LambertGraphicPipeline::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
 {
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
 	inputElementDescs.Format = Format;
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
-void PhongGraphicPipeline::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
+void LambertGraphicPipeline::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = numInputElements;
@@ -218,7 +218,7 @@ void PhongGraphicPipeline::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayout
 
 
 // BlendStateのセットアップ
-void PhongGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode)
+void LambertGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode)
 {
 	blendDesc.RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
@@ -279,7 +279,7 @@ void PhongGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blend
 
 
 // RasterizerStateのセットアップ
-void PhongGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc)
+void LambertGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc)
 {
 	// 裏面(時計回り)を表示しない
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
@@ -289,11 +289,11 @@ void PhongGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterize
 
 
 // Shadersのコンパイル
-void PhongGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
+void LambertGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().Phong.VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().Lambert.VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().Phong.PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().Lambert.PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

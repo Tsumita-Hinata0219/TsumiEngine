@@ -63,9 +63,9 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, ViewProje
 void ModelObjState::CommandCall(uint32_t texture, WorldTransform worldTransform, ViewProjection view) {
 
 	// RootSignatureを設定。
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(LightGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
 	// PSOを設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(LightGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
 
 	///// いざ描画！！！！！
 	// VBVを設定

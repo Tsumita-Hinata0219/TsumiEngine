@@ -101,6 +101,8 @@ void BGM::Update()
 	}
 
 
+#ifdef  USE_IMGUI
+
 	if (ImGui::TreeNode("Audio")) {
 
 		ImGui::Checkbox("Audio_IsPlaying", &AudioIsPlaying_);
@@ -108,6 +110,9 @@ void BGM::Update()
 		ImGui::DragFloat2("AudioS_Translate", &AudioWt_.translate.x, 0.1f);
 		ImGui::TreePop();
 	}
+
+#endif //  USE_IMGUI
+
 }
 
 

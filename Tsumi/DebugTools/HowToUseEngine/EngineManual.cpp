@@ -26,7 +26,7 @@ void EngineManual::Initialize()
 	monsBall_->Initialize();
 
 	// 光子パーティクル
-	//photon_ = make_unique<Photon>();
+	photon_ = make_unique<Photon>();
 	//photon_->Initialize();
 
 	// BGM

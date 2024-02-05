@@ -33,7 +33,7 @@ void DebugScene::Update(GameManager* state) {
 	viewProjection_.UpdateMatrix();
 
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 	ImGui::Begin("DebugScene");
 	ImGui::End();
@@ -43,7 +43,7 @@ void DebugScene::Update(GameManager* state) {
 	ImGui::DragFloat3("Translate", &viewProjection_.translate.x, 0.01f);
 	ImGui::End();
 
-#endif // _DEBUG
+#endif // USE_IMGUI
 }
 
 

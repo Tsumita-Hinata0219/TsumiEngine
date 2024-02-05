@@ -50,7 +50,7 @@ void MonsBall::Update()
 		monsBall_[i]->SetDirectionalLight(light_);
 	}
 
-#ifdef _DEBUG
+#ifdef USE_IMGUI
 
 	if (ImGui::TreeNode("MonsBall")) {
 
@@ -61,7 +61,7 @@ void MonsBall::Update()
 		ImGui::TreePop();
 	}
 
-#endif // _DEBUG
+#endif // USE_IMGUI
 }
 
 

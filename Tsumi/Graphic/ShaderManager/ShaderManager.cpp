@@ -141,7 +141,7 @@ void ShaderManager::ShadersCompiles() {
 	LambertShader();
 	PhongShader();
 	PhongNormalMapShader();
-	//ParticleShader();
+	ParticleShader();
 }
 
 
@@ -259,7 +259,7 @@ void ShaderManager::PhongNormalMapShader()
 /// </summary>
 void ShaderManager::ParticleShader() {
 
-	/*ShadersMode shader{};
+	ShadersMode shader{};
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
@@ -268,5 +268,5 @@ void ShaderManager::ParticleShader() {
 		ShaderManager::CompileShader(
 			L"Resources/shaders/ParticleObject3D.PS.hlsl", L"ps_6_0");
 
-	ShaderManager::GetInstance()->shaders_.Particle = shader;*/
+	ShaderManager::GetInstance()->shaders_.Particle = shader;
 }

@@ -452,7 +452,9 @@
     <ClCompile Include="Project\GameObject\Terrain\Cloud\Cloud.cpp">
       <Filter>Project\GameObject\Terrain\Cloud</Filter>
     </ClCompile>
-    <ClCompile Include="Project\GameObject\Effect\Photon.cpp" />
+    <ClCompile Include="Project\GameObject\Effect\Photon.cpp">
+      <Filter>Project\GameObject\Effect\Photon</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h">
@@ -701,7 +703,9 @@
     <ClInclude Include="Project\GameObject\Terrain\Cloud\Cloud.h">
       <Filter>Project\GameObject\Terrain\Cloud</Filter>
     </ClInclude>
-    <ClInclude Include="Project\GameObject\Effect\Photon.h" />
+    <ClInclude Include="Project\GameObject\Effect\Photon.h">
+      <Filter>Project\GameObject\Effect\Photon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">

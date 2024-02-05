@@ -141,7 +141,7 @@ void ShaderManager::ShadersCompiles() {
 	LambertShader();
 	PhongShader();
 	PhongNormalMapShader();
-	ParticleShader();
+	//ParticleShader();
 }
 
 

@@ -50,16 +50,17 @@ private:
 	ViewProjection viewProjection_{};
 
 
-	// カプセルモデル
-	std::unique_ptr<Model> capsuleObj_;
+	// カプセル1
+	std::unique_ptr<Model> capsuleObj1_;
+	WorldTransform capsuleWt1_{};
+	Vector4 capsuleColor1_ = Vector4::one;
 
-	// カプセルワールドトランスフォーム
-	WorldTransform capsuleWt_{};
+	// カプセル2
+	std::unique_ptr<Model> capsuleObj2_;
+	WorldTransform capsuleWt2_{};
+	Vector4 capsuleColor2_ = { 0.0f, 0.0f, 1.0f, 1.0f };
 
 	// カプセルライト
 	DirectionalLight capsuleLight_{};
-
-	// カプセルカラー
-	Vector4 capsuleColor_ = Vector4::one;
 };
 

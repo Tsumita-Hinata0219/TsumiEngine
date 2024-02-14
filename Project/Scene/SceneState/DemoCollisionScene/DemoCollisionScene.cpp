@@ -19,10 +19,23 @@ void DemoCollisionScene::Initialize() {
 
 
 	// カプセルの初期化処理
-	capsuleObj_ = make_unique<Model>();
-	capsuleObj_->CreateFromObj("Capsule");
-	capsuleObj_->SetModelDrawType(Phong);
-	capsuleWt_.Initialize();
+	// 1
+	capsuleObj1_ = make_unique<Model>();
+	capsuleObj1_->CreateFromObj("Capsule");
+	capsuleObj1_->SetModelDrawType(Phong);
+	capsuleWt1_.Initialize();
+	capsuleWt1_.translate.x = -4.0f;
+
+	// 2
+	capsuleObj2_ = make_unique<Model>();
+	capsuleObj2_->CreateFromObj("Capsule");
+	capsuleObj2_->SetModelDrawType(Phong);
+	capsuleWt2_.Initialize();
+	capsuleWt2_.translate.x = 4.0f;
+
+
+
+
 	capsuleLight_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	capsuleLight_.direction = { 0.0f, 0.0f, -1.0f };
 	capsuleLight_.intensity = 1.0f;
@@ -41,10 +54,15 @@ void DemoCollisionScene::Update(GameManager* state) {
 
 
 	// カプセルの更新処理
-	capsuleWt_.UpdateMatrix();
-	capsuleObj_->SetDirectionalLight(capsuleLight_);
-	capsuleObj_->SetColor(capsuleColor_);
+	// 1
+	capsuleWt1_.UpdateMatrix();
+	capsuleObj1_->SetDirectionalLight(capsuleLight_);
+	capsuleObj1_->SetColor(capsuleColor1_);
 
+	// 2
+	capsuleWt2_.UpdateMatrix();
+	capsuleObj2_->SetDirectionalLight(capsuleLight_);
+	capsuleObj2_->SetColor(capsuleColor2_);
 
 #ifdef USE_IMGUI
 
@@ -56,14 +74,25 @@ void DemoCollisionScene::Update(GameManager* state) {
 		ImGui::DragFloat3("Translate", &viewProjection_.translate.x, 0.01f);
 		ImGui::TreePop();
 	}
-	if (ImGui::TreeNode("Capsule")) {
-		ImGui::Text("WorldTransform");
-		ImGui::DragFloat3("Scale", &capsuleWt_.scale.x, 0.01f, 0.0f, 10.0f);
-		ImGui::DragFloat3("Rotate", &capsuleWt_.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &capsuleWt_.translate.x, 0.01f);
-		ImGui::Text("ModelColor");
-		ImGui::ColorEdit4("ModelColor", &capsuleColor_.x);
-		ImGui::Text("Light");
+	if (ImGui::TreeNode("Capsule1")) {
+		ImGui::Text("WorldTransform1");
+		ImGui::DragFloat3("Scale1", &capsuleWt1_.scale.x, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat3("Rotate1", &capsuleWt1_.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate1", &capsuleWt1_.translate.x, 0.01f);
+		ImGui::Text("ModelColor1");
+		ImGui::ColorEdit4("ModelColor1", &capsuleColor1_.x);
+		ImGui::TreePop();
+	}
+	if (ImGui::TreeNode("Capsule2")) {
+		ImGui::Text("WorldTransform2");
+		ImGui::DragFloat3("Scale2", &capsuleWt2_.scale.x, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat3("Rotate2", &capsuleWt2_.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate2", &capsuleWt2_.translate.x, 0.01f);
+		ImGui::Text("ModelColor2");
+		ImGui::ColorEdit4("ModelColor2", &capsuleColor2_.x);
+		ImGui::TreePop();
+	}
+	if (ImGui::TreeNode("Light")) {
 		ImGui::ColorEdit4("LightColor", &capsuleLight_.color.x);
 		ImGui::DragFloat3("LightDirection", &capsuleLight_.direction.x, 0.1f);
 		ImGui::TreePop();
@@ -89,7 +118,8 @@ void DemoCollisionScene::BackSpriteDraw() {
 void DemoCollisionScene::ModelDraw() {
 
 	// カプセルの描画処理
-	capsuleObj_->Draw(capsuleWt_, viewProjection_);
+	capsuleObj1_->Draw(capsuleWt1_, viewProjection_);
+	capsuleObj2_->Draw(capsuleWt2_, viewProjection_);
 }
 
 

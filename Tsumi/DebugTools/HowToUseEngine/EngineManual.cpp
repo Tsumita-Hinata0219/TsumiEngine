@@ -107,7 +107,7 @@ void EngineManual::ModelDraw(ViewProjection view)
 void EngineManual::FrontSpriteDraw(ViewProjection view) 
 {
 	// BGM
-	bgm_->Draw(view);
+	//bgm_->Draw(view);
 
 
 	// スプライト

@@ -269,6 +269,9 @@
     <Filter Include="Project\GameObject\Effect\BGM">
       <UniqueIdentifier>{85a93f25-043a-4b84-a7bf-d9e97d84e674}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Scene\SceneState\MathScene">
+      <UniqueIdentifier>{90d8ae64-72a9-4f6c-8c2e-6a530779c82c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -748,6 +751,7 @@
     <ClInclude Include="Project\GameObject\Effect\BGM\BGM.h">
       <Filter>Project\GameObject\Effect\BGM</Filter>
     </ClInclude>
+    <ClInclude Include="Project\Scene\SceneState\MathScene\IScene.h" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">

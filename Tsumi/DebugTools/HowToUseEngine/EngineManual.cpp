@@ -32,6 +32,14 @@ void EngineManual::Initialize()
 	// BGM
 	bgm_ = make_unique<BGM>();
 	bgm_->Initialize();
+
+
+	// テクスチャの読み込み
+	uvTexHD_ = TextureManager::LoadTexture("uvChecker.png");
+	// スプライト
+	uvSp_ = make_unique<Sprite>();
+	uvSp_->Initialize(Vector2::zero, { 256.0f, 256.0f });
+	uvWt_.Initialize();
 }
 
 
@@ -52,7 +60,16 @@ void EngineManual::Update(ViewProjection view)
 	// BGM
 	bgm_->Update();
 
+
+
+	// スプライト
+	uvWt_.UpdateMatrix();
+
 #ifdef _DEBUG
+
+	ImGui::Begin("uvChecker");
+	ImGui::DragFloat3("Transform", &uvWt_.translate.x, 1.0f);
+	ImGui::End();
 
 
 #endif // _DEBUG
@@ -91,6 +108,10 @@ void EngineManual::FrontSpriteDraw(ViewProjection view)
 {
 	// BGM
 	bgm_->Draw(view);
+
+
+	// スプライト
+	uvSp_->Draw(uvTexHD_, uvWt_, view);
 
 }
 

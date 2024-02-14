@@ -69,4 +69,15 @@ private: // メンバ変数
 
 	// BGM
 	unique_ptr<BGM> bgm_ = nullptr;
+
+
+
+	// スプライト
+	unique_ptr<Sprite> uvSp_ = nullptr;
+
+	// テクスチャハンドル
+	uint32_t uvTexHD_;
+
+	// ワールドトランスフォーム
+	WorldTransform uvWt_{};
 };

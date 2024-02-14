@@ -35,5 +35,7 @@ private:
 	// ライト
 	DirectionalLight light_{};
 
+	Vector4 color = Vector4::one;
+
 };
 

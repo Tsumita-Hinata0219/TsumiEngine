@@ -48,6 +48,7 @@ void MonsBall::Update()
 	}
 	for (int i = 1; i < 4; ++i) {
 		monsBall_[i]->SetDirectionalLight(light_);
+		monsBall_[i]->SetColor(color);
 	}
 
 #ifdef USE_IMGUI
@@ -58,6 +59,7 @@ void MonsBall::Update()
 		ImGui::DragFloat3("LightDirection", &light_.direction.x, 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
+		ImGui::ColorEdit4("Color", &color.x);
 		ImGui::TreePop();
 	}
 

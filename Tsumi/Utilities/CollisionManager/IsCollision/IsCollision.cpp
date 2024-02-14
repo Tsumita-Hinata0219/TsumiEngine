@@ -212,4 +212,44 @@ namespace Collision {
 
 		return true;
 	}
+
+
+	// CapsuleとCapsuleの当たり判定
+	bool IsCollision(const Capsule& capsule1, const Capsule& capsule2) {
+
+		//オイラー角から回転行列を作成
+		Matrix4x4 rotateMat1 = MakeRotateXYZMatrix(capsule1.rotate);
+		Matrix4x4 rotateMat2 = MakeRotateXYZMatrix(capsule2.rotate);
+
+		// ベクトル変換
+		Vector3 v1 = TransformByMatrix((capsule1.s.origin + capsule1.s.diff) - capsule1.s.origin, rotateMat1);
+		Vector3 v2 = TransformByMatrix((capsule2.s.origin + capsule2.s.diff) - capsule2.s.origin, rotateMat2);
+		Vector3 startV = TransformByMatrix((capsule2.s.origin - capsule1.s.origin), rotateMat1);
+
+		// 内積
+		float dotProduct = Dot(v1, v2);
+
+		// 長さ
+		float length1 = Length(v1);
+		float length2 = Length(v2);
+
+		// 正規化
+		Vector3 normalize1 = Normalize(v1);
+		Vector3 normalize2 = Normalize(v2);
+
+		// 距離 & 半径
+		Vector3 val = { Dot(startV, normalize1), Dot(startV, normalize2), 0.0f };
+		float dist = Length(startV - val);
+		float rad = capsule1.radius + capsule2.radius;
+
+		// 衝突しているかの判定
+		if (dist <= rad && dotProduct >= 0.0f && dotProduct <= length1 + length2) {
+
+			// 衝突している
+			return true;
+		}
+
+		// 衝突していない
+		return false;
+	}
 }

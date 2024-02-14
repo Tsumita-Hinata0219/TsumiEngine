@@ -28,4 +28,7 @@ namespace Collision {
 
 	// OBBとOBBの当たり判定
 	bool IsCollision(const OBB& obb1, const OBB& obb2);
+
+	// CapsuleとCapsuleの当たり判定
+	bool IsCollision(const Capsule& capsule1, const Capsule& capsule2);
 }

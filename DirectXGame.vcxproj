@@ -161,6 +161,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Scene\SceneState\DebugScene\DebugScene.cpp" />
+    <ClCompile Include="Project\Scene\SceneState\DemoCollisionScene\DemoCollisionScene.cpp" />
     <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\SceneState\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp" />
@@ -240,6 +241,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\SceneState\DebugScene\DebugScene.h" />
+    <ClInclude Include="Project\Scene\SceneState\DemoCollisionScene\DemoCollisionScene.h" />
     <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\SceneState\TitleScene\TitleScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />

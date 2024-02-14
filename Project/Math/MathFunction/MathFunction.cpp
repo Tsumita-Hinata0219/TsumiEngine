@@ -580,12 +580,12 @@ Matrix4x4 MakeRotateZMatrix(float radian) {
 }
 
 // 回転行列(all)
-Matrix4x4 MakeRotateXYZMatrix(float radianX, float radianY, float radianZ) {
+Matrix4x4 MakeRotateXYZMatrix(Vector3 rotate) {
 	Matrix4x4 result{};
 
-	Matrix4x4 rotateXMatrix = MakeRotateXMatrix(radianX);
-	Matrix4x4 rotateYMatrix = MakeRotateYMatrix(radianY);
-	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(radianZ);
+	Matrix4x4 rotateXMatrix = MakeRotateXMatrix(rotate.x);
+	Matrix4x4 rotateYMatrix = MakeRotateYMatrix(rotate.y);
+	Matrix4x4 rotateZMatrix = MakeRotateZMatrix(rotate.z);
 
 	result = rotateXMatrix * (rotateYMatrix * rotateZMatrix);
 
@@ -602,7 +602,7 @@ Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Ve
 
 	// 回転行列(all)
 	Matrix4x4 rotateMatrix;
-	rotateMatrix = MakeRotateXYZMatrix(rotate.x, rotate.y, rotate.z);
+	rotateMatrix = MakeRotateXYZMatrix(rotate);
 
 	// 平行移動行列
 	Matrix4x4 translateMatrix;

@@ -4,6 +4,7 @@
 
 #include "IScene.h"
 #include "DebugScene/DebugScene.h"
+#include "DemoCollisionScene/DemoCollisionScene.h"
 #include "GameScene/GameScene.h"
 #include "TitleScene/TitleScene.h"
 #include "Input.h"

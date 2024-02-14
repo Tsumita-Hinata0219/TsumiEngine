@@ -131,7 +131,7 @@ Matrix4x4 MakeRotateXMatrix(float radian);
 Matrix4x4 MakeRotateYMatrix(float radian);
 Matrix4x4 MakeRotateZMatrix(float radian);
 // 回転行列(all)
-Matrix4x4 MakeRotateXYZMatrix(float radianX, float radianY, float radianZ);
+Matrix4x4 MakeRotateXYZMatrix(Vector3 rotate);
 // 平行移動行列
 Matrix4x4 MakeTranslateMatrix(const Vector3 translate);
 // 3次元アフィン変換行列 (W = SRT)
@@ -147,6 +147,7 @@ Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float angle);
 Matrix4x4 MakeRotateAxisAngle(const Vector3& axis, float cos, float sin);
 // ある方向からある方向への回転
 Matrix4x4 DirectionToDirection(const Vector3& from, const Vector3& to);
+
 
 
 

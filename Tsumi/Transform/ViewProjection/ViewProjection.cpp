@@ -17,8 +17,8 @@ void ViewProjection::Initialize(Vector3 initRotate, Vector3 initTranslate) {
 // 更新処理
 void ViewProjection::UpdateMatrix() {
 
-	Matrix4x4 translateMat = MakeTranslateMatrix(translate);
-	Matrix4x4 rotateMat = MakeRotateXYZMatrix(rotate.x, rotate.y, rotate.z);
+	rotateMat = MakeRotateXYZMatrix(rotate.x, rotate.y, rotate.z);
+	translateMat = MakeTranslateMatrix(translate);
 
 	matView = Inverse(translateMat) * Inverse(rotateMat);
 	matProjection = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);

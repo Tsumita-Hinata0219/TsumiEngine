@@ -66,7 +66,7 @@ void EngineManual::Update(ViewProjection view)
 void EngineManual::BackSpriteDraw(ViewProjection view) 
 {
 	// 雲模様背景
-	//cloudBG_->Draw(view);
+	cloudBG_->Draw(view);
 
 }
 
@@ -77,7 +77,7 @@ void EngineManual::BackSpriteDraw(ViewProjection view)
 void EngineManual::ModelDraw(ViewProjection view) 
 {
 	// モンスターボール
-	//monsBall_->Draw(view);
+	monsBall_->Draw(view);
 
 	// 光子パーティクル
 	photon_->Draw(view);
@@ -90,7 +90,7 @@ void EngineManual::ModelDraw(ViewProjection view)
 void EngineManual::FrontSpriteDraw(ViewProjection view) 
 {
 	// BGM
-	//bgm_->Draw(view);
+	bgm_->Draw(view);
 
 }
 

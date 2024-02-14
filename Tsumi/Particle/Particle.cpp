@@ -84,6 +84,7 @@ void Particle::Emit(const Emitter& emitter, Scope lifeTimeScope, ScopeVec3 posSc
 		ParticleProperties prope{};
 		prope = ParticleGenerators(lifeTimeScope, posScope, velScope, colorScope);
 		prope.worldTransform.translate += emitter.worldTransform.translate;
+		prope.worldTransform.UpdateMatrix();
 		PushBackList(prope);
 	}
 }

@@ -27,7 +27,7 @@ void EngineManual::Initialize()
 
 	// 光子パーティクル
 	photon_ = make_unique<Photon>();
-	//photon_->Initialize();
+	photon_->Initialize();
 
 	// BGM
 	bgm_ = make_unique<BGM>();
@@ -47,7 +47,7 @@ void EngineManual::Update(ViewProjection view)
 	monsBall_->Update();
 
 	// 光子パーティクル
-	//photon_->Update();
+	photon_->Update();
 
 	// BGM
 	bgm_->Update();
@@ -80,7 +80,7 @@ void EngineManual::ModelDraw(ViewProjection view)
 	monsBall_->Draw(view);
 
 	// 光子パーティクル
-	//photon_->Draw(view);
+	photon_->Draw(view);
 }
 
 

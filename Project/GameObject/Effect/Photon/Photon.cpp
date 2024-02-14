@@ -71,14 +71,14 @@ void Photon::Update()
 	for (ParticleProperties& prope : particlePropes_) {
 
 		// 速度を座標に加算
-		prope.worldTransform.translate += prope.velocity;
+		//prope.worldTransform.translate += prope.velocity;
 
 		// 寿命の処理
 		prope.currentTime++;
 
-		// alphaの処理
-		float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
-		prope.color.w = alpha;
+		//// alphaの処理
+		//float alpha = 1.0f - (float(prope.currentTime) / float(prope.lifeTime));
+		//prope.color.w = alpha;
 
 		// 寿命が尽きたらコンティニュー
 		if (prope.currentTime >= prope.lifeTime) {

@@ -23,19 +23,14 @@ public:
 
 private:
 
-	// テクスチャハンドル
-	uint32_t circleHD_;
-
 	// Particle
 	std::unique_ptr<Particle> particle_ = nullptr;
 
+	uint32_t circleHD_;
+
 	// パーティクルリスト
 	std::list<ParticleProperties> particlePropes_{};
-
-	// エミッター
 	Emitter emitter_{};
-
-	// スコープ
 	Scope lifeTimeScope_{};
 	ScopeVec3 posScope_{};
 	ScopeVec3 velScope_{};

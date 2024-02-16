@@ -144,6 +144,7 @@ namespace Collision {
 
 	}
 
+
 	// OBBと線の当たり判定
 	bool IsCollision(const OBB& obb, const Segment& s) {
 

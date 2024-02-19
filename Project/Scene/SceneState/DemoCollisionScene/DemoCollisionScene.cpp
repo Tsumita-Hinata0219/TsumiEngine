@@ -41,6 +41,7 @@ void DemoCollisionScene::Initialize() {
 	capsuleLight_.intensity = 1.0f;
 	capsuleLight_.sininess = 100.0f;
 	capsuleLight_.enableLightting = true;
+
 }
 
 
@@ -51,6 +52,12 @@ void DemoCollisionScene::Initialize() {
 void DemoCollisionScene::Update(GameManager* state) {
 
 	viewProjection_.UpdateMatrix();
+	Scope s = { 0.0f, 1000.0f };
+	Vector3 rand = {
+			RandomGenerator::getRandom(s) * 0.001f,
+			RandomGenerator::getRandom(s) * 0.001f,
+			RandomGenerator::getRandom(s) * 0.001f,
+	};
 
 
 	// カプセルの更新処理
@@ -63,6 +70,12 @@ void DemoCollisionScene::Update(GameManager* state) {
 	capsuleWt2_.UpdateMatrix();
 	capsuleObj2_->SetDirectionalLight(capsuleLight_);
 	capsuleObj2_->SetColor(capsuleColor2_);
+
+	/*timer++;
+	if (timer >= 2) {
+		timer = 0;
+		capsuleWt2_.translate.x = ParlinNoise::Noise(rand) * 1.5f;
+	}*/
 
 #ifdef USE_IMGUI
 

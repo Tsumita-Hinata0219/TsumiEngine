@@ -62,5 +62,7 @@ private:
 
 	// カプセルライト
 	DirectionalLight capsuleLight_{};
+
+	int timer = 0;
 };
 

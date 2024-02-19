@@ -27,4 +27,7 @@ namespace GeometryCollision {
 
 	// AABBの設定
 	AABB SettingAABBProperties(AABBCollider* c);
+
+	// Capsuleの設定
+	Capsule SettingCapusulePropertirs();
 }

@@ -59,6 +59,7 @@ struct OBB {
 
 // カプセル
 struct Capsule {
+	Vector3 center; // !< 中心座標
 	Segment s;	    // !< 始点と終点
 	Vector3 rotate; // !< オイラー角(姿勢) 
 	float radius;   // !< 半径

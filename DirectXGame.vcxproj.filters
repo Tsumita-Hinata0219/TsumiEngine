@@ -272,6 +272,9 @@
     <Filter Include="Project\Scene\SceneState\DemoCollisionScene">
       <UniqueIdentifier>{f16fc589-ce0e-4d80-8bcf-3b19dfd3285a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Project\Math\MyParlinNoise">
+      <UniqueIdentifier>{0fb631fc-d18c-47e3-ad41-1fef32916274}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp">
@@ -487,6 +490,9 @@
     </ClCompile>
     <ClCompile Include="Project\Scene\SceneState\DemoCollisionScene\DemoCollisionScene.cpp">
       <Filter>Project\Scene\SceneState\DemoCollisionScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp">
+      <Filter>Project\Math\MyParlinNoise</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -756,6 +762,12 @@
     </ClInclude>
     <ClInclude Include="Project\Scene\SceneState\DemoCollisionScene\DemoCollisionScene.h">
       <Filter>Project\Scene\SceneState\DemoCollisionScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\CapsuleCollider.h">
+      <Filter>Tsumi\Utilities\CollisionManager\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h">
+      <Filter>Project\Math\MyParlinNoise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "MathQuaternion.h"
 #include "MathOperations.h"
 #include "MathFunction.h"
+#include "ParlinNoise.h"
 #include "CollisionStructures.h"
 #include "RandomGenerator.h"
 
@@ -12,6 +13,7 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
+#include <cmath>
 #include <cmath>
 #include <iostream>
 #include <cassert>

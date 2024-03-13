@@ -60,7 +60,7 @@ void Player::Update(ViewProjection view)
 	ReticleUpdate(view);
 
 
-#ifdef _DEBUG
+#ifdef _DEMO
 
 	if (ImGui::TreeNode("Player")) 
 	{

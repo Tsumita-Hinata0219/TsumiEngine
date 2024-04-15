@@ -27,6 +27,7 @@ public: // メンバ関数
 	/// Objファイルの読み込み & Obj初期化処理
 	/// </summary>
 	void CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
 	/// <summary>
 	/// 描画処理

@@ -151,6 +151,34 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
+ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
+{
+	if (CheckObjData(filePath)) {
+
+		// asssimpでobjを読む
+		Assimp::Importer importer;
+		string file = filePath + routeFilePath;
+		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+		assert(scene->HasMeshes()); // メッシュがないのは対応しない
+
+
+
+		// meshを解析する
+		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+			aiMesh* mesh = scene->mMeshes[meshIndex];
+			assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
+			assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+			
+			// ここからMeshの中身(Face)の解析を行っていく
+
+		}
+	}
+
+
+	return ObjData();
+}
+
 
 /// <summary>
 /// mtlファイルを読み込む関数

@@ -344,7 +344,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 	}
 
 
-
 	/* 4. MaterialData を返す */
 	return materialData;
 }

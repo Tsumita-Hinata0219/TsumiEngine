@@ -139,7 +139,7 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, true);
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
 		
@@ -215,7 +215,80 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, true);
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
+		objData.textureHD = texHandle;
+		// 作ったモデルデータをデータ群に新しく作る
+		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
+	}
+
+	// 同じファイルパスのモデルデータを検索して返す
+	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
+}
+
+ObjData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
+{
+	if (CheckObjData(filePath)) {
+
+		// 初めてだったら加算
+		ModelManager::Getinstance()->objHandle_++;
+		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
+		ObjData objData{}; // モデルの格納用データ
+
+		// asssimpでobjを読む
+		Assimp::Importer importer;
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + filePath + "/" + filePath + ".gltf");
+
+		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+		assert(scene->HasMeshes()); // メッシュがないのは対応しない
+
+
+		// meshを解析する
+		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+			aiMesh* mesh = scene->mMeshes[meshIndex];
+			assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
+			assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+
+			// ここからMeshの中身(Face)の解析を行っていく
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3); // 三角形のみサポート
+
+				// ここからFaceの中身(Vertex)の解析を行っていく
+				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+					uint32_t vertexIndex = face.mIndices[element];
+					aiVector3D& position = mesh->mVertices[vertexIndex];
+					aiVector3D& normal = mesh->mNormals[vertexIndex];
+					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+					VertexData vertex{};
+					vertex.position = { position.x, position.y, position.z, 1.0f };
+					vertex.normal = { normal.x, normal.y, normal.z, };
+					vertex.texCoord = { texcoord.x, texcoord.y };
+
+					// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
+					vertex.position.x *= -1.0f;
+					vertex.normal.x *= -1.0f;
+
+					// OBJDataに解析した値を差し込む
+					objData.vertices.push_back(vertex);
+				}
+			}
+		}
+
+		// materialを解析する
+		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+			aiMaterial* material = scene->mMaterials[materialIndex];
+
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+				aiString textureFilePath;
+				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+				objData.material.textureFilePath = filePath + routeFilePath;
+			}
+		}
+
+		// テクスチャを指定されたものにする
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::gLTF);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
@@ -274,7 +347,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 
 	/* 4. MaterialData を返す */
 	return materialData;
-
 }
 
 

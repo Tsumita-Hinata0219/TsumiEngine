@@ -39,15 +39,24 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& routeFilePath, bool fromObjTex) {
+uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& routeFilePath, TextureFrom from) {
 
 	// パスを追加
 	std::string FilePath{};
-	if (!fromObjTex) {
+	
+	switch (from)
+	{
+	case TextureFrom::Texture:
 		FilePath = "Resources/Texture/" + routeFilePath + "/" + filePath;
-	}
-	else {
+		break;
+	case TextureFrom::Obj:
 		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath + "/" + filePath + ".png";
+		break;
+	case TextureFrom::gLTF:
+		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath + "/" + filePath + ".png";
+		break;
+	default:
+		break;
 	}
 
 

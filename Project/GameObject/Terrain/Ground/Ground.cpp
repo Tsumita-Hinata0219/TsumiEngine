@@ -15,7 +15,7 @@ void Ground::Initialize()
 {
 	this->normalMapTexHD_ = TextureManager::LoadTexture("normalMap.png");
 	this->model_ = make_unique<Model>();
-	this->model_->CreateFromObj("Ground");
+	this->model_->CreateFromObjAssimpVer("Ground");
 	this->model_->SetModelDrawType(PhongNormalMap);
 	this->model_->SetNormalMapTex(normalMapTexHD_);
 	this->worldTransform_.Initialize();

@@ -8,6 +8,11 @@
 #include <fstream>
 #include <sstream>
 
+#include <assimp\Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp\postprocess.h>
+
+
 /* ModelManagerクラス */
 class ModelManager {
 
@@ -42,6 +47,7 @@ public: // メンバ関数
 	/// Objファイルを読み込む
 	/// </summary>
 	static ObjData LoadObjFile(std::string filePath, const std::string& routeFilePath);
+	static ObjData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
 
 
 private: // メンバ関数

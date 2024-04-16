@@ -15,7 +15,7 @@ void Skydome::Initialize()
 {
 
 	Skydome::GetInstance()->model_ = make_unique<Model>();
-	Skydome::GetInstance()->model_->CreateFromObj("Skydome");
+	Skydome::GetInstance()->model_->CreateFromObjAssimpVer("Skydome");
 	Skydome::GetInstance()->worldTransform_.Initialize();
 	Skydome::GetInstance()->worldTransform_.scale = { 10000.0f, 1000.0f, 10000.0f };
 }

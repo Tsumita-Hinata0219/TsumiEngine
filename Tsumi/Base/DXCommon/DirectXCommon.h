@@ -14,6 +14,7 @@
 #include "GraphicPipelineManager.h"
 #include "MyMath.h"
 #include "Struct.h"
+#include "CreateResource.h"
 
 
 
@@ -36,7 +37,7 @@ struct SwapChains {
 struct RTV {
 	ComPtr<ID3D12DescriptorHeap> DescriptorHeap;
 	D3D12_RENDER_TARGET_VIEW_DESC Desc{};
-	D3D12_CPU_DESCRIPTOR_HANDLE Handles[2];
+	D3D12_CPU_DESCRIPTOR_HANDLE Handles[3];
 	D3D12_CPU_DESCRIPTOR_HANDLE StartHandle;
 };
 
@@ -231,11 +232,11 @@ private: // メンバ変数
 	D3D12_INFO_QUEUE_FILTER filter_{};
 
 	// コマンド
-	Commands commands_;
+	Commands commands_{};
 
 
 	// バックバッファインデックス
-	UINT backBufferIndex_;
+	UINT backBufferIndex_{};
 
 
 	// TransitionBarrierの設定
@@ -260,7 +261,7 @@ private: // メンバ変数
 
 
 	// Event
-	HANDLE fenceEvent_;
+	HANDLE fenceEvent_{};
 
 
 	// dxcCompilerを初期化

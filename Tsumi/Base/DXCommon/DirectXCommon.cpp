@@ -490,6 +490,12 @@ void DirectXCommon::SettingRTV() {
 		rtv.Handles[1]);
 
 
+	// 3つ目を作る RenderTexture用
+	const Vector4 kRenderTargetClearValue{ 1.0f, 0.0f, 0.0f, 1.0f }; // いったんわかりやすいように赤色
+	auto renderTextureResource = CreateResource::CreateRenderTextureResource(sizeof(VertexData) * 4, 1, DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, kRenderTargetClearValue);
+	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
+		renderTextureResource.Get(), &rtv.Desc, rtv.Handles[2]);
+
 	////DescriptorHandleとDescriptorHeap
 	typedef struct D3D12_CPU_DESCRIPTOR_HANDLE {
 		SIZE_T ptr;
@@ -500,6 +506,9 @@ void DirectXCommon::SettingRTV() {
 
 	rtv.Handles[1].ptr =
 		rtv.Handles[0].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+
+	rtv.Handles[2].ptr =
+		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	DirectXCommon::GetInstance()->rtv_ = rtv;
 }

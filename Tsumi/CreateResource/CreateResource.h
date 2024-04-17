@@ -48,7 +48,7 @@ public:
 	/// <summary>
 	/// Rendertexture生成関数
 	/// </summary>
-	void CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color, ComPtr<ID3D12Resource> resource);
+	static ComPtr<ID3D12Resource> CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color);
 
 private:
 

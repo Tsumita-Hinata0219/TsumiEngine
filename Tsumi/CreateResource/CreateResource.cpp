@@ -25,7 +25,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateBufferResource(size_t sizeInBytes) 
 
 	// バッファリソース。テクスチャの場合はまた別の設定をする
 	D3D12_RESOURCE_DESC vertexResourceDesc_{};
-	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 
 	// リソースのサイズ
 	vertexResourceDesc_.Width = sizeInBytes;
@@ -126,7 +126,7 @@ D3D12_INDEX_BUFFER_VIEW CreateResource::CreateIndexBufferview(size_t sizeInbyte,
 /// <summary>
 /// Rendertexture生成関数
 /// </summary>
-void CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color, ComPtr<ID3D12Resource> resource)
+ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color)
 {
 	ComPtr<ID3D12Resource> resultResource;
 
@@ -136,7 +136,8 @@ void CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height
 
 	// バッファリソース。テクスチャの場合はまた別の設定をする
 	D3D12_RESOURCE_DESC resourceDesc{};
-	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	resourceDesc.Format = format;
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
 
 	// リソースのサイズ
 	resourceDesc.Width = width;
@@ -149,7 +150,7 @@ void CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height
 	// バッファの場合はこれにする決まり
 	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
-	// REnderTargetとして利用可能にする
+	// RenderTargetとして利用可能にする
 	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
 
 	// ClearValueの設定
@@ -166,8 +167,10 @@ void CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height
 		&uploadHeapProperties_, 
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc, 
-		D3D12_RESOURCE_STATE_GENERIC_READ, // これから描画することを前提としたTextureなのでRederTargetとして使うことから始める
+		D3D12_RESOURCE_STATE_RENDER_TARGET, // これから描画することを前提としたTextureなのでRederTargetとして使うことから始める
 		&clearValue, // Clear最適地。ClearRederTargetをこの色でClearするようにする。最適化されているので高速である。
-		IID_PPV_ARGS(&resource));
+		IID_PPV_ARGS(&resultResource));
 	assert(SUCCEEDED(hr_));
+
+	return resultResource;
 }

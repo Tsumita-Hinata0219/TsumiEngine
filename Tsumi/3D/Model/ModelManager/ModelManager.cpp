@@ -225,6 +225,7 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
+
 ObjData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
 {
 	if (CheckObjData(filePath)) {
@@ -292,11 +293,30 @@ ObjData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFil
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
+
+		// Nodeを読み込む
+		objData.node = ModelManager::Getinstance()->ReadNode(scene->mRootNode);
 	}
 
 	// 同じファイルパスのモデルデータを検索して返す
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
+
+
+
+/// <summary>
+/// 一回読み込んだものは読み込まない
+/// </summary>
+bool ModelManager::CheckObjData(std::string filePath) {
+
+	if (ModelManager::Getinstance()->objModelDatas_.find(filePath) == ModelManager::Getinstance()->objModelDatas_.end()) {
+
+		return true;
+	}
+
+	return false;
+}
+
 
 
 /// <summary>
@@ -350,14 +370,26 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 
 
 /// <summary>
-/// 一回読み込んだものは読み込まない
+/// Nodeの情報を読む
 /// </summary>
-bool ModelManager::CheckObjData(std::string filePath) {
+Node ModelManager::ReadNode(aiNode* node)
+{
+	Node result;
 
-	if (ModelManager::Getinstance()->objModelDatas_.find(filePath) == ModelManager::Getinstance()->objModelDatas_.end()) {
-
-		return true;
+	aiMatrix4x4 aiLocalMatrix = node->mTransformation; // nodeのlocalMatrixを取得
+	aiLocalMatrix.Transpose(); // 列ベクトル形式を行ベクトル形式に転置
+	result.localMatrix = {
+		aiLocalMatrix[0][0], aiLocalMatrix[0][1], aiLocalMatrix[0][2], aiLocalMatrix[0][3],
+		aiLocalMatrix[1][0], aiLocalMatrix[1][1], aiLocalMatrix[1][2], aiLocalMatrix[1][3],
+		aiLocalMatrix[2][0], aiLocalMatrix[2][1], aiLocalMatrix[2][2], aiLocalMatrix[2][3],
+		aiLocalMatrix[3][0], aiLocalMatrix[3][1], aiLocalMatrix[3][2], aiLocalMatrix[3][3],
+	};
+	result.name = node->mName.C_Str(); // Mode名を格納
+	result.Children.resize(node->mNumChildren); // 子供の数だけ確保
+	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
+		// 再帰的によんで階層構造を作っていく
+		result.Children[childIndex] = ReadNode(node->mChildren[childIndex]);
 	}
-
-	return false;
+	return result;
 }
+

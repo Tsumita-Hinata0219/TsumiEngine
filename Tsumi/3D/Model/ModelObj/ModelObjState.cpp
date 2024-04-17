@@ -43,13 +43,15 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 	// マテリアルの情報を書き込む
 	material->color = pModel->GetColor();
 
-	// ライティングの設定
-	lightData->color = pModel->GetDirectionalLight().color;
-	lightData->direction = pModel->GetDirectionalLight().direction;
-	//lightData->SpecularFColor = pModel->GetDirectionalLight().SpecularFColor;
-	lightData->intensity = pModel->GetDirectionalLight().intensity;
-	lightData->sininess = pModel->GetDirectionalLight().sininess;
-	lightData->enableLightting = pModel->GetDirectionalLight().enableLightting;
+	//// ライティングの設定
+	//lightData->color = pModel->GetDirectionalLight().color;
+	//lightData->direction = pModel->GetDirectionalLight().direction;
+	////lightData->SpecularFColor = pModel->GetDirectionalLight().SpecularFColor;
+	//lightData->intensity = pModel->GetDirectionalLight().intensity;
+	//lightData->sininess = pModel->GetDirectionalLight().sininess;
+	//lightData->enableLightting = pModel->GetDirectionalLight().enableLightting;
+
+	(*lightData) = pModel->GetDirectionalLight();
 
 
 	// コマンドコール

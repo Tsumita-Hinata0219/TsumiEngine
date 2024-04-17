@@ -63,6 +63,10 @@ private: // メンバ関数
 	/// </summary>
 	MaterialData LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName, const std::string& routeFilePath);
 
+	/// <summary>
+	/// Nodeの情報を読む
+	/// </summary>
+	Node ReadNode(aiNode* node);
 
 private: // メンバ変数
 

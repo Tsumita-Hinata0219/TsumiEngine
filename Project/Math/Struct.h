@@ -49,6 +49,14 @@ struct SphereData {
 };
 
 
+// Node
+struct Node {
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<Node> Children;
+};
+
+
 // マテリアル
 struct Material {
 	Vector4 color;
@@ -73,17 +81,18 @@ struct MaterialData {
 struct ModelData {
 	std::vector<VertexData> vertices;
 	MaterialData material;
+	Node node;
 };
 
 
 // 平行光源
 struct DirectionalLight {
-	Vector4 color;          // ライトの色
-	Vector3 direction;      // ライトの向き
+	Vector4 color{};          // ライトの色
+	Vector3 direction{};      // ライトの向き
 	//Vector3 SpecularFColor; // 鏡面反射色
-	float intensity;        // 輝度
-	float sininess;         // 光沢度
-	bool enableLightting;   // ライティングするか
+	float intensity{};        // 輝度
+	float sininess{};         // 光沢度
+	bool enableLightting{};   // ライティングするか
 };
 
 
@@ -104,6 +113,7 @@ struct ObjData {
 	ComPtr<ID3D12Resource> resource;
 	vector<VertexData> vertices;
 	MaterialData material;
+	Node node;
 };
 
 

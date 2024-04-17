@@ -120,3 +120,54 @@ D3D12_INDEX_BUFFER_VIEW CreateResource::CreateIndexBufferview(size_t sizeInbyte,
 
 	return resultBufferView;
 }
+
+
+
+/// <summary>
+/// Rendertexture生成関数
+/// </summary>
+void CreateResource::CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color, ComPtr<ID3D12Resource> resource)
+{
+	ComPtr<ID3D12Resource> resultResource;
+
+	// 頂点リソース用のヒープ設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_DEFAULT; // VRAM上に作る
+
+	// バッファリソース。テクスチャの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+
+	// リソースのサイズ
+	resourceDesc.Width = width;
+	resourceDesc.Height = height;
+	
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
+
+	// バッファの場合はこれにする決まり
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// REnderTargetとして利用可能にする
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+
+	// ClearValueの設定
+	D3D12_CLEAR_VALUE clearValue{};
+	clearValue.Format = format;
+	clearValue.Color[0] = color.x;
+	clearValue.Color[1] = color.y;
+	clearValue.Color[2] = color.z;
+	clearValue.Color[3] = color.w;
+
+	// 実際に頂点リソースを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, 
+		D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, 
+		D3D12_RESOURCE_STATE_GENERIC_READ, // これから描画することを前提としたTextureなのでRederTargetとして使うことから始める
+		&clearValue, // Clear最適地。ClearRederTargetをこの色でClearするようにする。最適化されているので高速である。
+		IID_PPV_ARGS(&resource));
+	assert(SUCCEEDED(hr_));
+}

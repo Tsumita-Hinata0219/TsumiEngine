@@ -1,6 +1,7 @@
 #pragma once
 #include "DirectXCommon.h"
 #include "Struct.h"
+#include "MyMath.h"
 
 
 struct ResourcePeroperty {
@@ -36,7 +37,6 @@ public:
 	/// 頂点バッファリソースを作成する
 	/// </summary>
 	static ComPtr<ID3D12Resource> CreateBufferResource(size_t sizeInBytes);
-
 	static void CreateBufferResource(size_t sizeInBytes, ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
@@ -44,6 +44,11 @@ public:
 	/// </summary>
 	static D3D12_VERTEX_BUFFER_VIEW CreateVertexBufferView(size_t sizeInbyte, ID3D12Resource* resource, int size);
 	static D3D12_INDEX_BUFFER_VIEW CreateIndexBufferview(size_t sizeInbyte, ID3D12Resource* resource);
+
+	/// <summary>
+	/// Rendertexture生成関数
+	/// </summary>
+	void CreateRenderTextureResource(uint32_t width, uint32_t height, DXGI_FORMAT format, const Vector4& color, ComPtr<ID3D12Resource> resource);
 
 private:
 

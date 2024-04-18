@@ -29,7 +29,7 @@ void ModelManager::Finalize() {
 /// <summary>
 /// Objファイルを読み込む
 /// </summary>
-ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& routeFilePath) {
+ModelData ModelManager::LoadObjFile(std::string filePath, const std::string& routeFilePath) {
 
 	if (CheckObjData(filePath)) {
 
@@ -40,7 +40,7 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 
 		/* 1. 中で必要となる変数の宣言 */
 
-		ObjData objData;            // 構築するModelData
+		ModelData objData;            // 構築するModelData
 		std::vector<Vector4> positions; // 位置
 		std::vector<Vector3> normals;   // 法線
 		std::vector<Vector2> texcoords; // テクスチャ座標
@@ -142,23 +142,19 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
-		
-
-		/* 4. ModelHandleを返す */
-		//return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 	}
 
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
-ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
+ModelData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
 {
 	if (CheckObjData(filePath)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
 		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
-		ObjData objData{}; // モデルの格納用データ
+		ModelData objData{}; // モデルの格納用データ
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
@@ -167,7 +163,6 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
 
 
 		// meshを解析する
@@ -225,15 +220,14 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
-
-ObjData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
+ModelData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
 {
 	if (CheckObjData(filePath)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
 		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
-		ObjData objData{}; // モデルの格納用データ
+		ModelData objData{}; // モデルの格納用データ
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
@@ -330,7 +324,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 	std::string line{};			 // ファイルから読んだ１行を格納するもの
 
 
-
 	/* 2. ファイルを開く */
 
 	// ファイルを開く
@@ -340,7 +333,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 	assert(file.is_open());
 
 
-
 	/* 3. 実際にファイルを読み、MaterualDataを構築していく */
 
 	while (std::getline(file, line)) {
@@ -348,7 +340,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 		std::string identifier{};
 		std::istringstream s(line);
 		s >> identifier;
-
 
 		// identifierに応じた処理
 		// "map_Kd" = textureのファイル名が記載されている
@@ -362,7 +353,6 @@ MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath,
 			materialData.textureFilePath = "Resources/Obj/" + filePath + "/" + textureFileName;
 		}
 	}
-
 
 	/* 4. MaterialData を返す */
 	return materialData;

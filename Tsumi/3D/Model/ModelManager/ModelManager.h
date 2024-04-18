@@ -46,9 +46,9 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルを読み込む
 	/// </summary>
-	static ObjData LoadObjFile(std::string filePath, const std::string& routeFilePath);
-	static ObjData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
-	static ObjData LoadGLTF(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadObjFile(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadGLTF(std::string filePath, const std::string& routeFilePath);
 
 
 private: // メンバ関数

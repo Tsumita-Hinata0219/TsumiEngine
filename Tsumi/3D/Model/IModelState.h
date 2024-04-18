@@ -4,6 +4,14 @@
 #include "Camera.h"
 
 
+enum ModelDrawType {
+	Non,
+	Lambert,
+	Phong,
+	PhongNormalMap,
+};
+
+
 // Modelの前方宣言
 class Model;
 

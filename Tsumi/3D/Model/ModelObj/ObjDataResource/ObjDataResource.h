@@ -17,12 +17,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ObjDataResource(ObjData objData, uint32_t index);
+	ObjDataResource(ModelData objData, uint32_t index);
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~ObjDataResource();
+	~ObjDataResource() {};
 
 
 #pragma region Get
@@ -30,19 +30,19 @@ public:
 	/// <summary>
 	/// Objデータ
 	/// </summary>
-	ObjData GetObjData() { return objData_; }
+	ModelData GetObjData() { return objData_; }
 
 	/// <summary>
 	/// テクスチャハンドルの取得
 	/// </summary>
-	uint32_t GetObjHandle() { return objData_.index; }
+	uint32_t GetObjHandle() const { return index_; }
 
 #pragma endregion 
 
 
 private:
 
-	ObjData objData_{};
+	ModelData objData_{};
 	uint32_t index_;
 
 };

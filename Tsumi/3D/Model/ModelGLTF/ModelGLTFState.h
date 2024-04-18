@@ -16,13 +16,14 @@
 #include <sstream>
 
 
-/* ModelObjクラス */
-class ModelObjState : public IModelState {
+/* ModelGLTFクラス */
+class ModelGLTFState : public IModelState {
 
 public: // メンバ関数
 
-	ModelObjState() {};
-	~ModelObjState() {};
+	ModelGLTFState() {};
+	~ModelGLTFState() {};
+
 
 	/// <summary>
 	/// 初期化処理
@@ -50,3 +51,4 @@ private: // メンバ関数
 	// ModelData
 	ModelData modelData_{};
 };
+

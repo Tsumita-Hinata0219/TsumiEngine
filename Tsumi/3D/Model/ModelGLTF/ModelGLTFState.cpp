@@ -1,13 +1,11 @@
-#include "ModelObjState.h"
+#include "ModelGLTFState.h"
 #include "Model.h"
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void ModelObjState::Initialize(Model* pModel) {
-
-	//objData_ = pModel->GetObjData();
+void ModelGLTFState::Initialize(Model* pModel) {
 
 	modelData_.material = pModel->GetObjData().material;
 	modelData_.vertices = pModel->GetObjData().vertices;
@@ -23,7 +21,7 @@ void ModelObjState::Initialize(Model* pModel) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) {
 
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
@@ -55,7 +53,7 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
 
 	// コマンドの取得
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();

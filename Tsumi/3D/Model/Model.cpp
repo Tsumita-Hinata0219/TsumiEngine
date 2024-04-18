@@ -134,7 +134,7 @@ void Model::CreateGLTFModel(const std::string& directoryPath, const std::string&
 	modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
-	this->state_ = new ModelObjState();
+	this->state_ = new ModelGLTFState();
 	this->state_->Initialize(this);
 }
 

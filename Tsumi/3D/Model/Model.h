@@ -4,6 +4,7 @@
 #include "ViewProjection.h"
 #include "IModelState.h"
 #include "ModelManager.h"
+#include "ModelGLTFState.h"
 #include "ModelObjState.h"
 #include "ObjDataResource.h"
 #include "ModelPlaneState.h"
@@ -62,10 +63,9 @@ public: // メンバ関数
 	// ObjHandle
 	uint32_t GetObjHandle() const { return objHandle_; }
 
-	ObjData GetObjData() { return objData_; }
+	ModelData GetObjData() { return objData_; }
 
 	ModelDrawType GetModelDrawType() const { return modelDrawType_; }
-
 
 
 #pragma endregion 
@@ -122,7 +122,7 @@ private: // メンバ変数
 
 	ModelData modelData_{};
 
-	ObjData objData_{};
+	ModelData objData_{};
 
 	ModelDrawType modelDrawType_ = Non;
 

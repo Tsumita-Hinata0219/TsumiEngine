@@ -7,7 +7,7 @@
 /// </summary>
 void ModelObjState::Initialize(Model* pModel) {
 
-	pModel;
+	//objData_ = pModel->GetObjData();
 
 	modelData_.material = pModel->GetObjData().material;
 	modelData_.vertices = pModel->GetObjData().vertices;
@@ -39,6 +39,7 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 
 	// 頂点データをリソースにコピー
 	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
+
 
 	// マテリアルの情報を書き込む
 	material->color = pModel->GetColor();

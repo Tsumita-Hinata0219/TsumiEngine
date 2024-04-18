@@ -59,5 +59,5 @@ private: // メンバ関数
 	// ModelData
 	ModelData modelData_{};
 
-	ObjData objData_{};
+	//ObjData objData_{};
 };

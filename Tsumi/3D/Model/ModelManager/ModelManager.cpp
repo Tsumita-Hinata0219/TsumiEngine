@@ -29,7 +29,7 @@ void ModelManager::Finalize() {
 /// <summary>
 /// Objファイルを読み込む
 /// </summary>
-ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& routeFilePath) {
+ModelData ModelManager::LoadObjFile(std::string filePath, const std::string& routeFilePath) {
 
 	if (CheckObjData(filePath)) {
 
@@ -40,7 +40,7 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 
 		/* 1. 中で必要となる変数の宣言 */
 
-		ObjData objData;            // 構築するModelData
+		ModelData objData;            // 構築するModelData
 		std::vector<Vector4> positions; // 位置
 		std::vector<Vector3> normals;   // 法線
 		std::vector<Vector2> texcoords; // テクスチャ座標
@@ -139,26 +139,22 @@ ObjData ModelManager::LoadObjFile(std::string filePath, const std::string& route
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, true);
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
-		
-
-		/* 4. ModelHandleを返す */
-		//return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 	}
 
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
-ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
+ModelData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
 {
 	if (CheckObjData(filePath)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
 		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
-		ObjData objData{}; // モデルの格納用データ
+		ModelData objData{}; // モデルの格納用データ
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
@@ -167,7 +163,6 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
 
 
 		// meshを解析する
@@ -215,7 +210,7 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, true);
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
@@ -225,57 +220,83 @@ ObjData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::stri
 	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
 
+ModelData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
+{
+	if (CheckObjData(filePath)) {
 
-/// <summary>
-/// mtlファイルを読み込む関数
-/// </summary>
-MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName, const std::string& routeFilePath) {
+		// 初めてだったら加算
+		ModelManager::Getinstance()->objHandle_++;
+		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
+		ModelData objData{}; // モデルの格納用データ
 
-	/* 1. 中で必要となる変数の宣言 */
+		// asssimpでobjを読む
+		Assimp::Importer importer;
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + filePath + "/" + filePath + ".gltf");
 
-	MaterialData materialData{}; // 構築するMaterialData
-	std::string line{};			 // ファイルから読んだ１行を格納するもの
-
-
-
-	/* 2. ファイルを開く */
-
-	// ファイルを開く
-	std::ifstream file("Resources/Obj/" + routeFilePath + "/" + filePath + "/" + fileName);
-
-	//とりあえず開けなかったら止める
-	assert(file.is_open());
+		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+		assert(scene->HasMeshes()); // メッシュがないのは対応しない
 
 
+		// meshを解析する
+		for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+			aiMesh* mesh = scene->mMeshes[meshIndex];
+			assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
+			assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
 
-	/* 3. 実際にファイルを読み、MaterualDataを構築していく */
+			// ここからMeshの中身(Face)の解析を行っていく
+			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+				aiFace& face = mesh->mFaces[faceIndex];
+				assert(face.mNumIndices == 3); // 三角形のみサポート
 
-	while (std::getline(file, line)) {
+				// ここからFaceの中身(Vertex)の解析を行っていく
+				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+					uint32_t vertexIndex = face.mIndices[element];
+					aiVector3D& position = mesh->mVertices[vertexIndex];
+					aiVector3D& normal = mesh->mNormals[vertexIndex];
+					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 
-		std::string identifier{};
-		std::istringstream s(line);
-		s >> identifier;
+					VertexData vertex{};
+					vertex.position = { position.x, position.y, position.z, 1.0f };
+					vertex.normal = { normal.x, normal.y, normal.z, };
+					vertex.texCoord = { texcoord.x, texcoord.y };
 
+					// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
+					vertex.position.x *= -1.0f;
+					vertex.normal.x *= -1.0f;
 
-		// identifierに応じた処理
-		// "map_Kd" = textureのファイル名が記載されている
-
-		if (identifier == "map_Kd") {
-
-			std::string textureFileName{};
-			s >> textureFileName;
-
-			// 連結してファイルパスにする
-			materialData.textureFilePath = "Resources/Obj/" + filePath + "/" + textureFileName;
+					// OBJDataに解析した値を差し込む
+					objData.vertices.push_back(vertex);
+				}
+			}
 		}
+
+		// materialを解析する
+		for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+			aiMaterial* material = scene->mMaterials[materialIndex];
+
+			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+				aiString textureFilePath;
+				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+				objData.material.textureFilePath = filePath + routeFilePath;
+			}
+		}
+
+		// テクスチャを指定されたものにする
+		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::gLTF);
+		objData.textureHD = texHandle;
+
+		// Nodeを読み込む
+		objData.rootNode = ModelManager::Getinstance()->ReadNode(scene->mRootNode);
+
+		// 作ったモデルデータをデータ群に新しく作る
+		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
-
-
-	/* 4. MaterialData を返す */
-	return materialData;
-
+	// 同じファイルパスのモデルデータを検索して返す
+	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
 }
+
 
 
 /// <summary>
@@ -290,3 +311,91 @@ bool ModelManager::CheckObjData(std::string filePath) {
 
 	return false;
 }
+
+
+
+/// <summary>
+/// mtlファイルを読み込む関数
+/// </summary>
+MaterialData ModelManager::LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName, const std::string& routeFilePath) {
+
+	/* 1. 中で必要となる変数の宣言 */
+
+	MaterialData materialData{}; // 構築するMaterialData
+	std::string line{};			 // ファイルから読んだ１行を格納するもの
+
+
+	/* 2. ファイルを開く */
+
+	// ファイルを開く
+	std::ifstream file("Resources/Obj/" + routeFilePath + "/" + filePath + "/" + fileName);
+
+	//とりあえず開けなかったら止める
+	assert(file.is_open());
+
+
+	/* 3. 実際にファイルを読み、MaterualDataを構築していく */
+
+	while (std::getline(file, line)) {
+
+		std::string identifier{};
+		std::istringstream s(line);
+		s >> identifier;
+
+		// identifierに応じた処理
+		// "map_Kd" = textureのファイル名が記載されている
+
+		if (identifier == "map_Kd") {
+
+			std::string textureFileName{};
+			s >> textureFileName;
+
+			// 連結してファイルパスにする
+			materialData.textureFilePath = "Resources/Obj/" + filePath + "/" + textureFileName;
+		}
+	}
+
+	/* 4. MaterialData を返す */
+	return materialData;
+}
+
+
+/// <summary>
+/// Nodeの情報を読む
+/// </summary>
+Node ModelManager::ReadNode(aiNode* node)
+{
+	Node result;
+
+	aiMatrix4x4 aiLocalMatrix = node->mTransformation; // nodeのlocalMatrixを取得
+	aiLocalMatrix.Transpose(); // 列ベクトル形式を行ベクトル形式に転置
+
+	result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
+	result.localMatrix.m[0][1] = aiLocalMatrix[0][1];
+	result.localMatrix.m[0][2] = aiLocalMatrix[0][2];
+	result.localMatrix.m[0][3] = aiLocalMatrix[0][3];
+
+	result.localMatrix.m[1][0] = aiLocalMatrix[1][0];
+	result.localMatrix.m[1][1] = aiLocalMatrix[1][1];
+	result.localMatrix.m[1][2] = aiLocalMatrix[1][2];
+	result.localMatrix.m[1][3] = aiLocalMatrix[1][3];
+
+	result.localMatrix.m[2][0] = aiLocalMatrix[2][0];
+	result.localMatrix.m[2][1] = aiLocalMatrix[2][1];
+	result.localMatrix.m[2][2] = aiLocalMatrix[2][2];
+	result.localMatrix.m[2][3] = aiLocalMatrix[2][3];
+
+	result.localMatrix.m[3][0] = aiLocalMatrix[3][0];
+	result.localMatrix.m[3][1] = aiLocalMatrix[3][1];
+	result.localMatrix.m[3][2] = aiLocalMatrix[3][2];
+	result.localMatrix.m[3][3] = aiLocalMatrix[3][3];
+
+	result.name = node->mName.C_Str(); // Mode名を格納
+	result.Children.resize(node->mNumChildren); // 子供の数だけ確保
+	for (uint32_t childIndex = 0; childIndex < node->mNumChildren; ++childIndex) {
+		// 再帰的によんで階層構造を作っていく
+		result.Children[childIndex] = ReadNode(node->mChildren[childIndex]);
+	}
+	return result;
+}
+

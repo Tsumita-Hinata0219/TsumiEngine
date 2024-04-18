@@ -13,7 +13,6 @@ Skydome* Skydome::GetInstance()
 // 初期化処理
 void Skydome::Initialize() 
 {
-
 	Skydome::GetInstance()->model_ = make_unique<Model>();
 	Skydome::GetInstance()->model_->CreateFromObjAssimpVer("Skydome");
 	Skydome::GetInstance()->worldTransform_.Initialize();

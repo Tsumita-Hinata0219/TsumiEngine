@@ -46,8 +46,9 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルを読み込む
 	/// </summary>
-	static ObjData LoadObjFile(std::string filePath, const std::string& routeFilePath);
-	static ObjData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadObjFile(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadGLTF(std::string filePath, const std::string& routeFilePath);
 
 
 private: // メンバ関数
@@ -62,6 +63,10 @@ private: // メンバ関数
 	/// </summary>
 	MaterialData LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName, const std::string& routeFilePath);
 
+	/// <summary>
+	/// Nodeの情報を読む
+	/// </summary>
+	Node ReadNode(aiNode* node);
 
 private: // メンバ変数
 

@@ -6,6 +6,7 @@
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
+#include "TestObject/TestObject.h"
 
 
 class GameScene : public IScene {
@@ -52,5 +53,8 @@ private:
 
 	// メインカメラ
 	unique_ptr<Camera> camera_ = nullptr;
+
+	// TestModel
+	unique_ptr<TestObject> testObject_;
 
 };

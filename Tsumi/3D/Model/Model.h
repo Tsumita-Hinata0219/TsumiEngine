@@ -4,6 +4,7 @@
 #include "ViewProjection.h"
 #include "IModelState.h"
 #include "ModelManager.h"
+#include "ModelGLTFState.h"
 #include "ModelObjState.h"
 #include "ObjDataResource.h"
 #include "ModelPlaneState.h"
@@ -28,6 +29,7 @@ public: // メンバ関数
 	/// </summary>
 	void CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 	void CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateGLTFModel(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
 	/// <summary>
 	/// 描画処理
@@ -41,31 +43,34 @@ public: // メンバ関数
 	WorldTransform GetWorldTransform() { return this->worldTransform_; }
 
 	// UseTexture
-	uint32_t GetUseTexture() { return this->useTexture_; }
+	uint32_t GetUseTexture() const { return this->useTexture_; }
 
 	// NormalMapTexture
-	uint32_t GetNormalMapTex() { return this->normalMapTex_; }
+	uint32_t GetNormalMapTex() const { return this->normalMapTex_; }
 
 	// Color
-	Vector4 GetColor() { return this->color_; }
+	Vector4 GetColor() const { return this->color_; }
 
 	// DirectionalLight
-	DirectionalLight GetDirectionalLight() { return this->light_; }
+	DirectionalLight GetDirectionalLight() const { return this->light_; }
 
 	// SphereRadius
-	float GetRadius() { return this->radius_; }
+	float GetRadius() const { return this->radius_; }
 
 	// DirectoryPath
 	const std::string GetObjDirectoryPath() { return this->directoryPath_; }
 
 	// ObjHandle
-	uint32_t GetObjHandle() { return objHandle_; }
+	uint32_t GetObjHandle() const { return objHandle_; }
 
-	ObjData GetObjData() { return objData_; }
+	// ObjData
+	ModelData GetObjData() { return objData_; }
 
-	ModelDrawType GetModelDrawType() { return modelDrawType_; }
+	// ライティングのタイプ
+	ModelLightingType GetModelDrawType() const { return modelDrawType_; }
 
-
+	// Node
+	Node GetNode() const { return objData_.rootNode; }
 
 #pragma endregion 
 
@@ -86,7 +91,7 @@ public: // メンバ関数
 	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
 
 	// DrawType
-	void SetModelDrawType(ModelDrawType type) { modelDrawType_ = type; }
+	void SetModelDrawType(ModelLightingType type) { modelDrawType_ = type; }
 
 #pragma endregion
 
@@ -100,14 +105,14 @@ private: // メンバ変数
 	WorldTransform worldTransform_{};
 
 	// テクスチャ
-	uint32_t useTexture_;
-	uint32_t normalMapTex_;
+	uint32_t useTexture_{};
+	uint32_t normalMapTex_{};
 
 	// 色データ
 	Vector4 color_{};
 
 	// 光データ
-	DirectionalLight light_;
+	DirectionalLight light_{};
 
 	// スフィアの半径
 	float radius_ = 1.0f;
@@ -117,12 +122,12 @@ private: // メンバ変数
 	std::string routeFilePath_{};
 
 	// Objのハンドル
-	uint32_t objHandle_;
+	uint32_t objHandle_{};
 
 	ModelData modelData_{};
 
-	ObjData objData_{};
+	ModelData objData_{};
 
-	ModelDrawType modelDrawType_;
+	ModelLightingType modelDrawType_ = Non;
 
 };

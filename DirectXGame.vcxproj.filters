@@ -19,7 +19,6 @@
     <FxCompile Include="Resources\shaders\LineObject3d.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Project\GameObject\Character\Enemy\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="externals\imgui\imgui.cpp" />
     <ClCompile Include="externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="externals\imgui\imgui_draw.cpp" />
@@ -39,7 +38,6 @@
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
-    <ClCompile Include="Project\GameObject\Character\Enemy\Blast\Blast.cpp" />
     <ClCompile Include="externals\imgui\imgui.cpp" />
     <ClCompile Include="externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="externals\imgui\imgui_draw.cpp" />
@@ -47,13 +45,10 @@
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Project\GameObject\Character\Enemy\IEnemy\IEnemy.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\GameObject\Camera\Camera.cpp" />
     <ClCompile Include="Project\GameObject\Camera\MainCamera\MainCamera.cpp" />
-    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
-    <ClCompile Include="Project\GameObject\Character\Player\PlayerReticle\PlayerReticle.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Math\MathFunction\MathFunction.cpp" />
@@ -61,13 +56,7 @@
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\ClearScene\ClearScene.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\ManualScene\ManualScene.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\OverScene\OverScene.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\SelectScene\SelectScene.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Model.cpp" />
@@ -159,6 +148,8 @@
     <ClCompile Include="Tsumi\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Tsumi\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleArray\ParticleArray.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -169,9 +160,6 @@
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
-    <ClInclude Include="Project\GameObject\Character\Enemy\EnemyManager\EnemyManager.h" />
-    <ClInclude Include="Project\GameObject\Character\Enemy\Bullet\EnemyBullet.h" />
-    <ClInclude Include="Project\GameObject\Character\Enemy\Blast\Blast.h" />
     <ClInclude Include="externals\imgui\imconfig.h" />
     <ClInclude Include="externals\imgui\imgui.h" />
     <ClInclude Include="externals\imgui\imgui_impl_dx12.h" />
@@ -199,8 +187,6 @@
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
-    <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
-    <ClInclude Include="Project\GameObject\Character\Player\PlayerReticle\PlayerReticle.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />
@@ -213,13 +199,7 @@
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\ClearScene\ClearScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\ManualScene\ManualScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\OverScene\OverScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\SelectScene\SelectScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\TitleScene\TitleScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\2D\Sprite\state\ISpriteState.h" />
     <ClInclude Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.h" />
@@ -338,6 +318,8 @@
     <ClInclude Include="Tsumi\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Tsumi\Utilities\Timer\Timer.h" />
     <ClInclude Include="Tsumi\Particle\ParticleArray\ParticleArray.h" />
+    <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

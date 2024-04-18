@@ -81,6 +81,7 @@ struct MaterialData {
 struct ModelData {
 	std::vector<VertexData> vertices;
 	MaterialData material;
+	uint32_t textureHD;
 	Node node;
 };
 

@@ -27,9 +27,9 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルの読み込み & Obj初期化処理
 	/// </summary>
-	void CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
-	void CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
-	void CreateGLTFModel(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
 	/// <summary>
 	/// 描画処理
@@ -57,8 +57,8 @@ public: // メンバ関数
 	// SphereRadius
 	float GetRadius() const { return this->radius_; }
 
-	// DirectoryPath
-	const std::string GetObjDirectoryPath() { return this->directoryPath_; }
+	// fileName_
+	const std::string GetObjFileName() { return this->fileName_; }
 
 	// ObjHandle
 	uint32_t GetObjHandle() const { return objHandle_; }
@@ -118,7 +118,7 @@ private: // メンバ変数
 	float radius_ = 1.0f;
 
 	// Objのファイルパス
-	std::string directoryPath_{};
+	std::string fileName_{};
 	std::string routeFilePath_{};
 
 	// Objのハンドル

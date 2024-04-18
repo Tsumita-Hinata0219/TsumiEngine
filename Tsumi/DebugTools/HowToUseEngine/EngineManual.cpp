@@ -24,7 +24,7 @@ void EngineManual::Initialize()
 
 	// 3Dモデル
 	demoModel_ = make_unique<Model>();
-	demoModel_->CreateFromObj("ball"); // <! (objデータが入ってるファイル名), これがObjの初期化処理だからInitializeは別途書かなくていい
+	demoModel_->CreateFromObj("", "ball"); // <! (objデータが入ってるファイル名), これがObjの初期化処理だからInitializeは別途書かなくていい
 	demoModelWt_.Initialize(); // <! Initializeは通さないとエラー吐く
 
 	// 前景スプライト

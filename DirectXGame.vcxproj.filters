@@ -152,6 +152,7 @@
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -324,6 +325,7 @@
     <ClInclude Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

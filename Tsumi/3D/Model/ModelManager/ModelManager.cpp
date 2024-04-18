@@ -29,9 +29,9 @@ void ModelManager::Finalize() {
 /// <summary>
 /// Objファイルを読み込む
 /// </summary>
-ModelData ModelManager::LoadObjFile(std::string filePath, const std::string& routeFilePath) {
+ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std::string& fileName) {
 
-	if (CheckObjData(filePath)) {
+	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
@@ -51,7 +51,7 @@ ModelData ModelManager::LoadObjFile(std::string filePath, const std::string& rou
 		/* 2. ファイルを開く */
 
 		// ファイルを開く
-		std::ifstream file("Resources/Obj/" + routeFilePath + "/" + filePath + "/" + filePath + ".obj");
+		std::ifstream file("Resources/Obj/" + routeFilePath + "/" + fileName + "/" + fileName + ".obj");
 		// とりあえず開けなかったら止める
 		assert(file.is_open());
 
@@ -135,21 +135,21 @@ ModelData ModelManager::LoadObjFile(std::string filePath, const std::string& rou
 				s >> materialFileName;
 
 				// 基本的にobjファイルを同じ階層にmtlは存在させるので、ディレクトリファイル名を渡す
-				objData.material = ModelManager::Getinstance()->LoadMaterialTemplateFile(filePath, materialFileName, routeFilePath);
+				objData.material = ModelManager::Getinstance()->LoadMaterialTemplateFile(fileName, materialFileName, routeFilePath);
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
-		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
-	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
+	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
-ModelData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath)
+ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName)
 {
-	if (CheckObjData(filePath)) {
+	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
@@ -158,7 +158,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::st
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/Obj/" + routeFilePath + "/" + filePath + "/" + filePath + ".obj");
+		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + "/" + fileName + ".obj");
 
 		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -205,24 +205,24 @@ ModelData ModelManager::LoadObjFileAssimpVer(std::string filePath, const std::st
 			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
 				aiString textureFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-				objData.material.textureFilePath = filePath + routeFilePath;
+				objData.material.textureFilePath = fileName + routeFilePath;
 			}
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
-		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
 	// 同じファイルパスのモデルデータを検索して返す
-	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
+	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
-ModelData ModelManager::LoadGLTF(std::string filePath, const std::string& routeFilePath)
+ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName)
 {
-	if (CheckObjData(filePath)) {
+	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
 		ModelManager::Getinstance()->objHandle_++;
@@ -231,7 +231,7 @@ ModelData ModelManager::LoadGLTF(std::string filePath, const std::string& routeF
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/gLTF/" + routeFilePath + "/" + filePath + "/" + filePath + ".gltf");
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
 
 		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -278,23 +278,23 @@ ModelData ModelManager::LoadGLTF(std::string filePath, const std::string& routeF
 			if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
 				aiString textureFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-				objData.material.textureFilePath = filePath + routeFilePath;
+				objData.material.textureFilePath = fileName + routeFilePath;
 			}
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(filePath, routeFilePath, TextureFrom::gLTF);
+		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::gLTF);
 		objData.textureHD = texHandle;
 
 		// Nodeを読み込む
 		objData.rootNode = ModelManager::Getinstance()->ReadNode(scene->mRootNode);
 
 		// 作ったモデルデータをデータ群に新しく作る
-		ModelManager::Getinstance()->objModelDatas_[filePath] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
 	// 同じファイルパスのモデルデータを検索して返す
-	return ModelManager::Getinstance()->objModelDatas_[filePath].get()->GetObjData();
+	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
 

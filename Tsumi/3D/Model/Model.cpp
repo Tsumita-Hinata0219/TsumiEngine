@@ -36,7 +36,7 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 /// <summary>
 /// Objファイルの読み込み & Obj初期化処理
 /// </summary>
-void Model::CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -56,11 +56,11 @@ void Model::CreateFromObj(const std::string& directoryPath, const std::string& r
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFile(directoryPath_, routeFilePath_);
+	objData_ = ModelManager::LoadObjFile(routeFilePath, fileName);
 
 	// モデルの描画タイプ
 	modelDrawType_ = Phong;
@@ -70,7 +70,7 @@ void Model::CreateFromObj(const std::string& directoryPath, const std::string& r
 	this->state_->Initialize(this);
 }
 
-void Model::CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -90,11 +90,11 @@ void Model::CreateFromObjAssimpVer(const std::string& directoryPath, const std::
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFileAssimpVer(directoryPath_, routeFilePath_);
+	objData_ = ModelManager::LoadObjFileAssimpVer(routeFilePath, fileName);
 
 	// モデルの描画タイプ
 	modelDrawType_ = Phong;
@@ -104,7 +104,7 @@ void Model::CreateFromObjAssimpVer(const std::string& directoryPath, const std::
 	this->state_->Initialize(this);
 }
 
-void Model::CreateGLTFModel(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -124,11 +124,11 @@ void Model::CreateGLTFModel(const std::string& directoryPath, const std::string&
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadGLTF(directoryPath_, routeFilePath_);
+	objData_ = ModelManager::LoadGLTF(routeFilePath, fileName);
 
 	// モデルの描画タイプ
 	modelDrawType_ = Phong;

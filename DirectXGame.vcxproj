@@ -163,6 +163,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="Tsumi\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationManager\AnimationManager.cpp" />
+    <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleArray\ParticleArray.cpp" />
@@ -253,6 +255,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
+    <ClInclude Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
     <ClInclude Include="Tsumi\Audio\Audio.h" />
     <ClInclude Include="Tsumi\Audio\AudioDataResource\AudioDataResource.h" />
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />

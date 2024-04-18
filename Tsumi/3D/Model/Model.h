@@ -63,10 +63,14 @@ public: // メンバ関数
 	// ObjHandle
 	uint32_t GetObjHandle() const { return objHandle_; }
 
+	// ObjData
 	ModelData GetObjData() { return objData_; }
 
-	ModelDrawType GetModelDrawType() const { return modelDrawType_; }
+	// ライティングのタイプ
+	ModelLightingType GetModelDrawType() const { return modelDrawType_; }
 
+	// Node
+	Node GetNode() const { return objData_.rootNode; }
 
 #pragma endregion 
 
@@ -87,7 +91,7 @@ public: // メンバ関数
 	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
 
 	// DrawType
-	void SetModelDrawType(ModelDrawType type) { modelDrawType_ = type; }
+	void SetModelDrawType(ModelLightingType type) { modelDrawType_ = type; }
 
 #pragma endregion
 
@@ -124,6 +128,6 @@ private: // メンバ変数
 
 	ModelData objData_{};
 
-	ModelDrawType modelDrawType_ = Non;
+	ModelLightingType modelDrawType_ = Non;
 
 };

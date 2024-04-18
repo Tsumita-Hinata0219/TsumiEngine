@@ -7,8 +7,6 @@
 /// </summary>
 void ModelObjState::Initialize(Model* pModel) {
 
-	//objData_ = pModel->GetObjData();
-
 	modelData_.material = pModel->GetObjData().material;
 	modelData_.vertices = pModel->GetObjData().vertices;
 

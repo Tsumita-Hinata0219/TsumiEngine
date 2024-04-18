@@ -50,5 +50,6 @@ private: // メンバ関数
 
 	// ModelData
 	ModelData modelData_{};
+
 };
 

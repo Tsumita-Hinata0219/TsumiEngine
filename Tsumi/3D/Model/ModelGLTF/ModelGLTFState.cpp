@@ -41,9 +41,14 @@ void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform, Camera* 
 	// マテリアルの情報を書き込む
 	material->color = pModel->GetColor();
 
+
 	// ライティングの設定
 	(*lightData) = pModel->GetDirectionalLight();
 
+
+	// RootのMatrixを適用する
+	worldTransform.matWorld = worldTransform.matWorld * pModel->GetNode().localMatrix;
+	worldTransform.TransferMatrix();
 
 	// コマンドコール
 	CommandCall(pModel, worldTransform, camera);

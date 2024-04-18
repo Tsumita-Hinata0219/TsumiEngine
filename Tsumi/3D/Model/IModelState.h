@@ -4,7 +4,7 @@
 #include "Camera.h"
 
 
-enum ModelDrawType {
+enum ModelLightingType {
 	Non,
 	Lambert,
 	Phong,

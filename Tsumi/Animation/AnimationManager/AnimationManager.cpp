@@ -64,6 +64,11 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 				keyFrame.value = { -keyAssimp.mValue.x, keyAssimp.mValue.y, keyAssimp.mValue.z }; // 右手->左手
 				nodeAnimation.translate.keyFrames.push_back(keyFrame);
 			}
+
+			// 
+			// 
+			// 
+
 		}
 
 	}

@@ -39,15 +39,12 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 		// mTicksPerSecond : 周波数 mDuration : mTickPerSecondで指定された周波数における長さ
 		animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
 
-		/* --------------------------------------------------------------------------------------
-		
+		/* ==================================================================================
 		         mTicksPerSecond : 周波数 
 				 mDuration : mTickPerSecondで指定された周波数における長さ
 		         例えばmTicisPerSecondが1000というのは、1000Hzのことなので、1Tick(周期)は1msである
 		         このとき、mDurationが2000なら、2000ms = s2である
-
-		-----------------------------------------------------------------------------------------*/
-
+		================================================================================== */
 
 		// NodeAnimationを解析する
 		// assimpでは個々のNodeのAnimationをchannelと読んでるのでchannelを回してNodeAnimationの情報をとってくる
@@ -56,6 +53,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 			aiNodeAnim* nodeAnimationAssimp = animationAssimp->mChannels[channelIndex];
 			NodeAnimation& nodeAnimation = animation.nodeAnimations[nodeAnimationAssimp->mNodeName.C_Str()];
 			
+			// 座標の取得(Translate)
 			for (uint32_t keyIndex = 0; keyIndex < nodeAnimationAssimp->mNumPositionKeys; ++keyIndex) {
 
 				aiVectorKey& keyAssimp = nodeAnimationAssimp->mPositionKeys[keyIndex];
@@ -65,15 +63,29 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 				nodeAnimation.translate.keyFrames.push_back(keyFrame);
 			}
 
-			// 
-			// 
-			// 
+			// 姿勢の取得(Rotate)
+			for (uint32_t keyIndex = 0; keyIndex < nodeAnimationAssimp->mNumRotationKeys; ++keyIndex) {
 
+				aiQuatKey& keyAssimp = nodeAnimationAssimp->mRotationKeys[keyIndex];
+				KeyFrameQuaternion keyFrame{};
+				keyFrame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond); // ここも秒に変換
+				keyFrame.value = { keyAssimp.mValue.x, -keyAssimp.mValue.y, -keyAssimp.mValue.z, keyAssimp.mValue.w }; // 右手->左手
+				nodeAnimation.rotate.keyFrames.push_back(keyFrame);
+			}
+
+			// 拡縮の取得(Scale)
+			for (uint32_t keyIndex = 0; keyIndex < nodeAnimationAssimp->mNumScalingKeys; ++keyIndex) {
+
+				aiVectorKey& keyAssimp = nodeAnimationAssimp->mScalingKeys[keyIndex];
+				KeyFrameVector3 keyFrame{};
+				keyFrame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond); // ここも秒に変換
+				keyFrame.value = { keyAssimp.mValue.x, keyAssimp.mValue.y, keyAssimp.mValue.z }; // 右手->左手
+				nodeAnimation.scale.keyFrames.push_back(keyFrame);
+			}
 		}
-
 	}
 
-
+	// 解析完了
 	// 同じファイル名のデータを返す
 	return (*animationDatas_[fileName].get());
 }

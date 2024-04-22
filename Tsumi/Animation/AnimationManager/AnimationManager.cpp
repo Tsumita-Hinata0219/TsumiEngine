@@ -28,7 +28,6 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 		// 読み込んだことなかったら読み込み開始
 		Animation animation; // 今回作るアニメーションデータ
 		Assimp::Importer importer;
-		//string filePath = routeFilePath + "/" + fileName;
 		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), 0);
 		
@@ -37,7 +36,6 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 		// 最初のアニメーションだけ採用。もちろん複数対応するに越したことはない
 		aiAnimation* animationAssimp = scene->mAnimations[0];
 		// 時間の単位を秒に変換
-		// mTicksPerSecond : 周波数 mDuration : mTickPerSecondで指定された周波数における長さ
 		animation.duration = float(animationAssimp->mDuration / animationAssimp->mTicksPerSecond);
 
 		/* ==================================================================================
@@ -80,7 +78,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 				aiVectorKey& keyAssimp = nodeAnimationAssimp->mScalingKeys[keyIndex];
 				KeyFrameVector3 keyFrame{};
 				keyFrame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond); // ここも秒に変換
-				keyFrame.value = { keyAssimp.mValue.x, keyAssimp.mValue.y, keyAssimp.mValue.z }; // 右手->左手
+				keyFrame.value = { keyAssimp.mValue.x, keyAssimp.mValue.y, keyAssimp.mValue.z };
 				nodeAnimation.scale.keyFrames.push_back(keyFrame);
 			}
 		}

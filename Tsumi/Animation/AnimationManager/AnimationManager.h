@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject.h"
+#include "MyMath.h"
 #include "AnimationDataArray.h"
 #include "KeyFrameAnimation.h"
 

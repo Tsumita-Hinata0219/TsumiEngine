@@ -7,6 +7,7 @@ void TestAnimationCube::Init()
 {
 	testModel_ = make_unique<Model>();
 	testModel_->CreateGLTFModel("", "AnimatedCube");
+	testAnimation_ = AnimationManager::LoadAnimationFile("", "AnimatedCube");
 
 	wt_.Initialize();
 }
@@ -37,3 +38,4 @@ void TestAnimationCube::Draw(Camera* camera)
 {
 	testModel_->Draw(wt_, camera);
 }
+

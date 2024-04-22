@@ -23,13 +23,14 @@ void AnimationManager::Update()
 Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, const std::string& fileName)
 {
 	// 一回読み込んだファイルは読み込まないようにチェックする
-	if (CheckAnimationFile(fileName)) {
+	if (AnimationManager::GetInstance()->CheckAnimationFile(fileName)) {
 
 		// 読み込んだことなかったら読み込み開始
 		Animation animation; // 今回作るアニメーションデータ
 		Assimp::Importer importer;
-		string filePath = routeFilePath + "/" + fileName;
-		const aiScene* scene = importer.ReadFile(filePath.c_str(), 0);
+		//string filePath = routeFilePath + "/" + fileName;
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
+		const aiScene* scene = importer.ReadFile(file.c_str(), 0);
 		
 		assert(scene->mNumAnimations && "アニメーションがない");
 
@@ -83,18 +84,21 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 				nodeAnimation.scale.keyFrames.push_back(keyFrame);
 			}
 		}
+
+		// 新しくAnimationDataを作る
+		AnimationManager::GetInstance()->animationDataMap_[fileName] = make_unique<AnimationDataArray>(animation);
 	}
 
 	// 解析完了
 	// 同じファイル名のデータを返す
-	return (*animationDatas_[fileName].get());
+	return AnimationManager::GetInstance()->animationDataMap_[fileName].get()->GetAnimation();
 }
 
 
 // 同じファイルは読み込まない
 bool AnimationManager::CheckAnimationFile(string fileName)
 {
-	if (animationDatas_.find(fileName) == animationDatas_.end()) {
+	if (animationDataMap_.find(fileName) == animationDataMap_.end()) {
 		return true;
 	}
 

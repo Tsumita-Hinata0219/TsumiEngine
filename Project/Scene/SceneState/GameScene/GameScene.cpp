@@ -24,12 +24,11 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize() 
 {
-
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 1.0f, -10.0f };
+	camera_->translate = { 0.0f, 6.0f, -20.0f };
 
 
 	/* ----- Skydome 天球 ----- */
@@ -42,6 +41,9 @@ void GameScene::Initialize()
 	testObject_ = make_unique<TestObject>();
 	testObject_->Init();
 
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_ = make_unique<TestAnimationCube>();
+	testAnimCube_->Init();
 }
 
 
@@ -63,6 +65,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_->Update();
+
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_->Update();
 
 
 #ifdef _DEBUG
@@ -103,6 +108,9 @@ void GameScene::ModelDraw()
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_->Draw(camera_.get());
+
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_->Draw(camera_.get());
 }
 
 

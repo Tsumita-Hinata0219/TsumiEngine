@@ -22,3 +22,6 @@
 #include "ParticleSystem.h"
 #include "ParticleManager.h"
 #include "BaseParticle.h"
+
+#include "AnimationManager.h"
+#include "KeyFrameAnimation.h"

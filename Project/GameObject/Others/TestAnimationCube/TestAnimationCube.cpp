@@ -1,26 +1,25 @@
-#include "TestObject.h"
+#include "TestAnimationCube.h"
 
 
 
 // 初期化処理
-void TestObject::Init()
+void TestAnimationCube::Init()
 {
 	testModel_ = make_unique<Model>();
-	testModel_->CreateGLTFModel("", "GLTFPlane");
+	testModel_->CreateGLTFModel("", "AnimatedCube");
 
 	wt_.Initialize();
-	wt_.translate.z = -5.0f;
 }
 
 
 // 更新処理
-void TestObject::Update()
+void TestAnimationCube::Update()
 {
 	wt_.UpdateMatrix();
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("TestObject")) {
+	if (ImGui::TreeNode("TestAnimationCube")) {
 
 		ImGui::DragFloat3("Scale", &wt_.scale.x, 0.1f);
 		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.1f);
@@ -34,7 +33,7 @@ void TestObject::Update()
 
 
 // 描画処理
-void TestObject::Draw(Camera* camera)
+void TestAnimationCube::Draw(Camera* camera)
 {
 	testModel_->Draw(wt_, camera);
 }

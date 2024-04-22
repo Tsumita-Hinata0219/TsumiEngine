@@ -69,7 +69,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 				aiQuatKey& keyAssimp = nodeAnimationAssimp->mRotationKeys[keyIndex];
 				KeyFrameQuaternion keyFrame{};
 				keyFrame.time = float(keyAssimp.mTime / animationAssimp->mTicksPerSecond); // ここも秒に変換
-				keyFrame.value = { keyAssimp.mValue.x, -keyAssimp.mValue.y, -keyAssimp.mValue.z, keyAssimp.mValue.w }; // 右手->左手
+				keyFrame.value = { keyAssimp.mValue.w, keyAssimp.mValue.x, -keyAssimp.mValue.y, -keyAssimp.mValue.z }; // 右手->左手
 				nodeAnimation.rotate.keyFrames.push_back(keyFrame);
 			}
 

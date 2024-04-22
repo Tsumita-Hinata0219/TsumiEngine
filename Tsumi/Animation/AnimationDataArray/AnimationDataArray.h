@@ -1,6 +1,8 @@
 #pragma once
 
-#include "GameObject.h"
+#include "MyMath.h"
+#include <map>
+using namespace std;
 
 template <typename tValue>
 struct KeyFrame {

@@ -7,6 +7,7 @@
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "TestObject/TestObject.h"
+#include "TestAnimationCube/TestAnimationCube.h"
 
 
 class GameScene : public IScene {
@@ -57,4 +58,6 @@ private:
 	// TestModel
 	unique_ptr<TestObject> testObject_;
 
+	// TestAnimation
+	unique_ptr<TestAnimationCube> testAnimCube_;
 };

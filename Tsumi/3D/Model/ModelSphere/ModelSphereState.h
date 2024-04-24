@@ -17,7 +17,7 @@ class ModelSphereState : public IModelState {
 
 public: // メンバ関数
 
-	ModelSphereState() {};
+	ModelSphereState() { statetype_ = Normal; };
 	~ModelSphereState() {};
 
 	/// <summary>

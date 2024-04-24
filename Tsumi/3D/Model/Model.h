@@ -9,6 +9,8 @@
 #include "ObjDataResource.h"
 #include "ModelPlaneState.h"
 #include "ModelSphereState.h"
+#include "AnimationManager.h"
+#include "KeyFrameAnimation.h"
 
 
 /* Modelクラス */
@@ -36,6 +38,11 @@ public: // メンバ関数
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
 
+	/// <summary>
+	/// Animationの再生
+	/// </summary>
+	void PlayAnimation(Animation animation, float time);
+
 
 #pragma region Get
 
@@ -61,16 +68,16 @@ public: // メンバ関数
 	const std::string GetObjFileName() { return this->fileName_; }
 
 	// ObjHandle
-	uint32_t GetObjHandle() const { return objHandle_; }
+	uint32_t GetObjHandle() const { return this->objHandle_; }
 
 	// ObjData
-	ModelData GetObjData() { return objData_; }
+	ModelData GetObjData() { return this->objData_; }
 
 	// ライティングのタイプ
-	ModelLightingType GetModelDrawType() const { return modelDrawType_; }
+	ModelLightingType GetModelDrawType() const { return this->modelDrawType_; }
 
 	// Node
-	Node GetNode() const { return objData_.rootNode; }
+	Node GetNode() const { return this->objData_.rootNode; }
 
 #pragma endregion 
 
@@ -83,15 +90,20 @@ public: // メンバ関数
 	// NormalMapTexture
 	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
 
-
 	// Color
 	void SetColor(Vector4 color) { this->color_ = color; }
 
 	// Light
-	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
+	void SetDirectionalLight(DirectionalLight light) { this->light_ = light; }
 
 	// DrawType
-	void SetModelDrawType(ModelLightingType type) { modelDrawType_ = type; }
+	void SetModelDrawType(ModelLightingType type) { this->modelDrawType_ = type; }
+
+	// Node
+	void SetNode(Node node) { this->objData_.rootNode = node; }
+
+	// Node.localMatrix
+	void SetNodeMatrix(Matrix4x4 setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
 
 #pragma endregion
 

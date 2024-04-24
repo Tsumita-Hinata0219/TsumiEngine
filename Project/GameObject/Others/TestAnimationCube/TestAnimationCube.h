@@ -22,5 +22,6 @@ private:
 	unique_ptr<Model> testModel_;
 	WorldTransform wt_{};
 	Animation testAnimation_{};
+	float animationtime = 0.0f;
 };
 

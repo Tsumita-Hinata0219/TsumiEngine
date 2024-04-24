@@ -17,6 +17,7 @@ void TestAnimationCube::Init()
 void TestAnimationCube::Update()
 {
 	wt_.UpdateMatrix();
+	testModel_->SetNodeMatrix(Matrix4x4::identity);
 
 #ifdef _DEBUG
 

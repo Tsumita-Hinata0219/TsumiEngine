@@ -25,7 +25,7 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 	this->light_.enableLightting = false;
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = state;
@@ -60,10 +60,10 @@ void Model::CreateFromObj(const std::string& routeFilePath, const std::string& f
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFile(routeFilePath, fileName);
+	this->objData_ = ModelManager::LoadObjFile(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelObjState();
@@ -94,10 +94,10 @@ void Model::CreateFromObjAssimpVer(const std::string& routeFilePath, const std::
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFileAssimpVer(routeFilePath, fileName);
+	this->objData_ = ModelManager::LoadObjFileAssimpVer(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelObjState();
@@ -128,10 +128,10 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadGLTF(routeFilePath, fileName);
+	this->objData_ = ModelManager::LoadGLTF(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelGLTFState();
@@ -145,4 +145,17 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 
 	this->state_->Draw(this, worldTransform, camera);
+}
+
+
+/// <summary>
+/// Animationの再生
+/// </summary>
+void Model::PlayAnimation(Animation animation, float time)
+{
+	// GLTFで読み込んだモデルじゃないとダメ
+	assert(this->state_->GetStateType() != ModelStateType::gLTF, Log("その読み込み形式はだめだよ"));
+
+	// timeにあったAnimationを解析して、LocalMatrixに入れる
+	this->objData_.rootNode.localMatrix = KeyFrameAnimation::PlayAnimation(this->objData_.rootNode.name, animation, time);
 }

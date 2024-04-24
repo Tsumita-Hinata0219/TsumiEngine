@@ -14,7 +14,7 @@ void KeyFrameAnimation::Update() {}
 Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, float time)
 {
 	// 時刻を進める
-	//time += 1.0f, 60.0f; // 多分この処理いらない
+	//time += 1.0f / 60.0f; // 多分この処理いらない
 
 	// 最後まで行ったら最初からリピート再生。リピートしなくてもいい
 	time = fmod(time, animation.duration);

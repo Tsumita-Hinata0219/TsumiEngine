@@ -3,11 +3,11 @@
 
 
 // 初期化処理
-void AnimationManager::Initialize()　{}
+void AnimationManager::Initialize() {}
 
 
 // 更新処理
-void AnimationManager::Update()　{}
+void AnimationManager::Update() {}
 
 
 // Animationを読み込む

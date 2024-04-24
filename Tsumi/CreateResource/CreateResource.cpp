@@ -147,9 +147,6 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 	resourceDesc.MipLevels = 1;
 	resourceDesc.SampleDesc.Count = 1;
 
-	// バッファの場合はこれにする決まり
-	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
 	// RenderTargetとして利用可能にする
 	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
 

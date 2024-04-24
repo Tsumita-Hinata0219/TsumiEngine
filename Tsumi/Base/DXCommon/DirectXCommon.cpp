@@ -469,6 +469,7 @@ void DirectXCommon::SettingRTV() {
 	rtv.Desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 出力結果をSRGBに変換して書き込む
 	rtv.Desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
 
+
 	// ディスクリプタの先頭を取得する
 	rtv.StartHandle = rtv.DescriptorHeap->GetCPUDescriptorHandleForHeapStart();
 
@@ -479,7 +480,8 @@ void DirectXCommon::SettingRTV() {
 		&rtv.Desc,
 		rtv.Handles[0]);
 
-	// 2つ目のディスクリプタハンドルを得る(自力で)
+
+	// 2つ目のディスクリプタハンドルを得る
 	rtv.Handles[1].ptr =
 		rtv.Handles[0].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
@@ -490,28 +492,30 @@ void DirectXCommon::SettingRTV() {
 		rtv.Handles[1]);
 
 
-
-	// 3つ目のディスクリプタハンドルを得る(自力で)
-	rtv.Handles[2].ptr =
-		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
 	// 3つ目を作る RenderTexture用
 	const Vector4 kRenderTargetClearValue{ 1.0f, 0.0f, 0.0f, 1.0f }; // いったんわかりやすいように赤色
 	auto renderTextureResource = CreateResource::CreateRenderTextureResource(
 		WinApp::kWindowWidth, 
 		WinApp::kWindowHeight, 
-		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB, 
+		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
 		kRenderTargetClearValue);
 
+	rtv.Handles[2].ptr = 
+		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	
 	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
-		renderTextureResource.Get(), &rtv.Desc, rtv.Handles[2]);
+		renderTextureResource.Get(), 
+		&rtv.Desc, 
+		rtv.Handles[2]);
 
-	////DescriptorHandleとDescriptorHeap
+
+
+	// DescriptorHandleとDescriptorHeap
 	typedef struct D3D12_CPU_DESCRIPTOR_HANDLE {
 		SIZE_T ptr;
 	}D3D12_CPU_DESCRIPTOR_HANDLE;
 
-	////Descriptorの位置を決める
+	// Descriptorの位置を決める
 	rtv.Handles[0] = rtv.StartHandle;
 
 	rtv.Handles[1].ptr =

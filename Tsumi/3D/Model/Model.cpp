@@ -154,7 +154,7 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 void Model::PlayAnimation(Animation animation, float time)
 {
 	// GLTFで読み込んだモデルじゃないとダメ
-	assert(this->state_->GetStateType() != ModelStateType::gLTF, Log("その読み込み形式はだめだよ"));
+	assert(this->state_->GetStateType() == ModelStateType::gLTF && "その読み込み形式はだめだよ");
 
 	// timeにあったAnimationを解析して、LocalMatrixに入れる
 	this->objData_.rootNode.localMatrix = KeyFrameAnimation::PlayAnimation(this->objData_.rootNode.name, animation, time);

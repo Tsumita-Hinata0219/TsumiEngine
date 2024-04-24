@@ -17,7 +17,7 @@ void TestAnimationCube::Init()
 void TestAnimationCube::Update()
 {
 	wt_.UpdateMatrix();
-	testModel_->SetNodeMatrix(Matrix4x4::identity);
+	testModel_->PlayAnimation(testAnimation_, animationtime);
 
 #ifdef _DEBUG
 
@@ -26,6 +26,9 @@ void TestAnimationCube::Update()
 		ImGui::DragFloat3("Scale", &wt_.scale.x, 0.1f);
 		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.1f);
 		ImGui::DragFloat3("Translate", &wt_.translate.x, 0.1f);
+
+		ImGui::Text("");
+		ImGui::DragFloat("Animationtime", &animationtime, 0.01f, 0.0f, 10.f);
 
 		ImGui::TreePop();
 	}

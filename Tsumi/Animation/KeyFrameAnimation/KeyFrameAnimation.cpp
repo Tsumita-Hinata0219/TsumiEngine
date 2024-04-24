@@ -14,7 +14,7 @@ void KeyFrameAnimation::Update() {}
 Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, float time)
 {
 	// 時刻を進める
-	time += 1.0f, 60.0f;
+	//time += 1.0f, 60.0f; // 多分この処理いらない
 
 	// 最後まで行ったら最初からリピート再生。リピートしなくてもいい
 	time = fmod(time, animation.duration);
@@ -36,7 +36,7 @@ Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, flo
 Vector3 KeyFrameAnimation::CalculateValueVector3(const vector<KeyFrameVector3>& keyFrame, float time)
 {
 	// キーがないものは返す値がわからないのでassert
-	assert(!keyFrame.empty(), Log("キーがないものは返す値が分からない"));
+	assert(!keyFrame.empty() && "キーがないものは返す値が分からない");
 
 	// キーが1つか、時刻がキーフレーム前なら最初の値とする
 	if (keyFrame.size() == 1 || time <= keyFrame[0].time) {
@@ -66,7 +66,7 @@ Vector3 KeyFrameAnimation::CalculateValueVector3(const vector<KeyFrameVector3>& 
 Quaternion KeyFrameAnimation::CalculateValueQuaternion(const vector<KeyFrameQuaternion>& keyFrame, float time)
 {
 	// キーがないものは返す値がわからないのでassert
-	assert(!keyFrame.empty(), Log("キーがないものは返す値が分からない"));
+	assert(!keyFrame.empty() && "キーがないものは返す値が分からない");
 
 	// キーが1つか、時刻がキーフレーム前なら最初の値とする
 	if (keyFrame.size() == 1 || time <= keyFrame[0].time) {

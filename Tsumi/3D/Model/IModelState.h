@@ -7,7 +7,6 @@
 enum ModelStateType {
 	Normal,
 	Obj,
-	Assimp,
 	gLTF,
 };
 enum ModelLightingType {

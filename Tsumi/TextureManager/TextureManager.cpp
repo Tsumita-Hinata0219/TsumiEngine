@@ -53,7 +53,7 @@ uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std
 		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath + ".png";
 		break;
 	case TextureFrom::gLTF:
-		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath + ".png";
+		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath;
 		break;
 	default:
 		break;

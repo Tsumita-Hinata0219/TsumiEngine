@@ -6,7 +6,7 @@
 void TestAnimationCube::Init()
 {
 	testModel_ = make_unique<Model>();
-	testModel_->CreateGLTFModel("AnimatedCube", "AnimatedCube");
+	testModel_->CreateGLTFModel("AnimatedCube", "AnimatedCube", "AnimatedCube.png");
 	testAnimation_ = AnimationManager::LoadAnimationFile("AnimatedCube", "AnimatedCube");
 
 	wt_.Initialize();

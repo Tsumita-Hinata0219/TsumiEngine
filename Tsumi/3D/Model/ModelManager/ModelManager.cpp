@@ -220,7 +220,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
-ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName)
+ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
 {
 	if (CheckObjData(fileName)) {
 
@@ -283,7 +283,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::gLTF);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, textureName, TextureFrom::gLTF);
 		objData.textureHD = texHandle;
 
 		// Nodeを読み込む

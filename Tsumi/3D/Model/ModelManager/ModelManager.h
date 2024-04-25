@@ -48,7 +48,7 @@ public: // メンバ関数
 	/// </summary>
 	static ModelData LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
 	static ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	static ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName);
+	static ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 
 
 private: // メンバ関数

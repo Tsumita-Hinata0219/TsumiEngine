@@ -6,8 +6,8 @@
 void TestHuman::Init()
 {
 	testModel_ = make_unique<Model>();
-	testModel_->CreateGLTFModel("", "AnimatedCube");
-	testAnimation_ = AnimationManager::LoadAnimationFile("", "AnimatedCube");
+	testModel_->CreateGLTFModel("TestHuman", "walk", "white.png");
+	testAnimation_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
 
 	wt_.Initialize();
 }
@@ -19,7 +19,7 @@ void TestHuman::Update()
 	wt_.UpdateMatrix();
 
 	// とりあえず時間の加算処理はここで行う
-	animationtime += 1.0f / 60.0f;
+	//animationtime += 1.0f / 60.0f;
 	testModel_->PlayAnimation(testAnimation_, animationtime);
 
 #ifdef _DEBUG

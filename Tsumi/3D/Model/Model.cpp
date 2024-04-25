@@ -104,7 +104,7 @@ void Model::CreateFromObjAssimpVer(const std::string& routeFilePath, const std::
 	this->state_->Initialize(this);
 }
 
-void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
+void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -128,7 +128,7 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	this->objData_ = ModelManager::LoadGLTF(routeFilePath, fileName);
+	this->objData_ = ModelManager::LoadGLTF(routeFilePath, fileName, textureName);
 
 	// モデルの描画タイプ
 	this->modelDrawType_ = Phong;

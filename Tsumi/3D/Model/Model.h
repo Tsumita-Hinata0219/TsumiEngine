@@ -9,6 +9,8 @@
 #include "ObjDataResource.h"
 #include "ModelPlaneState.h"
 #include "ModelSphereState.h"
+#include "AnimationManager.h"
+#include "KeyFrameAnimation.h"
 
 
 /* Modelクラス */
@@ -27,14 +29,19 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルの読み込み & Obj初期化処理
 	/// </summary>
-	void CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
-	void CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
-	void CreateGLTFModel(const std::string& directoryPath, const std::string& routeFilePath = { "" }, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
+
+	/// <summary>
+	/// Animationの再生
+	/// </summary>
+	void PlayAnimation(Animation animation, float time);
 
 
 #pragma region Get
@@ -57,20 +64,20 @@ public: // メンバ関数
 	// SphereRadius
 	float GetRadius() const { return this->radius_; }
 
-	// DirectoryPath
-	const std::string GetObjDirectoryPath() { return this->directoryPath_; }
+	// fileName_
+	const std::string GetObjFileName() { return this->fileName_; }
 
 	// ObjHandle
-	uint32_t GetObjHandle() const { return objHandle_; }
+	uint32_t GetObjHandle() const { return this->objHandle_; }
 
 	// ObjData
-	ModelData GetObjData() { return objData_; }
+	ModelData GetObjData() { return this->objData_; }
 
 	// ライティングのタイプ
-	ModelLightingType GetModelDrawType() const { return modelDrawType_; }
+	ModelLightingType GetModelDrawType() const { return this->modelDrawType_; }
 
 	// Node
-	Node GetNode() const { return objData_.rootNode; }
+	Node GetNode() const { return this->objData_.rootNode; }
 
 #pragma endregion 
 
@@ -83,15 +90,20 @@ public: // メンバ関数
 	// NormalMapTexture
 	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
 
-
 	// Color
 	void SetColor(Vector4 color) { this->color_ = color; }
 
 	// Light
-	void SetDirectionalLight(DirectionalLight light) { light_ = light; }
+	void SetDirectionalLight(DirectionalLight light) { this->light_ = light; }
 
 	// DrawType
-	void SetModelDrawType(ModelLightingType type) { modelDrawType_ = type; }
+	void SetModelDrawType(ModelLightingType type) { this->modelDrawType_ = type; }
+
+	// Node
+	void SetNode(Node node) { this->objData_.rootNode = node; }
+
+	// Node.localMatrix
+	void SetNodeMatrix(Matrix4x4 setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
 
 #pragma endregion
 
@@ -118,7 +130,7 @@ private: // メンバ変数
 	float radius_ = 1.0f;
 
 	// Objのファイルパス
-	std::string directoryPath_{};
+	std::string fileName_{};
 	std::string routeFilePath_{};
 
 	// Objのハンドル

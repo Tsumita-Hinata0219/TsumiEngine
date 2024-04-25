@@ -25,7 +25,7 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 	this->light_.enableLightting = false;
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = state;
@@ -36,7 +36,7 @@ void Model::Initialize(IModelState* state, WorldTransform worldTransform) {
 /// <summary>
 /// Objファイルの読み込み & Obj初期化処理
 /// </summary>
-void Model::CreateFromObj(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -56,21 +56,21 @@ void Model::CreateFromObj(const std::string& directoryPath, const std::string& r
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFile(directoryPath_, routeFilePath_);
+	this->objData_ = ModelManager::LoadObjFile(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelObjState();
 	this->state_->Initialize(this);
 }
 
-void Model::CreateFromObjAssimpVer(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -90,21 +90,21 @@ void Model::CreateFromObjAssimpVer(const std::string& directoryPath, const std::
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadObjFileAssimpVer(directoryPath_, routeFilePath_);
+	this->objData_ = ModelManager::LoadObjFileAssimpVer(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelObjState();
 	this->state_->Initialize(this);
 }
 
-void Model::CreateGLTFModel(const std::string& directoryPath, const std::string& routeFilePath, WorldTransform worldTransform) {
+void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform) {
 
 	// ワールド座標のデフォルト設定
 	this->worldTransform_ = worldTransform;
@@ -124,14 +124,14 @@ void Model::CreateGLTFModel(const std::string& directoryPath, const std::string&
 	this->light_.enableLightting = false;
 
 	// Objファイルパス
-	this->directoryPath_ = directoryPath;
+	this->fileName_ = fileName;
 	this->routeFilePath_ = routeFilePath;
 
 	// Objの読み込み
-	objData_ = ModelManager::LoadGLTF(directoryPath_, routeFilePath_);
+	this->objData_ = ModelManager::LoadGLTF(routeFilePath, fileName);
 
 	// モデルの描画タイプ
-	modelDrawType_ = Phong;
+	this->modelDrawType_ = Phong;
 
 	// ステートパターンの初期化処理
 	this->state_ = new ModelGLTFState();
@@ -145,4 +145,17 @@ void Model::CreateGLTFModel(const std::string& directoryPath, const std::string&
 void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 
 	this->state_->Draw(this, worldTransform, camera);
+}
+
+
+/// <summary>
+/// Animationの再生
+/// </summary>
+void Model::PlayAnimation(Animation animation, float time)
+{
+	// GLTFで読み込んだモデルじゃないとダメ
+	assert(this->state_->GetStateType() == ModelStateType::gLTF && "その読み込み形式はだめだよ");
+
+	// timeにあったAnimationを解析して、LocalMatrixに入れる
+	this->objData_.rootNode.localMatrix = KeyFrameAnimation::PlayAnimation(this->objData_.rootNode.name, animation, time);
 }

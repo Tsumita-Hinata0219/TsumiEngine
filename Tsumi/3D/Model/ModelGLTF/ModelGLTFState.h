@@ -21,7 +21,7 @@ class ModelGLTFState : public IModelState {
 
 public: // メンバ関数
 
-	ModelGLTFState() {};
+	ModelGLTFState() { statetype_ = gLTF; };
 	~ModelGLTFState() {};
 
 

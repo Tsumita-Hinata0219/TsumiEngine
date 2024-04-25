@@ -8,9 +8,9 @@
 #include <fstream>
 #include <sstream>
 
-#include <assimp\Importer.hpp>
+#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
-#include <assimp\postprocess.h>
+#include <assimp/postprocess.h>
 
 
 /* ModelManagerクラス */
@@ -46,9 +46,9 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルを読み込む
 	/// </summary>
-	static ModelData LoadObjFile(std::string filePath, const std::string& routeFilePath);
-	static ModelData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
-	static ModelData LoadGLTF(std::string filePath, const std::string& routeFilePath);
+	static ModelData LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
+	static ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
+	static ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName);
 
 
 private: // メンバ関数

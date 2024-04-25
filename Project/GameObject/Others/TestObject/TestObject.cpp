@@ -6,9 +6,10 @@
 void TestObject::Init()
 {
 	testModel_ = make_unique<Model>();
-	testModel_->CreateGLTFModel("GLTFPlane");
+	testModel_->CreateGLTFModel("", "GLTFPlane");
 
 	wt_.Initialize();
+	wt_.translate.z = -5.0f;
 }
 
 
@@ -29,8 +30,6 @@ void TestObject::Update()
 	}
 
 #endif // _DEBUG
-
-
 }
 
 

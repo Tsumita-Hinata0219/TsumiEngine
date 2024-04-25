@@ -21,7 +21,7 @@ class ModelObjState : public IModelState {
 
 public: // メンバ関数
 
-	ModelObjState() {};
+	ModelObjState() { statetype_ = Obj; };
 	~ModelObjState() {};
 
 	/// <summary>

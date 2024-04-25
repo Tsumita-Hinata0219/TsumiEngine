@@ -41,9 +41,9 @@ void KeyFrameAnimation::ApplyAnimation(Skeleton& skeleton, const Animation& anim
 		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
 
 			const NodeAnimation& rootNodeAniamtion = (*it).second;
-			joint.transform.translate = CalculateValueVector3(rootNodeAniamtion.translate.keyFrames, animationTime);
-			joint.transform.rotate = CalculateValueQuaternion(rootNodeAniamtion.rotate.keyFrames, animationTime);
-			joint.transform.scale = CalculateValueVector3(rootNodeAniamtion.scale.keyFrames, animationTime);
+			joint.transform.translate = KeyFrameAnimation::GetInstance()->CalculateValueVector3(rootNodeAniamtion.translate.keyFrames, animationTime);
+			joint.transform.rotate = KeyFrameAnimation::GetInstance()->CalculateValueQuaternion(rootNodeAniamtion.rotate.keyFrames, animationTime);
+			joint.transform.scale = KeyFrameAnimation::GetInstance()->CalculateValueVector3(rootNodeAniamtion.scale.keyFrames, animationTime);
 		}
 	}
 }

@@ -152,6 +152,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Camera\Camera.cpp" />
     <ClCompile Include="Project\GameObject\Camera\MainCamera\MainCamera.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
@@ -231,6 +232,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
+    <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />

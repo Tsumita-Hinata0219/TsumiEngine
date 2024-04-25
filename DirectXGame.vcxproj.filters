@@ -154,6 +154,7 @@
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -328,6 +329,7 @@
     <ClInclude Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
+    <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

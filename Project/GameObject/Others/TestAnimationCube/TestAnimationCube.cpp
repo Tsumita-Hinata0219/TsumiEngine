@@ -17,6 +17,8 @@ void TestAnimationCube::Init()
 void TestAnimationCube::Update()
 {
 	wt_.UpdateMatrix();
+
+	// とりあえず時間の加算処理はここで行う
 	animationtime += 1.0f / 60.0f;
 	testModel_->PlayAnimation(testAnimation_, animationtime);
 

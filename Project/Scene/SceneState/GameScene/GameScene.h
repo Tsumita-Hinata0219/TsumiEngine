@@ -8,6 +8,7 @@
 #include "Ground/Ground.h"
 #include "TestObject/TestObject.h"
 #include "TestAnimationCube/TestAnimationCube.h"
+#include "TestHuman/TestHuman.h"
 
 
 class GameScene : public IScene {
@@ -60,4 +61,7 @@ private:
 
 	// TestAnimation
 	unique_ptr<TestAnimationCube> testAnimCube_;
+
+	// TestHuman
+	unique_ptr<TestHuman> testHuman_;
 };

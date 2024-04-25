@@ -44,6 +44,10 @@ void GameScene::Initialize()
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
 	testAnimCube_ = make_unique<TestAnimationCube>();
 	testAnimCube_->Init();
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_ = make_unique<TestHuman>();
+	testHuman_->Init();
 }
 
 
@@ -68,6 +72,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
 	testAnimCube_->Update();
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_->Update();
 
 
 #ifdef _DEBUG
@@ -111,6 +118,9 @@ void GameScene::ModelDraw()
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
 	testAnimCube_->Draw(camera_.get());
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_->Draw(camera_.get());
 }
 
 

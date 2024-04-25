@@ -181,7 +181,6 @@ void Model::UpdateSkeleton(Skeleton& skeleton)
 			joint.skeletonSpaceMatrix = joint.localMatrix;
 		}
 	}
-
 }
 
 

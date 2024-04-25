@@ -30,6 +30,9 @@ public: // メンバ関数
 	// Animationを再生する
 	static Matrix4x4 PlayAnimation(string name, Animation animation, float time);
 
+	// Animationを適用する
+	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
+
 
 private: // メンバ関数
 

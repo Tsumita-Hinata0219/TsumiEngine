@@ -159,3 +159,36 @@ void Model::PlayAnimation(Animation animation, float time)
 	// timeにあったAnimationを解析して、LocalMatrixに入れる
 	this->objData_.rootNode.localMatrix = KeyFrameAnimation::PlayAnimation(this->objData_.rootNode.name, animation, time);
 }
+
+
+/// <summary>
+/// Skeletonの更新処理
+/// </summary>
+void Model::UpdateSkeleton(Skeleton& skeleton)
+{
+	// すべてのJointを更新。親が若いので通常ループで処理可能になっている
+	for (Joint& joint : skeleton.joints) {
+		
+		joint.localMatrix = MakeAffineMatrix(joint.transform.scale, joint.transform.rotate, joint.transform.translate);
+
+		// 親がいれば親の行列を掛ける
+		if (joint.parent) {
+
+			joint.skeletonSpaceMatrix = joint.localMatrix * skeleton.joints[*joint.parent].skeletonSpaceMatrix;
+		}
+		else { // 親がいないのでlocalMatrixとskeletonSpaceMatrixは一致する
+
+			joint.skeletonSpaceMatrix = joint.localMatrix;
+		}
+	}
+
+}
+
+
+/// <summary>
+/// Animationを適用する
+/// </summary>
+void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime)
+{
+	
+}

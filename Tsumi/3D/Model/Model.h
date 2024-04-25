@@ -43,6 +43,16 @@ public: // メンバ関数
 	/// </summary>
 	void PlayAnimation(Animation animation, float time);
 
+	/// <summary>
+	/// Skeletonの更新処理
+	/// </summary>
+	void UpdateSkeleton(Skeleton& skeleton);
+
+	/// <summary>
+	/// Animationを適用する
+	/// </summary>
+	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
+
 
 #pragma region Get
 

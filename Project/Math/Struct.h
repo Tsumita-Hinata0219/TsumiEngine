@@ -14,6 +14,7 @@ using namespace std;
 #include <cstdint>
 #include <WorldTransform.h>
 #include <optional>
+#include <map>
 
 #include "MyMath.h"
 
@@ -85,10 +86,9 @@ struct Joint {
 // Skeleton
 struct Skeleton {
 	int32_t root; // RootJointのIndex
-	map<string, int32_t> jointMap; // Joint名とIndexとの辞書
+	std::map<std::string, int32_t> jointMap; // Joint名とIndexとの辞書
 	vector<Joint> joints; // 所属しているジョイント
 };
-
 
 // マテリアル
 struct Material {

@@ -32,6 +32,23 @@ Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, flo
 }
 
 
+// Animationを適用する
+void KeyFrameAnimation::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime)
+{
+	for (Joint& joint : skeleton.joints) {
+
+		// 対象のJointのAnimationがあれば、値の適用を行う。下記のif文はC++17から可能になった初期化付きif文
+		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
+
+			const NodeAnimation& rootNodeAniamtion = (*it).second;
+			joint.transform.translate = CalculateValueVector3(rootNodeAniamtion.translate.keyFrames, animationTime);
+			joint.transform.rotate = CalculateValueQuaternion(rootNodeAniamtion.rotate.keyFrames, animationTime);
+			joint.transform.scale = CalculateValueVector3(rootNodeAniamtion.scale.keyFrames, animationTime);
+		}
+	}
+}
+
+
 // 任意の時刻の値を取得する
 Vector3 KeyFrameAnimation::CalculateValueVector3(const vector<KeyFrameVector3>& keyFrame, float time)
 {

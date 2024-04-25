@@ -139,7 +139,7 @@ ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std:
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
@@ -158,7 +158,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + "/" + fileName + ".obj");
+		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + ".obj");
 
 		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -210,7 +210,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
@@ -231,7 +231,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + ".gltf");
 
 		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -283,7 +283,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::gLTF);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::gLTF);
 		objData.textureHD = texHandle;
 
 		// Nodeを読み込む

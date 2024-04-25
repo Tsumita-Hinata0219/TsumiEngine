@@ -68,6 +68,17 @@ private: // メンバ関数
 	/// </summary>
 	Node ReadNode(aiNode* node);
 
+	/// <summary>
+	/// Nodeの階層構造からSkeletonを作る
+	/// </summary>
+	Skeleton CreateSkeleton(const Node& rootNode);
+
+	/// <summary>
+	/// NodeからJointを作る
+	/// </summary>
+	int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
+
+
 private: // メンバ変数
 
 	// ObjDataResource

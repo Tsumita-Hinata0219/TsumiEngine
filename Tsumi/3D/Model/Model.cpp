@@ -190,5 +190,5 @@ void Model::UpdateSkeleton(Skeleton& skeleton)
 /// </summary>
 void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime)
 {
-	
+	KeyFrameAnimation::ApplyAnimation(skeleton, animation, animationTime);
 }

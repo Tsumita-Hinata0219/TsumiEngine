@@ -16,6 +16,7 @@ Model::Model() {
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
 }
 
+
 /// <summary>
 /// 初期化処理
 /// </summary>

@@ -23,12 +23,29 @@ Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, flo
 	NodeAnimation& rootNodeAnimation = animation.nodeAnimations[name];
 
 	// 指定時刻の値を取得
-	Vector3 translate = KeyFrameAnimation::GetInstance()->CalculateValueVector3(rootNodeAnimation.translate.keyFrames, time);
-	Quaternion rotate = KeyFrameAnimation::GetInstance()->CalculateValueQuaternion(rootNodeAnimation.rotate.keyFrames, time);
-	Vector3 scale = KeyFrameAnimation::GetInstance()->CalculateValueVector3(rootNodeAnimation.scale.keyFrames, time);
+	Vector3 translate = this->CalculateValueVector3(rootNodeAnimation.translate.keyFrames, time);
+	Quaternion rotate = this->CalculateValueQuaternion(rootNodeAnimation.rotate.keyFrames, time);
+	Vector3 scale = this->CalculateValueVector3(rootNodeAnimation.scale.keyFrames, time);
 	Matrix4x4 resultMat = MakeAffineMatrix(scale, rotate, translate);
 
 	return resultMat;
+}
+
+
+// Animationを適用する
+void KeyFrameAnimation::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime)
+{
+	for (Joint& joint : skeleton.joints) {
+
+		// 対象のJointのAnimationがあれば、値の適用を行う。下記のif文はC++17から可能になった初期化付きif文
+		if (auto it = animation.nodeAnimations.find(joint.name); it != animation.nodeAnimations.end()) {
+
+			const NodeAnimation& rootNodeAniamtion = (*it).second;
+			joint.transform.translate = this->CalculateValueVector3(rootNodeAniamtion.translate.keyFrames, animationTime);
+			joint.transform.rotate = this->CalculateValueQuaternion(rootNodeAniamtion.rotate.keyFrames, animationTime);
+			joint.transform.scale = this->CalculateValueVector3(rootNodeAniamtion.scale.keyFrames, animationTime);
+		}
+	}
 }
 
 

@@ -19,7 +19,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 		// 読み込んだことなかったら読み込み開始
 		Animation animation; // 今回作るアニメーションデータ
 		Assimp::Importer importer;
-		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), 0);
 		
 		assert(scene->mNumAnimations && "アニメーションがない");

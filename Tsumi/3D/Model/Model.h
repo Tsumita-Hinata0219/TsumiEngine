@@ -3,22 +3,30 @@
 #include "WorldTransform.h"
 #include "ViewProjection.h"
 #include "IModelState.h"
-#include "ModelManager.h"
 #include "ModelGLTFState.h"
 #include "ModelObjState.h"
 #include "ObjDataResource.h"
 #include "ModelPlaneState.h"
 #include "ModelSphereState.h"
 #include "AnimationManager.h"
-#include "KeyFrameAnimation.h"
 
+
+class ModelManager;
+class KeyFrameAnimation;
 
 /* Modelクラス */
 class Model {
 
 public: // メンバ関数
 
-	Model() {};
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	Model();
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~Model() {};
 
 	/// <summary>
@@ -31,7 +39,7 @@ public: // メンバ関数
 	/// </summary>
 	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
-	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
+	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
 	/// <summary>
 	/// 描画処理
@@ -42,6 +50,21 @@ public: // メンバ関数
 	/// Animationの再生
 	/// </summary>
 	void PlayAnimation(Animation animation, float time);
+
+	/// <summary>
+	/// Nodeの階層構造からSkeletonを作る
+	/// </summary>
+	Skeleton CreateSkeleton();
+
+	/// <summary>
+	/// Skeletonの更新処理
+	/// </summary>
+	void UpdateSkeleton(Skeleton& skeleton);
+
+	/// <summary>
+	/// Animationを適用する
+	/// </summary>
+	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
 
 #pragma region Get
@@ -109,6 +132,12 @@ public: // メンバ関数
 
 
 private: // メンバ変数
+
+	// モデルマネージャー
+	ModelManager* modelManager_ = nullptr;
+
+	// キーフレーアニメーション
+	KeyFrameAnimation* keyFrameAnimation_ = nullptr;
 
 	// ステートパターン
 	IModelState* state_ = nullptr;

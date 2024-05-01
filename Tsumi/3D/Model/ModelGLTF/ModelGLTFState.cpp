@@ -47,8 +47,8 @@ void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform, Camera* 
 
 
 	// RootのMatrixを適用する
-	worldTransform.matWorld = pModel->GetNode().localMatrix * worldTransform.matWorld;
-	worldTransform.TransferMatrix();
+	//worldTransform.matWorld = pModel->GetNode().localMatrix * worldTransform.matWorld;
+	//worldTransform.TransferMatrix();
 
 
 	// コマンドコール

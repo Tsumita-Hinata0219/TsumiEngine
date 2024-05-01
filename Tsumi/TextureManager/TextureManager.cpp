@@ -39,7 +39,7 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& routeFilePath, TextureFrom from) {
+uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from) {
 
 	// パスを追加
 	std::string FilePath{};
@@ -50,10 +50,10 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::str
 		FilePath = "Resources/Texture/" + routeFilePath + "/" + filePath;
 		break;
 	case TextureFrom::Obj:
-		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath + "/" + filePath + ".png";
+		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath + ".png";
 		break;
 	case TextureFrom::gLTF:
-		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath + "/" + filePath + ".png";
+		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath;
 		break;
 	default:
 		break;

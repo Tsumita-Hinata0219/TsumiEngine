@@ -12,12 +12,6 @@ ModelManager* ModelManager::Getinstance() {
 
 
 /// <summary>
-/// 初期化処理
-/// </summary>
-void ModelManager::Initialize() {}
-
-
-/// <summary>
 /// 解放処理
 /// </summary>
 void ModelManager::Finalize() {
@@ -139,7 +133,7 @@ ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std:
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
@@ -158,7 +152,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + "/" + fileName + ".obj");
+		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + ".obj");
 
 		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -210,7 +204,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
@@ -220,7 +214,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
-ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName)
+ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
 {
 	if (CheckObjData(fileName)) {
 
@@ -231,7 +225,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 
 		// asssimpでobjを読む
 		Assimp::Importer importer;
-		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + "/" + fileName + ".gltf");
+		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + ".gltf");
 
 		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
@@ -283,7 +277,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(fileName, routeFilePath, TextureFrom::gLTF);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, textureName, TextureFrom::gLTF);
 		objData.textureHD = texHandle;
 
 		// Nodeを読み込む
@@ -298,6 +292,22 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 }
 
 
+/// <summary>
+/// Nodeの階層構造からSkeletonを作る
+/// </summary>
+Skeleton ModelManager::CreateSkeleton(const Node& rootNode)
+{
+	Skeleton skeleton{};
+	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
+
+	// 名前とindexのマッピングを行いアクセスしやすくする
+	for (const Joint& joint : skeleton.joints) {
+		skeleton.jointMap.emplace(joint.name, joint.index);
+	}
+
+	return skeleton;
+}
+
 
 /// <summary>
 /// 一回読み込んだものは読み込まない
@@ -311,7 +321,6 @@ bool ModelManager::CheckObjData(std::string filePath) {
 
 	return false;
 }
-
 
 
 /// <summary>
@@ -370,25 +379,24 @@ Node ModelManager::ReadNode(aiNode* node)
 	aiMatrix4x4 aiLocalMatrix = node->mTransformation; // nodeのlocalMatrixを取得
 	aiLocalMatrix.Transpose(); // 列ベクトル形式を行ベクトル形式に転置
 
-	result.localMatrix.m[0][0] = aiLocalMatrix[0][0];
-	result.localMatrix.m[0][1] = aiLocalMatrix[0][1];
-	result.localMatrix.m[0][2] = aiLocalMatrix[0][2];
-	result.localMatrix.m[0][3] = aiLocalMatrix[0][3];
 
-	result.localMatrix.m[1][0] = aiLocalMatrix[1][0];
-	result.localMatrix.m[1][1] = aiLocalMatrix[1][1];
-	result.localMatrix.m[1][2] = aiLocalMatrix[1][2];
-	result.localMatrix.m[1][3] = aiLocalMatrix[1][3];
+	aiVector3D scale, translate;
+	aiQuaternion rotate;
 
-	result.localMatrix.m[2][0] = aiLocalMatrix[2][0];
-	result.localMatrix.m[2][1] = aiLocalMatrix[2][1];
-	result.localMatrix.m[2][2] = aiLocalMatrix[2][2];
-	result.localMatrix.m[2][3] = aiLocalMatrix[2][3];
+	// assimpの行列からSRTを抽出する関数を利用
+	node->mTransformation.Decompose(scale, rotate, translate); 
 
-	result.localMatrix.m[3][0] = aiLocalMatrix[3][0];
-	result.localMatrix.m[3][1] = aiLocalMatrix[3][1];
-	result.localMatrix.m[3][2] = aiLocalMatrix[3][2];
-	result.localMatrix.m[3][3] = aiLocalMatrix[3][3];
+	// scaleはそのまま
+	result.transform.scale = { scale.x, scale.y,scale.z };
+
+	// x軸を反転、さらに回転方向が逆なので軸を反転させる
+	result.transform.rotate = { rotate.w, rotate.x, -rotate.y, -rotate.z };
+
+	// x軸を反転
+	result.transform.translate = { -translate.x, translate.y,translate.z };
+
+	// 上記で読み込んだ情報を元にLocalMatrixを求める
+	result.localMatrix = MakeAffineMatrix(result.transform.scale, result.transform.rotate, result.transform.translate);
 
 	result.name = node->mName.C_Str(); // Mode名を格納
 	result.Children.resize(node->mNumChildren); // 子供の数だけ確保
@@ -397,5 +405,33 @@ Node ModelManager::ReadNode(aiNode* node)
 		result.Children[childIndex] = ReadNode(node->mChildren[childIndex]);
 	}
 	return result;
+}
+
+
+/// <summary>
+/// NodeからJointを作る
+/// </summary>
+int32_t ModelManager::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
+{
+	Joint joint{};
+	joint.name = node.name;
+	joint.localMatrix = node.localMatrix;
+	joint.skeletonSpaceMatrix = Matrix4x4::identity;
+	joint.transform = node.transform;
+	joint.index = int32_t(joints.size()); // 現在登録されている数をIndexに
+	joint.parent = parent;
+
+	// SkeletonのJoint列に追加
+	joints.push_back(joint);
+
+	for (const Node& child : node.Children) {
+
+		// 子Jointを作成し、そのIndexを登録
+		int32_t chileIndex = CreateJoint(child, joint.index, joints);
+		joints[joint.index].children.push_back(chileIndex);
+	}
+
+	// 自身のIndexを返す
+	return joint.index;
 }
 

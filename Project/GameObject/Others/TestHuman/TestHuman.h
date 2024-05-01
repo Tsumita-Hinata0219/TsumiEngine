@@ -23,5 +23,6 @@ private:
 	WorldTransform wt_{};
 	Animation testAnimation_{};
 	float animationtime = 0.0f;
+	Skeleton skeleton_{};
 };
 

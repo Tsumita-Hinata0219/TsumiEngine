@@ -28,10 +28,10 @@ public: // メンバ関数
 	void Update();
 
 	// Animationを再生する
-	static Matrix4x4 PlayAnimation(string name, Animation animation, float time);
+	Matrix4x4 PlayAnimation(string name, Animation animation, float time);
 
 	// Animationを適用する
-	static void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
+	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
 
 private: // メンバ関数

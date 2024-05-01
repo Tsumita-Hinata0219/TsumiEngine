@@ -12,12 +12,6 @@ ModelManager* ModelManager::Getinstance() {
 
 
 /// <summary>
-/// 初期化処理
-/// </summary>
-void ModelManager::Initialize() {}
-
-
-/// <summary>
 /// 解放処理
 /// </summary>
 void ModelManager::Finalize() {
@@ -299,6 +293,23 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 
 
 /// <summary>
+/// Nodeの階層構造からSkeletonを作る
+/// </summary>
+Skeleton ModelManager::CreateSkeleton(const Node& rootNode)
+{
+	Skeleton skeleton{};
+	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
+
+	// 名前とindexのマッピングを行いアクセスしやすくする
+	for (const Joint& joint : skeleton.joints) {
+		skeleton.jointMap.emplace(joint.name, joint.index);
+	}
+
+	return skeleton;
+}
+
+
+/// <summary>
 /// 一回読み込んだものは読み込まない
 /// </summary>
 bool ModelManager::CheckObjData(std::string filePath) {
@@ -398,23 +409,6 @@ Node ModelManager::ReadNode(aiNode* node)
 
 
 /// <summary>
-/// Nodeの階層構造からSkeletonを作る
-/// </summary>
-Skeleton ModelManager::CreateSkeleton(const Node& rootNode)
-{
-	Skeleton skeleton{};
-	skeleton.root = CreateJoint(rootNode, {}, skeleton.joints);
-
-	// 名前とindexのマッピングを行いアクセスしやすくする
-	for (const Joint& joint : skeleton.joints) {
-		skeleton.jointMap.emplace(joint.name, joint.index);
-	}
-	
-	return skeleton;
-}
-
-
-/// <summary>
 /// NodeからJointを作る
 /// </summary>
 int32_t ModelManager::CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints)
@@ -426,12 +420,12 @@ int32_t ModelManager::CreateJoint(const Node& node, const optional<int32_t>& par
 	joint.transform = node.transform;
 	joint.index = int32_t(joints.size()); // 現在登録されている数をIndexに
 	joint.parent = parent;
-	
+
 	// SkeletonのJoint列に追加
-	joints.push_back(joint); 
+	joints.push_back(joint);
 
 	for (const Node& child : node.Children) {
-		
+
 		// 子Jointを作成し、そのIndexを登録
 		int32_t chileIndex = CreateJoint(child, joint.index, joints);
 		joints[joint.index].children.push_back(chileIndex);

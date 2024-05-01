@@ -8,6 +8,7 @@ void TestHuman::Init()
 	testModel_ = make_unique<Model>();
 	testModel_->CreateGLTFModel("TestHuman", "walk", "uvChecker.png");
 	testAnimation_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
+	skeleton_ = testModel_->CreateSkeleton();
 
 	wt_.Initialize();
 }
@@ -19,8 +20,9 @@ void TestHuman::Update()
 	wt_.UpdateMatrix();
 
 	// とりあえず時間の加算処理はここで行う
-	//animationtime += 1.0f / 60.0f;
-	//testModel_->PlayAnimation(testAnimation_, animationtime);
+	animationtime += 1.0f / 60.0f;
+	testModel_->ApplyAnimation(skeleton_, testAnimation_, animationtime);
+	testModel_->UpdateSkeleton(skeleton_);
 
 #ifdef _DEBUG
 

@@ -33,7 +33,7 @@ struct VertexShaderInput
 VertexShaderOutput main(VertexShaderInput input)
 {
     VertexShaderOutput output;
-    float mulWorld = mul(gModelTransformMat.modelMatrix, gTransformationMat.World);
+    float4x4 mulWorld = mul(gModelTransformMat.modelMatrix, gTransformationMat.World);
     float4x4 matVP = mul(gViewProjectionMat.view, gViewProjectionMat.projection);
     float4x4 matWVP = mul(mulWorld, matVP);
     

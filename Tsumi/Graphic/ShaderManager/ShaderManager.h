@@ -35,6 +35,7 @@ struct ShadersType {
 	ShadersMode PhongNormalMap;
 	ShadersMode Particle;
 	ShadersMode Line;
+	ShadersMode Object3d;
 };
 
 
@@ -135,6 +136,11 @@ private: // メンバ関数
 	/// 
 	/// </summary>
 	static void LineShader();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	static void Object3DShader();
 
 #pragma endregion
 

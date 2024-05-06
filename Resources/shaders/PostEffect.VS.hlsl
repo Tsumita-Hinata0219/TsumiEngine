@@ -1,6 +1,6 @@
 #include "PostEffect.hlsli"
 
-static const int kNumVertex = 3;
+static const uint kNumVertex = 3;
 static const float4 kPositions[kNumVertex] =
 {
     { -1.0f, 1.0f, 0.0f, 1.0f }, // ç∂è„
@@ -15,7 +15,7 @@ static const float2 kTextureCoords[kNumVertex] =
 };
 
 
-VertexShaderOutput main(int vertexId : SV_VertexId)
+VertexShaderOutput main(uint vertexId : SV_VertexId)
 {
     VertexShaderOutput output;
     

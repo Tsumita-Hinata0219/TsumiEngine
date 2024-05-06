@@ -45,7 +45,7 @@ void Tsumi::Initialize() {
 	DescriptorManager::Initialize();
 
 	// DrawSystemの初期化処理
-	DrawSystem::GetInstance()->Initialize();
+	//DrawSystem::GetInstance()->Initialize();
 }
 
 

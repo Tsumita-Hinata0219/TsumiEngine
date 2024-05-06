@@ -143,6 +143,7 @@ void ShaderManager::ShadersCompiles() {
 	PhongNormalMapShader();
 	ParticleShader();
 	LineShader();
+	PostEffectShader();
 }
 
 
@@ -288,5 +289,22 @@ void ShaderManager::LineShader() {
 			L"Resources/shaders/LineObject3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Line = shader;
+}
 
+
+/// <summary>
+/// 
+/// </summary>
+void ShaderManager::PostEffectShader() {
+
+	ShadersMode shader{};
+
+	shader.VertexBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PostEffect.VS.hlsl", L"vs_6_0");
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PostEffect.PS.hlsl", L"ps_6_0");
+
+	ShaderManager::GetInstance()->shaders_.PostEffect = shader;
 }

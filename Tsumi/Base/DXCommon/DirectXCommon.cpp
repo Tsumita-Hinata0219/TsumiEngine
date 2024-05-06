@@ -421,7 +421,7 @@ void DirectXCommon::CreateSwapChain() {
 void DirectXCommon::SetDescriptorHeap() {
 
 	DirectXCommon::GetInstance()->rtv_.DescriptorHeap = CreateDescriptorHeap(
-		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 2, false);
+		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false);
 
 	DirectXCommon::GetInstance()->srvDescriptorHeap_ = CreateDescriptorHeap(
 		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
@@ -492,7 +492,11 @@ void DirectXCommon::SettingRTV() {
 		rtv.Handles[1]);
 
 
-	// 3つ目を作る RenderTexture用
+	// 3つ目のディスクリプタハンドルを得る
+	rtv.Handles[2].ptr =
+		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+
+	// 3つ目のリソースを作る
 	const Vector4 kRenderTargetClearValue{ 1.0f, 0.0f, 0.0f, 1.0f }; // いったんわかりやすいように赤色
 	auto renderTextureResource = CreateResource::CreateRenderTextureResource(
 		WinApp::kWindowWidth, 
@@ -500,9 +504,7 @@ void DirectXCommon::SettingRTV() {
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
 		kRenderTargetClearValue);
 
-	rtv.Handles[2].ptr = 
-		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	
+	// 3つ目を作る
 	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
 		renderTextureResource.Get(), 
 		&rtv.Desc, 

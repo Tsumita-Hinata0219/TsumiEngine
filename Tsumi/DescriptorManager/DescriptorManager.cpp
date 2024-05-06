@@ -87,7 +87,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 
 	return DescriptorManager::GetInstance()->index_;
 }
-uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource, UINT size) {
+uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource) {
 
 	// indexをインクリメント
 	DescriptorManager::GetInstance()->index_++;

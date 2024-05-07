@@ -63,7 +63,6 @@ void GameScene::Update(GameManager* state)
 
 	camera_->UpdateMatrix();
 
-=======
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
 

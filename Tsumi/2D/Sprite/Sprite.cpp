@@ -37,9 +37,6 @@ void Sprite::Initialize(Vector2 size, Vector4 color) {
 
 	resource_.Index = CreateResource::CreateBufferResource(sizeof(uint32_t) * 6);
 	resource_.IndexBufferView = CreateResource::CreateIndexBufferview(sizeof(uint32_t) * 6, resource_.Index.Get());
-
-	ComPtr<ID3D12Resource> stvRe = DirectXCommon::GetInstance()->GetRTV().Resources[2].Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stvRe);
 }
 
 
@@ -74,7 +71,7 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera)
 
 	// DescriptorTableを設定する
 	if (!texHandle == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+		DescriptorManager::SetGraphicsRootDescriptorTable(3, texHandle);
 	}
 
 	// 描画！(DrawCall/ドローコール)

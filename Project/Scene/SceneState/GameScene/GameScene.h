@@ -57,8 +57,4 @@ private:
 	// PostEffect
 	unique_ptr<PostEffect> postEffect_;
 
-
-	unique_ptr<Sprite> sp_;
-	//uint32_t tex_;
-	WorldTransform wt_;
 };

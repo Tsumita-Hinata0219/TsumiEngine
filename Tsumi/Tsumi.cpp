@@ -33,8 +33,7 @@ void Tsumi::Initialize() {
 	ImGuiManager::Initialize();
 
 	// Inputの初期化処理
-	KeysInput::Initialize();
-	GamePadInput::Initialize();
+	Input::GetInstance()->Initialize();
 
 	// Audioの初期化処理
 	Audio::Initialize();
@@ -64,8 +63,7 @@ void Tsumi::Finalize() {
 void Tsumi::BeginFlame() {
 
 	ImGuiManager::BeginFrame();
-	KeysInput::BeginFrame();
-	GamePadInput::BeginFrame();
+	Input::GetInstance()->BeginFrame();
 	DescriptorManager::BeginFrame();
 }
 

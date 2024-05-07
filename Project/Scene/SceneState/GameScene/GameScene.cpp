@@ -24,7 +24,6 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize() 
 {
-
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();

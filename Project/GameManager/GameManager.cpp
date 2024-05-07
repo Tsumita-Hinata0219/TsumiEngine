@@ -35,11 +35,27 @@ void GameManager::Run() {
 		Tsumi::BeginFlame();
 
 		Scene_->Update(this);
+
+	
+		//// ポストエフェクト
+		DirectXCommon::PreDrawForPostEffect();
+		
+		// オブジェクト
 		Scene_->BackSpriteDraw();
 		Scene_->ModelDraw();
-		Scene_->FrontSpriteDraw();
+		//Scene_->FrontSpriteDraw();
 
+		DirectXCommon::PostDrawForPostEffect();
+
+		// スワップチェーン
+		DirectXCommon::PreDrawForSwapChain();
+
+		Scene_->FrontSpriteDraw();
+	
+		// ImGui
 		Tsumi::EndFlame();
+
+		DirectXCommon::PostDrawForSwapChain();
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();

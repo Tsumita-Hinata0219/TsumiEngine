@@ -55,6 +55,7 @@ public:
 	/// SRVを作成する
 	/// </summary>
 	static uint32_t CreateInstancingSRV(uint32_t instancingNum, ComPtr<ID3D12Resource>& resource, UINT size);
+	static uint32_t CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
 	/// CPUとGPUの.ptrをずらす
@@ -122,7 +123,6 @@ public:
 #pragma endregion 
 
 
-private:
 
 	static const uint32_t descriptor_Max = 64;
 	DescriptorSize descriptorSize_{};

@@ -1,63 +1,63 @@
-#include "SpriteGraphicPipeline.h"
+#include "PostEffectGraphicPipeline.h"
 
 
 
 /// <summary>
-/// SpriteGraphicPipelineクラスのインスタンス取得
+/// PostEffectGraphicPipelineクラスのインスタンス取得
 /// </summary>
-SpriteGraphicPipeline* SpriteGraphicPipeline::GetInstance() {
-	static SpriteGraphicPipeline instance;
+PostEffectGraphicPipeline* PostEffectGraphicPipeline::GetInstance() {
+	static PostEffectGraphicPipeline instance;
 	return &instance;
 }
 
 
 
 // 初期化処理
-void SpriteGraphicPipeline::Initialize() {}
+void PostEffectGraphicPipeline::Initialize() {}
 
 
 
 // PSOを構築する
-void SpriteGraphicPipeline::SetupSpritePso() {
+void PostEffectGraphicPipeline::SetupPostEffectPso() {
 
-	SpriteGraphicPipeline* spriteGraphicPipeline = SpriteGraphicPipeline::GetInstance();
+	PostEffectGraphicPipeline* postEffectGraphicPipeline = PostEffectGraphicPipeline::GetInstance();
 
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
-	spriteGraphicPipeline->SetupRootSignature(descriptionRootSignature);
+	postEffectGraphicPipeline->SetupRootSignature(descriptionRootSignature);
 
 
 	/* --- InputLayoutを設定する --- */
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2]{};
-	spriteGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	spriteGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	postEffectGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	postEffectGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	spriteGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
+	postEffectGraphicPipeline->SetupInputLayout(inputLayoutDesc);
 
 
 	/* --- BlendStateを設定する --- */
 	// 全ての色要素を書き込む
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& pBlendDesc = blendDesc.RenderTarget[0];
-	spriteGraphicPipeline->SetupBlendState(pBlendDesc, BlendNone);
+	postEffectGraphicPipeline->SetupBlendState(pBlendDesc, BlendNone);
 
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	spriteGraphicPipeline->SetupRasterizerState(rasterizerDesc);
+	postEffectGraphicPipeline->SetupRasterizerState(rasterizerDesc);
 
 
 	/* --- Shaderをcompileする --- */
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	spriteGraphicPipeline->CompileShaders(vertexShaderBlob, pixelShaderBlob);
+	postEffectGraphicPipeline->CompileShaders(vertexShaderBlob, pixelShaderBlob);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
-	graphicsPipelineStateDesc.pRootSignature = SpriteGraphicPipeline::GetInstance()->spritePso_.rootSignature; // RootSignature
+	graphicsPipelineStateDesc.pRootSignature = PostEffectGraphicPipeline::GetInstance()->postEffectPso_.rootSignature; // RootSignature
 
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; // InputLayout
 
@@ -106,14 +106,14 @@ void SpriteGraphicPipeline::SetupSpritePso() {
 	HRESULT hr{};
 	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
-		IID_PPV_ARGS(&SpriteGraphicPipeline::GetInstance()->spritePso_.graphicsPipelineState));
+		IID_PPV_ARGS(&PostEffectGraphicPipeline::GetInstance()->postEffectPso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 }
 
 
 
 // RootSignatureのセットアップ
-void SpriteGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) {
+void PostEffectGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) {
 
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
@@ -173,10 +173,10 @@ void SpriteGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descri
 	HRESULT hr_ = D3D12SerializeRootSignature(
 		&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1,
-		&SpriteGraphicPipeline::GetInstance()->spritePso_.signatureBlob,
-		&SpriteGraphicPipeline::GetInstance()->spritePso_.errorBlob);
+		&PostEffectGraphicPipeline::GetInstance()->postEffectPso_.signatureBlob,
+		&PostEffectGraphicPipeline::GetInstance()->postEffectPso_.errorBlob);
 	if (FAILED(hr_)) {
-		Log(reinterpret_cast<char*>(SpriteGraphicPipeline::GetInstance()->spritePso_.errorBlob->GetBufferPointer()));
+		Log(reinterpret_cast<char*>(PostEffectGraphicPipeline::GetInstance()->postEffectPso_.errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
@@ -184,30 +184,30 @@ void SpriteGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descri
 	// バイナリを元に生成
 	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
-		SpriteGraphicPipeline::GetInstance()->spritePso_.signatureBlob->GetBufferPointer(),
-		SpriteGraphicPipeline::GetInstance()->spritePso_.signatureBlob->GetBufferSize(),
-		IID_PPV_ARGS(&SpriteGraphicPipeline::GetInstance()->spritePso_.rootSignature));
+		PostEffectGraphicPipeline::GetInstance()->postEffectPso_.signatureBlob->GetBufferPointer(),
+		PostEffectGraphicPipeline::GetInstance()->postEffectPso_.signatureBlob->GetBufferSize(),
+		IID_PPV_ARGS(&PostEffectGraphicPipeline::GetInstance()->postEffectPso_.rootSignature));
 	assert(SUCCEEDED(hr_));
 }
 
 
 // InputLayoutのセットアップ
-void SpriteGraphicPipeline::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset) {
+void PostEffectGraphicPipeline::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset) {
 
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
 	inputElementDescs.Format = Format;
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
-void SpriteGraphicPipeline::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements) {
+void PostEffectGraphicPipeline::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc) {
 
-	inputLayoutDesc.pInputElementDescs = inputElementDescs;
-	inputLayoutDesc.NumElements = numInputElements;
+	inputLayoutDesc.pInputElementDescs = nullptr;
+	inputLayoutDesc.NumElements = 0;
 }
 
 
 // BlendStateのセットアップ
-void SpriteGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode) {
+void PostEffectGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode) {
 
 	blendDesc.RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
@@ -268,7 +268,7 @@ void SpriteGraphicPipeline::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blen
 
 
 // RasterizerStateのセットアップ
-void SpriteGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc) {
+void PostEffectGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc) {
 
 	// 裏面(時計回り)を表示しない
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
@@ -278,11 +278,11 @@ void SpriteGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasteriz
 
 
 // Shadersのコンパイル
-void SpriteGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
+void PostEffectGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().Sprite.VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().PostEffect.VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().Sprite.PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().PostEffect.PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

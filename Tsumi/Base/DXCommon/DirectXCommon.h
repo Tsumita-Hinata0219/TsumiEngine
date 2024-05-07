@@ -14,6 +14,7 @@
 #include "GraphicPipelineManager.h"
 #include "MyMath.h"
 #include "Struct.h"
+#include "CreateResource.h"
 
 
 
@@ -36,8 +37,10 @@ struct SwapChains {
 struct RTV {
 	ComPtr<ID3D12DescriptorHeap> DescriptorHeap;
 	D3D12_RENDER_TARGET_VIEW_DESC Desc{};
-	D3D12_CPU_DESCRIPTOR_HANDLE Handles[2];
+	D3D12_CPU_DESCRIPTOR_HANDLE Handles[3];
 	D3D12_CPU_DESCRIPTOR_HANDLE StartHandle;
+	ComPtr<ID3D12Resource> Resources[3];
+	Vector4 color[3];
 };
 
 
@@ -60,14 +63,24 @@ public: // メンバ関数
 	static void Initialize();
 
 	/// <summary>
-	/// 描画前処理
+	/// 描画前処理 PostEffect用
 	/// </summary>
-	static void PreDraw();
+	static void PreDrawForPostEffect();
 
 	/// <summary>
-	/// 描画後処理
+	/// 描画後処理 PostEffect用
 	/// </summary>
-	static void PostDraw();
+	static void PostDrawForPostEffect();
+
+	/// <summary>
+	/// 描画前処理 SwapChain用
+	/// </summary>
+	static void PreDrawForSwapChain();
+
+	/// <summary>
+	/// 描画後処理 SwapChain用
+	/// </summary>
+	static void PostDrawForSwapChain();
 
 	/// <summary>
 	/// 解放処理
@@ -100,7 +113,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	RTV const GetRTV() { return DirectXCommon::GetInstance()->rtv_; }
+	RTV GetRTV() { return DirectXCommon::GetInstance()->rtv_; }
 
 	/// <summary>
 	/// 
@@ -231,11 +244,11 @@ private: // メンバ変数
 	D3D12_INFO_QUEUE_FILTER filter_{};
 
 	// コマンド
-	Commands commands_;
+	Commands commands_{};
 
 
 	// バックバッファインデックス
-	UINT backBufferIndex_;
+	UINT backBufferIndex_{};
 
 
 	// TransitionBarrierの設定
@@ -260,7 +273,7 @@ private: // メンバ変数
 
 
 	// Event
-	HANDLE fenceEvent_;
+	HANDLE fenceEvent_{};
 
 
 	// dxcCompilerを初期化

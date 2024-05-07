@@ -37,6 +37,9 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
+	postEffect_ = make_unique<PostEffect>();
+	postEffect_->Initialize();
+
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_ = make_unique<TestObject>();
 	testObject_->Init();
@@ -58,6 +61,9 @@ void GameScene::Update(GameManager* state)
 {
 	state;
 
+	camera_->UpdateMatrix();
+
+=======
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
 
@@ -108,7 +114,7 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw() 
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());
@@ -129,8 +135,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
-
-	
+	postEffect_->Draw();
 }
 
 

@@ -17,6 +17,8 @@
     <FxCompile Include="Resources\shaders\SpriteObject3d.VS.hlsl" />
     <FxCompile Include="Resources\shaders\LineObject3d.VS.hlsl" />
     <FxCompile Include="Resources\shaders\LineObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -148,6 +150,8 @@
     <ClCompile Include="Tsumi\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Tsumi\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleArray\ParticleArray.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffect\PostEffectGraphicPipeline.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationManager\AnimationManager.cpp" />
@@ -323,6 +327,8 @@
     <ClInclude Include="Tsumi\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Tsumi\Utilities\Timer\Timer.h" />
     <ClInclude Include="Tsumi\Particle\ParticleArray\ParticleArray.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffect\PostEffectGraphicPipeline.h" />
+    <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
@@ -340,6 +346,8 @@
     <None Include="Resources\shaders\PhongObject.hlsli" />
     <None Include="Resources\shaders\SpriteObject3d.hlsli" />
     <None Include="Resources\shaders\LineObject3d.hlsli" />
+    <None Include="Resources\shaders\PostEffect.hlsli" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

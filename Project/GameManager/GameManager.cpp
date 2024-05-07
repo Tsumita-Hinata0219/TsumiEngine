@@ -54,7 +54,6 @@ void GameManager::Run() {
 		Tsumi::EndFlame();
 
 		DirectXCommon::PostDrawForSwapChain();
-
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();

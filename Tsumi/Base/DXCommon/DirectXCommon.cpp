@@ -67,38 +67,38 @@ void DirectXCommon::Initialize() {
 /// </summary>
 void DirectXCommon::PreDrawForPostEffect() {
 
-	SwapChains swapChains{};
+	/*SwapChains swapChains{};
 	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
 	swapChains.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
-	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
+	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();*/
 	Commands commands = DirectXCommon::GetInstance()->commands_;
-	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
+	/*D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;*/
 
 	// コマンドを積み込んで確定させる
 	// これから書き込むバックバッファのインデックスを取得
-	UINT backBufferIndex_ = swapChains.swapChain->GetCurrentBackBufferIndex();
+	//UINT backBufferIndex_ = swapChains.swapChain->GetCurrentBackBufferIndex();
 
 
-	// Barrierを設定する
-	// 今回のバリアはTransition
-	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
-	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	barrier.Transition.pResource = swapChains.Resources[backBufferIndex_].Get();
-	// 遷移前(現在)のResourceState
-	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-	// 遷移後のResourceState
-	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	// TransitionBarrierを張る
-	commands.List->ResourceBarrier(1, &barrier);
+	//// Barrierを設定する
+	//// 今回のバリアはTransition
+	//barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	//// Noneにしておく
+	//barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	//// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	//barrier.Transition.pResource = swapChains.Resources[backBufferIndex_].Get();
+	//// 遷移前(現在)のResourceState
+	//barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	//// 遷移後のResourceState
+	//barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	//// TransitionBarrierを張る
+	//commands.List->ResourceBarrier(1, &barrier);
 
-	DirectXCommon::GetInstance()->barrier_ = barrier;
+	//DirectXCommon::GetInstance()->barrier_ = barrier;
 
 
 	// 描画先のRTVを設定する
 	commands.List->OMSetRenderTargets(
-		1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		1, &DirectXCommon::GetInstance()->rtv_.Handles[2],
 		false,
 		nullptr);
 
@@ -108,14 +108,14 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 
 	commands.List->ClearRenderTargetView(
-		DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		DirectXCommon::GetInstance()->rtv_.Handles[2],
 		clearColor,
 		0, nullptr);
 
 
 	// 描画先のRTVとDSVを設定する
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
-	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_], false, &dsvHandle);
+	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv_.Handles[2], false, &dsvHandle);
 
 
 	//指定した深度で画面全体をクリアする

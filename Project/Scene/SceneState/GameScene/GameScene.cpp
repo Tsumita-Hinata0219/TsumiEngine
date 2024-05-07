@@ -89,7 +89,7 @@ void GameScene::ModelDraw()
 {
 
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());

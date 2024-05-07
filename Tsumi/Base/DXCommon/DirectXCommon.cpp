@@ -67,33 +67,23 @@ void DirectXCommon::Initialize() {
 /// </summary>
 void DirectXCommon::PreDrawForPostEffect() {
 
-	/*SwapChains swapChains{};
-	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
-	swapChains.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
-	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();*/
 	Commands commands = DirectXCommon::GetInstance()->commands_;
-	/*D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;*/
-
-	// コマンドを積み込んで確定させる
-	// これから書き込むバックバッファのインデックスを取得
-	//UINT backBufferIndex_ = swapChains.swapChain->GetCurrentBackBufferIndex();
-
-
-	//// Barrierを設定する
-	//// 今回のバリアはTransition
-	//barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	//// Noneにしておく
-	//barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	//// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	//barrier.Transition.pResource = swapChains.Resources[backBufferIndex_].Get();
-	//// 遷移前(現在)のResourceState
-	//barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-	//// 遷移後のResourceState
-	//barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	//// TransitionBarrierを張る
-	//commands.List->ResourceBarrier(1, &barrier);
-
-	//DirectXCommon::GetInstance()->barrier_ = barrier;
+	D3D12_RESOURCE_BARRIER barrier{};
+	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	
+	// Barrierを設定する
+	// 今回のバリアはTransition
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = rtv.Resources[2].Get();
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// TransitionBarrierを張る
+	commands.List->ResourceBarrier(1, &barrier);
 
 
 	// 描画先のRTVを設定する
@@ -104,7 +94,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 
 	// 指定した色で画面全体をクリアする
-	float clearColor[] = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
+	float clearColor[] = { rtv.color[2].x, rtv.color[2].y, rtv.color[2].z, rtv.color[2].w }; // 青っぽい色。RGBAの順
 
 
 	commands.List->ClearRenderTargetView(
@@ -115,8 +105,6 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 	// 描画先のRTVとDSVを設定する
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
-	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv_.Handles[2], false, &dsvHandle);
-
 
 	//指定した深度で画面全体をクリアする
 	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
@@ -134,6 +122,23 @@ void DirectXCommon::PreDrawForPostEffect() {
 /// </summary>
 void DirectXCommon::PostDrawForPostEffect() {
 
+	Commands commands = DirectXCommon::GetInstance()->commands_;
+	D3D12_RESOURCE_BARRIER barrier{};
+	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+
+	// Barrierを設定する
+	// 今回のバリアはTransition
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = rtv.Resources[2].Get();
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+	// TransitionBarrierを張る
+	commands.List->ResourceBarrier(1, &barrier);
 }
 
 
@@ -148,6 +153,7 @@ void DirectXCommon::PreDrawForSwapChain() {
 	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
 	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
+	RTV rtv = DirectXCommon::GetInstance()->rtv_;
 
 	// コマンドを積み込んで確定させる
 	// これから書き込むバックバッファのインデックスを取得
@@ -177,24 +183,13 @@ void DirectXCommon::PreDrawForSwapChain() {
 		false,
 		nullptr);
 
-
 	// 指定した色で画面全体をクリアする
-	float clearColor[] = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
-
+	float clearColor[] = { rtv.color[backBufferIndex_].x, rtv.color[backBufferIndex_].y, rtv.color[backBufferIndex_].z, rtv.color[backBufferIndex_].w }; // 青っぽい色。RGBAの順
 
 	commands.List->ClearRenderTargetView(
-		DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		rtv.Handles[backBufferIndex_],
 		clearColor,
 		0, nullptr);
-
-
-	// 描画先のRTVとDSVを設定する
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
-	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_], false, &dsvHandle);
-
-
-	//指定した深度で画面全体をクリアする
-	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 
 	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
@@ -233,10 +228,6 @@ void DirectXCommon::PostDrawForSwapChain() {
 	// GPUにコマンドリストの実行を行わせる
 	ID3D12CommandList* commandLists[] = { commands.List.Get()};
 	commands.Queue->ExecuteCommandLists(1, commandLists);
-
-
-	// GPUとOSに画面の交換を行うよう通知する
-	swapChains.swapChain->Present(0, 1);
 
 
 	// Fenceの値を更新
@@ -548,6 +539,10 @@ void DirectXCommon::SettingRTV() {
 	rtv.Desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
 
 
+	// 指定した色で画面全体をクリアする
+	Vector4 clearColor = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
+
+
 	// ディスクリプタの先頭を取得する
 	rtv.StartHandle = rtv.DescriptorHeap->GetCPUDescriptorHandleForHeapStart();
 
@@ -557,6 +552,8 @@ void DirectXCommon::SettingRTV() {
 		DirectXCommon::GetInstance()->swapChains_.Resources[0].Get(),
 		&rtv.Desc,
 		rtv.Handles[0]);
+	rtv.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
+	rtv.color[0] = clearColor;
 
 
 	// 2つ目のディスクリプタハンドルを得る
@@ -568,6 +565,8 @@ void DirectXCommon::SettingRTV() {
 		DirectXCommon::GetInstance()->swapChains_.Resources[1].Get(),
 		&rtv.Desc,
 		rtv.Handles[1]);
+	rtv.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
+	rtv.color[1] = clearColor;
 
 
 	// 3つ目のディスクリプタハンドルを得る
@@ -587,6 +586,8 @@ void DirectXCommon::SettingRTV() {
 		renderTextureResource.Get(), 
 		&rtv.Desc, 
 		rtv.Handles[2]);
+	rtv.Resources[2] = renderTextureResource;
+	rtv.color[2] = kRenderTargetClearValue;
 
 
 

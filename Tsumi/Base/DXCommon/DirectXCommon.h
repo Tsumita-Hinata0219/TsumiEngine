@@ -39,6 +39,8 @@ struct RTV {
 	D3D12_RENDER_TARGET_VIEW_DESC Desc{};
 	D3D12_CPU_DESCRIPTOR_HANDLE Handles[3];
 	D3D12_CPU_DESCRIPTOR_HANDLE StartHandle;
+	ComPtr<ID3D12Resource> Resources[3];
+	Vector4 color[3];
 };
 
 

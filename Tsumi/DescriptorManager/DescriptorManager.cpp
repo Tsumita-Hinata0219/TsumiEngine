@@ -72,18 +72,11 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
-	/*DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU.ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._GPU.ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);*/
 
 
 	// SRVの生成
 	DescriptorManager::CreateShaderResourceView(resource, srvDesc, DescriptorManager::GetInstance()->index_);
-	/*DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-		resource.Get(),
-		&srvDesc,
-		DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU);*/
+	
 
 	return DescriptorManager::GetInstance()->index_;
 }
@@ -115,18 +108,9 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
-	/*DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU.ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._GPU.ptr +=
-		DirectXCommon::GetInstance()->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);*/
-
 
 	// SRVの生成
 	DescriptorManager::CreateShaderResourceView(resource, srvDesc, DescriptorManager::GetInstance()->index_);
-	/*DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-		resource.Get(),
-		&srvDesc,
-		DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU);*/
 
 	return DescriptorManager::GetInstance()->index_;
 }

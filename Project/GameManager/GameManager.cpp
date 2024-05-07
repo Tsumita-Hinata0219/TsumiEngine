@@ -36,7 +36,8 @@ void GameManager::Run() {
 
 		Scene_->Update(this);
 
-		// ポストエフェクト
+	
+		//// ポストエフェクト
 		DirectXCommon::PreDrawForPostEffect();
 		
 		// オブジェクト
@@ -46,10 +47,10 @@ void GameManager::Run() {
 
 		DirectXCommon::PostDrawForPostEffect();
 
-
 		// スワップチェーン
-		DirectXCommon::PostDrawForPostEffect();
+		DirectXCommon::PreDrawForSwapChain();
 
+	
 		// ImGui
 		Tsumi::EndFlame();
 

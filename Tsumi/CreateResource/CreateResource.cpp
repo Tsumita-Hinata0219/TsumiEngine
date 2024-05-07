@@ -164,7 +164,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 		&uploadHeapProperties_, 
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc, 
-		D3D12_RESOURCE_STATE_RENDER_TARGET, // これから描画することを前提としたTextureなのでRederTargetとして使うことから始める
+		D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE, // これから描画することを前提としたTextureなのでRederTargetとして使うことから始める
 		&clearValue, // Clear最適地。ClearRederTargetをこの色でClearするようにする。最適化されているので高速である。
 		IID_PPV_ARGS(&resultResource));
 	assert(SUCCEEDED(hr_));

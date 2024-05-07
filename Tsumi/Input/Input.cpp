@@ -7,8 +7,8 @@
 // -------------------------------------------------------------------------
 
 // 初期化処理
-void KeysInput::Initialize() {
-
+void KeysInput::Initialize() 
+{
 	// DirectInputのインスタンス生成
 	HRESULT result = DirectInput8Create(
 		WinApp::GetWc().hInstance, DIRECTINPUT_VERSION, 
@@ -30,8 +30,8 @@ void KeysInput::Initialize() {
 }
 
 // 更新処理
-void KeysInput::BeginFrame() {
-
+void KeysInput::BeginFrame() 
+{
 	// メモリコピー
 	memcpy(preKeys, Keys, 256);
 
@@ -43,8 +43,8 @@ void KeysInput::BeginFrame() {
 }
 
 // 押されていない
-bool KeysInput::NoneKey(uint32_t keyNum) {
-
+bool KeysInput::NoneKey(uint32_t keyNum) const 
+{
 	if (preKeys[keyNum] == 0x00 && Keys[keyNum] == 0x00) {
 		return true;
 	}
@@ -52,8 +52,8 @@ bool KeysInput::NoneKey(uint32_t keyNum) {
 }
 
 // 押した瞬間
-bool KeysInput::TriggerKey(uint32_t keyNum) {
-
+bool KeysInput::TriggerKey(uint32_t keyNum) const 
+{
 	if (preKeys[keyNum] == 0x00 && Keys[keyNum] == 0x80) {
 		return true;
 	}
@@ -61,8 +61,8 @@ bool KeysInput::TriggerKey(uint32_t keyNum) {
 }
 
 // 押しっぱなし
-bool KeysInput::PressKeys(uint32_t keyNum) {
-
+bool KeysInput::PressKeys(uint32_t keyNum) const 
+{
 	if (preKeys[keyNum] == 0x80 && Keys[keyNum] == 0x80) {
 		return true;
 	}
@@ -70,8 +70,8 @@ bool KeysInput::PressKeys(uint32_t keyNum) {
 }
 
 // 離された瞬間
-bool KeysInput::ReleaseKeys(uint32_t keyNum) {
-
+bool KeysInput::ReleaseKeys(uint32_t keyNum) const 
+{
 	if (preKeys[keyNum] == 0x80 && Keys[keyNum] == 0x00) {
 		return true;
 	}
@@ -89,15 +89,15 @@ bool KeysInput::ReleaseKeys(uint32_t keyNum) {
 // -------------------------------------------------------------------------
 
 // 初期化処理
-void GamePadInput::Initialize() {
-
+void GamePadInput::Initialize() 
+{
 	// 各ボタンのトリガー状態の初期化処理
 	ResetButtonTriggers();
 }
 
 // 更新処理
-void GamePadInput::BeginFrame() {
-
+void GamePadInput::BeginFrame() 
+{
 	// メモリコピー
 	preJoyState_ = joyState_;
 
@@ -138,14 +138,14 @@ bool GamePadInput::GetJoyStickState()
 }
 
 // 押されていない
-bool GamePadInput::NoneButton(PadData button)
+bool GamePadInput::NoneButton(PadData button) const
 {
 	button;
 	return false;
 }
 
 // 押した瞬間
-bool GamePadInput::TriggerButton(PadData button)
+bool GamePadInput::TriggerButton(PadData button) const
 {
 	bool preFlag = false;
 
@@ -163,7 +163,7 @@ bool GamePadInput::TriggerButton(PadData button)
 }
 
 // 押しっぱなし
-bool GamePadInput::PressButton(PadData button)
+bool GamePadInput::PressButton(PadData button) const
 {
 	if (joyState_.Gamepad.wButtons & (WORD)button)
 	{
@@ -173,7 +173,7 @@ bool GamePadInput::PressButton(PadData button)
 }
 
 // 離された瞬間
-bool GamePadInput::ReleaseButton(PadData button)
+bool GamePadInput::ReleaseButton(PadData button) const
 {
 	button;
 	return false;

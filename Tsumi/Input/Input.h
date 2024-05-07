@@ -70,22 +70,22 @@ public: // メンバ関数
 	/// <summary>
 	/// 押されていない
 	/// </summary>
-	bool NoneKey(uint32_t keyNum);
+	bool NoneKey(uint32_t keyNum) const;
 
 	/// <summary>
 	/// 押した瞬間
 	/// </summary>
-	bool TriggerKey(uint32_t keyNum);
+	bool TriggerKey(uint32_t keyNum) const;
 
 	/// <summary>
 	/// 押しっぱなし
 	/// </summary>
-	bool PressKeys(uint32_t keyNum);
+	bool PressKeys(uint32_t keyNum) const;
 
 	/// <summary>
 	/// 離された瞬間
 	/// </summary>
-	bool ReleaseKeys(uint32_t keyNum);
+	bool ReleaseKeys(uint32_t keyNum) const;
 
 
 private: // メンバ変数
@@ -144,22 +144,22 @@ public: // メンバ関数
 	/// <summary>
 	/// 押されていない
 	/// </summary>
-	bool NoneButton(PadData button);
+	bool NoneButton(PadData button) const;
 
 	/// <summary>
 	/// 押した瞬間
 	/// </summary>
-	bool TriggerButton(PadData button);
+	bool TriggerButton(PadData button) const;
 
 	/// <summary>
 	/// 押しっぱなし
 	/// </summary>
-	bool PressButton(PadData button);
+	bool PressButton(PadData button) const;
 
 	/// <summary>
 	/// 離された瞬間
 	/// </summary>
-	bool ReleaseButton(PadData button);
+	bool ReleaseButton(PadData button) const;
 
 	/// <summary>
 	/// Lスティック
@@ -177,7 +177,7 @@ private: // メンバ変数
 	XINPUT_STATE joyState_{};
 	XINPUT_STATE preJoyState_{};
 
-	WORD buttonTriggers[XINPUT_GAMEPAD_MAX]{};
+	WORD buttonTriggers[XINPUT_GAMEPAD_MAX];
 };
 
 

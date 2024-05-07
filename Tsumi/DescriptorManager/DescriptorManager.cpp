@@ -93,7 +93,6 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;
 
-
 	// SRVを作成するDescriptorHeapの場所を決める
 	DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU = GetCPUDescriptorHandle(
 		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
@@ -104,7 +103,6 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
 		DescriptorManager::GetInstance()->descriptorSize_.SRV,
 		DescriptorManager::GetInstance()->index_);
-
 
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();

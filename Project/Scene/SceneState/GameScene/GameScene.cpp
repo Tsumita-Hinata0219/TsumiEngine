@@ -28,7 +28,7 @@ void GameScene::Initialize()
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 20.0f, -75.0f };
+	camera_->translate = { 0.0f, 6.0f, -20.0f };
 
 
 	/* ----- Skydome 天球 ----- */
@@ -40,6 +40,17 @@ void GameScene::Initialize()
 	postEffect_ = make_unique<PostEffect>();
 	postEffect_->Initialize();
 
+	/* ----- TestObject テストオブジェクト ----- */
+	testObject_ = make_unique<TestObject>();
+	testObject_->Init();
+
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_ = make_unique<TestAnimationCube>();
+	testAnimCube_->Init();
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_ = make_unique<TestHuman>();
+	testHuman_->Init();
 }
 
 
@@ -52,13 +63,24 @@ void GameScene::Update(GameManager* state)
 
 	camera_->UpdateMatrix();
 
+=======
+	/* ----- Camera カメラ ----- */
+	camera_->UpdateMatrix();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
 
-
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
+
+	/* ----- TestObject テストオブジェクト ----- */
+	testObject_->Update();
+
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_->Update();
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_->Update();
 
 
 #ifdef _DEBUG
@@ -91,13 +113,20 @@ void GameScene::BackSpriteDraw()
 /// </summary>
 void GameScene::ModelDraw() 
 {
-
 	/* ----- Skydome 天球 ----- */
 	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());
 
+	/* ----- TestObject テストオブジェクト ----- */
+	testObject_->Draw(camera_.get());
+
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_->Draw(camera_.get());
+
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_->Draw(camera_.get());
 }
 
 

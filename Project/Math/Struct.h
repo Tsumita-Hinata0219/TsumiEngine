@@ -13,6 +13,8 @@ using namespace std;
 #include <iostream>
 #include <cstdint>
 #include <WorldTransform.h>
+#include <optional>
+#include <map>
 
 #include "MyMath.h"
 
@@ -48,6 +50,45 @@ struct SphereData {
 	float radius;
 };
 
+// EulerTransform
+struct EulerTransform {
+	Vector3 scale;
+	Vector3 rotate; // Eulerでの回転
+	Vector3 translate;
+};
+
+// QuaternionTransform
+struct QuaternionTransform {
+	Vector3 scale;
+	Quaternion rotate;
+	Vector3 translate;
+};
+
+// Node
+struct Node {
+	QuaternionTransform transform;
+	Matrix4x4 localMatrix;
+	std::string name;
+	std::vector<Node> Children;
+};
+
+// Joint
+struct Joint {
+	QuaternionTransform transform; // Transform構造体
+	Matrix4x4 localMatrix; // localMatrix
+	Matrix4x4 skeletonSpaceMatrix; // skeltonSpaceでの変換行列
+	string name; // 名前
+	vector<int32_t> children; // 子NodeのIndexのリスト。いなければ空
+	int32_t index; // 自身のIndex
+	optional<int32_t> parent; // 親JointのInsex。いなければnull
+};
+
+// Skeleton
+struct Skeleton {
+	int32_t root; // RootJointのIndex
+	std::map<std::string, int32_t> jointMap; // Joint名とIndexとの辞書
+	vector<Joint> joints; // 所属しているジョイント
+};
 
 // マテリアル
 struct Material {
@@ -73,17 +114,19 @@ struct MaterialData {
 struct ModelData {
 	std::vector<VertexData> vertices;
 	MaterialData material;
+	uint32_t textureHD;
+	Node rootNode;
 };
 
 
 // 平行光源
 struct DirectionalLight {
-	Vector4 color;          // ライトの色
-	Vector3 direction;      // ライトの向き
+	Vector4 color{};          // ライトの色
+	Vector3 direction{};      // ライトの向き
 	//Vector3 SpecularFColor; // 鏡面反射色
-	float intensity;        // 輝度
-	float sininess;         // 光沢度
-	bool enableLightting;   // ライティングするか
+	float intensity{};        // 輝度
+	float sininess{};         // 光沢度
+	bool enableLightting{};   // ライティングするか
 };
 
 
@@ -104,6 +147,7 @@ struct ObjData {
 	ComPtr<ID3D12Resource> resource;
 	vector<VertexData> vertices;
 	MaterialData material;
+	Node node;
 };
 
 

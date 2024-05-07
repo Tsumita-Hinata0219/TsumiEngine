@@ -181,5 +181,6 @@ Quaternion MakeRotateAxisAngleQuatenion(const Vector3& axis, float angle);
 Vector3 RotateVector(const Vector3& v, const Quaternion& q);
 // Quaternionから回転行列を求める
 Matrix4x4 MakeRotateMatrix(const Quaternion& q);
-
+// 3次元アフィン変換行列 (W = SRT)
+Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Quaternion& rotate, const Vector3& translate);
 

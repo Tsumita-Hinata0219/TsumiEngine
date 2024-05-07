@@ -8,9 +8,9 @@
 #include <fstream>
 #include <sstream>
 
-#include <assimp\Importer.hpp>
+#include <assimp/Importer.hpp>
 #include <assimp/scene.h>
-#include <assimp\postprocess.h>
+#include <assimp/postprocess.h>
 
 
 /* ModelManagerクラス */
@@ -34,11 +34,6 @@ public: // メンバ関数
 	static ModelManager* Getinstance();
 
 	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	static void Initialize();
-
-	/// <summary>
 	/// 解放処理
 	/// </summary>
 	static void Finalize();
@@ -46,8 +41,14 @@ public: // メンバ関数
 	/// <summary>
 	/// Objファイルを読み込む
 	/// </summary>
-	static ObjData LoadObjFile(std::string filePath, const std::string& routeFilePath);
-	static ObjData LoadObjFileAssimpVer(std::string filePath, const std::string& routeFilePath);
+	ModelData LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
+	ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
+	ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
+
+	/// <summary>
+	/// Nodeの階層構造からSkeletonを作る
+	/// </summary>
+	Skeleton CreateSkeleton(const Node& rootNode);
 
 
 private: // メンバ関数
@@ -55,12 +56,22 @@ private: // メンバ関数
 	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
-	static bool CheckObjData(std::string filePath);
+	bool CheckObjData(std::string filePath);
 
 	/// <summary>
 	/// mtlファイルを読み込む関数
 	/// </summary>
 	MaterialData LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName, const std::string& routeFilePath);
+
+	/// <summary>
+	/// Nodeの情報を読む
+	/// </summary>
+	Node ReadNode(aiNode* node);
+
+	/// <summary>
+	/// NodeからJointを作る
+	/// </summary>
+	int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
 
 
 private: // メンバ変数

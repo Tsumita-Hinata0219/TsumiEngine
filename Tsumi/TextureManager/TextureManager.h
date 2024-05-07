@@ -10,6 +10,12 @@
 #include <map>
 
 
+enum class TextureFrom {
+	Texture,
+	Obj,
+	gLTF,
+};
+
 class TextureManager {
 
 public: // メンバ関数
@@ -42,7 +48,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textuerデータを読み込む
 	/// </summary>
-	static uint32_t LoadTexture(const std::string& filePath, const std::string& routeFilePath = { "" }, bool fromObjTex = false);
+	static uint32_t LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from = TextureFrom::Texture);
 
 	/// <summary>
 	/// Textureデータの解放

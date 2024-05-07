@@ -24,20 +24,20 @@ void EngineManual::Initialize()
 
 	// 3Dモデル
 	demoModel_ = make_unique<Model>();
-	demoModel_->CreateFromObj("ball"); // <! (objデータが入ってるファイル名), これがObjの初期化処理だからInitializeは別途書かなくていい
+	demoModel_->CreateFromObj("", "ball"); // <! (objデータが入ってるファイル名), これがObjの初期化処理だからInitializeは別途書かなくていい
 	demoModelWt_.Initialize(); // <! Initializeは通さないとエラー吐く
 
 	// 前景スプライト
 	FSprite_ = make_unique<Sprite>();
 	FSprite_->Initialize({ 128.0f, 128.0f }); // <! 初期座標とサイズ, 引数を入れなくても通る. その場合 pos={0.0f, 0.0f}, size={128.0f, 128.0f} で初期化
 	FSpriteWt_.Initialize();
-	FSpriteTexHD_ = TextureManager::LoadTexture("circle.png");
+	FSpriteTexHD_ = TextureManager::LoadTexture("", "circle.png");
 
 	// 前景スプライト
 	BSprite_ = make_unique<Sprite>();
 	BSprite_->Initialize({ 1280.0f, 720.0f });
 	BSpriteWt_.Initialize();
-	BSpriteTexHD_ = TextureManager::LoadTexture("uvChecker.png");
+	BSpriteTexHD_ = TextureManager::LoadTexture("", "uvChecker.png");
 }
 
 

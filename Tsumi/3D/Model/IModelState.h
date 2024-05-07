@@ -4,6 +4,19 @@
 #include "Camera.h"
 
 
+enum ModelStateType {
+	Normal,
+	Obj,
+	gLTF,
+};
+enum ModelLightingType {
+	Non,
+	Lambert,
+	Phong,
+	PhongNormalMap,
+};
+
+
 // Modelの前方宣言
 class Model;
 
@@ -28,7 +41,17 @@ public: // メンバ関数
 	/// </summary>
 	virtual void Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) = 0;
 
+	
+#pragma region Get
 
-private: // メンバ変数
+	// StateType
+	ModelStateType GetStateType() { return this->statetype_; }
+
+#pragma endregion 
+
+
+protected: // メンバ変数
+
+	ModelStateType statetype_ = Normal;
 
 };

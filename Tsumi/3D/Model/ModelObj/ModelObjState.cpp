@@ -7,13 +7,10 @@
 /// </summary>
 void ModelObjState::Initialize(Model* pModel) {
 
-	pModel;
-
 	modelData_.material = pModel->GetObjData().material;
 	modelData_.vertices = pModel->GetObjData().vertices;
 
 	// リソースの作成
-	//modelData_ = LoadObjFile(pModel, pModel->GetObjDirectoryPath());
 	resource_.Vertex = CreateResource::CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size());
 	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
 	resource_.Lighting = CreateResource::CreateBufferResource(sizeof(DirectionalLight));
@@ -40,16 +37,12 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 	// 頂点データをリソースにコピー
 	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
 
+
 	// マテリアルの情報を書き込む
 	material->color = pModel->GetColor();
 
 	// ライティングの設定
-	lightData->color = pModel->GetDirectionalLight().color;
-	lightData->direction = pModel->GetDirectionalLight().direction;
-	//lightData->SpecularFColor = pModel->GetDirectionalLight().SpecularFColor;
-	lightData->intensity = pModel->GetDirectionalLight().intensity;
-	lightData->sininess = pModel->GetDirectionalLight().sininess;
-	lightData->enableLightting = pModel->GetDirectionalLight().enableLightting;
+	(*lightData) = pModel->GetDirectionalLight();
 
 
 	// コマンドコール

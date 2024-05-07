@@ -16,21 +16,12 @@
 #include <sstream>
 
 
-enum ModelDrawType {
-	Non,
-	Lambert,
-	Phong,
-	PhongNormalMap,
-};
-
-
-
 /* ModelObjクラス */
 class ModelObjState : public IModelState {
 
 public: // メンバ関数
 
-	ModelObjState() {};
+	ModelObjState() { statetype_ = Obj; };
 	~ModelObjState() {};
 
 	/// <summary>
@@ -58,6 +49,4 @@ private: // メンバ関数
 
 	// ModelData
 	ModelData modelData_{};
-
-	ObjData objData_{};
 };

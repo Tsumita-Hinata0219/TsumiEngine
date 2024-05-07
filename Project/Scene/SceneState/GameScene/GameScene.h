@@ -7,6 +7,9 @@
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "PostEffect/PostEffect.h"
+#include "TestObject/TestObject.h"
+#include "TestAnimationCube/TestAnimationCube.h"
+#include "TestHuman/TestHuman.h"
 
 
 class GameScene : public IScene {
@@ -57,4 +60,12 @@ private:
 	// PostEffect
 	unique_ptr<PostEffect> postEffect_;
 
+	// TestModel
+	unique_ptr<TestObject> testObject_;
+
+	// TestAnimation
+	unique_ptr<TestAnimationCube> testAnimCube_;
+
+	// TestHuman
+	unique_ptr<TestHuman> testHuman_;
 };

@@ -17,7 +17,7 @@ class ModelPlaneState : public IModelState {
 
 public: // メンバ関数
 
-	ModelPlaneState() {};
+	ModelPlaneState() { statetype_ = Normal; };
 	~ModelPlaneState() {};
 
 	/// <summary>

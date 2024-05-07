@@ -61,14 +61,24 @@ public: // メンバ関数
 	static void Initialize();
 
 	/// <summary>
-	/// 描画前処理
+	/// 描画前処理 PostEffect用
 	/// </summary>
-	static void PreDraw();
+	static void PreDrawForPostEffect();
 
 	/// <summary>
-	/// 描画後処理
+	/// 描画後処理 PostEffect用
 	/// </summary>
-	static void PostDraw();
+	static void PostDrawForPostEffect();
+
+	/// <summary>
+	/// 描画前処理 SwapChain用
+	/// </summary>
+	static void PreDrawForSwapChain();
+
+	/// <summary>
+	/// 描画後処理 SwapChain用
+	/// </summary>
+	static void PostDrawForSwapChain();
 
 	/// <summary>
 	/// 解放処理

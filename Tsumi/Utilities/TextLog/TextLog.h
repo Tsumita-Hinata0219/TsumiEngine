@@ -5,7 +5,6 @@
 #include<string>
 #include <mutex>
 
-
 using namespace std;
 
 class TextLog {

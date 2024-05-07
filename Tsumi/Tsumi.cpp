@@ -14,8 +14,6 @@ Tsumi* Tsumi::GetInstance() {
 /// </summary>
 void Tsumi::Initialize() {
 
-	Tsumi::GetInstance();
-
 	// WinAppの初期化処理
 	WinApp::Initialize(L"LE2B_13_ツミタ_ヒナタ");
 
@@ -65,12 +63,10 @@ void Tsumi::Finalize() {
 /// </summary>
 void Tsumi::BeginFlame() {
 
-	DirectXCommon::PreDraw();
 	ImGuiManager::BeginFrame();
 	KeysInput::BeginFrame();
 	GamePadInput::BeginFrame();
 	DescriptorManager::BeginFrame();
-
 }
 
 
@@ -79,8 +75,8 @@ void Tsumi::BeginFlame() {
 /// </summary>
 void Tsumi::EndFlame() {
 
+	// ImGuiの描画処理
 	ImGuiManager::EndFrame();
-	DirectXCommon::PostDraw();
 }
 
 

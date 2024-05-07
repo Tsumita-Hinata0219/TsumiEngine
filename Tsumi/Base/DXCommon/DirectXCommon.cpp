@@ -16,7 +16,6 @@ DirectXCommon* DirectXCommon::GetInstance() {
 /// </summary>
 void DirectXCommon::Initialize() {
 
-
 	/* ----- デバッグレイヤー -----*/
 #ifdef _DEBUG
 
@@ -28,7 +27,6 @@ void DirectXCommon::Initialize() {
 	}
 
 #endif // _DEBUG
-
 
 
 	// DxgiFactoryを生成する
@@ -64,15 +62,10 @@ void DirectXCommon::Initialize() {
 }
 
 
-
-// 解放処理
-void DirectXCommon::Release() {
-	CloseHandle(DirectXCommon::GetInstance()->fenceEvent_);
-}
-
-
-
-void DirectXCommon::PreDraw() {
+/// <summary>
+/// 描画前処理 PostEffect用
+/// </summary>
+void DirectXCommon::PreDrawForPostEffect() {
 
 	SwapChains swapChains{};
 	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
@@ -136,7 +129,85 @@ void DirectXCommon::PreDraw() {
 }
 
 
-void DirectXCommon::PostDraw() {
+/// <summary>
+/// 描画後処理 PostEffect用
+/// </summary>
+void DirectXCommon::PostDrawForPostEffect() {
+
+}
+
+
+/// <summary>
+/// 描画前処理 SwapChain用
+/// </summary>
+void DirectXCommon::PreDrawForSwapChain() {
+
+	SwapChains swapChains{};
+	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
+	swapChains.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
+	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
+	Commands commands = DirectXCommon::GetInstance()->commands_;
+	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
+
+	// コマンドを積み込んで確定させる
+	// これから書き込むバックバッファのインデックスを取得
+	UINT backBufferIndex_ = swapChains.swapChain->GetCurrentBackBufferIndex();
+
+
+	// Barrierを設定する
+	// 今回のバリアはTransition
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	// Noneにしておく
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	// バリアを張る対象のリソース。現在のバックバッファに対して行う
+	barrier.Transition.pResource = swapChains.Resources[backBufferIndex_].Get();
+	// 遷移前(現在)のResourceState
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
+	// 遷移後のResourceState
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+	// TransitionBarrierを張る
+	commands.List->ResourceBarrier(1, &barrier);
+
+	DirectXCommon::GetInstance()->barrier_ = barrier;
+
+
+	// 描画先のRTVを設定する
+	commands.List->OMSetRenderTargets(
+		1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		false,
+		nullptr);
+
+
+	// 指定した色で画面全体をクリアする
+	float clearColor[] = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
+
+
+	commands.List->ClearRenderTargetView(
+		DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		clearColor,
+		0, nullptr);
+
+
+	// 描画先のRTVとDSVを設定する
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+	commands.List->OMSetRenderTargets(1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_], false, &dsvHandle);
+
+
+	//指定した深度で画面全体をクリアする
+	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
+
+
+	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
+	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
+
+	DirectXCommon::GetInstance()->commands_ = commands;
+}
+
+
+/// <summary>
+/// 描画後処理 SwapChain用
+/// </summary>
+void DirectXCommon::PostDrawForSwapChain() {
 
 	SwapChains swapChains = DirectXCommon::GetInstance()->swapChains_;
 	Commands commands = DirectXCommon::GetInstance()->commands_;
@@ -195,6 +266,13 @@ void DirectXCommon::PostDraw() {
 	DirectXCommon::GetInstance()->swapChains_ = swapChains;
 }
 
+
+/// <summary>
+/// 解放処理
+/// </summary>
+void DirectXCommon::Release() {
+	CloseHandle(DirectXCommon::GetInstance()->fenceEvent_);
+}
 
 
 /* ---DirectX初期化--- */

@@ -25,7 +25,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateBufferResource(size_t sizeInBytes) 
 
 	// バッファリソース。テクスチャの場合はまた別の設定をする
 	D3D12_RESOURCE_DESC vertexResourceDesc_{};
-	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_TEXTURE2D;
+	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 
 	// リソースのサイズ
 	vertexResourceDesc_.Width = sizeInBytes;

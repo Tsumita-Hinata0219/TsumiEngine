@@ -43,13 +43,14 @@ void GameManager::Run() {
 		// オブジェクト
 		Scene_->BackSpriteDraw();
 		Scene_->ModelDraw();
-		Scene_->FrontSpriteDraw();
+		//Scene_->FrontSpriteDraw();
 
 		DirectXCommon::PostDrawForPostEffect();
 
 		// スワップチェーン
 		DirectXCommon::PreDrawForSwapChain();
 
+		Scene_->FrontSpriteDraw();
 	
 		// ImGui
 		Tsumi::EndFlame();

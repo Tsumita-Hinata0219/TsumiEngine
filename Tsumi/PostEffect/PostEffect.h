@@ -3,6 +3,7 @@
 #include "MyMath.h"
 #include "DescriptorManager.h"
 #include "CreateResource.h"
+#include "PostEffectGraphicPipeline.h"
 
 
 /* PostEffectクラス */
@@ -21,9 +22,6 @@ public: // メンバ関数
 
 private: // メンバ関数
 
-	// 頂点データの設定
-	void SetVertex();
-
 	// コマンドコール
 	void CommandCall();
 
@@ -33,6 +31,12 @@ private:
 	ResourcePeroperty resource_{};
 
 	// SRV
-	uint32_t srv_;
+	uint32_t srv_ = 0;
+
+	// 座標
+	Vector2 pos_{};
+
+	// サイズ
+	Vector2 size_ = { WinApp::kWindowWidth, WinApp::kWindowHeight };
 };
 

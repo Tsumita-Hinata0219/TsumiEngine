@@ -52,5 +52,7 @@ public:
 
 private:
 
+	void TransfarImage(ComPtr<ID3D12Resource> resource);
+
 };
 

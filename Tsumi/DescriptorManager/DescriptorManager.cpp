@@ -107,8 +107,10 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
 
+
 	// SRVの生成
 	DescriptorManager::CreateShaderResourceView(resource, srvDesc, DescriptorManager::GetInstance()->index_);
+
 
 	return DescriptorManager::GetInstance()->index_;
 }
@@ -166,3 +168,4 @@ D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManager::GetGPUDescriptorHandle(ComPtr<ID3
 	handleGPU.ptr += (static_cast<unsigned long long>(descriptorSize) * index);
 	return handleGPU;
 }
+

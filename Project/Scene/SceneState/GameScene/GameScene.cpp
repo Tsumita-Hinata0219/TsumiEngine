@@ -37,6 +37,13 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
+	postEffect_ = make_unique<PostEffect>();
+	postEffect_->Initialize();
+
+	sp_ = make_unique<Sprite>();
+	sp_->Initialize();
+	wt_.Initialize();
+	sp_->SetSize(Vector2(1280.0f, 720.0f));
 }
 
 
@@ -48,6 +55,7 @@ void GameScene::Update(GameManager* state)
 
 	state;
 
+	wt_.UpdateMatrix();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
@@ -94,7 +102,7 @@ void GameScene::ModelDraw()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());
 
-
+	//postEffect_->Draw();
 }
 
 
@@ -103,7 +111,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
-
+	sp_->Draw(1, wt_, camera_.get());
 	
 }
 

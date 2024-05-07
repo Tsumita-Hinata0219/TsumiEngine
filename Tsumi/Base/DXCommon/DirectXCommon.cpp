@@ -85,12 +85,15 @@ void DirectXCommon::PreDrawForPostEffect() {
 	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 
+	// 描画先のRTVとDSVを設定する
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+
 
 	// 描画先のRTVを設定する
 	commands.List->OMSetRenderTargets(
 		1, &DirectXCommon::GetInstance()->rtv_.Handles[2],
 		false,
-		nullptr);
+		&dsvHandle);
 
 
 	// 指定した色で画面全体をクリアする
@@ -102,9 +105,6 @@ void DirectXCommon::PreDrawForPostEffect() {
 		clearColor,
 		0, nullptr);
 
-
-	// 描画先のRTVとDSVを設定する
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
 
 	//指定した深度で画面全体をクリアする
 	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);

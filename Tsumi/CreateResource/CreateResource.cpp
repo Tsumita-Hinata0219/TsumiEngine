@@ -132,7 +132,9 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 
 	// 頂点リソース用のヒープ設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
-	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_DEFAULT; // VRAM上に作る
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_CUSTOM; // VRAM上に作る
+	uploadHeapProperties_.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK;
+	uploadHeapProperties_.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 
 	// バッファリソース。テクスチャの場合はまた別の設定をする
 	D3D12_RESOURCE_DESC resourceDesc{};
@@ -169,5 +171,33 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 		IID_PPV_ARGS(&resultResource));
 	assert(SUCCEEDED(hr_));
 
+	CreateResource::GetInstance()->TransfarImage(resultResource);
+
 	return resultResource;
+}
+
+
+void CreateResource::TransfarImage(ComPtr<ID3D12Resource> resource)
+{
+	const UINT pixCount = WinApp::kWindowWidth * WinApp::kWindowHeight;
+
+	const UINT rowPitch = sizeof(UINT) * WinApp::kWindowWidth;
+
+	const UINT depthPitch = rowPitch * WinApp::kWindowHeight;
+
+	UINT* img = new UINT[pixCount];
+	for (int i = 0; i < int(pixCount); i++)
+	{
+		img[i] = 0xff0000ff;
+	}
+	HRESULT hr = {};
+	hr = resource->WriteToSubresource(
+		0,
+		nullptr,
+		img,
+		rowPitch,
+		depthPitch
+	);
+	assert(SUCCEEDED(hr));
+	delete[] img;
 }

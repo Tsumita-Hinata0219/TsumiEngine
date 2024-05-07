@@ -113,7 +113,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	RTV const GetRTV() { return DirectXCommon::GetInstance()->rtv_; }
+	RTV GetRTV() { return DirectXCommon::GetInstance()->rtv_; }
 
 	/// <summary>
 	/// 

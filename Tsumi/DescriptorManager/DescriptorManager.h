@@ -123,7 +123,6 @@ public:
 #pragma endregion 
 
 
-private:
 
 	static const uint32_t descriptor_Max = 64;
 	DescriptorSize descriptorSize_{};

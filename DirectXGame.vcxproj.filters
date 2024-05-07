@@ -331,6 +331,7 @@
     <None Include="Resources\shaders\SpriteObject3d.hlsli" />
     <None Include="Resources\shaders\LineObject3d.hlsli" />
     <None Include="Resources\shaders\PostEffect.hlsli" />
+    <None Include="cpp.hint" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

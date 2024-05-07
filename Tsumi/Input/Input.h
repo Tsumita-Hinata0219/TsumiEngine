@@ -177,7 +177,7 @@ private: // メンバ変数
 	XINPUT_STATE joyState_{};
 	XINPUT_STATE preJoyState_{};
 
-	WORD buttonTriggers[XINPUT_GAMEPAD_MAX];
+	WORD buttonTriggers[XINPUT_GAMEPAD_MAX]{};
 };
 
 

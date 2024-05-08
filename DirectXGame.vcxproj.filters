@@ -158,6 +158,8 @@
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -334,6 +336,8 @@
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
+    <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
+    <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

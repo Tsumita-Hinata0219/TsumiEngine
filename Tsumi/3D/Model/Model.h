@@ -41,6 +41,15 @@ public: // メンバ関数
 	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = { {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} });
 
+
+	/// <summary>
+	/// モデルの読み込み
+	/// </summary>
+	static Model LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
+	static Model LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
+	static Model LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
+
+
 	/// <summary>
 	/// 描画処理
 	/// </summary>

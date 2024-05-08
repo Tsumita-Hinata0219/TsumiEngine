@@ -12,13 +12,7 @@ struct MaterialDataN {
 
 
 /* Material構造体 */
-struct Material {
-
-public:
-
-	// コンストラクタ、デストラクタ
-	Material() {};
-	~Material() {};
+struct MaterialModel {
 
 	// マテリアル作成
 	void Create();
@@ -35,8 +29,6 @@ public:
 	// マテリアルの転送
 	void TransferMaterial();
 
-
-public:
 
 	// マテリアル名
 	string name;

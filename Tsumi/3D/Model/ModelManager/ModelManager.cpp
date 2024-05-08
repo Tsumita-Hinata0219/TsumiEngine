@@ -34,7 +34,7 @@ Model* const ModelManager::GetModel(const string name) const
 
 	// ヒットしたらポインタを返す
 	if (model != modelsMap_.end()) {
-		model->second.get();
+		return model->second.get();
 	}
 	return nullptr;
 }

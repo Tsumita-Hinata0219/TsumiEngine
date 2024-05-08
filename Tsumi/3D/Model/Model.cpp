@@ -158,18 +158,18 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 /// <summary>
 /// モデルの読み込み
 /// </summary>
-Model Model::LoadObjFile(const std::string& routeFilePath, const std::string& fileName)
-{
-	return Model();
-}
-Model Model::LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName)
-{
-	return Model();
-}
-Model Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
-{
-	return Model();
-}
+//Model Model::LoadObjFile(const std::string& routeFilePath, const std::string& fileName)
+//{
+//	return Model();
+//}
+//Model Model::LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName)
+//{
+//	return Model();
+//}
+//Model Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
+//{
+//	return Model();
+//}
 
 
 /// <summary>

@@ -3,7 +3,7 @@
 
 
 // 作成
-void Material::Create()
+void MaterialModel::Create()
 {
 	CreateBuffer();
 	name = "default";
@@ -15,7 +15,7 @@ void Material::Create()
 
 
 // バッファ作成
-void Material::CreateBuffer()
+void MaterialModel::CreateBuffer()
 {
 	CreateResource::CreateBufferResource(sizeof(MaterialDataN), constBuffer);
 
@@ -27,7 +27,7 @@ void Material::CreateBuffer()
 
 
 // マッピングする
-void Material::Map() 
+void MaterialModel::Map()
 {
 	// constBuffer が nullptr の場合はエラーハンドリング
 	if (!constBuffer) {
@@ -43,14 +43,14 @@ void Material::Map()
 
 
 // マッピング終了
-void Material::UnMap()
+void MaterialModel::UnMap()
 {
 	constBuffer->Unmap(0, nullptr);
 }
 
 
 // マテリアルの転送
-void Material::TransferMaterial()
+void MaterialModel::TransferMaterial()
 {
 	Map();
 	constMap->color = materialData.color;

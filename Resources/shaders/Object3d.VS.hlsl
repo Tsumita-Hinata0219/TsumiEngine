@@ -4,22 +4,10 @@
 struct TransformationMatrix
 {
     float4x4 World;
+    float4x4 WVP;
     float4x4 WorldInverseTranspose;
 };
-struct ViewProjectionMatrix
-{
-    float4x4 view;
-    float4x4 projection;
-    float4x4 cameraPos;
-};
-struct ModelTransformMatrix
-{
-    float4x4 modelMatrix;
-};
-
 ConstantBuffer<TransformationMatrix> gTransformationMat : register(b0);
-ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b3);
-ConstantBuffer<ModelTransformMatrix> gModelTransformMat : register(b4);
 
 
 struct VertexShaderInput
@@ -33,13 +21,10 @@ struct VertexShaderInput
 VertexShaderOutput main(VertexShaderInput input)
 {
     VertexShaderOutput output;
-    float4x4 mulWorld = mul(gModelTransformMat.modelMatrix, gTransformationMat.World);
-    float4x4 matVP = mul(gViewProjectionMat.view, gViewProjectionMat.projection);
-    float4x4 matWVP = mul(mulWorld, matVP);
     
-    output.position = mul(input.position, matWVP);
+    output.position = mul(input.position, gTransformationMat.WVP);
     output.texCoord = input.texCoord;
-    output.normal = normalize(mul(input.normal, InverseTranspose((float3x3) mulWorld)));
-    output.worldPos = mul(input.position, mulWorld).xyz;
+    output.normal = normalize(mul(input.normal, (float3x3) gTransformationMat.World));
+    
     return output;
 }

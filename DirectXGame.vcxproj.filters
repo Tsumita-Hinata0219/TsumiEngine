@@ -157,6 +157,7 @@
     <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -332,6 +333,7 @@
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

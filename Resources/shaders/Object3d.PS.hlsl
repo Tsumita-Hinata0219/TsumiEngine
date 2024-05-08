@@ -1,16 +1,11 @@
 #include "Object3d.hlsli"
 #include "MathFunc.hlsli"
 
+
 struct Material
 {
     float4 color;
     float uvTransform;
-};
-struct DirectionalLight
-{
-    float4 color; // 色(RGBA)
-    float3 direction; // ライトの向き
-    float intensity; // 輝度
 };
 struct ViewProjectionMatrix
 {
@@ -18,10 +13,15 @@ struct ViewProjectionMatrix
     float4x4 projection;
     float4x4 cameraPos;
 };
-
+struct DirectionalLight
+{
+    float4 color; // 色(RGBA)
+    float3 direction; // ライトの向き
+    float intensity; // 輝度
+};
 ConstantBuffer<Material> gMaterial : register(b0);
-ConstantBuffer<DirectionalLight> gDirectionalLight : register(b1);
-ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b3);
+ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
+ConstantBuffer<DirectionalLight> gDirectionalLight : register(b2);
 
 Texture2D<float4> gTexture : register(t0);
 SamplerState gSampler : register(s0);

@@ -8,6 +8,7 @@
 #include "DirectXCommon.h"
 #include "ShaderManager.h"
 #include "NormalGraphicPipeline.h"
+#include "Object3DGraphicPipeLine.h"
 #include "SpriteGraphicPipeline.h"
 #include "LightGraphicPipeline.h"
 #include "LambertGraphicPipeline.h"

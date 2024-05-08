@@ -12,7 +12,7 @@ struct MaterialDataN {
 
 
 /* Materialクラス */
-class Material {
+struct Material {
 
 public:
 

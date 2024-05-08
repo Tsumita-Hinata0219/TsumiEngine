@@ -2,8 +2,8 @@
 
 #include "MyMath.h"
 
-/* Meshクラス */
-class Mesh {
+/* Mesh構造体 */
+struct Mesh {
 
 
 };

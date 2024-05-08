@@ -11,7 +11,7 @@ struct MaterialDataN {
 };
 
 
-/* Materialクラス */
+/* Material構造体 */
 struct Material {
 
 public:
@@ -31,6 +31,9 @@ public:
 
 	// マッピング終了
 	void UnMap();
+
+	// マテリアルの転送
+	void TransferMaterial();
 
 
 public:

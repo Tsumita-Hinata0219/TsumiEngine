@@ -3,20 +3,63 @@
 
 
 /// <summary>
-/// インスタンスの取得
-/// </summary>
-ModelManager* ModelManager::Getinstance() {
-	static ModelManager instance;
-	return &instance;
-}
-
-
-/// <summary>
 /// 解放処理
 /// </summary>
 void ModelManager::Finalize() {
 
 	ModelManager::Getinstance()->objModelDatas_.clear();
+}
+
+
+// モデルデータを追加する
+Model* const ModelManager::AddModel(const string name, unique_ptr<Model> model)
+{
+	// 指定の名前で検索をかける
+	auto modelData = GetModel(name);
+
+	// ヒットしたらその情報を返す
+	if (modelData) { return modelData; }
+
+	// ヒットしなかったらマップに追加して return する
+	modelsMap_[name] = move(model);
+	return modelsMap_[name].get();
+}
+
+
+// モデルデータの取得
+Model* const ModelManager::GetModel(const string name) const
+{
+	// 指定された名前で検索をかける
+	auto model = modelsMap_.find(name);
+
+	// ヒットしたらポインタを返す
+	if (model != modelsMap_.end()) {
+		model->second.get();
+	}
+	return nullptr;
+}
+
+
+// 指定のモデルデータの破棄
+void ModelManager::ModelRemove(string name)
+{
+	// 指定された名前で検索をかける
+	const auto& model = modelsMap_.find(name);
+
+	// なかったらリターン
+	if (model == modelsMap_.end()) {
+		return;
+	}
+
+	// ヒットしたら破棄する
+	modelsMap_.erase(name);
+}
+
+
+// 全てのモデルデータの破棄
+void ModelManager::AllRemove()
+{
+	modelsMap_.clear();
 }
 
 

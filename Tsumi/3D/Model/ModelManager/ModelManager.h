@@ -4,7 +4,9 @@
 #include "Struct.h"
 #include "TextureManager.h"
 #include "ObjDataResource.h"
+#include "Model.h"
 #include <map>
+#include <unordered_map>
 #include <fstream>
 #include <sstream>
 
@@ -12,31 +14,55 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
+using namespace std;
+
 
 /* ModelManagerクラス */
 class ModelManager {
 
-public: // メンバ関数
+private: // シングルトンデザインパターン
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	ModelManager() {};
-	
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~ModelManager() {};
+	// コンストラクタ、デストラクタ
+	ModelManager() = default;
+	~ModelManager() = default;
+	ModelManager(const ModelManager&) = delete;
+	const ModelManager& operator=(const ModelManager&) = delete;
+
+public: // メンバ関数
 
 	/// <summary>
 	/// インスタンスの取得
 	/// </summary>
-	static ModelManager* Getinstance();
+	static ModelManager* Getinstance() {
+		static ModelManager instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// 解放処理
 	/// </summary>
 	static void Finalize();
+
+	/// <summary>
+	/// モデルデータを追加する
+	/// </summary>
+	Model* const AddModel(const string name, unique_ptr<Model> model);
+
+	/// <summary>
+	/// モデルデータの取得
+	/// </summary>
+	Model* const GetModel(const string name) const;
+
+	/// <summary>
+	/// 指定のモデルデータの破棄
+	/// </summary>
+	void ModelRemove (string name);
+
+	/// <summary>
+	/// 全てのモデルデータの破棄
+	/// </summary>
+	void AllRemove();
+
 
 	/// <summary>
 	/// Objファイルを読み込む
@@ -82,5 +108,9 @@ private: // メンバ変数
 	uint32_t objHandle_ = 0;
 
 	ModelData modelData_{};
+
+
+	// モデルのマップ
+	unordered_map<string, unique_ptr<Model>> modelsMap_;
 };
 

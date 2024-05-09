@@ -2,7 +2,7 @@
 
 
 
-// 作成
+// マテリアル作成
 void MaterialModel::Create()
 {
 	CreateBuffer();
@@ -31,8 +31,7 @@ void MaterialModel::Map()
 {
 	// constBuffer が nullptr の場合はエラーハンドリング
 	if (!constBuffer) {
-		// エラーログなどを出力するか、適切な対処を行う
-		// この例ではエラーログを出力し、アサーションでプログラムを停止させる
+		// エラーログを出力し、アサーションでプログラムを停止させる
 		assert(false && "constBuff_ is nullptr. Make sure to create constBuffer before calling Map.");
 		return;
 	}

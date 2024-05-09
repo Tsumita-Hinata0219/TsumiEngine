@@ -10,7 +10,7 @@
 #include "ModelSphereState.h"
 #include "AnimationManager.h"
 
-
+#include "Transform.h"
 #include "Mesh.h"
 #include "Material.h"
 
@@ -20,6 +20,14 @@ class KeyFrameAnimation;
 
 /* Modelクラス */
 class Model {
+
+public:
+
+	// PipeLineのタイプ
+	enum class PipeLineType : uint32_t {
+		kModel,
+		kParticle,
+	};
 
 public: // メンバ関数
 
@@ -52,12 +60,16 @@ public: // メンバ関数
 	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
 	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 
+	/// <summary>
+	/// PipeLineTypeの設定
+	/// </summary>
+	static void SetPipeLineType(const PipeLineType type);
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
-	void Draw(WorldTransform wt, Camera camera);
+	void DrawN(Transform transform, Camera* camera);
 
 	/// <summary>
 	/// Animationの再生
@@ -151,6 +163,10 @@ private:
 	/// </summary>
 	MaterialModel* LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
+	/// <summary>
+	/// コマンドコール
+	/// </summary>
+	void CommandCall(Transform transform, Camera* camera);
 
 private: // メンバ変数
 
@@ -197,10 +213,11 @@ private: // メンバ変数
 	string name_;
 
 	// Meshデータ
-	Mesh mesh_{};
 	unordered_map<string, unique_ptr<Mesh>> meshMap_;
 
 	// Materialデータ
-	MaterialModel* material_{};
 	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
+
+	// PipeLineのタイプ
+	static PipeLineType pipeLineType_;
 };

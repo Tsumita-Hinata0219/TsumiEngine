@@ -160,6 +160,7 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
+    <ClCompile Include="Tsumi\Transform\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -338,6 +339,7 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
     <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
+    <ClInclude Include="Tsumi\Transform\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

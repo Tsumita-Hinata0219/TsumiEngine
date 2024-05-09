@@ -12,17 +12,16 @@ void ModelManager::Finalize() {
 
 
 // モデルデータを追加する
-Model* const ModelManager::AddModel(const string name, unique_ptr<Model> model)
+void const ModelManager::AddModel(const string name, unique_ptr<Model> model)
 {
 	// 指定の名前で検索をかける
 	auto modelData = GetModel(name);
 
-	// ヒットしたらその情報を返す
-	if (modelData) { return modelData; }
+	// ヒットしたら早期リターン
+	if (modelData) { return; }
 
 	// ヒットしなかったらマップに追加して return する
 	modelsMap_[name] = move(model);
-	return modelsMap_[name].get();
 }
 
 

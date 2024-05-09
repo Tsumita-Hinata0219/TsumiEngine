@@ -10,6 +10,7 @@ void Mesh::Create()
 	TransferMesh();
 }
 
+
 // バッファ作成
 void Mesh::CreateBuffer()
 {
@@ -19,6 +20,8 @@ void Mesh::CreateBuffer()
 	if (!constBuffer) {
 		assert(false && "Failed to create constBuffer.");
 	}
+
+	vertexBufferView = CreateResource::CreateVertexBufferView(sizeof(MeshData) * meshData.vertices.size(), constBuffer.Get(), int(meshData.vertices.size()));
 }
 
 

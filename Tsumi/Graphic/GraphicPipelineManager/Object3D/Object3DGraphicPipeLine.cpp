@@ -18,12 +18,11 @@ void Object3DGraphicPipeLine::SetupObject3DPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[4]{};
 	object3dGpl->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	object3dGpl->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	object3dGpl->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	object3dGpl->SetupInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	object3dGpl->SetupInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	object3dGpl->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));

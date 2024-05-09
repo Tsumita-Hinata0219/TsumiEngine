@@ -3,6 +3,9 @@
 #include "KeyFrameAnimation.h"
 
 
+// PipeLineのタイプ
+Model::PipeLineType Model::pipeLineType_ = Model::PipeLineType::kModel;
+
 
 /// <summary>
 /// コンストラクタ
@@ -163,14 +166,16 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 	/* 1. 中で必要となる変数の宣言 */
 
 	auto result = make_unique<Model>(); // return するModel
+	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
+	string name = fileName.substr(0, fileName.size() - 4);
 
 	// 返すModelにファイルの名前を付ける
-	result->name_ = fileName.substr(0, fileName.size() - 4);
+	result->name_ = name;
 
 
 
 	/* 2. ファイルを開く */
-	
+
 	// asssimpでobjを読む
 	Assimp::Importer importer;
 	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
@@ -211,11 +216,13 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 				vertex.position.x *= -1.0f;
 				vertex.normal.x *= -1.0f;
 
-				// OBJDataに解析した値を差し込む
-				result->mesh_.meshData.vertices.push_back(vertex);
+				// 解析した値を差し込む
+				meshItem->meshData.vertices.push_back(vertex);
 			}
 		}
 	}
+	// 解析し終えたmeshを設定する
+	result->meshMap_[name] = move(meshItem);
 
 
 	// materialを解析する
@@ -234,24 +241,144 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 
 			aiString textureFilePath;
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-			
+
 			// テクスチャの読み込み
 			materialItem->textureHandle = TextureManager::LoadTexture(routeFilePath, textureFilePath.C_Str(), TextureFrom::Obj);
 		}
 
 		// マテリアルの名前の設定
 		materialItem->name = material->GetName().C_Str();
-
-		result->materialMap_.insert({ to_string(materialIndex), move(materialItem) });
+		result->materialMap_[name] = move(materialItem);
 	}
 
 
 	return result;
 }
-//Model Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
-//{
-//	return Model();
-//}
+unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
+{
+	/* 1. 中で必要となる変数の宣言 */
+
+	auto result = make_unique<Model>(); // return するModel
+	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
+	string name = fileName.substr(0, fileName.size() - 4);
+
+	// 返すModelにファイルの名前を付ける
+	result->name_ = name;
+
+
+
+	/* 2. ファイルを開く */
+
+	// asssimpでobjを読む
+	Assimp::Importer importer;
+	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
+
+
+
+	/* 3. 実際にファイルを読み、ModelDataを構築していく */
+
+	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+	assert(scene->HasMeshes()); // メッシュがないのは対応しない
+
+
+	// meshを解析する
+	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+		aiMesh* mesh = scene->mMeshes[meshIndex];
+		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
+		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+
+		// ここからMeshの中身(Face)の解析を行っていく
+		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+			aiFace& face = mesh->mFaces[faceIndex];
+			assert(face.mNumIndices == 3); // 三角形のみサポート
+
+			// ここからFaceの中身(Vertex)の解析を行っていく
+			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+				uint32_t vertexIndex = face.mIndices[element];
+				aiVector3D& position = mesh->mVertices[vertexIndex];
+				aiVector3D& normal = mesh->mNormals[vertexIndex];
+				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+				VertexData vertex{};
+				vertex.position = { position.x, position.y, position.z, 1.0f };
+				vertex.normal = { normal.x, normal.y, normal.z, };
+				vertex.texCoord = { texcoord.x, texcoord.y };
+
+				// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
+				vertex.position.x *= -1.0f;
+				vertex.normal.x *= -1.0f;
+
+				// 解析した値を差し込む
+				meshItem->meshData.vertices.push_back(vertex);
+			}
+		}
+	}
+	// 解析し終えたmeshを設定する
+	result->meshMap_[name] = move(meshItem);
+
+
+	// materialを解析する
+	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+
+		// 今回作るマテリアル
+		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
+
+		// マテリアルを作る
+		materialItem->Create();
+
+		// シーン内のマテリアル
+		aiMaterial* material = scene->mMaterials[materialIndex];
+
+		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+
+			aiString textureFilePath;
+			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+
+			// テクスチャの読み込み
+			materialItem->textureHandle = TextureManager::LoadTexture(routeFilePath, textureFilePath.C_Str(), TextureFrom::Obj);
+		}
+
+		// マテリアルの名前の設定
+		materialItem->name = material->GetName().C_Str();
+		result->materialMap_[name] = move(materialItem);
+	}
+
+
+	return result;
+}
+
+
+/// <summary>
+/// PipeLineTypeの設定
+/// </summary>
+void Model::SetPipeLineType(const PipeLineType type)
+{
+	// PipeLineTypeが違っていたらcommandを再設定
+	if (pipeLineType_ != type) {
+
+		// コマンドの取得
+		Commands commands = DirectXCommon::GetInstance()->GetCommands();
+
+		if (type == PipeLineType::kModel) {
+			
+			commands.List->SetGraphicsRootSignature(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().rootSignature);
+			commands.List->SetPipelineState(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().graphicsPipelineState);
+			// 形状を設定。基本PipeLineで設定したものと同じもの
+			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		}
+		else if (type == PipeLineType::kParticle) {
+
+			commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+			commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+			// 形状を設定。基本PipeLineで設定したものと同じもの
+			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		}
+
+		// PipeLineTypeの設定
+		pipeLineType_ = type;
+	}
+}
 
 
 /// <summary>
@@ -262,22 +389,20 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 	this->state_->Draw(this, worldTransform, camera);
 }
 
-void Model::Draw(WorldTransform wt, Camera camera)
+void Model::DrawN(Transform transform, Camera* camera)
 {
+	// 諸々の計算
+	transform.World = transform.matWorld;
+	transform.WVP = transform.matWorld * camera->matProjection;
+	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
+
 	// ここで書き込み
-	materialMap_.at(name_)->TransferMaterial();
 	meshMap_.at(name_)->TransferMesh();
+	materialMap_.at(name_)->TransferMaterial();
+	transform.TransferMatrix();
 
-
-	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-
-	// コマンドを詰む
-	commands.List->SetGraphicsRootConstantBufferView(0, materialMap_.at(name_)->constBuffer->GetGPUVirtualAddress());
-	commands.List->SetGraphicsRootConstantBufferView(2, camera.constBuffer->GetGPUVirtualAddress());
-	if (!materialMap_.at(name_)->textureHandle == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle);
-	}
+	// コマンドコール
+	CommandCall(transform, camera);
 }
 
 
@@ -401,4 +526,24 @@ MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, cons
 	}
 
 	return result;
+}
+
+
+/// <summary>
+/// コマンドコール
+/// </summary>
+void Model::CommandCall(Transform transform, Camera* camera)
+{
+	// コマンドの取得
+	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+
+	// コマンドを詰む
+	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV
+	commands.List->SetGraphicsRootConstantBufferView(0, materialMap_.at(name_)->constBuffer->GetGPUVirtualAddress()); // Material
+	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress()); // TransformationMatrix
+	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
+	if (!materialMap_.at(name_)->textureHandle == 0) {
+		DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
+	}
+	commands.List->DrawInstanced(UINT(meshMap_.at(name_)->meshData.vertices.size()), 1, 0, 0); // Draw!!
 }

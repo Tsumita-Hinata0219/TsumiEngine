@@ -43,7 +43,7 @@ struct MaterialModel {
 	// テクスチャハンドル
 	uint32_t textureHandle = 1u;
 
-	// カラー
+	// 定数バッファ構造体
 	MaterialDataN materialData{};
 
 	// 定数バッファ

@@ -46,7 +46,7 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルデータを追加する
 	/// </summary>
-	Model* const AddModel(const string name, unique_ptr<Model> model);
+	void const AddModel(const string name, unique_ptr<Model> model);
 
 	/// <summary>
 	/// モデルデータの取得
@@ -75,6 +75,11 @@ public: // メンバ関数
 	/// Nodeの階層構造からSkeletonを作る
 	/// </summary>
 	Skeleton CreateSkeleton(const Node& rootNode);
+
+
+#pragma region Get
+
+#pragma endregion 
 
 
 private: // メンバ関数

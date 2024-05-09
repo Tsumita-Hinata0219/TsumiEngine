@@ -50,10 +50,7 @@ void GameScene::Initialize()
 	testHuman_->Init();
 
 
-	Model* testA = ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	testA;
-
-
+	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 }
 
 
@@ -127,6 +124,9 @@ void GameScene::ModelDraw()
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());
+
+	Model::SetPipeLineType(Model::PipeLineType::kModel);
+
 }
 
 

@@ -5,7 +5,7 @@
 struct Material
 {
     float4 color;
-    float uvTransform;
+    float4x4 uvTransform;
 };
 struct ViewProjectionMatrix
 {

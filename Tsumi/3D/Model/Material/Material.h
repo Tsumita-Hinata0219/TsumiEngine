@@ -14,6 +14,13 @@ struct MaterialDataN {
 /* Material構造体 */
 struct MaterialModel {
 
+	// コンストラクタ
+	MaterialModel() = default;
+	MaterialModel(const string& mtlName) {
+		Create();
+		name = mtlName;
+	}
+
 	// マテリアル作成
 	void Create();
 
@@ -43,6 +50,6 @@ struct MaterialModel {
 	ComPtr<ID3D12Resource> constBuffer = nullptr;
 
 	// マップアドレス
-	MaterialDataN* constMap;
+	MaterialDataN* constMap{};
 };
 

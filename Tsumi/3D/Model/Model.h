@@ -11,6 +11,10 @@
 #include "AnimationManager.h"
 
 
+#include "Mesh.h"
+#include "Material.h"
+
+
 class ModelManager;
 class KeyFrameAnimation;
 
@@ -45,15 +49,15 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルの読み込み
 	/// </summary>
-	static Model LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
-	static Model LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	static Model LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
+	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
+	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
+	void Draw(WorldTransform wt, Camera camera);
 
 	/// <summary>
 	/// Animationの再生
@@ -140,6 +144,14 @@ public: // メンバ関数
 #pragma endregion
 
 
+private:
+
+	/// <summary>
+	/// mtlファイルを読み込む関数
+	/// </summary>
+	MaterialModel* LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
+
+
 private: // メンバ変数
 
 	// モデルマネージャー
@@ -180,4 +192,15 @@ private: // メンバ変数
 
 	ModelLightingType modelDrawType_ = Non;
 
+
+	// Modelの名前
+	string name_;
+
+	// Meshデータ
+	Mesh mesh_{};
+	unordered_map<string, unique_ptr<Mesh>> meshMap_;
+
+	// Materialデータ
+	MaterialModel* material_{};
+	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
 };

@@ -3,6 +3,7 @@
 #include "IScene.h"
 #include "GameManager.h"
 #include "GameObject.h"
+#include "ModelManager.h"
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"

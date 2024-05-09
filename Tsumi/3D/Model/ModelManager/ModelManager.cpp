@@ -247,7 +247,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName + ".png", TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);

@@ -265,7 +265,7 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 	// 返すModelにファイルの名前を付ける
 	result->name_ = name;
 
-
+	textureName;
 
 	/* 2. ファイルを開く */
 
@@ -388,7 +388,6 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 
 	this->state_->Draw(this, worldTransform, camera);
 }
-
 void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算

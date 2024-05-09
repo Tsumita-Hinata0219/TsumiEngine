@@ -51,6 +51,8 @@ void GameScene::Initialize()
 
 
 	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	transform_.Initialize();
+
 }
 
 
@@ -79,6 +81,8 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
 
+
+	transform_.UpdateMatrix();
 
 #ifdef _DEBUG
 
@@ -126,7 +130,7 @@ void GameScene::ModelDraw()
 	testHuman_->Draw(camera_.get());
 
 	Model::SetPipeLineType(Model::PipeLineType::kModel);
-
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

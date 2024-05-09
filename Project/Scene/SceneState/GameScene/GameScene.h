@@ -65,4 +65,6 @@ private:
 
 	// TestHuman
 	unique_ptr<TestHuman> testHuman_;
+
+	Transform transform_;
 };

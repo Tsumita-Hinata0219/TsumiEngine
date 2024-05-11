@@ -7,14 +7,16 @@
 /// </summary>
 void ModelObjState::Initialize(Model* pModel) {
 
-	modelData_.material = pModel->GetObjData().material;
-	modelData_.vertices = pModel->GetObjData().vertices;
+	modelData_ = pModel->GetObjData();
 
 	// リソースの作成
 	resource_.Vertex = CreateResource::CreateBufferResource(sizeof(VertexData) * modelData_.vertices.size());
 	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
 	resource_.Lighting = CreateResource::CreateBufferResource(sizeof(DirectionalLight));
 	resource_.VertexBufferView = CreateResource::CreateVertexBufferView(sizeof(VertexData) * modelData_.vertices.size(), resource_.Vertex.Get(), int(modelData_.vertices.size()));
+	
+	resource_.Index = CreateResource::CreateBufferResource(sizeof(uint32_t) * modelData_.indices.size());
+	resource_.IndexBufferView = CreateResource::CreateIndexBufferview(sizeof(uint32_t) * modelData_.indices.size(), resource_.Index.Get());
 }
 
 
@@ -26,16 +28,19 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
 	DirectionalLight* lightData = nullptr;
+	uint32_t* indexData = nullptr;
 
 
 	// 書き込むためにアドレスを取得
 	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
 	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&material));
 	resource_.Lighting->Map(0, nullptr, reinterpret_cast<void**>(&lightData));
+	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
 
 	// 頂点データをリソースにコピー
 	std::memcpy(vertexData, modelData_.vertices.data(), sizeof(VertexData) * modelData_.vertices.size());
+	std::memcpy(indexData, modelData_.indices.data(), sizeof(uint32_t) * modelData_.indices.size());
 
 
 	// マテリアルの情報を書き込む
@@ -89,8 +94,9 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 
 
 	///// いざ描画！！！！！
-	// VBVを設定
+	// 頂点の設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
+	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
 	// 形状を設定
 	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -117,6 +123,6 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
 	}
 
-	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
-	commands.List->DrawInstanced(UINT(modelData_.vertices.size()), 1, 0, 0);
+	// 描画！(DrawCall / ドローコール)。
+	commands.List->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);
 }

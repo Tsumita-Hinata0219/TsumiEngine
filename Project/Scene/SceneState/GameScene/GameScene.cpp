@@ -51,6 +51,10 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
+
+
+	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	transform_.Initialize();
 }
 
 
@@ -81,6 +85,8 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
 
+
+	transform_.UpdateMatrix();
 
 #ifdef _DEBUG
 
@@ -119,13 +125,16 @@ void GameScene::ModelDraw()
 	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
-	testObject_->Draw(camera_.get());
+	//testObject_->Draw(camera_.get());
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_->Draw(camera_.get());
+	//testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw(camera_.get());
+	//testHuman_->Draw(camera_.get());
+
+	/*Model::SetPipeLineType(Model::PipeLineType::kModel);
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());*/
 }
 
 

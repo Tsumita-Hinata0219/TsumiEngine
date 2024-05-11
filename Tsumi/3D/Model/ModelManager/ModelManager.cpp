@@ -3,20 +3,62 @@
 
 
 /// <summary>
-/// インスタンスの取得
-/// </summary>
-ModelManager* ModelManager::Getinstance() {
-	static ModelManager instance;
-	return &instance;
-}
-
-
-/// <summary>
 /// 解放処理
 /// </summary>
 void ModelManager::Finalize() {
 
 	ModelManager::Getinstance()->objModelDatas_.clear();
+}
+
+
+// モデルデータを追加する
+void const ModelManager::AddModel(const string name, unique_ptr<Model> model)
+{
+	// 指定の名前で検索をかける
+	auto modelData = GetModel(name);
+
+	// ヒットしたら早期リターン
+	if (modelData) { return; }
+
+	// ヒットしなかったらマップに追加して return する
+	modelsMap_[name] = move(model);
+}
+
+
+// モデルデータの取得
+Model* const ModelManager::GetModel(const string name) const
+{
+	// 指定された名前で検索をかける
+	auto model = modelsMap_.find(name);
+
+	// ヒットしたらポインタを返す
+	if (model != modelsMap_.end()) {
+		return model->second.get();
+	}
+	return nullptr;
+}
+
+
+// 指定のモデルデータの破棄
+void ModelManager::ModelRemove(string name)
+{
+	// 指定された名前で検索をかける
+	const auto& model = modelsMap_.find(name);
+
+	// なかったらリターン
+	if (model == modelsMap_.end()) {
+		return;
+	}
+
+	// ヒットしたら破棄する
+	modelsMap_.erase(name);
+}
+
+
+// 全てのモデルデータの破棄
+void ModelManager::AllRemove()
+{
+	modelsMap_.clear();
 }
 
 
@@ -164,30 +206,27 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
 			assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
-			
-			// ここからMeshの中身(Face)の解析を行っていく
+			objData.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
+
+			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+				aiVector3D& position = mesh->mVertices[vertexIndex];
+				aiVector3D& normal = mesh->mNormals[vertexIndex];
+				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+				// 右手系 -> 左手系への変換
+				objData.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
+				objData.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
+				objData.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
+			}
+
+			// Indexを解析する
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3); // 三角形のみサポート
+				assert(face.mNumIndices == 3);
 
-				// ここからFaceの中身(Vertex)の解析を行っていく
 				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 					uint32_t vertexIndex = face.mIndices[element];
-					aiVector3D& position = mesh->mVertices[vertexIndex];
-					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-
-					VertexData vertex{};
-					vertex.position = { position.x, position.y, position.z, 1.0f };
-					vertex.normal = { normal.x, normal.y, normal.z, };
-					vertex.texCoord = { texcoord.x, texcoord.y };
-
-					// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
-					vertex.position.x *= -1.0f;
-					vertex.normal.x *= -1.0f;
-					
-					// OBJDataに解析した値を差し込む
-					objData.vertices.push_back(vertex);
+					objData.indices.push_back(vertexIndex);
 				}
 			}
 		}
@@ -204,7 +243,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName + ".png", TextureFrom::Obj);
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);

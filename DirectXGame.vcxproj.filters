@@ -17,6 +17,8 @@
     <FxCompile Include="Resources\shaders\SpriteObject3d.VS.hlsl" />
     <FxCompile Include="Resources\shaders\LineObject3d.VS.hlsl" />
     <FxCompile Include="Resources\shaders\LineObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\Object3d.VS.hlsl" />
+    <FxCompile Include="Resources\shaders\Object3d.PS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl" />
   </ItemGroup>
@@ -159,6 +161,10 @@
     <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
+    <ClCompile Include="Tsumi\Transform\Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -336,6 +342,10 @@
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
+    <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
+    <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
+    <ClInclude Include="Tsumi\Transform\Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />
@@ -346,6 +356,8 @@
     <None Include="Resources\shaders\PhongObject.hlsli" />
     <None Include="Resources\shaders\SpriteObject3d.hlsli" />
     <None Include="Resources\shaders\LineObject3d.hlsli" />
+    <None Include="Resources\shaders\Object3d.hlsli" />
+    <None Include="Resources\shaders\MathFunc.hlsli" />
     <None Include="Resources\shaders\PostEffect.hlsli" />
     <None Include="cpp.hint" />
   </ItemGroup>

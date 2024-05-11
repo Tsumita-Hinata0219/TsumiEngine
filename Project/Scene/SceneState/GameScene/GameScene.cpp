@@ -53,8 +53,8 @@ void GameScene::Initialize()
 	testHuman_->Init();
 
 
-	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();
+	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	transform_.Initialize();*/
 }
 
 
@@ -86,7 +86,7 @@ void GameScene::Update(GameManager* state)
 	testHuman_->Update();
 
 
-	transform_.UpdateMatrix();
+	//transform_.UpdateMatrix();
 
 #ifdef _DEBUG
 

@@ -317,7 +317,8 @@ void ShaderManager::Object3DShader()
 void ShaderManager::PostEffectShader() {
 
 	ShadersMode shader{};
-	shader.PixelBlob =
+
+	shader.VertexBlob =
 		ShaderManager::CompileShader(
 			L"Resources/shaders/PostEffect.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =

@@ -26,6 +26,7 @@ void GraphicPipelineManager::Initialize() {
 	ParticleGraphicPipeline::SetupParticlePso();
 	LineGraphicPipeline::SetupLightPso();
 	Object3DGraphicPipeLine::SetupObject3DPso();
+	PostEffectGraphicPipeline::SetupPostEffectPso();
 }
 
 

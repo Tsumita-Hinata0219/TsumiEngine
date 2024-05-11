@@ -102,6 +102,8 @@ private:
 
 	// 
 	SpriteOrigin origin_ = SpriteOrigin::TopLeft;
+
+	uint32_t srv_;
 };
 
 

@@ -144,6 +144,7 @@ void ShaderManager::ShadersCompiles() {
 	ParticleShader();
 	LineShader();
 	Object3DShader();
+	PostEffectShader();
 }
 
 
@@ -307,4 +308,21 @@ void ShaderManager::Object3DShader()
 			L"Resources/shaders/Object3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Object3d = shader;
+}
+
+
+/// <summary>
+/// 
+/// </summary>
+void ShaderManager::PostEffectShader() {
+
+	ShadersMode shader{};
+
+	ShaderManager::GetInstance()->shaders_.Object3d = shader;
+			L"Resources/shaders/PostEffect.VS.hlsl", L"vs_6_0");
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/PostEffect.PS.hlsl", L"ps_6_0");
+
+	ShaderManager::GetInstance()->shaders_.PostEffect = shader;
 }

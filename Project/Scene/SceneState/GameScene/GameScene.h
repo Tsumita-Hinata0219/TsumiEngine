@@ -7,6 +7,7 @@
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
+#include "PostEffect/PostEffect.h"
 #include "TestObject/TestObject.h"
 #include "TestAnimationCube/TestAnimationCube.h"
 #include "TestHuman/TestHuman.h"
@@ -56,6 +57,9 @@ private:
 
 	// メインカメラ
 	unique_ptr<Camera> camera_ = nullptr;
+
+	// PostEffect
+	unique_ptr<PostEffect> postEffect_;
 
 	// TestModel
 	unique_ptr<TestObject> testObject_;

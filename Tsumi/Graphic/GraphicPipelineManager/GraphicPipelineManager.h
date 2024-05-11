@@ -16,6 +16,8 @@
 #include "PhongNormalMap.h"
 #include "ParticleGraphicPipeline.h"
 #include "LineGraphicPipeline.h"
+#include "PostEffectGraphicPipeline.h"
+
 
 
 class GraphicPipelineManager {

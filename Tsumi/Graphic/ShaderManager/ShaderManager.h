@@ -36,6 +36,7 @@ struct ShadersType {
 	ShadersMode Particle;
 	ShadersMode Line;
 	ShadersMode Object3d;
+	ShadersMode PostEffect;
 };
 
 
@@ -136,11 +137,16 @@ private: // メンバ関数
 	/// 
 	/// </summary>
 	static void LineShader();
-
+  
 	/// <summary>
 	/// 
 	/// </summary>
 	static void Object3DShader();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	static void PostEffectShader();
 
 #pragma endregion
 

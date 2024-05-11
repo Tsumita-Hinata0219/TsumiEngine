@@ -58,7 +58,7 @@ void EngineManual::Update(Camera* camera)
 
 
 	// オーディオ
-	if (KeysInput::TriggerKey(DIK_1)) 
+	if (Input::Trigger(DIK_1)) 
 	{
 		if (!Audio::IsPlaying(kakkoiiAHD_)) // <! IsPlaying(オーディオハンドル) オーディオが再生中か
 		{
@@ -69,7 +69,7 @@ void EngineManual::Update(Camera* camera)
 			Audio::StopOnSound(kakkoiiAHD_);
 		}
 	}
-	if (KeysInput::TriggerKey(DIK_2))
+	if (Input::Trigger(DIK_2))
 	{
 		if (!Audio::IsPlaying(meriAHD_))
 		{
@@ -80,7 +80,7 @@ void EngineManual::Update(Camera* camera)
 			Audio::StopOnSound(meriAHD_);
 		}
 	}
-	if (KeysInput::TriggerKey(DIK_3))
+	if (Input::Trigger(DIK_3))
 	{
 		Audio::PlayOnSound(mokugyoAHD_, false, 0.5f);
 	}

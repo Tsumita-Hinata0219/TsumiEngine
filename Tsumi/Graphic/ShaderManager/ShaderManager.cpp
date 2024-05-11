@@ -317,8 +317,8 @@ void ShaderManager::Object3DShader()
 void ShaderManager::PostEffectShader() {
 
 	ShadersMode shader{};
-
-	ShaderManager::GetInstance()->shaders_.Object3d = shader;
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
 			L"Resources/shaders/PostEffect.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(

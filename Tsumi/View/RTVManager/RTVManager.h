@@ -1,31 +1,9 @@
 #pragma once
 
-#include <d3d12.h>
-#include <dxgi1_6.h>
-#include <dxgidebug.h>
-#include <dxcapi.h>
-#pragma comment(lib, "d3d12.lib")
-#pragma comment(lib, "dxgi.lib")
-#pragma comment(lib, "dxguid.lib")
-#pragma comment(lib, "dxcompiler.lib")
-
-#include "MyMath.h"
-#include "Struct.h"
-
-#include"DescriptorManager.h"
+#include "RTVData.h"
 
 #define RTV_Index_Max 16
 
-
-// RTVData
-struct RTVData {
-	ComPtr<ID3D12DescriptorHeap> DescriptorHeap;
-	D3D12_RENDER_TARGET_VIEW_DESC Desc{};
-	D3D12_CPU_DESCRIPTOR_HANDLE Handles;
-	D3D12_CPU_DESCRIPTOR_HANDLE StartHandle;
-	ComPtr<ID3D12Resource> Resources;
-	Vector4 color;
-};
 
 /* RTVManagerクラス */
 class RTVManager {

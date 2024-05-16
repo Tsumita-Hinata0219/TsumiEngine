@@ -167,7 +167,6 @@
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
-    <ClCompile Include="Tsumi\View\RTVManager\RTVData\RTVData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -351,7 +350,6 @@
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
-    <ClInclude Include="Tsumi\View\RTVManager\RTVData\RTVData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

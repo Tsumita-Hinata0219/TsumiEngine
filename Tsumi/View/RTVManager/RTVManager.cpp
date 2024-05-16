@@ -3,9 +3,7 @@
 
 
 // 初期化処理
-void RTVManager::Initialize()
-{
-}
+void RTVManager::Initialize() {}
 
 
 // 開始処理
@@ -13,7 +11,8 @@ void RTVManager::BeginFrame()
 {
 	// 使用サイズが超過していないかチェック
 	// 超えていたらassert
-	assert(index_ >= RTV_Index_Max, Log("RTVの使用サイズ超過"));
+	Log("RTVの使用サイズ超過");
+	assert(index_ >= RTV_Index_Max);
 }
 
 
@@ -24,18 +23,39 @@ void RTVManager::EndFrame() {}
 // ImGui描画
 void RTVManager::DrawImGui()
 {
-	ImGui::Text("RTV_Index : %d", index_);
+	ImGui::Text("RTV_Index : %d", RTVManager::GetInstance()->index_);
+}
+
+
+// RTVDataの追加
+void RTVManager::AddRTV(const std::string name, RTVProperty prope)
+{
+	// インスタンスの取得
+	RTVManager* instance = RTVManager::GetInstance();
+
+	// 検索
+	auto rtv = instance->GetRTV(name);
+
+	// ヒットしたらreturn。同じものは作らないよ
+	if (rtv) { return; }
+
+	// ヒットしなければマップに追加してreturn
+	unique_ptr<RTVData> newRTV = make_unique<RTVData>(prope);
+	instance->rtvMap_[name] = move(newRTV);
 }
 
 
 // RTVDataの検索
-RTVData* const RTVManager::CheckRTV(std::string name)
+RTVData* RTVManager::GetRTV(std::string name)
 {
+	// インスタンスの取得
+	RTVManager* instance = RTVManager::GetInstance();
+
 	// 検索
-	const auto& rtv = rtvMap_.find(name);
+	const auto& rtv = instance->rtvMap_.find(name);
 
 	// ヒットしたらそのポインタを返す
-	if (rtv != rtvMap_.end()) {
+	if (rtv != instance->rtvMap_.end()) {
 		return rtv->second.get();
 	}
 
@@ -47,19 +67,25 @@ RTVData* const RTVManager::CheckRTV(std::string name)
 // 指定RTVDataの破棄
 void RTVManager::RemoveRTVData(std::string name)
 {
+	// インスタンスの取得
+	RTVManager* instance = RTVManager::GetInstance();
+
 	// 検索
-	const auto& rtv = rtvMap_.find(name);
+	const auto& rtv = instance->rtvMap_.find(name);
 
 	// なかったらreturn
-	if (rtv == rtvMap_.end()) { return; }
+	if (rtv == instance->rtvMap_.end()) { return; }
 
 	// ヒットしたら破棄
-	rtvMap_.erase(name);
+	instance->rtvMap_.erase(name);
 }
 
 
 // 全RTVDataの破棄
 void RTVManager::AllRemoveRTVData()
 {
-	rtvMap_.clear();
+	// インスタンスの取得
+	RTVManager* instance = RTVManager::GetInstance();
+
+	instance->rtvMap_.clear();
 }

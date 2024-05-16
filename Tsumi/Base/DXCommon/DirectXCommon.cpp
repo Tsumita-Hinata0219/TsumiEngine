@@ -502,6 +502,7 @@ void DirectXCommon::SetDescriptorHeap() {
 
 	// RTVを作る
 	SettingRTV();
+	//CreateRTV();
 
 
 	// depthStencilResourceを作る
@@ -597,15 +598,71 @@ void DirectXCommon::SettingRTV() {
 	}D3D12_CPU_DESCRIPTOR_HANDLE;
 
 	// Descriptorの位置を決める
-	rtv.Handles[0] = rtv.StartHandle;
+	/*rtv.Handles[0] = rtv.StartHandle;
 
 	rtv.Handles[1].ptr =
 		rtv.Handles[0].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 
 	rtv.Handles[2].ptr =
-		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);*/
 
 	DirectXCommon::GetInstance()->rtv_ = rtv;
+}
+void DirectXCommon::CreateRTV()
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->device_;
+	SwapChains swapChains = DirectXCommon::GetInstance()->GetSwapChains();
+
+	RTVManager::GetInstance()->SetDescriptorHeap(CreateDescriptorHeap(device.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, RTV_Index_Max, false));
+
+	// RTVの設定
+	D3D12_RENDER_TARGET_VIEW_DESC desc{};
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 出力結果をSRGBに変換して書き込む
+	desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
+
+	// クリアカラー
+	Vector4 clearColor = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
+
+	// ディスクリプタの先頭を取得する
+	D3D12_CPU_DESCRIPTOR_HANDLE startHandle;
+	startHandle = RTVManager::GetInstance()->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart();
+
+
+	RTVProperty rtvPrope[3]{};
+	// 1つ目
+	rtvPrope[0].Handles = startHandle;
+	device->CreateRenderTargetView(swapChains.Resources[0].Get(), &desc, rtvPrope[0].Handles);
+	rtvPrope[0].Resources = swapChains.Resources[0].Get();
+	rtvPrope[0].color = clearColor;
+	
+	// 2つ目
+	rtvPrope[1].Handles.ptr = rtvPrope[0].Handles.ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	device->CreateRenderTargetView(swapChains.Resources[1].Get(), &desc, rtvPrope[1].Handles);
+	rtvPrope[1].Resources = swapChains.Resources[1].Get();
+	rtvPrope[1].color = clearColor;
+	
+	// 3つ目
+	rtvPrope[2].Handles.ptr = rtvPrope[1].Handles.ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	auto renderTextureResource = CreateResource::CreateRenderTextureResource(
+		WinApp::kWindowWidth,
+		WinApp::kWindowHeight,
+		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
+		clearColor);
+	device->CreateRenderTargetView(renderTextureResource.Get(), &desc, rtvPrope[2].Handles);
+	rtvPrope[2].Resources = renderTextureResource.Get();
+	rtvPrope[2].color = clearColor;
+
+
+	// DescriptorHandleとDescriptorHeap
+	typedef struct D3D12_CPU_DESCRIPTOR_HANDLE {
+		SIZE_T ptr;
+	}D3D12_CPU_DESCRIPTOR_HANDLE;
+
+	
+	// RTVManagerに設定する
+	RTVManager::AddRTV("SwapChain0", rtvPrope[0]);
+	RTVManager::AddRTV("SwapChain1", rtvPrope[1]);
+	RTVManager::AddRTV("PostEffect", rtvPrope[2]);
 }
 
 

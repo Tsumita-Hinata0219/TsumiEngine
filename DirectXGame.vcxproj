@@ -229,7 +229,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Tsumi\Utilities\Timer\Timer.cpp" />
-    <ClCompile Include="Tsumi\View\RTVManager\RTVData\RTVData.cpp" />
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
   </ItemGroup>
@@ -337,7 +336,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Utilities\TextLog\TextLog.h" />
     <ClInclude Include="Tsumi\Utilities\TimedCall\TimedCall.h" />
     <ClInclude Include="Tsumi\Utilities\Timer\Timer.h" />
-    <ClInclude Include="Tsumi\View\RTVManager\RTVData\RTVData.h" />
     <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
   </ItemGroup>

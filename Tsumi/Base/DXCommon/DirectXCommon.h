@@ -15,6 +15,7 @@
 #include "MyMath.h"
 #include "Struct.h"
 #include "CreateResource.h"
+#include "RTVManager.h"
 
 
 
@@ -191,6 +192,7 @@ private: // メンバ関数
 
 	// RTVを作る
 	static void SettingRTV();
+	static void CreateRTV();
 
 	// 状態を遷移する
 	static void ChanegResourceState();

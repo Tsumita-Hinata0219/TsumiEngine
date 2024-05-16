@@ -61,7 +61,7 @@ public: // メンバ関数
 	static void AddRTV(const std::string name, RTVProperty prope);
 
 	// RTVDataの検索
-	RTVData* GetRTV(std::string name);
+	static RTVData* GetRTV(std::string name);
 
 	// 指定RTVDataの破棄
 	static void RemoveRTVData(std::string name);

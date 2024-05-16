@@ -502,7 +502,7 @@ void DirectXCommon::SetDescriptorHeap() {
 
 	// RTVを作る
 	SettingRTV();
-	//CreateRTV();
+	CreateRTV();
 
 
 	// depthStencilResourceを作る
@@ -613,12 +613,14 @@ void DirectXCommon::CreateRTV()
 	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->device_;
 	SwapChains swapChains = DirectXCommon::GetInstance()->GetSwapChains();
 
+	// Heapの設定
 	RTVManager::GetInstance()->SetDescriptorHeap(CreateDescriptorHeap(device.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, RTV_Index_Max, false));
 
 	// RTVの設定
 	D3D12_RENDER_TARGET_VIEW_DESC desc{};
 	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 出力結果をSRGBに変換して書き込む
 	desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
+	RTVManager::GetInstance()->SetDesc(desc); // デスクの設定
 
 	// クリアカラー
 	Vector4 clearColor = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
@@ -650,7 +652,7 @@ void DirectXCommon::CreateRTV()
 		clearColor);
 	device->CreateRenderTargetView(renderTextureResource.Get(), &desc, rtvPrope[2].Handles);
 	rtvPrope[2].Resources = renderTextureResource.Get();
-	rtvPrope[2].color = clearColor;
+	rtvPrope[2].color = { 1.0f, 0.0f, 0.0f, 1.0f };
 
 
 	// DescriptorHandleとDescriptorHeap

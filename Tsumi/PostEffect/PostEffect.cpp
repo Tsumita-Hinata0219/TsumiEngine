@@ -8,8 +8,9 @@ void PostEffect::Initialize()
 	// リソースの作成
 	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
 
-	ComPtr<ID3D12Resource> stvRe = DirectXCommon::GetInstance()->GetRTV().Resources[2].Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stvRe);
+	ComPtr<ID3D12Resource> stvRe1 = DirectXCommon::GetInstance()->GetRTV().Resources[2].Get();
+	ComPtr<ID3D12Resource> stvRe2 = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
+	srv_ = DescriptorManager::CreateRenderTextureSRV(stvRe2);
 }
 
 

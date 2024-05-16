@@ -42,6 +42,13 @@ public: // メンバ関数
 
 #pragma endregion 
 
+#pragma region Set
+
+	// RTVの取得
+	void SetRTVPrope(RTVProperty rtv) { this->rtvPrope_ = rtv; }
+
+#pragma endregion 
+
 private: // メンバ変数
 
 	// インデックス

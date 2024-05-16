@@ -29,14 +29,14 @@ void RTVManager::DrawImGui()
 
 
 // RTVDataの検索
-RTVData* RTVManager::CheckRTV(std::string name)
+RTVData* const RTVManager::CheckRTV(std::string name)
 {
 	// 検索
 	const auto& rtv = rtvMap_.find(name);
 
 	// ヒットしたらそのポインタを返す
 	if (rtv != rtvMap_.end()) {
-		return &rtv->second;
+		return rtv->second.get();
 	}
 
 	// なければNULLを返す

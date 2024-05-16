@@ -32,7 +32,7 @@ public: // メンバ関数
 private:
 
 	// RTVDataの検索
-	RTVData* CheckRTV(std::string name);
+	RTVData* const CheckRTV(std::string name);
 
 	// 指定RTVDataの破棄
 	void RemoveRTVData(std::string name);
@@ -47,6 +47,6 @@ private: // メンバ変数
 	uint32_t index_;
 
 	// RTVデータ
-	std::map<std::string, RTVData> rtvMap_;
+	std::map<std::string, unique_ptr<RTVData>> rtvMap_;
 };
 

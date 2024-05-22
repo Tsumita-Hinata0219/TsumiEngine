@@ -52,9 +52,14 @@ void GameScene::Initialize()
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
 
-
 	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();*/
+
+
+	/* ----- FileManager ファイルマネージャー ----- */
+	// とりあえずJSONファイルを読み込んでみる
+	FileManager::GetInstance()->LoadJsonFile("Json/", "kari2");
+
 }
 
 

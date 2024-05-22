@@ -13,15 +13,13 @@ struct LevelData {
 	
 	struct ObjectData {
 		std::string type;
-		std::string name;
 		Vector3 translation;
 		Vector3 rotation;
 		Vector3 scaling;
 		std::string file_name;
+		std::vector<std::unique_ptr<ObjectData>> children;
 	};
-
-
-	std::vector<ObjectData> objects;
+	std::vector<std::unique_ptr<ObjectData>> objects;
 };
 
 
@@ -61,7 +59,7 @@ public:
 private:
 
 	// オブジェクトの走査
-	void ScanningObjects(nlohmann::json& object, LevelData* levelData);
+	void ScanningObjects(nlohmann::json& object, std::vector<std::unique_ptr<LevelData::ObjectData>>& objects);
 
 
 private:

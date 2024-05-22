@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "ModelManager.h"
+#include "FileManager.h"
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"

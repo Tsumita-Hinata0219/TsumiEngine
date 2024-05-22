@@ -27,7 +27,7 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 	/* ---------- JSOnファイルを読み込んでみる ---------- */
 
 	// 連結してフルパスを得る
-	const std::string fullPath = routeFilePath + fileName + ".json";
+	const std::string fullPath = "Resources/" + routeFilePath + fileName + ".json";
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -61,8 +61,8 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 
 	/* ---------- オブジェクトの走査 ---------- */
 
-	// レベルデータ格納用インスタンスを生成
-	unique_ptr<LevelData> levelData = make_unique<LevelData>();
+	 // レベルデータ格納用インスタンスを生成
+	auto levelData = std::make_unique<LevelData>();
 
 	// "objects"の全オブジェクトを走査
 	if (deserialized.contains("objects") && deserialized["objects"].is_array()) {
@@ -73,7 +73,7 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 		// 走査してく
 		for (nlohmann::json& object : deserialized["objects"]) {
 
-			ScanningObjects(object, levelData.get());
+			ScanningObjects(object, levelData->objects);
 		}
 	}
 
@@ -84,7 +84,7 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 
 
 // オブジェクトの走査
-void FileManager::ScanningObjects(nlohmann::json& object, LevelData* levelData)
+void FileManager::ScanningObjects(nlohmann::json& object, std::vector<std::unique_ptr<LevelData::ObjectData>>& objects)
 {
 	// 各オブジェクトには必ず "type"データを入れているので
 	// "type"が検出できなければ不正として実行を停止する
@@ -98,45 +98,58 @@ void FileManager::ScanningObjects(nlohmann::json& object, LevelData* levelData)
 	// MESH
 	if (type.compare("MESH") == 0) {
 
-		// 要素追加
-		levelData->objects.emplace_back(LevelData::ObjectData{});
-		// 今追加した要素の参照を得る
-		LevelData::ObjectData& objectData = levelData->objects.back();
+		// 新しくオブジェクトを作成
+		auto objectData = make_unique<LevelData::ObjectData>();
+
+
+		if (object.contains("type")) {
+
+			// タイプ
+			objectData->type = object["type"];
+		}
 
 		if (object.contains("file_name")) {
 
 			// ファイル名
-			objectData.file_name = object["file_name"];
+			objectData->file_name = object["file_name"];
 		}
 
+
 		// トランスフォームのパラメータ読み込み
-		nlohmann::json& transform = object["transform"];
-		// 平行移動
-		objectData.translation.x = (float)transform["translation"][1];
-		objectData.translation.y = (float)transform["translation"][2];
-		objectData.translation.z = (float)transform["translation"][0];
-		// 回転角
-		objectData.rotation.x = -(float)transform["rotation"][1];
-		objectData.rotation.y = -(float)transform["rotation"][2];
-		objectData.rotation.z = (float)transform["rotation"][0];
-		// スケーリング
-		objectData.scaling.x = (float)transform["scaling"][1];
-		objectData.scaling.y = (float)transform["scaling"][2];
-		objectData.scaling.z = (float)transform["scaling"][0];
+		if (object.contains("transform")) {
+
+			nlohmann::json& transform = object["transform"];
+			// 平行移動
+			objectData->translation.x = (float)transform["translation"][1];
+			objectData->translation.y = (float)transform["translation"][2];
+			objectData->translation.z = (float)transform["translation"][0];
+			// 回転角
+			objectData->rotation.x = -(float)transform["rotation"][1];
+			objectData->rotation.y = -(float)transform["rotation"][2];
+			objectData->rotation.z = (float)transform["rotation"][0];
+			// スケーリング
+			objectData->scaling.x = (float)transform["scaling"][1];
+			objectData->scaling.y = (float)transform["scaling"][2];
+			objectData->scaling.z = (float)transform["scaling"][0];
+		}
 
 
 		// TODO : コライダーの読み込み
 
-	}
+		
+		/* ---------- ツリー構造の走査 ---------- */
+		if (object.contains("children") && object["children"].is_array()) {
 
+			// 事前にメモリを確保しておく
+			objectData->children.reserve(object["children"].size());
 
-	/* ---------- ツリー構造の走査 ---------- */
-
-	// 子オブジェクトの走査時に、"children"フィールドが存在し、かつ配列であることの確認
-	if (object.contains("children") && object["children"].is_array()) {
-		for (nlohmann::json& child : object["children"]) {
-			ScanningObjects(child, levelData);
+			for (nlohmann::json& child : object["children"]) {
+				ScanningObjects(child, objectData->children);
+			}
 		}
+
+		// オブジェクトを追加
+		objects.emplace_back(std::move(objectData));
 	}
 }
 

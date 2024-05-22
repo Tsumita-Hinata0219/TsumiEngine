@@ -13,10 +13,10 @@ struct LevelData {
 	
 	struct ObjectData {
 		std::string type;
+		std::string file_name;
 		Vector3 translation;
 		Vector3 rotation;
 		Vector3 scaling;
-		std::string file_name;
 		std::vector<std::unique_ptr<ObjectData>> children;
 	};
 	std::vector<std::unique_ptr<ObjectData>> objects;

@@ -107,7 +107,6 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::vector<std::uniqu
 			// タイプ
 			objectData->type = object["type"];
 		}
-
 		if (object.contains("file_name")) {
 
 			// ファイル名

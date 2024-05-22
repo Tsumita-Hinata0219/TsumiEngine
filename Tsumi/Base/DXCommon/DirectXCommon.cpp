@@ -69,7 +69,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier{};
-	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 	
 	// Barrierを設定する
 	// 今回のバリアはTransition
@@ -77,7 +77,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	barrier.Transition.pResource = rtv.Resources[2].Get();
+	barrier.Transition.pResource = rtv.Resources.Get();
 	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	// 遷移後のResourceState
@@ -91,17 +91,18 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 	// 描画先のRTVを設定する
 	commands.List->OMSetRenderTargets(
-		1, &DirectXCommon::GetInstance()->rtv_.Handles[2],
+		1, &rtv.Handles,
 		false,
 		&dsvHandle);
 
 
 	// 指定した色で画面全体をクリアする
-	float clearColor[] = { rtv.color[2].x, rtv.color[2].y, rtv.color[2].z, rtv.color[2].w }; // 青っぽい色。RGBAの順
+	Vector4 color = rtv.color;;
+	float clearColor[] = { color.x, color.y, color.z, color.w }; // 青っぽい色。RGBAの順
 
 
 	commands.List->ClearRenderTargetView(
-		DirectXCommon::GetInstance()->rtv_.Handles[2],
+		rtv.Handles,
 		clearColor,
 		0, nullptr);
 

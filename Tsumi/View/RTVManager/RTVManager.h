@@ -93,6 +93,10 @@ public: // メンバ関数
 
 #pragma region Handle
 
+	/*D3D12_CPU_DESCRIPTOR_HANDLE GetHandle(const string name) {
+		return this->rtvMap_[name]->GetRTVPrope().Handles;
+	}*/
+
 	D3D12_CPU_DESCRIPTOR_HANDLE GetStartHandle() const {
 		return this->startHandle_;
 	}
@@ -100,6 +104,8 @@ public: // メンバ関数
 	void SetStarthandle(D3D12_CPU_DESCRIPTOR_HANDLE handle) {
 		this->startHandle_ = handle;
 	}
+
+
 
 #pragma endregion 
 

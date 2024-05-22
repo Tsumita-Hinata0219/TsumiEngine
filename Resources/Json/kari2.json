@@ -21,7 +21,7 @@
                     1.0
                 ]
             },
-            "file_name": "Cube",
+            "file_name": "CubeParent",
             "collder": {
                 "type": "collider_EMPTY",
                 "center": "collider_EMPTY",
@@ -30,12 +30,12 @@
             "children": [
                 {
                     "type": "MESH",
-                    "name": "立方体",
+                    "name": "Cube.001",
                     "transform": {
                         "translation": [
                             0.0,
                             0.0,
-                            0.0
+                            1.652721643447876
                         ],
                         "rotation": [
                             0.0,
@@ -43,12 +43,12 @@
                             0.0
                         ],
                         "scaling": [
-                            0.5117871165275574,
-                            0.5117871165275574,
-                            0.5117871165275574
+                            0.699999988079071,
+                            0.699999988079071,
+                            0.699999988079071
                         ]
                     },
-                    "file_name": "CubeChildren",
+                    "file_name": "CubeChild",
                     "collder": {
                         "type": "collider_EMPTY",
                         "center": "collider_EMPTY",
@@ -59,12 +59,12 @@
         },
         {
             "type": "MESH",
-            "name": "ICO球",
+            "name": "円錐",
             "transform": {
                 "translation": [
                     0.0,
-                    -4.210178852081299,
-                    0.0
+                    0.0,
+                    2.9430952072143555
                 ],
                 "rotation": [
                     0.0,
@@ -72,66 +72,12 @@
                     0.0
                 ],
                 "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
+                    0.621425449848175,
+                    0.621425449848175,
+                    0.621425449848175
                 ]
             },
-            "file_name": "ICO",
-            "collder": {
-                "type": "collider_EMPTY",
-                "center": "collider_EMPTY",
-                "size": "collider_EMPTY"
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "球",
-            "transform": {
-                "translation": [
-                    0.0,
-                    0.0,
-                    2.8469691276550293
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "ball",
-            "collder": {
-                "type": "collider_EMPTY",
-                "center": "collider_EMPTY",
-                "size": "collider_EMPTY"
-            }
-        },
-        {
-            "type": "MESH",
-            "name": "円柱",
-            "transform": {
-                "translation": [
-                    0.0,
-                    3.314115285873413,
-                    0.0
-                ],
-                "rotation": [
-                    -0.0,
-                    -102.63196563720703,
-                    -0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "cylinder",
+            "file_name": "cone",
             "collder": {
                 "type": "collider_EMPTY",
                 "center": "collider_EMPTY",

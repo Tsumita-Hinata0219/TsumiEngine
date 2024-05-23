@@ -135,7 +135,8 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::vector<std::uniqu
 
 		// TODO : コライダーの読み込み
 
-		
+
+
 		/* ---------- ツリー構造の走査 ---------- */
 		if (object.contains("children") && object["children"].is_array()) {
 

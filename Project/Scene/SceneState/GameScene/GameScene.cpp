@@ -133,8 +133,8 @@ void GameScene::ModelDraw()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());
 
-	/*Model::SetPipeLineType(Model::PipeLineType::kModel);
-	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());*/
+	Model::SetPipeLineType(Model::PipeLineType::kModel);
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

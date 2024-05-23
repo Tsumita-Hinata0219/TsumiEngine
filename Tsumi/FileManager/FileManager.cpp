@@ -9,14 +9,6 @@ void FileManager::Initialize()
 }
 
 
-// 終了処理
-void FileManager::BeginFrame() {}
-
-
-// 終了処理
-void FileManager::EndFrame() {}
-
-
 // 解放処理
 void FileManager::Finalize() {}
 

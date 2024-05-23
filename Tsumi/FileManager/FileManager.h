@@ -9,6 +9,12 @@
 #include "json.hpp"
 #include"MyMath.h"
 
+
+struct ColliderData {
+	std::string type;
+	Vector3 center;
+	Vector3 size;
+};
 struct LevelData {
 	
 	struct ObjectData {
@@ -45,15 +51,34 @@ public:
 	// 初期化処理
 	void Initialize();
 
-	// 更新処理、終了処理
-	void BeginFrame();
-	void EndFrame();
-
 	// 解放処理
 	void Finalize();
 
 	// JSONファイル読み込み
 	void LoadJsonFile(const std::string& routeFilePath, const std::string& fileName);
+
+
+#pragma region Get
+
+	LevelData::ObjectData* GetObjectData(const std::string& key) const  {
+
+		if (!levelData_) {
+			return nullptr;
+		}
+
+		auto it = levelData_->objects.find(key);
+		if (it != levelData_->objects.end()) {
+			return it->second.get();
+		}
+
+		return nullptr;
+	}
+
+#pragma endregion 
+
+#pragma region Set
+
+#pragma endregion 
 
 
 private:

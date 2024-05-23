@@ -24,6 +24,11 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize() 
 {
+	/* ----- FileManager ファイルマネージャー ----- */
+	// とりあえずJSONファイルを読み込んでみる
+	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+
+
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
@@ -54,12 +59,6 @@ void GameScene::Initialize()
 
 	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();*/
-
-
-	/* ----- FileManager ファイルマネージャー ----- */
-	// とりあえずJSONファイルを読み込んでみる
-	FileManager::GetInstance()->LoadJsonFile("Json/", "kari2");
-
 }
 
 

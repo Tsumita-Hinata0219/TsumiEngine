@@ -67,9 +67,6 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 	// "objects"の全オブジェクトを走査
 	if (deserialized.contains("objects") && deserialized["objects"].is_array()) {
 
-		// 事前にメモリを確保しておく
-		levelData->objects.reserve(deserialized["objects"].size());
-
 		// 走査してく
 		for (nlohmann::json& object : deserialized["objects"]) {
 
@@ -84,7 +81,7 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 
 
 // オブジェクトの走査
-void FileManager::ScanningObjects(nlohmann::json& object, std::vector<std::unique_ptr<LevelData::ObjectData>>& objects)
+void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
 {
 	// 各オブジェクトには必ず "type"データを入れているので
 	// "type"が検出できなければ不正として実行を停止する
@@ -140,16 +137,13 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::vector<std::uniqu
 		/* ---------- ツリー構造の走査 ---------- */
 		if (object.contains("children") && object["children"].is_array()) {
 
-			// 事前にメモリを確保しておく
-			objectData->children.reserve(object["children"].size());
-
 			for (nlohmann::json& child : object["children"]) {
 				ScanningObjects(child, objectData->children);
 			}
 		}
 
 		// オブジェクトを追加
-		objects.emplace_back(std::move(objectData));
+		objects[objectData->file_name] = std::move(objectData);
 	}
 }
 

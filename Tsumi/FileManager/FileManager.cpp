@@ -9,6 +9,23 @@ void FileManager::Initialize()
 }
 
 
+// 更新処理　
+void FileManager::Update()
+{
+
+
+
+}
+
+
+// 描画処理
+void FileManager::Draw()
+{
+
+
+
+}
+
 // 解放処理
 void FileManager::Finalize() {}
 
@@ -110,7 +127,7 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 			// 平行移動
 			objectData->translation.x = (float)transform["translation"][1];
 			objectData->translation.y = (float)transform["translation"][2];
-			objectData->translation.z = (float)transform["translation"][0];
+			objectData->translation.z = -(float)transform["translation"][0];
 			// 回転角
 			objectData->rotation.x = -(float)transform["rotation"][1];
 			objectData->rotation.y = -(float)transform["rotation"][2];
@@ -136,6 +153,18 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 
 		// オブジェクトを追加
 		objects[objectData->file_name] = std::move(objectData);
+	}
+}
+
+
+// 読み込んだ情報からモデル作成
+void FileManager::CreateModel()
+{
+	// レベルデータからオブジェクトを生成、配置
+	for (auto& objectData : levelData_->objects) {
+
+		// ファイル名から登録済みモデルを検索
+
 	}
 }
 

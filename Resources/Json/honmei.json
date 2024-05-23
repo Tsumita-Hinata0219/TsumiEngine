@@ -3,33 +3,6 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "Cube",
-            "transform": {
-                "translation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "DesuChair",
-            "collder": {
-                "type": "collider_EMPTY",
-                "center": "collider_EMPTY",
-                "size": "collider_EMPTY"
-            }
-        },
-        {
-            "type": "MESH",
             "name": "wall",
             "transform": {
                 "translation": [
@@ -49,6 +22,60 @@
                 ]
             },
             "file_name": "ShamWall",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "立方体",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.5,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "Gu",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "円柱",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.10000002384185791,
+                    0.10000002384185791,
+                    4.043214797973633
+                ]
+            },
+            "file_name": "Bou",
             "collder": {
                 "type": "collider_EMPTY",
                 "center": "collider_EMPTY",

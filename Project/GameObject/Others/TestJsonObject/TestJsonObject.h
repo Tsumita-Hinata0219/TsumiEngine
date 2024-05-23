@@ -22,7 +22,16 @@ private:
 
 private:
 
+	// テストモデル : 壁
+	unique_ptr<Model> wallModel_;
+	WorldTransform wallWt_{};
 
+	// テストモデル : 棒
+	unique_ptr<Model> bouModel_;
+	WorldTransform bouWt_{};
 
+	// テストモデル : 具
+	unique_ptr<Model> guModel_;
+	WorldTransform guWt_{};
 };
 

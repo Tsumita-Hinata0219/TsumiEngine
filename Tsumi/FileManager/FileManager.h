@@ -8,6 +8,7 @@
 
 #include "json.hpp"
 #include"MyMath.h"
+#include"GameObject.h"
 
 
 struct ColliderData {
@@ -26,6 +27,10 @@ struct LevelData {
 		std::map<std::string, std::unique_ptr<ObjectData>> children;
 	};
 	std::map<std::string, std::unique_ptr<ObjectData>> objects;
+};
+struct LevelObject {
+	std::unique_ptr<Model> model;
+	WorldTransform transform;
 };
 
 
@@ -50,6 +55,12 @@ public:
 
 	// 初期化処理
 	void Initialize();
+
+	// 更新処理　
+	void Update();
+
+	// 描画処理
+	void Draw();
 
 	// 解放処理
 	void Finalize();
@@ -86,10 +97,15 @@ private:
 	// オブジェクトの走査
 	void ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
 
+	// 読み込んだ情報からモデル作成
+	void CreateModel();
 
 private:
 
 	// JSONファイルから読み込んだ情報をまとめおく変数
-	unique_ptr<LevelData> levelData_;
+	std::unique_ptr<LevelData> levelData_;
+
+	// 配置するための変数
+	std::map<const std::string, std::unique_ptr<LevelObject>> levelObjectMap_;
 };
 

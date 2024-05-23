@@ -57,6 +57,11 @@ void GameScene::Initialize()
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
 
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_ = make_unique<TestJsonObject>();
+	testJsonObject_->Initialize();
+
+
 	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();*/
 }
@@ -88,6 +93,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
+	
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Update();
 
 
 	//transform_.UpdateMatrix();
@@ -136,6 +144,9 @@ void GameScene::ModelDraw()
 
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw(camera_.get());
+
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Draw(camera_.get());
 
 	/*Model::SetPipeLineType(Model::PipeLineType::kModel);
 	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());*/

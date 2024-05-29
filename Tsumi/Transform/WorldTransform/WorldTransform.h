@@ -15,6 +15,7 @@ struct SRT {
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;
+	SRT() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
 };
 
 
@@ -48,8 +49,11 @@ struct WorldTransform {
 	/// <summary>
 	/// デフォルトコンストラクタ
 	/// </summary>
-	WorldTransform()
+	/*WorldTransform()
 		: srt{ {1.0f, 1.0f, 1.0f}, {0.0f, 0.0f, 0.0f}, {0.0f, 0.0f, 0.0f} }
+	{}*/
+	WorldTransform()
+		: srt{}
 	{}
 
 	/// <summary>

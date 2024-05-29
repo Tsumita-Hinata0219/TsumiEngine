@@ -24,7 +24,6 @@ void TestJsonObject::Initialize()
 	guModel_->CreateFromObjAssimpVer("Gu", "Gu");
 	guWt_.Initialize();
 	guWt_.srt = FileManager::GetInstance()->GetObjectSrt("Gu");
-
 }
 
 

@@ -160,12 +160,12 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 // 読み込んだ情報からモデル作成
 void FileManager::CreateModel()
 {
-	// レベルデータからオブジェクトを生成、配置
-	for (auto& objectData : levelData_->objects) {
+	//// レベルデータからオブジェクトを生成、配置
+	//for (auto& objectData : levelData_->objects) {
 
-		// ファイル名から登録済みモデルを検索
+	//	// ファイル名から登録済みモデルを検索
 
-	}
+	//}
 }
 
 

@@ -62,8 +62,8 @@ void GameScene::Initialize()
 	testJsonObject_->Initialize();
 
 
-	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();
+	//ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	//transform_.Initialize();
 }
 
 
@@ -148,8 +148,8 @@ void GameScene::ModelDraw()
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_->Draw(camera_.get());
 
-	Model::SetPipeLineType(Model::PipeLineType::kModel);
-	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	//Model::SetPipeLineType(Model::PipeLineType::kModel);
+	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

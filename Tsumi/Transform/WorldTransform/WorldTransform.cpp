@@ -14,7 +14,7 @@ void WorldTransform::Initialize() {
 void WorldTransform::UpdateMatrix() {
 
 	// スケール、回転、並列移動を合成して行列を計算する
-	matWorld = MakeAffineMatrix(scale, rotate, translate);
+	matWorld = MakeAffineMatrix(srt.scale, srt.rotate, srt.translate);
 
 	// 親があれば親のワールド行列を掛ける
 	if (parent) {

@@ -28,9 +28,9 @@ void TestHuman::Update()
 
 	if (ImGui::TreeNode("TestHuman")) {
 
-		ImGui::DragFloat3("Scale", &wt_.scale.x, 0.1f);
-		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.1f);
-		ImGui::DragFloat3("Translate", &wt_.translate.x, 0.1f);
+		ImGui::DragFloat3("Scale", &wt_.srt.scale.x, 0.1f);
+		ImGui::DragFloat3("Rotate", &wt_.srt.rotate.x, 0.1f);
+		ImGui::DragFloat3("Translate", &wt_.srt.translate.x, 0.1f);
 
 		ImGui::Text("");
 		ImGui::DragFloat("Animationtime", &animationtime, 0.01f, 0.0f, 10.f);

@@ -19,8 +19,8 @@ void Ground::Initialize()
 	this->model_->SetModelDrawType(PhongNormalMap);
 	this->model_->SetNormalMapTex(normalMapTexHD_);
 	this->worldTransform_.Initialize();
-	this->worldTransform_.scale = { 500.0f, 1.0f, 500.0f };
-	this->worldTransform_.translate.y = -10.0f;
+	this->worldTransform_.srt.scale = { 500.0f, 1.0f, 500.0f };
+	this->worldTransform_.srt.translate.y = -10.0f;
 	this->color_ = { 0.5f, 0.5f, 0.5f, 1.0f };
 	this->light_.color = { 1.0f, 1.0f, 1.0f, 1.0f };
 	this->light_.direction = { 0.0f, 1.0f, 1.0f };

@@ -8,7 +8,7 @@ void BaseParticle::Initialize()
 	wt_.Initialize();
 	uv_.Initialize();
 
-	wt_.translate = Vector3::zero;
+	wt_.srt.translate = Vector3::zero;
 
 	perSecond_ = 1;
 

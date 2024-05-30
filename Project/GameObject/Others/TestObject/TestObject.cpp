@@ -9,7 +9,7 @@ void TestObject::Init()
 	testModel_->CreateGLTFModel("GLTFPlane", "GLTFPlane", "GLTFPlane.png");
 
 	wt_.Initialize();
-	wt_.translate.z = -5.0f;
+	wt_.srt.translate.z = -5.0f;
 }
 
 
@@ -22,9 +22,9 @@ void TestObject::Update()
 
 	if (ImGui::TreeNode("TestObject")) {
 
-		ImGui::DragFloat3("Scale", &wt_.scale.x, 0.1f);
-		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.1f);
-		ImGui::DragFloat3("Translate", &wt_.translate.x, 0.1f);
+		ImGui::DragFloat3("Scale", &wt_.srt.scale.x, 0.1f);
+		ImGui::DragFloat3("Rotate", &wt_.srt.rotate.x, 0.1f);
+		ImGui::DragFloat3("Translate", &wt_.srt.translate.x, 0.1f);
 
 		ImGui::TreePop();
 	}

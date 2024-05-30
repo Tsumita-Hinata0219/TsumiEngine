@@ -24,6 +24,11 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize() 
 {
+	/* ----- FileManager ファイルマネージャー ----- */
+	// とりあえずJSONファイルを読み込んでみる
+	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+
+
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
@@ -52,9 +57,13 @@ void GameScene::Initialize()
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
 
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_ = make_unique<TestJsonObject>();
+	testJsonObject_->Initialize();
 
-	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();*/
+
+	//ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	//transform_.Initialize();
 }
 
 
@@ -84,6 +93,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
+	
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Update();
 
 
 	//transform_.UpdateMatrix();
@@ -125,16 +137,19 @@ void GameScene::ModelDraw()
 	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
-	testObject_->Draw(camera_.get());
+	//testObject_->Draw(camera_.get());
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_->Draw(camera_.get());
+	//testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw(camera_.get());
+	//testHuman_->Draw(camera_.get());
 
-	/*Model::SetPipeLineType(Model::PipeLineType::kModel);
-	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());*/
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Draw(camera_.get());
+
+	//Model::SetPipeLineType(Model::PipeLineType::kModel);
+	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

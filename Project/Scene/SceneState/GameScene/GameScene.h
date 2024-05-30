@@ -4,6 +4,7 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "ModelManager.h"
+#include "FileManager.h"
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
@@ -11,6 +12,7 @@
 #include "TestObject/TestObject.h"
 #include "TestAnimationCube/TestAnimationCube.h"
 #include "TestHuman/TestHuman.h"
+#include "TestJsonObject/TestJsonObject.h"
 
 
 class GameScene : public IScene {
@@ -69,6 +71,9 @@ private:
 
 	// TestHuman
 	unique_ptr<TestHuman> testHuman_;
+
+	// TestJsonObject
+	unique_ptr<TestJsonObject> testJsonObject_;
 
 	Transform transform_;
 };

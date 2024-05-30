@@ -165,6 +165,8 @@
     <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
+    <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -346,6 +348,8 @@
     <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
+    <ClInclude Include="Tsumi\FileManager\FileManager.h" />
+    <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

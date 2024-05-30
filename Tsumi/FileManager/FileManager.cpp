@@ -125,17 +125,17 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 
 			nlohmann::json& transform = object["transform"];
 			// 平行移動
-			objectData->srt.translate.x = (float)transform["translation"][1];
+			objectData->srt.translate.x = (float)transform["translation"][0];
 			objectData->srt.translate.y = (float)transform["translation"][2];
-			objectData->srt.translate.z = -(float)transform["translation"][0];
+			objectData->srt.translate.z = (float)transform["translation"][1];
 			// 回転角
-			objectData->srt.rotate.x = -(float)transform["rotation"][1];
-			objectData->srt.rotate.y = -(float)transform["rotation"][2];
-			objectData->srt.rotate.z = (float)transform["rotation"][0];
+			objectData->srt.rotate.x = -(float)transform["rotation"][0] * (float(std::numbers::pi) / 180.0f);
+			objectData->srt.rotate.y = -(float)transform["rotation"][2] * (float(std::numbers::pi) / 180.0f);
+			objectData->srt.rotate.z = -(float)transform["rotation"][1] * (float(std::numbers::pi) / 180.0f);
 			// スケーリング
-			objectData->srt.scale.x = (float)transform["scaling"][1];
+			objectData->srt.scale.x = (float)transform["scaling"][0];
 			objectData->srt.scale.y = (float)transform["scaling"][2];
-			objectData->srt.scale.z = (float)transform["scaling"][0];
+			objectData->srt.scale.z = (float)transform["scaling"][1];
 		}
 
 

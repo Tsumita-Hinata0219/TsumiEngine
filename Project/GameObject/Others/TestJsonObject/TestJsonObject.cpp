@@ -45,7 +45,7 @@ void TestJsonObject::Update()
 void TestJsonObject::Draw(Camera* camera)
 {
 	// テストモデル : 壁
-	wallModel_->Draw(wallWt_, camera);
+	//wallModel_->Draw(wallWt_, camera);
 
 	// テストモデル : 棒
 	bouModel_->Draw(bouWt_, camera);

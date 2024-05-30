@@ -42,6 +42,9 @@ void Ground::Update()
 	// ライトの設定
 	this->model_->SetDirectionalLight(this->light_);
 
+
+#ifdef _DEBUG
+
 	if (ImGui::TreeNode("Ground")) {
 
 		ImGui::ColorEdit4("color", &color_.x);
@@ -51,6 +54,8 @@ void Ground::Update()
 		ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
 		ImGui::TreePop();
 	}
+
+#endif // _DEBUG
 }
 
 

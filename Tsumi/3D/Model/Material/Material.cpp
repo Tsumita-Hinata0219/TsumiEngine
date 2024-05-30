@@ -36,7 +36,8 @@ void MaterialModel::Map()
 		return;
 	}
 
-	HRESULT result = constBuffer->Map(0, nullptr, reinterpret_cast<void**>(&constMap));
+	HRESULT result;
+	result = constBuffer->Map(0, nullptr, reinterpret_cast<void**>(&constMap));
 	assert(SUCCEEDED(result));
 }
 

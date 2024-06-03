@@ -53,6 +53,7 @@ void GameScene::Initialize()
 	testHuman_->Init();
 
 
+	/* ----- newModel 新しいモデル描画形式 ----- */
 	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();
 }
@@ -64,8 +65,6 @@ void GameScene::Initialize()
 void GameScene::Update(GameManager* state) 
 {
 	state;
-
-	//camera_->UpdateMatrix();
 
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
@@ -116,10 +115,10 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw() 
 {
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Draw(camera_.get());
+	Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw(camera_.get());
+	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
 	//testObject_->Draw(camera_.get());
@@ -130,6 +129,7 @@ void GameScene::ModelDraw()
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw(camera_.get());
 
+	/* ----- newModel 新しいモデル描画形式 ----- */
 	Model::SetPipeLineType(Model::PipeLineType::kModel);
 	ModelManager::Getinstance()->GetModel("TestCube")->DrawN(transform_, camera_.get());
 }

@@ -400,10 +400,9 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算
+	transform.UpdateMatrix();
 	transform.World = transform.matWorld;
-	//transform.WVP = transform.matWorld * camera->matProjection;
 	transform.WVP = transform.matWorld * (camera->matView * camera->matProjection);
-	//transform.WVP = transform.matWorld * camera->matViewProjectionViewPort;
 	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み

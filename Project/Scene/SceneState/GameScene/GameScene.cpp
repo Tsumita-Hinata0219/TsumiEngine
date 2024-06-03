@@ -85,9 +85,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
 
-
-	transform_.UpdateMatrix();
-
 #ifdef _DEBUG
 
 	ImGui::Begin("GameScene");

@@ -89,3 +89,4 @@ void RTVManager::AllRemoveRTVData()
 
 	instance->rtvMap_.clear();
 }
+

@@ -13,6 +13,7 @@
 #include "MyMath.h"
 #include "Struct.h"
 #include "DescriptorManager.h"
+#include "DirectXCommon.h"
 
 #define RTV_Index_Max 16
 
@@ -105,9 +106,11 @@ public: // メンバ関数
 		this->startHandle_ = handle;
 	}
 
-
-
 #pragma endregion 
+
+
+private: // メンバ関数
+
 
 
 private: // メンバ変数

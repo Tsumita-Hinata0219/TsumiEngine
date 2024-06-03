@@ -53,8 +53,8 @@ void GameScene::Initialize()
 	testHuman_->Init();
 
 
-	/*ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();*/
+	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	transform_.Initialize();
 }
 
 
@@ -65,7 +65,7 @@ void GameScene::Update(GameManager* state)
 {
 	state;
 
-	camera_->UpdateMatrix();
+	//camera_->UpdateMatrix();
 
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
@@ -86,7 +86,7 @@ void GameScene::Update(GameManager* state)
 	testHuman_->Update();
 
 
-	//transform_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 #ifdef _DEBUG
 
@@ -119,22 +119,22 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw() 
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw(camera_.get());
+	//Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
-	testObject_->Draw(camera_.get());
+	//testObject_->Draw(camera_.get());
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
 	testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw(camera_.get());
+	//testHuman_->Draw(camera_.get());
 
-	//Model::SetPipeLineType(Model::PipeLineType::kModel);
-	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	Model::SetPipeLineType(Model::PipeLineType::kModel);
+	ModelManager::Getinstance()->GetModel("TestCube")->DrawN(transform_, camera_.get());
 }
 
 
@@ -143,6 +143,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
+	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
 	postEffect_->Draw();
 }
 

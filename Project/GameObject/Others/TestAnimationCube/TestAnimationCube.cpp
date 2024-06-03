@@ -10,6 +10,7 @@ void TestAnimationCube::Init()
 	testAnimation_ = AnimationManager::LoadAnimationFile("AnimatedCube", "AnimatedCube");
 
 	wt_.Initialize();
+	wt_.translate.y = 2.0f;
 	wt_.translate.z = 10.0f;
 }
 

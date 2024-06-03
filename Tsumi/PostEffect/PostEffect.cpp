@@ -35,14 +35,6 @@ void PostEffect::CommandCall()
 	// コマンドの取得
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
-	// RootSignatureの設定
-	commands.List->SetGraphicsRootSignature(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-
-	// PSOの設定
-	commands.List->SetPipelineState(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-
-	// 形状の設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Materialの設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

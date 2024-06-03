@@ -14,7 +14,7 @@ void Mesh::Create()
 // バッファ作成
 void Mesh::CreateBuffer()
 {
-	CreateResource::CreateBufferResource(sizeof(MeshData), constBuffer);
+	CreateResource::CreateBufferResource(sizeof(MeshData) *meshData.vertices.size(), constBuffer);
 
 	// constBuffer が nullptr の場合はエラーログを出力してアサーションでプログラムを停止させる
 	if (!constBuffer) {

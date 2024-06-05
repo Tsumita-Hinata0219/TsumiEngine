@@ -12,7 +12,6 @@ void TestAnimationCube::Init()
 	wt_.Initialize();
 	wt_.srt.translate.y = 2.0f;
 	wt_.srt.translate.z = 10.0f;
-
 }
 
 

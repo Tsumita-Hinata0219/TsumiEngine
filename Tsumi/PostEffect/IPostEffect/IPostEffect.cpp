@@ -4,8 +4,8 @@
 // リソース作成
 void IPostEffect::Create()
 {
-	// リソースの作成
-	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
+	// マテリアル作成
+	material_.Create();
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
 	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
@@ -19,7 +19,8 @@ void IPostEffect::CommandCall()
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
 
 	// Materialの設定
-	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	material_.TransferMaterial();
+	commands.List->SetGraphicsRootConstantBufferView(0, material_.constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableの設定
 	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);

@@ -168,6 +168,8 @@
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
+    <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -352,6 +354,8 @@
     <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
+    <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

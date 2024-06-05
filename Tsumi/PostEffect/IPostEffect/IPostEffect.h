@@ -4,6 +4,7 @@
 #include "DescriptorManager.h"
 #include "CreateResource.h"
 #include "PostEffectGraphicPipeline.h"
+#include "PostEffect/PostEffectMaterial/PostEffectMaterial.h"
 
 
 /* IPostEffectクラス */
@@ -32,8 +33,8 @@ protected: // メンバ関数
 
 protected: // メンバ変数
 
-	// リソース
-	ResourcePeroperty resource_{};
+	// マテリアル
+	PostEffectMaterial material_;
 
 	// SRV
 	uint32_t srv_ = 0;

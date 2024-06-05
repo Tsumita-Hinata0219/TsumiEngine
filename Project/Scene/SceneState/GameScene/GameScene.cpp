@@ -37,8 +37,9 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
-	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize();
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_ = make_unique<TestPostEffect>();
+	testPostEffect_->Initialize();
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_ = make_unique<TestObject>();
@@ -51,7 +52,6 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
@@ -74,6 +74,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
+	
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_->Update();
@@ -141,6 +144,8 @@ void GameScene::ModelDraw()
 void GameScene::FrontSpriteDraw() 
 {
 	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
-	postEffect_->Draw();
+	
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Draw();
 }
 

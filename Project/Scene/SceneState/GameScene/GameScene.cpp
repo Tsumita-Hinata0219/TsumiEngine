@@ -54,7 +54,7 @@ void GameScene::Initialize()
 
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
-	ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();
 }
 
@@ -131,7 +131,7 @@ void GameScene::ModelDraw()
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	Model::SetPipeLineType(Model::PipeLineType::kModel);
-	ModelManager::Getinstance()->GetModel("TestCube")->DrawN(transform_, camera_.get());
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 
@@ -143,5 +143,4 @@ void GameScene::FrontSpriteDraw()
 	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
 	postEffect_->Draw();
 }
-
 

@@ -80,14 +80,14 @@ void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p, Camera* camera
 		// 最大描画数を超えないようにする
 		if (instanceNum_ <= kMaxInstanceNum_) {
 
-			Matrix4x4 scaleMat = MakeScaleMatrix((*itr)->GetTransform().scale);
-			Matrix4x4 translateMat = MakeTranslateMatrix((*itr)->GetTransform().translate);
+			Matrix4x4 scaleMat = MakeScaleMatrix((*itr)->GetTransform().srt.scale);
+			Matrix4x4 translateMat = MakeTranslateMatrix((*itr)->GetTransform().srt.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
 			Matrix4x4 worldView = camera->matView * camera->matProjection;
 			Matrix4x4 matWorld = worldPos * worldView;
 
 			(*itr)->GetUvTransform().matWorld = MakeAffineMatrix(
-				(*itr)->GetUvTransform().scale, (*itr)->GetUvTransform().rotate, (*itr)->GetUvTransform().translate);
+				(*itr)->GetUvTransform().srt.scale, (*itr)->GetUvTransform().srt.rotate, (*itr)->GetUvTransform().srt.translate);
 
 			instancingData[instanceNum_].World = matWorld;
 			instancingData[instanceNum_].Color = (*itr)->GetColor();

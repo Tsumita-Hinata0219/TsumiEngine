@@ -19,6 +19,11 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize() 
 {
+	/* ----- FileManager ファイルマネージャー ----- */
+	// とりあえずJSONファイルを読み込んでみる
+	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+
+
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
@@ -47,8 +52,12 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-
-	/* ----- newModel 新しいモデル描画形式 ----- */
+  
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_ = make_unique<TestJsonObject>();
+	testJsonObject_->Initialize();
+  
+  /* ----- newModel 新しいモデル描画形式 ----- */
 	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();
 }
@@ -81,6 +90,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
+	
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Update();
 
 #ifdef _DEBUG
 
@@ -122,10 +134,13 @@ void GameScene::ModelDraw()
 	//testObject_->Draw(camera_.get());
 
 	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_->Draw(camera_.get());
+	//testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw(camera_.get());
+
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	Model::SetPipeLineType(Model::PipeLineType::kModel);

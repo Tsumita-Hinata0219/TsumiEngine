@@ -7,8 +7,8 @@ void DebugCamera::Initialize()
 {
 	// ワールドトランスフォームの初期化
 	worldTransform_.Initialize();
-	worldTransform_.rotate = Vector3::zero;
-	worldTransform_.translate = Vector3::zero;
+	worldTransform_.srt.rotate = Vector3::zero;
+	worldTransform_.srt.translate = Vector3::zero;
 
 	// ビュープロジェクションの初期化
 	viewProjection_.Initialize();
@@ -32,8 +32,8 @@ void DebugCamera::Update()
 
 	if (ImGui::TreeNode("RailCamera"))
 	{
-		ImGui::DragFloat3("Rotate", &worldTransform_.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &worldTransform_.translate.x, 0.01f);
+		ImGui::DragFloat3("Rotate", &worldTransform_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &worldTransform_.srt.translate.x, 0.01f);
 		ImGui::TreePop();
 	}
 

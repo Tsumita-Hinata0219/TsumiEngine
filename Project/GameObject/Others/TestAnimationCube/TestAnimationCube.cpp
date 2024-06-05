@@ -12,6 +12,7 @@ void TestAnimationCube::Init()
 	wt_.Initialize();
 	wt_.translate.y = 2.0f;
 	wt_.translate.z = 10.0f;
+
 }
 
 
@@ -28,9 +29,9 @@ void TestAnimationCube::Update()
 
 	if (ImGui::TreeNode("TestAnimationCube")) {
 
-		ImGui::DragFloat3("Scale", &wt_.scale.x, 0.1f);
-		ImGui::DragFloat3("Rotate", &wt_.rotate.x, 0.1f);
-		ImGui::DragFloat3("Translate", &wt_.translate.x, 0.1f);
+		ImGui::DragFloat3("Scale", &wt_.srt.scale.x, 0.1f);
+		ImGui::DragFloat3("Rotate", &wt_.srt.rotate.x, 0.1f);
+		ImGui::DragFloat3("Translate", &wt_.srt.translate.x, 0.1f);
 
 		ImGui::Text("");
 		ImGui::DragFloat("Animationtime", &animationtime, 0.01f, 0.0f, 10.f);

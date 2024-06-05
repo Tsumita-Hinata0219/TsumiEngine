@@ -20,16 +20,13 @@ GameScene::~GameScene() {}
 void GameScene::Initialize() 
 {
 	/* ----- FileManager ファイルマネージャー ----- */
-	// とりあえずJSONファイルを読み込んでみる
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
-
 
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
 	camera_->translate = { 0.0f, 6.0f, -20.0f };
-
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();

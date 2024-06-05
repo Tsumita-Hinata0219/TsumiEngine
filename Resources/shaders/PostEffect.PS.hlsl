@@ -24,7 +24,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     if (gMaterial.type == 0) // None
     {
-        return;
+        return output;
     }
     else if (gMaterial.type == 1) // GrayScale
     {

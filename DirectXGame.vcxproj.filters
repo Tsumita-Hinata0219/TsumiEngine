@@ -165,6 +165,11 @@
     <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
+    <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
+    <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
+    <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
   </ItemGroup>
@@ -348,6 +353,11 @@
     <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
+    <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
+    <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
+    <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
   </ItemGroup>

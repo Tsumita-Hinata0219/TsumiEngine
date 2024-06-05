@@ -5,18 +5,13 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {
-
-}
+GameScene::GameScene() {}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() 
-{
-
-}
+GameScene::~GameScene() {}
 
 
 /// <summary>
@@ -42,8 +37,9 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
-	postEffect_ = make_unique<PostEffect>();
-	postEffect_->Initialize();
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_ = make_unique<TestPostEffect>();
+	testPostEffect_->Initialize();
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_ = make_unique<TestObject>();
@@ -56,14 +52,14 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-
+  
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_ = make_unique<TestJsonObject>();
 	testJsonObject_->Initialize();
-
-
-	//ModelManager::Getinstance()->AddModel("TestCube", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	//transform_.Initialize();
+  
+  /* ----- newModel 新しいモデル描画形式 ----- */
+	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	transform_.Initialize();
 }
 
 
@@ -74,8 +70,6 @@ void GameScene::Update(GameManager* state)
 {
 	state;
 
-	camera_->UpdateMatrix();
-
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
 
@@ -84,6 +78,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
+	
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
 
 	/* ----- TestObject テストオブジェクト ----- */
 	testObject_->Update();
@@ -96,9 +93,6 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_->Update();
-
-
-	//transform_.UpdateMatrix();
 
 #ifdef _DEBUG
 
@@ -148,8 +142,9 @@ void GameScene::ModelDraw()
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_->Draw(camera_.get());
 
-	//Model::SetPipeLineType(Model::PipeLineType::kModel);
-	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	/* ----- newModel 新しいモデル描画形式 ----- */
+	Model::SetPipeLineType(Model::PipeLineType::kModel);
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 
@@ -158,7 +153,9 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
-	postEffect_->Draw();
+	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
+	
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Draw();
 }
-
 

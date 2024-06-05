@@ -90,6 +90,18 @@ struct Skeleton {
 	vector<Joint> joints; // 所属しているジョイント
 };
 
+// VertexWeightData
+struct VertexWeightData {
+	float weight;
+	uint32_t vertexIndex;
+};
+
+// JointWeightData
+struct JointWeightData {
+	Matrix4x4 inverseBindPoseMatrix;
+	std::vector<VertexWeightData> vertexWeights;
+};
+
 // マテリアル
 struct Material {
 	Vector4 color;
@@ -112,6 +124,7 @@ struct MaterialData {
 
 // モデルデータ
 struct ModelData {
+	std::map<string, JointWeightData> skinClusterData;
 	std::vector<VertexData> vertices;
 	std::vector<uint32_t> indices;
 	MaterialData material;

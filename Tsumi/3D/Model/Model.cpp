@@ -4,7 +4,7 @@
 
 
 // PipeLineのタイプ
-Model::PipeLineType Model::pipeLineType_ = Model::PipeLineType::kModel;
+Model::PipeLineType Model::pipeLineType_ = Model::PipeLineType::kNone;
 
 
 /// <summary>
@@ -166,7 +166,6 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 	/* 1. 中で必要となる変数の宣言 */
 
 	auto result = make_unique<Model>(); // return するModel
-	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
 	string name = fileName.substr(0, fileName.size() - 4);
 
 	// 返すModelにファイルの名前を付ける
@@ -190,6 +189,9 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 
 
 	// meshを解析する
+	// 今回作るメッシュ
+	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
+
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
@@ -222,6 +224,7 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 		}
 	}
 	// 解析し終えたmeshを設定する
+	meshItem->Create();
 	result->meshMap_[name] = move(meshItem);
 
 
@@ -230,8 +233,6 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 
 		// 今回作るマテリアル
 		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
-
-		// マテリアルを作る
 		materialItem->Create();
 
 		// シーン内のマテリアル
@@ -247,6 +248,7 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 		}
 
 		// マテリアルの名前の設定
+		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
 		materialItem->name = material->GetName().C_Str();
 		result->materialMap_[name] = move(materialItem);
 	}
@@ -374,6 +376,13 @@ void Model::SetPipeLineType(const PipeLineType type)
 			// 形状を設定。基本PipeLineで設定したものと同じもの
 			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 		}
+		else if (type == PipeLineType::kPostEffect) {
+
+			commands.List->SetGraphicsRootSignature(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+			commands.List->SetPipelineState(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+			// 形状を設定。基本PipeLineで設定したものと同じもの
+			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+		}
 
 		// PipeLineTypeの設定
 		pipeLineType_ = type;
@@ -391,8 +400,9 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算
+	transform.UpdateMatrix();
 	transform.World = transform.matWorld;
-	transform.WVP = transform.matWorld * camera->matProjection;
+	transform.WVP = transform.matWorld * (camera->matView * camera->matProjection);
 	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み

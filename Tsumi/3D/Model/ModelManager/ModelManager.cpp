@@ -276,30 +276,54 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 			aiMesh* mesh = scene->mMeshes[meshIndex];
 			assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
 			assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+			objData.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
 
-			// ここからMeshの中身(Face)の解析を行っていく
+			for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+				aiVector3D& position = mesh->mVertices[vertexIndex];
+				aiVector3D& normal = mesh->mNormals[vertexIndex];
+				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+				// 右手系 -> 左手系への変換
+				objData.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
+				objData.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
+				objData.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
+			}
+
+			// Indexを解析する
 			for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 				aiFace& face = mesh->mFaces[faceIndex];
-				assert(face.mNumIndices == 3); // 三角形のみサポート
+				assert(face.mNumIndices == 3);
 
-				// ここからFaceの中身(Vertex)の解析を行っていく
 				for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 					uint32_t vertexIndex = face.mIndices[element];
-					aiVector3D& position = mesh->mVertices[vertexIndex];
-					aiVector3D& normal = mesh->mNormals[vertexIndex];
-					aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+					objData.indices.push_back(vertexIndex);
+				}
+			}
 
-					VertexData vertex{};
-					vertex.position = { position.x, position.y, position.z, 1.0f };
-					vertex.normal = { normal.x, normal.y, normal.z, };
-					vertex.texCoord = { texcoord.x, texcoord.y };
+			// SkinCluster構築用のデータ種取得を追加
+			for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
 
-					// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
-					vertex.position.x *= -1.0f;
-					vertex.normal.x *= -1.0f;
+				// Jointごとの格納領域を作る
+				aiBone* bone = mesh->mBones[boneIndex];
+				string jointName = bone->mName.C_Str();
+				JointWeightData& jointWeightData = objData.skinClusterData[jointName];
 
-					// OBJDataに解析した値を差し込む
-					objData.vertices.push_back(vertex);
+				// InverseBindPoseMatrixの抽出
+				aiMatrix4x4 bindPoseMatrixAssimp = bone->mOffsetMatrix.Inverse(); // BindPoseMatrixに戻す
+				aiVector3D scale, translate;
+				aiQuaternion rotate;
+				bindPoseMatrixAssimp.Decompose(scale, rotate, translate); // 成分を抽出
+				// 左手系のBindPoseMatrixを作る
+				Matrix4x4 bindPoseMatrix = MakeAffineMatrix(
+					{ scale.x, scale.y, scale.z },
+					{ rotate.x, -rotate.y, -rotate.z, rotate.w },
+					{ -translate.x, translate.y, translate.z });
+				// InverseBindPoseMatrixにする
+				jointWeightData.inverseBindPoseMatrix = Inverse(bindPoseMatrix);
+
+				// Weight情報を取り出す
+				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+					jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });
 				}
 			}
 		}

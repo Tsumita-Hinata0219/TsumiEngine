@@ -1,32 +1,39 @@
-#include "Mesh.h"
+#include "PostEffectMaterial.h"
 
 
 
-// メッシュ作成
-void Mesh::Create()
+// マテリアル作成
+void PostEffectMaterial::Create()
 {
 	CreateBuffer();
-	name = "deafult";
-	TransferMesh();
+	mtlData.color = Vector4::one;
+	TransferMaterial();
+}
+
+
+// マテリアルの転送
+void PostEffectMaterial::TransferMaterial()
+{
+	Map();
+	constMap->color = mtlData.color;
+	UnMap();
 }
 
 
 // バッファ作成
-void Mesh::CreateBuffer()
+void PostEffectMaterial::CreateBuffer()
 {
-	CreateResource::CreateBufferResource(sizeof(MeshData) *meshData.vertices.size(), constBuffer);
+	CreateResource::CreateBufferResource(sizeof(PostEffectMtlData), constBuffer);
 
 	// constBuffer が nullptr の場合はエラーログを出力してアサーションでプログラムを停止させる
 	if (!constBuffer) {
 		assert(false && "Failed to create constBuffer.");
 	}
-
-	vertexBufferView = CreateResource::CreateVertexBufferView(sizeof(MeshData) * meshData.vertices.size(), constBuffer.Get(), int(meshData.vertices.size()));
 }
 
 
 // マッピングする
-void Mesh::Map()
+void PostEffectMaterial::Map()
 {
 	// constBuffer が nullptr の場合はエラーハンドリング
 	if (!constBuffer) {
@@ -35,24 +42,13 @@ void Mesh::Map()
 		return;
 	}
 
-	HRESULT result;
-	result = constBuffer->Map(0, nullptr, reinterpret_cast<void**>(&constMap));
+	HRESULT result = constBuffer->Map(0, nullptr, reinterpret_cast<void**>(&constMap));
 	assert(SUCCEEDED(result));
 }
 
 
 // マッピング終了
-void Mesh::UnMap()
+void PostEffectMaterial::UnMap()
 {
 	constBuffer->Unmap(0, nullptr);
-}
-
-
-// メッシュの転送
-void Mesh::TransferMesh()
-{
-	Map();
-	constMap->vertices = meshData.vertices;
-	constMap->rootNode = meshData.rootNode;
-	UnMap();
 }

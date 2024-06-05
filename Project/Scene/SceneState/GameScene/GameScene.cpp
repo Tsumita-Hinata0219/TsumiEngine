@@ -53,8 +53,8 @@ void GameScene::Initialize()
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_ = make_unique<TestJsonObject>();
 	testJsonObject_->Initialize();
-  
-  /* ----- newModel 新しいモデル描画形式 ----- */
+
+	/* ----- newModel 新しいモデル描画形式 ----- */
 	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();
 }

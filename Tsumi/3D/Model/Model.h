@@ -25,10 +25,8 @@ public:
 
 	// PipeLineのタイプ
 	enum class PipeLineType : uint32_t {
-		kNone,
 		kModel,
 		kParticle,
-		kPostEffect,
 	};
 
 public: // メンバ関数

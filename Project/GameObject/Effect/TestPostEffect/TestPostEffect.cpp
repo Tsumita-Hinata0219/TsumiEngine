@@ -5,9 +5,9 @@
 // 初期化処理
 void TestPostEffect::Initialize()
 {
-
 	// リソースなどを作成
 	Create();
+
 }
 
 
@@ -15,16 +15,17 @@ void TestPostEffect::Initialize()
 void TestPostEffect::Update()
 {
 
+
+
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("TestEffect")) {
+	if (ImGui::TreeNode("TestPostEffect")) {
 
 
 		ImGui::TreePop();
 	}
 
 #endif // _DEBUG
-
 }
 
 

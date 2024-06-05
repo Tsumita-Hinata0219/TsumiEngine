@@ -5,18 +5,13 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {
-
-}
+GameScene::GameScene() {}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() 
-{
-
-}
+GameScene::~GameScene() {}
 
 
 /// <summary>

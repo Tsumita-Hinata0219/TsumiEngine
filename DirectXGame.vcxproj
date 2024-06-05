@@ -185,6 +185,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Particle\ParticleManager\ParticleManager.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Tsumi\Utilities\TextLog\TextLog.cpp" />
@@ -311,6 +312,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Particle\ParticlePlane\ParticlePlane.h" />
     <ClInclude Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.h" />
     <ClInclude Include="Tsumi\Particle\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />

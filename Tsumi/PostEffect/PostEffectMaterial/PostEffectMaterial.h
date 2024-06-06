@@ -9,6 +9,7 @@ using namespace std;
 enum class PostEffectType {
 	None,
 	GrayScale,
+	Sepia,
 	Vignetting,
 	Smoothing,
 	GaussianFilter,

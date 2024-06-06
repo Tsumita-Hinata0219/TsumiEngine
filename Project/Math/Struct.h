@@ -95,7 +95,6 @@ struct VertexWeightData {
 	float weight;
 	uint32_t vertexIndex;
 };
-
 // JointWeightData
 struct JointWeightData {
 	Matrix4x4 inverseBindPoseMatrix;
@@ -154,11 +153,11 @@ struct CompileShaders {
 };
 
 
+	//uint32_t textureHD;
+	//ComPtr<ID3D12Resource> resource;
 // Objデータ
 struct ObjData {
 	uint32_t index;
-	uint32_t textureHD;
-	ComPtr<ID3D12Resource> resource;
 	vector<VertexData> vertices;
 	MaterialData material;
 	Node node;

@@ -25,8 +25,10 @@ public:
 
 	// PipeLineのタイプ
 	enum class PipeLineType : uint32_t {
+		kNone,
 		kModel,
 		kParticle,
+		kPostEffect,
 	};
 
 public: // メンバ関数
@@ -208,6 +210,8 @@ private: // メンバ変数
 
 	ModelLightingType modelDrawType_ = Non;
 
+
+	// ↓↓↓↓↓↓↓↓ こっから新しいモデル描画に必要な値
 
 	// Modelの名前
 	string name_;

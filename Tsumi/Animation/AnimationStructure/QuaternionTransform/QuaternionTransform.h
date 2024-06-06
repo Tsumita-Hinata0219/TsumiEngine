@@ -1,5 +1,11 @@
 #pragma once
-class QuaternionTransform
-{
-};
 
+#include "MyMath.h"
+
+
+// QuaternionTransform
+struct QuaternionTransform {
+	Vector3 scale;
+	Quaternion rotate;
+	Vector3 translate;
+};

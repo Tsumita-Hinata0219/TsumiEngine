@@ -172,7 +172,6 @@
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.cpp" />
-    <ClCompile Include="Tsumi\Animation\AnimationStructure\AnimationStructure.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\Joint\Joint.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\Node\Node.cpp" />
@@ -181,6 +180,7 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -369,7 +369,6 @@
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
-    <ClInclude Include="Tsumi\Animation\AnimationStructure\AnimationStructure.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\Joint\Joint.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\Node\Node.h" />
@@ -378,6 +377,7 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

@@ -14,7 +14,8 @@
 #include "Mesh.h"
 #include "Material.h"
 
-#include "AnimationStructure.h"
+#include "Node.h"
+#include "Skeleton.h"
 
 
 class ModelManager;

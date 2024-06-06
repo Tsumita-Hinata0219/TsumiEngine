@@ -2,7 +2,8 @@
 
 #include "GameObject.h"
 #include "AnimationDataArray.h"
-#include "AnimationStructure.h"
+
+#include "Skeleton.h"
 
 
 /* KeyFrameAnimation */

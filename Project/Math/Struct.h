@@ -18,10 +18,10 @@ using namespace std;
 
 #include "MyMath.h"
 
-#include "AnimationStructure.h"
-struct Node;
-struct JointWeightData;
-
+//#include "Node.h"
+//#include "JointWeightData.h"
+#include "Node/Node.h"
+#include "JointWeightData/JointWeightData.h"
 
 
 // 頂点データ

@@ -73,33 +73,33 @@ struct EulerTransform {
 //};
 
 // Joint
-struct Joint {
-	QuaternionTransform transform; // Transform構造体
-	Matrix4x4 localMatrix; // localMatrix
-	Matrix4x4 skeletonSpaceMatrix; // skeltonSpaceでの変換行列
-	string name; // 名前
-	vector<int32_t> children; // 子NodeのIndexのリスト。いなければ空
-	int32_t index; // 自身のIndex
-	optional<int32_t> parent; // 親JointのInsex。いなければnull
-};
+//struct Joint {
+//	QuaternionTransform transform; // Transform構造体
+//	Matrix4x4 localMatrix; // localMatrix
+//	Matrix4x4 skeletonSpaceMatrix; // skeltonSpaceでの変換行列
+//	string name; // 名前
+//	vector<int32_t> children; // 子NodeのIndexのリスト。いなければ空
+//	int32_t index; // 自身のIndex
+//	optional<int32_t> parent; // 親JointのInsex。いなければnull
+//};
 
 // Skeleton
-struct Skeleton {
-	int32_t root; // RootJointのIndex
-	std::map<std::string, int32_t> jointMap; // Joint名とIndexとの辞書
-	vector<Joint> joints; // 所属しているジョイント
-};
+//struct Skeleton {
+//	int32_t root; // RootJointのIndex
+//	std::map<std::string, int32_t> jointMap; // Joint名とIndexとの辞書
+//	vector<Joint> joints; // 所属しているジョイント
+//};
 
-// VertexWeightData
-struct VertexWeightData {
-	float weight;
-	uint32_t vertexIndex;
-};
-// JointWeightData
-struct JointWeightData {
-	Matrix4x4 inverseBindPoseMatrix;
-	std::vector<VertexWeightData> vertexWeights;
-};
+//// VertexWeightData
+//struct VertexWeightData {
+//	float weight;
+//	uint32_t vertexIndex;
+//};
+//// JointWeightData
+//struct JointWeightData {
+//	Matrix4x4 inverseBindPoseMatrix;
+//	std::vector<VertexWeightData> vertexWeights;
+//};
 
 // マテリアル
 struct Material {

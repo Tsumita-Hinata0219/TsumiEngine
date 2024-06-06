@@ -362,6 +362,10 @@
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\QuaternionTransform\QuaternionTransform.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Node\Node.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Joint\Joint.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Skeleton\Skeleton.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\JointWeightData\JointWeightData.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\VertexWeightData\VertexWeightData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

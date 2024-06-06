@@ -7,7 +7,6 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-
 }
 
 

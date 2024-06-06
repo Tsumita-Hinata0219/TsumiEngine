@@ -172,6 +172,7 @@
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\AnimationStructure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -360,12 +361,7 @@
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\QuaternionTransform\QuaternionTransform.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Node\Node.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Joint\Joint.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Skeleton\Skeleton.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\JointWeightData\JointWeightData.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\AnimationStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

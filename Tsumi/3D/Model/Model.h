@@ -14,9 +14,30 @@
 #include "Mesh.h"
 #include "Material.h"
 
+#include "AnimationStructure.h"
+
 
 class ModelManager;
 class KeyFrameAnimation;
+
+
+//// モデルデータ
+//struct ModelData {
+//	std::map<string, JointWeightData> skinClusterData;
+//	std::vector<VertexData> vertices;
+//	std::vector<uint32_t> indices;
+//	MaterialData material;
+//	uint32_t textureHD;
+//	Node rootNode;
+//};
+//// Objデータ
+//struct ObjData {
+//	uint32_t index;
+//	vector<VertexData> vertices;
+//	MaterialData material;
+//	Node node;
+//};
+
 
 /* Modelクラス */
 class Model {

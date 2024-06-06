@@ -18,6 +18,10 @@ using namespace std;
 
 #include "MyMath.h"
 
+#include "AnimationStructure.h"
+struct Node;
+struct JointWeightData;
+
 
 
 // 頂点データ
@@ -57,49 +61,6 @@ struct EulerTransform {
 	Vector3 translate;
 };
 
-// QuaternionTransform
-//struct QuaternionTransform {
-//	Vector3 scale;
-//	Quaternion rotate;
-//	Vector3 translate;
-//};
-
-// Node
-//struct Node {
-//	QuaternionTransform transform;
-//	Matrix4x4 localMatrix;
-//	std::string name;
-//	std::vector<Node> Children;
-//};
-
-// Joint
-//struct Joint {
-//	QuaternionTransform transform; // Transform構造体
-//	Matrix4x4 localMatrix; // localMatrix
-//	Matrix4x4 skeletonSpaceMatrix; // skeltonSpaceでの変換行列
-//	string name; // 名前
-//	vector<int32_t> children; // 子NodeのIndexのリスト。いなければ空
-//	int32_t index; // 自身のIndex
-//	optional<int32_t> parent; // 親JointのInsex。いなければnull
-//};
-
-// Skeleton
-//struct Skeleton {
-//	int32_t root; // RootJointのIndex
-//	std::map<std::string, int32_t> jointMap; // Joint名とIndexとの辞書
-//	vector<Joint> joints; // 所属しているジョイント
-//};
-
-//// VertexWeightData
-//struct VertexWeightData {
-//	float weight;
-//	uint32_t vertexIndex;
-//};
-//// JointWeightData
-//struct JointWeightData {
-//	Matrix4x4 inverseBindPoseMatrix;
-//	std::vector<VertexWeightData> vertexWeights;
-//};
 
 // マテリアル
 struct Material {
@@ -153,8 +114,6 @@ struct CompileShaders {
 };
 
 
-	//uint32_t textureHD;
-	//ComPtr<ID3D12Resource> resource;
 // Objデータ
 struct ObjData {
 	uint32_t index;
@@ -162,21 +121,6 @@ struct ObjData {
 	MaterialData material;
 	Node node;
 };
-
-
-//
-//struct TransformationMatrix {
-//	Matrix4x4 WVP;
-//	Matrix4x4 World;
-//};
-
-//
-//struct TransformationViewMatrix {
-//	Matrix4x4 view;
-//	Matrix4x4 viewProjection;
-//	Matrix4x4 orthoGraphic;
-//	Vector3 cameraPosition;
-//};
 
 
 struct ParticleTransformationMatrix {

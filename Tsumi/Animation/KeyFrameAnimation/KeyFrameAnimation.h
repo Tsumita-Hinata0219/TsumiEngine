@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "AnimationDataArray.h"
+#include "AnimationStructure.h"
 
 
 /* KeyFrameAnimation */

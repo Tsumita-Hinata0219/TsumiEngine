@@ -125,10 +125,10 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw() 
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw(camera_.get());
+	//Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
 	//testObject_->Draw(camera_.get());
@@ -140,7 +140,7 @@ void GameScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	testJsonObject_->Draw(camera_.get());
+	//testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	Model::SetPipeLineType(Model::PipeLineType::kModel);

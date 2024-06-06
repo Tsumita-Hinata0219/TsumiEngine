@@ -286,6 +286,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\QuaternionTransform\QuaternionTransform.h" />
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />

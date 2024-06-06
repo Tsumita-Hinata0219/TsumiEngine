@@ -58,19 +58,19 @@ struct EulerTransform {
 };
 
 // QuaternionTransform
-struct QuaternionTransform {
-	Vector3 scale;
-	Quaternion rotate;
-	Vector3 translate;
-};
+//struct QuaternionTransform {
+//	Vector3 scale;
+//	Quaternion rotate;
+//	Vector3 translate;
+//};
 
 // Node
-struct Node {
-	QuaternionTransform transform;
-	Matrix4x4 localMatrix;
-	std::string name;
-	std::vector<Node> Children;
-};
+//struct Node {
+//	QuaternionTransform transform;
+//	Matrix4x4 localMatrix;
+//	std::string name;
+//	std::vector<Node> Children;
+//};
 
 // Joint
 struct Joint {

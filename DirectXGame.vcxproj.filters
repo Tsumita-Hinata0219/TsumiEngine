@@ -361,6 +361,7 @@
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\QuaternionTransform\QuaternionTransform.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Node\Node.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

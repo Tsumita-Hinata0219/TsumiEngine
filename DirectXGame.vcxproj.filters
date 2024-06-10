@@ -21,6 +21,15 @@
     <FxCompile Include="Resources\shaders\Object3d.PS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\BoxFilter\BoxFilter.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\Dissolve\Dissolve.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\GaussianFilter\GaussianFilter.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\GrayScale\GrayScale.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\OutLine\OutLine.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\RadialBlur\RadialBlur.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\Random\Random.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\SepiaTone\SepiaTone.PS.hlsl" />
+    <FxCompile Include="Resources\shaders\PostEffect\Vignetting\Vignetting.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />

@@ -181,6 +181,7 @@
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
+    <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -369,6 +370,7 @@
     <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
+    <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

@@ -7,7 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	material_.mtlData.type = int(PostEffectType::GaussianFilter);
+	material_.mtlData.type = int(PostEffectType::Smoothing);
 }
 
 

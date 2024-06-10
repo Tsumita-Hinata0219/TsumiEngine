@@ -60,14 +60,14 @@ ParticleProperties Particle::ParticleGenerators(Scope lifeTimeScope, ScopeVec3 p
 {
 	ParticleProperties particlePrope{};
 	particlePrope.worldTransform.Initialize();
-	particlePrope.worldTransform.scale = Vector3::one;
-	particlePrope.worldTransform.rotate = Vector3::zero;
-	particlePrope.worldTransform.translate = RandomGenerator::getRandom(posScope);
+	particlePrope.worldTransform.srt.scale = Vector3::one;
+	particlePrope.worldTransform.srt.rotate = Vector3::zero;
+	particlePrope.worldTransform.srt.translate = RandomGenerator::getRandom(posScope);
 	particlePrope.color = RandomGenerator::getColorRandom(colorScope);
 	particlePrope.velocity = RandomGenerator::getRandom(velScope) / 100.0f;
-	particlePrope.uvTransform.scale = Vector3::one;
-	particlePrope.uvTransform.rotate = Vector3::zero;
-	particlePrope.uvTransform.translate = Vector3::zero;
+	particlePrope.uvTransform.srt.scale = Vector3::one;
+	particlePrope.uvTransform.srt.rotate = Vector3::zero;
+	particlePrope.uvTransform.srt.translate = Vector3::zero;
 	particlePrope.lifeTime = uint32_t(RandomGenerator::getRandom(lifeTimeScope) * 60.0f);
 	particlePrope.currentTime = 0;
 	particlePrope.isActive = true;
@@ -83,7 +83,7 @@ void Particle::Emit(const Emitter& emitter, Scope lifeTimeScope, ScopeVec3 posSc
 	for (int count = 0; count < int(emitter.count); ++count) {
 		ParticleProperties prope{};
 		prope = ParticleGenerators(lifeTimeScope, posScope, velScope, colorScope);
-		prope.worldTransform.translate += emitter.worldTransform.translate;
+		prope.worldTransform.srt.translate += emitter.worldTransform.srt.translate;
 		PushBackList(prope);
 	}
 }

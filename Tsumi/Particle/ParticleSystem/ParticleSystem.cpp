@@ -75,14 +75,14 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 		// 最大描画数を超えないようにする
 		if (instanceNum_ <= kMaxInstanceNum_) {
 
-			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.scale);
-			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.translate);
+			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.srt.scale);
+			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.srt.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
 			Matrix4x4 worldView = camera->matView * camera->matProjection;
 			Matrix4x4 matWorld = worldPos * worldView;
 
 			(*itr).uvTransform.matWorld = MakeAffineMatrix(
-				(*itr).uvTransform.scale, (*itr).uvTransform.rotate, (*itr).uvTransform.translate);
+				(*itr).uvTransform.srt.scale, (*itr).uvTransform.srt.rotate, (*itr).uvTransform.srt.translate);
 
 			instancingData[instanceNum_].World = matWorld;
 			instancingData[instanceNum_].Color = (*itr).color;

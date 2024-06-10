@@ -248,14 +248,15 @@ D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties) {
 
 	ComPtr<ID3D12Resource> resource;
-	HRESULT hr = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
 		D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState。Textureは基本読むだけ
 		nullptr,						   // Clear最適地。使わないのでnullptr
 		IID_PPV_ARGS(&resource));		   // 作成するResourceポインタへのポインタ
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 
 	return resource;
 }
@@ -277,14 +278,15 @@ void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, Dir
 		const DirectX::Image* img = mipImages.GetImage(mipLevel, 0, 0);
 
 		// Textureに転送
-		HRESULT hr_ = textureData.resource->WriteToSubresource(
+		HRESULT result;
+		result = textureData.resource->WriteToSubresource(
 			UINT(mipLevel),
 			nullptr,			  // 全領域へコピー
 			img->pixels,		  // 元データアドレス
 			UINT(img->rowPitch),  // 1ラインサイズ
 			UINT(img->slicePitch) // 1枚サイズ
 		);
-		assert(SUCCEEDED(hr_));
+		assert(SUCCEEDED(result));
 	}
 }
 

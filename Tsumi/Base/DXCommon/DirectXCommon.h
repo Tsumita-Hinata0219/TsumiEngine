@@ -15,6 +15,7 @@
 #include "MyMath.h"
 #include "Struct.h"
 #include "CreateResource.h"
+#include "RTVManager.h"
 
 
 
@@ -113,11 +114,6 @@ public: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	RTV GetRTV() { return DirectXCommon::GetInstance()->rtv_; }
-
-	/// <summary>
-	/// 
-	/// </summary>
 	ID3D12DescriptorHeap* const GetSrvDescriptorHeap() { return DirectXCommon::GetInstance()->srvDescriptorHeap_.Get(); }
 
 	/// <summary>
@@ -190,7 +186,7 @@ private: // メンバ関数
 	static void CreateSwapChainResources();
 
 	// RTVを作る
-	static void SettingRTV();
+	static void CreateRTV();
 
 	// 状態を遷移する
 	static void ChanegResourceState();
@@ -261,10 +257,6 @@ private: // メンバ変数
 
 	// ディスクリプタヒープ
 	ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap_ = nullptr;
-
-
-	// RTV
-	RTV rtv_{};
 
 
 	// Fence

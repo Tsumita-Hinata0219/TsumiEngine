@@ -1,0 +1,59 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "file_name_EMPTY",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            }
+        },
+        {
+            "type": "MESH",
+            "name": "球",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    2.652420997619629
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "file_name_EMPTY",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            }
+        }
+    ]
+}

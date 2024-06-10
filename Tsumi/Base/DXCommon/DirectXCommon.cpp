@@ -69,7 +69,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier{};
-	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 	
 	// Barrierを設定する
 	// 今回のバリアはTransition
@@ -77,7 +77,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	barrier.Transition.pResource = rtv.Resources[2].Get();
+	barrier.Transition.pResource = rtv.Resources.Get();
 	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
 	// 遷移後のResourceState
@@ -91,17 +91,18 @@ void DirectXCommon::PreDrawForPostEffect() {
 
 	// 描画先のRTVを設定する
 	commands.List->OMSetRenderTargets(
-		1, &DirectXCommon::GetInstance()->rtv_.Handles[2],
+		1, &rtv.Handles,
 		false,
 		&dsvHandle);
 
 
 	// 指定した色で画面全体をクリアする
-	float clearColor[] = { rtv.color[2].x, rtv.color[2].y, rtv.color[2].z, rtv.color[2].w }; // 青っぽい色。RGBAの順
+	Vector4 color = rtv.color;
+	float clearColor[] = { color.x, color.y, color.z, color.w }; // 青っぽい色。RGBAの順
 
 
 	commands.List->ClearRenderTargetView(
-		DirectXCommon::GetInstance()->rtv_.Handles[2],
+		rtv.Handles,
 		clearColor,
 		0, nullptr);
 
@@ -124,7 +125,7 @@ void DirectXCommon::PostDrawForPostEffect() {
 
 	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier{};
-	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 
 	// Barrierを設定する
 	// 今回のバリアはTransition
@@ -132,7 +133,7 @@ void DirectXCommon::PostDrawForPostEffect() {
 	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
 	// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	barrier.Transition.pResource = rtv.Resources[2].Get();
+	barrier.Transition.pResource = rtv.Resources.Get();
 	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	// 遷移後のResourceState
@@ -153,7 +154,10 @@ void DirectXCommon::PreDrawForSwapChain() {
 	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
 	Commands commands = DirectXCommon::GetInstance()->commands_;
 	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
-	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	RTVProperty rtv[2] = {
+		RTVManager::GetRTV("SwapChain0")->GetRTVPrope(),
+		RTVManager::GetRTV("SwapChain1")->GetRTVPrope(),
+	};
 
 	// コマンドを積み込んで確定させる
 	// これから書き込むバックバッファのインデックスを取得
@@ -179,15 +183,19 @@ void DirectXCommon::PreDrawForSwapChain() {
 
 	// 描画先のRTVを設定する
 	commands.List->OMSetRenderTargets(
-		1, &DirectXCommon::GetInstance()->rtv_.Handles[backBufferIndex_],
+		1, &rtv[backBufferIndex_].Handles,
 		false,
 		nullptr);
 
 	// 指定した色で画面全体をクリアする
-	float clearColor[] = { rtv.color[backBufferIndex_].x, rtv.color[backBufferIndex_].y, rtv.color[backBufferIndex_].z, rtv.color[backBufferIndex_].w }; // 青っぽい色。RGBAの順
+	float clearColor[] = { 
+		rtv[backBufferIndex_].color.x, 
+		rtv[backBufferIndex_].color.y, 
+		rtv[backBufferIndex_].color.z, 
+		rtv[backBufferIndex_].color.w }; // 青っぽい色。RGBAの順
 
 	commands.List->ClearRenderTargetView(
-		rtv.Handles[backBufferIndex_],
+		rtv[backBufferIndex_].Handles,
 		clearColor,
 		0, nullptr);
 
@@ -222,8 +230,9 @@ void DirectXCommon::PostDrawForSwapChain() {
 
 	// コマンドをキックする
 	// コマンドリストの内容を確定させる・全てのコマンドを積んでからCloseすること
-	HRESULT hr = commands.List->Close();
-	assert(SUCCEEDED(hr));
+	HRESULT result;
+	result = commands.List->Close();
+	assert(SUCCEEDED(result));
 
 	// GPUにコマンドリストの実行を行わせる
 	ID3D12CommandList* commandLists[] = { commands.List.Get()};
@@ -248,10 +257,10 @@ void DirectXCommon::PostDrawForSwapChain() {
 	swapChains.swapChain->Present(1, 0);
 
 	// 次のフレーム用のコマンドリストを準備
-	hr = commands.Allocator->Reset();
-	assert(SUCCEEDED(hr));
-	hr = commands.List->Reset(commands.Allocator.Get(), nullptr);
-	assert(SUCCEEDED(hr));
+	result = commands.Allocator->Reset();
+	assert(SUCCEEDED(result));
+	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
+	assert(SUCCEEDED(result));
 
 	DirectXCommon::GetInstance()->commands_ = commands;
 	DirectXCommon::GetInstance()->swapChains_ = swapChains;
@@ -279,11 +288,12 @@ void DirectXCommon::CreateDxgiFactory() {
 	// HRESULTはWindows系のエラーコードであり、
 	// 関数が成功したかどうかをSUCCEEDEDマクロで判定できる
 	dxgiFactory = nullptr;
-	HRESULT hr = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
+	HRESULT result;
+	result = CreateDXGIFactory(IID_PPV_ARGS(&dxgiFactory));
 
 	// 初期化の根本的な部分でエラーが出た場合はプログラムが間違ってるかどうか、
 	// どうにもできない場合が多いのでassertにしておく
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 
 
 
@@ -294,8 +304,8 @@ void DirectXCommon::CreateDxgiFactory() {
 	{
 		// アダプターの情報を取得する
 		DXGI_ADAPTER_DESC3 adapterDesc{};
-		hr = useAdapter->GetDesc3(&adapterDesc);
-		assert(SUCCEEDED(hr)); // 取得できないのは一大事
+		result = useAdapter->GetDesc3(&adapterDesc);
+		assert(SUCCEEDED(result)); // 取得できないのは一大事
 
 		// ソフトウェアアダプタ出なければ採用！
 		if (!(adapterDesc.Flags & DXGI_ADAPTER_FLAG3_SOFTWARE))
@@ -332,10 +342,11 @@ void DirectXCommon::CreateDevice() {
 	// 高い順に生成できるか試していく
 	for (size_t i = 0; i < _countof(featureLevels); ++i) {
 		// 採用したアダプターでデバイスを生成
-		HRESULT hr = D3D12CreateDevice(DirectXCommon::GetInstance()->useAdapter_.Get(), featureLevels[i], IID_PPV_ARGS(&DirectXCommon::GetInstance()->device_));
+		HRESULT result;
+		result = D3D12CreateDevice(DirectXCommon::GetInstance()->useAdapter_.Get(), featureLevels[i], IID_PPV_ARGS(&DirectXCommon::GetInstance()->device_));
 
 		// 指定した昨日レベルでデバイスが生成できたかを確認
-		if (SUCCEEDED(hr)) {
+		if (SUCCEEDED(result)) {
 			// 生成できたのでログ出力を行ってループを抜ける
 			Log(std::format("FeatureLevel : {}\n", featureLevelStrings[i]));
 			break;
@@ -410,13 +421,14 @@ void DirectXCommon::CreateCommandQueue() {
 
 	// コマンドキューを生成する
 	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
 		&commandQueueDesc,
 		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Queue));
 
 
 	// コマンドキューの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 }
 
 
@@ -425,13 +437,14 @@ void DirectXCommon::CreateCommandQueue() {
 void DirectXCommon::CreateCommandAllocator() {
 
 	// コマンドアロケータを生成する
-	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
 		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Allocator));
 
 
 	// コマンドアロケータの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 }
 
 
@@ -441,7 +454,8 @@ void DirectXCommon::CreateCommandAllocator() {
 void DirectXCommon::CreateCommandList() {
 
 	// コマンドリストを生成する
-	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateCommandList(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->device_->CreateCommandList(
 		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
 		DirectXCommon::GetInstance()->commands_.Allocator.Get(),
 		nullptr,
@@ -449,7 +463,7 @@ void DirectXCommon::CreateCommandList() {
 
 
 	// コマンドリストの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 }
 
 
@@ -470,7 +484,8 @@ void DirectXCommon::CreateSwapChain() {
 	swapChains.Desc.SwapEffect = DXGI_SWAP_EFFECT_FLIP_DISCARD; // モニタにうつしたら、中身を破棄
 
 	// コマンドキュー、ウィンドウハンドル、設定を渡して生成する
-	HRESULT hr = DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(
 		DirectXCommon::GetInstance()->commands_.Queue.Get(),
 		hwnd_,
 		&swapChains.Desc,
@@ -478,7 +493,7 @@ void DirectXCommon::CreateSwapChain() {
 		nullptr,
 		reinterpret_cast<IDXGISwapChain1**>(swapChains.swapChain.GetAddressOf()));
 
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 
 	DirectXCommon::GetInstance()->swapChains_ = swapChains;
 }
@@ -489,8 +504,11 @@ void DirectXCommon::CreateSwapChain() {
 
 void DirectXCommon::SetDescriptorHeap() {
 
-	DirectXCommon::GetInstance()->rtv_.DescriptorHeap = CreateDescriptorHeap(
-		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false);
+	/*DirectXCommon::GetInstance()->rtv_.DescriptorHeap = CreateDescriptorHeap(
+		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false);*/
+	RTVManager::GetInstance()->SetDescriptorHeap(
+		CreateDescriptorHeap(DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false)
+	);
 
 	DirectXCommon::GetInstance()->srvDescriptorHeap_ = CreateDescriptorHeap(
 		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV, 128, true);
@@ -501,7 +519,7 @@ void DirectXCommon::SetDescriptorHeap() {
 
 
 	// RTVを作る
-	SettingRTV();
+	CreateRTV();
 
 
 	// depthStencilResourceを作る
@@ -514,81 +532,68 @@ void DirectXCommon::SetDescriptorHeap() {
 
 void DirectXCommon::CreateSwapChainResources() {
 
-	HRESULT hr = DirectXCommon::GetInstance()->swapChains_.swapChain->GetBuffer(0, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChains_.Resources[0]));
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->swapChains_.swapChain->GetBuffer(0, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChains_.Resources[0]));
 
 	// うまく取得できなければ起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 
 
-	hr = DirectXCommon::GetInstance()->swapChains_.swapChain->GetBuffer(1, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChains_.Resources[1]));
+	result = DirectXCommon::GetInstance()->swapChains_.swapChain->GetBuffer(1, IID_PPV_ARGS(&DirectXCommon::GetInstance()->swapChains_.Resources[1]));
 
 	// うまく取得できなければ起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 }
 
 
 
 /* ----- RTVを作る ----- */
 
-void DirectXCommon::SettingRTV() {
+void DirectXCommon::CreateRTV()
+{
+	ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->device_;
+	SwapChains swapChains = DirectXCommon::GetInstance()->GetSwapChains();
 
-	RTV rtv = DirectXCommon::GetInstance()->rtv_;
+	// Heapの設定
+	RTVManager::GetInstance()->SetDescriptorHeap(CreateDescriptorHeap(device.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, RTV_Index_Max, false));
 
 	// RTVの設定
-	rtv.Desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 出力結果をSRGBに変換して書き込む
-	rtv.Desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
+	D3D12_RENDER_TARGET_VIEW_DESC desc{};
+	desc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB; // 出力結果をSRGBに変換して書き込む
+	desc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE2D; // 2sテクスチャとして書き込む
+	RTVManager::GetInstance()->SetDesc(desc); // デスクの設定
 
-
-	// 指定した色で画面全体をクリアする
+	// クリアカラー
 	Vector4 clearColor = { 0.1f, 0.25f, 0.5f, 1.0f }; // 青っぽい色。RGBAの順
 
-
 	// ディスクリプタの先頭を取得する
-	rtv.StartHandle = rtv.DescriptorHeap->GetCPUDescriptorHandleForHeapStart();
-
-	// まず1つ目を作る。1つ目は最初のところに作る。作る場所をこちらで指定してあげる必要がある
-	rtv.Handles[0] = rtv.StartHandle;
-	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
-		DirectXCommon::GetInstance()->swapChains_.Resources[0].Get(),
-		&rtv.Desc,
-		rtv.Handles[0]);
-	rtv.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
-	rtv.color[0] = clearColor;
+	D3D12_CPU_DESCRIPTOR_HANDLE startHandle;
+	startHandle = RTVManager::GetInstance()->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart();
 
 
-	// 2つ目のディスクリプタハンドルを得る
-	rtv.Handles[1].ptr =
-		rtv.Handles[0].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
-	// 2つ目を作る
-	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
-		DirectXCommon::GetInstance()->swapChains_.Resources[1].Get(),
-		&rtv.Desc,
-		rtv.Handles[1]);
-	rtv.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
-	rtv.color[1] = clearColor;
-
-
-	// 3つ目のディスクリプタハンドルを得る
-	rtv.Handles[2].ptr =
-		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
-	// 3つ目のリソースを作る
-	const Vector4 kRenderTargetClearValue{ 1.0f, 0.0f, 0.0f, 1.0f }; // いったんわかりやすいように赤色
+	RTVProperty rtvPrope[3]{};
+	// 1つ目
+	rtvPrope[0].Handles = startHandle;
+	device->CreateRenderTargetView(swapChains.Resources[0].Get(), &desc, rtvPrope[0].Handles);
+	rtvPrope[0].Resources = swapChains.Resources[0].Get();
+	rtvPrope[0].color = clearColor;
+	
+	// 2つ目
+	rtvPrope[1].Handles.ptr = rtvPrope[0].Handles.ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
+	device->CreateRenderTargetView(swapChains.Resources[1].Get(), &desc, rtvPrope[1].Handles);
+	rtvPrope[1].Resources = swapChains.Resources[1].Get();
+	rtvPrope[1].color = clearColor;
+	
+	// 3つ目
+	rtvPrope[2].Handles.ptr = rtvPrope[1].Handles.ptr + device->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
 	auto renderTextureResource = CreateResource::CreateRenderTextureResource(
-		WinApp::kWindowWidth, 
-		WinApp::kWindowHeight, 
+		WinApp::kWindowWidth,
+		WinApp::kWindowHeight,
 		DXGI_FORMAT_R8G8B8A8_UNORM_SRGB,
-		kRenderTargetClearValue);
-
-	// 3つ目を作る
-	DirectXCommon::GetInstance()->device_->CreateRenderTargetView(
-		renderTextureResource.Get(), 
-		&rtv.Desc, 
-		rtv.Handles[2]);
-	rtv.Resources[2] = renderTextureResource;
-	rtv.color[2] = kRenderTargetClearValue;
-
+		clearColor);
+	device->CreateRenderTargetView(renderTextureResource.Get(), &desc, rtvPrope[2].Handles);
+	rtvPrope[2].Resources = renderTextureResource.Get();
+	rtvPrope[2].color = clearColor;
 
 
 	// DescriptorHandleとDescriptorHeap
@@ -596,16 +601,11 @@ void DirectXCommon::SettingRTV() {
 		SIZE_T ptr;
 	}D3D12_CPU_DESCRIPTOR_HANDLE;
 
-	// Descriptorの位置を決める
-	rtv.Handles[0] = rtv.StartHandle;
-
-	rtv.Handles[1].ptr =
-		rtv.Handles[0].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
-	rtv.Handles[2].ptr =
-		rtv.Handles[1].ptr + DirectXCommon::GetInstance()->device_->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-
-	DirectXCommon::GetInstance()->rtv_ = rtv;
+	
+	// RTVManagerに設定する
+	RTVManager::AddRTV("SwapChain0", rtvPrope[0]);
+	RTVManager::AddRTV("SwapChain1", rtvPrope[1]);
+	RTVManager::AddRTV("PostEffect", rtvPrope[2]);
 }
 
 
@@ -629,11 +629,13 @@ void DirectXCommon::ChanegResourceState() {
 void DirectXCommon::MakeFence() {
 
 	// 初期値0でFenceを作る
-	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateFence(DirectXCommon::GetInstance()->fenceValue_, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&DirectXCommon::GetInstance()->fence_));
-	assert(SUCCEEDED(hr));
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->device_->CreateFence(DirectXCommon::GetInstance()->fenceValue_, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&DirectXCommon::GetInstance()->fence_));
+	assert(SUCCEEDED(result));
 	// FenceのSignalを待つためのイベントを作成する
-	HANDLE fenceEvent_ = CreateEvent(NULL, FALSE, FALSE, NULL);
-	assert(fenceEvent_ != nullptr);
+	HANDLE fenceEvent;
+	fenceEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
+	assert(fenceEvent != nullptr);
 }
 
 
@@ -673,9 +675,10 @@ ID3D12DescriptorHeap* DirectXCommon::CreateDescriptorHeap(
 	DirectXCommon::GetInstance()->DescriptorHeapDesc_.Type = heapType;
 	DirectXCommon::GetInstance()->DescriptorHeapDesc_.NumDescriptors = numDescriptors;
 	DirectXCommon::GetInstance()->DescriptorHeapDesc_.Flags = shaderVisible ? D3D12_DESCRIPTOR_HEAP_FLAG_SHADER_VISIBLE : D3D12_DESCRIPTOR_HEAP_FLAG_NONE;
-	HRESULT hr = device->CreateDescriptorHeap(&DirectXCommon::GetInstance()->DescriptorHeapDesc_, IID_PPV_ARGS(&DirectXCommon::GetInstance()->descriptorHeap_));
+	HRESULT result;
+	result = device->CreateDescriptorHeap(&DirectXCommon::GetInstance()->DescriptorHeapDesc_, IID_PPV_ARGS(&DirectXCommon::GetInstance()->descriptorHeap_));
 	//ディスクリプタヒープの生成ができないので起動できない
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 	return DirectXCommon::GetInstance()->descriptorHeap_.Get();
 }
 
@@ -709,7 +712,8 @@ ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTexturerResource(int32_t
 
 	// Resourceの生成
 	ComPtr<ID3D12Resource> resource = nullptr;
-	HRESULT hr = DirectXCommon::GetInstance()->device_->CreateCommittedResource(
+	HRESULT result;
+	result = DirectXCommon::GetInstance()->device_->CreateCommittedResource(
 		&heapProperties, // Heapの設定
 		D3D12_HEAP_FLAG_NONE, // Hepaの特殊な設定。特になし
 		&resourceDesc, // Resourceの設定
@@ -717,7 +721,7 @@ ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTexturerResource(int32_t
 		&depthClearValue, // Clear最適値
 		IID_PPV_ARGS(&resource)); // 作成するResourceポインタへのポインタ
 
-	assert(SUCCEEDED(hr));
+	assert(SUCCEEDED(result));
 
 	return resource;
 }

@@ -8,8 +8,8 @@ void PostEffect::Initialize()
 	// リソースの作成
 	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
 
-	ComPtr<ID3D12Resource> stvRe = DirectXCommon::GetInstance()->GetRTV().Resources[2].Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stvRe);
+	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
+	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
 }
 
 
@@ -34,15 +34,6 @@ void PostEffect::CommandCall()
 {
 	// コマンドの取得
 	Commands commands = DirectXCommon::GetInstance()->GetCommands();
-
-	// RootSignatureの設定
-	commands.List->SetGraphicsRootSignature(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-
-	// PSOの設定
-	commands.List->SetPipelineState(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-
-	// 形状の設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Materialの設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

@@ -91,25 +91,25 @@ void EngineManual::Update(Camera* camera)
 	// ImGuiは TreeNode が一番画面がごちゃつかないんで基本 TreeNode 
 	if (ImGui::TreeNode("3DModel")) {
 		ImGui::Text("WorldTransform");
-		ImGui::DragFloat3("Scale", &demoModelWt_.scale.x, 0.01f, 0.0f, 10.0f);
-		ImGui::DragFloat3("Rotate", &demoModelWt_.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &demoModelWt_.translate.x, 0.01f);
+		ImGui::DragFloat3("Scale", &demoModelWt_.srt.scale.x, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat3("Rotate", &demoModelWt_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &demoModelWt_.srt.translate.x, 0.01f);
 
 		ImGui::TreePop();
 	}
 	if (ImGui::TreeNode("FrontSprite")) {
 		ImGui::Text("WorldTransform");
-		ImGui::DragFloat2("Scale", &FSpriteWt_.scale.x, 0.01f, 0.0f, 10.0f);
-		ImGui::DragFloat2("Rotate", &FSpriteWt_.rotate.x, 0.01f);
-		ImGui::DragFloat2("Translate", &FSpriteWt_.translate.x, 1.0f);
+		ImGui::DragFloat2("Scale", &FSpriteWt_.srt.scale.x, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat2("Rotate", &FSpriteWt_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat2("Translate", &FSpriteWt_.srt.translate.x, 1.0f);
 
 		ImGui::TreePop();
 	}
 	if (ImGui::TreeNode("BackSprite")) {
 		ImGui::Text("WorldTransform");
-		ImGui::DragFloat2("Scale", &BSpriteWt_.scale.x, 0.01f, 0.0f, 10.0f);
-		ImGui::DragFloat2("Rotate", &BSpriteWt_.rotate.x, 0.01f);
-		ImGui::DragFloat2("Translate", &BSpriteWt_.translate.x, 1.0f);
+		ImGui::DragFloat2("Scale", &BSpriteWt_.srt.scale.x, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat2("Rotate", &BSpriteWt_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat2("Translate", &BSpriteWt_.srt.translate.x, 1.0f);
 
 		ImGui::TreePop();
 	}

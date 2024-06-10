@@ -1,0 +1,88 @@
+{
+    "name": "scene",
+    "objects": [
+        {
+            "type": "MESH",
+            "name": "Cube",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "file_name": "CubeParent",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            },
+            "children": [
+                {
+                    "type": "MESH",
+                    "name": "Cube.001",
+                    "transform": {
+                        "translation": [
+                            0.0,
+                            0.0,
+                            1.652721643447876
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scaling": [
+                            0.699999988079071,
+                            0.699999988079071,
+                            0.699999988079071
+                        ]
+                    },
+                    "file_name": "CubeChild",
+                    "collder": {
+                        "type": "collider_EMPTY",
+                        "center": "collider_EMPTY",
+                        "size": "collider_EMPTY"
+                    }
+                }
+            ]
+        },
+        {
+            "type": "MESH",
+            "name": "円錐",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    2.9430952072143555
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    0.621425449848175,
+                    0.621425449848175,
+                    0.621425449848175
+                ]
+            },
+            "file_name": "cone",
+            "collder": {
+                "type": "collider_EMPTY",
+                "center": "collider_EMPTY",
+                "size": "collider_EMPTY"
+            }
+        }
+    ]
+}

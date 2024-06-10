@@ -8,7 +8,7 @@
 void Sprite::Initialize(Vector2 size, Vector4 color) {
 
 	// 座標の設定
-	worldTransform_.translate = Vector3::zero;
+	worldTransform_.srt.translate = Vector3::zero;
 
 	// サイズの設定
 	size_ = size;

@@ -38,7 +38,7 @@ void ModelPlaneState::Draw(Model* pModel, WorldTransform worldTransform, Camera*
 	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
 
 
-	Vector3 pos = worldTransform.translate;
+	Vector3 pos = worldTransform.srt.translate;
 
 	// 左下
 	vertexData[0].position = { pos.x - size_, pos.y - size_, pos.z, 1.0f };

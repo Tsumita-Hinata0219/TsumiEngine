@@ -4,13 +4,16 @@
 #include "GameManager.h"
 #include "GameObject.h"
 #include "ModelManager.h"
+#include "FileManager.h"
 
 #include "Skydome/Skydome.h"
 #include "Ground/Ground.h"
 #include "PostEffect/PostEffect.h"
+#include "TestPostEffect/TestPostEffect.h"
 #include "TestObject/TestObject.h"
 #include "TestAnimationCube/TestAnimationCube.h"
 #include "TestHuman/TestHuman.h"
+#include "TestJsonObject/TestJsonObject.h"
 
 
 class GameScene : public IScene {
@@ -59,7 +62,7 @@ private:
 	unique_ptr<Camera> camera_ = nullptr;
 
 	// PostEffect
-	unique_ptr<PostEffect> postEffect_;
+	unique_ptr<TestPostEffect> testPostEffect_;
 
 	// TestModel
 	unique_ptr<TestObject> testObject_;
@@ -69,6 +72,9 @@ private:
 
 	// TestHuman
 	unique_ptr<TestHuman> testHuman_;
+
+	// TestJsonObject
+	unique_ptr<TestJsonObject> testJsonObject_;
 
 	Transform transform_;
 };

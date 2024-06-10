@@ -7,7 +7,6 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	material_.mtlData.type = int(PostEffectType::GaussianFilter);
 }
 
 
@@ -45,6 +44,10 @@ void TestPostEffect::Update()
 		if (ImGui::Button("GaussianFilter")) {
 
 			material_.mtlData.type = int(PostEffectType::GaussianFilter);
+		}
+		if (ImGui::Button("OutLine")) {
+
+			material_.mtlData.type = int(PostEffectType::OutLine);
 		}
 
 		ImGui::TreePop();

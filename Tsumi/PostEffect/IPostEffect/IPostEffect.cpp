@@ -20,7 +20,7 @@ void IPostEffect::CommandCall()
 
 	// Materialの設定
 	material_.TransferMaterial();
-	commands.List->SetGraphicsRootConstantBufferView(0, material_.constBuffer->GetGPUVirtualAddress());
+	commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableの設定
 	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);

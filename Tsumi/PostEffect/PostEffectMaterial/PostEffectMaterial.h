@@ -6,7 +6,21 @@
 
 using namespace std;
 
+enum class PostEffectType {
+	None,
+	GrayScale,
+	Sepia,
+	Vignetting,
+	Smoothing,
+	GaussianFilter,
+	OutLine,
+	RadialBlur,
+	Dissolve,
+	Random,
+};
+
 struct PostEffectMtlData {
+	int type;
 	Vector4 color;
 };
 

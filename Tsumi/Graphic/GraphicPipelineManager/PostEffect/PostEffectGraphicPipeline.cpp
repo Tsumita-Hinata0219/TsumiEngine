@@ -120,7 +120,7 @@ void PostEffectGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 
 
 	// 色に関する
-	D3D12_ROOT_PARAMETER rootParameters[4]{};
+	D3D12_ROOT_PARAMETER rootParameters[5]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号0とバインド
@@ -146,11 +146,17 @@ void PostEffectGraphicPipeline::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる
 	descriptorRange[0].NumDescriptors = 1; // 数は1つ
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-
+	
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
+
+
+	// マテリアルに関する
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド
 
 
 	// Samplerの設定

@@ -81,7 +81,7 @@ void ModelPlaneState::Draw(Model* pModel, WorldTransform worldTransform, Camera*
 void ModelPlaneState::CommandCall(uint32_t texture, WorldTransform worldTransform, Camera* camera) {
 	
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// RootSignatureを設定。
 	commands.List->SetGraphicsRootSignature(NormalGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);

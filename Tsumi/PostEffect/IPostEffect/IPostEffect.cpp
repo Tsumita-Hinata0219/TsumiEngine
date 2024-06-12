@@ -16,7 +16,7 @@ void IPostEffect::Create()
 void IPostEffect::CommandCall()
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// Materialの設定
 	material_.TransferMaterial();

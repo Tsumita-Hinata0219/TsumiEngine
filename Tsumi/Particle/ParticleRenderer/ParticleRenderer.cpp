@@ -106,7 +106,7 @@ void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p, Camera* camera
 void ParticleRenderer::CommandCall()
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// RootSignatureを設定。
 	commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);

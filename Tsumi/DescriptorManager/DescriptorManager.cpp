@@ -137,7 +137,7 @@ void DescriptorManager::IncrementIndex() {
 // DescriptorTableを設定する
 void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t texHandle) {
 
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(
+	CommandManager::GetInstance()->GetList()->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex, 
 		DescriptorManager::GetInstance()->srvHandle_[texHandle]._GPU);
 }

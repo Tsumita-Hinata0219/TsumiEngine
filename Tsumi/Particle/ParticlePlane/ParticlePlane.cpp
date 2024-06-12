@@ -113,21 +113,24 @@ void ParticlePlane::Draw(uint32_t texHD, Particle* pParticle, list<ParticlePrope
 /// </summary>
 void ParticlePlane::CommandCall(uint32_t texHandle) {
 
+	// コマンドの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
 	// RootSignatureを設定。
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+	commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
 	// PSOを設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
 
 	///// いざ描画！！！！！
 	// VBVを設定
-	DirectXCommon::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
-	DirectXCommon::GetInstance()->GetCommandList()->IASetIndexBuffer(&resource_.IndexBufferView);
+	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
+	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
 	// 形状を設定
-	DirectXCommon::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// CBVを設定する
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
 	DescriptorManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
@@ -136,7 +139,7 @@ void ParticlePlane::CommandCall(uint32_t texHandle) {
 	}
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
-	DirectXCommon::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, instanceNum_, 0, 0, 0);
+	commands.List->DrawIndexedInstanced(6, instanceNum_, 0, 0, 0);
 }
 
 

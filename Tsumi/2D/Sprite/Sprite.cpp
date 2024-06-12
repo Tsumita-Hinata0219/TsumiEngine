@@ -48,26 +48,29 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera)
 	// 頂点データを設定する
 	SetVertex(transform);
 
+	// コマンドの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
 	// RootSignatureを設定。
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootSignature(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+	commands.List->SetGraphicsRootSignature(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
 	// PSOを設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetPipelineState(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	commands.List->SetPipelineState(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
 
 	// 頂点の設定
-	DirectXCommon::GetInstance()->GetCommandList()->IASetVertexBuffers(0, 1, &resource_.VertexBufferView); // VBVを設定
-	DirectXCommon::GetInstance()->GetCommandList()->IASetIndexBuffer(&resource_.IndexBufferView);
+	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView); // VBVを設定
+	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
 	// 形状を設定
-	DirectXCommon::GetInstance()->GetCommandList()->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Material用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
+	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// wvp用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress());
+	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
 	if (!texHandle == 0) {
@@ -75,7 +78,7 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera)
 	}
 
 	// 描画！(DrawCall/ドローコール)
-	DirectXCommon::GetInstance()->GetCommandList()->DrawIndexedInstanced(6, 1, 0, 0, 0);
+	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
 
 

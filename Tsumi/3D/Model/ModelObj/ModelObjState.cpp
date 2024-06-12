@@ -61,7 +61,7 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
 
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	if (pModel->GetModelDrawType() == Non) {
 

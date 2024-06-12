@@ -103,7 +103,7 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 void ParticleSystem::CommandCall()
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// RootSignatureを設定。
 	commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);

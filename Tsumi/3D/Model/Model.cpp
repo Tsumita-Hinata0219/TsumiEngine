@@ -360,7 +360,7 @@ void Model::SetPipeLineType(const PipeLineType type)
 	if (pipeLineType_ != type) {
 
 		// コマンドの取得
-		Commands commands = DirectXCommon::GetInstance()->GetCommands();
+		Commands commands = CommandManager::GetInstance()->GetCommands();
 
 		if (type == PipeLineType::kModel) {
 			
@@ -544,7 +544,7 @@ MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, cons
 void Model::CommandCall(Transform transform, Camera* camera)
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// コマンドを詰む
 	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV

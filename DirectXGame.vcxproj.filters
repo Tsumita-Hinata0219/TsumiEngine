@@ -182,6 +182,7 @@
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
+    <ClCompile Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -371,6 +372,7 @@
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
+    <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

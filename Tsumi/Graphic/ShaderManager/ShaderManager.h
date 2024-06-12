@@ -9,7 +9,7 @@
 #include <format>
 
 #include "MyMath.h"
-
+#include "EnumUtilities.h"
 
 
 struct Shaders {
@@ -26,7 +26,6 @@ struct ShadersMode {
 
 
 struct ShadersType {
-
 	ShadersMode Noraml;
 	ShadersMode Sprite;
 	ShadersMode Light;
@@ -39,18 +38,54 @@ struct ShadersType {
 	ShadersMode PostEffect;
 };
 
+enum class ModelShaders {
+	Normal,
+	Sprite,
+	Light,
+	Lambert,
+	Phong,
+	PhongNormalMap,
+	Particle,
+	Line,
+	Object3D,
+	Count,
+};
+enum class PostEffectShaders {
+	BoxFilter,
+	Dissolve,
+	GaussianFilter,
+	GrayScale,
+	OutLine,
+	RadialBlur,
+	Random,
+	SepiaTone,
+	Vignetting,
+	Count,
+};
 
 
 class ShaderManager {
+
+private: // シングルトンデザインパターン
+
+	// コンストラクタ、デストラクタ
+	ShaderManager() = default;
+	~ShaderManager() = default;
+	ShaderManager(const ShaderManager&) = delete;
+	const ShaderManager& operator=(const ShaderManager&) = delete;
+
 
 public: // メンバ関数
 
 	/// <summary>
 	/// ShaderManagerのインスタンス取得
 	/// </summary>
-	static ShaderManager* GetInstance();
+	static ShaderManager* GetInstance() {
+		static ShaderManager instance;
+		return &instance;
+	}
 
-	
+
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
@@ -72,7 +107,7 @@ private: // メンバ関数
 	/// <summary>
 	/// CompileShader関数
 	/// </summary>
-	static IDxcBlob* CompileShader(
+	IDxcBlob* CompileShader(
 		const std::wstring& filePath,
 		const wchar_t* profile);
 
@@ -80,80 +115,63 @@ private: // メンバ関数
 	/// <summary>
 	/// DXCの初期化
 	/// </summary>
-	static void InitializeDXC();
+	void InitializeDXC();
 
 
 	/// <summary>
 	/// includeに対応するための設定
 	/// </summary>
-	static void SettingIncludeHandler();
+	void SettingIncludeHandler();
 
 
 	/// <summary>
 	/// シェーダーをコンパイルする
 	/// </summary>
-	static void ShadersCompiles();
-
-
-
-#pragma region Shaders
+	void ModelShadersCompiles();
+	void PostEffectShadersCompiles();
 
 	/// <summary>
-	/// 
+	/// シェーダーをセットする
 	/// </summary>
-	static void NormalShader();
+	void SetShader(const std::wstring& vertexPath, const std::wstring& pixelPath, ShadersMode& shader);
 
-	/// <summary>
-	/// 
-	/// </summary>
-	static void SpriteShader();
+#pragma region ModelShaders
 
-	/// <summary>
-	/// 
-	/// </summary>
-	static void LightShader();
+	void NormalShader();
+	void SpriteShader();
+	void LightShader();
+	void LambertShader();
+	void PhongShader();
+	void PhongNormalMapShader();
+	void ParticleShader();
+	void LineShader();
+	void Object3DShader();
 
-	/// <summary>
-	/// 
-	/// </summary>
-	static void LambertShader();
+#pragma endregion
 
-	/// <summary>
-	/// 
-	/// </summary>
-	static void PhongShader();
+#pragma region PostEffectShaders
 
-	/// <summary>
-	/// 
-	/// </summary>
-	static void PhongNormalMapShader();
-
-	/// <summary>
-	/// 
-	/// </summary>
-	static void ParticleShader();
-
-	/// <summary>
-	/// 
-	/// </summary>
-	static void LineShader();
-  
-	/// <summary>
-	/// 
-	/// </summary>
-	static void Object3DShader();
-
-	/// <summary>
-	/// 
-	/// </summary>
-	static void PostEffectShader();
+	void PostEffectShader();
+	void BoxFilterShader();
+	void DissolveShader();
+	void GaussianFilterShader();
+	void GrayScaleShader();
+	void OutLineShader();
+	void RadialBlurShader();
+	void RandomShader();
+	void SepiaToneShader();
+	void VignettingShader();
 
 #pragma endregion
 
 
 private: // メンバ変数
 
-	Shaders dxc_;
-	ShadersType shaders_;
+	Shaders dxc_{};
+	ShadersType shaders_{};
+	ShadersMode shaderArray_{};
 
+	std::vector<ShadersMode> shadersVector_{};
+	std::vector<ShadersMode> modelShaders_{};
+	std::vector<ShadersMode> postEffectShaders_{};
 };

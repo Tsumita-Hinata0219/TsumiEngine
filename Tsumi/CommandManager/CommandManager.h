@@ -13,6 +13,8 @@
 using Microsoft::WRL::ComPtr;
 using namespace std;
 
+class DirectXCommon;
+
 
 /* CommandManagerクラス */
 class CommandManager {
@@ -32,16 +34,16 @@ public: // メンバ関数
 #pragma region Accessor アクセスメソッド
 
 	// コマンドキュー
-	ID3D12CommandQueue* const GetQueue() { return this->queue.Get(); }
-	void SetQueue(ID3D12CommandQueue* const setQueue) { this->queue = setQueue; }
+	ID3D12CommandQueue* const GetQueue() { return this->queue_.Get(); }
+	void SetQueue(ID3D12CommandQueue* const setQueue) { this->queue_ = setQueue; }
 
 	// アロケータ
-	ID3D12CommandAllocator* const GetAllocator() { return this->allocator.Get(); }
-	void SetAllocator(ID3D12CommandAllocator* const setAllocator) { this->allocator = setAllocator; }
+	ID3D12CommandAllocator* const GetAllocator() { return this->allocator_.Get(); }
+	void SetAllocator(ID3D12CommandAllocator* const setAllocator) { this->allocator_ = setAllocator; }
 
 	// リスト
-	ID3D12GraphicsCommandList* const GetList() { return this->list.Get(); }
-	void SetList(ID3D12GraphicsCommandList* const setList) { this->list = setList; }
+	ID3D12GraphicsCommandList* const GetList() { return this->list_.Get(); }
+	void SetList(ID3D12GraphicsCommandList* const setList) { this->list_ = setList; }
 
 #pragma endregion 
 
@@ -60,13 +62,16 @@ private: // メンバ関数
 
 private: // メンバ変数
 
+	// DirectXCommon
+	DirectXCommon* dxCommon_ = nullptr;
+
 	// コマンドキュー
-	ComPtr<ID3D12CommandQueue> queue;
+	ComPtr<ID3D12CommandQueue> queue_;
 
 	// コマンドアロケータ
-	ComPtr<ID3D12CommandAllocator> allocator;
+	ComPtr<ID3D12CommandAllocator> allocator_;
 
 	// コマンドリスト
-	ComPtr<ID3D12GraphicsCommandList> list;
+	ComPtr<ID3D12GraphicsCommandList> list_;
 };
 

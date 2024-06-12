@@ -49,7 +49,7 @@ void CommandManager::CreateCommandAllocator()
 	HRESULT result;
 	result = dxCommon_->GetDevice()->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
-		IID_PPV_ARGS(&this->commands_.List));
+		IID_PPV_ARGS(&this->commands_.Allocator));
 
 	// コマンドアロケータの生成がうまくいかなかったので起動できない
 	assert(SUCCEEDED(result));

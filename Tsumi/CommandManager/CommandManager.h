@@ -91,14 +91,5 @@ private: // メンバ変数
 
 	// コマンド
 	Commands commands_{};
-
-	//// コマンドキュー
-	//ComPtr<ID3D12CommandQueue> queue_;
-
-	//// コマンドアロケータ
-	//ComPtr<ID3D12CommandAllocator> allocator_;
-
-	//// コマンドリスト
-	//ComPtr<ID3D12GraphicsCommandList> list_;
 };
 

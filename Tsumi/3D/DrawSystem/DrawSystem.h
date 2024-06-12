@@ -2,6 +2,7 @@
 #include "MyMath.h"
 #include "Struct.h"
 #include "DirectXCommon.h"
+#include "CommandManager.h"
 #include "LineGraphicPipeline.h"
 #include "CreateResource.h"
 #include "DescriptorManager.h"

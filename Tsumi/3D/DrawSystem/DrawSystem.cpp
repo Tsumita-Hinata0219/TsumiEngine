@@ -54,7 +54,7 @@ void DrawSystem::Line(Segment segment, Camera* camera, Vector4 color) {
 void DrawSystem::CommandCallTypeLine(Camera* camera) {
 
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// RootSignatureを設定。
 	commands.List->SetGraphicsRootSignature(LineGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);

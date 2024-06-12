@@ -158,10 +158,10 @@ void ShaderManager::NormalShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/NormalObject3d.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/NormalObject3d.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/NormalObject3d.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/NormalObject3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Noraml = shader;
 }
@@ -176,10 +176,10 @@ void ShaderManager::SpriteShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/SpriteObject3d.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/SpriteObject3d.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/SpriteObject3d.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/SpriteObject3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Sprite = shader;
 }
@@ -194,10 +194,10 @@ void ShaderManager::LightShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LightObject.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/LightObject.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LightObject.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/LightObject.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Light = shader;
 }
@@ -212,10 +212,10 @@ void ShaderManager::LambertShader()
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LambertObject.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/LambertObject.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LambertObject.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/LambertObject.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Lambert = shader;
 }
@@ -230,10 +230,10 @@ void ShaderManager::PhongShader()
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PhongObject.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/PhongObject.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PhongObject.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/PhongObject.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Phong = shader;
 }
@@ -248,10 +248,10 @@ void ShaderManager::PhongNormalMapShader()
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PhongNormalMap.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/PhongNormalMap.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PhongNormalMap.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/PhongNormalMap.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.PhongNormalMap = shader;
 }
@@ -266,10 +266,10 @@ void ShaderManager::ParticleShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/ParticleObject3D.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/ParticleObject3D.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/ParticleObject3D.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/ParticleObject3D.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Particle = shader;
 }
@@ -284,10 +284,10 @@ void ShaderManager::LineShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LineObject3d.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/LineObject3d.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/LineObject3d.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/LineObject3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Line = shader;
 }
@@ -302,10 +302,10 @@ void ShaderManager::Object3DShader()
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/Object3d.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/Object3d.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/Object3d.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/Object3d.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.Object3d = shader;
 }
@@ -320,10 +320,10 @@ void ShaderManager::PostEffectShader() {
 
 	shader.VertexBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PostEffect.VS.hlsl", L"vs_6_0");
+			L"Resources/Shaders/PostEffect.VS.hlsl", L"vs_6_0");
 	shader.PixelBlob =
 		ShaderManager::CompileShader(
-			L"Resources/shaders/PostEffect.PS.hlsl", L"ps_6_0");
+			L"Resources/Shaders/PostEffect.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.PostEffect = shader;
 }

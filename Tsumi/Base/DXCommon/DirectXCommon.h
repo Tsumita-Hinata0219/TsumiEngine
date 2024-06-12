@@ -22,11 +22,11 @@
 
 
 // コマンド
-struct Commands {
-	ComPtr<ID3D12CommandQueue> Queue;		   // コマンドキュー
-	ComPtr<ID3D12CommandAllocator> Allocator; // コマンドアロケータ
-	ComPtr<ID3D12GraphicsCommandList> List;   // コマンドリスト
-};
+//struct Commands {
+//	ComPtr<ID3D12CommandQueue> Queue;		   // コマンドキュー
+//	ComPtr<ID3D12CommandAllocator> Allocator; // コマンドアロケータ
+//	ComPtr<ID3D12GraphicsCommandList> List;   // コマンドリスト
+//};
 
 // スワップチェーン
 struct SwapChains {
@@ -97,15 +97,15 @@ public: // メンバ関数
 	/// </summary>
 	ID3D12Device* const GetDevice() { return DirectXCommon::GetInstance()->device_.Get(); };
 
-	/// <summary>
-	/// 
-	/// </summary>
-	Commands const GetCommands() { return DirectXCommon::GetInstance()->commands_; }
+	///// <summary>
+	///// 
+	///// </summary>
+	//Commands const GetCommands() { return DirectXCommon::GetInstance()->commands_; }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	ID3D12GraphicsCommandList* const GetCommandList() { return DirectXCommon::GetInstance()->commands_.List.Get(); }
+	///// <summary>
+	///// 
+	///// </summary>
+	//ID3D12GraphicsCommandList* const GetCommandList() { return DirectXCommon::GetInstance()->commands_.List.Get(); }
 
 	/// <summary>
 	/// 
@@ -166,16 +166,16 @@ private: // メンバ関数
 	static void CreateDevice();
 
 	// コマンドキューを生成する
-	static void CreateCommandQueue();
+	//static void CreateCommandQueue();
 
 	// エラーと警告の抑制
 	static void DebugErrorInfoQueue();
 
 	// コマンドアロケータを作成
-	static void CreateCommandAllocator();
+	//static void CreateCommandAllocator();
 
 	// コマンドリストを生成する
-	static void CreateCommandList();
+	//static void CreateCommandList();
 
 	// スワップチェーンを生成する
 	static void CreateSwapChain();
@@ -241,7 +241,7 @@ private: // メンバ変数
 	D3D12_INFO_QUEUE_FILTER filter_{};
 
 	// コマンド
-	Commands commands_{};
+	//Commands commands_{};
 
 
 	// バックバッファインデックス

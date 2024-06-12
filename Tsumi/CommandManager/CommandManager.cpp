@@ -35,7 +35,7 @@ void CommandManager::CreateCommandQueue()
 	HRESULT result;
 	result = dxCommon_->GetDevice()->CreateCommandQueue(
 		&commandQueueDesc,
-		IID_PPV_ARGS(&this->queue_));
+		IID_PPV_ARGS(&this->commands_.Queue));
 
 	// コマンドキューの生成がうまくいかなかったので起動できない
 	assert(SUCCEEDED(result));
@@ -49,7 +49,7 @@ void CommandManager::CreateCommandAllocator()
 	HRESULT result;
 	result = dxCommon_->GetDevice()->CreateCommandAllocator(
 		D3D12_COMMAND_LIST_TYPE_DIRECT,
-		IID_PPV_ARGS(&this->allocator_));
+		IID_PPV_ARGS(&this->commands_.List));
 
 	// コマンドアロケータの生成がうまくいかなかったので起動できない
 	assert(SUCCEEDED(result));
@@ -63,9 +63,9 @@ void CommandManager::CreateCommandList()
 	HRESULT result;
 	result = dxCommon_->GetDevice()->CreateCommandList(
 		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-		this->allocator_.Get(),
+		this->commands_.Allocator.Get(),
 		nullptr,
-		IID_PPV_ARGS(&this->list_));
+		IID_PPV_ARGS(&this->commands_.List));
 
 	// コマンドリストの生成がうまくいかなかったので起動できない
 	assert(SUCCEEDED(result));

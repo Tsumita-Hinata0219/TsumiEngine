@@ -36,7 +36,7 @@ void ImGuiManager::BeginFrame() {
 	ImGui::PushFont(io.Fonts->Fonts[1]);
 
 	ID3D12DescriptorHeap* descriptorHeap[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap() };
-	DirectXCommon::GetInstance()->GetCommandList()->SetDescriptorHeaps(1, descriptorHeap);
+	CommandManager::GetInstance()->GetList()->SetDescriptorHeaps(1, descriptorHeap);
 }
 
 
@@ -46,5 +46,5 @@ void ImGuiManager::EndFrame() {
 	ImGui::Render();
 
 	//実際のCommandListのImGuiの描画コマンドを進む
-	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), DirectXCommon::GetInstance()->GetCommandList());
+	ImGui_ImplDX12_RenderDrawData(ImGui::GetDrawData(), CommandManager::GetInstance()->GetList());
 }

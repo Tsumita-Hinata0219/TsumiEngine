@@ -16,6 +16,14 @@ using namespace std;
 class DirectXCommon;
 
 
+// コマンド
+struct Commands {
+	ComPtr<ID3D12CommandQueue> Queue;		   // コマンドキュー
+	ComPtr<ID3D12CommandAllocator> Allocator; // コマンドアロケータ
+	ComPtr<ID3D12GraphicsCommandList> List;   // コマンドリスト
+};
+
+
 /* CommandManagerクラス */
 class CommandManager {
 
@@ -45,17 +53,21 @@ public: // メンバ関数
 
 #pragma region Accessor アクセスメソッド
 
+	// コマンド
+	Commands const GetCommands() { return this->commands_; }
+	void SetCommands(Commands setCommands) { this->commands_ = setCommands; }
+
 	// コマンドキュー
-	ID3D12CommandQueue* const GetQueue() { return this->queue_.Get(); }
-	void SetQueue(ID3D12CommandQueue* const setQueue) { this->queue_ = setQueue; }
+	ID3D12CommandQueue* const GetQueue() { return this->commands_.Queue.Get(); }
+	void SetQueue(ID3D12CommandQueue* const setQueue) { this->commands_.Queue = setQueue; }
 
 	// アロケータ
-	ID3D12CommandAllocator* const GetAllocator() { return this->allocator_.Get(); }
-	void SetAllocator(ID3D12CommandAllocator* const setAllocator) { this->allocator_ = setAllocator; }
+	ID3D12CommandAllocator* const GetAllocator() { return this->commands_.Allocator.Get(); }
+	void SetAllocator(ID3D12CommandAllocator* const setAllocator) { this->commands_.Allocator = setAllocator; }
 
 	// リスト
-	ID3D12GraphicsCommandList* const GetList() { return this->list_.Get(); }
-	void SetList(ID3D12GraphicsCommandList* const setList) { this->list_ = setList; }
+	ID3D12GraphicsCommandList* const GetList() { return this->commands_.List.Get(); }
+	void SetList(ID3D12GraphicsCommandList* const setList) { this->commands_.List = setList; }
 
 #pragma endregion 
 
@@ -77,13 +89,16 @@ private: // メンバ変数
 	// DirectXCommon
 	DirectXCommon* dxCommon_ = nullptr;
 
-	// コマンドキュー
-	ComPtr<ID3D12CommandQueue> queue_;
+	// コマンド
+	Commands commands_{};
 
-	// コマンドアロケータ
-	ComPtr<ID3D12CommandAllocator> allocator_;
+	//// コマンドキュー
+	//ComPtr<ID3D12CommandQueue> queue_;
 
-	// コマンドリスト
-	ComPtr<ID3D12GraphicsCommandList> list_;
+	//// コマンドアロケータ
+	//ComPtr<ID3D12CommandAllocator> allocator_;
+
+	//// コマンドリスト
+	//ComPtr<ID3D12GraphicsCommandList> list_;
 };
 

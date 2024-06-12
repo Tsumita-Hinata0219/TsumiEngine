@@ -38,6 +38,9 @@ void DirectXCommon::Initialize() {
 	// エラーと警告の抑制
 	DebugErrorInfoQueue();
 
+	// コマンド関連の生成
+	CommandManager::GetInstance()->Initialize();
+
 	// コマンドキューを生成する
 	CreateCommandQueue();
 

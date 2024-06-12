@@ -21,8 +21,20 @@ class CommandManager {
 
 private: // シングルトンデザインパターン
 
+	// コンストラクタ、デストラクタ
+	CommandManager() = default;
+	~CommandManager() = default;
+	CommandManager(const CommandManager&) = delete;
+	const CommandManager& operator=(const CommandManager&) = delete;
+
 
 public: // メンバ関数
+
+	// インスタンスの取得
+	static CommandManager* GetInstance() {
+		static CommandManager instance;
+		return &instance;
+	}
 
 	// 初期化処理
 	void Initialize();

@@ -183,6 +183,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\IPipeLineState\IPipeLineState.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffect\PostEffectGraphicPipeline.cpp" />
@@ -303,6 +304,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineStructure.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\IPipeLineState\IPipeLineState.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.h" />

@@ -183,6 +183,7 @@
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\IPipeLineState\IPipeLineState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -373,6 +374,7 @@
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\IPipeLineState\IPipeLineState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

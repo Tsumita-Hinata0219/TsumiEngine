@@ -11,12 +11,9 @@ void SpritePipeLine::SetupLightPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs[2]{};
 	SetUpInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 	SetUpInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	SetUpInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	SetUpInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	SetUpInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
@@ -76,9 +73,9 @@ void SpritePipeLine::SetupLightPso()
 
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc{};
 	// Depthの機能を有効化する
-	depthStencilDesc.DepthEnable = true;
+	depthStencilDesc.DepthEnable = false;
 	// 書き込む
-	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 	// 比較関数はLessEqual。つまり、近ければ描画される
 	depthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 
@@ -104,7 +101,7 @@ void SpritePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRo
 
 
 	// 色に関する
-	D3D12_ROOT_PARAMETER rootParameters[5]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号0とバインド
@@ -135,12 +132,6 @@ void SpritePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRo
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
-
-
-	// マテリアルに関する
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド
 
 
 	// Samplerの設定

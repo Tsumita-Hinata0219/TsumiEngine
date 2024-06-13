@@ -175,7 +175,7 @@ void ShaderManager::NormalShader() {
 		L"Resources/Shaders/NormalObject3d.VS.hlsl", 
 		L"Resources/Shaders/NormalObject3d.PS.hlsl", 
 		shader);
-	ShaderManager::GetInstance()->shaders_.Noraml = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Normal)] = shader;
 }
 
 void ShaderManager::SpriteShader() {

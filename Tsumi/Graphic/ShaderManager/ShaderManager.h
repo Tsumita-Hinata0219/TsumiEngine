@@ -85,12 +85,10 @@ public: // メンバ関数
 		return &instance;
 	}
 
-
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
 	static void Initialize();
-
 
 #pragma region Get 取得
 
@@ -111,18 +109,15 @@ private: // メンバ関数
 		const std::wstring& filePath,
 		const wchar_t* profile);
 
-
 	/// <summary>
 	/// DXCの初期化
 	/// </summary>
 	void InitializeDXC();
 
-
 	/// <summary>
 	/// includeに対応するための設定
 	/// </summary>
 	void SettingIncludeHandler();
-
 
 	/// <summary>
 	/// シェーダーをコンパイルする

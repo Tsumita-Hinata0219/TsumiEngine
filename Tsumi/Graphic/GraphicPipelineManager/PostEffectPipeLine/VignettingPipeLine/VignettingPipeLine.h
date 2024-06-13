@@ -1,5 +1,17 @@
 #pragma once
-class VignettingPipeLine
-{
+
+#include "IPipeLineState.h"
+
+/* VignettingPipeLineクラス */
+class VignettingPipeLine : public IPipeLineState {
+
+public:
+
+	// Psoを構築する
+	void SetupLightPso() override;
+
+	// RootSignatureのセットアップ
+	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
+
 };
 

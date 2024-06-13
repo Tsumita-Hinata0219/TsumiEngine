@@ -175,6 +175,7 @@ void ShaderManager::NormalShader() {
 		L"Resources/Shaders/NormalObject3d.VS.hlsl", 
 		L"Resources/Shaders/NormalObject3d.PS.hlsl", 
 		shader);
+	ShaderManager::GetInstance()->shaders_.Noraml = shader;
 	modelShaders_[static_cast<size_t>(ModelShaders::Normal)] = shader;
 }
 
@@ -186,6 +187,8 @@ void ShaderManager::SpriteShader() {
 		L"Resources/Shaders/SpriteObject3d.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Sprite = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Sprite)] = shader;
+
 }
 
 void ShaderManager::LightShader() {
@@ -196,6 +199,7 @@ void ShaderManager::LightShader() {
 		L"Resources/Shaders/LightObject.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Light = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Light)] = shader;
 }
 
 void ShaderManager::LambertShader()
@@ -206,6 +210,7 @@ void ShaderManager::LambertShader()
 		L"Resources/Shaders/LambertObject.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Lambert = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Lambert)] = shader;
 }
 
 void ShaderManager::PhongShader()
@@ -216,6 +221,7 @@ void ShaderManager::PhongShader()
 		L"Resources/Shaders/PhongObject.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Phong = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Phong)] = shader;
 }
 
 void ShaderManager::PhongNormalMapShader()
@@ -226,6 +232,7 @@ void ShaderManager::PhongNormalMapShader()
 		L"Resources/Shaders/PhongNormalMap.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.PhongNormalMap = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::PhongNormalMap)] = shader;
 }
 
 void ShaderManager::ParticleShader() {
@@ -236,6 +243,7 @@ void ShaderManager::ParticleShader() {
 		L"Resources/Shaders/ParticleObject3D.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Particle = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Particle)] = shader;
 }
 
 void ShaderManager::LineShader() {
@@ -246,6 +254,7 @@ void ShaderManager::LineShader() {
 		L"Resources/Shaders/LineObject3d.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Line = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Line)] = shader;
 }
 
 void ShaderManager::Object3DShader()
@@ -256,6 +265,7 @@ void ShaderManager::Object3DShader()
 		L"Resources/Shaders/Object3d.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.Object3d = shader;
+	modelShaders_[static_cast<size_t>(ModelShaders::Object3D)] = shader;
 }
 
 

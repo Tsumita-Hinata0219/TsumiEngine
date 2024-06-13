@@ -1,8 +1,10 @@
 #include "BoxFilterPipeLine.h"
 
+
+
+// Psoを構築する
 void BoxFilterPipeLine::SetupLightPso()
 {
-
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 	SetUpRootSignature(descriptionRootSignature);
@@ -93,6 +95,8 @@ void BoxFilterPipeLine::SetupLightPso()
 	assert(SUCCEEDED(hr));
 }
 
+
+// RootSignatureのセットアップ
 void BoxFilterPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =

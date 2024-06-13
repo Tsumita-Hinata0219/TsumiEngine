@@ -1,5 +1,16 @@
 #pragma once
-class DissolvePipeLine
-{
+
+#include "IPipeLineState.h"
+
+/* DissolvePipeLineクラス */
+class DissolvePipeLine : public IPipeLineState {
+
+public:
+
+	// Psoを構築する
+	void SetupLightPso() override;
+
+	// RootSignatureのセットアップ
+	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
 };
 

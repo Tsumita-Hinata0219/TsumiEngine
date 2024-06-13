@@ -1,5 +1,21 @@
 #pragma once
-class BoxFilterPipeLine
-{
+
+#include "IPipeLineState.h"
+
+/* BoxFilterPipeLineクラス */
+class BoxFilterPipeLine : public IPipeLineState {
+
+public:
+
+	// Psoを構築する
+	void SetupLightPso() override;
+
+	// RootSignatureのセットアップ
+	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
+
+
+private:
+
+
 };
 

@@ -3,14 +3,14 @@
 
 
 // InputLayoutのセットアップ
-void IPipeLineState::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
+void IPipeLineState::SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
 {
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
 	inputElementDescs.Format = Format;
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
-void IPipeLineState::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
+void IPipeLineState::SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = numInputElements;

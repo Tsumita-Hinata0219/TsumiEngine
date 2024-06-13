@@ -24,7 +24,7 @@ struct ShadersMode {
 	IDxcBlob* PixelBlob;
 };
 
-enum class ModelShaders {
+enum class ModelShaders : uint32_t {
 	Normal,
 	Sprite,
 	Light,
@@ -36,7 +36,7 @@ enum class ModelShaders {
 	Object3D,
 	Count,
 };
-enum class PostEffectShaders {
+enum class PostEffectShaders : uint32_t {
 	PostEffect,
 	BoxFilter,
 	Dissolve,

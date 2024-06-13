@@ -10,6 +10,31 @@
 #include "GraphicPipelineStructure.h"
 
 
+// PipeLineType
+enum class IPipeLineType : uint32_t {
+	Normal,
+	Sprite,
+	Light,
+	Lambert,
+	Phong,
+	PhongNormalMap,
+	Particle,
+	Line,
+	Object3D,
+	PostEffect,
+	BoxFilter,
+	Dissolve,
+	GaussianFilter,
+	GrayScale,
+	OutLine,
+	RadialBlur,
+	Random,
+	SepiaTone,
+	Vignetting,
+	Count,
+};
+
+
 /* IPipeLineStateクラス */
 class IPipeLineState {
 

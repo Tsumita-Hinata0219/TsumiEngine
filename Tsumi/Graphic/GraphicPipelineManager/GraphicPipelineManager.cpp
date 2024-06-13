@@ -17,6 +17,14 @@ GraphicPipelineManager* GraphicPipelineManager::GetInstance() {
 /// </summary>
 void GraphicPipelineManager::Initialize() {
 
+	// インスタンスの取得
+	GraphicPipelineManager* instance = GraphicPipelineManager::GetInstance();
+
+	// vectorのサイズを変える
+	instance->IPipeLine_.resize(EnumSize<IPipeLineType>::value);
+	instance->IPipeLine_[static_cast<size_t>(IPipeLineType::Normal)];
+
+
 	//NormalGraphicPipeline::SetupNormalPso();
 	SpriteGraphicPipeline::SetupSpritePso();
 	LightGraphicPipeline::SetupLightPso();

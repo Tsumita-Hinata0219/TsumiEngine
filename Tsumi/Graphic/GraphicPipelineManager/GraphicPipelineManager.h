@@ -7,6 +7,9 @@
 #include "Struct.h"
 #include "DirectXCommon.h"
 #include "ShaderManager.h"
+
+#include "IPipeLineState.h"
+
 #include "NormalGraphicPipeline.h"
 #include "Object3DGraphicPipeLine.h"
 #include "SpriteGraphicPipeline.h"
@@ -36,6 +39,8 @@ public: // メンバ関数
 
 
 private: // メンバ変数
+
+	std::vector<unique_ptr<IPipeLineState>> IPipeLine_;
 
 
 };

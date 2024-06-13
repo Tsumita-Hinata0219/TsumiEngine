@@ -111,7 +111,7 @@ void LightPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRoo
 
 
 	// 頂点位置に関する
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;//CSVで使う
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; //CBVで使う
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;//VertexShaderで使う
 	rootParameters[1].Descriptor.ShaderRegister = 0; // レジスタ番号を0にバインド
 
@@ -137,7 +137,7 @@ void LightPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRoo
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
 
 
-	// マテリアルに関する
+	// 光に関する
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド

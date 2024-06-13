@@ -99,10 +99,6 @@ void LambertPipeLine::SetupLightPso()
 // RootSignatureのセットアップ
 void LambertPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	descriptionRootSignature.Flags =
-		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
-
-
 	// 色に関する
 	D3D12_ROOT_PARAMETER rootParameters[5]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
@@ -111,17 +107,17 @@ void LambertPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionR
 
 
 	// 頂点位置に関する
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;//CSVで使う
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;//VertexShaderで使う
-	rootParameters[1].Descriptor.ShaderRegister = 0; // レジスタ番号を0にバインド
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
+	rootParameters[1].Descriptor.ShaderRegister = 0;// レジスタ番号を0にバインド
 
 	descriptionRootSignature.pParameters = rootParameters; // ルートパラメータ配列へのポインタ
 	descriptionRootSignature.NumParameters = _countof(rootParameters); // 配列の長さ
 
 
 	// Viewに関する
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX; // VertexShaderで使う
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
 	rootParameters[2].Descriptor.ShaderRegister = 1;
 
 
@@ -137,7 +133,7 @@ void LambertPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionR
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
 
 
-	// マテリアルに関する
+	// 光に関する
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド

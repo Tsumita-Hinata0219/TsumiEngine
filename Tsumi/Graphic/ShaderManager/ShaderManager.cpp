@@ -278,6 +278,7 @@ void ShaderManager::PostEffectShader() {
 		L"Resources/Shaders/PostEffect.PS.hlsl",
 		shader);
 	ShaderManager::GetInstance()->shaders_.PostEffect = shader;
+	postEffectShaders_[static_cast<size_t>(PostEffectShaders::PostEffect)] = shader;
 }
 
 void ShaderManager::BoxFilterShader()

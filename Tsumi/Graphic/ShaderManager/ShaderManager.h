@@ -51,6 +51,7 @@ enum class ModelShaders {
 	Count,
 };
 enum class PostEffectShaders {
+	PostEffect,
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,
@@ -96,6 +97,8 @@ public: // メンバ関数
 	/// 
 	/// </summary>
 	ShadersType GetShaderType() { return ShaderManager::GetInstance()->shaders_; }
+	ShadersMode GetShader(ModelShaders type) { return this->modelShaders_[static_cast<size_t>(type)]; }
+	ShadersMode GetShader(PostEffectShaders type) { return this->postEffectShaders_[static_cast<size_t>(type)]; }
 
 #pragma endregion
 

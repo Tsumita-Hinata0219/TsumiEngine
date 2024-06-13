@@ -280,9 +280,9 @@ void SpriteGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasteriz
 // Shadersのコンパイル
 void SpriteGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().Sprite.VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Sprite).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().Sprite.PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Sprite).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

@@ -193,6 +193,9 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -393,6 +396,9 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

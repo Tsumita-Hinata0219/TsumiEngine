@@ -185,6 +185,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\IPipeLineState\IPipeLineState.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
@@ -317,6 +320,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h" />

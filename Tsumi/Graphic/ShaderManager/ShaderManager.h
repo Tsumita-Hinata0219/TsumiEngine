@@ -24,20 +24,6 @@ struct ShadersMode {
 	IDxcBlob* PixelBlob;
 };
 
-
-struct ShadersType {
-	ShadersMode Noraml;
-	ShadersMode Sprite;
-	ShadersMode Light;
-	ShadersMode Lambert;
-	ShadersMode Phong;
-	ShadersMode PhongNormalMap;
-	ShadersMode Particle;
-	ShadersMode Line;
-	ShadersMode Object3d;
-	ShadersMode PostEffect;
-};
-
 enum class ModelShaders {
 	Normal,
 	Sprite,
@@ -96,7 +82,6 @@ public: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	ShadersType GetShaderType() { return ShaderManager::GetInstance()->shaders_; }
 	ShadersMode GetShader(ModelShaders type) { return this->modelShaders_[static_cast<size_t>(type)]; }
 	ShadersMode GetShader(PostEffectShaders type) { return this->postEffectShaders_[static_cast<size_t>(type)]; }
 
@@ -166,10 +151,6 @@ private: // メンバ関数
 private: // メンバ変数
 
 	Shaders dxc_{};
-	ShadersType shaders_{};
-	ShadersMode shaderArray_{};
-
-	std::vector<ShadersMode> shadersVector_{};
 	std::vector<ShadersMode> modelShaders_{};
 	std::vector<ShadersMode> postEffectShaders_{};
 };

@@ -1,9 +1,9 @@
-#include "OueLinePipeLine.h"
+#include "OutLinePipeLine.h"
 
 
 
 // Psoを構築する
-void OueLinePipeLine::SetupLightPso()
+void OutLinePipeLine::SetupLightPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -97,7 +97,7 @@ void OueLinePipeLine::SetupLightPso()
 
 
 // RootSignatureのセットアップ
-void OueLinePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void OutLinePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;

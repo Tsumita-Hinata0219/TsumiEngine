@@ -188,8 +188,6 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OueLinePipeLine.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlur.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp" />
@@ -202,6 +200,8 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -397,8 +397,6 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OueLinePipeLine.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlur.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h" />
@@ -411,6 +409,8 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

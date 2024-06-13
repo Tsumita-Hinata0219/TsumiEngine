@@ -21,6 +21,25 @@
 #include "LineGraphicPipeline.h"
 #include "PostEffectGraphicPipeline.h"
 
+#include "LambertPipeLine.h"
+#include "LightPipeLine.h"
+#include "LinePipeLine.h"
+#include "NormalPipeLine.h"
+#include "Object3DPipeLine.h"
+#include "ParticlePipeLine.h"
+#include "PhongNormalMapPipeLine.h"
+#include "PhongPipeLine.h"
+#include "SpritePipeLine.h"
+
+#include "BoxFilterPipeLine.h"
+#include "DissolvePipeLine.h"
+#include "GaussianFilterPipeLine.h"
+#include "GrayScalePipeLine.h"
+#include "OutLinePipeLine.h"
+#include "RadialBlurPipeLine.h"
+#include "RandomPipeLine.h"
+#include "SepiaTonePipeLine.h"
+#include "VignettingPipeLine.h"
 
 
 class GraphicPipelineManager {

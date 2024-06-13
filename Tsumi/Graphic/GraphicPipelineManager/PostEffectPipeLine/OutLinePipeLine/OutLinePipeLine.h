@@ -2,8 +2,8 @@
 
 #include "IPipeLineState.h"
 
-/* BoxFilterPipeLineクラス */
-class OueLinePipeLine : public IPipeLineState {
+/* OutLinePipeLineクラス */
+class OutLinePipeLine : public IPipeLineState {
 
 public:
 
@@ -14,4 +14,3 @@ public:
 	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
 
 };
-

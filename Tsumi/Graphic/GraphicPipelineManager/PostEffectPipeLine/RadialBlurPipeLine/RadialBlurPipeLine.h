@@ -3,7 +3,7 @@
 #include "IPipeLineState.h"
 
 /* RadialBlurクラス */
-class RadialBlur : public IPipeLineState {
+class RadialBlurPipeLine : public IPipeLineState {
 
 public:
 

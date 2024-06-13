@@ -1,9 +1,9 @@
-#include "RadialBlur.h"
+#include "RadialBlurPipeLine.h"
 
 
 
 // Psoを構築する
-void RadialBlur::SetupLightPso()
+void RadialBlurPipeLine::SetupLightPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -97,7 +97,7 @@ void RadialBlur::SetupLightPso()
 
 
 // RootSignatureのセットアップ
-void RadialBlur::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void RadialBlurPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;

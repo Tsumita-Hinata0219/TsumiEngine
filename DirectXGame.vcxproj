@@ -188,6 +188,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
@@ -323,6 +329,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h" />

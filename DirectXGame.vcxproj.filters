@@ -196,6 +196,12 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -399,6 +405,12 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\LinePipeLine\LinePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

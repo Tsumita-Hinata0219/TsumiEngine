@@ -89,7 +89,7 @@ void IPipeLineState::SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc,
 
 
 // Shadersのコンパイル
-void IPipeLineState::SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ModelShaders type)
+void IPipeLineState::SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type)
 {
 	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(type).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
@@ -97,7 +97,7 @@ void IPipeLineState::SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelSh
 	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(type).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
-void IPipeLineState::SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, PostEffectShaders type)
+void IPipeLineState::SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type)
 {
 	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(type).VertexBlob;
 	assert(vertexShaderBlob != nullptr);

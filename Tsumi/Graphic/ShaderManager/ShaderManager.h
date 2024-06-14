@@ -10,6 +10,7 @@
 
 #include "MyMath.h"
 #include "EnumUtilities.h"
+#include "../Project/Math/Struct.h"
 
 
 struct Shaders {
@@ -24,32 +25,6 @@ struct ShadersMode {
 	IDxcBlob* PixelBlob;
 };
 
-enum class ModelShaders : uint32_t {
-	Normal,
-	Sprite,
-	Light,
-	Lambert,
-	Phong,
-	PhongNormalMap,
-	Particle,
-	Line,
-	Object3D,
-	Count,
-};
-enum class PostEffectShaders : uint32_t {
-	PostEffect,
-	BoxFilter,
-	Dissolve,
-	GaussianFilter,
-	GrayScale,
-	OutLine,
-	RadialBlur,
-	Random,
-	SepiaTone,
-	Vignetting,
-	Count,
-};
-
 
 class ShaderManager {
 
@@ -60,6 +35,35 @@ private: // シングルトンデザインパターン
 	~ShaderManager() = default;
 	ShaderManager(const ShaderManager&) = delete;
 	const ShaderManager& operator=(const ShaderManager&) = delete;
+
+
+public:
+
+	/*enum class ModelShaders : uint32_t {
+		Normal,
+		Sprite,
+		Light,
+		Lambert,
+		Phong,
+		PhongNormalMap,
+		Particle,
+		Line,
+		Object3D,
+		Count,
+	};
+	enum class PostEffectShaders : uint32_t {
+		PostEffect,
+		BoxFilter,
+		Dissolve,
+		GaussianFilter,
+		GrayScale,
+		OutLine,
+		RadialBlur,
+		Random,
+		SepiaTone,
+		Vignetting,
+		Count,
+	};*/
 
 
 public: // メンバ関数

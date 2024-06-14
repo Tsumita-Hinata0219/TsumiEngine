@@ -3,7 +3,7 @@
 
 
 // Psoを構築する
-void LinePipeLine::SetupLightPso()
+PsoProperty LinePipeLine::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -89,6 +89,8 @@ void LinePipeLine::SetupLightPso()
 		&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
+
+	return pso_;
 }
 
 

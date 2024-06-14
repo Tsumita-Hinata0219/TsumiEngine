@@ -12,16 +12,15 @@
 
 // PipeLineType
 enum class IPipeLineType : uint32_t {
-	Normal,
-	Sprite,
-	Light,
 	Lambert,
-	Phong,
-	PhongNormalMap,
-	Particle,
+	Light,
 	Line,
+	Normal,
 	Object3D,
-	PostEffect,
+	Particle,
+	PhongNormalMap,
+	Phong,
+	Sprite,
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,
@@ -41,10 +40,7 @@ class IPipeLineState {
 public: // メンバ関数
 
 	// Psoを構築する
-	virtual void SetupLightPso() = 0;
-
-	// RootSignatureのセットアップ
-	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
+	virtual PsoProperty SetUpPso() = 0;
 
 #pragma region Accessor アクセッサ
 
@@ -55,6 +51,10 @@ public: // メンバ関数
 
 
 protected: // メンバ関数
+
+	// RootSignatureのセットアップ
+	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
+
 
 	// InputLayoutのセットアップ
 	void SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset);
@@ -69,6 +69,7 @@ protected: // メンバ関数
 	// Shadersのコンパイル
 	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ModelShaders type);
 	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, PostEffectShaders type);
+
 
 protected: // メンバ変数
 

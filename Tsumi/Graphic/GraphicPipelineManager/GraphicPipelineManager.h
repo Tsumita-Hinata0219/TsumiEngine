@@ -59,7 +59,61 @@ public: // メンバ関数
 
 private: // メンバ変数
 
-	std::vector<unique_ptr<IPipeLineState>> IPipeLine_;
+	// PipeLineを保存しておくvectorコンテナ
+	std::vector<PsoProperty> IPipeLine_;
 
+	// Lambert
+	unique_ptr<LambertPipeLine> lambertPipeLine_;
+
+	// Light
+	unique_ptr<LightPipeLine> lightPipeLine_;
+
+	// Line
+	unique_ptr<LinePipeLine> linePipeLine_;
+
+	// Normal
+	unique_ptr<NormalPipeLine> normalPipeLine_;
+	
+	// Object3D
+	unique_ptr<Object3DPipeLine> object3DPipeLine_;
+
+	// Particle
+	unique_ptr<ParticlePipeLine> particlePipeLine_;
+
+	// PhongNormalMap
+	unique_ptr<PhongNormalMapPipeLine> phongNormalMapPipeLine_;
+
+	// Phong
+	unique_ptr<PhongPipeLine> phongPipeLine_;
+
+	// Sprite
+	unique_ptr<SpritePipeLine> spritePipeLine_;
+
+	// BoxFilter
+	unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
+
+	// Dissolve
+	unique_ptr<DissolvePipeLine> dissolvePipeLine_;
+
+	// GaussianFilter
+	unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
+
+	// GrayScale
+	unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
+
+	// OutLine
+	unique_ptr<OutLinePipeLine> outLinePipeLine_;
+
+	// RadialBlur
+	unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
+
+	// Random
+	unique_ptr<RandomPipeLine> randomPipeLine_;
+
+	// SepiaTone
+	unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
+
+	// Vignetting
+	unique_ptr<VignettingPipeLine> vignettingPipeLine_;
 
 };

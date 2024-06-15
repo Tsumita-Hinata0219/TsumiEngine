@@ -276,9 +276,9 @@ void Object3DGraphicPipeLine::SetupRasterizerState(D3D12_RASTERIZER_DESC& raster
 // Shadersのコンパイル
 void Object3DGraphicPipeLine::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Object3D).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Object3D).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Object3D).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Object3D).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

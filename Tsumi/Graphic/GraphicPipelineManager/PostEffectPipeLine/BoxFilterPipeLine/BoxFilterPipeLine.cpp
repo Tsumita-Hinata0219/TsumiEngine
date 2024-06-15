@@ -38,7 +38,7 @@ PsoProperty BoxFilterPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, PostEffectShaders::BoxFilter);
+	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::BoxFilter);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

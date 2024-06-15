@@ -37,7 +37,7 @@ PsoProperty NormalPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, ModelShaders::Normal);
+	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::ModelShaders::Normal);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

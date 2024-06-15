@@ -38,7 +38,7 @@ PsoProperty RadialBlurPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, PostEffectShaders::RadialBlur);
+	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::RadialBlur);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

@@ -10,7 +10,6 @@
 
 #include "MyMath.h"
 #include "EnumUtilities.h"
-#include "../Project/Math/Struct.h"
 
 
 struct Shaders {
@@ -39,7 +38,7 @@ private: // シングルトンデザインパターン
 
 public:
 
-	/*enum class ModelShaders : uint32_t {
+	enum class ModelShaders {
 		Normal,
 		Sprite,
 		Light,
@@ -51,7 +50,7 @@ public:
 		Object3D,
 		Count,
 	};
-	enum class PostEffectShaders : uint32_t {
+	enum class PostEffectShaders {
 		PostEffect,
 		BoxFilter,
 		Dissolve,
@@ -63,7 +62,7 @@ public:
 		SepiaTone,
 		Vignetting,
 		Count,
-	};*/
+	};
 
 
 public: // メンバ関数

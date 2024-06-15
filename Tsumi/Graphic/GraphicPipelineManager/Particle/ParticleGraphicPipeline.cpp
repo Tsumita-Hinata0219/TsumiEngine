@@ -286,10 +286,10 @@ void ParticleGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& raster
 // Shadersのコンパイル
 void ParticleGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Particle).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Particle).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Particle).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Particle).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
 

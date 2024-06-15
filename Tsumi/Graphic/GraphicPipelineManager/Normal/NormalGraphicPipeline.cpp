@@ -282,10 +282,10 @@ void NormalGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasteriz
 // Shadersのコンパイル
 void NormalGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Normal).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Normal).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ModelShaders::Normal).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Normal).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
 

@@ -1,17 +1,18 @@
 #pragma once
 
+#include "ShaderManager.h"
+
 #include <d3dx12.h>
 #include <dxcapi.h>
 
 #include "MyMath.h"
 #include "Struct.h"
 #include "DirectXCommon.h"
-#include "ShaderManager.h"
 #include "GraphicPipelineStructure.h"
 
 
 // PipeLineType
-enum class IPipeLineType : uint32_t {
+enum class IPipeLineType {
 	Lambert,
 	Light,
 	Line,
@@ -67,8 +68,8 @@ protected: // メンバ関数
 	void SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE Cull, D3D12_FILL_MODE fill);
 
 	// Shadersのコンパイル
-	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ModelShaders type);
-	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, PostEffectShaders type);
+	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type);
+	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type);
 
 
 protected: // メンバ変数

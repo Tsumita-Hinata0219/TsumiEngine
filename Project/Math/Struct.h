@@ -186,29 +186,3 @@ struct ParticleTransformationMatrix {
 	Matrix4x4 uvTansform;
 };
 
-
-enum class ModelShaders : uint32_t {
-	Normal,
-	Sprite,
-	Light,
-	Lambert,
-	Phong,
-	PhongNormalMap,
-	Particle,
-	Line,
-	Object3D,
-	Count,
-};
-enum class PostEffectShaders : uint32_t {
-	PostEffect,
-	BoxFilter,
-	Dissolve,
-	GaussianFilter,
-	GrayScale,
-	OutLine,
-	RadialBlur,
-	Random,
-	SepiaTone,
-	Vignetting,
-	Count,
-};

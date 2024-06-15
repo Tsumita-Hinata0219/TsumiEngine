@@ -286,9 +286,9 @@ void PostEffectGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rast
 // Shadersのコンパイル
 void PostEffectGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(PostEffectShaders::PostEffect).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::PostEffectShaders::PostEffect).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(PostEffectShaders::PostEffect).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::PostEffectShaders::PostEffect).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

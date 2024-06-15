@@ -38,7 +38,7 @@ PsoProperty LambertPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::ModelShaders::Lambert);
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::ModelShaders::Lambert);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

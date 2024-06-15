@@ -51,11 +51,13 @@ public: // メンバ関数
 #pragma endregion
 
 
-protected: // メンバ関数
+private: // メンバ関数
 
 	// RootSignatureのセットアップ
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
 
+
+protected: // メンバ関数
 
 	// InputLayoutのセットアップ
 	void SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset);
@@ -68,8 +70,8 @@ protected: // メンバ関数
 	void SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE Cull, D3D12_FILL_MODE fill);
 
 	// Shadersのコンパイル
-	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type);
-	void SetUpShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type);
+	void SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type);
+	void SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type);
 
 
 protected: // メンバ変数

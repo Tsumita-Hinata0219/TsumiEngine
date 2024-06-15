@@ -38,7 +38,7 @@ PsoProperty GrayScalePipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::GrayScale);
+	SetUpPostEffectShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::GrayScale);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

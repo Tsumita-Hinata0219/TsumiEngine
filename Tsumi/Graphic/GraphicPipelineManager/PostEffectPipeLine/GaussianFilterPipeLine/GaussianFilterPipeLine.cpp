@@ -38,7 +38,7 @@ PsoProperty GaussianFilterPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::GaussianFilter);
+	SetUpPostEffectShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::GaussianFilter);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

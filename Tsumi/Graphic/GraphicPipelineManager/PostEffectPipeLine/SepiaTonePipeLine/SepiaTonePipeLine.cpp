@@ -38,7 +38,7 @@ PsoProperty SepiaTonePipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::BoxFilter);
+	SetUpPostEffectShader(vertexShaderBlob, pixelShaderBlob, ShaderManager::PostEffectShaders::BoxFilter);
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

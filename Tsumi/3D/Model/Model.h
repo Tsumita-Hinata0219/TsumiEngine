@@ -119,11 +119,16 @@ public: // メンバ関数
 	/// <summary>
 	/// SKinClusterの生成
 	/// </summary>
-	static SkinCluster CreateSkinCluster(
-		const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+	SkinCluster CreateSkinCluster(
 		const Skeleton& skeleton, const ModelData& modelData,
 		const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap,
 		uint32_t descriptorSize);
+
+
+	/// <summary>
+	/// SkinCLusterの更新処理
+	/// </summary>
+	void UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton);
 
 #pragma region Get
 

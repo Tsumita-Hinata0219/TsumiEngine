@@ -116,6 +116,15 @@ public: // メンバ関数
 	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
 
+	/// <summary>
+	/// SKinClusterの生成
+	/// </summary>
+	static SkinCluster CreateSkinCluster(
+		const Microsoft::WRL::ComPtr<ID3D12Device>& device,
+		const Skeleton& skeleton, const ModelData& modelData,
+		const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap,
+		uint32_t descriptorSize);
+
 #pragma region Get
 
 	// WorldTransform

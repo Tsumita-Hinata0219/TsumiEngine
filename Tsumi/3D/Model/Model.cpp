@@ -473,6 +473,33 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 
 
 /// <summary>
+/// SKinClusterの生成
+/// </summary>
+SkinCluster Model::CreateSkinCluster(const Microsoft::WRL::ComPtr<ID3D12Device>& device, const Skeleton& skeleton, const ModelData& modelData, const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize)
+{
+	// 作成するSkinCluster
+	SkinCluster result{};
+
+	// palette用のResourceを確保
+
+
+	// palette用のSRVを作成
+
+
+	// influence用のResourceを確保
+
+
+	// influence用のVBVを作成
+
+
+	// InverseBindPoseMatrixの保存領域を作成
+
+
+	// ModelDataのSkinCluster情報を解析してInfluenceの中身を埋める
+}
+
+
+/// <summary>
 /// mtlファイルを読み込む関数
 /// </summary>
 MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName)

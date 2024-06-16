@@ -24,5 +24,6 @@ private:
 	Animation testAnimation_{};
 	float animationtime = 0.0f;
 	Skeleton skeleton_{};
+	SkinCluster skinCluster_{};
 };
 

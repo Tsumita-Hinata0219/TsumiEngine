@@ -475,7 +475,7 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 /// <summary>
 /// SKinClusterの生成
 /// </summary>
-SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton, const ModelData& modelData, const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap, uint32_t descriptorSize)
+SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 {
 	// 作成するSkinCluster
 	SkinCluster result{};
@@ -522,7 +522,7 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton, const ModelData& 
 
 	// InverseBindPoseMatrixの保存領域を作成。単位行列で埋める
 	result.inverseBindPosematrices.resize(skeleton.joints.size());
-	std::generate(result.inverseBindPosematrices.begin(), result.inverseBindPosematrices.end(), Matrix4x4::identity);
+	std::generate(result.inverseBindPosematrices.begin(), result.inverseBindPosematrices.end(), []() { return Matrix4x4::identity; });
 
 	// ModelDataのSkinCluster情報を解析してInfluenceの中身を埋める
 	for (const auto& jointWeight : this->objData_.skinClusterData) { // ModelのSkinClusterの情報を解析
@@ -538,7 +538,7 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton, const ModelData& 
 			for (uint32_t index = 0; index < kNumMaxInfluence; ++index) { // 空いているところに入れる
 				if (currentInfluence.weights[index] == 0.0f) { // weight == 0 が開いている状態なので、その場所にweightとjointのindexを代入
 					currentInfluence.weights[index] = vertexWeight.weight;
-					currentInfluence.weights[index] = (*it).second;
+					currentInfluence.jointIndices[index] = (*it).second;
 					break;
 				}
 			}

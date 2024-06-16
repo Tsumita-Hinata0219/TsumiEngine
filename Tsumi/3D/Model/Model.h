@@ -119,10 +119,7 @@ public: // メンバ関数
 	/// <summary>
 	/// SKinClusterの生成
 	/// </summary>
-	SkinCluster CreateSkinCluster(
-		const Skeleton& skeleton, const ModelData& modelData,
-		const Microsoft::WRL::ComPtr<ID3D12DescriptorHeap>& descriptorHeap,
-		uint32_t descriptorSize);
+	SkinCluster CreateSkinCluster(const Skeleton& skeleton);
 
 
 	/// <summary>

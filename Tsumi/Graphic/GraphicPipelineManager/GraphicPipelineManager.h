@@ -62,58 +62,58 @@ private: // メンバ変数
 	// PipeLineを保存しておくvectorコンテナ
 	std::vector<PsoProperty> IPipeLine_;
 
-	// Lambert
-	std::unique_ptr<LambertPipeLine> lambertPipeLine_;
+	//// Lambert
+	//std::unique_ptr<LambertPipeLine> lambertPipeLine_;
 
-	// Light
-	std::unique_ptr<LightPipeLine> lightPipeLine_;
+	//// Light
+	//std::unique_ptr<LightPipeLine> lightPipeLine_;
 
-	// Line
-	std::unique_ptr<LinePipeLine> linePipeLine_;
+	//// Line
+	//std::unique_ptr<LinePipeLine> linePipeLine_;
 
-	// Normal
-	std::unique_ptr<NormalPipeLine> normalPipeLine_;
-	
-	// Object3D
-	std::unique_ptr<Object3DPipeLine> object3DPipeLine_;
+	//// Normal
+	//std::unique_ptr<NormalPipeLine> normalPipeLine_;
+	//
+	//// Object3D
+	//std::unique_ptr<Object3DPipeLine> object3DPipeLine_;
 
-	// Particle
-	std::unique_ptr<ParticlePipeLine> particlePipeLine_;
+	//// Particle
+	//std::unique_ptr<ParticlePipeLine> particlePipeLine_;
 
-	// PhongNormalMap
-	std::unique_ptr<PhongNormalMapPipeLine> phongNormalMapPipeLine_;
+	//// PhongNormalMap
+	//std::unique_ptr<PhongNormalMapPipeLine> phongNormalMapPipeLine_;
 
-	// Phong
-	std::unique_ptr<PhongPipeLine> phongPipeLine_;
+	//// Phong
+	//std::unique_ptr<PhongPipeLine> phongPipeLine_;
 
-	// Sprite
-	std::unique_ptr<SpritePipeLine> spritePipeLine_;
+	//// Sprite
+	//std::unique_ptr<SpritePipeLine> spritePipeLine_;
 
-	// BoxFilter
-	std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
+	//// BoxFilter
+	//std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
 
-	// Dissolve
-	std::unique_ptr<DissolvePipeLine> dissolvePipeLine_;
+	//// Dissolve
+	//std::unique_ptr<DissolvePipeLine> dissolvePipeLine_;
 
-	// GaussianFilter
-	std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
+	//// GaussianFilter
+	//std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
 
-	// GrayScale
-	std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
+	//// GrayScale
+	//std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
 
-	// OutLine
-	std::unique_ptr<OutLinePipeLine> outLinePipeLine_;
+	//// OutLine
+	//std::unique_ptr<OutLinePipeLine> outLinePipeLine_;
 
-	// RadialBlur
-	std::unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
+	//// RadialBlur
+	//std::unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
 
-	// Random
-	std::unique_ptr<RandomPipeLine> randomPipeLine_;
+	//// Random
+	//std::unique_ptr<RandomPipeLine> randomPipeLine_;
 
-	// SepiaTone
-	std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
+	//// SepiaTone
+	//std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
 
-	// Vignetting
-	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
+	//// Vignetting
+	//std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
 
 };

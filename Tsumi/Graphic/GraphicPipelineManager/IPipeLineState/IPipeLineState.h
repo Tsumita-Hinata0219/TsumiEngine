@@ -1,5 +1,8 @@
 #pragma once
 
+
+// ShaderManagerの前方宣言
+class ShaderManager;
 #include "ShaderManager.h"
 
 #include <d3dx12.h>

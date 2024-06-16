@@ -1,20 +1,20 @@
-#pragma once
-
-#include "IPipeLineState.h"
-
-/* VignettingPipeLineクラス */
-class VignettingPipeLine : public IPipeLineState {
-
-public:
-
-	// Psoを構築する
-	PsoProperty SetUpPso() override;
-
-
-private:
-
-	// RootSignatureのセットアップ
-	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
-
-};
-
+//#pragma once
+//
+//#include "IPipeLineState.h"
+//
+///* VignettingPipeLineクラス */
+//class VignettingPipeLine : public IPipeLineState {
+//
+//public:
+//
+//	// Psoを構築する
+//	PsoProperty SetUpPso() override;
+//
+//
+//private:
+//
+//	// RootSignatureのセットアップ
+//	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
+//
+//};
+//

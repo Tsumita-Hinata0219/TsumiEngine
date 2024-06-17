@@ -6,8 +6,14 @@
 void TestHuman::Init()
 {
 	testModel_ = make_unique<Model>();
-	testModel_->CreateGLTFModel("TestSimpleSkin", "simpleSkin", "simpleSkin.png");
-	testAnimation_ = AnimationManager::LoadAnimationFile("TestSimpleSkin", "simpleSkin");
+
+	// SimpleSkin
+	//testModel_->CreateGLTFModel("TestSimpleSkin", "simpleSkin", "simpleSkin.png");
+	//testAnimation_ = AnimationManager::LoadAnimationFile("TestSimpleSkin", "simpleSkin");
+
+	// Human
+	testModel_->CreateGLTFModel("TestHuman", "walk", "uvChecker.png");
+	testAnimation_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
 
 	skeleton_ = testModel_->CreateSkeleton();
 	skinCluster_ = testModel_->CreateSkinCluster(skeleton_);
@@ -23,7 +29,7 @@ void TestHuman::Update()
 	wt_.UpdateMatrix();
 
 	// アニメーションの時間を進める
-	//animationtime += 1.0f / 60.0f;
+	animationtime += 1.0f / 60.0f;
 	if (animationtime >= 1.0f) {
 		animationtime = 0.0f;
 	}

@@ -1,17 +1,17 @@
-#include "SkinningObject3d.h"
+#include "SkinningObject3dGraphicPipeLine.h"
 
 
 
 // SkinningObject3dクラスのインスタンス取得
-SkinningObject3d* SkinningObject3d::GetInstance()
+SkinningObject3dGraphicPipeLine* SkinningObject3dGraphicPipeLine::GetInstance()
 {
-	static SkinningObject3d instance;
+	static SkinningObject3dGraphicPipeLine instance;
 	return &instance;
 }
 
 
 // 初期化処理
-void SkinningObject3d::Initialize()
+void SkinningObject3dGraphicPipeLine::Initialize()
 {
 
 
@@ -20,9 +20,9 @@ void SkinningObject3d::Initialize()
 
 
 // PSOを構築する
-void SkinningObject3d::SetUpSkinningObject3dPso()
+void SkinningObject3dGraphicPipeLine::SetUpSkinningObject3dPso()
 {
-	SkinningObject3d* skinningObject3dGraphicPipeline = SkinningObject3d::GetInstance();
+	SkinningObject3dGraphicPipeLine* skinningObject3dGraphicPipeline = SkinningObject3dGraphicPipeLine::GetInstance();
 
 
 	/* --- RootSignatureを作成 --- */
@@ -31,15 +31,11 @@ void SkinningObject3d::SetUpSkinningObject3dPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
-	skinningObject3dGraphicPipeline->SetupInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	skinningObject3dGraphicPipeline->SetupInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	skinningObject3dGraphicPipeline->SetupInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	skinningObject3dGraphicPipeline->SetupInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	skinningObject3dGraphicPipeline->SetupInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
+	std::array<D3D12_INPUT_ELEMENT_DESC, 7> inputElementDescs{};
+	skinningObject3dGraphicPipeline->SetInputElementDescs(inputElementDescs);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	skinningObject3dGraphicPipeline->SetupInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
+	skinningObject3dGraphicPipeline->SetInputLayout(inputLayoutDesc, inputElementDescs);
 
 
 	/* --- BlendStateを設定する --- */
@@ -63,7 +59,7 @@ void SkinningObject3d::SetUpSkinningObject3dPso()
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
 
-	graphicsPipelineStateDesc.pRootSignature = SkinningObject3d::GetInstance()->skinningObject3dPso_.rootSignature; // RootSignature
+	graphicsPipelineStateDesc.pRootSignature = SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.rootSignature; // RootSignature
 
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; // InputLayout
 
@@ -111,21 +107,21 @@ void SkinningObject3d::SetUpSkinningObject3dPso()
 	HRESULT hr{};
 	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
-		IID_PPV_ARGS(&SkinningObject3d::GetInstance()->skinningObject3dPso_.graphicsPipelineState));
+		IID_PPV_ARGS(&SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
 }
 
 
 
 // RootSignatureのセットアップ
-void SkinningObject3d::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void SkinningObject3dGraphicPipeLine::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
 	// 色に関する
-	D3D12_ROOT_PARAMETER rootParameters[5]{};
+	D3D12_ROOT_PARAMETER rootParameters[6]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号0とバインド
@@ -180,14 +176,27 @@ void SkinningObject3d::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
 
 
+	// MatrixPaletteに関する
+	D3D12_DESCRIPTOR_RANGE descriptorRangeForInstancing[1] = {};
+	descriptorRangeForInstancing[0].BaseShaderRegister = 0;
+	descriptorRangeForInstancing[0].NumDescriptors = 1;
+	descriptorRangeForInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeForInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
+	rootParameters[5].DescriptorTable.pDescriptorRanges = descriptorRangeForInstancing;
+	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeForInstancing); 
+
+
 	// シリアライズしてバイナリにする
 	HRESULT hr_ = D3D12SerializeRootSignature(
 		&descriptionRootSignature,
 		D3D_ROOT_SIGNATURE_VERSION_1,
-		&SkinningObject3d::GetInstance()->skinningObject3dPso_.signatureBlob,
-		&SkinningObject3d::GetInstance()->skinningObject3dPso_.errorBlob);
+		&SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.signatureBlob,
+		&SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.errorBlob);
 	if (FAILED(hr_)) {
-		Log(reinterpret_cast<char*>(SkinningObject3d::GetInstance()->skinningObject3dPso_.errorBlob->GetBufferPointer()));
+		Log(reinterpret_cast<char*>(SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.errorBlob->GetBufferPointer()));
 		assert(false);
 	}
 
@@ -195,30 +204,81 @@ void SkinningObject3d::SetupRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	// バイナリを元に生成
 	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
-		SkinningObject3d::GetInstance()->skinningObject3dPso_.signatureBlob->GetBufferPointer(),
-		SkinningObject3d::GetInstance()->skinningObject3dPso_.signatureBlob->GetBufferSize(),
-		IID_PPV_ARGS(&SkinningObject3d::GetInstance()->skinningObject3dPso_.rootSignature));
+		SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.signatureBlob->GetBufferPointer(),
+		SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.signatureBlob->GetBufferSize(),
+		IID_PPV_ARGS(&SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_.rootSignature));
 	assert(SUCCEEDED(hr_));
 }
 
 
 // InputLayoutのセットアップ
-void SkinningObject3d::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
+void SkinningObject3dGraphicPipeLine::SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
 {
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
 	inputElementDescs.Format = Format;
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
-void SkinningObject3d::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
+void SkinningObject3dGraphicPipeLine::SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = numInputElements;
 }
+void SkinningObject3dGraphicPipeLine::SetInputElementDescs(std::array<D3D12_INPUT_ELEMENT_DESC, 7>& inputElementDescs)
+{
+	// POSITION
+	inputElementDescs[0].SemanticName = "POSITION";
+	inputElementDescs[0].SemanticIndex = 0;
+	inputElementDescs[0].Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+	inputElementDescs[0].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// TEXCOORD
+	inputElementDescs[1].SemanticName = "TEXCOORD";
+	inputElementDescs[1].SemanticIndex = 0;
+	inputElementDescs[1].Format = DXGI_FORMAT_R32G32_FLOAT;
+	inputElementDescs[1].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// NORMAL
+	inputElementDescs[2].SemanticName = "NORMAL";
+	inputElementDescs[2].SemanticIndex = 0;
+	inputElementDescs[2].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	inputElementDescs[2].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// WORLDPOSITION
+	inputElementDescs[3].SemanticName = "WORLDPOSITION";
+	inputElementDescs[3].SemanticIndex = 0;
+	inputElementDescs[3].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	inputElementDescs[3].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// CAMERAPOSITION
+	inputElementDescs[4].SemanticName = "CAMERAPOSITION";
+	inputElementDescs[4].SemanticIndex = 0;
+	inputElementDescs[4].Format = DXGI_FORMAT_R32G32B32_FLOAT;
+	inputElementDescs[4].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// WEIGHT
+	inputElementDescs[5].SemanticName = "WEIGHT";
+	inputElementDescs[5].SemanticIndex = 0;
+	inputElementDescs[5].Format = DXGI_FORMAT_R32G32B32A32_FLOAT; // float32_t4
+	inputElementDescs[5].InputSlot = 1; // 1番目のslotのVBVのことだと伝える
+	inputElementDescs[5].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+
+	// INDEX
+	inputElementDescs[6].SemanticName = "INDEX";
+	inputElementDescs[6].SemanticIndex = 0;
+	inputElementDescs[6].Format = DXGI_FORMAT_R32G32B32A32_SINT; // int32_t4
+	inputElementDescs[6].InputSlot = 1; // 1番目のslotのVBVのことだと伝える
+	inputElementDescs[6].AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+}
+void SkinningObject3dGraphicPipeLine::SetInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const std::array<D3D12_INPUT_ELEMENT_DESC, 7>& inputElementDescs)
+{
+	inputLayoutDesc.pInputElementDescs = inputElementDescs.data();
+	inputLayoutDesc.NumElements = static_cast<UINT>(inputElementDescs.size());
+}
 
 
 // BlendStateのセットアップ
-void SkinningObject3d::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode)
+void SkinningObject3dGraphicPipeLine::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode)
 {
 	blendDesc.RenderTargetWriteMask =
 		D3D12_COLOR_WRITE_ENABLE_ALL;
@@ -279,7 +339,7 @@ void SkinningObject3d::SetupBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc
 
 
 // RasterizerStateのセットアップ
-void SkinningObject3d::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc)
+void SkinningObject3dGraphicPipeLine::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc)
 {
 	// 裏面(時計回り)を表示しない
 	rasterizerDesc.CullMode = D3D12_CULL_MODE_BACK;
@@ -289,11 +349,11 @@ void SkinningObject3d::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDes
 
 
 // Shadersのコンパイル
-void SkinningObject3d::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
+void SkinningObject3dGraphicPipeLine::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().Phong.VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetShaderType().skinningObject3d.VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().Phong.PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetShaderType().skinningObject3d.PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

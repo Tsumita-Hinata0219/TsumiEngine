@@ -17,6 +17,7 @@
 #include "ParticleGraphicPipeline.h"
 #include "LineGraphicPipeline.h"
 #include "PostEffectGraphicPipeline.h"
+#include "SkinningObject3dGraphicPipeLine.h"
 
 
 

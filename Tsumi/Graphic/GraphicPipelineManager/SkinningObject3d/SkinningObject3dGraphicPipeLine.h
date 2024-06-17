@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <d3dx12.h>
 #include <dxcapi.h>
 
@@ -11,7 +10,7 @@
 #include "GraphicPipelineStructure.h"
 
 
-class SkinningObject3d
+class SkinningObject3dGraphicPipeLine
 {
 
 public: // メンバ関数
@@ -19,7 +18,7 @@ public: // メンバ関数
 	/// <summary>
 	/// PhongGraphicPipelineクラスのインスタンス取得
 	/// </summary>
-	static SkinningObject3d* GetInstance();
+	static SkinningObject3dGraphicPipeLine* GetInstance();
 
 	/// <summary>
 	/// 初期化処理
@@ -34,7 +33,7 @@ public: // メンバ関数
 	/// <summary>
 	/// phongPSOの取得
 	/// </summary>
-	static PsoProperty GetPsoProperty() { return SkinningObject3d::GetInstance()->skinningObject3dPso_; }
+	static PsoProperty GetPsoProperty() { return SkinningObject3dGraphicPipeLine::GetInstance()->skinningObject3dPso_; }
 
 
 private:
@@ -49,7 +48,9 @@ private:
 	/// </summary>
 	void SetupInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset);
 	void SetupInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements);
-
+	void SetInputElementDescs(std::array<D3D12_INPUT_ELEMENT_DESC, 7>& inputElementDescs);
+	void SetInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const std::array<D3D12_INPUT_ELEMENT_DESC, 7>& inputElementDescs);
+	
 	/// <summary>
 	/// BlendStateのセットアップ
 	/// </summary>
@@ -71,4 +72,3 @@ private: // メンバ変数
 	PsoProperty skinningObject3dPso_{};
 
 };
-

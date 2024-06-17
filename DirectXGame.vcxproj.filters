@@ -21,6 +21,8 @@
     <FxCompile Include="Resources\shaders\Object3d.PS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -392,6 +394,7 @@
     <None Include="Resources\shaders\MathFunc.hlsli" />
     <None Include="Resources\shaders\PostEffect.hlsli" />
     <None Include="cpp.hint" />
+    <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

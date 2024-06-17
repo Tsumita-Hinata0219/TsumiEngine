@@ -10,6 +10,7 @@
 // 定数バッファー構造体
 struct TransformationMatrix {
 	Matrix4x4 World;
+	Matrix4x4 WorldInverseTranspose;
 };
 struct SRT {
 	Vector3 scale;
@@ -35,6 +36,7 @@ struct WorldTransform {
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};
+	Matrix4x4 WorldInverseTranspose{};
 
 	// ペアレント
 	const WorldTransform* parent{};

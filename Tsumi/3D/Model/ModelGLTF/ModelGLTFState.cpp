@@ -90,8 +90,8 @@ void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, Skin
 
 
 	// RootのMatrixを適用する
-	//worldTransform.matWorld = pModel->GetNode().localMatrix * worldTransform.matWorld;
-	//worldTransform.TransferMatrix();
+	/*worldTransform.matWorld = pModel->GetNode().localMatrix * worldTransform.matWorld;
+	worldTransform.TransferMatrix();*/
 
 
 	// コマンドコール

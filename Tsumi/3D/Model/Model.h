@@ -11,11 +11,11 @@
 #include "AnimationManager.h"
 
 #include "Transform.h"
-#include "Mesh.h"
-#include "Material.h"
+#include "ModelStructure/Mesh/Mesh.h"
+#include "ModelStructure/Material/Material.h"
 
-#include "Node.h"
-#include "Skeleton.h"
+//#include "Node.h"
+//#include "Skeleton.h"
 
 
 class ModelManager;

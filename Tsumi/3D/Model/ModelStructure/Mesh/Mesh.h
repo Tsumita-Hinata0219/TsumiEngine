@@ -1,7 +1,7 @@
 #pragma once
 
 #include "MyMath.h"
-#include "Material.h"
+#include "ModelStructure/Material/Material.h"
 
 
 // モデルデータ

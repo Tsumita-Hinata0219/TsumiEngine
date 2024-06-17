@@ -19,7 +19,7 @@ void TestHuman::Init()
 	skinCluster_ = testModel_->CreateSkinCluster(skeleton_);
 
 	wt_.Initialize();
-
+	wt_.srt.rotate.y = degreesToRadians(90.0f);
 }
 
 
@@ -28,8 +28,35 @@ void TestHuman::Update()
 {
 	wt_.UpdateMatrix();
 
-	// アニメーションの時間を進める
-	animationtime += 1.0f / 60.0f;
+	// stick入力
+	if (Input::GetInstance()->GetLStick().x >= 0.3f) {
+
+		// アニメーションの時間を進める
+		animationtime += 1.0f / 60.0f;
+
+		// 回転の適用
+		wt_.srt.rotate.y = degreesToRadians(90.0f);
+
+		// 座標を少しずつずらす
+		wt_.srt.translate.x += 0.02f;
+	}
+	else if (Input::GetInstance()->GetLStick().x <= -0.3f) {
+
+		// アニメーションの時間を進める
+		animationtime += 1.0f / 60.0f;
+
+		// 回転の適用
+		wt_.srt.rotate.y = degreesToRadians(-90.0f);
+
+		// 座標を少しずつずらす
+		wt_.srt.translate.x -= 0.02f;
+	}
+	else {
+		// アニメーションの時間を止める
+		// 0固定
+		animationtime = 0.0f;
+	}
+
 	if (animationtime >= 1.0f) {
 		animationtime = 0.0f;
 	}

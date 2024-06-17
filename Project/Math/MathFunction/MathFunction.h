@@ -51,6 +51,9 @@ float Lerp(const float& start, const float& end, float t);
 float Clamp(const float& value, const float& minValue, const float& maxValue);
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
 float APOneAsZeroCloser(float value);
+// 度数法を入力して弧度法に変換する関数
+float degreesToRadians(float degrees);
+float degreesToRadians(float currentRadian, float degrees);
 
 
 

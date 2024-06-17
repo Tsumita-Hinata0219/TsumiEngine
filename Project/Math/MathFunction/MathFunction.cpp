@@ -63,6 +63,16 @@ float APOneAsZeroCloser(float value) {
 	return exp(-pow(value, 2.0f));
 }
 
+// 度数法を入力して弧度法に変換する関数
+float degreesToRadians(float degrees)
+{
+	return degrees * float((M_PI / 180.0f));
+}
+float degreesToRadians(float currentRadian, float degrees)
+{
+	return currentRadian + degrees * float((M_PI / 180.0f));
+}
+
 
 
 

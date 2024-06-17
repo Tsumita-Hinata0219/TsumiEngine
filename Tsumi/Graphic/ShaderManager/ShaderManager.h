@@ -37,6 +37,7 @@ struct ShadersType {
 	ShadersMode Line;
 	ShadersMode Object3d;
 	ShadersMode PostEffect;
+	ShadersMode skinningObject3d;
 };
 
 
@@ -147,6 +148,11 @@ private: // メンバ関数
 	/// 
 	/// </summary>
 	static void PostEffectShader();
+
+	/// <summary>
+	/// 
+	/// </summary>
+	static void SkinningObject3dShader();
 
 #pragma endregion
 

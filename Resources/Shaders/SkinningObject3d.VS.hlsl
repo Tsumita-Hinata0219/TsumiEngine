@@ -25,7 +25,6 @@ struct VertexShaderInput
     int4 index : INDEX0;
 };
 
-
 struct Skinned
 {
     float4 position;

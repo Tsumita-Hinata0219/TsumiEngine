@@ -22,6 +22,9 @@ void TestHuman::Update()
 
 	// アニメーションの時間を進める
 	animationtime += 1.0f / 60.0f;
+	if (animationtime >= 1.0f) {
+		animationtime = 0.0f;
+	}
 
 	// アニメーションの更新を行って、骨ごとのLocal情報を更新する
 	testModel_->ApplyAnimation(skeleton_, testAnimation_, animationtime);

@@ -53,5 +53,6 @@ void TestHuman::Update()
 // 描画処理
 void TestHuman::Draw(Camera* camera)
 {
-	testModel_->Draw(wt_, camera);
+	//testModel_->Draw(wt_, camera);
+	testModel_->AnimDraw(wt_, skinCluster_, camera);
 }

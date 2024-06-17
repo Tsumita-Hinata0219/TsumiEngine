@@ -40,6 +40,7 @@ public: // メンバ関数
 	/// 描画処理
 	/// </summary>
 	virtual void Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) = 0;
+	virtual void AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera) = 0;
 
 	
 #pragma region Get

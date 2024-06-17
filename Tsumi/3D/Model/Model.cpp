@@ -397,6 +397,10 @@ void Model::Draw(WorldTransform worldTransform, Camera* camera) {
 
 	this->state_->Draw(this, worldTransform, camera);
 }
+void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+{
+	this->state_->AnimDraw(this, worldTransform, skinCluster, camera);
+}
 void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算

@@ -93,6 +93,7 @@ public: // メンバ関数
 	/// 描画処理
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
+	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
 	void DrawN(Transform transform, Camera* camera);
 
 	/// <summary>

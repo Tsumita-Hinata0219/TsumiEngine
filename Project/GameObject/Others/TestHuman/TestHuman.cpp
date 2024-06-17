@@ -19,7 +19,7 @@ void TestHuman::Init()
 	skinCluster_ = testModel_->CreateSkinCluster(skeleton_);
 
 	wt_.Initialize();
-	wt_.srt.rotate.y = 3.0f;
+
 }
 
 

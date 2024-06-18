@@ -9,8 +9,9 @@
 #pragma comment(lib,"xinput.lib")
 #pragma comment(lib, "dxguid.lib")
 
-#include "WinApp.h"
-#include "Struct.h"
+#include "../Base/WinApp/WinApp.h"
+#include "../Project/Math/Struct.h"
+#include "../../Project/Math/MathStructure/Vector/Vector.h"
 
 #include <cassert>
 #include <wrl.h>

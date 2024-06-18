@@ -2,7 +2,7 @@
 
 #include "MyMath.h"
 #include "AnimationDataArray.h"
-#include "KeyFrameAnimation.h"
+#include "KeyFrameAnimation/KeyFrameAnimation.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>

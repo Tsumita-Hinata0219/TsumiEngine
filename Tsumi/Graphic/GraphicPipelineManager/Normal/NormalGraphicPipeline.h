@@ -4,11 +4,12 @@
 #include <d3dx12.h>
 #include <dxcapi.h>
 
-#include "MyMath.h"
-#include "Struct.h"
-#include "DirectXCommon.h"
-#include "ShaderManager.h"
-#include "GraphicPipelineStructure.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../Graphic/ShaderManager/ShaderManager.h"
+#include "../GraphicPipelineManager.h"
+#include "Graphic/GraphicPipelineManager/GraphicPipelineStructure.h"
 
 
 

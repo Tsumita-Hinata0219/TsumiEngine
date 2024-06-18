@@ -3,7 +3,7 @@
 #include "Model.h"
 #include "Sprite.h"
 #include "TextureManager.h"
-#include "Audio.h"
+#include "Audio/Audio.h"
 #include "Input.h"
 #include "SpriteTransform.h"
 #include "WorldTransform.h"
@@ -24,4 +24,4 @@
 #include "BaseParticle.h"
 
 #include "AnimationManager.h"
-#include "KeyFrameAnimation.h"
+#include "KeyFrameAnimation/KeyFrameAnimation.h"

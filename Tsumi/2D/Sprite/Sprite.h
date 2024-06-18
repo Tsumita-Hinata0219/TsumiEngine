@@ -7,7 +7,7 @@
 #include "ViewProjection.h"
 #include "Camera.h"
 #include "TextureManager.h"
-#include "WinApp.h"
+#include "../WinApp/WinApp.h"
 #include "DirectXCommon.h"
 #include "SpriteGraphicPipeline.h"
 #include "CreateResource.h"

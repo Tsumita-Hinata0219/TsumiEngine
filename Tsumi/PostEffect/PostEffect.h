@@ -1,10 +1,10 @@
 #pragma once
 
-#include "CommandManager.h"
-#include "MyMath.h"
-#include "DescriptorManager.h"
-#include "CreateResource.h"
-#include "PostEffectGraphicPipeline.h"
+#include "CommandManager/CommandManager.h"
+#include "../Project/Math/MyMath.h"
+#include "CreateResource/CreateResource.h"
+#include "DescriptorManager/DescriptorManager.h"
+#include "Graphic/GraphicPipelineManager/PostEffect/PostEffectGraphicPipeline.h"
 
 
 /* PostEffectクラス */

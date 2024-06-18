@@ -1,12 +1,14 @@
 #pragma once
 
-#include "CommandManager.h"
-#include "MyMath.h"
-#include "Struct.h"
-#include "IParticleState.h"
-#include "ParticleGraphicPipeline.h"
-#include "CreateResource.h"
-#include "DescriptorManager.h"
+#include "CommandManager/CommandManager.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
+#include "../IParticle.h"
+#include "Particle/IParticleState.h"
+#include "Graphic/GraphicPipelineManager/Particle/ParticleGraphicPipeline.h"
+#include "CreateResource/CreateResource.h"
+#include "DescriptorManager/DescriptorManager.h"
+#include "../Project/GameObject/Camera/Camera.h"
 #define INSTANCE_MAX 1000;
 
 

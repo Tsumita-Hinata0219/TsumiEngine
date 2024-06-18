@@ -1,10 +1,11 @@
 #pragma once
 
-#include "CommandManager.h"
-#include "MyMath.h"
-#include "DescriptorManager.h"
-#include "CreateResource.h"
-#include "PostEffectGraphicPipeline.h"
+#include "Base/WinApp/WinApp.h"
+#include "CommandManager/CommandManager.h"
+#include "../Project/Math/MyMath.h"
+#include "CreateResource/CreateResource.h"
+#include "DescriptorManager/DescriptorManager.h"
+#include "Graphic/GraphicPipelineManager/Particle/ParticleGraphicPipeline.h"
 #include "PostEffect/PostEffectMaterial/PostEffectMaterial.h"
 
 

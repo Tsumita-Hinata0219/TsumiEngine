@@ -1,8 +1,10 @@
 #pragma once
-#include "../WinApp/WinApp.h"
-#include "DirectXCommon.h"
-#include "CommandManager.h"
-#include "RTVManager.h"
+
+
+#include "../Base/WinApp/WinApp.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../CommandManager/CommandManager.h"
+#include "../View/RTVManager/RTVManager.h"
 #include "JapaneseGlyphArray.h"
 
 class ImGuiManager {

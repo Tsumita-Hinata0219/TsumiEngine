@@ -10,7 +10,11 @@ struct Material
     float contrast;
     float saturation;
     float brightness;
-    float hue;
+    float hueShift;
+    float temperature;
+    float tint;
+    float postExposure;
+    float4 colorFilter;
     float gamma;
 };
 ConstantBuffer<Material> gMaterial : register(b1);
@@ -35,6 +39,13 @@ float3 AdjustHue(float3 color, float hue)
     );
     return mul(rotationMatrix, color);
 }
+// 色温度とティント調整用関数
+float3 AdjustTemperatureTint(float3 color, float temperature, float tint)
+{
+    float3 tAdjust = float3(1.0 + 0.01 * temperature, 1.0, 1.0 - 0.01 * temperature);
+    float3 ttAdjust = tAdjust + float3(0.0, 0.01 * tint, 0.0);
+    return color * ttAdjust;
+}
 
 
 PixelShaderOutput main(VertexShaderOutput input)
@@ -50,23 +61,43 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     // コントラスト調整
     float3 meanColor = float3(0.5, 0.5, 0.5);
-    float3 contrastAdjustedColor = (toneAdjustedColor - meanColor) * gMaterial.contrast + meanColor;
+    float contrastFactor = gMaterial.contrast * 0.01 + 1.0;
+    float3 contrastAdjustedColor = (toneAdjustedColor - meanColor) * contrastFactor + meanColor;
     
-    // 明るさ調整
-    float3 brightnessAdjustedColor = contrastAdjustedColor + gMaterial.brightness;
+    // 明るさ調整 (LDRのみ)
+#ifdef LDR
+    float3 brightnessAdjustedColor = contrastAdjustedColor + gMaterial.brightness * 0.01;
+#else
+    float3 brightnessAdjustedColor = contrastAdjustedColor;
+#endif
 
     // 彩度調整
     float luminance = dot(brightnessAdjustedColor, float3(0.2126, 0.7152, 0.0722)); // 輝度の計算
     float3 grayscaleColor = float3(luminance, luminance, luminance);
-    float3 saturationAdjustedColor = lerp(grayscaleColor, brightnessAdjustedColor, gMaterial.saturation);
+    float saturationFactor = gMaterial.saturation * 0.01 + 1.0;
+    float3 saturationAdjustedColor = lerp(grayscaleColor, brightnessAdjustedColor, saturationFactor);
 
-    // 色相調整
-    float3 hueAdjustedColor = AdjustHue(saturationAdjustedColor, gMaterial.hue);
+
+    // 色相シフト
+    float3 hueShiftedColor = AdjustHue(saturationAdjustedColor, gMaterial.hueShift);
     
-    // ガンマ補正
-    float3 gammaAdjustedColor = pow(hueAdjustedColor, float3(1.0 / gMaterial.gamma));
+    // 色温度とティント調整
+    float3 tempTintAdjustedColor = AdjustTemperatureTint(hueShiftedColor, gMaterial.temperature, gMaterial.tint);
 
-    // 最終色の設定
+    // ポスト露出調整 (HDRのみ)
+#ifdef HDR
+    float3 postExposureAdjustedColor = tempTintAdjustedColor * pow(2.0, gMaterial.postExposure);
+#else
+    float3 postExposureAdjustedColor = tempTintAdjustedColor;
+#endif
+    
+    // 色フィルター適用
+    float3 colorFilteredColor = postExposureAdjustedColor * gMaterial.colorFilter.rgb;
+
+    // ガンマ補正
+    float3 gammaAdjustedColor = pow(colorFilteredColor, float3(1.0 / gMaterial.gamma));
+    
+     // 最終色の設定
     output.color.rgb = gammaAdjustedColor;
     
     return output;

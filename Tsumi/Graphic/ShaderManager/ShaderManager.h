@@ -112,6 +112,7 @@ private: // メンバ関数
 
 	void PostEffectShader();
 	void BoxFilterShader();
+	void ColorGrading();
 	void DissolveShader();
 	void GaussianFilterShader();
 	void GrayScaleShader();

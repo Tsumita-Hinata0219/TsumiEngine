@@ -139,6 +139,7 @@ void ShaderManager::PostEffectShadersCompiles()
 {
 	PostEffectShader();
 	BoxFilterShader();
+	ColorGrading();
 	DissolveShader();
 	GaussianFilterShader();
 	GrayScaleShader();
@@ -272,6 +273,16 @@ void ShaderManager::BoxFilterShader()
 		L"Resources/Shaders/PostEffect/BoxFilter/BoxFilter.PS.hlsl",
 		shader);
 	postEffectShadersMap_["BoxFilter"] = shader;
+}
+
+void ShaderManager::ColorGrading()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/ColorGrading/ColorGrading.PS.hlsl",
+		shader);
+	postEffectShadersMap_["ColorGrading"] = shader;
 }
 
 void ShaderManager::DissolveShader()

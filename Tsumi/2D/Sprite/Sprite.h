@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../Base/WinApp/WinApp.h"
-#include "../Base/DXCommon/DirectXCommon.h"
-#include "../Transform/WorldTransform/WorldTransform.h"
-#include "../TextureManager/TextureManager.h"
-#include "../Graphic/GraphicPipelineManager/Sprite/SpriteGraphicPipeline.h"
-#include "../CreateResource/CreateResource.h"
-#include "../DescriptorManager/DescriptorManager.h"
+#include "../../Base/WinApp/WinApp.h"
+#include "../../Base/DXCommon/DirectXCommon.h"
+#include "../../Transform/WorldTransform/WorldTransform.h"
+#include "../../TextureManager/TextureManager.h"
+#include "../../Graphic/GraphicPipelineManager/Sprite/SpriteGraphicPipeline.h"
+#include "../../CreateResource/CreateResource.h"
+#include "../../DescriptorManager/DescriptorManager.h"
 #include "../../../Project/GameObject/Camera/Camera.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
 
 
 enum class SpriteOrigin {

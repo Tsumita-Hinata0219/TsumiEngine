@@ -16,10 +16,10 @@
 #include <numbers>
 #include <type_traits>
 
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
-#include "../Transform/WorldTransform/WorldTransform.h"
+#include "../../Project/Math/MyMath.h"
+#include "../../Project/Math/Struct.h"
+#include "../../Tsumi/Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
+#include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 
 
 // 前方宣言

@@ -8,8 +8,8 @@
 #include <wrl.h>
 #include <format>
 
-#include "../Project/Math/MyMath.h"
-#include"../Utilities/EnumUtilities/EnumUtilities.h"
+#include "../../Project/Math/MyMath.h"
+#include"../../Utilities/EnumUtilities/EnumUtilities.h"
 
 
 struct Shaders {

@@ -9,8 +9,8 @@
 
 
 #include "json.hpp"
-#include "../Project/Math/MyMath.h"
-#include "../Project/GameObject/GameObject.h"
+#include "../../Project/Math/MyMath.h"
+#include "../../Project/GameObject/GameObject.h"
 
 
 struct ColliderData {

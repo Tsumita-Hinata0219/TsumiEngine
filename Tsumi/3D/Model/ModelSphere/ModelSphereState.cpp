@@ -1,5 +1,5 @@
 #include "ModelSphereState.h"
-#include "Model.h"
+#include "../Model.h"
 
 
 /// <summary>

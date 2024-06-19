@@ -9,13 +9,13 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
-#include "../Base/WinApp/WinApp.h"
-#include "../CommandManager/CommandManager.h"
-#include "../Graphic/GraphicPipelineManager/GraphicPipelineManager.h"
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../CreateResource/CreateResource.h"
-#include "../View/RTVManager/RTVManager.h"
+#include "../WinApp/WinApp.h"
+#include "../../CommandManager/CommandManager.h"
+#include "../../Graphic/GraphicPipelineManager/GraphicPipelineManager.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../CreateResource/CreateResource.h"
+#include "../../View/RTVManager/RTVManager.h"
 
 
 

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
 
 using namespace std;
 

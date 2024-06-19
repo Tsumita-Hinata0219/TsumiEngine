@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../Base/DXCommon/DirectXCommon.h"
-#include "../CommandManager/CommandManager.h"
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../Transform/WorldTransform/WorldTransform.h"
-#include "../TextureManager/TextureManager.h"
-#include "../Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
-#include "../CreateResource/CreateResource.h"
-#include "../DescriptorManager/DescriptorManager.h"
-#include "IModelState.h"
+#include "../../../Base/DXCommon/DirectXCommon.h"
+#include "../../../CommandManager/CommandManager.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../../Transform/WorldTransform/WorldTransform.h"
+#include "../../../TextureManager/TextureManager.h"
+#include "../../../Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
+#include "../../../CreateResource/CreateResource.h"
+#include "../../../DescriptorManager/DescriptorManager.h"
+#include "../IModelState.h"
 
 
 

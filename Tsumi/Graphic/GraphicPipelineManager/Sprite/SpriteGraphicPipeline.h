@@ -4,12 +4,12 @@
 #include <d3dx12.h>
 #include <dxcapi.h>
 
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../Base/DXCommon/DirectXCommon.h"
+#include "../../../../Project/Math/MyMath.h"
+#include "../../../../Project/Math/Struct.h"
+#include "../../../Base/DXCommon/DirectXCommon.h"
 #include "../../ShaderManager/ShaderManager.h"
-#include "Graphic/GraphicPipelineManager/GraphicPipelineStructure.h"
-
+#include "../GraphicPipelineManager.h"
+#include "../GraphicPipelineStructure.h"
 
 
 class SpriteGraphicPipeline {

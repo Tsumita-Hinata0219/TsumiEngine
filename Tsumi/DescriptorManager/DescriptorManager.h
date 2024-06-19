@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Project/Math/Struct.h"
+#include "../../Project/Math/Struct.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CreateResource/CreateResource.h"
 

@@ -2,9 +2,9 @@
 
 #include "DirectXTex.h"
 #include "../Base/DXCommon/DirectXCommon.h"
-#include "DescriptorManager/DescriptorManager.h"
+#include "../DescriptorManager/DescriptorManager.h"
 #include "TextureDataResource/TextureDataResource.h"
-#include "../Project/Math/MyMath.h"
+#include "../../Project/Math/MyMath.h"
 
 #include <cassert>
 #include <map>

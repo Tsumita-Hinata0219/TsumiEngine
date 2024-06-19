@@ -1,21 +1,22 @@
 #pragma once
 
-#include "Base/DXCommon/DirectXCommon.h"
-#include "CommandManager/CommandManager.h"
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "Transform/WorldTransform/WorldTransform.h"
-#include "TextureManager/TextureManager.h"
-#include "Graphic/GraphicPipelineManager/Normal/NormalGraphicPipeline.h"
-#include "Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
-#include "CreateResource/CreateResource.h"
-#include "IModelState.h"
-#include "DescriptorManager/DescriptorManager.h"
-#include "../Project/GameObject/Camera/Camera.h"
+#include "../../../Base/DXCommon/DirectXCommon.h"
+#include "../../../CommandManager/CommandManager.h"
+#include "../../../../Project/Math/MyMath.h"
+#include "../../../../Project/Math/Struct.h"
+#include "../../../Transform/WorldTransform/WorldTransform.h"
+#include "../../../TextureManager/TextureManager.h"
+#include "../../../Graphic/GraphicPipelineManager/Normal/NormalGraphicPipeline.h"
+#include "../../../Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
+#include "../../../CreateResource/CreateResource.h"
+#include "../IModelState.h"
+#include "../../../DescriptorManager/DescriptorManager.h"
+#include "../../../../Project/GameObject/Camera/Camera.h"
 
 #include <fstream>
 #include <sstream>
 
+class Model;
 
 /* ModelGLTFクラス */
 class ModelGLTFState : public IModelState {

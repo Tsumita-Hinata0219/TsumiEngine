@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Project/GameObject/GameObject.h"
-#include "PostEffect/IPostEffect/IPostEffect.h"
+#include "../../GameObject.h"
+#include "../../../Tsumi/PostEffect/IPostEffect/IPostEffect.h"
 
 
 /* TestPostEffectクラス */

@@ -3,7 +3,7 @@
 #include "../../Tsumi/Tsumi.h"
 #include "../Scene/IScene.h"
 #include "../Scene/SceneState/GameScene/GameScene.h"
-#include "../Utilities/TextLog/TextLog.h"
+#include "../../Tsumi/Utilities/TextLog/TextLog.h"
 
 
 /* GameManagerクラス */

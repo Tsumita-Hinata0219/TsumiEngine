@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Base/WinApp/WinApp.h"
+#include "../../Tsumi/Base/WinApp/WinApp.h"
 #include "../../Math/MyMath.h"
 #include "../../../Tsumi/CreateResource/CreateResource.h"
 

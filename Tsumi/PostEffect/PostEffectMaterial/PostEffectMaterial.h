@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../Project/Math/MyMath.h"
-#include "../Project/Math/Struct.h"
-#include "../CreateResource/CreateResource.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../CreateResource/CreateResource.h"
 
 using namespace std;
 

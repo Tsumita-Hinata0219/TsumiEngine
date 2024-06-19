@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Project/Math/MyMath.h"
-#include "Material.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../Material/Material.h"
 
 
 // モデルデータ

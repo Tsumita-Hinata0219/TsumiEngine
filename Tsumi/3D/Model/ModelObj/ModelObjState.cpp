@@ -1,5 +1,5 @@
 #include "ModelObjState.h"
-#include "Model.h"
+#include "../Model.h"
 
 
 /// <summary>

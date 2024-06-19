@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Project/GameObject/GameObject.h"
+#include "../../GameObject.h"
 
 /* TestObjectクラス */
 class TestObject {

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Project/GameObject/GameObject.h"
-#include "../../FileManager/FileManager.h"
+#include "../../GameObject.h"
+#include "../../../../Tsumi/FileManager/FileManager.h"
 
 /* TestJsonObjectクラス */
 class TestJsonObject {

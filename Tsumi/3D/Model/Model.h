@@ -1,18 +1,17 @@
 #pragma once
 
-#include "CommandManager/CommandManager.h"
-#include "../Transform/WorldTransform/WorldTransform.h"
+#include "../../CommandManager/CommandManager.h"
+#include "../../Transform/WorldTransform/WorldTransform.h"
+#include "../../Transform/Transform.h"
 #include "IModelState.h"
-#include "ModelGLTFState.h"
-#include "ModelObjState.h"
-#include "ObjDataResource.h"
-#include "ModelPlaneState.h"
-#include "ModelSphereState.h"
-#include "AnimationManager.h"
-
-#include "../Transform/Transform.h"
-#include "Mesh.h"
-#include "Material.h"
+#include "ModelGLTF/ModelGLTFState.h"
+#include "ModelObj/ModelObjState.h"
+#include "ModelObj/ObjDataResource/ObjDataResource.h"
+#include "ModelPlane/ModelPlaneState.h"
+#include "ModelSphere/ModelSphereState.h"
+#include "../../Animation/AnimationManager/AnimationManager.h"
+#include "Mesh/Mesh.h"
+#include "Material/Material.h"
 
 
 class ModelManager;

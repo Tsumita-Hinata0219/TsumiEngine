@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Project/Math/MyMath.h"
+#include "../../../Project/Math/MyMath.h"
 #include "../AnimationDataArray/AnimationDataArray.h"
 #include "../KeyFrameAnimation/KeyFrameAnimation.h"
 

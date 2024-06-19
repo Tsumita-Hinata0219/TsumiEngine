@@ -1,6 +1,6 @@
 #include "Model.h"
-#include "ModelManager.h"
-#include "../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "ModelManager/ModelManager.h"
+#include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
 
 // PipeLineのタイプ

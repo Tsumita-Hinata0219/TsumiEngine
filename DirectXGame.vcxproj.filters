@@ -96,8 +96,6 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Graphic\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\Particle\Particle.cpp" />
-    <ClCompile Include="Tsumi\Particle\ParticlePlane\ParticlePlane.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp" />
@@ -281,8 +279,6 @@
     <ClInclude Include="Tsumi\Graphic\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
     <ClInclude Include="Tsumi\Particle\IParticleState.h" />
-    <ClInclude Include="Tsumi\Particle\Particle.h" />
-    <ClInclude Include="Tsumi\Particle\ParticlePlane\ParticlePlane.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h" />

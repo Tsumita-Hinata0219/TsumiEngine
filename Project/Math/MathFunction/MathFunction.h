@@ -16,13 +16,11 @@
 #include <numbers>
 #include <type_traits>
 
-#include "Vector.h"
-#include "Matrix.h"
-#include "MathQuaternion.h"
-#include "MathOperations.h"
-#include "CollisionStructures.h"
-#include "WorldTransform.h"
-#include "ViewProjection.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
+#include "../Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
+#include "../Transform/WorldTransform/WorldTransform.h"
+#include "../Transform/ViewProjection/ViewProjection.h"
 
 
 // 前方宣言

@@ -1,6 +1,7 @@
 #pragma once
-#include "MyMath.h"
-#include "Struct.h"
+
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
 #include "IParticleState.h"
 #include "ParticleGraphicPipeline.h"
 #include "CreateResource.h"

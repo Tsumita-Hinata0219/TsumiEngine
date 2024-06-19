@@ -8,7 +8,7 @@
 #include <wrl.h>
 #include <format>
 
-#include "MyMath.h"
+#include "../Project/Math/MyMath.h"
 #include "EnumUtilities.h"
 
 

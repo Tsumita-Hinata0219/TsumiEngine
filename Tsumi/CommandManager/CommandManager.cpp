@@ -1,5 +1,5 @@
 #include "CommandManager.h"
-#include "DirectXCommon.h"
+#include "../Base/DXCommon/DirectXCommon.h"
 
 
 // 初期化処理

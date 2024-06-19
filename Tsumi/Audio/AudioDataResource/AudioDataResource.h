@@ -10,7 +10,7 @@
 #include <sstream>
 #include <cassert>
 
-#include "Struct.h"
+#include "../Project/Math/Struct.h"
 
 
 

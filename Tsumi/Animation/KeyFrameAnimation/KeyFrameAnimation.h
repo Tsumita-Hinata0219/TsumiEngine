@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GameObject.h"
-#include "AnimationDataArray.h"
+#include "../Project/GameObject/GameObject.h"
+#include "../AnimationDataArray/AnimationDataArray.h"
 
 
 /* KeyFrameAnimation */

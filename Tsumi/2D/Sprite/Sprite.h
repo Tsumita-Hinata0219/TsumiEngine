@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MyMath.h"
-#include "Struct.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
 #include "SpriteTransform.h"
 #include "WorldTransform.h"
 #include "ViewProjection.h"

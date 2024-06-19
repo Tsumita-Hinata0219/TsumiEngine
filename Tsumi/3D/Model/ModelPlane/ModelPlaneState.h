@@ -1,8 +1,8 @@
 #pragma once
 
-#include "CommandManager.h"
-#include "MyMath.h"
-#include "Struct.h"
+#include "CommandManager/CommandManager.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
 #include "WorldTransform.h"
 #include "TextureManager.h"
 #include "DirectXCommon.h"

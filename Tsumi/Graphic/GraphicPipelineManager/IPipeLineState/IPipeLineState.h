@@ -1,12 +1,12 @@
 #pragma once
 
-#include "ShaderManager.h"
+#include "../../ShaderManager/ShaderManager.h"
 
 #include <d3dx12.h>
 #include <dxcapi.h>
 
-#include "MyMath.h"
-#include "Struct.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
 #include "DirectXCommon.h"
 #include "GraphicPipelineStructure.h"
 

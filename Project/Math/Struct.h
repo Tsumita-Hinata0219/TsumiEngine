@@ -12,11 +12,11 @@ using namespace std;
 #include <vector>
 #include <iostream>
 #include <cstdint>
-#include <WorldTransform.h>
+#include "../Transform/WorldTransform/WorldTransform.h"
 #include <optional>
 #include <map>
 
-#include "MyMath.h"
+#include "../Project/Math/MyMath.h"
 
 
 

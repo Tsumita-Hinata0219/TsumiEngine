@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyMath.h"
+#include "../Project/Math/MyMath.h"
 
 
 /* MainCameraクラス */

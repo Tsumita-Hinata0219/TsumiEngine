@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MyMath.h"
-#include "Struct.h"
-#include "TextureManager.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
+#include "../TextureManager/TextureManager.h"
 #include "ObjDataResource.h"
 #include "Model.h"
 #include <map>

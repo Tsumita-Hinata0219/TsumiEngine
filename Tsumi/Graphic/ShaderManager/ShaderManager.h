@@ -9,7 +9,7 @@
 #include <format>
 
 #include "../Project/Math/MyMath.h"
-#include "EnumUtilities.h"
+#include"../Utilities/EnumUtilities/EnumUtilities.h"
 
 
 struct Shaders {

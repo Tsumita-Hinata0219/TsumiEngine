@@ -1,10 +1,9 @@
 #pragma once
 
-#include "Tsumi.h"
-#include "IScene.h"
-#include "TextLog.h"
-
-#include "GameScene/GameScene.h"
+#include "../../Tsumi/Tsumi.h"
+#include "../Scene/IScene.h"
+#include "../Scene/SceneState/GameScene/GameScene.h"
+#include "../Utilities/TextLog/TextLog.h"
 
 
 /* GameManagerクラス */

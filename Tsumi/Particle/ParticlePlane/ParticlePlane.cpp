@@ -1,5 +1,4 @@
 #include "ParticlePlane.h"
-#include "Particle.h"
 
 
 /// <summary>

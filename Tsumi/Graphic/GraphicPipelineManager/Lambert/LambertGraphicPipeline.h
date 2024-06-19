@@ -5,9 +5,9 @@
 
 #include "../Project/Math/MyMath.h"
 #include "../Project/Math/Struct.h"
-#include "DirectXCommon.h"
-#include "ShaderManager.h"
-#include "GraphicPipelineStructure.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../../ShaderManager/ShaderManager.h"
+#include "Graphic/GraphicPipelineManager/GraphicPipelineStructure.h"
 
 
 class LambertGraphicPipeline {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IPipeLineState.h"
+#include "../../IPipeLineState/IPipeLineState.h"
 
 /* DissolvePipeLineクラス */
 //class DissolvePipeLine : public IPipeLineState {

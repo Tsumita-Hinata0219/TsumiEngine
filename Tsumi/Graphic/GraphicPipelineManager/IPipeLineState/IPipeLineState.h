@@ -7,9 +7,8 @@
 
 #include "../Project/Math/MyMath.h"
 #include "../Project/Math/Struct.h"
-#include "DirectXCommon.h"
-#include "GraphicPipelineStructure.h"
-
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../GraphicPipelineStructure.h"
 
 // PipeLineType
 enum class IPipeLineType {

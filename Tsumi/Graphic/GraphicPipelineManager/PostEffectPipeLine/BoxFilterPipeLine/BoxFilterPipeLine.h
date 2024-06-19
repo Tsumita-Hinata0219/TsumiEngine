@@ -1,6 +1,6 @@
 #pragma once
 
-#include "IPipeLineState.h"
+#include "../../IPipeLineState/IPipeLineState.h"
 
 ///* BoxFilterPipeLineクラス */
 //class BoxFilterPipeLine : public IPipeLineState {

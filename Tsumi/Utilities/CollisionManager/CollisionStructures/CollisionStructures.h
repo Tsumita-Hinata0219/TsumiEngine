@@ -1,5 +1,6 @@
 #pragma once
-#include "Vector.h"
+
+#include "../Project/Math/MyMath.h"
 
 // 球
 struct Sphere {

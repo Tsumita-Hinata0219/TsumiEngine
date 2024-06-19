@@ -1,8 +1,7 @@
 #pragma once
 
 #include "CommandManager/CommandManager.h"
-#include "Transform/WorldTransform/WorldTransform.h"
-#include "Transform/ViewProjection/ViewProjection.h"
+#include "../Transform/WorldTransform/WorldTransform.h"
 #include "IModelState.h"
 #include "ModelGLTFState.h"
 #include "ModelObjState.h"
@@ -11,7 +10,7 @@
 #include "ModelSphereState.h"
 #include "AnimationManager.h"
 
-#include "Transform/Transform.h"
+#include "../Transform/Transform.h"
 #include "Mesh.h"
 #include "Material.h"
 

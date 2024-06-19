@@ -2,10 +2,11 @@
 
 #include "../Project/Math/MyMath.h"
 #include "../Project/Math/Struct.h"
-#include "IParticleState.h"
-#include "ParticleGraphicPipeline.h"
-#include "CreateResource.h"
-#include "DescriptorManager.h"
+#include "../IParticleState.h"
+#include "../Particle/Particle.h"
+#include "../Graphic/GraphicPipelineManager/Particle/ParticleGraphicPipeline.h"
+#include "../CreateResource/CreateResource.h"
+#include "../DescriptorManager/DescriptorManager.h"
 #define INSTANCE_MAX 1000;
 
 

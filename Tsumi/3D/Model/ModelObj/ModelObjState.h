@@ -1,17 +1,20 @@
 #pragma once
 
+#include "../Base/DXCommon/DirectXCommon.h"
 #include "CommandManager/CommandManager.h"
+#include "../TextureManager/TextureManager.h"
+#include "../Graphic/GraphicPipelineManager/Normal/NormalGraphicPipeline.h"
+#include "../Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
+#include "../Graphic/GraphicPipelineManager/Lambert/LambertGraphicPipeline.h"
+#include "../Graphic/GraphicPipelineManager/Phong/PhongGraphicPipeline.h"
+#include "../Graphic/GraphicPipelineManager/PhongNormalMap/PhongNormalMap.h"
+#include "../CreateResource/CreateResource.h"
+#include "../DescriptorManager/DescriptorManager.h"
+#include "../IModelState.h"
+#include "../Transform/WorldTransform/WorldTransform.h"
 #include "../Project/Math/MyMath.h"
 #include "../Project/Math/Struct.h"
-#include "WorldTransform.h"
-#include "TextureManager.h"
-#include "DirectXCommon.h"
-#include "NormalGraphicPipeline.h"
-#include "LightGraphicPipeline.h"
-#include "CreateResource.h"
-#include "IModelState.h"
-#include "DescriptorManager.h"
-#include "Camera.h"
+#include "../../../Project/GameObject/Camera/Camera.h"
 
 #include <fstream>
 #include <sstream>

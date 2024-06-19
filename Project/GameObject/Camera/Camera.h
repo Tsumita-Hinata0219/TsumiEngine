@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../Base/WinApp/WinApp.h"
-#include "MyMath.h"
-#include "CreateResource.h"
+#include "../../Math/MyMath.h"
+#include "../../../Tsumi/CreateResource/CreateResource.h"
 
 
 // 定数バッファ

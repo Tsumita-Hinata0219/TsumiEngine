@@ -101,7 +101,6 @@
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp" />
-    <ClCompile Include="Tsumi\Transform\ViewProjection\ViewProjection.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
     <ClCompile Include="Tsumi\Utilities\CollisionManager\CollisionManager.cpp" />
@@ -287,7 +286,6 @@
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h" />
-    <ClInclude Include="Tsumi\Transform\ViewProjection\ViewProjection.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
     <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\AABBCollider.h" />

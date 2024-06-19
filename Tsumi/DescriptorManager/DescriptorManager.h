@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../Project/Math/Struct.h"
-#include "DirectXCommon.h"
-#include "CommandManager.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../CreateResource/CreateResource.h"
 
 
 

@@ -6,9 +6,9 @@
 
 #include "../Project/Math/MyMath.h"
 #include "../Project/Math/Struct.h"
-#include "DirectXCommon.h"
-#include "ShaderManager.h"
-#include "GraphicPipelineStructure.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../Graphic/ShaderManager/ShaderManager.h"
+#include "Graphic/GraphicPipelineManager/GraphicPipelineStructure.h"
 
 
 class Object3DGraphicPipeLine {

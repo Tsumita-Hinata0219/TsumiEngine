@@ -20,7 +20,6 @@
 #include "../Project/Math/Struct.h"
 #include "../Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include "../Transform/WorldTransform/WorldTransform.h"
-#include "../Transform/ViewProjection/ViewProjection.h"
 
 
 // 前方宣言
@@ -72,7 +71,7 @@ Vector2 Project(const Vector2& v1, const Vector2& v2);
 // 線形補間
 Vector2 Lerp(const Vector2& start, const Vector2& end, const float t);
 // Vector3 -> Vector2 への変換
-Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
+//Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
 // クランプ
 Vector2 Clamp(const Vector2& value, const Vector2& minValue, const Vector2& maxValue);
 

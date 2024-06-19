@@ -10,12 +10,12 @@
 #pragma comment(lib, "dxcompiler.lib")
 
 #include "../Base/WinApp/WinApp.h"
-#include "CommandManager.h"
-#include "GraphicPipelineManager.h"
-#include "MyMath.h"
-#include "Struct.h"
-#include "CreateResource.h"
-#include "RTVManager.h"
+#include "../CommandManager/CommandManager.h"
+#include "../Graphic/GraphicPipelineManager/GraphicPipelineManager.h"
+#include "../Project/Math/MyMath.h"
+#include "../Project/Math/Struct.h"
+#include "../CreateResource/CreateResource.h"
+#include "../View/RTVManager/RTVManager.h"
 
 
 

@@ -1,17 +1,16 @@
 #pragma once
 
-#include "../Base/WinApp/WinApp.h"
-#include "DirectXCommon.h"
-#include "ShaderManager.h"
-#include "GraphicPipelineManager.h"
-#include "ImGuimanager.h"
-#include "TextureManager.h"
-#include "Input.h"
-#include "Audio.h"
-#include "DescriptorManager.h"
-#include "DrawSystem.h"
-#include "FileManager.h"
-
+#include "Base/WinApp/WinApp.h"
+#include "Base/DXCommon/DirectXCommon.h"
+#include "Graphic/ShaderManager/ShaderManager.h"
+#include "Graphic/GraphicPipelineManager/GraphicPipelineManager.h"
+#include "Utilities/ImGuiManager/ImGuiManager.h"
+#include "TextureManager/TextureManager.h"
+#include "Input/Input.h"
+#include "Audio/Audio.h"
+#include "DescriptorManager/DescriptorManager.h"
+#include "3D/DrawSystem/DrawSystem.h"
+#include "FileManager/FileManager.h"
 
 
 /// Tsumi Engine 

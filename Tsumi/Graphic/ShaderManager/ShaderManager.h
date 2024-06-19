@@ -7,6 +7,8 @@
 #include <string>
 #include <wrl.h>
 #include <format>
+#include <iostream>
+#include <map>
 
 #include "../../Project/Math/MyMath.h"
 #include"../../Utilities/EnumUtilities/EnumUtilities.h"
@@ -156,4 +158,7 @@ private: // メンバ変数
 	Shaders dxc_{};
 	std::vector<ShadersMode> modelShaders_{};
 	std::vector<ShadersMode> postEffectShaders_{};
+
+	std::map<std::string, ShadersMode> modelShadersMap_;
+	std::map<std::string, ShadersMode> postEffectShadersMap_;
 };

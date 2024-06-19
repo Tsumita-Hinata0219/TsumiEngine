@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../../ShaderManager/ShaderManager.h"
-
 #include <d3dx12.h>
 #include <dxcapi.h>
 
@@ -9,6 +7,8 @@
 #include "../../../../Project/Math/Struct.h"
 #include "../../../Base/DXCommon/DirectXCommon.h"
 #include "../GraphicPipelineStructure.h"
+#include "../../ShaderManager/ShaderManager.h"
+
 
 // PipeLineType
 enum class IPipeLineType {
@@ -76,6 +76,5 @@ protected: // メンバ関数
 protected: // メンバ変数
 
 	PsoProperty pso_{};
-
 };
 

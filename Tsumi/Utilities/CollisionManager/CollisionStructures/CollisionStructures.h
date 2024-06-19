@@ -2,6 +2,7 @@
 
 #include "../../Project/Math/MyMath.h"
 
+
 // 球
 struct Sphere {
 	Vector3 center;

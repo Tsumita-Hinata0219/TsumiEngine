@@ -22,11 +22,6 @@
 #include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 
 
-// 前方宣言
-struct ViewProjection;
-
-
-
 /// -------------------------------------------------------------------------
 /// ログ
 /// -------------------------------------------------------------------------
@@ -97,12 +92,13 @@ Vector3 Lerp(const Vector3& start, const Vector3& end, const float t);
 // 球面線形補間
 Vector3 SLerp(const Vector3& start, const Vector3& end, const float t);
 // 最近接線
-Vector3 ClosestPoint(const Vector3& p, const Segment& s);
+//Vector3 ClosestPoint(const Vector3& p, const Segment& s);
 // 法線ベクトル
 Vector3 Perpendicular(const Vector3& v);
 // 座標変換
 Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
 // ベクトル変換
+
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 // Vector2 -> Vector3 への変換
 //Vector3 ConvertVector(const Vector2& v);

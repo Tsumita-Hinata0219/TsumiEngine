@@ -299,9 +299,9 @@ void PhongNormalMap::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc)
 // Shadersのコンパイル
 void PhongNormalMap::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::PhongNormalMap).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader("PhongNormalMap").VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::PhongNormalMap).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader("PhongNormalMap").PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Tsumi/Particle/IParticle.h"
+#include "../../../Tsumi/Particle/IParticle.h"
 
 
 /* BaseParticleクラス */

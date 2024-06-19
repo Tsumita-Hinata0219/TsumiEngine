@@ -291,9 +291,9 @@ void PhongGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterize
 // Shadersのコンパイル
 void PhongGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Phong).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader("Phong").VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Phong).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader("Phong").PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

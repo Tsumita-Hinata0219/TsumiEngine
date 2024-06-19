@@ -287,9 +287,9 @@ void LightGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterize
 // Shadersのコンパイル
 void LightGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Light).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader("Light").VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Light).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader("Light").PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

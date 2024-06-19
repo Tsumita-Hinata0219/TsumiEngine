@@ -38,35 +38,6 @@ private: // シングルトンデザインパターン
 	const ShaderManager& operator=(const ShaderManager&) = delete;
 
 
-public:
-
-	enum class ModelShaders {
-		Normal,
-		Sprite,
-		Light,
-		Lambert,
-		Phong,
-		PhongNormalMap,
-		Particle,
-		Line,
-		Object3D,
-		Count,
-	};
-	enum class PostEffectShaders {
-		PostEffect,
-		BoxFilter,
-		Dissolve,
-		GaussianFilter,
-		GrayScale,
-		OutLine,
-		RadialBlur,
-		Random,
-		SepiaTone,
-		Vignetting,
-		Count,
-	};
-
-
 public: // メンバ関数
 
 	/// <summary>
@@ -87,8 +58,8 @@ public: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	ShadersMode GetShader(ModelShaders type) { return this->modelShaders_[static_cast<size_t>(type)]; }
-	ShadersMode GetShader(PostEffectShaders type) { return this->postEffectShaders_[static_cast<size_t>(type)]; }
+	ShadersMode GetModelShader(const std::string key) { return this->modelShadersMap_[key]; }
+	ShadersMode GetPostEffectShader(const std::string key) { return this->postEffectShadersMap_[key]; }
 
 #pragma endregion
 
@@ -156,9 +127,6 @@ private: // メンバ関数
 private: // メンバ変数
 
 	Shaders dxc_{};
-	std::vector<ShadersMode> modelShaders_{};
-	std::vector<ShadersMode> postEffectShaders_{};
-
 	std::map<std::string, ShadersMode> modelShadersMap_;
 	std::map<std::string, ShadersMode> postEffectShadersMap_;
 };

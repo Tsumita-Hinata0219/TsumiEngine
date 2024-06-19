@@ -291,9 +291,9 @@ void LambertGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasteri
 // Shadersのコンパイル
 void LambertGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Lambert).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader("Lambert").VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Lambert).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader("Lambert").PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }

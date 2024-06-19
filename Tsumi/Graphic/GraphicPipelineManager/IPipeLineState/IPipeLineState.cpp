@@ -91,20 +91,20 @@ void IPipeLineState::SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc,
 
 
 // Shadersのコンパイル
-void IPipeLineState::SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type)
+void IPipeLineState::SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(type).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader(key).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(type).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader(key).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
-void IPipeLineState::SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type)
+void IPipeLineState::SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key)
 {
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(type).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetPostEffectShader(key).VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(type).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetPostEffectShader(key).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
 

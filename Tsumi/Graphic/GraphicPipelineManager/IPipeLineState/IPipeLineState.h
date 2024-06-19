@@ -10,30 +10,6 @@
 #include "../../ShaderManager/ShaderManager.h"
 
 
-// PipeLineType
-enum class IPipeLineType {
-	Lambert,
-	Light,
-	Line,
-	Normal,
-	Object3D,
-	Particle,
-	PhongNormalMap,
-	Phong,
-	Sprite,
-	BoxFilter,
-	Dissolve,
-	GaussianFilter,
-	GrayScale,
-	OutLine,
-	RadialBlur,
-	Random,
-	SepiaTone,
-	Vignetting,
-	Count,
-};
-
-
 /* IPipeLineStateクラス */
 class IPipeLineState {
 
@@ -48,9 +24,6 @@ public: // メンバ関数
 	PsoProperty GetPsoProperty() const { return pso_; }
 
 #pragma endregion
-
-
-private: // メンバ関数
 
 	// RootSignatureのセットアップ
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
@@ -69,8 +42,9 @@ protected: // メンバ関数
 	void SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE Cull, D3D12_FILL_MODE fill);
 
 	// Shadersのコンパイル
-	void SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::ModelShaders type);
-	void SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, ShaderManager::PostEffectShaders type);
+	void SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key);
+	void SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key);
+
 
 
 protected: // メンバ変数

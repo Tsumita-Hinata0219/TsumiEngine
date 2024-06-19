@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Project/GameObject/GameObject.h"
+#include "../../../Project/GameObject/GameObject.h"
 
 
 struct FadeNowState {

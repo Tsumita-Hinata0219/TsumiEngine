@@ -125,9 +125,6 @@ void ShaderManager::SettingIncludeHandler() {
 /// </summary>
 void ShaderManager::ModelShadersCompiles()
 {
-	// vectorのサイズを変える
-	modelShaders_.resize(EnumSize<ModelShaders>::value);
-
 	NormalShader();
 	SpriteShader();
 	LightShader();
@@ -140,9 +137,6 @@ void ShaderManager::ModelShadersCompiles()
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
-	// vectorのサイズを変える
-	postEffectShaders_.resize(EnumSize<PostEffectShaders>::value);
-
 	PostEffectShader();
 	BoxFilterShader();
 	DissolveShader();
@@ -175,7 +169,6 @@ void ShaderManager::NormalShader() {
 		L"Resources/Shaders/NormalObject3d.VS.hlsl", 
 		L"Resources/Shaders/NormalObject3d.PS.hlsl", 
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Normal)] = shader;
 	modelShadersMap_["Normal"] = shader;
 }
 
@@ -186,7 +179,6 @@ void ShaderManager::SpriteShader() {
 		L"Resources/Shaders/SpriteObject3d.VS.hlsl",
 		L"Resources/Shaders/SpriteObject3d.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Sprite)] = shader;
 	modelShadersMap_["Sprite"] = shader;
 }
 
@@ -197,7 +189,6 @@ void ShaderManager::LightShader() {
 		L"Resources/Shaders/LightObject.VS.hlsl",
 		L"Resources/Shaders/LightObject.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Light)] = shader;
 	modelShadersMap_["Light"] = shader;
 }
 
@@ -208,7 +199,6 @@ void ShaderManager::LambertShader()
 		L"Resources/Shaders/LambertObject.VS.hlsl",
 		L"Resources/Shaders/LambertObject.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Lambert)] = shader;
 	modelShadersMap_["Lambert"] = shader;
 }
 
@@ -219,7 +209,6 @@ void ShaderManager::PhongShader()
 		L"Resources/Shaders/PhongObject.VS.hlsl",
 		L"Resources/Shaders/PhongObject.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Phong)] = shader;
 	modelShadersMap_["Phong"] = shader;
 }
 
@@ -230,7 +219,6 @@ void ShaderManager::PhongNormalMapShader()
 		L"Resources/Shaders/PhongNormalMap.VS.hlsl",
 		L"Resources/Shaders/PhongNormalMap.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::PhongNormalMap)] = shader;
 	modelShadersMap_["PhongNormalMap"] = shader;
 }
 
@@ -241,7 +229,6 @@ void ShaderManager::ParticleShader() {
 		L"Resources/Shaders/ParticleObject3D.VS.hlsl",
 		L"Resources/Shaders/ParticleObject3D.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Particle)] = shader;
 	modelShadersMap_["Particle"] = shader;
 }
 
@@ -252,7 +239,6 @@ void ShaderManager::LineShader() {
 		L"Resources/Shaders/LineObject3d.VS.hlsl",
 		L"Resources/Shaders/LineObject3d.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Line)] = shader;
 	modelShadersMap_["Line"] = shader;
 }
 
@@ -263,7 +249,6 @@ void ShaderManager::Object3DShader()
 		L"Resources/Shaders/Object3d.VS.hlsl",
 		L"Resources/Shaders/Object3d.PS.hlsl",
 		shader);
-	modelShaders_[static_cast<size_t>(ModelShaders::Object3D)] = shader;
 	modelShadersMap_["Object3D"] = shader;
 }
 
@@ -276,7 +261,6 @@ void ShaderManager::PostEffectShader() {
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::PostEffect)] = shader;
 	postEffectShadersMap_["PostEffect"] = shader;
 }
 
@@ -287,7 +271,6 @@ void ShaderManager::BoxFilterShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/BoxFilter/BoxFilter.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::BoxFilter)] = shader;
 	postEffectShadersMap_["BoxFilter"] = shader;
 }
 
@@ -298,7 +281,6 @@ void ShaderManager::DissolveShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/Dissolve/Dissolve.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::Dissolve)] = shader;
 	postEffectShadersMap_["Dissolve"] = shader;
 }
 
@@ -309,7 +291,6 @@ void ShaderManager::GaussianFilterShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/GaussianFilter/GaussianFilter.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::GaussianFilter)] = shader;
 	postEffectShadersMap_["GaussianFilter"] = shader;
 }
 
@@ -320,7 +301,6 @@ void ShaderManager::GrayScaleShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/GrayScale/GrayScale.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::GrayScale)] = shader;
 	postEffectShadersMap_["GrayScale"] = shader;
 }
 
@@ -331,7 +311,6 @@ void ShaderManager::OutLineShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/OutLine/OutLine.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::OutLine)] = shader;
 	postEffectShadersMap_["OutLine"] = shader;
 }
 
@@ -342,7 +321,6 @@ void ShaderManager::RadialBlurShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/RadialBlur/RadialBlur.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::RadialBlur)] = shader;
 	postEffectShadersMap_["RadialBlur"] = shader;
 }
 
@@ -353,7 +331,6 @@ void ShaderManager::RandomShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/Random/Random.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::Random)] = shader;
 	postEffectShadersMap_["Random"] = shader;
 }
 
@@ -364,7 +341,6 @@ void ShaderManager::SepiaToneShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/SepiaTone/SepiaTone.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::SepiaTone)] = shader;
 	postEffectShadersMap_["SepiaTone"] = shader;
 }
 
@@ -375,6 +351,5 @@ void ShaderManager::VignettingShader()
 		L"Resources/Shaders/PostEffect.VS.hlsl",
 		L"Resources/Shaders/PostEffect/Vignetting/Vignetting.PS.hlsl",
 		shader);
-	postEffectShaders_[static_cast<size_t>(PostEffectShaders::Vignetting)] = shader;
 	postEffectShadersMap_["Vignetting"] = shader;
 }

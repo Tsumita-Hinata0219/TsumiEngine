@@ -270,10 +270,10 @@ void LineGraphicPipeline::SetupRasterizerState(D3D12_RASTERIZER_DESC& rasterizer
 // Shadersのコンパイル
 void LineGraphicPipeline::CompileShaders(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob) {
 
-	vertexShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Line).VertexBlob;
+	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader("Line").VertexBlob;
 	assert(vertexShaderBlob != nullptr);
 
-	pixelShaderBlob = ShaderManager::GetInstance()->GetShader(ShaderManager::ModelShaders::Line).PixelBlob;
+	pixelShaderBlob = ShaderManager::GetInstance()->GetModelShader("Line").PixelBlob;
 	assert(pixelShaderBlob != nullptr);
 }
 

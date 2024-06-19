@@ -15,6 +15,9 @@ class IPipeLineState {
 
 public: // メンバ関数
 
+	// デストラクタ
+	~IPipeLineState() = default;
+
 	// Psoを構築する
 	virtual PsoProperty SetUpPso() = 0;
 
@@ -25,11 +28,11 @@ public: // メンバ関数
 
 #pragma endregion
 
-	// RootSignatureのセットアップ
-	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
-
 
 protected: // メンバ関数
+
+	// RootSignatureのセットアップ
+	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
 
 	// InputLayoutのセットアップ
 	void SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset);

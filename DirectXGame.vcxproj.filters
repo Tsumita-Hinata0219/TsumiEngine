@@ -189,6 +189,7 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -380,6 +381,7 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

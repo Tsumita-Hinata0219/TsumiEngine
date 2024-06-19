@@ -195,6 +195,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
@@ -330,6 +331,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />

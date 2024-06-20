@@ -91,7 +91,6 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
@@ -190,6 +189,8 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PipeLineManager.cpp" />
+    <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -262,7 +263,6 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
@@ -382,6 +382,8 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
+    <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

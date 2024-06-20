@@ -42,6 +42,27 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 
 
+enum class PipeLineType {
+	Lambert,
+	Light,
+	Line,
+	Normal,
+	Object3D,
+	Particle,
+	PhongNormalMap,
+	Phong,
+	Sprite,
+	BoxFilter,
+	Dissolve,
+	GaussianFilter,
+	GrayScale,
+	OutLine,
+	RadialBlur,
+	Randome,
+	SepiaTone,
+	Vignetting,
+};
+
 class GraphicPipelineManager {
 
 public: // メンバ関数
@@ -61,33 +82,34 @@ private: // メンバ変数
 
 	// PipeLineを保存しておくvectorコンテナ
 	std::vector<PsoProperty> IPipeLine_;
+	std::map<PipeLineType, PsoProperty> pipeLineMap_;
 
-	//// Lambert
-	//std::unique_ptr<LambertPipeLine> lambertPipeLine_;
+	// Lambert
+	std::unique_ptr<LambertPipeLine> lambertPipeLine_;
 
-	//// Light
-	//std::unique_ptr<LightPipeLine> lightPipeLine_;
+	// Light
+	std::unique_ptr<LightPipeLine> lightPipeLine_;
 
-	//// Line
-	//std::unique_ptr<LinePipeLine> linePipeLine_;
+	// Line
+	std::unique_ptr<LinePipeLine> linePipeLine_;
 
-	//// Normal
-	//std::unique_ptr<NormalPipeLine> normalPipeLine_;
-	//
-	//// Object3D
-	//std::unique_ptr<Object3DPipeLine> object3DPipeLine_;
+	// Normal
+	std::unique_ptr<NormalPipeLine> normalPipeLine_;
+	
+	// Object3D
+	std::unique_ptr<Object3DPipeLine> object3DPipeLine_;
 
-	//// Particle
-	//std::unique_ptr<ParticlePipeLine> particlePipeLine_;
+	// Particle
+	std::unique_ptr<ParticlePipeLine> particlePipeLine_;
 
-	//// PhongNormalMap
-	//std::unique_ptr<PhongNormalMapPipeLine> phongNormalMapPipeLine_;
+	// PhongNormalMap
+	std::unique_ptr<PhongNormalMapPipeLine> phongNormalMapPipeLine_;
 
-	//// Phong
-	//std::unique_ptr<PhongPipeLine> phongPipeLine_;
+	// Phong
+	std::unique_ptr<PhongPipeLine> phongPipeLine_;
 
-	//// Sprite
-	//std::unique_ptr<SpritePipeLine> spritePipeLine_;
+	// Sprite
+	std::unique_ptr<SpritePipeLine> spritePipeLine_;
 
 	//// BoxFilter
 	//std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
@@ -115,5 +137,4 @@ private: // メンバ変数
 
 	//// Vignetting
 	//std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
-
 };

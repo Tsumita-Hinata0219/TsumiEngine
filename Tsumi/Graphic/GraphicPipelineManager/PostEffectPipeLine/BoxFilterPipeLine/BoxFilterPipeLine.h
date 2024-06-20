@@ -2,19 +2,19 @@
 
 #include "../../IPipeLineState/IPipeLineState.h"
 
-///* BoxFilterPipeLineクラス */
-//class BoxFilterPipeLine : public IPipeLineState {
-//
-//public:
-//
-//	// Psoを構築する
-//	PsoProperty SetUpPso() override;
-//
-//
-//private:
-//
-//	// RootSignatureのセットアップ
-//	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
-//
-//};
+/* BoxFilterPipeLineクラス */
+class BoxFilterPipeLine : public IPipeLineState {
+
+public:
+
+	// Psoを構築する
+	PsoProperty SetUpPso() override;
+
+
+protected:
+
+	// RootSignatureのセットアップ
+	void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) override;
+
+};
 

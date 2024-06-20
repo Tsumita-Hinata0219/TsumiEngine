@@ -101,6 +101,9 @@ PsoProperty LambertPipeLine::SetUpPso()
 // RootSignatureのセットアップ
 void LambertPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
+	descriptionRootSignature.Flags =
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+
 	// 色に関する
 	D3D12_ROOT_PARAMETER rootParameters[5]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う

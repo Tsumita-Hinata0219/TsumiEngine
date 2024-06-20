@@ -1,10 +1,11 @@
 #pragma once
 
 #include "../../IPipeLineState/IPipeLineState.h"
+#include "../../IPipeLineState/IPipeLine.h"
 
 
 /* LambertPipeLineクラス */
-class LambertPipeLine : public IPipeLineState {
+class LambertPipeLine : public IPipeLine {
 
 public:
 

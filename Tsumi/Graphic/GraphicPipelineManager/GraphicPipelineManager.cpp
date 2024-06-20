@@ -70,42 +70,40 @@ void GraphicPipelineManager::Initialize() {
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
 	// BoxFilter
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->boxFilterPipeLine_ = make_unique<BoxFilterPipeLine>();
+	instance->pipeLineMap_[PipeLineType::BoxFilter] = instance->boxFilterPipeLine_->SetUpPso();
 
 	// Dissolve
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->dissolvePipeLine_ = make_unique<DissolvePipeLine>();
+	instance->pipeLineMap_[PipeLineType::Dissolve] = instance->dissolvePipeLine_->SetUpPso();
 
 	// GaussianFilter
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->gaussianFilterPipeLine_ = make_unique<GaussianFilterPipeLine>();
+	instance->pipeLineMap_[PipeLineType::GaussianFilter] = instance->gaussianFilterPipeLine_->SetUpPso();
 
 	// GrayScale
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->grayScalePipeLine_ = make_unique<GrayScalePipeLine>();
+	instance->pipeLineMap_[PipeLineType::GrayScale] = instance->grayScalePipeLine_->SetUpPso();
 
 	// OutLine
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->outLinePipeLine_ = make_unique<OutLinePipeLine>();
+	instance->pipeLineMap_[PipeLineType::OutLine] = instance->outLinePipeLine_->SetUpPso();
 
 	// RadialBlur
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->radialBlurPipeLine_ = make_unique<RadialBlurPipeLine>();
+	instance->pipeLineMap_[PipeLineType::RadialBlur] = instance->radialBlurPipeLine_->SetUpPso();
 
 	// Randome
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->randomPipeLine_ = make_unique<RandomPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Randome] = instance->randomPipeLine_->SetUpPso();
 
 	// SepiaTone
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
+	instance->sepiaTonePipeLine_ = make_unique<SepiaTonePipeLine>();
+	instance->pipeLineMap_[PipeLineType::SepiaTone] = instance->sepiaTonePipeLine_->SetUpPso();
 
 	// Vignetting
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
-
-
+	instance->vignettingPipeLine_ = make_unique<VignettingPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Vignetting] = instance->vignettingPipeLine_->SetUpPso();
 }
 
 

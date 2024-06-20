@@ -7,6 +7,7 @@
 #include "../../../Project/Math/Struct.h"
 #include "../../Base/DXCommon/DirectXCommon.h"
 #include "../ShaderManager/ShaderManager.h"
+#include "../../CommandManager/CommandManager.h"
 
 #include "IPipeLineState/IPipeLineState.h"
 
@@ -42,7 +43,8 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 
 
-enum class PipeLineType {
+enum class PipeLineType : uint32_t {
+	None,
 	Lambert,
 	Light,
 	Line,
@@ -63,6 +65,7 @@ enum class PipeLineType {
 	Vignetting,
 };
 
+
 class GraphicPipelineManager {
 
 public: // メンバ関数
@@ -76,6 +79,15 @@ public: // メンバ関数
 	/// 初期化処理
 	/// </summary>
 	static void Initialize();
+
+
+#pragma region Accessor アクセッサ
+
+	PsoProperty GetPipeLine(PipeLineType type) {
+		return pipeLineMap_[type];
+	}
+
+#pragma endregion
 
 
 private: // メンバ変数
@@ -111,30 +123,30 @@ private: // メンバ変数
 	// Sprite
 	std::unique_ptr<SpritePipeLine> spritePipeLine_;
 
-	//// BoxFilter
-	//std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
+	// BoxFilter
+	std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
 
-	//// Dissolve
-	//std::unique_ptr<DissolvePipeLine> dissolvePipeLine_;
+	// Dissolve
+	std::unique_ptr<DissolvePipeLine> dissolvePipeLine_;
 
-	//// GaussianFilter
-	//std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
+	// GaussianFilter
+	std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
 
-	//// GrayScale
-	//std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
+	// GrayScale
+	std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
 
-	//// OutLine
-	//std::unique_ptr<OutLinePipeLine> outLinePipeLine_;
+	// OutLine
+	std::unique_ptr<OutLinePipeLine> outLinePipeLine_;
 
-	//// RadialBlur
-	//std::unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
+	// RadialBlur
+	std::unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
 
-	//// Random
-	//std::unique_ptr<RandomPipeLine> randomPipeLine_;
+	// Random
+	std::unique_ptr<RandomPipeLine> randomPipeLine_;
 
-	//// SepiaTone
-	//std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
+	// SepiaTone
+	std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
 
-	//// Vignetting
-	//std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
+	// Vignetting
+	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
 };

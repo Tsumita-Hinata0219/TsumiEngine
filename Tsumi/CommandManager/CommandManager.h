@@ -13,6 +13,7 @@
 using Microsoft::WRL::ComPtr;
 using namespace std;
 
+
 class DirectXCommon;
 
 
@@ -91,5 +92,6 @@ private: // メンバ変数
 
 	// コマンド
 	Commands commands_{};
+
 };
 

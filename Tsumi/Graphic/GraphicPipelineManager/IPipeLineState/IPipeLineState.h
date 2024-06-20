@@ -29,7 +29,7 @@ public: // メンバ関数
 #pragma endregion
 
 
-//protected: // メンバ関数
+protected: // メンバ関数
 
 	// RootSignatureのセットアップ
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;

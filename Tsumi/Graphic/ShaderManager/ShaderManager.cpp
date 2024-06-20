@@ -139,7 +139,7 @@ void ShaderManager::PostEffectShadersCompiles()
 {
 	PostEffectShader();
 	BoxFilterShader();
-	ColorGrading();
+	//ColorGrading();
 	DissolveShader();
 	GaussianFilterShader();
 	GrayScaleShader();

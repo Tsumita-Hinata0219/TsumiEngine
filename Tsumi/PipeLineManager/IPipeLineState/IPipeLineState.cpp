@@ -29,7 +29,7 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 
 	switch (blendMode)
 	{
-	case BlendNone:
+	case None:
 		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
 		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
@@ -38,7 +38,7 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 		blendDesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
 		break;
 
-	case BlendAdd:
+	case Add:
 		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
 		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
@@ -47,7 +47,7 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 		blendDesc.DestBlend = D3D12_BLEND_ONE;
 		break;
 
-	case BlendSubtruct:
+	case Subtruct:
 		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
 		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
@@ -56,7 +56,7 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 		blendDesc.DestBlend = D3D12_BLEND_ONE;
 		break;
 
-	case BlendMultiply:
+	case Multiply:
 		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
 		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
@@ -65,7 +65,7 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 		blendDesc.DestBlend = D3D12_BLEND_SRC_COLOR;
 		break;
 
-	case BlendScreen:
+	case Screen:
 		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
 		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;

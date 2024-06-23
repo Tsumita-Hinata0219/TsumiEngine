@@ -4,7 +4,7 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../CreateResource/CreateResource.h"
 #include "../DescriptorManager/DescriptorManager.h"
-#include "../Graphic/GraphicPipelineManager/PostEffect/PostEffectGraphicPipeline.h"
+#include "../PipeLineManager/PipeLineManager.h"
 
 
 /* PostEffectクラス */

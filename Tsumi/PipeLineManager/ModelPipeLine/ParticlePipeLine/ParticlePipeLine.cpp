@@ -24,7 +24,7 @@ PsoProperty ParticlePipeLine::SetUpPso()
 	// 全ての色要素を書き込む
 	D3D12_BLEND_DESC blendDesc{};
 	D3D12_RENDER_TARGET_BLEND_DESC& pBlendDesc = blendDesc.RenderTarget[0];
-	SetUpBlendState(pBlendDesc, BlendAdd);
+	SetUpBlendState(pBlendDesc, Add);
 
 
 	/* --- RasiterzerStateを設定する --- */

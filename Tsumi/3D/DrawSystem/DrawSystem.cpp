@@ -57,9 +57,9 @@ void DrawSystem::CommandCallTypeLine(Camera* camera) {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(LineGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
+	commands.List->SetGraphicsRootSignature(PipeLineManager::GetInstance()->GetPipeLine(PipeLineType::Line).rootSignature);
 	// PSOを設定
-	commands.List->SetPipelineState(LineGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	commands.List->SetPipelineState(PipeLineManager::GetInstance()->GetPipeLine(PipeLineType::Line).graphicsPipelineState);
 
 	///// いざ描画！！！！！
 	// VBVを設定

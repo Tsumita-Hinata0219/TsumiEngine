@@ -6,7 +6,6 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 #include "../../Base/DXCommon/DirectXCommon.h"
-#include "../../Graphic/GraphicPipelineManager/GraphicPipelineStructure.h"
 #include "../PipeLineStructure/PipeLineStructure.h"
 #include "../../ShaderManager/ShaderManager.h"
 

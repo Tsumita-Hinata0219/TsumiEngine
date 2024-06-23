@@ -5,7 +5,7 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
-#include "../../Graphic/GraphicPipelineManager/Particle/ParticleGraphicPipeline.h"
+#include "../../PipeLineManager/PipeLineManager.h"
 #include "../PostEffectMaterial/PostEffectMaterial.h"
 
 

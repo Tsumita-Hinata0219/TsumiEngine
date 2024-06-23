@@ -4,7 +4,7 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 #include "../IParticle.h"
-#include "../../Graphic/GraphicPipelineManager/Particle/ParticleGraphicPipeline.h"
+#include "../../PipeLineManager/PipeLineManager.h"
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../../Project/GameObject/Camera/Camera.h"

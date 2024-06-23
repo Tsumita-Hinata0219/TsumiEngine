@@ -3,7 +3,7 @@
 #include "Base/WinApp/WinApp.h"
 #include "Base/DXCommon/DirectXCommon.h"
 #include "ShaderManager/ShaderManager.h"
-#include "Graphic/GraphicPipelineManager/GraphicPipelineManager.h"
+#include "PipeLineManager/PipeLineManager.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
 #include "TextureManager/TextureManager.h"
 #include "Input/Input.h"

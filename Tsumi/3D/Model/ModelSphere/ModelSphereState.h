@@ -6,7 +6,7 @@
 #include "../../../Project/Math/Struct.h"
 #include "../../../Transform/WorldTransform/WorldTransform.h"
 #include "../../../TextureManager/TextureManager.h"
-#include "../../../Graphic/GraphicPipelineManager/Light/LightGraphicPipeline.h"
+#include "../../../PipeLineManager/PipeLineManager.h"
 #include "../../../CreateResource/CreateResource.h"
 #include "../../../DescriptorManager/DescriptorManager.h"
 #include "../IModelState.h"

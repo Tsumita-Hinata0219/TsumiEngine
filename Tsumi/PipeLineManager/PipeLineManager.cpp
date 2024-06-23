@@ -104,3 +104,4 @@ void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type)
 		commands.List->IASetPrimitiveTopology(instance->pipeLineMap_[type].primitiveTopologyType);
 	}
 }
+

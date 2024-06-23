@@ -68,6 +68,7 @@ void Tsumi::BeginFlame() {
 	ImGuiManager::BeginFrame();
 	Input::GetInstance()->BeginFrame();
 	DescriptorManager::BeginFrame();
+	PipeLineManager::PipeLineTypeReset();
 }
 
 

@@ -74,6 +74,10 @@ public: // メンバ関数
 	// PipeLineのチェックと設定
 	static void PipeLineCheckAndSet(const PipeLineType type);
 
+	// PipeLineTypeのリセット
+	static void PipeLineTypeReset() {
+		nowPipeLineType_ = PipeLineType::None;
+	}
 
 #pragma region Accessor アクセッサ
 

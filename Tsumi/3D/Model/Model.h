@@ -3,12 +3,11 @@
 #include "../../CommandManager/CommandManager.h"
 #include "../../Transform/WorldTransform/WorldTransform.h"
 #include "../../Transform/Transform.h"
+#include "../../PipeLineManager/PipeLineManager.h"
 #include "IModelState.h"
 #include "ModelGLTF/ModelGLTFState.h"
 #include "ModelObj/ModelObjState.h"
 #include "ModelObj/ObjDataResource/ObjDataResource.h"
-#include "ModelPlane/ModelPlaneState.h"
-#include "ModelSphere/ModelSphereState.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
 #include "Mesh/Mesh.h"
 #include "Material/Material.h"
@@ -19,16 +18,6 @@ class KeyFrameAnimation;
 
 /* Modelクラス */
 class Model {
-
-public:
-
-	// PipeLineのタイプ
-	enum class PipeLineType : uint32_t {
-		kNone,
-		kModel,
-		kParticle,
-		kPostEffect,
-	};
 
 public: // メンバ関数
 
@@ -60,11 +49,6 @@ public: // メンバ関数
 	/// </summary>
 	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
 	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
-
-	/// <summary>
-	/// PipeLineTypeの設定
-	/// </summary>
-	static void SetPipeLineType(const PipeLineType type);
 
 	/// <summary>
 	/// 描画処理
@@ -219,6 +203,4 @@ private: // メンバ変数
 	// Materialデータ
 	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
 
-	// PipeLineのタイプ
-	static PipeLineType pipeLineType_;
 };

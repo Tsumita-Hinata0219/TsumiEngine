@@ -20,7 +20,6 @@ enum class PostEffectType {
 };
 
 struct PostEffectMtlData {
-	int type;
 	Vector4 color;
 };
 

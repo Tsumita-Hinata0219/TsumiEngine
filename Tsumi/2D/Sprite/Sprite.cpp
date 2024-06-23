@@ -51,17 +51,12 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera)
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	commands.List->SetPipelineState(SpriteGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Sprite);
 
 	// 頂点の設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView); // VBVを設定
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// Material用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

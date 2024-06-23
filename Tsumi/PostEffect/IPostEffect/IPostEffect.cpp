@@ -18,6 +18,9 @@ void IPostEffect::CommandCall()
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Vignetting);
+
 	// Materialの設定
 	material_.TransferMaterial();
 	commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());

@@ -3,10 +3,6 @@
 #include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
 
-// PipeLineのタイプ
-Model::PipeLineType Model::pipeLineType_ = Model::PipeLineType::kNone;
-
-
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -352,45 +348,6 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 
 
 /// <summary>
-/// PipeLineTypeの設定
-/// </summary>
-void Model::SetPipeLineType(const PipeLineType type)
-{
-	// PipeLineTypeが違っていたらcommandを再設定
-	if (pipeLineType_ != type) {
-
-		// コマンドの取得
-		Commands commands = CommandManager::GetInstance()->GetCommands();
-
-		if (type == PipeLineType::kModel) {
-			
-			commands.List->SetGraphicsRootSignature(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-		else if (type == PipeLineType::kParticle) {
-
-			commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-		else if (type == PipeLineType::kPostEffect) {
-
-			commands.List->SetGraphicsRootSignature(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-
-		// PipeLineTypeの設定
-		pipeLineType_ = type;
-	}
-}
-
-
-/// <summary>
 /// 描画処理
 /// </summary>
 void Model::Draw(WorldTransform worldTransform, Camera* camera) {
@@ -545,6 +502,9 @@ void Model::CommandCall(Transform transform, Camera* camera)
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	// コマンドを詰む
 	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV

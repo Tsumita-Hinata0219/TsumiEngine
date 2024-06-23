@@ -105,18 +105,13 @@ void ParticleSystem::CommandCall()
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Particle);
 
 	///// いざ描画！！！！！
 	// VBVを設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

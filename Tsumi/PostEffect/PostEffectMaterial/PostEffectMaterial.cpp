@@ -6,7 +6,6 @@
 void PostEffectMaterial::Create()
 {
 	CreateBuffer();
-	mtlData.type = int(PostEffectType::None);
 	mtlData.color = Vector4::one;
 	TransferMaterial();
 }
@@ -16,7 +15,6 @@ void PostEffectMaterial::Create()
 void PostEffectMaterial::TransferMaterial()
 {
 	Map();
-	constMap->type = mtlData.type;
 	constMap->color = mtlData.color;
 	UnMap();
 }

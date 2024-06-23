@@ -18,7 +18,7 @@ void TestPostEffect::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("TestPostEffect")) {
+	/*if (ImGui::TreeNode("TestPostEffect")) {
 
 		ImGui::ColorEdit4("Color", &material_.mtlData.color.x);
 		if (ImGui::Button("None")) {
@@ -51,7 +51,7 @@ void TestPostEffect::Update()
 		}
 
 		ImGui::TreePop();
-	}
+	}*/
 
 #endif // _DEBUG
 }

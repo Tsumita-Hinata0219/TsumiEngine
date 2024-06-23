@@ -21,6 +21,7 @@
 #include "ModelPipeLine/PhongPipeLine/PhongPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
 
+
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
 #include "PostEffectPipeLine/DissolvePipeLine/DissolvePipeLine.h"
 #include "PostEffectPipeLine/GaussianFilterPipeLine/GaussianFilterPipeLine.h"
@@ -43,6 +44,7 @@ enum class PipeLineType : uint32_t {
 	PhongNormalMap,
 	Phong,
 	Sprite,
+	PostEffect,
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,

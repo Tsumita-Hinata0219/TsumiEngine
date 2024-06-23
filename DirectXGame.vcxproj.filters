@@ -114,7 +114,6 @@
     <ClCompile Include="Tsumi\Base\DXCommon\DirectXCommon.cpp" />
     <ClCompile Include="Tsumi\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
-    <ClCompile Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.cpp" />
@@ -124,7 +123,6 @@
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
@@ -296,7 +294,6 @@
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
-    <ClInclude Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineStructure.h" />
@@ -307,7 +304,6 @@
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
@@ -382,6 +378,7 @@
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

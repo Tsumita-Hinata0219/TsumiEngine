@@ -3,7 +3,8 @@
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
-#include "../../../../tsumi/3D/Model/ModelManager/ModelManager.h"
+#include "../../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
+#include "../../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"

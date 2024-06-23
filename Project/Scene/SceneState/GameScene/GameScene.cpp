@@ -140,6 +140,7 @@ void GameScene::ModelDraw()
 	testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
 	Model::SetPipeLineType(Model::PipeLineType::kModel);
 	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }

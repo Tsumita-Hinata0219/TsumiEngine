@@ -64,6 +64,8 @@ PsoProperty LinePipeLine::SetUpPso()
 	// 利用するトポロジ(形状)もタイプ。三角形
 	graphicsPipelineStateDesc.PrimitiveTopologyType =
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_LINE;
+	pso_.primitiveTopologyType =
+		D3D_PRIMITIVE_TOPOLOGY_LINELIST;
 
 
 	// どのように画面に色を打ち込むかの設定(気にしなくて良い)

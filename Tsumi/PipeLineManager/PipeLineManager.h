@@ -15,7 +15,6 @@
 #include "ModelPipeLine/LambertPipeLine/LambertPipeLine.h"
 #include "ModelPipeLine/LightPipeLine/LightPipeLine.h"
 #include "ModelPipeLine/LinePipeLine/LinePipeLine.h"
-#include "ModelPipeLine/NormalPipeLine/NormalPipeLine.h"
 #include "ModelPipeLine/Object3DPipeLine/Object3DPipeLine.h"
 #include "ModelPipeLine/ParticlePipeLine/ParticlePipeLine.h"
 #include "ModelPipeLine/PhongNormalMapPipeLine/PhongNormalMapPipeLine.h"
@@ -39,7 +38,6 @@ enum class PipeLineType : uint32_t {
 	Lambert,
 	Light,
 	Line,
-	Normal,
 	Object3D,
 	Particle,
 	PhongNormalMap,
@@ -71,6 +69,9 @@ public: // メンバ関数
 	// 初期化処理
 	static void Initialize();
 
+	// PipeLineのチェックと設定
+	static void PipeLineCheckAndSet(const PipeLineType type);
+
 
 #pragma region Accessor アクセッサ
 
@@ -84,6 +85,9 @@ public: // メンバ関数
 
 private: // メンバ変数
 
+	// PipeLineのタイプ
+	static PipeLineType nowPipeLineType_;
+
 	// PipeLineを保存しておくmapコンテナ
 	std::map<PipeLineType, PsoProperty> pipeLineMap_;
 
@@ -95,9 +99,6 @@ private: // メンバ変数
 
 	// Line
 	std::unique_ptr<LinePipeLine> linePipeLine_;
-
-	// Normal
-	std::unique_ptr<NormalPipeLine> normalPipeLine_;
 
 	// Object3D
 	std::unique_ptr<Object3DPipeLine> object3DPipeLine_;

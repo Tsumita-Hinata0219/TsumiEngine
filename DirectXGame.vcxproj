@@ -329,6 +329,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />

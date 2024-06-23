@@ -35,7 +35,7 @@ public: // メンバ関数
 	static PsoProperty GetPsoProperty() { return LambertGraphicPipeline::GetInstance()->LambertPso_; }
 
 
-private:
+private:	
 
 	/// <summary>
 	/// RootSignatureのセットアップ

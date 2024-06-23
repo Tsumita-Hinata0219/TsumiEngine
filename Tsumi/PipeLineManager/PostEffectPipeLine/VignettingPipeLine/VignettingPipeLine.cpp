@@ -143,7 +143,7 @@ void VignettingPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descripti
 	// マテリアルに関する
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド
+	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号とバインド
 
 
 	// Samplerの設定

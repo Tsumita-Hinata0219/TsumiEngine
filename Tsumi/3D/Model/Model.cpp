@@ -504,7 +504,7 @@ void Model::CommandCall(Transform transform, Camera* camera)
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// コマンドを詰む
 	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV

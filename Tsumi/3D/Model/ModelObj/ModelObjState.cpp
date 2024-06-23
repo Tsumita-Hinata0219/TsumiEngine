@@ -64,7 +64,7 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::PhongNormalMap);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	///// いざ描画！！！！！
 	// 頂点の設定

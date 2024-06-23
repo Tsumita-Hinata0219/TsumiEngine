@@ -71,25 +71,25 @@ void GameScene::Update(GameManager* state)
 	camera_->UpdateMatrix();
 
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Update();
+	Skydome::GetInstance()->Update();
 
-	///* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Update();
-	//
-	///* ----- TestPostEffect テストポストエフェクト ----- */
-	//testPostEffect_->Update();
+	/* ----- Ground 床 ----- */
+	Ground::GetInstance()->Update();
+	
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
 
-	///* ----- TestObject テストオブジェクト ----- */
-	//testObject_->Update();
+	/* ----- TestObject テストオブジェクト ----- */
+	testObject_->Update();
 
-	///* ----- TestAnimCube テストアニメーションキューブ ----- */
-	//testAnimCube_->Update();
+	/* ----- TestAnimCube テストアニメーションキューブ ----- */
+	testAnimCube_->Update();
 
-	///* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Update();
-	//
-	///* ----- TestJsonObject テストJsonオブジェクト ----- */
-	//testJsonObject_->Update();
+	/* ----- TestHuman テストヒューマン ----- */
+	testHuman_->Update();
+	
+	/* ----- TestJsonObject テストJsonオブジェクト ----- */
+	testJsonObject_->Update();
 
 #ifdef _DEBUG
 
@@ -122,10 +122,10 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw() 
 {
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Draw(camera_.get());
+	Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw(camera_.get());
+	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
 	//testObject_->Draw(camera_.get());
@@ -141,7 +141,7 @@ void GameScene::ModelDraw()
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
-	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

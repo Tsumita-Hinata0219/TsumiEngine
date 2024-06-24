@@ -507,8 +507,6 @@ void DirectXCommon::CreateSwapChain() {
 
 void DirectXCommon::SetDescriptorHeap() {
 
-	/*DirectXCommon::GetInstance()->rtv_.DescriptorHeap = CreateDescriptorHeap(
-		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false);*/
 	RTVManager::GetInstance()->SetDescriptorHeap(
 		CreateDescriptorHeap(DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false)
 	);
@@ -574,7 +572,7 @@ void DirectXCommon::CreateRTV()
 	startHandle = RTVManager::GetInstance()->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart();
 
 
-	RTVProperty rtvPrope[3]{};
+	RTVProperty rtvPrope[4]{};
 	// 1つ目
 	rtvPrope[0].Handles = startHandle;
 	device->CreateRenderTargetView(swapChains.Resources[0].Get(), &desc, rtvPrope[0].Handles);

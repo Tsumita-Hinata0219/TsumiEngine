@@ -359,7 +359,6 @@ void Model::DrawN(Transform transform, Camera* camera)
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.World = transform.matWorld;
-	//transform.WVP = camera->viewProjectionMatrix * transform.matWorld;
 	transform.WVP = camera->projectionMatrix * camera->viewMatrix * transform.matWorld;
 	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 

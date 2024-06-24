@@ -78,7 +78,7 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.srt.scale);
 			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.srt.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
-			Matrix4x4 worldView = camera->matView * camera->matProjection;
+			Matrix4x4 worldView = camera->viewMatrix * camera->projectionMatrix;
 			Matrix4x4 matWorld = worldPos * worldView;
 
 			(*itr).uvTransform.matWorld = MakeAffineMatrix(

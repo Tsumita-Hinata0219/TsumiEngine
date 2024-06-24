@@ -83,7 +83,7 @@ void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p, Camera* camera
 			Matrix4x4 scaleMat = MakeScaleMatrix((*itr)->GetTransform().srt.scale);
 			Matrix4x4 translateMat = MakeTranslateMatrix((*itr)->GetTransform().srt.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
-			Matrix4x4 worldView = camera->matView * camera->matProjection;
+			Matrix4x4 worldView = camera->viewMatrix * camera->projectionMatrix;
 			Matrix4x4 matWorld = worldPos * worldView;
 
 			(*itr)->GetUvTransform().matWorld = MakeAffineMatrix(

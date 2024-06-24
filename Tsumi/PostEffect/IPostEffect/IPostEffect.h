@@ -23,6 +23,24 @@ public: // メンバ関数
 	virtual void Update() = 0;
 	virtual void Draw() = 0;
 
+	// ImGuiの描画
+	void DrawImGui();
+
+public:
+
+	enum class Type {
+		None,
+		BoxFilter,
+		ColorGrading,
+		Dissolve,
+		GaussianFilter,
+		GrayScale,
+		OutLine,
+		RadialBlur,
+		Random,
+		SepiaTone,
+		Vignetting,
+	};
 
 protected: // メンバ関数
 
@@ -31,6 +49,9 @@ protected: // メンバ関数
 
 	// コマンドコール
 	void CommandCall();
+
+	// PipeLineチェック
+	void PipeLineCheck();
 
 
 protected: // メンバ変数
@@ -46,6 +67,9 @@ protected: // メンバ変数
 
 	// サイズ
 	Vector2 size_ = { WinApp::kWindowWidth, WinApp::kWindowHeight };
+
+	// PostEffectTyepe
+	IPostEffect::Type effectType_ = IPostEffect::Type::None;
 
 };
 

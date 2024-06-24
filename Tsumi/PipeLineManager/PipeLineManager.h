@@ -51,7 +51,7 @@ enum class PipeLineType : uint32_t {
 	GrayScale,
 	OutLine,
 	RadialBlur,
-	Randome,
+	Random,
 	SepiaTone,
 	Vignetting,
 };

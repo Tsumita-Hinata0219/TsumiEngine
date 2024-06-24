@@ -7,6 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
+	effectType_ = IPostEffect::Type::BoxFilter;
 }
 
 
@@ -18,7 +19,8 @@ void TestPostEffect::Update()
 
 #ifdef _DEBUG
 
-
+	// ImGuiの描画
+	DrawImGui();
 
 #endif // _DEBUG
 }

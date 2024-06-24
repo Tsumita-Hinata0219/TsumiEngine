@@ -52,6 +52,7 @@ void IPostEffect::Create()
 {
 	// マテリアル作成
 	material_.Create();
+	vignettingMtl_.Create();
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
 	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
@@ -68,9 +69,15 @@ void IPostEffect::CommandCall()
 	PipeLineCheck();
 
 	// Materialの設定
-	material_.TransferMaterial();
-	commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
-
+	if (effectType_ == IPostEffect::Type::Vignetting) {
+		vignettingMtl_.TransferMaterial();
+		commands.List->SetGraphicsRootConstantBufferView(4, vignettingMtl_.constBuffer->GetGPUVirtualAddress());
+	}
+	else {
+		material_.TransferMaterial();
+		commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
+	}
+	
 	// DescriptorTableの設定
 	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
 

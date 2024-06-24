@@ -58,6 +58,7 @@ protected: // メンバ変数
 
 	// マテリアル
 	PostEffectMaterial material_;
+	VignettingMaterial vignettingMtl_;
 
 	// SRV
 	uint32_t srv_ = 0;

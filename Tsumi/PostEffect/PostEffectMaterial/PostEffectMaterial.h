@@ -23,6 +23,7 @@ enum class PostEffectType {
 /* BasePostEffectMaterial構造体 */
 struct PostEffectMtlData {
 	Vector4 color;
+	Matrix4x4 projectionInverse;
 };
 struct PostEffectMaterial {
 

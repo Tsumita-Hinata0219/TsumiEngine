@@ -7,7 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	effectType_ = IPostEffect::Type::BoxFilter;
+	effectType_ = IPostEffect::Type::OutLine;
 }
 
 
@@ -27,9 +27,9 @@ void TestPostEffect::Update()
 
 
 // 描画処理
-void TestPostEffect::Draw()
+void TestPostEffect::Draw(Camera* camera)
 {
 
 	// コマンドコール
-	CommandCall();
+	CommandCall(camera);
 }

@@ -119,7 +119,6 @@ PixelShaderOutput main(VertexShaderOutput input)
             float2 texCoord = input.texcoord + kINdex3x3[x][y] * uvStepSize;
             float ndcDepth = gDepthTexture.Sample(gSamplerPoint, texCoord);
             // NDC -> View。P^{-1}においてxとyはzwに影響を与えないのでなんでも良い。なので、わざわざ行列を渡さなくていい。
-            // Gmaterial.projectionInverseはCBufferを使って渡しておくこと
             float4 viewSpace = mul(float4(0.0f, 0.0f, ndcDepth, 1.0f), gMaterial.projectionInverse);
             float viewZ = viewSpace.z * rcp(viewSpace.w); // 同時座標系からデカルト座標系へ変換
             difference.x += viewZ * kPrewittHorizontalKernel[x][y];
@@ -132,7 +131,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         // 0 ~ 1
     weight = saturate(weight);
         
-    output.color.rgb = (1.0f - weight) * gTexture.Sample(gSampler, input.texcoord).rgb;
+    output.color.rgb = (1.0f - weight) * gDepthTexture.Sample(gSampler, input.texcoord);
     output.color.a = 1.0f;
     
     return output;

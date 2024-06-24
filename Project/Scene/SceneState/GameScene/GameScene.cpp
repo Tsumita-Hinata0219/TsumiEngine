@@ -151,6 +151,6 @@ void GameScene::ModelDraw()
 void GameScene::FrontSpriteDraw() 
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw();
+	testPostEffect_->Draw(camera_.get());
 }
 

@@ -32,6 +32,9 @@ void Camera::UpdateMatrix()
 	// 投影行列を作成（透視投影）
 	projectionMatrix = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
 
+	// 投影逆行列
+	projectionInverseMatrix = Inverse(projectionMatrix);
+
 	// 正射影行列を作成（ウィンドウサイズを基に設定）
 	orthoGraphicMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 100.0f);
 

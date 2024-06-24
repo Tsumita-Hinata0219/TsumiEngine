@@ -7,6 +7,7 @@
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "../PostEffectMaterial/PostEffectMaterial.h"
+#include "../../Project/GameObject/Camera/Camera.h"
 
 
 /* IPostEffectクラス */
@@ -21,7 +22,7 @@ public: // メンバ関数
 	// 初期化処理、更新処理、描画処理
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(Camera* camera) = 0;
 
 	// ImGuiの描画
 	void DrawImGui();
@@ -48,7 +49,7 @@ protected: // メンバ関数
 	void Create();
 
 	// コマンドコール
-	void CommandCall();
+	void CommandCall(Camera* camera);
 
 	// PipeLineチェック
 	void PipeLineCheck();

@@ -57,6 +57,7 @@ public:
 	/// </summary>
 	static uint32_t CreateInstancingSRV(uint32_t instancingNum, ComPtr<ID3D12Resource>& resource, UINT size);
 	static uint32_t CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource);
+	static uint32_t CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
 	/// CPUとGPUの.ptrをずらす

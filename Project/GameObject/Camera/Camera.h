@@ -99,6 +99,9 @@ public:
 	// 投影行列
 	Matrix4x4 projectionMatrix{};
 
+	// 投影逆行列
+	Matrix4x4 projectionInverseMatrix{};
+
 	// 正射影行列
 	Matrix4x4 orthoGraphicMatrix{};
 

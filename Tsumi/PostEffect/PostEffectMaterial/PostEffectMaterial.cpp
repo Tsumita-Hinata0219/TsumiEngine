@@ -7,6 +7,7 @@ void PostEffectMaterial::Create()
 {
 	CreateBuffer();
 	mtlData.color = Vector4::one;
+	mtlData.projectionInverse = Matrix4x4::identity;
 	TransferMaterial();
 }
 
@@ -15,7 +16,7 @@ void PostEffectMaterial::Create()
 void PostEffectMaterial::TransferMaterial()
 {
 	Map();
-	constMap->color = mtlData.color;
+	constMap = &mtlData;
 	UnMap();
 }
 

@@ -55,12 +55,13 @@ void IPostEffect::Create()
 	vignettingMtl_.Create();
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	srv_ = DescriptorManager::CreateRenderTextureDepthSRV(stv);
 }
 
 
 // コマンドコール
-void IPostEffect::CommandCall()
+void IPostEffect::CommandCall(Camera* camera)
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -74,6 +75,7 @@ void IPostEffect::CommandCall()
 		commands.List->SetGraphicsRootConstantBufferView(4, vignettingMtl_.constBuffer->GetGPUVirtualAddress());
 	}
 	else {
+		material_.mtlData.projectionInverse = camera->projectionInverseMatrix;
 		material_.TransferMaterial();
 		commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
 	}

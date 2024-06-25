@@ -3,6 +3,8 @@
 #include "GameObject.h"
 #include "AnimationDataArray.h"
 
+#include "Skeleton.h"
+
 
 /* KeyFrameAnimation */
 class KeyFrameAnimation {

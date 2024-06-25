@@ -14,9 +14,31 @@
 #include "Mesh.h"
 #include "Material.h"
 
+#include "Node.h"
+#include "Skeleton.h"
+
 
 class ModelManager;
 class KeyFrameAnimation;
+
+
+//// モデルデータ
+//struct ModelData {
+//	std::map<string, JointWeightData> skinClusterData;
+//	std::vector<VertexData> vertices;
+//	std::vector<uint32_t> indices;
+//	MaterialData material;
+//	uint32_t textureHD;
+//	Node rootNode;
+//};
+//// Objデータ
+//struct ObjData {
+//	uint32_t index;
+//	vector<VertexData> vertices;
+//	MaterialData material;
+//	Node node;
+//};
+
 
 /* Modelクラス */
 class Model {
@@ -71,6 +93,7 @@ public: // メンバ関数
 	/// 描画処理
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
+	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
 	void DrawN(Transform transform, Camera* camera);
 
 	/// <summary>
@@ -93,6 +116,17 @@ public: // メンバ関数
 	/// </summary>
 	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
+
+	/// <summary>
+	/// SKinClusterの生成
+	/// </summary>
+	SkinCluster CreateSkinCluster(const Skeleton& skeleton);
+
+
+	/// <summary>
+	/// SkinCLusterの更新処理
+	/// </summary>
+	void UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton);
 
 #pragma region Get
 
@@ -210,6 +244,8 @@ private: // メンバ変数
 
 	ModelLightingType modelDrawType_ = Non;
 
+
+	// ↓↓↓↓↓↓↓↓ こっから新しいモデル描画に必要な値
 
 	// Modelの名前
 	string name_;

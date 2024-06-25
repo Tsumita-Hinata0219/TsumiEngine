@@ -145,6 +145,7 @@ void ShaderManager::ShadersCompiles() {
 	LineShader();
 	Object3DShader();
 	PostEffectShader();
+	SkinningObject3dShader();
 }
 
 
@@ -326,4 +327,22 @@ void ShaderManager::PostEffectShader() {
 			L"Resources/shaders/PostEffect.PS.hlsl", L"ps_6_0");
 
 	ShaderManager::GetInstance()->shaders_.PostEffect = shader;
+}
+
+
+/// <summary>
+/// 
+/// </summary>
+void ShaderManager::SkinningObject3dShader()
+{
+	ShadersMode shader{};
+
+	shader.VertexBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/SkinningObject3d.VS.hlsl", L"vs_6_0");
+	shader.PixelBlob =
+		ShaderManager::CompileShader(
+			L"Resources/shaders/SkinningObject3d.PS.hlsl", L"ps_6_0");
+
+	ShaderManager::GetInstance()->shaders_.skinningObject3d = shader;
 }

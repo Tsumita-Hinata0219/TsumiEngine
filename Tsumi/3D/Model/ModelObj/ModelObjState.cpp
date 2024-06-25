@@ -54,6 +54,14 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 	CommandCall(pModel, worldTransform, camera);
 }
 
+void ModelObjState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+{
+	pModel;
+	worldTransform;
+	skinCluster;
+	camera;
+}
+
 
 /// <summary>
 /// コマンドコール処理

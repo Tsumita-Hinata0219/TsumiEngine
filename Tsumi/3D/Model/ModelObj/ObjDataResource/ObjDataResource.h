@@ -5,6 +5,7 @@
 
 #include "MyMath.h"
 #include "Struct.h"
+#include "Model.h"
 
 #include <cassert>
 

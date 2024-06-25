@@ -34,6 +34,7 @@ public: // メンバ関数
 	/// 描画処理
 	/// </summary>
 	void Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) override;
+	void AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera) override;
 
 
 private: // メンバ関数
@@ -42,6 +43,7 @@ private: // メンバ関数
 	/// コマンドコール処理
 	/// </summary>
 	void CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera);
+	void AnimCommandCall(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
 
 private: // メンバ関数
 
@@ -50,6 +52,9 @@ private: // メンバ関数
 
 	// ModelData
 	ModelData modelData_{};
+
+	// 
+	uint32_t dsvIndex_ = 0;
 
 };
 

@@ -15,9 +15,13 @@ using namespace std;
 #include <WorldTransform.h>
 #include <optional>
 #include <map>
+#include <span>
+
 
 #include "MyMath.h"
 
+//#include "Node.h"
+//#include "JointWeightData.h"
 
 
 // 頂点データ
@@ -100,6 +104,30 @@ struct VertexWeightData {
 struct JointWeightData {
 	Matrix4x4 inverseBindPoseMatrix;
 	std::vector<VertexWeightData> vertexWeights;
+};
+
+// VertexInfluence
+const uint32_t kNumMaxInfluence = 4;
+struct VertexInfluence {
+	std::array<float, kNumMaxInfluence> weights;
+	std::array<int32_t, kNumMaxInfluence> jointIndices;
+};
+
+// WellForGPU
+struct WellForGPU {
+	Matrix4x4 skeletonSpaceMatrix; // 位置用
+	Matrix4x4 skeletonSpaceInverseTransposeMatrix; // 法線用
+};
+
+// SkinCluster
+struct SkinCluster {
+	std::vector<Matrix4x4> inverseBindPosematrices;
+	Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
+	D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
+	std::span<VertexInfluence> mappedInfluence;
+	Microsoft::WRL::ComPtr<ID3D12Resource> paletteResource;
+	std::span<WellForGPU> mappedPallette;
+	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE>paletteSrvHandle;
 };
 
 // マテリアル

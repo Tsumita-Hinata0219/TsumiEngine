@@ -6,11 +6,20 @@
 void TestHuman::Init()
 {
 	testModel_ = make_unique<Model>();
+
+	// SimpleSkin
+	//testModel_->CreateGLTFModel("TestSimpleSkin", "simpleSkin", "simpleSkin.png");
+	//testAnimation_ = AnimationManager::LoadAnimationFile("TestSimpleSkin", "simpleSkin");
+
+	// Human
 	testModel_->CreateGLTFModel("TestHuman", "walk", "uvChecker.png");
 	testAnimation_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
+
 	skeleton_ = testModel_->CreateSkeleton();
+	skinCluster_ = testModel_->CreateSkinCluster(skeleton_);
 
 	wt_.Initialize();
+
 }
 
 
@@ -19,10 +28,20 @@ void TestHuman::Update()
 {
 	wt_.UpdateMatrix();
 
-	// とりあえず時間の加算処理はここで行う
+	// アニメーションの時間を進める
 	animationtime += 1.0f / 60.0f;
+	if (animationtime >= 1.0f) {
+		animationtime = 0.0f;
+	}
+
+	// アニメーションの更新を行って、骨ごとのLocal情報を更新する
 	testModel_->ApplyAnimation(skeleton_, testAnimation_, animationtime);
+
+	// 現在の骨ごとのLocal情報を基にSKeletonSpaceの情報を更新する
 	testModel_->UpdateSkeleton(skeleton_);
+
+	// SkeletonSpaceの情報を基にSkinClusterのMatrixPaletteを更新する
+	testModel_->UpdateSkinCluster(skinCluster_, skeleton_);
 
 #ifdef _DEBUG
 
@@ -45,5 +64,6 @@ void TestHuman::Update()
 // 描画処理
 void TestHuman::Draw(Camera* camera)
 {
-	testModel_->Draw(wt_, camera);
+	//testModel_->Draw(wt_, camera);
+	testModel_->AnimDraw(wt_, skinCluster_, camera);
 }

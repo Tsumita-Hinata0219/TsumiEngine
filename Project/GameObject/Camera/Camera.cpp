@@ -21,7 +21,8 @@ void Camera::UpdateMatrix()
 	translateMat = MakeTranslateMatrix(translate);
 	matWorld = MakeAffineMatrix({ 1.0f, 1.0f, 1.0f }, rotate, translate);
 
-	matView = Inverse(translateMat) * Inverse(rotateMat);
+	//matView = Inverse(translateMat) * Inverse(rotateMat);
+	matView = Inverse(matWorld);
 	matProjection = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
 
 	orthoGraphicMat = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 100.0f);

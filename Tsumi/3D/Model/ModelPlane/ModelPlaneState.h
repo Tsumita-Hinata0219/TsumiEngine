@@ -29,6 +29,7 @@ public: // メンバ関数
 	/// 描画処理
 	/// </summary>
 	void Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) override;
+	void AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera) override;
 
 
 private: // メンバ関数

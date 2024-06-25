@@ -35,6 +35,7 @@ public: // メンバ関数
 	// Animationを読み込む
 	static Animation LoadAnimationFile(const std::string& routeFilePath, const std::string& fileName);
 
+
 private: // メンバ関数
 
 	// 同じファイルは読み込まない

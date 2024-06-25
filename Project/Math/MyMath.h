@@ -15,10 +15,14 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 #include <cmath>
-#include <cmath>
 #include <iostream>
 #include <cassert>
 #include <algorithm>
 #include <array>
 #include <numbers>
-
+#include <span>
+#include <vector>
+#include <memory>
+#include <string>
+#include <optional>
+#include <map>

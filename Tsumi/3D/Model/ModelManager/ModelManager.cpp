@@ -316,10 +316,11 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 				// 左手系のBindPoseMatrixを作る
 				Matrix4x4 bindPoseMatrix = MakeAffineMatrix(
 					{ scale.x, scale.y, scale.z },
-					{ rotate.x, -rotate.y, -rotate.z, rotate.w },
+					{ rotate.w, rotate.x, -rotate.y, -rotate.z },
 					{ -translate.x, translate.y, translate.z });
 				// InverseBindPoseMatrixにする
 				jointWeightData.inverseBindPoseMatrix = Inverse(bindPoseMatrix);
+				Matrix4x4 hr = jointWeightData.inverseBindPoseMatrix * bindPoseMatrix;
 
 				// Weight情報を取り出す
 				for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {

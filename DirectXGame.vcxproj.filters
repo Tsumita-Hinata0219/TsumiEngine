@@ -21,6 +21,8 @@
     <FxCompile Include="Resources\shaders\Object3d.PS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl" />
     <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -162,8 +164,6 @@
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
@@ -172,6 +172,18 @@
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Joint\Joint.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Node\Node.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Skeleton\Skeleton.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -350,8 +362,6 @@
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
-    <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
-    <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
@@ -360,6 +370,18 @@
     <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Joint\Joint.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Node\Node.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Skeleton\Skeleton.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />
@@ -374,6 +396,7 @@
     <None Include="Resources\shaders\MathFunc.hlsli" />
     <None Include="Resources\shaders\PostEffect.hlsli" />
     <None Include="cpp.hint" />
+    <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

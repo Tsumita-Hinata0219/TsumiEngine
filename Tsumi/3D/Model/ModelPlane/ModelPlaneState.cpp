@@ -74,6 +74,14 @@ void ModelPlaneState::Draw(Model* pModel, WorldTransform worldTransform, Camera*
 	CommandCall(pModel->GetUseTexture(), worldTransform, camera);
 }
 
+void ModelPlaneState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+{
+	pModel;
+	worldTransform;
+	skinCluster;
+	camera;
+}
+
 
 /// <summary>
 /// コマンドコール処理

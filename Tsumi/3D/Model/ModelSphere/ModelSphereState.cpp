@@ -157,6 +157,14 @@ void ModelSphereState::Draw(Model* pModel, WorldTransform worldTransform, Camera
 	CommandCall(pModel->GetObjData().textureHD, worldTransform, camera);
 }
 
+void ModelSphereState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+{
+	pModel;
+	worldTransform;
+	skinCluster;
+	camera;
+}
+
 
 /// <summary>
 /// コマンドコール処理

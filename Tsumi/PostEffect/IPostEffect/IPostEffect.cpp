@@ -55,8 +55,8 @@ void IPostEffect::Create()
 	vignettingMtl_.Create();
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
-	srv_ = DescriptorManager::CreateRenderTextureDepthSRV(stv);
+	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureDepthSRV(stv);
 }
 
 

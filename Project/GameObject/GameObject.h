@@ -12,6 +12,7 @@
 #include "MyMath.h"
 #include "RandomGenerator.h"
 #include "TimedCall.h"
+#include "Timer/Timer.h"
 #include "CollisionManager.h"
 #include "DebugCamera.h"
 #include "Camera.h"

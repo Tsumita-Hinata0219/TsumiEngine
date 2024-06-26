@@ -16,7 +16,7 @@ public:
 	~PlayerBullet() {};
 
 	// 初期化処理、更新処理、描画処理
-	void Initialize();
+	void Initialize(Model* SetModel);
 	void Update();
 	void Draw3D(Camera* camera);
 
@@ -29,9 +29,6 @@ public:
 	// 速度
 	Vector3 GetVelocity() const { return  this->velocity_; }
 	void SetVelocity(Vector3 setVel) { this->velocity_ = setVel; }
-
-	// モデル
-	//void SetModel(Model& SetModel) { (*bulletModel_) = SetModel; }
 
 	// 姿勢
 	Vector3 GetRotate() const { return this->bulletWt_.srt.rotate; }

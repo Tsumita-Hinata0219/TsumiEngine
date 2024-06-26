@@ -16,7 +16,7 @@ public:
 	~PlayerBullet() {};
 
 	// 初期化処理、更新処理、描画処理
-	void Initialize(Model* SetModel);
+	void Initialize(Model& modelHD);
 	void Update();
 	void Draw3D(Camera* camera);
 
@@ -59,7 +59,7 @@ private:
 private:
 
 	// 本体モデル
-	unique_ptr<Model> bulletModel_ = nullptr;
+	std::unique_ptr<Model> bulletModel_;
 
 	// 本体座標
 	WorldTransform bulletWt_{};

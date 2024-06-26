@@ -184,6 +184,8 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -382,6 +384,8 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
     <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\shaders\LambertObject.hlsli" />

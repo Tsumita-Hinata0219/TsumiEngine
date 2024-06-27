@@ -33,6 +33,7 @@
     <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\PostEffect\Grain\Grain.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />

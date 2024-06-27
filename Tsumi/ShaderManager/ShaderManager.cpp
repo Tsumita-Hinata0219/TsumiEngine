@@ -134,6 +134,7 @@ void ShaderManager::ModelShadersCompiles()
 	ParticleShader();
 	LineShader();
 	Object3DShader();
+	SkinningObject3dShader();
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
@@ -251,6 +252,16 @@ void ShaderManager::Object3DShader()
 		L"Resources/Shaders/Object3d.PS.hlsl",
 		shader);
 	modelShadersMap_["Object3D"] = shader;
+}
+
+void ShaderManager::SkinningObject3dShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/SkinningObject3d.VS.hlsl",
+		L"Resources/Shaders/SkinningObject3d.PS.hlsl",
+		shader);
+	modelShadersMap_["SkinningObject3d"] = shader;
 }
 
 

@@ -31,6 +31,8 @@
     <FxCompile Include="Resources\Shaders\PostEffect\GrayScale\GrayScale.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Random\Random.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -97,22 +99,12 @@
     <ClCompile Include="Tsumi\3D\Model\ModelManager\ModelManager.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelObj\ModelObjState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.cpp" />
     <ClCompile Include="Tsumi\Audio\Audio.cpp" />
     <ClCompile Include="Tsumi\Audio\AudioDataResource\AudioDataResource.cpp" />
     <ClCompile Include="Tsumi\Base\DXCommon\DirectXCommon.cpp" />
     <ClCompile Include="Tsumi\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
@@ -141,8 +133,6 @@
     <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\Mesh\Mesh.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\Material\Material.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
@@ -175,6 +165,18 @@
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PipeLineManager.cpp" />
     <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Joint\Joint.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Node\Node.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\Skeleton\Skeleton.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -263,23 +265,12 @@
     <ClInclude Include="Tsumi\3D\Model\ModelManager\ModelManager.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ModelObjState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.h" />
     <ClInclude Include="Tsumi\Audio\Audio.h" />
     <ClInclude Include="Tsumi\Audio\AudioDataResource\AudioDataResource.h" />
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineStructure.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
@@ -317,8 +308,6 @@
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
-    <ClInclude Include="Tsumi\3D\Model\Mesh\Mesh.h" />
-    <ClInclude Include="Tsumi\3D\Model\Material\Material.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
@@ -352,6 +341,16 @@
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Joint\Joint.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Node\Node.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\Skeleton\Skeleton.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

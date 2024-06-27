@@ -10,12 +10,18 @@ void IPipeLineState::SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputEleme
 	inputElementDescs.SemanticName = SemanticName;
 	inputElementDescs.SemanticIndex = SemanticIndex;
 	inputElementDescs.Format = Format;
+	inputElementDescs.InputSlot;
 	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
 }
 void IPipeLineState::SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = numInputElements;
+}
+
+void IPipeLineState::CreateInputElementMap()
+{
+
 }
 
 

@@ -18,12 +18,22 @@ public:
 
 private:
 
-	// テストモデル
-	unique_ptr<Model> testModel_;
-	WorldTransform wt_{};
-	Animation testAnimation_{};
-	float animationtime = 0.0f;
-	Skeleton skeleton_{};
-	SkinCluster skinCluster_{};
+	//  ヒューマンモデル
+	unique_ptr<Model> humanModel_;
+	WorldTransform humanWt_{};
+	float animTimeA_ = 0.0f;
+	Skeleton humanSkeleton_{};
+	SkinCluster humanSkinCluster_{};
+
+	//  シンプルモデル
+	unique_ptr<Model> simpleModel_;
+	WorldTransform simpleWt_{};
+	float animTimeB_ = 0.0f;
+	Skeleton simpleSkeleton_{};
+	SkinCluster simpleSkinCluster_{};
+
+	// アニメーションタイプ
+	Animation walkAnim_{};
+	Animation simpleAnim_{};
 };
 

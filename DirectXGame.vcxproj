@@ -206,6 +206,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
@@ -327,6 +328,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />

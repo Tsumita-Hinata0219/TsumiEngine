@@ -143,6 +143,7 @@ void ShaderManager::PostEffectShadersCompiles()
 	//ColorGrading();
 	DissolveShader();
 	GaussianFilterShader();
+	GrainShader();
 	GrayScaleShader();
 	OutLineShader();
 	RadialBlurShader();
@@ -314,6 +315,16 @@ void ShaderManager::GaussianFilterShader()
 		L"Resources/Shaders/PostEffect/GaussianFilter/GaussianFilter.PS.hlsl",
 		shader);
 	postEffectShadersMap_["GaussianFilter"] = shader;
+}
+
+void ShaderManager::GrainShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/Grain/Grain.PS.hlsl",
+		shader);
+	postEffectShadersMap_["Grain"] = shader;
 }
 
 void ShaderManager::GrayScaleShader()

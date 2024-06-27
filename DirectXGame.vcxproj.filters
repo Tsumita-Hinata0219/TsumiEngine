@@ -178,6 +178,7 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -352,6 +353,7 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MyMath.h"
-#include "AnimationDataArray.h"
-#include "KeyFrameAnimation.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../AnimationDataArray/AnimationDataArray.h"
+#include "../KeyFrameAnimation/KeyFrameAnimation.h"
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>

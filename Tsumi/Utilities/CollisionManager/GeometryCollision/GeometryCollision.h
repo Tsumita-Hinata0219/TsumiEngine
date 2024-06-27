@@ -1,9 +1,9 @@
 #pragma once
 
-#include "CollisionStructures.h"
-#include "OBBCollider.h"
-#include "AABBCollider.h"
-#include "MyMath.h"
+#include "../CollisionStructures/CollisionStructures.h"
+#include "../Collider/OBBCollider.h"
+#include "../Collider/AABBCollider.h"
+#include "../../../../Project/Math/MyMath.h"
 
 #include <array>
 

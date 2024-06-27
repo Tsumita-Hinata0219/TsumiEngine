@@ -1,10 +1,13 @@
 #pragma once
 
-#include "MyMath.h"
-#include "DescriptorManager.h"
-#include "CreateResource.h"
-#include "PostEffectGraphicPipeline.h"
-#include "PostEffect/PostEffectMaterial/PostEffectMaterial.h"
+#include "../../Base/WinApp/WinApp.h"
+#include "../../CommandManager/CommandManager.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../CreateResource/CreateResource.h"
+#include "../../DescriptorManager/DescriptorManager.h"
+#include "../../PipeLineManager/PipeLineManager.h"
+#include "../PostEffectMaterial/PostEffectMaterial.h"
+#include "../../Project/GameObject/Camera/Camera.h"
 
 
 /* IPostEffectクラス */
@@ -19,8 +22,26 @@ public: // メンバ関数
 	// 初期化処理、更新処理、描画処理
 	virtual void Initialize() = 0;
 	virtual void Update() = 0;
-	virtual void Draw() = 0;
+	virtual void Draw(Camera* camera) = 0;
 
+	// ImGuiの描画
+	void DrawImGui();
+
+public:
+
+	enum class Type {
+		None,
+		BoxFilter,
+		ColorGrading,
+		Dissolve,
+		GaussianFilter,
+		GrayScale,
+		OutLine,
+		RadialBlur,
+		Random,
+		SepiaTone,
+		Vignetting,
+	};
 
 protected: // メンバ関数
 
@@ -28,13 +49,17 @@ protected: // メンバ関数
 	void Create();
 
 	// コマンドコール
-	void CommandCall();
+	void CommandCall(Camera* camera);
+
+	// PipeLineチェック
+	void PipeLineCheck();
 
 
 protected: // メンバ変数
 
 	// マテリアル
 	PostEffectMaterial material_;
+	VignettingMaterial vignettingMtl_;
 
 	// SRV
 	uint32_t srv_ = 0;
@@ -44,6 +69,9 @@ protected: // メンバ変数
 
 	// サイズ
 	Vector2 size_ = { WinApp::kWindowWidth, WinApp::kWindowHeight };
+
+	// PostEffectTyepe
+	IPostEffect::Type effectType_ = IPostEffect::Type::None;
 
 };
 

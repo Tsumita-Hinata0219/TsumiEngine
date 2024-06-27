@@ -114,6 +114,41 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 
 	return DescriptorManager::GetInstance()->index_;
 }
+uint32_t DescriptorManager::CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource)
+{
+	// indexをインクリメント
+	DescriptorManager::GetInstance()->index_++;
+
+
+	// SRVの設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+
+
+	// SRVを作成するDescriptorHeapの場所を決める
+	DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._CPU = GetCPUDescriptorHandle(
+		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+		DescriptorManager::GetInstance()->descriptorSize_.SRV,
+		DescriptorManager::GetInstance()->index_);
+
+	DescriptorManager::GetInstance()->srvHandle_[DescriptorManager::GetInstance()->index_]._GPU = GetGPUDescriptorHandle(
+		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+		DescriptorManager::GetInstance()->descriptorSize_.SRV,
+		DescriptorManager::GetInstance()->index_);
+
+	// CPUとGPUの.ptrをずらす
+	ShiftSRVHandlePtr();
+
+
+	// SRVの生成
+	DescriptorManager::CreateShaderResourceView(resource, srvDesc, DescriptorManager::GetInstance()->index_);
+
+
+	return DescriptorManager::GetInstance()->index_;
+}
 
 
 // CPUとGPUの.ptrをずらす
@@ -137,7 +172,7 @@ void DescriptorManager::IncrementIndex() {
 // DescriptorTableを設定する
 void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t texHandle) {
 
-	DirectXCommon::GetInstance()->GetCommandList()->SetGraphicsRootDescriptorTable(
+	CommandManager::GetInstance()->GetList()->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex, 
 		DescriptorManager::GetInstance()->srvHandle_[texHandle]._GPU);
 }

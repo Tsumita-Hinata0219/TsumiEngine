@@ -35,17 +35,18 @@ struct PixelShaderOutput
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
-    float4 transfoemdUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
-    float4 textureColor = gTexture.Sample(gSampler, transfoemdUV.xy);
+    float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
+
+    float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     
-    // 色が不透明な場合破棄する
-    if (textureColor.a < 0.9f)
+    // 色が不透明な場合は描画する
+    if (textureColor.a < 0.9f) // アルファ値の閾値を変更
     {
         discard;
     }
     
     output.color.rgb = textureColor.rgb;
-    output.color.a = gMaterial.color.a * textureColor.a; // α値
-    
+    output.color.a = gMaterial.color.a * textureColor.a; // 色の透明度の計算
+
     return output;
 }

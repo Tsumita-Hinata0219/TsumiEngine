@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MyMath.h"
-#include "IParticle.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../IParticle.h"
 
 /* ParticleArrayクラス */
 class ParticleArray {

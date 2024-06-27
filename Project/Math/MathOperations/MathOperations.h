@@ -1,7 +1,6 @@
 #pragma once
-#include "Vector.h"
-#include "Matrix.h"
-#include "MathQuaternion.h"
+
+#include "../../Project/Math/MyMath.h"
 
 
 /// -------------------------------------------------------------------------

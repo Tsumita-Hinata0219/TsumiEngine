@@ -1,10 +1,10 @@
 #pragma once
 
 #include "DirectXTex.h"
-#include "DirectXCommon.h"
-#include "DescriptorManager.h"
-#include "TextureDataResource.h"
-#include "MyMath.h"
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../DescriptorManager/DescriptorManager.h"
+#include "TextureDataResource/TextureDataResource.h"
+#include "../../Project/Math/MyMath.h"
 
 #include <cassert>
 #include <map>

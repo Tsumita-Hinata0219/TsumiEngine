@@ -151,6 +151,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 
 	// RenderTargetとして利用可能にする
 	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET;
+	//resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL;
 
 	// ClearValueの設定
 	D3D12_CLEAR_VALUE clearValue{};

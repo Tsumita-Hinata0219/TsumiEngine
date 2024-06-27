@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ParticleRenderer.h"
-#include "ParticleArray.h"
+#include "../ParticleRenderer/ParticleRenderer.h"
+#include "../ParticleArray/ParticleArray.h"
 
 /* ParticleManagerクラス */
 class ParticleManager {

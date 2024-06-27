@@ -10,7 +10,7 @@
 #include <array>
 #include <numbers>
 
-#include "MathGeometry.h"
+#include "../MathGeometry/MathGeometry.h"
 
 
 /* イージング関数 */

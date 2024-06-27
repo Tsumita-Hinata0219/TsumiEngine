@@ -1,6 +1,5 @@
 #include "ModelGLTFState.h"
-#include "Model.h"
-
+#include "../Model.h"
 
 /// <summary>
 /// 初期化処理
@@ -105,45 +104,15 @@ void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, Skin
 void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
 
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	if (pModel->GetModelDrawType() == Non) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == Lambert) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(LambertGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(LambertGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == Phong) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == PhongNormalMap) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongNormalMap::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongNormalMap::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	///// いざ描画！！！！！
 	// VBVを設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

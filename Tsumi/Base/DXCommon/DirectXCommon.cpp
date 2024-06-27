@@ -38,14 +38,17 @@ void DirectXCommon::Initialize() {
 	// エラーと警告の抑制
 	DebugErrorInfoQueue();
 
+	// コマンド関連の生成
+	CommandManager::GetInstance()->Initialize();
+
 	// コマンドキューを生成する
-	CreateCommandQueue();
+	//CreateCommandQueue();
 
 	// コマンドアロケータを生成する
-	CreateCommandAllocator();
+	//CreateCommandAllocator();
 
 	// コマンドを生成する
-	CreateCommandList();
+	//CreateCommandList();
 
 	// スワップチェーンを生成する
 	CreateSwapChain();
@@ -67,7 +70,7 @@ void DirectXCommon::Initialize() {
 /// </summary>
 void DirectXCommon::PreDrawForPostEffect() {
 
-	Commands commands = DirectXCommon::GetInstance()->commands_;
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 	
@@ -114,7 +117,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
 	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
 
-	DirectXCommon::GetInstance()->commands_ = commands;
+	CommandManager::GetInstance()->SetCommands(commands);
 }
 
 
@@ -123,7 +126,7 @@ void DirectXCommon::PreDrawForPostEffect() {
 /// </summary>
 void DirectXCommon::PostDrawForPostEffect() {
 
-	Commands commands = DirectXCommon::GetInstance()->commands_;
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 
@@ -152,7 +155,7 @@ void DirectXCommon::PreDrawForSwapChain() {
 	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
 	swapChains.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
 	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
-	Commands commands = DirectXCommon::GetInstance()->commands_;
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
 	RTVProperty rtv[2] = {
 		RTVManager::GetRTV("SwapChain0")->GetRTVPrope(),
@@ -203,7 +206,7 @@ void DirectXCommon::PreDrawForSwapChain() {
 	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
 	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
 
-	DirectXCommon::GetInstance()->commands_ = commands;
+	CommandManager::GetInstance()->SetCommands(commands);
 }
 
 
@@ -213,7 +216,7 @@ void DirectXCommon::PreDrawForSwapChain() {
 void DirectXCommon::PostDrawForSwapChain() {
 
 	SwapChains swapChains = DirectXCommon::GetInstance()->swapChains_;
-	Commands commands = DirectXCommon::GetInstance()->commands_;
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
 
 	// 状態を遷移
@@ -262,7 +265,7 @@ void DirectXCommon::PostDrawForSwapChain() {
 	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
 	assert(SUCCEEDED(result));
 
-	DirectXCommon::GetInstance()->commands_ = commands;
+	CommandManager::GetInstance()->SetCommands(commands);
 	DirectXCommon::GetInstance()->swapChains_ = swapChains;
 }
 
@@ -417,54 +420,54 @@ void DirectXCommon::DebugErrorInfoQueue() {
 
 /* ----- コマンドキューを生成する ----- */
 
-void DirectXCommon::CreateCommandQueue() {
-
-	// コマンドキューを生成する
-	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-	HRESULT result;
-	result = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
-		&commandQueueDesc,
-		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Queue));
-
-
-	// コマンドキューの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(result));
-}
+//void DirectXCommon::CreateCommandQueue() {
+//
+//	// コマンドキューを生成する
+//	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
+//	HRESULT result;
+//	result = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
+//		&commandQueueDesc,
+//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Queue));
+//
+//
+//	// コマンドキューの生成がうまくいかなかったので起動できない
+//	assert(SUCCEEDED(result));
+//}
 
 
 
 /* ----- コマンドアロケータを生成する ----- */
-void DirectXCommon::CreateCommandAllocator() {
-
-	// コマンドアロケータを生成する
-	HRESULT result;
-	result = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
-		D3D12_COMMAND_LIST_TYPE_DIRECT,
-		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Allocator));
-
-
-	// コマンドアロケータの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(result));
-}
+//void DirectXCommon::CreateCommandAllocator() {
+//
+//	// コマンドアロケータを生成する
+//	HRESULT result;
+//	result = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
+//		D3D12_COMMAND_LIST_TYPE_DIRECT,
+//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Allocator));
+//
+//
+//	// コマンドアロケータの生成がうまくいかなかったので起動できない
+//	assert(SUCCEEDED(result));
+//}
 
 
 
 /* ----- コマンドリストを生成する ----- */
 
-void DirectXCommon::CreateCommandList() {
-
-	// コマンドリストを生成する
-	HRESULT result;
-	result = DirectXCommon::GetInstance()->device_->CreateCommandList(
-		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-		DirectXCommon::GetInstance()->commands_.Allocator.Get(),
-		nullptr,
-		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.List));
-
-
-	// コマンドリストの生成がうまくいかなかったので起動できない
-	assert(SUCCEEDED(result));
-}
+//void DirectXCommon::CreateCommandList() {
+//
+//	// コマンドリストを生成する
+//	HRESULT result;
+//	result = DirectXCommon::GetInstance()->device_->CreateCommandList(
+//		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
+//		DirectXCommon::GetInstance()->commands_.Allocator.Get(),
+//		nullptr,
+//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.List));
+//
+//
+//	// コマンドリストの生成がうまくいかなかったので起動できない
+//	assert(SUCCEEDED(result));
+//}
 
 
 
@@ -486,7 +489,7 @@ void DirectXCommon::CreateSwapChain() {
 	// コマンドキュー、ウィンドウハンドル、設定を渡して生成する
 	HRESULT result;
 	result = DirectXCommon::GetInstance()->dxgiFactory_->CreateSwapChainForHwnd(
-		DirectXCommon::GetInstance()->commands_.Queue.Get(),
+		CommandManager::GetInstance()->GetQueue(),
 		hwnd_,
 		&swapChains.Desc,
 		nullptr,
@@ -504,8 +507,6 @@ void DirectXCommon::CreateSwapChain() {
 
 void DirectXCommon::SetDescriptorHeap() {
 
-	/*DirectXCommon::GetInstance()->rtv_.DescriptorHeap = CreateDescriptorHeap(
-		DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false);*/
 	RTVManager::GetInstance()->SetDescriptorHeap(
 		CreateDescriptorHeap(DirectXCommon::GetInstance()->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false)
 	);
@@ -571,7 +572,7 @@ void DirectXCommon::CreateRTV()
 	startHandle = RTVManager::GetInstance()->GetDescriptorHeap()->GetCPUDescriptorHandleForHeapStart();
 
 
-	RTVProperty rtvPrope[3]{};
+	RTVProperty rtvPrope[4]{};
 	// 1つ目
 	rtvPrope[0].Handles = startHandle;
 	device->CreateRenderTargetView(swapChains.Resources[0].Get(), &desc, rtvPrope[0].Handles);
@@ -619,7 +620,7 @@ void DirectXCommon::ChanegResourceState() {
 	DirectXCommon::GetInstance()->barrier_.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
 
 	// TransitionBarrierを張る
-	DirectXCommon::GetInstance()->commands_.List->ResourceBarrier(1, &DirectXCommon::GetInstance()->barrier_);
+	CommandManager::GetInstance()->GetList()->ResourceBarrier(1, &DirectXCommon::GetInstance()->barrier_);
 }
 
 

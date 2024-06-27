@@ -23,8 +23,8 @@ void Tsumi::Initialize() {
 	// ShaderManagerの初期化処理
 	ShaderManager::Initialize();
 
-	// GraphicPiplelineManagerの初期化処理
-	GraphicPipelineManager::Initialize();
+	// PipeLineManagerの初期化処理
+	PipeLineManager::Initialize();
 
 	// TextureManagerの初期化処理
 	TextureManager::Initialize();
@@ -68,6 +68,7 @@ void Tsumi::BeginFlame() {
 	ImGuiManager::BeginFrame();
 	Input::GetInstance()->BeginFrame();
 	DescriptorManager::BeginFrame();
+	PipeLineManager::PipeLineTypeReset();
 }
 
 

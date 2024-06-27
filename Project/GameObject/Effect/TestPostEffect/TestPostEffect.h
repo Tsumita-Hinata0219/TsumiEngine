@@ -1,7 +1,7 @@
 #pragma once
 
-#include "GameObject.h"
-#include "PostEffect/IPostEffect/IPostEffect.h"
+#include "../../GameObject.h"
+#include "../../../Tsumi/PostEffect/IPostEffect/IPostEffect.h"
 
 
 /* TestPostEffectクラス */
@@ -16,7 +16,7 @@ public:
 	// 初期化処理、更新処理、描画処理
 	void Initialize() override;
 	void Update() override;
-	void Draw() override;
+	void Draw(Camera* camera) override;
 
 private:
 

@@ -4,8 +4,8 @@
 #include <d3d12.h>
 #pragma comment(lib, "d3d12.lib")
 
-#include "MyMath.h"
-#include "Struct.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
 
 #include <cassert>
 

@@ -46,6 +46,18 @@ static const float kKernel5x5[5][5] =
     { 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f },
     { 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f, 1.0f / 25.0f }
 };
+static const float kPrewittHorizontalKernel[3][3] =
+{
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+    { -1.0f / 6.0f, 0.0f, 1.0f / 6.0f },
+};
+static const float kPrewittVerticalKernel[3][3] =
+{
+    { -1.0f / 6.0f, -1.0f / 6.0f, -1.0f / 6.0f },
+    { 0.0f, 0.0f, 0.0f },
+    { 1.0f / 6.0f, 1.0f / 6.0f, 1.0f / 6.0f },
+};
 // PI π
 static const float PI = 3.14159265f;
 // Gauss関数
@@ -54,6 +66,11 @@ float gauss(float x, float y, float sigma)
     float exponent = -(x * x + y * y) * rcp(2.0f * sigma * sigma);
     float denominator = 2.0f * PI * sigma * sigma;
     return exp(exponent) * rcp(denominator);
+}
+// Luminance関数
+float Luminance(float3 v)
+{
+    return dot(v, float3(0.2125f, 0.7154f, 0.0721f));
 }
 
 
@@ -184,6 +201,48 @@ PixelShaderOutput main(VertexShaderOutput input)
         // しかし、無限の範囲果たせないので、kernek値の合計である
         //　weightは1に満たない。なので合計が1になるように逆数をかけて全体を底上げして調整する
         output.color.rgb *= rcp(weight);        
+    }
+    else if (gMaterial.type == 6)
+    {
+        // uvStepSizeの算出
+        uint width, height;
+        gTexture.GetDimensions(width, height);
+        float2 uvStepSize = float2(rcp((float) width), rcp((float) height));
+        
+        // 縦横それぞれの畳み込みの結果を格納する
+        float2 difference = float2(0.0f, 0.0f);
+        
+        // 色を輝度に変換して、畳み込みを行っていく。微分Filter用のkernelになっているので、やること自体は今までの畳み込みと同じ
+        for (int x = 0; x < 3; ++x)
+        {
+            for (int y = 0; y < 3; ++y)
+            {
+                float2 texCoord = input.texcoord + kINdex3x3[x][y] * uvStepSize;
+                float3 fetchColor = gTexture.Sample(gSampler, texCoord).rgb;
+                float luminance = Luminance(fetchColor);
+                difference.x += luminance * kPrewittHorizontalKernel[x][y];
+                difference.y += luminance * kPrewittVerticalKernel[x][y];
+            }
+        }
+        
+        //// 変化の長さをウェイトとして合成。
+        //// ウェイトの決定方法もいろいろと考えられる。例えばdifference.xだけ使えば横方向のエッジが検出される
+        //float weight = length(difference);
+        
+        //// 0 ~ 1
+        //weight = saturate(weight);
+        
+        //output.color.rgb = weight;
+        //output.color.a = 1.0f;
+        
+        float weight = length(difference);
+        
+        // 0 ~ 1
+        weight = saturate(weight * 6.0f);
+        
+        output.color.rgb = (1.0f - weight) * gTexture.Sample(gSampler, input.texcoord).rgb;
+        output.color.a = 1.0f;
+
     }
     
     return output;

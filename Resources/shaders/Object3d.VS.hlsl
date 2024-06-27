@@ -37,9 +37,14 @@ VertexShaderOutput main(VertexShaderInput input)
     
     VertexShaderOutput output;
     
+     // 頂点の位置をワールド・ビュー・プロジェクション行列で変換
     output.position = mul(input.position, gTransformationMat.WVP);
+    
+    // テクスチャ座標はそのまま渡す
     output.texCoord = input.texCoord;
-    output.normal = normalize(mul(input.normal, (float3x3) gTransformationMat.World));
+    
+    // 法線ベクトルをワールド行列の逆転置行列で変換し、正規化する
+    output.normal = normalize(mul(input.normal, (float3x3) gTransformationMat.WorldInverseTranspose));
     
     return output;
 }

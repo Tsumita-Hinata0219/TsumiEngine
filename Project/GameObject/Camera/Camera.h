@@ -1,8 +1,8 @@
 #pragma once
 
-#include "WinApp.h"
-#include "MyMath.h"
-#include "CreateResource.h"
+#include "../../Tsumi/Base/WinApp/WinApp.h"
+#include "../../Math/MyMath.h"
+#include "../../../Tsumi/CreateResource/CreateResource.h"
 
 
 // 定数バッファ
@@ -56,7 +56,7 @@ private:
 	void UnMap();
 
 	/// <summary>
-	/// 行列の計算・転送
+	/// 行列の転送
 	/// </summary>
 	void TransferMatrix();
 
@@ -94,22 +94,28 @@ public:
 #pragma endregion 
 
 	// ビュー行列
-	Matrix4x4 matView{};
+	Matrix4x4 viewMatrix{};
 
-	// 射影行列
-	Matrix4x4 matProjection{};
+	// 投影行列
+	Matrix4x4 projectionMatrix{};
+
+	// 投影逆行列
+	Matrix4x4 projectionInverseMatrix{};
 
 	// 正射影行列
-	Matrix4x4 orthoGraphicMat{};
+	Matrix4x4 orthoGraphicMatrix{};
 
 	// ビューポート行列
-	Matrix4x4 matViewPort{};
+	Matrix4x4 viewportMatrix{};
+
+	// ビュープロジェクション行列
+	Matrix4x4 viewProjectionMatrix{};
 
 	// ビュープロジェクションビューポート合成行列
-	Matrix4x4 matViewProjectionViewPort{};
+	Matrix4x4 viewProjectionViewportMatrix{};
 
 	// 合成行列の逆行列
-	Matrix4x4 matInverseVPV{};
+	Matrix4x4 inverseViewProjectionViewportMatrix{};
 
 	// 定数バッファ
 	ComPtr<ID3D12Resource> constBuffer;

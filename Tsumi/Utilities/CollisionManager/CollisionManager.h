@@ -1,12 +1,12 @@
 #pragma once
 
-#include "SphereCollider.h"
-#include "OBBCollider.h"
-#include "AABBCollider.h"
-#include "SegmentCollider.h"
-#include "ColliderConfig.h"
-#include "MyMath.h"
-#include "Struct.h"
+#include "Collider/SphereCollider.h"
+#include "Collider/OBBCollider.h"
+#include "Collider/AABBCollider.h"
+#include "Collider/SegmentCollider.h"
+#include "Collider/ColliderConfig.h"
+#include "../../Project/Math/MyMath.h"
+#include "../../Project/Math/Struct.h"
 #include "IsCollision/IsCollision.h"
 
 #include <list>

@@ -1,7 +1,7 @@
 #pragma once
-#include "WorldTransform.h"
-#include "ViewProjection.h"
-#include "Camera.h"
+
+#include "../../Transform/WorldTransform/WorldTransform.h"
+#include "../../Project/GameObject/Camera/Camera.h"
 
 
 enum ModelStateType {

@@ -10,10 +10,10 @@
 #pragma comment(lib, "dxcompiler.lib")
 #include <map>
 
-#include "MyMath.h"
-#include "Struct.h"
-#include "DescriptorManager.h"
-#include "DirectXCommon.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../DescriptorManager/DescriptorManager.h"
+#include "../../Base/DXCommon/DirectXCommon.h"
 
 #define RTV_Index_Max 16
 

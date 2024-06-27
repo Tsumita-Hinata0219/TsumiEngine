@@ -140,7 +140,7 @@ void GameScene::ModelDraw()
 	//testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
-	Model::SetPipeLineType(Model::PipeLineType::kModel);
+	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
 	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
@@ -150,9 +150,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
-	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
-	
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw();
+	testPostEffect_->Draw(camera_.get());
 }
 

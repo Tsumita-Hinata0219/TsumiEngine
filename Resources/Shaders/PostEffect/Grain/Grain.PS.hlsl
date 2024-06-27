@@ -32,8 +32,8 @@ PixelShaderOutput main(VertexShaderOutput input)
     float noise = frac(sin(dot(pixelCoord, float2(12.9898, 78.233))) * 43758.5453);
     
     // ノイズの強度を調整
-    float grainAmount = 0.1f; // グレインの強度を設定（0.0から1.0の範囲）
-    //float grainAmount = 1.0f; // グレインの強度を設定（0.0から1.0の範囲）
+    //float grainAmount = 0.1f; // グレインの強度を設定（0.0から1.0の範囲）
+    float grainAmount = 1.0f; // グレインの強度を設定（0.0から1.0の範囲）
 
     // ノイズに基づいて色を生成
     float3 grainColor = float3(

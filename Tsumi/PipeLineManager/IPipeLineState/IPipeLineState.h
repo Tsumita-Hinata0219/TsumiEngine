@@ -37,9 +37,8 @@ protected: // メンバ関数
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
 
 	// InputLayoutのセットアップ
-	void SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset);
+	D3D12_INPUT_ELEMENT_DESC SetUpInputElementDescs(LPCSTR SemanticName);
 	void SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements);
-	void CreateInputElementMap();
 
 	// BlendStateのセットアップ
 	void SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode);
@@ -55,6 +54,5 @@ protected: // メンバ関数
 protected: // メンバ変数
 
 	PsoProperty pso_{};
-	std::map<std::string, D3D12_INPUT_ELEMENT_DESC> inputElementMap_;
 };
 

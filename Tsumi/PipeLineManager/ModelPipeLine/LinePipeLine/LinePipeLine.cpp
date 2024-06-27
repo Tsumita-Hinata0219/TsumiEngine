@@ -11,11 +11,17 @@ PsoProperty LinePipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	D3D12_INPUT_ELEMENT_DESC inputElementDescs[1]{};
+	/*D3D12_INPUT_ELEMENT_DESC inputElementDescs[1]{};
 	SetUpInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
 
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
+	SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));*/
+
+	std::array<D3D12_INPUT_ELEMENT_DESC, 1> inputElementDesc = {
+		SetUpInputElementDescs("POSITION"),
+	};
+	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
+	SetUpInputLayout(inputLayoutDesc, inputElementDesc.data(), static_cast<UINT>(inputElementDesc.size()));
 
 
 	/* --- BlendStateを設定する --- */

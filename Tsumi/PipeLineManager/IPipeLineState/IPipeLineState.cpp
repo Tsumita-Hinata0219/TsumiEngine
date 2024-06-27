@@ -5,23 +5,81 @@
 
 
 // InputLayoutのセットアップ
-void IPipeLineState::SetUpInputElementDescs(D3D12_INPUT_ELEMENT_DESC& inputElementDescs, LPCSTR SemanticName, UINT SemanticIndex, DXGI_FORMAT Format, UINT AlignedByteOffset)
+D3D12_INPUT_ELEMENT_DESC IPipeLineState::SetUpInputElementDescs(LPCSTR SemanticName)
 {
-	inputElementDescs.SemanticName = SemanticName;
-	inputElementDescs.SemanticIndex = SemanticIndex;
-	inputElementDescs.Format = Format;
-	inputElementDescs.InputSlot;
-	inputElementDescs.AlignedByteOffset = AlignedByteOffset;
+	D3D12_INPUT_ELEMENT_DESC inputElementDescs{};
+
+	if (strcmp(SemanticName, "POSITION") == 0)
+	{
+		inputElementDescs.SemanticName = "POSITION";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "TEXCOORD") == 0) 
+	{
+		inputElementDescs.SemanticName = "TEXCOORD";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "NORMAL") == 0)
+	{
+		inputElementDescs.SemanticName = "NORMAL";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "WORLDPOSITION") == 0)
+	{
+		inputElementDescs.SemanticName = "WORLDPOSITION";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "CAMERAPOSITION") == 0)
+	{
+		inputElementDescs.SemanticName = "CAMERAPOSITION";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "COLOR") == 0)
+	{
+		inputElementDescs.SemanticName = "COLOR";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputElementDescs.InputSlot = 0;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "WEIGHT") == 0)
+	{
+		inputElementDescs.SemanticName = "WEIGHT";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputElementDescs.InputSlot = 1;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+	else if (strcmp(SemanticName, "INDEX") == 0)
+	{
+		inputElementDescs.SemanticName = "INDEX";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputElementDescs.InputSlot = 1;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
+
+	return inputElementDescs;
 }
 void IPipeLineState::SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
 	inputLayoutDesc.NumElements = numInputElements;
-}
-
-void IPipeLineState::CreateInputElementMap()
-{
-
 }
 
 

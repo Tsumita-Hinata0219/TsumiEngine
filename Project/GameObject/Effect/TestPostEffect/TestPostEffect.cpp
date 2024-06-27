@@ -7,7 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	effectType_ = IPostEffect::Type::OutLine;
+	effectType_ = IPostEffect::Type::Grain;
 }
 
 

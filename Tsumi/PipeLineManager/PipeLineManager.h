@@ -32,6 +32,7 @@
 #include "PostEffectPipeLine/RandomPipeLine/RandomPipeLine.h"
 #include "PostEffectPipeLine/SepiaTonePipeLine/SepiaTonePipeLine.h"
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
+#include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
 
 // PipeLineTypeのenum構造体
@@ -50,6 +51,7 @@ enum class PipeLineType : uint32_t {
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,
+	Grain,
 	GrayScale,
 	OutLine,
 	RadialBlur,
@@ -134,6 +136,9 @@ private: // メンバ変数
 
 	// GaussianFilter
 	std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
+
+	// Grain
+	std::unique_ptr<GrainPipeLine> grainPipeLine_;
 
 	// GrayScale
 	std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;

@@ -35,6 +35,7 @@ public:
 		ColorGrading,
 		Dissolve,
 		GaussianFilter,
+		Grain,
 		GrayScale,
 		OutLine,
 		RadialBlur,

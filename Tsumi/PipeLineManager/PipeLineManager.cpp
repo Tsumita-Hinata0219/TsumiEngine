@@ -60,6 +60,10 @@ void PipeLineManager::Initialize()
 	instance->gaussianFilterPipeLine_ = make_unique<GaussianFilterPipeLine>();
 	instance->pipeLineMap_[PipeLineType::GaussianFilter] = instance->gaussianFilterPipeLine_->SetUpPso();
 
+	// Grain
+	instance->grainPipeLine_ = make_unique<GrainPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Grain] = instance->grainPipeLine_->SetUpPso();
+
 	// GrayScale
 	instance->grayScalePipeLine_ = make_unique<GrayScalePipeLine>();
 	instance->pipeLineMap_[PipeLineType::GrayScale] = instance->grayScalePipeLine_->SetUpPso();

@@ -23,6 +23,9 @@ void IPostEffect::DrawImGui()
 		if (ImGui::Button("GaussianFilter")) {
 			effectType_ = IPostEffect::Type::GaussianFilter;
 		}
+		if (ImGui::Button("Grain")) {
+			effectType_ = IPostEffect::Type::Grain;
+		}
 		if (ImGui::Button("GrayScale")) {
 			effectType_ = IPostEffect::Type::GrayScale;
 		}
@@ -117,6 +120,11 @@ void IPostEffect::PipeLineCheck()
 	case IPostEffect::Type::GaussianFilter:
 
 		PipeLineManager::PipeLineCheckAndSet(PipeLineType::GaussianFilter);
+		break;
+
+	case IPostEffect::Type::Grain:
+
+		PipeLineManager::PipeLineCheckAndSet(PipeLineType::Grain);
 		break;
 
 	case IPostEffect::Type::GrayScale:

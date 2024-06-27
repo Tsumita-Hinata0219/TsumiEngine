@@ -33,6 +33,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     // ノイズの強度を調整
     float grainAmount = 0.1f; // グレインの強度を設定（0.0から1.0の範囲）
+    //float grainAmount = 1.0f; // グレインの強度を設定（0.0から1.0の範囲）
 
     // ノイズに基づいて色を生成
     float3 grainColor = float3(

@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MyMath.h"
-#include "VertexWeightData.h"
+//#include "MyMath.h"
+//#include "VertexWeightData.h"
 
 
 // JointWeightData

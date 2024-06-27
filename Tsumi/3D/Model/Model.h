@@ -9,11 +9,12 @@
 #include "ModelObj/ModelObjState.h"
 #include "ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
-#include "Mesh/Mesh.h"
-#include "Material/Material.h"
+#include "ModelStructure/Mesh/Mesh.h"
+#include "ModelStructure/Material/Material.h"
 
-#include "Node.h"
-#include "Skeleton.h"
+
+//#include "Node.h"
+//#include "Skeleton.h"
 
 
 class ModelManager;

@@ -143,12 +143,10 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(SkinningObject3dGraphicPipeLine::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	commands.List->SetPipelineState(SkinningObject3dGraphicPipeLine::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	///// いざ描画！！！！！
 	// VBVを設定
@@ -160,9 +158,6 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 	// 配列を渡す(開始Slot番号、使用Slot数、VBV葉入れ悦へのポインタ)
 	commands.List->IASetVertexBuffers(0, 2, vbvs);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());

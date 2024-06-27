@@ -3,7 +3,7 @@
 #include "../../../Project/GameObject/GameObject.h"
 #include "../AnimationDataArray/AnimationDataArray.h"
 
-#include "Skeleton.h"
+//#include "Skeleton.h"
 
 
 /* KeyFrameAnimation */

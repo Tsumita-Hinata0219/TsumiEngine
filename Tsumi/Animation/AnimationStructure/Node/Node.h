@@ -1,8 +1,8 @@
 #pragma once
-
-#include "MyMath.h"
-#include "QuaternionTransform.h"
-
+//
+//#include "MyMath.h"
+//#include "QuaternionTransform.h"
+//
 
 // Node
 //struct Node {

@@ -134,14 +134,14 @@ void GameScene::ModelDraw()
 	//testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw(camera_.get());
+	//testHuman_->Draw(camera_.get());
 
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	//testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
-	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 

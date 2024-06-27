@@ -1,7 +1,7 @@
 #pragma once
-
-#include "MyMath.h"
-#include "Joint.h"
+//
+//#include "MyMath.h"
+//#include "Joint.h"
 
 
 // Skeleton

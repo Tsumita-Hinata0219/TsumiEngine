@@ -16,6 +16,8 @@ using namespace std;
 #include <optional>
 #include <map>
 #include <span>
+#include <utility>
+#include <array>
 
 
 #include "MyMath.h"

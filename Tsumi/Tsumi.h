@@ -9,6 +9,8 @@
 #include "Input/Input.h"
 #include "Audio/Audio.h"
 #include "DescriptorManager/DescriptorManager.h"
+#include "View/RTVManager/RTVManager.h"
+#include "View/SRVManager/SRVManager.h"
 #include "3D/DrawSystem/DrawSystem.h"
 #include "FileManager/FileManager.h"
 

@@ -49,11 +49,10 @@ public: // メンバ関数
 	}
 
 	// 初期化処理
-	void Initialize();
+	static void Initialize();
 
-	// 開始処理、終了処理
-	void BeginFrame();
-	void EndFrame();
+	// 開始処理
+	static void BeginFrame();
 
 	// ImGui描画
 	static void DrawImGui();

@@ -57,6 +57,7 @@ void Tsumi::Finalize() {
 	Audio::Finalize();
 	TextureManager::Finalize();
 	DescriptorManager::Clear();
+	SRVManager::Clear();
 }
 
 
@@ -68,6 +69,8 @@ void Tsumi::BeginFlame() {
 	ImGuiManager::BeginFrame();
 	Input::GetInstance()->BeginFrame();
 	DescriptorManager::BeginFrame();
+	RTVManager::BeginFrame();
+	SRVManager::BeginFrame();
 	PipeLineManager::PipeLineTypeReset();
 }
 

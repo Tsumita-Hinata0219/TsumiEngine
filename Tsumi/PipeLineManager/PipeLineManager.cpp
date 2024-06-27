@@ -40,6 +40,10 @@ void PipeLineManager::Initialize()
 	instance->phongPipeLine_ = make_unique<PhongPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Phong] = instance->phongPipeLine_->SetUpPso();
 
+	// SkinningObject3d
+	instance->skinningObject3DPipeLine_ = make_unique<SkinningObject3dPipeLine>();
+	instance->pipeLineMap_[PipeLineType::SkinningObject3D] = instance->skinningObject3DPipeLine_->SetUpPso();
+
 	// Sprite
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();

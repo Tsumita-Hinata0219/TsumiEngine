@@ -18,7 +18,7 @@ PsoProperty SpritePipeLine::SetUpPso()
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));*/
 
-	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 2> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
 	};

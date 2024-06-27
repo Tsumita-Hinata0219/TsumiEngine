@@ -69,7 +69,7 @@ D3D12_INPUT_ELEMENT_DESC IPipeLineState::SetUpInputElementDescs(LPCSTR SemanticN
 	{
 		inputElementDescs.SemanticName = "INDEX";
 		inputElementDescs.SemanticIndex = 0;
-		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_FLOAT;
+		inputElementDescs.Format = DXGI_FORMAT_R32G32B32A32_SINT;
 		inputElementDescs.InputSlot = 1;
 		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 	}

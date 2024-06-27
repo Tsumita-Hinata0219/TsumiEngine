@@ -146,7 +146,7 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SkinningObject3D);
 
 	///// いざ描画！！！！！
 	// VBVを設定

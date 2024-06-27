@@ -125,7 +125,7 @@ void GameScene::ModelDraw()
 	Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw(camera_.get());
+	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
 	//testObject_->Draw(camera_.get());
@@ -134,7 +134,7 @@ void GameScene::ModelDraw()
 	//testAnimCube_->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Draw(camera_.get());
+	testHuman_->Draw(camera_.get());
 
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	//testJsonObject_->Draw(camera_.get());

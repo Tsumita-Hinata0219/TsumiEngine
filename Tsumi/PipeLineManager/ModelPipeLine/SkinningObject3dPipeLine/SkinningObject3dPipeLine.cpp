@@ -30,7 +30,7 @@ PsoProperty SkinningObject3dPipeLine::SetUpPso()
 		SetUpInputElementDescs("WORLDPOSITION"),
 		SetUpInputElementDescs("CAMERAPOSITION"),
 		SetUpInputElementDescs("WEIGHT"),
-		SetUpInputElementDescs("WORLDPOSITION"),
+		SetUpInputElementDescs("INDEX"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	SetUpInputLayout(inputLayoutDesc, inputElementDesc.data(), static_cast<UINT>(inputElementDesc.size()));
@@ -52,7 +52,7 @@ PsoProperty SkinningObject3dPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "Object3D");
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "SkinningObject3d");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -118,6 +118,10 @@ PsoProperty SkinningObject3dPipeLine::SetUpPso()
 // RootSignatureのセットアップ
 void SkinningObject3dPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
+	descriptionRootSignature.Flags =
+		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
+
+
 	// 色に関する
 	D3D12_ROOT_PARAMETER rootParameters[6]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う

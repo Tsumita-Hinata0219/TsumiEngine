@@ -4,6 +4,7 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../CreateResource/CreateResource.h"
 #include "../DescriptorManager/DescriptorManager.h"
+#include "../View/SRVManager/SRVManager.h"
 #include "../PipeLineManager/PipeLineManager.h"
 
 

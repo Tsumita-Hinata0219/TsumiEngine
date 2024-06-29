@@ -469,7 +469,7 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 	//paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
 	//DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
 	//	result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
-	SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton);
+	result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton);
 
 	// influence用のResourceを確保
 	result.influenceResource = CreateResource::CreateBufferResource(sizeof(VertexInfluence) * this->objData_.vertices.size());

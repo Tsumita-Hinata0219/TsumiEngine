@@ -67,13 +67,13 @@ uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std
 		TextureData textureData{};
 
 
-		// indexをインクリメント
-		DescriptorManager::IncrementIndex();
-		const uint32_t index = DescriptorManager::GetIndex();
+		//// indexをインクリメント
+		//DescriptorManager::IncrementIndex();
+		//const uint32_t index = DescriptorManager::GetIndex();
 
 
-		// TextureDataに登録
-		textureData.index = index;
+		//// TextureDataに登録
+		//textureData.index = index;
 
 
 		// Textureを読んで転送する
@@ -85,33 +85,36 @@ uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std
 		// 登録
 		UpdateTextureData(metadata, mipImages, textureData);
 
-
-		// metaDataを基にSRVの設定
-		D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		srvDesc = SettingSRVDesc(metadata);
+		// SRV作成
+		textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
 
 
-		// SRVを作成するDescriptorHeapの場所を決める
-		DescriptorManager::SetDescriptorHandle_CPU(
-			DescriptorManager::GetCPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-				DescriptorManager::GetDescriptorSize().SRV, index),
-			index);
-
-		DescriptorManager::SetDescriptorHandle_GPU(
-			DescriptorManager::GetGPUDescriptorHandle(
-				DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-				DescriptorManager::GetDescriptorSize().SRV, index),
-			index);
+		//// metaDataを基にSRVの設定
+		//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+		//srvDesc = SettingSRVDesc(metadata);
 
 
-		// 先頭はImGuiが使っているのでその次を使う
-		DescriptorManager::ShiftSRVHandlePtr();
+		//// SRVを作成するDescriptorHeapの場所を決める
+		//DescriptorManager::SetDescriptorHandle_CPU(
+		//	DescriptorManager::GetCPUDescriptorHandle(
+		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+		//		DescriptorManager::GetDescriptorSize().SRV, index),
+		//	index);
+
+		//DescriptorManager::SetDescriptorHandle_GPU(
+		//	DescriptorManager::GetGPUDescriptorHandle(
+		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+		//		DescriptorManager::GetDescriptorSize().SRV, index),
+		//	index);
 
 
-		// SRVの生成
-		DescriptorManager::CreateShaderResourceView(
-			textureData.resource.Get(), srvDesc, index);
+		//// 先頭はImGuiが使っているのでその次を使う
+		//DescriptorManager::ShiftSRVHandlePtr();
+
+
+		//// SRVの生成
+		//DescriptorManager::CreateShaderResourceView(
+		//	textureData.resource.Get(), srvDesc, index);
 
 
 		// textureのサイズの取得

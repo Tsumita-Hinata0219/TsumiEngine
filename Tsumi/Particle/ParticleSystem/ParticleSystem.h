@@ -5,6 +5,7 @@
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
+#include "../../View/SRVManager/SRVManager.h"
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 #include "../../../Project/GameObject/Camera/Camera.h"

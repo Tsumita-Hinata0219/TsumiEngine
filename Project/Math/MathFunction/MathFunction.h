@@ -44,7 +44,8 @@ float Lerp(const float& start, const float& end, float t);
 float Clamp(const float& value, const float& minValue, const float& maxValue);
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
 float APOneAsZeroCloser(float value);
-
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees);
 
 
 

@@ -55,7 +55,8 @@ void IPostEffect::Create()
 	vignettingMtl_.Create();
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	srv_ = SRVManager::CreatePostEffectSRV(stv);
 	//srv_ = DescriptorManager::CreateRenderTextureDepthSRV(stv);
 }
 
@@ -81,7 +82,8 @@ void IPostEffect::CommandCall(Camera* camera)
 	}
 	
 	// DescriptorTableの設定
-	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
 
 	// 頂点3つ描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

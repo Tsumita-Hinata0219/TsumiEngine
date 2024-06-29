@@ -63,6 +63,12 @@ float APOneAsZeroCloser(float value) {
 	return exp(-pow(value, 2.0f));
 }
 
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees)
+{
+	return degrees * (float(M_PI) / 180.0f);
+}
+
 
 
 

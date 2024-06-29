@@ -447,28 +447,29 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 	result.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	result.mappedPallette = { mappedPalette, skeleton.joints.size() }; // spanを使ってアクセスするようにする
 	
-	// indexを確認
-	const uint32_t heapIndex = DescriptorManager::GetIndex();
-	result.paletteSrvHandle.first =
-		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-			DescriptorManager::GetDescriptorSize().SRV, heapIndex);
-	result.paletteSrvHandle.second =
-		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-			DescriptorManager::GetDescriptorSize().SRV, heapIndex);
+	//// indexを確認
+	//const uint32_t heapIndex = DescriptorManager::GetIndex();
+	//result.paletteSrvHandle.first =
+	//	DescriptorManager::GetCPUDescriptorHandle(
+	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
+	//result.paletteSrvHandle.second =
+	//	DescriptorManager::GetGPUDescriptorHandle(
+	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
 
-	// palette用のSRVを作成。StructureBufferでアクセスできるようにする
-	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
-	paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	paletteSrvDesc.Buffer.FirstElement = 0;
-	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
-	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-		result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
+	//// palette用のSRVを作成。StructureBufferでアクセスできるようにする
+	//D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
+	//paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	//paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	//paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	//paletteSrvDesc.Buffer.FirstElement = 0;
+	//paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	//paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
+	//paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
+	//DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
+	//	result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
+	SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton);
 
 	// influence用のResourceを確保
 	result.influenceResource = CreateResource::CreateBufferResource(sizeof(VertexInfluence) * this->objData_.vertices.size());
@@ -613,7 +614,8 @@ void Model::CommandCall(Transform transform, Camera* camera)
 	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress()); // TransformationMatrix
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
 	if (!materialMap_.at(name_)->textureHandle == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
+		SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle);
 	}
 	commands.List->DrawInstanced(UINT(meshMap_.at(name_)->meshData.vertices.size()), 1, 0, 0); // Draw!!
 }

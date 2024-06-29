@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../CommandManager/CommandManager.h"
+#include "../../View/SRVManager/SRVManager.h"
 #include "../../Transform/WorldTransform/WorldTransform.h"
 #include "../../Transform/Transform.h"
 #include "../../PipeLineManager/PipeLineManager.h"

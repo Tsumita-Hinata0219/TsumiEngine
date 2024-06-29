@@ -3,6 +3,7 @@
 #include "DirectXTex.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../DescriptorManager/DescriptorManager.h"
+#include "../View/SRVManager/SRVManager.h"
 #include "TextureDataResource/TextureDataResource.h"
 #include "../../Project/Math/MyMath.h"
 

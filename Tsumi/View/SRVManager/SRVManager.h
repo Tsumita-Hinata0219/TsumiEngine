@@ -5,6 +5,7 @@
 #include "DirectXTex.h"
 #include "../../Project/Math/Struct.h"
 #include "../../Base/DXCommon/DirectXCommon.h"
+#include "../../CommandManager/CommandManager.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../CreateResource/CreateResource.h"
 
@@ -54,7 +55,10 @@ public: // メンバ関数
 	static uint32_t CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size);
 	static uint32_t CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const DirectX::TexMetadata& metadata);
 	static uint32_t CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
+	static uint32_t CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const Skeleton& skeleton);
 
+	// DescriptorTableの設定
+	static void SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t index);
 
 #pragma region Accessor アクセッサ
 
@@ -64,7 +68,11 @@ public: // メンバ関数
 	static D3D12_GPU_DESCRIPTOR_HANDLE Get_GPUDescriptorHandle(
 		Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> heap, uint32_t index);
 
-
+	// 空きインデックスの取得
+	static uint32_t GetEmptyIndex() {
+		uint32_t index = SRVManager::GetInstance()->index_;
+		return index++; // 空きインデックスなのでインクリメントして返す
+	}
 
 #pragma endregion
 

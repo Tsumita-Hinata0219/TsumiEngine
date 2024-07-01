@@ -153,6 +153,26 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 
 	// Textureを読んで転送する
 	DirectX::ScratchImage mipImages = CreateMipImage(filePath, TextureFileFormat::DSS.second);
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	textureData.resource = CreateTextureResource(metadata);
+
+	// 登録
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
+		UploadTextureData(textureData.resource.Get(), mipImages);
+
+	// Commandの実行
+	instance->ExeCommands();
+
+	// SRV作成
+	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+
+	// textureのサイズの取得
+	textureData.size = {
+		static_cast<float>(metadata.width),
+		static_cast<float>(metadata.height) };
+
+	// コンテナに保存
+	instance->textureMaps_[key] = textureData;
 }
 
 

@@ -3,17 +3,6 @@
 
 
 /// <summary>
-/// TextureManagerのインスタンス取得
-/// </summary>
-TextureManager* TextureManager::GetInstance() {
-
-	static TextureManager instance;
-	return &instance;
-}
-
-
-
-/// <summary>
 /// 初期化処理
 /// </summary>
 void TextureManager::Initialize() {

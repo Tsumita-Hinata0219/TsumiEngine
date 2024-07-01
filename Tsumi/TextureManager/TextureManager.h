@@ -1,15 +1,23 @@
 #pragma once
 
 #include "DirectXTex.h"
+#include "d3dx12.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../DescriptorManager/DescriptorManager.h"
 #include "../View/SRVManager/SRVManager.h"
-#include "TextureDataResource/TextureDataResource.h"
 #include "../../Project/Math/MyMath.h"
 
 #include <cassert>
 #include <map>
 
+
+
+// TextureData
+struct TextureData {
+	uint32_t index;
+	ComPtr<ID3D12Resource> resource;
+	Vector2 size;
+};
 
 enum class TextureFrom {
 	Texture,
@@ -19,22 +27,23 @@ enum class TextureFrom {
 
 class TextureManager {
 
+private: // シングルトンデザインパターン
+
+	// コンストラクタ、デストラクタ
+	TextureManager() = default;
+	~TextureManager() = default;
+	TextureManager(const TextureManager&) = delete;
+	const TextureManager& operator=(const TextureManager&) = delete;
+
 public: // メンバ関数
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	TextureManager() {};
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~TextureManager() {};
 
 	/// <summary>
 	/// TextureManagerのインスタンス取得
 	/// </summary>
-	static TextureManager* GetInstance();
+	static TextureManager* GetInstance() {
+		static TextureManager instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// 初期化処理

@@ -8,6 +8,9 @@
 void TextureManager::Initialize() {
 
 	CoInitializeEx(0, COINIT_MULTITHREADED);
+
+	// Fenceの作成
+	TextureManager::GetInstance()->CreateFence();
 }
 
 
@@ -21,6 +24,8 @@ void TextureManager::Finalize() {
 
 	// コンテナ内のResourceを削除
 	UnLoadTexture();
+
+	CloseHandle(TextureManager::GetInstance()->fenceEvent_);
 }
 
 
@@ -73,6 +78,24 @@ void TextureManager::UnLoadTexture() {
 }
 
 
+/// <summary>
+/// Fenceを生成する
+/// </summary>
+void TextureManager::CreateFence()
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+
+	// 初期値0でFenceを作る
+	HRESULT result{};
+	result = device->CreateFence(fenceValue_, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence_));
+	assert(SUCCEEDED(result));
+
+	// FenceのSignalを待つためのイベントを作成する
+	fenceEvent_ = CreateEvent(NULL, FALSE, FALSE, NULL);
+	assert(fenceEvent_ != nullptr);
+}
+
 
 /// <summary>
 /// 一回読み込んだものは読み込まない
@@ -107,7 +130,12 @@ void TextureManager::CreateTextureData(std::string fullFilePath, std::string key
 	textureData.resource = CreateTextureResource(metadata);
 
 	// 登録
-	UpdateTextureData(metadata, mipImages, textureData);
+	//UpdateTextureData(metadata, mipImages, textureData);
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece = 
+		UploadTextureData(textureData.resource.Get(), mipImages);
+
+	// Commandの実行
+	instance->ExeCommands();
 
 	// SRV作成
 	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
@@ -199,9 +227,9 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;                        // 細かい設定を行う
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;                        // VRAM上に作成する
+	//heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
+	//heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
 
 	return heapProperties;
 }
@@ -219,9 +247,10 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
-		D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState。Textureは基本読むだけ
+		D3D12_RESOURCE_STATE_COPY_DEST,    // データ転送される設定
 		nullptr,						   // Clear最適地。使わないのでnullptr
 		IID_PPV_ARGS(&resource));		   // 作成するResourceポインタへのポインタ
+
 	assert(SUCCEEDED(result));
 
 	return resource;
@@ -254,5 +283,86 @@ void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, Dir
 		);
 		assert(SUCCEEDED(result));
 	}
+}
+[[nodiscard]]
+Microsoft::WRL::ComPtr<ID3D12Resource>  TextureManager::UploadTextureData(Microsoft::WRL::ComPtr<ID3D12Resource> texture, const DirectX::ScratchImage& mipImages)
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// 読み込んだデータからDirectX12用のSubResourceの配列を作成する
+	std::vector<D3D12_SUBRESOURCE_DATA> subResources;
+	DirectX::PrepareUpload(device.Get(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+
+	// Subresourceの数を基に、コピー元となるResourceに必要なサイズを計算する
+	uint64_t intermediateSize = GetRequiredIntermediateSize(texture.Get(), 0, UINT(subResources.size()));
+
+	// 計算したサイズでIntermediateResourceを作る。CPUとGPUを取り持つためのResourceなので、intermediateResource(中間リソース)と呼ぶ
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource = CreateResource::CreateBufferResource(intermediateSize);
+
+	// データ転送をコマンドに積む
+	UpdateSubresources(commands.List.Get(), texture.Get(), intermediateResource.Get(), 0, 0, UINT(subResources.size()), subResources.data());
+
+	// ResourceState変更し、IntermediateResourceを返す
+	// Textureへの転送後は利用できるよう、D3D12_RESOURCE_STATE_COPY_DESTからD3D12_ReSOURCE_STATE_GENERIC_READへResourceStateを変更する
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = texture.Get();
+	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+
+	commands.List->ResourceBarrier(1, &barrier);
+
+	return intermediateResource;
+}
+
+
+/// <summary>
+/// Commandを実行する
+/// </summary>
+void TextureManager::ExeCommands()
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+
+	// CommandListをCloseし、CommandQueue->ExecuteComandListsを使いキックする
+	HRESULT result;
+	result = commands.List->Close();
+	assert(SUCCEEDED(result));
+	ID3D12CommandList* commandLists[] = { commands.List.Get() };
+	commands.Queue->ExecuteCommandLists(1, commandLists);
+
+
+	// 実行を待つ
+	fenceValue_++; // fenceの値を更新；
+	// GPUここまでたどり着いたときに、fenceの値を指定した値に代入するようにSignalを送る
+	commands.Queue->Signal(fence_.Get(), fenceValue_);
+	// fenceの値が指定したSignal値にたどり着いているか確認する。GetCompletedValueの初期値はfence作成時に渡した初期値
+	if (fence_->GetCompletedValue() < fenceValue_) {
+
+		// 指定したSignalにたどり着いていないので、たどり着くまで待つようにイベントを設定する
+		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+		// イベントを待つ
+		WaitForSingleObject(fenceEvent_, INFINITE);
+	}
+
+
+	// 実行が完了したので、allocatorとcommandListをResetして次のコマンドを積めるようにする
+	result = commands.Allocator->Reset();
+	assert(SUCCEEDED(result));
+	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
+	assert(SUCCEEDED(result));
+
+
+	CommandManager::GetInstance()->SetCommands(commands);
 }
 

@@ -41,15 +41,6 @@ void DirectXCommon::Initialize() {
 	// コマンド関連の生成
 	CommandManager::GetInstance()->Initialize();
 
-	// コマンドキューを生成する
-	//CreateCommandQueue();
-
-	// コマンドアロケータを生成する
-	//CreateCommandAllocator();
-
-	// コマンドを生成する
-	//CreateCommandList();
-
 	// スワップチェーンを生成する
 	CreateSwapChain();
 

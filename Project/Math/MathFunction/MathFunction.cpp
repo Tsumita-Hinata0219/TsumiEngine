@@ -3,7 +3,7 @@
 
 
 /// -------------------------------------------------------------------------
-/// ログ
+/// char , std::string
 /// -------------------------------------------------------------------------
 // string->wstring
 std::wstring ConverString(const std::string& str) {
@@ -40,6 +40,16 @@ std::string ConvertString(const std::wstring& str) {
 // wstring->string
 void Log(const std::string& message) {
 	OutputDebugStringA(message.c_str());
+}
+
+// ファイルパスから拡張子を抽出する関数
+std::string GetExtension(const std::string& path)
+{
+	size_t dotPos = path.find_last_of('.');
+	if (dotPos == std::string::npos) {
+		return ""; // 拡張子がない場合は空文字列を返す
+	}
+	return path.substr(dotPos);
 }
 
 

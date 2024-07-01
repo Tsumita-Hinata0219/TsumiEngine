@@ -23,7 +23,7 @@
 
 
 /// -------------------------------------------------------------------------
-/// ログ
+/// char , std::string
 /// -------------------------------------------------------------------------
 // string->wstring
 std::wstring ConverString(const std::string& str);
@@ -31,6 +31,8 @@ std::wstring ConverString(const std::string& str);
 std::string ConvertString(const std::wstring& str);
 // wstring->string
 void Log(const std::string& message);
+// ファイルパスから拡張子を抽出する関数
+std::string GetExtension(const std::string& path);
 
 
 

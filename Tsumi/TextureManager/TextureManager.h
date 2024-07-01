@@ -24,10 +24,10 @@ struct TextureData {
 	Vector2 size;
 };
 
-enum class TextureFileFormat {
-	PNG,
-	JPEG,
-	DDS,
+namespace TextureFileFormat {
+	const std::pair<std::string, uint32_t> PNG = { ".png", 0 };
+	const std::pair<std::string, uint32_t> JPEG = { ".jpeg", 1 };
+	const std::pair<std::string, uint32_t> DSS = { ".dss", 2 };
 };
 
 class TextureManager {
@@ -63,7 +63,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textuerデータを読み込む
 	/// </summary>
-	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName, TextureFileFormat format = TextureFileFormat::PNG);
+	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName);
 
 	/// <summary>
 	/// Textureデータの解放
@@ -86,12 +86,14 @@ private: // メンバ関数
 	/// <summary>
 	/// TextureDataを生成する
 	/// </summary>
-	void CreateTextureData(std::string filePath, std::string key);
+	void CreateTextureDataFormatPng(std::string filePath, std::string key);
+	void CreateTextureDataFormatJpeg(std::string filePath, std::string key);
+	void CreateTextureDataFormatDDS(std::string filePath, std::string key);
 
 	/// <summary>
 	/// Textureファイルを開く
 	/// </summary>
-	DirectX::ScratchImage CreateMipImage(const std::string& filePath);
+	DirectX::ScratchImage CreateMipImage(const std::string& filePath, const uint32_t format);
 
 	/// <summary>
 	/// DirectX12のTextureResourceを作る

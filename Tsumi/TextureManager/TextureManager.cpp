@@ -33,9 +33,8 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName, TextureFileFormat format)
+uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName)
 {
-	format;
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
 
@@ -45,8 +44,16 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::str
 	// マップコンテナで検索
 	if (!instance->CheckTextureData(FileName)) {
 
-		// なければ新しく作る
-		instance->CreateTextureData(fullFilePath, FileName);
+		// なければ新しく作る。拡張子で処理を変える
+		if (GetExtension(FileName) == TextureFileFormat::PNG.first) {
+			instance->CreateTextureDataFormatPng(fullFilePath, FileName);
+		}
+		else if (GetExtension(FileName) == TextureFileFormat::JPEG.first) {
+			instance->CreateTextureDataFormatJpeg(fullFilePath, FileName);
+		}
+		else if (GetExtension(FileName) == TextureFileFormat::DSS.first) {
+			instance->CreateTextureDataFormatDDS(fullFilePath, FileName);
+		}
 	}
 
 	// filePahtのマップコンテナのindexを返す
@@ -102,7 +109,7 @@ bool TextureManager::CheckTextureData(std::string key) {
 /// <summary>
 /// TextureDataを生成する
 /// </summary>
-void TextureManager::CreateTextureData(std::string filePath, std::string key)
+void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::string key)
 {
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
@@ -111,12 +118,12 @@ void TextureManager::CreateTextureData(std::string filePath, std::string key)
 	TextureData textureData{};
 
 	// Textureを読んで転送する
-	DirectX::ScratchImage mipImages = CreateMipImage(filePath);
+	DirectX::ScratchImage mipImages = CreateMipImage(filePath, TextureFileFormat::PNG.second);
 	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 	textureData.resource = CreateTextureResource(metadata);
 
 	// 登録
-	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece = 
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
 		UploadTextureData(textureData.resource.Get(), mipImages);
 
 	// Commandの実行
@@ -133,6 +140,20 @@ void TextureManager::CreateTextureData(std::string filePath, std::string key)
 	// コンテナに保存
 	instance->textureMaps_[key] = textureData;
 }
+void TextureManager::CreateTextureDataFormatJpeg(std::string filePath, std::string key)
+{
+}
+void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::string key)
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
+
+	// 新しく作成するTextureDataを用意
+	TextureData textureData{};
+
+	// Textureを読んで転送する
+	DirectX::ScratchImage mipImages = CreateMipImage(filePath, TextureFileFormat::DSS.second);
+}
 
 
 
@@ -140,21 +161,49 @@ void TextureManager::CreateTextureData(std::string filePath, std::string key)
 /// <summary>
 /// Textureファイルを開く
 /// </summary>
-DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath) {
+DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath, const uint32_t format) {
 
-	// テクスチャファイルを読み込んでプログラムで扱えるようにする
-	// Textureデータを読み込む
 	DirectX::ScratchImage image{};
-	std::wstring filePathw = ConverString(filePath);
-	HRESULT hr = DirectX::LoadFromWICFile(filePathw.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
-	assert(SUCCEEDED(hr));
-
-	// ミニマップの作成
+	std::wstring filePathw{};
 	DirectX::ScratchImage mipImages{};
-	hr = DirectX::GenerateMipMaps(
-		image.GetImages(), image.GetImageCount(), image.GetMetadata(),
-		DirectX::TEX_FILTER_SRGB, 0, mipImages);
-	assert(SUCCEEDED(hr));
+
+	// formatで処理を変える
+	if (format == TextureFileFormat::PNG.second) { // Format -> PNG
+
+		// テクスチャファイルを読み込んでプログラムで扱えるようにする
+		// Textureデータを読み込む
+		filePathw = ConverString(filePath);
+		HRESULT hr = DirectX::LoadFromWICFile(filePathw.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+		assert(SUCCEEDED(hr));
+
+		// ミニマップの作成
+		hr = DirectX::GenerateMipMaps(
+			image.GetImages(), image.GetImageCount(), image.GetMetadata(),
+			DirectX::TEX_FILTER_SRGB, 0, mipImages);
+		assert(SUCCEEDED(hr));
+	}
+	else if (format == TextureFileFormat::JPEG.second) { // Format -> JPEG
+
+	}
+	else if (format == TextureFileFormat::DSS.second) { // Format -> DSS
+
+		// テクスチャファイルを読み込んでプログラムで扱えるようにする
+		// Textureデータを読み込む
+		filePathw = ConverString(filePath);
+		HRESULT hr = DirectX::LoadFromDDSFile(filePathw.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+		assert(SUCCEEDED(hr));
+
+		// ミニマップの作成
+		if (DirectX::IsCompressed(image.GetMetadata().format)) { // 圧縮フォーマットかどうかを調べる
+			mipImages = std::move(image); // 圧縮フォーマットならそのまま使うのでstd::moveする
+		}
+		else {
+			hr = DirectX::GenerateMipMaps(
+				image.GetImages(), image.GetImageCount(), image.GetMetadata(),
+				DirectX::TEX_FILTER_SRGB, 4, mipImages);
+			assert(SUCCEEDED(hr));
+		}
+	}
 
 	// ミニマップ付きのデータを探す	
 	return mipImages;
@@ -163,7 +212,7 @@ DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath
 
 
 /// <summary>
-/// DirectX12のTExtureResourceを作る
+/// DirectX12のTextureResourceを作る
 /// </summary>
 ComPtr<ID3D12Resource> TextureManager::CreateTextureResource(const DirectX::TexMetadata& metadata) {
 

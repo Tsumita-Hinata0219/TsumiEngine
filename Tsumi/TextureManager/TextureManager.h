@@ -49,7 +49,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textuerデータを読み込む
 	/// </summary>
-	static uint32_t LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from = TextureFrom::Texture);
+	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName, TextureFrom from = TextureFrom::Texture);
 
 	/// <summary>
 	/// Textureデータの解放
@@ -62,7 +62,12 @@ private: // メンバ関数
 	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
-	static bool CheckTextureDatas(std::string filePath);
+	bool CheckTextureData(std::string key);
+
+	/// <summary>
+	/// TextureDataを生成する
+	/// </summary>
+	void CreateTextureData(std::string fullFilePath, std::string key);
 
 	/// <summary>
 	/// Textureファイルを開く
@@ -78,11 +83,6 @@ private: // メンバ関数
 	/// TextureResourceにデータを転送する
 	/// </summary>
 	static void UpdateTextureData(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TextureData textureData);
-
-	/// <summary>
-	/// metaDataを基にSRVの設定
-	/// </summary>
-	static D3D12_SHADER_RESOURCE_VIEW_DESC SettingSRVDesc(const DirectX::TexMetadata& metadata);
 
 	/// <summary>
 	/// metadataを基にResourceの設定
@@ -102,15 +102,6 @@ private: // メンバ関数
 
 private: // メンバ変数
 
-	// ロードできるテクスチャの最大数
-	const static uint32_t TexLoadMax = 128;
-
-	// デスクリプターヒープの場所指定のインデックス
-	uint32_t LoadTextureIndex_ = 0;
-
-	// リソース
-	ComPtr<ID3D12Resource> Resource_[TexLoadMax];
-
-
-	map<std::string, unique_ptr<TextureDataResource>> textureDatas_;
+	// テクスチャのコンテナマップ
+	std::map < std::string, TextureData> textureMaps_;
 };

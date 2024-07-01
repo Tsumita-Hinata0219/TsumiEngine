@@ -39,99 +39,39 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from) {
+uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName, TextureFrom from) 
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
 
-	// パスを追加
-	std::string FilePath{};
-	
+	std::string fullFilePath{};
+
 	switch (from)
 	{
 	case TextureFrom::Texture:
-		FilePath = "Resources/Texture/" + routeFilePath + "/" + filePath;
+		fullFilePath = "Resources/Texture/" + filePath + "/" + FileName;
 		break;
 	case TextureFrom::Obj:
-		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath;
+		fullFilePath = "Resources/Obj/" + filePath + "/" + FileName;
 		break;
 	case TextureFrom::gLTF:
-		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath;
+		fullFilePath = "Resources/gLTF/" + filePath + "/" + FileName;
 		break;
 	default:
 		break;
 	}
 
+	// マップコンテナで検索
+	if (!instance->CheckTextureData(FileName)) {
 
-	// filePaht同じものがあるならそれを返す
-	if (TextureManager::GetInstance()->CheckTextureDatas(FilePath)) {
-
-		// TextureDataを用意
-		TextureData textureData{};
-
-
-		//// indexをインクリメント
-		//DescriptorManager::IncrementIndex();
-		//const uint32_t index = DescriptorManager::GetIndex();
-
-
-		//// TextureDataに登録
-		//textureData.index = index;
-
-
-		// Textureを読んで転送する
-		// 1枚目のTextureを読んで転送する
-		DirectX::ScratchImage mipImages = CreateMipImage(FilePath);
-		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
-		textureData.resource = CreateTextureResource(metadata);
-
-		// 登録
-		UpdateTextureData(metadata, mipImages, textureData);
-
-		// SRV作成
-		textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
-
-
-		//// metaDataを基にSRVの設定
-		//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		//srvDesc = SettingSRVDesc(metadata);
-
-
-		//// SRVを作成するDescriptorHeapの場所を決める
-		//DescriptorManager::SetDescriptorHandle_CPU(
-		//	DescriptorManager::GetCPUDescriptorHandle(
-		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-		//		DescriptorManager::GetDescriptorSize().SRV, index),
-		//	index);
-
-		//DescriptorManager::SetDescriptorHandle_GPU(
-		//	DescriptorManager::GetGPUDescriptorHandle(
-		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-		//		DescriptorManager::GetDescriptorSize().SRV, index),
-		//	index);
-
-
-		//// 先頭はImGuiが使っているのでその次を使う
-		//DescriptorManager::ShiftSRVHandlePtr();
-
-
-		//// SRVの生成
-		//DescriptorManager::CreateShaderResourceView(
-		//	textureData.resource.Get(), srvDesc, index);
-
-
-		// textureのサイズの取得
-		textureData.size = {
-			static_cast<float>(metadata.width),
-			static_cast<float>(metadata.height)};
-
-
-		// コンテナに保存
-		TextureManager::GetInstance()->textureDatas_[FilePath] =
-			make_unique<TextureDataResource>(FilePath, textureData);
+		// なければ新しく作る
+		instance->CreateTextureData(fullFilePath, FileName);
 	}
 
 
-	// ハンドルを返す
-	return TextureManager::GetInstance()->textureDatas_[FilePath]->GetTextureHandle();
-};
+	// filePahtのマップコンテナのindexを返す
+	return instance->textureMaps_[FileName].index;
+}
 
 
 
@@ -140,7 +80,7 @@ uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std
 /// </summary>
 void TextureManager::UnLoadTexture() {
 
-	TextureManager::GetInstance()->textureDatas_.clear();
+	TextureManager::GetInstance()->textureMaps_.clear();
 }
 
 
@@ -148,16 +88,50 @@ void TextureManager::UnLoadTexture() {
 /// <summary>
 /// 一回読み込んだものは読み込まない
 /// </summary>
-bool TextureManager::CheckTextureDatas(std::string filePath) {
+bool TextureManager::CheckTextureData(std::string key) {
 
-	// filePaht同じものがあるならそれを返す
-	if (TextureManager::GetInstance()->textureDatas_.find(filePath) == TextureManager::GetInstance()->textureDatas_.end()) {
+	// マップコンテナに検索をかける
+	auto data = textureMaps_.find(key);
 
+	// ヒットしたらtrueを返す
+	if (data != textureMaps_.end()) {
 		return true;
 	}
-	
 	return false;
 }
+
+
+/// <summary>
+/// TextureDataを生成する
+/// </summary>
+void TextureManager::CreateTextureData(std::string fullFilePath, std::string key)
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
+
+	// 新しく作成するTextureDataを用意
+	TextureData textureData{};
+
+	// Textureを読んで転送する
+	DirectX::ScratchImage mipImages = CreateMipImage(fullFilePath);
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	textureData.resource = CreateTextureResource(metadata);
+
+	// 登録
+	UpdateTextureData(metadata, mipImages, textureData);
+
+	// SRV作成
+	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+
+	// textureのサイズの取得
+	textureData.size = {
+		static_cast<float>(metadata.width),
+		static_cast<float>(metadata.height) };
+
+	// コンテナに保存
+	instance->textureMaps_[key] = textureData;
+}
+
 
 
 
@@ -293,18 +267,3 @@ void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, Dir
 	}
 }
 
-
-
-/// <summary>
-/// metaDataを基にSRVの設定
-/// </summary>
-D3D12_SHADER_RESOURCE_VIEW_DESC TextureManager::SettingSRVDesc(const DirectX::TexMetadata& metadata) {
-
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D; // 2Dテクスチャ
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
-
-	return srvDesc;
-}

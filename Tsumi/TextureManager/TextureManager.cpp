@@ -33,27 +33,14 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName, TextureFrom from) 
+uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName, TextureFileFormat format)
 {
+	format;
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
 
-	std::string fullFilePath{};
-
-	switch (from)
-	{
-	case TextureFrom::Texture:
-		fullFilePath = "Resources/Texture/" + filePath + "/" + FileName;
-		break;
-	case TextureFrom::Obj:
-		fullFilePath = "Resources/Obj/" + filePath + "/" + FileName;
-		break;
-	case TextureFrom::gLTF:
-		fullFilePath = "Resources/gLTF/" + filePath + "/" + FileName;
-		break;
-	default:
-		break;
-	}
+	// フルファイルパス
+	std::string fullFilePath = "Resources/" + filePath + "/" + FileName;
 
 	// マップコンテナで検索
 	if (!instance->CheckTextureData(FileName)) {
@@ -61,7 +48,6 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::str
 		// なければ新しく作る
 		instance->CreateTextureData(fullFilePath, FileName);
 	}
-
 
 	// filePahtのマップコンテナのindexを返す
 	return instance->textureMaps_[FileName].index;
@@ -116,7 +102,7 @@ bool TextureManager::CheckTextureData(std::string key) {
 /// <summary>
 /// TextureDataを生成する
 /// </summary>
-void TextureManager::CreateTextureData(std::string fullFilePath, std::string key)
+void TextureManager::CreateTextureData(std::string filePath, std::string key)
 {
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
@@ -125,12 +111,11 @@ void TextureManager::CreateTextureData(std::string fullFilePath, std::string key
 	TextureData textureData{};
 
 	// Textureを読んで転送する
-	DirectX::ScratchImage mipImages = CreateMipImage(fullFilePath);
+	DirectX::ScratchImage mipImages = CreateMipImage(filePath);
 	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
 	textureData.resource = CreateTextureResource(metadata);
 
 	// 登録
-	//UpdateTextureData(metadata, mipImages, textureData);
 	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece = 
 		UploadTextureData(textureData.resource.Get(), mipImages);
 

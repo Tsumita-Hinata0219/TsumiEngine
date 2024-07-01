@@ -24,10 +24,10 @@ struct TextureData {
 	Vector2 size;
 };
 
-enum class TextureFrom {
-	Texture,
-	Obj,
-	gLTF,
+enum class TextureFileFormat {
+	PNG,
+	JPEG,
+	DDS,
 };
 
 class TextureManager {
@@ -63,7 +63,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textuerデータを読み込む
 	/// </summary>
-	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName, TextureFrom from = TextureFrom::Texture);
+	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName, TextureFileFormat format = TextureFileFormat::PNG);
 
 	/// <summary>
 	/// Textureデータの解放
@@ -86,7 +86,7 @@ private: // メンバ関数
 	/// <summary>
 	/// TextureDataを生成する
 	/// </summary>
-	void CreateTextureData(std::string fullFilePath, std::string key);
+	void CreateTextureData(std::string filePath, std::string key);
 
 	/// <summary>
 	/// Textureファイルを開く

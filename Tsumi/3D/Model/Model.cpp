@@ -240,7 +240,7 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture(routeFilePath, textureFilePath.C_Str(), TextureFrom::Obj);
+			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
@@ -334,7 +334,7 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture(routeFilePath, textureFilePath.C_Str(), TextureFrom::Obj);
+			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
@@ -446,30 +446,7 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 	WellForGPU* mappedPalette = nullptr;
 	result.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	result.mappedPallette = { mappedPalette, skeleton.joints.size() }; // spanを使ってアクセスするようにする
-	
-	//// indexを確認
-	//const uint32_t heapIndex = DescriptorManager::GetIndex();
-	//result.paletteSrvHandle.first =
-	//	DescriptorManager::GetCPUDescriptorHandle(
-	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
-	//result.paletteSrvHandle.second =
-	//	DescriptorManager::GetGPUDescriptorHandle(
-	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
-
-	//// palette用のSRVを作成。StructureBufferでアクセスできるようにする
-	//D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
-	//paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	//paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	//paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	//paletteSrvDesc.Buffer.FirstElement = 0;
-	//paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	//paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
-	//paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	//DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-	//	result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
-	result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton);
+	result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton); // SRVHandleの設定
 
 	// influence用のResourceを確保
 	result.influenceResource = CreateResource::CreateBufferResource(sizeof(VertexInfluence) * this->objData_.vertices.size());
@@ -568,7 +545,7 @@ MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, cons
 			result = materialMap_[mtlName].get();
 
 			// 仮テクスチャハンドル
-			result->textureHandle = TextureManager::LoadTexture("", "uvChecker.png");
+			result->textureHandle = TextureManager::LoadTexture("Texture/", "uvChecker.png");
 		}
 
 		// identifierに応じた処理
@@ -583,7 +560,7 @@ MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, cons
 			// 画像を読み込む
 			if (result != nullptr) {
 				textureFileName = textureFileName.substr(0, fileName.size() - 4);
-				result->textureHandle = TextureManager::LoadTexture(filePath, textureFileName, TextureFrom::Obj);
+				result->textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFileName);
 			}
 			else {
 				//とりあえず止める

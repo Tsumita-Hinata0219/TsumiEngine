@@ -175,7 +175,7 @@ ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std:
 			}
 		}
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName, TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, fileName);
 		objData.textureHD = texHandle;
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
@@ -243,7 +243,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, fileName + ".png", TextureFrom::Obj);
+		uint32_t texHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, fileName + ".png");
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
 		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
@@ -341,7 +341,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 		}
 
 		// テクスチャを指定されたものにする
-		uint32_t texHandle = TextureManager::LoadTexture(routeFilePath, textureName, TextureFrom::gLTF);
+		uint32_t texHandle = TextureManager::LoadTexture("gLTF/" + routeFilePath, textureName);
 		objData.textureHD = texHandle;
 
 		// Nodeを読み込む

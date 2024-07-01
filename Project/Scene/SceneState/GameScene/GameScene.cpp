@@ -19,12 +19,6 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize() 
 {
-	/* ----- newTextureLoad 新しいテクスチャのロード ----- */
-	uint32_t texHDA = TextureManager::LoadTexture("", "ishi.png");
-	uint32_t texHDB = TextureManager::LoadTexture("", "normalMap.png");
-	texHDA;
-	texHDB;
-
 	/* ----- FileManager ファイルマネージャー ----- */
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 

@@ -3,7 +3,7 @@
 #include <list>
 #include <memory>
 
-#include "GameObject.h"
+#include "../../GameObject.h"
 
 #include "Bullet/PlayerBullet.h"
 

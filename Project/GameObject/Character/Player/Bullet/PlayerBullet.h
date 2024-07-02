@@ -3,7 +3,7 @@
 
 #include <memory>
 
-#include "GameObject.h"
+#include "../../../GameObject.h"
 
 
 /* PlayerBulletクラス */

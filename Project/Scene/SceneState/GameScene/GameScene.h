@@ -15,7 +15,8 @@
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
-#include "Player/Player.h"
+#include "../../../Project/GameObject/Character/Player/Player.h"
+
 
 
 class GameScene : public IScene {

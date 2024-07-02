@@ -337,12 +337,16 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 				aiString textureFilePath;
 				material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 				objData.material.textureFilePath = fileName + routeFilePath;
+				//objData.textureHD = TextureManager::LoadTexture("gLTF/" + routeFilePath, textureFilePath);
+				//objData.material.textureFilePath = "gLTF/" + routeFilePath;
+				//objData.textureHD = TextureManager::LoadTexture(objData.material.textureFilePath, textureFilePath.C_Str());
 			}
 		}
 
 		// テクスチャを指定されたものにする
 		uint32_t texHandle = TextureManager::LoadTexture("gLTF/" + routeFilePath, textureName);
 		objData.textureHD = texHandle;
+		TextureManager::LoadTexture("gLTF/" + routeFilePath, textureName);
 
 		// Nodeを読み込む
 		objData.rootNode = ModelManager::Getinstance()->ReadNode(scene->mRootNode);

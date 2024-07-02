@@ -26,13 +26,13 @@ void Skybox::Update()
 // 描画処理
 void Skybox::Draw(Camera* camera)
 {
-	
+	camera;
 }
 
 
 // コマンドコール
 void Skybox::CommandCall(Camera* camera)
 {
-
+	camera;
 
 }

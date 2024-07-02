@@ -5,7 +5,7 @@
 
 #include "GameObject.h"
 
-//#include "Bullet/PlayerBullet.h"
+#include "Bullet/PlayerBullet.h"
 
 
 /* Playerクラス */
@@ -39,7 +39,7 @@ private:
 	void CreateNewBullet();
 
 	// バレットリストの追加
-	//void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
+	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
 
 private:
@@ -58,7 +58,7 @@ private:
 	float moveVector_ = 0.3f;
 
 	// BulletのList配列
-	//std::list<std::shared_ptr<PlayerBullet>> bulletList_;
+	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
 
 	// 射撃ボタン押下フレーム
 	int shotPressFrame_ = 0;

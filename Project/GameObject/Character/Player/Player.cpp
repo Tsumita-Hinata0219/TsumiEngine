@@ -29,24 +29,24 @@ void Player::Update()
 	// プレイヤー本体の姿勢処理
 	CalcBodyRotate();
 
-	//// Bulletの更新処理
-	//for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
-	//	bullet->Update();
-	//}
+	// Bulletの更新処理
+	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
+		bullet->Update();
+	}
 
-	//// 死亡フラグが立っていたら削除
-	//bulletList_.remove_if([](std::shared_ptr<PlayerBullet> bullet) {
-	//	if (bullet->IsDead()) {
-	//		bullet.reset();
-	//		return true;
-	//	}
-	//	return false;
-	//	}
-	//);
+	// 死亡フラグが立っていたら削除
+	bulletList_.remove_if([](std::shared_ptr<PlayerBullet> bullet) {
+		if (bullet->IsDead()) {
+			bullet.reset();
+			return true;
+		}
+		return false;
+		}
+	);
 
 #ifdef _DEBUG
 
-	/*if (ImGui::TreeNode("Player")) {
+	if (ImGui::TreeNode("Player")) {
 
 		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
 		ImGui::DragFloat3("Rotate", &bodyWt_.srt.rotate.x, 0.01f);
@@ -56,7 +56,7 @@ void Player::Update()
 		ImGui::Text("ShotFrame = %d", shotPressFrame_);
 
 		ImGui::TreePop();
-	}*/
+	}
 
 #endif // _DEBUG
 }
@@ -73,9 +73,9 @@ void Player::Draw3D(Camera* camera)
 	bodyModel_->Draw(bodyWt_, camera);
 
 	// Bulletsの描画
-	/*for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
+	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
 		bullet->Draw3D(camera);
-	}*/
+	}
 }
 void Player::Draw2DFront(Camera* camera)
 {
@@ -141,19 +141,16 @@ void Player::Move()
 // プレイヤー本体の姿勢処理
 void Player::CalcBodyRotate()
 {
-	Vector3 addRotate{};
+	////Stickの入力を取得
+	//Vector2 lStickInput = input_->GetLStick();
 
-	if (input_->GetLStick().x <= -0.1f ||
-		input_->GetLStick().x >= 0.1f) {
-		addRotate.x = input_->GetLStick().x;
-	}
-	if (input_->GetLStick().y <= -0.1f ||
-		input_->GetLStick().y >= 0.1f) {
-		addRotate.z = input_->GetLStick().y;
-	}
+	//// Stick入力がいていい範囲を超えている場合、角度を更新
+	//// stick入力が一定範囲を超えている場合、角度を更新
+	//if (std::abs(lStickInput.x) > 0.2f || std::abs(lStickInput.y) > 0.2f) {
 
-	// Y軸周り角度(θy)
-	bodyWt_.srt.rotate.y = std::atan2(addRotate.x, addRotate.z);
+	//	// Y軸周り角度(θy)
+	//	bodyWt_.srt.rotate.y = std::atan2(addRotate.x, addRotate.z);
+	//}
 }
 
 

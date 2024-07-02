@@ -15,6 +15,8 @@
 #include "TestHuman/TestHuman.h"
 #include "TestJsonObject/TestJsonObject.h"
 
+#include "Player/Player.h"
+
 
 class GameScene : public IScene {
 
@@ -77,4 +79,7 @@ private:
 	unique_ptr<TestJsonObject> testJsonObject_;
 
 	Transform transform_;
+
+	// Player
+	unique_ptr<Player> player_;
 };

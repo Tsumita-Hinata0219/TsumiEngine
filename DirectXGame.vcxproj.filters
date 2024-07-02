@@ -178,6 +178,7 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -351,6 +352,7 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

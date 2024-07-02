@@ -12,7 +12,7 @@ SamplerState gSampler : register(s0);
 
 struct PixelShaderOutput
 {
-    float4 color : SV_Target0;
+    float4 color : SV_TARGET0;
 };
 
 

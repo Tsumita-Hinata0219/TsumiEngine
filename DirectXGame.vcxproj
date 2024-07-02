@@ -202,6 +202,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
@@ -322,6 +323,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />

@@ -1,9 +1,9 @@
-#include "PhongPipeLine.h"
+#include "SkyboxPipeLine.h"
 
 
 
 // Psoを構築する
-PsoProperty PhongPipeLine::SetUpPso()
+PsoProperty SkyboxPipeLine::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -11,12 +11,9 @@ PsoProperty PhongPipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 5> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 2> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
-		SetUpInputElementDescs("NORMAL"),
-		SetUpInputElementDescs("WORLDPOSITION"),
-		SetUpInputElementDescs("CAMERAPOSITION"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	SetUpInputLayout(inputLayoutDesc, inputElementDesc.data(), static_cast<UINT>(inputElementDesc.size()));
@@ -38,7 +35,7 @@ PsoProperty PhongPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "Phong");
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "Skybox");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -79,11 +76,12 @@ PsoProperty PhongPipeLine::SetUpPso()
 
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc{};
 	// Depthの機能を有効化する
-	depthStencilDesc.DepthEnable = true;
+	depthStencilDesc.DepthEnable = true; 
 	// 書き込む
-	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
+	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
 	// 比較関数はLessEqual。つまり、近ければ描画される
 	depthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
+
 
 	// DepthStencilの設定
 	graphicsPipelineStateDesc.DepthStencilState = depthStencilDesc;
@@ -102,14 +100,14 @@ PsoProperty PhongPipeLine::SetUpPso()
 
 
 // RootSignatureのセットアップ
-void PhongPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void SkyboxPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
 	// 色に関する
-	D3D12_ROOT_PARAMETER rootParameters[5]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号0とバインド
@@ -140,12 +138,6 @@ void PhongPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRoo
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
-
-
-	// 光に関する
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド
 
 
 	// Samplerの設定

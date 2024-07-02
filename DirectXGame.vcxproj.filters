@@ -175,6 +175,9 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
   </ItemGroup>
@@ -349,6 +352,9 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
   </ItemGroup>

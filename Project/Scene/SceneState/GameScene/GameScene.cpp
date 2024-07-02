@@ -57,6 +57,10 @@ void GameScene::Initialize()
 	/* ----- newModel 新しいモデル描画形式 ----- */
 	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	transform_.Initialize();
+
+	/* ----- Player プレイヤー ----- */
+	player_ = make_unique<Player>();
+	player_->Initialize();
 }
 
 
@@ -90,6 +94,9 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- TestJsonObject テストJsonオブジェクト ----- */
 	testJsonObject_->Update();
+
+	/* ----- Player プレイヤー ----- */
+	player_->Update();
 
 #ifdef _DEBUG
 
@@ -140,8 +147,11 @@ void GameScene::ModelDraw()
 	//testJsonObject_->Draw(camera_.get());
 
 	/* ----- newModel 新しいモデル描画形式 ----- */
-	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
-	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+	Model::SetPipeLineType(Model::PipeLineType::kModel);
+	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
+
+	/* ----- Player プレイヤー ----- */
+	player_->Draw3D(camera_.get());
 }
 
 

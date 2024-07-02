@@ -135,6 +135,7 @@ void ShaderManager::ModelShadersCompiles()
 	LineShader();
 	Object3DShader();
 	SkinningObject3dShader();
+	SkyboxShader();
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
@@ -262,6 +263,16 @@ void ShaderManager::SkinningObject3dShader()
 		L"Resources/Shaders/SkinningObject3d.PS.hlsl",
 		shader);
 	modelShadersMap_["SkinningObject3d"] = shader;
+}
+
+void ShaderManager::SkyboxShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/Skybox/Skybox.VS.hlsl",
+		L"Resources/Shaders/Skybox/Skybox.PS.hlsl",
+		shader);
+	modelShadersMap_["Skybox"] = shader;
 }
 
 

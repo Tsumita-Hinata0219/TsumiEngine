@@ -69,7 +69,7 @@
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\PostEffect;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Tsumi\View;$(ProjectDir)Tsumi\View\RTVManager;$(ProjectDir)Tsumi\View\RTVManager\RTVData;$(ProjectDir)Tsumi\View\SRVManager;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\Material</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\3D\Model\ModelStructure;$(ProjectDir)Tsumi\3D\Model\ModelStructure\Material;$(ProjectDir)Tsumi\3D\Model\ModelStructure\Mesh;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\AnimationStructure;$(ProjectDir)Tsumi\Animation\AnimationStructure\Joint;$(ProjectDir)Tsumi\Animation\AnimationStructure\JointWeightData;$(ProjectDir)Tsumi\Animation\AnimationStructure\Node;$(ProjectDir)Tsumi\Animation\AnimationStructure\QuaternionTransform;$(ProjectDir)Tsumi\Animation\AnimationStructure\Skeleton;$(ProjectDir)Tsumi\Animation\AnimationStructure\SkinCluster;$(ProjectDir)Tsumi\Animation\AnimationStructure\VertexInfluence;$(ProjectDir)Tsumi\Animation\AnimationStructure\VertexWeightData;$(ProjectDir)Tsumi\Animation\AnimationStructure\WellForGPU;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\FileManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Tsumi\View;$(ProjectDir)Tsumi\View\RTVManager;$(ProjectDir)Tsumi\View\RTVManager\RTVData;$(ProjectDir)Tsumi\View\SRVManager;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\json;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)externals\assimp;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\lib;$(ProjectDir)externals\DirectXTex;$(ProjectDir)externals\imgui;$(ProjectDir)externals\json</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
@@ -98,7 +98,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\PostEffect;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Tsumi\View;$(ProjectDir)Tsumi\View\RTVManager;$(ProjectDir)Tsumi\View\RTVManager\RTVData;$(ProjectDir)Tsumi\View\SRVManager;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\Material</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\FileManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\json;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\Material</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)externals\assimp;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\lib;$(ProjectDir)externals\DirectXTex;$(ProjectDir)externals\imgui;$(ProjectDir)externals\json</AdditionalIncludeDirectories>
       <SupportJustMyCode>true</SupportJustMyCode>
       <DebugInformationFormat>None</DebugInformationFormat>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -131,7 +131,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\PostEffect;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Tsumi\View;$(ProjectDir)Tsumi\View\RTVManager;$(ProjectDir)Tsumi\View\RTVManager\RTVData;$(ProjectDir)Tsumi\View\SRVManager;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\Material</AdditionalIncludeDirectories>
-      <AdditionalIncludeDirectories>$(ProjectDir)Tsumi;$(ProjectDir)Tsumi\2D;$(ProjectDir)Tsumi\2D\Sprite;$(ProjectDir)Tsumi\2D\Sprite\state;$(ProjectDir)Tsumi\2D\Sprite\state\SpriteBoxState;$(ProjectDir)Tsumi\3D;$(ProjectDir)Tsumi\3D\DrawSystem;$(ProjectDir)Tsumi\3D\Model;$(ProjectDir)Tsumi\3D\Model\Material;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\ModelGLTF;$(ProjectDir)Tsumi\3D\Model\ModelManager;$(ProjectDir)Tsumi\3D\Model\ModelObj;$(ProjectDir)Tsumi\3D\Model\ModelObj\ObjDataResource;$(ProjectDir)Tsumi\3D\Model\ModelPlane;$(ProjectDir)Tsumi\3D\Model\ModelSphere;$(ProjectDir)Tsumi\Animation;$(ProjectDir)Tsumi\Animation\AnimationDataArray;$(ProjectDir)Tsumi\Animation\AnimationManager;$(ProjectDir)Tsumi\Animation\KeyFrameAnimation;$(ProjectDir)Tsumi\Audio;$(ProjectDir)Tsumi\Audio\AudioDataResource;$(ProjectDir)Tsumi\Base;$(ProjectDir)Tsumi\Base\WinApp;$(ProjectDir)Tsumi\Base\DXCommon;$(ProjectDir)Tsumi\CreateResource;$(ProjectDir)Tsumi\DebugTools;$(ProjectDir)Tsumi\DebugTools\DebugCamera;$(ProjectDir)Tsumi\DebugTools\HowToUseEngine;$(ProjectDir)Tsumi\DescriptorManager;$(ProjectDir)Tsumi\FileManager;$(ProjectDir)Tsumi\Graphic;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Normal;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Object3D;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Sprite;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Light;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Lambert;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Phong;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Particle;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\Line;$(ProjectDir)Tsumi\Graphic\GraphicPipelineManager\PostEffect;$(ProjectDir)Tsumi\Graphic\PipelineStateObject;$(ProjectDir)Tsumi\Graphic\ShaderManager;$(ProjectDir)Tsumi\Input;$(ProjectDir)Tsumi\Particle;$(ProjectDir)Tsumi\Particle\BaseParticle;$(ProjectDir)Tsumi\Particle\ParticleArray;$(ProjectDir)Tsumi\Particle\ParticleEmitter;$(ProjectDir)Tsumi\Particle\ParticleManager;$(ProjectDir)Tsumi\Particle\ParticlePlane;$(ProjectDir)Tsumi\Particle\ParticleRenderer;$(ProjectDir)Tsumi\Particle\ParticleSystem;$(ProjectDir)Tsumi\TextureManager;$(ProjectDir)Tsumi\TextureManager\TextureDataResource;$(ProjectDir)Tsumi\Transform;$(ProjectDir)Tsumi\Transform\SpriteTransform;$(ProjectDir)Tsumi\Transform\ViewProjection;$(ProjectDir)Tsumi\Transform\WorldTransform;$(ProjectDir)Tsumi\Utilities;$(ProjectDir)Tsumi\Utilities\ImGuiManager;$(ProjectDir)Tsumi\Utilities\CollisionManager;$(ProjectDir)Tsumi\Utilities\CollisionManager\Collider;$(ProjectDir)Tsumi\Utilities\CollisionManager\CollisionStructures;$(ProjectDir)Tsumi\Utilities\CollisionManager\GeometryCollision;$(ProjectDir)Tsumi\Utilities\CollisionManager\IsCollision;$(ProjectDir)Tsumi\Utilities\FadeManager;$(ProjectDir)Tsumi\Utilities\RandomGenerator;$(ProjectDir)Tsumi\Utilities\TextLog;$(ProjectDir)Tsumi\Utilities\TimedCall;$(ProjectDir)Project;$(ProjectDir)Project\GameManager;$(ProjectDir)Project\GameObject;$(ProjectDir)Project\GameObject\Camera;$(ProjectDir)Project\GameObject\Effect;$(ProjectDir)Project\GameObject\Character;$(ProjectDir)Project\GameObject\Others;$(ProjectDir)Project\GameObject\Terrain;$(ProjectDir)Project\Math;$(ProjectDir)Project\Math\MathEasing;$(ProjectDir)Project\Math\MathFunction;$(ProjectDir)Project\Math\MathGeometry;$(ProjectDir)Project\Math\MathOperations;$(ProjectDir)Project\Math\MathStructure;$(ProjectDir)Project\Math\MathStructure\Matrix;$(ProjectDir)Project\Math\MathStructure\Vector;$(ProjectDir)Project\Math\MathQuaternion;$(ProjectDir)Project\Math\MyParlinNoise;$(ProjectDir)Project\Scene;$(ProjectDir)Project\Scene\SceneState;$(ProjectDir)shaders;$(ProjectDir)Resources;$(ProjectDir)externals;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\json;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\imgui;$(ProjectDir)externals\DirectXtex;$(ProjectDir)Tsumi\3D\Model\Mesh;$(ProjectDir)Tsumi\3D\Model\Material</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)externals\assimp;$(ProjectDir)externals\assimp\include;$(ProjectDir)externals\assimp\lib;$(ProjectDir)externals\DirectXTex;$(ProjectDir)externals\imgui;$(ProjectDir)externals\json</AdditionalIncludeDirectories>
       <SupportJustMyCode>true</SupportJustMyCode>
       <DebugInformationFormat>None</DebugInformationFormat>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -192,54 +192,57 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PostEffect\PostEffectGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp" />
     <ClCompile Include="Tsumi\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleArray\ParticleArray.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleEmitter\ParticleEmitter.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleManager\ParticleManager.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PipeLineManager.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
+    <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffect.cpp" />
+    <ClCompile Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.cpp" />
     <ClCompile Include="Tsumi\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp" />
-    <ClCompile Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Model.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelManager\ModelManager.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelObj\ModelObjState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.cpp" />
     <ClCompile Include="Tsumi\Audio\Audio.cpp" />
     <ClCompile Include="Tsumi\Audio\AudioDataResource\AudioDataResource.cpp" />
     <ClCompile Include="Tsumi\Base\DXCommon\DirectXCommon.cpp" />
     <ClCompile Include="Tsumi\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
-    <ClCompile Include="Tsumi\DebugTools\DebugCamera\DebugCamera.cpp" />
-    <ClCompile Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.cpp" />
-    <ClCompile Include="Tsumi\Graphic\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\Particle\Particle.cpp" />
-    <ClCompile Include="Tsumi\Particle\ParticlePlane\ParticlePlane.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
-    <ClCompile Include="Tsumi\Transform\SpriteTransform\SpriteTransform.cpp" />
-    <ClCompile Include="Tsumi\Transform\ViewProjection\ViewProjection.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
     <ClCompile Include="Tsumi\Utilities\CollisionManager\CollisionManager.cpp" />
@@ -287,8 +290,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Scene\IScene.h" />
     <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
-    <ClInclude Include="Tsumi\2D\Sprite\state\ISpriteState.h" />
-    <ClInclude Include="Tsumi\2D\Sprite\state\SpriteBoxState\SpriteBoxState.h" />
     <ClInclude Include="Tsumi\3D\DrawSystem\DrawSystem.h" />
     <ClInclude Include="Tsumi\3D\Model\IModelState.h" />
     <ClInclude Include="Tsumi\3D\Model\Model.h" />
@@ -296,10 +297,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\3D\Model\ModelManager\ModelManager.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ModelObjState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelPlane\ModelPlaneState.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelSphere\ModelSphereState.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Material\Material.h" />
-    <ClInclude Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.h" />
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
@@ -316,44 +313,48 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Audio\AudioDataResource\AudioDataResource.h" />
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
+    <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
-    <ClInclude Include="Tsumi\DebugTools\DebugCamera\DebugCamera.h" />
-    <ClInclude Include="Tsumi\DebugTools\HowToUseEngine\EngineManual.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineManager.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\GraphicPipelineStructure.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Lambert\LambertGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Light\LightGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Line\LineGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Normal\NormalGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Object3D\Object3DGraphicPipeLine.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Particle\ParticleGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PhongNormalMap\PhongNormalMap.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Phong\PhongGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\PostEffect\PostEffectGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\SkinningObject3d\SkinningObject3dGraphicPipeLine.h" />
-    <ClInclude Include="Tsumi\Graphic\GraphicPipelineManager\Sprite\SpriteGraphicPipeline.h" />
-    <ClInclude Include="Tsumi\Graphic\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\LinePipeLine\LinePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
     <ClInclude Include="Tsumi\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Tsumi\Particle\IParticle.h" />
-    <ClInclude Include="Tsumi\Particle\IParticleState.h" />
-    <ClInclude Include="Tsumi\Particle\Particle.h" />
     <ClInclude Include="Tsumi\Particle\ParticleArray\ParticleArray.h" />
     <ClInclude Include="Tsumi\Particle\ParticleEmitter\ParticleEmitter.h" />
     <ClInclude Include="Tsumi\Particle\ParticleManager\ParticleManager.h" />
-    <ClInclude Include="Tsumi\Particle\ParticlePlane\ParticlePlane.h" />
     <ClInclude Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.h" />
     <ClInclude Include="Tsumi\Particle\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
+    <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
-    <ClInclude Include="Tsumi\Transform\SpriteTransform\SpriteTransform.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
-    <ClInclude Include="Tsumi\Transform\ViewProjection\ViewProjection.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
     <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\AABBCollider.h" />
@@ -366,6 +367,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionStructures\CollisionStructures.h" />
     <ClInclude Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.h" />
     <ClInclude Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.h" />
+    <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h" />
     <ClInclude Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Tsumi\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
@@ -377,27 +379,27 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Resources\shaders\LambertObject.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\LambertObject.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\LambertObject.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\LambertObject.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\LightObject.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\LightObject.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\LightObject.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\LightObject.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\LineObject3d.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\LineObject3d.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
@@ -405,7 +407,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\LineObject3d.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\LineObject3d.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
@@ -413,17 +415,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\NormalObject3d.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\NormalObject3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\NormalObject3d.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\NormalObject3d.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\Object3d.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\Object3d.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
@@ -431,7 +433,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\Object3d.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\Object3d.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
@@ -439,37 +441,37 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleObject3D.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\ParticleObject3D.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\ParticleObject3D.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\ParticleObject3D.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongNormalMap.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\PhongNormalMap.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongNormalMap.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\PhongNormalMap.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongObject.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\PhongObject.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PhongObject.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\PhongObject.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffect.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
@@ -477,32 +479,92 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\PostEffect.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\BoxFilter\BoxFilter.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Dissolve\Dissolve.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GaussianFilter\GaussianFilter.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GrayScale\GrayScale.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\OutLine\OutLine.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\RadialBlur\RadialBlur.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Random\Random.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\SepiaTone\SepiaTone.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Vignetting\Vignetting.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteObject3d.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\SpriteObject3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\shaders\SpriteObject3d.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\SpriteObject3d.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
@@ -518,23 +580,23 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <None Include="cpp.hint" />
-    <None Include="Resources\shaders\LambertObject.hlsli" />
-    <None Include="Resources\shaders\LightObject.hlsli">
+    <None Include="Resources\Shaders\LambertObject.hlsli" />
+    <None Include="Resources\Shaders\LightObject.hlsli">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
       <FileType>Document</FileType>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">false</ExcludedFromBuild>
     </None>
-    <None Include="Resources\shaders\LineObject3d.hlsli" />
-    <None Include="Resources\shaders\MathFunc.hlsli" />
-    <None Include="Resources\shaders\NormalObject3d.hlsli" />
-    <None Include="Resources\shaders\Object3d.hlsli" />
-    <None Include="Resources\shaders\ParticleObject3D.hlsli" />
-    <None Include="Resources\shaders\PhongNormalMap.hlsli" />
-    <None Include="Resources\shaders\PhongObject.hlsli" />
-    <None Include="Resources\shaders\PostEffect.hlsli" />
+    <None Include="Resources\Shaders\LineObject3d.hlsli" />
+    <None Include="Resources\Shaders\MathFunc.hlsli" />
+    <None Include="Resources\Shaders\NormalObject3d.hlsli" />
+    <None Include="Resources\Shaders\Object3d.hlsli" />
+    <None Include="Resources\Shaders\ParticleObject3D.hlsli" />
+    <None Include="Resources\Shaders\PhongNormalMap.hlsli" />
+    <None Include="Resources\Shaders\PhongObject.hlsli" />
+    <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
-    <None Include="Resources\shaders\SpriteObject3d.hlsli" />
+    <None Include="Resources\Shaders\SpriteObject3d.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

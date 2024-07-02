@@ -1,8 +1,8 @@
 #pragma once
 
-#include "MyMath.h"
-#include "VertexInfluence.h"
-#include "WellForGPU.h"
+//#include "MyMath.h"
+//#include "VertexInfluence.h"
+//#include "WellForGPU.h"
 
 
 // SkinCluster

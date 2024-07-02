@@ -14,19 +14,12 @@
 #include <cassert>
 #include "imgui.h"
 #include <numbers>
+#include <type_traits>
 
-#include "Vector.h"
-#include "Matrix.h"
-#include "MathQuaternion.h"
-#include "MathOperations.h"
-#include "CollisionStructures.h"
-#include "WorldTransform.h"
-#include "ViewProjection.h"
-
-
-// 前方宣言
-struct ViewProjection;
-
+#include "../../Project/Math/MyMath.h"
+#include "../../Project/Math/Struct.h"
+#include "../../Tsumi/Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
+#include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 
 
 /// -------------------------------------------------------------------------
@@ -51,6 +44,8 @@ float Lerp(const float& start, const float& end, float t);
 float Clamp(const float& value, const float& minValue, const float& maxValue);
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
 float APOneAsZeroCloser(float value);
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees);
 
 
 
@@ -72,7 +67,7 @@ Vector2 Project(const Vector2& v1, const Vector2& v2);
 // 線形補間
 Vector2 Lerp(const Vector2& start, const Vector2& end, const float t);
 // Vector3 -> Vector2 への変換
-Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
+//Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
 // クランプ
 Vector2 Clamp(const Vector2& value, const Vector2& minValue, const Vector2& maxValue);
 
@@ -98,12 +93,13 @@ Vector3 Lerp(const Vector3& start, const Vector3& end, const float t);
 // 球面線形補間
 Vector3 SLerp(const Vector3& start, const Vector3& end, const float t);
 // 最近接線
-Vector3 ClosestPoint(const Vector3& p, const Segment& s);
+//Vector3 ClosestPoint(const Vector3& p, const Segment& s);
 // 法線ベクトル
 Vector3 Perpendicular(const Vector3& v);
 // 座標変換
 Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
 // ベクトル変換
+
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 // Vector2 -> Vector3 への変換
 //Vector3 ConvertVector(const Vector2& v);

@@ -10,10 +10,10 @@
 #pragma comment(lib, "dxcompiler.lib")
 #include <map>
 
-#include "MyMath.h"
-#include "Struct.h"
-#include "DescriptorManager.h"
-#include "DirectXCommon.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../DescriptorManager/DescriptorManager.h"
+#include "../../Base/DXCommon/DirectXCommon.h"
 
 #define RTV_Index_Max 16
 
@@ -49,11 +49,10 @@ public: // メンバ関数
 	}
 
 	// 初期化処理
-	void Initialize();
+	static void Initialize();
 
-	// 開始処理、終了処理
-	void BeginFrame();
-	void EndFrame();
+	// 開始処理
+	static void BeginFrame();
 
 	// ImGui描画
 	static void DrawImGui();

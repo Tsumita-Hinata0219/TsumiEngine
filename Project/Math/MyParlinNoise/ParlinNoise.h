@@ -1,11 +1,6 @@
 #pragma once
 
-#include "Vector.h"
-#include "Matrix.h"
-#include "MathQuaternion.h"
-#include "MathOperations.h"
-#include "MathFunction.h"
-#include "RandomGenerator.h"
+#include "../../Project/Math/MyMath.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -16,6 +11,7 @@
 #include <algorithm>
 #include <array>
 #include <numbers>
+#include <vector>
 
 class ParlinNoise {
 

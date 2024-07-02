@@ -1,6 +1,6 @@
 #pragma once
-
-#include "MyMath.h"
+//
+//#include "MyMath.h"
 
 
 // QuaternionTransform

@@ -15,7 +15,8 @@ void ParticleSystem::Initialize()
 	resource_.IndexBufferView = CreateResource::CreateIndexBufferview(sizeof(uint32_t) * 6, resource_.Index.Get());
 
 	resource_.instancing = CreateResource::CreateBufferResource(sizeof(ParticleTransformationMatrix) * instanceNum_);
-	dsvIndex_ = DescriptorManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
+	//dsvIndex_ = DescriptorManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
+	dsvIndex_ = SRVManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
 }
 
 
@@ -78,7 +79,7 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 			Matrix4x4 scaleMat = MakeScaleMatrix((*itr).worldTransform.srt.scale);
 			Matrix4x4 translateMat = MakeTranslateMatrix((*itr).worldTransform.srt.translate);
 			Matrix4x4 worldPos = scaleMat * (billMat * translateMat);
-			Matrix4x4 worldView = camera->matView * camera->matProjection;
+			Matrix4x4 worldView = camera->viewMatrix * camera->projectionMatrix;
 			Matrix4x4 matWorld = worldPos * worldView;
 
 			(*itr).uvTransform.matWorld = MakeAffineMatrix(
@@ -103,30 +104,27 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 void ParticleSystem::CommandCall()
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Particle);
 
 	///// いざ描画！！！！！
 	// VBVを設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
-	DescriptorManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
+	//DescriptorManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
+	SRVManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
 
 	// Texture
 	if (!useTexture_ == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(2, useTexture_);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(2, useTexture_);
+		SRVManager::SetGraphicsRootDescriptorTable(2, useTexture_);
 	}
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後

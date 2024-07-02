@@ -1,10 +1,6 @@
 #include "Model.h"
-#include "ModelManager.h"
-#include "KeyFrameAnimation.h"
-
-
-// PipeLineのタイプ
-Model::PipeLineType Model::pipeLineType_ = Model::PipeLineType::kNone;
+#include "ModelManager/ModelManager.h"
+#include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
 
 /// <summary>
@@ -352,45 +348,6 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 
 
 /// <summary>
-/// PipeLineTypeの設定
-/// </summary>
-void Model::SetPipeLineType(const PipeLineType type)
-{
-	// PipeLineTypeが違っていたらcommandを再設定
-	if (pipeLineType_ != type) {
-
-		// コマンドの取得
-		Commands commands = DirectXCommon::GetInstance()->GetCommands();
-
-		if (type == PipeLineType::kModel) {
-			
-			commands.List->SetGraphicsRootSignature(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(Object3DGraphicPipeLine::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-		else if (type == PipeLineType::kParticle) {
-
-			commands.List->SetGraphicsRootSignature(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(ParticleGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-		else if (type == PipeLineType::kPostEffect) {
-
-			commands.List->SetGraphicsRootSignature(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-			commands.List->SetPipelineState(PostEffectGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-			// 形状を設定。基本PipeLineで設定したものと同じもの
-			commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-		}
-
-		// PipeLineTypeの設定
-		pipeLineType_ = type;
-	}
-}
-
-
-/// <summary>
 /// 描画処理
 /// </summary>
 void Model::Draw(WorldTransform worldTransform, Camera* camera) {
@@ -406,7 +363,7 @@ void Model::DrawN(Transform transform, Camera* camera)
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.World = transform.matWorld;
-	transform.WVP = transform.matWorld * (camera->matView * camera->matProjection);
+	transform.WVP = camera->projectionMatrix * camera->viewMatrix * transform.matWorld;
 	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
@@ -489,28 +446,30 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 	WellForGPU* mappedPalette = nullptr;
 	result.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	result.mappedPallette = { mappedPalette, skeleton.joints.size() }; // spanを使ってアクセスするようにする
-	result.paletteSrvHandle.first =
-		DescriptorManager::GetCPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-			DescriptorManager::GetDescriptorSize().SRV,
-			DescriptorManager::GetInstance()->index_);
-	result.paletteSrvHandle.second =
-		DescriptorManager::GetGPUDescriptorHandle(
-			DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-			DescriptorManager::GetDescriptorSize().SRV,
-			DescriptorManager::GetInstance()->index_);
+	
+	//// indexを確認
+	//const uint32_t heapIndex = DescriptorManager::GetIndex();
+	//result.paletteSrvHandle.first =
+	//	DescriptorManager::GetCPUDescriptorHandle(
+	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
+	//result.paletteSrvHandle.second =
+	//	DescriptorManager::GetGPUDescriptorHandle(
+	//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
+	//		DescriptorManager::GetDescriptorSize().SRV, heapIndex);
 
-	// palette用のSRVを作成。StructureBufferでアクセスできるようにする
-	D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
-	paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
-	paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
-	paletteSrvDesc.Buffer.FirstElement = 0;
-	paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
-	paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
-	paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
-	DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
-		result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
+	//// palette用のSRVを作成。StructureBufferでアクセスできるようにする
+	//D3D12_SHADER_RESOURCE_VIEW_DESC paletteSrvDesc{};
+	//paletteSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	//paletteSrvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	//paletteSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	//paletteSrvDesc.Buffer.FirstElement = 0;
+	//paletteSrvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	//paletteSrvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
+	//paletteSrvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
+	//DirectXCommon::GetInstance()->GetDevice()->CreateShaderResourceView(
+	//	result.paletteResource.Get(), &paletteSrvDesc, result.paletteSrvHandle.first);
+	result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton);
 
 	// influence用のResourceを確保
 	result.influenceResource = CreateResource::CreateBufferResource(sizeof(VertexInfluence) * this->objData_.vertices.size());
@@ -637,13 +596,17 @@ MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, cons
 }
 
 
+
 /// <summary>
 /// コマンドコール
 /// </summary>
 void Model::CommandCall(Transform transform, Camera* camera)
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// コマンドを詰む
 	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV
@@ -651,7 +614,8 @@ void Model::CommandCall(Transform transform, Camera* camera)
 	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress()); // TransformationMatrix
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
 	if (!materialMap_.at(name_)->textureHandle == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
+		SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle);
 	}
 	commands.List->DrawInstanced(UINT(meshMap_.at(name_)->meshData.vertices.size()), 1, 0, 0); // Draw!!
 }

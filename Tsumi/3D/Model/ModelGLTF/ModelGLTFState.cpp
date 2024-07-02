@@ -1,5 +1,5 @@
 #include "ModelGLTFState.h"
-#include "Model.h"
+#include "../Model.h"
 
 
 /// <summary>
@@ -105,45 +105,15 @@ void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, Skin
 void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
 
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	if (pModel->GetModelDrawType() == Non) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == Lambert) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(LambertGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(LambertGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == Phong) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongGraphicPipeline::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongGraphicPipeline::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-	else if (pModel->GetModelDrawType() == PhongNormalMap) {
-
-		// RootSignatureを設定。
-		commands.List->SetGraphicsRootSignature(PhongNormalMap::GetInstance()->GetPsoProperty().rootSignature);
-		// PSOを設定
-		commands.List->SetPipelineState(PhongNormalMap::GetInstance()->GetPsoProperty().graphicsPipelineState);
-	}
-
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	///// いざ描画！！！！！
 	// VBVを設定
 	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
@@ -156,7 +126,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -164,7 +135,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 	// 描画！(DrawCall / ドローコール)。
@@ -174,12 +146,13 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	// RootSignatureを設定。
-	commands.List->SetGraphicsRootSignature(SkinningObject3dGraphicPipeLine::GetInstance()->GetPsoProperty().rootSignature);
-	// PSOを設定
-	commands.List->SetPipelineState(SkinningObject3dGraphicPipeLine::GetInstance()->GetPsoProperty().graphicsPipelineState);
+	// SRVManagerの取得
+	SRVManager* srvManager = SRVManager::GetInstance();
+
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SkinningObject3D);
 
 	///// いざ描画！！！！！
 	// VBVを設定
@@ -192,9 +165,6 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 	commands.List->IASetVertexBuffers(0, 2, vbvs);
 	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
 
-	// 形状を設定
-	commands.List->IASetPrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
 	// CBVを設定する
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
@@ -206,18 +176,21 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		srvManager->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(4, resource_.Lighting->GetGPUVirtualAddress());
 
 	// Skinning
-	commands.List->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
+	//commands.List->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
+	srvManager->SetGraphicsRootDescriptorTable(5, skinCluster.srvHandle);
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		srvManager->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 

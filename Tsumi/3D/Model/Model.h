@@ -1,28 +1,28 @@
 #pragma once
 
-#include "WorldTransform.h"
-#include "ViewProjection.h"
+#include "../../CommandManager/CommandManager.h"
+#include "../../View/SRVManager/SRVManager.h"
+#include "../../Transform/WorldTransform/WorldTransform.h"
+#include "../../Transform/Transform.h"
+#include "../../PipeLineManager/PipeLineManager.h"
 #include "IModelState.h"
-#include "ModelGLTFState.h"
-#include "ModelObjState.h"
-#include "ObjDataResource.h"
-#include "ModelPlaneState.h"
-#include "ModelSphereState.h"
-#include "AnimationManager.h"
+#include "ModelGLTF/ModelGLTFState.h"
+#include "ModelObj/ModelObjState.h"
+#include "ModelObj/ObjDataResource/ObjDataResource.h"
+#include "../../Animation/AnimationManager/AnimationManager.h"
+#include "ModelStructure/Mesh/Mesh.h"
+#include "ModelStructure/Material/Material.h"
 
-#include "Transform.h"
-#include "Mesh.h"
-#include "Material.h"
 
-#include "Node.h"
-#include "Skeleton.h"
+//#include "Node.h"
+//#include "Skeleton.h"
 
 
 class ModelManager;
 class KeyFrameAnimation;
 
 
-//// モデルデータ
+//// 繝｢繝・Ν繝・・繧ｿ
 //struct ModelData {
 //	std::map<string, JointWeightData> skinClusterData;
 //	std::vector<VertexData> vertices;
@@ -31,7 +31,7 @@ class KeyFrameAnimation;
 //	uint32_t textureHD;
 //	Node rootNode;
 //};
-//// Objデータ
+//// Obj繝・・繧ｿ
 //struct ObjData {
 //	uint32_t index;
 //	vector<VertexData> vertices;
@@ -40,38 +40,28 @@ class KeyFrameAnimation;
 //};
 
 
-/* Modelクラス */
+/* Model繧ｯ繝ｩ繧ｹ */
 class Model {
 
-public:
-
-	// PipeLineのタイプ
-	enum class PipeLineType : uint32_t {
-		kNone,
-		kModel,
-		kParticle,
-		kPostEffect,
-	};
-
-public: // メンバ関数
+public: // 繝｡繝ｳ繝宣未謨ｰ
 
 	/// <summary>
-	/// コンストラクタ
+	/// 繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ
 	/// </summary>
 	Model();
 
 	/// <summary>
-	/// デストラクタ
+	/// 繝・せ繝医Λ繧ｯ繧ｿ
 	/// </summary>
 	~Model() {};
 
 	/// <summary>
-	/// 初期化処理
+	/// 蛻晄悄蛹門・逅・
 	/// </summary>
 	void Initialize(IModelState* state, WorldTransform worldTransform = WorldTransform());
 
 	/// <summary>
-	/// Objファイルの読み込み & Obj初期化処理
+	/// Obj繝輔ぃ繧､繝ｫ縺ｮ隱ｭ縺ｿ霎ｼ縺ｿ & Obj蛻晄悄蛹門・逅・
 	/// </summary>
 	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
 	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
@@ -79,52 +69,47 @@ public: // メンバ関数
 
 
 	/// <summary>
-	/// モデルの読み込み
+	/// 繝｢繝・Ν縺ｮ隱ｭ縺ｿ霎ｼ縺ｿ
 	/// </summary>
 	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
 	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 
 	/// <summary>
-	/// PipeLineTypeの設定
-	/// </summary>
-	static void SetPipeLineType(const PipeLineType type);
-
-	/// <summary>
-	/// 描画処理
+	/// 謠冗判蜃ｦ逅・
 	/// </summary>
 	void Draw(WorldTransform worldTransform, Camera* camera);
 	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
 	void DrawN(Transform transform, Camera* camera);
 
 	/// <summary>
-	/// Animationの再生
+	/// Animation縺ｮ蜀咲函
 	/// </summary>
 	void PlayAnimation(Animation animation, float time);
 
 	/// <summary>
-	/// Nodeの階層構造からSkeletonを作る
+	/// Node縺ｮ髫主ｱ､讒矩縺九ｉSkeleton繧剃ｽ懊ｋ
 	/// </summary>
 	Skeleton CreateSkeleton();
 
 	/// <summary>
-	/// Skeletonの更新処理
+	/// Skeleton縺ｮ譖ｴ譁ｰ蜃ｦ逅・
 	/// </summary>
 	void UpdateSkeleton(Skeleton& skeleton);
 
 	/// <summary>
-	/// Animationを適用する
+	/// Animation繧帝←逕ｨ縺吶ｋ
 	/// </summary>
 	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
 
 	/// <summary>
-	/// SKinClusterの生成
+	/// SKinCluster縺ｮ逕滓・
 	/// </summary>
 	SkinCluster CreateSkinCluster(const Skeleton& skeleton);
 
 
 	/// <summary>
-	/// SkinCLusterの更新処理
+	/// SkinCLuster縺ｮ譖ｴ譁ｰ蜃ｦ逅・
 	/// </summary>
 	void UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton);
 
@@ -157,7 +142,7 @@ public: // メンバ関数
 	// ObjData
 	ModelData GetObjData() { return this->objData_; }
 
-	// ライティングのタイプ
+	// 繝ｩ繧､繝・ぅ繝ｳ繧ｰ縺ｮ繧ｿ繧､繝・
 	ModelLightingType GetModelDrawType() const { return this->modelDrawType_; }
 
 	// Node
@@ -195,47 +180,47 @@ public: // メンバ関数
 private:
 
 	/// <summary>
-	/// mtlファイルを読み込む関数
+	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
 	/// </summary>
 	MaterialModel* LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
 	/// <summary>
-	/// コマンドコール
+	/// 繧ｳ繝槭Φ繝峨さ繝ｼ繝ｫ
 	/// </summary>
 	void CommandCall(Transform transform, Camera* camera);
 
-private: // メンバ変数
+private: // 繝｡繝ｳ繝仙､画焚
 
-	// モデルマネージャー
+	// 繝｢繝・Ν繝槭ロ繝ｼ繧ｸ繝｣繝ｼ
 	ModelManager* modelManager_ = nullptr;
 
-	// キーフレーアニメーション
+	// 繧ｭ繝ｼ繝輔Ξ繝ｼ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
 	KeyFrameAnimation* keyFrameAnimation_ = nullptr;
 
-	// ステートパターン
+	// 繧ｹ繝・・繝医ヱ繧ｿ繝ｼ繝ｳ
 	IModelState* state_ = nullptr;
 
-	// ワールド座標
+	// 繝ｯ繝ｼ繝ｫ繝牙ｺｧ讓・
 	WorldTransform worldTransform_{};
 
-	// テクスチャ
+	// 繝・け繧ｹ繝√Ε
 	uint32_t useTexture_{};
 	uint32_t normalMapTex_{};
 
-	// 色データ
+	// 濶ｲ繝・・繧ｿ
 	Vector4 color_{};
 
-	// 光データ
+	// 蜈峨ョ繝ｼ繧ｿ
 	DirectionalLight light_{};
 
-	// スフィアの半径
+	// 繧ｹ繝輔ぅ繧｢縺ｮ蜊雁ｾ・
 	float radius_ = 1.0f;
 
-	// Objのファイルパス
+	// Obj縺ｮ繝輔ぃ繧､繝ｫ繝代せ
 	std::string fileName_{};
 	std::string routeFilePath_{};
 
-	// Objのハンドル
+	// Obj縺ｮ繝上Φ繝峨Ν
 	uint32_t objHandle_{};
 
 	ModelData modelData_{};
@@ -245,17 +230,15 @@ private: // メンバ変数
 	ModelLightingType modelDrawType_ = Non;
 
 
-	// ↓↓↓↓↓↓↓↓ こっから新しいモデル描画に必要な値
+	// 竊凪・竊凪・竊凪・竊凪・ 縺薙▲縺九ｉ譁ｰ縺励＞繝｢繝・Ν謠冗判縺ｫ蠢・ｦ√↑蛟､
 
-	// Modelの名前
+	// Model縺ｮ蜷榊燕
 	string name_;
 
-	// Meshデータ
+	// Mesh繝・・繧ｿ
 	unordered_map<string, unique_ptr<Mesh>> meshMap_;
 
-	// Materialデータ
+	// Material繝・・繧ｿ
 	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
 
-	// PipeLineのタイプ
-	static PipeLineType pipeLineType_;
 };

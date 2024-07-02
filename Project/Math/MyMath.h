@@ -1,15 +1,14 @@
 #pragma once
 
-#include "Vector.h"
-#include "Matrix.h"
-#include "MathEasing.h"
-#include "MathQuaternion.h"
-#include "MathOperations.h"
-#include "MathFunction.h"
-#include "ParlinNoise.h"
-#include "CollisionStructures.h"
-#include "RandomGenerator.h"
-
+#include "MathStructure/Vector/Vector.h"
+#include "MathStructure/Matrix/Matrix.h"
+#include "MathQuaternion/MathQuaternion.h"
+#include "MathOperations/MathOperations.h"
+#include "MathFunction/MathFunction.h"
+#include "MyParlinNoise/ParlinNoise.h"
+#include "../../Tsumi/Utilities/RandomGenerator/RandomGenerator.h"
+#include "../../Tsumi/Utilities/TimedCall/TimedCall.h"
+#include "MathEasing/MathEasing.h"
 
 
 #define _USE_MATH_DEFINES

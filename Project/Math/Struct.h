@@ -12,7 +12,7 @@ using namespace std;
 #include <vector>
 #include <iostream>
 #include <cstdint>
-#include <WorldTransform.h>
+#include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 #include <optional>
 #include <map>
 #include <span>
@@ -129,6 +129,7 @@ struct SkinCluster {
 	Microsoft::WRL::ComPtr<ID3D12Resource> paletteResource;
 	std::span<WellForGPU> mappedPallette;
 	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE>paletteSrvHandle;
+	uint32_t srvHandle;
 };
 
 // マテリアル
@@ -214,3 +215,4 @@ struct ParticleTransformationMatrix {
 	Vector4 Color;
 	Matrix4x4 uvTansform;
 };
+

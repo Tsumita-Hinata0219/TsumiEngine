@@ -1,19 +1,19 @@
 #pragma once
 
-#include "IScene.h"
-#include "GameManager.h"
-#include "GameObject.h"
-#include "ModelManager.h"
-#include "FileManager.h"
+#include "../../../Project/Scene/IScene.h"
+#include "../../../Project/GameManager/GameManager.h"
+#include "../../../Project/GameObject/GameObject.h"
+#include "../../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
+#include "../../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
-#include "Skydome/Skydome.h"
-#include "Ground/Ground.h"
-#include "PostEffect/PostEffect.h"
-#include "TestPostEffect/TestPostEffect.h"
-#include "TestObject/TestObject.h"
-#include "TestAnimationCube/TestAnimationCube.h"
-#include "TestHuman/TestHuman.h"
-#include "TestJsonObject/TestJsonObject.h"
+#include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
+#include "../../../Project/GameObject/Terrain/Ground/Ground.h"
+#include "../../../../Tsumi/PostEffect/PostEffect.h"
+#include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
+#include "../../../Project/GameObject/Others/TestObject/TestObject.h"
+#include "../../../Project/GameObject/Others/TestAnimationCube/TestAnimationCube.h"
+#include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
+#include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
 #include "Player/Player.h"
 

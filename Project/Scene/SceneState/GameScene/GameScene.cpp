@@ -132,7 +132,7 @@ void GameScene::ModelDraw()
 	Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw(camera_.get());
+	Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestObject テストオブジェクト ----- */
 	//testObject_->Draw(camera_.get());
@@ -160,9 +160,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw() 
 {
-	Model::SetPipeLineType(Model::PipeLineType::kPostEffect);
-	
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw();
+	testPostEffect_->Draw(camera_.get());
 }
 

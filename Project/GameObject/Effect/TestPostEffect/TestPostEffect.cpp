@@ -7,7 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	material_.mtlData.type = int(PostEffectType::GaussianFilter);
+	effectType_ = IPostEffect::Type::OutLine;
 }
 
 
@@ -19,45 +19,17 @@ void TestPostEffect::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("TestPostEffect")) {
-
-		ImGui::ColorEdit4("Color", &material_.mtlData.color.x);
-		if (ImGui::Button("None")) {
-
-			material_.mtlData.type = int(PostEffectType::None);
-		}
-		if (ImGui::Button("GrayScale")) {
-
-			material_.mtlData.type = int(PostEffectType::GrayScale);
-		}
-		if (ImGui::Button("Sepia")) {
-
-			material_.mtlData.type = int(PostEffectType::Sepia);
-		}
-		if (ImGui::Button("Vignetting")) {
-
-			material_.mtlData.type = int(PostEffectType::Vignetting);
-		}
-		if (ImGui::Button("Smoothing")) {
-
-			material_.mtlData.type = int(PostEffectType::Smoothing);
-		}
-		if (ImGui::Button("GaussianFilter")) {
-
-			material_.mtlData.type = int(PostEffectType::GaussianFilter);
-		}
-
-		ImGui::TreePop();
-	}
+	// ImGuiの描画
+	DrawImGui();
 
 #endif // _DEBUG
 }
 
 
 // 描画処理
-void TestPostEffect::Draw()
+void TestPostEffect::Draw(Camera* camera)
 {
 
 	// コマンドコール
-	CommandCall();
+	CommandCall(camera);
 }

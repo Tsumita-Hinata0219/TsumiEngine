@@ -1,6 +1,19 @@
 #pragma once
 
-#include "MyMath.h"
+#include "../../Project/Math/MyMath.h"
+
+
+// Particle
+struct ParticleProperties {
+	WorldTransform worldTransform;
+	WorldTransform uvTransform;
+	Vector4 color;
+	Vector3 velocity;
+	uint32_t lifeTime;
+	uint32_t currentTime;
+	bool isActive;
+};
+
 
 /* IParticleクラス */
 class IParticle {

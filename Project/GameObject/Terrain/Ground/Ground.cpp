@@ -13,11 +13,8 @@ Ground* Ground::GetInstance()
 // 初期化処理
 void Ground::Initialize() 
 {
-	this->normalMapTexHD_ = TextureManager::LoadTexture("", "normalMap.png");
 	this->model_ = make_unique<Model>();
 	this->model_->CreateFromObjAssimpVer("Ground", "Ground");
-	this->model_->SetModelDrawType(PhongNormalMap);
-	this->model_->SetNormalMapTex(normalMapTexHD_);
 	this->worldTransform_.Initialize();
 	this->worldTransform_.srt.scale = { 500.0f, 1.0f, 500.0f };
 	this->worldTransform_.srt.translate.y = -10.0f;
@@ -26,7 +23,7 @@ void Ground::Initialize()
 	this->light_.direction = { 0.0f, 1.0f, 1.0f };
 	this->light_.intensity = 1.0f;
 	this->light_.sininess = 100.0f;
-	this->light_.enableLightting = true;
+	this->light_.enableLightting = false;
 }
 
 

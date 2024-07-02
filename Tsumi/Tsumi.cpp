@@ -23,8 +23,8 @@ void Tsumi::Initialize() {
 	// ShaderManagerの初期化処理
 	ShaderManager::Initialize();
 
-	// GraphicPiplelineManagerの初期化処理
-	GraphicPipelineManager::Initialize();
+	// PipeLineManagerの初期化処理
+	PipeLineManager::Initialize();
 
 	// TextureManagerの初期化処理
 	TextureManager::Initialize();
@@ -39,7 +39,8 @@ void Tsumi::Initialize() {
 	Audio::Initialize();
 
 	// DescriptorManagerの初期化処理
-	DescriptorManager::Initialize();
+	//DescriptorManager::Initialize();
+	SRVManager::Initialize();
 
 	// DrawSystemの初期化処理
 	DrawSystem::GetInstance()->Initialize();
@@ -56,7 +57,8 @@ void Tsumi::Finalize() {
 
 	Audio::Finalize();
 	TextureManager::Finalize();
-	DescriptorManager::Clear();
+	//DescriptorManager::Clear();
+	SRVManager::Clear();
 }
 
 
@@ -67,7 +69,10 @@ void Tsumi::BeginFlame() {
 
 	ImGuiManager::BeginFrame();
 	Input::GetInstance()->BeginFrame();
-	DescriptorManager::BeginFrame();
+	//DescriptorManager::BeginFrame();
+	RTVManager::BeginFrame();
+	SRVManager::BeginFrame();
+	PipeLineManager::PipeLineTypeReset();
 }
 
 

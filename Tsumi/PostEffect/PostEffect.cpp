@@ -9,7 +9,8 @@ void PostEffect::Initialize()
 	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	srv_ = SRVManager::CreatePostEffectSRV(stv);
 }
 
 
@@ -33,13 +34,14 @@ void PostEffect::Draw()
 void PostEffect::CommandCall()
 {
 	// コマンドの取得
-	Commands commands = DirectXCommon::GetInstance()->GetCommands();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// Materialの設定
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// DescriptorTableの設定
-	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
 
 	// 頂点3つ描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

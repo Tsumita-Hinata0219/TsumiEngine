@@ -1,20 +1,21 @@
 #pragma once
 
-#include "MyMath.h"
-#include "Struct.h"
-#include "WorldTransform.h"
-#include "TextureManager.h"
-#include "DirectXCommon.h"
-#include "NormalGraphicPipeline.h"
-#include "LightGraphicPipeline.h"
-#include "CreateResource.h"
-#include "IModelState.h"
-#include "DescriptorManager.h"
-#include "Camera.h"
+#include "../../../Base/DXCommon/DirectXCommon.h"
+#include "../../../CommandManager/CommandManager.h"
+#include "../../../TextureManager/TextureManager.h"
+#include "../../../PipeLineManager/PipeLineManager.h"
+#include "../../../CreateResource/CreateResource.h"
+#include "../../../DescriptorManager/DescriptorManager.h"
+#include "../IModelState.h"
+#include "../../../Transform/WorldTransform/WorldTransform.h"
+#include "../../../Project/Math/MyMath.h"
+#include "../../../Project/Math/Struct.h"
+#include "../../../Project/GameObject/Camera/Camera.h"
 
 #include <fstream>
 #include <sstream>
 
+class Model;
 
 /* ModelObjクラス */
 class ModelObjState : public IModelState {

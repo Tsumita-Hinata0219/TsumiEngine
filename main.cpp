@@ -1,4 +1,4 @@
-#include "GameManager.h"
+#include "Project/GameManager/GameManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	GameManager* gameManager = new GameManager();

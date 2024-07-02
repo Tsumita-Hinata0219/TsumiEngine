@@ -63,6 +63,12 @@ float APOneAsZeroCloser(float value) {
 	return exp(-pow(value, 2.0f));
 }
 
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees)
+{
+	return degrees * (float(M_PI) / 180.0f);
+}
+
 
 
 
@@ -105,12 +111,12 @@ Vector2 Lerp(const Vector2& start, const Vector2& end, const float t) {
 }
 
 // Vector3 -> Vector2 への変換 今はそのまま対する値を送ってるだけだけど今後はもっと変換処理作っていく
-Vector2 ConvertVector(const Vector3& v, const ViewProjection& view) {
-	Vector3 worldPos = v;
-	Matrix4x4 matViewProjectionViewPort = view.matView * view.matProjection * view.matViewPort;
-	worldPos = TransformByMatrix(worldPos, matViewProjectionViewPort);
-	return { worldPos.x, worldPos.y };
-}
+//Vector2 ConvertVector(const Vector3& v, const ViewProjection& view) {
+//	Vector3 worldPos = v;
+//	Matrix4x4 matViewProjectionViewPort = view.matView * view.matProjection * view.matViewPort;
+//	worldPos = TransformByMatrix(worldPos, matViewProjectionViewPort);
+//	return { worldPos.x, worldPos.y };
+//}
 
 // クランプ
 Vector2 Clamp(const Vector2& value, const Vector2& minValue, const Vector2& maxValue)
@@ -177,14 +183,14 @@ Vector3 SLerp(const Vector3& start, const Vector3& end, const float t) {
 }
 
 // 最近接線
-Vector3 ClosestPoint(const Vector3& p, const Segment& s) {
-	float length = Length(p);
-	Vector3 normalize = Normalize(p);
-	float dist = Dot((p - s.origin), normalize);
-	dist = std::clamp(dist, 0.0f, length);
-	Vector3 proj = dist * normalize;
-	return s.origin + proj;
-}
+//Vector3 ClosestPoint(const Vector3& p, const Segment& s) {
+//	float length = Length(p);
+//	Vector3 normalize = Normalize(p);
+//	float dist = Dot((p - s.origin), normalize);
+//	dist = std::clamp(dist, 0.0f, length);
+//	Vector3 proj = dist * normalize;
+//	return s.origin + proj;
+//}
 
 // 法線ベクトル
 Vector3 Perpendicular(const Vector3& v) {

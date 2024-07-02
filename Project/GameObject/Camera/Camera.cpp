@@ -17,19 +17,38 @@ void Camera::Initialize(Vector3 initRotate, Vector3 initTranslate)
 // 行列の更新処理
 void Camera::UpdateMatrix()
 {
+	// 回転行列を作成
 	rotateMat = MakeRotateXYZMatrix(rotate);
+
+	// 平行移動行列を作成
 	translateMat = MakeTranslateMatrix(translate);
+
+	// ワールド行列を作成
 	matWorld = MakeAffineMatrix({ 1.0f, 1.0f, 1.0f }, rotate, translate);
 
-	//matView = Inverse(translateMat) * Inverse(rotateMat);
-	matView = Inverse(matWorld);
-	matProjection = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
+	// ビュー行列を作成（カメラの位置と向きを基に逆行列を計算）
+	viewMatrix = Inverse(matWorld);
 
-	orthoGraphicMat = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 100.0f);
+	// 投影行列を作成（透視投影）
+	projectionMatrix = MakePerspectiveFovMatrix(fov, aspectRatio, nearZ, farZ);
 
-	matViewPort = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 1.0f);
-	matViewProjectionViewPort = matView * (matProjection * matViewPort);
-	matInverseVPV = Inverse(matViewProjectionViewPort);
+	// 投影逆行列
+	projectionInverseMatrix = Inverse(projectionMatrix);
+
+	// 正射影行列を作成（ウィンドウサイズを基に設定）
+	orthoGraphicMatrix = MakeOrthographicMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 100.0f);
+
+	// ビューポート行列を作成（ウィンドウサイズを基に設定）
+	viewportMatrix = MakeViewportMatrix(0.0f, 0.0f, float(WinApp::kWindowWidth), float(WinApp::kWindowHeight), 0.0f, 1.0f);
+
+	// ビュープロジェクション行列
+	viewProjectionMatrix = projectionMatrix * viewMatrix;
+
+	// ビュー・投影・ビューポート行列を掛け合わせた行列を作成
+	viewProjectionViewportMatrix = viewportMatrix * viewProjectionMatrix;
+
+	// ビュー・投影・ビューポート行列の逆行列を作成
+	inverseViewProjectionViewportMatrix = Inverse(viewProjectionViewportMatrix);
 
 	TransferMatrix();
 }
@@ -78,14 +97,14 @@ void Camera::UnMap()
 }
 
 
-// 行列の計算・転送
+// 行列の転送
 void Camera::TransferMatrix()
 {
 	Map();
 
-	constMap->view = matView;
-	constMap->viewProjection = matProjection;
-	constMap->orthoGraphic = orthoGraphicMat;
+	constMap->view = viewMatrix;
+	constMap->viewProjection = projectionMatrix;
+	constMap->orthoGraphic = orthoGraphicMatrix;
 	constMap->cameraPosition = translate;
 
 	UnMap();

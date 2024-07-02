@@ -1,6 +1,6 @@
 #pragma once
 
-#include "MyMath.h"
+#include "../../Project/Math/MyMath.h"
 #include <functional>
 
 /* 時限発動クラス */

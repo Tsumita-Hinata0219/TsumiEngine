@@ -38,26 +38,10 @@ void GameScene::Initialize()
 	testPostEffect_ = make_unique<TestPostEffect>();
 	testPostEffect_->Initialize();
 
-	/* ----- TestObject テストオブジェクト ----- */
-	testObject_ = make_unique<TestObject>();
-	testObject_->Init();
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_ = make_unique<TestAnimationCube>();
-	testAnimCube_->Init();
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
   
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	testJsonObject_ = make_unique<TestJsonObject>();
-	testJsonObject_->Initialize();
-
-	/* ----- newModel 新しいモデル描画形式 ----- */
-	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();
-
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Initialize();
@@ -83,18 +67,9 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
-	/* ----- TestObject テストオブジェクト ----- */
-	testObject_->Update();
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_->Update();
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
 	
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	testJsonObject_->Update();
-
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
@@ -134,21 +109,8 @@ void GameScene::ModelDraw()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());
 
-	/* ----- TestObject テストオブジェクト ----- */
-	//testObject_->Draw(camera_.get());
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	//testAnimCube_->Draw(camera_.get());
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());
-
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	//testJsonObject_->Draw(camera_.get());
-
-	/* ----- newModel 新しいモデル描画形式 ----- */
-	/*Model::SetPipeLineType(Model::PipeLineType::kModel);
-	ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());*/
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D(camera_.get());

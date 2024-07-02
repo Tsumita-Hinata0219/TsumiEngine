@@ -10,7 +10,7 @@ void Player::Initialize()
 
 	// BodyModelのロードと初期化
 	bodyModel_ = make_unique<Model>();
-	bodyModel_->CreateFromObjAssimpVer("Test", "Test");
+	bodyModel_->CreateFromObjAssimpVer("ball", "ball");
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
@@ -92,7 +92,6 @@ void Player::Move()
 	// velocityは0で毎フレーム初期化
 	velocity_ = Vector3::zero;
 
-
 	// キーの処理
 	if (input_->Press(DIK_W))
 	{
@@ -144,16 +143,16 @@ void Player::Move()
 // プレイヤー本体の姿勢処理
 void Player::CalcBodyRotate()
 {
-	////Stickの入力を取得
-	//Vector2 lStickInput = input_->GetLStick();
+	//Stickの入力を取得
+	Vector2 lStickInput = input_->GetLStick();
 
-	//// Stick入力がいていい範囲を超えている場合、角度を更新
-	//// stick入力が一定範囲を超えている場合、角度を更新
-	//if (std::abs(lStickInput.x) > 0.2f || std::abs(lStickInput.y) > 0.2f) {
+	// Stick入力がいていい範囲を超えている場合、角度を更新
+	// stick入力が一定範囲を超えている場合、角度を更新
+	if (std::abs(lStickInput.x) > 0.2f || std::abs(lStickInput.y) > 0.2f) {
 
-	//	// Y軸周り角度(θy)
-	//	bodyWt_.srt.rotate.y = std::atan2(addRotate.x, addRotate.z);
-	//}
+		// Y軸周り角度(θy)
+		bodyWt_.srt.rotate.y = std::atan2(lStickInput.x, lStickInput.y);
+	}
 }
 
 

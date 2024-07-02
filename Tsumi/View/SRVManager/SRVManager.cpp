@@ -29,7 +29,7 @@ void SRVManager::BeginFrame()
 // ImGui描画
 void SRVManager::DrawImGui()
 {
-	ImGui::Text("SRV_Index : %d", SRVManager::GetInstance()->index_);
+	ImGui::Text("SRV_Index : %d", SRVManager::GetInstance()->index_ - 1); // index_は常に空きindexを指しているのでデクリメント
 }
 
 

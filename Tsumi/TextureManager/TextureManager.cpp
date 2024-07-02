@@ -44,14 +44,16 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::str
 	// マップコンテナで検索
 	if (!instance->CheckTextureData(FileName)) {
 
+		std::string format = GetExtension(FileName);
+
 		// なければ新しく作る。拡張子で処理を変える
-		if (GetExtension(FileName) == TextureFileFormat::PNG.first) {
+		if (format == TextureFileFormat::PNG.first) {
 			instance->CreateTextureDataFormatPng(fullFilePath, FileName);
 		}
-		else if (GetExtension(FileName) == TextureFileFormat::JPEG.first) {
+		else if (format == TextureFileFormat::JPEG.first) {
 			instance->CreateTextureDataFormatJpeg(fullFilePath, FileName);
 		}
-		else if (GetExtension(FileName) == TextureFileFormat::DSS.first) {
+		else if (format == TextureFileFormat::DSS.first) {
 			instance->CreateTextureDataFormatDDS(fullFilePath, FileName);
 		}
 	}

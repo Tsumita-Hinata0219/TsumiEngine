@@ -31,6 +31,9 @@ void GameScene::Initialize()
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
 
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Initialize();
+
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
@@ -72,6 +75,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
+
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Update();
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
@@ -123,6 +129,9 @@ void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Draw(camera_.get());
+
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Draw(camera_.get());

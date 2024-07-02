@@ -27,7 +27,7 @@ struct TextureData {
 namespace TextureFileFormat {
 	const std::pair<std::string, uint32_t> PNG = { ".png", 0 };
 	const std::pair<std::string, uint32_t> JPEG = { ".jpeg", 1 };
-	const std::pair<std::string, uint32_t> DSS = { ".dss", 2 };
+	const std::pair<std::string, uint32_t> DSS = { ".dds", 2 };
 };
 
 class TextureManager {

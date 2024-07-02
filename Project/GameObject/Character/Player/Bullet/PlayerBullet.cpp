@@ -3,13 +3,11 @@
 
 
 // 初期化処理
-void PlayerBullet::Initialize(Model& modelHD)
+void PlayerBullet::Initialize()
 {
 	// Modelの初期化
 	bulletModel_ = std::make_unique<Model>();
-	//(*bulletModel_) = modelHD;
-	modelHD;
-	
+	bulletModel_->CreateFromObjAssimpVer("ball", "ball");
 
 	// Transformの初期化。座標や姿勢の設定はPlayer側でaccessorで設定
 	bulletWt_.Initialize();

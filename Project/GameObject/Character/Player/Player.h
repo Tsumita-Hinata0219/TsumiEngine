@@ -56,12 +56,14 @@ private:
 	// 移動速度
 	Vector3 velocity_{};
 	float moveVector_ = 0.3f;
+	float kBulletSpeed_ = 0.5f;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
 
 	// 射撃ボタン押下フレーム
 	int shotPressFrame_ = 0;
+	int kShotInterval_ = 10;
 
 };
 

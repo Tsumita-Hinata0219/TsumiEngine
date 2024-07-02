@@ -29,6 +29,9 @@ void Player::Update()
 	// プレイヤー本体の姿勢処理
 	CalcBodyRotate();
 
+	// 射撃の処理
+	ExecuteShot();
+
 	// Bulletの更新処理
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
 		bullet->Update();
@@ -159,10 +162,19 @@ void Player::ExecuteShot()
 {
 	// キーorボタン押下でタイマーをデクリメント
 	if (input_->Press(DIK_SPACE) || input_->Press(PadData::RIGHT_SHOULDER)) {
+
 		shotPressFrame_--;
+
+		if (shotPressFrame_ <= 0) {
+			// 0以下でタイマー再設定
+			shotPressFrame_ = kShotInterval_;
+			// バレット生成
+			CreateNewBullet();
+		}
 	}
 	// キーorボタンを離したら、最初の1発目がすぐ出るように1フレームを入れておく
-	if (input_->Release(DIK_SPACE) || input_->Release(PadData::RIGHT_SHOULDER)) {
+	else if (input_->Release(DIK_SPACE) || input_->Release(PadData::RIGHT_SHOULDER)) {
+		
 		shotPressFrame_ = 1;
 	}
 }
@@ -171,6 +183,22 @@ void Player::ExecuteShot()
 // 新しいバレットを生成する
 void Player::CreateNewBullet()
 {
+	// newBulletのインスタンス
+	std::shared_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
 
+	// 初期座標
+	Vector3 initPos = bodyWt_.GetWorldPos();
+	// 初期速度
+	Vector3 initVel = Vector3::oneZ;
+	initVel = TransformNormal(initVel, bodyWt_.matWorld);
 
+	// newBulletの初期化
+	newBullet->Initialize();
+	newBullet->SetPosition(initPos);
+	newBullet->SetVelocity(initVel);
+	newBullet->SetRotationFromVelocity();
+
+	// リストに追加
+	bulletList_.push_back(newBullet);
 }
+

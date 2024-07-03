@@ -37,7 +37,7 @@ public: // メンバ関数
 	// 衝突判定
 	void OnCollision(uint32_t id) override;
 	void OnCollisionWithEnemy();
-	void OnCollisionWIthEnemuBullet();
+	void OnCollisionWithEnemuBullet();
 
 	// コライダーのゲッター
 	Vector3 GetOBBWorldPos() override { return bodyWt_.GetWorldPos(); }

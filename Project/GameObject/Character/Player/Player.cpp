@@ -14,6 +14,7 @@ void Player::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
+
 }
 
 
@@ -93,7 +94,7 @@ void Player::OnCollisionWithEnemy()
 
 
 }
-void Player::OnCollisionWIthEnemuBullet()
+void Player::OnCollisionWithEnemuBullet()
 {
 
 

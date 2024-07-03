@@ -40,6 +40,18 @@ void PlayerBullet::Draw3D(Camera* camera)
 }
 
 
+// 衝突判定
+void PlayerBullet::OnCollision(uint32_t id) { id; }
+void PlayerBullet::OnCollisionWithEnemy()
+{
+
+}
+void PlayerBullet::OnCollisionWithEnemuBullet()
+{
+
+
+}
+
 // 移動処理
 void PlayerBullet::Move()
 {

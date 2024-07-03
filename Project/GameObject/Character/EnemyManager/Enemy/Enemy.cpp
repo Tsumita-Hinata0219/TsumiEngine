@@ -88,6 +88,18 @@ void Enemy::Draw3D(Camera* camera)
 }
 
 
+// 衝突自コールバック関数
+void Enemy::OnCollisionWithPlayer()
+{
+
+}
+void Enemy::OnCollisionWithPlayerBullet()
+{
+
+
+}
+
+
 // 戦闘状態の切り替え処理
 void Enemy::ToggleCombatState()
 {

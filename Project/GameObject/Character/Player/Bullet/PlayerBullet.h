@@ -47,10 +47,10 @@ public: // メンバ関数
 
 #pragma region Collision 衝突判定
 
-	// 衝突判定
-	void OnCollision(uint32_t id) override;
+	// 衝突自コールバック関数
+	void OnCollision(uint32_t id) override { id; }
 	void OnCollisionWithEnemy();
-	void OnCollisionWithEnemuBullet();
+	void OnCollisionWithEnemyBullet();
 
 	// コライダーのゲッター
 	Vector3 GetOBBWorldPos() override { return bulletWt_.GetWorldPos(); }

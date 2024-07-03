@@ -40,13 +40,12 @@ void PlayerBullet::Draw3D(Camera* camera)
 }
 
 
-// 衝突判定
-void PlayerBullet::OnCollision(uint32_t id) { id; }
+// 衝突自コールバック関数
 void PlayerBullet::OnCollisionWithEnemy()
 {
 
 }
-void PlayerBullet::OnCollisionWithEnemuBullet()
+void PlayerBullet::OnCollisionWithEnemyBullet()
 {
 
 

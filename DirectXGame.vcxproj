@@ -177,7 +177,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Tsumi\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
@@ -292,8 +292,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Math\MyMath.h" />
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
+    <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\3D\DrawSystem\DrawSystem.h" />
     <ClInclude Include="Tsumi\3D\Model\IModelState.h" />

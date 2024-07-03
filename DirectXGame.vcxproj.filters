@@ -52,7 +52,6 @@
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="externals\imgui\imgui.cpp" />
     <ClCompile Include="externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="externals\imgui\imgui_draw.cpp" />
@@ -70,7 +69,6 @@
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Model.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelManager\ModelManager.cpp" />
@@ -182,6 +180,7 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
+    <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -214,7 +213,6 @@
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
@@ -229,7 +227,6 @@
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\3D\Model\IModelState.h" />
     <ClInclude Include="Tsumi\3D\Model\Model.h" />
@@ -362,6 +359,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
+    <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -189,6 +189,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\BufferResource\BufferResource.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
@@ -308,6 +309,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Audio\AudioDataResource\AudioDataResource.h" />
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
+    <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />

@@ -16,6 +16,7 @@
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
 #include "../../../Project/GameObject/Character/Player/Player.h"
+#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 
 
@@ -62,25 +63,29 @@ public:
 private:
 
 	// メインカメラ
-	unique_ptr<Camera> camera_ = nullptr;
+	std::unique_ptr<Camera> camera_ = nullptr;
 
 	// PostEffect
-	unique_ptr<TestPostEffect> testPostEffect_;
+	std::unique_ptr<TestPostEffect> testPostEffect_;
 
 	// TestModel
-	unique_ptr<TestObject> testObject_;
+	std::unique_ptr<TestObject> testObject_;
 
 	// TestAnimation
-	unique_ptr<TestAnimationCube> testAnimCube_;
+	std::unique_ptr<TestAnimationCube> testAnimCube_;
 
 	// TestHuman
-	unique_ptr<TestHuman> testHuman_;
+	std::unique_ptr<TestHuman> testHuman_;
 
 	// TestJsonObject
-	unique_ptr<TestJsonObject> testJsonObject_;
+	std::unique_ptr<TestJsonObject> testJsonObject_;
 
 	Transform transform_;
 
 	// Player
-	unique_ptr<Player> player_;
+	std::unique_ptr<Player> player_;
+
+	// Enemy
+	std::unique_ptr<Enemy> enemy_;
 };
+

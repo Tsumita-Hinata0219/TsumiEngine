@@ -45,6 +45,11 @@ void GameScene::Initialize()
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Initialize();
+
+	/* ----- Enemy enemy ----- */
+	enemy_ = make_unique<Enemy>();
+	enemy_->Initialize();
+	enemy_->SetPlayer(player_.get());
 }
 
 
@@ -72,6 +77,9 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
+
+	/* ----- Enemy enemy ----- */
+	enemy_->Update();
 
 #ifdef _DEBUG
 
@@ -114,6 +122,9 @@ void GameScene::ModelDraw()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D(camera_.get());
+
+	/* ----- Enemy enemy ----- */
+	enemy_->Draw3D(camera_.get());
 }
 
 

@@ -6,13 +6,13 @@
 
 
 /* PlayerBulletクラス */
-class PlayerBullet {
+class EnemyBullet {
 
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	PlayerBullet() {};
-	~PlayerBullet() {};
+	EnemyBullet() {};
+	~EnemyBullet() {};
 
 	// 初期化処理、更新処理、描画処理
 	void Initialize();

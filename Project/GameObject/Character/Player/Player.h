@@ -11,7 +11,7 @@
 /* Playerクラス */
 class Player {
 
-public:
+public: // メンバ関数
 
 	// コンストラクタとデストラクタ
 	Player() {};
@@ -23,6 +23,16 @@ public:
 	void Draw2DBack(Camera* camera);
 	void Draw3D(Camera* camera);
 	void Draw2DFront(Camera* camera);
+
+
+#pragma region Accessor アクセッサ
+
+	// 座標
+	Vector3 GetPosition() { return this->bodyWt_.GetWorldPos(); }
+
+
+#pragma endregion 
+
 
 private:
 
@@ -42,7 +52,7 @@ private:
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
 
-private:
+private: // メンバ変数
 
 	// Inputクラス
 	Input* input_ = nullptr;
@@ -61,7 +71,7 @@ private:
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
 
-	// 射撃ボタン押下フレーム
+	// 射撃ボタン押下フレーム&インターバル
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 10;
 

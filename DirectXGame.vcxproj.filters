@@ -181,6 +181,7 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -360,6 +361,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
+    <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

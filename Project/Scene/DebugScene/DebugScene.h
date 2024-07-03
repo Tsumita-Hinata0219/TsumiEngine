@@ -9,29 +9,23 @@
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "../../../Project/GameObject/Others/TestObject/TestObject.h"
-#include "../../../Project/GameObject/Others/TestAnimationCube/TestAnimationCube.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
-#include "../../../Project/GameObject/Character/Player/Player.h"
-#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
-
-
-class GameScene : public IScene {
+class DebugScene : public IScene {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	GameScene();
+	DebugScene();
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~GameScene();
+	~DebugScene();
 
 	/// <summary>
 	/// 初期化処理
@@ -59,16 +53,7 @@ public:
 	void FrontSpriteDraw() override;
 
 
-private: 
-
-	// 衝突判定処理
-	void CheckAllCollision();
-
-
 private:
-
-	// CollisionManager
-	std::unique_ptr<CollisionManager> collisionManager_;
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;
@@ -76,10 +61,10 @@ private:
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
 
-	// Player
-	std::unique_ptr<Player> player_;
+	// TestHuman
+	std::unique_ptr<TestHuman> testHuman_;
 
-	// Enemy
-	std::unique_ptr<Enemy> enemy_;
+	// TestJsonObject
+	std::unique_ptr<TestJsonObject> testJsonObject_;
 };
 

@@ -17,7 +17,7 @@ GameScene::~GameScene() {}
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GameScene::Initialize() 
+void GameScene::Initialize()
 {
 	/* ----- FileManager ファイルマネージャー ----- */
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
@@ -29,7 +29,7 @@ void GameScene::Initialize()
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 6.0f, -20.0f };
+	camera_->translate = { 0.0f, 10.0f, -25.0f };
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -44,7 +44,7 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-  
+
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Initialize();
@@ -59,7 +59,7 @@ void GameScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void GameScene::Update(GameManager* state) 
+void GameScene::Update(GameManager* state)
 {
 	state;
 
@@ -71,13 +71,13 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
-	
+
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
-	
+
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
@@ -106,7 +106,7 @@ void GameScene::Update(GameManager* state)
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void GameScene::BackSpriteDraw() 
+void GameScene::BackSpriteDraw()
 {
 
 }
@@ -115,7 +115,7 @@ void GameScene::BackSpriteDraw()
 /// <summary>
 /// ３Dオブジェクトの描画処理
 /// </summary>
-void GameScene::ModelDraw() 
+void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Draw(camera_.get());
@@ -137,7 +137,7 @@ void GameScene::ModelDraw()
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void GameScene::FrontSpriteDraw() 
+void GameScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw(camera_.get());
@@ -160,6 +160,16 @@ void GameScene::CheckAllCollision()
 		if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy_.get())) {
 			bullet->OnCollisionWithEnemy();
 			enemy_->OnCollisionWithPlayerBullet();
+		}
+	}
+
+	// PlayerBullet with EnemyBullet
+	for (auto& playerBullet : player_->GetBulletList()) {
+		for (auto& enemyBullet : enemy_->GetBulletList()) {
+			if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
+				playerBullet->OnCollisionWithEnemyBullet();
+				enemyBullet->OnCollisionWithPlayerBullet();
+			}
 		}
 	}
 }

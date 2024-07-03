@@ -1,23 +1,23 @@
-#include "GameScene.h"
+#include "DebugScene.h"
 
 
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {}
+DebugScene::DebugScene() {}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() {}
+DebugScene::~DebugScene() {}
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GameScene::Initialize() 
+void DebugScene::Initialize()
 {
 	/* ----- FileManager ファイルマネージャー ----- */
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
@@ -26,7 +26,7 @@ void GameScene::Initialize()
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 6.0f, -20.0f };
+	camera_->translate = { 0.0f, 5.0f, -15.0f };
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -41,22 +41,13 @@ void GameScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-  
-	/* ----- Player プレイヤー ----- */
-	player_ = make_unique<Player>();
-	player_->Initialize();
-
-	/* ----- Enemy enemy ----- */
-	enemy_ = make_unique<Enemy>();
-	enemy_->Initialize();
-	enemy_->SetPlayer(player_.get());
 }
 
 
 /// <summary>
 /// 更新処理
 /// </summary>
-void GameScene::Update(GameManager* state) 
+void DebugScene::Update(GameManager* state)
 {
 	state;
 
@@ -68,18 +59,13 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
-	
+
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
-	
-	/* ----- Player プレイヤー ----- */
-	player_->Update();
 
-	/* ----- Enemy enemy ----- */
-	enemy_->Update();
 
 #ifdef _DEBUG
 
@@ -100,7 +86,7 @@ void GameScene::Update(GameManager* state)
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void GameScene::BackSpriteDraw() 
+void DebugScene::BackSpriteDraw()
 {
 
 }
@@ -109,7 +95,7 @@ void GameScene::BackSpriteDraw()
 /// <summary>
 /// ３Dオブジェクトの描画処理
 /// </summary>
-void GameScene::ModelDraw() 
+void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Draw(camera_.get());
@@ -119,21 +105,14 @@ void GameScene::ModelDraw()
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());
-
-	/* ----- Player プレイヤー ----- */
-	player_->Draw3D(camera_.get());
-
-	/* ----- Enemy enemy ----- */
-	enemy_->Draw3D(camera_.get());
 }
 
 
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void GameScene::FrontSpriteDraw() 
+void DebugScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw(camera_.get());
 }
-

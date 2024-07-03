@@ -492,6 +492,12 @@ bool CollisionManager::CheckOBBxSegment(OBBCollider* cA, SegmentCollider* cB)
 /// </summary>
 bool CollisionManager::CheckOBBxOBB(OBBCollider* cA, OBBCollider* cB)
 {
+	// 距離が離れていたら早期return false
+	// そもそも当たるはずがないのに計算する必要がない
+	if (std::abs(Length(cA->GetOBBWorldPos() - cB->GetOBBWorldPos())) >= 3.0f) {
+		return false;
+	}
+
 	// 値を入れた構造体を作る
 	OBB obbA = SettingOBBProperties(cA);
 	OBB obbB = SettingOBBProperties(cB);

@@ -6,7 +6,7 @@
 
 
 /* PlayerBulletクラス */
-class PlayerBullet {
+class PlayerBullet : public OBBCollider {
 
 public: // メンバ関数
 
@@ -45,6 +45,20 @@ public: // メンバ関数
 
 #pragma endregion 
 
+#pragma region Collision 衝突判定
+
+	// 衝突自コールバック関数
+	void OnCollision(uint32_t id) override { id; }
+	void OnCollisionWithEnemy();
+	void OnCollisionWithEnemyBullet();
+
+	// コライダーのゲッター
+	Vector3 GetOBBWorldPos() override { return bulletWt_.GetWorldPos(); }
+	Vector3 GetSize() override { return this->size_; }
+	Vector3 GetRotate() override { return this->bulletWt_.srt.rotate; }
+
+#pragma endregion 
+
 
 private:
 
@@ -62,6 +76,9 @@ private: // メンバ変数
 
 	// 本体座標
 	WorldTransform bulletWt_{};
+
+	// サイズ
+	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// 移動速度
 	Vector3 velocity_;

@@ -13,7 +13,7 @@ class Player;
 
 
 /* Enemyクラス */
-class Enemy {
+class Enemy : public OBBCollider {
 
 public: // メンバ関数
 
@@ -31,6 +31,23 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
+	// BulletList
+	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
+
+
+#pragma endregion 
+
+#pragma region Collision 衝突判定
+
+	// 衝突自コールバック関数
+	void OnCollision(uint32_t id) override { id; }
+	void OnCollisionWithPlayer();
+	void OnCollisionWithPlayerBullet();
+
+	// コライダーのゲッター
+	Vector3 GetOBBWorldPos() override { return bodyWt_.GetWorldPos(); }
+	Vector3 GetSize() override { return this->size_; }
+	Vector3 GetRotate() override { return this->bodyWt_.srt.rotate; }
 
 #pragma endregion 
 
@@ -66,6 +83,9 @@ private: // メンバ変数
 
 	// 本体座標
 	WorldTransform bodyWt_{};
+
+	// サイズ
+	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// 移動速度
 	Vector3 velocity_{};

@@ -3,36 +3,29 @@
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
-#include "../../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
-#include "../../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
+#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
-#include "../../../../Tsumi/PostEffect/PostEffect.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "../../../Project/GameObject/Others/TestObject/TestObject.h"
-#include "../../../Project/GameObject/Others/TestAnimationCube/TestAnimationCube.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
-#include "../../../Project/GameObject/Character/Player/Player.h"
-#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
-
-
-class GameScene : public IScene {
+class DebugScene : public IScene {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	GameScene();
+	DebugScene();
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~GameScene();
+	~DebugScene();
 
 	/// <summary>
 	/// 初期化処理
@@ -68,24 +61,10 @@ private:
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
 
-	// TestModel
-	std::unique_ptr<TestObject> testObject_;
-
-	// TestAnimation
-	std::unique_ptr<TestAnimationCube> testAnimCube_;
-
 	// TestHuman
 	std::unique_ptr<TestHuman> testHuman_;
 
 	// TestJsonObject
 	std::unique_ptr<TestJsonObject> testJsonObject_;
-
-	Transform transform_;
-
-	// Player
-	std::unique_ptr<Player> player_;
-
-	// Enemy
-	std::unique_ptr<Enemy> enemy_;
 };
 

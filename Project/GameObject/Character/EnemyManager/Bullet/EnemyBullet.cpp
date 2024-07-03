@@ -40,6 +40,17 @@ void EnemyBullet::Draw3D(Camera* camera)
 }
 
 
+// 衝突自コールバック関数
+void EnemyBullet::OnCollisionWithPlayer()
+{
+	isDead_ = true;
+}
+void EnemyBullet::OnCollisionWithPlayerBullet()
+{
+	isDead_ = true;
+}
+
+
 // 移動処理
 void EnemyBullet::Move()
 {

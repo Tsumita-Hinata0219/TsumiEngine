@@ -2,7 +2,8 @@
 
 #include "../../Tsumi/Tsumi.h"
 #include "../Scene/IScene.h"
-#include "../Scene/SceneState/GameScene/GameScene.h"
+#include "../Scene/DebugScene/DebugScene.h"
+#include "../Scene/GameScene/GameScene.h"
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
 
 

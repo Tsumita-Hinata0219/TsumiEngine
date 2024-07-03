@@ -14,6 +14,7 @@ void Player::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
+
 }
 
 
@@ -83,6 +84,19 @@ void Player::Draw3D(Camera* camera)
 void Player::Draw2DFront(Camera* camera)
 {
 	camera;
+}
+
+
+// 衝突自コールバック関数
+void Player::OnCollisionWithEnemy()
+{
+
+
+}
+void Player::OnCollisionWithEnemyBullet()
+{
+
+
 }
 
 

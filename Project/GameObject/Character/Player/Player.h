@@ -9,7 +9,7 @@
 
 
 /* Playerクラス */
-class Player {
+class Player : public OBBCollider {
 
 public: // メンバ関数
 
@@ -24,12 +24,27 @@ public: // メンバ関数
 	void Draw3D(Camera* camera);
 	void Draw2DFront(Camera* camera);
 
-
 #pragma region Accessor アクセッサ
 
 	// 座標
 	Vector3 GetPosition() { return this->bodyWt_.GetWorldPos(); }
 
+	// BulletList
+	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
+
+#pragma endregion 
+
+#pragma region Collision 衝突判定
+
+	// 衝突自コールバック関数
+	void OnCollision(uint32_t id) override { id; }
+	void OnCollisionWithEnemy();
+	void OnCollisionWithEnemyBullet();
+
+	// コライダーのゲッター
+	Vector3 GetOBBWorldPos() override { return bodyWt_.GetWorldPos(); }
+	Vector3 GetSize() override { return this->size_; }
+	Vector3 GetRotate() override { return this->bodyWt_.srt.rotate; }
 
 #pragma endregion 
 
@@ -62,6 +77,9 @@ private: // メンバ変数
 
 	// 本体座標
 	WorldTransform bodyWt_{};
+
+	// サイズ
+	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// 移動速度
 	Vector3 velocity_{};

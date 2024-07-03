@@ -11,7 +11,10 @@ void Enemy::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
-	bodyWt_.srt.translate.z = 20.0f;
+	bodyWt_.srt.translate.z = 40.0f;
+
+	// ShotFrameにIntervalを入れておく
+	shotFrame_ = kShotInterval_;
 }
 
 
@@ -82,6 +85,18 @@ void Enemy::Draw3D(Camera* camera)
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
 		bullet->Draw3D(camera);
 	}
+}
+
+
+// 衝突自コールバック関数
+void Enemy::OnCollisionWithPlayer()
+{
+
+}
+void Enemy::OnCollisionWithPlayerBullet()
+{
+
+
 }
 
 

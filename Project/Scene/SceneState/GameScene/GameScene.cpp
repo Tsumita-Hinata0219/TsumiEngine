@@ -22,6 +22,9 @@ void GameScene::Initialize()
 	/* ----- FileManager ファイルマネージャー ----- */
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
+	/* ----- CollisionManager コリジョンマネージャー ----- */
+	collisionManager_ = std::make_unique<CollisionManager>();
+
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
@@ -78,8 +81,11 @@ void GameScene::Update(GameManager* state)
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
-	/* ----- Enemy enemy ----- */
+	/* ----- Enemy エネミー ----- */
 	enemy_->Update();
+
+	/* ----- Collision 衝突判定 ----- */
+	CheckAllCollision();
 
 #ifdef _DEBUG
 
@@ -135,5 +141,26 @@ void GameScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw(camera_.get());
+}
+
+
+// 衝突判定処理
+void GameScene::CheckAllCollision()
+{
+	// Player with EnemyBullet
+	for (auto& bullet : enemy_->GetBulletList()) {
+		if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
+			player_->OnCollisionWithEnemyBullet();
+			bullet->OnCollisionWithPlayer();
+		}
+	}
+
+	// PlayerBullet with Enemy
+	for (auto& bullet : player_->GetBulletList()) {
+		if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy_.get())) {
+			bullet->OnCollisionWithEnemy();
+			enemy_->OnCollisionWithPlayerBullet();
+		}
+	}
 }
 

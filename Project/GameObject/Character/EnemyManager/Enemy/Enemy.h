@@ -31,6 +31,10 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
+	// BulletList
+	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
+
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定

@@ -60,7 +60,16 @@ public:
 	void FrontSpriteDraw() override;
 
 
+private: 
+
+	// 衝突判定処理
+	void CheckAllCollision();
+
+
 private:
+
+	// CollisionManager
+	std::unique_ptr<CollisionManager> collisionManager_;
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;

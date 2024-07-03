@@ -29,6 +29,8 @@ public: // メンバ関数
 	// 座標
 	Vector3 GetPosition() { return this->bodyWt_.GetWorldPos(); }
 
+	// BulletList
+	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 
 #pragma endregion 
 

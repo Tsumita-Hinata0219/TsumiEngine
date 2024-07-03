@@ -86,6 +86,20 @@ void Player::Draw2DFront(Camera* camera)
 }
 
 
+// 衝突判定
+void Player::OnCollision(uint32_t id) { id; }
+void Player::OnCollisionWithEnemy()
+{
+
+
+}
+void Player::OnCollisionWIthEnemuBullet()
+{
+
+
+}
+
+
 // 移動処理
 void Player::Move()
 {

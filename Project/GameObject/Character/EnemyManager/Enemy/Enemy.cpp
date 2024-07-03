@@ -12,6 +12,9 @@ void Enemy::Initialize()
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
 	bodyWt_.srt.translate.z = 20.0f;
+
+	// ShotFrameにIntervalを入れておく
+	shotFrame_ = kShotInterval_;
 }
 
 

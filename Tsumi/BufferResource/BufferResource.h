@@ -1,5 +1,139 @@
 #pragma once
-class BufferResource
-{
+
+#include <d3d12.h>
+#include <dxgi1_6.h>
+#include <dxgidebug.h>
+#include <dxcapi.h>
+#pragma comment(lib, "d3d12.lib")
+#pragma comment(lib, "dxgi.lib")
+#pragma comment(lib, "dxguid.lib")
+#pragma comment(lib, "dxcompiler.lib")
+
+#include "../Base/WinApp/WinApp.h"
+#include "../CommandManager/CommandManager.h"
+
+
+
+/* BufferResourceクラス */
+template<typename T>
+class BufferResource {
+
+public:
+
+	// コンストラクタ、デストラクタ
+	BufferResource() {};
+	~BufferResource() {};
+
+	// リソース作成
+	void CreateResource(UINT elementCount = 1;);
+
+	// リソースをマップしてCPUアクセスを可能にする
+	void Map();
+
+	// リソースのマップを解除してGPUアクセスを可能にする
+	void UnMap();
+
+	// データを書き込む
+	void WriteData(const T* data);
+
+	// コマンドコール
+	void CommandCall(UINT number);
+
+
+private:
+
+	// リソース
+	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
+	// 頂点バッファビュー
+	D3D12_VERTEX_BUFFER_VIEW VertexBufferView_;
+	// 頂点バッファビュー
+	D3D12_INDEX_BUFFER_VIEW IndexBufferView_;
+
+
+	// mappedData
+	T* mappedData_{};
 };
 
+
+
+// リソース作成
+template<typename T>
+inline void BufferResource<T>::CreateResource(UINT elementCount)
+{
+	// 頂点リソース用のヒープ設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+
+	// バッファリソース。テクスチャの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC vertexResourceDesc_{};
+	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+
+	// リソースのサイズ
+	vertexResourceDesc_.Width = sizeof(T) * elementCount;
+
+	// バッファの場合はこれらは1にする決まり
+	vertexResourceDesc_.Height = 1;
+	vertexResourceDesc_.DepthOrArraySize = 1;
+	vertexResourceDesc_.MipLevels = 1;
+	vertexResourceDesc_.SampleDesc.Count = 1;
+
+	// バッファの場合はこれにする決まり
+	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際に頂点リソースを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&resource));
+	assert(SUCCEEDED(hr_));
+}
+
+
+// リソースをマップしてCPUアクセスを可能にする
+template<typename T>
+inline void BufferResource<T>::Map()
+{
+	// buffer_ が nullptr の場合はエラー
+	if (!buffer_) {
+		// ログを出力し、アサーションでプログラムを停止させる
+		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling Map.")
+		assert(false);
+		return;
+	}
+
+	HRESULT result;
+	result = buffer_->Map(0, nullptr, reinterpret_cast<void**>(&mappedData_));
+	assert(SUCCEEDED(result));
+}
+
+
+// リソースのマップを解除してGPUアクセスを可能にする
+template<typename T>
+inline void BufferResource<T>::UnMap()
+{
+	buffer_->Unmap(0, nullptr);
+
+	if (buffer_ && mappedData_) {
+		buffer_->Unmap(0, nullptr);
+		mappedData_ = nullptr;
+	}
+}
+
+
+// データを書き込む
+template<typename T>
+inline void BufferResource<T>::WriteData(const T* data)
+{
+	assert(mappedData_);
+	*mappedData_ = data;
+}
+
+
+// コマンドコール
+template<typename T>
+inline void BufferResource<T>::CommandCall(UINT number)
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}

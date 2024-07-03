@@ -35,6 +35,9 @@ public: // メンバ関数
 
 private:
 
+	// 戦闘状態の切り替え処理
+	void ToggleCombatState();
+
 	// 移動処理
 	void Move();
 
@@ -46,6 +49,9 @@ private:
 
 	// 射撃の処理
 	void ExecuteShot();
+
+	// 新しいバレットを生成する
+	void CreateNewBullet();
 
 
 private: // メンバ変数
@@ -64,7 +70,16 @@ private: // メンバ変数
 	float moveVector_ = 0.05f;
 
 	// playerとの最低距離
-	float minToPlayer_ = 8.0f;
+	float minToPlayer_ = 4.0f;
 
+	// 戦闘状態化のフラグ
+	bool isCombatActive_ = false;
+
+	// 戦闘状態になるかならないかの距離の閾値
+	float combatTriggerDistance_ = 20.0f;
+
+	// 射撃するまでのフレーム&インターバル
+	int shotFrame_ = 0;
+	int kShotInterval_ = 30;
 };
 

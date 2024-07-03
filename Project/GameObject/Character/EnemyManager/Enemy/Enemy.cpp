@@ -21,11 +21,38 @@ void Enemy::Update()
 	// Transformの更新処理
 	bodyWt_.UpdateMatrix();
 
-	// 移動処理
-	Move();
+	// 戦闘状態の切り替え処理
+	ToggleCombatState();
+
+	// 戦闘状態に入っていたら入る処理
+	if (isCombatActive_) {
+
+		// 移動処理
+		Move();
+
+		// 射撃の処理
+		ExecuteShot();
+	}
+
 
 
 #ifdef _DEBUG
+
+	if (ImGui::TreeNode("Enemy")) {
+
+		ImGui::Text("Transform");
+		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
+		ImGui::DragFloat3("Rotate", &bodyWt_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &bodyWt_.srt.translate.x, 0.01f);
+
+		ImGui::Text("");
+		ImGui::Checkbox("CombatActive", &isCombatActive_);
+
+		ImGui::Text("");
+		ImGui::Text("ShotFrame = %d : Interval = %d", shotFrame_, kShotInterval_);
+
+		ImGui::TreePop();
+	}
 
 
 #endif // _DEBUG
@@ -37,6 +64,27 @@ void Enemy::Draw3D(Camera* camera)
 {
 	// BodyModelの描画
 	bodyModel_->Draw(bodyWt_, camera);
+}
+
+
+// 戦闘状態の切り替え処理
+void Enemy::ToggleCombatState()
+{
+	// プレイヤーとの距離で戦闘状態のフラグを管理する
+	// 設定した距離よりも近くにいたらフラグを立てる
+	if (std::abs(Length(player_->GetPosition() - bodyWt_.GetWorldPos())) <= combatTriggerDistance_) {
+
+		// 戦闘状態のフラグを立てる
+		isCombatActive_ = true;
+	}
+	else {
+
+		// 戦闘状態のフラグを折る
+		isCombatActive_ = false;
+
+		// 射撃までのフレームを設定
+		shotFrame_ = kShotInterval_;
+	}
 }
 
 
@@ -92,5 +140,26 @@ void Enemy::CalcRotate()
 // 射撃の処理
 void Enemy::ExecuteShot()
 {
+	// タイマーをデクリメント
+	shotFrame_--;
+
+	// 0以下になったら射撃&タイマーリセット
+	if (shotFrame_ <= 0) {
+
+		// バレット生成
+		CreateNewBullet();
+
+		// タイマー再設定
+		shotFrame_ = kShotInterval_;
+	}
+}
+
+
+// 新しいバレットを生成する
+void Enemy::CreateNewBullet()
+{
+
+
+
 }
 

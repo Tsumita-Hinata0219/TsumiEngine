@@ -71,7 +71,7 @@ private: // メンバ変数
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
 
-	// 射撃ボタン押下フレーム
+	// 射撃ボタン押下フレーム&インターバル
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 10;
 

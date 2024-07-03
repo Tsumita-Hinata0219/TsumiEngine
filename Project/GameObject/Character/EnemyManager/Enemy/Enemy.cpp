@@ -34,6 +34,20 @@ void Enemy::Update()
 		ExecuteShot();
 	}
 
+	// Bullet更新処理
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Update();
+	}
+
+	// 死亡フラグが立っていたら削除
+	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
+		if (bullet->IsDead()) {
+			bullet.reset();
+			return true;
+		}
+		return false;
+		}
+	);
 
 
 #ifdef _DEBUG
@@ -54,7 +68,6 @@ void Enemy::Update()
 		ImGui::TreePop();
 	}
 
-
 #endif // _DEBUG
 }
 
@@ -64,6 +77,11 @@ void Enemy::Draw3D(Camera* camera)
 {
 	// BodyModelの描画
 	bodyModel_->Draw(bodyWt_, camera);
+
+	// Bulletsの描画
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Draw3D(camera);
+	}
 }
 
 
@@ -158,8 +176,23 @@ void Enemy::ExecuteShot()
 // 新しいバレットを生成する
 void Enemy::CreateNewBullet()
 {
+	// newBulletのインスタンス
+	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
 
+	// 初期座標
+	Vector3 initPos = bodyWt_.GetWorldPos();
+	// 初期速度
+	Vector3 initVel = Vector3::oneZ;
+	initVel.z = 0.1f;
+	initVel = TransformNormal(initVel, bodyWt_.matWorld);
 
+	// newBulletの初期化
+	newBullet->Initialize();
+	newBullet->SetPosition(initPos);
+	newBullet->SetVelocity(initVel);
+	newBullet->SetRotationFromVelocity();
 
+	// リストに追加
+	bulletList_.push_back(newBullet);
 }
 

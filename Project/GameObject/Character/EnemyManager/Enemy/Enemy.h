@@ -5,6 +5,8 @@
 
 #include "../../../GameObject.h"
 
+#include "../Bullet/EnemyBullet.h"
+
 
 // Player前方宣言
 class Player;
@@ -78,8 +80,11 @@ private: // メンバ変数
 	// 戦闘状態になるかならないかの距離の閾値
 	float combatTriggerDistance_ = 20.0f;
 
+	// BulletのList配列
+	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
+
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
-	int kShotInterval_ = 30;
+	int kShotInterval_ = 80;
 };
 

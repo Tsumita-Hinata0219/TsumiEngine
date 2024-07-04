@@ -1,23 +1,23 @@
-#include "GameScene.h"
+#include "DebugScene.h"
 
 
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {}
+DebugScene::DebugScene() {}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() {}
+DebugScene::~DebugScene() {}
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GameScene::Initialize() 
+void DebugScene::Initialize()
 {
 	/* ----- FileManager ファイルマネージャー ----- */
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
@@ -26,7 +26,7 @@ void GameScene::Initialize()
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 6.0f, -20.0f };
+	camera_->translate = { 0.0f, 5.0f, -15.0f };
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -41,32 +41,16 @@ void GameScene::Initialize()
 	testPostEffect_ = make_unique<TestPostEffect>();
 	testPostEffect_->Initialize();
 
-	/* ----- TestObject テストオブジェクト ----- */
-	testObject_ = make_unique<TestObject>();
-	testObject_->Init();
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_ = make_unique<TestAnimationCube>();
-	testAnimCube_->Init();
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-  
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	testJsonObject_ = make_unique<TestJsonObject>();
-	testJsonObject_->Initialize();
-
-	/* ----- newModel 新しいモデル描画形式 ----- */
-	ModelManager::Getinstance()->AddModel("Test", Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	transform_.Initialize();
 }
 
 
 /// <summary>
 /// 更新処理
 /// </summary>
-void GameScene::Update(GameManager* state) 
+void DebugScene::Update(GameManager* state)
 {
 	state;
 
@@ -81,21 +65,13 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
-	
+
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
-	/* ----- TestObject テストオブジェクト ----- */
-	testObject_->Update();
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	testAnimCube_->Update();
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
-	
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	testJsonObject_->Update();
+
 
 #ifdef _DEBUG
 
@@ -116,7 +92,7 @@ void GameScene::Update(GameManager* state)
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void GameScene::BackSpriteDraw() 
+void DebugScene::BackSpriteDraw()
 {
 
 }
@@ -125,7 +101,7 @@ void GameScene::BackSpriteDraw()
 /// <summary>
 /// ３Dオブジェクトの描画処理
 /// </summary>
-void GameScene::ModelDraw() 
+void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
 	//Skydome::GetInstance()->Draw(camera_.get());
@@ -136,30 +112,16 @@ void GameScene::ModelDraw()
 	/* ----- Ground 床 ----- */
 	//Ground::GetInstance()->Draw(camera_.get());
 
-	/* ----- TestObject テストオブジェクト ----- */
-	//testObject_->Draw(camera_.get());
-
-	/* ----- TestAnimCube テストアニメーションキューブ ----- */
-	//testAnimCube_->Draw(camera_.get());
-
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());
-
-	/* ----- TestJsonObject テストJsonオブジェクト ----- */
-	//testJsonObject_->Draw(camera_.get());
-
-	/* ----- newModel 新しいモデル描画形式 ----- */
-	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Lambert);
-	//ModelManager::Getinstance()->GetModel("Test")->DrawN(transform_, camera_.get());
 }
 
 
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void GameScene::FrontSpriteDraw() 
+void DebugScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw(camera_.get());
 }
-

@@ -3,8 +3,8 @@
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
-#include "../../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
-#include "../../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
+#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
@@ -14,6 +14,11 @@
 #include "../../../Project/GameObject/Others/TestAnimationCube/TestAnimationCube.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
+
+#include "../../../Project/GameObject/Character/Player/Player.h"
+#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
+
+
 
 class GameScene : public IScene {
 
@@ -55,25 +60,27 @@ public:
 	void FrontSpriteDraw() override;
 
 
+private: 
+
+	// 衝突判定処理
+	void CheckAllCollision();
+
+
 private:
 
+	// CollisionManager
+	std::unique_ptr<CollisionManager> collisionManager_;
+
 	// メインカメラ
-	unique_ptr<Camera> camera_ = nullptr;
+	std::unique_ptr<Camera> camera_ = nullptr;
 
 	// PostEffect
-	unique_ptr<TestPostEffect> testPostEffect_;
+	std::unique_ptr<TestPostEffect> testPostEffect_;
 
-	// TestModel
-	unique_ptr<TestObject> testObject_;
+	// Player
+	std::unique_ptr<Player> player_;
 
-	// TestAnimation
-	unique_ptr<TestAnimationCube> testAnimCube_;
-
-	// TestHuman
-	unique_ptr<TestHuman> testHuman_;
-
-	// TestJsonObject
-	unique_ptr<TestJsonObject> testJsonObject_;
-
-	Transform transform_;
+	// Enemy
+	std::unique_ptr<Enemy> enemy_;
 };
+

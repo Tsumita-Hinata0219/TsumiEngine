@@ -18,11 +18,11 @@ public: // メンバ関数
 
 #pragma region Get 取得
 
-	float GetNowFrame() { return this->nowFrame_; }
-	float GetEndFrame() { return this->endFrame_; }
+	float GetNowFrame() const { return this->nowFrame_; }
+	float GetEndFrame() const { return this->endFrame_; }
 
-	bool GetIsActive() { return this->isActive_; }
-	bool GetIsFinish() { return this->isFinish_; }
+	bool IsActive() const { return this->isActive_; }
+	bool IsFinish() const { return this->isFinish_; }
 
 #pragma endregion 
 
@@ -31,18 +31,18 @@ public: // メンバ関数
 	void SetNowFrame(float setFrame) { this->nowFrame_ = setFrame; }
 	void SetEndFrame(float setFrame) { this->endFrame_ = setFrame; }
 
-	void SetIsActive(bool setFlag) { this->isActive_ = setFlag; }
-	void SetIsFinish(bool setFlag) { this->isFinish_ = setFlag; }
+	/*void SetIsActive(bool setFlag) { this->isActive_ = setFlag; }
+	void SetIsFinish(bool setFlag) { this->isFinish_ = setFlag; }*/
 
 #pragma endregion 
 
 
 private: // メンバ変数
 
-	float nowFrame_;
-	float endFrame_;
-	bool isActive_;
-	bool isFinish_;
+	float nowFrame_ = 0.0f;
+	float endFrame_ = 0.0f;
+	bool isActive_ = false;
+	bool isFinish_ = true;
 	
 };
 

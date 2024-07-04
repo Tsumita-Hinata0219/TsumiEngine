@@ -10,6 +10,7 @@
 #include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 #include "../../Tsumi/Utilities/ImGuiManager/ImGuiManager.h"
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
+#include "../../Tsumi/Utilities/Timer/Timer.h"
 #include "Camera/Camera.h"
 
 #include "../Math/MyMath.h"

@@ -179,6 +179,7 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
+    <ClCompile Include="Tsumi\BufferResource\BufferResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -355,6 +356,7 @@
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
     <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
+    <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

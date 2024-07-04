@@ -189,6 +189,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\BufferResource\BufferResource.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
@@ -346,6 +347,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Particle\ParticleSystem\ParticleSystem.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />

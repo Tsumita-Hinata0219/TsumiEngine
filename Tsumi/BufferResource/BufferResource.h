@@ -24,31 +24,45 @@ public:
 	BufferResource() {};
 	~BufferResource() {};
 
-	// リソース作成
+	// Resource作成
 	void CreateResource(UINT elementCount = 1;);
 
-	// リソースをマップしてCPUアクセスを可能にする
+	// VertexBufferViewを作成する
+	void CreateVertexBufferView();
+
+	// IndexBufferViewを作成する 
+	void CreateIndexBufferView();
+
+	// ResourceをマップしてCPUアクセスを可能にする
 	void Map();
 
-	// リソースのマップを解除してGPUアクセスを可能にする
+	// Resourceのマップを解除してGPUアクセスを可能にする
 	void UnMap();
 
 	// データを書き込む
 	void WriteData(const T* data);
 
-	// コマンドコール
+	// Commandを積む
 	void CommandCall(UINT number);
 
 
 private:
 
-	// リソース
+	// BufferResourceの生成
+	void CreateBufferResource();
+
+
+private:
+
+	// Resource
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 	// 頂点バッファビュー
 	D3D12_VERTEX_BUFFER_VIEW VertexBufferView_;
 	// 頂点バッファビュー
 	D3D12_INDEX_BUFFER_VIEW IndexBufferView_;
 
+	// 作成するResourceの要素数
+	UINT itemCount_ = 1;
 
 	// mappedData
 	T* mappedData_{};
@@ -60,37 +74,37 @@ private:
 template<typename T>
 inline void BufferResource<T>::CreateResource(UINT elementCount)
 {
-	// 頂点リソース用のヒープ設定
-	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
-	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+	// 作成するResourceの要素数
+	itemCount_ = elementCount;
 
-	// バッファリソース。テクスチャの場合はまた別の設定をする
-	D3D12_RESOURCE_DESC vertexResourceDesc_{};
-	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
-
-	// リソースのサイズ
-	vertexResourceDesc_.Width = sizeof(T) * elementCount;
-
-	// バッファの場合はこれらは1にする決まり
-	vertexResourceDesc_.Height = 1;
-	vertexResourceDesc_.DepthOrArraySize = 1;
-	vertexResourceDesc_.MipLevels = 1;
-	vertexResourceDesc_.SampleDesc.Count = 1;
-
-	// バッファの場合はこれにする決まり
-	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
-
-	// 実際に頂点リソースを作る
-	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
-		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
-		IID_PPV_ARGS(&resource));
-	assert(SUCCEEDED(hr_));
+	// BufferResourceの作成
+	CreateBufferResource();
 }
 
 
-// リソースをマップしてCPUアクセスを可能にする
+// VertexBufferViewを作成する
+template<typename T>
+inline void BufferResource<T>::CreateVertexBufferView() 
+{
+	VertexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	VertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
+	VertexBufferView_.StrideInBytes = UINT(sizeof(T));
+
+}
+
+
+// IndexBufferViewを作成する 
+template<typename T>
+inline void BufferResource<T>::CreateIndexBufferView() 
+{
+	IndexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	IndexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
+	IndexBufferView_.SizeInBytes = UINS(sizeof(T));
+}
+
+
+
+// ResourceをマップしてCPUアクセスを可能にする
 template<typename T>
 inline void BufferResource<T>::Map()
 {
@@ -108,7 +122,7 @@ inline void BufferResource<T>::Map()
 }
 
 
-// リソースのマップを解除してGPUアクセスを可能にする
+// Resourceのマップを解除してGPUアクセスを可能にする
 template<typename T>
 inline void BufferResource<T>::UnMap()
 {
@@ -130,10 +144,44 @@ inline void BufferResource<T>::WriteData(const T* data)
 }
 
 
-// コマンドコール
+// Commandを積む
 template<typename T>
 inline void BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+
+// BufferResourceの生成
+template<typename T>
+inline void BufferResource<T>::CreateBufferResource() 
+{
+	// Resource用のHeap設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+
+	// BufferResource。Textureの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC vertexResourceDesc_{};
+	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+
+	// Resourceのサイズ
+	vertexResourceDesc_.Width = sizeof(T) * itemCount_;
+
+	// Bufferの場合はこれらは1にする決まり
+	vertexResourceDesc_.Height = 1;
+	vertexResourceDesc_.DepthOrArraySize = 1;
+	vertexResourceDesc_.MipLevels = 1;
+	vertexResourceDesc_.SampleDesc.Count = 1;
+
+	// Bufferの場合はこれにする決まり
+	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際にBufferResourceを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&resource));
+	assert(SUCCEEDED(hr_));
 }

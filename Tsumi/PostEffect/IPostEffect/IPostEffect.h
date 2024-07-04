@@ -1,11 +1,13 @@
 #pragma once
 
 #include "../../Base/WinApp/WinApp.h"
+#include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
 #include "../../../Project/Math/MyMath.h"
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../PipeLineManager/PipeLineManager.h"
+#include "../Materials/PostEffectMaterials.h"
 #include "../PostEffectMaterial/PostEffectMaterial.h"
 #include "../../Project/GameObject/Camera/Camera.h"
 
@@ -61,6 +63,8 @@ protected: // メンバ変数
 	// マテリアル
 	PostEffectMaterial material_;
 	VignettingMaterial vignettingMtl_;
+	PostEffectMtl<BoxFilterMtl> boxFilterMtl_;
+	BufferResource<PostEffectMtl<BoxFilterMtl>> boxFilterBuffer_;
 
 	// SRV
 	uint32_t srv_ = 0;

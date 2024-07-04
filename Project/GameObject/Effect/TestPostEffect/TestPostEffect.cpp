@@ -8,7 +8,6 @@ void TestPostEffect::Initialize()
 	// リソースなどを作成
 	Create();
 	effectType_ = IPostEffect::Type::Grain;
-	boxFilterBuffer_.WriteData(&boxFilterMtl_);
 }
 
 

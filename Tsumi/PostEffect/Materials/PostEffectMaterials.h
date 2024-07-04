@@ -6,16 +6,6 @@
 #include "../../../Project/Math/Struct.h"
 
 
-
-/* 基底構造体 */
-template<typename T>
-struct PostEffectMtl {
-	T data_{};
-	bool enableEffect_ = true; // 使用フラグ
-};
-
-
-/* PostEffectに使用するMaterial */
 /* BoxFilter用 */
 struct BoxFilterMtl {
 

@@ -63,8 +63,12 @@ protected: // メンバ変数
 	// マテリアル
 	PostEffectMaterial material_;
 	VignettingMaterial vignettingMtl_;
-	PostEffectMtl<BoxFilterMtl> boxFilterMtl_;
-	BufferResource<PostEffectMtl<BoxFilterMtl>> boxFilterBuffer_;
+
+	// BoxFilter
+	BoxFilterMtl boxFilterMtl_{};
+	BufferResource<BoxFilterMtl> boxFilterBuffer_{};
+
+
 
 	// SRV
 	uint32_t srv_ = 0;

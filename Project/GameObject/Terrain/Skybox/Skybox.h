@@ -41,15 +41,19 @@ private:
 
 private: // メンバ変数
 
-	// Skyboxモデル
-	std::unique_ptr<Model> model_;
-
 	// Transform
 	WorldTransform transform_{};
 	float initScale_ = 1.0f;
 
 	// 使用するTextureHandle
 	uint32_t texture_ = 0;
+
+	// カラー
+	Vector4 color_{};
+
+	// 定数の頂点数とインデックス数
+	const size_t kNumVertices_ = 24; // 各面4頂点、6面で計24頂点
+	const size_t kNumIndices_ = 36;  // 各面6インデックス、6面で計36インデックス
 
 	// リソース
 	ResourcePeroperty resource_{};

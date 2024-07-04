@@ -41,11 +41,17 @@ private:
 
 private: // メンバ変数
 
+	// Skyboxモデル
+	std::unique_ptr<Model> model_;
+
+	// Transform
+	WorldTransform transform_{};
+	float initScale_ = 1.0f;
+
 	// 使用するTextureHandle
 	uint32_t texture_ = 0;
 
 	// リソース
 	ResourcePeroperty resource_{};
-
 };
 

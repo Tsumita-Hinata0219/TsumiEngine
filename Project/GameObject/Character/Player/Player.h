@@ -93,5 +93,8 @@ private: // メンバ変数
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 10;
 
+	//Stickの入力を取得
+	Vector2 stickInput_{};
+
 };
 

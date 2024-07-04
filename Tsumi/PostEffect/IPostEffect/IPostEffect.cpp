@@ -71,7 +71,7 @@ void IPostEffect::CommandCall(Camera* camera)
 	PipeLineCheck();
 
 	// Materialの設定
-	if (effectType_ == IPostEffect::Type::Vignetting) {
+	/*if (effectType_ == IPostEffect::Type::Vignetting) {
 		vignettingMtl_.TransferMaterial();
 		commands.List->SetGraphicsRootConstantBufferView(4, vignettingMtl_.constBuffer->GetGPUVirtualAddress());
 	}
@@ -79,7 +79,10 @@ void IPostEffect::CommandCall(Camera* camera)
 		material_.mtlData.projectionInverse = camera->projectionInverseMatrix;
 		material_.TransferMaterial();
 		commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
-	}
+	}*/
+	material_.mtlData.projectionInverse = camera->projectionInverseMatrix;
+	material_.TransferMaterial();
+	commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
 	
 	// DescriptorTableの設定
 	//DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);

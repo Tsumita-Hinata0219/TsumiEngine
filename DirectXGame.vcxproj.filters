@@ -363,6 +363,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
+    <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

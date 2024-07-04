@@ -170,6 +170,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Project\Math\MathFunction\MathFunction.cpp" />
@@ -207,6 +208,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
@@ -244,7 +246,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -282,6 +283,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Project\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Project\Math\MathFunction\MathFunction.h" />
@@ -334,6 +336,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\PhongPipeLine\PhongPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SpritePipeLine\SpritePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />
@@ -359,7 +362,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
@@ -566,6 +568,22 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\SpriteObject3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -603,6 +621,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\PhongObject.hlsli" />
     <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
+    <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\SpriteObject3d.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

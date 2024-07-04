@@ -3,22 +3,14 @@
 
 
 /// <summary>
-/// TextureManagerのインスタンス取得
-/// </summary>
-TextureManager* TextureManager::GetInstance() {
-
-	static TextureManager instance;
-	return &instance;
-}
-
-
-
-/// <summary>
 /// 初期化処理
 /// </summary>
 void TextureManager::Initialize() {
 
 	CoInitializeEx(0, COINIT_MULTITHREADED);
+
+	// Fenceの作成
+	TextureManager::GetInstance()->CreateFence();
 }
 
 
@@ -32,6 +24,8 @@ void TextureManager::Finalize() {
 
 	// コンテナ内のResourceを削除
 	UnLoadTexture();
+
+	CloseHandle(TextureManager::GetInstance()->fenceEvent_);
 }
 
 
@@ -39,99 +33,34 @@ void TextureManager::Finalize() {
 /// <summary>
 /// Textuerデータを読み込む
 /// </summary>
-uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from) {
+uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::string& FileName)
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
 
-	// パスを追加
-	std::string FilePath{};
-	
-	switch (from)
-	{
-	case TextureFrom::Texture:
-		FilePath = "Resources/Texture/" + routeFilePath + "/" + filePath;
-		break;
-	case TextureFrom::Obj:
-		FilePath = "Resources/Obj/" + routeFilePath + "/" + filePath;
-		break;
-	case TextureFrom::gLTF:
-		FilePath = "Resources/gLTF/" + routeFilePath + "/" + filePath;
-		break;
-	default:
-		break;
+	// フルファイルパス
+	std::string fullFilePath = "Resources/" + filePath + "/" + FileName;
+
+	// マップコンテナで検索
+	if (!instance->CheckTextureData(FileName)) {
+
+		std::string format = GetExtension(FileName);
+
+		// なければ新しく作る。拡張子で処理を変える
+		if (format == TextureFileFormat::PNG.first) {
+			instance->CreateTextureDataFormatPng(fullFilePath, FileName);
+		}
+		else if (format == TextureFileFormat::JPEG.first) {
+			instance->CreateTextureDataFormatJpeg(fullFilePath, FileName);
+		}
+		else if (format == TextureFileFormat::DSS.first) {
+			instance->CreateTextureDataFormatDDS(fullFilePath, FileName);
+		}
 	}
 
-
-	// filePaht同じものがあるならそれを返す
-	if (TextureManager::GetInstance()->CheckTextureDatas(FilePath)) {
-
-		// TextureDataを用意
-		TextureData textureData{};
-
-
-		//// indexをインクリメント
-		//DescriptorManager::IncrementIndex();
-		//const uint32_t index = DescriptorManager::GetIndex();
-
-
-		//// TextureDataに登録
-		//textureData.index = index;
-
-
-		// Textureを読んで転送する
-		// 1枚目のTextureを読んで転送する
-		DirectX::ScratchImage mipImages = CreateMipImage(FilePath);
-		const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
-		textureData.resource = CreateTextureResource(metadata);
-
-		// 登録
-		UpdateTextureData(metadata, mipImages, textureData);
-
-		// SRV作成
-		textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
-
-
-		//// metaDataを基にSRVの設定
-		//D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-		//srvDesc = SettingSRVDesc(metadata);
-
-
-		//// SRVを作成するDescriptorHeapの場所を決める
-		//DescriptorManager::SetDescriptorHandle_CPU(
-		//	DescriptorManager::GetCPUDescriptorHandle(
-		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-		//		DescriptorManager::GetDescriptorSize().SRV, index),
-		//	index);
-
-		//DescriptorManager::SetDescriptorHandle_GPU(
-		//	DescriptorManager::GetGPUDescriptorHandle(
-		//		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-		//		DescriptorManager::GetDescriptorSize().SRV, index),
-		//	index);
-
-
-		//// 先頭はImGuiが使っているのでその次を使う
-		//DescriptorManager::ShiftSRVHandlePtr();
-
-
-		//// SRVの生成
-		//DescriptorManager::CreateShaderResourceView(
-		//	textureData.resource.Get(), srvDesc, index);
-
-
-		// textureのサイズの取得
-		textureData.size = {
-			static_cast<float>(metadata.width),
-			static_cast<float>(metadata.height)};
-
-
-		// コンテナに保存
-		TextureManager::GetInstance()->textureDatas_[FilePath] =
-			make_unique<TextureDataResource>(FilePath, textureData);
-	}
-
-
-	// ハンドルを返す
-	return TextureManager::GetInstance()->textureDatas_[FilePath]->GetTextureHandle();
-};
+	// filePahtのマップコンテナのindexを返す
+	return instance->textureMaps_[FileName].index;
+}
 
 
 
@@ -140,45 +69,163 @@ uint32_t TextureManager::LoadTexture(const std::string& routeFilePath, const std
 /// </summary>
 void TextureManager::UnLoadTexture() {
 
-	TextureManager::GetInstance()->textureDatas_.clear();
+	TextureManager::GetInstance()->textureMaps_.clear();
 }
 
+
+/// <summary>
+/// Fenceを生成する
+/// </summary>
+void TextureManager::CreateFence()
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+
+	// 初期値0でFenceを作る
+	HRESULT result{};
+	result = device->CreateFence(fenceValue_, D3D12_FENCE_FLAG_NONE, IID_PPV_ARGS(&fence_));
+	assert(SUCCEEDED(result));
+
+	// FenceのSignalを待つためのイベントを作成する
+	fenceEvent_ = CreateEvent(NULL, FALSE, FALSE, NULL);
+	assert(fenceEvent_ != nullptr);
+}
 
 
 /// <summary>
 /// 一回読み込んだものは読み込まない
 /// </summary>
-bool TextureManager::CheckTextureDatas(std::string filePath) {
+bool TextureManager::CheckTextureData(std::string key) {
 
-	// filePaht同じものがあるならそれを返す
-	if (TextureManager::GetInstance()->textureDatas_.find(filePath) == TextureManager::GetInstance()->textureDatas_.end()) {
+	// マップコンテナに検索をかける
+	auto data = textureMaps_.find(key);
 
+	// ヒットしたらtrueを返す
+	if (data != textureMaps_.end()) {
 		return true;
 	}
-	
 	return false;
 }
+
+
+/// <summary>
+/// TextureDataを生成する
+/// </summary>
+void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::string key)
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
+
+	// 新しく作成するTextureDataを用意
+	TextureData textureData{};
+
+	// Textureを読んで転送する
+	DirectX::ScratchImage mipImages = CreateMipImage(filePath, TextureFileFormat::PNG.second);
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	textureData.resource = CreateTextureResource(metadata);
+
+	// 登録
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
+		UploadTextureData(textureData.resource.Get(), mipImages);
+
+	// Commandの実行
+	instance->ExeCommands();
+
+	// SRV作成
+	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+
+	// textureのサイズの取得
+	textureData.size = {
+		static_cast<float>(metadata.width),
+		static_cast<float>(metadata.height) };
+
+	// コンテナに保存
+	instance->textureMaps_[key] = textureData;
+}
+void TextureManager::CreateTextureDataFormatJpeg(std::string filePath, std::string key)
+{
+}
+void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::string key)
+{
+	// インスタンスの取得
+	TextureManager* instance = TextureManager::GetInstance();
+
+	// 新しく作成するTextureDataを用意
+	TextureData textureData{};
+
+	// Textureを読んで転送する
+	DirectX::ScratchImage mipImages = CreateMipImage(filePath, TextureFileFormat::DSS.second);
+	const DirectX::TexMetadata& metadata = mipImages.GetMetadata();
+	textureData.resource = CreateTextureResource(metadata);
+
+	// 登録
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
+		UploadTextureData(textureData.resource.Get(), mipImages);
+
+	// Commandの実行
+	instance->ExeCommands();
+
+	// SRV作成
+	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+
+	// textureのサイズの取得
+	textureData.size = {
+		static_cast<float>(metadata.width),
+		static_cast<float>(metadata.height) };
+
+	// コンテナに保存
+	instance->textureMaps_[key] = textureData;
+}
+
 
 
 
 /// <summary>
 /// Textureファイルを開く
 /// </summary>
-DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath) {
+DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath, const uint32_t format) {
 
-	// テクスチャファイルを読み込んでプログラムで扱えるようにする
-	// Textureデータを読み込む
 	DirectX::ScratchImage image{};
-	std::wstring filePathw = ConverString(filePath);
-	HRESULT hr = DirectX::LoadFromWICFile(filePathw.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
-	assert(SUCCEEDED(hr));
-
-	// ミニマップの作成
+	std::wstring filePathw{};
 	DirectX::ScratchImage mipImages{};
-	hr = DirectX::GenerateMipMaps(
-		image.GetImages(), image.GetImageCount(), image.GetMetadata(),
-		DirectX::TEX_FILTER_SRGB, 0, mipImages);
-	assert(SUCCEEDED(hr));
+
+	// formatで処理を変える
+	if (format == TextureFileFormat::PNG.second) { // Format -> PNG
+
+		// テクスチャファイルを読み込んでプログラムで扱えるようにする
+		// Textureデータを読み込む
+		filePathw = ConverString(filePath);
+		HRESULT hr = DirectX::LoadFromWICFile(filePathw.c_str(), DirectX::WIC_FLAGS_FORCE_SRGB, nullptr, image);
+		assert(SUCCEEDED(hr));
+
+		// ミニマップの作成
+		hr = DirectX::GenerateMipMaps(
+			image.GetImages(), image.GetImageCount(), image.GetMetadata(),
+			DirectX::TEX_FILTER_SRGB, 0, mipImages);
+		assert(SUCCEEDED(hr));
+	}
+	else if (format == TextureFileFormat::JPEG.second) { // Format -> JPEG
+
+	}
+	else if (format == TextureFileFormat::DSS.second) { // Format -> DSS
+
+		// テクスチャファイルを読み込んでプログラムで扱えるようにする
+		// Textureデータを読み込む
+		filePathw = ConverString(filePath);
+		HRESULT hr = DirectX::LoadFromDDSFile(filePathw.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, image);
+		assert(SUCCEEDED(hr));
+
+		// ミニマップの作成
+		if (DirectX::IsCompressed(image.GetMetadata().format)) { // 圧縮フォーマットかどうかを調べる
+			mipImages = std::move(image); // 圧縮フォーマットならそのまま使うのでstd::moveする
+		}
+		else {
+			hr = DirectX::GenerateMipMaps(
+				image.GetImages(), image.GetImageCount(), image.GetMetadata(),
+				DirectX::TEX_FILTER_SRGB, 4, mipImages);
+			assert(SUCCEEDED(hr));
+		}
+	}
 
 	// ミニマップ付きのデータを探す	
 	return mipImages;
@@ -187,7 +234,7 @@ DirectX::ScratchImage TextureManager::CreateMipImage(const std::string& filePath
 
 
 /// <summary>
-/// DirectX12のTExtureResourceを作る
+/// DirectX12のTextureResourceを作る
 /// </summary>
 ComPtr<ID3D12Resource> TextureManager::CreateTextureResource(const DirectX::TexMetadata& metadata) {
 
@@ -236,9 +283,9 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;                        // 細かい設定を行う
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;                        // VRAM上に作成する
+	//heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
+	//heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
 
 	return heapProperties;
 }
@@ -256,9 +303,10 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
-		D3D12_RESOURCE_STATE_GENERIC_READ, // 初回のResourceState。Textureは基本読むだけ
+		D3D12_RESOURCE_STATE_COPY_DEST,    // データ転送される設定
 		nullptr,						   // Clear最適地。使わないのでnullptr
 		IID_PPV_ARGS(&resource));		   // 作成するResourceポインタへのポインタ
+
 	assert(SUCCEEDED(result));
 
 	return resource;
@@ -292,19 +340,85 @@ void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, Dir
 		assert(SUCCEEDED(result));
 	}
 }
+[[nodiscard]]
+Microsoft::WRL::ComPtr<ID3D12Resource>  TextureManager::UploadTextureData(Microsoft::WRL::ComPtr<ID3D12Resource> texture, const DirectX::ScratchImage& mipImages)
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// 読み込んだデータからDirectX12用のSubResourceの配列を作成する
+	std::vector<D3D12_SUBRESOURCE_DATA> subResources;
+	DirectX::PrepareUpload(device.Get(), mipImages.GetImages(), mipImages.GetImageCount(), mipImages.GetMetadata(), subResources);
+
+	// Subresourceの数を基に、コピー元となるResourceに必要なサイズを計算する
+	uint64_t intermediateSize = GetRequiredIntermediateSize(texture.Get(), 0, UINT(subResources.size()));
+
+	// 計算したサイズでIntermediateResourceを作る。CPUとGPUを取り持つためのResourceなので、intermediateResource(中間リソース)と呼ぶ
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResource = CreateResource::CreateBufferResource(intermediateSize);
+
+	// データ転送をコマンドに積む
+	UpdateSubresources(commands.List.Get(), texture.Get(), intermediateResource.Get(), 0, 0, UINT(subResources.size()), subResources.data());
+
+	// ResourceState変更し、IntermediateResourceを返す
+	// Textureへの転送後は利用できるよう、D3D12_RESOURCE_STATE_COPY_DESTからD3D12_ReSOURCE_STATE_GENERIC_READへResourceStateを変更する
+	D3D12_RESOURCE_BARRIER barrier{};
+	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
+	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	barrier.Transition.pResource = texture.Get();
+	barrier.Transition.Subresource = D3D12_RESOURCE_BARRIER_ALL_SUBRESOURCES;
+	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_COPY_DEST;
+	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_GENERIC_READ;
+
+	commands.List->ResourceBarrier(1, &barrier);
+
+	return intermediateResource;
+}
 
 
 /// <summary>
-/// metaDataを基にSRVの設定
+/// Commandを実行する
 /// </summary>
-D3D12_SHADER_RESOURCE_VIEW_DESC TextureManager::SettingSRVDesc(const DirectX::TexMetadata& metadata) {
+void TextureManager::ExeCommands()
+{
+	// Deviceの取得
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
 
-	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = metadata.format;
-	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D; // 2Dテクスチャ
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	return srvDesc;
+
+	// CommandListをCloseし、CommandQueue->ExecuteComandListsを使いキックする
+	HRESULT result;
+	result = commands.List->Close();
+	assert(SUCCEEDED(result));
+	ID3D12CommandList* commandLists[] = { commands.List.Get() };
+	commands.Queue->ExecuteCommandLists(1, commandLists);
+
+
+	// 実行を待つ
+	fenceValue_++; // fenceの値を更新；
+	// GPUここまでたどり着いたときに、fenceの値を指定した値に代入するようにSignalを送る
+	commands.Queue->Signal(fence_.Get(), fenceValue_);
+	// fenceの値が指定したSignal値にたどり着いているか確認する。GetCompletedValueの初期値はfence作成時に渡した初期値
+	if (fence_->GetCompletedValue() < fenceValue_) {
+
+		// 指定したSignalにたどり着いていないので、たどり着くまで待つようにイベントを設定する
+		fence_->SetEventOnCompletion(fenceValue_, fenceEvent_);
+		// イベントを待つ
+		WaitForSingleObject(fenceEvent_, INFINITE);
+	}
+
+
+	// 実行が完了したので、allocatorとcommandListをResetして次のコマンドを積めるようにする
+	result = commands.Allocator->Reset();
+	assert(SUCCEEDED(result));
+	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
+	assert(SUCCEEDED(result));
+
+
+	CommandManager::GetInstance()->SetCommands(commands);
 }
+

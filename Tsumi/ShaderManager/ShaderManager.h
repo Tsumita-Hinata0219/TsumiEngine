@@ -106,6 +106,7 @@ private: // メンバ関数
 	void LineShader();
 	void Object3DShader();
 	void SkinningObject3dShader();
+	void SkyboxShader();
 
 #pragma endregion
 

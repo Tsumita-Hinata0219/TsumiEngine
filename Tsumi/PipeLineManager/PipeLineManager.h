@@ -20,6 +20,7 @@
 #include "ModelPipeLine/PhongNormalMapPipeLine/PhongNormalMapPipeLine.h"
 #include "ModelPipeLine/PhongPipeLine/PhongPipeLine.h"
 #include "ModelPipeLine/SkinningObject3dPipeLine/SkinningObject3dPipeLine.h"
+#include "ModelPipeLine/SkyboxPipeLine/SkyboxPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
 
 
@@ -45,6 +46,7 @@ enum class PipeLineType : uint32_t {
 	PhongNormalMap,
 	Phong,
 	SkinningObject3D,
+	Skybox,
 	Sprite,
 	PostEffect,
 	BoxFilter,
@@ -122,6 +124,9 @@ private: // メンバ変数
 
 	// SkinningObject3d
 	std::unique_ptr<SkinningObject3dPipeLine> skinningObject3DPipeLine_;
+
+	// Skybox
+	std::unique_ptr<SkyboxPipeLine> skyboxPipeLine_;
 
 	// Sprite
 	std::unique_ptr<SpritePipeLine> spritePipeLine_;

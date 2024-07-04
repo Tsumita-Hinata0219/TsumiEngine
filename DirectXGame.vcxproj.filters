@@ -33,6 +33,8 @@
     <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -81,7 +83,6 @@
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -104,7 +105,6 @@
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -177,6 +177,8 @@
     <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
@@ -241,7 +243,6 @@
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
-    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
@@ -275,7 +276,6 @@
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
-    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
@@ -356,7 +356,8 @@
     <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
-    <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
@@ -377,6 +378,7 @@
     <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="cpp.hint" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
+    <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

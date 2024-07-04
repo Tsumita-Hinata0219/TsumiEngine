@@ -7,6 +7,7 @@
 #include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
+#include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
 #include "../../../Project/GameObject/Others/TestObject/TestObject.h"

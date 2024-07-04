@@ -31,6 +31,9 @@ void DebugScene::Initialize()
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
 
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Initialize();
+
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
@@ -56,6 +59,9 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
+
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Update();
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
@@ -98,10 +104,13 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw(camera_.get());
+
+	/* ----- Skybox 天箱 ----- */
+	Skybox::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw(camera_.get());
+	//Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Draw(camera_.get());

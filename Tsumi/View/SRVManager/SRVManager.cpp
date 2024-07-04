@@ -29,7 +29,7 @@ void SRVManager::BeginFrame()
 // ImGui描画
 void SRVManager::DrawImGui()
 {
-	ImGui::Text("SRV_Index : %d", SRVManager::GetInstance()->index_);
+	ImGui::Text("SRV_Index : %d", SRVManager::GetInstance()->index_ - 1); // index_は常に空きindexを指しているのでデクリメント
 }
 
 
@@ -85,8 +85,18 @@ uint32_t SRVManager::CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& re
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = metadata.format;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D; // 2Dテクスチャ
-	srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+
+	// CubeMapかどうかで分岐
+	if (metadata.IsCubemap()) {
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+		srvDesc.TextureCube.MostDetailedMip = 0; // unionがTextureCubeになったが、内部パラメータの意味はTexture2Dと変わらない
+		srvDesc.TextureCube.MipLevels = UINT_MAX;
+		srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+	}
+	else {
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D; // 2Dテクスチャ
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	}
 
 	// SRVを作成するHeapの場所を決める
 	instance->handleMap_[instance->index_]._CPU = instance->Get_CPUDescriptorHandle(

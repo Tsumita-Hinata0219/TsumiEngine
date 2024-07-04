@@ -9,9 +9,10 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
-#include "../Base/WinApp/WinApp.h"
+#include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
-
+#include "../../Project/Math/MyMath.h"
+#include "../../Project/Math/Struct.h"
 
 
 /* BufferResourceクラス */
@@ -24,25 +25,26 @@ public:
 	BufferResource() {};
 	~BufferResource() {};
 
-	// Resource作成
-	void CreateResource(UINT elementCount = 1;);
 
-	// VertexBufferViewを作成する
+	// Resource作成
+	void CreateResource(UINT itemCount);
+
+	// VertexBufferViewの作成
 	void CreateVertexBufferView();
 
-	// IndexBufferViewを作成する 
+	// IndexBufferViewの作成
 	void CreateIndexBufferView();
 
 	// ResourceをマップしてCPUアクセスを可能にする
 	void Map();
 
-	// Resourceのマップを解除してGPUアクセスを可能にする
+	// Resourceのマップを解除してGPUアクセスを解除する
 	void UnMap();
 
 	// データを書き込む
 	void WriteData(const T* data);
 
-	// Commandを積む
+	// コマンドを積む
 	void CommandCall(UINT number);
 
 
@@ -52,56 +54,55 @@ private:
 	void CreateBufferResource();
 
 
-private:
+private: 
 
 	// Resource
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
-	// 頂点バッファビュー
-	D3D12_VERTEX_BUFFER_VIEW VertexBufferView_;
-	// 頂点バッファビュー
-	D3D12_INDEX_BUFFER_VIEW IndexBufferView_;
+
+	// VertexBufferView
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
+	// IndexBufferView
+	D3D12_INDEX_BUFFER_VIEW indexBufferView_;
 
 	// 作成するResourceの要素数
 	UINT itemCount_ = 1;
 
 	// mappedData
 	T* mappedData_{};
+
 };
 
 
-
-// リソース作成
+// Resourceの作成
 template<typename T>
-inline void BufferResource<T>::CreateResource(UINT elementCount)
+inline void BufferResource<T>::CreateResource(UINT itemCount) 
 {
 	// 作成するResourceの要素数
-	itemCount_ = elementCount;
+	this->itemCount_ = itemCount;
 
 	// BufferResourceの作成
 	CreateBufferResource();
 }
 
 
-// VertexBufferViewを作成する
+// VertexBufferViewの作成
 template<typename T>
-inline void BufferResource<T>::CreateVertexBufferView() 
+inline void BufferResource<T>::CreateVertexBufferView()
 {
 	VertexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	VertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
 	VertexBufferView_.StrideInBytes = UINT(sizeof(T));
-
 }
 
 
-// IndexBufferViewを作成する 
+// IndexBufferViewの作成
 template<typename T>
-inline void BufferResource<T>::CreateIndexBufferView() 
+inline void BufferResource<T>::CreateIndexBufferView()
 {
 	IndexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	IndexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
 	IndexBufferView_.SizeInBytes = UINS(sizeof(T));
 }
-
 
 
 // ResourceをマップしてCPUアクセスを可能にする
@@ -112,7 +113,7 @@ inline void BufferResource<T>::Map()
 	if (!buffer_) {
 		// ログを出力し、アサーションでプログラムを停止させる
 		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling Map.")
-		assert(false);
+			assert(false);
 		return;
 	}
 
@@ -122,7 +123,7 @@ inline void BufferResource<T>::Map()
 }
 
 
-// Resourceのマップを解除してGPUアクセスを可能にする
+// Resourceのマップを解除してGPUアクセスを解除する
 template<typename T>
 inline void BufferResource<T>::UnMap()
 {
@@ -144,7 +145,7 @@ inline void BufferResource<T>::WriteData(const T* data)
 }
 
 
-// Commandを積む
+// コマンドを積む
 template<typename T>
 inline void BufferResource<T>::CommandCall(UINT number)
 {
@@ -155,7 +156,7 @@ inline void BufferResource<T>::CommandCall(UINT number)
 
 // BufferResourceの生成
 template<typename T>
-inline void BufferResource<T>::CreateBufferResource() 
+inline void BufferResource<T>::CreateBufferResource()
 {
 	// Resource用のHeap設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
@@ -184,4 +185,5 @@ inline void BufferResource<T>::CreateBufferResource()
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&resource));
 	assert(SUCCEEDED(hr_));
+
 }

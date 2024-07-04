@@ -10,7 +10,7 @@ void Player::Initialize()
 
 	// BodyModelのロードと初期化
 	bodyModel_ = make_unique<Model>();
-	bodyModel_->CreateFromObjAssimpVer("ball", "ball");
+	bodyModel_->CreateFromObjAssimpVer("Player", "Player");
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();

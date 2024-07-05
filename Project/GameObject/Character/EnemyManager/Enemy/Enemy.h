@@ -31,7 +31,13 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
-	// BulletList
+	// 死亡フラグ
+	bool IsDead() const { return this->isDead_; }
+
+	// 座標
+	void SetPosition(Vector3 setPos) { this->bodyWt_.srt.translate = setPos; }
+
+	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
 
@@ -79,7 +85,7 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 
 	// 本体モデル
-	unique_ptr<Model> bodyModel_;
+	std::unique_ptr<Model> bodyModel_;
 
 	// 本体座標
 	WorldTransform bodyWt_{};
@@ -90,6 +96,9 @@ private: // メンバ変数
 	// 移動速度
 	Vector3 velocity_{};
 	float moveVector_ = 0.05f;
+
+	// 死亡フラグ
+	bool isDead_ = false;
 
 	// playerとの最低距離
 	float minToPlayer_ = 4.0f;

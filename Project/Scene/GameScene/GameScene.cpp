@@ -45,10 +45,16 @@ void GameScene::Initialize()
 	player_ = make_unique<Player>();
 	player_->Initialize();
 
-	/* ----- Enemy enemy ----- */
-	enemy_ = make_unique<Enemy>();
+	/* ----- EnemyManager エネミーマネージャー ----- */
+	enemyManager_ = std::make_unique<EnemyManager>();
+	enemyManager_->SetPlayer(player_.get());
+	enemyManager_->Initialize();
+	//enemyManager_->SetPlayer(player_.get());
+
+	/* ----- Enemy エネミー ----- */
+	/*enemy_ = make_unique<Enemy>();
 	enemy_->Initialize();
-	enemy_->SetPlayer(player_.get());
+	enemy_->SetPlayer(player_.get());*/
 }
 
 
@@ -74,8 +80,11 @@ void GameScene::Update(GameManager* state)
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
+	/* ----- EnemyManager エネミーマネージャー ----- */
+	enemyManager_->Update();
+
 	/* ----- Enemy エネミー ----- */
-	enemy_->Update();
+	//enemy_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
 	CheckAllCollision();
@@ -114,13 +123,16 @@ void GameScene::ModelDraw()
 	//Skydome::GetInstance()->Draw(camera_.get());
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw(camera_.get());
+	//Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- Player プレイヤー ----- */
-	player_->Draw3D(camera_.get());
+	//player_->Draw3D(camera_.get());
+
+	/* ----- EnemyManager エネミーマネージャー ----- */
+	enemyManager_->Draw3D(camera_.get());
 
 	/* ----- Enemy enemy ----- */
-	enemy_->Draw3D(camera_.get());
+	//enemy_->Draw3D(camera_.get());
 }
 
 
@@ -138,27 +150,53 @@ void GameScene::FrontSpriteDraw()
 void GameScene::CheckAllCollision()
 {
 	// Player with EnemyBullet
-	for (auto& bullet : enemy_->GetBulletList()) {
+	/*for (auto& bullet : enemy_->GetBulletList()) {
 		if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
 			player_->OnCollisionWithEnemyBullet();
 			bullet->OnCollisionWithPlayer();
 		}
+	}*/
+	for (auto& enemy : enemyManager_->GetEnemyList()) {
+		for (auto& bullet : enemy->GetBulletList()) {
+			if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
+				player_->OnCollisionWithEnemyBullet();
+				bullet->OnCollisionWithPlayer();
+			}
+		}
 	}
 
 	// PlayerBullet with Enemy
-	for (auto& bullet : player_->GetBulletList()) {
+	/*for (auto& bullet : player_->GetBulletList()) {
 		if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy_.get())) {
 			bullet->OnCollisionWithEnemy();
 			enemy_->OnCollisionWithPlayerBullet();
 		}
+	}*/
+	for (auto& bullet : player_->GetBulletList()) {
+		for (auto& enemy : enemyManager_->GetEnemyList()) {
+			if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy.get())) {
+				bullet->OnCollisionWithEnemy();
+				enemy->OnCollisionWithPlayerBullet();
+			}
+		}
 	}
 
 	// PlayerBullet with EnemyBullet
-	for (auto& playerBullet : player_->GetBulletList()) {
+	/*for (auto& playerBullet : player_->GetBulletList()) {
 		for (auto& enemyBullet : enemy_->GetBulletList()) {
 			if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
 				playerBullet->OnCollisionWithEnemyBullet();
 				enemyBullet->OnCollisionWithPlayerBullet();
+			}
+		}
+	}*/
+	for (auto& playerBullet : player_->GetBulletList()) {
+		for (auto& enemy : enemyManager_->GetEnemyList()) {
+			for (auto& enemyBullet : enemy->GetBulletList()) {
+				if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
+					playerBullet->OnCollisionWithEnemyBullet();
+					enemyBullet->OnCollisionWithPlayerBullet();
+				}
 			}
 		}
 	}

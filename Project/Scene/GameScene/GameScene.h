@@ -16,6 +16,7 @@
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
 #include "../../../Project/GameObject/Character/Player/Player.h"
+#include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
 #include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 
@@ -79,6 +80,9 @@ private:
 
 	// Player
 	std::unique_ptr<Player> player_;
+
+	// EnemyManager
+	std::unique_ptr<EnemyManager> enemyManager_;
 
 	// Enemy
 	std::unique_ptr<Enemy> enemy_;

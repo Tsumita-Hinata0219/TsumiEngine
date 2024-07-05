@@ -7,7 +7,7 @@ void TestPostEffect::Initialize()
 {
 	// リソースなどを作成
 	Create();
-	effectType_ = IPostEffect::Type::Grain;
+	effectType_ = IPostEffect::Type::OutLine;
 }
 
 
@@ -15,7 +15,8 @@ void TestPostEffect::Initialize()
 void TestPostEffect::Update()
 {
 
-
+	// ImGuiの描画
+	DrawImGui();
 
 #ifdef _DEBUG
 

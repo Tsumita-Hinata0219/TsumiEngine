@@ -9,6 +9,8 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
+#include <assert.h>
+
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
 #include "../../Project/Math/MyMath.h"
@@ -89,9 +91,9 @@ inline void BufferResource<T>::CreateResource(UINT itemCount)
 template<typename T>
 inline void BufferResource<T>::CreateVertexBufferView()
 {
-	VertexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
-	VertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
-	VertexBufferView_.StrideInBytes = UINT(sizeof(T));
+	vertexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	vertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
+	vertexBufferView_.StrideInBytes = UINT(sizeof(T));
 }
 
 
@@ -99,9 +101,9 @@ inline void BufferResource<T>::CreateVertexBufferView()
 template<typename T>
 inline void BufferResource<T>::CreateIndexBufferView()
 {
-	IndexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
-	IndexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
-	IndexBufferView_.SizeInBytes = UINS(sizeof(T));
+	indexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
+	indexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
+	indexBufferView_.SizeInBytes = UINS(sizeof(T));
 }
 
 
@@ -112,8 +114,8 @@ inline void BufferResource<T>::Map()
 	// buffer_ が nullptr の場合はエラー
 	if (!buffer_) {
 		// ログを出力し、アサーションでプログラムを停止させる
-		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling Map.")
-			assert(false);
+		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling Map.");
+		assert(false);
 		return;
 	}
 
@@ -183,7 +185,7 @@ inline void BufferResource<T>::CreateBufferResource()
 	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
-		IID_PPV_ARGS(&resource));
+		IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr_));
 
 }

@@ -7,7 +7,7 @@ void IPostEffect::DrawImGui()
 {
 	if (ImGui::TreeNode("PostEffect")) {
 
-		ImGui::ColorEdit4("Color", &material_.mtlData.color.x);
+		//ImGui::ColorEdit4("Color", &material_.mtlData.color.x);
 		/*if (ImGui::Button("None")) {
 			effectType_ = IPostEffect::Type::None;
 		}*/
@@ -17,9 +17,9 @@ void IPostEffect::DrawImGui()
 		/*if (ImGui::Button("ColorGrading")) {
 			effectType_ = IPostEffect::Type::ColorGrading;
 		}*/
-		if (ImGui::Button("Dissolve")) {
+		/*if (ImGui::Button("Dissolve")) {
 			effectType_ = IPostEffect::Type::Dissolve;
-		}
+		}*/
 		if (ImGui::Button("GaussianFilter")) {
 			effectType_ = IPostEffect::Type::GaussianFilter;
 		}
@@ -29,15 +29,15 @@ void IPostEffect::DrawImGui()
 		if (ImGui::Button("GrayScale")) {
 			effectType_ = IPostEffect::Type::GrayScale;
 		}
-		if (ImGui::Button("OutLine")) {
+		if (ImGui::Button("LuminanceOutLine")) {
 			effectType_ = IPostEffect::Type::OutLine;
 		}
 		if (ImGui::Button("RadialBlur")) {
 			effectType_ = IPostEffect::Type::RadialBlur;
 		}
-		if (ImGui::Button("Random")) {
+		/*if (ImGui::Button("Random")) {
 			effectType_ = IPostEffect::Type::Random;
-		}
+		}*/
 		if (ImGui::Button("SepiaTone")) {
 			effectType_ = IPostEffect::Type::SepiaTone;
 		}

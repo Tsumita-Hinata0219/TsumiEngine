@@ -5,20 +5,19 @@
 // 初期化処理
 void TestPostEffect::Initialize()
 {
-	// リソースなどを作成
-	Create();
-	effectType_ = IPostEffect::Type::Vignetting;
+	boxFilter_ = std::make_unique<BoxFilterEffect>();
+	boxFilter_->Initialize();
 }
 
 
 // 更新処理
 void TestPostEffect::Update()
 {
-
 #ifdef _DEBUG
 
 	// ImGuiの描画
-	DrawImGui();
+	boxFilter_->DrawImGui();
+
 
 #endif // _DEBUG
 }
@@ -27,7 +26,6 @@ void TestPostEffect::Update()
 // 描画処理
 void TestPostEffect::Draw(Camera* camera)
 {
+	boxFilter_->Draw(camera);
 
-	// コマンドコール
-	CommandCall(camera);
 }

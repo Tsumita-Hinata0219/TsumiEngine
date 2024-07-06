@@ -1,17 +1,20 @@
 #pragma once
 
+#ifndef BOXFILTEREFFECT_H
+#define BOXFILTEREFFECT_H
+
+
 #include "../../../BufferResource/BufferResource.h"
 #include "../../../CommandManager/CommandManager.h"
-#include "../../../CreateResource/CreateResource.h"
 #include "../../../PipeLineManager/PipeLineManager.h"
 #include "../../../View/SRVManager/SRVManager.h"
 #include "../../../View/RTVManager/RTVManager.h"
+#include "../IPostEffect.h"
 #include "../../Materials/PostEffectMaterials.h"
-#include "../../PostEffectMaterial/PostEffectMaterial.h"
 
 
 /* BoxFilterEffectクラス */
-class BoxFilterEffect {
+class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
 
 public:
 
@@ -20,30 +23,36 @@ public:
 	~BoxFilterEffect() {};
 
 	// 初期化処理、描画処理
-	void Initialize();
-	void Draw();
+	void Initialize() override;
+	void Draw([[maybe_unused]] Camera* camera) override;
 
 	// Imguiの描画
-	void DrawImGui(std::string name = "");
-
-
-public:
-
-	// バッファーにセットするMaterialData
-	// 外部でも外部でも扱いやす用にpublicにしておく
-	BoxFilterMtl mtlData_{};
+	void DrawImGui(std::string name = "") override;
 
 
 private:
 
-	// SRV
-	uint32_t srv_ = 0;
+	// コマンドコール
+	void CommandCall() override;
 
-	// バッファー
-	BufferResource<BoxFilterMtl> mtlBuffer_{};
-
-	// string 
-	std::string label_;
-
+//
+//public:
+//
+//	// バッファーにセットするMaterialData
+//	// 外部でも外部でも扱いやす用にpublicにしておく
+//	BoxFilterMtl mtlData_{};
+//
+//
+//private:
+//
+//	// SRV
+//	uint32_t srv_ = 0;
+//
+//	// バッファー
+//	BufferResource<BoxFilterMtl> mtlBuffer_{};
+//
+//	// ImGuiLabel 
+//	std::string label_;
 };
 
+#endif // BOXFILTEREFFECT_H

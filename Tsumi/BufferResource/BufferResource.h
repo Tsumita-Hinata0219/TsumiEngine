@@ -44,7 +44,7 @@ public:
 	void UnMap();
 
 	// データを書き込む
-	void WriteData(const T* data);
+	void WriteData(const T data);
 
 	// コマンドを積む
 	void CommandCall(UINT number);
@@ -129,8 +129,7 @@ inline void BufferResource<T>::Map()
 template<typename T>
 inline void BufferResource<T>::UnMap()
 {
-	buffer_->Unmap(0, nullptr);
-
+	// buffer_ と mappedData_ が有効な時にUnMap
 	if (buffer_ && mappedData_) {
 		buffer_->Unmap(0, nullptr);
 		mappedData_ = nullptr;
@@ -140,7 +139,7 @@ inline void BufferResource<T>::UnMap()
 
 // データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T* data)
+inline void BufferResource<T>::WriteData(const T data)
 {
 	assert(mappedData_);
 	*mappedData_ = data;

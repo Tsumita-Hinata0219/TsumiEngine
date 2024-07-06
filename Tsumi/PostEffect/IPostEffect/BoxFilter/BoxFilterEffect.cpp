@@ -5,16 +5,29 @@
 // 初期化処理
 void BoxFilterEffect::Initialize()
 {
+	// SRV作成
 	Microsoft::WRL::ComPtr<ID3D12Resource> stv =
 		RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
+	srv_ = SRVManager::CreatePostEffectSRV(stv);
 
+	// バッファー作成
+	mtlBuffer_.CreateResource();
+
+	// MtlData初期値
+	mtlData_.color = Vector4::one;
 }
 
 
 // 描画処理
-void BoxFilterEffect::Draw()
+void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
 {
+	// MtlBufferにMtlを書き込む
+	mtlBuffer_.Map();
+	mtlBuffer_.WriteData(mtlData_);
+	mtlBuffer_.UnMap();
 
+	// コマンドコール
+	CommandCall();
 }
 
 
@@ -34,4 +47,24 @@ void BoxFilterEffect::DrawImGui(std::string name)
 	}
 
 #endif // _DEBUG
+}
+
+
+// コマンドコール
+void BoxFilterEffect::CommandCall()
+{
+	// コマンドの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineの設定
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::BoxFilter);
+
+	// SRVをコマンドに積む
+	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+
+	// MtlBufferをコマンドに積む
+	mtlBuffer_.CommandCall(4);
+
+	// 描画
+	commands.List->DrawInstanced(3, 1, 0, 0);
 }

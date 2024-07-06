@@ -9,15 +9,13 @@ void RTVManager::Initialize() {}
 // 開始処理
 void RTVManager::BeginFrame()
 {
-	// 使用サイズが超過していないかチェック
-	// 超えていたらassert
-	Log("RTVの使用サイズ超過");
-	assert(index_ >= RTV_Index_Max);
+	if (RTVManager::GetInstance()->index_ >= RTV_Index_Max) {
+		// ディスクリプタインデックスが最大値を超えた場合エラーログを出力
+		Log("RTVManager index Overflow\n");
+		// アサートでプログラムを停止
+		assert(0);
+	}
 }
-
-
-// 終了処理
-void RTVManager::EndFrame() {}
 
 
 // ImGui描画
@@ -39,9 +37,12 @@ void RTVManager::AddRTV(const std::string name, RTVProperty prope)
 	// ヒットしたらreturn。同じものは作らないよ
 	if (rtv) { return; }
 
-	// ヒットしなければマップに追加してreturn
+	// ヒットしなければマップに追加
 	unique_ptr<RTVData> newRTV = make_unique<RTVData>(prope);
 	instance->rtvMap_[name] = move(newRTV);
+
+	// indexをインクリメント
+	instance->index_++;
 }
 
 
@@ -78,6 +79,9 @@ void RTVManager::RemoveRTVData(std::string name)
 
 	// ヒットしたら破棄
 	instance->rtvMap_.erase(name);
+
+	// indexをデクリメント
+	instance->index_--;
 }
 
 
@@ -87,6 +91,10 @@ void RTVManager::AllRemoveRTVData()
 	// インスタンスの取得
 	RTVManager* instance = RTVManager::GetInstance();
 
+	// マップのクリア
 	instance->rtvMap_.clear();
+
+	// indexを0で初期化
+	instance->index_ = 0;
 }
 

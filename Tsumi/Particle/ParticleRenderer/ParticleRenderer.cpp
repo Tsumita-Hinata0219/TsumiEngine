@@ -20,7 +20,8 @@ void ParticleRenderer::Initialize(uint32_t maxInstance)
 	resource_.IndexBufferView = CreateResource::CreateIndexBufferview(sizeof(uint32_t) * 6, resource_.Index.Get());
 
 	resource_.instancing = CreateResource::CreateBufferResource(sizeof(ParticleTransformationMatrix) * instanceNum_);
-	dsvIndex_ = DescriptorManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
+	//dsvIndex_ = DescriptorManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
+	dsvIndex_ = SRVManager::CreateInstancingSRV(instanceNum_, resource_.instancing, sizeof(ParticleTransformationMatrix));
 }
 
 
@@ -120,11 +121,14 @@ void ParticleRenderer::CommandCall()
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
-	DescriptorManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
+	//DescriptorManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
+	SRVManager::SetGraphicsRootDescriptorTable(1, dsvIndex_);
+
 
 	// Texture
 	if (!useTexture_ == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(2, useTexture_);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(2, useTexture_);
+		SRVManager::SetGraphicsRootDescriptorTable(2, useTexture_);
 	}
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後

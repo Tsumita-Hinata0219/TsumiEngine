@@ -1,6 +1,7 @@
 #include "ModelGLTFState.h"
 #include "../Model.h"
 
+
 /// <summary>
 /// 初期化処理
 /// </summary>
@@ -125,7 +126,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -133,7 +135,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 	// 描画！(DrawCall / ドローコール)。
@@ -144,6 +147,9 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// SRVManagerの取得
+	SRVManager* srvManager = SRVManager::GetInstance();
 
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SkinningObject3D);
@@ -170,18 +176,21 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		srvManager->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
 	commands.List->SetGraphicsRootConstantBufferView(4, resource_.Lighting->GetGPUVirtualAddress());
 
 	// Skinning
-	commands.List->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
+	//commands.List->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
+	srvManager->SetGraphicsRootDescriptorTable(5, skinCluster.srvHandle);
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		srvManager->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 

@@ -3,7 +3,7 @@
 
 
 /// -------------------------------------------------------------------------
-/// ログ
+/// char , std::string
 /// -------------------------------------------------------------------------
 // string->wstring
 std::wstring ConverString(const std::string& str) {
@@ -42,6 +42,16 @@ void Log(const std::string& message) {
 	OutputDebugStringA(message.c_str());
 }
 
+// ファイルパスから拡張子を抽出する関数
+std::string GetExtension(const std::string& path)
+{
+	size_t dotPos = path.find_last_of('.');
+	if (dotPos == std::string::npos) {
+		return ""; // 拡張子がない場合は空文字列を返す
+	}
+	return path.substr(dotPos);
+}
+
 
 
 
@@ -61,6 +71,12 @@ float Clamp(const float& value, const float& minValue, const float& maxValue) {
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
 float APOneAsZeroCloser(float value) {
 	return exp(-pow(value, 2.0f));
+}
+
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees)
+{
+	return degrees * (float(M_PI) / 180.0f);
 }
 
 

@@ -23,7 +23,7 @@
 
 
 /// -------------------------------------------------------------------------
-/// ログ
+/// char , std::string
 /// -------------------------------------------------------------------------
 // string->wstring
 std::wstring ConverString(const std::string& str);
@@ -31,6 +31,8 @@ std::wstring ConverString(const std::string& str);
 std::string ConvertString(const std::wstring& str);
 // wstring->string
 void Log(const std::string& message);
+// ファイルパスから拡張子を抽出する関数
+std::string GetExtension(const std::string& path);
 
 
 
@@ -44,7 +46,8 @@ float Lerp(const float& start, const float& end, float t);
 float Clamp(const float& value, const float& minValue, const float& maxValue);
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
 float APOneAsZeroCloser(float value);
-
+// 角度を度からラジアンに変換する処理
+float ToRadians(float degrees);
 
 
 

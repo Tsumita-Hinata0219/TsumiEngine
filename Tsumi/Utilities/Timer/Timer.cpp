@@ -5,6 +5,11 @@
 // スタート時に呼び出す処理
 void Timer::Start(float setStart, float setEnd)
 {
+	// 既にスタートしていたら早期return
+	if (this->isActive_) {
+		return;
+	}
+
 	this->nowFrame_ = setStart;
 	this->endFrame_ = setEnd;
 

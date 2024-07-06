@@ -74,7 +74,9 @@ void IPostEffect::Create()
 
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
+	srv_ = SRVManager::CreatePostEffectSRV(stv);
+	//srv_ = DescriptorManager::CreateRenderTextureDepthSRV(stv);
 }
 
 
@@ -88,7 +90,7 @@ void IPostEffect::CommandCall(Camera* camera)
 	PipeLineCheck();
 
 	// Materialの設定
-	if (effectType_ == IPostEffect::Type::Vignetting) {
+	/*if (effectType_ == IPostEffect::Type::Vignetting) {
 		vignettingMtl_.TransferMaterial();
 		commands.List->SetGraphicsRootConstantBufferView(4, vignettingMtl_.constBuffer->GetGPUVirtualAddress());
 	}
@@ -96,10 +98,14 @@ void IPostEffect::CommandCall(Camera* camera)
 		material_.mtlData.projectionInverse = camera->projectionInverseMatrix;
 		material_.TransferMaterial();
 		commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
-	}
-
+	}*/
+	material_.mtlData.projectionInverse = camera->projectionInverseMatrix;
+	material_.TransferMaterial();
+	commands.List->SetGraphicsRootConstantBufferView(4, material_.constBuffer->GetGPUVirtualAddress());
+	
 	// DescriptorTableの設定
-	DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//DescriptorManager::SetGraphicsRootDescriptorTable(3, srv_);
+	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
 
 	// 頂点3つ描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

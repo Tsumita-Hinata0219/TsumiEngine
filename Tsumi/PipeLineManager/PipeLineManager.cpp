@@ -44,6 +44,10 @@ void PipeLineManager::Initialize()
 	instance->skinningObject3DPipeLine_ = make_unique<SkinningObject3dPipeLine>();
 	instance->pipeLineMap_[PipeLineType::SkinningObject3D] = instance->skinningObject3DPipeLine_->SetUpPso();
 
+	// Skybox
+	instance->skyboxPipeLine_ = make_unique<SkyboxPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Skybox] = instance->skyboxPipeLine_->SetUpPso();
+
 	// Sprite
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();

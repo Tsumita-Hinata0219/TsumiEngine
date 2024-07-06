@@ -90,7 +90,8 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -98,7 +99,8 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
+		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 	// 描画！(DrawCall / ドローコール)。

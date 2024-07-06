@@ -35,6 +35,8 @@
     <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Grain\Grain.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Absent\Absent.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -54,7 +56,6 @@
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="externals\imgui\imgui.cpp" />
     <ClCompile Include="externals\imgui\imgui_demo.cpp" />
     <ClCompile Include="externals\imgui\imgui_draw.cpp" />
@@ -72,7 +73,6 @@
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
-    <ClCompile Include="Project\Scene\SceneState\GameScene\GameScene.cpp" />
     <ClCompile Include="Tsumi\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Model.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelManager\ModelManager.cpp" />
@@ -84,7 +84,6 @@
     <ClCompile Include="Tsumi\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -107,7 +106,6 @@
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Tsumi\Input\Input.cpp" />
-    <ClCompile Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
@@ -176,12 +174,21 @@
     <ClCompile Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
+    <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -214,7 +221,6 @@
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
@@ -229,7 +235,6 @@
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
-    <ClInclude Include="Project\Scene\SceneState\GameScene\GameScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\3D\Model\IModelState.h" />
     <ClInclude Include="Tsumi\3D\Model\Model.h" />
@@ -242,7 +247,6 @@
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
-    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
@@ -276,7 +280,6 @@
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\Input\Input.h" />
-    <ClInclude Include="Tsumi\TextureManager\TextureDataResource\TextureDataResource.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
@@ -353,6 +356,8 @@
     <ClInclude Include="Tsumi\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
@@ -361,6 +366,14 @@
     <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
+    <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
+    <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
+    <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />
@@ -376,6 +389,7 @@
     <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="cpp.hint" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
+    <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

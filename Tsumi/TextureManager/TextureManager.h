@@ -1,39 +1,54 @@
 #pragma once
 
-#include "DirectXTex.h"
-#include "../Base/DXCommon/DirectXCommon.h"
-#include "../DescriptorManager/DescriptorManager.h"
-#include "TextureDataResource/TextureDataResource.h"
-#include "../../Project/Math/MyMath.h"
+#include <d3d12.h>
+#include <dxgi1_4.h>
+#include <d3dcompiler.h>
+#include <DirectXMath.h>
+#include <d3dx12.h>
 
 #include <cassert>
 #include <map>
+#include<vector>
+
+#include "../Base/DXCommon/DirectXCommon.h"
+#include "../CommandManager/CommandManager.h"
+#include "../CreateResource/CreateResource.h"
+#include "../View/SRVManager/SRVManager.h"
+#include "../../Project/Math/MyMath.h"
 
 
-enum class TextureFrom {
-	Texture,
-	Obj,
-	gLTF,
+// TextureData
+struct TextureData {
+	uint32_t index;
+	ComPtr<ID3D12Resource> resource;
+	Vector2 size;
+};
+
+namespace TextureFileFormat {
+	const std::pair<std::string, uint32_t> PNG = { ".png", 0 };
+	const std::pair<std::string, uint32_t> JPEG = { ".jpeg", 1 };
+	const std::pair<std::string, uint32_t> DSS = { ".dds", 2 };
 };
 
 class TextureManager {
 
+private: // シングルトンデザインパターン
+
+	// コンストラクタ、デストラクタ
+	TextureManager() = default;
+	~TextureManager() = default;
+	TextureManager(const TextureManager&) = delete;
+	const TextureManager& operator=(const TextureManager&) = delete;
+
 public: // メンバ関数
-
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	TextureManager() {};
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~TextureManager() {};
 
 	/// <summary>
 	/// TextureManagerのインスタンス取得
 	/// </summary>
-	static TextureManager* GetInstance();
+	static TextureManager* GetInstance() {
+		static TextureManager instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// 初期化処理
@@ -48,7 +63,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textuerデータを読み込む
 	/// </summary>
-	static uint32_t LoadTexture(const std::string& routeFilePath, const std::string& filePath, TextureFrom from = TextureFrom::Texture);
+	static uint32_t LoadTexture(const std::string& filePath, const std::string& fileName);
 
 	/// <summary>
 	/// Textureデータの解放
@@ -59,57 +74,65 @@ public: // メンバ関数
 private: // メンバ関数
 
 	/// <summary>
+	/// Fenceを生成する
+	/// </summary>
+	void CreateFence();
+
+	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
-	static bool CheckTextureDatas(std::string filePath);
+	bool CheckTextureData(std::string key);
+
+	/// <summary>
+	/// TextureDataを生成する
+	/// </summary>
+	void CreateTextureDataFormatPng(std::string filePath, std::string key);
+	void CreateTextureDataFormatJpeg(std::string filePath, std::string key);
+	void CreateTextureDataFormatDDS(std::string filePath, std::string key);
 
 	/// <summary>
 	/// Textureファイルを開く
 	/// </summary>
-	static DirectX::ScratchImage CreateMipImage(const std::string& filePath);
+	DirectX::ScratchImage CreateMipImage(const std::string& filePath, const uint32_t format);
 
 	/// <summary>
 	/// DirectX12のTextureResourceを作る
 	/// </summary>
-	static ComPtr<ID3D12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata);
-
-	/// <summary>
-	/// TextureResourceにデータを転送する
-	/// </summary>
-	static void UpdateTextureData(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TextureData textureData);
-
-	/// <summary>
-	/// metaDataを基にSRVの設定
-	/// </summary>
-	static D3D12_SHADER_RESOURCE_VIEW_DESC SettingSRVDesc(const DirectX::TexMetadata& metadata);
+	ComPtr<ID3D12Resource> CreateTextureResource(const DirectX::TexMetadata& metadata);
 
 	/// <summary>
 	/// metadataを基にResourceの設定
 	/// </summary>
-	static D3D12_RESOURCE_DESC SettingResource(const DirectX::TexMetadata& metadata);
+	D3D12_RESOURCE_DESC SettingResource(const DirectX::TexMetadata& metadata);
 
 	/// <summary>
 	/// 利用するHeapの設定
 	/// </summary>
-	static D3D12_HEAP_PROPERTIES SettingUseHeap();
+	D3D12_HEAP_PROPERTIES SettingUseHeap();
 
 	/// <summary>
 	/// Resourceを生成する
 	/// </summary>
-	static ComPtr<ID3D12Resource> CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties);
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties);
 
+	/// <summary>
+	/// TextureResourceにデータを転送する
+	/// </summary>
+	void UpdateTextureData(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TextureData textureData);
+	Microsoft::WRL::ComPtr<ID3D12Resource>  UploadTextureData(Microsoft::WRL::ComPtr<ID3D12Resource> texture, const DirectX::ScratchImage& mipImages);
+
+	/// <summary>
+	/// Commandを実行する
+	/// </summary>
+	void ExeCommands();
 
 private: // メンバ変数
 
-	// ロードできるテクスチャの最大数
-	const static uint32_t TexLoadMax = 128;
+	// テクスチャのコンテナマップ
+	std::map < std::string, TextureData> textureMaps_;
 
-	// デスクリプターヒープの場所指定のインデックス
-	uint32_t LoadTextureIndex_ = 0;
-
-	// リソース
-	ComPtr<ID3D12Resource> Resource_[TexLoadMax];
-
-
-	map<std::string, unique_ptr<TextureDataResource>> textureDatas_;
+	// Fence
+	Microsoft::WRL::ComPtr<ID3D12Fence> fence_;
+	uint64_t fenceValue_ = 0;
+	HANDLE fenceEvent_{};
 };

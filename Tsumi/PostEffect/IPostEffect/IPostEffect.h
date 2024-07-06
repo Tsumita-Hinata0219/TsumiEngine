@@ -9,6 +9,7 @@
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../View/SRVManager/SRVManager.h"
+#include "../../View/RTVManager/RTVManager.h"
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "../Materials/PostEffectMaterials.h"
 #include "../PostEffectMaterial/PostEffectMaterial.h"
@@ -37,6 +38,17 @@ protected:
 
 	// コマンドコール
 	virtual void CommandCall() = 0;
+
+	// SRVやBufferの作成
+	virtual void Create() {
+		// SRV作成
+		Microsoft::WRL::ComPtr<ID3D12Resource> stv =
+			RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
+		srv_ = SRVManager::CreatePostEffectSRV(stv);
+
+		// バッファー作成
+		mtlBuffer_.CreateResource();
+	}
 
 
 protected: // メンバ変数

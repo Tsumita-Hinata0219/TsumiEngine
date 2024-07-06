@@ -17,7 +17,6 @@
 #include "../../View/RTVManager/RTVManager.h"
 
 
-
 // スワップチェーン
 struct SwapChains {
 	ComPtr<IDXGISwapChain4> swapChain;				// スワップチェーン
@@ -279,4 +278,6 @@ private: // メンバ変数
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc_{};
 
 	ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap_ = nullptr;
+
+
 };

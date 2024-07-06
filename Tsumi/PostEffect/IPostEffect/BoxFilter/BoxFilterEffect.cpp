@@ -5,13 +5,7 @@
 // 初期化処理
 void BoxFilterEffect::Initialize()
 {
-	// SRV作成
-	Microsoft::WRL::ComPtr<ID3D12Resource> stv =
-		RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-	srv_ = SRVManager::CreatePostEffectSRV(stv);
-
-	// バッファー作成
-	mtlBuffer_.CreateResource();
+	Create();
 
 	// MtlData初期値
 	mtlData_.color = Vector4::one;

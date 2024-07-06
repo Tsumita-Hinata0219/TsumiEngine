@@ -6,6 +6,8 @@
 #include "../Scene/GameScene/GameScene.h"
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
 
+#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
+
 
 /* GameManagerクラス */
 class GameManager {
@@ -35,4 +37,7 @@ public:
 private:
 
 	IScene* Scene_ = nullptr;
+
+	// 仕方ないからここでAbsentEffectを使う
+	std::unique_ptr<AbsentEffect> absentEffect_;
 };

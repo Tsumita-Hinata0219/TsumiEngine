@@ -53,6 +53,7 @@ void DirectXCommon::Initialize() {
 	// ViewportとScissor
 	SetViewport();
 	SetScissor();
+
 }
 
 

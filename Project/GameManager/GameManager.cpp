@@ -10,6 +10,8 @@ GameManager::GameManager() {
 	Tsumi::Initialize();
 	Scene_ = new GameScene();
 	Scene_->Initialize();
+	absentEffect_ = std::make_unique<AbsentEffect>();
+	absentEffect_->Initialize();
 }
 
 
@@ -33,28 +35,23 @@ void GameManager::Run() {
 	while (Tsumi::ProcessMessage() == 0) {
 
 		Tsumi::BeginFlame();
-
 		Scene_->Update(this);
 
-	
 		//// ポストエフェクト
 		DirectXCommon::PreDrawForPostEffect();
 		
-		// オブジェクト
 		Scene_->BackSpriteDraw();
 		Scene_->ModelDraw();
-		//Scene_->FrontSpriteDraw();
 
 		DirectXCommon::PostDrawForPostEffect();
 
 		// スワップチェーン
 		DirectXCommon::PreDrawForSwapChain();
 
+		absentEffect_->Draw(nullptr);
 		Scene_->FrontSpriteDraw();
-	
-		// ImGui
-		Tsumi::EndFlame();
 
+		Tsumi::EndFlame();
 		DirectXCommon::PostDrawForSwapChain();
 	}
 	TextLog::Load("Run_End");

@@ -7,6 +7,8 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 
+/* AbsentMtl */
+struct AbsentMtl{};
 
 /* BoxFilter用 */
 struct BoxFilterMtl {

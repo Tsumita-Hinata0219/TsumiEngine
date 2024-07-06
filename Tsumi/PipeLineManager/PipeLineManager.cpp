@@ -48,6 +48,11 @@ void PipeLineManager::Initialize()
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
+
+	// Absent
+	instance->absentPipeLine_ = make_unique<AbsentPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Absent] = instance->absentPipeLine_->SetUpPso();
+
 	// BoxFilter
 	instance->boxFilterPipeLine_ = make_unique<BoxFilterPipeLine>();
 	instance->pipeLineMap_[PipeLineType::BoxFilter] = instance->boxFilterPipeLine_->SetUpPso();

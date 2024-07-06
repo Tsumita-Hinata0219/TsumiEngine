@@ -15,9 +15,6 @@ void TestPostEffect::Initialize()
 void TestPostEffect::Update()
 {
 
-	// ImGuiの描画
-	DrawImGui();
-
 #ifdef _DEBUG
 
 	// ImGuiの描画

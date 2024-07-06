@@ -29,7 +29,7 @@ public:
 
 
 	// Resource作成
-	void CreateResource(UINT itemCount);
+	void CreateResource(UINT itemCount = 1);
 
 	// VertexBufferViewの作成
 	void CreateVertexBufferView();

@@ -22,7 +22,7 @@
 #include "ModelPipeLine/SkinningObject3dPipeLine/SkinningObject3dPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
 
-
+#include "PostEffectPipeLine/AbsentPipeLine/AbsentPipeLine.h"
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
 #include "PostEffectPipeLine/DissolvePipeLine/DissolvePipeLine.h"
 #include "PostEffectPipeLine/GaussianFilterPipeLine/GaussianFilterPipeLine.h"
@@ -48,6 +48,7 @@ enum class PipeLineType : uint32_t {
 	SkinningObject3D,
 	Sprite,
 	PostEffect,
+	Absent,
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,
@@ -127,6 +128,10 @@ private: // メンバ変数
 
 	// Sprite
 	std::unique_ptr<SpritePipeLine> spritePipeLine_;
+
+
+	// Absent
+	std::unique_ptr<AbsentPipeLine> absentPipeLine_;
 
 	// BoxFilter
 	std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;

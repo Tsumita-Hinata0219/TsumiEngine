@@ -139,6 +139,7 @@ void ShaderManager::ModelShadersCompiles()
 void ShaderManager::PostEffectShadersCompiles()
 {
 	PostEffectShader();
+	AbsentShader();
 	BoxFilterShader();
 	//ColorGrading();
 	DissolveShader();
@@ -275,6 +276,16 @@ void ShaderManager::PostEffectShader() {
 		L"Resources/Shaders/PostEffect.PS.hlsl",
 		shader);
 	postEffectShadersMap_["PostEffect"] = shader;
+}
+
+void ShaderManager::AbsentShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/Absent/Absent.PS.hlsl",
+		shader);
+	postEffectShadersMap_["Absent"] = shader;
 }
 
 void ShaderManager::BoxFilterShader()

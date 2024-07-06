@@ -112,6 +112,7 @@ private: // メンバ関数
 #pragma region PostEffectShaders
 
 	void PostEffectShader();
+	void AbsentShader();
 	void BoxFilterShader();
 	void ColorGrading();
 	void DissolveShader();

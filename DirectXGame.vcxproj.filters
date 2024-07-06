@@ -181,6 +181,7 @@
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -359,6 +360,7 @@
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

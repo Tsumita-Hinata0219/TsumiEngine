@@ -222,6 +222,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.cpp" />
     <ClCompile Include="Tsumi\Particle\ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PipeLineManager.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
     <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
@@ -347,6 +348,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Particle\ParticleRenderer\ParticleRenderer.h" />
     <ClInclude Include="Tsumi\Particle\ParticleSystem\ParticleSystem.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PipeLineManager.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />

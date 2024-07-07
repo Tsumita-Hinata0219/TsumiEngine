@@ -41,7 +41,10 @@ struct GrayScaleMtl {
 };
 
 /* OutLine用 */
-struct OutLineMtl {
+struct LuminanceOutLineMtl {
+	Vector4 color{};
+};
+struct DepthOutLine {
 	Vector4 color{};
 };
 

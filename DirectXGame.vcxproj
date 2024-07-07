@@ -237,7 +237,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
-    <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />

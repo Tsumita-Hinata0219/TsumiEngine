@@ -6,8 +6,8 @@
 void TestPostEffect::Initialize()
 {
 	// BoxFilter
-	boxFilter_ = std::make_unique<BoxFilterEffect>();
-	boxFilter_->Initialize();
+	/*boxFilter_ = std::make_unique<BoxFilterEffect>();
+	boxFilter_->Initialize();*/
 
 	// ColorGrading
 	/*colorGrading_ = std::make_unique<ColorGradingEffect>();
@@ -55,7 +55,7 @@ void TestPostEffect::Update()
 #ifdef _DEBUG
 
 	// ImGuiの描画
-	boxFilter_->DrawImGui();
+	//boxFilter_->DrawImGui();
 
 
 #endif // _DEBUG

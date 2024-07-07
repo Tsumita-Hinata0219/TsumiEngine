@@ -135,7 +135,6 @@
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
-    <ClCompile Include="Tsumi\PostEffect\IPostEffect\IPostEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />

@@ -33,7 +33,7 @@ public:
 private:
 
 	// BoxFilter
-	std::unique_ptr<BoxFilterEffect> boxFilter_;
+	//std::unique_ptr<BoxFilterEffect> boxFilter_;
 
 	// ColorGrading
 	//std::unique_ptr<ColorGradingEffect> colorGrading_;

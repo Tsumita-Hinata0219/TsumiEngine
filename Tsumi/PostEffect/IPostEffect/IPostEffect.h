@@ -2,18 +2,15 @@
 
 #include <iostream>
 
-#include "../../Base/WinApp/WinApp.h"
 #include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
-#include "../../../Project/Math/MyMath.h"
-#include "../../CreateResource/CreateResource.h"
-#include "../../DescriptorManager/DescriptorManager.h"
 #include "../../View/SRVManager/SRVManager.h"
 #include "../../View/RTVManager/RTVManager.h"
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "../Materials/PostEffectMaterials.h"
 #include "../PostEffectMaterial/PostEffectMaterial.h"
 #include "../../Project/GameObject/Camera/Camera.h"
+#include "../../../Project/Math/MyMath.h"
 
 
 /* IPostEffectクラス */
@@ -22,7 +19,7 @@ class IPostEffect {
 
 public: // メンバ関数
 
-	// コンストラクタ、デストラクタ
+	// デストラクタ
 	virtual ~IPostEffect() {};
 
 	// 初期化処理、更新処理、描画処理

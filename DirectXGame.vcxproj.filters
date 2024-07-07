@@ -190,6 +190,16 @@
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Absent\AbsentEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -376,6 +386,16 @@
     <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Absent\AbsentEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\Dissolve\DissolveEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\Grain\GrainEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

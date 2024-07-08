@@ -5,6 +5,10 @@
 // 初期化処理
 void TestPostEffect::Initialize()
 {
+	// Absent
+	absent_ = std::make_unique<AbsentEffect>();
+	absent_->Initialize();
+
 	// BoxFilter
 	boxFilter_ = std::make_unique<BoxFilterEffect>();
 	boxFilter_->Initialize();
@@ -46,6 +50,21 @@ void TestPostEffect::Initialize()
 	vignetting_->Initialize();
 
 
+	// IPostEffect::Typeを表す文字
+	imguiEffectName_ = {
+		"Absent",
+		"BoxFilter",
+		"ColorGrading",
+		"Dissolve",
+		"GaussianFilter",
+		"Grain",
+		"GrayScale",
+		"LuminanceOutLine",
+		"RadialBlur",
+		"Random",
+		"SepiaTone",
+		"Vignetting"
+	};
 }
 
 
@@ -54,46 +73,48 @@ void TestPostEffect::Update()
 {
 #ifdef _DEBUG
 
-	// ImGuiの描画
-#if 0 // BoxFilter
-	boxFilter_->DrawImGui();
-#endif
+	if (ImGui::TreeNode("TestPostEffect")) {
 
-#if 0 // ColorGrading
-	colorGrading_->DrawImGui();
-#endif
+		ChangeImGui();
 
-#if 0 // Dissolve
-	dissolve_->DrawImGui();
-#endif
+		if (activeEffects_ == EffectType::Absent) {
 
-#if 0 // GaussianFilter
-	gaussianFilter_->DrawImGui();
-#endif
+			absent_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::BoxFilter) {
+			boxFilter_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::ColorGrading) {
+			colorGrading_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::Dissolve) {
+			dissolve_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::GauusianFilter) {
+			gaussianFilter_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::Grain) {
+			grain_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::LuminanceOutLine) {
+			luminanceOutLine_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::RadialBlur) {
+			radialBlur_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::Random) {
+			random_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::SepiaTone) {
+			sepiaTone_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::Vignetting) {
+			vignetting_->DrawImGui();
+		}
+		ImGui::Text("");
 
-#if 0 // Grain
-	grain_->DrawImGui();
-#endif
-
-#if 0 // LuminanceOutLine
-	luminanceOutLine_->DrawImGui();
-#endif
-
-#if 0 // RadialBlur
-	radialBlur_->DrawImGui();
-#endif
-
-#if 0 // Random
-	random_->DrawImGui();
-#endif
-
-#if 0 // SepiaTone
-	sepiaTone_->DrawImGui();
-#endif
-
-#if 0 // Vignetting
-	vignetting_->DrawImGui();
-#endif
+		ImGui::TreePop();
+	}
 
 #endif // _DEBUG
 }
@@ -103,45 +124,68 @@ void TestPostEffect::Update()
 void TestPostEffect::Draw(Camera* camera)
 {
 	camera;
+	if (activeEffects_ == EffectType::Absent) {
+		absent_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::BoxFilter) {
+		boxFilter_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::ColorGrading) {
+		colorGrading_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::Dissolve) {
+		dissolve_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::GauusianFilter) {
+		gaussianFilter_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::Grain) {
+		grain_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::LuminanceOutLine) {
+		luminanceOutLine_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::RadialBlur) {
+		radialBlur_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::Random) {
+		random_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::SepiaTone) {
+		sepiaTone_->Draw(camera);
+	}
+	else if (activeEffects_ == EffectType::Vignetting) {
+		vignetting_->Draw(camera);
+	}
 
-#if 0 // BoxFilter
-	boxFilter_->Draw(camera);
-#endif
+}
 
-#if 0 // ColorGrading
-	colorGrading_->Draw(camera);
-#endif
 
-#if 0 // Dissolve
-	dissolve_->Draw(camera);
-#endif
+// ImGuiの描画
+void TestPostEffect::ChangeImGui()
+{
+	// std::vector<std::string>をstd::vector<const char*>に変換
+	std::vector<const char*> cstrEffectNames;
+	for (const auto& name : imguiEffectName_) {
+		cstrEffectNames.push_back(name.c_str());
+	}
 
-#if 0 // GaussianFilter
-	gaussianFilter_->Draw(camera);
-#endif
+	if (ImGui::Combo("EffectType", &imguiComboIndex_, cstrEffectNames.data(), int(cstrEffectNames.size()))) {
 
-#if 0 // Grain
-	grain_->Draw(camera);
-#endif
-
-#if 0 // LuminanceOutLine
-	luminanceOutLine_->Draw(camera);
-#endif
-
-#if 0 // RadialBlur
-	radialBlur_->Draw(camera);
-#endif
-
-#if 0 // Random
-	random_->Draw(camera);
-#endif
-
-#if 0 // SepiaTone
-	sepiaTone_->Draw(camera);
-#endif
-
-#if 0 // Vignetting
-	vignetting_->Draw(camera);
-#endif
+		switch (imguiComboIndex_) {
+		case 0: activeEffects_ = EffectType::Absent; break;
+		case 1: activeEffects_ = EffectType::BoxFilter; break;
+		case 2: activeEffects_ = EffectType::ColorGrading; break;
+		case 3: activeEffects_ = EffectType::Dissolve; break;
+		case 4: activeEffects_ = EffectType::GauusianFilter; break;
+		case 5: activeEffects_ = EffectType::Grain; break;
+		case 6: activeEffects_ = EffectType::GrayScale; break;
+		case 7: activeEffects_ = EffectType::LuminanceOutLine; break;
+		case 8: activeEffects_ = EffectType::RadialBlur; break;
+		case 9: activeEffects_ = EffectType::Random; break;
+		case 10: activeEffects_ = EffectType::SepiaTone; break;
+		case 11: activeEffects_ = EffectType::Vignetting; break;
+		}
+	}
 
 }

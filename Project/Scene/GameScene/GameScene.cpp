@@ -137,7 +137,7 @@ void GameScene::FrontSpriteDraw()
 	absentEffect_->Draw(camera_.get());
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	//testPostEffect_->Draw(camera_.get()); 
+	testPostEffect_->Draw(camera_.get()); 
 }
 
 

@@ -3,6 +3,7 @@
 #include "../../GameObject.h"
 #include "../../../Tsumi/PostEffect/IPostEffect/IPostEffect.h"
 
+#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/BoxFilter/BoxFilterEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/Dissolve/DissolveEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/BoxFilter/BoxFilterEffect.h"
@@ -16,6 +17,22 @@
 #include "../../Tsumi/PostEffect/IPostEffect/Random/RandomEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/SepiaTone/SepiaToneEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/Vignetting/VignettingEffect.h"
+
+
+enum EffectType {
+	Absent = 0,
+	BoxFilter = 1 << 0,
+	ColorGrading = 1 << 1,
+	Dissolve = 1 << 2,
+	GauusianFilter = 1 << 3,
+	Grain = 1 << 4,
+	GrayScale = 1 << 5,
+	LuminanceOutLine = 1 << 6,
+	RadialBlur = 1 << 7,
+	Random = 1 << 8,
+	SepiaTone = 1 << 9,
+	Vignetting = 1 << 10,
+};
 
 
 /* TestPostEffectクラス */
@@ -32,7 +49,20 @@ public:
 	void Update();
 	void Draw(Camera* camera);
 
+
 private:
+
+	// ImGuiの描画
+	void ChangeImGui();
+
+
+private:
+
+	// エフェクトのアクティブを管理する変数
+	int activeEffects_ = EffectType::Absent;
+
+	// Absent
+	std::unique_ptr<AbsentEffect> absent_;
 
 	// BoxFilter
 	std::unique_ptr<BoxFilterEffect> boxFilter_;
@@ -64,5 +94,8 @@ private:
 	// Vignetting
 	std::unique_ptr<VignettingEffect> vignetting_;
 
+	// IPostEffect::Typeを表す文字
+	std::vector<std::string> imguiEffectName_{};
+	int imguiComboIndex_ = 0;
 };
 

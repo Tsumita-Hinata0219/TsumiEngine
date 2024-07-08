@@ -242,7 +242,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
-    <ClCompile Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.cpp" />
     <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Tsumi\Transform\Transform.cpp" />
     <ClCompile Include="Tsumi\PostEffect\PostEffect.cpp" />
@@ -389,7 +388,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
-    <ClInclude Include="Tsumi\PostEffect\PostEffectMaterial\PostEffectMaterial.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />

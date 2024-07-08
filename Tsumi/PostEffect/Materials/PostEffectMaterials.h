@@ -65,5 +65,10 @@ struct SepiaToneMtl {
 
 /* Vignetting用 */
 struct VignettingMtl {
-	Vector4 color{};
+	Vector4 color = Vector4::one;
+	float intensity = 0;
+	float center = 0.5f;
+	Vector2 radius = Vector2::one / 2.0f;
+	float smoothness = 0.01f;
+	float roundness = 1.0f;
 };

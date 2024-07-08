@@ -6,9 +6,6 @@
 void VignettingEffect::Initialize()
 {
 	Create();
-
-	// MtlData初期値
-	mtlData_.color = Vector4::one;
 }
 
 
@@ -36,7 +33,11 @@ void VignettingEffect::DrawImGui(std::string name)
 	if (ImGui::TreeNode((label_ + "Vignetting").c_str())) {
 
 		ImGui::ColorEdit4("Color", &mtlData_.color.x);
-
+		ImGui::DragFloat("Intensity", &mtlData_.intensity, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Center", &mtlData_.center, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2("Radisu", &mtlData_.radius.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Smoothness", &mtlData_.smoothness, 0.01f, 0.01f, 1.0f);
+		ImGui::DragFloat("Roundness", &mtlData_.roundness, 0.01f, 0.0f, 1.0f);
 		ImGui::TreePop();
 	}
 

@@ -7,8 +7,7 @@ void DissolveEffect::Initialize()
 {
 	Create();
 
-	// MtlData初期値
-	mtlData_.color = Vector4::one;
+	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise0.png");
 }
 
 
@@ -36,6 +35,7 @@ void DissolveEffect::DrawImGui(std::string name)
 	if (ImGui::TreeNode((label_ + "Dissolve").c_str())) {
 
 		ImGui::ColorEdit4("Color", &mtlData_.color.x);
+		ImGui::DragFloat("Threshold", &mtlData_.threshold, 0.01f, 0.0f, 1.0f);
 
 		ImGui::TreePop();
 	}
@@ -58,6 +58,9 @@ void DissolveEffect::CommandCall()
 
 	// MtlBufferをコマンドに積む
 	mtlBuffer_.CommandCall(4);
+
+	// MaksTexture
+	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

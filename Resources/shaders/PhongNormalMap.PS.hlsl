@@ -35,7 +35,7 @@ PixcelShaderOutput main(VertexShaderOutput input)
 {
     PixcelShaderOutput output;
     float4 textureColor = gTexture.Sample(gSampler, input.texcoord);
-    float4 textureColorNormal = gTextureNormal.Sample(gSampler, input.texcoord);\
+    float4 textureColorNormal = gTextureNormal.Sample(gSampler, input.texcoord);
 
     NormalMap = normalize(input.normal + textureColorNormal.rgb);
     

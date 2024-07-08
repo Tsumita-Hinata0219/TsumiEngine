@@ -22,7 +22,9 @@ struct ColorGradingMtl {
 
 /* Dissolve用 */
 struct DissolveMtl {
-	Vector4 color{};
+	Vector4 color = Vector4::one;
+	uint32_t maskTexture = 0;
+	float threshold = 0.0f;
 };
 
 /* GaussianFilter用 */

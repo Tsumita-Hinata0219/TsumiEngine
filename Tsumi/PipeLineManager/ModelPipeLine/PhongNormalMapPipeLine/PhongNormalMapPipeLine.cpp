@@ -10,17 +10,7 @@ PsoProperty PhongNormalMapPipeLine::SetUpPso()
 	SetUpRootSignature(descriptionRootSignature);
 
 
-	///* --- InputLayoutを設定する --- */
-	//D3D12_INPUT_ELEMENT_DESC inputElementDescs[5]{};
-	//SetUpInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	//SetUpInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	//SetUpInputElementDescs(inputElementDescs[2], "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	//SetUpInputElementDescs(inputElementDescs[3], "WORLDPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	//SetUpInputElementDescs(inputElementDescs[4], "CAMERAPOSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-
-	//D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	//SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));
-
+	/* --- InputLayoutを設定する --- */
 	std::array<D3D12_INPUT_ELEMENT_DESC, 5> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),

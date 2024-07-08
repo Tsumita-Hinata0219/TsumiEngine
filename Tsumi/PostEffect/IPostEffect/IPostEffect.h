@@ -8,6 +8,7 @@
 #include "../../View/SRVManager/SRVManager.h"
 #include "../../View/RTVManager/RTVManager.h"
 #include "../../PipeLineManager/PipeLineManager.h"
+#include "../../TextureManager/TextureManager.h"
 #include "../Materials/PostEffectMaterials.h"
 #include "../../Project/GameObject/Camera/Camera.h"
 #include "../../../Project/Math/MyMath.h"

@@ -65,6 +65,8 @@ void TestPostEffect::Initialize()
 		"SepiaTone",
 		"Vignetting"
 	};
+
+	activeEffects_ = EffectType::Dissolve;
 }
 
 

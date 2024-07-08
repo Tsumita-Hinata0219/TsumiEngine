@@ -39,7 +39,7 @@ protected:
 	// SRVやBufferの作成
 	virtual void Create() {
 		// SRV作成
-		Microsoft::WRL::ComPtr<ID3D12Resource> stv =
+		Microsoft::WRL::ComPtr<ID3D12Resource> stv = 
 			RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
 		srv_ = SRVManager::CreatePostEffectSRV(stv);
 

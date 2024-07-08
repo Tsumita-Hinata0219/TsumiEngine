@@ -6,7 +6,7 @@
 #include "../../Tsumi/PostEffect/IPostEffect/BoxFilter/BoxFilterEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/Dissolve/DissolveEffect.h"
 
-
+#include <memory>
 /* TestPostEffectクラス */
 class TestPostEffect {
 

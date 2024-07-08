@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <memory>
 
 #include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"

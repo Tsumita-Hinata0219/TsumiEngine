@@ -14,7 +14,6 @@ void Player::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
-
 }
 
 

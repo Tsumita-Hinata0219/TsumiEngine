@@ -54,8 +54,8 @@ private: // メンバ変数
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<Enemy>> enemyList_;
 
-	//
-	std::unique_ptr<Enemy> enemy_;
+	// FlagModel
+	std::unique_ptr<Model> flagModel_;
 
 	// Transform
 	WorldTransform transform_{};

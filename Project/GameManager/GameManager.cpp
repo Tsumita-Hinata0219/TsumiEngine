@@ -43,7 +43,6 @@ void GameManager::Run() {
 		// オブジェクト
 		Scene_->BackSpriteDraw();
 		Scene_->ModelDraw();
-		//Scene_->FrontSpriteDraw();
 
 		DirectXCommon::PostDrawForPostEffect();
 

@@ -5,12 +5,14 @@
 // 初期化処理
 void EnemyManager::Initialize()
 {
+	// FlagModel
+	flagModel_ = make_unique<Model>();
+	flagModel_->CreateFromObjAssimpVer("Flag", "Flag");
+
 	// Transformの初期化
 	transform_.Initialize();
+	transform_.srt.translate.z = 30.0f;
 
-	enemy_ = std::make_unique<Enemy>();
-	enemy_->Initialize();
-	enemy_->SetPlayer(player_);
 }
 
 
@@ -20,25 +22,22 @@ void EnemyManager::Update()
 	// Transformの更新処理
 	transform_.UpdateMatrix();
 
-	//// EnemyListの更新処理
-	//for (std::shared_ptr<Enemy> enemy : enemyList_) {
-	//	enemy->Update();
-	//}
+	// EnemyListの更新処理
+	for (std::shared_ptr<Enemy> enemy : enemyList_) {
+		enemy->Update();
+	}
 
-	//// 死亡フラグが立っていたら削除
-	//enemyList_.remove_if([](std::shared_ptr<Enemy> enemy) {
-	//	if (enemy->IsDead()) {
-	//		enemy.reset();
-	//		return true;
-	//	}
-	//	return false;
-	//	}
-	//);
-
-	enemy_->Update();
+	// 死亡フラグが立っていたら削除
+	enemyList_.remove_if([](std::shared_ptr<Enemy> enemy) {
+		if (enemy->IsDead()) {
+			enemy.reset();
+			return true;
+		}
+		return false;
+		}
+	);
 
 #ifdef _DEBUG
-
 	if (ImGui::TreeNode("EnemyManager")) {
 
 		ImGui::Text("Transform");
@@ -53,7 +52,6 @@ void EnemyManager::Update()
 
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 
@@ -61,12 +59,13 @@ void EnemyManager::Update()
 // 描画処理
 void EnemyManager::Draw3D(Camera* camera)
 {
-	// EnemyListの描画
-	/*for (std::shared_ptr<Enemy> enemy : enemyList_) {
-		enemy->Draw3D(camera);
-	}*/
+	// FlagModel
+	flagModel_->Draw(transform_, camera);
 
-	enemy_->Draw3D(camera);
+	// EnemyListの描画
+	for (std::shared_ptr<Enemy> enemy : enemyList_) {
+		enemy->Draw3D(camera);
+	}
 }
 
 

@@ -350,8 +350,8 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 /// <summary>
 /// 描画処理
 /// </summary>
-void Model::Draw(WorldTransform worldTransform, Camera* camera) {
-
+void Model::Draw(WorldTransform worldTransform, Camera* camera) 
+{
 	this->state_->Draw(this, worldTransform, camera);
 }
 void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)

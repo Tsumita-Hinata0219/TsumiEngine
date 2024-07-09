@@ -31,10 +31,10 @@ PixelShaderOutput main(VertexShaderOutput input)
     //{
     //    discard;
     //}
-    if (mask <= 0.5f)
-    {
-        discard;
-    }
+    //if (mask <= 0.5f)
+    //{
+    //    discard;
+    //}
     
     output.color = gTexture.Sample(gSampler, input.texcoord);
     

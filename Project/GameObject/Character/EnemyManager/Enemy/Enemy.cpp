@@ -95,8 +95,7 @@ void Enemy::OnCollisionWithPlayer()
 }
 void Enemy::OnCollisionWithPlayerBullet()
 {
-
-
+	isDead_ = true;
 }
 
 

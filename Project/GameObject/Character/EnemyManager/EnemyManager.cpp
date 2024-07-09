@@ -43,7 +43,7 @@ void EnemyManager::Update()
 		ImGui::Text("Transform");
 		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
 		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
 
 		ImGui::Text("");
 		if (ImGui::Button("AddEnemy")) {

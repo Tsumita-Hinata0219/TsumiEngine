@@ -25,21 +25,10 @@ public:
 	virtual void Update() = 0;
 	virtual void Exit() = 0;
 
-#pragma region Accessor
-
-	// ステート番号の取得
-	int GetStateNo();
-
-#pragma endregion 
-
 
 protected:
 
-	Enemy* enemy_;
-
-public:
-
-	static int stateNo_;
+	Enemy* enemy_ = nullptr;
 };
 
 

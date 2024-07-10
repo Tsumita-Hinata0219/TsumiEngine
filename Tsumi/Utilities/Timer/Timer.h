@@ -20,7 +20,7 @@ public: // メンバ関数
 
 	float GetNowFrame() const { return this->nowFrame_; }
 	float GetEndFrame() const { return this->endFrame_; }
-
+	float GetRatio() const { return this->frameRatio_; }
 	bool IsActive() const { return this->isActive_; }
 	bool IsFinish() const { return this->isFinish_; }
 
@@ -30,7 +30,7 @@ public: // メンバ関数
 
 	void SetNowFrame(float setFrame) { this->nowFrame_ = setFrame; }
 	void SetEndFrame(float setFrame) { this->endFrame_ = setFrame; }
-
+	void SetRatio(float setFrame) { this->frameRatio_ = setFrame; }
 	/*void SetIsActive(bool setFlag) { this->isActive_ = setFlag; }
 	void SetIsFinish(bool setFlag) { this->isFinish_ = setFlag; }*/
 

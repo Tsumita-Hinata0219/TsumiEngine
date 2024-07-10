@@ -31,6 +31,9 @@ public: // メンバ関数
 	void Update();
 	void Draw3D(Camera* camera);
 
+	// チェンジステート
+	void ChangeState(int newState) { this->stateNo_ = newState; }
+
 #pragma region Accessor アクセッサ
 
 	// SRT
@@ -131,6 +134,7 @@ private: // メンバ変数
 
 	// ステートパターン
 	std::vector<std::unique_ptr<IEnemyState>> stateVector_; // ステートコンテナ
+	int stateNo_ = 0;        // ステートを管理するクラス
 	int currentStateNo_ = 0; // 現在のステート
 	int preStateNo_ = 0;	 // 前回のステート
 };

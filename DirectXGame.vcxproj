@@ -164,7 +164,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
-    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\IEnemyState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />

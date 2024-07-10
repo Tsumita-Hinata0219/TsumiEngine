@@ -24,7 +24,7 @@ public:
 private:
 
 	// スケールをイージングにかける
-	void OutElasticScale();
+	bool OutElasticScale();
 
 private:
 

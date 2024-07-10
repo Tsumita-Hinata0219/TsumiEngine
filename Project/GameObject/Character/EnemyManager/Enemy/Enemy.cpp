@@ -12,6 +12,8 @@ void Enemy::Initialize()
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
 	bodyWt_.srt.translate.z = 40.0f;
+	float initScale = 0.1f;
+	bodyWt_.srt.scale = { initScale, initScale,initScale };
 
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
@@ -24,7 +26,8 @@ void Enemy::Initialize()
 	stateVector_[EnemyState::APPROACH] = std::make_unique<IEnemyApproachState>();
 	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
-	currentStateNo_ = IEnemyState::stateNo_;
+	stateNo_ = EnemyState::SPAWN;
+	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Init(this);
 }
 
@@ -118,7 +121,7 @@ void Enemy::FuncStatePattern()
 {
 	// ステートチェック
 	preStateNo_ = currentStateNo_;
-	currentStateNo_ = stateVector_[currentStateNo_]->GetStateNo();
+	currentStateNo_ = stateNo_;
 
 	// ステート変更チェック
 	if (preStateNo_ != currentStateNo_) {

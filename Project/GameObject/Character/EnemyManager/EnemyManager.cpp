@@ -11,7 +11,7 @@ void EnemyManager::Initialize()
 
 	// Transformの初期化
 	transform_.Initialize();
-	transform_.srt.translate.z = 30.0f;
+	transform_.srt.translate.z = 30.0f; // 少し奥にずらしておく
 
 	// 湧き範囲のスコープ
 	scope3_ = {

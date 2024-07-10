@@ -28,6 +28,7 @@ private:
 
 private:
 
+	// SRT
 	SRT srt_{};
 
 	// スケールの開始値と終了値。(0.0f, 1.0f)

@@ -62,6 +62,5 @@ private: // メンバ変数
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};
-
 };
 

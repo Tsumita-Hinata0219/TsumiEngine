@@ -17,6 +17,21 @@ public:
 	void Update() override;
 	void Exit() override;
 
+
 private:
+
+	// ポジションをイージングにかける
+	bool InOutBackPos();
+
+private:
+
+	// SRT
+	SRT srt_{};
+
+	// 開始値と終了値
+	std::pair<float, float> posPair_;
+
+	// スケールのイージングにかかるタイマー
+	Timer posEaseTime_{};
 
 };

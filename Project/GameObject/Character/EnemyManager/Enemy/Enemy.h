@@ -36,22 +36,27 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
+	// Playerの設定
+	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
+
 	// SRT
 	SRT GetSRT() const { return this->bodyWt_.srt; }
 	void SetSRT(SRT setSRT) { this->bodyWt_.srt = setSRT; }
 
-	// Playerの設定
-	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
+	// カラー
+	Vector4 GetModelColor() const { return this->modelColor_; }
+	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
 
 	// 座標
+	Vector3 GetPosition() { return bodyWt_.GetWorldPos(); }
 	void SetPosition(Vector3 setPos) { this->bodyWt_.srt.translate = setPos; }
 
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
-
 
 #pragma endregion 
 
@@ -107,6 +112,9 @@ private: // メンバ変数
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
+
+	// カラー
+	Vector4 modelColor_ = Vector4::one;
 
 	// 移動速度
 	Vector3 velocity_{};

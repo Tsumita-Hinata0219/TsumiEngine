@@ -8,7 +8,7 @@ void IEnemySpawnState::Init(Enemy* enemy)
 	// Enemyの設定
 	enemy_ = enemy;
 
-	// スケールのイージングにかかる時間の設定
+	// スケールのイージングにかかる時間の設定。1秒
 	scaleEaseTime_.Start(0.0f, 60.0f);
 }
 

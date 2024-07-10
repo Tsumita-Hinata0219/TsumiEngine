@@ -94,6 +94,7 @@ void Enemy::Update()
 void Enemy::Draw3D(Camera* camera)
 {
 	// BodyModelの描画
+	bodyModel_->SetColor(modelColor_);
 	bodyModel_->Draw(bodyWt_, camera);
 
 	// Bulletsの描画
@@ -111,7 +112,7 @@ void Enemy::OnCollisionWithPlayer()
 void Enemy::OnCollisionWithPlayerBullet()
 {
 	this->ChangeState(EnemyState::DEATH);
-	isDead_ = true;
+	//isDead_ = true;
 }
 
 
@@ -124,8 +125,6 @@ void Enemy::FuncStatePattern()
 
 	// ステート変更チェック
 	if (preStateNo_ != currentStateNo_) {
-
-		///// ステートの変更があっった
 
 		///// 前回のステートの終了処理
 		stateVector_[preStateNo_]->Exit();

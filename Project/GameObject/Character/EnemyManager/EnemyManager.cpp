@@ -114,6 +114,12 @@ void EnemyManager::EnemyCountCheck()
 	// エネミーが一定数以下なら新しく湧くようにする
 	if (enemyMinInstance_ >= int(enemyList_.size())) {
 
-		CreateNewEnemy(); // 新しいEnemyを生成する
+		// 最低数との差分
+		int shortageCount = enemyMinInstance_ - int(enemyList_.size());
+
+		// 足りない分、新しいEnemyを生成する
+		for (int i = 0; i < shortageCount; ++i) {
+			CreateNewEnemy();
+		}
 	}
 }

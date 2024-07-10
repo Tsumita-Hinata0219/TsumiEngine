@@ -51,14 +51,17 @@ private: // メンバ変数
 	// Player
 	Player* player_ = nullptr;
 
-	// EnemyのLIst配列
-	std::list<std::shared_ptr<Enemy>> enemyList_;
-
 	// FlagModel
 	std::unique_ptr<Model> flagModel_;
 
 	// Transform
 	WorldTransform transform_{};
+
+	// EnemyのLIst配列
+	std::list<std::shared_ptr<Enemy>> enemyList_;
+
+	// Vector3Scope。エネミーの湧き範囲
+	ScopeVec3 scope3_{};
 
 };
 

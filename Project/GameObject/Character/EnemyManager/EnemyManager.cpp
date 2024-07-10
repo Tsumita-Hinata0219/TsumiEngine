@@ -13,6 +13,12 @@ void EnemyManager::Initialize()
 	transform_.Initialize();
 	transform_.srt.translate.z = 30.0f;
 
+	// 湧き範囲のスコープ
+	scope3_ = {
+		{ -3.0f, 3.0f },
+		{  0.0f, 0.0f },
+		{ -3.0f, 3.0f },
+	};
 }
 
 
@@ -83,8 +89,9 @@ void EnemyManager::CreateNewEnemy()
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
 
-	// 初期座標
-	Vector3 initPos = transform_.GetWorldPos();
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos = 
+		transform_.GetWorldPos() + RandomGenerator::getRandom(scope3_);
 
 	// newEnemyの初期化
 	newEnemy->Initialize();

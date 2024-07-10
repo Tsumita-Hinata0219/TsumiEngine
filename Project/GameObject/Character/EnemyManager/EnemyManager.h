@@ -45,6 +45,9 @@ private:
 	// 新しいEnemyを生成する
 	void CreateNewEnemy();
 
+	// エネミーカウントチェック
+	void EnemyCountCheck();
+
 
 private: // メンバ変数
 
@@ -62,5 +65,8 @@ private: // メンバ変数
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};
+
+	// エネミーの最低数
+	int enemyMinInstance_ = 0;
 };
 

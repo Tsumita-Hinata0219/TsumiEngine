@@ -15,10 +15,13 @@ void EnemyManager::Initialize()
 
 	// 湧き範囲のスコープ
 	scope3_ = {
-		{ -5.0f, 5.0f },
+		{ -8.0f, 8.0f },
 		{  0.0f, 0.0f },
-		{ -5.0f, 5.0f },
+		{ -8.0f, 8.0f },
 	};
+
+	// エネミーの最低数の設定
+	enemyMinInstance_ = 5;
 }
 
 
@@ -43,6 +46,9 @@ void EnemyManager::Update()
 		}
 	);
 
+	// エネミーカウントチェック
+	EnemyCountCheck();
+
 #ifdef _DEBUG
 	if (ImGui::TreeNode("EnemyManager")) {
 
@@ -66,7 +72,7 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D(Camera* camera)
 {
 	// FlagModel
-	//flagModel_->Draw(transform_, camera);
+	flagModel_->Draw(transform_, camera);
 
 	// EnemyListの描画
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
@@ -78,8 +84,7 @@ void EnemyManager::Draw3D(Camera* camera)
 // 新しいEnemyを追加する
 void EnemyManager::AddNewEnemy()
 {
-	// 新しいEnemyを生成する
-	CreateNewEnemy();
+	CreateNewEnemy(); // 新しいEnemyを生成する
 }
 
 
@@ -100,4 +105,15 @@ void EnemyManager::CreateNewEnemy()
 
 	// リストに追加
 	enemyList_.push_back(newEnemy);
+}
+
+
+// エネミーカウントチェック
+void EnemyManager::EnemyCountCheck()
+{
+	// エネミーが一定数以下なら新しく湧くようにする
+	if (enemyMinInstance_ >= int(enemyList_.size())) {
+
+		CreateNewEnemy(); // 新しいEnemyを生成する
+	}
 }

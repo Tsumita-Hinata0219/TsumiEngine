@@ -22,6 +22,9 @@ void EnemyManager::Initialize()
 
 	// エネミーの最低数の設定
 	enemyMinInstance_ = 5;
+
+	// エネミーのカウントチェックタイマーの設定。4秒
+	enemyCountCheckTime_.Start(0.0f, 240.0f);
 }
 
 
@@ -61,6 +64,8 @@ void EnemyManager::Update()
 		if (ImGui::Button("AddEnemy")) {
 			AddNewEnemy();
 		}
+		ImGui::Text("EnemyInstance = %d", int(enemyList_.size()));
+		ImGui::Text("CountCheckTime : %.1f", enemyCountCheckTime_.GetNowFrame());
 
 		ImGui::TreePop();
 	}
@@ -111,15 +116,22 @@ void EnemyManager::CreateNewEnemy()
 // エネミーカウントチェック
 void EnemyManager::EnemyCountCheck()
 {
-	// エネミーが一定数以下なら新しく湧くようにする
-	if (enemyMinInstance_ >= int(enemyList_.size())) {
+	// タイマー更新
+	enemyCountCheckTime_.Update(true);
 
-		// 最低数との差分
-		int shortageCount = enemyMinInstance_ - int(enemyList_.size());
+	// タイマー終了でチェック
+	if (enemyCountCheckTime_.IsFinish()) {
 
-		// 足りない分、新しいEnemyを生成する
-		for (int i = 0; i < shortageCount; ++i) {
-			CreateNewEnemy();
+		// エネミーが一定数以下なら新しく湧くようにする
+		if (enemyMinInstance_ >= int(enemyList_.size())) {
+
+			// 最低数との差分
+			int shortageCount = enemyMinInstance_ - int(enemyList_.size());
+
+			// 足りない分、新しいEnemyを生成する
+			for (int i = 0; i < shortageCount; ++i) {
+				CreateNewEnemy();
+			}
 		}
 	}
 }

@@ -68,5 +68,8 @@ private: // メンバ変数
 
 	// エネミーの最低数
 	int enemyMinInstance_ = 0;
+
+	// エネミーのカウントチェックタイマー
+	Timer enemyCountCheckTime_;
 };
 

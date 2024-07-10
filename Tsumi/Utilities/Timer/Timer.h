@@ -11,10 +11,11 @@ public: // メンバ関数
 	void Start(float setStart, float setEnd);
 
 	// タイマーの更新処理
-	void Update();
+	void Update(bool roop = false);
 
 	// リセットみたいなやつ
 	void Clear();
+
 
 #pragma region Get 取得
 
@@ -44,6 +45,6 @@ private: // メンバ変数
 	float frameRatio_ = 0.0f;
 	bool isActive_ = false;
 	bool isFinish_ = true;
-	
+	std::pair<float, float> saveTimer_;
 };
 

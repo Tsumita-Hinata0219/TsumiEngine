@@ -13,6 +13,8 @@ void Timer::Start(float setStart, float setEnd)
 	nowFrame_ = setStart;
 	endFrame_ = setEnd;
 
+	saveTimer_ = { setStart, setEnd };
+
 	frameRatio_ = nowFrame_ / endFrame_;
 
 	isActive_ = true;
@@ -21,9 +23,13 @@ void Timer::Start(float setStart, float setEnd)
 
 
 // タイマーの更新処理
-void Timer::Update()
+void Timer::Update(bool roop)
 {
 	if (isFinish_) {
+		if (roop) {
+			this->Start(saveTimer_.first, saveTimer_.second);
+			return;
+		}
 		isActive_ = false;
 		return;
 	}

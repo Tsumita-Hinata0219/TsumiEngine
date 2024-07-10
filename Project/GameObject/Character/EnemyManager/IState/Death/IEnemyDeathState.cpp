@@ -3,18 +3,18 @@
 
 
 // 初期化処理
-void IEnemyDeathState::InitState()
+void IEnemyDeathState::Init()
 {
 }
 
 
 // 更新処理
-void IEnemyDeathState::UpdateState()
+void IEnemyDeathState::Update()
 {
 }
 
 
 // 終了処理
-void IEnemyDeathState::ExitState()
+void IEnemyDeathState::Exit()
 {
 }

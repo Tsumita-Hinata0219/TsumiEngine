@@ -3,18 +3,18 @@
 
 
 // 初期化処理
-void IEnemyApproachState::InitState()
+void IEnemyApproachState::Init()
 {
 }
 
 
 // 更新処理
-void IEnemyApproachState::UpdateState()
+void IEnemyApproachState::Update()
 {
 }
 
 
 // 終了処理
-void IEnemyApproachState::ExitState()
+void IEnemyApproachState::Exit()
 {
 }

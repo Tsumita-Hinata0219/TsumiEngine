@@ -3,18 +3,18 @@
 
 
 // 初期化処理
-void IEnemySpawnState::InitState()
+void IEnemySpawnState::Init()
 {
 }
 
 
 // 更新処理
-void IEnemySpawnState::UpdateState()
+void IEnemySpawnState::Update()
 {
 }
 
 
 // 終了処理
-void IEnemySpawnState::ExitState()
+void IEnemySpawnState::Exit()
 {
 }

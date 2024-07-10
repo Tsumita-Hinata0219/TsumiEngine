@@ -2,31 +2,25 @@
 
 
 // ステートの種類
-namespace EnemyState {
-
-	enum EnemyState {
-		SPAWN,
-		APPROACH,
-		DEATH,
-		Count,
-	};
-}
+enum EnemyState {
+	SPAWN,
+	APPROACH,
+	DEATH,
+	Count,
+};
 
 /* IEnemyState基底クラス */
 class IEnemyState {
 
 public:
 
-	// コンストラクタ、デストラクタ
-	~IEnemyState() {};
+	// 仮想デストラクタ
+	virtual ~IEnemyState() = default;
 
 	// 初期化、更新、終了
-	virtual void InitState() = 0;
-	virtual void UpdateState() = 0;
-	virtual void ExitState() = 0;
-
-	// ステート変更
-	virtual void ChangeState(int nextState) = 0;
+	virtual void Init() = 0;
+	virtual void Update() = 0;
+	virtual void Exit() = 0;
 
 #pragma region Accessor
 
@@ -35,7 +29,8 @@ public:
 
 #pragma endregion 
 
-protected:
+
+public:
 
 	static int stateNo_;
 };

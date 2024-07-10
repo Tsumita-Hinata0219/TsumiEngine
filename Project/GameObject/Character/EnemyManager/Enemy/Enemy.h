@@ -65,6 +65,9 @@ public: // メンバ関数
 
 private:
 
+	// ステートパターン処理
+	void FuncStatePattern();
+
 	// 戦闘状態の切り替え処理
 	void ToggleCombatState();
 

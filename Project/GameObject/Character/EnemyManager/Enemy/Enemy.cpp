@@ -17,15 +17,24 @@ void Enemy::Initialize()
 	shotFrame_ = kShotInterval_;
 
 
-	// ステートパターン
+	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
-	//int stateArray = EnumSize<IEnemyState>::value;
+	stateVector_.resize(EnumSize<EnemyState>::value);
+	stateVector_[EnemyState::SPAWN] = std::make_unique<IEnemySpawnState>();
+	stateVector_[EnemyState::APPROACH] = std::make_unique<IEnemyApproachState>();
+	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
+	// 初期ステートの設定 && 初期ステートの初期化処理
+	currentStateNo_ = IEnemyState::stateNo_;
+	stateVector_[currentStateNo_]->Init();
 }
 
 
 // 更新処理
 void Enemy::Update()
 {
+	// ステートパターン処理
+	FuncStatePattern();
+
 	// Transformの更新処理
 	bodyWt_.UpdateMatrix();
 
@@ -101,6 +110,30 @@ void Enemy::OnCollisionWithPlayer()
 void Enemy::OnCollisionWithPlayerBullet()
 {
 	isDead_ = true;
+}
+
+
+// ステートパターン処理
+void Enemy::FuncStatePattern()
+{
+	// ステートチェック
+	preStateNo_ = currentStateNo_;
+	currentStateNo_ = stateVector_[currentStateNo_]->GetStateNo();
+
+	// ステート変更チェック
+	if (preStateNo_ != currentStateNo_) {
+
+		///// ステートの変更があっった
+
+		///// 前回のステートの終了処理
+		stateVector_[preStateNo_]->Exit();
+
+		///// 新しいステートの初期化処理
+		stateVector_[currentStateNo_]->Init();
+	}
+
+	///// 更新処理
+	stateVector_[currentStateNo_]->Update();
 }
 
 

@@ -111,8 +111,12 @@ void Enemy::OnCollisionWithPlayer()
 }
 void Enemy::OnCollisionWithPlayerBullet()
 {
-	this->ChangeState(EnemyState::DEATH);
-	//isDead_ = true;
+	// スポーン&デス時には通らない
+	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
+
+		// デスステートに移行
+		this->ChangeState(EnemyState::DEATH);
+	}
 }
 
 

@@ -39,17 +39,21 @@ void Enemy::Update()
 	// Transformの更新処理
 	bodyWt_.UpdateMatrix();
 
-	// 戦闘状態の切り替え処理
-	ToggleCombatState();
+	// アプローチ状態の時のみ入る処理
+	if (stateNo_ == EnemyState::APPROACH) {
 
-	// 戦闘状態に入っていたら入る処理
-	if (isCombatActive_) {
+		// 戦闘状態の切り替え処理
+		ToggleCombatState();
 
-		// 移動処理
-		Move();
+		// 戦闘状態に入っていたら入る処理
+		if (isCombatActive_) {
 
-		// 射撃の処理
-		ExecuteShot();
+			// 移動処理
+			Move();
+
+			// 射撃の処理
+			ExecuteShot();
+		}
 	}
 
 	// Bullet更新処理

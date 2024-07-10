@@ -15,9 +15,9 @@ void EnemyManager::Initialize()
 
 	// 湧き範囲のスコープ
 	scope3_ = {
-		{ -8.0f, 8.0f },
+		{ -12.0f, 12.0f },
 		{  0.0f, 0.0f },
-		{ -8.0f, 8.0f },
+		{ -12.0f, 12.0f },
 	};
 
 	// エネミーの最低数の設定
@@ -65,7 +65,7 @@ void EnemyManager::Update()
 			AddNewEnemy();
 		}
 		ImGui::Text("EnemyInstance = %d", int(enemyList_.size()));
-		ImGui::Text("CountCheckTime : %.1f", enemyCountCheckTime_.GetNowFrame());
+		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
 
 		ImGui::TreePop();
 	}

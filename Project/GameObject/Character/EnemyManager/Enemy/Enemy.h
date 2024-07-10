@@ -7,6 +7,11 @@
 
 #include "../Bullet/EnemyBullet.h"
 
+#include "../IState/IEnemyState.h"
+#include "../IState/Spawn/IEnemySpawnState.h"
+#include "../IState/Approach/IEnemyApproachState.h"
+#include "../IState/Death/IEnemyDeathState.h"
+
 
 // Player前方宣言
 class Player;
@@ -115,5 +120,11 @@ private: // メンバ変数
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
 	int kShotInterval_ = 80;
+
+
+	// ステートパターン
+	std::vector<std::unique_ptr<IEnemyState>> stateVector_; // ステートコンテナ
+	int currentStateNo_ = 0; // 現在のステート
+	int preStateNo_ = 0;	 // 前回のステート
 };
 

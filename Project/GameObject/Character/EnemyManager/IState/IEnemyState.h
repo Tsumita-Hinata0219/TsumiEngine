@@ -8,6 +8,7 @@ namespace EnemyState {
 		SPAWN,
 		APPROACH,
 		DEATH,
+		Count,
 	};
 }
 

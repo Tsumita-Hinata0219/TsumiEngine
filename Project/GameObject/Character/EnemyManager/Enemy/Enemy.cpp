@@ -15,6 +15,11 @@ void Enemy::Initialize()
 
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
+
+
+	// ステートパターン
+	// 各ステートをコンテナに保存
+	//int stateArray = EnumSize<IEnemyState>::value;
 }
 
 

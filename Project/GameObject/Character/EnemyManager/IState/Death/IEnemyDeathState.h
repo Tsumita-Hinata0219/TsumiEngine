@@ -13,7 +13,7 @@ public:
 	IEnemyDeathState() {};
 
 	// 初期化、更新、終了
-	void Init() override;
+	void Init(Enemy* enemy) override;
 	void Update() override;
 	void Exit() override;
 

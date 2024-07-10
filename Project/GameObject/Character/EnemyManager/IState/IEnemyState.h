@@ -9,6 +9,9 @@ enum EnemyState {
 	Count,
 };
 
+// Enemyの前方宣言
+class Enemy;
+
 /* IEnemyState基底クラス */
 class IEnemyState {
 
@@ -18,7 +21,7 @@ public:
 	virtual ~IEnemyState() = default;
 
 	// 初期化、更新、終了
-	virtual void Init() = 0;
+	virtual void Init(Enemy* enemy) = 0;
 	virtual void Update() = 0;
 	virtual void Exit() = 0;
 
@@ -29,6 +32,10 @@ public:
 
 #pragma endregion 
 
+
+protected:
+
+	Enemy* enemy_;
 
 public:
 

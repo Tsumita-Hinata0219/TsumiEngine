@@ -3,6 +3,9 @@
 #include "../../../../GameObject.h"
 #include "../IEnemyState.h"
 
+#include <memory>
+#include <utility>
+
 
 /* SpawnState派生クラス */
 class IEnemySpawnState : public IEnemyState {
@@ -13,11 +16,24 @@ public:
 	IEnemySpawnState() {};
 
 	// 初期化、更新、終了
-	void Init() override;
+	void Init(Enemy* enemy) override;
 	void Update() override;
 	void Exit() override;
 
+
 private:
 
+	// スケールをイージングにかける
+	void OutElasticScale();
+
+private:
+
+	SRT srt_{};
+
+	// スケールの開始値と終了値。(0.0f, 1.0f)
+	std::pair<float, float> scalePair_ = { 0.0f, 1.0f };
+
+	// スケールのイージングにかかるタイマー
+	Timer scaleEaseTime_{};
 };
 

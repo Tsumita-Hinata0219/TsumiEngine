@@ -1,10 +1,12 @@
 #include "IEnemyDeathState.h"
-
+#include "../../Enemy/Enemy.h"
 
 
 // 初期化処理
-void IEnemyDeathState::Init()
+void IEnemyDeathState::Init(Enemy* enemy)
 {
+	// Enemyの設定
+	enemy_ = enemy;
 }
 
 

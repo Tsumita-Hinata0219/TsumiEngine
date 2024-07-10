@@ -33,6 +33,10 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
+	// SRT
+	SRT GetSRT() const { return this->bodyWt_.srt; }
+	void SetSRT(SRT setSRT) { this->bodyWt_.srt = setSRT; }
+
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 

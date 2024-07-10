@@ -25,7 +25,7 @@ void Enemy::Initialize()
 	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
 	currentStateNo_ = IEnemyState::stateNo_;
-	stateVector_[currentStateNo_]->Init();
+	stateVector_[currentStateNo_]->Init(this);
 }
 
 
@@ -129,7 +129,7 @@ void Enemy::FuncStatePattern()
 		stateVector_[preStateNo_]->Exit();
 
 		///// 新しいステートの初期化処理
-		stateVector_[currentStateNo_]->Init();
+		stateVector_[currentStateNo_]->Init(this);
 	}
 
 	///// 更新処理

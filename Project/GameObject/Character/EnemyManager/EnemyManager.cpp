@@ -15,9 +15,9 @@ void EnemyManager::Initialize()
 
 	// 湧き範囲のスコープ
 	scope3_ = {
-		{ -3.0f, 3.0f },
+		{ -5.0f, 5.0f },
 		{  0.0f, 0.0f },
-		{ -3.0f, 3.0f },
+		{ -5.0f, 5.0f },
 	};
 }
 

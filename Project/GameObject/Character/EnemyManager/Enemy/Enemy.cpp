@@ -70,7 +70,7 @@ void Enemy::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("Enemy")) {
+	/*if (ImGui::TreeNode("Enemy")) {
 
 		ImGui::Text("Transform");
 		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
@@ -84,7 +84,7 @@ void Enemy::Update()
 		ImGui::Text("ShotFrame = %d : Interval = %d", shotFrame_, kShotInterval_);
 
 		ImGui::TreePop();
-	}
+	}*/
 
 #endif // _DEBUG
 }

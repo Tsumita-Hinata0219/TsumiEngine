@@ -1,6 +1,7 @@
 #pragma once
 
 
+// ステートの種類
 namespace EnemyState {
 
 	enum EnemyState {

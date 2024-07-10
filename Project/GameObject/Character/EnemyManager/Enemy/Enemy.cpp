@@ -11,13 +11,11 @@ void Enemy::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
-	bodyWt_.srt.translate.z = 40.0f;
-	float initScale = 0.1f;
-	bodyWt_.srt.scale = { initScale, initScale,initScale };
+	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
+	bodyWt_.srt.scale = { 0.1f, 0.1f, 0.1f }; 
 
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
-
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
@@ -112,6 +110,7 @@ void Enemy::OnCollisionWithPlayer()
 }
 void Enemy::OnCollisionWithPlayerBullet()
 {
+	this->ChangeState(EnemyState::DEATH);
 	isDead_ = true;
 }
 

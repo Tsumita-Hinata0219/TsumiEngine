@@ -36,6 +36,8 @@ struct GaussianFilterMtl {
 /* Grain用 */
 struct GrainMtl {
 	Vector4 color{};
+	float grainAmount = 0.0f;
+	Vector2 noiseFactors = Vector2::zero;
 };
 
 /* GrayScale用 */

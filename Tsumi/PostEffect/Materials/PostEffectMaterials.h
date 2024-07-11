@@ -7,6 +7,8 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 
+/* AbsentMtl */
+struct AbsentMtl{};
 
 /* BoxFilter用 */
 struct BoxFilterMtl {
@@ -20,7 +22,10 @@ struct ColorGradingMtl {
 
 /* Dissolve用 */
 struct DissolveMtl {
-	Vector4 color{};
+	Vector4 color = Vector4::one;
+	float threshold = 0.0f;
+	float thinkness = 0.0f;
+	uint32_t maskTexture = 0;
 };
 
 /* GaussianFilter用 */
@@ -39,7 +44,10 @@ struct GrayScaleMtl {
 };
 
 /* OutLine用 */
-struct OutLineMtl {
+struct LuminanceOutLineMtl {
+	Vector4 color{};
+};
+struct DepthOutLine {
 	Vector4 color{};
 };
 
@@ -60,5 +68,10 @@ struct SepiaToneMtl {
 
 /* Vignetting用 */
 struct VignettingMtl {
-	Vector4 color{};
+	Vector4 color = Vector4::one;
+	float intensity = 0;
+	float center = 0.5f;
+	Vector2 radius = Vector2::one / 2.0f;
+	float smoothness = 0.01f;
+	float roundness = 1.0f;
 };

@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* RadialBlurEffectクラス */
+class RadialBlurEffect : public IPostEffect<RadialBlurMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	RadialBlurEffect() {};
+	~RadialBlurEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;

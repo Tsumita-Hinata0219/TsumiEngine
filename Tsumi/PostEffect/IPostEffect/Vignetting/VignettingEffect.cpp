@@ -1,19 +1,16 @@
-#include "BoxFilterEffect.h"
+#include "VignettingEffect.h"
 
 
 
 // 初期化処理
-void BoxFilterEffect::Initialize()
+void VignettingEffect::Initialize()
 {
 	Create();
-
-	// MtlData初期値
-	mtlData_.color = Vector4::one;
 }
 
 
 // 描画処理
-void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
+void VignettingEffect::Draw([[maybe_unused]] Camera* camera)
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
@@ -26,17 +23,21 @@ void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
 
 
 // ImGuiの描画
-void BoxFilterEffect::DrawImGui(std::string name)
+void VignettingEffect::DrawImGui(std::string name)
 {
 #ifdef _DEBUG
 
 	// Labelを追加する場合は追加
 	label_ = label_ + name;
 
-	if (ImGui::TreeNode((label_ + "BoxFilter").c_str())) {
+	if (ImGui::TreeNode((label_ + "Vignetting").c_str())) {
 
 		ImGui::ColorEdit4("Color", &mtlData_.color.x);
-
+		ImGui::DragFloat("Intensity", &mtlData_.intensity, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Center", &mtlData_.center, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2("Radisu", &mtlData_.radius.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Smoothness", &mtlData_.smoothness, 0.01f, 0.01f, 1.0f);
+		ImGui::DragFloat("Roundness", &mtlData_.roundness, 0.01f, 0.0f, 1.0f);
 		ImGui::TreePop();
 	}
 
@@ -45,13 +46,13 @@ void BoxFilterEffect::DrawImGui(std::string name)
 
 
 // コマンドコール
-void BoxFilterEffect::CommandCall()
+void VignettingEffect::CommandCall()
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::BoxFilter);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Vignetting);
 
 	// SRVをコマンドに積む
 	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

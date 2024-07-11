@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* LuminanceOutLineEffectクラス */
+class LuminanceOutLineEffect : public IPostEffect<LuminanceOutLineMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	LuminanceOutLineEffect() {};
+	~LuminanceOutLineEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;

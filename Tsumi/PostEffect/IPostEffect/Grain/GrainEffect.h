@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* GrainEffectクラス */
+class GrainEffect : public IPostEffect<GrainMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	GrainEffect() {};
+	~GrainEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;

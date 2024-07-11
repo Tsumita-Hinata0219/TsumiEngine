@@ -1,9 +1,9 @@
-#include "BoxFilterEffect.h"
+#include "SepiaToneEffect.h"
 
 
 
 // 初期化処理
-void BoxFilterEffect::Initialize()
+void SepiaToneEffect::Initialize()
 {
 	Create();
 
@@ -13,7 +13,7 @@ void BoxFilterEffect::Initialize()
 
 
 // 描画処理
-void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
+void SepiaToneEffect::Draw([[maybe_unused]] Camera* camera)
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
@@ -26,14 +26,14 @@ void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
 
 
 // ImGuiの描画
-void BoxFilterEffect::DrawImGui(std::string name)
+void SepiaToneEffect::DrawImGui(std::string name)
 {
 #ifdef _DEBUG
 
 	// Labelを追加する場合は追加
 	label_ = label_ + name;
 
-	if (ImGui::TreeNode((label_ + "BoxFilter").c_str())) {
+	if (ImGui::TreeNode((label_ + "SepiaTone").c_str())) {
 
 		ImGui::ColorEdit4("Color", &mtlData_.color.x);
 
@@ -45,13 +45,13 @@ void BoxFilterEffect::DrawImGui(std::string name)
 
 
 // コマンドコール
-void BoxFilterEffect::CommandCall()
+void SepiaToneEffect::CommandCall()
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::BoxFilter);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SepiaTone);
 
 	// SRVをコマンドに積む
 	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

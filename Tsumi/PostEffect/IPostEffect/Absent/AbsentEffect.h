@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* AbsentEffectクラス */
+class AbsentEffect : public IPostEffect<AbsentMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	AbsentEffect() {};
+	~AbsentEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;
@@ -23,4 +23,3 @@ protected:
 	// コマンドコール
 	void CommandCall() override;
 };
-

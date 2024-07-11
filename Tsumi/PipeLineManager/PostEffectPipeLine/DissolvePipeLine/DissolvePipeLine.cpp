@@ -11,13 +11,6 @@ PsoProperty DissolvePipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	/*D3D12_INPUT_ELEMENT_DESC inputElementDescs[2]{};
-	SetUpInputElementDescs(inputElementDescs[0], "POSITION", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-	SetUpInputElementDescs(inputElementDescs[1], "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, D3D12_APPEND_ALIGNED_ELEMENT);
-
-	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
-	SetUpInputLayout(inputLayoutDesc, inputElementDescs, _countof(inputElementDescs));*/
-
 	std::array<D3D12_INPUT_ELEMENT_DESC, 2> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
@@ -85,7 +78,7 @@ PsoProperty DissolvePipeLine::SetUpPso()
 	// Depthの機能を有効化する
 	depthStencilDesc.DepthEnable = false;
 	// 書き込む
-	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ZERO;
+	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
 	// 比較関数はLessEqual。つまり、近ければ描画される
 	depthStencilDesc.DepthFunc = D3D12_COMPARISON_FUNC_LESS_EQUAL;
 
@@ -113,7 +106,7 @@ void DissolvePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 
 
 	// 色に関する
-	D3D12_ROOT_PARAMETER rootParameters[5]{};
+	D3D12_ROOT_PARAMETER rootParameters[6]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号0とバインド
@@ -138,6 +131,7 @@ void DissolvePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
 	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる
 	descriptorRange[0].NumDescriptors = 1; // 数は1つ
+	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
 
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
@@ -150,6 +144,19 @@ void DissolvePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[4].Descriptor.ShaderRegister = 1; // レジスタ番号0とバインド
+
+
+	// マスク画像に関する
+	D3D12_DESCRIPTOR_RANGE descriptorRangeA[1]{};
+	descriptorRangeA[0].BaseShaderRegister = 1; // 1から始まる
+	descriptorRangeA[0].NumDescriptors = 1; // 数は1つ
+	descriptorRangeA[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRangeA[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[5].DescriptorTable.pDescriptorRanges = descriptorRangeA; // Tableの中身の配列を指定
+	rootParameters[5].DescriptorTable.NumDescriptorRanges = _countof(descriptorRangeA); // Tableで利用する
 
 
 	// Samplerの設定

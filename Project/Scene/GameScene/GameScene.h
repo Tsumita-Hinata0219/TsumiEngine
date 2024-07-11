@@ -19,7 +19,7 @@
 #include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
 #include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
-
+#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 class GameScene : public IScene {
 
@@ -71,6 +71,9 @@ private:
 
 	// CollisionManager
 	std::unique_ptr<CollisionManager> collisionManager_;
+
+	// AbsentEffect
+	std::unique_ptr<AbsentEffect> absentEffect_;
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;

@@ -25,6 +25,10 @@ void GameScene::Initialize()
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();
 
+	/* ----- AbsentEffect アブセントエフェクト----- */
+	absentEffect_ = std::make_unique<AbsentEffect>();
+	absentEffect_->Initialize();
+
 	/* ----- Camera カメラ ----- */
 	camera_ = make_unique<Camera>();
 	camera_->Initialize();
@@ -132,8 +136,11 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
+	/* ----- AbsentEffect アブセントエフェクト----- */
+	//absentEffect_->Draw(camera_.get());
+
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw(camera_.get());
+	testPostEffect_->Draw(camera_.get()); 
 }
 
 

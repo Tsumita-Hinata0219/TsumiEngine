@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* ColorGradingEffectクラス */
+class ColorGradingEffect : public IPostEffect<ColorGradingMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	ColorGradingEffect() {};
+	~ColorGradingEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;
@@ -23,4 +23,3 @@ protected:
 	// コマンドコール
 	void CommandCall() override;
 };
-

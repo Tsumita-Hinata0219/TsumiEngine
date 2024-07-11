@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* GrayScaleEffectクラス */
+class GrayScaleEffect : public IPostEffect<GrayScaleMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	GrayScaleEffect() {};
+	~GrayScaleEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;

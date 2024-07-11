@@ -2,14 +2,14 @@
 
 #include "../IPostEffect.h"
 
-/* BoxFilterEffectクラス */
-class BoxFilterEffect : public IPostEffect<BoxFilterMtl>{
+/* GaussianFilterEffectクラス */
+class GaussianFilterEffect : public IPostEffect<GaussianFilterMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	BoxFilterEffect() {};
-	~BoxFilterEffect() {};
+	GaussianFilterEffect() {};
+	~GaussianFilterEffect() {};
 
 	// 初期化処理、描画処理
 	void Initialize() override;

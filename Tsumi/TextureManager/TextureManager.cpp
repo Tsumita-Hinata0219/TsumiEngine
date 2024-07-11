@@ -128,7 +128,6 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	//Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
 	//	UploadTextureData(textureData.resource.Get(), mipImages);
 	
-
 	// Commandの実行
 	//instance->ExeCommands();
 	UpdateTextureData(metadata, mipImages, textureData);
@@ -162,7 +161,7 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 
 	// 登録
 	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
-		UploadTextureData(textureData.resource.Get(), mipImages);
+		UploadTextureData(textureData.resource.Get(), mipImages); 
 
 	// Commandの実行
 	instance->ExeCommands();

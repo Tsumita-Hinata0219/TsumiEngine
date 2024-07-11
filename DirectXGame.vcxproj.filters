@@ -189,6 +189,9 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -374,6 +377,10 @@
     <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\IEnemyState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

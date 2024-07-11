@@ -125,11 +125,13 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	textureData.resource = CreateTextureResource(metadata);
 
 	// 登録
-	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
-		UploadTextureData(textureData.resource.Get(), mipImages);
+	//Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
+	//	UploadTextureData(textureData.resource.Get(), mipImages);
+	
 
 	// Commandの実行
-	instance->ExeCommands();
+	//instance->ExeCommands();
+	UpdateTextureData(metadata, mipImages, textureData);
 
 	// SRV作成
 	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
@@ -283,10 +285,10 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;                        // VRAM上に作成する
-	//heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
-	//heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
-
+	
+	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;                        // 細かい設定を行う
+	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
+	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
 	return heapProperties;
 }
 
@@ -303,7 +305,7 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
-		D3D12_RESOURCE_STATE_COPY_DEST,    // データ転送される設定
+		D3D12_RESOURCE_STATE_GENERIC_READ, // データ転送される設定
 		nullptr,						   // Clear最適地。使わないのでnullptr
 		IID_PPV_ARGS(&resource));		   // 作成するResourceポインタへのポインタ
 
@@ -419,6 +421,6 @@ void TextureManager::ExeCommands()
 	assert(SUCCEEDED(result));
 
 
-	CommandManager::GetInstance()->SetCommands(commands);
+	//CommandManager::GetInstance()->SetCommands(commands);
 }
 

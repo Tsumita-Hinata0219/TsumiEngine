@@ -11,30 +11,49 @@ void Enemy::Initialize()
 
 	// BodyTransformの初期化
 	bodyWt_.Initialize();
-	bodyWt_.srt.translate.z = 40.0f;
+	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
+	bodyWt_.srt.scale = { 0.1f, 0.1f, 0.1f }; 
 
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
+
+	/* ----- StatePattern ステートパターン ----- */
+	// 各ステートをコンテナに保存
+	stateVector_.resize(EnumSize<EnemyState>::value);
+	stateVector_[EnemyState::SPAWN] = std::make_unique<IEnemySpawnState>();
+	stateVector_[EnemyState::APPROACH] = std::make_unique<IEnemyApproachState>();
+	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
+	// 初期ステートの設定 && 初期ステートの初期化処理
+	stateNo_ = EnemyState::SPAWN;
+	currentStateNo_ = stateNo_;
+	stateVector_[currentStateNo_]->Init(this);
 }
 
 
 // 更新処理
 void Enemy::Update()
 {
+	// ステートパターン処理
+	FuncStatePattern();
+
 	// Transformの更新処理
 	bodyWt_.UpdateMatrix();
 
-	// 戦闘状態の切り替え処理
-	ToggleCombatState();
+	// アプローチ状態の時のみ入る処理
+	if (stateNo_ == EnemyState::APPROACH) {
 
-	// 戦闘状態に入っていたら入る処理
-	if (isCombatActive_) {
+		// 戦闘状態の切り替え処理
+		ToggleCombatState();
 
-		// 移動処理
-		Move();
+		// 戦闘状態に入っていたら入る処理
+		if (isCombatActive_) {
 
-		// 射撃の処理
-		ExecuteShot();
+			// 移動処理
+			Move();
+
+			// 射撃の処理
+			ExecuteShot();
+		}
 	}
 
 	// Bullet更新処理
@@ -55,7 +74,7 @@ void Enemy::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("Enemy")) {
+	/*if (ImGui::TreeNode("Enemy")) {
 
 		ImGui::Text("Transform");
 		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
@@ -69,7 +88,7 @@ void Enemy::Update()
 		ImGui::Text("ShotFrame = %d : Interval = %d", shotFrame_, kShotInterval_);
 
 		ImGui::TreePop();
-	}
+	}*/
 
 #endif // _DEBUG
 }
@@ -79,6 +98,7 @@ void Enemy::Update()
 void Enemy::Draw3D(Camera* camera)
 {
 	// BodyModelの描画
+	bodyModel_->SetColor(modelColor_);
 	bodyModel_->Draw(bodyWt_, camera);
 
 	// Bulletsの描画
@@ -95,8 +115,34 @@ void Enemy::OnCollisionWithPlayer()
 }
 void Enemy::OnCollisionWithPlayerBullet()
 {
+	// スポーン&デス時には通らない
+	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
+
+		// デスステートに移行
+		this->ChangeState(EnemyState::DEATH);
+	}
+}
 
 
+// ステートパターン処理
+void Enemy::FuncStatePattern()
+{
+	// ステートチェック
+	preStateNo_ = currentStateNo_;
+	currentStateNo_ = stateNo_;
+
+	// ステート変更チェック
+	if (preStateNo_ != currentStateNo_) {
+
+		///// 前回のステートの終了処理
+		stateVector_[preStateNo_]->Exit();
+
+		///// 新しいステートの初期化処理
+		stateVector_[currentStateNo_]->Init(this);
+	}
+
+	///// 更新処理
+	stateVector_[currentStateNo_]->Update();
 }
 
 

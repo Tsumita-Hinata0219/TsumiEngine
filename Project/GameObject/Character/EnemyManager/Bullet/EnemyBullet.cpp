@@ -7,7 +7,7 @@ void EnemyBullet::Initialize()
 {
 	// Modelの初期化
 	bulletModel_ = std::make_unique<Model>();
-	bulletModel_->CreateFromObjAssimpVer("Test", "Test");
+	bulletModel_->CreateFromObjAssimpVer("DemoBullet", "DemoBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	bulletWt_.Initialize();

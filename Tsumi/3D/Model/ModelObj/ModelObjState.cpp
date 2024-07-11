@@ -89,8 +89,7 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
 
 	// DescriptorTableを設定する
-	if (!pModel->GetObjData().textureHD == 0) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+	if (pModel->GetObjData().textureHD != 0) {
 		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
@@ -99,7 +98,6 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
 		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 

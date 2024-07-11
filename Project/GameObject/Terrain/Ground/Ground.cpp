@@ -42,7 +42,7 @@ void Ground::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("Ground")) {
+	/*if (ImGui::TreeNode("Ground")) {
 
 		ImGui::ColorEdit4("color", &color_.x);
 		ImGui::ColorEdit4("LightColor", &light_.color.x);
@@ -50,7 +50,7 @@ void Ground::Update()
 		ImGui::DragFloat("LightIntensity", &light_.intensity, 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat("LightSininess", &light_.sininess, 0.1f, 0.0f, 200.0f);
 		ImGui::TreePop();
-	}
+	}*/
 
 #endif // _DEBUG
 }

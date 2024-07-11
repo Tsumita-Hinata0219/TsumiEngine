@@ -7,6 +7,11 @@
 
 #include "../Bullet/EnemyBullet.h"
 
+#include "../IState/IEnemyState.h"
+#include "../IState/Spawn/IEnemySpawnState.h"
+#include "../IState/Approach/IEnemyApproachState.h"
+#include "../IState/Death/IEnemyDeathState.h"
+
 
 // Player前方宣言
 class Player;
@@ -26,14 +31,32 @@ public: // メンバ関数
 	void Update();
 	void Draw3D(Camera* camera);
 
+	// チェンジステート
+	void ChangeState(int newState) { this->stateNo_ = newState; }
+
 #pragma region Accessor アクセッサ
 
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
-	// BulletList
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
+	// SRT
+	SRT GetSRT() const { return this->bodyWt_.srt; }
+	void SetSRT(SRT setSRT) { this->bodyWt_.srt = setSRT; }
 
+	// カラー
+	Vector4 GetModelColor() const { return this->modelColor_; }
+	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
+
+	// 死亡フラグ
+	bool IsDead() const { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+
+	// 座標
+	Vector3 GetPosition() { return bodyWt_.GetWorldPos(); }
+	void SetPosition(Vector3 setPos) { this->bodyWt_.srt.translate = setPos; }
+
+	// BulletListの取得
+	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
 #pragma endregion 
 
@@ -53,6 +76,9 @@ public: // メンバ関数
 
 
 private:
+
+	// ステートパターン処理
+	void FuncStatePattern();
 
 	// 戦闘状態の切り替え処理
 	void ToggleCombatState();
@@ -79,7 +105,7 @@ private: // メンバ変数
 	Player* player_ = nullptr;
 
 	// 本体モデル
-	unique_ptr<Model> bodyModel_;
+	std::unique_ptr<Model> bodyModel_;
 
 	// 本体座標
 	WorldTransform bodyWt_{};
@@ -87,9 +113,15 @@ private: // メンバ変数
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
+	// カラー
+	Vector4 modelColor_ = Vector4::one;
+
 	// 移動速度
 	Vector3 velocity_{};
 	float moveVector_ = 0.05f;
+
+	// 死亡フラグ
+	bool isDead_ = false;
 
 	// playerとの最低距離
 	float minToPlayer_ = 4.0f;
@@ -98,7 +130,7 @@ private: // メンバ変数
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 20.0f;
+	float combatTriggerDistance_ = 40.0f;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
@@ -106,5 +138,12 @@ private: // メンバ変数
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
 	int kShotInterval_ = 80;
+
+
+	// ステートパターン
+	std::vector<std::unique_ptr<IEnemyState>> stateVector_; // ステートコンテナ
+	int stateNo_ = 0;        // ステートを管理するクラス
+	int currentStateNo_ = 0; // 現在のステート
+	int preStateNo_ = 0;	 // 前回のステート
 };
 

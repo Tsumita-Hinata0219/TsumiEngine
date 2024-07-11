@@ -198,6 +198,9 @@
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -393,6 +396,10 @@
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\IEnemyState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

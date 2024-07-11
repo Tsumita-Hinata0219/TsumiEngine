@@ -181,7 +181,6 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 
 
 
-
 /// <summary>
 /// Textureファイルを開く
 /// </summary>
@@ -321,9 +320,6 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 /// </summary>
 void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TextureData textureData) {
 
-	// Meta情報を取得
-	//const DirectX::TexMetadata& metadata = mipImage.GetMetadata();
-
 	// 全MipMapについて
 	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel) {
 
@@ -380,6 +376,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource>  TextureManager::UploadTextureData(Micros
 }
 
 
+
 /// <summary>
 /// Commandを実行する
 /// </summary>
@@ -421,6 +418,6 @@ void TextureManager::ExeCommands()
 	assert(SUCCEEDED(result));
 
 
-	//CommandManager::GetInstance()->SetCommands(commands);
+	CommandManager::GetInstance()->SetCommands(commands);
 }
 

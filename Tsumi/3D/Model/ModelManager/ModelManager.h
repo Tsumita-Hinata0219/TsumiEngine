@@ -46,7 +46,7 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルデータを追加する
 	/// </summary>
-	void const AddModel(const string name, unique_ptr<Model> model);
+	void const AddModel(unique_ptr<Model> model);
 
 	/// <summary>
 	/// モデルデータの取得

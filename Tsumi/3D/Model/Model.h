@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
 #include "../../View/SRVManager/SRVManager.h"
 #include "../../Transform/WorldTransform/WorldTransform.h"
@@ -148,6 +149,9 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// Node
 	Node GetNode() const { return this->objData_.rootNode; }
 
+	// nameの取得
+	std::string GetName()const { return this->name_; }
+
 #pragma endregion 
 
 
@@ -180,14 +184,24 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 private:
 
 	/// <summary>
+	/// Bufferのリソースを確保しておく
+	/// </summary>
+	void CreateBuffer() {
+		meshBuffer_.CreateResource();
+		meshBuffer_.CreateVertexBufferView();
+		materialBuffer_.CreateResource();
+		transformBuffer_.CreateResource();
+	}
+
+	/// <summary>
 	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
 	/// </summary>
-	MaterialModel* LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
+	MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
 	/// <summary>
 	/// 繧ｳ繝槭Φ繝峨さ繝ｼ繝ｫ
 	/// </summary>
-	void CommandCall(Transform transform, Camera* camera);
+	void CommandCall(Camera* camera);
 
 private: // 繝｡繝ｳ繝仙､画焚
 
@@ -235,10 +249,14 @@ private: // 繝｡繝ｳ繝仙､画焚
 	// Model縺ｮ蜷榊燕
 	string name_;
 
-	// Mesh繝・・繧ｿ
-	unordered_map<string, unique_ptr<Mesh>> meshMap_;
+	// MeshBuffer
+	unordered_map<string, MeshData> meshMap_;
+	BufferResource<MeshData> meshBuffer_;
 
-	// Material繝・・繧ｿ
-	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
+	// MaterilBuffer
+	unordered_map<string, MaterialDataN> materialMap_;
+	BufferResource<MaterialDataN> materialBuffer_;
 
+	// WorldTransform
+	BufferResource<TransformationMat> transformBuffer_;
 };

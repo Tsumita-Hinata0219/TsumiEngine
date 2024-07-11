@@ -55,6 +55,10 @@ public:
 
 private:
 
+	// ModelManager
+	ModelManager* modelManager_ = nullptr;
+	Transform transform_{};
+
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;
 

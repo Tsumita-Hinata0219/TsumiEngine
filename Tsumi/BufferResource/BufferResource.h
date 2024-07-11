@@ -48,6 +48,18 @@ public:
 
 	// コマンドを積む
 	void CommandCall(UINT number);
+	void IASetVertexBuffers(UINT number);
+	void IASetIndexBuffer();
+
+#pragma region Accessor アクセッサ
+
+	// VertexBufferView
+	D3D12_VERTEX_BUFFER_VIEW GetVBV() { return this->vertexBufferView_; }
+
+	// IndexBufferView
+	D3D12_INDEX_BUFFER_VIEW GetIBV() { return this->indexBufferView_; }
+
+#pragma endregion 
 
 
 private:
@@ -62,9 +74,9 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
 	// VertexBufferView
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
 	// IndexBufferView
-	D3D12_INDEX_BUFFER_VIEW indexBufferView_;
+	D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
 
 	// 作成するResourceの要素数
 	UINT itemCount_ = 1;
@@ -152,6 +164,20 @@ inline void BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::IASetVertexBuffers(UINT number)
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->IASetVertexBuffers(0, number, &vertexBufferView_);
+}
+
+template<typename T>
+inline void BufferResource<T>::IASetIndexBuffer()
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->IASetIndexBuffer(&indexBufferView_);
 }
 
 

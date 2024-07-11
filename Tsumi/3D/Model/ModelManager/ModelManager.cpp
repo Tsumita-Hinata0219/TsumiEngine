@@ -12,9 +12,10 @@ void ModelManager::Finalize() {
 
 
 // モデルデータを追加する
-void const ModelManager::AddModel(const string name, unique_ptr<Model> model)
+void const ModelManager::AddModel(unique_ptr<Model> model)
 {
 	// 指定の名前で検索をかける
+	std::string name = model->GetName();
 	auto modelData = GetModel(name);
 
 	// ヒットしたら早期リターン

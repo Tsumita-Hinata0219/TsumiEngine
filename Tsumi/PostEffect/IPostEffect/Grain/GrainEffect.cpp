@@ -63,3 +63,4 @@ void GrainEffect::CommandCall()
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);
 }
+

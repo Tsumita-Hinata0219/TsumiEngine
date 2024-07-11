@@ -48,7 +48,6 @@ void Player::Update()
 	);
 
 #ifdef _DEBUG
-
 	if (ImGui::TreeNode("Player")) {
 
 		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
@@ -60,7 +59,6 @@ void Player::Update()
 
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 

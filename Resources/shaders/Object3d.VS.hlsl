@@ -20,24 +20,9 @@ struct VertexShaderInput
 
 VertexShaderOutput main(VertexShaderInput input)
 {    
-    //VertexShaderOutput output;
-    //float4x4 resultMat;
-
-    //float4x4 cameraMat = mul(gTransformationViewMatrix.view, gTransformationViewMatrix.viewProjection);
-    //resultMat = mul(gTransformationMatrix.World, cameraMat);
-
-    //output.position = mul(input.position, resultMat);
-    //output.texcoord = input.texcoord;
-    //output.normal = normalize(mul(input.normal, (float3x3) gTransformationMatrix.World));
-    //output.worldPosition = mul(input.position, gTransformationMatrix.World).xyz;
-    //output.cameraPosition = gTransformationViewMatrix.cameraPosition;
-    
-    //return output;
-    
-    
     VertexShaderOutput output;
     
-     // 頂点の位置をワールド・ビュー・プロジェクション行列で変換
+    // 頂点の位置をワールド・ビュー・プロジェクション行列で変換
     output.position = mul(input.position, gTransformationMat.WVP);
     
     // テクスチャ座標はそのまま渡す
@@ -48,3 +33,4 @@ VertexShaderOutput main(VertexShaderInput input)
     
     return output;
 }
+

@@ -161,12 +161,9 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 {
 	/* 1. 中で必要となる変数の宣言 */
 
-	auto result = make_unique<Model>(); // return するModel
-	string name = fileName.substr(0, fileName.size() - 4);
-
-	// 返すModelにファイルの名前を付ける
-	result->name_ = name;
-
+	// return するModelに名前を付けておく。(ファイル名)
+	auto result = make_unique<Model>();
+	result->name_ = fileName.substr(0, fileName.size() - 4);
 
 
 	/* 2. ファイルを開く */
@@ -176,18 +173,15 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
 
 
-
 	/* 3. 実際にファイルを読み、ModelDataを構築していく */
 
-	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	//三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 	assert(scene->HasMeshes()); // メッシュがないのは対応しない
 
-
 	// meshを解析する
 	// 今回作るメッシュ
-	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
-
+	MeshData meshItem{};
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
@@ -215,21 +209,18 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 				vertex.normal.x *= -1.0f;
 
 				// 解析した値を差し込む
-				meshItem->meshData.vertices.push_back(vertex);
+				meshItem.vertices.push_back(vertex);
 			}
 		}
 	}
 	// 解析し終えたmeshを設定する
-	meshItem->Create();
-	result->meshMap_[name] = move(meshItem);
+	result->meshMap_[result->name_] = meshItem;
 
 
 	// materialを解析する
+	// 今回作るマテリアル
+	MaterialDataN materialItem{};
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-
-		// 今回作るマテリアル
-		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
-		materialItem->Create();
 
 		// シーン内のマテリアル
 		aiMaterial* material = scene->mMaterials[materialIndex];
@@ -240,14 +231,21 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
+			materialItem.textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
 		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		materialItem->name = material->GetName().C_Str();
-		result->materialMap_[name] = move(materialItem);
+		materialItem.name = material->GetName().C_Str();
 	}
+	result->materialMap_[result->name_] = materialItem;
+
+
+	// 作ったデータを基にbufferを作っていく
+	result->meshBuffer_.CreateResource(UINT(meshItem.vertices.size()));
+	result->meshBuffer_.CreateVertexBufferView();
+	result->materialBuffer_.CreateResource();
+	result->transformBuffer_.CreateResource();
 
 
 	return result;
@@ -256,14 +254,13 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 {
 	/* 1. 中で必要となる変数の宣言 */
 
-	auto result = make_unique<Model>(); // return するModel
-	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
-	string name = fileName.substr(0, fileName.size() - 4);
-
-	// 返すModelにファイルの名前を付ける
-	result->name_ = name;
-
+	// return するModelに名前を付けておく。(ファイル名)
+	auto result = make_unique<Model>();
+	result->name_ = fileName.substr(0, fileName.size() - 4);
+	// Bufferのリソースを確保しておく
+	result->CreateBuffer();
 	textureName;
+
 
 	/* 2. ファイルを開く */
 
@@ -281,6 +278,7 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 
 
 	// meshを解析する
+	MeshData meshItem{};
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
@@ -308,22 +306,18 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 				vertex.normal.x *= -1.0f;
 
 				// 解析した値を差し込む
-				meshItem->meshData.vertices.push_back(vertex);
+				meshItem.vertices.push_back(vertex);
 			}
 		}
 	}
 	// 解析し終えたmeshを設定する
-	result->meshMap_[name] = move(meshItem);
+	result->meshMap_[result->name_] = meshItem;
 
 
 	// materialを解析する
+	// 今回作るマテリアル
+	MaterialDataN materialItem{};
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-
-		// 今回作るマテリアル
-		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
-
-		// マテリアルを作る
-		materialItem->Create();
 
 		// シーン内のマテリアル
 		aiMaterial* material = scene->mMaterials[materialIndex];
@@ -334,13 +328,14 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
+			materialItem.textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
-		materialItem->name = material->GetName().C_Str();
-		result->materialMap_[name] = move(materialItem);
+		materialItem.name = material->GetName().C_Str();
 	}
+	// 解析し終えたmeshを設定する
+	result->materialMap_[result->name_] = move(materialItem);
 
 
 	return result;
@@ -362,17 +357,25 @@ void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算
 	transform.UpdateMatrix();
-	transform.World = transform.matWorld;
-	transform.WVP = camera->projectionMatrix * camera->viewMatrix * transform.matWorld;
-	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
+	transform.transformationMatData.World = transform.matWorld;
+	transform.transformationMatData.WVP = transform.transformationMatData.World * camera->viewMatrix * camera->projectionMatrix;
+	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
-	meshMap_.at(name_)->TransferMesh();
-	materialMap_.at(name_)->TransferMaterial();
-	transform.TransferMatrix();
+	meshBuffer_.Map();
+	meshBuffer_.WriteData(meshMap_.at(name_));
+	meshBuffer_.UnMap();
+
+	materialBuffer_.Map();
+	materialBuffer_.WriteData(materialMap_.at(name_));
+	materialBuffer_.UnMap();
+
+	transformBuffer_.Map();
+	transformBuffer_.WriteData(transform.transformationMatData);
+	transformBuffer_.UnMap();
 
 	// コマンドコール
-	CommandCall(transform, camera);
+	CommandCall(camera);
 }
 
 
@@ -507,77 +510,11 @@ void Model::UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton
 }
 
 
-/// <summary>
-/// mtlファイルを読み込む関数
-/// </summary>
-MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName)
-{
-	/* 1. 中で必要となる変数の宣言 */
-
-	MaterialModel* result = nullptr; // 構築するMaterialData
-	string line{};  // ファイルから読んだ１行を格納するもの
-
-
-	/* 2. ファイルを開く */
-
-	// ファイルを開く
-	std::ifstream file("Resources/Obj/" + filePath + "/" + fileName);
-
-	//とりあえず開けなかったら止める
-	assert(file.is_open());
-
-
-	/* 3. 実際にファイルを読み、MaterualDataを構築していく */
-
-	while (std::getline(file, line)) {
-
-		std::string identifier{};
-		std::istringstream s(line);
-		s >> identifier;
-
-		// 新規マテリルの作成
-		if (identifier == "newmtl") {
-
-			// 新規マテリアルならMapに追加
-			string mtlName;
-			s >> mtlName;
-			materialMap_[mtlName] = make_unique<MaterialModel>(mtlName);
-			result = materialMap_[mtlName].get();
-
-			// 仮テクスチャハンドル
-			result->textureHandle = TextureManager::LoadTexture("Texture/", "uvChecker.png");
-		}
-
-		// identifierに応じた処理
-		// "map_Kd" = textureのファイル名が記載されている
-
-		else if (identifier == "map_Kd") {
-
-			std::string textureFileName{};
-			s >> textureFileName;
-			textureFileName = textureFileName.substr(0, fileName.size() - 4);
-
-			// 画像を読み込む
-			if (result != nullptr) {
-				textureFileName = textureFileName.substr(0, fileName.size() - 4);
-				result->textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFileName);
-			}
-			else {
-				//とりあえず止める
-				assert(result == nullptr);
-			}
-		}
-	}
-
-	return result;
-}
-
-
 
 /// <summary>
 /// コマンドコール
 /// </summary>
-void Model::CommandCall(Transform transform, Camera* camera)
+void Model::CommandCall(Camera* camera)
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -586,13 +523,10 @@ void Model::CommandCall(Transform transform, Camera* camera)
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// コマンドを詰む
-	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV
-	commands.List->SetGraphicsRootConstantBufferView(0, materialMap_.at(name_)->constBuffer->GetGPUVirtualAddress()); // Material
-	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress()); // TransformationMatrix
+	meshBuffer_.IASetVertexBuffers(1); // VBV
+	materialBuffer_.CommandCall(0); // Material
+	transformBuffer_.CommandCall(1); // TransformationMatrix
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
-	if (!materialMap_.at(name_)->textureHandle == 0) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
-		SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle);
-	}
-	commands.List->DrawInstanced(UINT(meshMap_.at(name_)->meshData.vertices.size()), 1, 0, 0); // Draw!!
+	SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_).textureHandle); // Texture
+	commands.List->DrawInstanced(UINT(meshMap_.at(name_).vertices.size()), 1, 0, 0); // Draw!!
 }

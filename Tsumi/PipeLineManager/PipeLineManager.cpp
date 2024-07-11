@@ -52,6 +52,11 @@ void PipeLineManager::Initialize()
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
+
+	// Absent
+	instance->absentPipeLine_ = make_unique<AbsentPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Absent] = instance->absentPipeLine_->SetUpPso();
+
 	// BoxFilter
 	instance->boxFilterPipeLine_ = make_unique<BoxFilterPipeLine>();
 	instance->pipeLineMap_[PipeLineType::BoxFilter] = instance->boxFilterPipeLine_->SetUpPso();
@@ -63,6 +68,10 @@ void PipeLineManager::Initialize()
 	// GaussianFilter
 	instance->gaussianFilterPipeLine_ = make_unique<GaussianFilterPipeLine>();
 	instance->pipeLineMap_[PipeLineType::GaussianFilter] = instance->gaussianFilterPipeLine_->SetUpPso();
+
+	// Grain
+	instance->grainPipeLine_ = make_unique<GrainPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Grain] = instance->grainPipeLine_->SetUpPso();
 
 	// GrayScale
 	instance->grayScalePipeLine_ = make_unique<GrayScalePipeLine>();

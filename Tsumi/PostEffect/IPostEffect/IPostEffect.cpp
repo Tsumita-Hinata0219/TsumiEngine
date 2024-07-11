@@ -7,41 +7,29 @@ void IPostEffect::DrawImGui()
 {
 	if (ImGui::TreeNode("PostEffect")) {
 
-		ImGui::ColorEdit4("Color", &material_.mtlData.color.x);
-		/*if (ImGui::Button("None")) {
-			effectType_ = IPostEffect::Type::None;
-		}*/
-		if (ImGui::Button("BoxFileter")) {
-			effectType_ = IPostEffect::Type::BoxFilter;
-		}
-		/*if (ImGui::Button("ColorGrading")) {
-			effectType_ = IPostEffect::Type::ColorGrading;
-		}*/
-		if (ImGui::Button("Dissolve")) {
-			effectType_ = IPostEffect::Type::Dissolve;
-		}
-		if (ImGui::Button("GaussianFilter")) {
-			effectType_ = IPostEffect::Type::GaussianFilter;
-		}
-		if (ImGui::Button("GrayScale")) {
-			effectType_ = IPostEffect::Type::GrayScale;
-		}
-		if (ImGui::Button("OutLine")) {
-			effectType_ = IPostEffect::Type::OutLine;
-		}
-		if (ImGui::Button("RadialBlur")) {
-			effectType_ = IPostEffect::Type::RadialBlur;
-		}
-		if (ImGui::Button("Random")) {
-			effectType_ = IPostEffect::Type::Random;
-		}
-		if (ImGui::Button("SepiaTone")) {
-			effectType_ = IPostEffect::Type::SepiaTone;
-		}
-		if (ImGui::Button("Vignetting")) {
-			effectType_ = IPostEffect::Type::Vignetting;
+		// std::vector<std::string>をstd::vector<const char*>に変換
+		std::vector<const char*> cstrEffectNames;
+		for (const auto& name : imguiEffectName_) {
+			cstrEffectNames.push_back(name.c_str());
 		}
 
+		if (ImGui::Combo("EffectType", &imguiComboIndex_, cstrEffectNames.data(), int(cstrEffectNames.size()))) {
+			
+			switch (imguiComboIndex_) {
+			case 0: effectType_ = IPostEffect::Type::Absent; break;
+			case 1: effectType_ = IPostEffect::Type::BoxFilter; break;
+			case 2: effectType_ = IPostEffect::Type::ColorGrading; break;
+			case 3: effectType_ = IPostEffect::Type::Dissolve; break;
+			case 4: effectType_ = IPostEffect::Type::GaussianFilter; break;
+			case 5: effectType_ = IPostEffect::Type::Grain; break;
+			case 6: effectType_ = IPostEffect::Type::GrayScale; break;
+			case 7: effectType_ = IPostEffect::Type::OutLine; break;
+			case 8: effectType_ = IPostEffect::Type::RadialBlur; break;
+			case 9: effectType_ = IPostEffect::Type::Random; break;
+			case 10: effectType_ = IPostEffect::Type::SepiaTone; break;
+			case 11: effectType_ = IPostEffect::Type::Vignetting; break;
+			}
+		}
 		ImGui::TreePop();
 	}
 }
@@ -50,9 +38,40 @@ void IPostEffect::DrawImGui()
 // リソース作成
 void IPostEffect::Create()
 {
+	// IPostEffect::Typeを表す文字
+	imguiEffectName_ = {
+		"Absent",
+		"BoxFilter",
+		"ColorGrading",
+		"Dissolve",
+		"GaussianFilter",
+		"Grain",
+		"GrayScale",
+		"LuminanceOutLine",
+		"RadialBlur",
+		"Random",
+		"SepiaTone",
+		"Vignetting"
+	};
+
 	// マテリアル作成
 	material_.Create();
 	vignettingMtl_.Create();
+
+	// マテリアルのバッファ作成
+	boxFilterBuffer_.CreateResource();
+	colorGradingBuffer_.CreateResource();
+	dissolveBuffer_.CreateResource();
+	dissolveBuffer_.CreateResource();
+	gaussianFilterBuffer_.CreateResource();
+	grainBuffer_.CreateResource();
+	grayScaleBuffer_.CreateResource();
+	outLineBuffer_.CreateResource();
+	radialBlurBuffer_.CreateResource();
+	randomBuffer_.CreateResource();
+	sepiaToneBuffer_.CreateResource();
+	vignettingBuffer_.CreateResource();
+
 
 	ComPtr<ID3D12Resource> stv = RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
 	//srv_ = DescriptorManager::CreateRenderTextureSRV(stv);
@@ -98,9 +117,9 @@ void IPostEffect::PipeLineCheck()
 {
 	switch (effectType_) {
 
-	case IPostEffect::Type::None:
+	case IPostEffect::Type::Absent:
 
-		assert(false && "Effect type is None. Please set a valid effect type.");
+		PipeLineManager::PipeLineCheckAndSet(PipeLineType::Absent);
 		break;
 
 	case IPostEffect::Type::BoxFilter:
@@ -122,6 +141,11 @@ void IPostEffect::PipeLineCheck()
 	case IPostEffect::Type::GaussianFilter:
 
 		PipeLineManager::PipeLineCheckAndSet(PipeLineType::GaussianFilter);
+		break;
+
+	case IPostEffect::Type::Grain:
+
+		PipeLineManager::PipeLineCheckAndSet(PipeLineType::Grain);
 		break;
 
 	case IPostEffect::Type::GrayScale:

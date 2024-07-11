@@ -1,4 +1,5 @@
 #include "RandomEffect.h"
+#include "../../../../Project/GameManager/GameManager.h"
 
 
 
@@ -15,6 +16,8 @@ void RandomEffect::Initialize()
 // 描画処理
 void RandomEffect::Draw([[maybe_unused]] Camera* camera)
 {
+	mtlData_.time = g_ElapsedTime;
+
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
 	mtlBuffer_.WriteData(mtlData_);

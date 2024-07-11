@@ -7,6 +7,7 @@ struct Material
 {
     float4 color;
     float threshold;
+    float thinkness;
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -27,16 +28,17 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     float mask = gMaskTexture.Sample(gSampler, input.texcoord);
     // maskの値が閾値以下の場合はdiscardして抜く
-    //if (mask <= gMaterial.threshold)
-    //{
-    //    discard;
-    //}
-    //if (mask <= 0.5f)
-    //{
-    //    discard;
-    //}
+    if (mask <= gMaterial.threshold)
+    {
+        discard;
+    }
     
+    
+    // エッジ作成。Edgeっぽさを算出
+    float edge = 1.0f - smoothstep(gMaterial.threshold, gMaterial.threshold + gMaterial.thinkness, mask);
     output.color = gTexture.Sample(gSampler, input.texcoord);
-    
+    // Edgeっぽい程指定した色を加算
+    output.color.rgb += edge * gMaterial.color.rgb;   
+     
     return output;
 }

@@ -80,7 +80,6 @@ void TestPostEffect::Update()
 		ChangeImGui();
 
 		if (activeEffects_ == EffectType::Absent) {
-
 			absent_->DrawImGui();
 		}
 		else if (activeEffects_ == EffectType::BoxFilter) {

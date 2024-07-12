@@ -10,21 +10,12 @@ void FileManager::Initialize()
 
 
 // 更新処理　
-void FileManager::Update()
-{
-
-
-
-}
+void FileManager::Update() {}
 
 
 // 描画処理
-void FileManager::Draw()
-{
+void FileManager::Draw() {}
 
-
-
-}
 
 // 解放処理
 void FileManager::Finalize() {}

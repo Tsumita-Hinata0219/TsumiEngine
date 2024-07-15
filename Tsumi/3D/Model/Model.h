@@ -250,11 +250,15 @@ private: // 繝｡繝ｳ繝仙､画焚
 	string name_;
 
 	// MeshBuffer
-	unordered_map<string, MeshData> meshMap_;
+	std::unique_ptr<MeshData> meshData_;
 	BufferResource<MeshData> meshBuffer_;
 
+	// VertexDataBuffer
+	std::unique_ptr<VertexData[]> vertexData_;
+	BufferResource<VertexData> vertexBuffer_;
+
 	// MaterilBuffer
-	unordered_map<string, MaterialDataN> materialMap_;
+	std::unique_ptr<MaterialDataN> materialData_;
 	BufferResource<MaterialDataN> materialBuffer_;
 
 	// WorldTransform

@@ -44,7 +44,7 @@ public:
 	void UnMap();
 
 	// データを書き込む
-	void WriteData(const T data);
+	void WriteData(const T* data, size_t count = 1);
 
 	// コマンドを積む
 	void CommandCall(UINT number);
@@ -151,10 +151,10 @@ inline void BufferResource<T>::UnMap()
 
 // データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T data)
+inline void BufferResource<T>::WriteData(const T* data, size_t count)
 {
 	assert(mappedData_);
-	*mappedData_ = data;
+	std::memcpy(mappedData_, data, sizeof(T) * count);
 }
 
 

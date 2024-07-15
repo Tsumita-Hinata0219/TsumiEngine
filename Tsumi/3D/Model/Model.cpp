@@ -181,7 +181,8 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 
 	// meshを解析する
 	// 今回作るメッシュ
-	MeshData meshItem{};
+	auto meshItem = std::make_unique<MeshData>();
+	result->meshData_ = std::make_unique<MeshData>();
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
@@ -209,17 +210,29 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 				vertex.normal.x *= -1.0f;
 
 				// 解析した値を差し込む
-				meshItem.vertices.push_back(vertex);
+				meshItem->vertices.push_back(vertex);
 			}
 		}
 	}
 	// 解析し終えたmeshを設定する
-	result->meshMap_[result->name_] = meshItem;
+	result->meshData_ = std::move(meshItem);
+
+
+
+	// VertexDataの設定
+	result->vertexData_ = std::make_unique<VertexData[]>(result->meshData_->vertices.size());
+	std::memcpy(
+		result->vertexData_.get(), // コピー先のアドレス
+		result->meshData_->vertices.data(), // コピー元のデータの先頭アドレス
+		sizeof(VertexData) * result->meshData_->vertices.size() // コピーするデータのバイト数
+	);
+
 
 
 	// materialを解析する
 	// 今回作るマテリアル
-	MaterialDataN materialItem{};
+	auto materialItem = std::make_unique<MaterialDataN>();
+	result->materialData_ = std::make_unique<MaterialDataN>();
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
 
 		// シーン内のマテリアル
@@ -231,19 +244,22 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem.textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
+			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
 		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		materialItem.name = material->GetName().C_Str();
+		materialItem->name = material->GetName().C_Str();
 	}
-	result->materialMap_[result->name_] = materialItem;
+	// 解析し終えたmaterialを設定する
+	result->materialData_ = std::move(materialItem);
+
 
 
 	// 作ったデータを基にbufferを作っていく
-	result->meshBuffer_.CreateResource(UINT(meshItem.vertices.size()));
-	result->meshBuffer_.CreateVertexBufferView();
+	result->meshBuffer_.CreateResource(UINT(result->meshData_->vertices.size()));
+	result->vertexBuffer_.CreateResource(UINT(result->meshData_->vertices.size()));
+	result->vertexBuffer_.CreateVertexBufferView();
 	result->materialBuffer_.CreateResource();
 	result->transformBuffer_.CreateResource();
 
@@ -278,7 +294,8 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 
 
 	// meshを解析する
-	MeshData meshItem{};
+	auto meshItem = std::make_unique<MeshData>();
+	result->meshData_ = std::make_unique<MeshData>();
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
@@ -306,17 +323,18 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 				vertex.normal.x *= -1.0f;
 
 				// 解析した値を差し込む
-				meshItem.vertices.push_back(vertex);
+				meshItem->vertices.push_back(vertex);
 			}
 		}
 	}
 	// 解析し終えたmeshを設定する
-	result->meshMap_[result->name_] = meshItem;
+	result->meshData_ = std::move(meshItem);
 
 
 	// materialを解析する
 	// 今回作るマテリアル
-	MaterialDataN materialItem{};
+	auto materialItem = std::make_unique<MaterialDataN>();
+	result->materialData_ = std::make_unique<MaterialDataN>();
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
 
 		// シーン内のマテリアル
@@ -328,14 +346,14 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// テクスチャの読み込み
-			materialItem.textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
+			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
-		materialItem.name = material->GetName().C_Str();
+		materialItem->name = material->GetName().C_Str();
 	}
-	// 解析し終えたmeshを設定する
-	result->materialMap_[result->name_] = move(materialItem);
+	// 解析し終えたmaterialを設定する
+	result->materialData_ = std::move(materialItem);
 
 
 	return result;
@@ -362,16 +380,20 @@ void Model::DrawN(Transform transform, Camera* camera)
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
+	vertexBuffer_.Map();
+	vertexBuffer_.WriteData(vertexData_.get(), meshData_->vertices.size());
+	vertexBuffer_.UnMap();
+
 	meshBuffer_.Map();
-	meshBuffer_.WriteData(meshMap_.at(name_));
+	meshBuffer_.WriteData(meshData_.get());
 	meshBuffer_.UnMap();
 
 	materialBuffer_.Map();
-	materialBuffer_.WriteData(materialMap_.at(name_));
+	materialBuffer_.WriteData(materialData_.get());
 	materialBuffer_.UnMap();
 
 	transformBuffer_.Map();
-	transformBuffer_.WriteData(transform.transformationMatData);
+	transformBuffer_.WriteData((&transform.transformationMatData));
 	transformBuffer_.UnMap();
 
 	// コマンドコール
@@ -523,10 +545,11 @@ void Model::CommandCall(Camera* camera)
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// コマンドを詰む
-	meshBuffer_.IASetVertexBuffers(1); // VBV
+	//meshBuffer_.IASetVertexBuffers(1); // VBV
+	vertexBuffer_.IASetVertexBuffers(1); // VBV
 	materialBuffer_.CommandCall(0); // Material
 	transformBuffer_.CommandCall(1); // TransformationMatrix
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
-	SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_).textureHandle); // Texture
-	commands.List->DrawInstanced(UINT(meshMap_.at(name_).vertices.size()), 1, 0, 0); // Draw!!
+	SRVManager::SetGraphicsRootDescriptorTable(3, materialData_->textureHandle); // Texture
+	commands.List->DrawInstanced(UINT(meshData_->vertices.size()), 1, 0, 0); // Draw!!
 }

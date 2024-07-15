@@ -73,7 +73,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	/// 繝｢繝・Ν縺ｮ隱ｭ縺ｿ霎ｼ縺ｿ
 	/// </summary>
 	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
+	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName);
 
 	/// <summary>
 	/// 謠冗判蜃ｦ逅・

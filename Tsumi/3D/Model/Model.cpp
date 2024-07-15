@@ -276,23 +276,21 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 
 	return result;
 }
-unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
+unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName)
 {
 	/* 1. 中で必要となる変数の宣言 */
 
 	// return するModelに名前を付けておく。(ファイル名)
 	auto result = make_unique<Model>();
 	result->name_ = fileName.substr(0, fileName.size() - 4);
-	// Bufferのリソースを確保しておく
-	result->CreateBuffer();
-	textureName;
+	
 
 
 	/* 2. ファイルを開く */
 
 	// asssimpでobjを読む
 	Assimp::Importer importer;
-	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
+	string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName);
 
 
 
@@ -303,42 +301,62 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 	assert(scene->HasMeshes()); // メッシュがないのは対応しない
 
 
-	// meshを解析する
+	// mesh & indicesを解析する
+	// 今回作るmesh & indeces
 	auto meshItem = std::make_unique<MeshData>();
 	result->meshData_ = std::make_unique<MeshData>();
+	auto indicesItem = std::make_unique<std::vector<uint32_t>>();
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
 		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+		meshItem->vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
 
-		// ここからMeshの中身(Face)の解析を行っていく
+		// Verticesを解析する
+		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+			aiVector3D& position = mesh->mVertices[vertexIndex];
+			aiVector3D& normal = mesh->mNormals[vertexIndex];
+			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+			// 右手系 -> 左手系への変換
+			meshItem->vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
+			meshItem->vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
+			meshItem->vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
+		}
+
+		// Indexを解析する
 		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
 			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3); // 三角形のみサポート
+			assert(face.mNumIndices == 3);
 
-			// ここからFaceの中身(Vertex)の解析を行っていく
 			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-
-				VertexData vertex{};
-				vertex.position = { position.x, position.y, position.z, 1.0f };
-				vertex.normal = { normal.x, normal.y, normal.z, };
-				vertex.texCoord = { texcoord.x, texcoord.y };
-
-				// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-
-				// 解析した値を差し込む
-				meshItem->vertices.push_back(vertex);
+				indicesItem->push_back(vertexIndex);
 			}
 		}
 	}
-	// 解析し終えたmeshを設定する
+	// 解析し終えたmesh & indicesを設定する
+	result->meshData_->vertices.resize(sizeof(meshItem));
 	result->meshData_ = std::move(meshItem);
+
+
+
+	// VertexDataの設定
+	result->vertexData_ = std::make_unique<VertexData[]>(result->meshData_->vertices.size());
+	std::memcpy(
+		result->vertexData_.get(),
+		result->meshData_->vertices.data(),
+		sizeof(VertexData) * result->meshData_->vertices.size());
+
+
+
+	// IndicesDataの設定
+	result->indicesData_ = std::make_unique<std::vector<uint32_t>>(indicesItem->size());
+	std::memcpy(
+		result->indicesData_->data(),
+		indicesItem->data(),
+		sizeof(uint32_t) * indicesItem->size());
+
 
 
 	// materialを解析する
@@ -346,24 +364,31 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 	auto materialItem = std::make_unique<MaterialDataN>();
 	result->materialData_ = std::make_unique<MaterialDataN>();
 	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-
-		// シーン内のマテリアル
 		aiMaterial* material = scene->mMaterials[materialIndex];
 
 		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
-
 			aiString textureFilePath;
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-
-			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
+			materialItem->textureHandle = TextureManager::LoadTexture("gLTF/" + routeFilePath, textureFilePath.C_Str());
 		}
 
 		// マテリアルの名前の設定
+		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
 		materialItem->name = material->GetName().C_Str();
 	}
 	// 解析し終えたmaterialを設定する
 	result->materialData_ = std::move(materialItem);
+
+
+
+	// 作ったデータを基にbufferを作っていく
+	//result->meshBuffer_.CreateResource(UINT(result->meshData_->vertices.size()));
+	result->vertexBuffer_.CreateResource(UINT(result->meshData_->vertices.size()));
+	result->vertexBuffer_.CreateVertexBufferView();
+	result->indecesBuffer_.CreateResource(UINT(result->indicesData_->size()));
+	result->indecesBuffer_.CreateIndexBufferView();
+	result->materialBuffer_.CreateResource();
+	result->transformBuffer_.CreateResource();
 
 
 	return result;
@@ -390,18 +415,19 @@ void Model::DrawN(Transform transform, Camera* camera)
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
+	// VBV
 	vertexBuffer_.Map();
 	vertexBuffer_.WriteData(vertexData_.get());
 	vertexBuffer_.UnMap();
-
+	// IBV
 	indecesBuffer_.Map();
 	indecesBuffer_.WriteData(indicesData_->data());
 	indecesBuffer_.UnMap();
-
+	// Material
 	materialBuffer_.Map();
 	materialBuffer_.WriteData(materialData_.get());
 	materialBuffer_.UnMap();
-
+	// Transform
 	transformBuffer_.Map();
 	transformBuffer_.WriteData((&transform.transformationMatData));
 	transformBuffer_.UnMap();

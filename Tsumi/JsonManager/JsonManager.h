@@ -9,6 +9,9 @@
 
 
 #include "json.hpp"
+
+#include "../FileManager/FileManager.h"
+
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/GameObject/GameObject.h"
 
@@ -49,11 +52,19 @@ public: // メンバ関数
 
 private:
 
+	// オブジェクトの走査
+	void ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
+
+	// 読み込んだ情報からモデル作成
+	void CreateModel();
 
 
 private: // メンバ変数
 
+	// Jsonファイルから読み込んだ情報をまとめておく変数
+	std::unique_ptr<LevelData> levelData_;
 
-
+	// 配置するための変数
+	std::map<const std::string, std::list<std::unique_ptr<LevelObject>>> levelObjectMap_;
 };
 

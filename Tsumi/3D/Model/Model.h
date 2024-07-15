@@ -257,6 +257,10 @@ private: // 繝｡繝ｳ繝仙､画焚
 	std::unique_ptr<VertexData[]> vertexData_;
 	BufferResource<VertexData> vertexBuffer_;
 
+	// IndexDataBuffer
+	std::unique_ptr<std::vector<uint32_t>> indicesData_;
+	BufferResource<uint32_t> indecesBuffer_;
+
 	// MaterilBuffer
 	std::unique_ptr<MaterialDataN> materialData_;
 	BufferResource<MaterialDataN> materialBuffer_;

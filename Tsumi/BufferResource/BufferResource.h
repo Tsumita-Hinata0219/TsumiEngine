@@ -44,7 +44,7 @@ public:
 	void UnMap();
 
 	// データを書き込む
-	void WriteData(const T* data, size_t count = 1);
+	void WriteData(const T* data);
 
 	// コマンドを積む
 	void CommandCall(UINT number);
@@ -115,7 +115,7 @@ inline void BufferResource<T>::CreateIndexBufferView()
 {
 	indexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	indexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
-	indexBufferView_.SizeInBytes = UINS(sizeof(T));
+	indexBufferView_.Format = DXGI_FORMAT_R32_UINT;
 }
 
 
@@ -151,10 +151,10 @@ inline void BufferResource<T>::UnMap()
 
 // データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T* data, size_t count)
+inline void BufferResource<T>::WriteData(const T* data)
 {
 	assert(mappedData_);
-	std::memcpy(mappedData_, data, sizeof(T) * count);
+	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
 }
 
 
@@ -212,5 +212,4 @@ inline void BufferResource<T>::CreateBufferResource()
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr_));
-
 }

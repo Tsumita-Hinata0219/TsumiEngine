@@ -184,16 +184,6 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 private:
 
 	/// <summary>
-	/// Bufferのリソースを確保しておく
-	/// </summary>
-	void CreateBuffer() {
-		meshBuffer_.CreateResource();
-		meshBuffer_.CreateVertexBufferView();
-		materialBuffer_.CreateResource();
-		transformBuffer_.CreateResource();
-	}
-
-	/// <summary>
 	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
 	/// </summary>
 	MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
@@ -244,9 +234,10 @@ private: // 繝｡繝ｳ繝仙､画焚
 	ModelLightingType modelDrawType_ = Non;
 
 
-	// 竊凪・竊凪・竊凪・竊凪・ 縺薙▲縺九ｉ譁ｰ縺励＞繝｢繝・Ν謠冗判縺ｫ蠢・ｦ√↑蛟､
 
-	// Model縺ｮ蜷榊燕
+
+
+	// ModelName
 	string name_;
 
 	// MeshBuffer

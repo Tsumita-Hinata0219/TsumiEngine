@@ -14,17 +14,23 @@ struct TransformationMat {
 	Matrix4x4 WVP;
 	Matrix4x4 WorldInverseTranspose;
 };
+// SRT
+struct SRT {
+	Vector3 scale;
+	Vector3 rotate;
+	Vector3 translate;
+	SRT() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
+};
 
 
 /* Transform構造体 */
 struct Transform
 {
-	// ローカルスケール
-	Vector3 scale = Vector3::one;
-	// ローカル回転軸
-	Vector3 rotate = Vector3::zero;
-	// ローカル座標
-	Vector3 translate = Vector3::zero;
+	// コンストラクタ
+	Transform() : srt{} {};
+
+	// SRT
+	SRT srt{};
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};
@@ -44,6 +50,11 @@ struct Transform
 	/// 行列の更新処理
 	/// </summary>
 	void UpdateMatrix();
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui(std::string label = "");
 
 
 #pragma region Get

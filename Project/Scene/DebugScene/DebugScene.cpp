@@ -50,11 +50,9 @@ void DebugScene::Initialize()
 	model = modelManager_->GetModel("Test");
 
 	transform_.Initialize();
-	transform_.scale = { 1.0f,1.0f,1.0f };
-	transform_.rotate = { 0.0f,0.0f,0.0f };
-	transform_.translate = { 0.0f,0.0f,0.0f };
-	
-
+	transform_.srt.scale = { 1.0f,1.0f,1.0f };
+	transform_.srt.rotate = { 0.0f,0.0f,0.0f };
+	transform_.srt.translate = { 0.0f,0.0f,0.0f };
 }
 
 
@@ -95,9 +93,7 @@ void DebugScene::Update(GameManager* state)
 
 
 	ImGui::Begin("Test");
-	ImGui::DragFloat3("Scale", &transform_.scale.x, 0.1f);
-	ImGui::DragFloat3("Rotate", &transform_.rotate.x, 0.1f);
-	ImGui::DragFloat3("Translate", &transform_.translate.x, 0.1f);
+	transform_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG

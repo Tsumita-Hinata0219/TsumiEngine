@@ -15,12 +15,15 @@
 #include "ModelStructure/Material/Material.h"
 
 
-//#include "Node.h"
-//#include "Skeleton.h"
+namespace ModelFileFormat {
+	const std::pair<std::string, uint32_t> OBJ = { ".obj", 0 };
+	const std::pair<std::string, uint32_t> GLTF = { ".gltf", 1 };
+}
 
 
 class ModelManager;
 class KeyFrameAnimation;
+struct aiScene;
 
 
 //// 繝｢繝・Ν繝・・繧ｿ
@@ -184,6 +187,22 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 private:
 
 	/// <summary>
+	/// MeshDataの解析
+	/// </summary>
+	void ParseMeshData(const aiScene* scene);
+
+	/// <summary>
+	/// MaterialDataの解析
+	/// </summary>
+	void ParseMaterialData(const aiScene* scene, const std::string& filePath);
+
+	/// <summary>
+	/// BufferResourceの生成
+	/// </summary>
+	void CreateBufferResource();
+
+
+	/// <summary>
 	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
 	/// </summary>
 	MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
@@ -238,18 +257,19 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 
 	// ModelName
-	string name_;
+	std::string name_;
+
+	// FileFormat
+	std::string fileFormat_;
 
 	// MeshBuffer
 	std::unique_ptr<MeshData> meshData_;
 	BufferResource<MeshData> meshBuffer_;
 
 	// VertexDataBuffer
-	std::unique_ptr<VertexData[]> vertexData_;
 	BufferResource<VertexData> vertexBuffer_;
 
 	// IndexDataBuffer
-	std::unique_ptr<std::vector<uint32_t>> indicesData_;
 	BufferResource<uint32_t> indecesBuffer_;
 
 	// MaterilBuffer
@@ -258,4 +278,8 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 	// WorldTransform
 	BufferResource<TransformationMat> transformBuffer_;
+
+	// DirectionLight
+	std::unique_ptr<DirectionalLightData> lightData_;
+	BufferResource<DirectionalLightData> lightBuffer_;
 };

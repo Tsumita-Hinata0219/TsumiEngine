@@ -2,7 +2,6 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/Math/Struct.h"
-#include "../CreateResource/CreateResource.h"
 
 #include <vector>
 
@@ -15,11 +14,11 @@ struct TransformationMat {
 	Matrix4x4 WorldInverseTranspose;
 };
 // SRT
-struct SRT {
+struct SRTN {
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;
-	SRT() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
+	SRTN() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
 };
 
 
@@ -30,7 +29,7 @@ struct Transform
 	Transform() : srt{} {};
 
 	// SRT
-	SRT srt{};
+	SRTN srt{};
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};

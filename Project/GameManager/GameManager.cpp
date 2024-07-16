@@ -7,10 +7,10 @@ float g_ElapsedTime = 0.0f;
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameManager::GameManager() {
+GameManager::GameManager(IScene* newScene) {
 
 	Tsumi::Initialize();
-	Scene_ = new GameScene();
+	Scene_ = newScene;
 	Scene_->Initialize();
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
 }

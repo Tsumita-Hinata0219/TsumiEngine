@@ -20,7 +20,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	GameManager();
+	GameManager(IScene* newScene);
 
 	/// <summary>
 	/// デストラクタ

@@ -247,8 +247,12 @@ public: // メンバ関数
 	/// </summary>
 	Vector2 GetRStick(const float& mode = SHRT_MAX);
 
+	void Vibration(int val1, int val2);
+
 private: // メンバ変数
 
 	KeysInput* keysInput_ = nullptr;
 	GamePadInput* gamePadInput_ = nullptr;
+
+	XINPUT_VIBRATION vibration;
 };

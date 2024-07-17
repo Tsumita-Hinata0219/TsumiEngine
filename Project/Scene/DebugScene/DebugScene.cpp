@@ -46,10 +46,9 @@ void DebugScene::Initialize()
 	/* ----- ModelNewLoad モデルニューロード ----- */
 	modelManager_ = ModelManager::Getinstance();
 	modelManager_->AddModel(Model::LoadObjFileAssimpVer("Test", "Test.obj"));
-	demoModel_ = std::make_unique<Model>();
 	demoModel_ = modelManager_->GetModel("Test");
-	kariModel_ = std::make_unique<Model>();
 	kariModel_ = modelManager_->GetModel("Test");
+
 
 
 	transformA_.Initialize();
@@ -62,6 +61,8 @@ void DebugScene::Initialize()
 	transformB_.srt.scale = { 1.0f,1.0f,1.0f };
 	transformB_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformB_.srt.translate = { 2.0f,0.0f,0.0f };
+
+
 }
 
 

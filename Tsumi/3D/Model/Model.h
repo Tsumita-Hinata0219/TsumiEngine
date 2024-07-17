@@ -54,7 +54,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	/// 繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ
 	/// </summary>
 	Model();
-	Model(ModelResources resources);
+	Model(ModelDatas datas);
 
 	/// <summary>
 	/// 繝・せ繝医Λ繧ｯ繧ｿ
@@ -158,7 +158,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	//std::string GetName()const { return this->resources_.name_; }
 
 	// ModelResourcesの取得
-	ModelResources GetModelResources() const { return this->resources_; }
+	ModelDatas GetModelResources() const { return this->datas_; }
 
 #pragma endregion 
 
@@ -288,5 +288,6 @@ private: // 繝｡繝ｳ繝仙､画焚
 	//std::unique_ptr<DirectionalLightData> lightData_;
 	//BufferResource<DirectionalLightData> lightBuffer_;
 
-	ModelResources resources_{};
+	ModelDatas datas_{};
+	ModelBuffers buffers_{};
 };

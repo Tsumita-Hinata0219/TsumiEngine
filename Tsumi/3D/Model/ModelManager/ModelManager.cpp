@@ -23,7 +23,7 @@ void const ModelManager::AddModel(unique_ptr<Model> model)
 	if (modelData) { return; }
 
 	// ヒットしなかったらマップに追加して return する
-	modelsMap_[name] = move(model);
+	modelsMap_[name] = model->GetModelResources();
 }
 
 
@@ -35,9 +35,9 @@ std::unique_ptr<Model> ModelManager::GetModel(const string& name) const
 
 	// ヒットしたらポインタを返す
 	if (it != modelsMap_.end()) {
-		// 作ってあるモデルデータを基に新しく作ってそれを返す
-		std::unique_ptr<Model> model = std::make_unique<Model>(it->second->GetModelResources());
-		return std::move(model);
+		// 作ってあるモデルリソースを基に新しくモデル作ってそれを返す
+		std::unique_ptr<Model> model = std::make_unique<Model>(it->second);
+		return model;
 	}
 
 	// 見つからなかった場合に例外を投げる

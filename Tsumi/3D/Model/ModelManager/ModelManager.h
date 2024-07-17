@@ -116,6 +116,7 @@ private: // メンバ変数
 
 
 	// モデルのマップ
-	unordered_map<string, unique_ptr<Model>> modelsMap_;
+	//unordered_map<string, unique_ptr<Model>> modelsMap_;
+	std::unordered_map < std::string, ModelDatas> modelsMap_;
 };
 

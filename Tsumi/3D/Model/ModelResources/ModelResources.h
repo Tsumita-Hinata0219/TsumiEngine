@@ -7,7 +7,7 @@
 
 
 /* ModelResource構造体 */
-struct ModelResources {
+struct ModelDatas {
 
 	// ModelName
 	std::string name_;
@@ -17,6 +17,18 @@ struct ModelResources {
 
 	// Mesh
 	MeshData meshData_;
+
+	// Materil
+	MaterialDataN materialData_;
+
+	// DirectionLight
+	DirectionalLightData lightData_;
+};
+
+
+struct ModelBuffers {
+
+	// Mesh
 	BufferResource<MeshData> meshBuffer_;
 
 	// VertexDataBuffer
@@ -26,14 +38,11 @@ struct ModelResources {
 	BufferResource<uint32_t> indecesBuffer_;
 
 	// Materil
-	MaterialDataN materialData_;
 	BufferResource<MaterialDataN> materialBuffer_;
 
 	// WorldTransform
 	BufferResource<TransformationMat> transformBuffer_;
 
 	// DirectionLight
-	DirectionalLightData lightData_;
 	BufferResource<DirectionalLightData> lightBuffer_;
 };
-

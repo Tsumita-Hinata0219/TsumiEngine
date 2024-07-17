@@ -14,13 +14,16 @@ Model::Model()
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
 }
-Model::Model(ModelResources resources) : resources_(resources)
+Model::Model(ModelDatas datas) : datas_(datas)
 {
 	// ModelManagerのインスタンス取得
 	modelManager_ = ModelManager::Getinstance();
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// Datasを基にBufferを作成する
+	CreateBufferResource();
 }
 
 
@@ -170,8 +173,8 @@ unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, 
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelに名前を付けておく。(ファイル名)
 	auto result = make_unique<Model>();
-	result->resources_.name_ = fileName.substr(0, fileName.size() - 4);
-	result->resources_.fileFormat_ = GetExtension(fileName);
+	result->datas_.name_ = fileName.substr(0, fileName.size() - 4);
+	result->datas_.fileFormat_ = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
@@ -205,8 +208,8 @@ unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::s
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelに名前を付けておく。(ファイル名)
 	auto result = make_unique<Model>();
-	result->resources_.name_ = fileName.substr(0, fileName.size() - 4);
-	result->resources_.fileFormat_ = GetExtension(fileName);
+	result->datas_.name_ = fileName.substr(0, fileName.size() - 4);
+	result->datas_.fileFormat_ = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
@@ -258,25 +261,25 @@ void Model::DrawN(Transform transform, Camera* camera)
 
 	// ここで書き込み
 	// VBV
-	resources_.vertexBuffer_.Map();
-	resources_.vertexBuffer_.WriteData(resources_.meshData_.vertices.data());
-	resources_.vertexBuffer_.UnMap();
+	buffers_.vertexBuffer_.Map();
+	buffers_.vertexBuffer_.WriteData(datas_.meshData_.vertices.data());
+	buffers_.vertexBuffer_.UnMap();
 	// IBV
-	resources_.indecesBuffer_.Map();
-	resources_.indecesBuffer_.WriteData(resources_.meshData_.indices.data());
-	resources_.indecesBuffer_.UnMap();
+	buffers_.indecesBuffer_.Map();
+	buffers_.indecesBuffer_.WriteData(datas_.meshData_.indices.data());
+	buffers_.indecesBuffer_.UnMap();
 	// Material
-	resources_.materialBuffer_.Map();
-	resources_.materialBuffer_.WriteData(&resources_.materialData_);
-	resources_.materialBuffer_.UnMap();
+	buffers_.materialBuffer_.Map();
+	buffers_.materialBuffer_.WriteData(&datas_.materialData_);
+	buffers_.materialBuffer_.UnMap();
 	// Transform
-	resources_.transformBuffer_.Map();
-	resources_.transformBuffer_.WriteData((&transform.transformationMatData));
-	resources_.transformBuffer_.UnMap();
+	buffers_.transformBuffer_.Map();
+	buffers_.transformBuffer_.WriteData((&transform.transformationMatData));
+	buffers_.transformBuffer_.UnMap();
 	// Light
-	resources_.lightBuffer_.Map();
-	resources_.lightBuffer_.WriteData(&resources_.lightData_);
-	resources_.lightBuffer_.UnMap();
+	buffers_.lightBuffer_.Map();
+	buffers_.lightBuffer_.WriteData(&datas_.lightData_);
+	buffers_.lightBuffer_.UnMap();
 
 	// コマンドコール
 	CommandCall(camera);
@@ -425,7 +428,7 @@ void Model::ParseMeshData(const aiScene* scene)
 		aiMesh* mesh = scene->mMeshes[meshIndex];
 		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
 		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
-		resources_.meshData_.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
+		datas_.meshData_.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
 
 		// Verticesを解析する
 		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
@@ -434,9 +437,9 @@ void Model::ParseMeshData(const aiScene* scene)
 			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
 
 			// 右手系 -> 左手系への変換
-			resources_.meshData_.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
-			resources_.meshData_.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
-			resources_.meshData_.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
+			datas_.meshData_.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
+			datas_.meshData_.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
+			datas_.meshData_.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
 		}
 
 		// Indexを解析する
@@ -446,7 +449,7 @@ void Model::ParseMeshData(const aiScene* scene)
 
 			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
 				uint32_t vertexIndex = face.mIndices[element];
-				resources_.meshData_.indices.push_back(vertexIndex);
+				datas_.meshData_.indices.push_back(vertexIndex);
 			}
 		}
 	}
@@ -466,17 +469,17 @@ void Model::ParseMaterialData(const aiScene* scene, const std::string& filePath)
 			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
 
 			// FileFormatで読み込みパスの分岐
-			if (resources_.fileFormat_ == ModelFileFormat::OBJ.first) {
-				resources_.materialData_.textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFilePath.C_Str());
+			if (datas_.fileFormat_ == ModelFileFormat::OBJ.first) {
+				datas_.materialData_.textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFilePath.C_Str());
 			}
-			else if (resources_.fileFormat_ == ModelFileFormat::GLTF.first) {
-				resources_.materialData_.textureHandle = TextureManager::LoadTexture("gLTF/" + filePath, textureFilePath.C_Str());
+			else if (datas_.fileFormat_ == ModelFileFormat::GLTF.first) {
+				datas_.materialData_.textureHandle = TextureManager::LoadTexture("gLTF/" + filePath, textureFilePath.C_Str());
 			}
 		}
 
 		// マテリアルの名前の設定
 		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		resources_.materialData_.name = material->GetName().C_Str();
+		datas_.materialData_.name = material->GetName().C_Str();
 	}
 }
 
@@ -487,19 +490,19 @@ void Model::ParseMaterialData(const aiScene* scene, const std::string& filePath)
 void Model::CreateBufferResource()
 {
 	// mesh
-	resources_.meshBuffer_.CreateResource(UINT(resources_.meshData_.vertices.size()));
+	buffers_.meshBuffer_.CreateResource(UINT(datas_.meshData_.vertices.size()));
 	// vertexBufferView
-	resources_.vertexBuffer_.CreateResource(UINT(resources_.meshData_.vertices.size()));
-	resources_.vertexBuffer_.CreateVertexBufferView();
+	buffers_.vertexBuffer_.CreateResource(UINT(datas_.meshData_.vertices.size()));
+	buffers_.vertexBuffer_.CreateVertexBufferView();
 	// indexBufferView
-	resources_.indecesBuffer_.CreateResource(UINT(resources_.meshData_.indices.size()));
-	resources_.indecesBuffer_.CreateIndexBufferView();
+	buffers_.indecesBuffer_.CreateResource(UINT(datas_.meshData_.indices.size()));
+	buffers_.indecesBuffer_.CreateIndexBufferView();
 	// material
-	resources_.materialBuffer_.CreateResource();
+	buffers_.materialBuffer_.CreateResource();
 	// transform
-	resources_.transformBuffer_.CreateResource();
+	buffers_.transformBuffer_.CreateResource();
 	// light
-	resources_.lightBuffer_.CreateResource();
+	buffers_.lightBuffer_.CreateResource();
 }
 
 
@@ -515,19 +518,19 @@ void Model::CommandCall(Camera* camera)
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// VertexBufferView
-	resources_.vertexBuffer_.IASetVertexBuffers(1);
+	buffers_.vertexBuffer_.IASetVertexBuffers(1);
 	// IndexBufferView
-	resources_.indecesBuffer_.IASetIndexBuffer();
+	buffers_.indecesBuffer_.IASetIndexBuffer();
 	// Material
-	resources_.materialBuffer_.CommandCall(0);
+	buffers_.materialBuffer_.CommandCall(0);
 	// TransformationMatrix
-	resources_.transformBuffer_.CommandCall(1);
+	buffers_.transformBuffer_.CommandCall(1);
 	// Camera
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
 	// Texture
-	SRVManager::SetGraphicsRootDescriptorTable(3, resources_.materialData_.textureHandle);
+	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.materialData_.textureHandle);
 	// Light
-	resources_.lightBuffer_.CommandCall(4);
+	buffers_.lightBuffer_.CommandCall(4);
 	// Draw!!
-	commands.List->DrawIndexedInstanced(UINT(resources_.meshData_.indices.size()), 1, 0, 0, 0);
+	commands.List->DrawIndexedInstanced(UINT(datas_.meshData_.indices.size()), 1, 0, 0, 0);
 }

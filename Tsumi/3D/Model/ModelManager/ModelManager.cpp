@@ -36,7 +36,8 @@ std::unique_ptr<Model> ModelManager::GetModel(const string& name) const
 	// ヒットしたらポインタを返す
 	if (it != modelsMap_.end()) {
 		// 作ってあるモデルデータを基に新しく作ってそれを返す
-		return std::make_unique<Model>(it->second->GetModelResources());
+		std::unique_ptr<Model> model = std::make_unique<Model>(it->second->GetModelResources());
+		return std::move(model);
 	}
 
 	// 見つからなかった場合に例外を投げる

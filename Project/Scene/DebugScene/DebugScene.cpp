@@ -48,12 +48,20 @@ void DebugScene::Initialize()
 	modelManager_->AddModel(Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	demoModel_ = std::make_unique<Model>();
 	demoModel_ = modelManager_->GetModel("Test");
+	kariModel_ = std::make_unique<Model>();
+	kariModel_ = modelManager_->GetModel("Test");
 
 
-	transform_.Initialize();
-	transform_.srt.scale = { 1.0f,1.0f,1.0f };
-	transform_.srt.rotate = { 0.0f,0.0f,0.0f };
-	transform_.srt.translate = { 0.0f,0.0f,0.0f };
+	transformA_.Initialize();
+	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
+	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
+	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
+
+
+	transformB_.Initialize();
+	transformB_.srt.scale = { 1.0f,1.0f,1.0f };
+	transformB_.srt.rotate = { 0.0f,0.0f,0.0f };
+	transformB_.srt.translate = { 2.0f,0.0f,0.0f };
 }
 
 
@@ -94,7 +102,7 @@ void DebugScene::Update(GameManager* state)
 
 
 	ImGui::Begin("Test");
-	transform_.DrawImGui();
+	transformA_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG
@@ -125,7 +133,9 @@ void DebugScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	modelManager_->GetModel("Test")->DrawN(transform_, camera_.get());
+	//modelManager_->GetModel("Test")->DrawN(transformA_, camera_.get());
+	demoModel_->DrawN(transformA_, camera_.get());
+	kariModel_->DrawN(transformB_, camera_.get());
 }
 
 

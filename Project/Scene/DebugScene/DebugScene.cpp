@@ -50,12 +50,10 @@ void DebugScene::Initialize()
 	kariModel_ = modelManager_->GetModel("Test");
 
 
-
 	transformA_.Initialize();
 	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
-
 
 	transformB_.Initialize();
 	transformB_.srt.scale = { 1.0f,1.0f,1.0f };
@@ -132,7 +130,6 @@ void DebugScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	//modelManager_->GetModel("Test")->DrawN(transformA_, camera_.get());
 	demoModel_->DrawN(transformA_, camera_.get());
 	kariModel_->DrawN(transformB_, camera_.get());
 }

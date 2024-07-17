@@ -111,10 +111,6 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// Node
 	Node GetNode() const { return this->objData_.rootNode; }
 
-
-	// ModelResourcesの取得
-	ModelDatas GetModelResources() const { return this->datas_; }
-
 #pragma endregion 
 
 
@@ -142,6 +138,26 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void SetNodeMatrix(Matrix4x4 setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
 
 #pragma endregion
+
+
+#pragma region Accessor アクセッサ
+
+	// ModelResourcesの取得
+	ModelDatas GetModelResources() const { return this->datas_; }
+
+	// Mesh
+	MeshData GetMeshData() const { return this->datas_.meshData_; }
+	void SetMeshData(MeshData setData) { this->datas_.meshData_ = setData; }
+
+	// Material
+	MaterialDataN GetMaterialData() const { return this->datas_.materialData_; }
+	void SetMaterialData(MaterialDataN seteData) { this->datas_.materialData_ = seteData; }
+
+	// Light
+	DirectionalLightData GetLightData() const { return this->datas_.lightData_; }
+	void SetLightData(DirectionalLightData setData) { this->datas_.lightData_ = setData };
+
+#pragma endregion 
 
 
 private:

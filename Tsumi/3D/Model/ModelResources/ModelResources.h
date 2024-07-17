@@ -6,7 +6,6 @@
 #include "../ModelStructure/Material/Material.h"
 
 
-/* ModelResource構造体 */
 struct ModelDatas {
 
 	// ModelName
@@ -24,7 +23,6 @@ struct ModelDatas {
 	// DirectionLight
 	DirectionalLightData lightData_;
 };
-
 
 struct ModelBuffers {
 

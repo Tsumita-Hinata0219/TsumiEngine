@@ -47,7 +47,8 @@ void DebugScene::Initialize()
 	modelManager_ = ModelManager::Getinstance();
 	modelManager_->AddModel(Model::LoadObjFileAssimpVer("Test", "Test.obj"));
 	demoModel_ = std::make_unique<Model>();
-	(*demoModel_) = modelManager_->GetModel("Test");
+	demoModel_ = modelManager_->GetModel("Test");
+
 
 	transform_.Initialize();
 	transform_.srt.scale = { 1.0f,1.0f,1.0f };

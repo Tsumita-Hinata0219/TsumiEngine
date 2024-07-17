@@ -13,6 +13,7 @@
 #include "../../Animation/AnimationManager/AnimationManager.h"
 #include "ModelStructure/Mesh/Mesh.h"
 #include "ModelStructure/Material/Material.h"
+#include "ModelResources/ModelResources.h"
 
 
 namespace ModelFileFormat {
@@ -53,6 +54,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	/// 繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ
 	/// </summary>
 	Model();
+	Model(ModelResources resources);
 
 	/// <summary>
 	/// 繝・せ繝医Λ繧ｯ繧ｿ
@@ -153,7 +155,10 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	Node GetNode() const { return this->objData_.rootNode; }
 
 	// nameの取得
-	std::string GetName()const { return this->name_; }
+	//std::string GetName()const { return this->resources_.name_; }
+
+	// ModelResourcesの取得
+	ModelResources GetModelResources() const { return this->resources_; }
 
 #pragma endregion 
 
@@ -256,30 +261,32 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 
 
-	// ModelName
-	std::string name_;
+	//// ModelName
+	//std::string name_;
 
-	// FileFormat
-	std::string fileFormat_;
+	//// FileFormat
+	//std::string fileFormat_;
 
-	// MeshBuffer
-	std::unique_ptr<MeshData> meshData_;
-	BufferResource<MeshData> meshBuffer_;
+	//// MeshBuffer
+	//std::unique_ptr<MeshData> meshData_;
+	//BufferResource<MeshData> meshBuffer_;
 
-	// VertexDataBuffer
-	BufferResource<VertexData> vertexBuffer_;
+	//// VertexDataBuffer
+	//BufferResource<VertexData> vertexBuffer_;
 
-	// IndexDataBuffer
-	BufferResource<uint32_t> indecesBuffer_;
+	//// IndexDataBuffer
+	//BufferResource<uint32_t> indecesBuffer_;
 
-	// MaterilBuffer
-	std::unique_ptr<MaterialDataN> materialData_;
-	BufferResource<MaterialDataN> materialBuffer_;
+	//// MaterilBuffer
+	//std::unique_ptr<MaterialDataN> materialData_;
+	//BufferResource<MaterialDataN> materialBuffer_;
 
-	// WorldTransform
-	BufferResource<TransformationMat> transformBuffer_;
+	//// WorldTransform
+	//BufferResource<TransformationMat> transformBuffer_;
 
-	// DirectionLight
-	std::unique_ptr<DirectionalLightData> lightData_;
-	BufferResource<DirectionalLightData> lightBuffer_;
+	//// DirectionLight
+	//std::unique_ptr<DirectionalLightData> lightData_;
+	//BufferResource<DirectionalLightData> lightBuffer_;
+
+	ModelResources resources_{};
 };

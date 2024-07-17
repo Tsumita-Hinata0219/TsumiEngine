@@ -400,6 +400,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

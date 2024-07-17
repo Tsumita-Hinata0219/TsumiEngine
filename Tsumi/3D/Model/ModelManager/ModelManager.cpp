@@ -15,7 +15,8 @@ void ModelManager::Finalize() {
 void const ModelManager::AddModel(unique_ptr<Model> model)
 {
 	// 指定の名前で検索をかける
-	std::string name = model->GetName();
+	//std::string name = model->GetName();
+	std::string name = model->GetModelResources().name_;
 	auto modelData = GetModel(name);
 
 	// ヒットしたら早期リターン
@@ -27,18 +28,19 @@ void const ModelManager::AddModel(unique_ptr<Model> model)
 
 
 // モデルデータの取得
-Model* ModelManager::GetModel(const string& name) const
+std::unique_ptr<Model> ModelManager::GetModel(const string& name) const
 {
 	// 指定された名前で検索をかける
-	auto model = modelsMap_.find(name);
+	auto it = modelsMap_.find(name);
 
 	// ヒットしたらポインタを返す
-	if (model != modelsMap_.end()) {
-		return model->second.get();
+	if (it != modelsMap_.end()) {
+		// 作ってあるモデルデータを基に新しく作ってそれを返す
+		return std::make_unique<Model>(it->second->GetModelResources());
 	}
+
 	// 見つからなかった場合に例外を投げる
-	// 後でダミーオブジェクトに変えておく
-	throw std::runtime_error("Model not found: " + name);
+	return nullptr;
 }
 
 

@@ -46,17 +46,17 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルデータを追加する
 	/// </summary>
-	void const AddModel(unique_ptr<Model> model);
+	void const AddModel(std::unique_ptr<Model> model);
 
 	/// <summary>
 	/// モデルデータの取得
 	/// </summary>
-	Model* GetModel(const string& name) const;
+	std::unique_ptr<Model> GetModel(const std::string& name) const;
 
 	/// <summary>
 	/// 指定のモデルデータの破棄
 	/// </summary>
-	void ModelRemove (string name);
+	void ModelRemove (std::string name);
 
 	/// <summary>
 	/// 全てのモデルデータの破棄

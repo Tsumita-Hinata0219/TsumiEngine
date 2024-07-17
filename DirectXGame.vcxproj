@@ -325,6 +325,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\3D\Model\ModelManager\ModelManager.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ModelObjState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />

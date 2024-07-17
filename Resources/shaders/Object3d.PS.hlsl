@@ -78,7 +78,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float3 finalColor = diffuse + specularReflection;
 
         // êFÇÃê›íË
-        //output.color.rgb = finalColor;
+        output.color.rgb = finalColor;
     }
     else
     {

@@ -51,7 +51,7 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルデータの取得
 	/// </summary>
-	Model* const GetModel(const string name) const;
+	Model* GetModel(const string& name) const;
 
 	/// <summary>
 	/// 指定のモデルデータの破棄

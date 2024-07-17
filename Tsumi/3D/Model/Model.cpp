@@ -6,8 +6,8 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-Model::Model() {
-
+Model::Model()	
+{
 	// ModelManagerのインスタンス取得
 	modelManager_ = ModelManager::Getinstance();
 

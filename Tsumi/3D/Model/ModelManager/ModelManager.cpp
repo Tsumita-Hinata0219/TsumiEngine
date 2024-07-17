@@ -27,7 +27,7 @@ void const ModelManager::AddModel(unique_ptr<Model> model)
 
 
 // モデルデータの取得
-Model* const ModelManager::GetModel(const string name) const
+Model* ModelManager::GetModel(const string& name) const
 {
 	// 指定された名前で検索をかける
 	auto model = modelsMap_.find(name);
@@ -36,7 +36,9 @@ Model* const ModelManager::GetModel(const string name) const
 	if (model != modelsMap_.end()) {
 		return model->second.get();
 	}
-	return nullptr;
+	// 見つからなかった場合に例外を投げる
+	// 後でダミーオブジェクトに変えておく
+	throw std::runtime_error("Model not found: " + name);
 }
 
 

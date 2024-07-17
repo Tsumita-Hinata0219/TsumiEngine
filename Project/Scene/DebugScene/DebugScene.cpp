@@ -61,8 +61,6 @@ void DebugScene::Initialize()
 	transformB_.srt.scale = { 1.0f,1.0f,1.0f };
 	transformB_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformB_.srt.translate = { 2.0f,0.0f,0.0f };
-
-
 }
 
 

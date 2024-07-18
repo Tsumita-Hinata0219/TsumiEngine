@@ -186,25 +186,25 @@ void Model::DrawN(Transform transform, Camera* camera)
 
 	// ここで書き込み
 	// VBV
-	buffers_.vertexBuffer_.Map();
-	buffers_.vertexBuffer_.WriteData(datas_.meshData_.vertices.data());
-	buffers_.vertexBuffer_.UnMap();
+	buffers_.vertex.Map();
+	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
+	buffers_.vertex.UnMap();
 	// IBV
-	buffers_.indecesBuffer_.Map();
-	buffers_.indecesBuffer_.WriteData(datas_.meshData_.indices.data());
-	buffers_.indecesBuffer_.UnMap();
+	buffers_.indeces.Map();
+	buffers_.indeces.WriteData(datas_.mesh.indices.data());
+	buffers_.indeces.UnMap();
 	// Material
-	buffers_.materialBuffer_.Map();
-	buffers_.materialBuffer_.WriteData(&datas_.materialData_);
-	buffers_.materialBuffer_.UnMap();
+	buffers_.material.Map();
+	buffers_.material.WriteData(&datas_.material);
+	buffers_.material.UnMap();
 	// Transform
-	buffers_.transformBuffer_.Map();
-	buffers_.transformBuffer_.WriteData((&transform.transformationMatData));
-	buffers_.transformBuffer_.UnMap();
+	buffers_.transform.Map();
+	buffers_.transform.WriteData((&transform.transformationMatData));
+	buffers_.transform.UnMap();
 	// Light
-	buffers_.lightBuffer_.Map();
-	buffers_.lightBuffer_.WriteData(&datas_.lightData_);
-	buffers_.lightBuffer_.UnMap();
+	buffers_.light.Map();
+	buffers_.light.WriteData(&datas_.light);
+	buffers_.light.UnMap();
 
 	// コマンドコール
 	CommandCall(camera);
@@ -349,19 +349,21 @@ void Model::UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton
 void Model::CreateBufferResource()
 {
 	// mesh
-	buffers_.meshBuffer_.CreateResource(UINT(datas_.meshData_.vertices.size()));
+	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
 	// vertexBufferView
-	buffers_.vertexBuffer_.CreateResource(UINT(datas_.meshData_.vertices.size()));
-	buffers_.vertexBuffer_.CreateVertexBufferView();
+	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+	buffers_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	buffers_.indecesBuffer_.CreateResource(UINT(datas_.meshData_.indices.size()));
-	buffers_.indecesBuffer_.CreateIndexBufferView();
+	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+	buffers_.indeces.CreateIndexBufferView();
 	// material
-	buffers_.materialBuffer_.CreateResource();
+	buffers_.material.CreateResource();
 	// transform
-	buffers_.transformBuffer_.CreateResource();
+	buffers_.transform.CreateResource();
 	// light
-	buffers_.lightBuffer_.CreateResource();
+	buffers_.light.CreateResource();
+	// Encironment
+	buffers_.enviroment.CreateResource();
 }
 
 
@@ -377,19 +379,19 @@ void Model::CommandCall(Camera* camera)
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
 	// VertexBufferView
-	buffers_.vertexBuffer_.IASetVertexBuffers(1);
+	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
-	buffers_.indecesBuffer_.IASetIndexBuffer();
+	buffers_.indeces.IASetIndexBuffer();
 	// Material
-	buffers_.materialBuffer_.CommandCall(0);
+	buffers_.material.CommandCall(0);
 	// TransformationMatrix
-	buffers_.transformBuffer_.CommandCall(1);
+	buffers_.transform.CommandCall(1);
 	// Camera
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
 	// Texture
-	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.materialData_.textureHandle);
+	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
 	// Light
-	buffers_.lightBuffer_.CommandCall(4);
+	buffers_.light.CommandCall(4);
 	// Draw!!
-	commands.List->DrawIndexedInstanced(UINT(datas_.meshData_.indices.size()), 1, 0, 0, 0);
+	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

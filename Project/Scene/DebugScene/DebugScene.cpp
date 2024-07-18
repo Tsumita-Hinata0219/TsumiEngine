@@ -48,11 +48,12 @@ void DebugScene::Initialize()
 	modelManager_->LoadModel("Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 
-
 	transformA_.Initialize();
 	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
+
+	light_.eneble = false;
 }
 
 
@@ -94,6 +95,7 @@ void DebugScene::Update(GameManager* state)
 
 	ImGui::Begin("Test");
 	transformA_.DrawImGui();
+	light_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG
@@ -124,6 +126,7 @@ void DebugScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
+	demoModel_->SetLightData(light_);
 	demoModel_->DrawN(transformA_, camera_.get());
 }
 

@@ -386,15 +386,15 @@ void ModelManager::LoadModel(const std::string& path, const std::string fileName
 	}
 
 	// マップコンテナに追加
-	modelsMap_[newData.name_] = newData;
+	modelsMap_[newData.name] = newData;
 }
 ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fileName)
 {
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelDatasに名前を付けておく。(ファイル名)
 	ModelDatas result{};
-	result.name_ = fileName.substr(0, fileName.size() - 4);
-	result.fileFormat_ = GetExtension(fileName);
+	result.name = fileName.substr(0, fileName.size() - 4);
+	result.fileFormat = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
@@ -410,10 +410,10 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 
 
 	// mesh & indicesを解析する
-	result.meshData_ = ParseMeshData(scene);
+	result.mesh = ParseMeshData(scene);
 
 	// materialを解析する
-	result.materialData_ = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの作成
 
@@ -424,8 +424,8 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelDatasに名前を付けておく。(ファイル名)
 	ModelDatas result{};
-	result.name_ = fileName.substr(0, fileName.size() - 4);
-	result.fileFormat_ = GetExtension(fileName);
+	result.name = fileName.substr(0, fileName.size() - 4);
+	result.fileFormat = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
@@ -441,10 +441,10 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 
 
 	// mesh & indicesを解析する
-	result.meshData_ = ParseMeshData(scene);
+	result.mesh = ParseMeshData(scene);
 
 	// materialを解析する
-	result.materialData_ = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの作成
 

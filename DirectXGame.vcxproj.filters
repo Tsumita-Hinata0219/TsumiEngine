@@ -162,8 +162,6 @@
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PipeLineManager.cpp" />
     <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Material\Material.cpp" />
-    <ClCompile Include="Tsumi\3D\Model\ModelStructure\Mesh\Mesh.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\Joint\Joint.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\Node\Node.cpp" />
@@ -401,6 +399,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
+    <ClInclude Include="Tsumi\3D\Model\ModelStructure\ModelStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -174,16 +174,6 @@ struct DirectionalLight {
 	bool enableLightting{};   // ライティングするか
 };
 
-struct DirectionalLightData
-{
-	Vector4 color = Vector4::one; // 色(RGBA)
-	Vector3 direction = { 0.0f, 1.0f, 0.0f }; // ライトの向き
-	float intensity = 1.0f; // 輝度
-	float shininess = 1.0f; // 光沢
-	bool eneble = true; // フラグ
-};
-
-
 // CompileShader
 struct CompileShaders {
 	IDxcBlobEncoding* Source;

@@ -11,8 +11,7 @@
 #include "ModelObj/ModelObjState.h"
 #include "ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
-#include "ModelStructure/Mesh/Mesh.h"
-#include "ModelStructure/Material/Material.h"
+#include "ModelStructure/ModelStructure.h"
 #include "ModelResources/ModelResources.h"
 
 
@@ -137,16 +136,16 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	ModelDatas GetModelResources() const { return this->datas_; }
 
 	// Mesh
-	MeshData GetMeshData() const { return this->datas_.meshData_; }
-	void SetMeshData(MeshData setData) { this->datas_.meshData_ = setData; }
+	MeshData GetMeshData() const { return this->datas_.mesh; }
+	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
 
 	// Material
-	MaterialDataN GetMaterialData() const { return this->datas_.materialData_; }
-	void SetMaterialData(MaterialDataN seteData) { this->datas_.materialData_ = seteData; }
+	MaterialDataN GetMaterialData() const { return this->datas_.material; }
+	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
 
 	// Light
-	DirectionalLightData GetLightData() const { return this->datas_.lightData_; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.lightData_ = setData; };
+	DirectionalLightData GetLightData() const { return this->datas_.light; }
+	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; };
 
 #pragma endregion 
 

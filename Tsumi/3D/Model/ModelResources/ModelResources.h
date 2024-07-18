@@ -2,45 +2,50 @@
 
 #include "../../../BufferResource/BufferResource.h"
 #include "../../../Transform/Transform.h"
-#include "../ModelStructure/Mesh/Mesh.h"
-#include "../ModelStructure/Material/Material.h"
+#include "../ModelStructure/ModelStructure.h"
 
 
 struct ModelDatas {
 
-	// ModelName
-	std::string name_;
+	// モデルの名前
+	std::string name;
 
-	// FileFormat
-	std::string fileFormat_;
+	// モデルファイルのフォーマット
+	std::string fileFormat;
 
-	// Mesh
-	MeshData meshData_;
+	// メッシュ
+	MeshData mesh;
 
-	// Materil
-	MaterialDataN materialData_;
+	// マテリアル
+	MaterialDataN material;
 
-	// DirectionLight
-	DirectionalLightData lightData_;
+	// ライト
+	DirectionalLightData light;
+
+	// 環境マップ
+	EnvironmentData environment;
 };
 
 struct ModelBuffers {
 
-	// Mesh
-	BufferResource<MeshData> meshBuffer_;
+	// メッシュ
+	BufferResource<MeshData> mesh;
 
 	// VertexDataBuffer
-	BufferResource<VertexData> vertexBuffer_;
+	BufferResource<VertexData> vertex;
 
 	// IndexDataBuffer
-	BufferResource<uint32_t> indecesBuffer_;
+	BufferResource<uint32_t> indeces;
 
-	// Materil
-	BufferResource<MaterialDataN> materialBuffer_;
+	// マテリアル
+	BufferResource<MaterialDataN> material;
 
 	// WorldTransform
-	BufferResource<TransformationMat> transformBuffer_;
+	BufferResource<TransformationMat> transform;
 
-	// DirectionLight
-	BufferResource<DirectionalLightData> lightBuffer_;
+	// ライト
+	BufferResource<DirectionalLightData> light;
+
+	// 環境マップ
+	BufferResource<EnvironmentData> enviroment;
 };

@@ -52,11 +52,6 @@ public: // メンバ関数
 	static void Finalize();
 
 	/// <summary>
-	/// モデルデータを追加する
-	/// </summary>
-	//void const AddModel(std::unique_ptr<Model> model);
-
-	/// <summary>
 	/// モデルデータの取得
 	/// </summary>
 	std::unique_ptr<Model> GetModel(const std::string& name) const;

@@ -60,6 +60,7 @@ private:
 	std::unique_ptr<Model> demoModel_;
 	Transform transformA_{};
 	DirectionalLightData light_{};
+	EnvironmentData environment_{};
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;

@@ -53,7 +53,8 @@ void DebugScene::Initialize()
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
 
-	light_.eneble = false;
+	//light_.eneble = false;
+	//environment_.enable = false;
 }
 
 
@@ -96,6 +97,7 @@ void DebugScene::Update(GameManager* state)
 	ImGui::Begin("Test");
 	transformA_.DrawImGui();
 	light_.DrawImGui();
+	environment_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG
@@ -126,7 +128,8 @@ void DebugScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	demoModel_->SetLightData(light_);
+	//demoModel_->SetLightData(light_);
+	//demoModel_->SetEnvironmentData(environment_);
 	demoModel_->DrawN(transformA_, camera_.get());
 }
 

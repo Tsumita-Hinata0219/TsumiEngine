@@ -11,21 +11,6 @@ void ModelManager::Finalize() {
 }
 
 
-// モデルデータを追加する
-//void const ModelManager::AddModel(unique_ptr<Model> model)
-//{
-//	// 指定の名前で検索をかける
-//	std::string name = model->GetModelResources().name_;
-//	auto modelData = GetModel(name);
-//
-//	// ヒットしたら早期リターン
-//	if (modelData) { return; }
-//
-//	// ヒットしなかったらマップに追加して return する
-//	modelsMap_[name] = model->GetModelResources();
-//}
-
-
 // モデルデータの取得
 std::unique_ptr<Model> ModelManager::GetModel(const string& name) const
 {
@@ -363,6 +348,7 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 	// 同じファイルパスのモデルデータを検索して返す
 	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
+
 void ModelManager::LoadModel(const std::string& path, const std::string fileName)
 {
 	// ファイル名で検索を掛ける
@@ -415,7 +401,11 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 	// materialを解析する
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
-	// lightの作成
+	// lightの初期化
+	result.light.eneble = false;
+
+	// Environmentの初期化
+	result.environment.enable = false;
 
 	return result;
 }
@@ -446,7 +436,11 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 	// materialを解析する
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
-	// lightの作成
+	// lightの初期化
+	result.light.eneble = false;
+
+	// Environmentの初期化
+	result.environment.enable = false;
 
 	return result;
 }

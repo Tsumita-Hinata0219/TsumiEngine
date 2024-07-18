@@ -145,7 +145,11 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->datas_.light; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; };
+	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+
+	// Environment
+	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
+	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
 
 #pragma endregion 
 

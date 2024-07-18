@@ -40,12 +40,12 @@ struct DirectionalLightData
 
 // 環境マップデータ
 struct EnvironmentData {
-	float scale = 1.0f;
+	float scale = 0.0f;
 	bool enable = false;
 	int textureHandle = 1u;
 
 	void DrawImGui(std::string label = "") {
 		ImGui::Checkbox((label + "_Enable").c_str(), &enable);
-		ImGui::DragFloat((label + "_Scale").c_str(), &scale);
+		ImGui::DragFloat((label + "_Scale").c_str(), &scale, 0.01f, 0.0f, 1.0f);
 	}
 };

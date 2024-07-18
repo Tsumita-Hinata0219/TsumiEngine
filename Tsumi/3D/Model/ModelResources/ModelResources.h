@@ -17,13 +17,13 @@ struct ModelDatas {
 	MeshData mesh;
 
 	// マテリアル
-	MaterialDataN material;
+	MaterialDataN material{};
 
 	// ライト
-	DirectionalLightData light;
+	DirectionalLightData light{};
 
 	// 環境マップ
-	EnvironmentData environment;
+	EnvironmentData environment{};
 };
 
 struct ModelBuffers {

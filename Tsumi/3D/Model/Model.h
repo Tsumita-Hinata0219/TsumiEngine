@@ -16,11 +16,6 @@
 #include "ModelResources/ModelResources.h"
 
 
-namespace ModelFileFormat {
-	const std::pair<std::string, uint32_t> OBJ = { ".obj", 0 };
-	const std::pair<std::string, uint32_t> GLTF = { ".gltf", 1 };
-}
-
 
 class ModelManager;
 class KeyFrameAnimation;
@@ -46,10 +41,6 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
 	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
 	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = WorldTransform());
-
-	// モデルの読み込み <- new
-	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName);
 
 	// 描画処理
 	void Draw(WorldTransform worldTransform, Camera* camera);
@@ -155,18 +146,12 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->datas_.lightData_; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.lightData_ = setData };
+	void SetLightData(DirectionalLightData setData) { this->datas_.lightData_ = setData; };
 
 #pragma endregion 
 
 
 private:
-
-	// MeshDataの解析
-	void ParseMeshData(const aiScene* scene);
-
-	// MaterialDataの解析
-	void ParseMaterialData(const aiScene* scene, const std::string& filePath);
 
 	// BufferResourceの生成
 	void CreateBufferResource();

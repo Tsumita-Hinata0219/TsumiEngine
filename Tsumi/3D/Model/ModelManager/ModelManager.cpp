@@ -12,19 +12,18 @@ void ModelManager::Finalize() {
 
 
 // モデルデータを追加する
-void const ModelManager::AddModel(unique_ptr<Model> model)
-{
-	// 指定の名前で検索をかける
-	//std::string name = model->GetName();
-	std::string name = model->GetModelResources().name_;
-	auto modelData = GetModel(name);
-
-	// ヒットしたら早期リターン
-	if (modelData) { return; }
-
-	// ヒットしなかったらマップに追加して return する
-	modelsMap_[name] = model->GetModelResources();
-}
+//void const ModelManager::AddModel(unique_ptr<Model> model)
+//{
+//	// 指定の名前で検索をかける
+//	std::string name = model->GetModelResources().name_;
+//	auto modelData = GetModel(name);
+//
+//	// ヒットしたら早期リターン
+//	if (modelData) { return; }
+//
+//	// ヒットしなかったらマップに追加して return する
+//	modelsMap_[name] = model->GetModelResources();
+//}
 
 
 // モデルデータの取得
@@ -202,7 +201,7 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		Assimp::Importer importer;
 		string file = ("Resources/Obj/" + routeFilePath + "/" + fileName + ".obj");
 
-		                                                      //三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+		//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
 		const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
 		assert(scene->HasMeshes()); // メッシュがないのは対応しない
 
@@ -364,6 +363,93 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 	// 同じファイルパスのモデルデータを検索して返す
 	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
 }
+void ModelManager::LoadModel(const std::string& path, const std::string fileName)
+{
+	// ファイル名で検索を掛ける
+	auto it = modelsMap_.find(fileName.substr(0, fileName.size() - 4));
+
+	if (it != modelsMap_.end()) { // 既に存在していれば早期return
+		return;
+	}
+
+	// ないので新しく作る
+	// 今回作るModelDatas
+	ModelDatas newData{};
+	std::string format = GetExtension(fileName);
+
+	// フォーマットを取得して分岐
+	if (format == ModelFileFormat::OBJ.first) {
+		newData = LoadOBJ(path, fileName);
+	}
+	else if (format == ModelFileFormat::GLTF.first) {
+		newData = LoadGLTF(path, fileName);
+	}
+
+	// マップコンテナに追加
+	modelsMap_[newData.name_] = newData;
+}
+ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fileName)
+{
+	/* 1. 中で必要となる変数の宣言 */
+	// return するModelDatasに名前を付けておく。(ファイル名)
+	ModelDatas result{};
+	result.name_ = fileName.substr(0, fileName.size() - 4);
+	result.fileFormat_ = GetExtension(fileName);
+
+
+	/* 2. ファイルを開く */
+	// asssimpでobjを読む
+	Assimp::Importer importer;
+	string file = ("Resources/Obj/" + path + "/" + fileName);
+
+
+	/* 3. 実際にファイルを読み、ModelDataを構築していく */
+	//三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+	assert(scene->HasMeshes()); // メッシュがないのは対応しない
+
+
+	// mesh & indicesを解析する
+	result.meshData_ = ParseMeshData(scene);
+
+	// materialを解析する
+	result.materialData_ = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+
+	// lightの作成
+
+	return result;
+}
+ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fileName)
+{
+	/* 1. 中で必要となる変数の宣言 */
+	// return するModelDatasに名前を付けておく。(ファイル名)
+	ModelDatas result{};
+	result.name_ = fileName.substr(0, fileName.size() - 4);
+	result.fileFormat_ = GetExtension(fileName);
+
+
+	/* 2. ファイルを開く */
+	// asssimpでobjを読む
+	Assimp::Importer importer;
+	string file = ("Resources/gLTF/" + path + "/" + fileName);
+
+
+	/* 3. 実際にファイルを読み、ModelDataを構築していく */
+	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+	assert(scene->HasMeshes()); // メッシュがないのは対応しない
+
+
+	// mesh & indicesを解析する
+	result.meshData_ = ParseMeshData(scene);
+
+	// materialを解析する
+	result.materialData_ = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+
+	// lightの作成
+
+	return result;
+}
 
 
 /// <summary>
@@ -458,7 +544,7 @@ Node ModelManager::ReadNode(aiNode* node)
 	aiQuaternion rotate;
 
 	// assimpの行列からSRTを抽出する関数を利用
-	node->mTransformation.Decompose(scale, rotate, translate); 
+	node->mTransformation.Decompose(scale, rotate, translate);
 
 	// scaleはそのまま
 	result.transform.scale = { scale.x, scale.y,scale.z };
@@ -507,5 +593,76 @@ int32_t ModelManager::CreateJoint(const Node& node, const optional<int32_t>& par
 
 	// 自身のIndexを返す
 	return joint.index;
+}
+
+
+// MeshDataの解析
+MeshData ModelManager::ParseMeshData(const aiScene* scene)
+{
+	MeshData result{};
+
+	// mesh & indicesを解析する
+	// 今回作るmesh & indeces
+	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
+		aiMesh* mesh = scene->mMeshes[meshIndex];
+		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
+		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+		result.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
+
+		// Verticesを解析する
+		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
+			aiVector3D& position = mesh->mVertices[vertexIndex];
+			aiVector3D& normal = mesh->mNormals[vertexIndex];
+			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
+
+			// 右手系 -> 左手系への変換
+			result.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
+			result.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
+			result.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
+		}
+
+		// Indexを解析する
+		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
+			aiFace& face = mesh->mFaces[faceIndex];
+			assert(face.mNumIndices == 3);
+
+			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
+				uint32_t vertexIndex = face.mIndices[element];
+				result.indices.push_back(vertexIndex);
+			}
+		}
+	}
+
+	return result;
+}
+
+
+// MaterialDataの解析
+MaterialDataN ModelManager::ParseMaterialData(const aiScene* scene, const std::string& filePath, const std::string& format)
+{
+	MaterialDataN result{};
+
+	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
+		aiMaterial* material = scene->mMaterials[materialIndex];
+
+		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
+			aiString textureFilePath;
+			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
+
+			// FileFormatで読み込みパスの分岐
+			if (format == ModelFileFormat::OBJ.first) {
+				result.textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFilePath.C_Str());
+			}
+			else if (format == ModelFileFormat::GLTF.first) {
+				result.textureHandle = TextureManager::LoadTexture("gLTF/" + filePath, textureFilePath.C_Str());
+			}
+		}
+
+		// マテリアルの名前の設定
+		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
+		result.name = material->GetName().C_Str();
+	}
+
+	return result;
 }
 

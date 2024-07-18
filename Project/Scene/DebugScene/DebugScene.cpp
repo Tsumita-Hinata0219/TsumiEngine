@@ -45,7 +45,9 @@ void DebugScene::Initialize()
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
 	modelManager_ = ModelManager::Getinstance();
-	modelManager_->AddModel(Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	//modelManager_->AddModel(Model::LoadObjFileAssimpVer("Test", "Test.obj"));
+	modelManager_->LoadModel("Test", "Test.obj");
+	modelManager_->LoadModel("Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 	kariModel_ = modelManager_->GetModel("Test");
 

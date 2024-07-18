@@ -14,7 +14,15 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-using namespace std;
+
+
+namespace ModelFileFormat {
+	const std::pair<std::string, uint32_t> OBJ = { ".obj", 0 };
+	const std::pair<std::string, uint32_t> GLTF = { ".gltf", 1 };
+}
+
+struct aiScene;
+
 
 
 /* ModelManagerクラス */
@@ -46,7 +54,7 @@ public: // メンバ関数
 	/// <summary>
 	/// モデルデータを追加する
 	/// </summary>
-	void const AddModel(std::unique_ptr<Model> model);
+	//void const AddModel(std::unique_ptr<Model> model);
 
 	/// <summary>
 	/// モデルデータの取得
@@ -70,6 +78,9 @@ public: // メンバ関数
 	ModelData LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
 	ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
 	ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
+	void LoadModel(const std::string& path, const std::string fileName);
+	ModelDatas LoadOBJ(const std::string& path, const std::string& fileName);
+	ModelDatas LoadGLTF(const std::string& path, const std::string& fileName);
 
 	/// <summary>
 	/// Nodeの階層構造からSkeletonを作る
@@ -103,6 +114,13 @@ private: // メンバ関数
 	/// NodeからJointを作る
 	/// </summary>
 	int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
+
+
+	// MeshDataの解析
+	MeshData ParseMeshData(const aiScene* scene);
+
+	// MaterialDataの解析
+	MaterialDataN ParseMaterialData(const aiScene* scene, const std::string& filePath, const std::string& format);
 
 
 private: // メンバ変数

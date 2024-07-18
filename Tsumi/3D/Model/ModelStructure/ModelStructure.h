@@ -27,7 +27,7 @@ struct DirectionalLightData
 	Vector3 direction = { 0.0f, 1.0f, 0.0f }; // ライトの向き
 	float intensity = 1.0f; // 輝度
 	float shininess = 1.0f; // 光沢
-	bool eneble = true; // フラグ
+	bool eneble = false; // フラグ
 
 	void DrawImGui(std::string label = "") {
 		ImGui::Checkbox((label + "_enable").c_str(), &eneble);
@@ -40,9 +40,9 @@ struct DirectionalLightData
 
 // 環境マップデータ
 struct EnvironmentData {
-	int texture = 0;
-	float scale = 0.0f;
+	float scale = 1.0f;
 	bool enable = false;
+	int textureHandle = 1u;
 
 	void DrawImGui(std::string label = "") {
 		ImGui::Checkbox((label + "_Enable").c_str(), &enable);

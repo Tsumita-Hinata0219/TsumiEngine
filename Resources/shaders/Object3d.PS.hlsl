@@ -101,6 +101,15 @@ PixelShaderOutput main(VertexShaderOutput input)
         output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     }
     
+    if (gEnvironment.enable)
+    {
+        float3 cameraToPos = normalize(input.worldPos - gViewProjectionMat.cameraPosition);
+        float3 reflectedVector = reflect(cameraToPos, normalize(input.normal));
+        float4 environmentColor = gEnvironmentTexture.Sample(gSampler, reflectedVector.xy);
+        environmentColor *= gEnvironment.scale;
+        output.color.rgb += environmentColor.rgb;
+    }
+    
     // アルファ値の計算
     output.color.a = gMaterial.color.a * textureColor.a;
 

@@ -205,7 +205,10 @@ void Model::DrawN(Transform transform, Camera* camera)
 	buffers_.light.Map();
 	buffers_.light.WriteData(&datas_.light);
 	buffers_.light.UnMap();
-
+	// Environment
+	buffers_.enviroment.Map();
+	buffers_.enviroment.WriteData(&datas_.environment);
+	buffers_.enviroment.UnMap();
 	// コマンドコール
 	CommandCall(camera);
 }
@@ -388,10 +391,14 @@ void Model::CommandCall(Camera* camera)
 	buffers_.transform.CommandCall(1);
 	// Camera
 	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
-	// Texture
+	// MaterialTexture
 	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
 	// Light
 	buffers_.light.CommandCall(4);
+	// Environment
+	buffers_.enviroment.CommandCall(5);
+	// EnvironmentTexxture
+	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

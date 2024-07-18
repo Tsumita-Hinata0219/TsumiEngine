@@ -133,6 +133,7 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
 	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる
 	descriptorRange[0].NumDescriptors = 1; // 数は1つ
+	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
 
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
@@ -145,6 +146,20 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[4].Descriptor.ShaderRegister = 2; // レジスタ番号
+
+
+	// 環境マップ
+	// テクスチャに関する
+	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
+	descriptorRange[0].BaseShaderRegister = 1; // 1から始まる
+	descriptorRange[0].NumDescriptors = 1; // 数は1つ
+	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[3].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
 
 
 	// Samplerの設定

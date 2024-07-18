@@ -2,32 +2,47 @@
 #include "MathFunc.hlsli"
 
 
+// マテリアル
 struct Material
 {
     float4 color;
     float4x4 uvTransform;
 };
+ConstantBuffer<Material> gMaterial : register(b0);
+Texture2D<float4> gTexture : register(t0);
+
+// カメラ
 struct ViewProjectionMatrix
 {
     float4x4 view;
     float4x4 projection;
     float3 cameraPosition;
 };
+ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
+
+// ライト
 struct DirectionalLight
 {
-    float4 color; // 色(RGBA)
-    float3 direction; // ライトの向き
-    float intensity; // 輝度
-    float shininess; // 光沢
-    bool eneble; // フラグ
+    float4 color;
+    float3 direction;
+    float intensity;
+    float shininess;
+    bool eneble;
 };
-ConstantBuffer<Material> gMaterial : register(b0);
-ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
 ConstantBuffer<DirectionalLight> gDirectionalLight : register(b2);
 
-Texture2D<float4> gTexture : register(t0);
-SamplerState gSampler : register(s0);
+// 環境マップ
+struct Environment
+{
+    float scale;
+    bool enable;
+};
+ConstantBuffer<Environment> gEnvironment : register(b3);
+Texture2D<float4> gEnvironmentTexture : register(t1);
 
+
+
+SamplerState gSampler : register(s0);
 
 struct PixelShaderOutput
 {

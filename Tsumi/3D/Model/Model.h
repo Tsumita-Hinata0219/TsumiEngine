@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
 #include "../../View/SRVManager/SRVManager.h"
 #include "../../Transform/WorldTransform/WorldTransform.h"
@@ -10,34 +11,15 @@
 #include "ModelObj/ModelObjState.h"
 #include "ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
-#include "ModelStructure/Mesh/Mesh.h"
-#include "ModelStructure/Material/Material.h"
+#include "ModelStructure/ModelStructure.h"
+#include "ModelResources/ModelResources.h"
 
-
-//#include "Node.h"
-//#include "Skeleton.h"
 
 
 class ModelManager;
 class KeyFrameAnimation;
+struct aiScene;
 
-
-//// 繝｢繝・Ν繝・・繧ｿ
-//struct ModelData {
-//	std::map<string, JointWeightData> skinClusterData;
-//	std::vector<VertexData> vertices;
-//	std::vector<uint32_t> indices;
-//	MaterialData material;
-//	uint32_t textureHD;
-//	Node rootNode;
-//};
-//// Obj繝・・繧ｿ
-//struct ObjData {
-//	uint32_t index;
-//	vector<VertexData> vertices;
-//	MaterialData material;
-//	Node node;
-//};
 
 
 /* Model繧ｯ繝ｩ繧ｹ */
@@ -45,72 +27,43 @@ class Model {
 
 public: // 繝｡繝ｳ繝宣未謨ｰ
 
-	/// <summary>
-	/// 繧ｳ繝ｳ繧ｹ繝医Λ繧ｯ繧ｿ
-	/// </summary>
+	// コンストラクタ、デストラクタ
 	Model();
-
-	/// <summary>
-	/// 繝・せ繝医Λ繧ｯ繧ｿ
-	/// </summary>
+	Model(ModelDatas datas);
 	~Model() {};
-
-	/// <summary>
-	/// 蛻晄悄蛹門・逅・
-	/// </summary>
+	
+	
+	// 初期化処理 
 	void Initialize(IModelState* state, WorldTransform worldTransform = WorldTransform());
 
-	/// <summary>
-	/// Obj繝輔ぃ繧､繝ｫ縺ｮ隱ｭ縺ｿ霎ｼ縺ｿ & Obj蛻晄悄蛹門・逅・
-	/// </summary>
+	// モデル読み込み
 	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
 	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
 	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = WorldTransform());
 
-
-	/// <summary>
-	/// 繝｢繝・Ν縺ｮ隱ｭ縺ｿ霎ｼ縺ｿ
-	/// </summary>
-	static unique_ptr<Model> LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	static unique_ptr<Model> LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
-
-	/// <summary>
-	/// 謠冗判蜃ｦ逅・
-	/// </summary>
+	// 描画処理
 	void Draw(WorldTransform worldTransform, Camera* camera);
 	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
+
+	// 描画処理 <- new
 	void DrawN(Transform transform, Camera* camera);
 
-	/// <summary>
-	/// Animation縺ｮ蜀咲函
-	/// </summary>
+	// アニメーションの再生
 	void PlayAnimation(Animation animation, float time);
-
-	/// <summary>
-	/// Node縺ｮ髫主ｱ､讒矩縺九ｉSkeleton繧剃ｽ懊ｋ
-	/// </summary>
+	
+	// スケルトンの生成
 	Skeleton CreateSkeleton();
 
-	/// <summary>
-	/// Skeleton縺ｮ譖ｴ譁ｰ蜃ｦ逅・
-	/// </summary>
+	// スケルトンの更新
 	void UpdateSkeleton(Skeleton& skeleton);
 
-	/// <summary>
-	/// Animation繧帝←逕ｨ縺吶ｋ
-	/// </summary>
+	// アニメーション再生 <- 最新
 	void ApplyAnimation(Skeleton& skeleton, const Animation& animation, float animationTime);
 
-
-	/// <summary>
-	/// SKinCluster縺ｮ逕滓・
-	/// </summary>
+	// スキンクラスターの生成
 	SkinCluster CreateSkinCluster(const Skeleton& skeleton);
 
-
-	/// <summary>
-	/// SkinCLuster縺ｮ譖ｴ譁ｰ蜃ｦ逅・
-	/// </summary>
+	// スキンクラスターの更新
 	void UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton);
 
 #pragma region Get
@@ -142,7 +95,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// ObjData
 	ModelData GetObjData() { return this->objData_; }
 
-	// 繝ｩ繧､繝・ぅ繝ｳ繧ｰ縺ｮ繧ｿ繧､繝・
+	// なにこれ・
 	ModelLightingType GetModelDrawType() const { return this->modelDrawType_; }
 
 	// Node
@@ -177,17 +130,42 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 #pragma endregion
 
 
+#pragma region Accessor アクセッサ
+
+	// ModelResourcesの取得
+	ModelDatas GetModelResources() const { return this->datas_; }
+
+	// Mesh
+	MeshData GetMeshData() const { return this->datas_.mesh; }
+	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+
+	// Material
+	MaterialDataN GetMaterialData() const { return this->datas_.material; }
+	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+
+	// Light
+	DirectionalLightData GetLightData() const { return this->datas_.light; }
+	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+
+	// Environment
+	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
+	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
+
+#pragma endregion 
+
+
 private:
+
+	// BufferResourceの生成
+	void CreateBufferResource();
 
 	/// <summary>
 	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
 	/// </summary>
-	MaterialModel* LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
+	//MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
-	/// <summary>
-	/// 繧ｳ繝槭Φ繝峨さ繝ｼ繝ｫ
-	/// </summary>
-	void CommandCall(Transform transform, Camera* camera);
+	// コマンドコール
+	void CommandCall(Camera* camera);
 
 private: // 繝｡繝ｳ繝仙､画焚
 
@@ -230,15 +208,11 @@ private: // 繝｡繝ｳ繝仙､画焚
 	ModelLightingType modelDrawType_ = Non;
 
 
-	// 竊凪・竊凪・竊凪・竊凪・ 縺薙▲縺九ｉ譁ｰ縺励＞繝｢繝・Ν謠冗判縺ｫ蠢・ｦ√↑蛟､
 
-	// Model縺ｮ蜷榊燕
-	string name_;
 
-	// Mesh繝・・繧ｿ
-	unordered_map<string, unique_ptr<Mesh>> meshMap_;
+	// バッファーに書き込むデータ
+	ModelDatas datas_{};
 
-	// Material繝・・繧ｿ
-	unordered_map<string, unique_ptr<MaterialModel>> materialMap_;
-
+	// バッファー
+	ModelBuffers buffers_{};
 };

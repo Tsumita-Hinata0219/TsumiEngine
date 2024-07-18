@@ -31,9 +31,6 @@ void DebugScene::Initialize()
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
 
-	/* ----- Skybox 天箱 ----- */
-	//Skybox::GetInstance()->Initialize();
-
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
@@ -44,7 +41,22 @@ void DebugScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
+
+
+	/* ----- ModelNewLoad モデルニューロード ----- */
+	modelManager_ = ModelManager::Getinstance();
+	modelManager_->LoadModel("Test", "Test.obj");
+	demoModel_ = modelManager_->GetModel("Test");
+
+	transformA_.Initialize();
+	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
+	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
+	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
+
+	light_.eneble = false;
+	environment_.enable = false;
 }
+
 
 
 /// <summary>
@@ -60,9 +72,6 @@ void DebugScene::Update(GameManager* state)
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
 
-	/* ----- Skybox 天箱 ----- */
-	//Skybox::GetInstance()->Update();
-
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
 
@@ -72,14 +81,9 @@ void DebugScene::Update(GameManager* state)
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_->Update();
 
-	if (Input::Trigger(DIK_RETURN)) {
-		state->ChangeSceneState(new GameScene());
-		return;
-	}
-
 #ifdef _DEBUG
 
-	ImGui::Begin("GameScene");
+	ImGui::Begin("DebugScene");
 
 	ImGui::Text("");
 	ImGui::Text("Camera");
@@ -87,6 +91,13 @@ void DebugScene::Update(GameManager* state)
 	ImGui::DragFloat3("Translate", &camera_->translate.x, 0.01f);
 	ImGui::Text("");
 
+	ImGui::End();
+
+
+	ImGui::Begin("Test");
+	transformA_.DrawImGui();
+	light_.DrawImGui();
+	environment_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG
@@ -110,14 +121,16 @@ void DebugScene::ModelDraw()
 	/* ----- Skydome 天球 ----- */
 	//Skydome::GetInstance()->Draw(camera_.get());
 
-	/* ----- Skybox 天箱 ----- */
-	//Skybox::GetInstance()->Draw(camera_.get());
-
 	/* ----- Ground 床 ----- */
 	//Ground::GetInstance()->Draw(camera_.get());
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw(camera_.get());
+	//testHuman_->Draw(camera_.get());
+
+	/* ----- ModelNewLoad モデルニューロード ----- */
+	demoModel_->SetLightData(light_);
+	demoModel_->SetEnvironmentData(environment_);
+	demoModel_->DrawN(transformA_, camera_.get());
 }
 
 

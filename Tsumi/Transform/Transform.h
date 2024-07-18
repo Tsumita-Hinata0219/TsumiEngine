@@ -2,7 +2,6 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/Math/Struct.h"
-#include "../CreateResource/CreateResource.h"
 
 #include <vector>
 
@@ -14,34 +13,32 @@ struct TransformationMat {
 	Matrix4x4 WVP;
 	Matrix4x4 WorldInverseTranspose;
 };
+// SRT
+struct SRTN {
+	Vector3 scale;
+	Vector3 rotate;
+	Vector3 translate;
+	SRTN() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
+};
 
 
 /* Transform構造体 */
 struct Transform
 {
-	// ローカルスケール
-	Vector3 scale = Vector3::one;
-	// ローカル回転軸
-	Vector3 rotate = Vector3::zero;
-	// ローカル座標
-	Vector3 translate = Vector3::zero;
+	// コンストラクタ
+	Transform() : srt{} {};
+
+	// SRT
+	SRTN srt{};
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};
 
 	// TransformationMatに設定する変数
-	Matrix4x4 World{};
-	Matrix4x4 WVP{};
-	Matrix4x4 WorldInverseTranspose{};
+	TransformationMat transformationMatData{};
 
 	// ペアレント
 	const Transform* parent{};
-
-	// 定数バッファー
-	ComPtr<ID3D12Resource> constBuffer = nullptr;
-
-	// マッピング済みアドレス
-	TransformationMat* constMap;
 
 	/// <summary>
 	/// 初期化処理
@@ -52,6 +49,11 @@ struct Transform
 	/// 行列の更新処理
 	/// </summary>
 	void UpdateMatrix();
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui(std::string label = "");
 
 
 #pragma region Get
@@ -71,25 +73,4 @@ struct Transform
 	void SetParent(const Transform* parentTransform);
 
 #pragma endregion
-
-
-	/// <summary>
-	/// 定数バッファの生成
-	/// </summary>
-	void CreateBuffer();
-
-	/// <summary>
-	/// マッピングする
-	/// </summary>
-	void Map();
-
-	/// <summary>
-	/// マッピング終了
-	/// </summary>
-	void UnMap();
-
-	/// <summary>
-	/// 行列の計算・転送
-	/// </summary>
-	void TransferMatrix();
 };

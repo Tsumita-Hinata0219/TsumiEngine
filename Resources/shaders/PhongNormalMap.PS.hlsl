@@ -37,6 +37,8 @@ PixcelShaderOutput main(VertexShaderOutput input)
     float4 textureColor = gTexture.Sample(gSampler, input.texcoord);
     float4 textureColorNormal = gTextureNormal.Sample(gSampler, input.texcoord);
 
+    // –{—ˆ‚±‚±‚ç‚Ö‚ñ‚ÅŒ¸ŽZ
+    
     NormalMap = normalize(input.normal + textureColorNormal.rgb);
     
     if (gDirectionalLight.enableLighting != 0)
@@ -69,12 +71,10 @@ PixcelShaderOutput main(VertexShaderOutput input)
     }
     else
     {
-         
         if (textureColor.a == 0.0f)
         {
             discard;
         }
-         
         output.color = gMaterial.color * textureColor;
     }
 

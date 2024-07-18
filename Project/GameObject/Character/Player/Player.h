@@ -95,7 +95,5 @@ private: // メンバ変数
 
 	//Stickの入力を取得
 	Vector2 stickInput_{};
-
-
 };
 

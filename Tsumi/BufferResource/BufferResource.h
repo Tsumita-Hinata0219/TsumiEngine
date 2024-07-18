@@ -44,10 +44,22 @@ public:
 	void UnMap();
 
 	// データを書き込む
-	void WriteData(const T data);
+	void WriteData(const T* data);
 
 	// コマンドを積む
 	void CommandCall(UINT number);
+	void IASetVertexBuffers(UINT number);
+	void IASetIndexBuffer();
+
+#pragma region Accessor アクセッサ
+
+	// VertexBufferView
+	D3D12_VERTEX_BUFFER_VIEW GetVBV() { return this->vertexBufferView_; }
+
+	// IndexBufferView
+	D3D12_INDEX_BUFFER_VIEW GetIBV() { return this->indexBufferView_; }
+
+#pragma endregion 
 
 
 private:
@@ -62,9 +74,9 @@ private:
 	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
 	// VertexBufferView
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_;
+	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
 	// IndexBufferView
-	D3D12_INDEX_BUFFER_VIEW indexBufferView_;
+	D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
 
 	// 作成するResourceの要素数
 	UINT itemCount_ = 1;
@@ -103,7 +115,7 @@ inline void BufferResource<T>::CreateIndexBufferView()
 {
 	indexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	indexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
-	indexBufferView_.SizeInBytes = UINS(sizeof(T));
+	indexBufferView_.Format = DXGI_FORMAT_R32_UINT;
 }
 
 
@@ -139,10 +151,10 @@ inline void BufferResource<T>::UnMap()
 
 // データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T data)
+inline void BufferResource<T>::WriteData(const T* data)
 {
 	assert(mappedData_);
-	*mappedData_ = data;
+	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
 }
 
 
@@ -152,6 +164,20 @@ inline void BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::IASetVertexBuffers(UINT number)
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->IASetVertexBuffers(0, number, &vertexBufferView_);
+}
+
+template<typename T>
+inline void BufferResource<T>::IASetIndexBuffer()
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->IASetIndexBuffer(&indexBufferView_);
 }
 
 
@@ -186,5 +212,4 @@ inline void BufferResource<T>::CreateBufferResource()
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr_));
-
 }

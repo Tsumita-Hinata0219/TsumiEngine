@@ -17,7 +17,7 @@ void GrainEffect::Draw([[maybe_unused]] Camera* camera)
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
-	mtlBuffer_.WriteData(mtlData_);
+	mtlBuffer_.WriteData((&mtlData_));
 	mtlBuffer_.UnMap();
 
 	// コマンドコール
@@ -63,3 +63,4 @@ void GrainEffect::CommandCall()
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);
 }
+

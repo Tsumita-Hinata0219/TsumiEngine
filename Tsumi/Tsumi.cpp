@@ -41,6 +41,7 @@ void Tsumi::Initialize() {
 	// DescriptorManagerの初期化処理
 	//DescriptorManager::Initialize();
 	SRVManager::Initialize();
+	TextureManager::LoadTexture("Texture", "uvChecker.png");
 
 	// DrawSystemの初期化処理
 	DrawSystem::GetInstance()->Initialize();

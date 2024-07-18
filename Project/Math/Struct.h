@@ -174,7 +174,6 @@ struct DirectionalLight {
 	bool enableLightting{};   // ライティングするか
 };
 
-
 // CompileShader
 struct CompileShaders {
 	IDxcBlobEncoding* Source;

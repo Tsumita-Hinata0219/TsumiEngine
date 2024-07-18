@@ -6,13 +6,24 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-Model::Model() {
-
+Model::Model()	
+{
 	// ModelManagerのインスタンス取得
 	modelManager_ = ModelManager::Getinstance();
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+}
+Model::Model(ModelDatas datas) : datas_(datas)
+{
+	// ModelManagerのインスタンス取得
+	modelManager_ = ModelManager::Getinstance();
+
+	// KeyFrameAnimationのインスタンス取得
+	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// Datasを基にBufferを作成する
+	CreateBufferResource();
 }
 
 
@@ -155,199 +166,6 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 
 
 /// <summary>
-/// モデルの読み込み
-/// </summary>
-unique_ptr<Model> Model::LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName)
-{
-	/* 1. 中で必要となる変数の宣言 */
-
-	auto result = make_unique<Model>(); // return するModel
-	string name = fileName.substr(0, fileName.size() - 4);
-
-	// 返すModelにファイルの名前を付ける
-	result->name_ = name;
-
-
-
-	/* 2. ファイルを開く */
-
-	// asssimpでobjを読む
-	Assimp::Importer importer;
-	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
-
-
-
-	/* 3. 実際にファイルを読み、ModelDataを構築していく */
-
-	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
-
-	// meshを解析する
-	// 今回作るメッシュ
-	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
-
-	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
-		aiMesh* mesh = scene->mMeshes[meshIndex];
-		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
-		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
-
-		// ここからMeshの中身(Face)の解析を行っていく
-		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3); // 三角形のみサポート
-
-			// ここからFaceの中身(Vertex)の解析を行っていく
-			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
-				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-
-				VertexData vertex{};
-				vertex.position = { position.x, position.y, position.z, 1.0f };
-				vertex.normal = { normal.x, normal.y, normal.z, };
-				vertex.texCoord = { texcoord.x, texcoord.y };
-
-				// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-
-				// 解析した値を差し込む
-				meshItem->meshData.vertices.push_back(vertex);
-			}
-		}
-	}
-	// 解析し終えたmeshを設定する
-	meshItem->Create();
-	result->meshMap_[name] = move(meshItem);
-
-
-	// materialを解析する
-	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-
-		// 今回作るマテリアル
-		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
-		materialItem->Create();
-
-		// シーン内のマテリアル
-		aiMaterial* material = scene->mMaterials[materialIndex];
-
-		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
-
-			aiString textureFilePath;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-
-			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
-		}
-
-		// マテリアルの名前の設定
-		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		materialItem->name = material->GetName().C_Str();
-		result->materialMap_[name] = move(materialItem);
-	}
-
-
-	return result;
-}
-unique_ptr<Model> Model::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
-{
-	/* 1. 中で必要となる変数の宣言 */
-
-	auto result = make_unique<Model>(); // return するModel
-	unique_ptr<Mesh> meshItem = make_unique<Mesh>();
-	string name = fileName.substr(0, fileName.size() - 4);
-
-	// 返すModelにファイルの名前を付ける
-	result->name_ = name;
-
-	textureName;
-
-	/* 2. ファイルを開く */
-
-	// asssimpでobjを読む
-	Assimp::Importer importer;
-	string file = ("Resources/Obj/" + routeFilePath + "/" + fileName);
-
-
-
-	/* 3. 実際にファイルを読み、ModelDataを構築していく */
-
-	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
-
-	// meshを解析する
-	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
-		aiMesh* mesh = scene->mMeshes[meshIndex];
-		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
-		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
-
-		// ここからMeshの中身(Face)の解析を行っていく
-		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3); // 三角形のみサポート
-
-			// ここからFaceの中身(Vertex)の解析を行っていく
-			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
-				uint32_t vertexIndex = face.mIndices[element];
-				aiVector3D& position = mesh->mVertices[vertexIndex];
-				aiVector3D& normal = mesh->mNormals[vertexIndex];
-				aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-
-				VertexData vertex{};
-				vertex.position = { position.x, position.y, position.z, 1.0f };
-				vertex.normal = { normal.x, normal.y, normal.z, };
-				vertex.texCoord = { texcoord.x, texcoord.y };
-
-				// aiProcess_MakeKeftHanded は z *= -1 で、右手->左手に変換するので手動で対処
-				vertex.position.x *= -1.0f;
-				vertex.normal.x *= -1.0f;
-
-				// 解析した値を差し込む
-				meshItem->meshData.vertices.push_back(vertex);
-			}
-		}
-	}
-	// 解析し終えたmeshを設定する
-	result->meshMap_[name] = move(meshItem);
-
-
-	// materialを解析する
-	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-
-		// 今回作るマテリアル
-		unique_ptr<MaterialModel> materialItem = make_unique<MaterialModel>();
-
-		// マテリアルを作る
-		materialItem->Create();
-
-		// シーン内のマテリアル
-		aiMaterial* material = scene->mMaterials[materialIndex];
-
-		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
-
-			aiString textureFilePath;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-
-			// テクスチャの読み込み
-			materialItem->textureHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, textureFilePath.C_Str());
-		}
-
-		// マテリアルの名前の設定
-		materialItem->name = material->GetName().C_Str();
-		result->materialMap_[name] = move(materialItem);
-	}
-
-
-	return result;
-}
-
-
-/// <summary>
 /// 描画処理
 /// </summary>
 void Model::Draw(WorldTransform worldTransform, Camera* camera) 
@@ -362,17 +180,37 @@ void Model::DrawN(Transform transform, Camera* camera)
 {
 	// 諸々の計算
 	transform.UpdateMatrix();
-	transform.World = transform.matWorld;
-	transform.WVP = camera->projectionMatrix * camera->viewMatrix * transform.matWorld;
-	transform.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
+	transform.transformationMatData.World = transform.matWorld;
+	transform.transformationMatData.WVP = transform.transformationMatData.World * camera->viewMatrix * camera->projectionMatrix;
+	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
-	meshMap_.at(name_)->TransferMesh();
-	materialMap_.at(name_)->TransferMaterial();
-	transform.TransferMatrix();
-
+	// VBV
+	buffers_.vertex.Map();
+	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
+	buffers_.vertex.UnMap();
+	// IBV
+	buffers_.indeces.Map();
+	buffers_.indeces.WriteData(datas_.mesh.indices.data());
+	buffers_.indeces.UnMap();
+	// Material
+	buffers_.material.Map();
+	buffers_.material.WriteData(&datas_.material);
+	buffers_.material.UnMap();
+	// Transform
+	buffers_.transform.Map();
+	buffers_.transform.WriteData((&transform.transformationMatData));
+	buffers_.transform.UnMap();
+	// Light
+	buffers_.light.Map();
+	buffers_.light.WriteData(&datas_.light);
+	buffers_.light.UnMap();
+	// Environment
+	buffers_.enviroment.Map();
+	buffers_.enviroment.WriteData(&datas_.environment);
+	buffers_.enviroment.UnMap();
 	// コマンドコール
-	CommandCall(transform, camera);
+	CommandCall(camera);
 }
 
 
@@ -507,92 +345,60 @@ void Model::UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton
 }
 
 
+
 /// <summary>
-/// mtlファイルを読み込む関数
+/// BufferResourceの生成
 /// </summary>
-MaterialModel* Model::LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName)
+void Model::CreateBufferResource()
 {
-	/* 1. 中で必要となる変数の宣言 */
-
-	MaterialModel* result = nullptr; // 構築するMaterialData
-	string line{};  // ファイルから読んだ１行を格納するもの
-
-
-	/* 2. ファイルを開く */
-
-	// ファイルを開く
-	std::ifstream file("Resources/Obj/" + filePath + "/" + fileName);
-
-	//とりあえず開けなかったら止める
-	assert(file.is_open());
-
-
-	/* 3. 実際にファイルを読み、MaterualDataを構築していく */
-
-	while (std::getline(file, line)) {
-
-		std::string identifier{};
-		std::istringstream s(line);
-		s >> identifier;
-
-		// 新規マテリルの作成
-		if (identifier == "newmtl") {
-
-			// 新規マテリアルならMapに追加
-			string mtlName;
-			s >> mtlName;
-			materialMap_[mtlName] = make_unique<MaterialModel>(mtlName);
-			result = materialMap_[mtlName].get();
-
-			// 仮テクスチャハンドル
-			result->textureHandle = TextureManager::LoadTexture("Texture/", "uvChecker.png");
-		}
-
-		// identifierに応じた処理
-		// "map_Kd" = textureのファイル名が記載されている
-
-		else if (identifier == "map_Kd") {
-
-			std::string textureFileName{};
-			s >> textureFileName;
-			textureFileName = textureFileName.substr(0, fileName.size() - 4);
-
-			// 画像を読み込む
-			if (result != nullptr) {
-				textureFileName = textureFileName.substr(0, fileName.size() - 4);
-				result->textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFileName);
-			}
-			else {
-				//とりあえず止める
-				assert(result == nullptr);
-			}
-		}
-	}
-
-	return result;
+	// mesh
+	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
+	// vertexBufferView
+	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+	buffers_.vertex.CreateVertexBufferView();
+	// indexBufferView
+	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+	buffers_.indeces.CreateIndexBufferView();
+	// material
+	buffers_.material.CreateResource();
+	// transform
+	buffers_.transform.CreateResource();
+	// light
+	buffers_.light.CreateResource();
+	// Encironment
+	buffers_.enviroment.CreateResource();
 }
-
 
 
 /// <summary>
 /// コマンドコール
 /// </summary>
-void Model::CommandCall(Transform transform, Camera* camera)
+void Model::CommandCall(Camera* camera)
 {
-	// コマンドの取得
+	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
 
-	// コマンドを詰む
-	commands.List->IASetVertexBuffers(0, 1, &meshMap_.at(name_)->vertexBufferView); // VBV
-	commands.List->SetGraphicsRootConstantBufferView(0, materialMap_.at(name_)->constBuffer->GetGPUVirtualAddress()); // Material
-	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress()); // TransformationMatrix
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress()); // TransformationViewMatrix
-	if (!materialMap_.at(name_)->textureHandle == 0) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle); // Texture
-		SRVManager::SetGraphicsRootDescriptorTable(3, materialMap_.at(name_)->textureHandle);
-	}
-	commands.List->DrawInstanced(UINT(meshMap_.at(name_)->meshData.vertices.size()), 1, 0, 0); // Draw!!
+	// VertexBufferView
+	buffers_.vertex.IASetVertexBuffers(1);
+	// IndexBufferView
+	buffers_.indeces.IASetIndexBuffer();
+	// Material
+	buffers_.material.CommandCall(0);
+	// TransformationMatrix
+	buffers_.transform.CommandCall(1);
+	// Camera
+	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	// MaterialTexture
+	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	// Light
+	buffers_.light.CommandCall(4);
+	// Environment
+	buffers_.enviroment.CommandCall(5);
+	// EnvironmentTexture
+	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
+	// Draw!!
+	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

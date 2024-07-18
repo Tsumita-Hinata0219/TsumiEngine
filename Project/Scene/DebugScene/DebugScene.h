@@ -59,8 +59,6 @@ private:
 	ModelManager* modelManager_ = nullptr;
 	std::unique_ptr<Model> demoModel_;
 	Transform transformA_{};
-	std::unique_ptr<Model> kariModel_;
-	Transform transformB_{};
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;

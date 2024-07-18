@@ -24,10 +24,10 @@ ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
 struct DirectionalLight
 {
     float4 color;
-    float3 direction;
-    float intensity;
+    float3 direction;    
+    float intensity;    
     float shininess;
-    bool eneble;
+    int eneble;
 };
 ConstantBuffer<DirectionalLight> gDirectionalLight : register(b2);
 
@@ -35,7 +35,7 @@ ConstantBuffer<DirectionalLight> gDirectionalLight : register(b2);
 struct Environment
 {
     float scale;
-    bool enable;
+    int enable;
 };
 ConstantBuffer<Environment> gEnvironment : register(b3);
 Texture2D<float4> gEnvironmentTexture : register(t1);

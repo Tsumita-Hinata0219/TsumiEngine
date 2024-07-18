@@ -397,7 +397,7 @@ void Model::CommandCall(Camera* camera)
 	buffers_.light.CommandCall(4);
 	// Environment
 	buffers_.enviroment.CommandCall(5);
-	// EnvironmentTexxture
+	// EnvironmentTexture
 	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);

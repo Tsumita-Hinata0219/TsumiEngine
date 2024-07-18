@@ -304,6 +304,20 @@ Vector2 Input::GetRStick(const float& mode)
 	return Input::GetInstance()->gamePadInput_->GetRStick(mode);
 }
 
+
+void Input::Vibration(int val1, int val2)
+{
+	std::memset(&Input::GetInstance()->vibration, 0, sizeof(XINPUT_VIBRATION));
+
+	// Set the vibration levels
+	Input::GetInstance()->vibration.wLeftMotorSpeed = WORD(val1);  // Left motor vibration (0-65535)
+	Input::GetInstance()->vibration.wRightMotorSpeed = WORD(val2); // Right motor vibration (0-65535)
+
+	// Apply the vibration to the controller
+	XInputSetState(0, &Input::GetInstance()->vibration);
+}
+
+
 // -------------------------------------------------------------------------
 // Input : インプット
 // -------------------------------------------------------------------------

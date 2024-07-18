@@ -200,6 +200,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
+    <ClCompile Include="Tsumi\JsonManager\JsonManager.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
@@ -346,6 +347,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Tsumi\FileManager\FileManager.h" />
+    <ClInclude Include="Tsumi\JsonManager\JsonManager.h" />
     <ClInclude Include="Tsumi\PipeLineManager\IPipeLineState\IPipeLineState.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.h" />

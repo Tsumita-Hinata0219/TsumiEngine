@@ -66,7 +66,7 @@ void TestPostEffect::Initialize()
 		"Vignetting"
 	};
 
-	activeEffects_ = EffectType::Dissolve;
+	activeEffects_ = EffectType::Absent;
 }
 
 

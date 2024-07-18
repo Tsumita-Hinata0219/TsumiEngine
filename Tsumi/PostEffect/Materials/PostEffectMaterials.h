@@ -61,6 +61,7 @@ struct RadialBlurMtl {
 /* Random用 */
 struct RandomMtl {
 	Vector4 color{};
+	float time = 0.0f;
 };
 
 /* SepiaTone用 */

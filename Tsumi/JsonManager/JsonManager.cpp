@@ -1,33 +1,27 @@
-#include "FileManager.h"
+#include "JsonManager.h"
 
 
 
 // 初期化処理
-void FileManager::Initialize()
+void JsonManager::Initialize()
 {
-	levelData_ = make_unique<LevelData>();
+	levelData_ = std::make_unique<LevelData>();
+
+
 }
 
 
-// 更新処理　
-void FileManager::Update() {}
-
-
-// 描画処理
-void FileManager::Draw() {}
-
-
 // 解放処理
-void FileManager::Finalize() {}
+void JsonManager::Finalize() {}
 
 
-// JSONファイル読み込み
-void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::string& fileName)
+// Jsonファイルの読み込み
+void JsonManager::LoadJsonFile(const std::string& path, const std::string& fileName)
 {
 	/* ---------- JSOnファイルを読み込んでみる ---------- */
 
 	// 連結してフルパスを得る
-	const std::string fullPath = "Resources/" + routeFilePath + fileName + ".json";
+	const std::string fullPath = "Resources/" + path + fileName + ".json";
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -81,7 +75,7 @@ void FileManager::LoadJsonFile(const std::string& routeFilePath, const std::stri
 
 
 // オブジェクトの走査
-void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
+void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
 {
 	// 各オブジェクトには必ず "type"データを入れているので
 	// "type"が検出できなければ不正として実行を停止する
@@ -149,14 +143,6 @@ void FileManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 
 
 // 読み込んだ情報からモデル作成
-void FileManager::CreateModel()
+void JsonManager::CreateModel()
 {
-	//// レベルデータからオブジェクトを生成、配置
-	//for (auto& objectData : levelData_->objects) {
-
-	//	// ファイル名から登録済みモデルを検索
-
-	//}
 }
-
-

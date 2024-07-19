@@ -159,6 +159,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\GameObject\Camera\Camera.cpp" />
+    <ClCompile Include="Project\GameObject\Camera\Manager\CameraManager.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
@@ -169,6 +170,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
@@ -286,6 +288,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\BaseObject\BaseObject.h" />
     <ClInclude Include="Project\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
+    <ClInclude Include="Project\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
@@ -298,6 +301,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
+    <ClInclude Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />

@@ -74,8 +74,7 @@ public: // メンバ関数
 	ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
 	ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 	void LoadModel(const std::string& path, const std::string fileName);
-	ModelDatas LoadOBJ(const std::string& path, const std::string& fileName);
-	ModelDatas LoadGLTF(const std::string& path, const std::string& fileName);
+	
 
 	/// <summary>
 	/// Nodeの階層構造からSkeletonを作る
@@ -89,6 +88,12 @@ public: // メンバ関数
 
 
 private: // メンバ関数
+
+	/// <summary>
+	/// 
+	/// </summary>
+	ModelDatas LoadOBJ(const std::string& path, const std::string& fileName);
+	ModelDatas LoadGLTF(const std::string& path, const std::string& fileName);
 
 	/// <summary>
 	/// 一回読み込んだものは読み込まない

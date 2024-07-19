@@ -53,8 +53,8 @@ void DebugScene::Initialize()
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
 
-	light_.eneble = false;
-	environment_.enable = false;
+	/*light_.eneble = false;
+	environment_.enable = false;*/
 }
 
 

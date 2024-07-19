@@ -5,6 +5,10 @@
 #include "../../../Math/MyMath.h"
 
 
+/* -----------------------------------
+		CameraResource構造体
+		カメラに必要な値をまとめた構造体
+--------------------------------------*/
 struct CameraResource {
 
 #pragma region ビュー行列の設定

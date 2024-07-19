@@ -402,6 +402,7 @@
     <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\ModelStructure.h" />
     <ClInclude Include="Tsumi\JsonManager\JsonManager.h" />
+    <ClInclude Include="Project\GameObject\BaseObject\BaseObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -7,7 +7,8 @@ class CameraManager {
 
 public:
 
-
+	// 初期化
+	void Init();
 
 private:
 

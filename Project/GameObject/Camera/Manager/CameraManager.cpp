@@ -8,3 +8,10 @@ void CameraManager::Init()
 
 
 }
+
+
+// コマンドコール
+void CameraManager::CommandCall(UINT number)
+{
+
+}

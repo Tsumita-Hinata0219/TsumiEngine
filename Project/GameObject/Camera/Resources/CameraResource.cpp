@@ -6,8 +6,8 @@
 void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 {
 	// 初期姿勢と座標
-	rotate = initRotate;
-	translate = initTranslate;
+	srt.rotate = initRotate;
+	srt.translate = initTranslate;
 
 	// 行列の計算を通しておく
 	UpdateMatrix();
@@ -18,13 +18,13 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 void CameraResource::UpdateMatrix()
 {
 	// 回転行列を作成
-	rotateMat = MakeRotateXYZMatrix(rotate);
+	rotateMat = MakeRotateXYZMatrix(srt.rotate);
 
 	// 平行移動行列を作成
-	translateMat = MakeTranslateMatrix(translate);
+	translateMat = MakeTranslateMatrix(srt.translate);
 
 	// ワールド行列を作成
-	matWorld = MakeAffineMatrix({ 1.0f, 1.0f, 1.0f }, rotate, translate);
+	matWorld = MakeAffineMatrix(srt.scale, srt.rotate, srt.translate);
 
 	// ビュー行列を作成（カメラの位置と向きを基に逆行列を計算）
 	viewMatrix = Inverse(matWorld);
@@ -49,6 +49,20 @@ void CameraResource::UpdateMatrix()
 
 	// ビュー・投影・ビューポート行列の逆行列を作成
 	inverseViewProjectionViewportMatrix = Inverse(viewProjectionViewportMatrix);
+
+
+	// 行列に書き込むデータの設定
+	TransfarMatrix();
+}
+
+
+// 行列に書き込むデータの設定
+void CameraResource::TransfarMatrix()
+{
+	bufferData->view = viewMatrix;
+	bufferData->viewProjection = projectionMatrix;
+	bufferData->orthoGraphic = orthoGraphicMatrix;
+	bufferData->cameraPosition = GetWorldPosition();
 }
 
 

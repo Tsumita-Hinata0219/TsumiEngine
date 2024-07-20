@@ -3,6 +3,7 @@
 #include "../../Tsumi/Base/WinApp/WinApp.h"
 #include "../../Tsumi/BufferResource/BufferResource.h"
 #include "../../../Math/MyMath.h"
+#include "../Camera.h"
 
 
 /* -----------------------------------
@@ -13,15 +14,10 @@ struct CameraResource {
 
 #pragma region ビュー行列の設定
 
-	// X, Y, Z軸周りのローカル回転軸
-	Vector3 rotate = { 0.0f, 0.0f, 0.0f };
+	SRT srt{};
 
-	// ローカル座標
-	Vector3 translate = { 0.0f, 0.0f, -15.0f };
-
-	Matrix4x4 rotateMat{};
-	Matrix4x4 translateMat{};
-	Matrix4x4 matWorld{};
+	// バッファーに書き込むデータ
+	TransformationViewMatrix* bufferData = nullptr;
 
 #pragma endregion 
 
@@ -42,6 +38,15 @@ struct CameraResource {
 #pragma endregion
 
 #pragma region 行列
+
+	// 回転行列
+	Matrix4x4 rotateMat{};
+
+	// 平行移動行列
+	Matrix4x4 translateMat{};
+
+	// アフィン行列
+	Matrix4x4 matWorld{};
 
 	// ビュー行列
 	Matrix4x4 viewMatrix{};
@@ -69,7 +74,6 @@ struct CameraResource {
 
 #pragma endregion
 
-
 #pragma region 関数
 
 	// 初期化処理
@@ -78,8 +82,10 @@ struct CameraResource {
 	// 行列の更新
 	void UpdateMatrix();
 
-#pragma endregion 
+	// 行列に書き込むデータの設定
+	void TransfarMatrix();
 
+#pragma endregion 
 
 #pragma region Accessor アクセッサ
 
@@ -87,6 +93,5 @@ struct CameraResource {
 	Vector3 GetWorldPosition();
 
 #pragma endregion 
-
 };
 

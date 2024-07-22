@@ -3,16 +3,17 @@
 
 
 // 初期化処理
-void Enemy::Initialize()
+void Enemy::Init()
 {
 	// BodyModelのロードと初期化
-	bodyModel_ = make_unique<Model>();
-	bodyModel_->CreateFromObjAssimpVer("Test", "Test");
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Test", "Test.obj");
+	model_ = modelManager_->GetModel("Test");
 
 	// BodyTransformの初期化
-	bodyWt_.Initialize();
+	transform_.Initialize();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
-	bodyWt_.srt.scale = { 0.1f, 0.1f, 0.1f }; 
+	transform_.srt.scale = { 0.1f, 0.1f, 0.1f };
 
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
@@ -37,7 +38,7 @@ void Enemy::Update()
 	FuncStatePattern();
 
 	// Transformの更新処理
-	bodyWt_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 	// アプローチ状態の時のみ入る処理
 	if (stateNo_ == EnemyState::APPROACH) {
@@ -98,14 +99,16 @@ void Enemy::Update()
 void Enemy::Draw3D()
 {
 	// BodyModelの描画
-	bodyModel_->SetColor(modelColor_);
-	bodyModel_->Draw(bodyWt_);
+	model_->SetColor(modelColor_);
+	model_->DrawN(transform_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
 		bullet->Draw3D();
 	}
 }
+void Enemy::Draw2DFront() {}
+void Enemy::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
@@ -151,7 +154,7 @@ void Enemy::ToggleCombatState()
 {
 	// プレイヤーとの距離で戦闘状態のフラグを管理する
 	// 設定した距離よりも近くにいたらフラグを立てる
-	if (std::abs(Length(player_->GetWorldPosition() - bodyWt_.GetWorldPos())) <= combatTriggerDistance_) {
+	if (std::abs(Length(player_->GetWorldPosition() - transform_.GetWorldPos())) <= combatTriggerDistance_) {
 
 		// 戦闘状態のフラグを立てる
 		isCombatActive_ = true;
@@ -171,7 +174,7 @@ void Enemy::ToggleCombatState()
 void Enemy::Move()
 {
 	// ある程度近ければ早期return
-	if (std::abs(Length(player_->GetWorldPosition() - bodyWt_.GetWorldPos())) <= minToPlayer_) {
+	if (std::abs(Length(player_->GetWorldPosition() - transform_.GetWorldPos())) <= minToPlayer_) {
 		return;
 	}
 
@@ -182,7 +185,7 @@ void Enemy::Move()
 	CalcRotate();
 
 	// 座標にvelocityを加算
-	bodyWt_.srt.translate += velocity_;
+	transform_.srt.translate += velocity_;
 }
 
 
@@ -191,7 +194,7 @@ void Enemy::CalcVelocity()
 {
 	// 差分をNormalize
 	Vector3 player2Enemy =
-		Normalize(player_->GetWorldPosition() - bodyWt_.GetWorldPos());
+		Normalize(player_->GetWorldPosition() - transform_.GetWorldPos());
 
 	// 差分Normalizeに速度をかけてvelocityに設定
 	velocity_ = {
@@ -206,13 +209,13 @@ void Enemy::CalcVelocity()
 void Enemy::CalcRotate()
 {
 	// Y軸周り角度(θy)
-	bodyWt_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
+	transform_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
 
 	float velZ = std::sqrt((velocity_.x * velocity_.x) + (velocity_.z * velocity_.z));
 	float height = -velocity_.y;
 
 	// X軸周り角度(θx)
-	bodyWt_.srt.rotate.x = std::atan2(height, velZ);
+	transform_.srt.rotate.x = std::atan2(height, velZ);
 }
 
 
@@ -241,11 +244,11 @@ void Enemy::CreateNewBullet()
 	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
 
 	// 初期座標
-	Vector3 initPos = bodyWt_.GetWorldPos();
+	Vector3 initPos = transform_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = 0.1f;
-	initVel = TransformNormal(initVel, bodyWt_.matWorld);
+	initVel = TransformNormal(initVel, transform_.matWorld);
 
 	// newBulletの初期化
 	newBullet->Initialize();

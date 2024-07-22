@@ -13,8 +13,8 @@ void IEnemyDeathState::Init(Enemy* enemy)
 
 	// イージングの開始座標と終了座標
 	posPair_ = {
-		enemy_->GetPosition().y,
-		enemy_->GetPosition().y - 20,
+		enemy->GetWorldPosition().y,
+		enemy->GetWorldPosition().y - 20
 	};
 }
 

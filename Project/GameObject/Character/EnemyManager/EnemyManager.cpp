@@ -104,7 +104,7 @@ void EnemyManager::CreateNewEnemy()
 		transform_.GetWorldPos() + RandomGenerator::getRandom(scope3_);
 
 	// newEnemyの初期化
-	newEnemy->Initialize();
+	newEnemy->Init();
 	newEnemy->SetPlayer(player_);
 	newEnemy->SetPosition(initPos);
 

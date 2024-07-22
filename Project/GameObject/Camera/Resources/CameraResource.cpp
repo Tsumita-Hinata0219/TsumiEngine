@@ -9,6 +9,9 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 	srt.rotate = initRotate;
 	srt.translate = initTranslate;
 
+	// バッファー作成
+	buffer.CreateResource();
+
 	// 行列の計算を通しておく
 	UpdateMatrix();
 }
@@ -52,17 +55,23 @@ void CameraResource::UpdateMatrix()
 
 
 	// 行列に書き込むデータの設定
-	TransfarMatrix();
+	UpdateBuffer();
 }
 
 
 // 行列に書き込むデータの設定
-void CameraResource::TransfarMatrix()
+void CameraResource::UpdateBuffer()
 {
+	// バッファーに書き込むデータの設定
 	bufferData->view = viewMatrix;
 	bufferData->viewProjection = projectionMatrix;
 	bufferData->orthoGraphic = orthoGraphicMatrix;
 	bufferData->cameraPosition = GetWorldPosition();
+
+	// バッファーに書き込み
+	buffer.Map();
+	buffer.WriteData(bufferData);
+	buffer.UnMap();
 }
 
 

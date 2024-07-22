@@ -19,6 +19,9 @@ struct CameraResource {
 	// バッファーに書き込むデータ
 	TransformationViewMatrix* bufferData = nullptr;
 
+	// バッファー
+	BufferResource<TransformationViewMatrix> buffer;
+
 #pragma endregion 
 
 #pragma region 射影行列用変数
@@ -82,8 +85,8 @@ struct CameraResource {
 	// 行列の更新
 	void UpdateMatrix();
 
-	// 行列に書き込むデータの設定
-	void TransfarMatrix();
+	// バッファーの更新
+	void UpdateBuffer();
 
 #pragma endregion 
 

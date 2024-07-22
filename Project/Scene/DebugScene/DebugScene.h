@@ -6,6 +6,8 @@
 #include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 #include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
@@ -64,6 +66,8 @@ private:
 
 	// メインカメラ
 	std::unique_ptr<Camera> camera_ = nullptr;
+	CameraManager* cameraManager_ = nullptr;
+	CameraResource cameraResource_;
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;

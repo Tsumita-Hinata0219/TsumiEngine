@@ -13,6 +13,9 @@ Model::Model()
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// CameraManagerのインスタンスの取得
+	cameraManager_ = CameraManager::GetInstance();
 }
 Model::Model(ModelDatas datas) : datas_(datas)
 {
@@ -21,6 +24,9 @@ Model::Model(ModelDatas datas) : datas_(datas)
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// CameraManagerのインスタンスの取得
+	cameraManager_ = CameraManager::GetInstance();
 
 	// Datasを基にBufferを作成する
 	CreateBufferResource();
@@ -176,15 +182,20 @@ void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Cam
 {
 	this->state_->AnimDraw(this, worldTransform, skinCluster, camera);
 }
-void Model::DrawN(Transform transform, Camera* camera)
+void Model::DrawN(Transform transform)
 {
+	// カメラリソースの取得
+	cameraResource_ = (*cameraManager_->GetResource());
+
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
-	transform.transformationMatData.WVP = transform.transformationMatData.World * camera->viewMatrix * camera->projectionMatrix;
+	transform.transformationMatData.WVP = transform.transformationMatData.World * cameraResource_.viewMatrix * cameraResource_.projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
+	// Camera
+	cameraManager_->WrirwData();
 	// VBV
 	buffers_.vertex.Map();
 	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
@@ -210,7 +221,7 @@ void Model::DrawN(Transform transform, Camera* camera)
 	buffers_.enviroment.WriteData(&datas_.environment);
 	buffers_.enviroment.UnMap();
 	// コマンドコール
-	CommandCall(camera);
+	CommandCall();
 }
 
 
@@ -373,7 +384,7 @@ void Model::CreateBufferResource()
 /// <summary>
 /// コマンドコール
 /// </summary>
-void Model::CommandCall(Camera* camera)
+void Model::CommandCall()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -390,7 +401,7 @@ void Model::CommandCall(Camera* camera)
 	// TransformationMatrix
 	buffers_.transform.CommandCall(1);
 	// Camera
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	cameraManager_->CommandCall(2);
 	// MaterialTexture
 	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
 	// Light

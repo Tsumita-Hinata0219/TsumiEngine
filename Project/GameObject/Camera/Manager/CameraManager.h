@@ -33,9 +33,17 @@ public:
 	// コマンドコール
 	void CommandCall(UINT number);
 
+#pragma region Accessor アクセッサ
+
+	// カメラのリソースの取得
+	const CameraResource* GetResource() { return this->resource_; }
+
+#pragma endregion 
+
+
 private:
 
-	// カメラのデータ
+	// カメラのリソース
 	const CameraResource* resource_ = nullptr;
 
 	// バッファー

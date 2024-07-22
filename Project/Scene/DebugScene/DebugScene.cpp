@@ -27,6 +27,9 @@ void DebugScene::Initialize()
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
 	camera_->translate = { 0.0f, 5.0f, -15.0f };
+	cameraManager_ = CameraManager::GetInstance();
+	cameraResource_.Init();
+	
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -68,6 +71,7 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
+	cameraManager_->ReSetData(cameraResource_);
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
@@ -128,9 +132,7 @@ void DebugScene::ModelDraw()
 	//testHuman_->Draw(camera_.get());
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	demoModel_->SetLightData(light_);
-	demoModel_->SetEnvironmentData(environment_);
-	demoModel_->DrawN(transformA_, camera_.get());
+	demoModel_->DrawN(transformA_);
 }
 
 

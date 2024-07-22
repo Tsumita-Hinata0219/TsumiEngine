@@ -14,6 +14,9 @@
 #include "ModelStructure/ModelStructure.h"
 #include "ModelResources/ModelResources.h"
 
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "../../Project/GameObject/Camera/Resources/CameraResource.h"
+
 
 
 class ModelManager;
@@ -46,7 +49,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
 
 	// 描画処理 <- new
-	void DrawN(Transform transform, Camera* camera);
+	void DrawN(Transform transform);
 
 	// アニメーションの再生
 	void PlayAnimation(Animation animation, float time);
@@ -165,7 +168,7 @@ private:
 	//MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
 	// コマンドコール
-	void CommandCall(Camera* camera);
+	void CommandCall();
 
 private: // 繝｡繝ｳ繝仙､画焚
 
@@ -215,4 +218,10 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 	// バッファー
 	ModelBuffers buffers_{};
+
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
+
+	// カメラのリソース
+	CameraResource cameraResource_{};
 };

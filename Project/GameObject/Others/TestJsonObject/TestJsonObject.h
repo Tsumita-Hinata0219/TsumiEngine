@@ -15,7 +15,7 @@ public:
 	// 初期化処理、更新処理、描画処理
 	void Initialize();
 	void Update();
-	void Draw(Camera* camera);
+	void Draw();
 
 private:
 

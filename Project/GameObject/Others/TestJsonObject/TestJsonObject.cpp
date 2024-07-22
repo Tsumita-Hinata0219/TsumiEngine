@@ -42,15 +42,15 @@ void TestJsonObject::Update()
 
 
 // 描画処理
-void TestJsonObject::Draw(Camera* camera)
+void TestJsonObject::Draw()
 {
 	// テストモデル : 壁
 	//wallModel_->Draw(wallWt_, camera);
 
 	// テストモデル : 棒
-	bouModel_->Draw(bouWt_, camera);
+	bouModel_->Draw(bouWt_);
 
 	// テストモデル : 具
-	guModel_->Draw(guWt_, camera);
+	guModel_->Draw(guWt_);
 
 }

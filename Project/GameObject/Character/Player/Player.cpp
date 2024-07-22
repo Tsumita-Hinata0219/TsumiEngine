@@ -64,24 +64,18 @@ void Player::Update()
 
 
 // 描画処理
-void Player::Draw2DBack(Camera* camera)
-{
-	camera;
-}
-void Player::Draw3D(Camera* camera)
+void Player::Draw2DBack() {}
+void Player::Draw3D()
 {
 	// BodyModelの描画
-	bodyModel_->Draw(bodyWt_, camera);
+	bodyModel_->Draw(bodyWt_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
-		bullet->Draw3D(camera);
+		bullet->Draw3D();
 	}
 }
-void Player::Draw2DFront(Camera* camera)
-{
-	camera;
-}
+void Player::Draw2DFront() {}
 
 
 // 衝突自コールバック関数

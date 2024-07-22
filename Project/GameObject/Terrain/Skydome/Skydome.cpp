@@ -29,8 +29,8 @@ void Skydome::Update()
 
 
 // 描画処理
-void Skydome::Draw(Camera* camera) 
+void Skydome::Draw() 
 {
 
-	Skydome::GetInstance()->model_->Draw(Skydome::GetInstance()->worldTransform_, camera);
+	Skydome::GetInstance()->model_->Draw(Skydome::GetInstance()->worldTransform_);
 }

@@ -95,15 +95,15 @@ void Enemy::Update()
 
 
 // 描画処理
-void Enemy::Draw3D(Camera* camera)
+void Enemy::Draw3D()
 {
 	// BodyModelの描画
 	bodyModel_->SetColor(modelColor_);
-	bodyModel_->Draw(bodyWt_, camera);
+	bodyModel_->Draw(bodyWt_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
-		bullet->Draw3D(camera);
+		bullet->Draw3D();
 	}
 }
 

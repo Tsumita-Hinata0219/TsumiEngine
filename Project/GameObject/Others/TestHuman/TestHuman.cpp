@@ -125,15 +125,14 @@ void TestHuman::Update()
 
 
 // 描画処理
-void TestHuman::Draw(Camera* camera)
+void TestHuman::Draw()
 {
-	camera;
 	// Walk
-	walkModel_->AnimDraw(walkWt_, walkSkinCluster_, camera);
+	walkModel_->AnimDraw(walkWt_, walkSkinCluster_);
 
 	// Sneak
-	sneakModel_->AnimDraw(sneakWt_, sneakSkinCluster_, camera);
+	sneakModel_->AnimDraw(sneakWt_, sneakSkinCluster_);
 
 	// SimpleSkin
-	simpleModel_->AnimDraw(simpleWt_, simpleSkinCluster_, camera);
+	simpleModel_->AnimDraw(simpleWt_, simpleSkinCluster_);
 }

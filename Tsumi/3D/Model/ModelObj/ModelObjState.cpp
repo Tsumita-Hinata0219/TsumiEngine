@@ -23,7 +23,7 @@ void ModelObjState::Initialize(Model* pModel) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform) {
 
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
@@ -51,22 +51,21 @@ void ModelObjState::Draw(Model* pModel, WorldTransform worldTransform, Camera* c
 
 
 	// コマンドコール
-	CommandCall(pModel, worldTransform, camera);
+	CommandCall(pModel, worldTransform);
 }
 
-void ModelObjState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+void ModelObjState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster)
 {
 	pModel;
 	worldTransform;
 	skinCluster;
-	camera;
 }
 
 
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -86,7 +85,7 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform, Ca
 	commands.List->SetGraphicsRootConstantBufferView(1, worldTransform.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// DescriptorTableを設定する
 	if (pModel->GetObjData().textureHD != 0) {

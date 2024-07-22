@@ -54,6 +54,9 @@ void Player::Update()
 		ImGui::Text("");
 		ImGui::Text("ShotFrame = %d", shotPressFrame_);
 
+		ImGui::Text("");
+		light_.DrawImGui();
+
 		ImGui::TreePop();
 	}
 #endif // _DEBUG
@@ -65,6 +68,7 @@ void Player::Draw2DBack() {}
 void Player::Draw3D()
 {
 	// BodyModelの描画
+	model_->SetLightData(light_);
 	model_->DrawN(transform_);
 
 	// Bulletsの描画

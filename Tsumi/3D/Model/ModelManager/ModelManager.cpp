@@ -402,7 +402,7 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.eneble = false;
+	result.light.enable = false;
 
 	// Environmentの初期化
 	result.environment.enable = false;
@@ -437,7 +437,7 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.eneble = false;
+	result.light.enable = false;
 
 	// Environmentの初期化
 	result.environment.enable = false;

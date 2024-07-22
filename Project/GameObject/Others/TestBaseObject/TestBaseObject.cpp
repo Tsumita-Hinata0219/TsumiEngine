@@ -6,7 +6,7 @@
 void TestBaseObject::Init()
 {
 	// ModelManagerのインスタンスの取得
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Test", "Test.obj");
 	model_ = modelManager_->GetModel("Test");
 

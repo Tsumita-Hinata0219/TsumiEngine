@@ -41,7 +41,7 @@ public: // メンバ関数
 	/// <summary>
 	/// インスタンスの取得
 	/// </summary>
-	static ModelManager* Getinstance() {
+	static ModelManager* GetInstance() {
 		static ModelManager instance;
 		return &instance;
 	}

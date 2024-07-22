@@ -9,7 +9,7 @@ void Player::Init()
 	input_ = Input::GetInstance();
 
 	// BodyModelのロードと初期化
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Player", "Player.obj");
 	model_ = modelManager_->GetModel("Player");
 
@@ -64,7 +64,6 @@ void Player::Update()
 
 
 // 描画処理
-void Player::Draw2DBack() {}
 void Player::Draw3D()
 {
 	// BodyModelの描画
@@ -76,6 +75,7 @@ void Player::Draw3D()
 		bullet->Draw3D();
 	}
 }
+void Player::Draw2DBack() {}
 void Player::Draw2DFront() {}
 
 
@@ -206,7 +206,7 @@ void Player::CreateNewBullet()
 	initVel = TransformNormal(initVel, transform_.matWorld);
 
 	// newBulletの初期化
-	newBullet->Initialize();
+	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);
 	newBullet->SetRotationFromVelocity();

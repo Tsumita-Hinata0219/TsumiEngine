@@ -3,14 +3,15 @@
 
 
 // 初期化処理
-void PlayerBullet::Initialize()
+void PlayerBullet::Init()
 {
-	// Modelの初期化
-	bulletModel_ = std::make_unique<Model>();
-	bulletModel_->CreateFromObjAssimpVer("ball", "ball");
+	// BodyModelのロードと初期化
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("ball", "ball.obj");
+	model_ = modelManager_->GetModel("ball");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	bulletWt_.Initialize();
+	transform_.Initialize();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -23,7 +24,7 @@ void PlayerBullet::Initialize()
 void PlayerBullet::Update()
 {
 	// Transformの更新処理
-	bulletWt_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -36,8 +37,10 @@ void PlayerBullet::Update()
 // 描画処理
 void PlayerBullet::Draw3D()
 {
-	bulletModel_->Draw(bulletWt_);
+	model_->DrawN(transform_);
 }
+void PlayerBullet::Draw2DFront() {}
+void PlayerBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
@@ -53,7 +56,7 @@ void PlayerBullet::OnCollisionWithEnemyBullet()
 // 移動処理
 void PlayerBullet::Move()
 {
-	bulletWt_.srt.translate += velocity_;
+	transform_.srt.translate += velocity_;
 }
 
 

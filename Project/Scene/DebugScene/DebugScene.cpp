@@ -42,7 +42,7 @@ void DebugScene::Initialize()
 	testHuman_->Init();
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 

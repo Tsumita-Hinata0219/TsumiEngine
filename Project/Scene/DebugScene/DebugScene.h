@@ -66,7 +66,7 @@ private:
 
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
-	CameraResource cameraResource_;
+	CameraResource camera_;
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;

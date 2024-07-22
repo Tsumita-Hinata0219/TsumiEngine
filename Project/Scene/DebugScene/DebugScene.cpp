@@ -23,11 +23,11 @@ void DebugScene::Initialize()
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
-	cameraResource_.Init();
-	cameraResource_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	cameraResource_.srt.translate = { 0.0f, 5.0f, -15.0f };
+	camera_.Init();
+	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	camera_.srt.translate = { 0.0f, 5.0f, -15.0f };
 	cameraManager_ = CameraManager::GetInstance();
-	cameraManager_->ReSetData(cameraResource_);
+	cameraManager_->ReSetData(camera_);
 	
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -68,7 +68,7 @@ void DebugScene::Update(GameManager* state)
 	state;
 
 	/* ----- Camera カメラ ----- */
-	cameraResource_.Update();
+	camera_.Update();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
@@ -85,7 +85,7 @@ void DebugScene::Update(GameManager* state)
 #ifdef _DEBUG
 
 	ImGui::Begin("DebugScene");
-	cameraResource_.DrawImGui();
+	camera_.DrawImGui();
 	ImGui::End();
 
 

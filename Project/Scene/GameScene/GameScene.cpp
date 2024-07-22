@@ -44,7 +44,7 @@ void GameScene::Initialize()
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
-	player_->Initialize();
+	player_->Init();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_ = std::make_unique<EnemyManager>();
@@ -127,6 +127,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
+	absentEffect_->Draw();
 }
 
 

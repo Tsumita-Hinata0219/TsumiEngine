@@ -35,6 +35,9 @@ private:
 
 protected: // メンバ変数
 
+	// ModelManager
+	ModelManager* modelManager_ = nullptr;
+
 	// モデル
 	std::unique_ptr<Model> model_;
 

@@ -20,8 +20,5 @@ public:
 
 private:
 
-	// ModelManager
-	ModelManager* modelManager_ = nullptr;
-
 };
 

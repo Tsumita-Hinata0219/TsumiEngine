@@ -27,10 +27,10 @@ struct DirectionalLightData
 	Vector3 direction = { 0.0f, 1.0f, 0.0f }; // ライトの向き
 	float intensity = 1.0f; // 輝度
 	float shininess = 1.0f; // 光沢
-	bool eneble = false; // フラグ
+	uint32_t eneble = false; // フラグ
 
 	void DrawImGui(std::string label = "") {
-		ImGui::Checkbox((label + "_enable").c_str(), &eneble);
+		//ImGui::Checkbox((label + "_enable").c_str(), &eneble);
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
 		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat((label +  "_intennsity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
@@ -41,11 +41,11 @@ struct DirectionalLightData
 // 環境マップデータ
 struct EnvironmentData {
 	float scale = 0.0f;
-	bool enable = false;
+	uint32_t enable = false;
 	int textureHandle = 1u;
 
 	void DrawImGui(std::string label = "") {
-		ImGui::Checkbox((label + "_Enable").c_str(), &enable);
+		//ImGui::Checkbox((label + "_Enable").c_str(), &enable);
 		ImGui::DragFloat((label + "_Scale").c_str(), &scale, 0.01f, 0.0f, 1.0f);
 	}
 };

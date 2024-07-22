@@ -42,10 +42,6 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Initialize();
 
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Initialize();
-
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Initialize();
@@ -72,9 +68,6 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	Ground::GetInstance()->Update();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -134,11 +127,6 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
-	/* ----- AbsentEffect アブセントエフェクト----- */
-	//absentEffect_->Draw();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw(); 
 }
 
 

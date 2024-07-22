@@ -11,11 +11,6 @@
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
-#include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "../../../Project/GameObject/Others/TestObject/TestObject.h"
-#include "../../../Project/GameObject/Others/TestAnimationCube/TestAnimationCube.h"
-#include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
-#include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
 
 #include "../../../Project/GameObject/Character/Player/Player.h"
 #include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
@@ -80,9 +75,6 @@ private:
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource cameraResource_;
-
-	// PostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
 
 	// Player
 	std::unique_ptr<Player> player_;

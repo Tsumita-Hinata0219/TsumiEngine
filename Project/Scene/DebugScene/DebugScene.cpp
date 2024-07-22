@@ -23,9 +23,7 @@ void DebugScene::Initialize()
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
-	camera_.Init();
-	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	camera_.srt.translate = { 0.0f, 5.0f, -15.0f };
+	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	

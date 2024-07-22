@@ -11,7 +11,7 @@ void AbsentEffect::Initialize()
 
 
 // 描画処理
-void AbsentEffect::Draw([[maybe_unused]] Camera* camera)
+void AbsentEffect::Draw()
 {
 	// コマンドコール
 	CommandCall();

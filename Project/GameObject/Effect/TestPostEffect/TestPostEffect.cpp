@@ -122,41 +122,40 @@ void TestPostEffect::Update()
 
 
 // 描画処理
-void TestPostEffect::Draw(Camera* camera)
+void TestPostEffect::Draw()
 {
-	camera;
 	if (activeEffects_ == EffectType::Absent) {
-		absent_->Draw(camera);
+		absent_->Draw();
 	}
 	else if (activeEffects_ == EffectType::BoxFilter) {
-		boxFilter_->Draw(camera);
+		boxFilter_->Draw();
 	}
 	else if (activeEffects_ == EffectType::ColorGrading) {
-		colorGrading_->Draw(camera);
+		colorGrading_->Draw();
 	}
 	else if (activeEffects_ == EffectType::Dissolve) {
-		dissolve_->Draw(camera);
+		dissolve_->Draw();
 	}
 	else if (activeEffects_ == EffectType::GauusianFilter) {
-		gaussianFilter_->Draw(camera);
+		gaussianFilter_->Draw();
 	}
 	else if (activeEffects_ == EffectType::Grain) {
-		grain_->Draw(camera);
+		grain_->Draw();
 	}
 	else if (activeEffects_ == EffectType::LuminanceOutLine) {
-		luminanceOutLine_->Draw(camera);
+		luminanceOutLine_->Draw();
 	}
 	else if (activeEffects_ == EffectType::RadialBlur) {
-		radialBlur_->Draw(camera);
+		radialBlur_->Draw();
 	}
 	else if (activeEffects_ == EffectType::Random) {
-		random_->Draw(camera);
+		random_->Draw();
 	}
 	else if (activeEffects_ == EffectType::SepiaTone) {
-		sepiaTone_->Draw(camera);
+		sepiaTone_->Draw();
 	}
 	else if (activeEffects_ == EffectType::Vignetting) {
-		vignetting_->Draw(camera);
+		vignetting_->Draw();
 	}
 
 }

@@ -3,7 +3,15 @@
 #include "../../Tsumi/Base/WinApp/WinApp.h"
 #include "../../Tsumi/BufferResource/BufferResource.h"
 #include "../../../Math/MyMath.h"
-#include "../Camera.h"
+
+
+// GPUに送る行列
+struct TransformationViewMatrix {
+	Matrix4x4 view;
+	Matrix4x4 viewProjection;
+	Matrix4x4 orthoGraphic;
+	Vector3 cameraPosition;
+};
 
 
 /* -----------------------------------

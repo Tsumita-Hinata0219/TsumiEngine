@@ -65,7 +65,7 @@ private:
 	EnvironmentData environment_{};
 
 	// メインカメラ
-	std::unique_ptr<Camera> camera_ = nullptr;
+	//std::unique_ptr<Camera> camera_ = nullptr;
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource cameraResource_;
 

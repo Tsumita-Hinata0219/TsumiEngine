@@ -23,10 +23,10 @@ void DebugScene::Initialize()
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
-	camera_ = make_unique<Camera>();
+	/*camera_ = make_unique<Camera>();
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 5.0f, -15.0f };
+	camera_->translate = { 0.0f, 5.0f, -15.0f };*/
 	cameraResource_.Init();
 	cameraResource_.srt.rotate = { 0.2f, 0.0f, 0.0f };
 	cameraResource_.srt.translate = { 0.0f, 5.0f, -15.0f };
@@ -72,7 +72,7 @@ void DebugScene::Update(GameManager* state)
 	state;
 
 	/* ----- Camera カメラ ----- */
-	camera_->UpdateMatrix();
+	//camera_->UpdateMatrix();
 	cameraResource_.Update();
 
 	/* ----- Skydome 天球 ----- */
@@ -92,9 +92,9 @@ void DebugScene::Update(GameManager* state)
 	ImGui::Begin("DebugScene");
 
 	ImGui::Text("");
-	ImGui::Text("Camera");
+	/*ImGui::Text("Camera");
 	ImGui::DragFloat3("Rotate", &camera_->rotate.x, 0.01f);
-	ImGui::DragFloat3("Translate", &camera_->translate.x, 0.01f);
+	ImGui::DragFloat3("Translate", &camera_->translate.x, 0.01f);*/
 	ImGui::Text("");
 
 	ImGui::End();

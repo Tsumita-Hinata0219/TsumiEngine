@@ -56,6 +56,11 @@ void DebugScene::Initialize()
 
 	/*light_.eneble = false;
 	environment_.enable = false;*/
+
+	/* ----- TestBaseObject テストベースオブジェクト ----- */
+	testBaseObject_ = std::make_unique<TestBaseObject>();
+	testBaseObject_->Init();
+
 }
 
 
@@ -124,6 +129,9 @@ void DebugScene::ModelDraw()
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
 	demoModel_->DrawN(transformA_);
+
+	/* ----- TestBaseObject テストベースオブジェクト ----- */
+	testBaseObject_->Draw3D();
 }
 
 

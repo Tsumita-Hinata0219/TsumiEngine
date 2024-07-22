@@ -13,6 +13,7 @@
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
+#include "../../../Project/GameObject/Others/TestBaseObject/TestBaseObject.h"
 
 
 class DebugScene : public IScene {
@@ -76,5 +77,8 @@ private:
 
 	// TestJsonObject
 	std::unique_ptr<TestJsonObject> testJsonObject_;
+
+	// TestBaseObject
+	std::unique_ptr<TestBaseObject> testBaseObject_;
 };
 

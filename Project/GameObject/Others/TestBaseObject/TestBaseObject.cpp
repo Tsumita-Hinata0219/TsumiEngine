@@ -25,7 +25,7 @@ void TestBaseObject::Update()
 // 描画
 void TestBaseObject::Draw3D()
 {
-
+	model_->DrawN(transform_);
 }
 void TestBaseObject::Draw2DFront()
 {

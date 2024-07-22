@@ -39,14 +39,14 @@ void FadeManager::Initialize(FunctionFade func)
 
 
 // 描画処理
-void FadeManager::Draw(Camera* camera)
+void FadeManager::Draw()
 {
 	// カラーの設定
 	FadeManager::GetInstance()->sprite_->SetColor(FadeManager::GetInstance()->color_);
 
 	uint32_t texHandle = FadeManager::GetInstance()->texHD_;
 	WorldTransform spriteTransform = FadeManager::GetInstance()->wt_;
-	FadeManager::GetInstance()->sprite_->Draw(texHandle, spriteTransform, camera);
+	FadeManager::GetInstance()->sprite_->Draw(texHandle, spriteTransform);
 
 
 #ifdef _DEBUG

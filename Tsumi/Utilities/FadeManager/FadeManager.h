@@ -45,7 +45,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	static void Draw(Camera* camera);
+	static void Draw();
 
 	/// <summary>
 	///フェードイン処理

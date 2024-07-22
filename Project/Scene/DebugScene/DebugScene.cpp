@@ -85,10 +85,7 @@ void DebugScene::Update(GameManager* state)
 #ifdef _DEBUG
 
 	ImGui::Begin("DebugScene");
-
-	ImGui::Text("");
-	ImGui::Text("");
-
+	cameraResource_.DrawImGui();
 	ImGui::End();
 
 

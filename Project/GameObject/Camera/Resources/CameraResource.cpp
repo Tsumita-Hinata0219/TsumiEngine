@@ -63,6 +63,16 @@ void CameraResource::Update()
 }
 
 
+// ImGuiの描画
+void CameraResource::DrawImGui()
+{
+	ImGui::Text("Camera");
+	ImGui::DragFloat3("Scale", &srt.scale.x, 0.01f, 0.01f, 100.0f);
+	ImGui::DragFloat3("Rotate", &srt.rotate.x, 0.01f);
+	ImGui::DragFloat3("Translate", &srt.translate.x, 0.01f);
+}
+
+
 // 行列に書き込むデータの設定
 void CameraResource::UpdateBuffer()
 {

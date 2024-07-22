@@ -28,6 +28,9 @@ public:
 	// 行列の更新
 	void Update();
 
+	// ImGuiの描画
+	void DrawImGui();
+
 #pragma region Accessor アクセッサ
 
 	// ワールド座標の取得

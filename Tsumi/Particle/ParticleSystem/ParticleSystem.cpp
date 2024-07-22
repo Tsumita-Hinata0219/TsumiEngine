@@ -21,7 +21,7 @@ void ParticleSystem::Initialize()
 
 
 // 描画処理
-void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
+void ParticleSystem::Draw(list<ParticleProperties> prope)
 {
 	VertexData* vertexData = nullptr;
 	MaterialParticle* materialData = nullptr;
@@ -67,7 +67,11 @@ void ParticleSystem::Draw(list<ParticleProperties> prope, Camera* camera)
 		MakeAffineMatrix(Vector3::one, Vector3::zero, Vector3::zero);
 
 	// ビルボードの計算
-	Matrix4x4 billMat = CalcBillBord(camera);
+	Matrix4x4 billMat = CalcBillBord();
+
+
+	// カメラの情報
+	auto camera = CameraManager::GetInstance()->GetResource();
 
 
 	instanceNum_ = 0;
@@ -133,8 +137,10 @@ void ParticleSystem::CommandCall()
 
 
 // ビルボードの処理
-Matrix4x4 ParticleSystem::CalcBillBord(Camera* camera)
+Matrix4x4 ParticleSystem::CalcBillBord()
 {
+	// カメラの情報
+	auto camera = CameraManager::GetInstance()->GetResource();
 	Matrix4x4 backToFrontMat = Matrix4x4::identity;
 	Matrix4x4 billBoardMat = backToFrontMat * camera->rotateMat;
 	billBoardMat.m[3][0] = 0.0f;

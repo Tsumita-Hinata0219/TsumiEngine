@@ -43,8 +43,8 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = WorldTransform());
 
 	// 描画処理
-	void Draw(WorldTransform worldTransform, Camera* camera);
-	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera);
+	void Draw(WorldTransform worldTransform);
+	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster);
 
 	// 描画処理 <- new
 	void DrawN(Transform transform);

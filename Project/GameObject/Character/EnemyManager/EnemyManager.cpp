@@ -74,7 +74,7 @@ void EnemyManager::Update()
 
 
 // 描画処理
-void EnemyManager::Draw3D(Camera* camera)
+void EnemyManager::Draw3D()
 {
 	// FlagModel
 	flagModel_->Draw(transform_, camera);

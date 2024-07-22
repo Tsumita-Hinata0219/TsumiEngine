@@ -17,7 +17,7 @@ public: // メンバ関数
 	// 初期化処理、更新処理、描画処理
 	void Initialize();
 	void Update();
-	void Draw3D(Camera* camera);
+	void Draw3D();
 
 #pragma region Accessor アクセッサ
 

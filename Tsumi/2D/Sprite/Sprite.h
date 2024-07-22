@@ -43,7 +43,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera);
+	void Draw(uint32_t texHandle, WorldTransform& transform);
 
 	/// <summary>
 	/// 色の変換

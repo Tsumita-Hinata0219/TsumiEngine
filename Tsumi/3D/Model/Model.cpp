@@ -175,13 +175,13 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 /// <summary>
 /// 描画処理
 /// </summary>
-void Model::Draw(WorldTransform worldTransform, Camera* camera) 
+void Model::Draw(WorldTransform worldTransform) 
 {
-	this->state_->Draw(this, worldTransform, camera);
+	this->state_->Draw(this, worldTransform);
 }
-void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster)
 {
-	this->state_->AnimDraw(this, worldTransform, skinCluster, camera);
+	this->state_->AnimDraw(this, worldTransform, skinCluster);
 }
 void Model::DrawN(Transform transform)
 {

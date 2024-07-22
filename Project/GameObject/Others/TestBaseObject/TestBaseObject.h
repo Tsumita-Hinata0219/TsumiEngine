@@ -1,9 +1,9 @@
 #pragma once
 
-#include "../../BaseObject/BaseObject.h"
+#include "../../IObject/IObject.h"
 
 /* TestBaseObjectクラス */
-class TestBaseObject : public IBaseObject {
+class TestBaseObject : public IObject {
 
 public:
 

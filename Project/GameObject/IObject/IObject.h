@@ -5,13 +5,14 @@
 #include "../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 #include "../../Tsumi/Transform/Transform.h"
 
-/* ゲームオブジェクトの基底クラス */
-class IBaseObject {
+
+/* オブジェクトの基底クラス */
+class IObject {
 
 public: // メンバ関数
 
 	// デストラクタ
-	virtual ~IBaseObject() {};
+	virtual ~IObject() {};
 
 	// 初期化、更新、描画
 	virtual void Init() = 0;
@@ -19,7 +20,6 @@ public: // メンバ関数
 	virtual void Draw3D() = 0;
 	virtual void Draw2DFront() = 0;
 	virtual void Draw2DBack() = 0;
-
 
 #pragma region Accessor アクセッサ
 

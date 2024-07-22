@@ -26,7 +26,6 @@ public: // メンバ関数
 	// ワールドポジションの取得
 	Vector3 GetWorldPosition() { return this->transform_.GetWorldPos(); }
 
-
 #pragma endregion 
 
 

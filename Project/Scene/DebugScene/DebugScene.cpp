@@ -41,7 +41,6 @@ void DebugScene::Initialize()
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
 
-
 	/* ----- ModelNewLoad モデルニューロード ----- */
 	modelManager_ = ModelManager::Getinstance();
 	modelManager_->LoadModel("Test", "Test.obj");
@@ -55,7 +54,6 @@ void DebugScene::Initialize()
 	/* ----- TestBaseObject テストベースオブジェクト ----- */
 	testBaseObject_ = std::make_unique<TestBaseObject>();
 	testBaseObject_->Init();
-
 }
 
 

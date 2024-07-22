@@ -200,6 +200,9 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
     <ClCompile Include="Tsumi\JsonManager\JsonManager.cpp" />
+    <ClCompile Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
+    <ClCompile Include="Project\GameObject\Camera\Manager\CameraManager.cpp" />
+    <ClCompile Include="Project\GameObject\Camera\Resources\CameraResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -402,6 +405,10 @@
     <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\ModelStructure.h" />
     <ClInclude Include="Tsumi\JsonManager\JsonManager.h" />
+    <ClInclude Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.h" />
+    <ClInclude Include="Project\GameObject\Camera\Manager\CameraManager.h" />
+    <ClInclude Include="Project\GameObject\Camera\Resources\CameraResource.h" />
+    <ClInclude Include="Project\GameObject\IObject\IObject.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "ModelManager/ModelManager.h"
 #include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 
 /// <summary>
@@ -13,6 +14,9 @@ Model::Model()
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// CameraManagerのインスタンスの取得
+	cameraManager_ = CameraManager::GetInstance();
 }
 Model::Model(ModelDatas datas) : datas_(datas)
 {
@@ -21,6 +25,9 @@ Model::Model(ModelDatas datas) : datas_(datas)
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
+
+	// CameraManagerのインスタンスの取得
+	cameraManager_ = CameraManager::GetInstance();
 
 	// Datasを基にBufferを作成する
 	CreateBufferResource();
@@ -168,20 +175,24 @@ void Model::CreateGLTFModel(const std::string& routeFilePath, const std::string&
 /// <summary>
 /// 描画処理
 /// </summary>
-void Model::Draw(WorldTransform worldTransform, Camera* camera) 
+void Model::Draw(WorldTransform worldTransform) 
 {
-	this->state_->Draw(this, worldTransform, camera);
+	this->state_->Draw(this, worldTransform);
 }
-void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster)
 {
-	this->state_->AnimDraw(this, worldTransform, skinCluster, camera);
+	this->state_->AnimDraw(this, worldTransform, skinCluster);
 }
-void Model::DrawN(Transform transform, Camera* camera)
+void Model::DrawN(Transform transform)
 {
+	// CameraResourceの取得
+	auto cameraResource = cameraManager_->GetResource();
+
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
-	transform.transformationMatData.WVP = transform.transformationMatData.World * camera->viewMatrix * camera->projectionMatrix;
+	transform.transformationMatData.WVP = 
+		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
@@ -210,7 +221,7 @@ void Model::DrawN(Transform transform, Camera* camera)
 	buffers_.enviroment.WriteData(&datas_.environment);
 	buffers_.enviroment.UnMap();
 	// コマンドコール
-	CommandCall(camera);
+	CommandCall();
 }
 
 
@@ -373,7 +384,7 @@ void Model::CreateBufferResource()
 /// <summary>
 /// コマンドコール
 /// </summary>
-void Model::CommandCall(Camera* camera)
+void Model::CommandCall()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -390,7 +401,7 @@ void Model::CommandCall(Camera* camera)
 	// TransformationMatrix
 	buffers_.transform.CommandCall(1);
 	// Camera
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	cameraManager_->CommandCall(2);
 	// MaterialTexture
 	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
 	// Light

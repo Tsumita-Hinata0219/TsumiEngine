@@ -50,7 +50,7 @@ void Skybox::Update()
 
 
 // 描画処理
-void Skybox::Draw(Camera* camera)
+void Skybox::Draw()
 {
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
@@ -129,12 +129,12 @@ void Skybox::Draw(Camera* camera)
 
 
 	// コマンドコール
-	CommandCall(camera);
+	CommandCall();
 }
 
 
 // コマンドコール
-void Skybox::CommandCall(Camera* camera)
+void Skybox::CommandCall()
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -154,7 +154,7 @@ void Skybox::CommandCall(Camera* camera)
 	commands.List->SetGraphicsRootConstantBufferView(1, transform_.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// DescriptorTableを設定する
 	if (!texture_ == 0) {

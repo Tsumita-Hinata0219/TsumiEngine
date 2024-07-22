@@ -12,7 +12,7 @@
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
 #include "../../Tsumi/Utilities/Timer/Timer.h"
 #include"../../Tsumi/Utilities/EnumUtilities/EnumUtilities.h"
-#include "Camera/Camera.h"
+#include "../GameObject/Camera/Manager/CameraManager.h"
 
 #include "../Math/MyMath.h"
 

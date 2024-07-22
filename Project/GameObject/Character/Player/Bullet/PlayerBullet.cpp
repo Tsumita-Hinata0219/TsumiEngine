@@ -34,9 +34,9 @@ void PlayerBullet::Update()
 
 
 // 描画処理
-void PlayerBullet::Draw3D(Camera* camera)
+void PlayerBullet::Draw3D()
 {
-	bulletModel_->Draw(bulletWt_, camera);
+	bulletModel_->Draw(bulletWt_);
 }
 
 

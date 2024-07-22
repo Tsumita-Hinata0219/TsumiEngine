@@ -22,7 +22,7 @@ void DrawSystem::Initialize() {
 
 
 // 描画処理
-void DrawSystem::Line(Segment segment, Camera* camera, Vector4 color) {
+void DrawSystem::Line(Segment segment, Vector4 color) {
 
 	VertexData* vertexData = nullptr;
 	Vector4* materialData = nullptr;
@@ -46,12 +46,12 @@ void DrawSystem::Line(Segment segment, Camera* camera, Vector4 color) {
 	transformation->World = MakeAffineMatrix(Vector3::one, Vector3::zero, segment.origin);
 
 	// コマンドコール
-	DrawSystem::GetInstance()->CommandCallTypeLine(camera);
+	DrawSystem::GetInstance()->CommandCallTypeLine();
 }
 
 
 // コマンドコール
-void DrawSystem::CommandCallTypeLine(Camera* camera) {
+void DrawSystem::CommandCallTypeLine() {
 
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -75,7 +75,7 @@ void DrawSystem::CommandCallTypeLine(Camera* camera) {
 	commands.List->SetGraphicsRootConstantBufferView(1, DrawSystem::GetInstance()->lineResource_.TransformationMatrix->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// 描画！(DrawCall / ドローコール)。3頂点で1つのインスタンス。インスタンスについては今後
 	commands.List->DrawInstanced(2, 1, 0, 0);

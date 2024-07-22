@@ -39,8 +39,8 @@ public: // メンバ関数
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	virtual void Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) = 0;
-	virtual void AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera) = 0;
+	virtual void Draw(Model* pModel, WorldTransform worldTransform) = 0;
+	virtual void AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster) = 0;
 
 	
 #pragma region Get

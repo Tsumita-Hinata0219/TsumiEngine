@@ -30,10 +30,11 @@ void GameScene::Initialize()
 	absentEffect_->Initialize();
 
 	/* ----- Camera カメラ ----- */
-	camera_ = make_unique<Camera>();
-	camera_->Initialize();
-	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 20.0f, -60.0f };
+	cameraResource_.Init();
+	cameraResource_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	cameraResource_.srt.translate = { 0.0f, 20.0f, -60.0f };
+	cameraManager_ = CameraManager::GetInstance();
+	cameraManager_->ReSetData(cameraResource_);
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
@@ -64,7 +65,7 @@ void GameScene::Update(GameManager* state)
 	state;
 
 	/* ----- Camera カメラ ----- */
-	camera_->UpdateMatrix();
+	cameraResource_.Update();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
@@ -91,9 +92,6 @@ void GameScene::Update(GameManager* state)
 	ImGui::Begin("GameScene");
 
 	ImGui::Text("");
-	ImGui::Text("Camera");
-	ImGui::DragFloat3("Rotate", &camera_->rotate.x, 0.01f);
-	ImGui::DragFloat3("Translate", &camera_->translate.x, 0.01f);
 	ImGui::Text("");
 
 	ImGui::End();
@@ -117,16 +115,16 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw(camera_.get());
+	Skydome::GetInstance()->Draw();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw(camera_.get());
+	Ground::GetInstance()->Draw();
 
 	/* ----- Player プレイヤー ----- */
-	player_->Draw3D(camera_.get());
+	player_->Draw3D();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_->Draw3D(camera_.get());
+	enemyManager_->Draw3D();
 
 }
 
@@ -137,10 +135,10 @@ void GameScene::ModelDraw()
 void GameScene::FrontSpriteDraw()
 {
 	/* ----- AbsentEffect アブセントエフェクト----- */
-	//absentEffect_->Draw(camera_.get());
+	//absentEffect_->Draw();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw(camera_.get()); 
+	testPostEffect_->Draw(); 
 }
 
 

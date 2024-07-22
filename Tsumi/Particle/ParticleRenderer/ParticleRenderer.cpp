@@ -26,7 +26,7 @@ void ParticleRenderer::Initialize(uint32_t maxInstance)
 
 
 // 描画処理
-void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p, Camera* camera)
+void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p)
 {
 	VertexData* vertexData = nullptr;
 	MaterialParticle* materialData = nullptr;
@@ -72,7 +72,11 @@ void ParticleRenderer::Draw(const list<unique_ptr<IParticle>>& p, Camera* camera
 		MakeAffineMatrix(Vector3::one, Vector3::zero, Vector3::zero);
 
 	// ビルボードの計算
-	Matrix4x4 billMat = CalcBillBord(camera);
+	Matrix4x4 billMat = CalcBillBord();
+
+
+	// カメラの情報
+	auto camera = CameraManager::GetInstance()->GetResource();
 
 
 	instanceNum_ = 0;
@@ -137,8 +141,10 @@ void ParticleRenderer::CommandCall()
 
 
 // ビルボードの処理
-Matrix4x4 ParticleRenderer::CalcBillBord(Camera* camera)
+Matrix4x4 ParticleRenderer::CalcBillBord()
 {
+	// カメラの情報
+	auto camera = CameraManager::GetInstance()->GetResource();
 	Matrix4x4 backToFrontMat = Matrix4x4::identity;
 	Matrix4x4 billBoardMat = backToFrontMat * camera->rotateMat;
 	billBoardMat.m[3][0] = 0.0f;

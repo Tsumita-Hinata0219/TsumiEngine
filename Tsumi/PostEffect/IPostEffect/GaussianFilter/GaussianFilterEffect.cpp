@@ -13,7 +13,7 @@ void GaussianFilterEffect::Initialize()
 
 
 // 描画処理
-void GaussianFilterEffect::Draw([[maybe_unused]] Camera* camera)
+void GaussianFilterEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

@@ -34,7 +34,7 @@ void TestObject::Update()
 
 
 // 描画処理
-void TestObject::Draw(Camera* camera)
+void TestObject::Draw()
 {
-	testModel_->Draw(wt_, camera);
+	testModel_->Draw(wt_);
 }

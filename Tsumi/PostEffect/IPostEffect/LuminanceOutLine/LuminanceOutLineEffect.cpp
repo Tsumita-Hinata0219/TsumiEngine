@@ -13,7 +13,7 @@ void LuminanceOutLineEffect::Initialize()
 
 
 // 描画処理
-void LuminanceOutLineEffect::Draw([[maybe_unused]] Camera* camera)
+void LuminanceOutLineEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

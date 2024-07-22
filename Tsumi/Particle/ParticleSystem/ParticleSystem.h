@@ -9,6 +9,7 @@
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 #include "../../../Project/GameObject/Camera/Camera.h"
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 #define INSTANCE_MAX 1000;
 
 
@@ -23,7 +24,7 @@ public: // メンバ関数
 
 	// 初期化処理、更新処理、描画処理
 	void Initialize();
-	void Draw(list<ParticleProperties> prope, Camera* camera);
+	void Draw(list<ParticleProperties> prope);
 
 #pragma region Get 取得
 
@@ -46,7 +47,7 @@ private: // メンバ関数
 	void CommandCall();
 
 	// ビルボードの処理
-	Matrix4x4 CalcBillBord(Camera* camera);
+	Matrix4x4 CalcBillBord();
 
 
 private: // メンバ変数

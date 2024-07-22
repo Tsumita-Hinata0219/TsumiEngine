@@ -23,11 +23,12 @@ void DebugScene::Initialize()
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
-	camera_ = make_unique<Camera>();
-	camera_->Initialize();
-	camera_->rotate = { 0.2f, 0.0f, 0.0f };
-	camera_->translate = { 0.0f, 5.0f, -15.0f };
-
+	camera_.Init();
+	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	camera_.srt.translate = { 0.0f, 5.0f, -15.0f };
+	cameraManager_ = CameraManager::GetInstance();
+	cameraManager_->ReSetData(camera_);
+	
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
 
@@ -53,8 +54,13 @@ void DebugScene::Initialize()
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
 
-	light_.eneble = false;
-	environment_.enable = false;
+	/*light_.eneble = false;
+	environment_.enable = false;*/
+
+	/* ----- TestBaseObject テストベースオブジェクト ----- */
+	testBaseObject_ = std::make_unique<TestBaseObject>();
+	testBaseObject_->Init();
+
 }
 
 
@@ -67,7 +73,7 @@ void DebugScene::Update(GameManager* state)
 	state;
 
 	/* ----- Camera カメラ ----- */
-	camera_->UpdateMatrix();
+	camera_.Update();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();
@@ -84,13 +90,7 @@ void DebugScene::Update(GameManager* state)
 #ifdef _DEBUG
 
 	ImGui::Begin("DebugScene");
-
-	ImGui::Text("");
-	ImGui::Text("Camera");
-	ImGui::DragFloat3("Rotate", &camera_->rotate.x, 0.01f);
-	ImGui::DragFloat3("Translate", &camera_->translate.x, 0.01f);
-	ImGui::Text("");
-
+	camera_.DrawImGui();
 	ImGui::End();
 
 
@@ -119,18 +119,19 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Draw(camera_.get());
+	//Skydome::GetInstance()->Draw();
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw(camera_.get());
+	//Ground::GetInstance()->Draw();
 
 	/* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Draw(camera_.get());
+	//testHuman_->Draw();
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	demoModel_->SetLightData(light_);
-	demoModel_->SetEnvironmentData(environment_);
-	demoModel_->DrawN(transformA_, camera_.get());
+	demoModel_->DrawN(transformA_);
+
+	/* ----- TestBaseObject テストベースオブジェクト ----- */
+	testBaseObject_->Draw3D();
 }
 
 
@@ -140,5 +141,5 @@ void DebugScene::ModelDraw()
 void DebugScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw(camera_.get());
+	testPostEffect_->Draw();
 }

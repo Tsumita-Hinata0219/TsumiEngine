@@ -13,7 +13,7 @@ void GrayScaleEffect::Initialize()
 
 
 // 描画処理
-void GrayScaleEffect::Draw([[maybe_unused]] Camera* camera)
+void GrayScaleEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

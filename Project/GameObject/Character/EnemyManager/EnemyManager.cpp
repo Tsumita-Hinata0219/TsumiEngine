@@ -74,14 +74,14 @@ void EnemyManager::Update()
 
 
 // 描画処理
-void EnemyManager::Draw3D(Camera* camera)
+void EnemyManager::Draw3D()
 {
 	// FlagModel
-	flagModel_->Draw(transform_, camera);
+	flagModel_->Draw(transform_);
 
 	// EnemyListの描画
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
-		enemy->Draw3D(camera);
+		enemy->Draw3D();
 	}
 }
 

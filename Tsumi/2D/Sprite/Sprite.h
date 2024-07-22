@@ -8,7 +8,7 @@
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../View/SRVManager/SRVManager.h"
-#include "../../../Project/GameObject/Camera/Camera.h"
+#include "../../../Project/GameObject/Camera/Manager/CameraManager.h"
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
 
@@ -43,7 +43,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera);
+	void Draw(uint32_t texHandle, WorldTransform& transform);
 
 	/// <summary>
 	/// 色の変換

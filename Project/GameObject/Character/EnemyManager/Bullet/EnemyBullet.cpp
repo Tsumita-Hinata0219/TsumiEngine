@@ -34,9 +34,9 @@ void EnemyBullet::Update()
 
 
 // 描画処理
-void EnemyBullet::Draw3D(Camera* camera)
+void EnemyBullet::Draw3D()
 {
-	bulletModel_->Draw(bulletWt_, camera);
+	bulletModel_->Draw(bulletWt_);
 }
 
 

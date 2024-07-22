@@ -24,7 +24,7 @@ void ModelGLTFState::Initialize(Model* pModel) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform) {
 
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
@@ -58,10 +58,10 @@ void ModelGLTFState::Draw(Model* pModel, WorldTransform worldTransform, Camera* 
 
 
 	// コマンドコール
-	CommandCall(pModel, worldTransform, camera);
+	CommandCall(pModel, worldTransform);
 }
 
-void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster)
 {
 	VertexData* vertexData = nullptr;
 	Material* material = nullptr;
@@ -95,14 +95,14 @@ void ModelGLTFState::AnimDraw(Model* pModel, WorldTransform worldTransform, Skin
 
 
 	// コマンドコール
-	AnimCommandCall(pModel, worldTransform, skinCluster, camera);
+	AnimCommandCall(pModel, worldTransform, skinCluster);
 }
 
 
 /// <summary>
 /// コマンドコール処理
 /// </summary>
-void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, Camera* camera) {
+void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -122,7 +122,7 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 	commands.List->SetGraphicsRootConstantBufferView(1, worldTransform.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
@@ -143,7 +143,7 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform, C
 	commands.List->DrawIndexedInstanced(UINT(modelData_.indices.size()), 1, 0, 0, 0);
 }
 
-void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster, Camera* camera)
+void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransform, SkinCluster skinCluster)
 {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -172,7 +172,7 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 	commands.List->SetGraphicsRootConstantBufferView(1, worldTransform.constBuffer->GetGPUVirtualAddress());
 
 	// camera
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {

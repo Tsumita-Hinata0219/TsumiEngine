@@ -1,5 +1,5 @@
 #include "ParticleManager.h"
-
+#include "../ParticleRenderer/ParticleRenderer.h"
 
 
 // 初期化処理
@@ -22,10 +22,10 @@ void ParticleManager::Update()
 
 
 // 描画処理
-void ParticleManager::Draw(Camera* camera)
+void ParticleManager::Draw()
 {
 	const auto& particle = particleArray_->GetParticleArray();
-	renderer_->Draw(particle, camera);
+	renderer_->Draw(particle);
 }
 
 

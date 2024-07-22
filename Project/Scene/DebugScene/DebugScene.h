@@ -6,11 +6,14 @@
 #include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 #include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
 #include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
+#include "../../../Project/GameObject/Others/TestBaseObject/TestBaseObject.h"
 
 
 class DebugScene : public IScene {
@@ -63,7 +66,8 @@ private:
 	EnvironmentData environment_{};
 
 	// メインカメラ
-	std::unique_ptr<Camera> camera_ = nullptr;
+	CameraManager* cameraManager_ = nullptr;
+	CameraResource camera_;
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
@@ -73,5 +77,8 @@ private:
 
 	// TestJsonObject
 	std::unique_ptr<TestJsonObject> testJsonObject_;
+
+	// TestBaseObject
+	std::unique_ptr<TestBaseObject> testBaseObject_;
 };
 

@@ -43,8 +43,8 @@ void TestAnimationCube::Update()
 
 
 // 描画処理
-void TestAnimationCube::Draw(Camera* camera)
+void TestAnimationCube::Draw()
 {
-	testModel_->Draw(wt_, camera);
+	testModel_->Draw(wt_);
 }
 

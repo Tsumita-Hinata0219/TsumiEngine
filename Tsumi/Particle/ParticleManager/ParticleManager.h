@@ -3,6 +3,8 @@
 #include "../ParticleRenderer/ParticleRenderer.h"
 #include "../ParticleArray/ParticleArray.h"
 
+class ParticleRenderer;
+
 /* ParticleManagerクラス */
 class ParticleManager {
 
@@ -25,7 +27,7 @@ public: // メンバ関数
 	// 初期化処理、更新処理、描画処理
 	void Initialize();
 	void Update();
-	void Draw(Camera* camera);
+	void Draw();
 
 	// パーティクルの追加
 	void AddParticle(unique_ptr<IParticle> particle);

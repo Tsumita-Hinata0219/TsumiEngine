@@ -12,6 +12,30 @@
 --------------------------------------*/
 struct CameraResource {
 
+public:
+
+	// 初期化処理
+	void Init(Vector3 initRotate = { 0.0f, 0.0f, 0.0f }, Vector3 initTranslate = { 0.0f, 0.0f, 0.0f });
+
+	// 行列の更新
+	void Update();
+
+#pragma region Accessor アクセッサ
+
+	// ワールド座標の取得
+	Vector3 GetWorldPosition();
+
+#pragma endregion 
+
+
+private:
+
+	// バッファーの更新
+	void UpdateBuffer();
+
+
+public:
+
 #pragma region ビュー行列の設定
 
 	SRT srt{};
@@ -20,7 +44,7 @@ struct CameraResource {
 	TransformationViewMatrix* bufferData = nullptr;
 
 	// バッファー
-	BufferResource<TransformationViewMatrix> buffer;
+	std::unique_ptr<BufferResource<TransformationViewMatrix>> buffer;
 
 #pragma endregion 
 
@@ -77,24 +101,5 @@ struct CameraResource {
 
 #pragma endregion
 
-#pragma region 関数
-
-	// 初期化処理
-	void Init(Vector3 initRotate = { 0.0f, 0.0f, 0.0f }, Vector3 initTranslate = { 0.0f, 0.0f, 0.0f });
-
-	// 行列の更新
-	void UpdateMatrix();
-
-	// バッファーの更新
-	void UpdateBuffer();
-
-#pragma endregion 
-
-#pragma region Accessor アクセッサ
-
-	// ワールド座標の取得
-	Vector3 GetWorldPosition();
-
-#pragma endregion 
 };
 

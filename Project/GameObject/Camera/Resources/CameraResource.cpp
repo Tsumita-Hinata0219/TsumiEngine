@@ -9,16 +9,20 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 	srt.rotate = initRotate;
 	srt.translate = initTranslate;
 
+	// 書き込み用データの作成
+	bufferData = new TransformationViewMatrix();
+
 	// バッファー作成
-	buffer.CreateResource();
+	buffer = std::make_unique<BufferResource<TransformationViewMatrix>>();
+	buffer->CreateResource();
 
 	// 行列の計算を通しておく
-	UpdateMatrix();
+	Update();
 }
 
 
 // 行列の更新
-void CameraResource::UpdateMatrix()
+void CameraResource::Update()
 {
 	// 回転行列を作成
 	rotateMat = MakeRotateXYZMatrix(srt.rotate);
@@ -69,9 +73,9 @@ void CameraResource::UpdateBuffer()
 	bufferData->cameraPosition = GetWorldPosition();
 
 	// バッファーに書き込み
-	buffer.Map();
-	buffer.WriteData(bufferData);
-	buffer.UnMap();
+	buffer->Map();
+	buffer->WriteData(bufferData);
+	buffer->UnMap();
 }
 
 

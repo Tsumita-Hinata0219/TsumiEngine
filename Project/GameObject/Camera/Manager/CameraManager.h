@@ -27,9 +27,6 @@ public:
 	// データをセットする
 	void ReSetData(const CameraResource& data);
 
-	// バッファーに書き込む
-	void WrirwData();
-
 	// コマンドコール
 	void CommandCall(UINT number);
 
@@ -45,8 +42,5 @@ private:
 
 	// カメラのリソース
 	const CameraResource* resource_ = nullptr;
-
-	// バッファー
-	BufferResource<TransformationViewMatrix> buffer_;
 };
 

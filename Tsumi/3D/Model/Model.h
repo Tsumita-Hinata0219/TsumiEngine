@@ -14,13 +14,11 @@
 #include "ModelStructure/ModelStructure.h"
 #include "ModelResources/ModelResources.h"
 
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
-#include "../../Project/GameObject/Camera/Resources/CameraResource.h"
-
 
 
 class ModelManager;
 class KeyFrameAnimation;
+class CameraManager;
 struct aiScene;
 
 
@@ -221,7 +219,4 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
-
-	// カメラのリソース
-	CameraResource cameraResource_{};
 };

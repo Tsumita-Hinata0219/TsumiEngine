@@ -27,10 +27,12 @@ void DebugScene::Initialize()
 	camera_->Initialize();
 	camera_->rotate = { 0.2f, 0.0f, 0.0f };
 	camera_->translate = { 0.0f, 5.0f, -15.0f };
-	cameraManager_ = CameraManager::GetInstance();
 	cameraResource_.Init();
+	cameraResource_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	cameraResource_.srt.translate = { 0.0f, 5.0f, -15.0f };
+	cameraManager_ = CameraManager::GetInstance();
+	cameraManager_->ReSetData(cameraResource_);
 	
-
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Initialize();
 
@@ -71,7 +73,7 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- Camera カメラ ----- */
 	camera_->UpdateMatrix();
-	cameraManager_->ReSetData(cameraResource_);
+	cameraResource_.Update();
 
 	/* ----- Skydome 天球 ----- */
 	Skydome::GetInstance()->Update();

@@ -7,9 +7,6 @@ void CameraManager::Init()
 {
 	// データの初期化
 	resource_ = nullptr;
-
-	// バッファー作成
-	buffer_.CreateResource();
 }
 
 
@@ -21,18 +18,8 @@ void CameraManager::ReSetData(const CameraResource& data)
 }
 
 
-// バッファーに書き込む
-void CameraManager::WrirwData()
-{
-	// データ書き込み
-	buffer_.Map();
-	buffer_.WriteData(resource_->bufferData);
-	buffer_.UnMap();
-}
-
-
 // コマンドコール
 void CameraManager::CommandCall(UINT number)
 {
-	buffer_.CommandCall(number);
+	resource_->buffer->CommandCall(number);
 }

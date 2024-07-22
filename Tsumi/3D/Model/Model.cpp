@@ -1,6 +1,7 @@
 #include "Model.h"
 #include "ModelManager/ModelManager.h"
 #include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 
 /// <summary>
@@ -184,18 +185,17 @@ void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster, Cam
 }
 void Model::DrawN(Transform transform)
 {
-	// カメラリソースの取得
-	cameraResource_ = (*cameraManager_->GetResource());
+	// CameraResourceの取得
+	auto cameraResource = cameraManager_->GetResource();
 
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
-	transform.transformationMatData.WVP = transform.transformationMatData.World * cameraResource_.viewMatrix * cameraResource_.projectionMatrix;
+	transform.transformationMatData.WVP = 
+		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
-	// Camera
-	cameraManager_->WrirwData();
 	// VBV
 	buffers_.vertex.Map();
 	buffers_.vertex.WriteData(datas_.mesh.vertices.data());

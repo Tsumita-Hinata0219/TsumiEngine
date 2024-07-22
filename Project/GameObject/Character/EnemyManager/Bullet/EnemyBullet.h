@@ -2,11 +2,12 @@
 
 #include <memory>
 
+#include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
 
 
 /* PlayerBulletクラス */
-class EnemyBullet : public OBBCollider {
+class EnemyBullet : public IObject, public OBBCollider {
 
 public: // メンバ関数
 
@@ -14,30 +15,31 @@ public: // メンバ関数
 	EnemyBullet() {};
 	~EnemyBullet() {};
 
-	// 初期化処理、更新処理、描画処理
-	void Initialize();
-	void Update();
-	void Draw3D();
+	// 初期化処理　更新処理　描画処理
+	void Init() override;
+	void Update() override;
+	void Draw3D() override;
+	void Draw2DFront() override;
+	void Draw2DBack() override;
 
 #pragma region Accessor アクセッサ
 
 	// 座標
-	Vector3 GetPosition() { return this->bulletWt_.GetWorldPos(); }
-	void SetPosition(Vector3 setPos) { this->bulletWt_.srt.translate = setPos; }
+	void SetPosition(Vector3 setPos) { this->transform_.srt.translate = setPos; }
 
 	// 速度
 	Vector3 GetVelocity() const { return  this->velocity_; }
 	void SetVelocity(Vector3 setVel) { this->velocity_ = setVel; }
 
 	// 姿勢
-	Vector3 GetRotate() const { return this->bulletWt_.srt.rotate; }
-	void SetRotation(Vector3 setRotate) { this->bulletWt_.srt.rotate = setRotate; }
+	Vector3 GetRotate() const { return this->transform_.srt.rotate; }
+	void SetRotation(Vector3 setRotate) { this->transform_.srt.rotate = setRotate; }
 	// 必ずSetVelocityの後に呼び出すこと
 	void SetRotationFromVelocity() {
-		bulletWt_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
+		transform_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
 		float velZ = std::sqrt((velocity_.x * velocity_.x) + (velocity_.z * velocity_.z));
 		float height = -velocity_.y;
-		bulletWt_.srt.rotate.x = std::atan2(height, velZ);
+		transform_.srt.rotate.x = std::atan2(height, velZ);
 	}
 
 	// 死亡フラグ
@@ -53,9 +55,9 @@ public: // メンバ関数
 	void OnCollisionWithPlayerBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return bulletWt_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return transform_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->bulletWt_.srt.rotate; }
+	Vector3 GetRotate() override { return this->transform_.srt.rotate; }
 
 #pragma endregion 
 
@@ -70,12 +72,6 @@ private:
 
 
 private: // メンバ変数
-
-	// 本体モデル
-	std::unique_ptr<Model> bulletModel_;
-
-	// 本体座標
-	WorldTransform bulletWt_{}; 
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f,2.0f };

@@ -251,7 +251,7 @@ void Enemy::CreateNewBullet()
 	initVel = TransformNormal(initVel, transform_.matWorld);
 
 	// newBulletの初期化
-	newBullet->Initialize();
+	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);
 	newBullet->SetRotationFromVelocity();

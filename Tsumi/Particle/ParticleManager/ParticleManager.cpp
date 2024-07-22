@@ -1,5 +1,5 @@
 #include "ParticleManager.h"
-
+#include "../ParticleRenderer/ParticleRenderer.h"
 
 
 // 初期化処理

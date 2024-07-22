@@ -3,6 +3,8 @@
 #include "../ParticleRenderer/ParticleRenderer.h"
 #include "../ParticleArray/ParticleArray.h"
 
+class ParticleRenderer;
+
 /* ParticleManagerクラス */
 class ParticleManager {
 

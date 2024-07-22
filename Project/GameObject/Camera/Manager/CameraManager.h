@@ -24,10 +24,19 @@ public:
 	// 初期化
 	void Init();
 
+	// データをセットする
+	void ReSetData(const CameraResource& data);
+
+	// バッファーに書き込む
+	void WrirwData();
+
 	// コマンドコール
 	void CommandCall(UINT number);
 
 private:
+
+	// カメラのデータ
+	const CameraResource* resource_ = nullptr;
 
 	// バッファー
 	BufferResource<TransformationViewMatrix> buffer_;

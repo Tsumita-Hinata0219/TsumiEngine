@@ -43,7 +43,7 @@ void Sprite::Initialize(Vector2 size, Vector4 color) {
 /// <summary>
 /// 描画処理
 /// </summary>
-void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera) {
+void Sprite::Draw(uint32_t texHandle, WorldTransform& transform) {
 
 	// 頂点データを設定する
 	SetVertex(transform);
@@ -65,7 +65,7 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform, Camera* camera)
 	commands.List->SetGraphicsRootConstantBufferView(1, transform.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(2, camera->constBuffer->GetGPUVirtualAddress());
+	CameraManager::GetInstance()->CommandCall(2);
 
 	// DescriptorTableを設定する
 	if (!texHandle == 0) {

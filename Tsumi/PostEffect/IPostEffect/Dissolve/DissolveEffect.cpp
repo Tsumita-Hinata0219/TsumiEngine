@@ -12,7 +12,7 @@ void DissolveEffect::Initialize()
 
 
 // 描画処理
-void DissolveEffect::Draw([[maybe_unused]] Camera* camera)
+void DissolveEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

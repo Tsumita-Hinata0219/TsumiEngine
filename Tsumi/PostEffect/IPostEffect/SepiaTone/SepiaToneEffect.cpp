@@ -13,7 +13,7 @@ void SepiaToneEffect::Initialize()
 
 
 // 描画処理
-void SepiaToneEffect::Draw([[maybe_unused]] Camera* camera)
+void SepiaToneEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

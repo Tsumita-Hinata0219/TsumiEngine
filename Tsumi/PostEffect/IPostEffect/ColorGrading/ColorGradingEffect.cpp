@@ -13,7 +13,7 @@ void ColorGradingEffect::Initialize()
 
 
 // 描画処理
-void ColorGradingEffect::Draw([[maybe_unused]] Camera* camera)
+void ColorGradingEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

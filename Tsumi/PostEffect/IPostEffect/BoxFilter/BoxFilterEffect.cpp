@@ -13,7 +13,7 @@ void BoxFilterEffect::Initialize()
 
 
 // 描画処理
-void BoxFilterEffect::Draw([[maybe_unused]] Camera* camera)
+void BoxFilterEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

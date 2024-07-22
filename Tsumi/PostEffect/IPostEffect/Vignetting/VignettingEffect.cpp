@@ -10,7 +10,7 @@ void VignettingEffect::Initialize()
 
 
 // 描画処理
-void VignettingEffect::Draw([[maybe_unused]] Camera* camera)
+void VignettingEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

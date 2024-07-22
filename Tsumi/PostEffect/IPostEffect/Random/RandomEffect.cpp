@@ -14,7 +14,7 @@ void RandomEffect::Initialize()
 
 
 // 描画処理
-void RandomEffect::Draw([[maybe_unused]] Camera* camera)
+void RandomEffect::Draw()
 {
 	mtlData_.time = g_ElapsedTime;
 

@@ -13,7 +13,7 @@ void GrainEffect::Initialize()
 
 
 // 描画処理
-void GrainEffect::Draw([[maybe_unused]] Camera* camera)
+void GrainEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

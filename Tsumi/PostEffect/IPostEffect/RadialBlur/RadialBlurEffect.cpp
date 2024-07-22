@@ -13,7 +13,7 @@ void RadialBlurEffect::Initialize()
 
 
 // 描画処理
-void RadialBlurEffect::Draw([[maybe_unused]] Camera* camera)
+void RadialBlurEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

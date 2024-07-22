@@ -7,7 +7,7 @@
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
-#include "../../../Project/GameObject/Camera/Camera.h"
+#include "../../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 
 /* DrawSyetemクラス */

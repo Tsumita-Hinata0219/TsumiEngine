@@ -54,9 +54,6 @@ void DebugScene::Initialize()
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
 
-	/*light_.eneble = false;
-	environment_.enable = false;*/
-
 	/* ----- TestBaseObject テストベースオブジェクト ----- */
 	testBaseObject_ = std::make_unique<TestBaseObject>();
 	testBaseObject_->Init();
@@ -91,13 +88,6 @@ void DebugScene::Update(GameManager* state)
 
 	ImGui::Begin("DebugScene");
 	camera_.DrawImGui();
-	ImGui::End();
-
-
-	ImGui::Begin("Test");
-	transformA_.DrawImGui();
-	light_.DrawImGui();
-	environment_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG

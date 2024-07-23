@@ -9,9 +9,9 @@ void HSVEffect::Initialize()
 
 	// MtlData初期値
 	mtlData_.color = Vector4::one;
-	mtlData_.hue = 0.5f;
-	mtlData_.saturation = 0.5f;
-	mtlData_.value = 0.5f;
+	mtlData_.hue = 0.0f;
+	mtlData_.saturation = 0.0f;
+	mtlData_.value = 0.0f;
 }
 
 
@@ -38,9 +38,9 @@ void HSVEffect::DrawImGui(std::string name)
 
 	if (ImGui::TreeNode((label_ + "HSV").c_str())) {
 
-		ImGui::DragFloat("Hue", &mtlData_.hue, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat("Saturation", &mtlData_.saturation, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat("Value", &mtlData_.value, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Hue", &mtlData_.hue, 0.01f, -1.0f, 1.0f);
+		ImGui::DragFloat("Saturation", &mtlData_.saturation, 0.01f, -1.0f, 1.0f);
+		ImGui::DragFloat("Value", &mtlData_.value, 0.01f, -1.0f, 1.0f);
 
 		ImGui::TreePop();
 	}

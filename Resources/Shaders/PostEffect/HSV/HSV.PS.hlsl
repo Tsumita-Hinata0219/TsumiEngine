@@ -116,6 +116,17 @@ float3 ToRGB(float3 hsv)
 
     return float3(r, g, b);
 }
+float WrapValue(float value, float minRange, float maxRange)
+{
+    float range = maxRange - minRange;
+    float modValue = fmod(value - minRange, range);
+    
+    if (modValue < 0)
+    {
+        modValue += range;
+    }
+    return minRange + modValue;
+}
 
 
 PixelShaderOutput main(VertexShaderOutput input)
@@ -127,9 +138,16 @@ PixelShaderOutput main(VertexShaderOutput input)
     
     
     // ‚±‚±‚Å’²®‚·‚é
+    hsv.x += gMaterial.hue;
+    hsv.y += gMaterial.saturation;
+    hsv.z += gMaterial.value;
     
+    hsv.x = WrapValue(hsv.x, 0.0f, 1.0f);
+    hsv.y = saturate(hsv.y);
+    hsv.z = saturate(hsv.z);
     
     float3 rgb = ToRGB(hsv);
+    
     
     output.color.rgb = rgb;
     output.color.a = textureColor.a;

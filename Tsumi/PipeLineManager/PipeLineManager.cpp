@@ -77,6 +77,10 @@ void PipeLineManager::Initialize()
 	instance->grayScalePipeLine_ = make_unique<GrayScalePipeLine>();
 	instance->pipeLineMap_[PipeLineType::GrayScale] = instance->grayScalePipeLine_->SetUpPso();
 
+	// HSV
+	instance->hsvPipeLine_ = make_unique<HSVPipeLine>();
+	instance->pipeLineMap_[PipeLineType::HSV] = instance->hsvPipeLine_->SetUpPso();
+
 	// OutLine
 	instance->outLinePipeLine_ = make_unique<OutLinePipeLine>();
 	instance->pipeLineMap_[PipeLineType::OutLine] = instance->outLinePipeLine_->SetUpPso();

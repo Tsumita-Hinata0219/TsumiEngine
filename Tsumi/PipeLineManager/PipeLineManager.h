@@ -28,6 +28,7 @@
 #include "PostEffectPipeLine/DissolvePipeLine/DissolvePipeLine.h"
 #include "PostEffectPipeLine/GaussianFilterPipeLine/GaussianFilterPipeLine.h"
 #include "PostEffectPipeLine/GrayScalePipeLine/GrayScalePipeLine.h"
+#include "PostEffectPipeLine/HSVPipeLine/HSVPipeLine.h"
 #include "PostEffectPipeLine/OutLinePipeLine/OutLinePipeLine.h"
 #include "PostEffectPipeLine/RadialBlurPipeLine/RadialBlurPipeLine.h"
 #include "PostEffectPipeLine/RandomPipeLine/RandomPipeLine.h"
@@ -56,6 +57,7 @@ enum class PipeLineType : uint32_t {
 	GaussianFilter,
 	Grain,
 	GrayScale,
+	HSV,
 	OutLine,
 	RadialBlur,
 	Random,
@@ -152,6 +154,9 @@ private: // メンバ変数
 
 	// GrayScale
 	std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
+
+	// HSV
+	std::unique_ptr<HSVPipeLine> hsvPipeLine_;
 
 	// OutLine
 	std::unique_ptr<OutLinePipeLine> outLinePipeLine_;

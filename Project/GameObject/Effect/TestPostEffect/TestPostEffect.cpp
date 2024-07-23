@@ -29,6 +29,10 @@ void TestPostEffect::Initialize()
 	grain_ = std::make_unique<GrainEffect>();
 	grain_->Initialize();
 
+	// HSV
+	hsv_ = std::make_unique<HSVEffect>();
+	hsv_->Initialize();
+
 	// LuminanceOutLine
 	luminanceOutLine_ = std::make_unique<LuminanceOutLineEffect>();
 	luminanceOutLine_->Initialize();
@@ -59,6 +63,7 @@ void TestPostEffect::Initialize()
 		"GaussianFilter",
 		"Grain",
 		"GrayScale",
+		"HSV",
 		"LuminanceOutLine",
 		"RadialBlur",
 		"Random",
@@ -96,6 +101,9 @@ void TestPostEffect::Update()
 		}
 		else if (activeEffects_ == EffectType::Grain) {
 			grain_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::HSV) {
+			hsv_->DrawImGui();
 		}
 		else if (activeEffects_ == EffectType::LuminanceOutLine) {
 			luminanceOutLine_->DrawImGui();
@@ -142,6 +150,9 @@ void TestPostEffect::Draw()
 	else if (activeEffects_ == EffectType::Grain) {
 		grain_->Draw();
 	}
+	else if (activeEffects_ == EffectType::HSV) {
+		hsv_->Draw();
+	}
 	else if (activeEffects_ == EffectType::LuminanceOutLine) {
 		luminanceOutLine_->Draw();
 	}
@@ -180,11 +191,12 @@ void TestPostEffect::ChangeImGui()
 		case 4: activeEffects_ = EffectType::GauusianFilter; break;
 		case 5: activeEffects_ = EffectType::Grain; break;
 		case 6: activeEffects_ = EffectType::GrayScale; break;
-		case 7: activeEffects_ = EffectType::LuminanceOutLine; break;
-		case 8: activeEffects_ = EffectType::RadialBlur; break;
-		case 9: activeEffects_ = EffectType::Random; break;
-		case 10: activeEffects_ = EffectType::SepiaTone; break;
-		case 11: activeEffects_ = EffectType::Vignetting; break;
+		case 7: activeEffects_ = EffectType::HSV; break;
+		case 8: activeEffects_ = EffectType::LuminanceOutLine; break;
+		case 9: activeEffects_ = EffectType::RadialBlur; break;
+		case 10: activeEffects_ = EffectType::Random; break;
+		case 11: activeEffects_ = EffectType::SepiaTone; break;
+		case 12: activeEffects_ = EffectType::Vignetting; break;
 		}
 	}
 

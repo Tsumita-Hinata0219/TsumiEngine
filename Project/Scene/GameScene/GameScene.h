@@ -17,6 +17,8 @@
 #include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
+
 
 class GameScene : public IScene {
 

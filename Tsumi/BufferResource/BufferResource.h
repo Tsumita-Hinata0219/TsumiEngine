@@ -212,4 +212,8 @@ inline void BufferResource<T>::CreateBufferResource()
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr_));
+	if (FAILED(hr_)) {
+		// エラーハンドリング
+		std::cerr << "CreateCommittedResource failed: " << std::hex << hr_ << std::endl;
+	}
 }

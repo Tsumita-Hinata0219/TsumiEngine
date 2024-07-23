@@ -20,7 +20,7 @@ DebugScene::~DebugScene() {}
 void DebugScene::Initialize()
 {
 	/* ----- FileManager ファイルマネージャー ----- */
-	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+	//FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
 	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });

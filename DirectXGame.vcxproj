@@ -222,6 +222,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp" />
@@ -241,6 +242,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
@@ -373,6 +375,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h" />
@@ -394,6 +397,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Grain\GrainEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h" />

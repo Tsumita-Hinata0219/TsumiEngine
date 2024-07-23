@@ -6,6 +6,9 @@ SamplerState gSampler : register(s0);
 struct Material
 {
     float4 color;
+    float hue;
+    float saturation;
+    float value;
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 

@@ -2,35 +2,26 @@
 
 
 
-// インスタンスの取得
-Skydome* Skydome::GetInstance() 
-{
-	static Skydome instance;
-	return &instance;
-}
-
-
 // 初期化処理
-void Skydome::Initialize() 
+void Skydome::Init()
 {
-	Skydome::GetInstance()->model_ = make_unique<Model>();
-	Skydome::GetInstance()->model_->CreateFromObjAssimpVer("Skydome", "Skydome");
-	Skydome::GetInstance()->worldTransform_.Initialize();
-	Skydome::GetInstance()->worldTransform_.srt.scale = { 10000.0f, 1000.0f, 10000.0f };
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Skydome", "Skydome.obj");
+	model_ = modelManager_->GetModel("Skydome");
+
+	trans_.Initialize();
+	trans_.srt.scale = { 10000.0f, 10000.0f, 10000.0f };
 }
 
 
 // 更新処理
-void Skydome::Update() 
-{
-	// ワールド座標の更新
-	Skydome::GetInstance()->worldTransform_.UpdateMatrix();
-}
+void Skydome::Update() {}
 
 
 // 描画処理
-void Skydome::Draw() 
+void Skydome::Draw3D()
 {
-
-	Skydome::GetInstance()->model_->Draw(Skydome::GetInstance()->worldTransform_);
+	model_->DrawN(trans_);
 }
+void Skydome::Draw2DFront() {}
+void Skydome::Draw2DBack() {}

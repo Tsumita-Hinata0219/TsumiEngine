@@ -27,6 +27,9 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+
 	// BulletList
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 

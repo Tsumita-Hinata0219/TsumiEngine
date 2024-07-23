@@ -21,13 +21,6 @@ public: // メンバ関数
 	virtual void Draw2DFront() = 0;
 	virtual void Draw2DBack() = 0;
 
-#pragma region Accessor アクセッサ
-
-	// ワールドポジションの取得
-	Vector3 GetWorldPosition() { return this->transform_.GetWorldPos(); }
-
-#pragma endregion 
-
 
 private:
 

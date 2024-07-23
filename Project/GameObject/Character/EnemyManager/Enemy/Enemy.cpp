@@ -154,7 +154,7 @@ void Enemy::ToggleCombatState()
 {
 	// プレイヤーとの距離で戦闘状態のフラグを管理する
 	// 設定した距離よりも近くにいたらフラグを立てる
-	if (std::abs(Length(player_->GetWorldPosition() - trans_.GetWorldPos())) <= combatTriggerDistance_) {
+	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= combatTriggerDistance_) {
 
 		// 戦闘状態のフラグを立てる
 		isCombatActive_ = true;
@@ -174,7 +174,7 @@ void Enemy::ToggleCombatState()
 void Enemy::Move()
 {
 	// ある程度近ければ早期return
-	if (std::abs(Length(player_->GetWorldPosition() - trans_.GetWorldPos())) <= minToPlayer_) {
+	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= minToPlayer_) {
 		return;
 	}
 
@@ -194,7 +194,7 @@ void Enemy::CalcVelocity()
 {
 	// 差分をNormalize
 	Vector3 player2Enemy =
-		Normalize(player_->GetWorldPosition() - trans_.GetWorldPos());
+		Normalize(player_->GetWorldPos() - trans_.GetWorldPos());
 
 	// 差分Normalizeに速度をかけてvelocityに設定
 	velocity_ = {

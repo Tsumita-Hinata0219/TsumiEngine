@@ -42,6 +42,9 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+
 	// SRT
 	SRTN GetSRT() const { return this->trans_.srt; }
 	void SetSRT(SRTN setSRT) { this->trans_.srt = setSRT; }

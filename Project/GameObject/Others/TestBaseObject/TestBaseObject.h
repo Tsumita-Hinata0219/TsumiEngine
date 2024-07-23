@@ -20,5 +20,10 @@ public:
 
 private:
 
+	// モデル
+	std::unique_ptr<Model> model_;
+
+	// トランスフォーム
+	Transform trans_{};
 };
 

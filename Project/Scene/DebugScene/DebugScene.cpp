@@ -28,10 +28,12 @@ void DebugScene::Initialize()
 	cameraManager_->ReSetData(camera_);
 	
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Initialize();
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Initialize();
+	ground_ = std::make_unique<Ground>();
+	ground_->Init();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_ = make_unique<TestPostEffect>();
@@ -69,10 +71,10 @@ void DebugScene::Update(GameManager* state)
 	camera_.Update();
 
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Update();
+	skydome_->Update();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Update();
+	ground_->Update();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
@@ -105,10 +107,10 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Draw();
+	//skydome_->draw3D();
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw();
+	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw();

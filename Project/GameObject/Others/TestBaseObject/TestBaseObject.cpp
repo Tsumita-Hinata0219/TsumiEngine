@@ -10,7 +10,7 @@ void TestBaseObject::Init()
 	modelManager_->LoadModel("Test", "Test.obj");
 	model_ = modelManager_->GetModel("Test");
 
-	transform_.Initialize();
+	trans_.Initialize();
 }
 
 
@@ -25,7 +25,7 @@ void TestBaseObject::Update()
 // 描画
 void TestBaseObject::Draw3D()
 {
-	model_->DrawN(transform_);
+	model_->DrawN(trans_);
 }
 void TestBaseObject::Draw2DFront()
 {

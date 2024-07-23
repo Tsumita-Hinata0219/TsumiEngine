@@ -76,6 +76,12 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource cameraResource_;
 
+	// Skydome
+	std::unique_ptr<Skydome> skydome_;
+
+	// Ground
+	std::unique_ptr<Ground> ground_;
+
 	// Player
 	std::unique_ptr<Player> player_;
 

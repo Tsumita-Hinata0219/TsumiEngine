@@ -1,51 +1,32 @@
 #pragma once
 
+#include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
 
 /* Skydomeクラス */
-class Skydome {
+class Skydome : public IObject {
 
 public:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
+	// コンストラクタ、デストラクタ
 	Skydome() {};
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
 	~Skydome() {};
 
-	/// <summary>
-	/// インスタンスの取得
-	/// </summary>
-	static Skydome* GetInstance();
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update();
-
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	void Draw();
+	// 初期化処理　更新処理　描画処理
+	void Init() override;
+	void Update() override;
+	void Draw3D() override;
+	void Draw2DFront() override;
+	void Draw2DBack() override;
 
 
 private:
 
 	// モデル
-	std::unique_ptr<Model> model_ = nullptr;
+	std::unique_ptr<Model> model_;
 
 	// ワールドトランスフォーム
-	WorldTransform worldTransform_{};
-
+	Transform trans_{};
 };
 

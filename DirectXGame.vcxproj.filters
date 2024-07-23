@@ -37,6 +37,7 @@
     <FxCompile Include="Resources\Shaders\PostEffect\Absent\Absent.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\PostEffect\HSV\HSV.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -202,6 +203,8 @@
     <ClCompile Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\GameObject\Camera\Manager\CameraManager.cpp" />
     <ClCompile Include="Project\GameObject\Camera\Resources\CameraResource.cpp" />
+    <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -407,6 +410,8 @@
     <ClInclude Include="Project\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\GameObject\Camera\Resources\CameraResource.h" />
     <ClInclude Include="Project\GameObject\IObject\IObject.h" />
+    <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

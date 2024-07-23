@@ -45,6 +45,14 @@ struct GrayScaleMtl {
 	Vector4 color{};
 };
 
+/* HSV用 */
+struct HSVMtl {
+	Vector4 color{};
+	float hue = 0.0f;
+	float saturation = 0.0f;
+	float value = 0.0f;
+};
+
 /* OutLine用 */
 struct LuminanceOutLineMtl {
 	Vector4 color{};

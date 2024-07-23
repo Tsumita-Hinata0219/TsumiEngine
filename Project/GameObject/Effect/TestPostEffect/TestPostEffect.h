@@ -12,6 +12,7 @@
 #include "../../Tsumi/PostEffect/IPostEffect/GaussianFilter/GaussianFilterEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/Grain/GrainEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/GrayScale/GrayScaleEffect.h"
+#include "../../Tsumi/PostEffect/IPostEffect/HSV/HSVEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/LuminanceOutLine/LuminanceOutLineEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 #include "../../Tsumi/PostEffect/IPostEffect/Random/RandomEffect.h"
@@ -27,11 +28,12 @@ enum EffectType {
 	GauusianFilter = 1 << 3,
 	Grain = 1 << 4,
 	GrayScale = 1 << 5,
-	LuminanceOutLine = 1 << 6,
-	RadialBlur = 1 << 7,
-	Random = 1 << 8,
-	SepiaTone = 1 << 9,
-	Vignetting = 1 << 10,
+	HSV = 1 << 6,
+	LuminanceOutLine = 1 << 7,
+	RadialBlur = 1 << 8,
+	Random = 1 << 9,
+	SepiaTone = 1 << 10,
+	Vignetting = 1 << 11,
 };
 
 
@@ -78,6 +80,9 @@ private:
 
 	// Grain
 	std::unique_ptr<GrainEffect> grain_;
+
+	// HSV
+	std::unique_ptr<HSVEffect> hsv_;
 
 	// LuminanceOutLine
 	std::unique_ptr<LuminanceOutLineEffect> luminanceOutLine_;

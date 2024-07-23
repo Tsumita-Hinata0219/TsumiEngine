@@ -20,7 +20,7 @@ GameScene::~GameScene() {}
 void GameScene::Initialize()
 {
 	/* ----- FileManager ファイルマネージャー ----- */
-	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+	//FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();

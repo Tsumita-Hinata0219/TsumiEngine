@@ -120,6 +120,7 @@ private: // メンバ関数
 	void GaussianFilterShader();
 	void GrainShader();
 	void GrayScaleShader();
+	void HSVShader();
 	void OutLineShader();
 	void RadialBlurShader();
 	void RandomShader();

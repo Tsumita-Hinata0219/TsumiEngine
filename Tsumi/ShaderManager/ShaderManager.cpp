@@ -147,6 +147,7 @@ void ShaderManager::PostEffectShadersCompiles()
 	GaussianFilterShader();
 	GrainShader();
 	GrayScaleShader();
+	HSVShader();
 	OutLineShader();
 	RadialBlurShader();
 	RandomShader();
@@ -357,6 +358,16 @@ void ShaderManager::GrayScaleShader()
 		L"Resources/Shaders/PostEffect/GrayScale/GrayScale.PS.hlsl",
 		shader);
 	postEffectShadersMap_["GrayScale"] = shader;
+}
+
+void ShaderManager::HSVShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/HSV/HSV.PS.hlsl",
+		shader);
+	postEffectShadersMap_["HSV"] = shader;
 }
 
 void ShaderManager::OutLineShader()

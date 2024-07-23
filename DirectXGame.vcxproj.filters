@@ -37,6 +37,7 @@
     <FxCompile Include="Resources\Shaders\PostEffect\Absent\Absent.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\PostEffect\HSV\HSV.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />

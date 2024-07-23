@@ -1,60 +1,32 @@
 #pragma once
 
+#include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
 
 /* Groundクラス */
-class Ground {
+class Ground : public IObject {
 
 public:
 
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
+	// コンストラクタ、デストラクタ
 	Ground() {};
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
 	~Ground() {};
 
-	/// <summary>
-	/// インスタンスの取得
-	/// </summary>
-	static Ground* GetInstance();
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update();
-
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	void Draw();
+	// 初期化処理　更新処理　描画処理
+	void Init() override;
+	void Update() override;
+	void Draw3D() override;
+	void Draw2DFront() override;
+	void Draw2DBack() override;
 
 
 private:
 
 	// モデル
-	std::unique_ptr<Model> model_ = nullptr;
+	std::unique_ptr<Model> model_;
 
 	// ワールドトランスフォーム
-	WorldTransform worldTransform_{};
-
-	// カラー
-	Vector4 color_{};
-
-	// ライト
-	DirectionalLight light_{};
-
-	// ノーマルマップ
-	uint32_t normalMapTexHD_;
-
+	Transform trans_{};
 };
 

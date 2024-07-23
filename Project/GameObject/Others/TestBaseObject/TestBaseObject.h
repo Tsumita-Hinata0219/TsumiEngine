@@ -20,8 +20,10 @@ public:
 
 private:
 
-	// ModelManager
-	ModelManager* modelManager_ = nullptr;
+	// モデル
+	std::unique_ptr<Model> model_;
 
+	// トランスフォーム
+	Transform trans_{};
 };
 

@@ -3,17 +3,18 @@
 
 
 // 初期化処理
-void Player::Initialize()
+void Player::Init()
 {
 	// Inputクラス
 	input_ = Input::GetInstance();
 
 	// BodyModelのロードと初期化
-	bodyModel_ = make_unique<Model>();
-	bodyModel_->CreateFromObjAssimpVer("Player", "Player");
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Player", "Player.obj");
+	model_ = modelManager_->GetModel("Player");
 
 	// BodyTransformの初期化
-	bodyWt_.Initialize();
+	trans_.Initialize();
 }
 
 
@@ -21,7 +22,7 @@ void Player::Initialize()
 void Player::Update()
 {
 	// Transformの更新処理
-	bodyWt_.UpdateMatrix();
+	trans_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -49,13 +50,12 @@ void Player::Update()
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Player")) {
-
-		ImGui::DragFloat3("Scale", &bodyWt_.srt.scale.x, 0.01f, 0.0f, 20.0f);
-		ImGui::DragFloat3("Rotate", &bodyWt_.srt.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &bodyWt_.srt.translate.x, 0.01f);
-
+		trans_.DrawImGui();
 		ImGui::Text("");
 		ImGui::Text("ShotFrame = %d", shotPressFrame_);
+
+		ImGui::Text("");
+		light_.DrawImGui();
 
 		ImGui::TreePop();
 	}
@@ -64,17 +64,18 @@ void Player::Update()
 
 
 // 描画処理
-void Player::Draw2DBack() {}
 void Player::Draw3D()
 {
 	// BodyModelの描画
-	bodyModel_->Draw(bodyWt_);
+	model_->SetLightData(light_);
+	model_->DrawN(trans_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
 		bullet->Draw3D();
 	}
 }
+void Player::Draw2DBack() {}
 void Player::Draw2DFront() {}
 
 
@@ -141,7 +142,7 @@ void Player::Move()
 	}
 
 	// velocityに速度を掛けて座標に加算
-	bodyWt_.srt.translate += (velocity_ * moveVector_);
+	trans_.srt.translate += (velocity_ * moveVector_);
 }
 
 
@@ -164,7 +165,7 @@ void Player::CalcBodyRotate()
 	if (std::abs(stickInput_.x) > 0.2f || std::abs(stickInput_.y) > 0.2f) {
 
 		// Y軸周り角度(θy)
-		bodyWt_.srt.rotate.y = std::atan2(stickInput_.x, stickInput_.y);
+		trans_.srt.rotate.y = std::atan2(stickInput_.x, stickInput_.y);
 	}
 }
 
@@ -199,13 +200,13 @@ void Player::CreateNewBullet()
 	std::shared_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
 
 	// 初期座標
-	Vector3 initPos = bodyWt_.GetWorldPos();
+	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel = TransformNormal(initVel, bodyWt_.matWorld);
+	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化
-	newBullet->Initialize();
+	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);
 	newBullet->SetRotationFromVelocity();

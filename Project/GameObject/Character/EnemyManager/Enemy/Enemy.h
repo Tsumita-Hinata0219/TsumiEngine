@@ -3,6 +3,7 @@
 #include <list>
 #include <memory>
 
+#include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
 
 #include "../Bullet/EnemyBullet.h"
@@ -18,7 +19,7 @@ class Player;
 
 
 /* Enemyクラス */
-class Enemy : public OBBCollider {
+class Enemy : public IObject, public OBBCollider {
 
 public: // メンバ関数
 
@@ -27,9 +28,11 @@ public: // メンバ関数
 	~Enemy() {};
 
 	// 初期化処理　更新処理　描画処理
-	void Initialize();
-	void Update();
-	void Draw3D();
+	void Init() override;
+	void Update() override;
+	void Draw3D() override;
+	void Draw2DFront() override;
+	void Draw2DBack() override;
 
 	// チェンジステート
 	void ChangeState(int newState) { this->stateNo_ = newState; }
@@ -39,9 +42,12 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+
 	// SRT
-	SRT GetSRT() const { return this->bodyWt_.srt; }
-	void SetSRT(SRT setSRT) { this->bodyWt_.srt = setSRT; }
+	SRTN GetSRT() const { return this->trans_.srt; }
+	void SetSRT(SRTN setSRT) { this->trans_.srt = setSRT; }
 
 	// カラー
 	Vector4 GetModelColor() const { return this->modelColor_; }
@@ -52,8 +58,7 @@ public: // メンバ関数
 	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
 
 	// 座標
-	Vector3 GetPosition() { return bodyWt_.GetWorldPos(); }
-	void SetPosition(Vector3 setPos) { this->bodyWt_.srt.translate = setPos; }
+	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
@@ -68,9 +73,9 @@ public: // メンバ関数
 	void OnCollisionWithPlayerBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return bodyWt_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->bodyWt_.srt.rotate; }
+	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -104,11 +109,11 @@ private: // メンバ変数
 	// Player
 	Player* player_ = nullptr;
 
-	// 本体モデル
-	std::unique_ptr<Model> bodyModel_;
+	// Model
+	std::unique_ptr<Model> model_;
 
-	// 本体座標
-	WorldTransform bodyWt_{};
+	// トランスフォーム
+	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

@@ -10,7 +10,7 @@
 Model::Model()	
 {
 	// ModelManagerのインスタンス取得
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();
@@ -21,7 +21,7 @@ Model::Model()
 Model::Model(ModelDatas datas) : datas_(datas)
 {
 	// ModelManagerのインスタンス取得
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 
 	// KeyFrameAnimationのインスタンス取得
 	keyFrameAnimation_ = KeyFrameAnimation::GetInstance();

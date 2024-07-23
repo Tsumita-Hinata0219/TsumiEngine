@@ -3,13 +3,14 @@
 #include <list>
 #include <memory>
 
+#include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
 #include "Bullet/PlayerBullet.h"
 
 
 /* Playerクラス */
-class Player : public OBBCollider {
+class Player : public IObject, public OBBCollider {
 
 public: // メンバ関数
 
@@ -18,16 +19,16 @@ public: // メンバ関数
 	~Player() {};
 
 	// 初期化処理　更新処理　描画処理
-	void Initialize();
-	void Update();
-	void Draw2DBack();
-	void Draw3D();
-	void Draw2DFront();
+	void Init() override;
+	void Update() override;
+	void Draw3D() override;
+	void Draw2DFront() override;
+	void Draw2DBack() override;
 
 #pragma region Accessor アクセッサ
 
-	// 座標
-	Vector3 GetPosition() { return this->bodyWt_.GetWorldPos(); }
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
 	// BulletList
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
@@ -42,9 +43,9 @@ public: // メンバ関数
 	void OnCollisionWithEnemyBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return bodyWt_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->bodyWt_.srt.rotate; }
+	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -72,11 +73,11 @@ private: // メンバ変数
 	// Inputクラス
 	Input* input_ = nullptr;
 
-	// 本体モデル
-	unique_ptr<Model> bodyModel_;
+	// モデル
+	std::unique_ptr<Model> model_;
 
-	// 本体座標
-	WorldTransform bodyWt_{};
+	// トランスフォーム
+	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
@@ -95,5 +96,8 @@ private: // メンバ変数
 
 	//Stickの入力を取得
 	Vector2 stickInput_{};
+
+	// Light
+	DirectionalLightData light_;
 };
 

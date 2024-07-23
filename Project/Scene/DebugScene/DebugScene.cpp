@@ -23,17 +23,17 @@ void DebugScene::Initialize()
 	FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
 
 	/* ----- Camera カメラ ----- */
-	camera_.Init();
-	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	camera_.srt.translate = { 0.0f, 5.0f, -15.0f };
+	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Initialize();
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Initialize();
+	ground_ = std::make_unique<Ground>();
+	ground_->Init();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_ = make_unique<TestPostEffect>();
@@ -43,9 +43,8 @@ void DebugScene::Initialize()
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
 
-
 	/* ----- ModelNewLoad モデルニューロード ----- */
-	modelManager_ = ModelManager::Getinstance();
+	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 
@@ -54,13 +53,9 @@ void DebugScene::Initialize()
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
 
-	/*light_.eneble = false;
-	environment_.enable = false;*/
-
 	/* ----- TestBaseObject テストベースオブジェクト ----- */
 	testBaseObject_ = std::make_unique<TestBaseObject>();
 	testBaseObject_->Init();
-
 }
 
 
@@ -76,10 +71,10 @@ void DebugScene::Update(GameManager* state)
 	camera_.Update();
 
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Update();
+	skydome_->Update();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Update();
+	ground_->Update();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
@@ -91,13 +86,6 @@ void DebugScene::Update(GameManager* state)
 
 	ImGui::Begin("DebugScene");
 	camera_.DrawImGui();
-	ImGui::End();
-
-
-	ImGui::Begin("Test");
-	transformA_.DrawImGui();
-	light_.DrawImGui();
-	environment_.DrawImGui();
 	ImGui::End();
 
 #endif // _DEBUG
@@ -119,10 +107,10 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	//Skydome::GetInstance()->Draw();
+	//skydome_->draw3D();
 
 	/* ----- Ground 床 ----- */
-	//Ground::GetInstance()->Draw();
+	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw();

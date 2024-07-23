@@ -62,12 +62,16 @@ private:
 	ModelManager* modelManager_ = nullptr;
 	std::unique_ptr<Model> demoModel_;
 	Transform transformA_{};
-	DirectionalLightData light_{};
-	EnvironmentData environment_{};
 
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource camera_;
+
+	// Skydome
+	std::unique_ptr<Skydome> skydome_;
+
+	// Ground
+	std::unique_ptr<Ground> ground_;
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;

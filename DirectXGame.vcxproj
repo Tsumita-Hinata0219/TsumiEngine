@@ -174,7 +174,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
-    <ClCompile Include="Project\GameObject\Others\TestObject\TestObject.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
@@ -306,7 +305,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.h" />
     <ClInclude Include="Project\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
-    <ClInclude Include="Project\GameObject\Others\TestObject\TestObject.h" />
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />

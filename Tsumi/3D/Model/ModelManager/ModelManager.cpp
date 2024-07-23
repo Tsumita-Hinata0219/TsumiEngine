@@ -7,7 +7,7 @@
 /// </summary>
 void ModelManager::Finalize() {
 
-	ModelManager::Getinstance()->objModelDatas_.clear();
+	ModelManager::GetInstance()->objModelDatas_.clear();
 }
 
 
@@ -60,8 +60,8 @@ ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std:
 	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
-		ModelManager::Getinstance()->objHandle_++;
-		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
+		ModelManager::GetInstance()->objHandle_++;
+		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 
 
 		/* 1. 中で必要となる変数の宣言 */
@@ -161,16 +161,16 @@ ModelData ModelManager::LoadObjFile(const std::string& routeFilePath, const std:
 				s >> materialFileName;
 
 				// 基本的にobjファイルを同じ階層にmtlは存在させるので、ディレクトリファイル名を渡す
-				objData.material = ModelManager::Getinstance()->LoadMaterialTemplateFile(fileName, materialFileName, routeFilePath);
+				objData.material = ModelManager::GetInstance()->LoadMaterialTemplateFile(fileName, materialFileName, routeFilePath);
 			}
 		}
 		// テクスチャを指定されたものにする
 		uint32_t texHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, fileName);
 		objData.textureHD = texHandle;
-		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::GetInstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
-	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
+	return ModelManager::GetInstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
 ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName)
@@ -178,8 +178,8 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
-		ModelManager::Getinstance()->objHandle_++;
-		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
+		ModelManager::GetInstance()->objHandle_++;
+		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 		ModelData objData{}; // モデルの格納用データ
 
 		// asssimpでobjを読む
@@ -236,11 +236,11 @@ ModelData ModelManager::LoadObjFileAssimpVer(const std::string& routeFilePath, c
 		uint32_t texHandle = TextureManager::LoadTexture("Obj/" + routeFilePath, fileName + ".png");
 		objData.textureHD = texHandle;
 		// 作ったモデルデータをデータ群に新しく作る
-		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::GetInstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
 	// 同じファイルパスのモデルデータを検索して返す
-	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
+	return ModelManager::GetInstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
 ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName)
@@ -248,8 +248,8 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 	if (CheckObjData(fileName)) {
 
 		// 初めてだったら加算
-		ModelManager::Getinstance()->objHandle_++;
-		uint32_t modelHandle = ModelManager::Getinstance()->objHandle_;
+		ModelManager::GetInstance()->objHandle_++;
+		uint32_t modelHandle = ModelManager::GetInstance()->objHandle_;
 		ModelData objData{}; // モデルの格納用データ
 
 		// asssimpでobjを読む
@@ -339,14 +339,14 @@ ModelData ModelManager::LoadGLTF(const std::string& routeFilePath, const std::st
 		TextureManager::LoadTexture("gLTF/" + routeFilePath, textureName);
 
 		// Nodeを読み込む
-		objData.rootNode = ModelManager::Getinstance()->ReadNode(scene->mRootNode);
+		objData.rootNode = ModelManager::GetInstance()->ReadNode(scene->mRootNode);
 
 		// 作ったモデルデータをデータ群に新しく作る
-		ModelManager::Getinstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
+		ModelManager::GetInstance()->objModelDatas_[fileName] = make_unique<ObjDataResource>(objData, modelHandle);
 	}
 
 	// 同じファイルパスのモデルデータを検索して返す
-	return ModelManager::Getinstance()->objModelDatas_[fileName].get()->GetObjData();
+	return ModelManager::GetInstance()->objModelDatas_[fileName].get()->GetObjData();
 }
 
 void ModelManager::LoadModel(const std::string& path, const std::string fileName)
@@ -402,7 +402,7 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.eneble = false;
+	result.light.enable = false;
 
 	// Environmentの初期化
 	result.environment.enable = false;
@@ -437,7 +437,7 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.eneble = false;
+	result.light.enable = false;
 
 	// Environmentの初期化
 	result.environment.enable = false;
@@ -468,7 +468,7 @@ Skeleton ModelManager::CreateSkeleton(const Node& rootNode)
 /// </summary>
 bool ModelManager::CheckObjData(std::string filePath) {
 
-	if (ModelManager::Getinstance()->objModelDatas_.find(filePath) == ModelManager::Getinstance()->objModelDatas_.end()) {
+	if (ModelManager::GetInstance()->objModelDatas_.find(filePath) == ModelManager::GetInstance()->objModelDatas_.end()) {
 
 		return true;
 	}

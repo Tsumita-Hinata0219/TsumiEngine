@@ -3,14 +3,15 @@
 
 
 // 初期化処理
-void EnemyBullet::Initialize()
+void EnemyBullet::Init()
 {
-	// Modelの初期化
-	bulletModel_ = std::make_unique<Model>();
-	bulletModel_->CreateFromObjAssimpVer("DemoBullet", "DemoBullet");
+	// BodyModelのロードと初期化
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("DemoBullet", "DemoBullet.obj");
+	model_ = modelManager_->GetModel("DemoBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	bulletWt_.Initialize();
+	trans_.Initialize();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -23,7 +24,7 @@ void EnemyBullet::Initialize()
 void EnemyBullet::Update()
 {
 	// Transformの更新処理
-	bulletWt_.UpdateMatrix();
+	trans_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -36,8 +37,10 @@ void EnemyBullet::Update()
 // 描画処理
 void EnemyBullet::Draw3D()
 {
-	bulletModel_->Draw(bulletWt_);
+	model_->DrawN(trans_);
 }
+void EnemyBullet::Draw2DFront() {}
+void EnemyBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
@@ -54,7 +57,7 @@ void EnemyBullet::OnCollisionWithPlayerBullet()
 // 移動処理
 void EnemyBullet::Move()
 {
-	bulletWt_.srt.translate += velocity_;
+	trans_.srt.translate += velocity_;
 }
 
 

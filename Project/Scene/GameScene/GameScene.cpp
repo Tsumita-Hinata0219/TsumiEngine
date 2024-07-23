@@ -37,18 +37,16 @@ void GameScene::Initialize()
 	cameraManager_->ReSetData(cameraResource_);
 
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Initialize();
+	skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Initialize();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Initialize();
+	ground_ = std::make_unique<Ground>();
+	ground_->Init();
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
-	player_->Initialize();
+	player_->Init();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_ = std::make_unique<EnemyManager>();
@@ -68,13 +66,10 @@ void GameScene::Update(GameManager* state)
 	cameraResource_.Update();
 
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Update();
+	skydome_->Update();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Update();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Update();
+	ground_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -115,10 +110,10 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	Skydome::GetInstance()->Draw();
+	skydome_->Draw3D();
 
 	/* ----- Ground 床 ----- */
-	Ground::GetInstance()->Draw();
+	ground_->Draw3D();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();
@@ -134,11 +129,7 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
-	/* ----- AbsentEffect アブセントエフェクト----- */
-	//absentEffect_->Draw();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw(); 
+	absentEffect_->Draw();
 }
 
 

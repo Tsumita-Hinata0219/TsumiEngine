@@ -14,7 +14,7 @@ void Player::Init()
 	model_ = modelManager_->GetModel("Player");
 
 	// BodyTransformの初期化
-	transform_.Initialize();
+	trans_.Initialize();
 }
 
 
@@ -22,7 +22,7 @@ void Player::Init()
 void Player::Update()
 {
 	// Transformの更新処理
-	transform_.UpdateMatrix();
+	trans_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -50,7 +50,7 @@ void Player::Update()
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Player")) {
-		transform_.DrawImGui();
+		trans_.DrawImGui();
 		ImGui::Text("");
 		ImGui::Text("ShotFrame = %d", shotPressFrame_);
 
@@ -68,7 +68,7 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetLightData(light_);
-	model_->DrawN(transform_);
+	model_->DrawN(trans_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
@@ -142,7 +142,7 @@ void Player::Move()
 	}
 
 	// velocityに速度を掛けて座標に加算
-	transform_.srt.translate += (velocity_ * moveVector_);
+	trans_.srt.translate += (velocity_ * moveVector_);
 }
 
 
@@ -165,7 +165,7 @@ void Player::CalcBodyRotate()
 	if (std::abs(stickInput_.x) > 0.2f || std::abs(stickInput_.y) > 0.2f) {
 
 		// Y軸周り角度(θy)
-		transform_.srt.rotate.y = std::atan2(stickInput_.x, stickInput_.y);
+		trans_.srt.rotate.y = std::atan2(stickInput_.x, stickInput_.y);
 	}
 }
 
@@ -200,10 +200,10 @@ void Player::CreateNewBullet()
 	std::shared_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
 
 	// 初期座標
-	Vector3 initPos = transform_.GetWorldPos();
+	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel = TransformNormal(initVel, transform_.matWorld);
+	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化
 	newBullet->Init();

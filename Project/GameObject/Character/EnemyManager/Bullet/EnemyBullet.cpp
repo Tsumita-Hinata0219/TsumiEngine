@@ -11,7 +11,7 @@ void EnemyBullet::Init()
 	model_ = modelManager_->GetModel("DemoBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	transform_.Initialize();
+	trans_.Initialize();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -24,7 +24,7 @@ void EnemyBullet::Init()
 void EnemyBullet::Update()
 {
 	// Transformの更新処理
-	transform_.UpdateMatrix();
+	trans_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -37,7 +37,7 @@ void EnemyBullet::Update()
 // 描画処理
 void EnemyBullet::Draw3D()
 {
-	model_->DrawN(transform_);
+	model_->DrawN(trans_);
 }
 void EnemyBullet::Draw2DFront() {}
 void EnemyBullet::Draw2DBack() {}
@@ -57,7 +57,7 @@ void EnemyBullet::OnCollisionWithPlayerBullet()
 // 移動処理
 void EnemyBullet::Move()
 {
-	transform_.srt.translate += velocity_;
+	trans_.srt.translate += velocity_;
 }
 
 

@@ -43,8 +43,8 @@ public: // メンバ関数
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
 	// SRT
-	SRTN GetSRT() const { return this->transform_.srt; }
-	void SetSRT(SRTN setSRT) { this->transform_.srt = setSRT; }
+	SRTN GetSRT() const { return this->trans_.srt; }
+	void SetSRT(SRTN setSRT) { this->trans_.srt = setSRT; }
 
 	// カラー
 	Vector4 GetModelColor() const { return this->modelColor_; }
@@ -55,7 +55,7 @@ public: // メンバ関数
 	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
 
 	// 座標
-	void SetPosition(Vector3 setPos) { this->transform_.srt.translate = setPos; }
+	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
@@ -70,9 +70,9 @@ public: // メンバ関数
 	void OnCollisionWithPlayerBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return transform_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->transform_.srt.rotate; }
+	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -105,6 +105,12 @@ private: // メンバ変数
 
 	// Player
 	Player* player_ = nullptr;
+
+	// Model
+	std::unique_ptr<Model> model_;
+
+	// トランスフォーム
+	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

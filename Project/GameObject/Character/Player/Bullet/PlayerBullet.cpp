@@ -11,7 +11,7 @@ void PlayerBullet::Init()
 	model_ = modelManager_->GetModel("ball");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	transform_.Initialize();
+	trans_.Initialize();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -24,7 +24,7 @@ void PlayerBullet::Init()
 void PlayerBullet::Update()
 {
 	// Transformの更新処理
-	transform_.UpdateMatrix();
+	trans_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -37,7 +37,7 @@ void PlayerBullet::Update()
 // 描画処理
 void PlayerBullet::Draw3D()
 {
-	model_->DrawN(transform_);
+	model_->DrawN(trans_);
 }
 void PlayerBullet::Draw2DFront() {}
 void PlayerBullet::Draw2DBack() {}
@@ -56,7 +56,7 @@ void PlayerBullet::OnCollisionWithEnemyBullet()
 // 移動処理
 void PlayerBullet::Move()
 {
-	transform_.srt.translate += velocity_;
+	trans_.srt.translate += velocity_;
 }
 
 

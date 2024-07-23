@@ -25,21 +25,21 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// 座標
-	void SetPosition(Vector3 setPos) { this->transform_.srt.translate = setPos; }
+	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
 	// 速度
 	Vector3 GetVelocity() const { return  this->velocity_; }
 	void SetVelocity(Vector3 setVel) { this->velocity_ = setVel; }
 
 	// 姿勢
-	Vector3 GetRotate() const { return this->transform_.srt.rotate; }
-	void SetRotation(Vector3 setRotate) { this->transform_.srt.rotate = setRotate; }
+	Vector3 GetRotate() const { return this->trans_.srt.rotate; }
+	void SetRotation(Vector3 setRotate) { this->trans_.srt.rotate = setRotate; }
 	// 必ずSetVelocityの後に呼び出すこと
 	void SetRotationFromVelocity() {
-		transform_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
+		trans_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
 		float velZ = std::sqrt((velocity_.x * velocity_.x) + (velocity_.z * velocity_.z));
 		float height = -velocity_.y;
-		transform_.srt.rotate.x = std::atan2(height, velZ);
+		trans_.srt.rotate.x = std::atan2(height, velZ);
 	}
 
 	// 死亡フラグ
@@ -55,9 +55,9 @@ public: // メンバ関数
 	void OnCollisionWithEnemyBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return transform_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->transform_.srt.rotate; }
+	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -72,6 +72,12 @@ private:
 
 
 private: // メンバ変数
+
+	// モデル
+	std::unique_ptr<Model> model_;
+
+	// トランスフォーム
+	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

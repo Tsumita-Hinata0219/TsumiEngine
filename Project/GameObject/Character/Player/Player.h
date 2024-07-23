@@ -40,9 +40,9 @@ public: // メンバ関数
 	void OnCollisionWithEnemyBullet();
 
 	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return transform_.GetWorldPos(); }
+	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
 	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->transform_.srt.rotate; }
+	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -69,6 +69,12 @@ private: // メンバ変数
 
 	// Inputクラス
 	Input* input_ = nullptr;
+
+	// モデル
+	std::unique_ptr<Model> model_;
+
+	// トランスフォーム
+	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

@@ -5,6 +5,7 @@
 #include "../../../Project/GameObject/GameObject.h"
 #include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 #include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "../../Tsumi/JsonManager/JsonManager.h"
 
 #include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
@@ -67,6 +68,9 @@ private:
 
 
 private:
+
+	// JsonFileManager
+	JsonManager* jsonManager_ = nullptr;
 
 	// CollisionManager
 	std::unique_ptr<CollisionManager> collisionManager_;

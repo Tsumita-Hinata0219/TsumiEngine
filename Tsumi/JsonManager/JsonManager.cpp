@@ -7,7 +7,6 @@ void JsonManager::Initialize()
 {
 	levelData_ = std::make_unique<LevelData>();
 
-
 }
 
 
@@ -16,12 +15,12 @@ void JsonManager::Finalize() {}
 
 
 // Jsonファイルの読み込み
-void JsonManager::LoadJsonFile(const std::string& path, const std::string& fileName)
+void JsonManager::LoadSceneFile(const std::string& path, const std::string& fileName)
 {
 	/* ---------- JSOnファイルを読み込んでみる ---------- */
 
 	// 連結してフルパスを得る
-	const std::string fullPath = "Resources/" + path + fileName + ".json";
+	const std::string fullPath = "Resources/Json" + path + fileName;
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -55,7 +54,7 @@ void JsonManager::LoadJsonFile(const std::string& path, const std::string& fileN
 
 	/* ---------- オブジェクトの走査 ---------- */
 
-	 // レベルデータ格納用インスタンスを生成
+	// レベルデータ格納用インスタンスを生成
 	auto levelData = std::make_unique<LevelData>();
 
 	// "objects"の全オブジェクトを走査

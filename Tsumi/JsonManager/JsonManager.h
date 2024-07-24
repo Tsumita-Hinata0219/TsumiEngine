@@ -41,7 +41,7 @@ public: // メンバ関数
 	void Finalize();
 
 	// Jsonファイルの読み込み
-	void LoadJsonFile(const std::string& path, const std::string& fileName);
+	void LoadSceneFile(const std::string& path, const std::string& fileName);
 
 
 #pragma region Accessor アクセッサ
@@ -66,5 +66,8 @@ private: // メンバ変数
 
 	// 配置するための変数
 	std::map<const std::string, std::list<std::unique_ptr<LevelObject>>> levelObjectMap_;
+
+	// 読み込んだ情報をまとめておくコンテナ
+	std::map<const std::string, SRTN> srtMap_;
 };
 

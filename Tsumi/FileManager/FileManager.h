@@ -85,7 +85,7 @@ public:
 		return nullptr;
 	}
 
-	SRT GetObjectSrt(const std::string& key) const {
+	SRT GetObjectSRT(const std::string& key) const {
 
 		auto it = levelData_->objects.find(key);
 		if (it != levelData_->objects.end()) {

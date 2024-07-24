@@ -19,8 +19,9 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize()
 {
-	/* ----- FileManager ファイルマネージャー ----- */
-	//FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
+	/* ----- JsonManager Jsonマネージャー ----- */
+	jsonManager_ = JsonManager::GetInstance();
+	jsonManager_->LoadSceneFile("", "kari.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();

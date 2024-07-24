@@ -6,14 +6,14 @@
 #include "../../Tsumi/JsonManager/JsonManager.h"
 
 
-/* Wallクラス */
-class Wall : public IObject {
+/* Wall */
+class Building1 : public IObject {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	Wall() {};
-	~Wall() {};
+	Building1() {};
+	~Building1() {};
 
 	// 初期化処理、更新処理、描画処理
 	void Init() override;

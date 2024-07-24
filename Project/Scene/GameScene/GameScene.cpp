@@ -49,6 +49,10 @@ void GameScene::Initialize()
 	wall_ = std::make_unique<Wall>();
 	wall_->Init();
 
+	/* ----- Building1 建物1 ----- */
+	building1_ = std::make_unique<Building1>();
+	building1_->Init();
+
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Init();
@@ -78,6 +82,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Wall 壁 ----- */
 	wall_->Update();
+
+	/* ----- Building1 建物1 ----- */
+	building1_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -126,12 +133,14 @@ void GameScene::ModelDraw()
 	/* ----- Wall 壁 ----- */
 	wall_->Draw3D();
 
+	/* ----- Building1 建物1 ----- */
+	building1_->Draw3D();
+
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Draw3D();
-
 }
 
 

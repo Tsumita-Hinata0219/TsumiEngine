@@ -47,6 +47,30 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 
+	LevelData::ObjectData* GetObjectData(const std::string& key) const {
+
+		if (!levelData_) {
+			return nullptr;
+		}
+
+		auto it = levelData_->objects.find(key);
+		if (it != levelData_->objects.end()) {
+			return it->second.get();
+		}
+
+		return nullptr;
+	}
+
+	SRT GetObjectSRT(const std::string& key) const {
+
+		auto it = levelData_->objects.find(key);
+		if (it != levelData_->objects.end()) {
+			return it->second.get()->srt;
+		}
+
+		return SRT();
+	}
+
 #pragma endregion 
 
 

@@ -45,6 +45,10 @@ void GameScene::Initialize()
 	ground_ = std::make_unique<Ground>();
 	ground_->Init();
 
+	/* ----- Wall 壁 ----- */
+	wall_ = std::make_unique<Wall>();
+	wall_->Init();
+
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Init();
@@ -71,6 +75,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Ground 床 ----- */
 	ground_->Update();
+
+	/* ----- Wall 壁 ----- */
+	wall_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -115,6 +122,9 @@ void GameScene::ModelDraw()
 
 	/* ----- Ground 床 ----- */
 	ground_->Draw3D();
+
+	/* ----- Wall 壁 ----- */
+	wall_->Draw3D();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();

@@ -234,8 +234,8 @@ void CollisionManager::CheckCollisionSpherexSphere(SphereCollider* cA, SphereCol
 void CollisionManager::CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -255,8 +255,8 @@ void CollisionManager::CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* c
 void CollisionManager::CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -278,8 +278,8 @@ void CollisionManager::CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollide
 //  : AABB2Segment
 void CollisionManager::CheckCollisionAABBxSegment(AABBCollider* cA, SegmentCollider* cB) {
 
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetCollisionMask()) == 0 ||
+		(cA->GetMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
@@ -294,8 +294,8 @@ void CollisionManager::CheckCollisionAABBxSegment(AABBCollider* cA, SegmentColli
 void CollisionManager::CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -318,8 +318,8 @@ void CollisionManager::CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider*
 void CollisionManager::CheckCollisionOBBxSegment(OBBCollider* cA, SegmentCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetCollisionMask()) == 0 ||
+		(cA->GetMask() & cB->GetCollosionAttribute()) == 0)
 	{
 		return;
 	}
@@ -339,8 +339,8 @@ void CollisionManager::CheckCollisionOBBxSegment(OBBCollider* cA, SegmentCollide
 void CollisionManager::CheckCollisionOBBxOBB(OBBCollider* cA, OBBCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -494,7 +494,7 @@ bool CollisionManager::CheckOBBxOBB(OBBCollider* cA, OBBCollider* cB)
 {
 	// 距離が離れていたら早期return false
 	// そもそも当たるはずがないのに計算する必要がない
-	if (std::abs(Length(cA->GetOBBWorldPos() - cB->GetOBBWorldPos())) >= 3.0f) {
+	if (std::abs(Length(cA->GetWorldPos() - cB->GetWorldPos())) >= 3.0f) {
 		return false;
 	}
 

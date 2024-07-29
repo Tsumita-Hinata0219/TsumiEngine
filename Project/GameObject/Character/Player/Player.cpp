@@ -80,16 +80,16 @@ void Player::Draw2DFront() {}
 
 
 // 衝突自コールバック関数
-void Player::OnCollisionWithEnemy()
-{
-
-
-}
-void Player::OnCollisionWithEnemyBullet()
-{
-
-
-}
+//void Player::OnCollisionWithEnemy()
+//{
+//
+//
+//}
+//void Player::OnCollisionWithEnemyBullet()
+//{
+//
+//
+//}
 
 
 // 移動処理

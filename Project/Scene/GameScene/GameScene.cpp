@@ -155,36 +155,36 @@ void GameScene::FrontSpriteDraw()
 // 衝突判定処理
 void GameScene::CheckAllCollision()
 {
-	// Player with EnemyBullet
-	for (auto& enemy : enemyManager_->GetEnemyList()) {
-		for (auto& bullet : enemy->GetBulletList()) {
-			if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
-				player_->OnCollisionWithEnemyBullet();
-				bullet->OnCollisionWithPlayer();
-			}
-		}
-	}
+	//// Player with EnemyBullet
+	//for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//	for (auto& bullet : enemy->GetBulletList()) {
+	//		if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
+	//			player_->OnCollisionWithEnemyBullet();
+	//			bullet->OnCollisionWithPlayer();
+	//		}
+	//	}
+	//}
 
-	// PlayerBullet with Enemy
-	for (auto& bullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy.get())) {
-				bullet->OnCollisionWithEnemy();
-				enemy->OnCollisionWithPlayerBullet();
-			}
-		}
-	}
+	//// PlayerBullet with Enemy
+	//for (auto& bullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy.get())) {
+	//			bullet->OnCollisionWithEnemy();
+	//			enemy->OnCollisionWithPlayerBullet();
+	//		}
+	//	}
+	//}
 
-	// PlayerBullet with EnemyBullet
-	for (auto& playerBullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			for (auto& enemyBullet : enemy->GetBulletList()) {
-				if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
-					playerBullet->OnCollisionWithEnemyBullet();
-					enemyBullet->OnCollisionWithPlayerBullet();
-				}
-			}
-		}
-	}
+	//// PlayerBullet with EnemyBullet
+	//for (auto& playerBullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		for (auto& enemyBullet : enemy->GetBulletList()) {
+	//			if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
+	//				playerBullet->OnCollisionWithEnemyBullet();
+	//				enemyBullet->OnCollisionWithPlayerBullet();
+	//			}
+	//		}
+	//	}
+	//}
 }
 

@@ -158,7 +158,7 @@ void GameScene::CheckAllCollision()
 	// Player with EnemyBullet
 	for (auto& enemy : enemyManager_->GetEnemyList()) {
 		for (auto& bullet : enemy->GetBulletList()) {
-			if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
+			if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
 				player_->OnCollisionWithEnemyBullet();
 				bullet->OnCollisionWithPlayer();
 			}
@@ -168,7 +168,7 @@ void GameScene::CheckAllCollision()
 	// PlayerBullet with Enemy
 	for (auto& bullet : player_->GetBulletList()) {
 		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy.get())) {
+			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
 				bullet->OnCollisionWithEnemy();
 				enemy->OnCollisionWithPlayerBullet();
 			}
@@ -179,7 +179,7 @@ void GameScene::CheckAllCollision()
 	for (auto& playerBullet : player_->GetBulletList()) {
 		for (auto& enemy : enemyManager_->GetEnemyList()) {
 			for (auto& enemyBullet : enemy->GetBulletList()) {
-				if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
+				if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
 					playerBullet->OnCollisionWithEnemyBullet();
 					enemyBullet->OnCollisionWithPlayerBullet();
 				}

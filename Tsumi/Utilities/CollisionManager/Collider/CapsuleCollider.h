@@ -1,7 +1,8 @@
 #pragma once
 
-#include "CollisionStructures.h"
+//#include "CollisionStructures.h"
 #include "ColliderConfig.h"
+#include "../../Project/Math/MyMath.h"
 #include<cstdint>
 
 class CapsuleCollider {

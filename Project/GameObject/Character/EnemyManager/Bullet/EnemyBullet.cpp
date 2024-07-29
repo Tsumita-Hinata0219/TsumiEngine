@@ -17,6 +17,11 @@ void EnemyBullet::Init()
 
 	// 寿命のタイマーをスタート。2秒で設定
 	life_.Start(0.0f, 5.0f * 60.0f);
+
+	// Colliderの初期化
+	collider_ = std::make_unique<OBBCollider>();
+	collider_->Init();
+	collider_->SetSize(size_);
 }
 
 
@@ -31,6 +36,9 @@ void EnemyBullet::Update()
 
 	// 寿命の処理
 	RemoveAfterlifeTime();
+
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
 }
 
 

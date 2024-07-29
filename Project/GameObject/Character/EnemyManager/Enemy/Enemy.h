@@ -19,7 +19,7 @@ class Player;
 
 
 /* Enemyクラス */
-class Enemy : public IObject, public OBBCollider {
+class Enemy : public IObject/*, public OBBCollider*/ {
 
 public: // メンバ関数
 
@@ -63,19 +63,22 @@ public: // メンバ関数
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
+	// Collider
+	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
 
-	// 衝突自コールバック関数
-	void OnCollision(uint32_t id) override { id; }
+	//// 衝突自コールバック関数
+	//void OnCollision(uint32_t id) override { id; }
 	void OnCollisionWithPlayer();
 	void OnCollisionWithPlayerBullet();
 
-	// コライダーのゲッター
-	Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
-	Vector3 GetSize() override { return this->size_; }
-	Vector3 GetRotate() override { return this->trans_.srt.rotate; }
+	//// コライダーのゲッター
+	//Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
+	//Vector3 GetSize() override { return this->size_; }
+	//Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 
@@ -117,6 +120,9 @@ private: // メンバ変数
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
+
+	// コライダー
+	std::unique_ptr<OBBCollider> collider_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

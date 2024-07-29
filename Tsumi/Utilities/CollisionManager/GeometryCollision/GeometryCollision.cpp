@@ -85,7 +85,7 @@ namespace GeometryCollision {
 
 		OBB result{};
 
-		result.center = c->GetOBBWorldPos();
+		result.center = c->GetWorldPos();
 
 		Matrix4x4 rotateMat = MakeRotateXYZMatrix(c->GetRotate());
 		result.orientations[0].x = rotateMat.m[0][0];
@@ -108,8 +108,8 @@ namespace GeometryCollision {
 
 		AABB result{};
 
-		result.min = c->GetWorldPosition() - (c->GetSize() / 2.0f);
-		result.max = c->GetWorldPosition() + (c->GetSize() / 2.0f);
+		result.min = c->GetWorldPos() - (c->GetSize() / 2.0f);
+		result.max = c->GetWorldPos() + (c->GetSize() / 2.0f);
 
 		return result;
 	}

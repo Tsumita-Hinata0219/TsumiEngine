@@ -207,19 +207,19 @@ void CollisionManager::DetectOBB2OBBList(list<OBBCollider*>::iterator itrA) {
 void CollisionManager::CheckCollisionSpherexSphere(SphereCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0) 
+	if ((cA->GetAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetMask() & cB->GetAttribute()) == 0) 
 	{
 		return;
 	}
 
 	// 値を入れた構造体を作る
 	Sphere SphereA = {
-		.center = cA->GetWorldPosition(),
+		.center = cA->GetWorldPos(),
 		.radius = cA->GetRadius(),
 	};
 	Sphere SphereB = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 
@@ -255,8 +255,8 @@ void CollisionManager::CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* c
 void CollisionManager::CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetCollosionAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetCollisionMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -264,7 +264,7 @@ void CollisionManager::CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollide
 	// 値を入れた構造体を作る
 	AABB aabb = SettingAABBProperties(cA);
 	Sphere sphere = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 
@@ -294,8 +294,8 @@ void CollisionManager::CheckCollisionAABBxSegment(AABBCollider* cA, SegmentColli
 void CollisionManager::CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider* cB) {
 
 	// コリジョンフィルタリング
-	if ((cA->GetCollosionAttribute() & cB->GetCollisionMask()) == 0 ||
-		(cA->GetCollisionMask() & cB->GetCollosionAttribute()) == 0)
+	if ((cA->GetCollosionAttribute() & cB->GetMask()) == 0 ||
+		(cA->GetCollisionMask() & cB->GetAttribute()) == 0)
 	{
 		return;
 	}
@@ -303,7 +303,7 @@ void CollisionManager::CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider*
 	// 値を入れた構造体を作る
 	OBB obb = SettingOBBProperties(cA);
 	Sphere sphere = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 
@@ -372,11 +372,11 @@ bool CollisionManager::CheckSpherexSphere(SphereCollider* cA, SphereCollider* cB
 {
 	// 値を入れた構造体を作る
 	Sphere SphereA = {
-		.center = cA->GetWorldPosition(),
+		.center = cA->GetWorldPos(),
 		.radius = cA->GetRadius(),
 	};
 	Sphere SphereB = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 
@@ -416,7 +416,7 @@ bool CollisionManager::CheckAABBxSphere(AABBCollider* cA, SphereCollider* cB)
 	// 値を入れた構造体を作る
 	AABB aabb = SettingAABBProperties(cA);
 	Sphere sphere = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 
@@ -454,7 +454,7 @@ bool CollisionManager::CheckOBBxSphere(OBBCollider* cA, SphereCollider* cB)
 	// 値を入れた構造体を作る
 	OBB obb = SettingOBBProperties(cA);
 	Sphere sphere = {
-		.center = cB->GetWorldPosition(),
+		.center = cB->GetWorldPos(),
 		.radius = cB->GetRadius(),
 	};
 

@@ -1,5 +1,6 @@
 #include "ModelManager.h"
 
+namespace fs = std::filesystem;
 
 
 /// <summary>

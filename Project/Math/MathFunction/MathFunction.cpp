@@ -1,5 +1,5 @@
 #include "MathFunction.h"
-
+namespace fs = std::filesystem;
 
 
 /// -------------------------------------------------------------------------
@@ -50,6 +50,86 @@ std::string GetExtension(const std::string& path)
 		return ""; // 拡張子がない場合は空文字列を返す
 	}
 	return path.substr(dotPos);
+}
+
+// 指定されたディレクトリ内のファイル名を取得
+std::vector<std::string> GetFileNamesInDirectory(const std::string& directoryPath)
+{
+	std::vector<std::string> filenames;
+
+	for (const auto& entry : fs::directory_iterator(directoryPath)) {
+		if (entry.is_regular_file()) {
+			filenames.push_back(entry.path().filename().string());
+		}
+	}
+
+	return filenames;
+}
+
+// 指定されたディレクトリ内のサブディレクトリ名を取得
+std::vector<std::string> GetSubdirectories(const std::string& directoryPath)
+{
+	std::vector<std::string> subdirs;
+
+	for (const auto& entry : fs::directory_iterator(directoryPath)) {
+		if (entry.is_directory()) {
+			subdirs.push_back(entry.path().filename().string());
+		}
+	}
+
+	return subdirs;
+}
+
+// 特定の拡張子を持ったファイル名だけを取り出す
+std::string FilterFileByExtension(const std::vector<std::string>& filenames, const std::string& extension)
+{
+	// 拡張子の長さをキャッシュしておく
+	size_t extensionLength = extension.size();
+
+	// ファイル名の中から、指定した拡張子を持つ最初のファイルを探す
+	auto it = std::find_if(filenames.begin(), filenames.end(),
+		[extensionLength, &extension](const std::string& filename) {
+			return filename.size() >= extensionLength &&
+				filename.compare(filename.size() - extensionLength, extensionLength, extension) == 0;
+		});
+
+	// 一致するファイルが見つかった場合はそのファイル名を返す
+	if (it != filenames.end()) {
+		return *it;
+	}
+
+	// 一致するファイルが見つからなかった場合は空文字列を返す
+	return "";
+}
+
+// 指定された拡張子を持つ最初のファイル名を返す関数
+std::string FindFirstFileWithExtension(const std::string& directoryPath, const std::string& extension) {
+	std::vector<std::string> filenames;
+
+	// ディレクトリ内の全ファイル名を取得
+	for (const auto& entry : fs::directory_iterator(directoryPath)) {
+		if (entry.is_regular_file()) {
+			filenames.push_back(entry.path().filename().string());
+		}
+	}
+
+	// 拡張子の長さをキャッシュしておく
+	size_t extensionLength = extension.size();
+
+	// ファイル名の中から、指定した拡張子を持つ最初のファイルを探す
+	auto it = std::find_if(filenames.begin(), filenames.end(),
+		[extensionLength, &extension](const std::string& filename) {
+			return filename.size() >= extensionLength &&
+				filename.compare(filename.size() - extensionLength, extensionLength, extension) == 0;
+		});
+
+	// 一致するファイルが見つかった場合はそのファイル名を返す
+	if (it != filenames.end()) {
+		return *it;
+	}
+
+	// 一致するファイルが見つからなかった場合は空文字列を返す
+	return "";
 }
 
 

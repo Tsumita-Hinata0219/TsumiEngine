@@ -11,6 +11,7 @@
 #include "json.hpp"
 
 #include "../FileManager/FileManager.h"
+#include "../3D/Model/ModelManager/ModelManager.h"
 
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/GameObject/GameObject.h"
@@ -85,6 +86,9 @@ private:
 
 private: // メンバ変数
 
+	// モデルマネージャー
+	ModelManager* modelManager_ = nullptr;
+
 	// Jsonファイルから読み込んだ情報をまとめておく変数
 	std::unique_ptr<LevelData> levelData_;
 
@@ -93,5 +97,6 @@ private: // メンバ変数
 
 	// 読み込んだ情報をまとめておくコンテナ
 	std::map<const std::string, SRTN> srtMap_;
+
 };
 

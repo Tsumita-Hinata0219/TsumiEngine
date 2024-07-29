@@ -5,6 +5,9 @@
 // 初期化処理
 void JsonManager::Initialize()
 {
+	// モデルマネージャーのインスタンスの取得
+	modelManager_ = ModelManager::GetInstance();
+
 	levelData_ = std::make_unique<LevelData>();
 
 }
@@ -120,6 +123,16 @@ void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 			objectData->srt.scale.x = (float)transform["scaling"][0];
 			objectData->srt.scale.y = (float)transform["scaling"][2];
 			objectData->srt.scale.z = (float)transform["scaling"][1];
+		}
+
+
+		// モデルの読み込み
+		if (object.contains("load_model")) {
+			
+			if (object["type"] == "true") {
+
+				modelManager_->LoadModel("","");
+			}
 		}
 
 

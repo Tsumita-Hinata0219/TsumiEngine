@@ -5,10 +5,12 @@
 #include "../../../TextureManager/TextureManager.h"
 #include "../ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../Model.h"
+
 #include <map>
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>

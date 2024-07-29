@@ -19,7 +19,7 @@ class Player;
 
 
 /* Enemyクラス */
-class Enemy : public IObject/*, public OBBCollider*/ {
+class Enemy : public IObject {
 
 public: // メンバ関数
 
@@ -70,15 +70,9 @@ public: // メンバ関数
 
 #pragma region Collision 衝突判定
 
-	//// 衝突自コールバック関数
-	//void OnCollision(uint32_t id) override { id; }
+	// 衝突自コールバック関数
 	void OnCollisionWithPlayer();
 	void OnCollisionWithPlayerBullet();
-
-	//// コライダーのゲッター
-	//Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
-	//Vector3 GetSize() override { return this->size_; }
-	//Vector3 GetRotate() override { return this->trans_.srt.rotate; }
 
 #pragma endregion 
 

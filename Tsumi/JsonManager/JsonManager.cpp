@@ -66,7 +66,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 		// 走査してく
 		for (nlohmann::json& object : deserialized["objects"]) {
 
-			ScanningObjects(object, levelData->objects);
+			ScanningObjects(path, object, levelData->objects);
 		}
 	}
 
@@ -77,7 +77,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 
 
 // オブジェクトの走査
-void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
+void JsonManager::ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
 {
 	// 各オブジェクトには必ず "type"データを入れているので
 	// "type"が検出できなければ不正として実行を停止する
@@ -129,9 +129,28 @@ void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 		// モデルの読み込み
 		if (object.contains("load_model")) {
 			
-			if (object["type"] == "true") {
+			// モデル読み込みのフラグが立っていたら
+			if (object["load_model"] == "true") {
 
-				modelManager_->LoadModel("","");
+				// ディレクトリ内にある特定の拡張子を持つファイルを取り出す
+				// 最初は.objで走査
+				std::string fileName = FindFirstFileWithExtension(path, ".obj");
+				// なければ.gltf
+				if (fileName.empty()) {
+
+					fileName = FindFirstFileWithExtension(path, ".gltf");
+				}
+				// それでもなければエラー
+				if (fileName.empty()) {
+					Log("取り出すファイルがない");
+					assert(0);
+				}
+
+				// ファイルパス
+				std::string filePath = path + objectData->file_name;
+
+				// ファイルパスとファイル名からモデルをロードする
+				modelManager_->LoadModel(filePath, fileName);
 			}
 		}
 
@@ -144,7 +163,7 @@ void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 		if (object.contains("children") && object["children"].is_array()) {
 
 			for (nlohmann::json& child : object["children"]) {
-				ScanningObjects(child, objectData->children);
+				ScanningObjects(path, child, objectData->children);
 			}
 		}
 

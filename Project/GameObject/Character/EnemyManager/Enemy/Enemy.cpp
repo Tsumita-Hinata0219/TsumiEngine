@@ -7,7 +7,7 @@ void Enemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Test", "Test.obj");
+	modelManager_->LoadModel("Obj/Test", "Test.obj");
 	model_ = modelManager_->GetModel("Test");
 
 	// BodyTransformの初期化

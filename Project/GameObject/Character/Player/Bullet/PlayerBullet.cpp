@@ -7,7 +7,7 @@ void PlayerBullet::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("ball", "ball.obj");
+	modelManager_->LoadModel("Obj/ball", "ball.obj");
 	model_ = modelManager_->GetModel("ball");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定

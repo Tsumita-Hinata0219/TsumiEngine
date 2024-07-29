@@ -6,7 +6,7 @@
 void Ground::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Ground", "Ground.obj");
+	modelManager_->LoadModel("Obj/Ground", "Ground.obj");
 	model_ = modelManager_->GetModel("Ground");
 
 	trans_.Initialize();

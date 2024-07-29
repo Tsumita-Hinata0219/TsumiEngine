@@ -6,7 +6,7 @@
 void Building1::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Building1", "Building1.obj");
+	modelManager_->LoadModel("Obj/Building1", "Building1.obj");
 	model_ = modelManager_->GetModel("Building1");
 
 	JsonManager* jsonManager = JsonManager::GetInstance();

@@ -10,7 +10,7 @@ void Player::Init()
 
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Player", "Player.obj");
+	modelManager_->LoadModel("Obj/Player", "Player.obj");
 	model_ = modelManager_->GetModel("Player");
 
 	// BodyTransformの初期化

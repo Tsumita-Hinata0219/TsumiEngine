@@ -387,7 +387,7 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 	/* 2. ファイルを開く */
 	// asssimpでobjを読む
 	Assimp::Importer importer;
-	string file = ("Resources/Obj/" + path + "/" + fileName);
+	string file = ("Resources/" + path + "/" + fileName);
 
 
 	/* 3. 実際にファイルを読み、ModelDataを構築していく */
@@ -422,7 +422,7 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 	/* 2. ファイルを開く */
 	// asssimpでobjを読む
 	Assimp::Importer importer;
-	string file = ("Resources/gLTF/" + path + "/" + fileName);
+	string file = ("Resources/" + path + "/" + fileName);
 
 
 	/* 3. 実際にファイルを読み、ModelDataを構築していく */
@@ -646,10 +646,10 @@ MaterialDataN ModelManager::ParseMaterialData(const aiScene* scene, const std::s
 
 			// FileFormatで読み込みパスの分岐
 			if (format == ModelFileFormat::OBJ.first) {
-				result.textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFilePath.C_Str());
+				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
 			}
 			else if (format == ModelFileFormat::GLTF.first) {
-				result.textureHandle = TextureManager::LoadTexture("gLTF/" + filePath, textureFilePath.C_Str());
+				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
 			}
 		}
 

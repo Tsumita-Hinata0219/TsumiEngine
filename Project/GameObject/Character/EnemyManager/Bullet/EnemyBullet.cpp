@@ -7,7 +7,7 @@ void EnemyBullet::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("DemoBullet", "DemoBullet.obj");
+	modelManager_->LoadModel("Obj/DemoBullet", "DemoBullet.obj");
 	model_ = modelManager_->GetModel("DemoBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定

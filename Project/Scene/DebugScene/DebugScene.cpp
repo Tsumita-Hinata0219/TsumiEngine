@@ -45,7 +45,7 @@ void DebugScene::Initialize()
 
 	/* ----- ModelNewLoad モデルニューロード ----- */
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Test", "Test.obj");
+	modelManager_->LoadModel("Obj/Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 
 	transformA_.Initialize();

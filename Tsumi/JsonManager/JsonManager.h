@@ -78,7 +78,7 @@ public: // メンバ関数
 private:
 
 	// オブジェクトの走査
-	void ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
+	void ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
 
 	// 読み込んだ情報からモデル作成
 	void CreateModel();

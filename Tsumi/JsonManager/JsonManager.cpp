@@ -23,7 +23,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 	/* ---------- JSOnファイルを読み込んでみる ---------- */
 
 	// 連結してフルパスを得る
-	const std::string fullPath = "Resources/Json/" + path + fileName;
+	const std::string fullPath = "Resources/" + path + "/" + fileName;
 
 	// ファイルストリーム
 	std::ifstream file;

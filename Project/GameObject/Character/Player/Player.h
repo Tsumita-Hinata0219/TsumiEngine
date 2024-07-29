@@ -33,14 +33,17 @@ public: // メンバ関数
 	// BulletList
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 
+	// Collider
+	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
 
 	//// 衝突自コールバック関数
 	//void OnCollision(uint32_t id) override { id; }
-	//void OnCollisionWithEnemy();
-	//void OnCollisionWithEnemyBullet();
+	void OnCollisionWithEnemy();
+	void OnCollisionWithEnemyBullet();
 
 	//// コライダーのゲッター
 	//Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
@@ -87,12 +90,15 @@ private: // メンバ変数
 	float moveVector_ = 0.3f;
 	float kBulletSpeed_ = 0.5f;
 
+	// コライダー
+	std::unique_ptr<OBBCollider> collider_;
+
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
 
 	// 射撃ボタン押下フレーム&インターバル
 	int shotPressFrame_ = 0;
-	int kShotInterval_ = 10;
+	int kShotInterval_ = 5;
 
 	//Stickの入力を取得
 	Vector2 stickInput_{};

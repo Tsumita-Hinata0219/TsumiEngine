@@ -45,14 +45,17 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
+	// Collider
+	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
 
 	//// 衝突自コールバック関数
 	//void OnCollision(uint32_t id) override { id; }
-	//void OnCollisionWithPlayer();
-	//void OnCollisionWithPlayerBullet();
+	void OnCollisionWithPlayer();
+	void OnCollisionWithPlayerBullet();
 
 	//// コライダーのゲッター
 	//Vector3 GetOBBWorldPos() override { return trans_.GetWorldPos(); }
@@ -81,6 +84,9 @@ private: // メンバ変数
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f,2.0f };
+
+	// コライダー
+	std::unique_ptr<OBBCollider> collider_;
 
 	// 移動速度
 	Vector3 velocity_;

@@ -28,6 +28,11 @@ void Enemy::Init()
 	stateNo_ = EnemyState::SPAWN;
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Init(this);
+
+	// Colliderの初期化
+	collider_ = std::make_unique<OBBCollider>();
+	collider_->Init();
+	collider_->SetSize(size_);
 }
 
 
@@ -72,6 +77,8 @@ void Enemy::Update()
 		}
 	);
 
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 
@@ -112,19 +119,19 @@ void Enemy::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
-//void Enemy::OnCollisionWithPlayer()
-//{
-//
-//}
-//void Enemy::OnCollisionWithPlayerBullet()
-//{
-//	// スポーン&デス時には通らない
-//	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
-//
-//		// デスステートに移行
-//		this->ChangeState(EnemyState::DEATH);
-//	}
-//}
+void Enemy::OnCollisionWithPlayer()
+{
+
+}
+void Enemy::OnCollisionWithPlayerBullet()
+{
+	// スポーン&デス時には通らない
+	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
+
+		// デスステートに移行
+		this->ChangeState(EnemyState::DEATH);
+	}
+}
 
 
 // ステートパターン処理

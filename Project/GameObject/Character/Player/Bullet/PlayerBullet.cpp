@@ -17,6 +17,11 @@ void PlayerBullet::Init()
 
 	// 寿命のタイマーをスタート。2秒で設定
 	life_.Start(0.0f, 2.0f * 60.0f);
+
+	// Colliderの初期化
+	collider_ = std::make_unique<OBBCollider>();
+	collider_->Init();
+	collider_->SetSize(size_);
 }
 
 
@@ -31,6 +36,9 @@ void PlayerBullet::Update()
 
 	// 寿命の処理
 	RemoveAfterlifeTime();
+
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
 }
 
 
@@ -44,14 +52,14 @@ void PlayerBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
-//void PlayerBullet::OnCollisionWithEnemy()
-//{
-//	isDead_ = true;
-//}
-//void PlayerBullet::OnCollisionWithEnemyBullet()
-//{
-//	isDead_ = true;
-//}
+void PlayerBullet::OnCollisionWithEnemy()
+{
+	isDead_ = true;
+}
+void PlayerBullet::OnCollisionWithEnemyBullet()
+{
+	isDead_ = true;
+}
 
 // 移動処理
 void PlayerBullet::Move()

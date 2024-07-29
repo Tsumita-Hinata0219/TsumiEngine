@@ -96,7 +96,6 @@ void GameScene::Update(GameManager* state)
 	CheckAllCollision();
 
 
-
 #ifdef _DEBUG
 
 	ImGui::Begin("GameScene");

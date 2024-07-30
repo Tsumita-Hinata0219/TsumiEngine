@@ -205,6 +205,9 @@
     <ClCompile Include="Project\GameObject\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Wall\Wall.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Building1\Building1.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\Floor\Floor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -412,6 +415,9 @@
     <ClInclude Include="Project\GameObject\IObject\IObject.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\HSV\HSVEffect.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Wall\Wall.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Building1\Building1.h" />
+    <ClInclude Include="Project\GameObject\Terrain\Floor\Floor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

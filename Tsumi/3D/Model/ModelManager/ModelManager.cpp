@@ -1,5 +1,6 @@
 #include "ModelManager.h"
 
+namespace fs = std::filesystem;
 
 
 /// <summary>
@@ -360,33 +361,32 @@ void ModelManager::LoadModel(const std::string& path, const std::string fileName
 
 	// ないので新しく作る
 	// 今回作るModelDatas
-	ModelDatas newData{};
+	ModelDatas* newData = new ModelDatas();
 	std::string format = GetExtension(fileName);
 
 	// フォーマットを取得して分岐
 	if (format == ModelFileFormat::OBJ.first) {
-		newData = LoadOBJ(path, fileName);
+		LoadOBJ(newData, path, fileName);
 	}
 	else if (format == ModelFileFormat::GLTF.first) {
-		newData = LoadGLTF(path, fileName);
+		LoadGLTF(newData, path, fileName);
 	}
 
 	// マップコンテナに追加
-	modelsMap_[newData.name] = newData;
+	modelsMap_[newData->name] = (*newData);
 }
-ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fileName)
+void ModelManager::LoadOBJ(ModelDatas* newData, const std::string& path, const std::string& fileName)
 {
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelDatasに名前を付けておく。(ファイル名)
-	ModelDatas result{};
-	result.name = fileName.substr(0, fileName.size() - 4);
-	result.fileFormat = GetExtension(fileName);
+	newData->name = fileName.substr(0, fileName.size() - 4);
+	newData->fileFormat = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
 	// asssimpでobjを読む
 	Assimp::Importer importer;
-	string file = ("Resources/Obj/" + path + "/" + fileName);
+	string file = ("Resources/" + path + "/" + fileName);
 
 
 	/* 3. 実際にファイルを読み、ModelDataを構築していく */
@@ -396,32 +396,29 @@ ModelDatas ModelManager::LoadOBJ(const std::string& path, const std::string& fil
 
 
 	// mesh & indicesを解析する
-	result.mesh = ParseMeshData(scene);
+	newData->mesh = ParseMeshData(scene);
 
 	// materialを解析する
-	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+	newData->material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.enable = false;
+	newData->light.enable = false;
 
 	// Environmentの初期化
-	result.environment.enable = false;
-
-	return result;
+	newData->environment.enable = false;
 }
-ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fileName)
+void ModelManager::LoadGLTF(ModelDatas* newData, const std::string& path, const std::string& fileName)
 {
 	/* 1. 中で必要となる変数の宣言 */
 	// return するModelDatasに名前を付けておく。(ファイル名)
-	ModelDatas result{};
-	result.name = fileName.substr(0, fileName.size() - 4);
-	result.fileFormat = GetExtension(fileName);
+	newData->name = fileName.substr(0, fileName.size() - 4);
+	newData->fileFormat = GetExtension(fileName);
 
 
 	/* 2. ファイルを開く */
 	// asssimpでobjを読む
 	Assimp::Importer importer;
-	string file = ("Resources/gLTF/" + path + "/" + fileName);
+	string file = ("Resources/" + path + "/" + fileName);
 
 
 	/* 3. 実際にファイルを読み、ModelDataを構築していく */
@@ -431,18 +428,16 @@ ModelDatas ModelManager::LoadGLTF(const std::string& path, const std::string& fi
 
 
 	// mesh & indicesを解析する
-	result.mesh = ParseMeshData(scene);
+	newData->mesh = ParseMeshData(scene);
 
 	// materialを解析する
-	result.material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
+	newData->material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
 
 	// lightの初期化
-	result.light.enable = false;
+	newData->light.enable = false;
 
 	// Environmentの初期化
-	result.environment.enable = false;
-
-	return result;
+	newData->environment.enable = false;
 }
 
 
@@ -645,10 +640,10 @@ MaterialDataN ModelManager::ParseMaterialData(const aiScene* scene, const std::s
 
 			// FileFormatで読み込みパスの分岐
 			if (format == ModelFileFormat::OBJ.first) {
-				result.textureHandle = TextureManager::LoadTexture("Obj/" + filePath, textureFilePath.C_Str());
+				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
 			}
 			else if (format == ModelFileFormat::GLTF.first) {
-				result.textureHandle = TextureManager::LoadTexture("gLTF/" + filePath, textureFilePath.C_Str());
+				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
 			}
 		}
 

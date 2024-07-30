@@ -5,10 +5,12 @@
 #include "../../../TextureManager/TextureManager.h"
 #include "../ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../Model.h"
+
 #include <map>
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include <filesystem>
 
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
@@ -92,8 +94,8 @@ private: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	ModelDatas LoadOBJ(const std::string& path, const std::string& fileName);
-	ModelDatas LoadGLTF(const std::string& path, const std::string& fileName);
+	void LoadOBJ(ModelDatas* newData, const std::string& path, const std::string& fileName);
+	void LoadGLTF(ModelDatas* newData, const std::string& path, const std::string& fileName);
 
 	/// <summary>
 	/// 一回読み込んだものは読み込まない

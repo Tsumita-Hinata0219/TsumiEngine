@@ -21,7 +21,9 @@ void GameScene::Initialize()
 {
 	/* ----- JsonManager Jsonマネージャー ----- */
 	jsonManager_ = JsonManager::GetInstance();
-	jsonManager_->LoadSceneFile("", "kari.json");
+	jsonManager_->Initialize();
+	jsonManager_->LoadSceneFile("Json", "kari.json");
+	jsonManager_->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();
@@ -44,6 +46,18 @@ void GameScene::Initialize()
 	/* ----- Ground 床 ----- */
 	ground_ = std::make_unique<Ground>();
 	ground_->Init();
+
+	/* ----- Wall 壁 ----- */
+	wall_ = std::make_unique<Wall>();
+	wall_->Init();
+
+	/* ----- Floor 床 ----- */
+	floor_ = std::make_unique<Floor>();
+	floor_->Init();
+
+	/* ----- Building1 建物1 ----- */
+	building1_ = std::make_unique<Building1>();
+	building1_->Init();
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
@@ -72,6 +86,15 @@ void GameScene::Update(GameManager* state)
 	/* ----- Ground 床 ----- */
 	ground_->Update();
 
+	/* ----- Wall 壁 ----- */
+	wall_->Update();
+	
+	/* ----- Floor 床 ----- */
+	floor_->Update();
+
+	/* ----- Building1 建物1 ----- */
+	building1_->Update();
+
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
@@ -82,12 +105,12 @@ void GameScene::Update(GameManager* state)
 	CheckAllCollision();
 
 
-
 #ifdef _DEBUG
 
 	ImGui::Begin("GameScene");
 
 	ImGui::Text("");
+	cameraResource_.DrawImGui();
 	ImGui::Text("");
 
 	ImGui::End();
@@ -111,17 +134,25 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	skydome_->Draw3D();
+	//skydome_->Draw3D();
 
 	/* ----- Ground 床 ----- */
-	ground_->Draw3D();
+	//ground_->Draw3D();
+
+	/* ----- Wall 壁 ----- */
+	wall_->Draw3D();
+
+	/* ----- Floor 床 ----- */
+	floor_->Draw3D();
+
+	/* ----- Building1 建物1 ----- */
+	building1_->Draw3D();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Draw3D();
-
 }
 
 
@@ -140,7 +171,7 @@ void GameScene::CheckAllCollision()
 	// Player with EnemyBullet
 	for (auto& enemy : enemyManager_->GetEnemyList()) {
 		for (auto& bullet : enemy->GetBulletList()) {
-			if (collisionManager_->CheckOBBxOBB(player_.get(), bullet.get())) {
+			if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
 				player_->OnCollisionWithEnemyBullet();
 				bullet->OnCollisionWithPlayer();
 			}
@@ -150,7 +181,7 @@ void GameScene::CheckAllCollision()
 	// PlayerBullet with Enemy
 	for (auto& bullet : player_->GetBulletList()) {
 		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			if (collisionManager_->CheckOBBxOBB(bullet.get(), enemy.get())) {
+			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
 				bullet->OnCollisionWithEnemy();
 				enemy->OnCollisionWithPlayerBullet();
 			}
@@ -161,7 +192,7 @@ void GameScene::CheckAllCollision()
 	for (auto& playerBullet : player_->GetBulletList()) {
 		for (auto& enemy : enemyManager_->GetEnemyList()) {
 			for (auto& enemyBullet : enemy->GetBulletList()) {
-				if (collisionManager_->CheckOBBxOBB(playerBullet.get(), enemyBullet.get())) {
+				if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
 					playerBullet->OnCollisionWithEnemyBullet();
 					enemyBullet->OnCollisionWithPlayerBullet();
 				}

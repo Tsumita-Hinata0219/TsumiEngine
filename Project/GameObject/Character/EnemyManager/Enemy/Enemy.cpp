@@ -7,7 +7,7 @@ void Enemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Test", "Test.obj");
+	modelManager_->LoadModel("Obj/Test", "Test.obj");
 	model_ = modelManager_->GetModel("Test");
 
 	// BodyTransformの初期化
@@ -28,6 +28,11 @@ void Enemy::Init()
 	stateNo_ = EnemyState::SPAWN;
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Init(this);
+
+	// Colliderの初期化
+	collider_ = std::make_unique<OBBCollider>();
+	collider_->Init();
+	collider_->SetSize(size_);
 }
 
 
@@ -72,6 +77,8 @@ void Enemy::Update()
 		}
 	);
 
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 

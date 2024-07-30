@@ -10,11 +10,16 @@ void Player::Init()
 
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Player", "Player.obj");
+	modelManager_->LoadModel("Obj/Player", "Player.obj");
 	model_ = modelManager_->GetModel("Player");
 
 	// BodyTransformの初期化
 	trans_.Initialize();
+
+	// Colliderの初期化
+	collider_ = std::make_unique<OBBCollider>();
+	collider_->Init();
+	collider_->SetSize(size_);
 }
 
 
@@ -47,6 +52,9 @@ void Player::Update()
 		return false;
 		}
 	);
+
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Player")) {

@@ -5,6 +5,9 @@
 // 初期化処理
 void JsonManager::Initialize()
 {
+	// モデルマネージャーのインスタンスの取得
+	modelManager_ = ModelManager::GetInstance();
+
 	levelData_ = std::make_unique<LevelData>();
 
 }
@@ -20,7 +23,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 	/* ---------- JSOnファイルを読み込んでみる ---------- */
 
 	// 連結してフルパスを得る
-	const std::string fullPath = "Resources/Json" + path + fileName;
+	const std::string fullPath = "Resources/" + path + "/" + fileName;
 
 	// ファイルストリーム
 	std::ifstream file;
@@ -63,7 +66,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 		// 走査してく
 		for (nlohmann::json& object : deserialized["objects"]) {
 
-			ScanningObjects(object, levelData->objects);
+			ScanningObjects(path, object, levelData->objects);
 		}
 	}
 
@@ -74,7 +77,7 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 
 
 // オブジェクトの走査
-void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
+void JsonManager::ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects)
 {
 	// 各オブジェクトには必ず "type"データを入れているので
 	// "type"が検出できなければ不正として実行を停止する
@@ -123,6 +126,32 @@ void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 		}
 
 
+		// モデルの読み込み
+		if (object.contains("load_model")) {
+			
+			// モデル読み込みのフラグが立っていたら
+			if (object["load_model"].is_boolean() && object["load_model"].get<bool>() == true) {
+
+				// ディレクトリ内にある特定の拡張子を持つファイルを取り出す
+				std::string directoryPath = path + "/" + objectData->file_name;
+				// 最初は.objで走査
+				std::string fileName = FindFirstFileWithExtension(directoryPath, ".obj");
+				// なければ.gltf
+				if (fileName.empty()) {
+					fileName = FindFirstFileWithExtension(path, ".gltf");
+				}
+				// それでもなければエラー
+				if (fileName.empty()) {
+					Log("ロードするモデルがない");
+					assert(0);
+				}
+
+				// ディレクトリファイルパスとファイル名からモデルをロードする
+				modelManager_->LoadModel(directoryPath, fileName);
+			}
+		}
+
+
 		// TODO : コライダーの読み込み
 
 
@@ -131,7 +160,7 @@ void JsonManager::ScanningObjects(nlohmann::json& object, std::map<std::string, 
 		if (object.contains("children") && object["children"].is_array()) {
 
 			for (nlohmann::json& child : object["children"]) {
-				ScanningObjects(child, objectData->children);
+				ScanningObjects(path, child, objectData->children);
 			}
 		}
 

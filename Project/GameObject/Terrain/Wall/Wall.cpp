@@ -6,7 +6,6 @@
 void Wall::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Wall", "Wall.obj");
 	model_ = modelManager_->GetModel("Wall");
 
 	JsonManager* jsonManager = JsonManager::GetInstance();

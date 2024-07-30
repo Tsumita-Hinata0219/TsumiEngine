@@ -14,6 +14,7 @@
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 
 #include "../../../Project/GameObject/Terrain/Wall/Wall.h"
+#include "../../../Project/GameObject/Terrain/Floor/Floor.h"
 #include "../../../Project/GameObject/Terrain/Building1/Building1.h"
 
 #include "../../../Project/GameObject/Character/Player/Player.h"
@@ -93,6 +94,9 @@ private:
 
 	// Wall
 	std::unique_ptr<Wall> wall_;
+
+	// Floor
+	std::unique_ptr<Floor> floor_;
 
 	// Building1
 	std::unique_ptr<Building1> building1_;

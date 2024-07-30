@@ -51,6 +51,10 @@ void GameScene::Initialize()
 	wall_ = std::make_unique<Wall>();
 	wall_->Init();
 
+	/* ----- Floor 床 ----- */
+	floor_ = std::make_unique<Floor>();
+	floor_->Init();
+
 	/* ----- Building1 建物1 ----- */
 	building1_ = std::make_unique<Building1>();
 	building1_->Init();
@@ -84,6 +88,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Wall 壁 ----- */
 	wall_->Update();
+	
+	/* ----- Floor 床 ----- */
+	floor_->Update();
 
 	/* ----- Building1 建物1 ----- */
 	building1_->Update();
@@ -126,13 +133,16 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	skydome_->Draw3D();
+	//skydome_->Draw3D();
 
 	/* ----- Ground 床 ----- */
-	ground_->Draw3D();
+	//ground_->Draw3D();
 
 	/* ----- Wall 壁 ----- */
 	wall_->Draw3D();
+
+	/* ----- Floor 床 ----- */
+	floor_->Draw3D();
 
 	/* ----- Building1 建物1 ----- */
 	building1_->Draw3D();

@@ -43,7 +43,7 @@ struct Transform
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize();
+	void Init();
 
 	/// <summary>
 	/// 行列の更新処理

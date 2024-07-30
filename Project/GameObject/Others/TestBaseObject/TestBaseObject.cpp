@@ -10,7 +10,7 @@ void TestBaseObject::Init()
 	modelManager_->LoadModel("Obj/Test", "Test.obj");
 	model_ = modelManager_->GetModel("Test");
 
-	trans_.Initialize();
+	trans_.Init();
 }
 
 

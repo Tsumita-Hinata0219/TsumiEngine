@@ -64,11 +64,23 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
+	// カメラ操作
+	void CameraOperation();
+
+	// カメラの回転処理
+	void CameraRotate();
+
 
 private: // メンバ変数
 
 	// Inputクラス
 	Input* input_ = nullptr;
+
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
+
+	// カメラ本体
+	CameraResource camera_{};
 
 	// モデル
 	std::unique_ptr<Model> model_;
@@ -95,9 +107,18 @@ private: // メンバ変数
 	int kShotInterval_ = 5;
 
 	//Stickの入力を取得
-	Vector2 stickInput_{};
+	Vector2 LStickInput_{};
+	Vector2 RStickInput_{};
 
 	// Light
 	DirectionalLightData light_;
+
+	// カメラの回転に使う変数
+	float cameraAngle_ = 0.0f;
+	const float kCameraRadius_ = 5.0f;
+	const float kAngleSpeed_ = 2.0f;
+
+	// プレイヤーからのオフセット
+	Vector3 cameraOffset_{};
 };
 

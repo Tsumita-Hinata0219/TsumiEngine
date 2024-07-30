@@ -9,7 +9,7 @@ void Skydome::Init()
 	modelManager_->LoadModel("Obj/Skydome", "Skydome.obj");
 	model_ = modelManager_->GetModel("Skydome");
 
-	trans_.Initialize();
+	trans_.Init();
 	trans_.srt.scale = { 10000.0f, 10000.0f, 10000.0f };
 }
 

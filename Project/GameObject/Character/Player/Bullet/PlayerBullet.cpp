@@ -11,7 +11,7 @@ void PlayerBullet::Init()
 	model_ = modelManager_->GetModel("ball");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	trans_.Initialize();
+	trans_.Init();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 

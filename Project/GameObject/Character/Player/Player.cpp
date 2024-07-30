@@ -8,13 +8,23 @@ void Player::Init()
 	// Inputクラス
 	input_ = Input::GetInstance();
 
+	// カメラ
+	cameraManager_ = CameraManager::GetInstance();
+	camera_.Init();
+	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
+	cameraManager_->ReSetData(camera_);
+	// プレイヤーからのオフセット
+	cameraOffset_ = { 0.0f, 2.0f, -10.0f };
+
+
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Player", "Player.obj");
 	model_ = modelManager_->GetModel("Player");
 
 	// BodyTransformの初期化
-	trans_.Initialize();
+	trans_.Init();
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -26,6 +36,12 @@ void Player::Init()
 // 更新処理
 void Player::Update()
 {
+	// カメラの更新処理
+	camera_.Update();
+
+	// カメラ操作
+	CameraOperation();
+
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
@@ -57,7 +73,12 @@ void Player::Update()
 	collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
+	if (ImGui::TreeNode("Camera")) {
+		camera_.DrawImGui();
+		ImGui::TreePop();
+	}
 	if (ImGui::TreeNode("Player")) {
+
 		trans_.DrawImGui();
 		ImGui::Text("");
 		ImGui::Text("ShotFrame = %d", shotPressFrame_);
@@ -157,23 +178,22 @@ void Player::Move()
 // プレイヤー本体の姿勢処理
 void Player::CalcBodyRotate()
 {
-	// 射撃時はRStickのInputを取得
+	// 回転に使うVector2
+	Vector2 stickInput{};
+
+	// 射撃ボタン押下時はRStickの入力を取得
 	if (input_->Press(DIK_SPACE) || input_->Press(PadData::RIGHT_SHOULDER)) {
-		
-		//Stickの入力を取得
-		stickInput_ = input_->GetRStick();
+		stickInput = input_->GetRStick(); // RStick
 	}
 	else {
-		//Stickの入力を取得
-		stickInput_ = input_->GetLStick();
+		stickInput = input_->GetLStick(); // LStick
 	}
 
-	// Stick入力がいていい範囲を超えている場合、角度を更新
 	// stick入力が一定範囲を超えている場合、角度を更新
-	if (std::abs(stickInput_.x) > 0.2f || std::abs(stickInput_.y) > 0.2f) {
+	if (std::abs(stickInput.x) > 0.2f || std::abs(stickInput.y) > 0.2f) {
 
 		// Y軸周り角度(θy)
-		trans_.srt.rotate.y = std::atan2(stickInput_.x, stickInput_.y);
+		trans_.srt.rotate.y = std::atan2(stickInput.x, stickInput.y);
 	}
 }
 
@@ -221,5 +241,31 @@ void Player::CreateNewBullet()
 
 	// リストに追加
 	bulletList_.push_back(newBullet);
+}
+
+
+// カメラ操作
+void Player::CameraOperation()
+{
+	// カメラの回転処理
+	CameraRotate();
+}
+
+
+// カメラの回転処理
+void Player::CameraRotate()
+{
+	// stickの入力を受け取るベクトル
+	Vector2 stickInput = input_->GetRStick();
+
+	// stick入力が一定範囲を超えている場合、角度を更新
+	if (std::abs(stickInput.x) > 0.2f) {
+
+		// 入力に基づいて角度を更新
+		cameraAngle_ = stickInput.x * kAngleSpeed_;
+	}
+
+	// 回す
+	camera_.srt.rotate.y += cameraAngle_;
 }
 

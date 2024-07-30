@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void Transform::Initialize()
+void Transform::Init()
 {
 	matWorld = Matrix4x4::identity;
 	UpdateMatrix();

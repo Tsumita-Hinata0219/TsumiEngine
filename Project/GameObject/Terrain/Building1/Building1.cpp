@@ -11,7 +11,7 @@ void Building1::Init()
 
 	JsonManager* jsonManager = JsonManager::GetInstance();
 
-	trans_.Initialize();
+	trans_.Init();
 	trans_.srt.translate =
 		jsonManager->GetObjectSRT("Building").translate;
 }

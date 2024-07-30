@@ -196,16 +196,16 @@ bool GamePadInput::ReleaseButton(PadData button) const
 Vector2 GamePadInput::GetLStick(const float& mode)
 {
 	return {
-		std::floor((joyState_.Gamepad.sThumbLX / mode) * 10.0f) / 10.0f,
-		std::floor((joyState_.Gamepad.sThumbLX / mode) * 10.0f) / 10.0f };
+		std::floor((joyState_.Gamepad.sThumbLX / mode) * 100.0f) / 100.0f,
+		std::floor((joyState_.Gamepad.sThumbLY / mode) * 100.0f) / 100.0f };
 }
 
 // Rスティック
 Vector2 GamePadInput::GetRStick(const float& mode)
 {
 	return {
-		std::floor((joyState_.Gamepad.sThumbRX / mode) * 10.0f) / 10.0f,
-		std::floor((joyState_.Gamepad.sThumbRY / mode) * 10.0f) / 10.0f };
+		std::floor((joyState_.Gamepad.sThumbRX / mode) * 100.0f) / 100.0f,
+		std::floor((joyState_.Gamepad.sThumbRY / mode) * 100.0f) / 100.0f };
 }
 
 // -------------------------------------------------------------------------

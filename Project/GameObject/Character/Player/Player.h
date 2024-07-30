@@ -70,6 +70,8 @@ private:
 	// カメラの回転処理
 	void CameraRotate();
 
+	// カメラのフォロー処理
+	void CameraFollow();
 
 private: // メンバ変数
 
@@ -116,7 +118,7 @@ private: // メンバ変数
 	// カメラの回転に使う変数
 	float cameraAngle_ = 0.0f;
 	const float kCameraRadius_ = 5.0f;
-	const float kAngleSpeed_ = 2.0f;
+	const float kAngleSpeed_ = 0.1f;
 
 	// プレイヤーからのオフセット
 	Vector3 cameraOffset_{};

@@ -12,11 +12,8 @@ void Player::Init()
 	cameraManager_ = CameraManager::GetInstance();
 	camera_.Init();
 	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
+	//camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
 	cameraManager_->ReSetData(camera_);
-	// プレイヤーからのオフセット
-	cameraOffset_ = { 0.0f, 2.0f, -10.0f };
-
 
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
@@ -151,19 +148,20 @@ void Player::Move()
 	};
 
 	// パッドの処理
-	if (input_->GetLStick().x <= -0.3f)
+	L_StickInput_ = input_->GetLStick();
+	if (L_StickInput_.x <= -0.3f)
 	{
 		velocity_.x = -1.0f;
 	}
-	if (input_->GetLStick().x >= 0.3f)
+	if (L_StickInput_.x >= 0.3f)
 	{
 		velocity_.x = 1.0f;
 	}
-	if (input_->GetLStick().y <= -0.3f)
+	if (L_StickInput_.y <= -0.3f)
 	{
 		velocity_.z = -1.0f;
 	}
-	if (input_->GetLStick().y >= 0.3f)
+	if (L_StickInput_.y >= 0.3f)
 	{
 		velocity_.z = 1.0f;
 	}
@@ -254,6 +252,9 @@ void Player::CameraOperation()
 {
 	// カメラの回転処理
 	CameraRotate();
+
+	// カメラのフォロー処理
+	CameraFollow();
 }
 
 
@@ -268,9 +269,23 @@ void Player::CameraRotate()
 
 		// 入力に基づいて角度を更新
 		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
-	}
 
-	// 回す
-	//camera_.srt.rotate.y += cameraAngle_;
+		// 回す
+		camera_.srt.rotate.y += cameraAngle_;
+	}
+}
+
+
+// カメラのフォロー処理
+void Player::CameraFollow()
+{
+	// オフセットの設定
+	cameraOffset_ = { 0.0f, 5.0f, -30.0f };
+
+	// オフセットをカメラの回転に合わせて回転させる
+	cameraOffset_ = TransformNormal(cameraOffset_, camera_.rotateMat);
+
+	// ターゲットの座標とオフセットをカメラの座標に加算する
+	camera_.srt.translate = trans_.srt.translate + cameraOffset_;
 }
 

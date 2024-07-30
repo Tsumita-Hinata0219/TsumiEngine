@@ -9,7 +9,6 @@ void Wall::Init()
 	model_ = modelManager_->GetModel("Wall");
 
 	JsonManager* jsonManager = JsonManager::GetInstance();
-
 	trans_.Initialize();
 	trans_.srt.translate =
 		jsonManager->GetObjectSRT("Wall").translate;

@@ -110,6 +110,7 @@ void GameScene::Update(GameManager* state)
 	ImGui::Begin("GameScene");
 
 	ImGui::Text("");
+	cameraResource_.DrawImGui();
 	ImGui::Text("");
 
 	ImGui::End();

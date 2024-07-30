@@ -46,7 +46,7 @@ void Player::Update()
 	Move();
 
 	// プレイヤー本体の姿勢処理
-	CalcBodyRotate();
+	//CalcBodyRotate();
 
 	// 射撃の処理
 	ExecuteShot();
@@ -130,51 +130,43 @@ void Player::Move()
 	velocity_ = Vector3::zero;
 
 	// キーの処理
-	if (input_->Press(DIK_W))
-	{
-		velocity_.z = moveVector_;
-	};
-	if (input_->Press(DIK_A))
-	{
-		velocity_.x = -moveVector_;
-	};
-	if (input_->Press(DIK_S))
-	{
-		velocity_.z = -moveVector_;
-	};
-	if (input_->Press(DIK_D))
-	{
-		velocity_.x = moveVector_;
-	};
+	KeyMove();
 
 	// パッドの処理
+	PadMove();
+}
+void Player::KeyMove()
+{
+	// キーの処理
+	if (input_->Press(DIK_W)) {};
+	if (input_->Press(DIK_A)) {};
+	if (input_->Press(DIK_S)) {};
+	if (input_->Press(DIK_D)) {};
+}
+void Player::PadMove()
+{
+	// stickの入力を受け取る
 	L_StickInput_ = input_->GetLStick();
-	if (L_StickInput_.x <= -0.3f)
-	{
-		velocity_.x = -1.0f;
-	}
-	if (L_StickInput_.x >= 0.3f)
-	{
-		velocity_.x = 1.0f;
-	}
-	if (L_StickInput_.y <= -0.3f)
-	{
-		velocity_.z = -1.0f;
-	}
-	if (L_StickInput_.y >= 0.3f)
-	{
-		velocity_.z = 1.0f;
-	}
 
-	// 正規化
-	if (velocity_.x != 0.0f || velocity_.z != 0.0f) {
-		float length = Length({ velocity_.x, velocity_.z });
-		velocity_.x /= length;
-		velocity_.z /= length;
-	}
+	// stick入力が一定範囲を超えている場合更新
+	if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
 
-	// velocityに速度を掛けて座標に加算
-	trans_.srt.translate += (velocity_ * moveVector_);
+		// 移動量
+		velocity_ = {
+			L_StickInput_.x,
+			0.0f,
+			L_StickInput_.y,
+		};
+
+		// 移動量に速さを反映
+		velocity_ = Normalize(velocity_) * moveSpeed_;
+
+		// 移動ベクトルをカメラの角度だけ回転する
+		velocity_ = TransformNormal(velocity_, camera_.srt.rotate);
+
+		// 移動
+		trans_.srt.translate += velocity_;
+	}
 }
 
 

@@ -51,6 +51,8 @@ private:
 
 	// 移動処理
 	void Move();
+	void KeyMove();
+	void PadMove();
 
 	// プレイヤー本体の姿勢処理
 	void CalcBodyRotate();
@@ -95,7 +97,7 @@ private: // メンバ変数
 
 	// 移動速度
 	Vector3 velocity_{};
-	float moveVector_ = 0.3f;
+	float moveSpeed_ = 0.3f;
 	float kBulletSpeed_ = 0.5f;
 
 	// コライダー

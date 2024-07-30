@@ -216,26 +216,26 @@ public: // メンバ関数
 	/// <summary>
 	/// 押されていない
 	/// </summary>
-	static bool None(uint32_t keyNum);
-	static bool None(PadData button);
+	bool None(uint32_t keyNum);
+	bool None(PadData button);
 
 	/// <summary>
 	/// 押した瞬間
 	/// </summary>
-	static bool Trigger(uint32_t keyNum);
-	static bool Trigger(PadData button);
+	bool Trigger(uint32_t keyNum);
+	bool Trigger(PadData button);
 
 	/// <summary>
 	/// 押しっぱなし
 	/// </summary>
-	static bool Press(uint32_t keyNum);
-	static bool Press(PadData button);
+	bool Press(uint32_t keyNum);
+	bool Press(PadData button);
 
 	/// <summary>
 	/// 離された瞬間
 	/// </summary>
-	static bool Release(uint32_t keyNum);
-	static bool Release(PadData button);
+	bool Release(uint32_t keyNum);
+	bool Release(PadData button);
 
 	/// <summary>
 	/// Lスティック

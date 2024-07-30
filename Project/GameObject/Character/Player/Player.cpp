@@ -86,6 +86,11 @@ void Player::Update()
 		ImGui::Text("");
 		light_.DrawImGui();
 
+		ImGui::Text("");
+		ImGui::Text("Stick");
+		ImGui::DragFloat2("R_Stick", &R_StickInput_.x, 0.0f);
+		ImGui::DragFloat2("L_Stick", &L_StickInput_.x, 0.0f);
+
 		ImGui::TreePop();
 	}
 #endif // _DEBUG
@@ -255,17 +260,17 @@ void Player::CameraOperation()
 // カメラの回転処理
 void Player::CameraRotate()
 {
-	// stickの入力を受け取るベクトル
-	Vector2 stickInput = input_->GetRStick();
+	// stickの入力を受け取る
+	R_StickInput_ = input_->GetRStick();
 
 	// stick入力が一定範囲を超えている場合、角度を更新
-	if (std::abs(stickInput.x) > 0.2f) {
+	if (std::abs(R_StickInput_.x) > 0.2f) {
 
 		// 入力に基づいて角度を更新
-		cameraAngle_ = stickInput.x * kAngleSpeed_;
+		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
 	}
 
 	// 回す
-	camera_.srt.rotate.y += cameraAngle_;
+	//camera_.srt.rotate.y += cameraAngle_;
 }
 

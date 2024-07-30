@@ -107,8 +107,8 @@ private: // メンバ変数
 	int kShotInterval_ = 5;
 
 	//Stickの入力を取得
-	Vector2 LStickInput_{};
-	Vector2 RStickInput_{};
+	Vector2 L_StickInput_{};
+	Vector2 R_StickInput_{};
 
 	// Light
 	DirectionalLightData light_;

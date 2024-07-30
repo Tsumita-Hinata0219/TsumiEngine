@@ -107,7 +107,7 @@ std::string FindFirstFileWithExtension(const std::string& directoryPath, const s
 	std::vector<std::string> filenames;
 
 	// ディレクトリ内の全ファイル名を取得
-	for (const auto& entry : fs::directory_iterator(directoryPath)) {
+	for (const auto& entry : fs::directory_iterator("Resources/" + directoryPath)) {
 		if (entry.is_regular_file()) {
 			filenames.push_back(entry.path().filename().string());
 		}

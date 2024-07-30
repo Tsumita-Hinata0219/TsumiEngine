@@ -94,8 +94,8 @@ private: // メンバ関数
 	/// <summary>
 	/// 
 	/// </summary>
-	ModelDatas LoadOBJ(const std::string& path, const std::string& fileName);
-	ModelDatas LoadGLTF(const std::string& path, const std::string& fileName);
+	void LoadOBJ(ModelDatas* newData, const std::string& path, const std::string& fileName);
+	void LoadGLTF(ModelDatas* newData, const std::string& path, const std::string& fileName);
 
 	/// <summary>
 	/// 一回読み込んだものは読み込まない

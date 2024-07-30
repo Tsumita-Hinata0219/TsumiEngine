@@ -21,8 +21,9 @@ void GameScene::Initialize()
 {
 	/* ----- JsonManager Jsonマネージャー ----- */
 	jsonManager_ = JsonManager::GetInstance();
+	jsonManager_->Initialize();
 	jsonManager_->LoadSceneFile("Json", "kari.json");
-	jsonManager_->LoadSceneFile("Json", "demo.json");
+	jsonManager_->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();

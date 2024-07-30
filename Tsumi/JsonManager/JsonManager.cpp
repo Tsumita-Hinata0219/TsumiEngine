@@ -130,27 +130,24 @@ void JsonManager::ScanningObjects(const std::string& path, nlohmann::json& objec
 		if (object.contains("load_model")) {
 			
 			// モデル読み込みのフラグが立っていたら
-			if (object["load_model"] == "true") {
+			if (object["load_model"].is_boolean() && object["load_model"].get<bool>() == true) {
 
 				// ディレクトリ内にある特定の拡張子を持つファイルを取り出す
+				std::string directoryPath = path + "/" + objectData->file_name;
 				// 最初は.objで走査
-				std::string fileName = FindFirstFileWithExtension(path, ".obj");
+				std::string fileName = FindFirstFileWithExtension(directoryPath, ".obj");
 				// なければ.gltf
 				if (fileName.empty()) {
-
 					fileName = FindFirstFileWithExtension(path, ".gltf");
 				}
 				// それでもなければエラー
 				if (fileName.empty()) {
-					Log("取り出すファイルがない");
+					Log("ロードするモデルがない");
 					assert(0);
 				}
 
-				// ファイルパス
-				std::string filePath = path + objectData->file_name;
-
-				// ファイルパスとファイル名からモデルをロードする
-				modelManager_->LoadModel(filePath, fileName);
+				// ディレクトリファイルパスとファイル名からモデルをロードする
+				modelManager_->LoadModel(directoryPath, fileName);
 			}
 		}
 

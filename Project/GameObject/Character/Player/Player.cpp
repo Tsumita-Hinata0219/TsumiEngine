@@ -46,7 +46,7 @@ void Player::Update()
 	Move();
 
 	// プレイヤー本体の姿勢処理
-	//CalcBodyRotate();
+	CalcBodyRotate();
 
 	// 射撃の処理
 	ExecuteShot();
@@ -173,23 +173,14 @@ void Player::PadMove()
 // プレイヤー本体の姿勢処理
 void Player::CalcBodyRotate()
 {
-	// 回転に使うVector2
-	Vector2 stickInput{};
+	// Rstick入力が一定範囲を超えている場合、カメラの姿勢を使用する
+	if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
 
-	// 射撃ボタン押下時はRStickの入力を取得
-	if (input_->Press(DIK_SPACE) || input_->Press(PadData::RIGHT_SHOULDER)) {
-		stickInput = input_->GetRStick(); // RStick
-	}
-	else {
-		stickInput = input_->GetLStick(); // LStick
+		playerRad_ = camera_.srt.rotate.y;
 	}
 
-	// stick入力が一定範囲を超えている場合、角度を更新
-	if (std::abs(stickInput.x) > 0.2f || std::abs(stickInput.y) > 0.2f) {
-
-		// Y軸周り角度(θy)
-		trans_.srt.rotate.y = std::atan2(stickInput.x, stickInput.y);
-	}
+	// カメラの角度を使い姿勢を制御
+	trans_.srt.rotate.y = playerRad_;
 }
 
 

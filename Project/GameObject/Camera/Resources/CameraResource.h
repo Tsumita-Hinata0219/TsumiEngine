@@ -34,7 +34,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// ワールド座標の取得
-	Vector3 GetWorldPosition();
+	Vector3 GetWorldPos();
 
 #pragma endregion 
 

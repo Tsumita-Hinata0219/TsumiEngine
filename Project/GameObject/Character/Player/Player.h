@@ -120,9 +120,12 @@ private: // メンバ変数
 	// カメラの回転に使う変数
 	float cameraAngle_ = 0.0f;
 	const float kCameraRadius_ = 5.0f;
-	const float kAngleSpeed_ = 0.1f;
+	const float kAngleSpeed_ = 0.05f;
 
 	// プレイヤーからのオフセット
 	Vector3 cameraOffset_{};
+
+	// プレイヤーのY軸姿勢制御値
+	float playerRad_ = 0.0f;
 };
 

@@ -8,6 +8,7 @@
 
 #include "../Scene/TitleScene/TitleScene.h"
 #include "../Scene/GameScene/GameScene.h"
+#include "../Scene/ResultScene/ResultScene.h"
 
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
 

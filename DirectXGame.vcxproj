@@ -188,6 +188,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Tsumi\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
@@ -330,6 +331,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\IScene.h" />
+    <ClInclude Include="Project\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Project\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\3D\DrawSystem\DrawSystem.h" />

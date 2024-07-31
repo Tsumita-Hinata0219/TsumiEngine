@@ -27,6 +27,9 @@ void Player::Init()
 	collider_ = std::make_unique<OBBCollider>();
 	collider_->Init();
 	collider_->SetSize(size_);
+
+	// キルカウントを0で初期化
+	killCount_ = 0;
 }
 
 
@@ -68,6 +71,13 @@ void Player::Update()
 
 	// ColliderのSRTの設定
 	collider_->SetSrt(trans_.srt);
+
+	if (input_->Trigger(DIK_K)) {
+		AddKillCount();
+	}
+	if (input_->Trigger(DIK_L)) {
+		AddKillCount(3);
+	}
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {

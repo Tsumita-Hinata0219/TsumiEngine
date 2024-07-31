@@ -27,6 +27,12 @@ void TitleScene::Initialize()
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
 
+	/* ----- Title タイトル ----- */
+	titleTexHD_ = TextureManager::LoadTexture("Texture/Title", "TitleSceneBG.png");
+	titleSp_ = std::make_unique<Sprite>();
+	titleSp_->Initialize({ 1280.0f, 720.0f });
+	titleWt_.Initialize();
+
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
 	fadeManager_->Initialize(func_FadeIn);
@@ -40,8 +46,11 @@ void TitleScene::Update(GameManager* state)
 {
 	state;
 
-	// カメラの更新
+	/* ----- Camera カメラ ----- */
 	camera_.Update();
+
+	/* ----- Title タイトル ----- */
+	titleWt_.UpdateMatrix();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -90,6 +99,9 @@ void TitleScene::ModelDraw()
 /// </summary>
 void TitleScene::FrontSpriteDraw()
 {
+	/* ----- Title タイトル ----- */
+	titleSp_->Draw(titleTexHD_, titleWt_);
+
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_->Draw();
 }

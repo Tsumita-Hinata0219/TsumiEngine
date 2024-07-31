@@ -57,6 +57,11 @@ private:
 	// カメラ本体
 	CameraResource camera_{};
 
+	// タイトルテクスチャ
+	uint32_t titleTexHD_{};
+	WorldTransform titleWt_{};;
+	std::unique_ptr<Sprite> titleSp_;
+
 	// FadeManager
 	FadeManager* fadeManager_ = nullptr;
 

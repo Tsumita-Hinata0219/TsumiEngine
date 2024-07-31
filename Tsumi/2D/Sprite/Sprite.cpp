@@ -69,7 +69,6 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform) {
 
 	// DescriptorTableを設定する
 	if (!texHandle == 0) {
-		DescriptorManager::SetGraphicsRootDescriptorTable(3, texHandle);
 		SRVManager::SetGraphicsRootDescriptorTable(3, texHandle);
 	}
 

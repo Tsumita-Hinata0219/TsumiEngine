@@ -21,6 +21,15 @@ void TitleScene::Initialize()
 {
 	/* ----- Input インプット ----- */
 	input_ = Input::GetInstance();
+
+	/* ----- Camera カメラ ----- */
+	cameraManager_ = CameraManager::GetInstance();
+	camera_.Init();
+	cameraManager_->ReSetData(camera_);
+
+	/* ----- FadeManager フェードマネージャー ----- */
+	fadeManager_ = FadeManager::GetInstance();
+	fadeManager_->Initialize(func_FadeIn);
 }
 
 
@@ -30,6 +39,22 @@ void TitleScene::Initialize()
 void TitleScene::Update(GameManager* state)
 {
 	state;
+
+	// カメラの更新
+	camera_.Update();
+
+	// ボタン押下でフェードイン
+	if (input_->Trigger(PadData::A)) {
+		isFadeFunc_ = true;
+	}
+
+	// フェード処理のフラグが立っていたらフェード処理に入る
+	if (isFadeFunc_) {
+
+		if (fadeManager_->IsFadeIn()) {
+			state->ChangeSceneState(new GameScene);
+		}
+	}
 
 #ifdef _DEBUG
 
@@ -65,4 +90,6 @@ void TitleScene::ModelDraw()
 /// </summary>
 void TitleScene::FrontSpriteDraw()
 {
+	/* ----- FadeManager フェードマネージャー ----- */
+	fadeManager_->Draw();
 }

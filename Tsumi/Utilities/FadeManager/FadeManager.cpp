@@ -6,7 +6,7 @@
 void FadeManager::Initialize(FunctionFade func)
 {
 	// テクスチャの読み込み
-	FadeManager::GetInstance()->texHD_ = TextureManager::LoadTexture("", "Fade.png");
+	FadeManager::GetInstance()->texHD_ = TextureManager::LoadTexture("Texture", "Fade.png");
 
 	// スプライトの初期化
 	FadeManager::GetInstance()->sprite_ = make_unique<Sprite>();

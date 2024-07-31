@@ -3,6 +3,7 @@
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
+#include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 
 
 class TitleScene : public IScene {
@@ -49,5 +50,17 @@ private:
 
 	// Input
 	Input* input_ = nullptr;
+
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
+
+	// カメラ本体
+	CameraResource camera_{};
+
+	// FadeManager
+	FadeManager* fadeManager_ = nullptr;
+
+	// フェード処理のフラグ
+	bool isFadeFunc_ = false;
 };
 

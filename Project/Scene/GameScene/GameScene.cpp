@@ -97,7 +97,7 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- SceneChange シーンチェンジ ----- */
 	// プレイヤーのキルカウントが一定数を超えたらシーンチェンジ
-	if (player_->GetKillCount() >= 15) {
+	if (player_->GetKillCount() >= 15) { // <- ここのマジックナンバー後で修正する
 		state->ChangeSceneState(new ResultScene);
 		return;
 	}

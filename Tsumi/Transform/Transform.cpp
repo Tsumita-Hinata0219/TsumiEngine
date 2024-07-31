@@ -35,6 +35,7 @@ void Transform::DrawImGui(std::string label)
 // ワールド座標の取得
 Vector3 Transform::GetWorldPos()
 {
+	matWorld = MakeAffineMatrix(srt.scale, srt.rotate, srt.translate);
 	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
 }
 

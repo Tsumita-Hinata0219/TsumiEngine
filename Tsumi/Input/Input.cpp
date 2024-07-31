@@ -196,16 +196,16 @@ bool GamePadInput::ReleaseButton(PadData button) const
 Vector2 GamePadInput::GetLStick(const float& mode)
 {
 	return {
-		joyState_.Gamepad.sThumbLX / mode,
-		joyState_.Gamepad.sThumbLY / mode };
+		std::floor((joyState_.Gamepad.sThumbLX / mode) * 100.0f) / 100.0f,
+		std::floor((joyState_.Gamepad.sThumbLY / mode) * 100.0f) / 100.0f };
 }
 
 // Rスティック
 Vector2 GamePadInput::GetRStick(const float& mode)
 {
 	return {
-		joyState_.Gamepad.sThumbRX / mode,
-		joyState_.Gamepad.sThumbRY / mode };
+		std::floor((joyState_.Gamepad.sThumbRX / mode) * 100.0f) / 100.0f,
+		std::floor((joyState_.Gamepad.sThumbRY / mode) * 100.0f) / 100.0f };
 }
 
 // -------------------------------------------------------------------------
@@ -245,11 +245,11 @@ void Input::BeginFrame()
 /// </summary>
 bool Input::None(uint32_t keyNum)
 {
-	return Input::GetInstance()->keysInput_->NoneKey(keyNum);
+	return keysInput_->NoneKey(keyNum);
 }
 bool Input::None(PadData button)
 {
-	return Input::GetInstance()->gamePadInput_->NoneButton(button);
+	return gamePadInput_->NoneButton(button);
 }
 
 /// <summary>
@@ -257,11 +257,11 @@ bool Input::None(PadData button)
 /// </summary>
 bool Input::Trigger(uint32_t keyNum)
 {
-	return Input::GetInstance()->keysInput_->TriggerKey(keyNum);
+	return keysInput_->TriggerKey(keyNum);
 }
 bool Input::Trigger(PadData button)
 {
-	return Input::GetInstance()->gamePadInput_->TriggerButton(button);
+	return gamePadInput_->TriggerButton(button);
 }
 
 /// <summary>
@@ -269,11 +269,11 @@ bool Input::Trigger(PadData button)
 /// </summary>
 bool Input::Press(uint32_t keyNum)
 {
-	return Input::GetInstance()->keysInput_->PressKeys(keyNum);
+	return keysInput_->PressKeys(keyNum);
 }
 bool Input::Press(PadData button)
 {
-	return Input::GetInstance()->gamePadInput_->PressButton(button);
+	return gamePadInput_->PressButton(button);
 }
 
 /// <summary>
@@ -281,11 +281,11 @@ bool Input::Press(PadData button)
 /// </summary>
 bool Input::Release(uint32_t keyNum)
 {
-	return Input::GetInstance()->keysInput_->ReleaseKeys(keyNum);
+	return keysInput_->ReleaseKeys(keyNum);
 }
 bool Input::Release(PadData button)
 {
-	return Input::GetInstance()->gamePadInput_->ReleaseButton(button);
+	return gamePadInput_->ReleaseButton(button);
 }
 
 /// <summary>
@@ -293,7 +293,7 @@ bool Input::Release(PadData button)
 /// </summary>
 Vector2 Input::GetLStick(const float& mode)
 {
-	return Input::GetInstance()->gamePadInput_->GetLStick(mode);
+	return gamePadInput_->GetLStick(mode);
 }
 
 /// <summary>
@@ -301,7 +301,7 @@ Vector2 Input::GetLStick(const float& mode)
 /// </summary>
 Vector2 Input::GetRStick(const float& mode)
 {
-	return Input::GetInstance()->gamePadInput_->GetRStick(mode);
+	return gamePadInput_->GetRStick(mode);
 }
 
 

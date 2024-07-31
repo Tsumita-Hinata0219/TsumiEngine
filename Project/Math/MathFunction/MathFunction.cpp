@@ -316,6 +316,32 @@ Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m)
 	return  result;
 }
 
+// Y軸周りに回転させる関数
+Vector3 YawRotation(const Vector3& vec, float angle)
+{
+	// Y軸回転行列を適用
+	float cosYaw = std::cos(angle);
+	float sinYaw = std::sin(angle);
+
+	return {
+		vec.x * cosYaw - vec.z * sinYaw,
+		vec.y,
+		vec.x * sinYaw + vec.z * cosYaw
+	};
+}
+Vector3 TransformNormal(const Vector3& vec, const Vector3& rotation)
+{
+	// Y軸回転行列を適用
+	float cosYaw = std::cos(rotation.y);
+	float sinYaw = std::sin(rotation.y);
+
+	return {
+		vec.x * cosYaw + vec.z * sinYaw,
+		vec.y,
+		-vec.x * sinYaw + vec.z * cosYaw
+	};
+}
+
 // ベクトル変換
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 	Vector3 result{};
@@ -329,11 +355,6 @@ Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m) {
 	return result;
 }
 
-// Vector2 -> Vector3 への変換
-//Vector3 ConvertVector(const Vector2& v) {
-//	return { v.x, v.y, 0.0f };
-//}
-
 // Vector2をそのままVector3に入れる
 Vector3 CreateVector3FromVector2(const Vector2& v) {
 	return { v.x, v.y, 1.0f };
@@ -341,14 +362,6 @@ Vector3 CreateVector3FromVector2(const Vector2& v) {
 
 // CatmullRom補間
 Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vector3& p2, const Vector3& p3, float t) {
-
-	//float s = 0.5f;
-	//float t2 = t * t;
-	//float t3 = t * t * t;
-	//Vector3 hr1 = (-p0 + (3.0f * p1) - (3.0f * p2) + p3) * t3;
-	//Vector3 hr2 = ((2.0f * p0) - (5.0f * p1) + (4.0f * p2) - p3) * t2;
-	//Vector3 hr3 = ((-p0 + p2) * t) + (2.0f + p1);
-	//return (s * (hr1 + hr2 + hr3));
 
 	float t2 = t * t;
 	float t3 = t * t * t;

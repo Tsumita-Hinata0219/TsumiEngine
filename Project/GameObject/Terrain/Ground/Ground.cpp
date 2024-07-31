@@ -9,7 +9,7 @@ void Ground::Init()
 	modelManager_->LoadModel("Obj/Ground", "Ground.obj");
 	model_ = modelManager_->GetModel("Ground");
 
-	trans_.Initialize();
+	trans_.Init();
 	trans_.srt.scale = { 500.0f, 1.0f, 500.0f };
 	trans_.srt.translate.y = -10.0f;
 }

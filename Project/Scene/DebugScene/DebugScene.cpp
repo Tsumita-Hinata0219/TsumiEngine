@@ -48,7 +48,7 @@ void DebugScene::Initialize()
 	modelManager_->LoadModel("Obj/Test", "Test.obj");
 	demoModel_ = modelManager_->GetModel("Test");
 
-	transformA_.Initialize();
+	transformA_.Init();
 	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
 	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
 	transformA_.srt.translate = { -2.0f,0.0f,0.0f };

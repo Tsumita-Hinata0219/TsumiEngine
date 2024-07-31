@@ -51,6 +51,8 @@ private:
 
 	// 移動処理
 	void Move();
+	void KeyMove();
+	void PadMove();
 
 	// プレイヤー本体の姿勢処理
 	void CalcBodyRotate();
@@ -64,11 +66,25 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
+	// カメラ操作
+	void CameraOperation();
+
+	// カメラの回転処理
+	void CameraRotate();
+
+	// カメラのフォロー処理
+	void CameraFollow();
 
 private: // メンバ変数
 
 	// Inputクラス
 	Input* input_ = nullptr;
+
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
+
+	// カメラ本体
+	CameraResource camera_{};
 
 	// モデル
 	std::unique_ptr<Model> model_;
@@ -81,7 +97,7 @@ private: // メンバ変数
 
 	// 移動速度
 	Vector3 velocity_{};
-	float moveVector_ = 0.3f;
+	float moveSpeed_ = 0.3f;
 	float kBulletSpeed_ = 0.5f;
 
 	// コライダー
@@ -95,9 +111,21 @@ private: // メンバ変数
 	int kShotInterval_ = 5;
 
 	//Stickの入力を取得
-	Vector2 stickInput_{};
+	Vector2 L_StickInput_{};
+	Vector2 R_StickInput_{};
 
 	// Light
 	DirectionalLightData light_;
+
+	// カメラの回転に使う変数
+	float cameraAngle_ = 0.0f;
+	const float kCameraRadius_ = 5.0f;
+	const float kAngleSpeed_ = 0.05f;
+
+	// プレイヤーからのオフセット
+	Vector3 cameraOffset_{};
+
+	// プレイヤーのY軸姿勢制御値
+	float playerRad_ = 0.0f;
 };
 

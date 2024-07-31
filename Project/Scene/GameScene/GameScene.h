@@ -82,10 +82,6 @@ private:
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
 
-	// メインカメラ
-	CameraManager* cameraManager_ = nullptr;
-	CameraResource cameraResource_;
-
 	// Skydome
 	std::unique_ptr<Skydome> skydome_;
 

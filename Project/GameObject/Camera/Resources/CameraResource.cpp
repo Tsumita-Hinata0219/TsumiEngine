@@ -80,7 +80,7 @@ void CameraResource::UpdateBuffer()
 	bufferData->view = viewMatrix;
 	bufferData->viewProjection = projectionMatrix;
 	bufferData->orthoGraphic = orthoGraphicMatrix;
-	bufferData->cameraPosition = GetWorldPosition();
+	bufferData->cameraPosition = GetWorldPos();
 
 	// バッファーに書き込み
 	buffer->Map();
@@ -90,7 +90,7 @@ void CameraResource::UpdateBuffer()
 
 
 // ワールド座標の取得
-Vector3 CameraResource::GetWorldPosition()
+Vector3 CameraResource::GetWorldPos()
 {
 	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
 }

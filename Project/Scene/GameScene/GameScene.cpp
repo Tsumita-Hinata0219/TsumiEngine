@@ -32,13 +32,6 @@ void GameScene::Initialize()
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Initialize();
 
-	/* ----- Camera カメラ ----- */
-	cameraResource_.Init();
-	cameraResource_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	cameraResource_.srt.translate = { 0.0f, 20.0f, -60.0f };
-	cameraManager_ = CameraManager::GetInstance();
-	cameraManager_->ReSetData(cameraResource_);
-
 	/* ----- Skydome 天球 ----- */
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
@@ -66,7 +59,7 @@ void GameScene::Initialize()
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->SetPlayer(player_.get());
-	enemyManager_->Initialize();
+	enemyManager_->Init();
 }
 
 
@@ -76,9 +69,6 @@ void GameScene::Initialize()
 void GameScene::Update(GameManager* state)
 {
 	state;
-
-	/* ----- Camera カメラ ----- */
-	cameraResource_.Update();
 
 	/* ----- Skydome 天球 ----- */
 	skydome_->Update();
@@ -110,7 +100,6 @@ void GameScene::Update(GameManager* state)
 	ImGui::Begin("GameScene");
 
 	ImGui::Text("");
-	cameraResource_.DrawImGui();
 	ImGui::Text("");
 
 	ImGui::End();

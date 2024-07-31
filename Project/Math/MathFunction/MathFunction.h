@@ -109,8 +109,10 @@ Vector3 SLerp(const Vector3& start, const Vector3& end, const float t);
 Vector3 Perpendicular(const Vector3& v);
 // 座標変換
 Vector3 TransformByMatrix(const Vector3 v, const Matrix4x4 m);
+// Y軸周りに回転させる関数
+Vector3 YawRotation(const Vector3& vec, float angle);
 // ベクトル変換
-
+Vector3 TransformNormal(const Vector3& vec, const Vector3& rotation);
 Vector3 TransformNormal(const Vector3& v, const Matrix4x4& m);
 // Vector2 -> Vector3 への変換
 //Vector3 ConvertVector(const Vector2& v);

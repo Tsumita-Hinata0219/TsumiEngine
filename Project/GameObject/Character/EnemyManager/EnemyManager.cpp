@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void EnemyManager::Initialize()
+void EnemyManager::Init()
 {
 	// FlagModel
 	flagModel_ = make_unique<Model>();

@@ -11,7 +11,7 @@ void Enemy::Init()
 	model_ = modelManager_->GetModel("Test");
 
 	// BodyTransformの初期化
-	trans_.Initialize();
+	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
 	trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
 

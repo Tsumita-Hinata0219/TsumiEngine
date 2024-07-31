@@ -209,6 +209,7 @@
     <ClCompile Include="Project\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -420,6 +421,7 @@
     <ClInclude Include="Project\GameObject\Terrain\Building1\Building1.h" />
     <ClInclude Include="Project\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Project\Scene\ResultScene\ResultScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

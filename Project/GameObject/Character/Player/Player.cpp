@@ -27,6 +27,9 @@ void Player::Init()
 	collider_ = std::make_unique<OBBCollider>();
 	collider_->Init();
 	collider_->SetSize(size_);
+
+	// キルカウントを0で初期化
+	killCount_ = 0;
 }
 
 
@@ -69,6 +72,13 @@ void Player::Update()
 	// ColliderのSRTの設定
 	collider_->SetSrt(trans_.srt);
 
+	if (input_->Trigger(DIK_K)) {
+		AddKillCount();
+	}
+	if (input_->Trigger(DIK_L)) {
+		AddKillCount(3);
+	}
+
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {
 		camera_.DrawImGui();
@@ -77,17 +87,12 @@ void Player::Update()
 	if (ImGui::TreeNode("Player")) {
 
 		trans_.DrawImGui();
+		
 		ImGui::Text("");
-		ImGui::Text("ShotFrame = %d", shotPressFrame_);
+		ImGui::Text("KillCount = %d", killCount_);
 
 		ImGui::Text("");
-		light_.DrawImGui();
-
-		ImGui::Text("");
-		ImGui::Text("Stick");
-		ImGui::DragFloat2("R_Stick", &R_StickInput_.x, 0.0f);
-		ImGui::DragFloat2("L_Stick", &L_StickInput_.x, 0.0f);
-
+		//light_.DrawImGui();
 		ImGui::TreePop();
 	}
 #endif // _DEBUG

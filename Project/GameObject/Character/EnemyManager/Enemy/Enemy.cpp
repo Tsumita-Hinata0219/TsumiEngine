@@ -130,6 +130,9 @@ void Enemy::OnCollisionWithPlayerBullet()
 
 		// デスステートに移行
 		this->ChangeState(EnemyState::DEATH);
+
+		// プレイヤーのキルカウントを加算する
+		player_->AddKillCount();
 	}
 }
 

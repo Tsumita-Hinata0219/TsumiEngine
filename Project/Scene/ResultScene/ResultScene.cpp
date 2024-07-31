@@ -62,6 +62,7 @@ void ResultScene::Update(GameManager* state)
 
 		if (fadeManager_->IsFadeIn()) {
 			state->ChangeSceneState(new TitleScene);
+			return;
 		}
 	}
 

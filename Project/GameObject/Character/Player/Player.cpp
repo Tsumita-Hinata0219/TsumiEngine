@@ -77,17 +77,12 @@ void Player::Update()
 	if (ImGui::TreeNode("Player")) {
 
 		trans_.DrawImGui();
+		
 		ImGui::Text("");
-		ImGui::Text("ShotFrame = %d", shotPressFrame_);
+		ImGui::Text("KillCount = %d", killCount_);
 
 		ImGui::Text("");
-		light_.DrawImGui();
-
-		ImGui::Text("");
-		ImGui::Text("Stick");
-		ImGui::DragFloat2("R_Stick", &R_StickInput_.x, 0.0f);
-		ImGui::DragFloat2("L_Stick", &L_StickInput_.x, 0.0f);
-
+		//light_.DrawImGui();
 		ImGui::TreePop();
 	}
 #endif // _DEBUG

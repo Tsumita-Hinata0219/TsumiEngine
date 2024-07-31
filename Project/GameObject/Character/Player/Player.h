@@ -36,6 +36,9 @@ public: // メンバ関数
 	// Collider
 	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
+	// KillCount
+	void AddKillCount(uint32_t addCount = 1) { this->killCount_ = addCount; }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
@@ -127,5 +130,8 @@ private: // メンバ変数
 
 	// プレイヤーのY軸姿勢制御値
 	float playerRad_ = 0.0f;
+
+	// キルカウント
+	uint32_t killCount_ = 0;
 };
 

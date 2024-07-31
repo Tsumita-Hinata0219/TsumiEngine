@@ -58,7 +58,7 @@ private: // メンバ変数
 	std::unique_ptr<Model> flagModel_;
 
 	// Transform
-	WorldTransform transform_{};
+	Transform transform_{};
 
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<Enemy>> enemyList_;
@@ -71,5 +71,11 @@ private: // メンバ変数
 
 	// エネミーのカウントチェックタイマー
 	Timer enemyCountCheckTime_;
+
+
+	ModelManager* modelManager_ = nullptr;
+	std::vector<std::unique_ptr<Model>> spawn_;
+	std::vector<Transform> trans_;
+	Scope scope_{};
 };
 

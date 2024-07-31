@@ -5,19 +5,24 @@
 // 初期化処理
 void EnemyManager::Init()
 {
+	modelManager_ = ModelManager::GetInstance();
+
 	// FlagModel
-	flagModel_ = make_unique<Model>();
-	flagModel_->CreateFromObjAssimpVer("Flag", "Flag");
+	modelManager_->LoadModel("Obj/Flag", "Flag.obj");
+	flagModel_ = modelManager_->GetModel("Flag");
+	
 
 	// Transformの初期化
-	transform_.Initialize();
-	transform_.srt.translate.z = 30.0f; // 少し奥にずらしておく
+	//transform_.Init();
+	//transform_.srt.translate.z = 30.0f; // 少し奥にずらしておく
+	transform_.Init();
+	transform_.srt.translate.z = 30.0f;
 
 	// 湧き範囲のスコープ
 	scope3_ = {
-		{ -12.0f, 12.0f },
+		{ -6.0f, 6.0f },
 		{  0.0f, 0.0f },
-		{ -12.0f, 12.0f },
+		{ -6.0f, 6.0f },
 	};
 
 	// エネミーの最低数の設定
@@ -25,15 +30,27 @@ void EnemyManager::Init()
 
 	// エネミーのカウントチェックタイマーの設定。4秒
 	enemyCountCheckTime_.Start(0.0f, 240.0f);
+
+
+
+	spawn_.resize(3);
+	trans_.resize(3);
+
+	for (int i = 0; i < 3; ++i) {
+		spawn_[i] = modelManager_->GetModel("Flag");
+		trans_[i].Init();
+	}
+	trans_[0].srt.translate.x = -30.0f;
+	trans_[1].srt.translate.z = 30.0f;
+	trans_[2].srt.translate.x = 30.0f;
+
+	scope_ = { 0.0f, 2.5f };
 }
 
 
 // 更新処理
 void EnemyManager::Update()
 {
-	// Transformの更新処理
-	transform_.UpdateMatrix();
-
 	// EnemyListの更新処理
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
 		enemy->Update();
@@ -77,7 +94,11 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// FlagModel
-	flagModel_->Draw(transform_);
+	flagModel_->DrawN(transform_);
+
+	for (int i = 0; i < 3; ++i) {
+		spawn_[i]->DrawN(trans_[i]);
+	}
 
 	// EnemyListの描画
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
@@ -99,9 +120,13 @@ void EnemyManager::CreateNewEnemy()
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
 
+
+	int index = int(RandomGenerator::getRandom(scope_));
+	
+	
 	// 初期座標。多少ランダムに湧く
 	Vector3 initPos = 
-		transform_.GetWorldPos() + RandomGenerator::getRandom(scope3_);
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
 
 	// newEnemyの初期化
 	newEnemy->Init();

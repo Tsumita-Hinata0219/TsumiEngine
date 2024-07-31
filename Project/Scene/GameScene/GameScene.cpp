@@ -142,7 +142,7 @@ void GameScene::ModelDraw()
 	floor_->Draw3D();
 
 	/* ----- Building1 建物1 ----- */
-	building1_->Draw3D();
+	//building1_->Draw3D();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();

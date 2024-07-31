@@ -38,7 +38,7 @@ struct Transform
 	TransformationMat transformationMatData{};
 
 	// ペアレント
-	const Transform* parent{};
+	const Transform* parent = nullptr;
 
 	/// <summary>
 	/// 初期化処理

@@ -135,7 +135,7 @@ private: // メンバ変数
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 40.0f;
+	float combatTriggerDistance_ = 70.0f;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;

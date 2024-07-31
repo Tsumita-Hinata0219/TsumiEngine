@@ -37,7 +37,11 @@ public: // メンバ関数
 	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
 	// KillCount
+	uint32_t GetKillCount() const { return this->killCount_; }
+
+	// KillCount加算 & 減算
 	void AddKillCount(uint32_t addCount = 1) { this->killCount_ += addCount; }
+	void SubKillCount(uint32_t subCount = 1) { this->killCount_ -= subCount; }
 
 #pragma endregion 
 

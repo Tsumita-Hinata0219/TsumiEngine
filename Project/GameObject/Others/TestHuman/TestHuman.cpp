@@ -100,11 +100,6 @@ void TestHuman::Update()
 
 	if (ImGui::TreeNode("TestHuman")) {
 
-		/*if(ImGui::Button("texchange")) {
-			uint32_t te = TextureManager::LoadTexture("Texture", "NormalMapTest.png");
-			walkModel_->SetTexHandle(te);
-		}*/
-
 		/*ImGui::DragFloat3("Walk_Scale", &walkWt_.srt.scale.x, 0.1f);
 		ImGui::DragFloat3("Walk_Rotate", &walkWt_.srt.rotate.x, 0.1f);
 		ImGui::DragFloat3("Walk_Translate", &walkWt_.srt.translate.x, 0.1f);

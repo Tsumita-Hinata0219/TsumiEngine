@@ -1,5 +1,5 @@
 #include "IOBJState.h"
-
+#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 
 // コンストラクタ

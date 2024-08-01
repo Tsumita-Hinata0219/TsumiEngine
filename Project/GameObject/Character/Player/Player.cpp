@@ -96,7 +96,7 @@ void Player::Update()
 void Player::Draw3D()
 {
 	// BodyModelの描画
-	model_->SetLightData(light_);
+	//model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

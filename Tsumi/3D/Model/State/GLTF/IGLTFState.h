@@ -9,7 +9,8 @@ class IGLTFState : public ModelState {
 public:
 
 	// コンストラクタ、デストラクタ
-	IGLTFState() { stateType = GLTF; };
+	IGLTFState() {};
+	IGLTFState(ModelDatas datas);
 	~IGLTFState() {};
 
 	// 描画処理

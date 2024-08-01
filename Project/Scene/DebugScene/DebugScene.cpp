@@ -90,13 +90,13 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	//skydome_->draw3D();
+	skydome_->Draw3D();
 
 	/* ----- Ground 床 ----- */
 	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
-	testHuman_->Draw();
+	//testHuman_->Draw();
 
 }
 

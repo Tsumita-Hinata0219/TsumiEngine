@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../ModelState.h"
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 
 /* OBJState */

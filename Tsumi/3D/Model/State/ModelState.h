@@ -19,6 +19,9 @@ enum StateType {
 // Modelの前方宣言
 class Model;
 
+// CameraManagerの前方宣言
+class CameraManager;
+
 
 /* ModelState モデルのステートパターン */
 class ModelState {

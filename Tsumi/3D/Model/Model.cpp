@@ -31,10 +31,10 @@ Model::Model(ModelDatas datas)
 
 	// フォーマットからステートを決める
 	if (datas.fileFormat == ModelFileFormat::OBJ.first) {
-		this->modelState_ = new IOBJState();
+		this->modelState_ = new IOBJState(datas);
 	}
 	else if (datas.fileFormat == ModelFileFormat::GLTF.first) {
-		this->modelState_ = new IGLTFState();
+		this->modelState_ = new IGLTFState(datas);
 	}
 
 	// Datasを基にBufferを作成する

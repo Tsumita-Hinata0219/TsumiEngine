@@ -25,8 +25,8 @@ struct ModelDatas {
 	// 環境マップ
 	EnvironmentData environment{};
 
-	// スケルトン
-	Skeleton skeleton{};
+	// ジョイントウェイト
+	JointWeightData jointWeight{};
 
 	// スキンクラスター
 	//SkinClusterData skinCluster{};

@@ -620,6 +620,39 @@ MeshData ModelManager::ParseMeshData(const aiScene* scene)
 				result.indices.push_back(vertexIndex);
 			}
 		}
+
+		// Boneを解析する
+		for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+
+			// Jointごとの格納領域を作る
+			aiBone* bone = mesh->mBones[boneIndex];
+			string jointName = bone->mName.C_Str();
+			JointWeightData& jointWeightData = result.skinClusterData[jointName];
+
+			// InverseBindPoseMatrixの抽出
+			aiMatrix4x4 bindPoseMatrixAssimp = bone->mOffsetMatrix.Inverse(); // BindPoseMatrixに戻す
+			aiVector3D scale, translate;
+			aiQuaternion rotate;
+			bindPoseMatrixAssimp.Decompose(scale, rotate, translate); // 成分を抽出
+			// 左手系のBindPoseMatrixを作る
+			Matrix4x4 bindPoseMatrix = MakeAffineMatrix(
+				{ scale.x, scale.y, scale.z },
+				{ rotate.w, rotate.x, -rotate.y, -rotate.z },
+				{ -translate.x, translate.y, translate.z });
+			// InverseBindPoseMatrixにする
+			jointWeightData.inverseBindPoseMatrix = Inverse(bindPoseMatrix);
+			Matrix4x4 hr = jointWeightData.inverseBindPoseMatrix * bindPoseMatrix;
+
+			// Weight情報を取り出す
+			for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
+				jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });
+			}
+		}
+	}
+
+	// Nodeを読み込む
+	if (scene->mRootNode) {
+		result.rootNode = ReadNode(scene->mRootNode); // 情報があれば読み込む
 	}
 
 	return result;
@@ -654,4 +687,5 @@ MaterialDataN ModelManager::ParseMaterialData(const aiScene* scene, const std::s
 
 	return result;
 }
+
 

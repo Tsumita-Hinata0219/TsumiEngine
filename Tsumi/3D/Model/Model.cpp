@@ -18,7 +18,7 @@ Model::Model()
 	// CameraManagerのインスタンスの取得
 	cameraManager_ = CameraManager::GetInstance();
 }
-Model::Model(ModelDatas datas) : datas_(datas)
+Model::Model(ModelDatas datas)
 {
 	// ModelManagerのインスタンス取得
 	modelManager_ = ModelManager::GetInstance();
@@ -30,15 +30,15 @@ Model::Model(ModelDatas datas) : datas_(datas)
 	cameraManager_ = CameraManager::GetInstance();
 
 	// フォーマットからステートを決める
-	if (datas_.fileFormat == ModelFileFormat::OBJ.first) {
+	if (datas.fileFormat == ModelFileFormat::OBJ.first) {
 		this->modelState_ = new IOBJState();
 	}
-	else if (datas_.fileFormat == ModelFileFormat::GLTF.first) {
+	else if (datas.fileFormat == ModelFileFormat::GLTF.first) {
 		this->modelState_ = new IGLTFState();
 	}
 
 	// Datasを基にBufferを作成する
-	CreateBufferResource();
+	//CreateBufferResource();
 }
 
 
@@ -230,7 +230,6 @@ void Model::DrawN(Transform transform)
 	//buffers_.enviroment.UnMap();
 	//// コマンドコール
 	//CommandCall();
-	transform;
 	modelState_->Draw(transform);
 }
 
@@ -370,60 +369,60 @@ void Model::UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton
 /// <summary>
 /// BufferResourceの生成
 /// </summary>
-void Model::CreateBufferResource()
-{
-	// mesh
-	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
-	// vertexBufferView
-	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
-	buffers_.vertex.CreateVertexBufferView();
-	// indexBufferView
-	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
-	buffers_.indeces.CreateIndexBufferView();
-	// material
-	buffers_.material.CreateResource();
-	// transform
-	buffers_.transform.CreateResource();
-	// light
-	buffers_.light.CreateResource();
-	// encironment
-	buffers_.enviroment.CreateResource();
-	// influence
-	//buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
-	// palette
-	//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
-}
+//void Model::CreateBufferResource()
+//{
+//	// mesh
+//	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
+//	// vertexBufferView
+//	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+//	buffers_.vertex.CreateVertexBufferView();
+//	// indexBufferView
+//	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+//	buffers_.indeces.CreateIndexBufferView();
+//	// material
+//	buffers_.material.CreateResource();
+//	// transform
+//	buffers_.transform.CreateResource();
+//	// light
+//	buffers_.light.CreateResource();
+//	// encironment
+//	buffers_.enviroment.CreateResource();
+//	// influence
+//	//buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
+//	// palette
+//	//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
+//}
 
 
 /// <summary>
 /// コマンドコール
 /// </summary>
-void Model::CommandCall()
-{
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-
-	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
-
-	// VertexBufferView
-	buffers_.vertex.IASetVertexBuffers(1);
-	// IndexBufferView
-	buffers_.indeces.IASetIndexBuffer();
-	// Material
-	buffers_.material.CommandCall(0);
-	// TransformationMatrix
-	buffers_.transform.CommandCall(1);
-	// Camera
-	cameraManager_->CommandCall(2);
-	// MaterialTexture
-	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
-	// Light
-	buffers_.light.CommandCall(4);
-	// Environment
-	buffers_.enviroment.CommandCall(5);
-	// EnvironmentTexture
-	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
-	// Draw!!
-	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
-}
+//void Model::CommandCall()
+//{
+//	// Commandの取得
+//	Commands commands = CommandManager::GetInstance()->GetCommands();
+//
+//	// PipeLineCheck
+//	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
+//
+//	// VertexBufferView
+//	buffers_.vertex.IASetVertexBuffers(1);
+//	// IndexBufferView
+//	buffers_.indeces.IASetIndexBuffer();
+//	// Material
+//	buffers_.material.CommandCall(0);
+//	// TransformationMatrix
+//	buffers_.transform.CommandCall(1);
+//	// Camera
+//	cameraManager_->CommandCall(2);
+//	// MaterialTexture
+//	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+//	// Light
+//	buffers_.light.CommandCall(4);
+//	// Environment
+//	buffers_.enviroment.CommandCall(5);
+//	// EnvironmentTexture
+//	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
+//	// Draw!!
+//	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
+//}

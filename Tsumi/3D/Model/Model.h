@@ -138,24 +138,24 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 #pragma region Accessor アクセッサ
 
-	// ModelResourcesの取得
-	ModelDatas GetModelResources() const { return this->datas_; }
+	//// ModelResourcesの取得
+	//ModelDatas GetModelResources() const { return this->datas_; }
 
-	// Mesh
-	MeshData GetMeshData() const { return this->datas_.mesh; }
-	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+	//// Mesh
+	//MeshData GetMeshData() const { return this->datas_.mesh; }
+	//void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
 
-	// Material
-	MaterialDataN GetMaterialData() const { return this->datas_.material; }
-	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+	//// Material
+	//MaterialDataN GetMaterialData() const { return this->datas_.material; }
+	//void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
 
-	// Light
-	DirectionalLightData GetLightData() const { return this->datas_.light; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+	//// Light
+	//DirectionalLightData GetLightData() const { return this->datas_.light; }
+	//void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
 
-	// Environment
-	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
-	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
+	//// Environment
+	//EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
+	//void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
 
 #pragma endregion 
 
@@ -163,7 +163,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 private:
 
 	// BufferResourceの生成
-	void CreateBufferResource();
+	//void CreateBufferResource();
 
 	/// <summary>
 	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
@@ -171,7 +171,7 @@ private:
 	//MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
 
 	// コマンドコール
-	void CommandCall();
+	//void CommandCall();
 
 private: // 繝｡繝ｳ繝仙､画焚
 
@@ -217,10 +217,10 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 
 	// バッファーに書き込むデータ
-	ModelDatas datas_{};
+	//ModelDatas datas_{};
 
 	// バッファー
-	ModelBuffers buffers_{};
+	//ModelBuffers buffers_{};
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;

@@ -4,7 +4,7 @@
 
 
 /* OBJState */
-class IOBJState : ModelState {
+class IOBJState : public ModelState {
 
 public:
 

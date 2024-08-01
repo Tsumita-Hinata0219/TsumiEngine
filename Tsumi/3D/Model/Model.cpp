@@ -29,6 +29,14 @@ Model::Model(ModelDatas datas) : datas_(datas)
 	// CameraManagerのインスタンスの取得
 	cameraManager_ = CameraManager::GetInstance();
 
+	// フォーマットからステートを決める
+	if (datas_.fileFormat == ModelFileFormat::OBJ.first) {
+		this->modelState_ = new IOBJState();
+	}
+	else if (datas_.fileFormat == ModelFileFormat::GLTF.first) {
+		this->modelState_ = new IGLTFState();
+	}
+
 	// Datasを基にBufferを作成する
 	CreateBufferResource();
 }
@@ -185,43 +193,45 @@ void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster)
 }
 void Model::DrawN(Transform transform)
 {
-	// CameraResourceの取得
-	auto cameraResource = cameraManager_->GetResource();
+	//// CameraResourceの取得
+	//auto cameraResource = cameraManager_->GetResource();
 
-	// 諸々の計算
-	transform.UpdateMatrix();
-	transform.transformationMatData.World = transform.matWorld;
-	transform.transformationMatData.WVP = 
-		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
-	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
+	//// 諸々の計算
+	//transform.UpdateMatrix();
+	//transform.transformationMatData.World = transform.matWorld;
+	//transform.transformationMatData.WVP = 
+	//	transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+	//transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
-	// ここで書き込み
-	// VBV
-	buffers_.vertex.Map();
-	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
-	buffers_.vertex.UnMap();
-	// IBV
-	buffers_.indeces.Map();
-	buffers_.indeces.WriteData(datas_.mesh.indices.data());
-	buffers_.indeces.UnMap();
-	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(&datas_.material);
-	buffers_.material.UnMap();
-	// Transform
-	buffers_.transform.Map();
-	buffers_.transform.WriteData((&transform.transformationMatData));
-	buffers_.transform.UnMap();
-	// Light
-	buffers_.light.Map();
-	buffers_.light.WriteData(&datas_.light);
-	buffers_.light.UnMap();
-	// Environment
-	buffers_.enviroment.Map();
-	buffers_.enviroment.WriteData(&datas_.environment);
-	buffers_.enviroment.UnMap();
-	// コマンドコール
-	CommandCall();
+	//// ここで書き込み
+	//// VBV
+	//buffers_.vertex.Map();
+	//buffers_.vertex.WriteData(datas_.mesh.vertices.data());
+	//buffers_.vertex.UnMap();
+	//// IBV
+	//buffers_.indeces.Map();
+	//buffers_.indeces.WriteData(datas_.mesh.indices.data());
+	//buffers_.indeces.UnMap();
+	//// Material
+	//buffers_.material.Map();
+	//buffers_.material.WriteData(&datas_.material);
+	//buffers_.material.UnMap();
+	//// Transform
+	//buffers_.transform.Map();
+	//buffers_.transform.WriteData((&transform.transformationMatData));
+	//buffers_.transform.UnMap();
+	//// Light
+	//buffers_.light.Map();
+	//buffers_.light.WriteData(&datas_.light);
+	//buffers_.light.UnMap();
+	//// Environment
+	//buffers_.enviroment.Map();
+	//buffers_.enviroment.WriteData(&datas_.environment);
+	//buffers_.enviroment.UnMap();
+	//// コマンドコール
+	//CommandCall();
+
+	modelState_->Draw();
 }
 
 

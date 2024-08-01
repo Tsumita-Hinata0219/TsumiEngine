@@ -4,7 +4,7 @@
 
 
 /* GLTFState */
-class IGLTFState : ModelState {
+class IGLTFState : public ModelState {
 
 public:
 

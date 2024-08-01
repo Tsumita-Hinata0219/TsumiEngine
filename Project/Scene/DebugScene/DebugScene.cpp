@@ -19,9 +19,6 @@ DebugScene::~DebugScene() {}
 /// </summary>
 void DebugScene::Initialize()
 {
-	/* ----- FileManager ファイルマネージャー ----- */
-	//FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
-
 	/* ----- Camera カメラ ----- */
 	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
 	cameraManager_ = CameraManager::GetInstance();
@@ -42,20 +39,6 @@ void DebugScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-
-	/* ----- ModelNewLoad モデルニューロード ----- */
-	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Test", "Test.obj");
-	demoModel_ = modelManager_->GetModel("Test");
-
-	transformA_.Init();
-	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
-	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
-	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
-
-	/* ----- TestBaseObject テストベースオブジェクト ----- */
-	testBaseObject_ = std::make_unique<TestBaseObject>();
-	testBaseObject_->Init();
 }
 
 
@@ -115,11 +98,6 @@ void DebugScene::ModelDraw()
 	/* ----- TestHuman テストヒューマン ----- */
 	//testHuman_->Draw();
 
-	/* ----- ModelNewLoad モデルニューロード ----- */
-	demoModel_->DrawN(transformA_);
-
-	/* ----- TestBaseObject テストベースオブジェクト ----- */
-	testBaseObject_->Draw3D();
 }
 
 

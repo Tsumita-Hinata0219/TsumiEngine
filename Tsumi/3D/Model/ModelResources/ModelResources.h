@@ -24,6 +24,12 @@ struct ModelDatas {
 
 	// 環境マップ
 	EnvironmentData environment{};
+
+	// スケルトン
+	Skeleton skeleton{};
+
+	// スキンクラスター
+	//SkinClusterData skinCluster{};
 };
 
 struct ModelBuffers {
@@ -48,4 +54,10 @@ struct ModelBuffers {
 
 	// 環境マップ
 	BufferResource<EnvironmentData> enviroment;
+
+	// インフルエンス
+	//BufferResource<VertexInfluence> influence;
+
+	// パレット
+	//BufferResource<WellForGPU> palette;
 };

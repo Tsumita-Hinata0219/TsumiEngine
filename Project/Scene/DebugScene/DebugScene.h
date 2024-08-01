@@ -58,11 +58,6 @@ public:
 
 private:
 
-	// ModelManager
-	ModelManager* modelManager_ = nullptr;
-	std::unique_ptr<Model> demoModel_;
-	Transform transformA_{};
-
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource camera_;
@@ -81,8 +76,5 @@ private:
 
 	// TestJsonObject
 	std::unique_ptr<TestJsonObject> testJsonObject_;
-
-	// TestBaseObject
-	std::unique_ptr<TestBaseObject> testBaseObject_;
 };
 

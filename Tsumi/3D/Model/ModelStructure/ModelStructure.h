@@ -51,3 +51,15 @@ struct EnvironmentData {
 		ImGui::DragFloat((label + "_Scale").c_str(), &scale, 0.01f, 0.0f, 1.0f);
 	}
 };
+
+// スキンクラスターデータ
+struct SkinClusterData {
+	std::vector<Matrix4x4> inverseBindPosematrices;
+	//Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
+	//D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
+	std::span<VertexInfluence> mappedInfluence;
+	//Microsoft::WRL::ComPtr<ID3D12Resource> paletteResource;
+	std::span<WellForGPU> mappedPallette;
+	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE>paletteSrvHandle;
+	uint32_t srvHandle;
+};

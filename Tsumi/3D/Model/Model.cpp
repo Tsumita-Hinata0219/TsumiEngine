@@ -376,8 +376,12 @@ void Model::CreateBufferResource()
 	buffers_.transform.CreateResource();
 	// light
 	buffers_.light.CreateResource();
-	// Encironment
+	// encironment
 	buffers_.enviroment.CreateResource();
+	// influence
+	//buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
+	// palette
+	//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
 }
 
 

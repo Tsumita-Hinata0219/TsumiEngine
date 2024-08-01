@@ -194,8 +194,6 @@ void DirectXCommon::PreDrawForSwapChain() {
 		clearColor,
 		0, nullptr);
 
-	ID3D12DescriptorHeap *desc[] = { DirectXCommon::GetInstance()->descriptorHeap_.Get()};
-	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
 	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
 

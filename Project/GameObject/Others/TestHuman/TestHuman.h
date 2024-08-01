@@ -18,12 +18,12 @@ public:
 
 private:
 
-	////  ウォークモデル
-	//unique_ptr<Model> walkModel_;
-	//WorldTransform walkWt_{};
-	//float animTimeA_ = 0.0f;
-	//Skeleton walkSkeleton_{};
-	//SkinCluster walkSkinCluster_{};
+	//  ウォークモデル
+	unique_ptr<Model> walkModel_;
+	WorldTransform walkWt_{};
+	float animTimeA_ = 0.0f;
+	Skeleton walkSkeleton_{};
+	SkinCluster walkSkinCluster_{};
 
 	//// スニークモデル
 	//unique_ptr<Model> sneakModel_;
@@ -40,7 +40,7 @@ private:
 	//SkinCluster simpleSkinCluster_{};
 
 	//// アニメーションタイプ
-	//Animation walkAnim_{};
+	Animation walkAnim_{};
 	//Animation sneakAnim_{};
 	//Animation simpleAnim_{};
 

@@ -113,7 +113,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 #pragma region Set
 
 	// TextureHandle
-	void SetTexHandle(uint32_t texHD) { this->useTexture_ = texHD; }
+	void SetTexHandle(uint32_t texHD) { this->objData_.textureHD = texHD; }
 
 	// NormalMapTexture
 	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }

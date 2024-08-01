@@ -19,6 +19,8 @@ DebugScene::~DebugScene() {}
 /// </summary>
 void DebugScene::Initialize()
 {
+	uint32_t dds = TextureManager::LoadTexture("Texture", "airport_4k.dds");
+	dds;
 	/* ----- Camera カメラ ----- */
 	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
 	cameraManager_ = CameraManager::GetInstance();
@@ -68,6 +70,12 @@ void DebugScene::Update(GameManager* state)
 #ifdef _DEBUG
 
 	ImGui::Begin("DebugScene");
+	
+	if (ImGui::Button("texLoad")) {
+
+		TextureManager::LoadTexture("Texture","NormalMapTest.png");
+
+	}
 	camera_.DrawImGui();
 	ImGui::End();
 
@@ -96,7 +104,7 @@ void DebugScene::ModelDraw()
 	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Draw();
+	testHuman_->Draw();
 
 }
 

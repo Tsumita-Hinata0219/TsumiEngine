@@ -5,17 +5,17 @@
 // 初期化処理
 void TestHuman::Init()
 {
-	//// Walk
-	//walkModel_ = make_unique<Model>();
-	//walkModel_->CreateGLTFModel("TestHuman", "walk", "uvChecker.png");
-	//walkAnim_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
+	// Walk
+	walkModel_ = make_unique<Model>();
+	walkModel_->CreateGLTFModel("TestHuman", "walk", "uvChecker.png");
+	walkAnim_ = AnimationManager::LoadAnimationFile("TestHuman", "walk");
 
-	//walkSkeleton_ = walkModel_->CreateSkeleton();
-	//walkSkinCluster_ = walkModel_->CreateSkinCluster(walkSkeleton_);
+	walkSkeleton_ = walkModel_->CreateSkeleton();
+	walkSkinCluster_ = walkModel_->CreateSkinCluster(walkSkeleton_);
 
-	//walkWt_.Initialize();
-	//walkWt_.srt.translate.x = 2.0f;
-	//walkWt_.srt.rotate.y = ToRadians(180.0f);
+	walkWt_.Initialize();
+	walkWt_.srt.translate.x = 2.0f;
+	walkWt_.srt.rotate.y = ToRadians(180.0f);
 
 
 	//// Sneak
@@ -49,20 +49,20 @@ void TestHuman::Init()
 // 更新処理
 void TestHuman::Update()
 {
-	//// Walk
-	//walkWt_.UpdateMatrix();
+	// Walk
+	walkWt_.UpdateMatrix();
 
-	//// アニメーションの時間を進める
-	//animTimeA_ += 1.0f / 60.0f;
-	//if (animTimeA_ >= 1.0f) {
-	//	animTimeA_ = 0.0f;
-	//}
-	//// アニメーションの更新を行って、骨ごとのLocal情報を更新する
-	//walkModel_->ApplyAnimation(walkSkeleton_, walkAnim_, animTimeA_);
-	//// 現在の骨ごとのLocal情報を基にSKeletonSpaceの情報を更新する
-	//walkModel_->UpdateSkeleton(walkSkeleton_);
-	//// SkeletonSpaceの情報を基にSkinClusterのMatrixPaletteを更新する
-	//walkModel_->UpdateSkinCluster(walkSkinCluster_, walkSkeleton_);
+	// アニメーションの時間を進める
+	animTimeA_ += 1.0f / 60.0f;
+	if (animTimeA_ >= 1.0f) {
+		animTimeA_ = 0.0f;
+	}
+	// アニメーションの更新を行って、骨ごとのLocal情報を更新する
+	walkModel_->ApplyAnimation(walkSkeleton_, walkAnim_, animTimeA_);
+	// 現在の骨ごとのLocal情報を基にSKeletonSpaceの情報を更新する
+	walkModel_->UpdateSkeleton(walkSkeleton_);
+	// SkeletonSpaceの情報を基にSkinClusterのMatrixPaletteを更新する
+	walkModel_->UpdateSkinCluster(walkSkinCluster_, walkSkeleton_);
 
 
 	//// Sneak
@@ -98,9 +98,14 @@ void TestHuman::Update()
 
 #ifdef _DEBUG
 
-	/*if (ImGui::TreeNode("TestHuman")) {
+	if (ImGui::TreeNode("TestHuman")) {
 
-		ImGui::DragFloat3("Walk_Scale", &walkWt_.srt.scale.x, 0.1f);
+		if(ImGui::Button("texchange")) {
+			uint32_t te = TextureManager::LoadTexture("Texture", "NormalMapTest.png");
+			walkModel_->SetTexHandle(te);
+		}
+
+		/*ImGui::DragFloat3("Walk_Scale", &walkWt_.srt.scale.x, 0.1f);
 		ImGui::DragFloat3("Walk_Rotate", &walkWt_.srt.rotate.x, 0.1f);
 		ImGui::DragFloat3("Walk_Translate", &walkWt_.srt.translate.x, 0.1f);
 		ImGui::DragFloat("Animationtime_A", &animTimeA_, 0.01f, 0.0f, 10.f);
@@ -115,10 +120,10 @@ void TestHuman::Update()
 		ImGui::DragFloat3("Simple_Scale", &simpleWt_.srt.scale.x, 0.1f);
 		ImGui::DragFloat3("Simple_Rotate", &simpleWt_.srt.rotate.x, 0.1f);
 		ImGui::DragFloat3("Simple_Translate", &simpleWt_.srt.translate.x, 0.1f);
-		ImGui::DragFloat("Animationtime_V", &animTimeC_, 0.01f, 0.0f, 10.f);
+		ImGui::DragFloat("Animationtime_V", &animTimeC_, 0.01f, 0.0f, 10.f);*/
 
 		ImGui::TreePop();
-	}*/
+	}
 
 #endif // _DEBUG
 }
@@ -128,7 +133,7 @@ void TestHuman::Update()
 void TestHuman::Draw()
 {
 	//// Walk
-	//walkModel_->AnimDraw(walkWt_, walkSkinCluster_);
+	walkModel_->AnimDraw(walkWt_, walkSkinCluster_);
 
 	//// Sneak
 	//sneakModel_->AnimDraw(sneakWt_, sneakSkinCluster_);

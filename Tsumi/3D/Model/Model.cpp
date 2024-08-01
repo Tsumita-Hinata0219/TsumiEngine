@@ -230,7 +230,7 @@ void Model::DrawN(Transform transform)
 	//buffers_.enviroment.UnMap();
 	//// コマンドコール
 	//CommandCall();
-
+	transform;
 	modelState_->Draw();
 }
 

@@ -181,6 +181,8 @@ void SRVManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint3
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	SRVManager* instance = SRVManager::GetInstance();
 
+	ID3D12DescriptorHeap* desc[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap()};
+	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(rootPatramerterIndex, instance->handleMap_[index]._GPU);
 }
 

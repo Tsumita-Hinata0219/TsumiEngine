@@ -72,13 +72,6 @@ void Player::Update()
 	// ColliderのSRTの設定
 	collider_->SetSrt(trans_.srt);
 
-	if (input_->Trigger(DIK_K)) {
-		AddKillCount();
-	}
-	if (input_->Trigger(DIK_L)) {
-		AddKillCount(3);
-	}
-
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {
 		camera_.DrawImGui();

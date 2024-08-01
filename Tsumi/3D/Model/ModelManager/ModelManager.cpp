@@ -364,12 +364,15 @@ void ModelManager::LoadModel(const std::string& path, const std::string fileName
 	ModelDatas* newData = new ModelDatas();
 	std::string format = GetExtension(fileName);
 
+	// ローダーのインスタンス取得
+	ModelFileLoader* loader = ModelFileLoader::GetInstance();
+
 	// フォーマットを取得して分岐
 	if (format == ModelFileFormat::OBJ.first) {
-		LoadOBJ(newData, path, fileName);
+		loader->ParseLoadObj(path, fileName);
 	}
 	else if (format == ModelFileFormat::GLTF.first) {
-		LoadGLTF(newData, path, fileName);
+		loader->ParseLoadGLTF(path, fileName);
 	}
 
 	// マップコンテナに追加

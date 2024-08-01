@@ -4,7 +4,9 @@
 #include "../../../../Project/Math/Struct.h"
 #include "../../../TextureManager/TextureManager.h"
 #include "../ModelObj/ObjDataResource/ObjDataResource.h"
+#include "../Loader/ModelFileLoader.h"
 #include "../Model.h"
+
 
 #include <map>
 #include <unordered_map>

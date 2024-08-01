@@ -191,6 +191,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Tsumi\3D\DrawSystem\DrawSystem.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
@@ -338,6 +339,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\2D\Sprite\Sprite.h" />
     <ClInclude Include="Tsumi\3D\DrawSystem\DrawSystem.h" />
     <ClInclude Include="Tsumi\3D\Model\IModelState.h" />
+    <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Tsumi\3D\Model\Model.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelManager\ModelManager.h" />

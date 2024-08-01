@@ -15,6 +15,11 @@
 #include "ModelResources/ModelResources.h"
 
 
+#include "State/ModelState.h"
+#include "State/OBJ/IOBJState.h"
+#include "State/GLTF/IGLTFState.h"
+
+
 
 class ModelManager;
 class KeyFrameAnimation;
@@ -219,4 +224,7 @@ private: // 繝｡繝ｳ繝仙､画焚
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
+
+	// State
+	ModelState* modelState_ = nullptr;
 };

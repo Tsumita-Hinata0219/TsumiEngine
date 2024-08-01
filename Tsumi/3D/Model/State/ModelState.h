@@ -26,6 +26,8 @@ public: // メンバ変数
 	// デストラクタ
 	virtual ~ModelState() {};
 
+
+
 	// 描画処理
 	virtual void Draw() = 0;
 	

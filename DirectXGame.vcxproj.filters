@@ -212,6 +212,7 @@
     <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -427,6 +428,7 @@
     <ClInclude Include="Tsumi\3D\Model\State\ModelState.h" />
     <ClInclude Include="Tsumi\3D\Model\State\GLTF\IGLTFState.h" />
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
+    <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

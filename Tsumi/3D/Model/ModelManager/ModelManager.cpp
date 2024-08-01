@@ -369,78 +369,14 @@ void ModelManager::LoadModel(const std::string& path, const std::string fileName
 
 	// フォーマットを取得して分岐
 	if (format == ModelFileFormat::OBJ.first) {
-		loader->ParseLoadObj(path, fileName);
+		newData = loader->ParseLoadObj(path, fileName);
 	}
 	else if (format == ModelFileFormat::GLTF.first) {
-		loader->ParseLoadGLTF(path, fileName);
+		newData = loader->ParseLoadGLTF(path, fileName);
 	}
 
 	// マップコンテナに追加
 	modelsMap_[newData->name] = (*newData);
-}
-void ModelManager::LoadOBJ(ModelDatas* newData, const std::string& path, const std::string& fileName)
-{
-	/* 1. 中で必要となる変数の宣言 */
-	// return するModelDatasに名前を付けておく。(ファイル名)
-	newData->name = fileName.substr(0, fileName.size() - 4);
-	newData->fileFormat = GetExtension(fileName);
-
-
-	/* 2. ファイルを開く */
-	// asssimpでobjを読む
-	Assimp::Importer importer;
-	string file = ("Resources/" + path + "/" + fileName);
-
-
-	/* 3. 実際にファイルを読み、ModelDataを構築していく */
-	//三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
-
-	// mesh & indicesを解析する
-	newData->mesh = ParseMeshData(scene);
-
-	// materialを解析する
-	newData->material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
-
-	// lightの初期化
-	newData->light.enable = false;
-
-	// Environmentの初期化
-	newData->environment.enable = false;
-}
-void ModelManager::LoadGLTF(ModelDatas* newData, const std::string& path, const std::string& fileName)
-{
-	/* 1. 中で必要となる変数の宣言 */
-	// return するModelDatasに名前を付けておく。(ファイル名)
-	newData->name = fileName.substr(0, fileName.size() - 4);
-	newData->fileFormat = GetExtension(fileName);
-
-
-	/* 2. ファイルを開く */
-	// asssimpでobjを読む
-	Assimp::Importer importer;
-	string file = ("Resources/" + path + "/" + fileName);
-
-
-	/* 3. 実際にファイルを読み、ModelDataを構築していく */
-	//三角形の並び順を逆にする         UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
-
-
-	// mesh & indicesを解析する
-	newData->mesh = ParseMeshData(scene);
-
-	// materialを解析する
-	newData->material = ParseMaterialData(scene, path, ModelFileFormat::OBJ.first);
-
-	// lightの初期化
-	newData->light.enable = false;
-
-	// Environmentの初期化
-	newData->environment.enable = false;
 }
 
 
@@ -587,108 +523,5 @@ int32_t ModelManager::CreateJoint(const Node& node, const optional<int32_t>& par
 	return joint.index;
 }
 
-
-// MeshDataの解析
-MeshData ModelManager::ParseMeshData(const aiScene* scene)
-{
-	MeshData result{};
-
-	// mesh & indicesを解析する
-	// 今回作るmesh & indeces
-	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
-		aiMesh* mesh = scene->mMeshes[meshIndex];
-		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
-		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
-		result.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
-
-		// Verticesを解析する
-		for (uint32_t vertexIndex = 0; vertexIndex < mesh->mNumVertices; ++vertexIndex) {
-			aiVector3D& position = mesh->mVertices[vertexIndex];
-			aiVector3D& normal = mesh->mNormals[vertexIndex];
-			aiVector3D& texcoord = mesh->mTextureCoords[0][vertexIndex];
-
-			// 右手系 -> 左手系への変換
-			result.vertices[vertexIndex].position = { -position.x, position.y, position.z, 1.0f };
-			result.vertices[vertexIndex].normal = { -normal.x, normal.y, normal.z };
-			result.vertices[vertexIndex].texCoord = { texcoord.x, texcoord.y };
-		}
-
-		// Indexを解析する
-		for (uint32_t faceIndex = 0; faceIndex < mesh->mNumFaces; ++faceIndex) {
-			aiFace& face = mesh->mFaces[faceIndex];
-			assert(face.mNumIndices == 3);
-
-			for (uint32_t element = 0; element < face.mNumIndices; ++element) {
-				uint32_t vertexIndex = face.mIndices[element];
-				result.indices.push_back(vertexIndex);
-			}
-		}
-
-		// Boneを解析する
-		for (uint32_t boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
-
-			// Jointごとの格納領域を作る
-			aiBone* bone = mesh->mBones[boneIndex];
-			string jointName = bone->mName.C_Str();
-			JointWeightData& jointWeightData = result.skinClusterData[jointName];
-
-			// InverseBindPoseMatrixの抽出
-			aiMatrix4x4 bindPoseMatrixAssimp = bone->mOffsetMatrix.Inverse(); // BindPoseMatrixに戻す
-			aiVector3D scale, translate;
-			aiQuaternion rotate;
-			bindPoseMatrixAssimp.Decompose(scale, rotate, translate); // 成分を抽出
-			// 左手系のBindPoseMatrixを作る
-			Matrix4x4 bindPoseMatrix = MakeAffineMatrix(
-				{ scale.x, scale.y, scale.z },
-				{ rotate.w, rotate.x, -rotate.y, -rotate.z },
-				{ -translate.x, translate.y, translate.z });
-			// InverseBindPoseMatrixにする
-			jointWeightData.inverseBindPoseMatrix = Inverse(bindPoseMatrix);
-			Matrix4x4 hr = jointWeightData.inverseBindPoseMatrix * bindPoseMatrix;
-
-			// Weight情報を取り出す
-			for (uint32_t weightIndex = 0; weightIndex < bone->mNumWeights; ++weightIndex) {
-				jointWeightData.vertexWeights.push_back({ bone->mWeights[weightIndex].mWeight, bone->mWeights[weightIndex].mVertexId });
-			}
-		}
-	}
-
-	// Nodeを読み込む
-	if (scene->mRootNode) {
-		result.rootNode = ReadNode(scene->mRootNode); // 情報があれば読み込む
-	}
-
-	return result;
-}
-
-
-// MaterialDataの解析
-MaterialDataN ModelManager::ParseMaterialData(const aiScene* scene, const std::string& filePath, const std::string& format)
-{
-	MaterialDataN result{};
-
-	for (uint32_t materialIndex = 0; materialIndex < scene->mNumMaterials; ++materialIndex) {
-		aiMaterial* material = scene->mMaterials[materialIndex];
-
-		if (material->GetTextureCount(aiTextureType_DIFFUSE) != 0) {
-			aiString textureFilePath;
-			material->GetTexture(aiTextureType_DIFFUSE, 0, &textureFilePath);
-
-			// FileFormatで読み込みパスの分岐
-			if (format == ModelFileFormat::OBJ.first) {
-				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
-			}
-			else if (format == ModelFileFormat::GLTF.first) {
-				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
-			}
-		}
-
-		// マテリアルの名前の設定
-		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		result.name = material->GetName().C_Str();
-	}
-
-	return result;
-}
 
 

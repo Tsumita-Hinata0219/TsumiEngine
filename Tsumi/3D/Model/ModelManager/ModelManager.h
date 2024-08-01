@@ -94,12 +94,6 @@ public: // メンバ関数
 private: // メンバ関数
 
 	/// <summary>
-	/// 
-	/// </summary>
-	void LoadOBJ(ModelDatas* newData, const std::string& path, const std::string& fileName);
-	void LoadGLTF(ModelDatas* newData, const std::string& path, const std::string& fileName);
-
-	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
 	bool CheckObjData(std::string filePath);
@@ -118,13 +112,6 @@ private: // メンバ関数
 	/// NodeからJointを作る
 	/// </summary>
 	int32_t CreateJoint(const Node& node, const optional<int32_t>& parent, vector<Joint>& joints);
-
-
-	// MeshDataの解析
-	MeshData ParseMeshData(const aiScene* scene);
-
-	// MaterialDataの解析
-	MaterialDataN ParseMaterialData(const aiScene* scene, const std::string& filePath, const std::string& format);
 
 
 private: // メンバ変数

@@ -42,10 +42,6 @@ public:
 		return &instance;
 	}
 
-
-	// モデルファイルロード
-	void ParseFile(ModelDatas* newData, const std::string& path, const std::string& fileName);
-
 	// OBJファイルローダー
 	ModelDatas* ParseLoadObj(const std::string& path, const std::string& fileName);
 

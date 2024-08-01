@@ -2,18 +2,6 @@
 
 
 
-// モデルファイルロード
-void ModelFileLoader::ParseFile(ModelDatas* newData, const std::string& path, const std::string& fileName)
-{
-	if (newData->fileFormat == ModelFileFormat::OBJ.first) {
-		newData = ParseLoadObj(path, fileName);
-	}
-	else if (newData->fileFormat == ModelFileFormat::GLTF.first) {
-		newData = ParseLoadGLTF(path, fileName);
-	}
-}
-
-
 // OBJファイルローダー
 ModelDatas* ModelFileLoader::ParseLoadObj(const std::string& path, const std::string& fileName)
 {

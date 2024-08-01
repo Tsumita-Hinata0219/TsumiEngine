@@ -192,6 +192,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Tsumi\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Tsumi\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\State\GLTF\IGLTFState.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
@@ -343,6 +345,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\ModelStructure.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\GLTF\IGLTFState.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\ModelState.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
     <ClInclude Include="Tsumi\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Tsumi\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Tsumi\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />

@@ -210,6 +210,8 @@
     <ClCompile Include="Project\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\State\GLTF\IGLTFState.cpp" />
+    <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -422,6 +424,9 @@
     <ClInclude Include="Project\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Project\Scene\ResultScene\ResultScene.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\ModelState.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\GLTF\IGLTFState.h" />
+    <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

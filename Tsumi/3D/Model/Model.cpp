@@ -231,7 +231,7 @@ void Model::DrawN(Transform transform)
 	//// コマンドコール
 	//CommandCall();
 	transform;
-	modelState_->Draw();
+	modelState_->Draw(transform);
 }
 
 

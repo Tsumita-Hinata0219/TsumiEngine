@@ -3,7 +3,7 @@
 
 
 // 描画処理
-void IGLTFState::Draw()
+void IGLTFState::Draw(Transform transform)
 {
 }
 

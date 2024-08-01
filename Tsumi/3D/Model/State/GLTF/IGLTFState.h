@@ -13,7 +13,7 @@ public:
 	~IGLTFState() {};
 
 	// 描画処理
-	void Draw() override;
+	void Draw(Transform transform) override;
 
 	// コマンドコール
 	void CommandCall() override;

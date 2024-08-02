@@ -32,6 +32,7 @@ void IOBJState::Draw(Transform transform)
 		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
+
 	// ここで書き込み
 	// VBV
 	buffers_.vertex.Map();

@@ -85,8 +85,8 @@ MeshData ModelFileLoader::ParseMeshData(const aiScene* scene, std::string fileFo
 	// 今回作るmesh & indeces
 	for (uint32_t meshIndex = 0; meshIndex < scene->mNumMeshes; ++meshIndex) {
 		aiMesh* mesh = scene->mMeshes[meshIndex];
-		assert(mesh->HasNormals()); // 法線がないMeshは小名木は非対応
-		assert(mesh->HasTextureCoords(0)); // TexcoordがないMeshは今回は非対応
+		assert(mesh->HasNormals());
+		assert(mesh->HasTextureCoords(0));
 		result.vertices.resize(mesh->mNumVertices); // 最初に頂点数分のメモリを確保しておく
 
 		// Verticesを解析する

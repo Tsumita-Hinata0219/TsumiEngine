@@ -22,7 +22,7 @@ void ConfigManager::CreateGroup(const std::string& groupName)
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, int32_t value)
 {
 	// グループの参照を取得
-	ConfigGroup& group = datas_[groupName];
+	ConfigGroup& group = GetGroup(groupName);
 
 	// 指定された名前で検索をかける
 	auto it = group.items.find(key);

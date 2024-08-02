@@ -1,6 +1,7 @@
 #pragma once
 
 #include <variant>
+#include <stdexcept>
 
 #include "Math/MyMath.h"
 
@@ -55,7 +56,20 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
+	// グループの取得
+	ConfigGroup& GetGroup(const std::string& groupName) {
+		// 指定された名前で検索をかける
+		auto it = datas_.find(groupName);
 
+		// ヒットしたらそのグループをreturn
+		if (it != datas_.end()) {
+			return it->second;
+		}
+
+		// 見つからなかった場合のエラーハンドリング
+		Log("\n指定されたグループは存在しません\n新しくグループを作成するか、指定名を修正してください\n");
+		throw std::runtime_error("Group not found: " + groupName);
+	}
 
 #pragma endregion 
 

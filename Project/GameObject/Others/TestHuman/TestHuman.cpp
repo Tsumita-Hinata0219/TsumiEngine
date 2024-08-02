@@ -48,6 +48,9 @@ void TestHuman::Init()
 	simple_ = modelManager_->GetModel("walk");
 	simpleTrans_.Init();
 	simpleTrans_.srt.rotate.y = ToRadians(180.0f);
+
+	enviroment_.textureHandle = TextureManager::LoadTexture("Texture", "uvChecker.png");
+	enviroment_.enable = true;
 }
 
 
@@ -105,6 +108,17 @@ void TestHuman::Update()
 
 	if (ImGui::TreeNode("TestHuman")) {
 
+		simpleTrans_.DrawImGui();
+
+		ImGui::Text("");
+		ImGui::Text("Light");
+		light_.DrawImGui();
+
+		ImGui::Text("");
+		ImGui::Text("Enviroment");
+		enviroment_.DrawImGui();
+
+
 		/*ImGui::DragFloat3("Walk_Scale", &walkWt_.srt.scale.x, 0.1f);
 		ImGui::DragFloat3("Walk_Rotate", &walkWt_.srt.rotate.x, 0.1f);
 		ImGui::DragFloat3("Walk_Translate", &walkWt_.srt.translate.x, 0.1f);
@@ -141,5 +155,7 @@ void TestHuman::Draw()
 	//// SimpleSkin
 	//simpleModel_->AnimDraw(simpleWt_, simpleSkinCluster_);
 
+	simple_->SetLightData(light_);
+	simple_->SetEnvironmentData(enviroment_);
 	simple_->DrawN(simpleTrans_);
 }

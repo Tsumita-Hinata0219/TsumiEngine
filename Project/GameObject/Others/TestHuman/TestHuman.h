@@ -48,5 +48,8 @@ private:
 	ModelManager* modelManager_ = nullptr;
 	std::unique_ptr<Model> simple_;
 	Transform simpleTrans_{};
+
+	DirectionalLightData light_{};
+	EnvironmentData enviroment_{};
 };
 

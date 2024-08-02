@@ -21,10 +21,49 @@ void ConfigManager::CreateGroup(const std::string& groupName)
 // 項目のセット
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, int32_t value)
 {
+	// グループの参照を取得
+	ConfigGroup& group = datas_[groupName];
+
+	// 指定された名前で検索をかける
+	auto it = datas_[groupName].items.find(key);
+
+	// ヒットしなかったら項目を作る
+	if (it == datas_[groupName].items.end()) {
+		datas_[groupName].items[key];
+	}
+
+	// 項目のデータを設定
+	datas_[groupName].items[key].value = value;
 }
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, float value)
 {
+	// グループの参照を取得
+	ConfigGroup& group = datas_[groupName];
+
+	// 指定された名前で検索をかける
+	auto it = datas_[groupName].items.find(key);
+
+	// ヒットしなかったら項目を作る
+	if (it == datas_[groupName].items.end()) {
+		datas_[groupName].items[key];
+	}
+
+	// 項目のデータを設定
+	datas_[groupName].items[key].value = value;
 }
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, const Vector3& value)
 {
+	// グループの参照を取得
+	ConfigGroup& group = datas_[groupName];
+
+	// 指定された名前で検索をかける
+	auto it = datas_[groupName].items.find(key);
+
+	// ヒットしなかったら項目を作る
+	if (it == datas_[groupName].items.end()) {
+		datas_[groupName].items[key];
+	}
+
+	// 項目のデータを設定
+	datas_[groupName].items[key].value = value;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../GameObject.h"
+#include "../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 
 /* TestHumanクラス */
 class TestHuman {

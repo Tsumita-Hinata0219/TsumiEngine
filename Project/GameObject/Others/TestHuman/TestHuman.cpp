@@ -43,6 +43,11 @@ void TestHuman::Init()
 	//simpleWt_.srt.translate.x = 0.0f;
 	//simpleWt_.srt.rotate.y = ToRadians(180.0f);
 
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("gLTF/TestHuman", "walk.gltf");
+	simple_ = modelManager_->GetModel("walk");
+	simpleTrans_.Init();
+	simpleTrans_.srt.rotate.y = ToRadians(180.0f);
 }
 
 
@@ -135,4 +140,6 @@ void TestHuman::Draw()
 
 	//// SimpleSkin
 	//simpleModel_->AnimDraw(simpleWt_, simpleSkinCluster_);
+
+	simple_->DrawN(simpleTrans_);
 }

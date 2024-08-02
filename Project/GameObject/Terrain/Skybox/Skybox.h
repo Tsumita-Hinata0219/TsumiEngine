@@ -10,25 +10,14 @@
 /* Skyboxクラス */
 class Skybox {
 
-private: // シングルトンデザインパターン
-
-	// コンストラクタ、デストラクタ
-	Skybox() = default;
-	~Skybox() = default;
-	Skybox(const Skybox&) = delete;
-	const Skybox& operator=(const Skybox&) = delete;
-
-
 public: // メンバ関数
 
-	// インスタンスの取得
-	static Skybox* GetInstance() {
-		static Skybox instance;
-		return &instance;
-	}
+	// コンストラクタ、デストラクタ
+	Skybox() {};
+	~Skybox() {};
 
 	// 初期化処理、更新処理、描画処理
-	void Initialize();
+	void Init();
 	void Update();
 	void Draw();
 

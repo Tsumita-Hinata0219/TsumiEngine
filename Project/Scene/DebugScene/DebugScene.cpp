@@ -28,6 +28,10 @@ void DebugScene::Initialize()
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
 
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	skybox_->Init();
+
 	/* ----- Ground 床 ----- */
 	ground_ = std::make_unique<Ground>();
 	ground_->Init();
@@ -55,6 +59,9 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- Skydome 天球 ----- */
 	skydome_->Update();
+
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Update();
 
 	/* ----- Ground 床 ----- */
 	ground_->Update();
@@ -90,13 +97,16 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	skydome_->Draw3D();
+	//skydome_->Draw3D();
+
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Draw();
 
 	/* ----- Ground 床 ----- */
 	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Draw();
+	testHuman_->Draw();
 
 }
 

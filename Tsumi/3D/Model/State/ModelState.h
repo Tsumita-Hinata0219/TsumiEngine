@@ -40,7 +40,24 @@ public: // メンバ変数
 #pragma region Accessor アクセッサ
 
 	// データのセット
+	ModelDatas GetModelDatas() { return this->datas_; }
 	void SetModelDatas(ModelDatas setData) { this->datas_ = setData; }
+	
+	// Mesh
+	MeshData GetMeshData() const { return this->datas_.mesh; }
+	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+
+	// Material
+	MaterialDataN GetMaterialData() const { return this->datas_.material; }
+	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+
+	// Light
+	DirectionalLightData GetLightData() const { return this->datas_.light; }
+	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+
+	// Environment
+	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
+	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
 
 #pragma endregion 
 
@@ -70,7 +87,7 @@ protected:
 			// influence
 			buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
 			// palette
-			buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
+			//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
 		}
 	}
 

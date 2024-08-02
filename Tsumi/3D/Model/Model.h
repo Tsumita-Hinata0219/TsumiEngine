@@ -138,24 +138,24 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 #pragma region Accessor アクセッサ
 
-	//// ModelResourcesの取得
-	//ModelDatas GetModelResources() const { return this->datas_; }
+	// ModelResourcesの取得
+	ModelDatas GetModelResources() const { return this->modelState_->GetModelDatas(); }
 
-	//// Mesh
-	//MeshData GetMeshData() const { return this->datas_.mesh; }
-	//void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+	// Mesh
+	MeshData GetMeshData() const { return this->modelState_->GetMeshData(); }
+	void SetMeshData(MeshData setData) { this->modelState_->SetMeshData(setData); }
 
-	//// Material
-	//MaterialDataN GetMaterialData() const { return this->datas_.material; }
-	//void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+	// Material
+	MaterialDataN GetMaterialData() const { return this->modelState_->GetMaterialData(); }
+	void SetMaterialData(MaterialDataN seteData) { this->modelState_->SetMaterialData(seteData); }
 
-	//// Light
-	//DirectionalLightData GetLightData() const { return this->datas_.light; }
-	//void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+	// Light
+	DirectionalLightData GetLightData() const { return this->modelState_->GetLightData(); }
+	void SetLightData(DirectionalLightData setData) { this->modelState_->SetLightData(setData); }
 
-	//// Environment
-	//EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
-	//void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
+	// Environment
+	EnvironmentData GetEnvironmentData() const { return this->modelState_->GetEnvironmentData(); }
+	void SetEnvironmentData(EnvironmentData setData) { this->modelState_->SetEnvironmentData(setData); }
 
 #pragma endregion 
 

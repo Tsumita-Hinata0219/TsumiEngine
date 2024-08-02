@@ -45,7 +45,7 @@ ModelDatas* ModelFileLoader::ParseLoadGLTF(const std::string& path, const std::s
 	ModelDatas* result = new ModelDatas;
 
 	// return するModelDatasに名前を付けておく。(ファイル名)
-	result->name = fileName.substr(0, fileName.size() - 4);
+	result->name = fileName.substr(0, fileName.size() - 5);
 	result->fileFormat = GetExtension(fileName);
 
 

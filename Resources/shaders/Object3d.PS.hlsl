@@ -54,11 +54,11 @@ PixelShaderOutput main(VertexShaderOutput input)
     PixelShaderOutput output;
 
     // UV変換を適用
-    //float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
+    float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
 
     // テクスチャから色をサンプリング
-    //float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-    float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
+    float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
+    //float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
 
     // アルファ値が0.9f未満なら描画をスキップ
     if (textureColor.a < 0.01f)
@@ -69,45 +69,42 @@ PixelShaderOutput main(VertexShaderOutput input)
     // ライト処理を追加
     if (gDirectionalLight.eneble) // ライトが有効な場合
     {
-        //// 法線ベクトルの計算
-        //float3 normal = normalize(input.normal);
+        // 法線ベクトルの計算
+        float3 normal = normalize(input.normal);
         
-        //// ライトの方向ベクトルを正規化
-        //float3 lightDir = normalize(gDirectionalLight.direction);
+        // ライトの方向ベクトルを正規化
+        float3 lightDir = normalize(gDirectionalLight.direction);
         
-        //// 視線ベクトルの計算
-        //float3 toEye = normalize(gViewProjectionMat.cameraPosition - input.worldPos);
+        // 視線ベクトルの計算
+        float3 toEye = normalize(gViewProjectionMat.cameraPosition - input.worldPos);
         
-        //// リフレクトベクトルの計算
-        //float3 reflectLight = reflect(lightDir, normal);
+        // リフレクトベクトルの計算
+        float3 reflectLight = reflect(lightDir, normal);
         
-        //// ハーフベクトルの計算
-        //float3 halfVector = normalize(lightDir + toEye);
+        // ハーフベクトルの計算
+        float3 halfVector = normalize(lightDir + toEye);
         
-        //// 拡散反射の計算
-        //float NdotL = dot(normal, lightDir);
-        //float cos = pow(NdotL * 0.5f + 0.5f, 2.0f);
-        //float3 diffuse = gMaterial.color.rgb * textureColor.rgb * gDirectionalLight.color.rgb * cos * gDirectionalLight.intensity;
+        // 拡散反射の計算
+        float NdotL = dot(normal, lightDir);
+        float cos = pow(NdotL * 0.5f + 0.5f, 2.0f);
+        float3 diffuse = gMaterial.color.rgb * textureColor.rgb * gDirectionalLight.color.rgb * cos * gDirectionalLight.intensity;
         
-        //// 鏡面反射の計算
-        //float NdotH = dot(normal, halfVector);
-        //float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
-        //float3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specularPow;
+        // 鏡面反射の計算
+        float NdotH = dot(normal, halfVector);
+        float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
+        float3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specularPow;
         
-        //// 拡散反射と鏡面反射の合成
-        //float3 finalColor = diffuse + specular;
+        // 拡散反射と鏡面反射の合成
+        float3 finalColor = diffuse + specular;
         
-        //// テクスチャのアルファが0の場合はピクセルを破棄
-        //if (textureColor.a <= 0.5f)
-        //{
-        //    discard;
-        //}
+        // テクスチャのアルファが0の場合はピクセルを破棄
+        if (textureColor.a <= 0.5f)
+        {
+            discard;
+        }
         
-        //// 色の設定
-        //output.color.rgb = finalColor;
-        
-        float cos = saturate(dot(normalize(input.normal), -gDirectionalLight.direction));
-        output.color =  gMaterial.color * textureColor * cos * gDirectionalLight.intensity;
+        // 色の設定
+        output.color.rgb = finalColor;
     }
     else
     {

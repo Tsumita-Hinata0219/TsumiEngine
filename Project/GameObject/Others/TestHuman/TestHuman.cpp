@@ -49,8 +49,12 @@ void TestHuman::Init()
 	simpleTrans_.Init();
 	simpleTrans_.srt.rotate.y = ToRadians(180.0f);
 
-	enviroment_.textureHandle = TextureManager::LoadTexture("Texture", "uvChecker.png");
+	light_.enable = true;
+	light_.direction = Vector3::one;
+
+	enviroment_.textureHandle = TextureManager::LoadTexture("Texture", "airport_4k.dds");
 	enviroment_.enable = true;
+	enviroment_.scale = 1.0f;
 }
 
 

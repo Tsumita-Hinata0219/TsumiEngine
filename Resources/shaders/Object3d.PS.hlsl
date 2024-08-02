@@ -38,7 +38,7 @@ struct Environment
     int enable;
 };
 ConstantBuffer<Environment> gEnvironment : register(b3);
-Texture2D<float4> gEnvironmentTexture : register(t1);
+TextureCube<float4> gEnvironmentTexture : register(t1);
 
 
 
@@ -116,7 +116,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         float3 cameraToPos = normalize(input.worldPos - gViewProjectionMat.cameraPosition);
         float3 reflectedVector = reflect(cameraToPos, normalize(input.normal));
-        float4 environmentColor = gEnvironmentTexture.Sample(gSampler, reflectedVector.xy);
+        float4 environmentColor = gEnvironmentTexture.Sample(gSampler, reflectedVector);
         environmentColor *= gEnvironment.scale;
         output.color.rgb += environmentColor.rgb;
     }

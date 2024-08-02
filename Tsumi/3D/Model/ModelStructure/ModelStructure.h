@@ -7,6 +7,7 @@
 
 // メッシュデータ
 struct MeshData {
+	std::map<std::string, JointWeightData> skinClusterData;
 	std::vector<VertexData> vertices;
 	std::vector<uint32_t> indices;
 	Node rootNode;
@@ -33,7 +34,7 @@ struct DirectionalLightData
 		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat((label +  "_intennsity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat((label + "_shininess").c_str(), &shininess, 0.01f, 0.0f, 1.0f);
 	}
@@ -50,4 +51,16 @@ struct EnvironmentData {
 		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
 		ImGui::DragFloat((label + "_Scale").c_str(), &scale, 0.01f, 0.0f, 1.0f);
 	}
+};
+
+// スキンクラスターデータ
+struct SkinClusterData {
+	std::vector<Matrix4x4> inverseBindPosematrices;
+	//Microsoft::WRL::ComPtr<ID3D12Resource> influenceResource;
+	//D3D12_VERTEX_BUFFER_VIEW influenceBufferView;
+	std::span<VertexInfluence> mappedInfluence;
+	//Microsoft::WRL::ComPtr<ID3D12Resource> paletteResource;
+	std::span<WellForGPU> mappedPallette;
+	std::pair<D3D12_CPU_DESCRIPTOR_HANDLE, D3D12_GPU_DESCRIPTOR_HANDLE>paletteSrvHandle;
+	uint32_t srvHandle;
 };

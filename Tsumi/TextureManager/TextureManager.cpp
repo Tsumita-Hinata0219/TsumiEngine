@@ -125,12 +125,11 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	textureData.resource = CreateTextureResource(metadata);
 
 	// 登録
-	//Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
-	//	UploadTextureData(textureData.resource.Get(), mipImages);
-	
+	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
+		UploadTextureData(textureData.resource.Get(), mipImages);
+
 	// Commandの実行
-	//instance->ExeCommands();
-	UpdateTextureData(metadata, mipImages, textureData);
+	instance->ExeCommands();
 
 	// SRV作成
 	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
@@ -161,7 +160,7 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 
 	// 登録
 	Microsoft::WRL::ComPtr<ID3D12Resource> intermediateResourece =
-		UploadTextureData(textureData.resource.Get(), mipImages); 
+		UploadTextureData(textureData.resource.Get(), mipImages);
 
 	// Commandの実行
 	instance->ExeCommands();
@@ -283,10 +282,10 @@ D3D12_RESOURCE_DESC TextureManager::SettingResource(const DirectX::TexMetadata& 
 D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 
 	D3D12_HEAP_PROPERTIES heapProperties{};
-	
-	heapProperties.Type = D3D12_HEAP_TYPE_CUSTOM;                        // 細かい設定を行う
-	heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
-	heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;
+	heapProperties.Type = D3D12_HEAP_TYPE_DEFAULT;                        // VRAM上に作成する
+	//heapProperties.CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_WRITE_BACK; // WriteBackポリシーでCPUアクセス可能
+	//heapProperties.MemoryPoolPreference = D3D12_MEMORY_POOL_L0;	         // プロセッサの近くに配置
+
 	return heapProperties;
 }
 
@@ -303,7 +302,7 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
-		D3D12_RESOURCE_STATE_GENERIC_READ, // データ転送される設定
+		D3D12_RESOURCE_STATE_COPY_DEST,    // データ転送される設定
 		nullptr,						   // Clear最適地。使わないのでnullptr
 		IID_PPV_ARGS(&resource));		   // 作成するResourceポインタへのポインタ
 
@@ -318,6 +317,9 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 /// TextureResourceにデータを転送する
 /// </summary>
 void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, DirectX::ScratchImage& mipImages, TextureData textureData) {
+
+	// Meta情報を取得
+	//const DirectX::TexMetadata& metadata = mipImage.GetMetadata();
 
 	// 全MipMapについて
 	for (size_t mipLevel = 0; mipLevel < metadata.mipLevels; ++mipLevel) {

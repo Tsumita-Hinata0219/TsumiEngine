@@ -24,8 +24,8 @@ ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
 struct DirectionalLight
 {
     float4 color;
-    float3 direction;    
-    float intensity;    
+    float3 direction;
+    float intensity;
     float shininess;
     int eneble;
 };
@@ -38,7 +38,7 @@ struct Environment
     int enable;
 };
 ConstantBuffer<Environment> gEnvironment : register(b3);
-Texture2D<float4> gEnvironmentTexture : register(t1);
+TextureCube<float4> gEnvironmentTexture : register(t1);
 
 
 
@@ -58,9 +58,10 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     // テクスチャから色をサンプリング
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
+    //float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
 
     // アルファ値が0.9f未満なら描画をスキップ
-    if (textureColor.a < 0.9f)
+    if (textureColor.a < 0.01f)
     {
         discard;
     }
@@ -70,28 +71,38 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         // 法線ベクトルの計算
         float3 normal = normalize(input.normal);
-
+        
         // ライトの方向ベクトルを正規化
-        float3 lightDir = normalize(-gDirectionalLight.direction);
-
-        // 光源の強さと色を計算
-        float NdotL = max(dot(normal, lightDir), 0.0f);
-        float3 diffuse = gMaterial.color.rgb * textureColor.rgb * gDirectionalLight.color.rgb * NdotL * gDirectionalLight.intensity;
-
+        float3 lightDir = normalize(gDirectionalLight.direction);
+        
         // 視線ベクトルの計算
         float3 toEye = normalize(gViewProjectionMat.cameraPosition - input.worldPos);
-
+        
+        // リフレクトベクトルの計算
+        float3 reflectLight = reflect(lightDir, normal);
+        
         // ハーフベクトルの計算
         float3 halfVector = normalize(lightDir + toEye);
-        float NdotH = max(dot(normal, halfVector), 0.0f);
-        float specular = pow(NdotH, gDirectionalLight.shininess);
-
+        
+        // 拡散反射の計算
+        float NdotL = dot(normal, lightDir);
+        float cos = pow(NdotL * 0.5f + 0.5f, 2.0f);
+        float3 diffuse = gMaterial.color.rgb * textureColor.rgb * gDirectionalLight.color.rgb * cos * gDirectionalLight.intensity;
+        
         // 鏡面反射の計算
-        float3 specularReflection = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specular;
-
+        float NdotH = dot(normal, halfVector);
+        float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
+        float3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specularPow;
+        
         // 拡散反射と鏡面反射の合成
-        float3 finalColor = diffuse + specularReflection;
-
+        float3 finalColor = diffuse + specular;
+        
+        // テクスチャのアルファが0の場合はピクセルを破棄
+        if (textureColor.a <= 0.5f)
+        {
+            discard;
+        }
+        
         // 色の設定
         output.color.rgb = finalColor;
     }
@@ -105,7 +116,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     {
         float3 cameraToPos = normalize(input.worldPos - gViewProjectionMat.cameraPosition);
         float3 reflectedVector = reflect(cameraToPos, normalize(input.normal));
-        float4 environmentColor = gEnvironmentTexture.Sample(gSampler, reflectedVector.xy);
+        float4 environmentColor = gEnvironmentTexture.Sample(gSampler, reflectedVector);
         environmentColor *= gEnvironment.scale;
         output.color.rgb += environmentColor.rgb;
     }

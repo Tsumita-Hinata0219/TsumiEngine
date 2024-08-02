@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void Skybox::Initialize()
+void Skybox::Init()
 {
 	// テクスチャの読み込み
 	this->texture_ = TextureManager::LoadTexture("Texture", "airport_4k.dds");
@@ -14,6 +14,7 @@ void Skybox::Initialize()
 	// Transformの初期化処理
 	transform_.Initialize();
 	transform_.srt.scale = { initScale_, initScale_, initScale_ };
+	transform_.srt.rotate.y = ToRadians(180.0f);
 
 	// カラー
 	color_ = Vector4::one;

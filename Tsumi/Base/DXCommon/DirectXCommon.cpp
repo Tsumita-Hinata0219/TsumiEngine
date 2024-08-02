@@ -194,7 +194,6 @@ void DirectXCommon::PreDrawForSwapChain() {
 		clearColor,
 		0, nullptr);
 
-
 	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
 	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
 

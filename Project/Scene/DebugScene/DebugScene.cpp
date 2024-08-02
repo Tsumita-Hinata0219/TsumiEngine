@@ -19,17 +19,18 @@ DebugScene::~DebugScene() {}
 /// </summary>
 void DebugScene::Initialize()
 {
-	/* ----- FileManager ファイルマネージャー ----- */
-	//FileManager::GetInstance()->LoadJsonFile("Json/", "honmei");
-
 	/* ----- Camera カメラ ----- */
-	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
+	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 1.7f, -4.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	
 	/* ----- Skydome 天球 ----- */
 	skydome_ = std::make_unique<Skydome>();
 	skydome_->Init();
+
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	skybox_->Init();
 
 	/* ----- Ground 床 ----- */
 	ground_ = std::make_unique<Ground>();
@@ -42,20 +43,6 @@ void DebugScene::Initialize()
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();
 	testHuman_->Init();
-
-	/* ----- ModelNewLoad モデルニューロード ----- */
-	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Test", "Test.obj");
-	demoModel_ = modelManager_->GetModel("Test");
-
-	transformA_.Init();
-	transformA_.srt.scale = { 1.0f,1.0f,1.0f };
-	transformA_.srt.rotate = { 0.0f,0.0f,0.0f };
-	transformA_.srt.translate = { -2.0f,0.0f,0.0f };
-
-	/* ----- TestBaseObject テストベースオブジェクト ----- */
-	testBaseObject_ = std::make_unique<TestBaseObject>();
-	testBaseObject_->Init();
 }
 
 
@@ -72,6 +59,9 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- Skydome 天球 ----- */
 	skydome_->Update();
+
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Update();
 
 	/* ----- Ground 床 ----- */
 	ground_->Update();
@@ -107,19 +97,17 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skydome 天球 ----- */
-	//skydome_->draw3D();
+	//skydome_->Draw3D();
+
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Draw();
 
 	/* ----- Ground 床 ----- */
 	//ground_->Draw3D();
 
 	/* ----- TestHuman テストヒューマン ----- */
-	//testHuman_->Draw();
+	testHuman_->Draw();
 
-	/* ----- ModelNewLoad モデルニューロード ----- */
-	demoModel_->DrawN(transformA_);
-
-	/* ----- TestBaseObject テストベースオブジェクト ----- */
-	testBaseObject_->Draw3D();
 }
 
 

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../GameObject.h"
+#include "../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 
 /* TestHumanクラス */
 class TestHuman {
@@ -19,29 +20,36 @@ public:
 private:
 
 	//  ウォークモデル
-	unique_ptr<Model> walkModel_;
+	/*unique_ptr<Model> walkModel_;
 	WorldTransform walkWt_{};
 	float animTimeA_ = 0.0f;
 	Skeleton walkSkeleton_{};
-	SkinCluster walkSkinCluster_{};
+	SkinCluster walkSkinCluster_{};*/
 
-	// スニークモデル
-	unique_ptr<Model> sneakModel_;
-	WorldTransform sneakWt_{};
-	float animTimeB_ = 0.0f;
-	Skeleton sneakSkeleton_{};
-	SkinCluster sneakSkinCluster_{};
+	//// スニークモデル
+	//unique_ptr<Model> sneakModel_;
+	//WorldTransform sneakWt_{};
+	//float animTimeB_ = 0.0f;
+	//Skeleton sneakSkeleton_{};
+	//SkinCluster sneakSkinCluster_{};
 
-	//  シンプルモデル
-	unique_ptr<Model> simpleModel_;
-	WorldTransform simpleWt_{};
-	float animTimeC_ = 0.0f;
-	Skeleton simpleSkeleton_{};
-	SkinCluster simpleSkinCluster_{};
+	////  シンプルモデル
+	//unique_ptr<Model> simpleModel_;
+	//WorldTransform simpleWt_{};
+	//float animTimeC_ = 0.0f;
+	//Skeleton simpleSkeleton_{};
+	//SkinCluster simpleSkinCluster_{};
 
-	// アニメーションタイプ
-	Animation walkAnim_{};
-	Animation sneakAnim_{};
-	Animation simpleAnim_{};
+	//// アニメーションタイプ
+	//Animation walkAnim_{};
+	//Animation sneakAnim_{};
+	//Animation simpleAnim_{};
+
+	ModelManager* modelManager_ = nullptr;
+	std::unique_ptr<Model> simple_;
+	Transform simpleTrans_{};
+
+	DirectionalLightData light_{};
+	EnvironmentData enviroment_{};
 };
 

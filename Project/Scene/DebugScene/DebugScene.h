@@ -9,6 +9,7 @@
 #include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
+#include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
 #include "../../../Project/GameObject/Terrain/Ground/Ground.h"
 #include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
 #include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
@@ -58,17 +59,15 @@ public:
 
 private:
 
-	// ModelManager
-	ModelManager* modelManager_ = nullptr;
-	std::unique_ptr<Model> demoModel_;
-	Transform transformA_{};
-
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource camera_;
 
 	// Skydome
 	std::unique_ptr<Skydome> skydome_;
+
+	// Skybox
+	std::unique_ptr<Skybox> skybox_;
 
 	// Ground
 	std::unique_ptr<Ground> ground_;
@@ -81,8 +80,5 @@ private:
 
 	// TestJsonObject
 	std::unique_ptr<TestJsonObject> testJsonObject_;
-
-	// TestBaseObject
-	std::unique_ptr<TestBaseObject> testBaseObject_;
 };
 

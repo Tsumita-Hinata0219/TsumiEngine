@@ -15,7 +15,7 @@ IOBJState::IOBJState(ModelDatas datas)
 	datas_ = datas;
 
 	// DatasをもとにBufferを作成
-	CreateBufferResource();
+	CreateBufferResource(datas_);
 }
 
 

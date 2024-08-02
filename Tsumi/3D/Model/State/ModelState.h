@@ -65,14 +65,14 @@ public: // メンバ変数
 protected:
 
 	// BufferResourceの生成
-	void CreateBufferResource() {
+	void CreateBufferResource(ModelDatas datas) {
 		// mesh
-		buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
+		buffers_.mesh.CreateResource(UINT(datas.mesh.vertices.size()));
 		// vertexBufferView
-		buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+		buffers_.vertex.CreateResource(UINT(datas.mesh.vertices.size()));
 		buffers_.vertex.CreateVertexBufferView();
 		// indexBufferView
-		buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+		buffers_.indeces.CreateResource(UINT(datas.mesh.indices.size()));
 		buffers_.indeces.CreateIndexBufferView();
 		// material
 		buffers_.material.CreateResource();
@@ -85,7 +85,7 @@ protected:
 
 		if (stateType_ == GLTF) {
 			// influence
-			buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
+			buffers_.influence.CreateResource(UINT(datas.mesh.vertices.size()));
 			// palette
 			//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
 		}

@@ -28,6 +28,9 @@ struct ModelDatas {
 	// ジョイントウェイト
 	JointWeightData jointWeight{};
 
+	// スケルトン
+	Skeleton skeleton{};
+
 	// スキンクラスター
 	//SkinClusterData skinCluster{};
 };
@@ -56,8 +59,8 @@ struct ModelBuffers {
 	BufferResource<EnvironmentData> enviroment;
 
 	// インフルエンス
-	//BufferResource<VertexInfluence> influence;
+	BufferResource<VertexInfluence> influence;
 
 	// パレット
-	//BufferResource<WellForGPU> palette;
+	BufferResource<WellForGPU> palette;
 };

@@ -8,6 +8,9 @@ IGLTFState::IGLTFState(ModelDatas datas)
 	// CameraManagerのインスタンスの取得
 	cameraManager_ = CameraManager::GetInstance();
 
+	// ステートタイプの設定
+	stateType_ = GLTF;
+
 	// ModelDatasの設定
 	datas_ = datas;
 

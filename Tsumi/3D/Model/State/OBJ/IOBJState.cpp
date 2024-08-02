@@ -8,6 +8,9 @@ IOBJState::IOBJState(ModelDatas datas)
 	// CameraManagerのインスタンスの取得
 	cameraManager_ = CameraManager::GetInstance();
 
+	// ステートタイプの設定
+	stateType_ = OBJ;
+
 	// ModelDatasの設定
 	datas_ = datas;
 

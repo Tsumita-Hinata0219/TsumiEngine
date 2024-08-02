@@ -65,10 +65,13 @@ protected:
 		buffers_.light.CreateResource();
 		// encironment
 		buffers_.enviroment.CreateResource();
-		// influence
-		//buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
-		// palette
-		//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
+
+		if (stateType_ == GLTF) {
+			// influence
+			buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
+			// palette
+			buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
+		}
 	}
 
 
@@ -82,4 +85,7 @@ protected: // メンバ変数
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
+
+	// モデルステート
+	StateType stateType_ = NONE;
 };

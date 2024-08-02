@@ -25,15 +25,15 @@ void ConfigManager::SetValue(const std::string& groupName, const std::string& ke
 	ConfigGroup& group = datas_[groupName];
 
 	// 指定された名前で検索をかける
-	auto it = datas_[groupName].items.find(key);
+	auto it = group.items.find(key);
 
 	// ヒットしなかったら項目を作る
-	if (it == datas_[groupName].items.end()) {
-		datas_[groupName].items[key];
+	if (it == group.items.end()) {
+		group.items[key];
 	}
 
 	// 項目のデータを設定
-	datas_[groupName].items[key].value = value;
+	group.items[key].value = value;
 }
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, float value)
 {
@@ -41,15 +41,15 @@ void ConfigManager::SetValue(const std::string& groupName, const std::string& ke
 	ConfigGroup& group = datas_[groupName];
 
 	// 指定された名前で検索をかける
-	auto it = datas_[groupName].items.find(key);
+	auto it = group.items.find(key);
 
 	// ヒットしなかったら項目を作る
-	if (it == datas_[groupName].items.end()) {
-		datas_[groupName].items[key];
+	if (it == group.items.end()) {
+		group.items[key];
 	}
 
 	// 項目のデータを設定
-	datas_[groupName].items[key].value = value;
+	group.items[key].value = value;
 }
 void ConfigManager::SetValue(const std::string& groupName, const std::string& key, const Vector3& value)
 {
@@ -57,13 +57,13 @@ void ConfigManager::SetValue(const std::string& groupName, const std::string& ke
 	ConfigGroup& group = datas_[groupName];
 
 	// 指定された名前で検索をかける
-	auto it = datas_[groupName].items.find(key);
+	auto it = group.items.find(key);
 
 	// ヒットしなかったら項目を作る
-	if (it == datas_[groupName].items.end()) {
-		datas_[groupName].items[key];
+	if (it == group.items.end()) {
+		group.items[key];
 	}
 
 	// 項目のデータを設定
-	datas_[groupName].items[key].value = value;
+	group.items[key].value = value;
 }

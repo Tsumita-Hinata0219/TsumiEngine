@@ -6,8 +6,10 @@
 void TestHuman::Init()
 {
 	// コンフィグマネージャー
+	std::string groupName = "TestHuman";
 	configManager_ = ConfigManager::GetInstance();
-	configManager_->CreateGroup("TestHuman");
+	configManager_->CreateGroup(groupName);
+	configManager_->SetValue(groupName, "Test", 90);
 
 	// モデルの読み込み
 	modelManager_ = ModelManager::GetInstance();

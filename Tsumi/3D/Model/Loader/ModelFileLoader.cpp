@@ -144,11 +144,9 @@ MeshData ModelFileLoader::ParseMeshData(const aiScene* scene, std::string fileFo
 		}
 	}
 
-	// Nodeを読み込む
-	if (scene->mRootNode) {
-		result.rootNode = ReadNode(scene->mRootNode); // 情報があれば読み込む
-	}
-		
+	// Nodeの読み込み
+	result.rootNode = ReadNode(scene->mRootNode);
+
 	return result;
 }
 

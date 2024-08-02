@@ -20,7 +20,7 @@ DebugScene::~DebugScene() {}
 void DebugScene::Initialize()
 {
 	/* ----- Camera カメラ ----- */
-	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 5.0f, -15.0f });
+	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 2.0f, -10.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	

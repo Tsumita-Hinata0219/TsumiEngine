@@ -44,8 +44,12 @@ void TestHuman::Init()
 	//simpleWt_.srt.rotate.y = ToRadians(180.0f);
 
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("gLTF/TestHuman", "walk.gltf");
-	simple_ = modelManager_->GetModel("walk");
+	/*modelManager_->LoadModel("gLTF/TestHuman", "walk.gltf");
+	simple_ = modelManager_->GetModel("walk");*/
+	/*modelManager_->LoadModel("gLTF/AnimatedCube", "AnimatedCube.gltf");
+	simple_ = modelManager_->GetModel("AnimatedCube");*/
+	modelManager_->LoadModel("Obj/ball", "ball.obj");
+	simple_ = modelManager_->GetModel("ball");
 	simpleTrans_.Init();
 	simpleTrans_.srt.rotate.y = ToRadians(180.0f);
 

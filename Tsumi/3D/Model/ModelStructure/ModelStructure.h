@@ -34,7 +34,7 @@ struct DirectionalLightData
 		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, -1.0f, 1.0f);
 		ImGui::DragFloat((label +  "_intennsity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat((label + "_shininess").c_str(), &shininess, 0.01f, 0.0f, 1.0f);
 	}

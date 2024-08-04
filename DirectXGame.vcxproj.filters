@@ -214,6 +214,8 @@
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Detector\CollisionDetector.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Sphere\SphereCollisionDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -431,6 +433,8 @@
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
     <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Detector\CollisionDetector.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Sphere\SphereCollisionDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -23,10 +23,10 @@ void Player::Init()
 	// BodyTransformの初期化
 	trans_.Init();
 
-	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);
+	//// Colliderの初期化
+	//collider_ = std::make_unique<OBBCollider>();
+	//collider_->Init();
+	//collider_->SetSize(size_);
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
@@ -70,7 +70,7 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	collider_->SetSrt(trans_.srt);
+	//collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {

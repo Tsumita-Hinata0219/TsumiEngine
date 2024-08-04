@@ -29,10 +29,10 @@ void Enemy::Init()
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Init(this);
 
-	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);
+	//// Colliderの初期化
+	//collider_ = std::make_unique<OBBCollider>();
+	//collider_->Init();
+	//collider_->SetSize(size_);
 }
 
 
@@ -78,7 +78,7 @@ void Enemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	collider_->SetSrt(trans_.srt);
+	//collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 

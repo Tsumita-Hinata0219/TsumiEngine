@@ -77,7 +77,7 @@ private:
 	JsonManager* jsonManager_ = nullptr;
 
 	// CollisionManager
-	std::unique_ptr<CollisionManager> collisionManager_;
+	//std::unique_ptr<CollisionManager> collisionManager_;
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;

@@ -34,7 +34,7 @@ public: // メンバ関数
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// Collider
-	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+	//OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
 	// KillCount
 	uint32_t GetKillCount() const { return this->killCount_; }
@@ -108,7 +108,7 @@ private: // メンバ変数
 	float kBulletSpeed_ = 0.5f;
 
 	// コライダー
-	std::unique_ptr<OBBCollider> collider_;
+	//std::unique_ptr<OBBCollider> collider_;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;

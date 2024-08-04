@@ -26,7 +26,7 @@ void GameScene::Initialize()
 	jsonManager_->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
-	collisionManager_ = std::make_unique<CollisionManager>();
+	//collisionManager_ = std::make_unique<CollisionManager>();
 
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -164,36 +164,36 @@ void GameScene::FrontSpriteDraw()
 // 衝突判定処理
 void GameScene::CheckAllCollision()
 {
-	// Player with EnemyBullet
-	for (auto& enemy : enemyManager_->GetEnemyList()) {
-		for (auto& bullet : enemy->GetBulletList()) {
-			if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
-				player_->OnCollisionWithEnemyBullet();
-				bullet->OnCollisionWithPlayer();
-			}
-		}
-	}
+	//// Player with EnemyBullet
+	//for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//	for (auto& bullet : enemy->GetBulletList()) {
+	//		if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
+	//			player_->OnCollisionWithEnemyBullet();
+	//			bullet->OnCollisionWithPlayer();
+	//		}
+	//	}
+	//}
 
-	// PlayerBullet with Enemy
-	for (auto& bullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
-				bullet->OnCollisionWithEnemy();
-				enemy->OnCollisionWithPlayerBullet();
-			}
-		}
-	}
+	//// PlayerBullet with Enemy
+	//for (auto& bullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
+	//			bullet->OnCollisionWithEnemy();
+	//			enemy->OnCollisionWithPlayerBullet();
+	//		}
+	//	}
+	//}
 
-	// PlayerBullet with EnemyBullet
-	for (auto& playerBullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
-			for (auto& enemyBullet : enemy->GetBulletList()) {
-				if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
-					playerBullet->OnCollisionWithEnemyBullet();
-					enemyBullet->OnCollisionWithPlayerBullet();
-				}
-			}
-		}
-	}
+	//// PlayerBullet with EnemyBullet
+	//for (auto& playerBullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		for (auto& enemyBullet : enemy->GetBulletList()) {
+	//			if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
+	//				playerBullet->OnCollisionWithEnemyBullet();
+	//				enemyBullet->OnCollisionWithPlayerBullet();
+	//			}
+	//		}
+	//	}
+	//}
 }
 

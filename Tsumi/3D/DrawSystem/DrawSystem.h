@@ -1,13 +1,14 @@
 #pragma once
 
-#include "../../Base/DXCommon/DirectXCommon.h"
-#include "../../CommandManager/CommandManager.h"
-#include "../../PipeLineManager/PipeLineManager.h"
-#include "../../CreateResource/CreateResource.h"
-#include "../../DescriptorManager/DescriptorManager.h"
-#include "../../../Project/Math/MyMath.h"
-#include "../../../Project/Math/Struct.h"
-#include "../../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "Base/DXCommon/DirectXCommon.h"
+#include "CommandManager/CommandManager.h"
+#include "PipeLineManager/PipeLineManager.h"
+#include "CreateResource/CreateResource.h"
+#include "DescriptorManager/DescriptorManager.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
+#include "CollisionSystem/Structure/CollisionStructures.h"
 
 
 /* DrawSyetemクラス */

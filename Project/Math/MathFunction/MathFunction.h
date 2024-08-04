@@ -19,7 +19,7 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/Math/Struct.h"
-#include "../../Tsumi/Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
+//#include "../../Tsumi/Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
 #include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 
 

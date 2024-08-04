@@ -1,20 +1,21 @@
 #pragma once
 
-#include "../../../Project/Scene/IScene.h"
-#include "../../../Project/GameManager/GameManager.h"
-#include "../../../Project/GameObject/GameObject.h"
-#include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
-#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "Scene/IScene.h"
+#include "GameManager/GameManager.h"
+#include "GameObject/GameObject.h"
+#include "3D/Model/ModelManager/ModelManager.h"
+#include "PipeLineManager/PipeLineManager.h"
+#include "ConfigManager/ConfigManager.h"
 
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 
-#include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
-#include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
-#include "../../../Project/GameObject/Terrain/Ground/Ground.h"
-#include "../../../Project/GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "../../../Project/GameObject/Others/TestHuman/TestHuman.h"
-#include "../../../Project/GameObject/Others/TestJsonObject/TestJsonObject.h"
-#include "../../../Project/GameObject/Others/TestBaseObject/TestBaseObject.h"
+#include "GameObject/Terrain/Skydome/Skydome.h"
+#include "GameObject/Terrain/Skybox/Skybox.h"
+#include "GameObject/Terrain/Ground/Ground.h"
+#include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
+#include "GameObject/Others/TestHuman/TestHuman.h"
+#include "GameObject/Others/TestJsonObject/TestJsonObject.h"
+#include "GameObject/Others/TestBaseObject/TestBaseObject.h"
 
 
 class DebugScene : public IScene {
@@ -58,6 +59,9 @@ public:
 
 
 private:
+
+	// ConfigManager
+	ConfigManager* configManager_ = nullptr;
 
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;

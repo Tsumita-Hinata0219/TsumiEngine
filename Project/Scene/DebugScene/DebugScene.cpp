@@ -19,6 +19,9 @@ DebugScene::~DebugScene() {}
 /// </summary>
 void DebugScene::Initialize()
 {
+	/* ----- ConfigManager コンフィグマネージャー ----- */
+	configManager_ = ConfigManager::GetInstance();
+
 	/* ----- Camera カメラ ----- */
 	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 1.7f, -4.0f });
 	cameraManager_ = CameraManager::GetInstance();
@@ -77,6 +80,9 @@ void DebugScene::Update(GameManager* state)
 	ImGui::Begin("DebugScene");
 	camera_.DrawImGui();
 	ImGui::End();
+
+	/* ----- ConfigManager コンフィグマネージャー ----- */
+	configManager_->DrawImGui();
 
 #endif // _DEBUG
 }

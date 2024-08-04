@@ -53,6 +53,10 @@ public: // メンバ関数
 	void SetValue(const std::string& groupName, const std::string& key, float value);
 	void SetValue(const std::string& groupName, const std::string& key, const Vector3& value);
 
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	void DrawImGui();
 
 #pragma region Accessor アクセッサ
 

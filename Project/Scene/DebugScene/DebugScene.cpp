@@ -21,6 +21,7 @@ void DebugScene::Initialize()
 {
 	/* ----- ConfigManager コンフィグマネージャー ----- */
 	configManager_ = ConfigManager::GetInstance();
+	configManager_->LoadFile();
 
 	/* ----- Camera カメラ ----- */
 	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 1.7f, -4.0f });

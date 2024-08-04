@@ -9,10 +9,10 @@ void TestHuman::Init()
 	std::string groupName = "TestHuman";
 	configManager_ = ConfigManager::GetInstance();
 	configManager_->CreateGroup(groupName);
-	configManager_->SetValue(groupName, "Test", 90);
-	configManager_->SetValue(groupName, "Test", 900.0f);
-	configManager_->SetValue(groupName, "Test", Vector3(1.0f, 2.0f, 3.0f));
-	configManager_->SaveFile(groupName);
+	configManager_->AddItem(groupName, "Test", 90);
+	configManager_->AddItem(groupName, "Test", 900.0f);
+	configManager_->AddItem(groupName, "Test", Vector3(1.0f, 2.0f, 3.0f));
+	//configManager_->SaveFile(groupName);
 
 	// モデルの読み込み
 	modelManager_ = ModelManager::GetInstance();

@@ -56,9 +56,20 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="groupName"> グループ名 </param>
 	/// <param name="key"> 項目名 </param>
+	/// <param name="value"> 値 </param>
 	void SetValue(const std::string& groupName, const std::string& key, int32_t value);
 	void SetValue(const std::string& groupName, const std::string& key, float value);
 	void SetValue(const std::string& groupName, const std::string& key, const Vector3& value);
+
+	/// <summary>
+	/// 項目の追加
+	/// </summary>
+	/// <param name="groupName"> グループ名 </param>
+	/// <param name="key"> 項目名 </param>
+	/// <param name="value"> 値 </param>
+	void AddItem(const std::string& groupName, const std::string& key, int32_t value);
+	void AddItem(const std::string& groupName, const std::string& key, float value);
+	void AddItem(const std::string& groupName, const std::string& key, const Vector3& value);
 
 	/// <summary>
 	/// 更新処理
@@ -70,6 +81,13 @@ public: // メンバ関数
 	/// </summary>
 	/// <param name="groupName"> グループ名 </param>
 	void SaveFile(const std::string& groupName);
+
+	/// <summary>
+	/// ディレクトリの全ファイルの読み込み
+	/// </summary>
+	/// <param name="groupName"> グループ名 </param>
+	void LoadFile();
+	void LoadFile(const std::string& groupName);
 
 
 #pragma region Accessor アクセッサ

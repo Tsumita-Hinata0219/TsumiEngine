@@ -1,5 +1,5 @@
 #include "ConfigManager.h"
-
+#include <fstream>
 
 
 // グループ作成
@@ -80,7 +80,9 @@ void ConfigManager::DrawImGui()
 
 	
 	// 各グループについて
-	for (std::map<std::string, ConfigGroup>::iterator itGroup = datas_.begin(); itGroup != datas_.end(); ++itGroup) {
+	for (std::map<std::string, ConfigGroup>::iterator itGroup = datas_.begin(); 
+		itGroup != datas_.end(); 
+		++itGroup) {
 
 		// グループ名とグループを取得
 		const std::string& groupName = itGroup->first;
@@ -91,7 +93,9 @@ void ConfigManager::DrawImGui()
 			continue;
 
 		// 各項目について
-		for (std::map<std::string, ConfigItem>::iterator itItem = group.items.begin(); itItem != group.items.end(); ++itItem) {
+		for (std::map<std::string, ConfigItem>::iterator itItem = group.items.begin(); 
+			itItem != group.items.end(); 
+			++itItem) {
 
 			// 項目名と項目を取得
 			const std::string& itemName = itItem->first;
@@ -114,6 +118,14 @@ void ConfigManager::DrawImGui()
 			}
 		}
 
+		// 改行
+		ImGui::Text("\n");
+		if (ImGui::Button("Save")) {
+			SaveFile(groupName);
+			std::string mess = std::format("{}.json saved.", groupName);
+			MessageBoxA(nullptr, mess.c_str(), "ConfigVariables", 0);
+		}
+
 		ImGui::EndMenu();
 	}
 
@@ -121,3 +133,74 @@ void ConfigManager::DrawImGui()
 	ImGui::EndMenuBar();
 	ImGui::End();
 }
+
+
+// Jsonファイルに書き出し
+void ConfigManager::SaveFile(const std::string& groupName)
+{
+	// グループを検索
+	std::map<std::string, ConfigGroup>::iterator itGroup = datas_.find(groupName);
+
+	// 未登録チェック
+	assert(itGroup != datas_.end());
+
+	// まとめるJson型のデータコンテナ
+	json root;
+	// jsonオブジェク登録
+	root[groupName] = json::object();
+
+	// 各項目について
+	for (std::map<std::string, ConfigItem>::iterator itItem = itGroup->second.items.begin(); 
+		itItem != itGroup->second.items.end(); 
+		++itItem) {
+
+		// 項目名と項目の取得
+		const std::string& itemName = itItem->first;
+		ConfigItem item = itItem->second;
+
+		// int32_t型の値を保持していれば
+		if (std::holds_alternative<int32_t>(item.value)) {
+			// int32_t型の値を登録
+			root[groupName][itemName] = std::get<int32_t>(item.value);
+		}
+		// flaot型の値を保持していれば
+		else if (std::holds_alternative<float>(item.value)) {
+			// float型の値を登録
+			root[groupName][itemName] = std::get<float>(item.value);
+		}
+		// Vector3型の値を保持していれば
+		else if (std::holds_alternative<Vector3>(item.value)) {
+			// Vector3型の値を登録
+			Vector3 value = std::get<Vector3>(item.value);
+			root[groupName][itemName] = json::array({ value.x, value.y, value.z });
+		}
+	}
+
+
+	// ディレクトリの作成
+	std::filesystem::path dir(kDirectoryPath);
+	if (!std::filesystem::exists(dir)) {
+		std::filesystem::create_directory(dir);
+	}
+
+	// 書き込むJsonファイルのフルファイルパスを合成する
+	std::string filePath = kDirectoryPath + groupName + ".json";
+	// 書き込み用ファイルストリーム
+	std::ofstream ofs{};
+	// ファイルを書き込みように開く
+	ofs.open(filePath);
+
+	// ファイルオープン失敗？
+	if (ofs.fail()) {
+		std::string mess = "Failed open data file for write.";
+		MessageBoxA(nullptr, mess.c_str(), "ConfigVariables", 0);
+		assert(0);
+		return;
+	}
+
+	// ファイルにjson文字列を書き込む(インデント幅4)
+	ofs << std::setw(4) << root << std::endl;
+	// ファイルを閉じる
+	ofs.close();
+}
+

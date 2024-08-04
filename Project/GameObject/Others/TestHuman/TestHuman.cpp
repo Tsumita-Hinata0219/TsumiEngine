@@ -12,6 +12,7 @@ void TestHuman::Init()
 	configManager_->SetValue(groupName, "Test", 90);
 	configManager_->SetValue(groupName, "Test", 900.0f);
 	configManager_->SetValue(groupName, "Test", Vector3(1.0f, 2.0f, 3.0f));
+	configManager_->SaveFile(groupName);
 
 	// モデルの読み込み
 	modelManager_ = ModelManager::GetInstance();

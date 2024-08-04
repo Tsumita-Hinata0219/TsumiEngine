@@ -2,6 +2,9 @@
 
 #include <variant>
 #include <stdexcept>
+#include <filesystem>
+#include <iosfwd>
+#include <json.hpp>
 
 #include "Math/MyMath.h"
 
@@ -16,6 +19,10 @@ struct ConfigItem {
 struct ConfigGroup {
 	std::map<std::string, ConfigItem> items;
 };
+
+using json = nlohmann::json;
+// 保存先のファイルパス
+const std::string kDirectoryPath = "Resources/ConfigVariables/";
 
 
 /* 調整項目クラス */
@@ -57,6 +64,13 @@ public: // メンバ関数
 	/// 更新処理
 	/// </summary>
 	void DrawImGui();
+
+	/// <summary>
+	/// Jsonファイルに書き出し
+	/// </summary>
+	/// <param name="groupName"> グループ名 </param>
+	void SaveFile(const std::string& groupName);
+
 
 #pragma region Accessor アクセッサ
 

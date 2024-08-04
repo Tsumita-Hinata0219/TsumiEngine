@@ -17,10 +17,10 @@
 #include <type_traits>
 #include <filesystem>
 
-#include "../../Project/Math/MyMath.h"
-#include "../../Project/Math/Struct.h"
-//#include "../../Tsumi/Utilities/CollisionManager/CollisionStructures/CollisionStructures.h"
-#include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
+#include "CollisionSystem/Structure/CollisionStructures.h"
+#include "Transform/WorldTransform/WorldTransform.h"
 
 
 /// -------------------------------------------------------------------------

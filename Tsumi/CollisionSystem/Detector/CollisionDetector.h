@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Structure/CollisionStructures.h"
 
 
 /* 衝突判定の基本インターフェイス */

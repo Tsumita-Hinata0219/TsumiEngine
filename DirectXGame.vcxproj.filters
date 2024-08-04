@@ -107,9 +107,6 @@
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\CollisionManager.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Tsumi\Utilities\FadeManager\FadeManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp" />
@@ -213,6 +210,9 @@
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Detector\CollisionDetector.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Sphere\SphereCollisionDetector.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -297,16 +297,6 @@
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\AABBCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\CapsuleCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\ColliderConfig.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\OBBCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SegmentCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SphereCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionManager.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionStructures\CollisionStructures.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.h" />
     <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h" />
     <ClInclude Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Tsumi\Utilities\RandomGenerator\RandomGenerator.h" />
@@ -422,6 +412,16 @@
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Detector\CollisionDetector.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Sphere\SphereCollisionDetector.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Manager\CollisionManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\AABBCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\CapsuleCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\ColliderConfig.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\OBBCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\SegmentCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

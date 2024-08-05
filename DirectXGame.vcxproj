@@ -158,7 +158,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Project\GameManager\GameManager.cpp" />
+    <ClCompile Include="Project\Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Camera.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Manager\CameraManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Resources\CameraResource.cpp" />
@@ -281,7 +281,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Input\Input.cpp" />
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
-    <ClCompile Include="Tsumi\Tsumi.cpp" />
+    <ClCompile Include="Project\Engine\Tsumi.cpp" />
     <ClCompile Include="Tsumi\Utilities\FadeManager\FadeManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp" />
@@ -298,7 +298,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
-    <ClInclude Include="Project\GameManager\GameManager.h" />
+    <ClInclude Include="Project\Engine\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
@@ -445,7 +445,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
-    <ClInclude Include="Tsumi\Tsumi.h" />
+    <ClInclude Include="Project\Engine\Tsumi.h" />
     <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h" />
     <ClInclude Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.h" />

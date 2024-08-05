@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "../../../Project/GameManager/GameManager.h"
+#include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 

@@ -2,7 +2,7 @@
 
 #include <chrono>
 
-#include "../../Tsumi/Tsumi.h"
+#include "Tsumi.h"
 #include "Scene/IScene.h"
 #include "Scene/DebugScene/DebugScene.h"
 

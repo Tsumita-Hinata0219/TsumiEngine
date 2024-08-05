@@ -1,5 +1,5 @@
 #include "RandomEffect.h"
-#include "../../../../Project/GameManager/GameManager.h"
+#include "GameManager/GameManager.h"
 
 
 

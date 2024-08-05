@@ -11,7 +11,7 @@
 #include "json.hpp"
 
 #include "../FileManager/FileManager.h"
-#include "../3D/Model/ModelManager/ModelManager.h"
+#include "Model/ModelManager/ModelManager.h"
 
 #include "Math/MyMath.h"
 #include "GameObject/GameObject.h"

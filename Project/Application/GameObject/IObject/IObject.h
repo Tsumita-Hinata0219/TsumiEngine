@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../GameObject.h"
-#include "3D/Model/Model.h"
-#include "3D/Model/ModelManager/ModelManager.h"
+#include "Model/Model.h"
+#include "Model/ModelManager/ModelManager.h"
 #include "Transform/Transform.h"
 #include "CollisionSystem/Collider/Collider.h"
 

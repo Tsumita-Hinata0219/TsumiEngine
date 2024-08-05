@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../BufferResource/BufferResource.h"
-#include "../../../Transform/Transform.h"
+#include "../../../Tsumi/BufferResource/BufferResource.h"
+#include "../../../Tsumi/Transform/Transform.h"
 #include "../ModelStructure/ModelStructure.h"
 
 

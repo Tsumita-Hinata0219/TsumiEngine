@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Tsumi/3D/Model/Model.h"
-#include "../../Tsumi/3D/DrawSystem/DrawSystem.h"
-#include "../../Tsumi/2D/Sprite/Sprite.h"
+#include "Model/Model.h"
+#include "DrawSystem/DrawSystem.h"
+#include "Sprite/Sprite.h"
 #include "../../Tsumi/TextureManager/TextureManager.h"
 #include "../../Tsumi/Audio/Audio.h"
 #include "../../Tsumi/Input/Input.h"

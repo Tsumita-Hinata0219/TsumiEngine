@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../GameObject.h"
-#include "3D/Model/ModelManager/ModelManager.h"
+#include "Model/ModelManager/ModelManager.h"
 #include "ConfigManager/ConfigManager.h"
 
 /* TestHumanクラス */

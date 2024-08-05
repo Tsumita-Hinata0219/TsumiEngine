@@ -1,15 +1,15 @@
 #pragma once
 
-#include "../../../Base/DXCommon/DirectXCommon.h"
-#include "../../../CommandManager/CommandManager.h"
+#include "../../../Tsumi/Base/DXCommon/DirectXCommon.h"
+#include "../../../Tsumi/CommandManager/CommandManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "../../../Transform/WorldTransform/WorldTransform.h"
-#include "../../../TextureManager/TextureManager.h"
-#include "../../../PipeLineManager/PipeLineManager.h"
-#include "../../../CreateResource/CreateResource.h"
+#include "../../../Tsumi/Transform/WorldTransform/WorldTransform.h"
+#include "../../../Tsumi/TextureManager/TextureManager.h"
+#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "../../../Tsumi/CreateResource/CreateResource.h"
 #include "../IModelState.h"
-#include "../../../DescriptorManager/DescriptorManager.h"
+#include "../../../Tsumi/DescriptorManager/DescriptorManager.h"
 #include "GameObject/Camera/Camera.h"
 
 #include "GameObject/Camera/Manager/CameraManager.h"

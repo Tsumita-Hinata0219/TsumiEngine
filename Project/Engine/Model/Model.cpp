@@ -1,6 +1,6 @@
 #include "Model.h"
 #include "ModelManager/ModelManager.h"
-#include "../../Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "../../Tsumi/Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
 
 

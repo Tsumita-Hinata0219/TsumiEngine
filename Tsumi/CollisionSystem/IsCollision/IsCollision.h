@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
-#include "../CollisionStructures/CollisionStructures.h"
-#include "../GeometryCollision/GeometryCollision.h"
+#include "../Structure/CollisionStructures.h"
+#include "../Geometry/GeometryCollision.h"
 using namespace GeometryCollision;
 
 

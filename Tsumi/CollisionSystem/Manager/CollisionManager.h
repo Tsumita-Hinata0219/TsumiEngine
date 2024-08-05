@@ -1,13 +1,15 @@
 #pragma once
 
-#include "Collider/SphereCollider.h"
-#include "Collider/OBBCollider.h"
-#include "Collider/AABBCollider.h"
-#include "Collider/SegmentCollider.h"
-#include "Collider/ColliderConfig.h"
-#include "../../Project/Math/MyMath.h"
-#include "../../Project/Math/Struct.h"
-#include "IsCollision/IsCollision.h"
+#include "../Collider/SegmentCollider.h"
+#include "../Collider/SphereCollider.h"
+#include "../Collider/OBBCollider.h"
+#include "../Collider/AABBCollider.h"
+#include "../Collider/SegmentCollider.h"
+#include "../Collider/ColliderConfig.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
+#include "../IsCollision/IsCollision.h"
+#include "GameObject/IObject/IObject.h"
 
 #include <list>
 using namespace std;
@@ -41,6 +43,19 @@ public: // 総当たり用
 		aabbColliders_.clear();
         obbColliders_.clear();
 	}
+
+    // 衝突判定検出
+    void CheckCollisions(const std::vector<IObject*>& obj) {
+        for (size_t i = 0; i < obj.size(); ++i) {
+            for (size_t j = i + 1; j < obj.size(); ++j) {
+                if (obj[i]->DetectCollisions(*obj[j])) {
+                    std::cout << "Collision detected between objects!" << std::endl;
+                    obj[i]->onCollision(obj[j]);
+                    obj[j]->onCollision(obj[i]);
+                }
+            }
+        }
+    }
 
 private:
 

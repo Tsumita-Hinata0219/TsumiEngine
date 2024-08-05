@@ -372,6 +372,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\AABBCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\CapsuleCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Collider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\ColliderConfig.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\OBBCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\SegmentCollider.h" />

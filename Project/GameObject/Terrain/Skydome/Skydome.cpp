@@ -25,3 +25,9 @@ void Skydome::Draw3D()
 }
 void Skydome::Draw2DFront() {}
 void Skydome::Draw2DBack() {}
+
+
+// 衝突判定コールバック関数
+void Skydome::onCollision([[maybe_unused]] IObject* object)
+{
+}

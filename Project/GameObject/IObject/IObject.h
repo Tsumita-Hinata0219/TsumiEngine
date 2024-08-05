@@ -1,9 +1,10 @@
 #pragma once
 
 #include "../GameObject.h"
-#include "../../Tsumi/3D/Model/Model.h"
-#include "../../Tsumi/3D/Model/ModelManager/ModelManager.h"
-#include "../../Tsumi/Transform/Transform.h"
+#include "3D/Model/Model.h"
+#include "3D/Model/ModelManager/ModelManager.h"
+#include "Transform/Transform.h"
+#include "CollisionSystem/Collider/Collider.h"
 
 
 /* オブジェクトの基底クラス */
@@ -22,12 +23,32 @@ public: // メンバ関数
 	virtual void Draw2DBack() = 0;
 
 
-private:
+    // コライダー追加
+    void addCollider(Collider* collider) {
+        colliders.push_back(collider);
+    }
 
+    // 衝突判定
+    bool DetectCollisions(const IObject& other) const {
+        for (const auto& collider1 : colliders) {
+            for (const auto& collider2 : other.colliders) {
+                if (collider1->DetectCollision(*collider2)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // 衝突時コールバック関数
+    virtual void onCollision([[maybe_unused]] IObject* object) = 0;
 
 
 protected: // メンバ変数
 
 	// ModelManager
 	ModelManager* modelManager_ = nullptr;
+
+    // コライダー
+    std::vector<Collider*> colliders;
 };

@@ -29,3 +29,9 @@ void Wall::Draw3D()
 }
 void Wall::Draw2DFront() {}
 void Wall::Draw2DBack() {}
+
+
+// 衝突判定コールバック関数
+void Wall::onCollision([[maybe_unused]] IObject* object)
+{
+}

@@ -2,11 +2,11 @@
 
 #include<cstdint>
 
-#include "../CollisionStructures/CollisionStructures.h"
+#include "../Structure/CollisionStructures.h"
 #include "ColliderConfig.h"
 
-#include "../../Project/Math/MyMath.h"
-#include "../../../Transform/Transform.h"
+#include "Math/MyMath.h"
+#include "Transform/Transform.h"
 
 
 /* SphereColliderクラス */

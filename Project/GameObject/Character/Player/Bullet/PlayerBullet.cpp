@@ -52,6 +52,9 @@ void PlayerBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
+void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
+{
+}
 void PlayerBullet::OnCollisionWithEnemy()
 {
 	isDead_ = true;

@@ -14,7 +14,18 @@ public:
 	/// <summary>
 	/// 衝突判定ロジックお実装する関数
 	/// </summary>
-	bool Detect() override;
+	bool Detect(const CollisionDetector& other) const override {
+		return other.detectSphere(*this);
+	}
+	bool detectSphere(const SphereCollisionDetector& other) const override {
+		return Collision::IsCollision(this->sphere_, other.sphere_);
+	}
+
+
+private:
+
+
+	Sphere sphere_{};
 
 };
 

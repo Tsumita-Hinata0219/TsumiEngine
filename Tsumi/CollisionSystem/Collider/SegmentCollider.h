@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../CollisionStructures/CollisionStructures.h"
+#include "../Structure/CollisionStructures.h"
 #include "ColliderConfig.h"
 #include<cstdint>
 

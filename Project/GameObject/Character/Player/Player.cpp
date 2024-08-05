@@ -109,6 +109,9 @@ void Player::Draw2DFront() {}
 
 
 // 衝突自コールバック関数
+void Player::onCollision([[maybe_unused]] IObject* object)
+{
+}
 void Player::OnCollisionWithEnemy()
 {
 

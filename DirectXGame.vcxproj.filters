@@ -422,6 +422,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\Collider\OBBCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\SegmentCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\SphereCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Collider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

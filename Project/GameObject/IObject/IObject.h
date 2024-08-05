@@ -7,6 +7,15 @@
 #include "CollisionSystem/Collider/Collider.h"
 
 
+// オブジェクトの属性
+enum class ObjAttribute {
+    PLAYER,
+    ENEMY,
+    TERRAIN,
+    OTHER,
+};
+
+
 /* オブジェクトの基底クラス */
 class IObject {
 

@@ -12,7 +12,7 @@ public:
 	~SphereCollisionDetector() {};
 
 	/// <summary>
-	/// 衝突判定ロジックお実装する関数
+	/// 衝突判定ロジックを実装する関数
 	/// </summary>
 	bool Detect(const CollisionDetector& other) const override {
 		return other.detectSphere(*this);
@@ -24,8 +24,6 @@ public:
 
 private:
 
-
 	Sphere sphere_{};
-
 };
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Project/Scene/IScene.h"
+#include "Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"

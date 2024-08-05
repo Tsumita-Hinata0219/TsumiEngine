@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Project/Scene/IScene.h"
+#include "Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../../Project/GameObject/GameObject.h"
 #include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
@@ -22,7 +22,7 @@
 #include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
-#include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
+#include "../../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 
 class GameScene : public IScene {

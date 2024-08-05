@@ -3,12 +3,12 @@
 #include <chrono>
 
 #include "../../Tsumi/Tsumi.h"
-#include "../Scene/IScene.h"
-#include "../Scene/DebugScene/DebugScene.h"
+#include "Scene/IScene.h"
+#include "Scene/DebugScene/DebugScene.h"
 
-#include "../Scene/TitleScene/TitleScene.h"
-#include "../Scene/GameScene/GameScene.h"
-#include "../Scene/ResultScene/ResultScene.h"
+#include "Scene/TitleScene/TitleScene.h"
+#include "Scene/GameScene/GameScene.h"
+#include "Scene/ResultScene/ResultScene.h"
 
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"
 

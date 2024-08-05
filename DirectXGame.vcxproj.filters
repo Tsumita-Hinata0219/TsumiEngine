@@ -177,8 +177,8 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
-    <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
-    <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
+    <ClCompile Include="Project\Application\Scene\GameScene\GameScene.cpp" />
+    <ClCompile Include="Project\Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Absent\AbsentEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
@@ -202,8 +202,8 @@
     <ClCompile Include="Project\GameObject\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Floor\Floor.cpp" />
-    <ClCompile Include="Project\Scene\TitleScene\TitleScene.cpp" />
-    <ClCompile Include="Project\Scene\ResultScene\ResultScene.cpp" />
+    <ClCompile Include="Project\Application\Scene\TitleScene\TitleScene.cpp" />
+    <ClCompile Include="Project\Application\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
@@ -244,7 +244,7 @@
     <ClInclude Include="Project\Math\MyMath.h" />
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />
-    <ClInclude Include="Project\Scene\IScene.h" />
+    <ClInclude Include="Project\Application\Scene\IScene.h" />
     <ClInclude Include="Project\GameManager\GameManager.h" />
     <ClInclude Include="Project\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\GameObject\GameObject.h" />
@@ -373,8 +373,8 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
-    <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
-    <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
+    <ClInclude Include="Project\Application\Scene\GameScene\GameScene.h" />
+    <ClInclude Include="Project\Application\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Absent\AbsentEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h" />
@@ -403,8 +403,8 @@
     <ClInclude Include="Project\GameObject\Terrain\Wall\Wall.h" />
     <ClInclude Include="Project\GameObject\Terrain\Building1\Building1.h" />
     <ClInclude Include="Project\GameObject\Terrain\Floor\Floor.h" />
-    <ClInclude Include="Project\Scene\TitleScene\TitleScene.h" />
-    <ClInclude Include="Project\Scene\ResultScene\ResultScene.h" />
+    <ClInclude Include="Project\Application\Scene\TitleScene\TitleScene.h" />
+    <ClInclude Include="Project\Application\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Tsumi\3D\Model\State\ModelState.h" />
     <ClInclude Include="Tsumi\3D\Model\State\GLTF\IGLTFState.h" />
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />

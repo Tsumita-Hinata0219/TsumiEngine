@@ -4,8 +4,8 @@
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 #include "Model/ModelManager/ModelManager.h"
-#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
-#include "../../Tsumi/JsonManager/JsonManager.h"
+#include "PipeLineManager/PipeLineManager.h"
+#include "JsonManager/JsonManager.h"
 
 #include "GameObject/Camera/Manager/CameraManager.h"
 
@@ -21,7 +21,7 @@
 #include "GameObject/Character/EnemyManager/EnemyManager.h"
 #include "GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
-#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 

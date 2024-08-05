@@ -1,8 +1,8 @@
 #pragma once
 
-#include "../../Tsumi/CommandManager/CommandManager.h"
-#include "../../Tsumi/CreateResource/CreateResource.h"
-#include "../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "CommandManager/CommandManager.h"
+#include "CreateResource/CreateResource.h"
+#include "PipeLineManager/PipeLineManager.h"
 
 #include "../../GameObject.h"
 

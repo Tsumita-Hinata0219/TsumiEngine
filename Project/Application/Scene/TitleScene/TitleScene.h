@@ -3,7 +3,7 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
-#include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
+#include "Utilities/FadeManager/FadeManager.h"
 
 
 class TitleScene : public IScene {

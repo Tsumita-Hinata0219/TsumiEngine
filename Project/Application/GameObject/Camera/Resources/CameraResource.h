@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Tsumi/Base/WinApp/WinApp.h"
-#include "../../Tsumi/BufferResource/BufferResource.h"
+#include "Base/WinApp/WinApp.h"
+#include "BufferResource/BufferResource.h"
 #include "Math/MyMath.h"
 
 

@@ -3,7 +3,7 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
-#include "../../Tsumi/JsonManager/JsonManager.h"
+#include "JsonManager/JsonManager.h"
 
 
 /* Wall */

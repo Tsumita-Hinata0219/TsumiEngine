@@ -6,8 +6,8 @@
 #include "MathOperations/MathOperations.h"
 #include "MathFunction/MathFunction.h"
 #include "MyParlinNoise/ParlinNoise.h"
-#include "../../Tsumi/Utilities/RandomGenerator/RandomGenerator.h"
-#include "../../Tsumi/Utilities/TimedCall/TimedCall.h"
+#include "Utilities/RandomGenerator/RandomGenerator.h"
+#include "Utilities/TimedCall/TimedCall.h"
 #include "MathEasing/MathEasing.h"
 
 

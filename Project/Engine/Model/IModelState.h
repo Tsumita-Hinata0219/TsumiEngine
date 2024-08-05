@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
+#include "Transform/WorldTransform/WorldTransform.h"
 #include "GameObject/Camera/Camera.h"
 
 

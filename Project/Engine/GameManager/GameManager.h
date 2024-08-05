@@ -10,7 +10,7 @@
 #include "Scene/GameScene/GameScene.h"
 #include "Scene/ResultScene/ResultScene.h"
 
-#include "../../Tsumi/Utilities/TextLog/TextLog.h"
+#include "Utilities/TextLog/TextLog.h"
 
 // グローバル変数の定義
 extern float g_ElapsedTime;

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../../../Tsumi/BufferResource/BufferResource.h"
-#include "../../../Tsumi/CommandManager/CommandManager.h"
-#include "../../../Tsumi/View/SRVManager/SRVManager.h"
-#include "../../../Tsumi/Transform/Transform.h"
-#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
+#include "BufferResource/BufferResource.h"
+#include "CommandManager/CommandManager.h"
+#include "View/SRVManager/SRVManager.h"
+#include "Transform/Transform.h"
+#include "PipeLineManager/PipeLineManager.h"
 #include "../ModelStructure/ModelStructure.h"
 #include "../ModelResources/ModelResources.h"
 

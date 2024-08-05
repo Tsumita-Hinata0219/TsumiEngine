@@ -8,8 +8,8 @@
 #include "../../View/SRVManager/SRVManager.h"
 #include "../../../Project/Math/MyMath.h"
 #include "../../../Project/Math/Struct.h"
-#include "../../../Project/GameObject/Camera/Camera.h"
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "GameObject/Camera/Camera.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 #define INSTANCE_MAX 1000;
 
 

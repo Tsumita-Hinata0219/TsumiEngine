@@ -2,7 +2,7 @@
 
 #include "Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
-#include "../../../Project/GameObject/GameObject.h"
+#include "GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 
 

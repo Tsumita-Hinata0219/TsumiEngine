@@ -10,9 +10,9 @@
 #include "../../../CreateResource/CreateResource.h"
 #include "../IModelState.h"
 #include "../../../DescriptorManager/DescriptorManager.h"
-#include "../../../../Project/GameObject/Camera/Camera.h"
+#include "GameObject/Camera/Camera.h"
 
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 
 #include <fstream>
 #include <sstream>

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../Project/GameObject/GameObject.h"
+#include "GameObject/GameObject.h"
 #include "../AnimationDataArray/AnimationDataArray.h"
 
 //#include "Skeleton.h"

@@ -14,7 +14,7 @@
 #include "../3D/Model/ModelManager/ModelManager.h"
 
 #include "../../Project/Math/MyMath.h"
-#include "../../Project/GameObject/GameObject.h"
+#include "GameObject/GameObject.h"
 
 
 /* JsonManagerクラス */

@@ -2,7 +2,7 @@
 
 #include "../../Tsumi/Base/WinApp/WinApp.h"
 #include "../../Tsumi/BufferResource/BufferResource.h"
-#include "../../../Math/MyMath.h"
+#include "../../Project/Math/MyMath.h"
 
 
 // GPUに送る行列

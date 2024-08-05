@@ -2,27 +2,27 @@
 
 #include "Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
-#include "../../../Project/GameObject/GameObject.h"
+#include "GameObject/GameObject.h"
 #include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
 #include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 #include "../../Tsumi/JsonManager/JsonManager.h"
 
-#include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 
-#include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
-#include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
-#include "../../../Project/GameObject/Terrain/Ground/Ground.h"
+#include "GameObject/Terrain/Skydome/Skydome.h"
+#include "GameObject/Terrain/Skybox/Skybox.h"
+#include "GameObject/Terrain/Ground/Ground.h"
 
-#include "../../../Project/GameObject/Terrain/Wall/Wall.h"
-#include "../../../Project/GameObject/Terrain/Floor/Floor.h"
-#include "../../../Project/GameObject/Terrain/Building1/Building1.h"
+#include "GameObject/Terrain/Wall/Wall.h"
+#include "GameObject/Terrain/Floor/Floor.h"
+#include "GameObject/Terrain/Building1/Building1.h"
 
-#include "../../../Project/GameObject/Character/Player/Player.h"
-#include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
-#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
+#include "GameObject/Character/Player/Player.h"
+#include "GameObject/Character/EnemyManager/EnemyManager.h"
+#include "GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
-#include "../../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
+#include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 
 class GameScene : public IScene {

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "../../../Project/GameManager/GameManager.h"
-#include "../../../Project/GameObject/GameObject.h"
+#include "GameManager/GameManager.h"
+#include "GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 
 

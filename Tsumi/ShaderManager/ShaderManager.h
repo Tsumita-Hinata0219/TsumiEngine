@@ -10,7 +10,7 @@
 #include <iostream>
 #include <map>
 
-#include "../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 #include"../Utilities/EnumUtilities/EnumUtilities.h"
 
 

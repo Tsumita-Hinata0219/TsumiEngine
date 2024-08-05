@@ -3,7 +3,7 @@
 #include <map>
 
 #include "DirectXTex.h"
-#include "../../Project/Math/Struct.h"
+#include "Math/Struct.h"
 #include "../../Base/DXCommon/DirectXCommon.h"
 #include "../../CommandManager/CommandManager.h"
 #include "../../DescriptorManager/DescriptorManager.h"

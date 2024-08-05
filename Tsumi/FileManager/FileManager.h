@@ -9,7 +9,7 @@
 
 
 #include "json.hpp"
-#include "../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
 

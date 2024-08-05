@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../../../Project/Math/MyMath.h"
-#include "../../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 #include "../../../TextureManager/TextureManager.h"
 #include "../ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../Loader/ModelFileLoader.h"

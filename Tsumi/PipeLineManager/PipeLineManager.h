@@ -4,8 +4,8 @@
 #include <d3dx12.h>
 #include <dxcapi.h>
 
-#include "../../../Project/Math/MyMath.h"
-#include "../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "ath/Struct.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../ShaderManager/ShaderManager.h"
 #include "../CommandManager/CommandManager.h"

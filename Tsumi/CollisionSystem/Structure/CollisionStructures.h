@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 
 
 // 球

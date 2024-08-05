@@ -1,7 +1,7 @@
 #pragma once
 #include "../Base/DXCommon/DirectXCommon.h"
-#include "../../Project/Math/MyMath.h"
-#include "../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 
 
 struct ResourcePeroperty {

@@ -6,8 +6,8 @@
 #include "../../CreateResource/CreateResource.h"
 #include "../../DescriptorManager/DescriptorManager.h"
 #include "../../View/SRVManager/SRVManager.h"
-#include "../../../Project/Math/MyMath.h"
-#include "../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 #include "GameObject/Camera/Camera.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
 #define INSTANCE_MAX 1000;

@@ -8,8 +8,8 @@
 #include "../../../DescriptorManager/DescriptorManager.h"
 #include "../IModelState.h"
 #include "../../../Transform/WorldTransform/WorldTransform.h"
-#include "../../../Project/Math/MyMath.h"
-#include "../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
 
 #include <fstream>

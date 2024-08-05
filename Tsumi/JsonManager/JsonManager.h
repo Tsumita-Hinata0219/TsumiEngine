@@ -13,7 +13,7 @@
 #include "../FileManager/FileManager.h"
 #include "../3D/Model/ModelManager/ModelManager.h"
 
-#include "../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
 

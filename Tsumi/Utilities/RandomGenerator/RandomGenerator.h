@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../../Project/Math/Struct.h"
-#include "../../Project/Math/MyMath.h"
+#include "Math/Struct.h"
+#include "Math/MyMath.h"
 #include <iostream>
 #include <random>
 

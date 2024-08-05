@@ -5,7 +5,7 @@
 #include <dxcapi.h>
 
 #include "Math/MyMath.h"
-#include "ath/Struct.h"
+#include "Math/Struct.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../ShaderManager/ShaderManager.h"
 #include "../CommandManager/CommandManager.h"

@@ -10,8 +10,8 @@
 #pragma comment(lib, "dxguid.lib")
 
 #include "../Base/WinApp/WinApp.h"
-#include "../../Project/Math/Struct.h"
-#include "../../Project/Math/MathStructure/Vector/Vector.h"
+#include "Math/Struct.h"
+#include "Math/MathStructure/Vector/Vector.h"
 
 #include <cassert>
 #include <wrl.h>

@@ -14,7 +14,7 @@
 #include"../../Tsumi/Utilities/EnumUtilities/EnumUtilities.h"
 #include "../GameObject/Camera/Manager/CameraManager.h"
 
-#include "../Math/MyMath.h"
+#include "Math/MyMath.h"
 
 #include "../../Tsumi/Particle/ParticleManager/ParticleManager.h"
 

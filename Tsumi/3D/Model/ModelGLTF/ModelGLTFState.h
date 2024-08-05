@@ -2,8 +2,8 @@
 
 #include "../../../Base/DXCommon/DirectXCommon.h"
 #include "../../../CommandManager/CommandManager.h"
-#include "../../../../Project/Math/MyMath.h"
-#include "../../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 #include "../../../Transform/WorldTransform/WorldTransform.h"
 #include "../../../TextureManager/TextureManager.h"
 #include "../../../PipeLineManager/PipeLineManager.h"

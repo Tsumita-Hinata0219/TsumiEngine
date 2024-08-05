@@ -13,8 +13,8 @@
 
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
-#include "../../Project/Math/MyMath.h"
-#include "../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 
 
 /* BufferResourceクラス */

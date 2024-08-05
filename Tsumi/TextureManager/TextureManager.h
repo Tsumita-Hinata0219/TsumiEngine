@@ -14,7 +14,7 @@
 #include "../CommandManager/CommandManager.h"
 #include "../CreateResource/CreateResource.h"
 #include "../View/SRVManager/SRVManager.h"
-#include "../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 
 
 // TextureData

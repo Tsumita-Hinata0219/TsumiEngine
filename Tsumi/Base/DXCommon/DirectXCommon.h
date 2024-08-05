@@ -11,8 +11,8 @@
 
 #include "../WinApp/WinApp.h"
 #include "../../CommandManager/CommandManager.h"
-#include "../../../Project/Math/MyMath.h"
-#include "../../../Project/Math/Struct.h"
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
 #include "../../CreateResource/CreateResource.h"
 #include "../../View/RTVManager/RTVManager.h"
 

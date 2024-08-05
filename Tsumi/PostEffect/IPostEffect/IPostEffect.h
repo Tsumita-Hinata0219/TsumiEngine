@@ -11,7 +11,7 @@
 #include "../../TextureManager/TextureManager.h"
 #include "../Materials/PostEffectMaterials.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
-#include "../../../Project/Math/MyMath.h"
+#include "Math/MyMath.h"
 
 
 /* IPostEffectクラス */

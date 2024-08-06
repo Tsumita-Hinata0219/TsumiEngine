@@ -7,15 +7,22 @@ class Collider {
 
 public:
 
-	Collider(CollisionDetector* d) : detector_(d) {};
+	// コンストラクタ
+	Collider() : id(nextID++) {};
 
-	// 衝突判定を返す
-	bool DetectCollision(const Collider& other) const {
-		return detector_->Detect(*other.detector_);
-	}
+	// 仮想デストラクタ
+	virtual ~Collider() = default;
+
+	// 更新処理
+	virtual void Update() = 0;
+
+	// 衝突判定処理
+	virtual bool Detext(const Collider& other) const = 0;
 
 
-private:
+protected:
 
-	CollisionDetector* detector_;
+	// コライダーの持つID
+	int id;
+	static int nextID;
 };

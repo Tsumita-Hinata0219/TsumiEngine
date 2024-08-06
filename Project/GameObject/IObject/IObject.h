@@ -61,3 +61,4 @@ protected: // メンバ変数
     // コライダー
     std::vector<Collider*> colliders;
 };
+

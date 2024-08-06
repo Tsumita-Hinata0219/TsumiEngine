@@ -44,18 +44,19 @@ public: // 総当たり用
         obbColliders_.clear();
 	}
 
-    // 衝突判定検出
-    void CheckCollisions(const std::vector<IObject*>& obj) {
-        for (size_t i = 0; i < obj.size(); ++i) {
-            for (size_t j = i + 1; j < obj.size(); ++j) {
-                if (obj[i]->DetectCollisions(*obj[j])) {
-                    std::cout << "Collision detected between objects!" << std::endl;
-                    obj[i]->onCollision(obj[j]);
-                    obj[j]->onCollision(obj[i]);
-                }
-            }
-        }
-    }
+    //// 衝突判定検出
+    //void CheckCollisions(const std::vector<IObject*>& obj) {
+    //    for (size_t i = 0; i < obj.size(); ++i) {
+    //        for (size_t j = i + 1; j < obj.size(); ++j) {
+    //            if (obj[i]->DetectCollisions(*obj[j])) {
+    //                std::cout << "Collision detected between objects!" << std::endl;
+    //                obj[i]->onCollision(obj[j]);
+    //                obj[j]->onCollision(obj[i]);
+    //            }
+    //        }
+    //    }
+    //}
+
 
 private:
 

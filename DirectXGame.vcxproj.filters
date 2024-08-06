@@ -436,7 +436,6 @@
     <None Include="Resources\Shaders\Object3d.hlsli" />
     <None Include="Resources\Shaders\MathFunc.hlsli" />
     <None Include="Resources\Shaders\PostEffect.hlsli" />
-    <None Include="cpp.hint" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
   </ItemGroup>

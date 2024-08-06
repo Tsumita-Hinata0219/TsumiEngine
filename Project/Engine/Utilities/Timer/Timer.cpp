@@ -1,6 +1,4 @@
-#include "Timer.h"
-
-
+#include"Timer.h"
 
 // スタート時に呼び出す処理
 void Timer::Start(float setStart, float setEnd)

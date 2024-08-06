@@ -18,7 +18,8 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-
+#include<wrl.h>
+#include"Transform/Transform.h"
 
 namespace ModelFileFormat {
 	const std::pair<std::string, uint32_t> OBJ = { ".obj", 0 };

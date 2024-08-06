@@ -1,0 +1,66 @@
+﻿2024/08/05 18:06:28 にビルドを開始しました。
+ログの詳細度は次のように設定されています: Normal。     1>ノード 2 上のプロジェクト "C:\Lesson\TsumiEngine\externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj" (Build ターゲット)。
+     1>PrepareForBuild:
+         構造化出力が有効になっています。コンパイラ診断の書式設定にはエラー階層が反映されます。詳細については、https://aka.ms/cpp/structured-output を参照してください。
+         ディレクトリ "Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.tlog\" を作成しています。
+       InitializeBuildStatus:
+         "AlwaysCreate" が指定されたため "Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.tlog\unsuccessfulbuild" を作成しています。
+         "Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.tlog\unsuccessfulbuild" のタッチ タスクを実行しています。
+       ClCompile:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\CL.exe /c /IC:\Lesson\TsumiEngine\externals\DirectXTex\ /IC:\Lesson\TsumiEngine\externals\DirectXTex\Shaders\Compiled /Zi /nologo /Wall /WX- /diagnostics:column /sdl /Od /D _UNICODE /D UNICODE /D WIN32 /D _DEBUG /D _LIB /D _WIN32_WINNT=0x0A00 /D _CRT_STDIO_ARBITRARY_WIDE_SPECIFIERS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MTd /GS /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /permissive- /Yc"DirectXTexP.h" /Fp"Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.pch" /Fo"Bin\Desktop_2022_Win10\x64\Debug\\" /Fd"Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.pdb" /external:W4 /Gd /TP /FC /errorReport:prompt /Zc:twoPhase- /Zc:__cplusplus DirectXTexUtil.cpp
+         DirectXTexUtil.cpp
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\CL.exe /c /IC:\Lesson\TsumiEngine\externals\DirectXTex\ /IC:\Lesson\TsumiEngine\externals\DirectXTex\Shaders\Compiled /Zi /nologo /Wall /WX- /diagnostics:column /sdl /Od /D _UNICODE /D UNICODE /D WIN32 /D _DEBUG /D _LIB /D _WIN32_WINNT=0x0A00 /D _CRT_STDIO_ARBITRARY_WIDE_SPECIFIERS /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MTd /GS /fp:fast /Zc:wchar_t /Zc:forScope /Zc:inline /openmp /permissive- /Yu"DirectXTexP.h" /Fp"Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.pch" /Fo"Bin\Desktop_2022_Win10\x64\Debug\\" /Fd"Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.pdb" /external:W4 /Gd /TP /FC /errorReport:prompt /Zc:twoPhase- /Zc:__cplusplus BC.cpp BC4BC5.cpp BC6HBC7.cpp BCDirectCompute.cpp DirectXTexCompress.cpp DirectXTexCompressGPU.cpp DirectXTexConvert.cpp DirectXTexD3D11.cpp DirectXTexD3D12.cpp DirectXTexDDS.cpp DirectXTexFlipRotate.cpp DirectXTexHDR.cpp DirectXTexImage.cpp DirectXTexMipMaps.cpp DirectXTexMisc.cpp DirectXTexNormalMaps.cpp DirectXTexPMAlpha.cpp DirectXTexResize.cpp DirectXTexTGA.cpp DirectXTexWIC.cpp
+         BC.cpp
+         BC4BC5.cpp
+         BC6HBC7.cpp
+         BCDirectCompute.cpp
+         DirectXTexCompress.cpp
+         DirectXTexCompressGPU.cpp
+         DirectXTexConvert.cpp
+         DirectXTexD3D11.cpp
+         DirectXTexD3D12.cpp
+         DirectXTexDDS.cpp
+         DirectXTexFlipRotate.cpp
+         DirectXTexHDR.cpp
+         DirectXTexImage.cpp
+         DirectXTexMipMaps.cpp
+         DirectXTexMisc.cpp
+         DirectXTexNormalMaps.cpp
+         DirectXTexPMAlpha.cpp
+         DirectXTexResize.cpp
+         DirectXTexTGA.cpp
+         DirectXTexWIC.cpp
+         コードを生成中...
+       Lib:
+         C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.40.33807\bin\HostX64\x64\Lib.exe /OUT:"Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.lib" /NOLOGO /MACHINE:X64 Bin\Desktop_2022_Win10\x64\Debug\BC.obj
+         Bin\Desktop_2022_Win10\x64\Debug\BC4BC5.obj
+         Bin\Desktop_2022_Win10\x64\Debug\BC6HBC7.obj
+         Bin\Desktop_2022_Win10\x64\Debug\BCDirectCompute.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexCompress.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexCompressGPU.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexConvert.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexD3D11.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexD3D12.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexDDS.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexFlipRotate.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexHDR.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexImage.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexMipMaps.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexMisc.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexNormalMaps.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexPMAlpha.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexResize.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexTGA.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexUtil.obj
+         Bin\Desktop_2022_Win10\x64\Debug\DirectXTexWIC.obj
+         DirectXTex_Desktop_2022_Win10.vcxproj -> C:\Lesson\TsumiEngine\externals\DirectXTex\Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.lib
+       FinalizeBuildStatus:
+         ファイル "Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.tlog\unsuccessfulbuild" を削除しています。
+         "Bin\Desktop_2022_Win10\x64\Debug\DirectXTex.tlog\DirectXTex.lastbuildstate" のタッチ タスクを実行しています。
+     1>プロジェクト "C:\Lesson\TsumiEngine\externals\DirectXTex\DirectXTex_Desktop_2022_Win10.vcxproj" (Build ターゲット) のビルドが完了しました。
+
+ビルドに成功しました。
+    0 個の警告
+    0 エラー
+
+経過時間 00:00:02.79

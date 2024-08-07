@@ -218,6 +218,8 @@
     <ClCompile Include="Tsumi\CollisionSystem\Component\CollisionComponent.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Event\CollisionEvent.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -433,6 +435,8 @@
     <ClInclude Include="Tsumi\CollisionSystem\Component\CollisionComponent.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.h" />
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Event\CollisionEvent.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

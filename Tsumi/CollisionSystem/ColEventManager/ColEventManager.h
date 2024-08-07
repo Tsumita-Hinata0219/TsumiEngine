@@ -12,14 +12,13 @@ class ColEventManager {
 
 public:
 
-	using CollisionListener = std::function<void(const CollisionEvent&)>;
+	using CollisionListener = std::shared_ptr<std::function<void(const CollisionEvent&)>>;
 
 	// インスタンス取得
 	static ColEventManager* GetInstance() {
 		static ColEventManager instance;
 		return &instance;
 	}
-
 
 	// イベントリスナーの登録
 	void RegisterListener(const CollisionListener& listener);

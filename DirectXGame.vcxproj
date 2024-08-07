@@ -212,6 +212,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
@@ -381,6 +382,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.h" />
     <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Manager\CollisionManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />

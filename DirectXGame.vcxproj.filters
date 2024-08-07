@@ -220,6 +220,7 @@
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Event\CollisionEvent.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Listener\CollisionListener.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -437,6 +438,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Event\CollisionEvent.h" />
     <ClInclude Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Listener\CollisionListener.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

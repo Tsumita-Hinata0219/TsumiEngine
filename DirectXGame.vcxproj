@@ -214,6 +214,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\Event\CollisionEvent.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Listener\CollisionListener.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Manager\CollisionManager.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
@@ -391,6 +392,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\Event\CollisionEvent.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.h" />
     <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Listener\CollisionListener.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Manager\CollisionManager.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />

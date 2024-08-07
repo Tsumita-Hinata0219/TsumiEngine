@@ -24,8 +24,8 @@ public:
 
 	// 衝突判定処理
 	bool Detect(const ICollider* other) const override {
-
-		return Collision::IsCollision(this->GetShape(), other->GetShape());
+		other;
+		return 0;
 	}
 
 private:

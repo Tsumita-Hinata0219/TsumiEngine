@@ -119,7 +119,7 @@ namespace Collision {
 
 		Vector3 centerInOBBLocalSpace = {
 		TransformByMatrix(
-			s.center, Inverse(CreateOBBWorldMatrix(obb))) };
+			s.center, Inverse(GeometryCollision::CreateOBBWorldMatrix(obb))) };
 
 		AABB abbOBBLocal = {
 			.min = { -obb.halfSize.x, -obb.halfSize.y, -obb.halfSize.z },
@@ -148,7 +148,7 @@ namespace Collision {
 	// OBBと線の当たり判定
 	bool IsCollision(const OBB& obb, const Segment& s) {
 
-		Matrix4x4 obbInverse = Inverse(CreateOBBWorldMatrix(obb));
+		Matrix4x4 obbInverse = Inverse(GeometryCollision::CreateOBBWorldMatrix(obb));
 
 		AABB aabbOBBLocal = {
 			.min = { -obb.halfSize.x, -obb.halfSize.y, -obb.halfSize.z },
@@ -184,13 +184,13 @@ namespace Collision {
 
 		// 分離軸テスト
 		for (const auto& axis : obb1.orientations) {
-			if (!TestAxis(axis, obb1, obb2)) {
+			if (!GeometryCollision::TestAxis(axis, obb1, obb2)) {
 				return false;
 			}
 		}
 
 		for (const auto& axis : obb2.orientations) {
-			if (!TestAxis(axis, obb1, obb2)) {
+			if (!GeometryCollision::TestAxis(axis, obb1, obb2)) {
 				return false;
 			}
 		}
@@ -206,7 +206,7 @@ namespace Collision {
 				Vector3{obb1.orientations[0].x * obb2.orientations[1].x - obb1.orientations[1].x * obb2.orientations[0].x,
 						obb1.orientations[0].y * obb2.orientations[1].y - obb1.orientations[1].y * obb2.orientations[0].y,
 						obb1.orientations[0].z * obb2.orientations[1].z - obb1.orientations[1].z * obb2.orientations[0].z} }) {
-			if (!TestAxis(axis, obb1, obb2)) {
+			if (!GeometryCollision::TestAxis(axis, obb1, obb2)) {
 				return false;
 			}
 		}

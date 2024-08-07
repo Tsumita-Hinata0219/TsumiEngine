@@ -39,16 +39,6 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
-	// コライダー追加
-	void AddCollider(ICollider<Sphere>* addCol) {
-		this->sphereCol_.insert(addCol);
-	}
-
-	// コライダー取得
-	const std::unordered_set<ICollider<Sphere>*>& GetCollider() const {
-		return this->sphereCol_;
-	}
-
 #pragma endregion 
 
 
@@ -58,7 +48,5 @@ protected: // メンバ変数
 	ModelManager* modelManager_ = nullptr;
 
 	// コライダー
-	std::unordered_set<ICollider<Sphere>*> sphereCol_;
-	//std::unordered_set<Collider<Box>*> boxColliders_;
 };
 

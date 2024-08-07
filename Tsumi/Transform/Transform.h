@@ -26,7 +26,7 @@ struct SRTN {
 struct Transform
 {
 	// コンストラクタ
-	Transform() : srt{} {};
+	Transform() : srt() {};
 
 	// SRT
 	SRTN srt{};

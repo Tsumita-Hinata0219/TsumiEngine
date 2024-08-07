@@ -3,7 +3,7 @@
 #include "../../Project/Math/MyMath.h"
 #include "../Structure/CollisionStructures.h"
 #include "../Geometry/GeometryCollision.h"
-using namespace GeometryCollision;
+//using namespace GeometryCollision;
 
 
 namespace Collision {

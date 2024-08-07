@@ -2,6 +2,7 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../Structure/CollisionStructures.h"
+#include "../IsCollision/IsCollision.h"
 
 /* Shapeの抽象基底クラス */
 class CollisionShape {

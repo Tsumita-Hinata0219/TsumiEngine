@@ -2,15 +2,16 @@
 
 #include<cstdint>
 
-#include "../Structure/CollisionStructures.h"
-#include "ColliderConfig.h"
+#include "../../Structure/CollisionStructures.h"
+#include "../ColliderConfig.h"
 
 #include "Math/MyMath.h"
 #include "Transform/Transform.h"
 
 
-/* SphereColliderクラス */
-class SphereCollider {
+
+/* AABBColliderクラス */
+class AABBCollider {
 
 public:
 
@@ -18,8 +19,8 @@ public:
 	void Init() {
 		// 配置
 		srt_;
-		// 半径
-		radius_ = 1.0f;
+		// サイズ
+		size_ = Vector3::one;
 		// 属性
 		attribute_ = 0xffffffff;
 		// マスク
@@ -40,9 +41,9 @@ public:
 	SRTN GetSrt() const { return this->srt_; }
 	void SetSrt(SRTN setSrt) { this->srt_ = setSrt; }
 
-	// 半径
-	float GetRadius() const { return this->radius_; }
-	void SetRadius(float setRadius) { this->radius_ = setRadius; }
+	// サイズ
+	Vector3 GetSize() const { return this->size_; }
+	void SetSize(Vector3 setSize) { this->size_ = setSize; }
 
 	// 属性
 	uint32_t GetAttribute() const { return this->attribute_; }
@@ -69,9 +70,9 @@ private:
 
 	// 配置
 	SRTN srt_{};
-
-	// 半径
-	float radius_ = 0.0f;
+	
+	// サイズ
+	Vector3 size_ = Vector3::one;
 
 	// 属性
 	uint32_t attribute_ = 0xffffffff;

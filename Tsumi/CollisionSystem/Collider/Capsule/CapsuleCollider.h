@@ -1,10 +1,12 @@
 #pragma once
 
-#include "../Structure/CollisionStructures.h"
-#include "ColliderConfig.h"
+#include "../../Structure/CollisionStructures.h"
+#include "../ColliderConfig.h"
+#include "../../Project/Math/MyMath.h"
 #include<cstdint>
 
-class SegmentCollider {
+class CapsuleCollider {
+
 public:
 
 	/// <summary>
@@ -17,19 +19,20 @@ public:
 	/// </summary>
 	virtual Vector3 GetWorldPosition() = 0;
 
-#pragma region Segment
+
+#pragma region Rotate
 
 	/// <summary>
-	/// Segmentの取得
+	/// Rotateの取得
 	/// </summary>
-	Segment GetSegments() { return segment_; }
+	virtual Vector3 GetRotate() = 0;
 
 	/// <summary>
-	/// Radiusの設定
+	/// Rotateの設定
 	/// </summary>
-	void SetRadius(Segment segment) { segment_ = segment; }
+	void SetRotate(Vector3 rotate) { rotate_ = rotate; }
 
-#pragma endregion 
+#pragma endregion
 
 #pragma region ID
 
@@ -73,13 +76,15 @@ public:
 
 #pragma endregion
 
+
 private:
+
+	uint32_t id_ = ObjectBit::None;
 
 	uint32_t collisionAttribute_ = 0xffffffff;
 
 	uint32_t CollisionMask_ = 0xffffffff;
 
-	uint32_t id_ = ObjectId::None;
+	Vector3 rotate_ = { 0.0f, 0.0f, 0.0f };
 
-	Segment segment_{};
 };

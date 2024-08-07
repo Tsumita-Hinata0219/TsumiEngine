@@ -2,8 +2,8 @@
 
 #include<cstdint>
 
-#include "../Structure/CollisionStructures.h"
-#include "ColliderConfig.h"
+#include "../../Structure/CollisionStructures.h"
+#include "../ColliderConfig.h"
 
 #include "Math/MyMath.h"
 #include "Transform/Transform.h"

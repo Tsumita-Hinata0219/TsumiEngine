@@ -1,8 +1,11 @@
 #pragma once
 
 #include "../Structure/CollisionStructures.h"
-#include "../Collider/OBBCollider.h"
-#include "../Collider/AABBCollider.h"
+#include "../Collider/Segment/SegmentCollider.h"
+#include "../Collider/Sphere/SphereCollider.h"
+#include "../Collider/Box/AABBCollider.h"
+#include "../Collider/Box/OBBCollider.h"
+#include "../Collider/Segment/SegmentCollider.h"
 #include "Math/MyMath.h"
 
 #include <array>

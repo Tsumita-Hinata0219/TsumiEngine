@@ -32,13 +32,13 @@ public: // メンバ関数
 	virtual void Draw2DBack() = 0;
 
 
-    // コライダー追加
-    void addCollider(Collider* collider) {
-        colliders.push_back(collider);
-    }
+    //// コライダー追加
+    //void addCollider(ICollider* collider) {
+    //    colliders.push_back(collider);
+    //}
 
     // 衝突判定
-    bool DetectCollisions(const IObject& other) const {
+    /*bool DetectCollisions(const IObject& other) const {
         for (const auto& collider1 : colliders) {
             for (const auto& collider2 : other.colliders) {
                 if (collider1->DetectCollision(*collider2)) {
@@ -47,7 +47,7 @@ public: // メンバ関数
             }
         }
         return false;
-    }
+    }*/
 
     // 衝突時コールバック関数
     virtual void onCollision([[maybe_unused]] IObject* object) = 0;
@@ -59,6 +59,6 @@ protected: // メンバ変数
 	ModelManager* modelManager_ = nullptr;
 
     // コライダー
-    std::vector<Collider*> colliders;
+    //std::vector<ICollider*> colliders;
 };
 

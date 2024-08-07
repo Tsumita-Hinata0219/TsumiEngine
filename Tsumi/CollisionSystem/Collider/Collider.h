@@ -1,28 +1,52 @@
 #pragma once
 
-#include "../Detector/CollisionDetector.h"
+//#include "../Detector/CollisionDetector.h"
+
+
+// IObjectの前方宣言
+class IObject;
+
 
 /* 抽象的なコライダークラス */
-class Collider {
+class ICollider {
 
 public:
 
+	enum class Type {
+		NONE,
+		BOX,
+		SPHERE,
+	};
+
 	// コンストラクタ
-	Collider() : id(nextID++) {};
+	ICollider() : id_(nextID_++) {};
 
 	// 仮想デストラクタ
-	virtual ~Collider() = default;
-
-	// 更新処理
-	virtual void Update() = 0;
+	virtual ~ICollider() = default;
 
 	// 衝突判定処理
-	virtual bool Detext(const Collider& other) const = 0;
+	virtual bool Detect(const ICollider& other) = 0;
+
+#pragma region Accessor
+
+	// ID
+	int GetID() const { return this->id_; }
+
+	// Type
+	ICollider::Type GetType() const { return this->type_; }
+
+#pragma endregion 
 
 
 protected:
 
 	// コライダーの持つID
-	int id;
-	static int nextID;
+	int id_ = 0;
+	static int nextID_;
+
+	// コライダーを所有するオブジェクト
+	IObject* owner_ = nullptr;
+
+	// コライダーのタイプ
+	ICollider::Type type_ = ICollider::Type::NONE;
 };

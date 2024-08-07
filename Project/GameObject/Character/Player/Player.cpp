@@ -27,6 +27,8 @@ void Player::Init()
 	//collider_ = std::make_unique<OBBCollider>();
 	//collider_->Init();
 	//collider_->SetSize(size_);
+	colComp_ = std::make_unique<CollisionComponent>();
+
 
 	// キルカウントを0で初期化
 	killCount_ = 0;

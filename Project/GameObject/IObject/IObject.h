@@ -6,6 +6,9 @@
 #include "Transform/Transform.h"
 #include "CollisionSystem/Collider/Collider.h"
 
+#include "../Tsumi/CollisionSystem/Component/CollisionComponent.h"
+
+
 #include <unordered_set>
 
 

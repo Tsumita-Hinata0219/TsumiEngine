@@ -2,6 +2,9 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../Shape/CollisionShape.h"
+#include "../Shape/Sphere/CollisionShapeSphere.h"
+#include "../Shape/AABB/CollisionShapeAABB.h"
+
 
 #include <memory>
 #include <vector>

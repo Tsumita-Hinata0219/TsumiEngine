@@ -208,6 +208,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Component\CollisionComponent.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Detector\CollisionDetector.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
@@ -380,6 +381,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\Collider\Box\OBBCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\Segment\SegmentCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\Sphere\SphereCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Component\CollisionComponent.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Detector\CollisionDetector.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.h" />
     <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />

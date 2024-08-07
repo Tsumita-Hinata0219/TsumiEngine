@@ -14,15 +14,21 @@ public:
 
 	using CollisionListener = std::function<void(const CollisionEvent&)>;
 
+	// インスタンス取得
+	static ColEventManager* GetInstance() {
+		static ColEventManager instance;
+		return &instance;
+	}
+
 
 	// イベントリスナーの登録
-	void RegisterCollisionListener(const CollisionListener& listener);
+	void RegisterListener(const CollisionListener& listener);
 
 	// イベントリスナーの解除
-	void UnregisterCollisionListener(const CollisionListener& listener);
+	void UnregisterListener(const CollisionListener& listener);
 
 	// コリジョンイベントの配信
-	void DispatchCollisionEvent(const CollisionEvent& event);
+	void Dispatch(const CollisionEvent& event);
 
 
 private:

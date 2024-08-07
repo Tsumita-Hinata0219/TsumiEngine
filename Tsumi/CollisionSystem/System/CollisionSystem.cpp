@@ -32,6 +32,10 @@ void CollisionSystem::CheckCollisions()
 			if (comp1->GetShape() && comp2->GetShape()) {
 				if (comp1->GetShape()->Intersects(*comp2->GetShape())) {
 
+					// 現段階の実装
+					CollisionEvent event(comp1, comp2);
+					ColEventManager::GetInstance()->Dispatch(event);
+
 					// ここで衝突が検出された場合の処理
 					// コンポーネントにIObjectを持たせてOnCollision()を返すのもいいかも
 					// comp1->GetObject()->OnCollision(comp2->GetObject());

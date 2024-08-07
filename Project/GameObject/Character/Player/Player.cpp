@@ -28,7 +28,8 @@ void Player::Init()
 	//collider_->Init();
 	//collider_->SetSize(size_);
 	colComp_ = std::make_unique<CollisionComponent>();
-
+	sphereCol_ = std::make_unique<CollisionShapeSphere>();
+	colComp_->AddShape(std::move(sphereCol_));
 
 	// キルカウントを0で初期化
 	killCount_ = 0;

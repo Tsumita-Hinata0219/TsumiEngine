@@ -113,6 +113,7 @@ private: // メンバ変数
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;
 	std::unique_ptr<CollisionComponent> colComp_;
+	std::unique_ptr<CollisionShapeSphere> sphereCol_;
 
 
 	// BulletのList配列

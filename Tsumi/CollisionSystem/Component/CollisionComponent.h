@@ -52,5 +52,8 @@ private:
 
 	// コリジョンシェイプ
 	std::vector<std::unique_ptr<CollisionShape>> shapes_;
+
+	// ID
+	int mectID_;
 };
 

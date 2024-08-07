@@ -4,6 +4,9 @@
 #include "../Structure/CollisionStructures.h"
 #include "../IsCollision/IsCollision.h"
 
+class CollisionShapeSphere;
+class CollisionShapeAABB;
+
 /* Shapeの抽象基底クラス */
 class CollisionShape {
 
@@ -14,5 +17,7 @@ public:
 
 	// 純粋仮想関数 : 異なるシェイプに応じた衝突判定処理
 	virtual bool Intersects(const CollisionShape& other) const = 0;
+	virtual bool Intersects(const CollisionShapeSphere& other) const = 0;
+	virtual bool Intersects(const CollisionShapeAABB& other) const = 0;
 };
 

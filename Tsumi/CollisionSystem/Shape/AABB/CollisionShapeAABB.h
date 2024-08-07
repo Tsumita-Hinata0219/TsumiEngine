@@ -13,6 +13,8 @@ public:
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;
+	bool Intersects(const CollisionShapeSphere& other) const override;
+	bool Intersects(const CollisionShapeAABB& other) const override;
 
 
 #pragma region Accessor

@@ -213,6 +213,7 @@
     <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -423,6 +424,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\Collider\Sphere\SphereCollider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Collider\Collider.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

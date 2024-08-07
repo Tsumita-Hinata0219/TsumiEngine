@@ -1,6 +1,7 @@
 #pragma once
 
-
+#include "../../Project/Math/MyMath.h"
+#include "../Structure/CollisionStructures.h"
 
 /* Shapeの抽象基底クラス */
 class CollisionShape {

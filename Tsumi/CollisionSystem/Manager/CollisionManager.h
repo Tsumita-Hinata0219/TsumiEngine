@@ -1,17 +1,29 @@
-//#pragma once
-//
-//#include "../Collider/Segment/SegmentCollider.h"
-//#include "../Collider/Sphere/SphereCollider.h"
-//#include "../Collider/Box/AABBCollider.h"
-//#include "../Collider/Box/OBBCollider.h"
-//#include "../Collider/Segment/SegmentCollider.h"
-//#include "../Collider/ColliderConfig.h"
-//#include "Math/MyMath.h"
-//#include "Math/Struct.h"
-//#include "../IsCollision/IsCollision.h"
-//#include "GameObject/IObject/IObject.h"
-//
-//#include <list>
+#pragma once
+
+#include "../Collider/Segment/SegmentCollider.h"
+#include "../Collider/Sphere/SphereCollider.h"
+#include "../Collider/Box/AABBCollider.h"
+#include "../Collider/Box/OBBCollider.h"
+#include "../Collider/Segment/SegmentCollider.h"
+#include "../Collider/ColliderConfig.h"
+#include "../IsCollision/IsCollision.h"
+
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
+#include "GameObject/IObject/IObject.h"
+
+#include <list>
+
+
+/* CollisionManagerクラス */
+class CollisionManager {
+
+public:
+
+
+
+};
+
 //using namespace std;
 //
 //

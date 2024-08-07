@@ -59,6 +59,9 @@ public: // メンバ関数
 
 private:
 
+	// コライダーの更新
+	void UpdateCollider();
+
 	// 移動処理
 	void Move();
 	void KeyMove();
@@ -112,7 +115,6 @@ private: // メンバ変数
 
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;
-	std::unique_ptr<CollisionComponent> colComp_;
 	std::unique_ptr<CollisionShapeSphere> sphereCol_;
 
 

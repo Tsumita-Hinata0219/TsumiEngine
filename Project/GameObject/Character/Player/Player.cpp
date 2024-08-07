@@ -127,6 +127,12 @@ void Player::OnCollisionWithEnemyBullet()
 }
 
 
+// コライダーの更新
+void Player::UpdateCollider()
+{
+}
+
+
 // 移動処理
 void Player::Move()
 {

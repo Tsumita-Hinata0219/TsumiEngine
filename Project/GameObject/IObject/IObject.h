@@ -51,5 +51,6 @@ protected: // メンバ変数
 	ModelManager* modelManager_ = nullptr;
 
 	// コライダー
+	std::unique_ptr<CollisionComponent> colComp_;
 };
 

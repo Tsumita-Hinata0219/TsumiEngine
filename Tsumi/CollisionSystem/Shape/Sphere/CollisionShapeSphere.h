@@ -20,7 +20,8 @@ public:
 #pragma region Accessor
 
 	// スフィアの情報
-	Sphere GetData() const { return this->sphere_; }
+	Col::Sphere GetData() const { return this->sphere_; }
+	void SetData(Col::Sphere setData) { this->sphere_ = setData; }
 
 #pragma endregion 
 
@@ -28,6 +29,6 @@ public:
 private:
 
 	// スフィアの情報
-	Sphere sphere_{};
+	Col::Sphere sphere_{};
 };
 

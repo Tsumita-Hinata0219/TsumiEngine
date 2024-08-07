@@ -4,6 +4,7 @@
 #include "../Shape/CollisionShape.h"
 
 #include <memory>
+#include <vector>
 
 
 /* コリジョンシェイプを保持するクラス */
@@ -11,17 +12,35 @@ class CollisionComponent {
 
 public:
 
-	// コンストラクタ
-	CollisionComponent(std::unique_ptr<CollisionShape> shape) {
-		shape_ = std::move(shape);
+	// コンストラクタ、デストラクタ
+	CollisionComponent() {};
+	~CollisionComponent() {};
+
+	// パラメータ付きコンストラクタ
+	CollisionComponent(std::vector<std::unique_ptr<CollisionShape>> addShape) {
+		this->shapes_ = std::move(addShape);
+	}
+
+	// シェイプの追加
+	void AddShape(std::unique_ptr<CollisionShape> addShape) {
+		this->shapes_.emplace_back(std::move(addShape));
+	}
+
+	// コリジョンのチェック
+	bool CheckCollision(const CollisionComponent& other) const {
+		for (const auto& shapeA : shapes_) {
+			for (const auto& shapeB : other.shapes_) {
+				if (shapeA->Intersects(*shapeB)) {
+					return true; // コリジョンが検出された
+				}
+			}
+		}
+		return false; // コリジョンなし
 	}
 
 
 #pragma region Accessor
 
-	// コリジョンシェイプ
-	const CollisionShape* GetShape() const { return this->shape_.get(); }
-	void SetShape(std::unique_ptr<CollisionShape> shape) { shape = std::move(shape); }
 
 #pragma endregion 
 
@@ -29,6 +48,6 @@ public:
 private:
 
 	// コリジョンシェイプ
-	std::unique_ptr<CollisionShape> shape_;
+	std::vector<std::unique_ptr<CollisionShape>> shapes_;
 };
 

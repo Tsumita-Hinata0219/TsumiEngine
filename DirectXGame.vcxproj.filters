@@ -208,7 +208,6 @@
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
-    <ClCompile Include="Tsumi\CollisionSystem\Detector\CollisionDetector.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Manager\CollisionManager.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
@@ -418,7 +417,6 @@
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
     <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
-    <ClInclude Include="Tsumi\CollisionSystem\Detector\CollisionDetector.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Manager\CollisionManager.h" />
     <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />

@@ -20,7 +20,15 @@ public:
 #pragma region Accessor
 
 	// スフィアの情報
-	Col::AABB GetData() const { return this->aabb_; }
+	ColShapeData GetData() const override {
+		return this->aabb_;
+	}
+	void SetData(const ColShapeData& data) override {
+
+		if (auto setData = std::get_if<Col::AABB>(&data)) {
+			this->aabb_ = *setData;
+		}
+	}
 
 #pragma endregion
 

@@ -39,6 +39,9 @@ namespace Col {
 	};
 }
 
+// 異なる型を扱うためのVariant型
+using ColShapeData = std::variant<Col::Sphere, Col::AABB, Col::OBB, Col::Segment, Col::Capsule>;
+
 
 class CollisionShapeSphere;
 class CollisionShapeAABB;
@@ -55,5 +58,14 @@ public:
 	virtual bool Intersects(const CollisionShape& other) const = 0;
 	virtual bool Intersects(const CollisionShapeSphere& other) const = 0;
 	virtual bool Intersects(const CollisionShapeAABB& other) const = 0;
+
+
+#pragma region Accessor アクセッサ
+
+	// データのセット
+	virtual ColShapeData GetData() const = 0;
+	virtual void SetData(const ColShapeData& data) = 0;
+
+#pragma endregion 
 };
 

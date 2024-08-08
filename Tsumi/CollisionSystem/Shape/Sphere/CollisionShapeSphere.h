@@ -20,8 +20,15 @@ public:
 #pragma region Accessor
 
 	// スフィアの情報
-	Col::Sphere GetData() const { return this->sphere_; }
-	void SetData(Col::Sphere setData) { this->sphere_ = setData; }
+	ColShapeData GetData() const override {
+		return this->sphere_;
+	}
+	void SetData(const ColShapeData& data) override {
+
+		if (auto setData = std::get_if<Col::Sphere>(&data)) {
+			this->sphere_ = *setData;
+		}
+	}
 
 #pragma endregion 
 

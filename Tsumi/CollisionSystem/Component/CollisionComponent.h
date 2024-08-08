@@ -30,19 +30,16 @@ public:
 	}
 
 	// シェイプの追加
-	/*void AddShape(std::unique_ptr<CollisionShape<T> addShape) {
-		this->shapes_.emplace_back(std::move(addShape));
-	}*/
 	void RegisterCollider(Col::Sphere sphere) {
 		this->nextID_++;
 		sphere.id = this->nextID_;
 		std::unique_ptr<CollisionShapeSphere> shape = std::make_unique<CollisionShapeSphere>(sphere);
-		//this->shapeMap_[nextID_] = std::move(shape);
+		this->shapeMap_[nextID_] = std::move(shape);
 	}
 
 	// シェイプの更新
 	void UpdateShape(Col::Sphere sphere) {
-		sphere;
+		this->shapeMap_[sphere.id]->SetData(sphere);
 	}
 
 	// コリジョンのチェック

@@ -28,6 +28,9 @@ public:
 		if (auto setData = std::get_if<Col::AABB>(&data)) {
 			this->aabb_ = *setData;
 		}
+		else {
+			throw std::bad_variant_access(); // 型が一致しない場合のエラー処理
+		}
 	}
 
 #pragma endregion

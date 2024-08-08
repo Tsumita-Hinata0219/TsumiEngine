@@ -27,23 +27,9 @@ void Player::Init()
 	//collider_ = std::make_unique<OBBCollider>();
 	//collider_->Init();
 	//collider_->SetSize(size_);
-	colComp_ = std::make_unique<CollisionComponent>(this);
+	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	sphere_.radius = 2.0f;
 
-
-	Col::Sphere sphere1{};
-	Col::Sphere sphere2{};
-	colComp_->RegisterCollider(sphere1);
-	colComp_->RegisterCollider(sphere2);
-
-	sphere1.center = Vector3::one;
-	sphere1.radius = 10.0f;
-
-	sphere2.center = { 2.0f,2.0f,2.0f };
-	sphere2.radius = 20.0f;
-
-	colComp_->UpdateShape(sphere1);
-	colComp_->UpdateShape(sphere2);
-	
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
@@ -88,6 +74,8 @@ void Player::Update()
 
 	// ColliderのSRTの設定
 	//collider_->SetSrt(trans_.srt);
+	sphere_.center = trans_.GetWorldPos();
+	colComp_->RegisterCollider(sphere_);
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {

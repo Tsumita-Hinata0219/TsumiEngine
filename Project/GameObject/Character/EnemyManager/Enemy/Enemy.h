@@ -120,6 +120,7 @@ private: // メンバ変数
 
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;
+	Col::Sphere sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

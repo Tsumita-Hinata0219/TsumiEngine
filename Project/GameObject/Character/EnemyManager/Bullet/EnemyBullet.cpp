@@ -22,6 +22,8 @@ void EnemyBullet::Init()
 	//collider_ = std::make_unique<OBBCollider>();
 	//collider_->Init();
 	//collider_->SetSize(size_);
+	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	sphere_.radius = 2.0f;
 }
 
 
@@ -39,6 +41,8 @@ void EnemyBullet::Update()
 
 	// ColliderのSRTの設定
 	//collider_->SetSrt(trans_.srt);
+	sphere_.center = trans_.GetWorldPos();
+	colComp_->RegisterCollider(sphere_);
 }
 
 

@@ -9,7 +9,7 @@ public:
 
 	// コンストラクタ
 	CollisionShapeSphere() {}
-	CollisionShapeSphere(Sphere setData) : sphere_(setData) {};
+	CollisionShapeSphere(Col::Sphere setData) : sphere_(setData) {};
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;

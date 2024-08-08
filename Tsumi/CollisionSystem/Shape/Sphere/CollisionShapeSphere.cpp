@@ -10,16 +10,16 @@ bool CollisionShapeSphere::Intersects(const CollisionShape& other) const
 bool CollisionShapeSphere::Intersects(const CollisionShapeSphere& other) const
 {
     // Sphere x Sphere
-    Sphere s1 = this->sphere_;
-    Sphere s2 = other.GetData();
+    Col::Sphere s1 = this->sphere_;
+    Col::Sphere s2 = other.GetData();
 
-    return Collision::IsCollision(s1, s2);
+    return Detect::Collision(s1, s2);
 }
 bool CollisionShapeSphere::Intersects(const CollisionShapeAABB& other) const
 {
     // Sphere x AABB
-    AABB a1 = other.GetData();
-    Sphere s1 = this->sphere_;
+    Col::AABB a1 = other.GetData();
+    Col::Sphere s1 = this->sphere_;
 
-    return Collision::IsCollision(a1, s1);
+    return Detect::Collision(a1, s1);
 }

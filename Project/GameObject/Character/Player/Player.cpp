@@ -30,6 +30,20 @@ void Player::Init()
 	colComp_ = std::make_unique<CollisionComponent>();
 
 
+	Col::Sphere sphere1{};
+	Col::Sphere sphere2{};
+	colComp_->RegisterCollider(sphere1);
+	colComp_->RegisterCollider(sphere2);
+
+	sphere1.center = Vector3::one;
+	sphere1.radius = 10.0f;
+
+	sphere2.center = { 2.0f,2.0f,2.0f };
+	sphere2.radius = 20.0f;
+
+	colComp_->UpdateShape(sphere1);
+	colComp_->UpdateShape(sphere2);
+	
 
 	// キルカウントを0で初期化
 	killCount_ = 0;

@@ -10,6 +10,10 @@
 #include <vector>
 
 
+// IObjectの前方宣言
+class IObject;
+
+
 /* コリジョンシェイプを保持するクラス */
 class CollisionComponent {
 
@@ -20,13 +24,23 @@ public:
 	~CollisionComponent() {};
 
 	// パラメータ付きコンストラクタ
-	CollisionComponent(std::vector<std::unique_ptr<CollisionShape>> addShape) {
-		this->shapes_ = std::move(addShape);
+	CollisionComponent(IObject* setObject) {
+		this->owner_ = setObject;
 	}
 
 	// シェイプの追加
 	void AddShape(std::unique_ptr<CollisionShape> addShape) {
 		this->shapes_.emplace_back(std::move(addShape));
+	}
+	void RegisterCollider(Col::Sphere sphere) {
+		this->nextID_++;
+		sphere.id = this->nextID_;
+		std::unique_ptr<CollisionShapeSphere> shape = std::make_unique<CollisionShapeSphere>(sphere);
+		this->shapeMap_[nextID_] = std::move(shape);
+	}
+
+	// シェイプの更新
+	void UpdateShape(Col::Sphere sphere) {
 	}
 
 	// コリジョンのチェック
@@ -50,7 +64,14 @@ public:
 
 private:
 
+	// オーナー
+	IObject* owner_ = nullptr;
+
+	// シェイプと構造体を繋ぐID
+	int nextID_ = 0;
+
 	// コリジョンシェイプ
 	std::vector<std::unique_ptr<CollisionShape>> shapes_;
+	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
 };
 

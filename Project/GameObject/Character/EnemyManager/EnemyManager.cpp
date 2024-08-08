@@ -94,7 +94,7 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// FlagModel
-	flagModel_->DrawN(transform_);
+	//flagModel_->DrawN(transform_);
 
 	for (int i = 0; i < 3; ++i) {
 		spawn_[i]->DrawN(trans_[i]);

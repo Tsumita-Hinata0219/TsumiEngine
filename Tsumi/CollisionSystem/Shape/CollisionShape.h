@@ -1,8 +1,6 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
-#include "../Structure/CollisionStructures.h"
-#include "../IsCollision/IsCollision.h"
 
 
 namespace Col {
@@ -14,14 +12,16 @@ namespace Col {
 	};
 	struct AABB {
 		Vector3 center{}; // !< 中心座標
+		float size{};     // !< サイズ
 		Vector3 min;      // !< 最少点
 		Vector3 max;      // !< 最大点
 		int id;
 	};
 	struct OBB {
 		Vector3 center;			   // !< 中心点
+		Vector3 rotate{};          // !< 姿勢
 		Vector3 orientations[3]{}; // !< 座標軸。正規化・直交必須
-		Vector3 halfSize;          // !< 座標軸方向の長さの半分。中心から面までの距離
+		Vector3 size;              // !< 座標軸方向の長さの半分。中心から面までの距離
 		int id;
 	};
 	struct Segment {

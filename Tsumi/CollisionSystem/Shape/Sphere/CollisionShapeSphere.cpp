@@ -1,5 +1,6 @@
 #include "CollisionShapeSphere.h"
 #include "../AABB/CollisionShapeAABB.h"
+#include "../../Detect/CollisionDetect.h"
 
 
 // 衝突判定処理

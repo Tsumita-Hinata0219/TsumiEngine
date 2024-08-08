@@ -42,6 +42,9 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
+	// CollisionComponent
+	CollisionComponent* GetColComponent() { return this->colComp_.get(); }
+
 #pragma endregion 
 
 

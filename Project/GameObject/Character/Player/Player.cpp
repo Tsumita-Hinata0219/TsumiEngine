@@ -27,7 +27,7 @@ void Player::Init()
 	//collider_ = std::make_unique<OBBCollider>();
 	//collider_->Init();
 	//collider_->SetSize(size_);
-	colComp_ = std::make_unique<CollisionComponent>();
+	colComp_ = std::make_unique<CollisionComponent>(this);
 
 
 	Col::Sphere sphere1{};

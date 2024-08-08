@@ -44,9 +44,9 @@ public:
 
 	// コリジョンのチェック
 	bool CheckCollision(const CollisionComponent& other) const {
-		for (const auto& shapeA : shapes_) {
-			for (const auto& shapeB : other.shapes_) {
-				if (shapeA->Intersects(*shapeB)) {
+		for (const auto& shapeA : shapeMap_) {
+			for (const auto& shapeB : other.shapeMap_) {
+				if (shapeA.second->Intersects(*shapeB.second)) {
 					return true; // コリジョンが検出された
 				}
 			}
@@ -56,6 +56,9 @@ public:
 
 
 #pragma region Accessor
+
+	// IObject
+	IObject* GetOwner() const { return this->owner_; }
 
 
 #pragma endregion 
@@ -70,7 +73,7 @@ private:
 	int nextID_ = 0;
 
 	// コリジョンシェイプ
-	std::vector<std::unique_ptr<CollisionShape>> shapes_;
+	//std::vector<std::unique_ptr<CollisionShape>> shapes_;
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
 };
 

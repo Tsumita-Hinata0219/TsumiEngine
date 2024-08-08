@@ -23,6 +23,8 @@ void EnemyBullet::Init()
 	//collider_->Init();
 	//collider_->SetSize(size_);
 	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	colComp_->RegisterCollider(sphere_);
+	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 }
 
@@ -42,7 +44,7 @@ void EnemyBullet::Update()
 	// ColliderのSRTの設定
 	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->RegisterCollider(sphere_);
+	colComp_->UpdateShape(sphere_);
 }
 
 
@@ -58,6 +60,9 @@ void EnemyBullet::Draw2DBack() {}
 // 衝突自コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
+	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+		isDead_ = true;
+	}
 }
 void EnemyBullet::OnCollisionWithPlayer()
 {

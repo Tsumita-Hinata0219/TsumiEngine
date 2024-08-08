@@ -43,7 +43,10 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// CollisionComponent
-	CollisionComponent* GetColComponent() { return this->colComp_.get(); }
+	CollisionComponent* GetColComponent() const { return this->colComp_.get(); }
+
+	// ObjAttribute
+	ObjAttribute GetAttribute() const { return this->attribute_; }
 
 #pragma endregion 
 
@@ -55,5 +58,8 @@ protected: // メンバ変数
 
 	// コライダー
 	std::unique_ptr<CollisionComponent> colComp_;
+
+	// オブジェクトの属性
+	ObjAttribute attribute_ = ObjAttribute::OTHER;
 };
 

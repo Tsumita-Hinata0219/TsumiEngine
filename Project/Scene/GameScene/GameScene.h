@@ -24,6 +24,8 @@
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
+#include "../../Tsumi/CollisionSystem/System/CollisionSystem.h"
+
 
 class GameScene : public IScene {
 
@@ -78,6 +80,7 @@ private:
 
 	// CollisionManager
 	//std::unique_ptr<CollisionManager> collisionManager_;
+	std::unique_ptr<CollisionSystem> collisionSystem_;
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;

@@ -24,7 +24,7 @@ class Enemy : public IObject {
 public: // メンバ関数
 
 	// コンストラクタとデストラクタ
-	Enemy() {};
+	Enemy() { attribute_ = ObjAttribute::ENEMY; };
 	~Enemy() {};
 
 	// 初期化処理　更新処理　描画処理

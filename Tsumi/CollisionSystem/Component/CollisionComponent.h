@@ -38,8 +38,18 @@ public:
 	}
 
 	// シェイプの更新
-	void UpdateShape(Col::Sphere& sphere) {
-		this->shapeMap_[sphere.id]->SetData(sphere);
+	void UpdateShape(const Col::Sphere& sphere) {
+		auto it = this->shapeMap_.find(sphere.id);
+		if (it != this->shapeMap_.end()) {
+			// IDが存在する場合はデータを更新
+			it->second->SetData(sphere);
+		}
+		else {
+			// IDが存在しない場合はエラー処理
+			Log("Error: Shape with ID :  not found.\n");
+			// 例外を投げる場合
+			throw std::runtime_error("Shape ID not found.");
+		}
 	}
 
 	// コリジョンのチェック

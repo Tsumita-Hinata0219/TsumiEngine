@@ -18,6 +18,9 @@ public:
 	// コンポーネント追加
 	void AAddComponent(CollisionComponent* component);
 
+	// コンポーネントのクリア
+	void ClearComponent();
+
 	// コリジョン判定を実行
 	void Update();
 

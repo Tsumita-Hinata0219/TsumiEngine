@@ -1,4 +1,5 @@
 #include "CollisionSystem.h"
+#include "../Project/GameObject/IObject/IObject.h"
 
 
 
@@ -6,6 +7,13 @@
 void CollisionSystem::AAddComponent(CollisionComponent* component)
 {
 	components_.push_back(component);
+}
+
+
+// コンポーネントのクリア
+void CollisionSystem::ClearComponent()
+{
+    components_.clear();
 }
 
 
@@ -32,8 +40,11 @@ void CollisionSystem::CheckCollisions()
                     CollisionEvent event(comp1, comp2);
                     //ColEventManager::GetInstance()->Dispatch(event);
                     // コリジョン処理の実装を行う（例: comp1->GetObject()->OnCollision(comp2->GetObject());）
+                    comp1->GetOwner()->onCollision(comp2->GetOwner());
+                    comp2->GetOwner()->onCollision(comp1->GetOwner());
                 }
             }
         }
     }
 }
+

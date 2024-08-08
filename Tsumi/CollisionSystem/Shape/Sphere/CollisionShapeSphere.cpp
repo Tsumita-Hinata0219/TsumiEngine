@@ -10,12 +10,12 @@ bool CollisionShapeSphere::Intersects(const CollisionShape& other) const
 }
 bool CollisionShapeSphere::Intersects(const CollisionShapeSphere& other) const
 {
-    // AABB x Sphere
+    // Sphere x Sphere
     ColShapeData s1 = this->GetData();
     ColShapeData s2 = other.GetData();
 
     // 型が一致するか確認してデータを取り出す
-    if (auto sphere1 = std::get_if<Col::AABB>(&s1)) {
+    if (auto sphere1 = std::get_if<Col::Sphere>(&s1)) {
         if (auto sphere2 = std::get_if<Col::Sphere>(&s2)) {
             return Detect::Collision(*sphere1, *sphere2);
         }

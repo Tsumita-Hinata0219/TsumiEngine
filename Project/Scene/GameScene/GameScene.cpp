@@ -27,6 +27,7 @@ void GameScene::Initialize()
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	//collisionManager_ = std::make_unique<CollisionManager>();
+	collisionSystem_ = std::make_unique<CollisionSystem>();
 
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -164,6 +165,27 @@ void GameScene::FrontSpriteDraw()
 // 衝突判定処理
 void GameScene::CheckAllCollision()
 {
+	// コンポーネントをクリア
+	collisionSystem_->ClearComponent();
+
+	// コンポーネントを追加
+	collisionSystem_->AAddComponent(player_->GetColComponent());
+	for (auto& plaBullet : player_->GetBulletList()) {
+		collisionSystem_->AAddComponent(plaBullet->GetColComponent());
+	}
+	for (auto& enemy : enemyManager_->GetEnemyList()) {
+		collisionSystem_->AAddComponent(enemy->GetColComponent());
+	}
+	for (auto& enemy : enemyManager_->GetEnemyList()) {
+		for (auto& eneBullet : enemy->GetBulletList()) {
+			collisionSystem_->AAddComponent(eneBullet->GetColComponent());
+		}
+	}
+
+	// コリジョン判定を行う
+	collisionSystem_->Update();
+
+
 	//// Player with EnemyBullet
 	//for (auto& enemy : enemyManager_->GetEnemyList()) {
 	//	for (auto& bullet : enemy->GetBulletList()) {

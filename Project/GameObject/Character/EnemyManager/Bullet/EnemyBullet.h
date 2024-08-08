@@ -12,7 +12,7 @@ class EnemyBullet : public IObject {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	EnemyBullet() {};
+	EnemyBullet() { attribute_ = ObjAttribute::ENEMY; };
 	~EnemyBullet() {};
 
 	// 初期化処理　更新処理　描画処理

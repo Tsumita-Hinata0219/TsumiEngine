@@ -34,11 +34,13 @@ void CollisionSystem::CheckCollisions()
             
             CollisionComponent* comp1 = components_[i];
             CollisionComponent* comp2 = components_[j];
+
+            // ここで空間四分木分割処理を挟む
             
             if (comp1 && comp2) {
                 if (comp1->CheckCollision(*comp2)) {
                     CollisionEvent event(comp1, comp2);
-                    //ColEventManager::GetInstance()->Dispatch(event);
+                    ColEventManager::GetInstance()->Dispatch(event);
                     // コリジョン処理の実装を行う（例: comp1->GetObject()->OnCollision(comp2->GetObject());）
                     comp1->GetOwner()->onCollision(comp2->GetOwner());
                     comp2->GetOwner()->onCollision(comp1->GetOwner());

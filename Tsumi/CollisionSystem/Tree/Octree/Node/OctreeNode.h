@@ -34,7 +34,7 @@ public:
 
 
 private:
-
+	
 	// ノードを分割する
 	void Subdivide();
 

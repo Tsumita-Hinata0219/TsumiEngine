@@ -5,6 +5,7 @@
 // オブジェクトをノードに挿入
 void OctreeNode::Insert(OctreeObject* object)
 {
+	// オブジェクトがノードの範囲に収まるか確認
 }
 
 
@@ -23,4 +24,5 @@ void OctreeNode::Subdivide()
 // ノード内のオブジェクトを子ノードに移動する
 void OctreeNode::RelocationObjects()
 {
+
 }

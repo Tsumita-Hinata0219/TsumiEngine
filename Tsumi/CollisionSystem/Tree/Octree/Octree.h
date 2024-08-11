@@ -31,7 +31,7 @@ public:
 
 private:
 
-	OctreeNode* root_;
+	OctreeNode* root_ = nullptr;
 
 };
 

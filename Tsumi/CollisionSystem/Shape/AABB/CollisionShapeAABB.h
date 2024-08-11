@@ -19,7 +19,7 @@ public:
 
 #pragma region Accessor
 
-	// スフィアの情報
+	// AABBの情報
 	ColShapeData GetData() const override {
 		return this->aabb_;
 	}
@@ -38,6 +38,6 @@ public:
 
 private:
 
-	// スフィアの情報
+	// AABBの情報
 	Col::AABB aabb_{};
 };

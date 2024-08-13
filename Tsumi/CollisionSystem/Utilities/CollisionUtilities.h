@@ -22,7 +22,7 @@ namespace ColUtil {
 	Col::OBB SettingOBBProperties(Col::OBB& obb);
 
 	// AABBの設定
-	Col::AABB SettingAABBProperties(Col::AABB& aabb);
+	//Col::AABB SettingAABBProperties(Col::AABB& aabb);
 
 	// Capsuleの設定
 	//Col::Sphere SettingCapusulePropertirs();

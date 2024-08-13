@@ -36,10 +36,10 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	bool Intersects(const CollisionShape* shape) const {
-		// AABB, Sphere, OBB, Segment それぞれの形状に応じた交差判定を行う
-		return shape->Intersects(bounds_);
-	}
+	//bool Intersects(const CollisionShape* shape) const {
+	//	// AABB, Sphere, OBB, Segment それぞれの形状に応じた交差判定を行う
+	//	return shape->Intersects(bounds_);
+	//}
 
 #pragma endregion 
 

@@ -13,7 +13,6 @@ namespace Col {
 	};
 	struct AABB {
 		Vector3 center{}; // !< 中心座標
-		float size{};     // !< サイズ
 		Vector3 min;      // !< 最少点
 		Vector3 max;      // !< 最大点
 		int id;
@@ -60,6 +59,9 @@ public:
 	virtual bool Intersects(const CollisionShapeSphere& other) const = 0;
 	virtual bool Intersects(const CollisionShapeAABB& other) const = 0;
 
+	// 純粋仮想関数 : コライダーの境界ボックスを求める
+	virtual void CalcBounding() = 0;
+
 
 #pragma region Accessor アクセッサ
 
@@ -76,7 +78,7 @@ public:
 
 protected:
 
-
+	// どの空間に属しているかの境界ボックス
 	Col::AABB bounding_{};
 
 };

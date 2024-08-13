@@ -99,15 +99,15 @@ Col::OBB ColUtil::SettingOBBProperties(Col::OBB& obb) {
 }
 
 // AABBの設定
-Col::AABB ColUtil::SettingAABBProperties(Col::AABB& aabb)
-{
-	Col::AABB result{};
-
-	result.min = aabb.center - (aabb.size / 2.0f);
-	result.max = aabb.center + (aabb.size / 2.0f);
-
-	return result;
-}
+//Col::AABB ColUtil::SettingAABBProperties(Col::AABB& aabb)
+//{
+//	Col::AABB result{};
+//
+//	result.min = aabb.center - (aabb.size / 2.0f);
+//	result.max = aabb.center + (aabb.size / 2.0f);
+//
+//	return result;
+//}
 
 //// Capsuleの設定
 //Col::Sphere ColUtil::SettingCapusulePropertirs() 

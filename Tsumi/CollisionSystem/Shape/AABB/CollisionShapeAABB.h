@@ -16,6 +16,13 @@ public:
 	bool Intersects(const CollisionShapeSphere& other) const override;
 	bool Intersects(const CollisionShapeAABB& other) const override;
 
+	// コライダーの境界ボックスを求める
+	void CalcBounding() override {
+
+		// 境界ボックスに情報を挿入
+		this->bounding_ = this->aabb_;
+	}
+
 
 #pragma region Accessor
 

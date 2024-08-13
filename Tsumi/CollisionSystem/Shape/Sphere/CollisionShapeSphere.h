@@ -16,6 +16,25 @@ public:
 	bool Intersects(const CollisionShapeSphere& other) const override;
 	bool Intersects(const CollisionShapeAABB& other) const override;
 
+	// コライダーの境界ボックスを求める
+	void CalcBounding() override {
+
+		// Col::AABBの各要素を求める
+		Vector3 center = this->sphere_.center;
+		float rad = this->sphere_.radius;
+		Vector3 min = this->sphere_.center + Vector3(rad, rad, rad);
+		Vector3 max = this->sphere_.center - Vector3(rad, rad, rad);
+		int id = this->sphere_.id;
+		
+		// 境界ボックスに情報を挿入
+		this->bounding_ = {
+			center,
+			min,
+			max,
+			id,
+		};
+	}
+
 
 #pragma region Accessor
 

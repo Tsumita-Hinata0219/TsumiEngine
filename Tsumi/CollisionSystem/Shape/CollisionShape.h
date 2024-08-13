@@ -63,10 +63,21 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// データのセット
+	// 各コライダーデータ
 	virtual ColShapeData GetData() const = 0;
 	virtual void SetData(const ColShapeData& data) = 0;
 
+	// Bounding
+	Col::AABB GetBounding() const { this->bounding_; }
+	void SetBounding(const Col::AABB& setData) { this->bounding_ = setData; }
+
 #pragma endregion 
+
+
+protected:
+
+
+	Col::AABB bounding_{};
+
 };
 

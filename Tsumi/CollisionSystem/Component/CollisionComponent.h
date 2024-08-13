@@ -43,6 +43,8 @@ public:
 		if (it != this->shapeMap_.end()) {
 			// IDが存在する場合はデータを更新
 			it->second->SetData(sphere);
+			// Boundingの値も更新しておく
+			it->second->CalcBounding(); 
 		}
 		else {
 			// IDが存在しない場合はエラー処理
@@ -83,7 +85,6 @@ private:
 	int nextID_ = 0;
 
 	// コリジョンシェイプ
-	//std::vector<std::unique_ptr<CollisionShape>> shapes_;
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
 };
 

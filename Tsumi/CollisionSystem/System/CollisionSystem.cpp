@@ -39,7 +39,6 @@ void CollisionSystem::CheckCollisions()
                 if (comp1->CheckCollision(*comp2)) {
                     CollisionEvent event(comp1, comp2);
                     ColEventManager::GetInstance()->Dispatch(event);
-                    // コリジョン処理の実装を行う（例: comp1->GetObject()->OnCollision(comp2->GetObject());）
                     comp1->GetOwner()->onCollision(comp2->GetOwner());
                     comp2->GetOwner()->onCollision(comp1->GetOwner());
                 }

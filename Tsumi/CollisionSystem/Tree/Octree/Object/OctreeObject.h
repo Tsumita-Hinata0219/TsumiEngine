@@ -22,9 +22,9 @@ public:
 	}
 
 	// シェイプの追加
-	void AddShape(std::unique_ptr<CollisionShape> shape) {
+	/*void AddShape(std::unique_ptr<CollisionShape> shape) {
 		this->shapes_.push_back(std::move(shape));
-	}
+	}*/
 
 
 #pragma region Accessor アクセッサー
@@ -35,9 +35,9 @@ public:
 	}
 
 	// shape
-	std::vector<std::unique_ptr<CollisionShape>> GetShape() const {
+	/*std::vector<std::unique_ptr<CollisionShape>> GetShape() const {
 		return this->shapes_;
-	}
+	}*/
 
 #pragma endregion 
 

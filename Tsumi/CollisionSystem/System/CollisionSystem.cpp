@@ -34,8 +34,6 @@ void CollisionSystem::CheckCollisions()
             
             CollisionComponent* comp1 = components_[i];
             CollisionComponent* comp2 = components_[j];
-
-            // ここで空間四分木分割処理を挟む
             
             if (comp1 && comp2) {
                 if (comp1->CheckCollision(*comp2)) {

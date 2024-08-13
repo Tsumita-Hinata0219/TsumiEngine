@@ -17,7 +17,7 @@ bool CollisionShapeAABB::Intersects(const CollisionShapeSphere& other) const
     // 型が一致するか確認してデータを取り出す
     if (auto aabb = std::get_if<Col::AABB>(&a1)) {
         if (auto sphere = std::get_if<Col::Sphere>(&s1)) {
-            return Detect::Collision(*aabb, *sphere);
+            return Detect::Intersects(*aabb, *sphere);
         }
         else {
             throw std::invalid_argument("Other shape is not a Sphere");
@@ -36,7 +36,7 @@ bool CollisionShapeAABB::Intersects(const CollisionShapeAABB& other) const
     // 型が一致するか確認してデータを取り出す
     if (auto aabb1 = std::get_if<Col::AABB>(&a1)) {
         if (auto aabb2 = std::get_if<Col::AABB>(&a2)) {
-            return Detect::Collision(*aabb1, *aabb2);
+            return Detect::Intersects(*aabb1, *aabb2);
         }
         else {
             throw std::invalid_argument("Other shape is not a AABB");

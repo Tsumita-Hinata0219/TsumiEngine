@@ -8,7 +8,7 @@
 namespace Detect {
 
 	// 球と球の当たり判定
-	inline bool Collision(const Col::Sphere& s1, const Col::Sphere& s2)
+	inline bool Intersects(const Col::Sphere& s1, const Col::Sphere& s2)
 	{
 		// 中心からの距離
 		float distance = Length(s2.center - s1.center);
@@ -23,7 +23,7 @@ namespace Detect {
 		return false;
 	}
 	// AABBとAABBの当たり判定
-	inline bool Collision(const Col::AABB& aabb1, const Col::AABB& aabb2)
+	inline bool Intersects(const Col::AABB& aabb1, const Col::AABB& aabb2)
 	{
 		if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
 			(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
@@ -37,7 +37,7 @@ namespace Detect {
 		return false;
 	}
 	// AABBと球の当たり判定
-	inline bool Collision(const Col::AABB& aabb, const Col::Sphere& s)
+	inline bool Intersects(const Col::AABB& aabb, const Col::Sphere& s)
 	{
 		// 最近接点を求める
 		const Vector3 ClosestPoint = {
@@ -60,7 +60,7 @@ namespace Detect {
 		}
 	}
 	// AABBと線の当たり判定
-	inline bool Collision(const Col::AABB& aabb, const Col::Segment& s)
+	inline bool Intersects(const Col::AABB& aabb, const Col::Segment& s)
 	{
 		Vector3 tMin = {
 			(aabb.min.x - s.origin.x) / s.diff.x,
@@ -110,7 +110,7 @@ namespace Detect {
 		}
 	}
 	// OBBと球の当たり判定
-	inline bool Collision(const Col::OBB& obb, const Col::Sphere& s)
+	inline bool Intersects(const Col::OBB& obb, const Col::Sphere& s)
 	{
 		Vector3 centerInOBBLocalSpace = {
 		TransformByMatrix(
@@ -126,7 +126,7 @@ namespace Detect {
 		};
 
 		// ローカル座標で衝突判定
-		if (Detect::Collision(abbOBBLocal, sphereOBBLocal)) {
+		if (Detect::Intersects(abbOBBLocal, sphereOBBLocal)) {
 
 			// 当たってる
 			return true;
@@ -138,7 +138,7 @@ namespace Detect {
 		}
 	}
 	// OBBと線の当たり判定
-	inline bool Collision(const Col::OBB& obb, const Col::Segment& s)
+	inline bool Intersects(const Col::OBB& obb, const Col::Segment& s)
 	{
 		Matrix4x4 obbInverse = Inverse(ColUtil::CreateOBBWorldMatrix(obb));
 
@@ -158,7 +158,7 @@ namespace Detect {
 
 
 		// AABBとSegmentの当たり判定を使う
-		if (Detect::Collision(aabbOBBLocal, localSegment)) {
+		if (Detect::Intersects(aabbOBBLocal, localSegment)) {
 
 			// 当たってる
 			return true;
@@ -170,7 +170,7 @@ namespace Detect {
 		}
 	}
 	// OBBとOBBの当たり判定
-	inline bool Collision(const Col::OBB& obb1, const Col::OBB& obb2)
+	inline bool Intersects(const Col::OBB& obb1, const Col::OBB& obb2)
 	{
 		// 分離軸テスト
 		for (const auto& axis : obb1.orientations) {
@@ -204,7 +204,7 @@ namespace Detect {
 		return true;
 	}
 	// CapsuleとCapsuleの当たり判定
-	inline bool Collision(const Col::Capsule& capsule1, const Col::Capsule& capsule2)
+	inline bool Intersects(const Col::Capsule& capsule1, const Col::Capsule& capsule2)
 	{
 		//オイラー角から回転行列を作成
 		Matrix4x4 rotateMat1 = MakeRotateXYZMatrix(capsule1.rotate);
@@ -240,5 +240,24 @@ namespace Detect {
 
 		// 衝突していない
 		return false;
+	}
+
+
+	// 包含判定
+	inline bool contains(const Col::AABB& a1, const Col::AABB& a2) {
+
+		if (a1.min.x <= a2.min.x && a1.max.x >= a2.max.x &&
+			a1.min.y <= a2.min.y && a1.max.y >= a2.max.y &&
+			a1.min.z <= a2.min.z && a1.max.z >= a2.max.z
+			) {
+
+			// 内包している
+			return true;
+		}
+		else {
+
+			// 内包していない
+			return false;
+		}
 	}
 }

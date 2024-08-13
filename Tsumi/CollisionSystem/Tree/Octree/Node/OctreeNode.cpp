@@ -6,12 +6,15 @@
 void OctreeNode::Insert(OctreeObject* object)
 {
 	// オブジェクトがノードの範囲に収まるか確認
+	object;
 }
 
 
 // 指定された範囲内のオブジェクトをクリエする
 void OctreeNode::Query(const Col::AABB& range, std::vector<OctreeObject*>& results)
 {
+	range;
+	results;
 }
 
 
@@ -20,9 +23,3 @@ void OctreeNode::Subdivide()
 {
 }
 
-
-// ノード内のオブジェクトを子ノードに移動する
-void OctreeNode::RelocationObjects()
-{
-
-}

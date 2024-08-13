@@ -2,6 +2,7 @@
 
 #include "../../../Shape/CollisionShape.h"
 #include "../Object/OctreeObject.h"
+#include "../Node/OctreeNode.h"
 
 #include <vector>
 #include <memory>
@@ -33,13 +34,20 @@ public:
 	void Query(const Col::AABB& range, std::vector<OctreeObject*>& results);
 
 
+#pragma region Accessor アクセッサ
+
+	bool Intersects(const CollisionShape* shape) const {
+		// AABB, Sphere, OBB, Segment それぞれの形状に応じた交差判定を行う
+		return shape->Intersects(bounds_);
+	}
+
+#pragma endregion 
+
+
 private:
 	
 	// ノードを分割する
 	void Subdivide();
-
-	// ノード内のオブジェクトを子ノードに移動する
-	void RelocationObjects();
 
 
 public:
@@ -54,7 +62,7 @@ private:
 	Col::AABB bounds_{};
 
 	// このノードに格納されたオブジェクト
-	std::vector<Col::AABB> objects_;
+	std::vector<OctreeObject> objects_;
 
 	// 子ノード
 	std::vector<OctreeNode*> children_;

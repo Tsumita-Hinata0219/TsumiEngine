@@ -1,30 +1,30 @@
 #pragma once
 
 #include "../../Shape/CollisionShape.h"
-
-
-/* 3D‹óŠÔ“à‚Ì‹«ŠE‚ğ•\Œ»‚·‚éƒNƒ‰ƒX : AABB */
-class BoundingSphere {
-
-public:
-
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^AƒfƒXƒgƒ‰ƒNƒ^
-	BoundingSphere() = default;
-	~BoundingSphere() {};
-
-	// ƒpƒ‰ƒ[ƒ^•t‚«ƒRƒ“ƒXƒgƒ‰ƒNƒ^
-	BoundingSphere(Col::Sphere setData) {
-		this->sphere_ = setData;
-	}
-
-	// w’è‚Ì”ÍˆÍ‚Æd‚È‚Á‚Ä‚¢‚é‚©‚Ç‚¤‚©‚ğ”»’è
-
-
-	// w’è‚Ì“_‚ª‚±‚ÌBounding“à‚É‚ ‚é‚©‚Ç‚¤‚©
-
-
-private:
-
-	Col::Sphere sphere_{};
-};
-
+//
+//
+///* 3Dç©ºé–“å†…ã®å¢ƒç•Œã‚’è¡¨ç¾ã™ã‚‹ã‚¯ãƒ©ã‚¹ : AABB */
+//class BoundingSphere {
+//
+//public:
+//
+//	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ã€ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+//	BoundingSphere() = default;
+//	~BoundingSphere() {};
+//
+//	// ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ä»˜ãã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
+//	BoundingSphere(Col::Sphere setData) {
+//		this->sphere_ = setData;
+//	}
+//
+//	// æŒ‡å®šã®ç¯„å›²ã¨é‡ãªã£ã¦ã„ã‚‹ã‹ã©ã†ã‹ã‚’åˆ¤å®š
+//
+//
+//	// æŒ‡å®šã®ç‚¹ãŒã“ã®Boundingå†…ã«ã‚ã‚‹ã‹ã©ã†ã‹
+//
+//
+//private:
+//
+//	Col::Sphere sphere_{};
+//};
+//

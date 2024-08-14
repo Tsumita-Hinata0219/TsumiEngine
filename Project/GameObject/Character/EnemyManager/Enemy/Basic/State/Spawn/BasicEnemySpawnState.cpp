@@ -24,7 +24,7 @@ void BasicEnemySpawnState::Update()
 	if (OutElasticScale()) {
 
 		// trueでチェンジステート
-		owner_->ChangeState(BasicEnemyStateType::APPROACH);
+		owner_->ChangeState(BasicEnemyStateType::IDLE);
 	}
 
 	// SRTの再設定

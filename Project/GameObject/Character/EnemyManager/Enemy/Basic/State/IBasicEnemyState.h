@@ -3,6 +3,7 @@
 // ステートの種類
 enum class BasicEnemyStateType {
 	SPAWN,
+	IDLE,
 	APPROACH,
 	DEATH,
 	Count,

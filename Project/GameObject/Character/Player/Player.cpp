@@ -248,8 +248,14 @@ void Player::CameraRotate()
 	// stick入力が一定範囲を超えている場合、角度を更新
 	if (std::abs(R_StickInput_.x) > 0.2f) {
 
+		// 目標角度を計算
+		float targetAngle = R_StickInput_.x * kAngleSpeed_;
+
 		// 入力に基づいて角度を更新
-		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
+		//cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
+
+		// 線形補間を使用して、現在の角度と目標角度の間をスムーズに移行
+		cameraAngle_ = Lerp(cameraAngle_, targetAngle, kCameraLerpSpeed_);
 
 		// 回す
 		camera_.srt.rotate.y += cameraAngle_;
@@ -265,6 +271,9 @@ void Player::CameraFollow()
 
 	// オフセットをカメラの回転に合わせて回転させる
 	cameraOffset_ = TransformNormal(cameraOffset_, camera_.rotateMat);
+
+	// 線形補間を使用して、現在のカメラ位置と目標位置の間をスムーズに移行
+	cameraOffset_ = Lerp(cameraOffset_, cameraOffset_, kCameraLerpSpeed_);
 
 	// ターゲットの座標とオフセットをカメラの座標に加算する
 	camera_.srt.translate = trans_.srt.translate + cameraOffset_;

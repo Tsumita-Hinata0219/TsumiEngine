@@ -128,6 +128,7 @@ private: // メンバ変数
 	float cameraAngle_ = 0.0f;
 	const float kCameraRadius_ = 5.0f;
 	const float kAngleSpeed_ = 0.05f;
+	const float kCameraLerpSpeed_ = 0.2f;
 
 	// プレイヤーからのオフセット
 	Vector3 cameraOffset_{};

@@ -20,7 +20,7 @@ IOBJState::IOBJState(ModelDatas datas)
 
 
 // 描画処理
-void IOBJState::Draw(Transform transform)
+void IOBJState::Draw(Transform& transform)
 {
 	// CameraResourceの取得
 	auto cameraResource = cameraManager_->GetResource();

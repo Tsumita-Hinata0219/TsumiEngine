@@ -52,7 +52,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster);
 
 	// 描画処理 <- new
-	void DrawN(Transform transform);
+	void DrawN(Transform& transform);
 
 	// アニメーションの再生
 	void PlayAnimation(Animation animation, float time);

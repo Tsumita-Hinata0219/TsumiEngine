@@ -19,7 +19,7 @@ IGLTFState::IGLTFState(ModelDatas datas)
 }
 
 // 描画処理
-void IGLTFState::Draw(Transform transform)
+void IGLTFState::Draw(Transform& transform)
 {
 	// CameraResourceの取得
 	auto cameraResource = cameraManager_->GetResource();

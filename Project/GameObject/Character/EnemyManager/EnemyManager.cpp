@@ -13,8 +13,6 @@ void EnemyManager::Init()
 	
 
 	// Transformの初期化
-	//transform_.Init();
-	//transform_.srt.translate.z = 30.0f; // 少し奥にずらしておく
 	transform_.Init();
 	transform_.srt.translate.z = 30.0f;
 
@@ -55,6 +53,9 @@ void EnemyManager::Update()
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
 		enemy->Update();
 	}
+	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+		enemy->Update();
+	}
 
 	// 死亡フラグが立っていたら削除
 	enemyList_.remove_if([](std::shared_ptr<Enemy> enemy) {
@@ -65,9 +66,16 @@ void EnemyManager::Update()
 		return false;
 		}
 	);
+	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
+		if (enemy->IsDead()) {
+			return true;
+		}
+		return false;
+		}
+	);
 
 	// エネミーカウントチェック
-	EnemyCountCheck();
+	//EnemyCountCheck();
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("EnemyManager")) {
@@ -81,7 +89,14 @@ void EnemyManager::Update()
 		if (ImGui::Button("AddEnemy")) {
 			AddNewEnemy();
 		}
+		if (ImGui::Button("AddBasicEnemy")) {
+			AddBasicEnemy();
+		}
+		if (ImGui::Button("AddStaticnemy")) {
+			AddStaticEnemy();
+		}
 		ImGui::Text("EnemyInstance = %d", int(enemyList_.size()));
+		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
 		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
 
 		ImGui::TreePop();
@@ -104,6 +119,9 @@ void EnemyManager::Draw3D()
 	for (std::shared_ptr<Enemy> enemy : enemyList_) {
 		enemy->Draw3D();
 	}
+	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+		enemy->Draw3D();
+	}
 }
 
 
@@ -111,6 +129,14 @@ void EnemyManager::Draw3D()
 void EnemyManager::AddNewEnemy()
 {
 	CreateNewEnemy(); // 新しいEnemyを生成する
+}
+void EnemyManager::AddBasicEnemy()
+{
+	CreateBasicEnemy(); // 新しいEnemyを生成する
+}
+void EnemyManager::AddStaticEnemy()
+{
+	CreateStaticEnemy(); // 新しいエネミーを生成する
 }
 
 
@@ -120,9 +146,7 @@ void EnemyManager::CreateNewEnemy()
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
 
-
 	int index = int(RandomGenerator::getRandom(scope_));
-	
 	
 	// 初期座標。多少ランダムに湧く
 	Vector3 initPos = 
@@ -135,6 +159,44 @@ void EnemyManager::CreateNewEnemy()
 
 	// リストに追加
 	enemyList_.push_back(newEnemy);
+}
+void EnemyManager::CreateBasicEnemy()
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
+
+	int index = int(RandomGenerator::getRandom(scope_));
+
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos =
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetPosition(initPos);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
+}
+void EnemyManager::CreateStaticEnemy()
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
+
+	int index = int(RandomGenerator::getRandom(scope_));
+
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos =
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetPosition(initPos);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
 }
 
 

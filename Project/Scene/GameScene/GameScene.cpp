@@ -165,7 +165,7 @@ void GameScene::FrontSpriteDraw()
 void GameScene::CheckAllCollision()
 {
 	// Player with EnemyBullet
-	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	for (auto& enemy : enemyManager_->GetEnemys()) {
 		for (auto& bullet : enemy->GetBulletList()) {
 			if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
 				player_->OnCollisionWithEnemyBullet();
@@ -176,17 +176,17 @@ void GameScene::CheckAllCollision()
 
 	// PlayerBullet with Enemy
 	for (auto& bullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
+		for (auto& enemy : enemyManager_->GetEnemys()) {
 			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
 				bullet->OnCollisionWithEnemy();
-				enemy->OnCollisionWithPlayerBullet();
+				//enemy->OnCollisionWithPlayerBullet();
 			}
 		}
 	}
 
 	// PlayerBullet with EnemyBullet
 	for (auto& playerBullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemyList()) {
+		for (auto& enemy : enemyManager_->GetEnemys()) {
 			for (auto& enemyBullet : enemy->GetBulletList()) {
 				if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
 					playerBullet->OnCollisionWithEnemyBullet();

@@ -7,6 +7,10 @@
 
 #include "Enemy/Enemy.h"
 
+#include "Enemy/IEnemy.h"
+#include "Enemy/Basic/BasicEnemy.h"
+#include "Enemy/Static/StaticEnemy.h"
+
 
 // Player前方宣言
 class Player;
@@ -28,6 +32,8 @@ public: // メンバ関数
 
 	// 新しいEnemyを追加する
 	void AddNewEnemy();
+	void AddBasicEnemy();
+	void AddStaticEnemy();
 
 #pragma region Accessor アクセッサ
 
@@ -37,6 +43,8 @@ public: // メンバ関数
 	// EnemyListの取得
 	std::list<std::shared_ptr<Enemy>>& GetEnemyList() { return this->enemyList_; }
 
+	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
+
 #pragma endregion 
 
 
@@ -44,6 +52,8 @@ private:
 
 	// 新しいEnemyを生成する
 	void CreateNewEnemy();
+	void CreateBasicEnemy();
+	void CreateStaticEnemy();
 
 	// エネミーカウントチェック
 	void EnemyCountCheck();
@@ -62,6 +72,8 @@ private: // メンバ変数
 
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<Enemy>> enemyList_;
+	std::list<std::shared_ptr<IEnemy>> enemys_;
+
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};

@@ -32,7 +32,7 @@ public: // メンバ変数
 	virtual ~ModelState() {};
 
 	// 描画処理
-	virtual void Draw(Transform transform) = 0;
+	virtual void Draw(Transform& transform) = 0;
 	
 	// コマンドコール
 	virtual void CommandCall() = 0;

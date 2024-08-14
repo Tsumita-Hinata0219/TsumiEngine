@@ -214,6 +214,11 @@
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -431,6 +436,13 @@
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
     <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

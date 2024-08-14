@@ -9,6 +9,7 @@
 
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
+#include "Enemy/Static/StaticEnemy.h"
 
 
 // Player前方宣言
@@ -32,6 +33,7 @@ public: // メンバ関数
 	// 新しいEnemyを追加する
 	void AddNewEnemy();
 	void AddBasicEnemy();
+	void AddStaticEnemy();
 
 #pragma region Accessor アクセッサ
 
@@ -51,6 +53,7 @@ private:
 	// 新しいEnemyを生成する
 	void CreateNewEnemy();
 	void CreateBasicEnemy();
+	void CreateStaticEnemy();
 
 	// エネミーカウントチェック
 	void EnemyCountCheck();

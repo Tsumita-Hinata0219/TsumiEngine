@@ -43,9 +43,6 @@ void BasicEnemy::Update()
 	// ステートパターン処理
 	FuncStatePattern();
 
-	// Transformの更新処理
-	trans_.UpdateMatrix();
-
 	// アプローチ状態の時のみ入る処理
 	if (stateNo_ == EnemyState::APPROACH) {
 

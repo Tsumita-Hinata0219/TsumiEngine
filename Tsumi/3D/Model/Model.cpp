@@ -191,7 +191,7 @@ void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster)
 {
 	this->state_->AnimDraw(this, worldTransform, skinCluster);
 }
-void Model::DrawN(Transform transform)
+void Model::DrawN(Transform& transform)
 {
 	modelState_->Draw(transform);
 }

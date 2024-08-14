@@ -35,9 +35,6 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// Playerの設定
-	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
-
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 

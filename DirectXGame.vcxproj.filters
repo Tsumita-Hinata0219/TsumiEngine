@@ -214,6 +214,7 @@
     <ClCompile Include="Tsumi\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Tsumi\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -431,6 +432,8 @@
     <ClInclude Include="Tsumi\3D\Model\State\OBJ\IOBJState.h" />
     <ClInclude Include="Tsumi\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

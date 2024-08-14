@@ -163,6 +163,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
@@ -302,7 +303,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Camera\Resources\CameraResource.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\IEnemyState.h" />

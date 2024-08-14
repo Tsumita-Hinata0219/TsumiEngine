@@ -1,9 +1,10 @@
-#include "Enemy.h"
-#include "../../Player/Player.h"
+#include "BasicEnemy.h"
+#include "../../../Player/Player.h"
+
 
 
 // 初期化処理
-void Enemy::Init()
+void BasicEnemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
@@ -27,7 +28,7 @@ void Enemy::Init()
 	// 初期ステートの設定 && 初期ステートの初期化処理
 	stateNo_ = EnemyState::SPAWN;
 	currentStateNo_ = stateNo_;
-	stateVector_[currentStateNo_]->Init(this);
+	//stateVector_[currentStateNo_]->Init(this);
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -37,7 +38,7 @@ void Enemy::Init()
 
 
 // 更新処理
-void Enemy::Update()
+void BasicEnemy::Update()
 {
 	// ステートパターン処理
 	FuncStatePattern();
@@ -87,7 +88,7 @@ void Enemy::Update()
 
 
 // 描画処理
-void Enemy::Draw3D()
+void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
@@ -98,16 +99,16 @@ void Enemy::Draw3D()
 		bullet->Draw3D();
 	}
 }
-void Enemy::Draw2DFront() {}
-void Enemy::Draw2DBack() {}
+void BasicEnemy::Draw2DFront() {}
+void BasicEnemy::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
-void Enemy::OnCollisionWithPlayer()
+void BasicEnemy::OnCollisionWithPlayer()
 {
 
 }
-void Enemy::OnCollisionWithPlayerBullet()
+void BasicEnemy::OnCollisionWithPlayerBullet()
 {
 	// スポーン&デス時には通らない
 	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
@@ -122,7 +123,7 @@ void Enemy::OnCollisionWithPlayerBullet()
 
 
 // ステートパターン処理
-void Enemy::FuncStatePattern()
+void BasicEnemy::FuncStatePattern()
 {
 	// ステートチェック
 	preStateNo_ = currentStateNo_;
@@ -135,7 +136,7 @@ void Enemy::FuncStatePattern()
 		stateVector_[preStateNo_]->Exit();
 
 		///// 新しいステートの初期化処理
-		stateVector_[currentStateNo_]->Init(this);
+		//stateVector_[currentStateNo_]->Init(this);
 	}
 
 	///// 更新処理
@@ -144,7 +145,7 @@ void Enemy::FuncStatePattern()
 
 
 // 戦闘状態の切り替え処理
-void Enemy::ToggleCombatState()
+void BasicEnemy::ToggleCombatState()
 {
 	// プレイヤーとの距離で戦闘状態のフラグを管理する
 	// 設定した距離よりも近くにいたらフラグを立てる
@@ -165,7 +166,7 @@ void Enemy::ToggleCombatState()
 
 
 // 移動処理
-void Enemy::Move()
+void BasicEnemy::Move()
 {
 	// ある程度近ければ早期return
 	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= minToPlayer_) {
@@ -184,7 +185,7 @@ void Enemy::Move()
 
 
 // Velocityの計算処理
-void Enemy::CalcVelocity()
+void BasicEnemy::CalcVelocity()
 {
 	// 差分をNormalize
 	Vector3 player2Enemy =
@@ -200,7 +201,7 @@ void Enemy::CalcVelocity()
 
 
 // 向きの計算処理
-void Enemy::CalcRotate()
+void BasicEnemy::CalcRotate()
 {
 	// Y軸周り角度(θy)
 	trans_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
@@ -214,7 +215,7 @@ void Enemy::CalcRotate()
 
 
 // 射撃の処理
-void Enemy::ExecuteShot()
+void BasicEnemy::ExecuteShot()
 {
 	// タイマーをデクリメント
 	shotFrame_--;
@@ -232,7 +233,7 @@ void Enemy::ExecuteShot()
 
 
 // 新しいバレットを生成する
-void Enemy::CreateNewBullet()
+void BasicEnemy::CreateNewBullet()
 {
 	// newBulletのインスタンス
 	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();

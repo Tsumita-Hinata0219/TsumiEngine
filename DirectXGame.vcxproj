@@ -166,6 +166,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
@@ -311,6 +312,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
+    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />

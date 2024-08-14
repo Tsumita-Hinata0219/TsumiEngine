@@ -9,6 +9,7 @@
 
 #include "State/IBasicEnemyState.h"
 #include "State/Spawn/BasicEnemySpawnState.h"
+#include "State/Idle/BasicEnemyIdleState.h"
 #include "State/Approach/BasicEnemyApproachState.h"
 #include "State/Death/BasicEnemyDeathState.h"
 
@@ -116,7 +117,7 @@ private:
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 70.0f;
+	float combatTriggerDistance_ = 0.0f;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;

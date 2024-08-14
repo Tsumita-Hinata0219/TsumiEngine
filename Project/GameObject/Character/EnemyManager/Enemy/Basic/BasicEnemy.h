@@ -50,14 +50,14 @@ public:
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
 	// 死亡フラグ
-	bool IsDead() const { return this->isDead_; }
-	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+	/*bool IsDead() const { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }*/
 
 	// 座標
-	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
+	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
 
 	// BulletListの取得
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
+	//std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// Collider
 	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
@@ -122,9 +122,6 @@ private:
 	Vector3 velocity_{};
 	float moveVector_ = 0.05f;
 
-	// 死亡フラグ
-	bool isDead_ = false;
-
 	// playerとの最低距離
 	float minToPlayer_ = 4.0f;
 
@@ -133,9 +130,6 @@ private:
 
 	// 戦闘状態になるかならないかの距離の閾値
 	float combatTriggerDistance_ = 70.0f;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;

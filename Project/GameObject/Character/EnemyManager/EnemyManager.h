@@ -6,6 +6,7 @@
 #include "../../GameObject.h"
 
 #include "Enemy/Enemy.h"
+#include "Enemy/IEnemy.h"
 
 
 // Player前方宣言
@@ -62,6 +63,8 @@ private: // メンバ変数
 
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<Enemy>> enemyList_;
+	std::list<std::shared_ptr<IEnemy>> enemys_;
+
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};

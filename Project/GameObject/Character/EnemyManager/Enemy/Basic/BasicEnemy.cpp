@@ -21,14 +21,14 @@ void BasicEnemy::Init()
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
-	stateVector_.resize(EnumSize<EnemyState>::value);
-	stateVector_[EnemyState::SPAWN] = std::make_unique<IEnemySpawnState>();
-	stateVector_[EnemyState::APPROACH] = std::make_unique<IEnemyApproachState>();
-	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
+	stateVector_.resize(EnumSize<BasicEnemyStateType>::value);
+	stateVector_[to_underlying(BasicEnemyStateType::SPAWN)] = std::make_unique<BasicEnemySpawnState>();
+	//stateVector_[BasicEnemyStateType::APPROACH] = std::make_unique<BasicEnemyApproachState>();
+	//stateVector_[BasicEnemyStateType::DEATH] = std::make_unique<IEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
-	stateNo_ = EnemyState::SPAWN;
+	stateNo_ = to_underlying(BasicEnemyStateType::SPAWN);
 	currentStateNo_ = stateNo_;
-	//stateVector_[currentStateNo_]->Init(this);
+	stateVector_[currentStateNo_]->Enter(this);
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -111,10 +111,10 @@ void BasicEnemy::OnCollisionWithPlayer()
 void BasicEnemy::OnCollisionWithPlayerBullet()
 {
 	// スポーン&デス時には通らない
-	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
+	if (stateNo_ != to_underlying(BasicEnemyStateType::SPAWN) && stateNo_ != to_underlying(BasicEnemyStateType::DEATH)) {
 
-		// デスステートに移行
-		this->ChangeState(EnemyState::DEATH);
+		// デスステートに移行	
+		this->ChangeState(BasicEnemyStateType::DEATH);
 
 		// プレイヤーのキルカウントを加算する
 		player_->AddKillCount();
@@ -136,7 +136,7 @@ void BasicEnemy::FuncStatePattern()
 		stateVector_[preStateNo_]->Exit();
 
 		///// 新しいステートの初期化処理
-		//stateVector_[currentStateNo_]->Init(this);
+		stateVector_[currentStateNo_]->Enter(this);
 	}
 
 	///// 更新処理

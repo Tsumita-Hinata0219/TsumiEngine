@@ -24,7 +24,7 @@ class IEnemy : public IObject {
 public:
 
 	// 仮想デストラクタ
-	~IEnemy() {};
+	virtual ~IEnemy() = default;
 
 
 

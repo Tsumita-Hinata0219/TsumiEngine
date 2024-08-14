@@ -7,10 +7,10 @@
 
 #include "../../Bullet/EnemyBullet.h"
 
-#include "../../IState/IEnemyState.h"
-#include "../../IState/Spawn/IEnemySpawnState.h"
-#include "../../IState/Approach/IEnemyApproachState.h"
-#include "../../IState/Death/IEnemyDeathState.h"
+#include "State/IBasicEnemyState.h"
+#include "State/Spawn/BasicEnemySpawnState.h"
+#include "State/Approach/BasicEnemyApproachState.h"
+#include "State/Death/BasicEnemyDeathState.h"
 
 
 /* 普通のエネミー */
@@ -30,7 +30,7 @@ public:
 	void Draw2DBack() override;
 
 	// チェンジステート
-	void ChangeState(int newState) { this->stateNo_ = newState; }
+	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = to_underlying(state); }
 
 
 #pragma region Accessor アクセッサ
@@ -137,7 +137,7 @@ private:
 
 
 	// ステートパターン
-	std::vector<std::unique_ptr<IEnemyState>> stateVector_; // ステートコンテナ
+	std::vector<std::unique_ptr<IBasicEnemyState>> stateVector_; // ステートコンテナ
 	int stateNo_ = 0;        // ステートを管理するクラス
 	int currentStateNo_ = 0; // 現在のステート
 	int preStateNo_ = 0;	 // 前回のステート

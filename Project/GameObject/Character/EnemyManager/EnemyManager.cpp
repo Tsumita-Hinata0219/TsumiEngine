@@ -75,7 +75,7 @@ void EnemyManager::Update()
 	);
 
 	// エネミーカウントチェック
-	EnemyCountCheck();
+	//EnemyCountCheck();
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("EnemyManager")) {
@@ -88,6 +88,9 @@ void EnemyManager::Update()
 		ImGui::Text("");
 		if (ImGui::Button("AddEnemy")) {
 			AddNewEnemy();
+		}
+		if (ImGui::Button("AddBasicEnemy")) {
+			AddBasicEnemy();
 		}
 		ImGui::Text("EnemyInstance = %d", int(enemyList_.size()));
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
@@ -123,6 +126,10 @@ void EnemyManager::Draw3D()
 void EnemyManager::AddNewEnemy()
 {
 	CreateNewEnemy(); // 新しいEnemyを生成する
+}
+void EnemyManager::AddBasicEnemy()
+{
+	CreateBasicEnemy(); // 新しいEnemyを生成する
 }
 
 

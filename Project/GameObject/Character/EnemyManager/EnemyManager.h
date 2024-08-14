@@ -31,6 +31,7 @@ public: // メンバ関数
 
 	// 新しいEnemyを追加する
 	void AddNewEnemy();
+	void AddBasicEnemy();
 
 #pragma region Accessor アクセッサ
 

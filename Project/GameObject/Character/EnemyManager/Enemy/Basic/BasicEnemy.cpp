@@ -23,8 +23,8 @@ void BasicEnemy::Init()
 	// 各ステートをコンテナに保存
 	stateVector_.resize(EnumSize<BasicEnemyStateType>::value);
 	stateVector_[to_underlying(BasicEnemyStateType::SPAWN)] = std::make_unique<BasicEnemySpawnState>();
-	//stateVector_[BasicEnemyStateType::APPROACH] = std::make_unique<BasicEnemyApproachState>();
-	//stateVector_[BasicEnemyStateType::DEATH] = std::make_unique<IEnemyDeathState>();
+	stateVector_[to_underlying(BasicEnemyStateType::APPROACH)] = std::make_unique<BasicEnemyApproachState>();
+	stateVector_[to_underlying(BasicEnemyStateType::DEATH)] = std::make_unique<BasicEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
 	stateNo_ = to_underlying(BasicEnemyStateType::SPAWN);
 	currentStateNo_ = stateNo_;

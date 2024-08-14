@@ -41,6 +41,8 @@ public: // メンバ関数
 	// EnemyListの取得
 	std::list<std::shared_ptr<Enemy>>& GetEnemyList() { return this->enemyList_; }
 
+	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
+
 #pragma endregion 
 
 

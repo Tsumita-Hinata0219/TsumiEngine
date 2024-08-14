@@ -50,6 +50,15 @@ public:
 
 private:
 
+	// 射撃の処理
+	void ExecutexShot();
+
+	// 新しいバレットを生成する
+	void CreateNewBullet();
+
+
+private:
+
 	// Model
 	std::unique_ptr<Model> model_;
 
@@ -68,7 +77,9 @@ private:
 	// 回転スピード
 	float addRadSpeed_ = 0.0f;
 
-
+	// 射撃するまでのフレーム&インターバル
+	int shotFrame_ = 0;
+	int kShotInterval_ = 50;
 
 };
 

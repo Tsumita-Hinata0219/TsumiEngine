@@ -49,15 +49,9 @@ public:
 	Vector4 GetModelColor() const { return this->modelColor_; }
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
-	// 死亡フラグ
-	/*bool IsDead() const { return this->isDead_; }
-	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }*/
 
 	// 座標
 	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
-
-	// BulletListの取得
-	//std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// Collider
 	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
@@ -98,10 +92,6 @@ private:
 
 
 private:
-
-
-	// Player
-	Player* player_ = nullptr;
 
 	// Model
 	std::unique_ptr<Model> model_;

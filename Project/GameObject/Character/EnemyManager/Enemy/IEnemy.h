@@ -45,6 +45,9 @@ public:
 	// 座標
 	virtual void SetPosition(Vector3 setPos) = 0;
 
+	// Collider
+	virtual OBBCollider* GetOBBCollider() = 0;
+
 #pragma endregion 
 	
 

@@ -129,26 +129,27 @@ void EnemyManager::AddNewEnemy()
 // 新しいEnemyを生成する
 void EnemyManager::CreateNewEnemy()
 {
-	//// 新しいEnemyのインスタンス
-	//std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
-
-	//int index = int(RandomGenerator::getRandom(scope_));
-	//
-	//// 初期座標。多少ランダムに湧く
-	//Vector3 initPos = 
-	//	trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
-
-	//// newEnemyの初期化
-	//newEnemy->Init();
-	//newEnemy->SetPlayer(player_);
-	//newEnemy->SetPosition(initPos);
-
-	//// リストに追加
-	//enemyList_.push_back(newEnemy);
-
-
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<IEnemy> newEnemy = std::make_unique<IEnemy>();
+	std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
+
+	int index = int(RandomGenerator::getRandom(scope_));
+	
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos = 
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(player_);
+	newEnemy->SetPosition(initPos);
+
+	// リストに追加
+	enemyList_.push_back(newEnemy);
+}
+void EnemyManager::CreateBasicEnemy()
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
 
 	int index = int(RandomGenerator::getRandom(scope_));
 
@@ -160,7 +161,6 @@ void EnemyManager::CreateNewEnemy()
 	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetPosition(initPos);
-
 
 	// リストに追加
 	enemys_.push_back(newEnemy);

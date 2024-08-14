@@ -60,7 +60,7 @@ public:
 	//std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// Collider
-	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
 
 #pragma endregion 
 

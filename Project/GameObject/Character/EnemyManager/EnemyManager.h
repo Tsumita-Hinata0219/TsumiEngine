@@ -6,7 +6,9 @@
 #include "../../GameObject.h"
 
 #include "Enemy/Enemy.h"
+
 #include "Enemy/IEnemy.h"
+#include "Enemy/Basic/BasicEnemy.h"
 
 
 // Player前方宣言
@@ -45,6 +47,7 @@ private:
 
 	// 新しいEnemyを生成する
 	void CreateNewEnemy();
+	void CreateBasicEnemy();
 
 	// エネミーカウントチェック
 	void EnemyCountCheck();

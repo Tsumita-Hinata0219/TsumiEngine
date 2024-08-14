@@ -22,4 +22,19 @@ public:
 
 private:
 
+	// ポジションにイージングにかける
+	bool InOutBackPos();
+
+
+private:
+
+	// SRT
+	SRTN srt_{};
+
+	// 開始値と終了値
+	std::pair<float, float> posPair_;
+
+	// スケールのイージングにかかるタイマー
+	Timer posEaseTime_{};
+
 };

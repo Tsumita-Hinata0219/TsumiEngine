@@ -7,6 +7,10 @@
 #include <vector>
 
 
+// 前方宣言
+class OctreeCell;
+
+
 /* 八分木に登録するオブジェクトの情報を保持するクラス */
 class OctreeObject {
 
@@ -17,37 +21,28 @@ public:
 	~OctreeObject() {};
 
 	// パラメータ付きコンストラクタ
-	OctreeObject(CollisionComponent* component) {
-		this->component_ = component;
-	}
+	OctreeObject(OctreeCell* cell, CollisionShape* shape) : cell_(cell), shape_(shape) {};
 
-	// シェイプの追加
-	/*void AddShape(std::unique_ptr<CollisionShape> shape) {
-		this->shapes_.push_back(std::move(shape));
-	}*/
+	// 空間に登録する
+	void RegisterCell(OctreeCell* cell);
 
-
-#pragma region Accessor アクセッサー
-
-	// Component
-	CollisionComponent* GetComponent() const {
-		return this->component_;
-	}
-
-	// shape
-	/*std::vector<std::unique_ptr<CollisionShape>> GetShape() const {
-		return this->shapes_;
-	}*/
-
-#pragma endregion 
+	// 空間から削除する
+	bool Remove();
 
 
 public:
 
-	// オブジェクトの持つコンポーネント
-	std::vector<std::unique_ptr<CollisionShape>> shapes_;
+	// 登録空間
+	OctreeCell* cell_ = nullptr;
 
-	// コンポーネントの持つシェイプのリスト
-	CollisionComponent* component_;
+	// 判定対象オブジェクト
+	CollisionShape* shape_ = nullptr;
+
+	// 前のオブジェクトへのポインタ
+	OctreeObject* preObj_ = nullptr;
+
+	// 次のオブジェクトへのポインタ
+	OctreeObject* nextObj_ = nullptr;
+
 };
 

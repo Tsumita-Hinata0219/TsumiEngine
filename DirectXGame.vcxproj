@@ -222,6 +222,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Cell\OctreeCell.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Node\OctreeNode.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Object\OctreeObject.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Octree.cpp" />
@@ -407,6 +408,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Cell\OctreeCell.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Node\OctreeNode.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Object\OctreeObject.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Octree.h" />

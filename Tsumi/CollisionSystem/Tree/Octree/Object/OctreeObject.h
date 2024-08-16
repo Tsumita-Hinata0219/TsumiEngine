@@ -24,7 +24,7 @@ public:
 	OctreeObject(OctreeCell* cell, CollisionShape* shape) : cell(cell), shape(shape) {};
 
 	// 空間に登録する
-	void RegisterCell(OctreeCell* cell);
+	void RegisterCell(OctreeCell* setCell);
 
 	// 空間から削除する
 	bool Remove();

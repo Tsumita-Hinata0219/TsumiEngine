@@ -4,9 +4,9 @@
 
 
 // 空間に登録する
-void OctreeObject::RegisterCell(OctreeCell* cell)
+void OctreeObject::RegisterCell(OctreeCell* setCell)
 {
-	this->cell = cell;
+	this->cell = setCell;
 }
 
 

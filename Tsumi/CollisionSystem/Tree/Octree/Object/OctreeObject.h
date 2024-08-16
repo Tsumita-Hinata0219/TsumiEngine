@@ -21,7 +21,7 @@ public:
 	~OctreeObject() {};
 
 	// パラメータ付きコンストラクタ
-	OctreeObject(OctreeCell* cell, CollisionShape* shape) : cell_(cell), shape_(shape) {};
+	OctreeObject(OctreeCell* cell, CollisionShape* shape) : cell(cell), shape(shape) {};
 
 	// 空間に登録する
 	void RegisterCell(OctreeCell* cell);
@@ -33,16 +33,16 @@ public:
 public:
 
 	// 登録空間
-	OctreeCell* cell_ = nullptr;
+	OctreeCell* cell = nullptr;
 
 	// 判定対象オブジェクト
-	CollisionShape* shape_ = nullptr;
+	CollisionShape* shape = nullptr;
 
 	// 前のオブジェクトへのポインタ
-	OctreeObject* preObj_ = nullptr;
+	OctreeObject* preObj = nullptr;
 
 	// 次のオブジェクトへのポインタ
-	OctreeObject* nextObj_ = nullptr;
+	OctreeObject* nextObj = nullptr;
 
 };
 

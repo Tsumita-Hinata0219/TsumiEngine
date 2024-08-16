@@ -6,7 +6,7 @@
 // 空間に登録する
 void OctreeObject::RegisterCell(OctreeCell* cell)
 {
-	this->cell_ = cell;
+	this->cell = cell;
 }
 
 
@@ -14,23 +14,23 @@ void OctreeObject::RegisterCell(OctreeCell* cell)
 bool OctreeObject::Remove()
 {
 	// 既に逸脱している場合は早期return
-	if (cell_ == nullptr) return false;
+	if (cell == nullptr) return false;
 	
 	// 空間に通知
-	if (!cell_->OnRemove(this)) return false;
+	if (!cell->OnRemove(this)) return false;
 
 	// リンクくの切断
-	if (preObj_) {
-		preObj_->nextObj_ = nextObj_;
+	if (preObj) {
+		preObj->nextObj = nextObj;
 	}
-	if (nextObj_) {
-		nextObj_->preObj_ = preObj_;
+	if (nextObj) {
+		nextObj->preObj = preObj;
 	}
 
 	// 自身のポインタをnullにして安全にする
-	cell_ = nullptr;
-	preObj_ = nullptr;
-	nextObj_ = nullptr;
+	cell = nullptr;
+	preObj = nullptr;
+	nextObj = nullptr;
 	
 	return true;
 }

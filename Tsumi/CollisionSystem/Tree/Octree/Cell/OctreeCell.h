@@ -18,15 +18,15 @@ public:
 	~OctreeCell() {}
 
 	// オブジェクトを空間に登録する
-	bool Push(OctreeObject* spObject);
+	bool Push(OctreeObject* setObj);
 
 	// オブジェクトが削除された時の処理
-	bool OnRemove(OctreeObject* spObject);
+	bool OnRemove(OctreeObject* reObj);
 
 public:
 
 	// 空間内の最新のオブジェクト
-	
+	OctreeObject* obj = nullptr;
 
 };
 

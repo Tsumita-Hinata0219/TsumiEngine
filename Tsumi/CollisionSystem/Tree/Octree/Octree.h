@@ -3,10 +3,12 @@
 #include "../../Shape/CollisionShape.h"
 #include "Node/OctreeNode.h"
 
-/* クラスはルートノードを持って、シーン全体の空間を管理する */
-class Octree {
+#define ROOT_EDGE_LENGTH 100
 
-public:
+/* クラスはルートノードを持って、シーン全体の空間を管理する */
+//class Octree {
+//
+//public:
 
 //	// コンストラクタ、デストラクタ
 //	Octree() {};
@@ -33,5 +35,5 @@ public:
 //
 //	OctreeNode* root_ = nullptr;
 
-};
+//};
 

@@ -31,9 +31,15 @@ public:
 
 	// シェイプの追加
 	void RegisterCollider(Col::Sphere& sphere) {
-		this->nextID_++;
-		sphere.id = this->nextID_;
-		std::unique_ptr<CollisionShapeSphere> shape = std::make_unique<CollisionShapeSphere>(sphere);
+
+		this->nextID_++; // IDの加算
+		sphere.id = this->nextID_; // IDの設定
+
+		// 新しくシェイプを作成
+		std::unique_ptr<CollisionShapeSphere> shape = 
+			std::make_unique<CollisionShapeSphere>(this, sphere);
+
+		// シェイプコンテナに作ったシェイプを追加
 		this->shapeMap_[sphere.id] = std::move(shape);
 	}
 

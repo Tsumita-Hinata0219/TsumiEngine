@@ -8,8 +8,8 @@ class CollisionShapeSphere : public CollisionShape {
 public:
 
 	// コンストラクタ
-	CollisionShapeSphere() {}
-	CollisionShapeSphere(Col::Sphere setData) : sphere_(setData) {};
+	CollisionShapeSphere(CollisionComponent* comp) : CollisionShape(comp) {}
+	CollisionShapeSphere(CollisionComponent* comp, Col::Sphere setData) : CollisionShape(comp), sphere_(setData) {};
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;

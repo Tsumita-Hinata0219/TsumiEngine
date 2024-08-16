@@ -8,8 +8,8 @@ class CollisionShapeAABB : public CollisionShape {
 public:
 
 	// コンストラクタ
-	CollisionShapeAABB() {}
-	CollisionShapeAABB(Col::AABB setData) : aabb_(setData) {};
+	CollisionShapeAABB(CollisionComponent* comp) : CollisionShape(comp) {}
+	CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData) : CollisionShape(comp), aabb_(setData) {};
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;

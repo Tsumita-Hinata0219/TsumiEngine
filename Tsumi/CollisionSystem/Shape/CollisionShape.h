@@ -43,6 +43,7 @@ namespace Col {
 using ColShapeData = std::variant<Col::Sphere, Col::AABB, Col::OBB, Col::Segment, Col::Capsule>;
 
 
+class CollisionComponent;
 class CollisionShapeSphere;
 class CollisionShapeAABB;
 
@@ -50,6 +51,9 @@ class CollisionShapeAABB;
 class CollisionShape {
 
 public:
+
+	// コンストラクタ
+	CollisionShape(CollisionComponent* comp) : component_(comp) {};
 
 	// 仮想デストラクタ
 	virtual ~CollisionShape() = default;
@@ -77,6 +81,9 @@ public:
 
 
 protected:
+
+	// シェイプを持っているコンポーネント
+	CollisionComponent* component_ = nullptr;
 
 	// どの空間に属しているかの境界ボックス
 	Col::AABB bounding_{};

@@ -221,8 +221,6 @@
     <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Listener\CollisionListener.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
-    <ClCompile Include="Tsumi\CollisionSystem\Bounding\AABB\BoundingAABB.cpp" />
-    <ClCompile Include="Tsumi\CollisionSystem\Bounding\Sphere\BoundingSphere.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Object\OctreeObject.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Node\OctreeNode.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Tree\Octree\Octree.cpp" />
@@ -446,8 +444,6 @@
     <ClInclude Include="Tsumi\CollisionSystem\Listener\CollisionListener.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Detect\CollisionDetect.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />
-    <ClInclude Include="Tsumi\CollisionSystem\Bounding\AABB\BoundingAABB.h" />
-    <ClInclude Include="Tsumi\CollisionSystem\Bounding\Sphere\BoundingSphere.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Object\OctreeObject.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Node\OctreeNode.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Tree\Octree\Octree.h" />

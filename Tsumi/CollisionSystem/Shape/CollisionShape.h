@@ -70,6 +70,9 @@ public:
 	// 境界ボックスからモートン番号を求める
 	void CalcMortonNumber() {
 
+
+		/* ===================================================== */
+
 		// 座標から左上と右下を求める
 		std::pair<Vector2, Vector2> pos;
 		pos.first = { // 左上
@@ -97,6 +100,9 @@ public:
 			Get2DMortonNumber(leftTop.first, leftTop.second),	  // 左上
 			Get2DMortonNumber(rightDown.first, rightDown.second), // 右下
 		};
+
+		/* ===================================================== */  // TODO : 現状2Dなので後で3D用に変える
+
 
 		// 二頂点のXOR
 		int XOR = vertexSpaceID_.first ^ vertexSpaceID_.second;

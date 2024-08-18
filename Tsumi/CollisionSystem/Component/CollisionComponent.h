@@ -39,6 +39,9 @@ public:
 		std::unique_ptr<CollisionShapeSphere> shape = 
 			std::make_unique<CollisionShapeSphere>(this, sphere);
 
+		// Boundingの計算も求めておく
+		shape->CalcBounding();
+
 		// シェイプコンテナに作ったシェイプを追加
 		this->shapeMap_[sphere.id] = std::move(shape);
 	}

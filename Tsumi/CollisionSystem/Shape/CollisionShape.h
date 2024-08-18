@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
+#include "../Tree/Octree/Octree.h"
 #include <variant>
 
 
@@ -66,6 +67,47 @@ public:
 	// 純粋仮想関数 : コライダーの境界ボックスを求める
 	virtual void CalcBounding() = 0;
 
+	// 境界ボックスからモートン番号を求める
+	void CalcMortonNumber() {
+
+		// 座標から左上と右下を求める
+		std::pair<Vector2, Vector2> pos;
+		pos.first = { // 左上
+			bounding_.center.x + bounding_.min.x,
+			bounding_.center.y + bounding_.max.y,
+		};
+		pos.second = { // 右下
+			bounding_.center.x + bounding_.max.x,
+			bounding_.center.y + bounding_.min.y,
+		};
+
+		// 座標と孫空間の一辺で割りintでキャストしたもの
+		float U = (ROOT_EDGE_LENGTH / std::pow(2, 3));
+		std::pair<int, int> leftTop = {
+			static_cast<int>(pos.first.x / U),
+			static_cast<int>(pos.first.y / U),
+		};
+		std::pair<int, int> rightDown = {
+			static_cast<int>(pos.second.x / U),
+			static_cast<int>(pos.second.y / U),
+		};
+
+		// AABBの二頂点の所属空間
+		vertexSpaceID_ = {
+			Get2DMortonNumber(leftTop.first, leftTop.second),	  // 左上
+			Get2DMortonNumber(rightDown.first, rightDown.second), // 右下
+		};
+
+		// 二頂点のXOR
+		int XOR = vertexSpaceID_.first ^ vertexSpaceID_.second;
+
+		// 最上位ビット位置
+		int highestBitPos = findHighestBitPosition(XOR);
+
+		// コライダーの所属空間レベル
+		spaceLevel_ = vertexSpaceID_.first >> highestBitPos;
+	}
+
 
 #pragma region Accessor アクセッサ
 
@@ -85,8 +127,16 @@ protected:
 	// シェイプを持っているコンポーネント
 	CollisionComponent* component_ = nullptr;
 
-	// どの空間に属しているかの境界ボックス
+	// コライダーの境界ボックス
 	Col::AABB bounding_{};
 
+	// どの空間に属しているかのモートン番号
+	uint32_t mortonNumber_ = 0;
+
+	// 空間レベル
+	uint32_t spaceLevel_ = 0;
+
+	// 二頂点の所属空間
+	std::pair<int, int> vertexSpaceID_;
 };
 

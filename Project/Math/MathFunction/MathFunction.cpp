@@ -157,6 +157,17 @@ uint32_t Get2DMortonNumber(uint16_t x, uint16_t y)
 	return (BitSeparate32(x) | (BitSeparate32(y) << 1));
 }
 
+// ビット列から最上位ビットの位置を取得する関数
+uint32_t findHighestBitPosition(int bitmask)
+{
+	int position = 0;
+	while (bitmask != 0) {
+		bitmask >>= 1;
+		++position;
+	}
+	return position;
+}
+
 
 
 

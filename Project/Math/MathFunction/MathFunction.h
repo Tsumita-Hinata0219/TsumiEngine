@@ -53,8 +53,8 @@ std::string FindFirstFileWithExtension(const std::string& directoryPath, const s
 uint32_t BitSeparate32(uint32_t n);
 // モートン番号を算出する関数
 uint32_t Get2DMortonNumber(uint16_t x, uint16_t y);
-
-
+// ビット列から最上位ビットの位置を取得する関数
+uint32_t findHighestBitPosition(int bitmask);
 
 
 /// -------------------------------------------------------------------------
@@ -92,7 +92,6 @@ Vector2 Lerp(const Vector2& start, const Vector2& end, const float t);
 //Vector2 ConvertVector(const Vector3& v, const ViewProjection& view);
 // クランプ
 Vector2 Clamp(const Vector2& value, const Vector2& minValue, const Vector2& maxValue);
-
 
 
 /// -------------------------------------------------------------------------

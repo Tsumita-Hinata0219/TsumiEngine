@@ -39,6 +39,8 @@ void CollisionSystem::CheckCollisions()
                 if (comp1->CheckCollision(*comp2)) {
                     CollisionEvent event(comp1, comp2);
                     ColEventManager::GetInstance()->Dispatch(event);
+
+
                     comp1->GetOwner()->onCollision(comp2->GetOwner());
                     comp2->GetOwner()->onCollision(comp1->GetOwner());
                 }

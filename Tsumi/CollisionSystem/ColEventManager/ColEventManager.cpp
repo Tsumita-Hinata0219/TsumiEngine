@@ -25,3 +25,5 @@ void ColEventManager::Dispatch(const CollisionEvent& event)
 		(*listener)(event);
 	}
 }
+
+

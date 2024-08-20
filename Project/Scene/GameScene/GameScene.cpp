@@ -28,6 +28,7 @@ void GameScene::Initialize()
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	//collisionManager_ = std::make_unique<CollisionManager>();
 	collisionSystem_ = std::make_unique<CollisionSystem>();
+	collisionSystem_->Init();
 
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();

@@ -2,6 +2,13 @@
 #include "../Project/GameObject/IObject/IObject.h"
 
 
+// 初期化処理
+void CollisionSystem::Init()
+{
+    // 八分木ノードクラス
+    node_ = std::make_unique<OctreeNode>(4);
+
+}
 
 // コンポーネント追加
 void CollisionSystem::AAddComponent(CollisionComponent* component)

@@ -5,11 +5,14 @@
 // パラメータ付きコンストラクタ
 OctreeNode::OctreeNode(int maxLevel)
 {
+    maxLevel_ = maxLevel;
     int numNodes = 0;
-    for (int i = 0; i <= maxLevel; ++i) {
-        numNodes += 4 * (1 << (2 * i));  // 4^i 個のノード
+    // ノード数を計算する
+    for (int i = 0; i <= maxLevel_ - 1; ++i) {
+        numNodes += int(std::pow(4, i));  // 4^i 個のノード
     }
-    nodes_.resize(numNodes, -1);  // 初期値として -1 を設定
+    // 線形配列のサイズを設定
+    nodes_.resize(numNodes, 0);  // 初期値として -1 を設定
 }
 
 

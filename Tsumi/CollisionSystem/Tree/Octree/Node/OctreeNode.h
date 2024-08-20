@@ -19,7 +19,7 @@ public:
 	~OctreeNode() = default;
 
 	// パラメータ付きコンストラクタ
-	OctreeNode(int maxLevel);
+	OctreeNode(int depth);
 
 	// データの挿入
 	void Insert(const CollisionShape& shape);
@@ -30,11 +30,10 @@ public:
 
 private:
 
-	// 最大レベル
-	int maxLevel_ = 0;
+	// 空間レベルの深さ
+	int levelDepth_ = 0;
 
 	// 線形配列
 	std::vector<int> nodes_;
-
 };
 

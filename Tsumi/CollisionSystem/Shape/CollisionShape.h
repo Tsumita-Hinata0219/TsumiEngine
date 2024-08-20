@@ -110,8 +110,11 @@ public:
 		// 最上位ビット位置
 		int highestBitPos = findHighestBitPosition(XOR);
 
-		// コライダーの所属空間レベル
-		spaceLevel_ = vertexSpaceID_.first >> highestBitPos;
+		// 空間レベル
+		spaceLevel_ = 3 - highestBitPos / 2;
+
+		// 所属空間
+		mortonNumber_ = vertexSpaceID_.first >> highestBitPos;
 	}
 
 
@@ -136,13 +139,12 @@ protected:
 	// コライダーの境界ボックス
 	Col::AABB bounding_{};
 
-	// どの空間に属しているかのモートン番号
-	uint32_t mortonNumber_ = 0;
-
 	// 空間レベル
 	uint32_t spaceLevel_ = 0;
+
+	// どの空間に属しているかのモートン番号
+	uint32_t mortonNumber_ = 0;
 
 	// 二頂点の所属空間
 	std::pair<int, int> vertexSpaceID_;
 };
-

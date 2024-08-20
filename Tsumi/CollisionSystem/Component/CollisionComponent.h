@@ -25,60 +25,16 @@ public:
 	~CollisionComponent() {};
 
 	// パラメータ付きコンストラクタ
-	CollisionComponent(IObject* setObject) {
-		this->owner_ = setObject;
-	}
+	CollisionComponent(IObject* setObject);
 
 	// シェイプの追加
-	void RegisterCollider(Col::Sphere& sphere) {
-
-		this->nextID_++; // IDの加算
-		sphere.id = this->nextID_; // IDの設定
-
-		// 新しくシェイプを作成
-		std::unique_ptr<CollisionShapeSphere> shape = 
-			std::make_unique<CollisionShapeSphere>(this, sphere);
-
-		// Boundingの計算も求める
-		shape->CalcBounding();
-
-		// コライダーの空間レベルと所属空間を求める
-		shape->CalcSpaceLevel();
-
-		// シェイプコンテナに作ったシェイプを追加
-		this->shapeMap_[sphere.id] = std::move(shape);
-	}
+	void RegisterCollider(Col::Sphere& sphere);
 
 	// シェイプの更新
-	void UpdateShape(const Col::Sphere& sphere) {
-		auto it = this->shapeMap_.find(sphere.id);
-		if (it != this->shapeMap_.end()) {
-			// IDが存在する場合はデータを更新
-			it->second->SetData(sphere);
-			// Boundingの値も更新しておく
-			it->second->CalcBounding();
-			// コライダーの空間レベルと所属空間を求める
-			it->second->CalcSpaceLevel();
-		}
-		else {
-			// IDが存在しない場合はエラー処理
-			Log("Error: Shape with ID :  not found.\n");
-			// 例外を投げる場合
-			throw std::runtime_error("Shape ID not found.");
-		}
-	}
+	void UpdateShape(const Col::Sphere& sphere);
 
 	// コリジョンのチェック
-	bool CheckCollision(const CollisionComponent& other) const {
-		for (const auto& shapeA : shapeMap_) {
-			for (const auto& shapeB : other.shapeMap_) {
-				if (shapeA.second->Intersects(*shapeB.second)) {
-					return true; // コリジョンが検出された
-				}
-			}
-		}
-		return false; // コリジョンなし
-	}
+	bool CheckCollision(const CollisionComponent& other) const;
 
 
 #pragma region Accessor

@@ -68,8 +68,7 @@ public:
 	virtual void CalcBounding() = 0;
 
 	// 境界ボックスからモートン番号を求める
-	void CalcMortonNumber() {
-
+	void CalcSpaceLevel() {
 
 		/* ===================================================== */
 
@@ -111,10 +110,10 @@ public:
 		int highestBitPos = findHighestBitPosition(XOR);
 
 		// 空間レベル
-		spaceLevel_ = 3 - highestBitPos / 2;
+		levelIndex = 3 - highestBitPos / 2;
 
 		// 所属空間
-		mortonNumber_ = vertexSpaceID_.first >> highestBitPos;
+		spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
 	}
 
 
@@ -140,10 +139,10 @@ protected:
 	Col::AABB bounding_{};
 
 	// 空間レベル
-	uint32_t spaceLevel_ = 0;
+	uint32_t levelIndex = 0;
 
 	// どの空間に属しているかのモートン番号
-	uint32_t mortonNumber_ = 0;
+	uint32_t spaceIndex_ = 0;
 
 	// 二頂点の所属空間
 	std::pair<int, int> vertexSpaceID_;

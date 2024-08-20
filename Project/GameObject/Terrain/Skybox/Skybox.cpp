@@ -6,10 +6,10 @@
 void Skybox::Init()
 {
 	// テクスチャの読み込み
-	this->texture_ = TextureManager::LoadTexture("Texture", "airport_4k.dds");
+	this->texture_ = TextureManager::LoadTexture("Texture", "CubeMap.dds");
 
 	// Scale
-	initScale_ = 100.0f;
+	initScale_ = 1000.0f;
 
 	// Transformの初期化処理
 	transform_.Initialize();

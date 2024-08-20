@@ -147,3 +147,4 @@ protected:
 	// 二頂点の所属空間
 	std::pair<int, int> vertexSpaceID_;
 };
+

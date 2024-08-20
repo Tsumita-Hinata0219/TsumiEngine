@@ -152,7 +152,7 @@ uint32_t BitSeparate32(uint32_t n)
 }
 
 // モートン番号を算出する関数
-uint32_t Get2DMortonNumber(uint16_t x, uint16_t y)
+uint32_t Get2DMortonNumber(uint32_t x, uint32_t y)
 {
 	return (BitSeparate32(x) | (BitSeparate32(y) << 1));
 }

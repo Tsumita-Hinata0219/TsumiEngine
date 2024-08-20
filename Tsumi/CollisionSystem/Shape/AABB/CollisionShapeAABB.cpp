@@ -1,6 +1,23 @@
 #include "CollisionShapeAABB.h"
 #include "../Sphere/CollisionShapeSphere.h"
 #include "../../Detect/CollisionDetect.h"
+#include "../../Component/CollisionComponent.h"
+
+
+
+// パラメータ付きコンストラクタ
+CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp)
+{
+    // コンポーネントの設定
+    component_ = comp;
+}
+CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData)
+{
+    // コンポーネントのの設定
+    component_ = comp;
+    // データの設定
+    aabb_ = setData;
+}
 
 
 // 衝突判定処理
@@ -45,4 +62,12 @@ bool CollisionShapeAABB::Intersects(const CollisionShapeAABB& other) const
     else {
         throw std::invalid_argument("This shape is not an AABB");
     }
+}
+
+
+// コライダーの境界ボックスを求める
+void CollisionShapeAABB::CalcBounding()
+{
+    // 境界ボックスに情報を挿入
+    this->bounding_ = this->aabb_;
 }

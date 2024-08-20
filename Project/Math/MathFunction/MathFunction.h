@@ -52,7 +52,7 @@ std::string FindFirstFileWithExtension(const std::string& directoryPath, const s
 // ビット分割関数
 uint32_t BitSeparate32(uint32_t n);
 // モートン番号を算出する関数
-uint32_t Get2DMortonNumber(uint16_t x, uint16_t y);
+uint32_t Get2DMortonNumber(uint32_t x, uint32_t y);
 // ビット列から最上位ビットの位置を取得する関数
 uint32_t findHighestBitPosition(int bitmask);
 

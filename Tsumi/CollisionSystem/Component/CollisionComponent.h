@@ -13,8 +13,6 @@
 // IObjectの前方宣言
 class IObject;
 
-//template <typename T>
-
 /* コリジョンシェイプを保持するクラス */
 class CollisionComponent {
 

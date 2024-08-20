@@ -2,14 +2,23 @@
 
 #include "../CollisionShape.h"
 
+
+// 前方宣言
+class CollisionComponent;
+class CollisionShapeSphere;
+
+
 /* CollisionShape TYPE : AABB */
 class CollisionShapeAABB : public CollisionShape {
 
 public:
 
 	// コンストラクタ
-	CollisionShapeAABB(CollisionComponent* comp) : CollisionShape(comp) {}
-	CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData) : CollisionShape(comp), aabb_(setData) {};
+	CollisionShapeAABB() = default;
+
+	// パラメータ付きコンストラクタ
+	CollisionShapeAABB(CollisionComponent* comp);
+	CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData);
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;
@@ -17,11 +26,7 @@ public:
 	bool Intersects(const CollisionShapeAABB& other) const override;
 
 	// コライダーの境界ボックスを求める
-	void CalcBounding() override {
-
-		// 境界ボックスに情報を挿入
-		this->bounding_ = this->aabb_;
-	}
+	void CalcBounding() override;
 
 
 #pragma region Accessor

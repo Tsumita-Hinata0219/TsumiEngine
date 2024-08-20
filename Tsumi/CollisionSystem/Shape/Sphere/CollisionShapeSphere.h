@@ -2,14 +2,24 @@
 
 #include "../CollisionShape.h"
 
+
+// 前方宣言
+class CollisionComponent;
+class CollisionShapeAABB;
+
+
 /* CollisionShape TYPE : Sphere */
 class CollisionShapeSphere : public CollisionShape {
 
 public:
 
 	// コンストラクタ
-	CollisionShapeSphere(CollisionComponent* comp) : CollisionShape(comp) {}
-	CollisionShapeSphere(CollisionComponent* comp, Col::Sphere setData) : CollisionShape(comp), sphere_(setData) {};
+	CollisionShapeSphere() = default;
+
+	// パラメータ付きコンストラクタ
+	CollisionShapeSphere(CollisionComponent* comp);
+	CollisionShapeSphere(CollisionComponent* comp, Col::Sphere setData);
+
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;
@@ -17,23 +27,7 @@ public:
 	bool Intersects(const CollisionShapeAABB& other) const override;
 
 	// コライダーの境界ボックスを求める
-	void CalcBounding() override {
-
-		// Col::AABBの各要素を求める
-		Vector3 center = this->sphere_.center;
-		float rad = this->sphere_.radius;
-		Vector3 min = this->sphere_.center + Vector3(rad, rad, rad);
-		Vector3 max = this->sphere_.center - Vector3(rad, rad, rad);
-		int id = this->sphere_.id;
-		
-		// 境界ボックスに情報を挿入
-		this->bounding_ = {
-			center,
-			min,
-			max,
-			id,
-		};
-	}
+	void CalcBounding() override;
 
 
 #pragma region Accessor

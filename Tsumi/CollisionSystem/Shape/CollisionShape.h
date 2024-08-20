@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
-#include "../Tree/Octree/Octree.h"
 #include <variant>
 
 
@@ -40,21 +39,21 @@ namespace Col {
 	};
 }
 
+
 // 異なる型を扱うためのVariant型
 using ColShapeData = std::variant<Col::Sphere, Col::AABB, Col::OBB, Col::Segment, Col::Capsule>;
 
 
+// 前方宣言
 class CollisionComponent;
 class CollisionShapeSphere;
 class CollisionShapeAABB;
+
 
 /* Shapeの抽象基底クラス */
 class CollisionShape {
 
 public:
-
-	// コンストラクタ
-	CollisionShape(CollisionComponent* comp) : component_(comp) {};
 
 	// 仮想デストラクタ
 	virtual ~CollisionShape() = default;
@@ -67,54 +66,8 @@ public:
 	// 純粋仮想関数 : コライダーの境界ボックスを求める
 	virtual void CalcBounding() = 0;
 
-	// 境界ボックスからモートン番号を求める
-	void CalcSpaceLevel() {
-
-		/* ===================================================== */
-
-		// 座標から左上と右下を求める
-		std::pair<Vector2, Vector2> pos;
-		pos.first = { // 左上
-			bounding_.center.x + bounding_.min.x,
-			bounding_.center.y + bounding_.max.y,
-		};
-		pos.second = { // 右下
-			bounding_.center.x + bounding_.max.x,
-			bounding_.center.y + bounding_.min.y,
-		};
-
-		// 座標と孫空間の一辺で割りintでキャストしたもの
-		float U = (ROOT_EDGE_LENGTH / std::pow(2, 3));
-		std::pair<int, int> leftTop = {
-			static_cast<int>(pos.first.x / U),
-			static_cast<int>(pos.first.y / U),
-		};
-		std::pair<int, int> rightDown = {
-			static_cast<int>(pos.second.x / U),
-			static_cast<int>(pos.second.y / U),
-		};
-
-		// AABBの二頂点の所属空間
-		vertexSpaceID_ = {
-			Get2DMortonNumber(leftTop.first, leftTop.second),	  // 左上
-			Get2DMortonNumber(rightDown.first, rightDown.second), // 右下
-		};
-
-		/* ===================================================== */  // TODO : 現状2Dなので後で3D用に変える
-
-
-		// 二頂点のXOR
-		int XOR = vertexSpaceID_.first ^ vertexSpaceID_.second;
-
-		// 最上位ビット位置
-		int highestBitPos = findHighestBitPosition(XOR);
-
-		// 空間レベル
-		levelIndex = 3 - highestBitPos / 2;
-
-		// 所属空間
-		spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
-	}
+	// 境界ボックスから空間レベルと所属空間を求める
+	void CalcSpaceLevel();
 
 
 #pragma region Accessor アクセッサ

@@ -9,6 +9,7 @@
 
 // 前方宣言
 class OctreeCell;
+class CollisionShape;
 
 
 /* 八分木に登録するオブジェクトの情報を保持するクラス */

@@ -5,9 +5,6 @@
 // 初期化処理
 void PlayerUI::Init()
 {
-	size_t Usize = EnumSize<U>::value;
-	Usize;
-
 	// 配列のresize
 	ui_.resize(EnumSize<PlayerUIType>::value);
 
@@ -18,12 +15,23 @@ void PlayerUI::Init()
 		ui_[i].transfrom.Initialize();
 	}
 
-	// テクスチャのサイズ変更
-	ui_[int(PlayerUIType::Shooting)].sprite->SetSize({ 256.0f, 128.0f });
+	// テクスチャのサイズ設定
+	ui_[int(PlayerUIType::Shooting)].sprite->SetSize({ 192.0f, 96.0f });
+	ui_[int(PlayerUIType::Moving)].sprite->SetSize({ 192.0f, 96.0f });
+	ui_[int(PlayerUIType::Camera)].sprite->SetSize({ 192.0f, 96.0f });
+
+	// 座標の設定
+	ui_[int(PlayerUIType::Shooting)].transfrom.srt.translate = { 0.0f, 0.0f, 0.0f };
+	ui_[int(PlayerUIType::Moving)].transfrom.srt.translate = { 0.0f, 96.0f, 0.0f };
+	ui_[int(PlayerUIType::Camera)].transfrom.srt.translate = { 0.0f, 192.0f, 0.0f };
 
 	// テクスチャの読み込み
 	ui_[int(PlayerUIType::Shooting)].texture =
 		TextureManager::LoadTexture("Texture/Game/Operation_UI", "Player_Shot_UI.png");
+	ui_[int(PlayerUIType::Moving)].texture =
+		TextureManager::LoadTexture("Texture/Game/Operation_UI", "Player_Move_UI.png");
+	ui_[int(PlayerUIType::Camera)].texture =
+		TextureManager::LoadTexture("Texture/Game/Operation_UI", "Player_Camera_UI.png");
 }
 
 
@@ -41,6 +49,8 @@ void PlayerUI::Draw2DFront() // 前景
 {
 	// Shooting
 	DrawUI(int(PlayerUIType::Shooting));
+	DrawUI(int(PlayerUIType::Moving));
+	DrawUI(int(PlayerUIType::Camera));
 }
 void PlayerUI::Draw2DBack() // 背景
 {

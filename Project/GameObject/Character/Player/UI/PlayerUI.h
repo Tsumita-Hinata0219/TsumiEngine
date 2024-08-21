@@ -10,6 +10,8 @@
 // UIの種類
 enum class PlayerUIType {
 	Shooting,
+	Moving,
+	Camera,
 	Count,
 };
 // UIの描画に必要なもの
@@ -18,11 +20,7 @@ struct UIProperty {
 	WorldTransform transfrom;
 	uint32_t texture = 0;
 };
-enum class U {
-	shot,
-	hp,
-	Count
-};
+
 
 
 /* プレイヤー関連のUI */

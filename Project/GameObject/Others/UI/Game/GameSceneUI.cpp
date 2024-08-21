@@ -16,14 +16,14 @@ void GameSceneUI::Init()
 	}
 
 	// テクスチャのサイズ設定
-
+	ui_[int(GameSceneUIType::ClearTask)].sprite->SetSize({ 480.0f, 96.0f });
 
 	// 座標の設定
-
+	ui_[int(GameSceneUIType::ClearTask)].transfrom.srt.translate = { 0.0f, 0.0f, 0.0f };
 
 	// テクスチャの読み込み
-
-
+	ui_[int(GameSceneUIType::ClearTask)].texture =
+		TextureManager::LoadTexture("Texture/Game/GameSceneUI", "GameClearTask.png");
 }
 
 

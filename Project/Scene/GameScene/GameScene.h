@@ -21,6 +21,8 @@
 #include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
 #include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
+#include "../../../Project/GameObject/Others/UI/Game/GameSceneUI.h"
+
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
@@ -81,6 +83,9 @@ private:
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
+
+	// GameSceneUI
+	std::unique_ptr<GameSceneUI> gameSceneUI_;
 
 	// Skydome
 	std::unique_ptr<Skydome> skydome_;

@@ -8,6 +8,8 @@
 
 #include "Bullet/PlayerBullet.h"
 
+#include "UI/PlayerUI.h"
+
 
 /* Playerクラス */
 class Player : public IObject {
@@ -90,6 +92,9 @@ private: // メンバ変数
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 
+	// UI
+	std::unique_ptr<PlayerUI> ui_;
+
 	// カメラ本体
 	CameraResource camera_{};
 
@@ -137,5 +142,6 @@ private: // メンバ変数
 
 	// キルカウント
 	uint32_t killCount_ = 0;
+
 };
 

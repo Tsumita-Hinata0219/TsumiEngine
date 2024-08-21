@@ -10,7 +10,7 @@ void FadeManager::Initialize(FunctionFade func)
 
 	// スプライトの初期化
 	FadeManager::GetInstance()->sprite_ = make_unique<Sprite>();
-	FadeManager::GetInstance()->sprite_->Initialize(WinApp::WindowSize());
+	FadeManager::GetInstance()->sprite_->Init(WinApp::WindowSize());
 
 	// スプライトトランスフォームの初期化
 	FadeManager::GetInstance()->wt_.Initialize();

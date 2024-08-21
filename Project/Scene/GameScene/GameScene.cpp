@@ -120,7 +120,8 @@ void GameScene::Update(GameManager* state)
 /// </summary>
 void GameScene::BackSpriteDraw()
 {
-
+	/* ----- Player プレイヤー ----- */
+	player_->Draw2DBack();
 }
 
 
@@ -158,6 +159,9 @@ void GameScene::ModelDraw()
 void GameScene::FrontSpriteDraw()
 {
 	absentEffect_->Draw();
+
+	/* ----- Player プレイヤー ----- */
+	player_->Draw2DFront();
 }
 
 

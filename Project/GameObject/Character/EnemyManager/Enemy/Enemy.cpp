@@ -21,11 +21,11 @@ void Enemy::Init()
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
 	stateVector_.resize(EnumSize<EnemyState>::value);
-	stateVector_[EnemyState::SPAWN] = std::make_unique<IEnemySpawnState>();
-	stateVector_[EnemyState::APPROACH] = std::make_unique<IEnemyApproachState>();
-	stateVector_[EnemyState::DEATH] = std::make_unique<IEnemyDeathState>();
+	stateVector_[int(EnemyState::SPAWN)] = std::make_unique<IEnemySpawnState>();
+	stateVector_[int(EnemyState::APPROACH)] = std::make_unique<IEnemyApproachState>();
+	stateVector_[int(EnemyState::DEATH)] = std::make_unique<IEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
-	stateNo_ = EnemyState::SPAWN;
+	stateNo_ = int(EnemyState::SPAWN);
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Init(this);
 
@@ -46,7 +46,7 @@ void Enemy::Update()
 	trans_.UpdateMatrix();
 
 	// アプローチ状態の時のみ入る処理
-	if (stateNo_ == EnemyState::APPROACH) {
+	if (stateNo_ == int(EnemyState::APPROACH)) {
 
 		// 戦闘状態の切り替え処理
 		ToggleCombatState();
@@ -110,10 +110,10 @@ void Enemy::OnCollisionWithPlayer()
 void Enemy::OnCollisionWithPlayerBullet()
 {
 	// スポーン&デス時には通らない
-	if (stateNo_ != EnemyState::SPAWN && stateNo_ != EnemyState::DEATH) {
+	if (stateNo_ != int(EnemyState::SPAWN) && stateNo_ != int(EnemyState::DEATH)) {
 
 		// デスステートに移行
-		this->ChangeState(EnemyState::DEATH);
+		this->ChangeState(int(EnemyState::DEATH));
 
 		// プレイヤーのキルカウントを加算する
 		player_->AddKillCount();

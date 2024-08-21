@@ -30,7 +30,7 @@ void ResultScene::Initialize()
 	/* ----- Result リザルト ----- */
 	resultTexHD_ = TextureManager::LoadTexture("Texture/Result", "ResultSceneBG.png");
 	resultSp_ = std::make_unique<Sprite>();
-	resultSp_->Initialize({ 1280.0f, 720.0f });
+	resultSp_->Init({ 1280.0f, 720.0f });
 	resultWt_.Initialize();
 
 	/* ----- FadeManager フェードマネージャー ----- */

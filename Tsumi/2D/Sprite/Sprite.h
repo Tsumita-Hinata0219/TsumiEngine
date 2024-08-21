@@ -37,7 +37,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Initialize(Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
+	void Init(Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
 
 
 	/// <summary>

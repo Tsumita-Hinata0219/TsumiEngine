@@ -5,7 +5,7 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void Sprite::Initialize(Vector2 size, Vector4 color) {
+void Sprite::Init(Vector2 size, Vector4 color) {
 
 	// 座標の設定
 	worldTransform_.srt.translate = Vector3::zero;

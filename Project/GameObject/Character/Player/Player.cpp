@@ -8,6 +8,10 @@ void Player::Init()
 	// Inputクラス
 	input_ = Input::GetInstance();
 
+	// UI
+	ui_ = std::make_unique<PlayerUI>();
+	ui_->Init();
+
 	// カメラ
 	cameraManager_ = CameraManager::GetInstance();
 	camera_.Init();
@@ -36,6 +40,9 @@ void Player::Init()
 // 更新処理
 void Player::Update()
 {
+	// UI
+	ui_->Update();
+
 	// カメラの更新処理
 	camera_.Update();
 
@@ -104,8 +111,16 @@ void Player::Draw3D()
 		bullet->Draw3D();
 	}
 }
-void Player::Draw2DBack() {}
-void Player::Draw2DFront() {}
+void Player::Draw2DBack() 
+{
+	// UI Back
+	ui_->Draw2DBack();
+}
+void Player::Draw2DFront() 
+{
+	// UI Front
+	ui_->Draw2DFront();
+}
 
 
 // 衝突自コールバック関数

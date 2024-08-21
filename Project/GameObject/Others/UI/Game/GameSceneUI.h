@@ -8,24 +8,20 @@
 
 
 // UIの種類
-enum class PlayerUIType {
-	Shooting,
-	Moving,
-	Camera,
+enum class GameSceneUIType {
+	ClearTask,
 	Count,
 };
 
 
-
-
-/* プレイヤー関連のUI */
-class PlayerUI {
+/* GameScene内のUI */
+class GameSceneUI {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	PlayerUI() = default;
-	~PlayerUI() = default;
+	GameSceneUI() = default;
+	~GameSceneUI() = default;
 
 	// 初期化処理、更新処理、描画処理
 	void Init();

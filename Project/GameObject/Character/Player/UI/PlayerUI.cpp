@@ -21,9 +21,9 @@ void PlayerUI::Init()
 	ui_[int(PlayerUIType::Camera)].sprite->SetSize({ 192.0f, 96.0f });
 
 	// 座標の設定
-	ui_[int(PlayerUIType::Shooting)].transfrom.srt.translate = { 0.0f, 0.0f, 0.0f };
-	ui_[int(PlayerUIType::Moving)].transfrom.srt.translate = { 0.0f, 96.0f, 0.0f };
-	ui_[int(PlayerUIType::Camera)].transfrom.srt.translate = { 0.0f, 192.0f, 0.0f };
+	ui_[int(PlayerUIType::Shooting)].transfrom.srt.translate = { 0.0f, 96.0f, 0.0f };
+	ui_[int(PlayerUIType::Moving)].transfrom.srt.translate = { 0.0f, 192.0f, 0.0f };
+	ui_[int(PlayerUIType::Camera)].transfrom.srt.translate = { 0.0f, 288.0f, 0.0f };
 
 	// テクスチャの読み込み
 	ui_[int(PlayerUIType::Shooting)].texture =

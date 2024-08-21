@@ -30,7 +30,7 @@ void TitleScene::Initialize()
 	/* ----- Title タイトル ----- */
 	titleTexHD_ = TextureManager::LoadTexture("Texture/Title", "TitleSceneBG.png");
 	titleSp_ = std::make_unique<Sprite>();
-	titleSp_->Initialize({ 1280.0f, 720.0f });
+	titleSp_->Init({ 1280.0f, 720.0f });
 	titleWt_.Initialize();
 
 	/* ----- FadeManager フェードマネージャー ----- */

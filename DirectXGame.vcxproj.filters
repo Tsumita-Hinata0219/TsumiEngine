@@ -220,6 +220,7 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\UI\PlayerUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -445,6 +446,7 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\UI\PlayerUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

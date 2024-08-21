@@ -23,7 +23,7 @@ void IEnemySpawnState::Update()
 	if (OutElasticScale()) {
 
 		// trueでチェンジステート
-		enemy_->ChangeState(EnemyState::APPROACH);
+		enemy_->ChangeState(int(EnemyState::APPROACH));
 	}
 
 	// SRTの再設定

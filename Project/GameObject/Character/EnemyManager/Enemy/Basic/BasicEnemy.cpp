@@ -45,7 +45,7 @@ void BasicEnemy::Update()
 	FuncStatePattern();
 
 	// アプローチ状態の時のみ入る処理
-	if (stateNo_ == EnemyState::APPROACH) {
+	if (stateNo_ == int(EnemyState::APPROACH)) {
 
 		// 戦闘状態の切り替え処理
 		ToggleCombatState();

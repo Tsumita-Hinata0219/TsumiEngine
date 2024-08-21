@@ -2,7 +2,7 @@
 
 
 // ステートの種類
-enum EnemyState {
+enum class EnemyState {
 	SPAWN,
 	APPROACH,
 	DEATH,

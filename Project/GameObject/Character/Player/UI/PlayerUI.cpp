@@ -47,10 +47,9 @@ void PlayerUI::Update()
 // 描画処理
 void PlayerUI::Draw2DFront() // 前景
 {
-	// Shooting
-	DrawUI(int(PlayerUIType::Shooting));
-	DrawUI(int(PlayerUIType::Moving));
-	DrawUI(int(PlayerUIType::Camera));
+	for (int i = 0; i < ui_.size(); ++i) {
+		DrawUI(i);
+	}
 }
 void PlayerUI::Draw2DBack() // 背景
 {

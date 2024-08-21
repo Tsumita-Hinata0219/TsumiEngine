@@ -75,9 +75,6 @@ private:
 
 private:
 
-	// JsonFileManager
-	JsonManager* jsonManager_ = nullptr;
-
 	// CollisionManager
 	std::unique_ptr<CollisionManager> collisionManager_;
 

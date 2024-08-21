@@ -20,10 +20,9 @@ GameScene::~GameScene() {}
 void GameScene::Initialize()
 {
 	/* ----- JsonManager Jsonマネージャー ----- */
-	jsonManager_ = JsonManager::GetInstance();
-	jsonManager_->Initialize();
-	jsonManager_->LoadSceneFile("Json", "kari.json");
-	jsonManager_->LoadSceneFile("Json", "nise.json");
+	JsonManager::GetInstance()->Initialize();
+	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
+	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	collisionManager_ = std::make_unique<CollisionManager>();
@@ -33,8 +32,8 @@ void GameScene::Initialize()
 	absentEffect_->Initialize();
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
-	//gameSceneUI_ = std::make_unique<GameSceneUI>();
-	//gameSceneUI_->Init();
+	gameSceneUI_ = std::make_unique<GameSceneUI>();
+	gameSceneUI_->Init();
 
 	/* ----- Skydome 天球 ----- */
 	skydome_ = std::make_unique<Skydome>();
@@ -75,7 +74,7 @@ void GameScene::Update(GameManager* state)
 	state;
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
-	//gameSceneUI_->Update();
+	gameSceneUI_->Update();
 
 	/* ----- Skydome 天球 ----- */
 	skydome_->Update();
@@ -127,7 +126,7 @@ void GameScene::Update(GameManager* state)
 void GameScene::BackSpriteDraw()
 {
 	/* ----- GameSceneUI ゲームシーンUI----- */
-	//gameSceneUI_->Draw2DBack();
+	gameSceneUI_->Draw2DBack();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DBack();
@@ -170,7 +169,7 @@ void GameScene::FrontSpriteDraw()
 	absentEffect_->Draw();
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
-	//gameSceneUI_->Draw2DFront();
+	gameSceneUI_->Draw2DFront();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront();

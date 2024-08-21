@@ -94,7 +94,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- Collision 衝突判定 ----- */
 	CheckAllCollision();
 
-
 	/* ----- SceneChange シーンチェンジ ----- */
 	// プレイヤーのキルカウントが一定数を超えたらシーンチェンジ
 	if (player_->GetKillCount() >= 15) { // <- ここのマジックナンバー後で修正する

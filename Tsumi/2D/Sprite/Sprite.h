@@ -19,6 +19,7 @@ enum class SpriteOrigin {
 };
 
 
+
 class Sprite {
 
 public:
@@ -102,7 +103,14 @@ private:
 	// 
 	SpriteOrigin origin_ = SpriteOrigin::TopLeft;
 
-	uint32_t srv_;
+	uint32_t srv_ = 0;
 };
 
 
+
+// UIの描画に必要なもの
+struct SpriteProperty {
+	std::unique_ptr<Sprite> sprite;
+	WorldTransform transfrom;
+	uint32_t texture = 0;
+};

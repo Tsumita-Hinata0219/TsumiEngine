@@ -35,13 +35,9 @@ void GameScene::Initialize()
 	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameSceneUI_->Init();
 
-	/* ----- Skydome 天球 ----- */
-	skydome_ = std::make_unique<Skydome>();
-	skydome_->Init();
-
-	/* ----- Ground 床 ----- */
-	ground_ = std::make_unique<Ground>();
-	ground_->Init();
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	skybox_->Init();
 
 	/* ----- Wall 壁 ----- */
 	wall_ = std::make_unique<Wall>();
@@ -50,10 +46,6 @@ void GameScene::Initialize()
 	/* ----- Floor 床 ----- */
 	floor_ = std::make_unique<Floor>();
 	floor_->Init();
-
-	/* ----- Building1 建物1 ----- */
-	building1_ = std::make_unique<Building1>();
-	building1_->Init();
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
@@ -71,25 +63,17 @@ void GameScene::Initialize()
 /// </summary>
 void GameScene::Update(GameManager* state)
 {
-	state;
-
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
-	/* ----- Skydome 天球 ----- */
-	skydome_->Update();
-
-	/* ----- Ground 床 ----- */
-	ground_->Update();
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Update();
 
 	/* ----- Wall 壁 ----- */
 	wall_->Update();
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();
-
-	/* ----- Building1 建物1 ----- */
-	building1_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -138,20 +122,14 @@ void GameScene::BackSpriteDraw()
 /// </summary>
 void GameScene::ModelDraw()
 {
-	/* ----- Skydome 天球 ----- */
-	//skydome_->Draw3D();
-
-	/* ----- Ground 床 ----- */
-	//ground_->Draw3D();
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Draw();
 
 	/* ----- Wall 壁 ----- */
 	wall_->Draw3D();
 
 	/* ----- Floor 床 ----- */
 	floor_->Draw3D();
-
-	/* ----- Building1 建物1 ----- */
-	//building1_->Draw3D();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw3D();

@@ -84,11 +84,8 @@ private:
 	// GameSceneUI
 	std::unique_ptr<GameSceneUI> gameSceneUI_;
 
-	// Skydome
-	std::unique_ptr<Skydome> skydome_;
-
-	// Ground
-	std::unique_ptr<Ground> ground_;
+	// Skybox
+	std::unique_ptr<Skybox> skybox_;
 
 	// Wall
 	std::unique_ptr<Wall> wall_;
@@ -96,16 +93,10 @@ private:
 	// Floor
 	std::unique_ptr<Floor> floor_;
 
-	// Building1
-	std::unique_ptr<Building1> building1_;
-
 	// Player
 	std::unique_ptr<Player> player_;
 
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
-
-	// Enemy
-	std::unique_ptr<Enemy> enemy_;
 };
 

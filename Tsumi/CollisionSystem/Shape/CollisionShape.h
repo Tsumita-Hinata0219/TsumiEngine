@@ -107,5 +107,7 @@ protected:
 
 	// どの空間に属しているかのモートン番号
 	uint32_t spaceIndex_ = 0;
+
+	uint8_t i = 0;
 };
 

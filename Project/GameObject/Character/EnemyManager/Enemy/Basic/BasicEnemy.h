@@ -30,9 +30,11 @@ public:
 	void Draw2DFront() override;
 	void Draw2DBack() override;
 
+	// 衝突時コールバック関数
+	void OnCollision() override;
+
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = to_underlying(state); }
-
 
 #pragma region Accessor アクセッサ
 
@@ -117,7 +119,7 @@ private:
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 0.0f;
+	float combatTriggerDistance_ = 40.0f;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;

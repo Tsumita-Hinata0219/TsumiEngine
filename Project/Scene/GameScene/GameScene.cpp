@@ -172,7 +172,7 @@ void GameScene::CheckAllCollision()
 		for (auto& enemy : enemyManager_->GetEnemys()) {
 			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
 				bullet->OnCollisionWithEnemy();
-				//enemy->OnCollisionWithPlayerBullet();
+				enemy->OnCollision();
 			}
 		}
 	}

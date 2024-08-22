@@ -48,6 +48,9 @@ void StaticEnemy::Update()
 		}
 	);
 
+	// ColliderのSRTの設定
+	collider_->SetSrt(trans_.srt);
+
 #ifdef _DEBUG
 
 #endif // _DEBUG
@@ -67,6 +70,14 @@ void StaticEnemy::Draw3D()
 }
 void StaticEnemy::Draw2DFront() {}
 void StaticEnemy::Draw2DBack() {}
+
+
+// 衝突時コールバック関数
+void StaticEnemy::OnCollision()
+{
+	isDead_ = true;
+	player_->AddKillCount();
+}
 
 
 // 射撃の処理

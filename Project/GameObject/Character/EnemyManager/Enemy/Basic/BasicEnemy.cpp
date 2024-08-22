@@ -101,6 +101,14 @@ void BasicEnemy::Draw2DFront() {}
 void BasicEnemy::Draw2DBack() {}
 
 
+// 衝突時コールバック関数
+void BasicEnemy::OnCollision()
+{
+	isDead_ = true;
+	player_->AddKillCount();
+}
+
+
 // 衝突自コールバック関数
 void BasicEnemy::OnCollisionWithPlayer()
 {

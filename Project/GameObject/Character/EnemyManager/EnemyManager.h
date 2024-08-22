@@ -31,7 +31,6 @@ public: // メンバ関数
 	void Draw3D();
 
 	// 新しいEnemyを追加する
-	void AddNewEnemy();
 	void AddBasicEnemy();
 	void AddStaticEnemy();
 
@@ -41,8 +40,6 @@ public: // メンバ関数
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
 	// EnemyListの取得
-	std::list<std::shared_ptr<Enemy>>& GetEnemyList() { return this->enemyList_; }
-
 	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
 
 #pragma endregion 
@@ -51,7 +48,6 @@ public: // メンバ関数
 private:
 
 	// 新しいEnemyを生成する
-	void CreateNewEnemy();
 	void CreateBasicEnemy();
 	void CreateStaticEnemy();
 
@@ -71,7 +67,6 @@ private: // メンバ変数
 	Transform transform_{};
 
 	// EnemyのLIst配列
-	std::list<std::shared_ptr<Enemy>> enemyList_;
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
 

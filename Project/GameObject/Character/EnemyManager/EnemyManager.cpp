@@ -24,13 +24,12 @@ void EnemyManager::Init()
 	};
 
 	// エネミーの最低数の設定
-	enemyMinInstance_ = 5;
+	enemyMinInstance_ = 7;
 
 	// エネミーのカウントチェックタイマーの設定。4秒
 	enemyCountCheckTime_.Start(0.0f, 240.0f);
 
-
-
+	// 湧きポイントのフラッグ
 	spawn_.resize(3);
 	trans_.resize(3);
 
@@ -43,6 +42,12 @@ void EnemyManager::Init()
 	trans_[2].srt.translate.x = 30.0f;
 
 	scope_ = { 0.0f, 2.5f };
+
+	// 最初に何体か湧かせておく
+	for (int i = 0; i < 3; ++i) {
+		AddBasicEnemy();
+		AddStaticEnemy();
+	}
 }
 
 
@@ -50,15 +55,12 @@ void EnemyManager::Init()
 void EnemyManager::Update()
 {
 	// EnemyListの更新処理
-	for (std::shared_ptr<Enemy> enemy : enemyList_) {
-		enemy->Update();
-	}
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
 	}
 
 	// 死亡フラグが立っていたら削除
-	enemyList_.remove_if([](std::shared_ptr<Enemy> enemy) {
+	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
 		if (enemy->IsDead()) {
 			enemy.reset();
 			return true;
@@ -66,16 +68,9 @@ void EnemyManager::Update()
 		return false;
 		}
 	);
-	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
-		if (enemy->IsDead()) {
-			return true;
-		}
-		return false;
-		}
-	);
 
 	// エネミーカウントチェック
-	//EnemyCountCheck();
+	EnemyCountCheck();
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("EnemyManager")) {
@@ -86,16 +81,12 @@ void EnemyManager::Update()
 		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
 
 		ImGui::Text("");
-		if (ImGui::Button("AddEnemy")) {
-			AddNewEnemy();
-		}
 		if (ImGui::Button("AddBasicEnemy")) {
 			AddBasicEnemy();
 		}
 		if (ImGui::Button("AddStaticnemy")) {
 			AddStaticEnemy();
 		}
-		ImGui::Text("EnemyInstance = %d", int(enemyList_.size()));
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
 		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
 
@@ -116,9 +107,6 @@ void EnemyManager::Draw3D()
 	}
 
 	// EnemyListの描画
-	for (std::shared_ptr<Enemy> enemy : enemyList_) {
-		enemy->Draw3D();
-	}
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Draw3D();
 	}
@@ -126,10 +114,6 @@ void EnemyManager::Draw3D()
 
 
 // 新しいEnemyを追加する
-void EnemyManager::AddNewEnemy()
-{
-	CreateNewEnemy(); // 新しいEnemyを生成する
-}
 void EnemyManager::AddBasicEnemy()
 {
 	CreateBasicEnemy(); // 新しいEnemyを生成する
@@ -141,25 +125,6 @@ void EnemyManager::AddStaticEnemy()
 
 
 // 新しいEnemyを生成する
-void EnemyManager::CreateNewEnemy()
-{
-	// 新しいEnemyのインスタンス
-	std::shared_ptr<Enemy> newEnemy = std::make_unique<Enemy>();
-
-	int index = int(RandomGenerator::getRandom(scope_));
-	
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos = 
-		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
-
-	// newEnemyの初期化
-	newEnemy->Init();
-	newEnemy->SetPlayer(player_);
-	newEnemy->SetPosition(initPos);
-
-	// リストに追加
-	enemyList_.push_back(newEnemy);
-}
 void EnemyManager::CreateBasicEnemy()
 {
 	// 新しいEnemyのインスタンス
@@ -210,14 +175,14 @@ void EnemyManager::EnemyCountCheck()
 	if (enemyCountCheckTime_.IsFinish()) {
 
 		// エネミーが一定数以下なら新しく湧くようにする
-		if (enemyMinInstance_ >= int(enemyList_.size())) {
+		if (enemyMinInstance_ >= int(enemys_.size())) {
 
 			// 最低数との差分
-			int shortageCount = enemyMinInstance_ - int(enemyList_.size());
+			int shortageCount = enemyMinInstance_ - int(enemys_.size());
 
 			// 足りない分、新しいEnemyを生成する
 			for (int i = 0; i < shortageCount; ++i) {
-				CreateNewEnemy();
+				CreateBasicEnemy();
 			}
 		}
 	}

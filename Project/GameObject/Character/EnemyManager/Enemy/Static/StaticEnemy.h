@@ -24,6 +24,8 @@ public:
 	void Draw2DFront() override;
 	void Draw2DBack() override;
 
+	// 衝突時コールバック関数
+	void OnCollision() override;
 
 
 #pragma region Accessor アクセッサ

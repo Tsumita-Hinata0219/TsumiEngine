@@ -26,6 +26,9 @@ public:
 	// 仮想デストラクタ
 	virtual ~IEnemy() = default;
 
+	// 衝突時コールバック関数
+	virtual void OnCollision() = 0;
+
 
 
 #pragma region Accessor アクセッサ
@@ -39,7 +42,6 @@ public:
 
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
-
 
 
 	// 座標

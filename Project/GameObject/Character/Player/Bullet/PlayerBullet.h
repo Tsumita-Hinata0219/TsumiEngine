@@ -6,6 +6,9 @@
 #include "../../../GameObject.h"
 
 
+class Player;
+
+
 /* PlayerBulletクラス */
 class PlayerBullet : public IObject {
 
@@ -23,6 +26,9 @@ public: // メンバ関数
 	void Draw2DBack() override;
 
 #pragma region Accessor アクセッサ
+
+	// プレイヤー
+	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
 	// 座標
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
@@ -69,6 +75,9 @@ private:
 
 
 private: // メンバ変数
+
+	// プレイヤー
+	Player* player_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_;

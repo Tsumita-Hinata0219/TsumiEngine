@@ -1,5 +1,5 @@
 #include "PlayerBullet.h"
-
+#include "../Player.h"
 
 
 // 初期化処理

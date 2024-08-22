@@ -237,6 +237,7 @@ void Player::CreateNewBullet()
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);
 	newBullet->SetRotationFromVelocity();
+	newBullet->SetPlayer(this);
 
 	// リストに追加
 	bulletList_.push_back(newBullet);

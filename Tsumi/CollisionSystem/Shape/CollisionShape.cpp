@@ -45,7 +45,7 @@ void CollisionShape::CalcSpaceLevel()
 	int highestBitPos = findHighestBitPosition(XOR);
 
 	// 空間レベル
-	levelIndex = 3 - highestBitPos / 2;
+	levelIndex_ = 3 - highestBitPos / 2;
 
 	// 所属空間
 	spaceIndex_ = vertexSpaceID_.first >> highestBitPos;

@@ -77,8 +77,16 @@ public:
 	virtual void SetData(const ColShapeData& data) = 0;
 
 	// Bounding
-	Col::AABB GetBounding() const { this->bounding_; }
+	Col::AABB GetBounding() const { return this->bounding_; }
 	void SetBounding(const Col::AABB& setData) { this->bounding_ = setData; }
+
+	// 空間レベル
+	uint32_t GetLevelINdex() const { return this->levelIndex_; }
+	void SetLevelIndex(uint32_t setIndex) { this->levelIndex_ = setIndex; }
+
+	// 所属空間
+	uint32_t GetSpaceIndex() const { return this->spaceIndex_; }
+	void SetSpaceIndex(uint32_t setIndex) { this->spaceIndex_ = setIndex; }
 
 #pragma endregion 
 
@@ -91,13 +99,13 @@ protected:
 	// コライダーの境界ボックス
 	Col::AABB bounding_{};
 
+	// 二頂点の所属空間
+	std::pair<int, int> vertexSpaceID_;
+
 	// 空間レベル
-	uint32_t levelIndex = 0;
+	uint32_t levelIndex_ = 0;
 
 	// どの空間に属しているかのモートン番号
 	uint32_t spaceIndex_ = 0;
-
-	// 二頂点の所属空間
-	std::pair<int, int> vertexSpaceID_;
 };
 

@@ -22,10 +22,7 @@ public:
 	OctreeNode(int depth);
 
 	// データの挿入
-	void Insert(const CollisionShape& shape);
-
-	// データのクリエ
-	void Query();
+	void Insert(const std::shared_ptr<CollisionShape>& shape);
 
 
 private:
@@ -43,6 +40,6 @@ private:
 	int levelDepth_ = 0;
 
 	// 線形配列
-	std::vector <std::list<CollisionShape*>> nodes_;
+	std::vector<std::list<std::shared_ptr<CollisionShape>>> nodes_;
 };
 

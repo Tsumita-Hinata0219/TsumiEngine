@@ -81,7 +81,7 @@ public:
 	void SetBounding(const Col::AABB& setData) { this->bounding_ = setData; }
 
 	// 空間レベル
-	uint32_t GetLevelINdex() const { return this->levelIndex_; }
+	uint32_t GetLevelIndex() const { return this->levelIndex_; }
 	void SetLevelIndex(uint32_t setIndex) { this->levelIndex_ = setIndex; }
 
 	// 所属空間

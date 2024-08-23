@@ -21,15 +21,18 @@ OctreeNode::OctreeNode(int depth)
 
 
 // データの挿入
-void OctreeNode::Insert(const CollisionShape& shape)
+void OctreeNode::Insert(const std::shared_ptr<CollisionShape>& shape)
 {
-    shape;
-}
+    // shapeの空間レベルと所属空間から、挿入する配列のインデックスを求める
+    int index = GetIndex(shape->GetLevelIndex(), shape->GetSpaceIndex());
 
-
-// データのクリエ
-void OctreeNode::Query()
-{
+    // 挿入可能なindexじゃなければエラー
+    if (index < nodes_.size()) {
+        nodes_[index].push_back(shape);
+    }
+    else {
+        std::cerr << "Error : Index out of bounds" << std::endl;
+    }
 }
 
 

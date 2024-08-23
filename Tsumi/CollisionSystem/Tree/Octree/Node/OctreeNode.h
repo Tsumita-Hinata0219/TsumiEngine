@@ -30,10 +30,19 @@ public:
 
 private:
 
+	// レベルLの最初の要素番号を計算
+	int LevelOffset(int level);
+
+	// レベルLでのノード番号Nに対する配列インデックスの計算
+	int GetIndex(int level, int nodeNum);
+
+
+private:
+
 	// 空間レベルの深さ
 	int levelDepth_ = 0;
 
 	// 線形配列
-	std::vector<int> nodes_;
+	std::vector <std::list<CollisionShape*>> nodes_;
 };
 

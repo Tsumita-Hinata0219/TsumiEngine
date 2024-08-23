@@ -16,7 +16,7 @@ OctreeNode::OctreeNode(int depth)
     }
 
     // 線形配列のサイズを設定
-    nodes_.resize(numNodes, 0);  // 初期値として 0 を設定
+    nodes_.resize(numNodes);  // 初期値として 0 を設定
 }
 
 
@@ -30,6 +30,21 @@ void OctreeNode::Insert(const CollisionShape& shape)
 // データのクリエ
 void OctreeNode::Query()
 {
+}
+
+
+// レベルLの最初の要素番号を計算
+int OctreeNode::LevelOffset(int level)
+{
+    if (level == 0) return 0;
+    return int((int(pow(4.0f, level)) - 1) / 3);
+}
+
+
+// レベルLでのノード番号Nに対する配列インデックスの計算
+int OctreeNode::GetIndex(int level, int nodeNum)
+{
+    return LevelOffset(level) + nodeNum;
 }
 
 

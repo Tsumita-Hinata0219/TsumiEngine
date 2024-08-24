@@ -1,4 +1,5 @@
 #include "OctreeNode.h"
+#include "../../../component/CollisionComponent.h"
 #include "../../../Shape/CollisionShape.h"
 
 
@@ -34,6 +35,17 @@ void OctreeNode::Insert(const std::shared_ptr<CollisionShape>& shape)
         std::cerr << "Error : Index out of bounds" << std::endl;
     }
 }
+void OctreeNode::Insert(const CollisionComponent& comp)
+{
+    comp:
+}
+
+
+// データのクリア
+void OctreeNode::Clear()
+{
+    nodes_.clear();
+}
 
 
 // レベルLの最初の要素番号を計算
@@ -49,5 +61,4 @@ int OctreeNode::GetIndex(int level, int nodeNum)
 {
     return LevelOffset(level) + nodeNum;
 }
-
 

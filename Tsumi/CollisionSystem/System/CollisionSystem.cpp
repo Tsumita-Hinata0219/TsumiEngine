@@ -15,6 +15,10 @@ void CollisionSystem::AAddComponent(CollisionComponent* component)
 {
 	components_.push_back(component);
 }
+//void CollisionSystem::AAddComponentN(CollisionComponent* component)
+//{
+//    //int index = component;
+//}
 
 
 // コンポーネントのクリア

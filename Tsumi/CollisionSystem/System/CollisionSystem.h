@@ -23,6 +23,7 @@ public:
 
 	// コンポーネント追加
 	void AAddComponent(CollisionComponent* component);
+	void AAddComponentN(CollisionComponent* component);
 
 	// コンポーネントのクリア
 	void ClearComponent();

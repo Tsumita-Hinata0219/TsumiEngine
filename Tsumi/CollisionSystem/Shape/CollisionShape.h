@@ -109,5 +109,8 @@ protected:
 	uint32_t spaceIndex_ = 0;
 
 	uint8_t i = 0;
+
+	// ID
+	uint32_t id_ = 0;
 };
 

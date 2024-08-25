@@ -2,6 +2,14 @@
 
 
 
+// コンストラクタ
+CollisionComponent::CollisionComponent()
+{
+	// インデックスの初期化
+	index_ = 0;
+}
+
+
 // パラメータ付きコンストラクタ
 CollisionComponent::CollisionComponent(IObject* setObject)
 {

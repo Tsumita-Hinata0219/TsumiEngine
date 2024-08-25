@@ -2,12 +2,23 @@
 #include "../Project/GameObject/IObject/IObject.h"
 
 
+// コンストラクタ
+CollisionSystem::CollisionSystem()
+{
+    // インデックス初期化
+    shapeIndex_ = 0;
+}
+
+
 // 初期化処理
 void CollisionSystem::Init()
 {
     // 八分木ノードクラス
     // ルート空間含め孫空間までで空間の深さは4
     node_ = std::make_unique<OctreeNode>(4);
+
+    // インデックス初期化
+    shapeIndex_ = 0;
 }
 
 
@@ -18,7 +29,7 @@ void CollisionSystem::AAddComponent(CollisionComponent* component)
 }
 void CollisionSystem::AAddComponentN(CollisionComponent* component)
 {
-   // コンポーネントの数を取得
+    // コンポーネントの数を取得
     int index = components_.size();
     
     // コンポーネントを八分木クラスに入れる
@@ -38,6 +49,9 @@ void CollisionSystem::ClearComponent()
 // シェイプの追加
 void CollisionSystem::AddShape(CollisionShape* shape)
 {
+    // インデックス加算
+    shapeIndex_++;
+
     shapes_.push_back(shape);
 }
 

@@ -15,7 +15,7 @@ class CollisionSystem {
 public:
 
 	// コンストラクタ、デストラクタ
-	CollisionSystem() {};
+	CollisionSystem();
 	~CollisionSystem() {};
 
 	// 初期化処理
@@ -52,8 +52,11 @@ private:
 	// コンポーネントリスト
 	std::vector<CollisionComponent*> components_;
 
-	// シェイプリスト
+	// シェイプ配列
 	std::vector<CollisionShape*> shapes_;
+
+	// シェイプ配列のインデックス
+	uint32_t shapeIndex_ = 0;
 
 };
 

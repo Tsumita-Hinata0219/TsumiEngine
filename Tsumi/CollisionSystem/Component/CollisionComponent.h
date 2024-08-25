@@ -19,7 +19,7 @@ class CollisionComponent {
 public:
 
 	// コンストラクタ、デストラクタ
-	CollisionComponent() {};
+	CollisionComponent();
 	~CollisionComponent() {};
 
 	// パラメータ付きコンストラクタ
@@ -56,5 +56,8 @@ private:
 
 	// コリジョンシェイプ
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
+
+	// インデックス
+	uint32_t index_ = 0;
 };
 

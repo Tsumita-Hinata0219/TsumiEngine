@@ -28,11 +28,11 @@ public:
 	// コンポーネントのクリア
 	void ClearComponent();
 
-	// シェイプの追加
-	void AddShape(CollisionShape* shape);
+	//// シェイプの追加
+	//void AddShape(CollisionShape* shape);
 
-	// シェイプのクリア
-	void ClearShape();
+	//// シェイプのクリア
+	//void ClearShape();
 
 	// コリジョン判定を実行
 	void Update();
@@ -52,11 +52,11 @@ private:
 	// コンポーネントリスト
 	std::vector<CollisionComponent*> components_;
 
-	// シェイプ配列
-	std::vector<CollisionShape*> shapes_;
+	//// シェイプ配列
+	//std::vector<CollisionShape*> shapes_;
 
-	// シェイプ配列のインデックス
-	uint32_t shapeIndex_ = 0;
+	//// シェイプ配列のインデックス
+	//uint32_t shapeIndex_ = 0;
 
 };
 

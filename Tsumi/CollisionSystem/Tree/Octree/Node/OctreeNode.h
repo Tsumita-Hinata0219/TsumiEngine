@@ -23,7 +23,7 @@ public:
 
 	// データの挿入
 	void Insert(const std::shared_ptr<CollisionShape>& shape);
-	void Insert(const CollisionComponent& comp);
+	void Insert(const CollisionComponent* comp);
 
 	// データのクリア
 	void Clear();

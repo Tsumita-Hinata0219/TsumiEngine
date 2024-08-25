@@ -35,9 +35,9 @@ void OctreeNode::Insert(const std::shared_ptr<CollisionShape>& shape)
         std::cerr << "Error : Index out of bounds" << std::endl;
     }
 }
-void OctreeNode::Insert(const CollisionComponent& comp)
+void OctreeNode::Insert(const CollisionComponent* comp)
 {
-    comp:
+    comp;
 }
 
 

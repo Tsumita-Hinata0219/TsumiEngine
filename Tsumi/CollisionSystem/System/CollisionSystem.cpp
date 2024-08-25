@@ -10,21 +10,42 @@ void CollisionSystem::Init()
     node_ = std::make_unique<OctreeNode>(4);
 }
 
+
 // コンポーネント追加
 void CollisionSystem::AAddComponent(CollisionComponent* component)
 {
 	components_.push_back(component);
 }
-//void CollisionSystem::AAddComponentN(CollisionComponent* component)
-//{
-//    //int index = component;
-//}
+void CollisionSystem::AAddComponentN(CollisionComponent* component)
+{
+   // コンポーネントの数を取得
+    int index = components_.size();
+    
+    // コンポーネントを八分木クラスに入れる
+    for (int i = 0; i < index; ++i) {
+        node_->Insert(components_[i]);
+    }
+}
 
 
 // コンポーネントのクリア
 void CollisionSystem::ClearComponent()
 {
     components_.clear();
+}
+
+
+// シェイプの追加
+void CollisionSystem::AddShape(CollisionShape* shape)
+{
+    shapes_.push_back(shape);
+}
+
+
+// シェイプのクリア
+void CollisionSystem::ClearShape()
+{
+    shapes_.clear();
 }
 
 

@@ -40,6 +40,8 @@ public:
 	// IObject
 	IObject* GetOwner() const { return this->owner_; }
 
+	// ShapeMap
+	std::map<int, std::unique_ptr<CollisionShape>> GetShapeMap() { return this->shapeMap_; }
 
 #pragma endregion 
 

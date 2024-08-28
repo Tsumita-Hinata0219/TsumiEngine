@@ -220,6 +220,10 @@
     <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Listener\CollisionListener.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -438,6 +442,10 @@
     <ClInclude Include="Tsumi\CollisionSystem\Listener\CollisionListener.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Detect\CollisionDetect.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

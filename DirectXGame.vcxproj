@@ -218,6 +218,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
@@ -396,6 +400,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />

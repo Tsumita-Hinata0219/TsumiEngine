@@ -6,7 +6,6 @@
 #include "../../Tsumi/TextureManager/TextureManager.h"
 #include "../../Tsumi/Audio/Audio.h"
 #include "../../Tsumi/Input/Input.h"
-//#include "../../Tsumi/Utilities/CollisionManager/CollisionManager.h"
 #include "../../Tsumi/Transform/WorldTransform/WorldTransform.h"
 #include "../../Tsumi/Utilities/ImGuiManager/ImGuiManager.h"
 #include "../../Tsumi/Utilities/TextLog/TextLog.h"

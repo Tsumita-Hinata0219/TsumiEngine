@@ -29,13 +29,6 @@ void CollisionSystem::AAddComponent(CollisionComponent* component)
 }
 void CollisionSystem::AAddComponentN(CollisionComponent* component)
 {
-    //// コンポーネントの数を取得
-    //int index = components_.size();
-    //
-    //// コンポーネントを八分木クラスに入れる
-    //for (int i = 0; i < index; ++i) {
-    //    node_->Insert(components_[i]);
-    //}
     component;
 }
 
@@ -46,23 +39,6 @@ void CollisionSystem::ClearComponent()
     components_.clear();
 }
 
-//
-//// シェイプの追加
-//void CollisionSystem::AddShape(CollisionShape* shape)
-//{
-//    // インデックス加算
-//    shapeIndex_++;
-//
-//    shapes_.push_back(shape);
-//}
-
-
-//// シェイプのクリア
-//void CollisionSystem::ClearShape()
-//{
-//    shapes_.clear();
-//}
-//
 
 // コリジョン判定を実行
 void CollisionSystem::Update()

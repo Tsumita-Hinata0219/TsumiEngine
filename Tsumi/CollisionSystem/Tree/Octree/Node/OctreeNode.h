@@ -1,12 +1,11 @@
 #pragma once
 
-#include "../Object/OctreeObject.h"
-
 #include <vector>
 #include <memory>
 
 // 前方宣言
 class CollisionShape;
+class CollisionComponent;
 
 /* 八分木のノードを管理するクラス */
 class OctreeNode {
@@ -43,6 +42,6 @@ private:
 	int levelDepth_ = 0;
 
 	// 線形配列
-	std::vector<std::list<std::shared_ptr<CollisionShape>>> nodes_;
+	std::vector<std::list<CollisionShape*>> nodes_;
 };
 

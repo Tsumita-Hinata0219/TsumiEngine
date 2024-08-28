@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../IObject/IObject.h"
-#include "../../GameObject.h"
 
 
 /* Skydomeクラス */

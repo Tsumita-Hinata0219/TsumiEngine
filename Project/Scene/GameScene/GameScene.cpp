@@ -26,7 +26,6 @@ void GameScene::Initialize()
 	jsonManager_->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
-	//collisionManager_ = std::make_unique<CollisionManager>();
 	collisionSystem_ = std::make_unique<CollisionSystem>();
 	collisionSystem_->Init();
 

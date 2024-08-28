@@ -160,19 +160,6 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 #pragma endregion 
 
 
-private:
-
-	// BufferResourceの生成
-	//void CreateBufferResource();
-
-	/// <summary>
-	/// mtl繝輔ぃ繧､繝ｫ繧定ｪｭ縺ｿ霎ｼ繧髢｢謨ｰ
-	/// </summary>
-	//MaterialDataN LoadMaterialTemplateFile(const std::string& filePath, const std::string& fileName);
-
-	// コマンドコール
-	//void CommandCall();
-
 private: // 繝｡繝ｳ繝仙､画焚
 
 	// 繝｢繝・Ν繝槭ロ繝ｼ繧ｸ繝｣繝ｼ

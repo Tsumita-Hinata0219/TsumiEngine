@@ -1,8 +1,5 @@
 #pragma once
 
-#include "../../../Shape/CollisionShape.h"
-#include "../../../Component/CollisionComponent.h"
-
 #include <memory>
 #include <vector>
 

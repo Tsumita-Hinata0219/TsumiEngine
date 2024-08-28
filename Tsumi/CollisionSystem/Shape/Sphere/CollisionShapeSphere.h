@@ -4,7 +4,6 @@
 
 
 // 前方宣言
-class CollisionComponent;
 class CollisionShapeAABB;
 
 

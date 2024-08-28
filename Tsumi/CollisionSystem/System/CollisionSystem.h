@@ -4,9 +4,6 @@
 #include "../Event/CollisionEvent.h"
 #include "../ColEventManager/ColEventManager.h"
 
-#include "../Tree/Octree/Node/OctreeNode.h"
-
-
 #include <vector>
 
 /* コリジョン判定のロジッククラス */
@@ -41,7 +38,7 @@ private:
 private:
 
 	// 八分木ノードクラス
-	std::unique_ptr<OctreeNode> node_;
+	//std::unique_ptr<OctreeNode> node_;
 
 	// コンポーネントリスト
 	std::vector<CollisionComponent*> components_;

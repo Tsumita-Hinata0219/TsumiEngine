@@ -3,6 +3,8 @@
 #include "../../Project/Math/MyMath.h"
 #include <variant>
 
+#define ROOT_EDGE_LENGTH 100
+
 
 namespace Col {
 

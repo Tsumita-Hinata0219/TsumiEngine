@@ -22,7 +22,7 @@ std::unique_ptr<Model> ModelManager::GetModel(const string& name) const
 	if (it != modelsMap_.end()) {
 		// 作ってあるモデルリソースを基に新しくモデル作ってそれを返す
 		std::unique_ptr<Model> model = std::make_unique<Model>(it->second);
-		return std::move(model);
+		return model;
 	}
 
 	// 見つからなかった場合に例外を投げる

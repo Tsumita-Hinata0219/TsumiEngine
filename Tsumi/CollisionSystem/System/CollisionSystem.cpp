@@ -15,7 +15,7 @@ void CollisionSystem::Init()
 {
     // 八分木ノードクラス
     // ルート空間含め孫空間までで空間の深さは4
-    node_ = std::make_unique<OctreeNode>(4);
+    //node_ = std::make_unique<OctreeNode>(4);
 
     //// インデックス初期化
     //shapeIndex_ = 0;

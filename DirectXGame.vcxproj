@@ -465,6 +465,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Tsumi\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />

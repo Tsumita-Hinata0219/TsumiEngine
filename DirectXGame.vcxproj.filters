@@ -446,6 +446,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
+    <ClInclude Include="Tsumi\SmartPointer\SmartPtr.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

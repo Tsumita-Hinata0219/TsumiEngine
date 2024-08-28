@@ -40,6 +40,19 @@ public:
 #pragma endregion 
 
 
+#pragma region Operator 演算子オーバーロード
+
+	SmartPtr<T>& operator =(const SmartPtr<T>& src);
+	template<class T2> SmartPtr<T>& operator =(SmartPtr<T2>& src);
+	SmartPtr<T>& operator =(const int nullval);
+	T& operator *();
+	T* operator ->();
+	bool operator ==(T* val);
+	bool operator !=(T* val);
+
+#pragma endregion 
+
+
 private:
 
 	// 参照カウントを加算
@@ -198,3 +211,88 @@ inline void SmartPtr<T>::Release()
 		delete pRefCount_;
 	}
 }
+
+
+//////////////演算子オーバーロード////////////////////
+
+template<class T>
+inline SmartPtr<T>& SmartPtr<T>::operator=(const SmartPtr<T>& src)
+{
+	// 自身への代入は不正で意味がないので行わない
+	if (*src.ppPtr_ == *ppPtr_) { return (*this); }
+
+	// 自身は他人になってしまうので、参照カウントを1つ減算
+	Release();
+
+	// 相手のポインタをコピー
+	pRefCount_ = src.pRefCount_;
+	ppPtr_ = src.ppPtr_;
+
+	// 新しい人自身の参照カウンタを加算
+	AddRefCount();
+}
+
+template<class T>
+template<class T2>
+inline SmartPtr<T>& SmartPtr<T>::operator =(SmartPtr<T2>& src) 
+{
+	// 自身への代入は不正で意味がないので行わない
+	if (*src.GetPtr() == *ppPtr_) { return (*this); }
+
+	// 自身は他人になってしまうので、参照カウントを1つ減算
+	Release();
+
+	// 相手のポインタをコピー
+	pRefCount_ = src.GetRefPtr();
+	ppPtr_ = (T**)src.GetPPtr();
+
+	// 型チェックコピー
+	*ppPtr_ = src.GetPtr();
+
+	// 新しい人自身の参照カウンタを加算
+	AddRefCount();
+
+	return (*true);
+}
+
+template<class T>
+inline SmartPtr<T>& SmartPtr<T>::operator=(const int nullval)
+{
+	// 自身は他人になってしまうので、参照カウントを1つ減算
+	Release();
+
+	// 新規に自分を作る
+	pRefCount_ = new unsigned int(1);
+	ppPtr_ = new T*;
+	*ppPtr_ = NullPtr_;
+
+	return (*this);
+}
+
+template<class T>
+inline T& SmartPtr<T>::operator*()
+{
+	return **ppPtr_;
+}
+
+template<class T>
+inline T* SmartPtr<T>::operator->()
+{
+	return *ppPtr_;
+}
+
+template<class T>
+inline bool SmartPtr<T>::operator==(T* val)
+{
+	if (*ppPtr_ == val) { return true; }
+	return false;
+}
+
+template<class T>
+inline bool SmartPtr<T>::operator!=(T* val)
+{
+	if (*ppPtr_ != val) { return false; }
+	return false;
+}
+
+//////////////////////////////////////////////////////

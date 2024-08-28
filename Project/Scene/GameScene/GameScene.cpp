@@ -34,12 +34,12 @@ void GameScene::Initialize()
 	absentEffect_->Initialize();
 
 	/* ----- Skydome 天球 ----- */
-	skydome_ = std::make_unique<Skydome>();
-	skydome_->Init();
+	/*skydome_ = std::make_unique<Skydome>();
+	skydome_->Init();*/
 
 	/* ----- Ground 床 ----- */
-	ground_ = std::make_unique<Ground>();
-	ground_->Init();
+	/*ground_ = std::make_unique<Ground>();
+	ground_->Init();*/
 
 	/* ----- Wall 壁 ----- */
 	wall_ = std::make_unique<Wall>();
@@ -50,8 +50,8 @@ void GameScene::Initialize()
 	floor_->Init();
 
 	/* ----- Building1 建物1 ----- */
-	building1_ = std::make_unique<Building1>();
-	building1_->Init();
+	/*building1_ = std::make_unique<Building1>();
+	building1_->Init();*/
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
@@ -72,10 +72,10 @@ void GameScene::Update(GameManager* state)
 	state;
 
 	/* ----- Skydome 天球 ----- */
-	skydome_->Update();
+	//skydome_->Update();
 
 	/* ----- Ground 床 ----- */
-	ground_->Update();
+	//ground_->Update();
 
 	/* ----- Wall 壁 ----- */
 	wall_->Update();
@@ -84,7 +84,7 @@ void GameScene::Update(GameManager* state)
 	floor_->Update();
 
 	/* ----- Building1 建物1 ----- */
-	building1_->Update();
+	//building1_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();

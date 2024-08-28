@@ -215,7 +215,6 @@
     <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Component\CollisionComponent.cpp" />
-    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Event\CollisionEvent.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
@@ -433,7 +432,6 @@
     <ClInclude Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Component\CollisionComponent.h" />
-    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.h" />
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Event\CollisionEvent.h" />
     <ClInclude Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.h" />

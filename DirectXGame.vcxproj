@@ -218,7 +218,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
-    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
@@ -397,7 +396,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
-    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\SpatialPartition.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />

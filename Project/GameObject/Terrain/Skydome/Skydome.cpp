@@ -7,6 +7,7 @@ void Skydome::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Skydome", "Skydome.obj");
+	auto demo = modelManager_->GetModel("Skydome");
 	model_ = modelManager_->GetModel("Skydome");
 
 	trans_.Init();

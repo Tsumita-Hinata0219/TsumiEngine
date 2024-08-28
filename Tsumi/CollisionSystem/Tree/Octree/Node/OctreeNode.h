@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../Object/OctreeObject.h"
-#include "../Node/OctreeNode.h"
 
 #include <vector>
 #include <memory>

@@ -2,7 +2,7 @@
 
 #include "../Project/Math/MyMath.h"
 
-#define TREE_MAX_LEVEL_DEPTH 7
+#define QUADTREE_MAX_LEVEL_DEPTH 7
 
 
 // 四分木
@@ -91,7 +91,7 @@ namespace QTree {
 
 
 
-	// 分木の空間クラス
+	/* 四分木の空間クラス */
 	template <class T>
 	class QuadTreeSpace {
 

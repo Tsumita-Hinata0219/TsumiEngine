@@ -6,99 +6,84 @@
 // 四分木
 namespace QTree {
 
-	//// 前方宣言
-	//template <class T>
-	//class QuadTreeSpace;
+	// 前方宣言
+	template <class T>
+	class QuadTreeSpace;
+
+	/* 四分木登録オブジェクト */
+	template <class T>
+	class QuadTreeObject {
+
+	public:
+
+		// 登録空間
+		QuadTreeSpace<T>* p_Space;
+
+		// 判定対象オブジェクト
+		T* p_Object;
+
+		// 前のオブジェクト
+		std::shared_ptr<QuadTreeObject<T>> sp_Pre;
+
+		// 次のオブジェクト
+		std::shared_ptr<QuadTreeObject<T>> sp_Next;
 
 
-	///* 四分木登録オブジェクト */
-	//template <class T>
-	//class QuadTreeObject {
+	public:
 
-	//public:
-
-	//	// コンストラクタ
-	//	QuadTreeObject()
-	//	{
-	//		// nullを入れておく
-	//		p_Space = nullptr;
-	//		p_Object = nullptr;
-	//	}
-
-	//	// デストラクタ
-	//	~QuadTreeObject() {}
-
-	//	// リストから外れる
-	//	bool Remove()
-	//	{
+		// コンストラクタ
+		QuadTreeObject()
+		{
+			// nullを入れておく
+			p_Space = nullptr;
+			p_Object = nullptr;
+		}
 
 
-	//	}
-
-	//	// 空間を登録
-	//	void RegisterSpace(QuadTreeSpace<T>* pSpace)
-	//	{
+		// デストラクタ
+		~QuadTreeObject() {}
 
 
-	//	}
+		// リストから外れる
+		bool Remove()
+		{
+			// 既に逸脱しているときは処理終了
+			if (!p_Space) { return false; }
 
-	//	// 次のオブジェクトを取得
-	//	QuadTreeObject<T>& GetNextObj()
-	//	{
+			// 自分を登録している空間に自身を通知
+			if (!p_Space->OnRemove(this)) { return false; }
 
+			// 逸脱処理
+			// 前後のオブジェクトを結びつける
+			if (sp_Pre)
+			{
+				sp_Pre->sp_Next = sp_Next;
+				sp_Pre.RegistPtr(nullptr);
+			}
+			if (sp_Next)
+			{
+				sp_Next->sp_Pre = sp_Pre;
+				sp_Next.reset();
+			}
 
-	//	}
-
-	//public:
-
-	//	// 登録空間
-	//	QuadTreeSpace<T>* p_Space;
-	//	// 判定対象オブジェクト
-	//	T* p_Object;
-	//	// 前のオブジェクト
-	//	QuadTreeObject<T>* sp_Pre;
-	//	// 次のオブジェクト
-	//	QuadTreeObject<T>* sp_Next;
-	//};
-
-
-	//// 線形四分木管理クラス
-	//class QuadTreeNode
-	//{
-	//};
-
+			p_Space = nullptr;
+			return true;
+		}
 
 
-
-	//// 分木の空間クラス
-	//template <class T>
-	//class QuadTreeSpace {
-
-	//public:
-
-	//	// コンストラクタ
-	//	QuadTreeSpace() {};
-
-	//	// デストラクタ
-	//	virtual QuadTreeSpace() 
-	//	{
-	//		if(ptrLatest != nullptr){}
-	//	}
-
-	//	//// リンクを全てリセットする
-	//	//void ResetLink(QuadTreeObject<T>* p)
-	//	//{
-	//	//	if(p->sp_Next.get)
-	//	//}
+		// 空間を登録
+		void RegisterSpace(QuadTreeSpace<T>* pSpace)
+		{
+			p_Space = pSpace;
+		}
 
 
-	//private:
+		// 次のオブジェクトを取得
+		std::shared_ptr<QuadTreeObject<T>> GetNextObj() const
+		{
+			return sp_Next;
+		}
+	};
 
-
-	//protected:
-
-	//	// 最新登録オブジェクトへのポインター
-	//	QuadTreeObject<T>* ptrLatest;
-	//};
 }
 

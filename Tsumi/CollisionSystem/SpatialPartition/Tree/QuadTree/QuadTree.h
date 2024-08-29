@@ -89,15 +89,6 @@ namespace QTree {
 
 
 
-
-
-
-
-
-
-
-
-
 	// 分木の空間クラス
 	template <class T>
 	class QuadTreeSpace {
@@ -130,15 +121,41 @@ namespace QTree {
 
 
 		// オブジェクトをプッシュする
-		bool Push(std::shared_ptr<QuadTreeObject<T>>& obj);
+		bool Push(std::shared_ptr<QuadTreeObject<T>>& obj)
+		{
+			// 無効オブジェクトは登録しない
+			if (!obj) { return false; }
+			// ２重登録チェック
+			if (obj->p_Space == this) { return false; }
+
+			if (!smartPtrLatest)
+			{
+				// 空間に新規登録
+				smartPtrLatest = obj;
+			}
+			else 
+			{
+				// 最新TreeObjectオブジェクトを更新
+				obj->sp_Next = smartPtrLatest;
+				smartPtrLatest->sp_Pre = obj;
+				smartPtrLatest = obj;
+			}
+
+			// 空間を登録
+			obj->RegisterSpace(this);
+
+			return true;
+		}
 
 
 		// 削除されるオブジェクトをチェック
 		bool OnRemove(std::shared_ptr<QuadTreeObject<T>>* removeObj)
 		{
-			if (smartPtrLatest.get() == removeObj) {
+			if (smartPtrLatest.get() == removeObj) 
+			{
 				// 次のオブジェクトにすげ替え
-				if (smartPtrLatest) {
+				if (smartPtrLatest) 
+				{
 					smartPtrLatest = smartPtrLatest->GetNextObj();
 				}
 			}
@@ -153,5 +170,10 @@ namespace QTree {
 		}
 
 	};
+
+
+
+
+
 }
 

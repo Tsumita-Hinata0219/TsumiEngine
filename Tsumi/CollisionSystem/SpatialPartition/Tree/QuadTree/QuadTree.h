@@ -2,6 +2,8 @@
 
 #include "../Project/Math/MyMath.h"
 
+#define TREE_MAX_LEVEL_DEPTH 7
+
 
 // 四分木
 namespace QTree {
@@ -175,5 +177,21 @@ namespace QTree {
 
 
 
+	// 線形四分木クラス
+	class Liner4Tree {
+
+	protected:
+
+
+
+
+
+	public:
+
+
+	private:
+
+
+	};
 }
 

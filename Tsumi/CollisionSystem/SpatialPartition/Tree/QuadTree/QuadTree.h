@@ -85,5 +85,73 @@ namespace QTree {
 		}
 	};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// 分木の空間クラス
+	template <class T>
+	class QuadTreeSpace {
+
+	protected:
+
+		// 最新登録オブジェクトへのポインタ
+		std::shared_ptr<QuadTreeObject<T>> smartPtrLatest;
+
+
+	public:
+
+		// コンストラクタ
+		QuadTreeSpace() {}
+
+
+		// デストラクタ
+		~QuadTreeSpace()
+		{
+			if (smartPtrLatest) ResetLink(smartPtrLatest);
+		}
+
+
+		// リンクを全てリセットする
+		void ResetLink(std::shared_ptr<QuadTreeObject<T>>& obj)
+		{
+			if (obj->sp_Next) { ResetLink(obj->sp_Next); }
+			obj.reset();
+		}
+
+
+		// オブジェクトをプッシュする
+		bool Push(std::shared_ptr<QuadTreeObject<T>>& obj);
+
+
+		// 削除されるオブジェクトをチェック
+		bool OnRemove(std::shared_ptr<QuadTreeObject<T>>* removeObj)
+		{
+			if (smartPtrLatest.get() == removeObj) {
+				// 次のオブジェクトにすげ替え
+				if (smartPtrLatest) {
+					smartPtrLatest = smartPtrLatest->GetNextObj();
+				}
+			}
+			return true;
+		}
+
+
+		// 最初のオブジェクトの取得
+		inline std::shared_ptr<QuadTreeObject<T>>& GetFirstObj()
+		{
+			return smartPtrLatest;
+		}
+
+	};
 }
 

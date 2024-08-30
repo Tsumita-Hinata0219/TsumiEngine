@@ -34,6 +34,9 @@ void Player::Init()
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
+
+	// HPの設定
+	hp_ = 3;
 }
 
 
@@ -92,6 +95,9 @@ void Player::Update()
 		ImGui::Text("KillCount = %d", killCount_);
 
 		ImGui::Text("");
+		ImGui::Text("HP = %d", hp_);
+
+		ImGui::Text("");
 		//light_.DrawImGui();
 		ImGui::TreePop();
 	}
@@ -131,7 +137,13 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
+	// HP減少
+	hp_--;
 
+	// HPが0で死亡
+	if (hp_ <= 0) {
+		
+	}
 
 }
 

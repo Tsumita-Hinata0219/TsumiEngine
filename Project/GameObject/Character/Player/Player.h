@@ -45,6 +45,14 @@ public: // メンバ関数
 	void AddKillCount(uint32_t addCount = 1) { this->killCount_ += addCount; }
 	void SubKillCount(uint32_t subCount = 1) { this->killCount_ -= subCount; }
 
+	// 死亡フラグ
+	bool IsDead() const { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+
+	// HP
+	uint32_t GetHP() const { return this->hp_; }
+	void SetHP(uint32_t setHP) { this->hp_ = setHP; }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
@@ -112,8 +120,14 @@ private: // メンバ変数
 	float moveSpeed_ = 0.3f;
 	float kBulletSpeed_ = 0.5f;
 
+	// 死亡フラグ
+	bool isDead_ = false;
+
 	// コライダー
 	std::unique_ptr<OBBCollider> collider_;
+
+	// HP
+	uint32_t hp_ = 0;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;

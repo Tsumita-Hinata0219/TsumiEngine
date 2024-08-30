@@ -21,25 +21,27 @@ void Player::Init()
 
 	// BodyModelのロード
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Player", "Player.obj");
-	//model_ = modelManager_->GetModel("Player");
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
 
 	// 各ボディクラスの初期化
-	m_Body_ = std::make_unique<PlayerMainBody>();
-	m_Body_->Init();
-	c_Body_ = std::make_unique<PlayerCenterBody>();
+	mBody_ = std::make_unique<PlayerMainBody>();
+	mBody_->Init();
+	cBody_ = std::make_unique<PlayerCenterBody>();
 
-	l_Body_ = std::make_unique<PlayerLeftBody>();
+	lBody_ = std::make_unique<PlayerLeftBody>();
 
-	r_Body_ = std::make_unique<PlayerRightBody>();
+	rBody_ = std::make_unique<PlayerRightBody>();
+
 	
 
 	// BodyTransformの初期化
 	trans_.Init();
+
+	// Bodyとペアレントを結ぶ
+	mBody_->SetParent(&trans_);
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -123,8 +125,7 @@ void Player::Update()
 void Player::Draw3D()
 {
 	// BodyModelの描画
-	//model_->SetLightData(light_);
-	//model_->DrawN(trans_);
+	mBody_->Draw3D();
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {

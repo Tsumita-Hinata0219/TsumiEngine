@@ -24,7 +24,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// ペアレント
-	void SetParent(Transform parent) { this->trans_.SetParent(&parent); }
+	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
 
 #pragma endregion 
 

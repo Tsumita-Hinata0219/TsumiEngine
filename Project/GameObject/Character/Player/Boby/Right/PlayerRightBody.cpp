@@ -1,1 +1,27 @@
 #include "PlayerRightBody.h"
+
+
+
+// 初期化処理
+void PlayerRightBody::Init()
+{
+	// Modelの設定
+	modelManager_ = ModelManager::GetInstance();
+	model_ = modelManager_->GetModel("Player_Main_Body");
+
+	// Transformの初期化
+	trans_.Init();
+}
+
+
+// 更新処理
+void PlayerRightBody::Update() {}
+
+
+// 描画処理
+void PlayerRightBody::Draw3D()
+{
+	model_->DrawN(trans_);
+}
+void PlayerRightBody::Draw2DFront() {}
+void PlayerRightBody::Draw2DBack() {}

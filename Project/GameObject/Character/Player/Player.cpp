@@ -28,6 +28,16 @@ void Player::Init()
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
 
+	// 各ボディクラスの初期化
+	m_Body_ = std::make_unique<PlayerMainBody>();
+	m_Body_->Init();
+	c_Body_ = std::make_unique<PlayerCenterBody>();
+
+	l_Body_ = std::make_unique<PlayerLeftBody>();
+
+	r_Body_ = std::make_unique<PlayerRightBody>();
+	
+
 	// BodyTransformの初期化
 	trans_.Init();
 

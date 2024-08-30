@@ -70,6 +70,9 @@ private:
 	// 移動処理
 	void Move();
 
+	// Z軸を回転させる
+	void ZRotate();
+
 	// 寿命の処理
 	void RemoveAfterlifeTime();
 
@@ -82,6 +85,9 @@ private: // メンバ変数
 	// モデル
 	std::unique_ptr<Model> model_;
 
+	// ライト
+	DirectionalLightData light_{};
+
 	// トランスフォーム
 	Transform trans_{};
 
@@ -93,6 +99,9 @@ private: // メンバ変数
 
 	// 移動速度
 	Vector3 velocity_;
+
+	// 回転速度
+	float addRotateZ_ = 0.0f;
 
 	// 寿命
 	Timer life_{};

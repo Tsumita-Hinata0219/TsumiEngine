@@ -26,6 +26,9 @@ void Player::Init()
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
 
+	// BulletModelのロード
+	modelManager_->LoadModel("Obj/Player/Bullet", "PlayerBullet.obj");
+
 	// BodyTransformの初期化
 	trans_.Init();
 

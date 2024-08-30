@@ -36,6 +36,7 @@ public:
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = to_underlying(state); }
 
+
 #pragma region Accessor アクセッサ
 
 	// WorldPos
@@ -50,11 +51,24 @@ public:
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
 
+	// プレイヤー　
+	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
+
+	// 死亡フラグ
+	bool IsDead() const override { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
+
+	// BulletListの取得
+	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
+
 	// 座標
 	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
 
 	// Collider
 	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
+
+	// HP
+	uint32_t GetHP() override { return this->hp_; }
 
 #pragma endregion 
 
@@ -93,6 +107,9 @@ private:
 
 private:
 
+	// プレイヤー
+	Player* player_ = nullptr;
+
 	// Model
 	std::unique_ptr<Model> model_;
 
@@ -101,6 +118,9 @@ private:
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
+
+	// 死亡フラグ
+	bool isDead_ = false;
 
 	// コライダー
 	std::unique_ptr<OBBCollider> collider_;
@@ -120,6 +140,12 @@ private:
 
 	// 戦闘状態になるかならないかの距離の閾値
 	float combatTriggerDistance_ = 40.0f;
+
+	// HP
+	uint32_t hp_ = 0;
+
+	// BulletのList配列
+	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;

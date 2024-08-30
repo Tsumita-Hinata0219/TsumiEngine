@@ -8,10 +8,6 @@
 
 #include "../Bullet/EnemyBullet.h"
 
-#include "../IState/IEnemyState.h"
-#include "../IState/Spawn/IEnemySpawnState.h"
-#include "../IState/Approach/IEnemyApproachState.h"
-#include "../IState/Death/IEnemyDeathState.h"
 
 
 // Player前方宣言
@@ -34,15 +30,14 @@ public:
 #pragma region Accessor アクセッサ
 
 	// Playerの設定
-	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
+	virtual void SetPlayer(Player* setPlayer) = 0;
 
 	// 死亡フラグ
-	bool IsDead() const { return this->isDead_; }
-	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+	virtual bool IsDead() const = 0;
+	virtual void SetDeadFlag(bool setFlag) = 0;
 
 	// BulletListの取得
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() { return this->bulletList_; }
-
+	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// 座標
 	virtual void SetPosition(Vector3 setPos) = 0;
@@ -50,18 +45,9 @@ public:
 	// Collider
 	virtual OBBCollider* GetOBBCollider() = 0;
 
+	// HP
+	virtual uint32_t GetHP() = 0;
+
 #pragma endregion 
 	
-
-protected:
-
-	// Player
-	Player* player_ = nullptr;
-
-	// 死亡フラグ
-	bool isDead_ = false;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-
 };

@@ -21,6 +21,9 @@ void StaticEnemy::Init()
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
+	
+	// HP野の設定
+	hp_ = 10;
 }
 
 
@@ -75,8 +78,14 @@ void StaticEnemy::Draw2DBack() {}
 // 衝突時コールバック関数
 void StaticEnemy::OnCollision()
 {
-	isDead_ = true;
-	player_->AddKillCount();
+	// HPを減らす
+	hp_--;
+
+	// HPが0以下なら死亡
+	if (hp_ <= 0) {
+		isDead_ = true;
+		player_->AddKillCount();
+	}
 }
 
 

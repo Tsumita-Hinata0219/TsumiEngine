@@ -19,7 +19,6 @@
 
 #include "../../../Project/GameObject/Character/Player/Player.h"
 #include "../../../Project/GameObject/Character/EnemyManager/EnemyManager.h"
-#include "../../../Project/GameObject/Character/EnemyManager/Enemy/Enemy.h"
 
 #include "../../../Project/GameObject/Others/UI/Game/GameSceneUI.h"
 

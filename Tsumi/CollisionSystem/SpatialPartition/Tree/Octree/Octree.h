@@ -297,16 +297,26 @@ namespace OTree {
 		DWORD GetTargetCollisionList(std::vector<T*>& collisionList, const Vector3& min, const Vector3& max)
 		{
 			collisionList.clear();
+
 			DWORD cellIndex = GetMortonNumber(min, max);
 
-			if (m_cellArray[cellIndex] == nullptr){ return 0; }
+			if (m_cellArray[cellIndex] == nullptr)
+			{ 
+				return 0;
+			}
 
 			GetCollisionList2(cellIndex, collisionList);
 
-			if (cellIndex == 0){ return static_cast<DWORD>(collisionList.size()); }
+			if (cellIndex == 0)
+			{ 
+				return static_cast<DWORD>(collisionList.size()); 
+			}
 
 			cellIndex = (cellIndex - 1) >> 3;
-			if (m_cellArray[cellIndex] == nullptr){ return static_cast<DWORD>(collisionList.size()); }
+			if (m_cellArray[cellIndex] == nullptr)
+			{ 
+				return static_cast<DWORD>(collisionList.size()); 
+			}
 
 			GetBackCollisionList(cellIndex, collisionList);
 

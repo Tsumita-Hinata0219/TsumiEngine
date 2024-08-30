@@ -6,6 +6,11 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "Boby/Main/PlayerMainBody.h"
+#include "Boby/Center/PlayerCenterBody.h"
+#include "Boby/Left/PlayerLeftBody.h"
+#include "Boby/Right/PlayerRightBody.h"
+
 #include "Bullet/PlayerBullet.h"
 
 #include "UI/PlayerUI.h"
@@ -107,7 +112,12 @@ private: // メンバ変数
 	CameraResource camera_{};
 
 	// モデル
-	std::unique_ptr<Model> model_;
+	//std::unique_ptr<Model> model_;
+	// BodyModel
+	std::unique_ptr<PlayerMainBody> m_Body_; // Main
+	std::unique_ptr<PlayerCenterBody> c_Body_; // Center
+	std::unique_ptr<PlayerLeftBody> l_Body_; // Left
+	std::unique_ptr<PlayerRightBody> r_Body_; // Right
 
 	// トランスフォーム
 	Transform trans_{};

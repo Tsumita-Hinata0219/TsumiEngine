@@ -15,9 +15,7 @@ void PlayerMainBody::Init()
 
 
 // 更新処理
-void PlayerMainBody::Update()
-{
-}
+void PlayerMainBody::Update() {}
 
 
 // 描画処理

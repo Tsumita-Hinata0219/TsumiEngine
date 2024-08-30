@@ -22,7 +22,7 @@ void Player::Init()
 	// BodyModelのロード
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Player", "Player.obj");
-	model_ = modelManager_->GetModel("Player");
+	//model_ = modelManager_->GetModel("Player");
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
@@ -114,7 +114,7 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	//model_->SetLightData(light_);
-	model_->DrawN(trans_);
+	//model_->DrawN(trans_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {

@@ -19,10 +19,14 @@ void Player::Init()
 	//camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
 	cameraManager_->ReSetData(camera_);
 
-	// BodyModelのロードと初期化
+	// BodyModelのロード
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Player", "Player.obj");
 	model_ = modelManager_->GetModel("Player");
+	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
 
 	// BodyTransformの初期化
 	trans_.Init();

@@ -36,6 +36,7 @@ public:
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = to_underlying(state); }
 
+
 #pragma region Accessor アクセッサ
 
 	// WorldPos
@@ -65,6 +66,9 @@ public:
 
 	// Collider
 	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
+
+	// HP
+	uint32_t GetHP() override { return this->hp_; }
 
 #pragma endregion 
 
@@ -136,6 +140,9 @@ private:
 
 	// 戦闘状態になるかならないかの距離の閾値
 	float combatTriggerDistance_ = 40.0f;
+
+	// HP
+	uint32_t hp_ = 0;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;

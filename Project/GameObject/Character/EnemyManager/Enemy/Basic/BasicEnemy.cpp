@@ -19,6 +19,9 @@ void BasicEnemy::Init()
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
 
+	// HP野の設定
+	hp_ = 10;
+
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
 	stateVector_.resize(EnumSize<BasicEnemyStateType>::value);
@@ -104,8 +107,14 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突時コールバック関数
 void BasicEnemy::OnCollision()
 {
-	isDead_ = true;
-	player_->AddKillCount();
+	// HPを減らす
+	hp_--;
+
+	// HPが0以下なら死亡
+	if (hp_ <= 0) {
+		isDead_ = true;
+		player_->AddKillCount();
+	}
 }
 
 

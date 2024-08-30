@@ -39,12 +39,14 @@ public:
 	// BulletListの取得
 	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
-
 	// 座標
 	virtual void SetPosition(Vector3 setPos) = 0;
 
 	// Collider
 	virtual OBBCollider* GetOBBCollider() = 0;
+
+	// HP
+	virtual uint32_t GetHP() = 0;
 
 #pragma endregion 
 	

@@ -41,7 +41,6 @@ public:
 	Vector4 GetModelColor() const { return this->modelColor_; }
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
-
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
 
@@ -57,6 +56,9 @@ public:
 
 	// Collider
 	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
+
+	// HP
+	uint32_t GetHP() override { return this->hp_; }
 
 #pragma endregion 
 
@@ -95,6 +97,9 @@ private:
 
 	// 回転スピード
 	float addRadSpeed_ = 0.0f;
+
+	// HP
+	uint32_t hp_ = 0;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;

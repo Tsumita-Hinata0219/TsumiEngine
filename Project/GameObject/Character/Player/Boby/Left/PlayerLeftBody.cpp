@@ -11,6 +11,10 @@ void PlayerLeftBody::Init()
 
 	// Transformの初期化
 	trans_.Init();
+
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
 }
 
 
@@ -21,6 +25,7 @@ void PlayerLeftBody::Update() {}
 // 描画処理
 void PlayerLeftBody::Draw3D()
 {
+	model_->SetLightData(light_);
 	model_->DrawN(trans_);
 }
 void PlayerLeftBody::Draw2DFront() {}

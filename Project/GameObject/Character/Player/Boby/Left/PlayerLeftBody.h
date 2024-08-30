@@ -37,4 +37,6 @@ private:
 	// トランスフォーム
 	Transform trans_{};
 
+	// ライト
+	DirectionalLightData light_{};
 };

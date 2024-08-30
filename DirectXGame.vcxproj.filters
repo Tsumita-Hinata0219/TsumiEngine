@@ -181,7 +181,6 @@
     <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\EnemyManager.cpp" />
-    <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.cpp" />
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
@@ -196,9 +195,6 @@
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
-    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.cpp" />
-    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.cpp" />
-    <ClCompile Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.cpp" />
     <ClCompile Include="Tsumi\JsonManager\JsonManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\GameObject\Camera\Manager\CameraManager.cpp" />
@@ -400,7 +396,6 @@
     <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Tsumi\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\EnemyManager.h" />
-    <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Enemy.h" />
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Project\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Scene\DebugScene\DebugScene.h" />
@@ -416,10 +411,6 @@
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
-    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\IEnemyState.h" />
-    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Spawn\IEnemySpawnState.h" />
-    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Death\IEnemyDeathState.h" />
-    <ClInclude Include="Project\GameObject\Character\EnemyManager\IState\Approach\IEnemyApproachState.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Tsumi\3D\Model\ModelStructure\ModelStructure.h" />
     <ClInclude Include="Tsumi\JsonManager\JsonManager.h" />

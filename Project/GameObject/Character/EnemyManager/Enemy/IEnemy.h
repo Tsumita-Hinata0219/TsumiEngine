@@ -8,10 +8,6 @@
 
 #include "../Bullet/EnemyBullet.h"
 
-#include "../IState/IEnemyState.h"
-#include "../IState/Spawn/IEnemySpawnState.h"
-#include "../IState/Approach/IEnemyApproachState.h"
-#include "../IState/Death/IEnemyDeathState.h"
 
 
 // Player前方宣言

@@ -5,7 +5,6 @@
 
 #include "../../GameObject.h"
 
-#include "Enemy/Enemy.h"
 
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"

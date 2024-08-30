@@ -16,7 +16,6 @@ void Player::Init()
 	cameraManager_ = CameraManager::GetInstance();
 	camera_.Init();
 	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	//camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
 	cameraManager_->ReSetData(camera_);
 
 	// BodyModelのロード
@@ -25,7 +24,6 @@ void Player::Init()
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
-
 	// BulletModelのロード
 	modelManager_->LoadModel("Obj/Player/Bullet", "PlayerBullet.obj");
 

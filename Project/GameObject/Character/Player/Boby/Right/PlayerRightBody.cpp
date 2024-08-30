@@ -7,7 +7,7 @@ void PlayerRightBody::Init()
 {
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();
-	model_ = modelManager_->GetModel("Player_Main_Body");
+	model_ = modelManager_->GetModel("Player_Right_Body");
 
 	// Transformの初期化
 	trans_.Init();

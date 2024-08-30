@@ -26,22 +26,25 @@ void Player::Init()
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
 
+	// BodyTransformの初期化
+	trans_.Init();
+
 	// 各ボディクラスの初期化
 	mBody_ = std::make_unique<PlayerMainBody>();
 	mBody_->Init();
 	cBody_ = std::make_unique<PlayerCenterBody>();
-
+	cBody_->Init();
 	lBody_ = std::make_unique<PlayerLeftBody>();
-
+	lBody_->Init();
 	rBody_ = std::make_unique<PlayerRightBody>();
-
-	
-
-	// BodyTransformの初期化
-	trans_.Init();
+	rBody_->Init();
 
 	// Bodyとペアレントを結ぶ
 	mBody_->SetParent(&trans_);
+	cBody_->SetParent(&trans_);
+	lBody_->SetParent(&trans_);
+	rBody_->SetParent(&trans_);
+
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -126,6 +129,9 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	mBody_->Draw3D();
+	cBody_->Draw3D();
+	lBody_->Draw3D();
+	rBody_->Draw3D();
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {

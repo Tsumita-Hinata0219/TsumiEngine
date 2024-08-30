@@ -7,7 +7,7 @@
 
 // 八分木
 namespace OTree {
-
+	
 	// 前方宣言
 	template <class T>
 	class OctreeSpace;
@@ -17,7 +17,7 @@ namespace OTree {
 	class OctreeObject {
 
 	public:
-
+		
 		// 登録空間
 		OctreeSpace<T>* p_Space;
 

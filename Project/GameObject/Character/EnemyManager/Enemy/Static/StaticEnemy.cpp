@@ -22,7 +22,7 @@ void StaticEnemy::Init()
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
 	
-	// HP野の設定
+	// HPの設定
 	hp_ = 10;
 }
 

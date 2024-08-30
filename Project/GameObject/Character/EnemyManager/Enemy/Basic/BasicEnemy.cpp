@@ -19,7 +19,7 @@ void BasicEnemy::Init()
 	// ShotFrameにIntervalを入れておく
 	shotFrame_ = kShotInterval_;
 
-	// HP野の設定
+	// HPの設定
 	hp_ = 10;
 
 	/* ----- StatePattern ステートパターン ----- */

@@ -218,6 +218,10 @@
     <ClCompile Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\GameObject\Others\UI\Game\GameSceneUI.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Boby\Center\PlayerCenterBody.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -440,6 +444,10 @@
     <ClInclude Include="Project\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Project\GameObject\Character\Player\UI\PlayerUI.h" />
     <ClInclude Include="Project\GameObject\Others\UI\Game\GameSceneUI.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Boby\Center\PlayerCenterBody.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

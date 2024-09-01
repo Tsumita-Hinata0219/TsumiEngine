@@ -6,24 +6,20 @@
 void TitleScreen::Init()
 {
 	/* ----- Screen スクリーン ----- */
-
 	// Modelの読み込みと設定
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/TitleScreen", "TitleScreenobj.obj");
 	screenModel_ = modelManager_->GetModel("TitleScreenobj");
-
 	// Transformの初期化
 	trans_.Init();
 	trans_.srt.translate.z = 5.0f;
 
 
 	/* ----- Cursor カーソル ----- */
-
 	// Spriteの読み込みと設定
 	cursorTexHD_ = TextureManager::LoadTexture("Texture", "8.png");
 	cursorSprite_ = std::make_unique<Sprite>();
 	cursorSprite_->Init({ 64.0f, 64.0f });
-
 	// Transfromの初期化
 	cursorTrans_.Initialize();
 	cursorTrans_.srt.translate = { WinApp::kHalfWindowWidth, WinApp::kHalfWindowHeight, 0.0f };
@@ -38,7 +34,7 @@ void TitleScreen::Init()
 
 
 	// Parentを組む
-	//trans_.SetParent(&ttrans_);
+	trans_.SetParent(&ttrans_);
 }
 
 

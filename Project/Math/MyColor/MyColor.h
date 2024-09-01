@@ -3,7 +3,7 @@
 #include "../MathStructure/Vector/Vector.h"
 
 /* カラーのサンプル静的変数 */
-namespace Smp {
+namespace Samp {
 
 	struct Color final {
 

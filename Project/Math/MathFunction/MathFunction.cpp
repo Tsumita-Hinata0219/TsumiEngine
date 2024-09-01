@@ -162,7 +162,11 @@ float ToRadians(float degrees)
 // 範囲に変換
 float ConvertToRange(Vector2 input, Vector2 output, float value)
 {
+	// 入力値を範囲に制限
+	//float clampedInput = std::clamp(static_cast<float>(value), input.x, input.y);
+
 	// 入力値を入力範囲に正規化
+	//float normalize = (clampedInput - input.x) / (input.y - input.x);
 	float normalize = (value - input.x) / (input.y - input.x);
 
 	// 正規化された値を出力範囲にスケーリング

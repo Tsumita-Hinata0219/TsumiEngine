@@ -68,11 +68,14 @@ public:
 
 private: 
 
+	// シーンチェンジチェック
+	bool SceneChangeCheck(GameManager* state);
+
 	// 衝突判定処理
 	void CheckAllCollision();
 
 
-private:
+private: // クラス
 
 	// CollisionManager
 	std::unique_ptr<CollisionManager> collisionManager_;
@@ -97,5 +100,11 @@ private:
 
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
+
+
+private:
+
+	// シーンチェンジにかかる時間
+	Timer sceneChange_;
 };
 

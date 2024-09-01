@@ -16,16 +16,29 @@ void Player::Init()
 	cameraManager_ = CameraManager::GetInstance();
 	camera_.Init();
 	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	//camera_.srt.translate = { 0.0f, 20.0f, -60.0f };
 	cameraManager_->ReSetData(camera_);
 
-	// BodyModelのロードと初期化
+	// BodyModelのロード
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Player", "Player.obj");
-	model_ = modelManager_->GetModel("Player");
+	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");
+	modelManager_->LoadModel("Obj/Player/Body/Right", "Player_Right_Body.obj");
+	// BulletModelのロード
+	modelManager_->LoadModel("Obj/Player/Bullet", "PlayerBullet.obj");
 
 	// BodyTransformの初期化
 	trans_.Init();
+
+	// 各ボディの初期化とペアレントを結ぶ
+	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
+	iBodys_[enum_val(PlayerBodyTyep::MAIN)] = std::make_unique<PlayerMainBody>();
+	iBodys_[enum_val(PlayerBodyTyep::LEFT)] = std::make_unique<PlayerLeftBody>();
+	iBodys_[enum_val(PlayerBodyTyep::RIGHTM)] = std::make_unique<PlayerRightBody>();
+	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->Init();
+		body->SetParent(&trans_);
+	}
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -34,6 +47,9 @@ void Player::Init()
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
+
+	// HPの設定
+	hp_ = 3;
 }
 
 
@@ -79,6 +95,17 @@ void Player::Update()
 	// ColliderのSRTの設定
 	collider_->SetSrt(trans_.srt);
 
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
+
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {
 		camera_.DrawImGui();
@@ -92,6 +119,9 @@ void Player::Update()
 		ImGui::Text("KillCount = %d", killCount_);
 
 		ImGui::Text("");
+		ImGui::Text("HP = %d", hp_);
+
+		ImGui::Text("");
 		//light_.DrawImGui();
 		ImGui::TreePop();
 	}
@@ -103,8 +133,9 @@ void Player::Update()
 void Player::Draw3D()
 {
 	// BodyModelの描画
-	//model_->SetLightData(light_);
-	model_->DrawN(trans_);
+	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->Draw3D();
+	}
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
@@ -131,8 +162,22 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
+	// HP減少
+	hp_--;
 
+	// 体力がなければ消すモデルもないので通らない
+	if (hp_ >= 0) {
 
+		// 体力減少具合でボディを減らす
+		iBodys_[hp_].reset();
+
+		// nullになった要素を削除
+		iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
+			return body == nullptr;
+			}),
+			iBodys_.end()
+		);
+	}
 }
 
 

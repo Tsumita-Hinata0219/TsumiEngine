@@ -6,6 +6,11 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "Boby/IPlayerBody.h"
+#include "Boby/Main/PlayerMainBody.h"
+#include "Boby/Left/PlayerLeftBody.h"
+#include "Boby/Right/PlayerRightBody.h"
+
 #include "Bullet/PlayerBullet.h"
 
 #include "UI/PlayerUI.h"
@@ -44,6 +49,18 @@ public: // メンバ関数
 	// KillCount加算 & 減算
 	void AddKillCount(uint32_t addCount = 1) { this->killCount_ += addCount; }
 	void SubKillCount(uint32_t subCount = 1) { this->killCount_ -= subCount; }
+
+	// 死亡フラグ
+	bool IsDead() const { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+
+	// HP
+	uint32_t GetHP() const { return this->hp_; }
+	void SetHP(uint32_t setHP) { this->hp_ = setHP; }
+
+	// 勝敗のフラグ
+	bool IsWin() const { return this->isWin_; }
+	bool IsLose() const { return this->isLose_; }
 
 #pragma endregion 
 
@@ -99,7 +116,8 @@ private: // メンバ変数
 	CameraResource camera_{};
 
 	// モデル
-	std::unique_ptr<Model> model_;
+	// Body
+	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 	// トランスフォーム
 	Transform trans_{};
@@ -112,8 +130,14 @@ private: // メンバ変数
 	float moveSpeed_ = 0.3f;
 	float kBulletSpeed_ = 0.5f;
 
+	// 死亡フラグ
+	bool isDead_ = false;
+
 	// コライダー
 	std::unique_ptr<OBBCollider> collider_;
+
+	// HP
+	uint32_t hp_ = 0;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
@@ -142,6 +166,10 @@ private: // メンバ変数
 
 	// キルカウント
 	uint32_t killCount_ = 0;
+
+	// ゲームに勝利したかのフラグ
+	bool isWin_ = false;
+	bool isLose_ = false;
 
 };
 

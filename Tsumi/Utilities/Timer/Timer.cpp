@@ -2,20 +2,24 @@
 
 
 
-// スタート時に呼び出す処理
-void Timer::Start(float setStart, float setEnd)
+// タイマーの設定
+void Timer::Init(float setStart, float setEnd)
 {
-	// 既にスタートしていたら早期return
-	if (isActive_) {
-		return;
-	}
-
 	nowFrame_ = setStart;
 	endFrame_ = setEnd;
 
 	saveTimer_ = { setStart, setEnd };
 
 	frameRatio_ = nowFrame_ / endFrame_;
+}
+
+// スタート時に呼び出す処理
+void Timer::Start()
+{
+	// 既にスタートしていたら早期return
+	if (isActive_) {
+		return;
+	}
 
 	isActive_ = true;
 	isFinish_ = false;
@@ -27,7 +31,8 @@ void Timer::Update(bool roop)
 {
 	if (isFinish_) {
 		if (roop) {
-			this->Start(saveTimer_.first, saveTimer_.second);
+			this->Init(saveTimer_.first, saveTimer_.second);
+			this->Start();
 			return;
 		}
 		isActive_ = false;

@@ -10,7 +10,8 @@ void BasicEnemySpawnState::Enter(BasicEnemy* owner)
 	owner_ = owner;
 
 	// スケールのイージングにかかる時間の設定。1秒
-	scaleEaseTime_.Start(0.0f, 60.0f);
+	scaleEaseTime_.Init(0.0f, 60.0f);
+	scaleEaseTime_.Start();
 }
 
 

@@ -27,7 +27,8 @@ void EnemyManager::Init()
 	enemyMinInstance_ = 7;
 
 	// エネミーのカウントチェックタイマーの設定。4秒
-	enemyCountCheckTime_.Start(0.0f, 240.0f);
+	enemyCountCheckTime_.Init(0.0f, 240.0f);
+	enemyCountCheckTime_.Start();
 
 	// 湧きポイントのフラッグ
 	spawn_.resize(3);

@@ -34,7 +34,7 @@ public:
 	void OnCollision() override;
 
 	// チェンジステート
-	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = to_underlying(state); }
+	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = enum_val(state); }
 
 
 #pragma region Accessor アクセッサ

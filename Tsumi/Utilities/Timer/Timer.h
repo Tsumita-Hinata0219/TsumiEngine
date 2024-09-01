@@ -7,8 +7,11 @@ class Timer final {
 
 public: // メンバ関数
 
+	// タイマーの設定
+	void Init(float setStart, float setEnd);
+
 	// スタート時に呼び出す処理
-	void Start(float setStart, float setEnd);
+	void Start();
 
 	// タイマーの更新処理
 	void Update(bool roop = false);

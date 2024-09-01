@@ -58,6 +58,10 @@ public: // メンバ関数
 	uint32_t GetHP() const { return this->hp_; }
 	void SetHP(uint32_t setHP) { this->hp_ = setHP; }
 
+	// 勝敗のフラグ
+	bool IsWin() const { return this->isWin_; }
+	bool IsLose() const { return this->isLose_; }
+
 #pragma endregion 
 
 #pragma region Collision 衝突判定
@@ -162,6 +166,10 @@ private: // メンバ変数
 
 	// キルカウント
 	uint32_t killCount_ = 0;
+
+	// ゲームに勝利したかのフラグ
+	bool isWin_ = false;
+	bool isLose_ = false;
 
 };
 

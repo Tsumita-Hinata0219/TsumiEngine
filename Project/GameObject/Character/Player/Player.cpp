@@ -95,6 +95,17 @@ void Player::Update()
 	// ColliderのSRTの設定
 	collider_->SetSrt(trans_.srt);
 
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
+
 #ifdef _DEBUG
 	if (ImGui::TreeNode("Camera")) {
 		camera_.DrawImGui();

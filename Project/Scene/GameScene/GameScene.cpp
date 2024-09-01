@@ -55,6 +55,10 @@ void GameScene::Initialize()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
+
+
+	// シーンチェンジにかかる時間。3秒
+	sceneChange_.Init(0.0f, 60.0f * 3.0f);
 }
 
 
@@ -63,6 +67,11 @@ void GameScene::Initialize()
 /// </summary>
 void GameScene::Update(GameManager* state)
 {
+	/* ----- SceneChange シーンチェンジ ----- */
+	if (SceneChangeCheck(state)) {
+		return; // 後の更新処理は入らない
+	}
+
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
@@ -84,20 +93,10 @@ void GameScene::Update(GameManager* state)
 	/* ----- Collision 衝突判定 ----- */
 	CheckAllCollision();
 
-	/* ----- SceneChange シーンチェンジ ----- */
-	// プレイヤーのキルカウントが一定数を超えたらシーンチェンジ
-	if (player_->GetKillCount() >= 15) { // <- ここのマジックナンバー後で修正する
-		state->ChangeSceneState(new ResultScene);
-		return;
-	}
-
 #ifdef _DEBUG
 
 	ImGui::Begin("GameScene");
-
 	ImGui::Text("");
-	ImGui::Text("");
-
 	ImGui::End();
 
 #endif // _DEBUG
@@ -151,6 +150,33 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront();
+}
+
+
+// シーンチェンジチェック
+bool GameScene::SceneChangeCheck(GameManager* state)
+{
+	// プレイヤーの勝敗条件
+	if (player_->IsWin() || player_->IsLose()) {
+
+		if (!sceneChange_.IsActive()) {
+
+			// SceneChangeTimeスタート
+			sceneChange_.Start();
+		}
+
+		// タイマー更新
+		sceneChange_.Update();
+
+		// 終了したらシーンチェンジ
+		if (sceneChange_.IsFinish()) {
+			state->ChangeSceneState(new ResultScene());
+		}
+
+		return true;
+	}
+
+	return false;
 }
 
 

@@ -10,7 +10,8 @@ void BasicEnemyDeathState::Enter(BasicEnemy* owner)
 	owner_ = owner;
 
 	// イージングのタイマー時間設定。1.5秒
-	posEaseTime_.Start(0.0f, 90.0f);
+	posEaseTime_.Init(0.0f, 90.0f);
+	posEaseTime_.Start();
 
 	// イージングの開始座標と終了座標
 	posPair_ = {

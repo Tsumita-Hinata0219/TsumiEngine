@@ -15,7 +15,8 @@ void PlayerBullet::Init()
 	// 速度の設定。呼び出し先でaccessorで設定
 
 	// 寿命のタイマーをスタート。2秒で設定
-	life_.Start(0.0f, 2.0f * 60.0f);
+	life_.Init(0.0f, 2.0f * 60.0f);
+	life_.Start();
 
 	// 回転速度の設定
 	addRotateZ_ = 1.0f;

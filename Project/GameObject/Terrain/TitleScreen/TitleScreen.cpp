@@ -16,7 +16,6 @@ void TitleScreen::Init()
 	// Transformの初期化
 	screenTrans_.Init();
 	screenTrans_.srt.translate.z = 5.0f;
-	// スクリーンの親Transform
 	pTrans_.Init();
 	pTrans_.srt.scale = { 0.2f, 0.2f, 0.2f };
 	pTrans_.srt.translate.z = 4.5f;
@@ -51,6 +50,7 @@ void TitleScreen::Init()
 void TitleScreen::Update()
 {
 	cursorTrans_.UpdateMatrix();
+	pTrans_.UpdateMatrix();
 
 	// カーソルの移動処理
 	CurSorMove();

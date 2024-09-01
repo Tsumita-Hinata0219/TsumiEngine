@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../../../../IObject/IObject.h"
+#include "../IPlayerBody.h"
 
 
 
 /* プレイヤーのMainBodyクラス */
-class PlayerMainBody : public IObject {
+class PlayerMainBody : public IPlayerBody {
 
 public:
 
@@ -32,7 +33,7 @@ public:
 private:
 
 	// モデル
-	std::unique_ptr<Model> model_;
+	std::vector<std::unique_ptr<Model>> models_;
 
 	// トランスフォーム
 	Transform trans_{};

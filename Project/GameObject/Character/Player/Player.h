@@ -6,8 +6,8 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "Boby/IPlayerBody.h"
 #include "Boby/Main/PlayerMainBody.h"
-#include "Boby/Center/PlayerCenterBody.h"
 #include "Boby/Left/PlayerLeftBody.h"
 #include "Boby/Right/PlayerRightBody.h"
 
@@ -114,9 +114,9 @@ private: // メンバ変数
 	// モデル
 	// Body
 	std::unique_ptr<PlayerMainBody> mBody_; // Main
-	std::unique_ptr<PlayerCenterBody> cBody_; // Center
 	std::unique_ptr<PlayerLeftBody> lBody_; // Left
 	std::unique_ptr<PlayerRightBody> rBody_; // Right
+	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 	// トランスフォーム
 	Transform trans_{};

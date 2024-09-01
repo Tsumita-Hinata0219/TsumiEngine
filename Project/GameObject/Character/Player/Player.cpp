@@ -33,8 +33,6 @@ void Player::Init()
 	// 各ボディクラスの初期化
 	mBody_ = std::make_unique<PlayerMainBody>();
 	mBody_->Init();
-	cBody_ = std::make_unique<PlayerCenterBody>();
-	cBody_->Init();
 	lBody_ = std::make_unique<PlayerLeftBody>();
 	lBody_->Init();
 	rBody_ = std::make_unique<PlayerRightBody>();
@@ -42,7 +40,6 @@ void Player::Init()
 
 	// Bodyとペアレントを結ぶ
 	mBody_->SetParent(&trans_);
-	cBody_->SetParent(&trans_);
 	lBody_->SetParent(&trans_);
 	rBody_->SetParent(&trans_);
 
@@ -130,7 +127,6 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	mBody_->Draw3D();
-	cBody_->Draw3D();
 	lBody_->Draw3D();
 	rBody_->Draw3D();
 

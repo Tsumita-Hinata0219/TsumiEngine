@@ -1,11 +1,12 @@
 #pragma once
 
 #include "../../../../IObject/IObject.h"
+#include "../IPlayerBody.h"
 
 
 
 /* プレイヤーのLeftBodyクラス */
-class PlayerLeftBody : public IObject {
+class PlayerLeftBody : public IPlayerBody {
 
 public:
 

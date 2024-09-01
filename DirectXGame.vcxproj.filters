@@ -448,6 +448,7 @@
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Center\PlayerCenterBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Boby\IPlayerBody.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -113,9 +113,6 @@ private: // メンバ変数
 
 	// モデル
 	// Body
-	std::unique_ptr<PlayerMainBody> mBody_; // Main
-	std::unique_ptr<PlayerLeftBody> lBody_; // Left
-	std::unique_ptr<PlayerRightBody> rBody_; // Right
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 	// トランスフォーム

@@ -30,19 +30,15 @@ void Player::Init()
 	// BodyTransformの初期化
 	trans_.Init();
 
-	// 各ボディクラスの初期化
-	mBody_ = std::make_unique<PlayerMainBody>();
-	mBody_->Init();
-	lBody_ = std::make_unique<PlayerLeftBody>();
-	lBody_->Init();
-	rBody_ = std::make_unique<PlayerRightBody>();
-	rBody_->Init();
-
-	// Bodyとペアレントを結ぶ
-	mBody_->SetParent(&trans_);
-	lBody_->SetParent(&trans_);
-	rBody_->SetParent(&trans_);
-
+	// 各ボディの初期化とペアレントを結ぶ
+	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
+	iBodys_[enum_val(PlayerBodyTyep::MAIN)] = std::make_unique<PlayerMainBody>();
+	iBodys_[enum_val(PlayerBodyTyep::LEFT)] = std::make_unique<PlayerLeftBody>();
+	iBodys_[enum_val(PlayerBodyTyep::RIGHTM)] = std::make_unique<PlayerRightBody>();
+	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->Init();
+		body->SetParent(&trans_);
+	}
 
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
@@ -126,9 +122,9 @@ void Player::Update()
 void Player::Draw3D()
 {
 	// BodyModelの描画
-	mBody_->Draw3D();
-	lBody_->Draw3D();
-	rBody_->Draw3D();
+	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->Draw3D();
+	}
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
@@ -158,11 +154,19 @@ void Player::OnCollisionWithEnemyBullet()
 	// HP減少
 	hp_--;
 
-	// HPが0で死亡
-	if (hp_ <= 0) {
-		
-	}
+	// 体力がなければ消すモデルもないので通らない
+	if (hp_ >= 0) {
 
+		// 体力減少具合でボディを減らす
+		iBodys_[hp_].reset();
+
+		// nullになった要素を削除
+		iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
+			return body == nullptr;
+			}),
+			iBodys_.end()
+		);
+	}
 }
 
 

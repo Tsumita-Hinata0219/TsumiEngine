@@ -7,10 +7,11 @@
 
 
 // PlayerBodyのタイプ
-enum PlayerBodyTyep {
+enum class PlayerBodyTyep {
 	MAIN,
 	LEFT,
-	RIGHTM
+	RIGHTM,
+	Count,
 };
 
 
@@ -26,5 +27,8 @@ public:
 
 	// 仮想デストラクタ
 	virtual ~IPlayerBody() = default;
+
+	// ペアレントを結ぶ
+	virtual void SetParent(Transform* parent) = 0;
 
 };

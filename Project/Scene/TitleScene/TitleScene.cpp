@@ -33,7 +33,7 @@ void TitleScene::Initialize()
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
-	uint32_t dds = TextureManager::LoadTexture("Texture", "koruku.dds");
+	uint32_t dds = TextureManager::LoadTexture("Texture", "kokuban.dds");
 	skybox_->Init(dds);
 
 	/* ----- TitleScreen タイトルスクリーン ----- */

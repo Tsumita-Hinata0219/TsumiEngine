@@ -29,6 +29,9 @@ private:
 	// 加算姿勢の計算
 	void CalcAddRotate();
 
+	// スクリーンの姿勢計算
+	void CalcScreenRotate();
+
 
 private:
 
@@ -56,6 +59,6 @@ private:
 
 	// 加算姿勢
 	Vector2 addRotate_{};
-	Vector2 rangeInput_{};
+	std::pair<Vector2, Vector2> rangeInput_{};
 	Vector2 rangeOutput_{};
 };

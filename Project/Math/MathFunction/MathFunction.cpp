@@ -170,7 +170,7 @@ float ConvertToRange(Vector2 input, Vector2 output, float value)
 	float normalize = (value - input.x) / (input.y - input.x);
 
 	// 正規化された値を出力範囲にスケーリング
-	float result = normalize * (output.y - output.x) + output.y;
+	float result = normalize * (output.y - output.x) + output.x;
 
 	return result;
 }

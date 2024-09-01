@@ -43,7 +43,10 @@ void TitleScreen::Init()
 
 
 	// RangeInputとOutputの設定
-	rangeInput_ = { WinApp::kWindowWidth, WinApp::kWindowHeight };
+	rangeInput_ = {
+		{ 0.0f, WinApp::kWindowWidth },
+		{ 0.0f, WinApp::kWindowHeight },
+	};
 	rangeOutput_ = { -1.0f, +1.0f };
 }
 
@@ -58,6 +61,9 @@ void TitleScreen::Update()
 
 	// 加算姿勢の計算
 	CalcAddRotate();
+
+	// スクリーンの姿勢計算
+	CalcScreenRotate();
 
 #ifdef _DEBUG
 	
@@ -146,11 +152,6 @@ void TitleScreen::PadMove()
 		cursorTrans_.srt.translate += velocity_;
 
 		// 移動限界
-		/*cursorTrans_.srt.translate.x = max(cursorTrans_.srt.translate.x, WinApp::kWindowWidth);
-		cursorTrans_.srt.translate.x = min(cursorTrans_.srt.translate.x, 0.0f);
-		cursorTrans_.srt.translate.y = max(cursorTrans_.srt.translate.y, WinApp::kWindowHeight);
-		cursorTrans_.srt.translate.y = min(cursorTrans_.srt.translate.y, 0.0f);*/
-
 		cursorTrans_.srt.translate.x = max(cursorTrans_.srt.translate.x, 0.0f);
 		cursorTrans_.srt.translate.x = min(cursorTrans_.srt.translate.x, float(WinApp::kWindowWidth));
 		cursorTrans_.srt.translate.y = max(cursorTrans_.srt.translate.y, 0.0f);
@@ -163,7 +164,18 @@ void TitleScreen::PadMove()
 void TitleScreen::CalcAddRotate()
 {
 	addRotate_ = {
-		ConvertToRange(rangeInput_, rangeOutput_, cursorTrans_.srt.translate.x),
-		ConvertToRange(rangeInput_, rangeOutput_, cursorTrans_.srt.translate.y),
+		ConvertToRange(rangeInput_.second, rangeOutput_, cursorTrans_.srt.translate.y),
+		ConvertToRange(rangeInput_.first, rangeOutput_, cursorTrans_.srt.translate.x),
 	};
+
+	addRotate_ /= 10.0f;
+}
+
+
+// スクリーンの姿勢計算
+void TitleScreen::CalcScreenRotate()
+{
+	// スクリーンと親子関係を結んでいる親の姿勢を変更する
+	pTrans_.srt.rotate.x = (-addRotate_.x);
+	pTrans_.srt.rotate.y = (-addRotate_.y);
 }

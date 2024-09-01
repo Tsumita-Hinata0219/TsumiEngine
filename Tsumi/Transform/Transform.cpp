@@ -27,7 +27,7 @@ void Transform::UpdateMatrix()
 void Transform::DrawImGui(std::string label)
 {
 	ImGui::DragFloat3((label + "_Scale").c_str(), &srt.scale.x, 0.1f);
-	ImGui::DragFloat3((label + "_Rotate").c_str(), &srt.rotate.x, 0.1f);
+	ImGui::DragFloat3((label + "_Rotate").c_str(), &srt.rotate.x, 0.001f);
 	ImGui::DragFloat3((label + "_Translate").c_str(), &srt.translate.x, 0.1f);
 }
 

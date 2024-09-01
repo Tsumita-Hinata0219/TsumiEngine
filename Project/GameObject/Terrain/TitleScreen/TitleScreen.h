@@ -42,7 +42,6 @@ private:
 	std::unique_ptr<Model> screenModel_;
 	Transform screenTrans_{};
 	Transform pTrans_{};
-	std::unique_ptr<Model> testModel_;
 	
 	// カーソルスプライト
 	uint32_t cursorTexHD_;

@@ -16,6 +16,12 @@ void TitleScreen::Init()
 	// Transformの初期化
 	screenTrans_.Init();
 	screenTrans_.srt.translate.z = 5.0f;
+	// スクリーンの親Transform
+	pTrans_.Init();
+	pTrans_.srt.scale = { 0.2f, 0.2f, 0.2f };
+	pTrans_.srt.translate.z = 4.5f;
+	// Parentを組む
+	screenTrans_.SetParent(&pTrans_);
 
 
 	/* ----- Cursor カーソル ----- */
@@ -30,16 +36,6 @@ void TitleScreen::Init()
 	cursorTrans_.srt.translate = { WinApp::kHalfWindowWidth, WinApp::kHalfWindowHeight, 0.0f };
 	// カーソルの移動速度
 	cursorSpeed_ = 15.0f;
-
-	// Test
-	modelManager_->LoadModel("Obj/Test", "Test.obj");
-	testModel_ = modelManager_->GetModel("Test");
-	pTrans_.Init();
-	pTrans_.srt.scale = { 0.2f, 0.2f, 0.2f };
-	pTrans_.srt.translate.z = 4.5f;
-
-	// Parentを組む
-	screenTrans_.SetParent(&pTrans_);
 
 
 	// RangeInputとOutputの設定
@@ -98,7 +94,6 @@ void TitleScreen::Update()
 void TitleScreen::Draw3D()
 {
 	screenModel_->DrawN(screenTrans_);
-	testModel_->DrawN(pTrans_);
 }
 void TitleScreen::Draw2DFront() 
 {

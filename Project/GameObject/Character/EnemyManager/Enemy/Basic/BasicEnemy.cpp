@@ -48,20 +48,22 @@ void BasicEnemy::Update()
 	FuncStatePattern();
 
 	// アプローチ状態の時のみ入る処理
-	if (stateNo_ == int(BasicEnemyStateType::APPROACH)) {
+	if (stateNo_ == int(BasicEnemyStateType::IDLE)) {
 
 		// 戦闘状態の切り替え処理
 		ToggleCombatState();
+		return;
+	}
 
-		// 戦闘状態に入っていたら入る処理
-		if (isCombatActive_) {
 
-			// 移動処理
-			Move();
+	// 戦闘状態に入っていたら入る処理
+	if (isCombatActive_) {
 
-			// 射撃の処理
-			ExecuteShot();
-		}
+		// 移動処理
+		Move();
+
+		// 射撃の処理
+		ExecuteShot();
 	}
 
 	// Bullet更新処理
@@ -168,8 +170,11 @@ void BasicEnemy::ToggleCombatState()
 
 		// 戦闘状態のフラグを立てる
 		isCombatActive_ = true;
+		ChangeState(BasicEnemyStateType::APPROACH);
 	}
 	else {
+
+		ChangeState(BasicEnemyStateType::IDLE);
 
 		// 戦闘状態のフラグを折る
 		isCombatActive_ = false;

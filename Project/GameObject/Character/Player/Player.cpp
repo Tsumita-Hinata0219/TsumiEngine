@@ -174,7 +174,8 @@ void Player::OnCollisionWithEnemyBullet()
 		// nullになった要素を削除
 		iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
 			return body == nullptr;
-			}),
+			}
+		),
 			iBodys_.end()
 		);
 	}

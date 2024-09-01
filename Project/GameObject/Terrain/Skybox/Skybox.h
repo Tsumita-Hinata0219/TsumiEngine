@@ -17,7 +17,7 @@ public: // メンバ関数
 	~Skybox() {};
 
 	// 初期化処理、更新処理、描画処理
-	void Init();
+	void Init(uint32_t dds);
 	void Update();
 	void Draw();
 

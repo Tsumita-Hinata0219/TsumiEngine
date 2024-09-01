@@ -187,12 +187,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Project\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Project\Math\MathQuaternion\MathQuaternion.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Project\Math\MathStructure\Vector\Vector.cpp" />
+    <ClCompile Include="Project\Math\MyColor\MyColor.cpp" />
     <ClCompile Include="Project\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Project\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Project\Scene\GameScene\GameScene.cpp" />
@@ -339,6 +341,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />
+    <ClInclude Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.h" />
     <ClInclude Include="Project\GameObject\Terrain\Wall\Wall.h" />
     <ClInclude Include="Project\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Project\Math\MathFunction\MathFunction.h" />
@@ -347,6 +350,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Math\MathQuaternion\MathQuaternion.h" />
     <ClInclude Include="Project\Math\MathStructure\Matrix\Matrix.h" />
     <ClInclude Include="Project\Math\MathStructure\Vector\Vector.h" />
+    <ClInclude Include="Project\Math\MyColor\MyColor.h" />
     <ClInclude Include="Project\Math\MyMath.h" />
     <ClInclude Include="Project\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Project\math\Struct.h" />

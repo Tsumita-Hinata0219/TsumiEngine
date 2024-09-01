@@ -222,6 +222,8 @@
     <ClCompile Include="Project\GameObject\Character\Player\Boby\Center\PlayerCenterBody.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
+    <ClCompile Include="Project\Math\MyColor\MyColor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -449,6 +451,8 @@
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Boby\IPlayerBody.h" />
+    <ClInclude Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.h" />
+    <ClInclude Include="Project\Math\MyColor\MyColor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

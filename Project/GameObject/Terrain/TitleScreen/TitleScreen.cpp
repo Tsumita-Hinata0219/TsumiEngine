@@ -49,6 +49,7 @@ void TitleScreen::Init()
 // 更新処理
 void TitleScreen::Update()
 {
+	// Transformの更新処理
 	cursorTrans_.UpdateMatrix();
 	pTrans_.UpdateMatrix();
 
@@ -73,9 +74,6 @@ void TitleScreen::Update()
 
 		ImGui::Text("");
 		ImGui::DragFloat("CurSor_Speed", &cursorSpeed_, 0.01f);
-
-		ImGui::Text("");
-		ImGui::DragFloat3("Velocity", &velocity_.x, 0.01f);
 
 
 		ImGui::Text("");

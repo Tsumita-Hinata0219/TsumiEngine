@@ -3,10 +3,10 @@
 
 
 // 初期化処理
-void Skybox::Init()
+void Skybox::Init(uint32_t dds)
 {
 	// テクスチャの読み込み
-	this->texture_ = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
+	this->texture_ = dds;
 
 	// Scale
 	initScale_ = 100000.0f;

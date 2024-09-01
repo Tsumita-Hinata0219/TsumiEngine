@@ -34,7 +34,8 @@ void DebugScene::Initialize()
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
-	skybox_->Init();
+	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
+	skybox_->Init(dds);
 
 	/* ----- Ground 床 ----- */
 	ground_ = std::make_unique<Ground>();

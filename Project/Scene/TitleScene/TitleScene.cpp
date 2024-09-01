@@ -31,15 +31,14 @@ void TitleScene::Initialize()
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Initialize();
 
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
+	skybox_->Init(dds);
+
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_ = std::make_unique<TitleScreen>();
 	titleScreen_->Init();
-
-	/* ----- Title タイトル ----- */
-	titleTexHD_ = TextureManager::LoadTexture("Texture/Title", "TitleSceneBG.png");
-	titleSp_ = std::make_unique<Sprite>();
-	titleSp_->Init({ 1280.0f, 720.0f });
-	titleWt_.Initialize();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
@@ -57,11 +56,11 @@ void TitleScene::Update(GameManager* state)
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
 
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Update();
+
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Update();
-
-	/* ----- Title タイトル ----- */
-	titleWt_.UpdateMatrix();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -103,6 +102,9 @@ void TitleScene::BackSpriteDraw()
 /// </summary>
 void TitleScene::ModelDraw()
 {
+	/* ----- Skybox 天箱 ----- */
+	skybox_->Draw();
+
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Draw3D();
 }
@@ -115,9 +117,6 @@ void TitleScene::FrontSpriteDraw()
 {
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_->Draw();
-
-	/* ----- Title タイトル ----- */
-	//titleSp_->Draw(titleTexHD_, titleWt_);
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Draw2DFront();

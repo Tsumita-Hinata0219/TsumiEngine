@@ -5,7 +5,11 @@
 #include "../../../Project/GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 
+#include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
+
 #include "../../Project/GameObject/Terrain/TitleScreen/TitleScreen.h"
+
+#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 
 class TitleScene : public IScene {
@@ -65,13 +69,14 @@ private:
 	// TitleScreen
 	std::unique_ptr<TitleScreen> titleScreen_;
 
-	// タイトルテクスチャ
-	uint32_t titleTexHD_{};
-	WorldTransform titleWt_{};;
-	std::unique_ptr<Sprite> titleSp_;
+	// Skybox
+	std::unique_ptr<Skybox> skybox_;
 
 	// FadeManager
 	FadeManager* fadeManager_ = nullptr;
+
+
+private:
 
 	// フェード処理のフラグ
 	bool isFadeFunc_ = false;

@@ -57,6 +57,8 @@ float Clamp(const float& value, const float& minValue, const float& maxValue);
 float APOneAsZeroCloser(float value);
 // 角度を度からラジアンに変換する処理
 float ToRadians(float degrees);
+// 範囲に変換
+float ConvertToRange(Vector2 input, Vector2 output, float value);
 
 
 

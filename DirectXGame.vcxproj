@@ -187,6 +187,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Skydome\Skydome.cpp" />
+    <ClCompile Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
     <ClCompile Include="Project\GameObject\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Project\Math\MathFunction\MathFunction.cpp" />
@@ -339,6 +340,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Project\GameObject\Terrain\Skydome\Skydome.h" />
+    <ClInclude Include="Project\GameObject\Terrain\TitleScreen\TitleScreen.h" />
     <ClInclude Include="Project\GameObject\Terrain\Wall\Wall.h" />
     <ClInclude Include="Project\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Project\Math\MathFunction\MathFunction.h" />

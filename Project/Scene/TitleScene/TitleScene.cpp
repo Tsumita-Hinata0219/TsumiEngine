@@ -27,6 +27,14 @@ void TitleScene::Initialize()
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
 
+	/* ----- AbsentEffect アブセントエフェクト----- */
+	absentEffect_ = std::make_unique<AbsentEffect>();
+	absentEffect_->Initialize();
+
+	/* ----- TitleScreen タイトルスクリーン ----- */
+	titleScreen_ = std::make_unique<TitleScreen>();
+	titleScreen_->Init();
+
 	/* ----- Title タイトル ----- */
 	titleTexHD_ = TextureManager::LoadTexture("Texture/Title", "TitleSceneBG.png");
 	titleSp_ = std::make_unique<Sprite>();
@@ -48,6 +56,9 @@ void TitleScene::Update(GameManager* state)
 
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
+
+	/* ----- TitleScreen タイトルスクリーン ----- */
+	titleScreen_->Update();
 
 	/* ----- Title タイトル ----- */
 	titleWt_.UpdateMatrix();
@@ -92,6 +103,8 @@ void TitleScene::BackSpriteDraw()
 /// </summary>
 void TitleScene::ModelDraw()
 {
+	/* ----- TitleScreen タイトルスクリーン ----- */
+	titleScreen_->Draw3D();
 }
 
 
@@ -100,8 +113,14 @@ void TitleScene::ModelDraw()
 /// </summary>
 void TitleScene::FrontSpriteDraw()
 {
+	/* ----- AbsentEffect アブセントエフェクト----- */
+	absentEffect_->Draw();
+
 	/* ----- Title タイトル ----- */
-	titleSp_->Draw(titleTexHD_, titleWt_);
+	//titleSp_->Draw(titleTexHD_, titleWt_);
+
+	/* ----- TitleScreen タイトルスクリーン ----- */
+	titleScreen_->Draw2DFront();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_->Draw();

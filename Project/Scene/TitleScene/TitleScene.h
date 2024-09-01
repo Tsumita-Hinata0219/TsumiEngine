@@ -5,6 +5,8 @@
 #include "../../../Project/GameObject/GameObject.h"
 #include "../../../Tsumi/Utilities/FadeManager/FadeManager.h"
 
+#include "../../Project/GameObject/Terrain/TitleScreen/TitleScreen.h"
+
 
 class TitleScene : public IScene {
 
@@ -56,6 +58,12 @@ private:
 
 	// カメラ本体
 	CameraResource camera_{};
+
+	// AbsentEffect
+	std::unique_ptr<AbsentEffect> absentEffect_;
+
+	// TitleScreen
+	std::unique_ptr<TitleScreen> titleScreen_;
 
 	// タイトルテクスチャ
 	uint32_t titleTexHD_{};

@@ -159,6 +159,18 @@ float ToRadians(float degrees)
 	return degrees * (float(M_PI) / 180.0f);
 }
 
+// 範囲に変換
+float ConvertToRange(Vector2 input, Vector2 output, float value)
+{
+	// 入力値を入力範囲に正規化
+	float normalize = (value - input.x) / (input.y - input.x);
+
+	// 正規化された値を出力範囲にスケーリング
+	float result = normalize * (output.y - output.x) + output.y;
+
+	return result;
+}
+
 
 
 

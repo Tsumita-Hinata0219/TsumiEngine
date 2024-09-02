@@ -57,7 +57,6 @@ void GameScene::Initialize()
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
-
 	// シーンチェンジにかかる時間。3秒
 	sceneChange_.Init(0.0f, 60.0f * 3.0f);
 }

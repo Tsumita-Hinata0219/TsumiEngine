@@ -28,6 +28,9 @@ public:
 	// コリジョン判定を実行
 	void Update();
 
+	// シェイプの追加
+	void RegisterShape(ColShapeData& data);
+
 
 private:
 
@@ -43,5 +46,10 @@ private:
 	// コンポーネントリスト
 	std::vector<CollisionComponent*> components_;
 
+	// シェイプリスト
+	std::vector<CollisionShape*> shapes_;
+	std::map<uint32_t, CollisionShape*> shapeMap_;
+	// 追加したシェイプのインデックス
+	uint32_t shapeIndex_ = 0;
 };
 

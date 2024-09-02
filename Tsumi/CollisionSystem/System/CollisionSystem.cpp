@@ -47,6 +47,41 @@ void CollisionSystem::Update()
 }
 
 
+// シェイプの追加
+void CollisionSystem::RegisterShape(ColShapeData& data)
+{
+    // Indexの加算
+    shapeIndex_++;
+    
+    if (auto colData = std::get_if<Col::Sphere>(&data)) {
+
+        // IDの設定
+        colData->id = shapeIndex_;
+
+    }
+    else if (auto colData = std::get_if<Col::AABB>(&data)) {
+
+        // IDの設定
+        colData->id = shapeIndex_;
+    }
+    else if (auto colData = std::get_if<Col::OBB>(&data)) {
+
+        // IDの設定
+        colData->id = shapeIndex_;
+    }
+    else if (auto colData = std::get_if<Col::Segment>(&data)) {
+
+        // IDの設定
+        colData->id = shapeIndex_;
+    }
+    else if (auto colData = std::get_if<Col::Capsule>(&data)) {
+
+        // IDの設定
+        colData->id = shapeIndex_;
+    }
+}
+
+
 // コリジョン判定を行う
 void CollisionSystem::CheckCollisions()
 {

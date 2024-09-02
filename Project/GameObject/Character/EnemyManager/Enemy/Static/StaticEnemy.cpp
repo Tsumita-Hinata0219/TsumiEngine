@@ -19,9 +19,13 @@ void StaticEnemy::Init()
 	light_.direction = Vector3::one;
 
 	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
+	/*collider_ = std::make_unique<OBBCollider>();
 	collider_->Init();
-	collider_->SetSize(size_);
+	collider_->SetSize(size_);*/
+	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	colComp_->RegisterCollider(sphere_);
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -56,7 +60,7 @@ void StaticEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	collider_->SetSrt(trans_.srt);
+	//collider_->SetSrt(trans_.srt);
 
 #ifdef _DEBUG
 
@@ -80,16 +84,19 @@ void StaticEnemy::Draw2DFront() {}
 void StaticEnemy::Draw2DBack() {}
 
 
-// 衝突時コールバック関数
-void StaticEnemy::OnCollision()
+// 衝突判定コールバック関数
+void StaticEnemy::onCollision(IObject* object)
 {
-	// HPを減らす
-	hp_--;
+	if (object->GetAttribute() == ObjAttribute::PLAYER) {
 
-	// HPが0以下なら死亡
-	if (hp_ <= 0) {
-		isDead_ = true;
-		player_->AddKillCount();
+		// HPを減らす
+		hp_--;
+
+		// HPが0以下なら死亡
+		if (hp_ <= 0) {
+			isDead_ = true;
+			player_->AddKillCount();
+		}
 	}
 }
 

@@ -30,3 +30,9 @@ void PlayerLeftBody::Draw3D()
 }
 void PlayerLeftBody::Draw2DFront() {}
 void PlayerLeftBody::Draw2DBack() {}
+
+
+// 衝突判定コールバック関数
+void PlayerLeftBody::onCollision([[maybe_unused]] IObject* object)
+{
+}

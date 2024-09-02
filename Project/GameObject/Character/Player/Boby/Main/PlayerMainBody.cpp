@@ -34,3 +34,9 @@ void PlayerMainBody::Draw3D()
 }
 void PlayerMainBody::Draw2DFront() {}
 void PlayerMainBody::Draw2DBack() {}
+
+
+// 衝突判定コールバック関数
+void PlayerMainBody::onCollision([[maybe_unused]] IObject* object)
+{
+}

@@ -73,13 +73,13 @@ void CollisionShapeSphere::CalcBounding()
 	float rad = this->sphere_.radius;
 	Vector3 min = this->sphere_.center + Vector3(rad, rad, rad);
 	Vector3 max = this->sphere_.center - Vector3(rad, rad, rad);
-	int id = this->sphere_.id;
+	uint32_t id = this->sphere_.id;
 
 	// 境界ボックスに情報を挿入
 	this->bounding_ = {
+		id,
 		center,
 		min,
 		max,
-		id,
 	};
 }

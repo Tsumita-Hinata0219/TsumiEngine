@@ -22,26 +22,22 @@ namespace Col {
 		Vector3 center{}; // !< 中心座標
 		Vector3 min;      // !< 最少点
 		Vector3 max;      // !< 最大点
-		int id;
 	};
 	struct OBB : public ColData {
 		Vector3 center;			   // !< 中心点
 		Vector3 rotate{};          // !< 姿勢
 		Vector3 orientations[3]{}; // !< 座標軸。正規化・直交必須
 		Vector3 size;              // !< 座標軸方向の長さの半分。中心から面までの距離
-		int id;
 	};
 	struct Segment : public ColData {
 		Vector3 origin;	// !< 始点
 		Vector3 diff;   // !< 終点への差分ベクトル
-		int id;
 	};
 	struct Capsule : public ColData {
 		Vector3 center;  // !< 中心座標
 		Segment segment; // !< 始点と終点
 		Vector3 rotate;  // !< オイラー角(姿勢) 
 		float radius;    // !< 半径
-		int id;
 	};
 }
 

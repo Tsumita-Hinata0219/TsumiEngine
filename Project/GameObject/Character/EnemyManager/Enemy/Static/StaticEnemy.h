@@ -14,7 +14,7 @@ class StaticEnemy : public IEnemy {
 public:
 
 	// コンストラクタ、デストラクタ
-	StaticEnemy() {};
+	StaticEnemy() { attribute_ = ObjAttribute::ENEMY; };
 	~StaticEnemy() {};
 
 	// 初期化処理　更新処理　描画処理
@@ -24,8 +24,8 @@ public:
 	void Draw2DFront() override;
 	void Draw2DBack() override;
 
-	// 衝突時コールバック関数
-	void OnCollision() override;
+	// 衝突判定コールバック関数
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 
 #pragma region Accessor アクセッサ
@@ -55,7 +55,7 @@ public:
 	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
 
 	// Collider
-	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
+	//OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
@@ -93,7 +93,8 @@ private:
 	DirectionalLightData light_{};
 
 	// コライダー
-	std::unique_ptr<OBBCollider> collider_;
+	//std::unique_ptr<OBBCollider> collider_;
+	Col::Sphere sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

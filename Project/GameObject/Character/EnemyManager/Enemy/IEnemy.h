@@ -21,10 +21,6 @@ public:
 	// 仮想デストラクタ
 	virtual ~IEnemy() = default;
 
-	// 衝突時コールバック関数
-	virtual void OnCollision() = 0;
-
-
 
 #pragma region Accessor アクセッサ
 
@@ -41,8 +37,8 @@ public:
 	// 座標
 	virtual void SetPosition(Vector3 setPos) = 0;
 
-	// Collider
-	virtual OBBCollider* GetOBBCollider() = 0;
+	//// Collider
+	//virtual OBBCollider* GetOBBCollider() = 0;
 
 	// HP
 	virtual uint32_t GetHP() = 0;

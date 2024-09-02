@@ -41,9 +41,9 @@ void Player::Init()
 	}
 
 	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
+	/*collider_ = std::make_unique<OBBCollider>();
 	collider_->Init();
-	collider_->SetSize(size_);
+	collider_->SetSize(size_);*/
 	//// Colliderの初期化
 	//collider_ = std::make_unique<OBBCollider>();
 	//collider_->Init();

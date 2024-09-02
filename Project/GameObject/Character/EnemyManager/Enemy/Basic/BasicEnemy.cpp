@@ -117,28 +117,22 @@ void BasicEnemy::Draw2DFront() {}
 void BasicEnemy::Draw2DBack() {}
 
 
-// 衝突時コールバック関数
-void BasicEnemy::OnCollision()
-{
-	// HPを減らす
-	hp_--;
-
-	// HPが0以下なら死亡
-	if (hp_ <= 0) {
-		isDead_ = true;
-		player_->AddKillCount();
-	}
-}
-
-
 // 衝突自コールバック関数
-void Enemy::onCollision([[maybe_unused]] IObject* object)
+void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYER) {
-		isDead_ = true;
+
+		// HPを減らす
+		hp_--;
+
+		// HPが0以下なら死亡
+		if (hp_ <= 0) {
+			isDead_ = true;
+			player_->AddKillCount();
+		}
 	}
 }
-void Enemy::OnCollisionWithPlayer()
+void BasicEnemy::OnCollisionWithPlayer()
 {
 
 }

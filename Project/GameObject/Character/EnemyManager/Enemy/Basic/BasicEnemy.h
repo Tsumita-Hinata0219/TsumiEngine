@@ -20,10 +20,8 @@ class BasicEnemy : public IEnemy {
 public:
 
 	// コンストラクタとデストラクタ
-	BasicEnemy() {};
+	BasicEnemy() { attribute_ = ObjAttribute::ENEMY; };
 	~BasicEnemy() {};
-	Enemy() { attribute_ = ObjAttribute::ENEMY; };
-	~Enemy() {};
 
 	// 初期化処理　更新処理　描画処理
 	void Init() override;
@@ -31,9 +29,6 @@ public:
 	void Draw3D() override;
 	void Draw2DFront() override;
 	void Draw2DBack() override;
-
-	// 衝突時コールバック関数
-	void OnCollision() override;
 
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
@@ -70,7 +65,7 @@ public:
 	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
 
 	// Collider
-	OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
+	//OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }

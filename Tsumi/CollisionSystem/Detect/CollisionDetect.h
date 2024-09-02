@@ -121,8 +121,8 @@ namespace Detect {
 			.max = { obb.size.x, obb.size.y, obb.size.z }
 		};
 		Col::Sphere sphereOBBLocal = {
-			centerInOBBLocalSpace,
-			s.radius
+			.center = centerInOBBLocalSpace,
+			.radius = s.radius
 		};
 
 		// ローカル座標で衝突判定

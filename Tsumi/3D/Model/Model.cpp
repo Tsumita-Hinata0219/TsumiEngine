@@ -36,9 +36,6 @@ Model::Model(ModelDatas datas)
 	else if (datas.fileFormat == ModelFileFormat::GLTF.first) {
 		this->modelState_ = new IGLTFState(datas);
 	}
-
-	// Datasを基にBufferを作成する
-	//CreateBufferResource();
 }
 
 

@@ -31,3 +31,9 @@ void Building1::Draw3D()
 }
 void Building1::Draw2DFront() {}
 void Building1::Draw2DBack() {}
+
+
+// 衝突判定コールバック関数
+void Building1::onCollision([[maybe_unused]] IObject* object)
+{
+}

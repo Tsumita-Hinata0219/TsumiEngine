@@ -7,10 +7,11 @@
 #include "MathFunction/MathFunction.h"
 #include "MyColor/MyColor.h"
 #include "MyParlinNoise/ParlinNoise.h"
-#include "../../Tsumi/Utilities/RandomGenerator/RandomGenerator.h"
-#include "../../Tsumi/Utilities/TimedCall/TimedCall.h"
 #include "MathEasing/MathEasing.h"
 
+#include "../../Tsumi/Utilities/RandomGenerator/RandomGenerator.h"
+#include "../../Tsumi/Utilities/TimedCall/TimedCall.h"
+#include "../../Tsumi/SmartPointer/SmartPtr.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

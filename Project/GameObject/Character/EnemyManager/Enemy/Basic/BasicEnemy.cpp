@@ -38,10 +38,14 @@ void BasicEnemy::Init()
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Enter(this);
 
-	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);
+	//// Colliderの初期化
+	//collider_ = std::make_unique<OBBCollider>();
+	//collider_->Init();
+	//collider_->SetSize(size_);
+	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	colComp_->RegisterCollider(sphere_);
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 }
 
 
@@ -86,7 +90,9 @@ void BasicEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	collider_->SetSrt(trans_.srt);
+	//collider_->SetSrt(trans_.srt);
+	sphere_.center = trans_.GetWorldPos();
+	colComp_->UpdateShape(sphere_);
 
 #ifdef _DEBUG
 
@@ -126,7 +132,13 @@ void BasicEnemy::OnCollision()
 
 
 // 衝突自コールバック関数
-void BasicEnemy::OnCollisionWithPlayer()
+void Enemy::onCollision([[maybe_unused]] IObject* object)
+{
+	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+		isDead_ = true;
+	}
+}
+void Enemy::OnCollisionWithPlayer()
 {
 
 }

@@ -25,7 +25,8 @@ void GameScene::Initialize()
 	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
-	collisionManager_ = std::make_unique<CollisionManager>();
+	collisionSystem_ = std::make_unique<CollisionSystem>();
+	collisionSystem_->Init();
 
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -47,6 +48,10 @@ void GameScene::Initialize()
 	/* ----- Floor 床 ----- */
 	floor_ = std::make_unique<Floor>();
 	floor_->Init();
+
+	/* ----- Building1 建物1 ----- */
+	/*building1_ = std::make_unique<Building1>();
+	building1_->Init();*/
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
@@ -83,6 +88,9 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();
+
+	/* ----- Building1 建物1 ----- */
+	//building1_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -183,36 +191,56 @@ bool GameScene::SceneChangeCheck(GameManager* state)
 // 衝突判定処理
 void GameScene::CheckAllCollision()
 {
-	// Player with EnemyBullet
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		for (auto& bullet : enemy->GetBulletList()) {
-			if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
-				player_->OnCollisionWithEnemyBullet();
-				bullet->OnCollisionWithPlayer();
-			}
+	// コンポーネントをクリア
+	collisionSystem_->ClearComponent();
+
+	// コンポーネントを追加
+	collisionSystem_->AAddComponent(player_->GetColComponent());
+	for (auto& plaBullet : player_->GetBulletList()) {
+		collisionSystem_->AAddComponent(plaBullet->GetColComponent());
+	}
+	for (auto& enemy : enemyManager_->GetEnemyList()) {
+		collisionSystem_->AAddComponent(enemy->GetColComponent());
+	}
+	for (auto& enemy : enemyManager_->GetEnemyList()) {
+		for (auto& eneBullet : enemy->GetBulletList()) {
+			collisionSystem_->AAddComponent(eneBullet->GetColComponent());
 		}
 	}
 
-	// PlayerBullet with Enemy
-	for (auto& bullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemys()) {
-			if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
-				bullet->OnCollisionWithEnemy();
-				enemy->OnCollision();
-			}
-		}
-	}
+	// コリジョン判定を行う
+	collisionSystem_->Update();
 
-	// PlayerBullet with EnemyBullet
-	for (auto& playerBullet : player_->GetBulletList()) {
-		for (auto& enemy : enemyManager_->GetEnemys()) {
-			for (auto& enemyBullet : enemy->GetBulletList()) {
-				if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
-					playerBullet->OnCollisionWithEnemyBullet();
-					enemyBullet->OnCollisionWithPlayerBullet();
-				}
-			}
-		}
-	}
+
+	//// Player with EnemyBullet
+	//for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//	for (auto& bullet : enemy->GetBulletList()) {
+	//		if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
+	//			player_->OnCollisionWithEnemyBullet();
+	//			bullet->OnCollisionWithPlayer();
+	//		}
+	//	}
+	//}
+
+	//// PlayerBullet with Enemy
+	//for (auto& bullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
+	//			bullet->OnCollisionWithEnemy();
+	//			enemy->OnCollisionWithPlayerBullet();
+	//		}
+	//	}
+	//}
+
+	//// PlayerBullet with EnemyBullet
+	//for (auto& playerBullet : player_->GetBulletList()) {
+	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
+	//		for (auto& enemyBullet : enemy->GetBulletList()) {
+	//			if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
+	//				playerBullet->OnCollisionWithEnemyBullet();
+	//				enemyBullet->OnCollisionWithPlayerBullet();
+	//			}
+	//		}
+	//	}
+	//}
 }
-

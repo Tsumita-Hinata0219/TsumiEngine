@@ -6,6 +6,7 @@
 void Transform::Init()
 {
 	matWorld = Matrix4x4::identity;
+	//parent = nullptr;
 	UpdateMatrix();
 }
 
@@ -17,7 +18,7 @@ void Transform::UpdateMatrix()
 	matWorld = MakeAffineMatrix(srt.scale, srt.rotate, srt.translate);
 
 	// 親があれば親のワールド行列を掛ける
-	if (parent) {
+	if (parent != nullptr) {
 		matWorld *= parent->matWorld;
 	}
 }

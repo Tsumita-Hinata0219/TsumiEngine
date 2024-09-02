@@ -136,6 +136,42 @@ std::string FindFirstFileWithExtension(const std::string& directoryPath, const s
 
 
 /// -------------------------------------------------------------------------
+/// Bit
+/// -------------------------------------------------------------------------
+// ビット分割関数
+uint32_t BitSeparate32(uint32_t n)
+{
+	// 8ビット飛びにする
+	n = (n | (n << 8)) & 0x00ff00ff;
+	// 4ビット飛びにする
+	n = (n | (n << 4)) & 0x0f0f0f0f;
+	// 2ビット飛びにする
+	n = (n | (n << 2)) & 0x33333333;
+	// 1ビット飛びにする
+	return (n | (n << 1)) & 0x55555555;
+}
+
+// モートン番号を算出する関数
+uint32_t Get2DMortonNumber(uint32_t x, uint32_t y)
+{
+	return (BitSeparate32(x) | (BitSeparate32(y) << 1));
+}
+
+// ビット列から最上位ビットの位置を取得する関数
+uint32_t findHighestBitPosition(int bitmask)
+{
+	int position = 0;
+	while (bitmask != 0) {
+		bitmask >>= 1;
+		++position;
+	}
+	return position;
+}
+
+
+
+
+/// -------------------------------------------------------------------------
 /// float
 /// -------------------------------------------------------------------------
 // ラープ

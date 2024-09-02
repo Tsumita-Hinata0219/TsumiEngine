@@ -2,9 +2,6 @@
 
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
-#include "../../../Project/GameObject/GameObject.h"
-#include "../../../Tsumi/3D/Model/ModelManager/ModelManager.h"
-#include "../../../Tsumi/PipeLineManager/PipeLineManager.h"
 #include "../../Tsumi/JsonManager/JsonManager.h"
 
 #include "../../Project/GameObject/Camera/Manager/CameraManager.h"
@@ -24,6 +21,8 @@
 
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "../../GameObject/Effect/TestPostEffect/TestPostEffect.h"
+
+#include "../../Tsumi/CollisionSystem/System/CollisionSystem.h"
 
 
 class GameScene : public IScene {
@@ -78,7 +77,8 @@ private:
 private: // クラス
 
 	// CollisionManager
-	std::unique_ptr<CollisionManager> collisionManager_;
+	//std::unique_ptr<CollisionManager> collisionManager_;
+	std::unique_ptr<CollisionSystem> collisionSystem_;
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;

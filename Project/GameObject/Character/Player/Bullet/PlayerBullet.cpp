@@ -25,10 +25,14 @@ void PlayerBullet::Init()
 	light_.enable = true;
 	light_.direction = Vector3::one;
 
-	// Colliderの初期化
-	collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);
+	//// Colliderの初期化
+	//collider_ = std::make_unique<OBBCollider>();
+	//collider_->Init();
+	//collider_->SetSize(size_);
+	colComp_ = std::make_unique<CollisionComponent>(this);
+	colComp_->RegisterCollider(sphere_);
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 }
 
 
@@ -48,7 +52,9 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	collider_->SetSrt(trans_.srt);
+	//collider_->SetSrt(trans_.srt);
+	sphere_.center = trans_.GetWorldPos();
+	colComp_->UpdateShape(sphere_);
 }
 
 
@@ -63,6 +69,12 @@ void PlayerBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
+void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
+{
+	if (object->GetAttribute() == ObjAttribute::ENEMY) {
+		isDead_ = true;
+	}
+}
 void PlayerBullet::OnCollisionWithEnemy()
 {
 	isDead_ = true;

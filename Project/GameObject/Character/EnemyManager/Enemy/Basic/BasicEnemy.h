@@ -22,6 +22,8 @@ public:
 	// コンストラクタとデストラクタ
 	BasicEnemy() {};
 	~BasicEnemy() {};
+	Enemy() { attribute_ = ObjAttribute::ENEMY; };
+	~Enemy() {};
 
 	// 初期化処理　更新処理　描画処理
 	void Init() override;
@@ -32,6 +34,9 @@ public:
 
 	// 衝突時コールバック関数
 	void OnCollision() override;
+
+	// 衝突判定コールバック関数
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = enum_val(state); }
@@ -126,7 +131,8 @@ private:
 	DirectionalLightData light_;
 
 	// コライダー
-	std::unique_ptr<OBBCollider> collider_;
+	//std::unique_ptr<OBBCollider> collider_;
+	Col::Sphere sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

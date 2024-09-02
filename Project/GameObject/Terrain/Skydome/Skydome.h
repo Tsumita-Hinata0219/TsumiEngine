@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../IObject/IObject.h"
-#include "../../GameObject.h"
 
 
 /* Skydomeクラス */
@@ -19,6 +18,9 @@ public:
 	void Draw3D() override;
 	void Draw2DFront() override;
 	void Draw2DBack() override;
+
+	// 衝突判定コールバック関数
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 
 private:

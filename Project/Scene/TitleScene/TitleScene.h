@@ -12,6 +12,9 @@
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 
+#include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
+
+
 class TitleScene : public IScene {
 
 public:

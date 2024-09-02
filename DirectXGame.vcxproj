@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -78,6 +78,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>$(ProjectDir)externals\assimp\lib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
     <PostBuildEvent>
       <Command>copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxcompiler.dll" "$(TargetDir)dxcompiler.dll"
@@ -217,6 +218,26 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Tsumi\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Tsumi\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Component\CollisionComponent.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Event\CollisionEvent.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Listener\CollisionListener.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Shape\CollisionShape.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Octree.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
@@ -286,9 +307,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Tsumi\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Tsumi\Tsumi.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\CollisionManager.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.cpp" />
-    <ClCompile Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Tsumi\Utilities\FadeManager\FadeManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\TimedCall\TimedCall.cpp" />
@@ -390,6 +408,35 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Tsumi\Base\WinApp\WinApp.h" />
     <ClInclude Include="Tsumi\BufferResource\BufferResource.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\ColEventManager\ColEventManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Box\AABBCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Capsule\CapsuleCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Collider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\ColliderConfig.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Box\OBBCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Segment\SegmentCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Collider\Sphere\SphereCollider.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Component\CollisionComponent.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Detect\CollisionDetect.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Event\CollisionEvent.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Geometry\GeometryCollision.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\IsCollision\IsCollision.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Listener\CollisionListener.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Manager\CollisionManager.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Shape\CollisionShape.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Octree.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Structure\CollisionStructures.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
@@ -448,20 +495,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Tsumi\PostEffect\PostEffect.h" />
     <ClInclude Include="Tsumi\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Tsumi\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Tsumi\TextureManager\TextureManager.h" />
     <ClInclude Include="Tsumi\Transform\Transform.h" />
     <ClInclude Include="Tsumi\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Tsumi\Tsumi.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\AABBCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\CapsuleCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\ColliderConfig.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\OBBCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SegmentCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\Collider\SphereCollider.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionManager.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\CollisionStructures\CollisionStructures.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\GeometryCollision\GeometryCollision.h" />
-    <ClInclude Include="Tsumi\Utilities\CollisionManager\IsCollision\IsCollision.h" />
     <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Tsumi\Utilities\FadeManager\FadeManager.h" />
     <ClInclude Include="Tsumi\Utilities\ImGuiManager\ImGuiManager.h" />
@@ -732,7 +770,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
     <None Include="Resources\Shaders\LambertObject.hlsli" />
     <None Include="Resources\Shaders\LightObject.hlsli">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>

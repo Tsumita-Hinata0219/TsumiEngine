@@ -55,6 +55,9 @@ void EnemyManager::Init()
 // 更新処理
 void EnemyManager::Update()
 {
+	// エネミーカウントチェック
+	EnemyCountCheck();
+
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
@@ -70,8 +73,6 @@ void EnemyManager::Update()
 		}
 	);
 
-	// エネミーカウントチェック
-	EnemyCountCheck();
 
 #ifdef _DEBUG
 	if (ImGui::TreeNode("EnemyManager")) {

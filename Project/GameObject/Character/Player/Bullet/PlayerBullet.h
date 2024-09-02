@@ -15,7 +15,7 @@ class PlayerBullet : public IObject {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	PlayerBullet() {};
+	PlayerBullet() { attribute_ = ObjAttribute::PLAYER; };
 	~PlayerBullet() {};
 
 	// 初期化処理　更新処理　描画処理
@@ -24,6 +24,9 @@ public: // メンバ関数
 	void Draw3D() override;
 	void Draw2DFront() override;
 	void Draw2DBack() override;
+
+	// 衝突判定コールバック関数
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 #pragma region Accessor アクセッサ
 
@@ -52,7 +55,7 @@ public: // メンバ関数
 	bool IsDead() const { return this->isDead_; }
 
 	// Collider
-	OBBCollider* GetOBBCollider() { return this->collider_.get(); }
+	//OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
 #pragma endregion 
 
@@ -95,7 +98,9 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// コライダー
-	std::unique_ptr<OBBCollider> collider_;
+	//std::unique_ptr<OBBCollider> collider_;
+	Col::Sphere sphere_;
+
 
 	// 移動速度
 	Vector3 velocity_;

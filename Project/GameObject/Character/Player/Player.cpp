@@ -225,6 +225,13 @@ void Player::PadMove()
 
 		// 移動
 		trans_.srt.translate += velocity_;
+
+		// 移動限界
+		const float kMoveMit = 100.0f;
+		trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+		trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+		trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+		trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
 	}
 }
 

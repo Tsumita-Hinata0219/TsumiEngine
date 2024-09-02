@@ -14,6 +14,10 @@ void StaticEnemy::Init()
 	// BodyTransfromの初期化
 	trans_.Init();
 
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+
 	// Colliderの初期化
 	collider_ = std::make_unique<OBBCollider>();
 	collider_->Init();
@@ -64,6 +68,7 @@ void StaticEnemy::Update()
 void StaticEnemy::Draw3D()
 {
 	// BodyModelの描画
+	//model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

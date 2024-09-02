@@ -37,7 +37,7 @@ void GameScene::Initialize()
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
-	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
+	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
 	skybox_->Init(dds);
 
 	/* ----- Wall 壁 ----- */
@@ -56,7 +56,6 @@ void GameScene::Initialize()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
-
 
 	// シーンチェンジにかかる時間。3秒
 	sceneChange_.Init(0.0f, 60.0f * 3.0f);
@@ -126,7 +125,7 @@ void GameScene::ModelDraw()
 	skybox_->Draw();
 
 	/* ----- Wall 壁 ----- */
-	wall_->Draw3D();
+	//wall_->Draw3D();
 
 	/* ----- Floor 床 ----- */
 	floor_->Draw3D();

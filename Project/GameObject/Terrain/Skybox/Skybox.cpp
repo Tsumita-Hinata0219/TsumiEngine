@@ -9,7 +9,7 @@ void Skybox::Init(uint32_t dds)
 	this->texture_ = dds;
 
 	// Scale
-	initScale_ = 100000.0f;
+	initScale_ = 1000.0f;
 
 	// Transformの初期化処理
 	transform_.Initialize();

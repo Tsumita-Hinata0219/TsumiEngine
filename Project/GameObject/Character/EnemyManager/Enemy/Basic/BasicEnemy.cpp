@@ -8,8 +8,8 @@ void BasicEnemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Test", "Test.obj");
-	model_ = modelManager_->GetModel("Test");
+	modelManager_->LoadModel("Obj/Enemys/Basic", "Basic.obj");
+	model_ = modelManager_->GetModel("Basic");
 
 	// BodyTransformの初期化
 	trans_.Init();
@@ -21,6 +21,10 @@ void BasicEnemy::Init()
 
 	// HPの設定
 	hp_ = 10;
+
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
@@ -95,6 +99,7 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
+	//model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

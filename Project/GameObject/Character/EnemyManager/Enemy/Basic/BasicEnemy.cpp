@@ -22,6 +22,10 @@ void BasicEnemy::Init()
 	// HPの設定
 	hp_ = 10;
 
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
 	stateVector_.resize(EnumSize<BasicEnemyStateType>::value);
@@ -95,6 +99,7 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
+	//model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

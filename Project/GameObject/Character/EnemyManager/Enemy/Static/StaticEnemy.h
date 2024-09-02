@@ -89,6 +89,9 @@ private:
 	// 死亡フラグ
 	bool isDead_ = false;
 
+	// ライト
+	DirectionalLightData light_{};
+
 	// コライダー
 	std::unique_ptr<OBBCollider> collider_;
 

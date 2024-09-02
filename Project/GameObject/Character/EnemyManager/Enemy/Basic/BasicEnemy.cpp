@@ -8,8 +8,8 @@ void BasicEnemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Test", "Test.obj");
-	model_ = modelManager_->GetModel("Test");
+	modelManager_->LoadModel("Obj/Enemys/Basic", "Basic.obj");
+	model_ = modelManager_->GetModel("Basic");
 
 	// BodyTransformの初期化
 	trans_.Init();

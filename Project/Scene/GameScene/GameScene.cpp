@@ -37,7 +37,7 @@ void GameScene::Initialize()
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
-	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
+	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
 	skybox_->Init(dds);
 
 	/* ----- Wall 壁 ----- */
@@ -126,7 +126,7 @@ void GameScene::ModelDraw()
 	skybox_->Draw();
 
 	/* ----- Wall 壁 ----- */
-	wall_->Draw3D();
+	//wall_->Draw3D();
 
 	/* ----- Floor 床 ----- */
 	floor_->Draw3D();

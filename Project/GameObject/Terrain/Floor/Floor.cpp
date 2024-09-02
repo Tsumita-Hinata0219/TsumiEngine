@@ -9,7 +9,7 @@ void Floor::Init()
 	model_ = modelManager_->GetModel("Floor");
 
 	trans_.Init();
-	trans_.srt.translate.y = -10.0f;
+	trans_.srt.translate.y = -2.0f;
 }
 
 

@@ -7,8 +7,6 @@
 
 #include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
 
-#include "../../Project/GameObject/Terrain/TitleScreen/TitleScreen.h"
-
 #include "../../Tsumi/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 
@@ -65,9 +63,6 @@ private:
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
-
-	// TitleScreen
-	std::unique_ptr<TitleScreen> titleScreen_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

@@ -133,6 +133,9 @@ void Player::Update()
 		ImGui::Text("HP = %d", hp_);
 
 		ImGui::Text("");
+		ImGui::DragFloat2("L_Stick", &L_StickInput_.x, 0.0f);
+
+		ImGui::Text("");
 		//light_.DrawImGui();
 		ImGui::TreePop();
 	}

@@ -62,3 +62,4 @@ bool BasicEnemySpawnState::OutElasticScale()
 
 	return false;
 }
+

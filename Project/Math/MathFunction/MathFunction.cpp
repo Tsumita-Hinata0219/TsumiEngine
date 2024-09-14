@@ -448,6 +448,34 @@ Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, f
 	return CatmullRomInterpolation(p0, p1, p2, p3, t);
 }
 
+// Vector3にアフィン変換と透視補正を適用する
+Vector3 TransformWithPerspective(const Vector3& v, const Matrix4x4& m)
+{
+	// 行と列の積和計算
+	auto dotProduct = [&](int row) {
+		return (v.x * m.m[0][row]) + (v.y * m.m[1][row]) + (v.z * m.m[2][row]) + m.m[3][row];
+		};
+
+	// 結果の計算
+	Vector3 result = {
+		dotProduct(0),
+		dotProduct(1),
+		dotProduct(2)
+	};
+
+	// w成分の計算
+	float w = dotProduct(3);
+
+	// 0除算を避ける
+	if (w != 0.0f) {
+		result.x /= w;
+		result.y /= w;
+		result.z /= w;
+	}
+
+	return result;
+}
+
 
 
 

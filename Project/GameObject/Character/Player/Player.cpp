@@ -19,7 +19,6 @@ void Player::Init()
 	cameraManager_->ReSetData(camera_);
 
 	// BodyModelのロード
-	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Left", "Player_Left_Body.obj");

@@ -16,6 +16,10 @@
 #include "UI/PlayerUI.h"
 
 
+// 前方宣言
+class FollowCamera;
+
+
 /* Playerクラス */
 class Player : public IObject {
 
@@ -36,6 +40,9 @@ public: // メンバ関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
 #pragma region Accessor アクセッサ
+
+	// フォローカメラ
+	void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
 
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
@@ -98,28 +105,31 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
-	// カメラ操作
-	void CameraOperation();
+	//// カメラ操作
+	//void CameraOperation();
 
-	// カメラの回転処理
-	void CameraRotate();
+	//// カメラの回転処理
+	//void CameraRotate();
 
-	// カメラのフォロー処理
-	void CameraFollow();
+	//// カメラのフォロー処理
+	//void CameraFollow();
 
 private: // メンバ変数
 
 	// Inputクラス
 	Input* input_ = nullptr;
 
-	// カメラマネージャー
-	CameraManager* cameraManager_ = nullptr;
+	// フォローカメラ
+	FollowCamera* followCamera_ = nullptr;
+
+	//// カメラマネージャー
+	//CameraManager* cameraManager_ = nullptr;
 
 	// UI
 	std::unique_ptr<PlayerUI> ui_;
 
-	// カメラ本体
-	CameraResource camera_{};
+	//// カメラ本体
+	//CameraResource camera_{};
 
 	// モデル
 	// Body

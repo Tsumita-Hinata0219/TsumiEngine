@@ -5,6 +5,7 @@
 #include "../../Tsumi/JsonManager/JsonManager.h"
 
 #include "../../Project/GameObject/Camera/Manager/CameraManager.h"
+#include "../../Project/GameObject/Camera/FollowCamera/FollowCamera.h"
 
 #include "../../../Project/GameObject/Terrain/Skydome/Skydome.h"
 #include "../../../Project/GameObject/Terrain/Skybox/Skybox.h"
@@ -85,6 +86,9 @@ private: // クラス
 
 	// GameSceneUI
 	std::unique_ptr<GameSceneUI> gameSceneUI_;
+
+	// FollowCamera
+	std::unique_ptr<FollowCamera> followCamera_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

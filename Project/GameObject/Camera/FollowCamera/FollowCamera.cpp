@@ -8,13 +8,6 @@ void FollowCamera::Init()
 	// Inputクラス
 	input_ = Input::GetInstance();
 
-	// モデルのロードと設定
-	modelManager_->LoadModel("Obj/FollowCamera", "FollowCamera.obj");
-	model_ = modelManager_->GetModel("FollowCamera");
-
-	// Transformの初期化
-	trans_.Init();
-
 	// カメラマネージャーのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();
 	// カメラリソース
@@ -27,14 +20,15 @@ void FollowCamera::Init()
 
 	// オフセットの設定
 	playerOffset_ = constOffset_;
-
-
 }
 
 
 // 更新処理
 void FollowCamera::Update()
 {
+	// カメラデータの更新
+	camera_.Update();
+
 	// stickの入力を受け取る
 	iRStick_ = input_->GetRStick();
 
@@ -70,6 +64,7 @@ void FollowCamera::Draw2DBack()
 // 衝突判定コールバック関数
 void FollowCamera::onCollision(IObject* object)
 {
+	object;
 }
 
 

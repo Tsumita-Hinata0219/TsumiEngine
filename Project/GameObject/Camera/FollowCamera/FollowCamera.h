@@ -62,11 +62,6 @@ private:
 	// プレイヤー
 	Player* player_ = nullptr;
 
-	// モデル
-	std::unique_ptr<Model> model_;
-	// トランスフォーム
-	Transform trans_{};
-
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 	// カメラ本体

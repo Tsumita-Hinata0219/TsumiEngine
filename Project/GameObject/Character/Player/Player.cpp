@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "../../Camera/FollowCamera/FollowCamera.h"
 
 
 // 初期化処理
@@ -12,11 +12,11 @@ void Player::Init()
 	ui_ = std::make_unique<PlayerUI>();
 	ui_->Init();
 
-	// カメラ
-	cameraManager_ = CameraManager::GetInstance();
-	camera_.Init();
-	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	cameraManager_->ReSetData(camera_);
+	//// カメラ
+	//cameraManager_ = CameraManager::GetInstance();
+	//camera_.Init();
+	//camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	//cameraManager_->ReSetData(camera_);
 
 	// BodyModelのロード
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
@@ -67,11 +67,11 @@ void Player::Update()
 	// UI
 	ui_->Update();
 
-	// カメラの更新処理
-	camera_.Update();
+	//// カメラの更新処理
+	//camera_.Update();
 
-	// カメラ操作
-	CameraOperation();
+	//// カメラ操作
+	//CameraOperation();
 
 	// Transformの更新処理
 	trans_.UpdateMatrix();
@@ -117,10 +117,10 @@ void Player::Update()
 	}
 
 #ifdef _DEBUG
-	if (ImGui::TreeNode("Camera")) {
+	/*if (ImGui::TreeNode("Camera")) {
 		camera_.DrawImGui();
 		ImGui::TreePop();
-	}
+	}*/
 	if (ImGui::TreeNode("Player")) {
 
 		trans_.DrawImGui();
@@ -220,49 +220,49 @@ void Player::KeyMove()
 }
 void Player::PadMove()
 {
-	// stickの入力を受け取る
-	L_StickInput_ = input_->GetLStick();
+	//// stickの入力を受け取る
+	//L_StickInput_ = input_->GetLStick();
 
-	// stick入力が一定範囲を超えている場合更新
-	if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
+	//// stick入力が一定範囲を超えている場合更新
+	//if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
 
-		// 移動量
-		velocity_ = {
-			L_StickInput_.x,
-			0.0f,
-			L_StickInput_.y,
-		};
+	//	// 移動量
+	//	velocity_ = {
+	//		L_StickInput_.x,
+	//		0.0f,
+	//		L_StickInput_.y,
+	//	};
 
-		// 移動量に速さを反映
-		velocity_ = Normalize(velocity_) * moveSpeed_;
+	//	// 移動量に速さを反映
+	//	velocity_ = Normalize(velocity_) * moveSpeed_;
 
-		// 移動ベクトルをカメラの角度だけ回転する
-		velocity_ = TransformNormal(velocity_, camera_.srt.rotate);
+	//	// 移動ベクトルをカメラの角度だけ回転する
+	//	velocity_ = TransformNormal(velocity_, camera_.srt.rotate);
 
-		// 移動
-		trans_.srt.translate += velocity_;
+	//	// 移動
+	//	trans_.srt.translate += velocity_;
 
-		// 移動限界
-		const float kMoveMit = 100.0f;
-		trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
-		trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
-		trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
-		trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
-	}
+	//	// 移動限界
+	//	const float kMoveMit = 100.0f;
+	//	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+	//	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+	//	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+	//	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
+	//}
 }
 
 
 // プレイヤー本体の姿勢処理
 void Player::CalcBodyRotate()
 {
-	// Rstick入力が一定範囲を超えている場合、カメラの姿勢を使用する
-	if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
+	//// Rstick入力が一定範囲を超えている場合、カメラの姿勢を使用する
+	//if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
 
-		playerRad_ = camera_.srt.rotate.y;
-	}
+	//	playerRad_ = camera_.srt.rotate.y;
+	//}
 
-	// カメラの角度を使い姿勢を制御
-	trans_.srt.rotate.y = playerRad_;
+	//// カメラの角度を使い姿勢を制御
+	//trans_.srt.rotate.y = playerRad_;
 }
 
 
@@ -312,46 +312,46 @@ void Player::CreateNewBullet()
 	bulletList_.push_back(newBullet);
 }
 
-
-// カメラ操作
-void Player::CameraOperation()
-{
-	// カメラの回転処理
-	CameraRotate();
-
-	// カメラのフォロー処理
-	CameraFollow();
-}
-
-
-// カメラの回転処理
-void Player::CameraRotate()
-{
-	// stickの入力を受け取る
-	R_StickInput_ = input_->GetRStick();
-
-	// stick入力が一定範囲を超えている場合、角度を更新
-	if (std::abs(R_StickInput_.x) > 0.2f) {
-
-		// 入力に基づいて角度を更新
-		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
-
-		// 回す
-		camera_.srt.rotate.y += cameraAngle_;
-	}
-}
-
-
-// カメラのフォロー処理
-void Player::CameraFollow()
-{
-	// オフセットの設定
-	cameraOffset_ = { 0.0f, 5.0f, -30.0f };
-
-	// オフセットをカメラの回転に合わせて回転させる
-	cameraOffset_ = TransformNormal(cameraOffset_, camera_.rotateMat);
-
-	// ターゲットの座標とオフセットをカメラの座標に加算する
-	camera_.srt.translate = trans_.srt.translate + cameraOffset_;
-}
-
+//
+//// カメラ操作
+//void Player::CameraOperation()
+//{
+//	// カメラの回転処理
+//	CameraRotate();
+//
+//	// カメラのフォロー処理
+//	CameraFollow();
+//}
+//
+//
+//// カメラの回転処理
+//void Player::CameraRotate()
+//{
+//	// stickの入力を受け取る
+//	R_StickInput_ = input_->GetRStick();
+//
+//	// stick入力が一定範囲を超えている場合、角度を更新
+//	if (std::abs(R_StickInput_.x) > 0.2f) {
+//
+//		// 入力に基づいて角度を更新
+//		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
+//
+//		// 回す
+//		camera_.srt.rotate.y += cameraAngle_;
+//	}
+//}
+//
+//
+//// カメラのフォロー処理
+//void Player::CameraFollow()
+//{
+//	// オフセットの設定
+//	cameraOffset_ = { 0.0f, 5.0f, -30.0f };
+//
+//	// オフセットをカメラの回転に合わせて回転させる
+//	cameraOffset_ = TransformNormal(cameraOffset_, camera_.rotateMat);
+//
+//	// ターゲットの座標とオフセットをカメラの座標に加算する
+//	camera_.srt.translate = trans_.srt.translate + cameraOffset_;
+//}
+//

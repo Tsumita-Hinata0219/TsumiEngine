@@ -144,7 +144,7 @@ void FollowCamera::DrawImGui()
 {
 	if (ImGui::TreeNode("FollowCamera")) {
 
-
+		camera_.DrawImGui();
 
 		ImGui::TreePop();
 	}

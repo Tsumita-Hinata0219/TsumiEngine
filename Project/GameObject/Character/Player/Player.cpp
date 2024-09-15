@@ -178,12 +178,11 @@ void Player::OnCollisionWithEnemyBullet()
 // 入力を受け取る
 void Player::InputFunc()
 {
-	// 入力を取得
+	// stickの入力を取得
 	iLStick_ = input_->GetLStick();
 
-	// 0で初期化
+	// keyの入力を取得
 	iKeys_ = Vector2::zero;
-
 	if (input_->Press(DIK_W)) {
 		iKeys_.y = 1.0f;
 	}
@@ -212,9 +211,12 @@ void Player::MoveFunc()
 	PadMove();
 	KeyMove();
 
+	// 移動限界処理
+	MoveLimited();
+
 	// 移動方向からY軸の姿勢を傾ける処理
-	CalcBodyOrienation(iLStick_, stickMoveDirection_);
-	CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	/*CalcBodyOrienation(iLStick_, stickMoveDirection_);
+	CalcBodyOrienation(iKeys_, keyMoveDirection_);*/
 }
 
 
@@ -244,26 +246,30 @@ void Player::PadMove()
 	// 移動量の計算
 	if (std::abs(iLStick_.x) > DZone_ || std::abs(iLStick_.y) > DZone_) {
 
+		// 移動量の計算(カメラの前方と右方に基づく)
+		velocity_ = stickMoveDirection_;
+
 		// 移動方向を正規化し速さを乗算
-		velocity_ = Normalize(stickMoveDirection_) * moveSpeed_;
+		velocity_ = Normalize(velocity_) * moveSpeed_;
 
 		// 座標に加算
 		trans_.srt.translate += velocity_;
-
-		// 移動限界処理
-		MoveLimited();
 	}
 }
 void Player::KeyMove()
 {
-	// 移動方向を正規化し速さを乗算
-	velocity_ = Normalize(keyMoveDirection_) * moveSpeed_;
+	// 移動量の計算
+	if (std::abs(iKeys_.x) > DZone_ || std::abs(iKeys_.y) > DZone_) {
 
-	// 座標に加算
-	trans_.srt.translate += velocity_;
+		// 移動量の計算(カメラの前方と右方に基づく)
+		velocity_ = keyMoveDirection_;
 
-	// 移動限界処理
-	MoveLimited();
+		// 移動方向を正規化し速さを乗算
+		velocity_ = Normalize(velocity_) * moveSpeed_;
+
+		// 座標に加算
+		trans_.srt.translate += velocity_;
+	}
 }
 
 

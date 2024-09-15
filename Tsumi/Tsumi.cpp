@@ -57,6 +57,7 @@ void Tsumi::Initialize() {
 void Tsumi::Finalize() {
 
 	Audio::Finalize();
+	ImGuiManager::Release();
 	TextureManager::Finalize();
 	//DescriptorManager::Clear();
 	SRVManager::Clear();

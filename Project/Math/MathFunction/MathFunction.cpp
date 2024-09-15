@@ -451,22 +451,14 @@ Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, f
 // Vector3にアフィン変換と透視補正を適用する
 Vector3 TransformWithPerspective(const Vector3& v, const Matrix4x4& m)
 {
-	// 行と列の積和計算
-	auto dotProduct = [&](int row) {
-		return (v.x * m.m[0][row]) + (v.y * m.m[1][row]) + (v.z * m.m[2][row]) + m.m[3][row];
-		};
-
-	// 結果の計算
 	Vector3 result = {
-		dotProduct(0),
-		dotProduct(1),
-		dotProduct(2)
+		(v.x * m.m[0][0]) + (v.y * m.m[1][0]) + (v.z * m.m[2][0]) + (1.0f * m.m[3][0]),
+		(v.x * m.m[0][1]) + (v.y * m.m[1][1]) + (v.z * m.m[2][1]) + (1.0f * m.m[3][1]),
+		(v.x * m.m[0][2]) + (v.y * m.m[1][2]) + (v.z * m.m[2][2]) + (1.0f * m.m[3][2])
 	};
+	float w = (v.x * m.m[0][3]) + (v.y * m.m[1][3]) + (v.z * m.m[2][3]) + (1.0f * m.m[3][3]);
 
-	// w成分の計算
-	float w = dotProduct(3);
-
-	// 0除算を避ける
+	//0除算を避ける
 	if (w != 0.0f) {
 		result.x /= w;
 		result.y /= w;

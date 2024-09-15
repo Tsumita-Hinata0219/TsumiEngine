@@ -98,23 +98,8 @@ void Player::Update()
 	}
 
 #ifdef _DEBUG
-	if (ImGui::TreeNode("Player")) {
-
-		trans_.DrawImGui();
-		
-		ImGui::Text("");
-		ImGui::Text("KillCount = %d", killCount_);
-
-		ImGui::Text("");
-		ImGui::Text("HP = %d", hp_);
-
-		ImGui::Text("");
-		ImGui::DragFloat2("L_Stick", &iLStick_.x, 0.0f);
-
-		ImGui::Text("");
-		//light_.DrawImGui();
-		ImGui::TreePop();
-	}
+	// ImGuiの描画
+	DrawImGui();
 #endif // _DEBUG
 }
 
@@ -156,7 +141,7 @@ void Player::OnCollisionWithEnemy()
 void Player::OnCollisionWithEnemyBullet()
 {
 	// HP減少
-	hp_--;
+	//hp_--;
 
 	// 体力がなければ消すモデルもないので通らない
 	if (hp_ >= 0) {
@@ -215,8 +200,8 @@ void Player::MoveFunc()
 	MoveLimited();
 
 	// 移動方向からY軸の姿勢を傾ける処理
-	/*CalcBodyOrienation(iLStick_, stickMoveDirection_);
-	CalcBodyOrienation(iKeys_, keyMoveDirection_);*/
+	CalcBodyOrienation(iLStick_, stickMoveDirection_);
+	CalcBodyOrienation(iKeys_, keyMoveDirection_);
 }
 
 
@@ -291,11 +276,11 @@ void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 		float targetAngle = std::atan2(normalizeDirection.x, normalizeDirection.z);
 
 		// 現在の角度と目標角度から最短を求める
-		float shortestAngle = ShortestAngle(trans_.srt.translate.y, targetAngle);
+		float shortestAngle = ShortestAngle(trans_.srt.rotate.y, targetAngle);
 
 		// 現在の角度を目標角度の間を補間
-		trans_.srt.translate.y = 
-			Lerp(trans_.srt.translate.y, trans_.srt.translate.y + shortestAngle, orientationLerpSpeed_);
+		trans_.srt.rotate.y = 
+			Lerp(trans_.srt.rotate.y, trans_.srt.rotate.y + shortestAngle, orientationLerpSpeed_);
 	}
 }
 
@@ -344,5 +329,35 @@ void Player::CreateNewBullet()
 
 	// リストに追加
 	bulletList_.push_back(newBullet);
+}
+
+
+// ImGuiの描画
+void Player::DrawImGui()
+{
+	if (ImGui::TreeNode("Player")) {
+
+		ImGui::Text("Transform");
+		trans_.DrawImGui();
+		ImGui::Text("");
+
+		ImGui::Text("Move");
+		ImGui::DragFloat3("Velocity", &velocity_.x, 0.0f);
+		ImGui::Text("");
+
+		ImGui::Text("KillCount = %d", killCount_);
+		ImGui::Text("");
+
+		ImGui::Text("HP = %d", hp_);
+		ImGui::Text("");
+
+		//ImGui::Text("入力関連");
+		ImGui::Text("Input");
+		ImGui::DragFloat2("L_Stick", &iLStick_.x, 0.0f);
+
+		ImGui::Text("");
+		//light_.DrawImGui();
+		ImGui::TreePop();
+	}
 }
 

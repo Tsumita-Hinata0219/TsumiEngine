@@ -113,6 +113,8 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
+	// ImGuiの描画
+	void DrawImGui();
 
 private:
 

@@ -26,8 +26,8 @@ void FollowCamera::Init()
 // 更新処理
 void FollowCamera::Update()
 {
-	//// カメラデータの更新
-	//camera_.Update();
+	// カメラデータの更新
+	camera_.Update();
 
 	// stickの入力を受け取る
 	iRStick_ = input_->GetRStick();
@@ -134,7 +134,7 @@ void FollowCamera::CalcRightVec()
 		MakeRotateYMatrix(camera_.srt.rotate.y);
 
 	// 前方ベクトルを求める
-	forwardVec_ =
+	rightVec_ =
 		TransformWithPerspective(deffRightVec, rotateYMat);
 }
 

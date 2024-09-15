@@ -12,12 +12,6 @@ void Player::Init()
 	ui_ = std::make_unique<PlayerUI>();
 	ui_->Init();
 
-	//// カメラ
-	//cameraManager_ = CameraManager::GetInstance();
-	//camera_.Init();
-	//camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
-	//cameraManager_->ReSetData(camera_);
-
 	// BodyModelのロード
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
@@ -40,13 +34,6 @@ void Player::Init()
 	}
 
 	// Colliderの初期化
-	/*collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);*/
-	//// Colliderの初期化
-	//collider_ = std::make_unique<OBBCollider>();
-	//collider_->Init();
-	//collider_->SetSize(size_);
 	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
 	colComp_->RegisterCollider(sphere_);
 	sphere_.center = trans_.GetWorldPos();
@@ -67,20 +54,14 @@ void Player::Update()
 	// UI
 	ui_->Update();
 
-	//// カメラの更新処理
-	//camera_.Update();
-
-	//// カメラ操作
-	//CameraOperation();
-
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
-	// 移動処理
-	Move();
+	// 入力を受け取る
+	InputFunc();
 
-	// プレイヤー本体の姿勢処理
-	CalcBodyRotate();
+	// プレイヤーの操作関連
+	MoveFunc();
 
 	// 射撃の処理
 	ExecuteShot();
@@ -117,10 +98,6 @@ void Player::Update()
 	}
 
 #ifdef _DEBUG
-	/*if (ImGui::TreeNode("Camera")) {
-		camera_.DrawImGui();
-		ImGui::TreePop();
-	}*/
 	if (ImGui::TreeNode("Player")) {
 
 		trans_.DrawImGui();
@@ -132,7 +109,7 @@ void Player::Update()
 		ImGui::Text("HP = %d", hp_);
 
 		ImGui::Text("");
-		ImGui::DragFloat2("L_Stick", &L_StickInput_.x, 0.0f);
+		ImGui::DragFloat2("L_Stick", &iLStick_.x, 0.0f);
 
 		ImGui::Text("");
 		//light_.DrawImGui();
@@ -198,71 +175,122 @@ void Player::OnCollisionWithEnemyBullet()
 }
 
 
-// 移動処理
-void Player::Move()
+// 入力を受け取る
+void Player::InputFunc()
 {
-	// velocityは0で毎フレーム初期化
+	// 入力を取得
+	iLStick_ = input_->GetLStick();
+
+	// 0で初期化
+	iKeys_ = Vector2::zero;
+
+	if (input_->Press(DIK_W)) {
+		iKeys_.y = 1.0f;
+	}
+	if (input_->Press(DIK_S)) {
+		iKeys_.y = -1.0f;
+	}
+	if (input_->Press(DIK_A)) {
+		iKeys_.x = -1.0f;
+	}
+	if (input_->Press(DIK_D)) {
+		iKeys_.x = 1.0f;
+	}
+}
+
+
+// プレイヤーの移動
+void Player::MoveFunc()
+{
+	// 移動方向を求める
+	CalcMoveDirection();
+
+	// Velocityは0で初期化しておく
 	velocity_ = Vector3::zero;
 
-	// キーの処理
+	// 移動処理
+	PadMove();
 	KeyMove();
 
-	// パッドの処理
-	PadMove();
+	// 移動方向からY軸の姿勢を傾ける処理
+	CalcBodyOrienation(iLStick_, stickMoveDirection_);
+	CalcBodyOrienation(iKeys_, keyMoveDirection_);
+}
+
+
+// 移動方向を求める
+void Player::CalcMoveDirection()
+{
+	// カメラの前方と右方
+	Vector3 forward = followCamera_->GetForwardVec();
+	Vector3 right = followCamera_->GetRightVec();
+
+	stickMoveDirection_ = {
+		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
+		0.0f,
+		(iLStick_.x * right.z) + (iLStick_.y * forward.z),
+	};
+	keyMoveDirection_ = {
+		(iKeys_.x * right.x) + (iKeys_.y * forward.x),
+		0.0f,
+		(iKeys_.x * right.z) + (iKeys_.y * forward.z),
+	};
+}
+
+
+// 移動処理
+void Player::PadMove()
+{
+	// 移動量の計算
+	if (std::abs(iLStick_.x) > DZone_ || std::abs(iLStick_.y) > DZone_) {
+
+		// 移動方向を正規化し速さを乗算
+		velocity_ = Normalize(stickMoveDirection_) * moveSpeed_;
+
+		// 座標に加算
+		trans_.srt.translate += velocity_;
+
+		// 移動限界処理
+		MoveLimited();
+	}
 }
 void Player::KeyMove()
 {
-	// キーの処理
-	if (input_->Press(DIK_W)) {};
-	if (input_->Press(DIK_A)) {};
-	if (input_->Press(DIK_S)) {};
-	if (input_->Press(DIK_D)) {};
-}
-void Player::PadMove()
-{
-	//// stickの入力を受け取る
-	//L_StickInput_ = input_->GetLStick();
+	// 移動方向を正規化し速さを乗算
+	velocity_ = Normalize(keyMoveDirection_) * moveSpeed_;
 
-	//// stick入力が一定範囲を超えている場合更新
-	//if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
+	// 座標に加算
+	trans_.srt.translate += velocity_;
 
-	//	// 移動量
-	//	velocity_ = {
-	//		L_StickInput_.x,
-	//		0.0f,
-	//		L_StickInput_.y,
-	//	};
-
-	//	// 移動量に速さを反映
-	//	velocity_ = Normalize(velocity_) * moveSpeed_;
-
-	//	// 移動ベクトルをカメラの角度だけ回転する
-	//	velocity_ = TransformNormal(velocity_, camera_.srt.rotate);
-
-	//	// 移動
-	//	trans_.srt.translate += velocity_;
-
-	//	// 移動限界
-	//	const float kMoveMit = 100.0f;
-	//	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
-	//	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
-	//	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
-	//	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
-	//}
+	// 移動限界処理
+	MoveLimited();
 }
 
 
-// プレイヤー本体の姿勢処理
-void Player::CalcBodyRotate()
+// 移動限界処理
+void Player::MoveLimited()
 {
-	//// Rstick入力が一定範囲を超えている場合、カメラの姿勢を使用する
-	//if (std::abs(L_StickInput_.x) > 0.2f || std::abs(L_StickInput_.y) > 0.2f) {
+}
 
-	//	playerRad_ = camera_.srt.rotate.y;
-	//}
 
-	//// カメラの角度を使い姿勢を制御
-	//trans_.srt.rotate.y = playerRad_;
+// 移動方向からY軸の姿勢を傾ける処理
+void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
+{
+	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
+	{
+		// 正規化した移動方向
+		Vector3 normalizeDirection = Normalize(direction);
+
+		// 目標回転角度
+		float targetAngle = std::atan2(normalizeDirection.x, normalizeDirection.z);
+
+		// 現在の角度と目標角度から最短を求める
+		float shortestAngle = ShortestAngle(trans_.srt.translate.y, targetAngle);
+
+		// 現在の角度を目標角度の間を補間
+		trans_.srt.translate.y = 
+			Lerp(trans_.srt.translate.y, trans_.srt.translate.y + shortestAngle, orientationLerpSpeed_);
+	}
 }
 
 
@@ -312,46 +340,3 @@ void Player::CreateNewBullet()
 	bulletList_.push_back(newBullet);
 }
 
-//
-//// カメラ操作
-//void Player::CameraOperation()
-//{
-//	// カメラの回転処理
-//	CameraRotate();
-//
-//	// カメラのフォロー処理
-//	CameraFollow();
-//}
-//
-//
-//// カメラの回転処理
-//void Player::CameraRotate()
-//{
-//	// stickの入力を受け取る
-//	R_StickInput_ = input_->GetRStick();
-//
-//	// stick入力が一定範囲を超えている場合、角度を更新
-//	if (std::abs(R_StickInput_.x) > 0.2f) {
-//
-//		// 入力に基づいて角度を更新
-//		cameraAngle_ = R_StickInput_.x * kAngleSpeed_;
-//
-//		// 回す
-//		camera_.srt.rotate.y += cameraAngle_;
-//	}
-//}
-//
-//
-//// カメラのフォロー処理
-//void Player::CameraFollow()
-//{
-//	// オフセットの設定
-//	cameraOffset_ = { 0.0f, 5.0f, -30.0f };
-//
-//	// オフセットをカメラの回転に合わせて回転させる
-//	cameraOffset_ = TransformNormal(cameraOffset_, camera_.rotateMat);
-//
-//	// ターゲットの座標とオフセットをカメラの座標に加算する
-//	camera_.srt.translate = trans_.srt.translate + cameraOffset_;
-//}
-//

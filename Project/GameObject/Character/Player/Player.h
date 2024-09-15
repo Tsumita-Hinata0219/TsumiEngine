@@ -23,7 +23,7 @@ class FollowCamera;
 /* Playerクラス */
 class Player : public IObject {
 
-public: // メンバ関数
+public:
 
 	// コンストラクタとデストラクタ
 	Player() { attribute_ = ObjAttribute::PLAYER; }
@@ -49,9 +49,6 @@ public: // メンバ関数
 
 	// BulletList
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
-
-	// Collider
-	//OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
 	// KillCount
 	uint32_t GetKillCount() const { return this->killCount_; }
@@ -88,13 +85,24 @@ private:
 	// コライダーの更新
 	void UpdateCollider();
 
-	// 移動処理
-	void Move();
-	void KeyMove();
-	void PadMove();
+	// 入力を受け取る
+	void InputFunc();
 
-	// プレイヤー本体の姿勢処理
-	void CalcBodyRotate();
+	// プレイヤーの移動
+	void MoveFunc();
+
+	// 移動方向を求める
+	void CalcMoveDirection();
+
+	// 移動処理
+	void PadMove();
+	void KeyMove();
+
+	// 移動限界処理
+	void MoveLimited();
+
+	// 移動方向からY軸の姿勢を傾ける処理
+	void CalcBodyOrienation(Vector2 input, Vector3 direction);
 
 	// 射撃処理
 	void ExecuteShot();
@@ -105,82 +113,38 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
-	//// カメラ操作
-	//void CameraOperation();
 
-	//// カメラの回転処理
-	//void CameraRotate();
-
-	//// カメラのフォロー処理
-	//void CameraFollow();
-
-private: // メンバ変数
-
-	// Inputクラス
-	Input* input_ = nullptr;
-
-	// フォローカメラ
-	FollowCamera* followCamera_ = nullptr;
-
-	//// カメラマネージャー
-	//CameraManager* cameraManager_ = nullptr;
-
-	// UI
-	std::unique_ptr<PlayerUI> ui_;
-
-	//// カメラ本体
-	//CameraResource camera_{};
-
-	// モデル
-	// Body
-	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
+private:
 
 	// トランスフォーム
 	Transform trans_{};
 
+	// Light
+	DirectionalLightData light_;
+
+	// コライダー
+	Col::Sphere sphere_;
+
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
-	// 移動速度
+
+	// 移動方向
+	Vector3 stickMoveDirection_{};
+	Vector3 keyMoveDirection_{};
+	// 移動量
 	Vector3 velocity_{};
+	// 移動速度
 	float moveSpeed_ = 0.3f;
-	float kBulletSpeed_ = 0.5f;
+
+	// 姿勢計算の補間速度
+	float orientationLerpSpeed_ = 0.1f;
 
 	// 死亡フラグ
 	bool isDead_ = false;
 
-	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
-	Col::Sphere sphere_;
-
-
 	// HP
 	uint32_t hp_ = 0;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
-
-	// 射撃ボタン押下フレーム&インターバル
-	int shotPressFrame_ = 0;
-	int kShotInterval_ = 5;
-
-	//Stickの入力を取得
-	Vector2 L_StickInput_{};
-	Vector2 R_StickInput_{};
-
-	// Light
-	DirectionalLightData light_;
-
-	// カメラの回転に使う変数
-	float cameraAngle_ = 0.0f;
-	const float kCameraRadius_ = 5.0f;
-	const float kAngleSpeed_ = 0.05f;
-
-	// プレイヤーからのオフセット
-	Vector3 cameraOffset_{};
-
-	// プレイヤーのY軸姿勢制御値
-	float playerRad_ = 0.0f;
 
 	// キルカウント
 	uint32_t killCount_ = 0;
@@ -188,6 +152,52 @@ private: // メンバ変数
 	// ゲームに勝利したかのフラグ
 	bool isWin_ = false;
 	bool isLose_ = false;
+
+#pragma region System
+
+	// Inputクラス
+	Input* input_ = nullptr;
+
+	// デッドゾーン
+	const float DZone_ = 0.2f;
+
+	//Stickの入力を取得
+	Vector2 iLStick_{};
+
+	// Keyの入力
+	Vector2 iKeys_{};
+
+#pragma endregion 
+
+
+private: // ボディ
+
+	// リスト
+	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
+
+
+private: // バレット
+
+	// リスト
+	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
+
+	// バレットの速度
+	float kBulletSpeed_ = 0.5f;
+
+	// 射撃ボタン押下フレーム&インターバル
+	int shotPressFrame_ = 0;
+	int kShotInterval_ = 5;
+
+
+private: // UI
+
+	std::unique_ptr<PlayerUI> ui_;
+
+
+private: // フォローカメラ
+
+	FollowCamera* followCamera_ = nullptr;
+
 
 };
 

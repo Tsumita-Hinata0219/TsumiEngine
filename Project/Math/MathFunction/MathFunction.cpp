@@ -476,6 +476,27 @@ Vector3 TransformWithPerspective(const Vector3& v, const Matrix4x4& m)
 	return result;
 }
 
+// 角度を 0～2π の範囲に正規化
+float NormalizeAngle(float angle)
+{
+	while (angle < -Math::PI) angle += Math::Double_PI;
+	while (angle > Math::PI) angle -= Math::Double_PI;
+	return angle;
+}
+
+// 最短回転角度を求める
+float ShortestAngle(float currentAngle, float targetAngle)
+{
+	// 角度の差を計算
+	float angleDifference = targetAngle - currentAngle;
+
+	// 角度を -π から +π の範囲に正規化する
+	while (angleDifference > Math::PI) angleDifference -= 2.0f * Math::PI;
+	while (angleDifference < -Math::PI) angleDifference += 2.0f * Math::PI;
+
+	return angleDifference; // 最短回転角度を返す
+}
+
 
 
 

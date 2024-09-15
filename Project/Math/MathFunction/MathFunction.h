@@ -136,6 +136,10 @@ Vector3 CatmullRomInterpolation(const Vector3& p0, const Vector3& p1, const Vect
 Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, float t);
 // Vector3にアフィン変換と透視補正を適用する
 Vector3 TransformWithPerspective(const Vector3& v, const Matrix4x4& m);
+// 角度を 0～2π の範囲に正規化
+float NormalizeAngle(float angle);
+// 最短回転角度を求める
+float ShortestAngle(float currentAngle, float targetAngle);
 
 
 /// -------------------------------------------------------------------------

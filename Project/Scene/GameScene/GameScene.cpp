@@ -28,13 +28,17 @@ void GameScene::Initialize()
 	collisionSystem_ = std::make_unique<CollisionSystem>();
 	collisionSystem_->Init();
 
-	/* ----- AbsentEffect アブセントエフェクト----- */
+	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Initialize();
 
-	/* ----- GameSceneUI ゲームシーンUI----- */
+	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameSceneUI_->Init();
+
+	/* ----- FollowCamera フォローカメラ ----- */
+	followCamera_ = std::make_unique<FollowCamera>();
+	followCamera_->Init();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
@@ -56,6 +60,10 @@ void GameScene::Initialize()
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
 	player_->Init();
+	// プレイヤーにフォローカメラを渡す
+	player_->SetFollowCamera(followCamera_.get());
+	// フォローカメラにカメラを渡す
+	followCamera_->SetPlayer(player_.get());
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_ = std::make_unique<EnemyManager>();
@@ -79,6 +87,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
+
+	/* ----- FollowCamera フォローカメラ ----- */
+	followCamera_->Update();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();

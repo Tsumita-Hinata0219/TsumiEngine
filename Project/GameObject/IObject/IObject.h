@@ -26,7 +26,10 @@ class IObject {
 
 public: // メンバ関数
 
-	// デストラクタ
+	// コンストラクタ
+	IObject(){ modelManager_ = ModelManager::GetInstance(); }
+
+	// 仮想デストラクタ
 	virtual ~IObject() {};
 
 	// 初期化、更新、描画

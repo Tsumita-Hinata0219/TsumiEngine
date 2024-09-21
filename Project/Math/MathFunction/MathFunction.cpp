@@ -448,6 +448,47 @@ Vector3 CatmullRomPosition(const std::vector<Vector3>& points, uint32_t index, f
 	return CatmullRomInterpolation(p0, p1, p2, p3, t);
 }
 
+// Vector3にアフィン変換と透視補正を適用する
+Vector3 TransformWithPerspective(const Vector3& v, const Matrix4x4& m)
+{
+	Vector3 result = {
+		(v.x * m.m[0][0]) + (v.y * m.m[1][0]) + (v.z * m.m[2][0]) + (1.0f * m.m[3][0]),
+		(v.x * m.m[0][1]) + (v.y * m.m[1][1]) + (v.z * m.m[2][1]) + (1.0f * m.m[3][1]),
+		(v.x * m.m[0][2]) + (v.y * m.m[1][2]) + (v.z * m.m[2][2]) + (1.0f * m.m[3][2])
+	};
+	float w = (v.x * m.m[0][3]) + (v.y * m.m[1][3]) + (v.z * m.m[2][3]) + (1.0f * m.m[3][3]);
+
+	//0除算を避ける
+	if (w != 0.0f) {
+		result.x /= w;
+		result.y /= w;
+		result.z /= w;
+	}
+
+	return result;
+}
+
+// 角度を 0～2π の範囲に正規化
+float NormalizeAngle(float angle)
+{
+	while (angle < -Math::PI) angle += Math::Double_PI;
+	while (angle > Math::PI) angle -= Math::Double_PI;
+	return angle;
+}
+
+// 最短回転角度を求める
+float ShortestAngle(float currentAngle, float targetAngle)
+{
+	// 角度の差を計算
+	float angleDifference = targetAngle - currentAngle;
+
+	// 角度を -π から +π の範囲に正規化する
+	while (angleDifference > Math::PI) angleDifference -= 2.0f * Math::PI;
+	while (angleDifference < -Math::PI) angleDifference += 2.0f * Math::PI;
+
+	return angleDifference; // 最短回転角度を返す
+}
+
 
 
 

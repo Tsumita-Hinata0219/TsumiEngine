@@ -101,7 +101,10 @@ private:
 	// 移動限界処理
 	void MoveLimited();
 
-	// 移動方向からY軸の姿勢を傾ける処理
+	// カメラの方向に体の向きを合わせる
+	void FaceCameraDirection();
+
+	// 移動方向からY軸の姿勢を合わせる
 	void CalcBodyOrienation(Vector2 input, Vector3 direction);
 
 	// 射撃処理
@@ -129,7 +132,6 @@ private:
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
-
 
 	// 移動方向
 	Vector3 stickMoveDirection_{};
@@ -172,16 +174,19 @@ private:
 #pragma endregion 
 
 
-private: // ボディ
+private: // ボディ関連
 
 	// リスト
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 
-private: // バレット
+private: // バレット関連
 
 	// リスト
 	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
+
+	// 射撃中かのフラグ
+	bool isShooting_ = false;
 
 	// バレットの速度
 	float kBulletSpeed_ = 0.5f;
@@ -191,12 +196,12 @@ private: // バレット
 	int kShotInterval_ = 5;
 
 
-private: // UI
+private: // UI関連
 
 	std::unique_ptr<PlayerUI> ui_;
 
 
-private: // フォローカメラ
+private: // フォローカメラ関連
 
 	FollowCamera* followCamera_ = nullptr;
 

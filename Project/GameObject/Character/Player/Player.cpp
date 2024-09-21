@@ -199,9 +199,15 @@ void Player::MoveFunc()
 	// 移動限界処理
 	MoveLimited();
 
-	// 移動方向からY軸の姿勢を傾ける処理
-	CalcBodyOrienation(iLStick_, stickMoveDirection_);
-	CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	if (isShooting_) {
+		// 射撃中はカメラの進行方向に姿勢を合わせる
+		FaceCameraDirection();
+	}
+	else {
+		// 移動方向からY軸の姿勢を合わせる
+		CalcBodyOrienation(iLStick_, stickMoveDirection_);
+		CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	}
 }
 
 
@@ -264,7 +270,29 @@ void Player::MoveLimited()
 }
 
 
-// 移動方向からY軸の姿勢を傾ける処理
+// カメラの方向に体の向きを合わせる
+void Player::FaceCameraDirection()
+{
+	// カメラの前方ベクトルを取得
+	Vector3 cameraForward = followCamera_->GetForwardVec();
+
+	// カメラのY成分を無視して水平面上の方向を計算
+	cameraForward.y = 0.0f;
+	cameraForward = Normalize(cameraForward);  // 正規化して方向ベクトルにする
+
+	// 目標の回転角度を求める（Y軸の回転）
+	float targetAngle = std::atan2(cameraForward.x, cameraForward.z);
+
+	// 現在の角度と目標角度から最短を求める
+	float shortestAngle = ShortestAngle(trans_.srt.rotate.y, targetAngle);
+
+	// 現在の角度を目標角度の間を補間
+	trans_.srt.rotate.y =
+		Lerp(trans_.srt.rotate.y, trans_.srt.rotate.y + shortestAngle, orientationLerpSpeed_);
+}
+
+
+// 移動方向からY軸の姿勢を合わせる
 void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 {
 	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
@@ -293,6 +321,9 @@ void Player::ExecuteShot()
 
 		shotPressFrame_--;
 
+		// 射撃中のフラグを立てる
+		isShooting_ = true;
+
 		if (shotPressFrame_ <= 0) {
 			// 0以下でタイマー再設定
 			shotPressFrame_ = kShotInterval_;
@@ -304,6 +335,9 @@ void Player::ExecuteShot()
 	else if (input_->Release(DIK_SPACE) || input_->Release(PadData::RIGHT_SHOULDER)) {
 		
 		shotPressFrame_ = 1;
+
+		// フラグを折る
+		isShooting_ = false;
 	}
 }
 
@@ -354,9 +388,12 @@ void Player::DrawImGui()
 		//ImGui::Text("入力関連");
 		ImGui::Text("Input");
 		ImGui::DragFloat2("L_Stick", &iLStick_.x, 0.0f);
-
 		ImGui::Text("");
-		//light_.DrawImGui();
+
+		ImGui::Text("Shoot");
+		ImGui::Checkbox("isShooting", &isShooting_);
+		ImGui::Text("");
+
 		ImGui::TreePop();
 	}
 }

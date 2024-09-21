@@ -240,6 +240,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
+    <ClCompile Include="Tsumi\Command\Handler\Input\InputHandler.cpp" />
     <ClCompile Include="Tsumi\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Tsumi\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
@@ -440,6 +441,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Tsumi\CollisionSystem\Utilities\CollisionUtilities.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
+    <ClInclude Include="Tsumi\Command\Handler\Input\InputHandler.h" />
+    <ClInclude Include="Tsumi\Command\ICommand.h" />
     <ClInclude Include="Tsumi\ConfigManager\ConfigManager.h" />
     <ClInclude Include="Tsumi\CreateResource\CreateResource.h" />
     <ClInclude Include="Tsumi\DescriptorManager\DescriptorManager.h" />

@@ -72,6 +72,7 @@ void GameScene::Initialize()
 
 	// シーンチェンジにかかる時間。3秒
 	sceneChange_.Init(0.0f, 60.0f * 3.0f);
+
 }
 
 

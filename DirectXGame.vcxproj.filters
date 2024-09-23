@@ -240,6 +240,7 @@
     <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.cpp" />
     <ClCompile Include="Project\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Tsumi\Command\Handler\Input\InputHandler.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Commands\Demo\DemoCommand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -482,6 +483,7 @@
     <ClInclude Include="Project\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Tsumi\Command\ICommand.h" />
     <ClInclude Include="Tsumi\Command\Handler\Input\InputHandler.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Commands\Demo\DemoCommand.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -2,17 +2,6 @@
 
 
 
-// デストラクタ
-InputHandler::~InputHandler()
-{
-	// コマンドのクリーンアップ
-	for (auto& pair : commandMap_)
-	{
-		delete pair.second;
-	}
-}
-
-
 // 初期化
 void InputHandler::Init()
 {
@@ -42,8 +31,16 @@ void InputHandler::HandleRelease(uint32_t input)
 
 
 // コマンドの登録
-void InputHandler::RegisterCommand(uint32_t input, ICommand* command)
+void InputHandler::RegisterCommand(uint32_t input, std::unique_ptr<ICommand> command)
 {
-	commandMap_[input] = command;
+	InputHandler::GetInstance()->
+		commandMap_[input] = std::move(command);
+}
+
+
+// コマンドの解放
+void InputHandler::Clear()
+{
+	commandMap_.clear();
 }
 

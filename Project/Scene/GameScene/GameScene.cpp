@@ -19,6 +19,9 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- InputHandler インプットハンドラー ----- */
+	inputHandler_ = InputHandler::GetInstance();
+
 	/* ----- JsonManager Jsonマネージャー ----- */
 	JsonManager::GetInstance()->Initialize();
 	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
@@ -73,6 +76,10 @@ void GameScene::Initialize()
 	// シーンチェンジにかかる時間。3秒
 	sceneChange_.Init(0.0f, 60.0f * 3.0f);
 
+	uint32_t key = DIK_A;
+	key;
+	uint32_t button = uint32_t(PadData::A);
+	button;
 }
 
 

@@ -3,6 +3,7 @@
 #include "../../../Project/Scene/IScene.h"
 #include "../../../Project/GameManager/GameManager.h"
 #include "../../Tsumi/JsonManager/JsonManager.h"
+#include "../../Tsumi/Command/Handler/Input/InputHandler.h"
 
 #include "../../Project/GameObject/Camera/Manager/CameraManager.h"
 #include "../../Project/GameObject/Camera/FollowCamera/FollowCamera.h"
@@ -76,6 +77,9 @@ private:
 
 
 private: // クラス
+
+	// InputHandler
+	InputHandler* inputHandler_ = nullptr;
 
 	// CollisionManager
 	//std::unique_ptr<CollisionManager> collisionManager_;

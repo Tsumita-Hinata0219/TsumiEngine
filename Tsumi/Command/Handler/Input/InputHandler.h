@@ -9,11 +9,21 @@
 /* 入力に基づいてコマンドを呼び出すクラス */
 class InputHandler {
 
+private: // シングルトン
+
+	InputHandler() = default;
+	~InputHandler() = default;
+	InputHandler(const InputHandler&) = delete;
+	const InputHandler& operator=(const InputHandler&) = delete;
+
+
 public:
 
-	// コンストラクタ、デストラクタ
-	InputHandler() = default;
-	~InputHandler();
+	// インスタンス取得
+	static InputHandler* GetInstance() {
+		static InputHandler instance;
+		return &instance;
+	}
 
 	// 初期化
 	void Init();
@@ -25,13 +35,16 @@ public:
 	void HandleRelease(uint32_t input);
 
 	// コマンドの登録
-	void RegisterCommand(uint32_t input, ICommand* command);
+	static void RegisterCommand(uint32_t input, std::unique_ptr<ICommand> command);
+
+	// コマンドの解放
+	void Clear();
 
 
 private:
 
 	// コマンド配列
-	std::unordered_map<uint32_t, ICommand*> commandMap_;
+	std::unordered_map<uint32_t, std::unique_ptr<ICommand>> commandMap_;
 
 };
 

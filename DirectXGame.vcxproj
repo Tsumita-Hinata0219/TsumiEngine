@@ -176,6 +176,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\GameObject\Character\Player\Commands\Demo\DemoCommand.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
@@ -346,6 +347,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Project\GameObject\Character\Player\Commands\Demo\DemoCommand.h" />
     <ClInclude Include="Project\GameObject\Character\Player\Player.h" />
     <ClInclude Include="Project\GameObject\Character\Player\UI\PlayerUI.h" />
     <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />

@@ -6,6 +6,8 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "../../Tsumi/Command/Handler/Input/InputHandler.h"
+
 #include "Boby/IPlayerBody.h"
 #include "Boby/Main/PlayerMainBody.h"
 #include "Boby/Left/PlayerLeftBody.h"
@@ -14,6 +16,8 @@
 #include "Bullet/PlayerBullet.h"
 
 #include "UI/PlayerUI.h"
+
+#include "Commands/Demo/DemoCommand.h"
 
 
 // 前方宣言
@@ -76,6 +80,18 @@ public:
 	// 衝突自コールバック関数
 	void OnCollisionWithEnemy();
 	void OnCollisionWithEnemyBullet();
+
+#pragma endregion 
+
+#pragma region Command
+
+	// デモコマンド
+	void DemoCommandExe() {
+		Log("DemoCommand_Execute");
+	}
+	void DemoCommandRel() {
+		Log("DemoCommand_Release");
+	}
 
 #pragma endregion 
 

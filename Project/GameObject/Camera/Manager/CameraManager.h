@@ -13,6 +13,7 @@ private: // シングルトンデザインパターン
 	CameraManager(const CameraManager&) = delete;
 	const CameraManager& operator=(const CameraManager&) = delete;
 
+
 public:
 
 	// インスタンスの取得

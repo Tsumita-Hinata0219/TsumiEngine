@@ -39,6 +39,8 @@ void Player::Init()
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 
+	// コマンドの設定
+	InputHandler::RegisterCommand(DIK_R, std::make_unique<DemoCommand>(this));
 
 	// キルカウントを0で初期化
 	killCount_ = 0;

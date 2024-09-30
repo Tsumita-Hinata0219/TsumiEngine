@@ -37,6 +37,11 @@ void CollisionComponent::RegisterCollider(Col::Sphere& sphere)
 	this->shapeMap_[sphere.id] = std::move(shape);
 }
 
+void CollisionComponent::Register(ColShapeData& shape)
+{
+
+}
+
 
 // シェイプの更新
 void CollisionComponent::UpdateShape(const Col::Sphere& sphere)

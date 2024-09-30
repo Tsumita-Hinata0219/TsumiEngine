@@ -27,6 +27,7 @@ public:
 
 	// シェイプの追加
 	void RegisterCollider(Col::Sphere& sphere);
+	void Register(ColShapeData& shape);
 
 	// シェイプの更新
 	void UpdateShape(const Col::Sphere& sphere);

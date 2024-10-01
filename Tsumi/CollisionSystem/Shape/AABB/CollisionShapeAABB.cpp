@@ -11,12 +11,12 @@ CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp)
     // コンポーネントの設定
     component_ = comp;
 }
-CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData)
+CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp, Col::AABB* setData)
 {
     // コンポーネントのの設定
     component_ = comp;
     // データの設定
-    aabb_ = setData;
+    aabb_ = *setData;
 }
 
 

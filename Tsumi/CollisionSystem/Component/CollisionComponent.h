@@ -8,10 +8,15 @@
 
 #include <memory>
 #include <vector>
+#include <typeindex>
 
 
 // IObjectの前方宣言
 class IObject;
+
+// ファクトリ関数
+using ShapeFactory = std::function<std::unique_ptr<CollisionShape>(CollisionComponent*, Col::ColData*)>;
+
 
 /* コリジョンシェイプを保持するクラス */
 class CollisionComponent {
@@ -27,7 +32,7 @@ public:
 
 	// シェイプの追加
 	void RegisterCollider(Col::Sphere& sphere);
-	void Register(ColShapeData& shape);
+	void Register(Col::ColData& colData);
 
 	// シェイプの更新
 	void UpdateShape(const Col::Sphere& sphere);
@@ -46,9 +51,8 @@ public:
 
 private:
 
-	// 新しいシェイプを追加
-	void CreateNewSphereShape();
-	void CreateNewAABBShape();
+
+	static const std::unordered_map<std::type_index, ShapeFactory>& GetFactoryMap();
 
 
 private:

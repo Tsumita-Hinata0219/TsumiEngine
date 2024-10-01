@@ -17,7 +17,7 @@ public:
 
 	// パラメータ付きコンストラクタ
 	CollisionShapeSphere(CollisionComponent* comp);
-	CollisionShapeSphere(CollisionComponent* comp, Col::Sphere setData);
+	CollisionShapeSphere(CollisionComponent* comp, Col::Sphere* setData);
 
 
 	// 衝突判定処理

@@ -2,6 +2,18 @@
 #include "../Manager/CollisionManager.h"
 
 
+// ファクトリマップを作る関数
+std::unordered_map<std::type_index, ShapeFactory> CreateShapeFactoryMap() {
+	return {
+		{ typeid(Col::Sphere), [](CollisionComponent* self, Col::ColData* data) {
+			return std::make_unique<CollisionShapeSphere>(self, static_cast<Col::Sphere*>(data)); }},
+		{ typeid(Col::AABB), [](CollisionComponent* self, Col::ColData* data) {
+			return std::make_unique<CollisionShapeAABB>(self, static_cast<Col::AABB*>(data)); }},
+			/* 他の型も同様に追加 */
+	};
+}
+
+
 // コンストラクタ
 CollisionComponent::CollisionComponent()
 {
@@ -25,7 +37,7 @@ void CollisionComponent::RegisterCollider(Col::Sphere& sphere)
 
 	// 新しくシェイプを作成
 	std::unique_ptr<CollisionShapeSphere> shape =
-		std::make_unique<CollisionShapeSphere>(this, sphere);
+		std::make_unique<CollisionShapeSphere>(this, &sphere);
 
 	// Boundingの計算も求める
 	shape->CalcBounding();
@@ -37,29 +49,30 @@ void CollisionComponent::RegisterCollider(Col::Sphere& sphere)
 	this->shapeMap_[sphere.id] = std::move(shape);
 }
 
-void CollisionComponent::Register(ColShapeData& shape)
+void CollisionComponent::Register(Col::ColData& colData)
 {
 	this->nextID_++; // IDの加算
+	colData.id = this->nextID_; // IDの設定
 
-	if (auto sphere = std::get_if<Col::Sphere>(&shape)) {
+	// データの型に基づいてシェイプを生成する
+	const auto& factoryMap = GetFactoryMap();
+	auto it = factoryMap.find(typeid(colData));
 
-		sphere->id = this->nextID_; // IDの設定
+	if (it != factoryMap.end()) {
+		std::unique_ptr<CollisionShape> shape = it->second(this, &colData);
 
-		// 新しくシェイプを作成
-		std::unique_ptr<CollisionShapeSphere> shape =
-			std::make_unique<CollisionShapeSphere>(this, sphere);
-
-		// Boundingの計算も求める
+		// シェイプのBoundingと空間レベルを求める
 		shape->CalcBounding();
-
-		// コライダーの空間レベルと所属空間を求める
 		shape->CalcSpaceLevel();
 
-		// シェイプコンテナに作ったシェイプを追加
-		this->shapes_[sphere->id] = shape.get();
-
-		// Managerにポインタを渡す
-		CollisionManager::GetInstance()->Register(shapes_[sphere->id]);
+		// シェイプをコンテナに登録
+		this->shapes_[colData.id] = shape.get();
+		// マネージャーにポインタを渡す
+		CollisionManager::GetInstance()->
+			Register(shapes_[colData.id]);
+	}
+	else {
+		std::cerr << "Error : Unsupported collision shape type." << std::endl;
 	}
 }
 
@@ -99,11 +112,8 @@ bool CollisionComponent::CheckCollision(const CollisionComponent& other) const
 }
 
 
-// 新しいシェイプを追加
-void CollisionComponent::CreateNewSphereShape()
-{
+// GetFactoryMap関数の実装
+const std::unordered_map<std::type_index, ShapeFactory>& CollisionComponent::GetFactoryMap() {
+	static const std::unordered_map<std::type_index, ShapeFactory> factoryMap = CreateShapeFactoryMap();
+	return factoryMap;
 }
-void CollisionComponent::CreateNewAABBShape()
-{
-}
-

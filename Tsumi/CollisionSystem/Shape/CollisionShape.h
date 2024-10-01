@@ -11,6 +11,8 @@ namespace Col {
 	struct ColData {
 	public:
 		uint32_t id;
+		// 仮想デストラクタ
+		virtual ~ColData() = default;
 	};
 
 	struct Sphere : public ColData {

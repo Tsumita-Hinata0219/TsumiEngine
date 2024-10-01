@@ -18,7 +18,7 @@ public:
 
 	// パラメータ付きコンストラクタ
 	CollisionShapeAABB(CollisionComponent* comp);
-	CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData);
+	CollisionShapeAABB(CollisionComponent* comp, Col::AABB* setData);
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;

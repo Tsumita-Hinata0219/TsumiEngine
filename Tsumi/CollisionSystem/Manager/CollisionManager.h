@@ -20,6 +20,9 @@
 #include <list>
 #include <vector>
 
+// 前方宣言
+class CollisionComponent;
+
 
 /* CollisionManagerクラス */
 class CollisionManager {
@@ -53,7 +56,7 @@ public:
 
 private:
 
-	// コライダーのポインタ配列x
-	std::vector<CollisionShape*> shapesData_;
+	// コライダーのポインタ配列
+	std::vector<CollisionShape*> shapesMap_;
 
 };

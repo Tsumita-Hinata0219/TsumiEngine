@@ -46,6 +46,13 @@ public:
 
 private:
 
+	// 新しいシェイプを追加
+	void CreateNewSphereShape();
+	void CreateNewAABBShape();
+
+
+private:
+
 	// オーナー
 	IObject* owner_ = nullptr;
 
@@ -54,6 +61,7 @@ private:
 
 	// コリジョンシェイプ
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
+	std::map<int, CollisionShape*> shapes_;
 
 	// インデックス
 	uint32_t index_ = 0;

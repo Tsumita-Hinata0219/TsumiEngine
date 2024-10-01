@@ -1,5 +1,5 @@
 #include "CollisionComponent.h"
-
+#include "../Manager/CollisionManager.h"
 
 
 // コンストラクタ
@@ -39,7 +39,28 @@ void CollisionComponent::RegisterCollider(Col::Sphere& sphere)
 
 void CollisionComponent::Register(ColShapeData& shape)
 {
+	this->nextID_++; // IDの加算
 
+	if (auto sphere = std::get_if<Col::Sphere>(&shape)) {
+
+		sphere->id = this->nextID_; // IDの設定
+
+		// 新しくシェイプを作成
+		std::unique_ptr<CollisionShapeSphere> shape =
+			std::make_unique<CollisionShapeSphere>(this, sphere);
+
+		//// Boundingの計算も求める
+		//shape->CalcBounding();
+
+		//// コライダーの空間レベルと所属空間を求める
+		//shape->CalcSpaceLevel();
+
+		// シェイプコンテナに作ったシェイプを追加
+		this->shapes_[sphere->id] = shape.get();
+
+		// Managerにポインタを渡す
+		CollisionManager::GetInstance()->Register(shapes_[sphere->id]);
+	}
 }
 
 
@@ -75,5 +96,14 @@ bool CollisionComponent::CheckCollision(const CollisionComponent& other) const
 		}
 	}
 	return false; // 衝突なし
+}
+
+
+// 新しいシェイプを追加
+void CollisionComponent::CreateNewSphereShape()
+{
+}
+void CollisionComponent::CreateNewAABBShape()
+{
 }
 

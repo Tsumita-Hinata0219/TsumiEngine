@@ -16,7 +16,6 @@ namespace Col {
 	struct Sphere : public ColData {
 		Vector3 center{}; // !< 中心座標
 		float radius;	  // !< 半径
-		int id;
 	};
 	struct AABB : public ColData {
 		Vector3 center{}; // !< 中心座標

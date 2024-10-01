@@ -84,7 +84,6 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
 	colComp_->UpdateShape(sphere_);
 

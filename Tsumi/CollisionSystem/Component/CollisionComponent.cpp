@@ -49,11 +49,11 @@ void CollisionComponent::Register(ColShapeData& shape)
 		std::unique_ptr<CollisionShapeSphere> shape =
 			std::make_unique<CollisionShapeSphere>(this, sphere);
 
-		//// Boundingの計算も求める
-		//shape->CalcBounding();
+		// Boundingの計算も求める
+		shape->CalcBounding();
 
-		//// コライダーの空間レベルと所属空間を求める
-		//shape->CalcSpaceLevel();
+		// コライダーの空間レベルと所属空間を求める
+		shape->CalcSpaceLevel();
 
 		// シェイプコンテナに作ったシェイプを追加
 		this->shapes_[sphere->id] = shape.get();

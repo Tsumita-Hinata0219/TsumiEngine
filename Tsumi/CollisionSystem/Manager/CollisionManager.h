@@ -47,16 +47,25 @@ public:
 	// 解放処理
 	static void Finalize();
 
+	// コライダーの登録
+	void Register(CollisionShape* shape);
+
+	// 更新処理
+	void Update();
+
+
+private:
+
 	// コリジョン判定を行う
 	void CheckCollisions();
 
-	// コライダーの登録
-	void Register(CollisionShape* shape);
+	// 無効なポインタは削除
+	void CheckAndCleanPointers();
 
 
 private:
 
 	// コライダーのポインタ配列
-	std::vector<CollisionShape*> shapesMap_;
+	std::vector<CollisionShape*> shapes_;
 
 };

@@ -8,15 +8,39 @@ void CollisionManager::Finalize()
 }
 
 
-// コリジョン判定を行う
-void CollisionManager::CheckCollisions()
-{
-}
-
-
 // コライダーの登録
 void CollisionManager::Register(CollisionShape* shape)
 {
-	shapesMap_.push_back(shape);
+	shapes_.push_back(shape);
+}
+
+
+// 更新処理
+void CollisionManager::Update()
+{
+	// 無効なポインタは削除
+	CheckAndCleanPointers();
+
+	// コリジョン判定を行う
+	CheckCollisions();
+}
+
+
+// コリジョン判定を行う
+void CollisionManager::CheckCollisions()
+{
+
+
+
+}
+
+
+// 無効なポインタは削除
+void CollisionManager::CheckAndCleanPointers()
+{
+	shapes_.erase(
+		std::remove_if(shapes_.begin(), shapes_.end(),
+			[](CollisionShape* ptr) {return ptr == nullptr; }),
+		shapes_.end());
 }
 

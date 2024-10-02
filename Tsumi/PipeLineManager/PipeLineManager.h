@@ -32,6 +32,7 @@
 #include "PostEffectPipeLine/OutLinePipeLine/OutLinePipeLine.h"
 #include "PostEffectPipeLine/RadialBlurPipeLine/RadialBlurPipeLine.h"
 #include "PostEffectPipeLine/RandomPipeLine/RandomPipeLine.h"
+#include "PostEffectPipeLine/RetroCRTPipeLine/RetroCRTPipeLine.h"
 #include "PostEffectPipeLine/SepiaTonePipeLine/SepiaTonePipeLine.h"
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
@@ -61,6 +62,7 @@ enum class PipeLineType : uint32_t {
 	OutLine,
 	RadialBlur,
 	Random,
+	RetroCRT,
 	SepiaTone,
 	Vignetting,
 };
@@ -166,6 +168,9 @@ private: // メンバ変数
 
 	// Random
 	std::unique_ptr<RandomPipeLine> randomPipeLine_;
+
+	// RetroCRT
+	std::unique_ptr<RetroCRTPipeLine> retroCRTPipeLine_;
 
 	// SepiaTone
 	std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;

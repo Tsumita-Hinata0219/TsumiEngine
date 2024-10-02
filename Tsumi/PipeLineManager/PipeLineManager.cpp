@@ -93,6 +93,10 @@ void PipeLineManager::Initialize()
 	instance->randomPipeLine_ = make_unique<RandomPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Random] = instance->randomPipeLine_->SetUpPso();
 
+	// RetroCRT
+	instance->retroCRTPipeLine_ = make_unique<RetroCRTPipeLine>();
+	instance->pipeLineMap_[PipeLineType::RetroCRT] = instance->retroCRTPipeLine_->SetUpPso();
+
 	// SepiaTone
 	instance->sepiaTonePipeLine_ = make_unique<SepiaTonePipeLine>();
 	instance->pipeLineMap_[PipeLineType::SepiaTone] = instance->sepiaTonePipeLine_->SetUpPso();

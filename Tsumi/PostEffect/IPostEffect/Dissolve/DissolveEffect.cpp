@@ -27,20 +27,11 @@ void DissolveEffect::Draw()
 // ImGuiの描画
 void DissolveEffect::DrawImGui(std::string name)
 {
-#ifdef _DEBUG
-
-	// Labelを追加する場合は追加
-	label_ = label_ + name;
-
-	if (ImGui::TreeNode((label_ + "Dissolve").c_str())) {
-
-		ImGui::ColorEdit4("Color", &mtlData_.color.x);
-		ImGui::DragFloat("Threshold", &mtlData_.threshold, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat("Thinkness", &mtlData_.thinkness, 0.01f, 0.0f, 1.0f);
-
+#ifdef _DEBUG	
+	if (ImGui::TreeNode((name + "Dissolve").c_str())) {
+		mtlData_.DrawImGui(name);
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 

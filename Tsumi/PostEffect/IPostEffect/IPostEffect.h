@@ -59,9 +59,6 @@ protected: // メンバ変数
 	// バッファー
 	BufferResource<T> mtlBuffer_{};
 
-	// ImGuiLabel 
-	std::string label_;
-
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 };

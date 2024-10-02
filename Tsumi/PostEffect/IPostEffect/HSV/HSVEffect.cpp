@@ -32,19 +32,10 @@ void HSVEffect::Draw()
 void HSVEffect::DrawImGui(std::string name)
 {
 #ifdef _DEBUG
-
-	// Labelを追加する場合は追加
-	label_ = label_ + name;
-
-	if (ImGui::TreeNode((label_ + "HSV").c_str())) {
-
-		ImGui::DragFloat("Hue", &mtlData_.hue, 0.01f, -1.0f, 1.0f);
-		ImGui::DragFloat("Saturation", &mtlData_.saturation, 0.01f, -1.0f, 1.0f);
-		ImGui::DragFloat("Value", &mtlData_.value, 0.01f, -1.0f, 1.0f);
-
+	if (ImGui::TreeNode((name + "HSV").c_str())) {
+		mtlData_.DrawImGui(name);
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 

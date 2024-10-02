@@ -22,13 +22,9 @@ void AbsentEffect::Draw()
 void AbsentEffect::DrawImGui(std::string name)
 {
 #ifdef _DEBUG
-
-	// Labelを追加する場合は追加
-	label_ = label_ + name;
-	if (ImGui::TreeNode((label_ + "Absent").c_str())) {
+	if (ImGui::TreeNode((name + "Absent").c_str())) {
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 

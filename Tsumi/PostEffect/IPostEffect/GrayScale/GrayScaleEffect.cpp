@@ -29,17 +29,10 @@ void GrayScaleEffect::Draw()
 void GrayScaleEffect::DrawImGui(std::string name)
 {
 #ifdef _DEBUG
-
-	// Labelを追加する場合は追加
-	label_ = label_ + name;
-
-	if (ImGui::TreeNode((label_ + "GrayScale").c_str())) {
-
-		ImGui::ColorEdit4("Color", &mtlData_.color.x);
-
+	if (ImGui::TreeNode((name + "GrayScale").c_str())) {
+		mtlData_.DrawImGui(name);
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 

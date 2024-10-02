@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void LuminanceOutLineEffect::Initialize()
+void LuminanceOutLineEffect::Init()
 {
 	Create();
 

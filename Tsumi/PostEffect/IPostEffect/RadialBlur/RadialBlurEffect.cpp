@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void RadialBlurEffect::Initialize()
+void RadialBlurEffect::Init()
 {
 	Create();
 

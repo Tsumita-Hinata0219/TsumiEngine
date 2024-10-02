@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void BoxFilterEffect::Initialize()
+void BoxFilterEffect::Init()
 {
 	Create();
 
@@ -17,7 +17,7 @@ void BoxFilterEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
-	mtlBuffer_.WriteData((&mtlData_));
+	mtlBuffer_.WriteData(&mtlData_);
 	mtlBuffer_.UnMap();
 
 	// コマンドコール

@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void SepiaToneEffect::Initialize()
+void SepiaToneEffect::Init()
 {
 	Create();
 

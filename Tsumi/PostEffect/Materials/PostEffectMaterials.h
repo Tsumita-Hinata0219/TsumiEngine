@@ -72,6 +72,11 @@ struct RandomMtl {
 	float time = 0.0f;
 };
 
+/* RetroCRT用 */
+struct RetroCRTMtl {
+
+};
+
 /* SepiaTone用 */
 struct SepiaToneMtl {
 	Vector4 color{};

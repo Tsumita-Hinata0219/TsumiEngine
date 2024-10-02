@@ -288,6 +288,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
     <ClCompile Include="Tsumi\ShaderManager\ShaderManager.cpp" />
@@ -494,6 +495,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Random\RandomEffect.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Tsumi\PostEffect\Materials\PostEffectMaterials.h" />

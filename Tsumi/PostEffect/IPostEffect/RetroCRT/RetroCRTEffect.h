@@ -2,20 +2,20 @@
 
 #include "../IPostEffect.h"
 
-/* ColorGradingEffectクラス */
-class ColorGradingEffect : public IPostEffect<ColorGradingMtl> {
+/* RetroCRTEffectクラス */
+class RetroCRTEffect : public IPostEffect<RetroCRTMtl> {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	ColorGradingEffect() {};
-	~ColorGradingEffect() {};
+	RetroCRTEffect() {};
+	~RetroCRTEffect() {};
 
 	// 初期化処理、描画処理
 	void Init() override;
 	void Draw() override;
 
-	// Imguiの描画
+	// ImGuiの描画
 	void DrawImGui(std::string name = "") override;
 
 protected:
@@ -23,3 +23,4 @@ protected:
 	// コマンドコール
 	void CommandCall() override;
 };
+

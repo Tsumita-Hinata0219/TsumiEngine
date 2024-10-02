@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void GrayScaleEffect::Initialize()
+void GrayScaleEffect::Init()
 {
 	Create();
 

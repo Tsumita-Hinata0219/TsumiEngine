@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void ColorGradingEffect::Initialize()
+void ColorGradingEffect::Init()
 {
 	Create();
 

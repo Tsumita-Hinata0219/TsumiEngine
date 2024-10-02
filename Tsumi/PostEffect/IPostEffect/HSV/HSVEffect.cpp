@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void HSVEffect::Initialize()
+void HSVEffect::Init()
 {
 	Create();
 

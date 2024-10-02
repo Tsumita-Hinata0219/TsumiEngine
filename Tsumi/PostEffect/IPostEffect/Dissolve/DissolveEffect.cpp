@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void DissolveEffect::Initialize()
+void DissolveEffect::Init()
 {
 	Create();
 
@@ -16,7 +16,7 @@ void DissolveEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
-	mtlBuffer_.WriteData((&mtlData_));
+	mtlBuffer_.WriteData(&mtlData_);
 	mtlBuffer_.UnMap();
 
 	// コマンドコール

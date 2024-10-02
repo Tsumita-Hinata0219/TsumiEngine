@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void GaussianFilterEffect::Initialize()
+void GaussianFilterEffect::Init()
 {
 	Create();
 

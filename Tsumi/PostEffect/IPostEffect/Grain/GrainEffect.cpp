@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void GrainEffect::Initialize()
+void GrainEffect::Init()
 {
 	Create();
 

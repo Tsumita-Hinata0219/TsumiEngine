@@ -30,7 +30,7 @@ void GameScene::Initialize()
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
-	absentEffect_->Initialize();
+	absentEffect_->Init();
 
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();

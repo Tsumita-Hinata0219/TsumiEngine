@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void AbsentEffect::Initialize()
+void AbsentEffect::Init()
 {
 	Create();
 

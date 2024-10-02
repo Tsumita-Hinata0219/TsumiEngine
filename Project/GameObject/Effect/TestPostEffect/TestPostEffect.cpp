@@ -7,51 +7,51 @@ void TestPostEffect::Initialize()
 {
 	// Absent
 	absent_ = std::make_unique<AbsentEffect>();
-	absent_->Initialize();
+	absent_->Init();
 
 	// BoxFilter
 	boxFilter_ = std::make_unique<BoxFilterEffect>();
-	boxFilter_->Initialize();
+	boxFilter_->Init();
 
 	// ColorGrading
 	colorGrading_ = std::make_unique<ColorGradingEffect>();
-	colorGrading_->Initialize();
+	colorGrading_->Init();
 
 	// Dissolve
 	dissolve_ = std::make_unique<DissolveEffect>();
-	dissolve_->Initialize();
+	dissolve_->Init();
 
 	// GaussianFilter
 	gaussianFilter_ = std::make_unique<GaussianFilterEffect>();
-	gaussianFilter_->Initialize();
+	gaussianFilter_->Init();
 
 	// Grain
 	grain_ = std::make_unique<GrainEffect>();
-	grain_->Initialize();
+	grain_->Init();
 
 	// HSV
 	hsv_ = std::make_unique<HSVEffect>();
-	hsv_->Initialize();
+	hsv_->Init();
 
 	// LuminanceOutLine
 	luminanceOutLine_ = std::make_unique<LuminanceOutLineEffect>();
-	luminanceOutLine_->Initialize();
+	luminanceOutLine_->Init();
 
 	// RadialBlur
 	radialBlur_ = std::make_unique<RadialBlurEffect>();
-	radialBlur_->Initialize();
+	radialBlur_->Init();
 
 	// Random
 	random_ = std::make_unique<RandomEffect>();
-	random_->Initialize();
+	random_->Init();
 
 	// SepiaTone
 	sepiaTone_ = std::make_unique<SepiaToneEffect>();
-	sepiaTone_->Initialize();
+	sepiaTone_->Init();
 
 	// Vignetting
 	vignetting_ = std::make_unique<VignettingEffect>();
-	vignetting_->Initialize();
+	vignetting_->Init();
 
 
 	// IPostEffect::Typeを表す文字

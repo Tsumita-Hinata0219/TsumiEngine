@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void VignettingEffect::Initialize()
+void VignettingEffect::Init()
 {
 	Create();
 }

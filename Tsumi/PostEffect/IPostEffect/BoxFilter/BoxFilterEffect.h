@@ -12,7 +12,7 @@ public:
 	~BoxFilterEffect() {};
 
 	// 初期化処理、描画処理
-	void Initialize() override;
+	void Init() override;
 	void Draw() override;
 
 	// Imguiの描画

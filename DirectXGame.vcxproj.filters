@@ -241,6 +241,7 @@
     <ClCompile Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.cpp" />
     <ClCompile Include="Project\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Tsumi\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
+    <ClCompile Include="Tsumi\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -482,6 +483,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.h" />
     <ClInclude Include="Project\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Tsumi\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h" />
+    <ClInclude Include="Tsumi\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

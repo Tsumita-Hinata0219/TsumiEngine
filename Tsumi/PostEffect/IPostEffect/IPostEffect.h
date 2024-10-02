@@ -24,7 +24,7 @@ public: // メンバ関数
 	virtual ~IPostEffect() {};
 
 	// 初期化処理、更新処理、描画処理
-	virtual void Initialize() = 0;
+	virtual void Init() = 0;
 	virtual void Draw() = 0;
 
 	// ImGuiの描画

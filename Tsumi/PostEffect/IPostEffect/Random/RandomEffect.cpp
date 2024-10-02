@@ -4,7 +4,7 @@
 
 
 // 初期化処理
-void RandomEffect::Initialize()
+void RandomEffect::Init()
 {
 	Create();
 

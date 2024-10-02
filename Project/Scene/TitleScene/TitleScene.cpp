@@ -29,7 +29,7 @@ void TitleScene::Initialize()
 
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
-	absentEffect_->Initialize();
+	absentEffect_->Init();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();

@@ -30,8 +30,6 @@ void CollisionManager::Update()
 void CollisionManager::CheckCollisions()
 {
 
-
-
 }
 
 

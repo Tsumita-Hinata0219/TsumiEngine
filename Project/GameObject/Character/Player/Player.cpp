@@ -41,7 +41,6 @@ void Player::Init()
 	Col::Sphere sh{};
 	colComp_->Register(sh);
 
-
 	// キルカウントを0で初期化
 	killCount_ = 0;
 

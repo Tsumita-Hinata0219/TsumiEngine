@@ -151,6 +151,7 @@ void ShaderManager::PostEffectShadersCompiles()
 	OutLineShader();
 	RadialBlurShader();
 	RandomShader();
+	RetroCRTShader();
 	SepiaToneShader();
 	VignettingShader();
 }
@@ -398,6 +399,16 @@ void ShaderManager::RandomShader()
 		L"Resources/Shaders/PostEffect/Random/Random.PS.hlsl",
 		shader);
 	postEffectShadersMap_["Random"] = shader;
+}
+
+void ShaderManager::RetroCRTShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/RetroCRT/RetroCRT.PS.hlsl",
+		shader);
+	postEffectShadersMap_["RetroCRT"] = shader;
 }
 
 void ShaderManager::SepiaToneShader()

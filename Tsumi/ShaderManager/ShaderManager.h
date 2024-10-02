@@ -124,6 +124,7 @@ private: // メンバ関数
 	void OutLineShader();
 	void RadialBlurShader();
 	void RandomShader();
+	void RetroCRTShader();
 	void SepiaToneShader();
 	void VignettingShader();
 

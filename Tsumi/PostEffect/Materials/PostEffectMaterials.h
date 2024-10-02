@@ -74,7 +74,19 @@ struct RandomMtl {
 
 /* RetroCRT用 */
 struct RetroCRTMtl {
-
+	Vector4 color;            // エッジカラー
+	float threshold;         // マスクの閾値
+	float thinkness;         // エッジの厚さ
+	float scanlineStrength;  // スキャンラインの強度
+	int scanlineActive;     // スキャンラインの有効フラグ
+	float chromaIntensity;   // 色収差の強度
+	int chromaActive;       // 色収差の有効フラグ
+	float barrelDistortion;  // バレル歪みの強度
+	int barrelActive;       // バレル歪みの有効フラグ
+	float noiseStrength;     // ノイズの強度
+	int noiseActive;        // ノイズの有効フラグ
+	float bloomStrength;     // ブルームの強度
+	int bloomActive;        // ブルームの有効フラグ
 };
 
 /* SepiaTone用 */

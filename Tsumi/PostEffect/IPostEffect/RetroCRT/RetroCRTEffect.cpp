@@ -27,7 +27,21 @@ void RetroCRTEffect::Draw()
 // ImGuiの描画
 void RetroCRTEffect::DrawImGui(std::string name)
 {
-	name;
+#ifdef _DEBUG
+
+	// Labelを追加する場合は追加
+	label_ = label_ + name;
+
+	if (ImGui::TreeNode((label_ + "RetroCRT").c_str())) {
+
+		ImGui::ColorEdit4("Color", &mtlData_.color.x);
+		ImGui::DragFloat("Threshold", &mtlData_.threshold, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat("Thinkness", &mtlData_.thinkness, 0.01f, 0.0f, 1.0f);
+
+		ImGui::TreePop();
+	}
+
+#endif // _DEBUG
 }
 
 

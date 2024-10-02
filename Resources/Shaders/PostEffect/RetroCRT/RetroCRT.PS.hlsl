@@ -9,10 +9,15 @@ struct Material
     float threshold; // マスクの閾値
     float thinkness; // エッジの厚さ
     float scanlineStrength; // スキャンラインの強度
+    int scanlineActive; // スキャンラインの有効フラグ
     float chromaIntensity; // 色収差の強度
+    int chromaActive; // 色収差の有効フラグ
     float barrelDistortion; // バレル歪みの強度
+    int barrelActive; // バレル歪みの有効フラグ
     float noiseStrength; // ノイズの強度
+    int noiseActive; // ノイズの有効フラグ
     float bloomStrength; // ブルームの強度
+    int bloomActive; // ブルームの有効フラグ
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -87,11 +92,11 @@ PixelShaderOutput main(VertexShaderOutput input)
     output.color.rgb += edge * gMaterial.color.rgb;
     
     // --- ブラウン管エフェクトの追加 ---
-    float scanline = ScanlineEffect(input.texcoord);
-    float3 chromaticColor = ChromaticAberration(input.texcoord);
-    float2 distortesUV = ApplyBarrelDistortion(input.texcoord);
-    float noise = NoiseEffect(input.texcoord);
-    float3 bloomColor = BloomEffect(chromaticColor);    
+    float scanline = gMaterial.scanlineActive ? ScanlineEffect(input.texcoord) : 0.0f;
+    float3 chromaticColor = gMaterial.chromaActive ? ChromaticAberration(input.texcoord) : output.color.rgb;
+    float2 distortesUV = gMaterial.barrelActive ? ApplyBarrelDistortion(input.texcoord) : input.texcoord;
+    float noise = gMaterial.noiseActive ? NoiseEffect(input.texcoord) : 0.0f;
+    float3 bloomColor = gMaterial.bloomActive ? BloomEffect(chromaticColor) : chromaticColor;
     
     // 最終的な色にスキャンライトノイズを加える
     output.color.rgb = bloomColor + scanline + noise;

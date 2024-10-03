@@ -45,9 +45,6 @@ void Tsumi::Initialize() {
 
 	// DrawSystemの初期化処理
 	DrawSystem::GetInstance()->Initialize();
-
-	// FileManagerの初期化処理
-	FileManager::GetInstance()->Initialize();
 }
 
 

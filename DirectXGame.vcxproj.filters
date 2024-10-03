@@ -131,7 +131,6 @@
     <ClCompile Include="Tsumi\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Tsumi\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
-    <ClCompile Include="Tsumi\FileManager\FileManager.cpp" />
     <ClCompile Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Tsumi\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.cpp" />
@@ -352,7 +351,6 @@
     <ClInclude Include="Tsumi\View\SRVManager\SRVManager.h" />
     <ClInclude Include="Tsumi\PostEffect\IPostEffect\IPostEffect.h" />
     <ClInclude Include="Project\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
-    <ClInclude Include="Tsumi\FileManager\FileManager.h" />
     <ClInclude Include="Project\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Tsumi\CommandManager\CommandManager.h" />
     <ClInclude Include="Tsumi\Utilities\EnumUtilities\EnumUtilities.h" />
@@ -476,7 +474,7 @@
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
-    <ClInclude Include="Tsumi\SmartPointer\SmartPtr.h" />
+    <ClInclude Include="Tsumi\Utilities\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Octree.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.h" />
     <ClInclude Include="Tsumi\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.h" />

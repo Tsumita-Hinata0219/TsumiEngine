@@ -18,6 +18,8 @@ struct Material
     int noiseActive; // ノイズの有効フラグ
     float bloomStrength; // ブルームの強度
     int bloomActive; // ブルームの有効フラグ
+    float2 resolution; // ウィンドウサイズ
+    float time; // ゲーム開始時からのタイマー
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -29,14 +31,11 @@ struct PixelShaderOutput
     float4 color : SV_TARGET0;
 };
 
-// 画面解像度と時間を追加
-float2 resolution;
-float time;
 
 // スキャンライン効果を計算する関数
 float ScanlineEffect(float2 texcoord)
 {
-    return sin(texcoord.y * resolution.y * 3.0f + time * 10.0f) * gMaterial.scanlineStrength;
+    return sin(texcoord.y * gMaterial.resolution.y * 3.0f + gMaterial.time * 10.0f) * gMaterial.scanlineStrength;
 }
 
 // 色収差効果を計算する関数
@@ -64,7 +63,7 @@ float2 ApplyBarrelDistortion(float2 texcoord)
 // ノイズ効果を計算する関数
 float NoiseEffect(float2 texcoord)
 {
-    float noise = frac(sin(dot(texcoord * resolution.xy, float2(12.9898f, 78.233f)) + time) * 43758.5453f);
+    float noise = frac(sin(dot(texcoord * gMaterial.resolution.xy, float2(12.9898f, 78.233f)) + gMaterial.time) * 43758.5453f);
     return (noise - 0.5f) * gMaterial.noiseStrength;
 }
 

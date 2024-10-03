@@ -139,6 +139,9 @@ struct RetroCRTMtl {
 	int noiseActive;        // ノイズの有効フラグ
 	float bloomStrength;     // ブルームの強度
 	int bloomActive;        // ブルームの有効フラグ
+	Vector2 resolution;       // ウィンドウサイズ
+	float time;             // ゲーム開始時からのタイマー
+	uint32_t maskTexture = 0; // マスク画像
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
@@ -159,6 +162,8 @@ struct RetroCRTMtl {
 		ImGui::DragFloat((label + "_bloomStrength").c_str(), &bloomStrength);
 		ImGui::RadioButton((label + "_bloomDisabled").c_str(), &bloomActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_bloomEnabled").c_str(), &bloomActive, 1);
+		ImGui::DragFloat2((label + "_resolution").c_str(), &resolution.x, 0.0f);
+		ImGui::DragFloat((label + "_time").c_str(), &time, 0.0f);
 	}
 };
 

@@ -10,11 +10,32 @@
 
 #include "json.hpp"
 
-#include "../FileManager/FileManager.h"
 #include "../3D/Model/ModelManager/ModelManager.h"
 
 #include "../../Project/Math/MyMath.h"
 #include "../../Project/GameObject/GameObject.h"
+
+
+
+struct ColliderData {
+	std::string type;
+	Vector3 center;
+	Vector3 size;
+};
+struct LevelData {
+
+	struct ObjectData {
+		std::string type;
+		std::string file_name;
+		SRT srt;
+		std::map<std::string, std::unique_ptr<ObjectData>> children;
+	};
+	std::map<std::string, std::unique_ptr<ObjectData>> objects;
+};
+struct LevelObject {
+	std::unique_ptr<Model> model;
+	WorldTransform transform;
+};
 
 
 /* JsonManagerクラス */

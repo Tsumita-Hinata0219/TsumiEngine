@@ -1,4 +1,5 @@
 #include "RetroCRTEffect.h"
+#include "../../../../Project/GameManager/GameManager.h"
 
 
 
@@ -7,13 +8,17 @@ void RetroCRTEffect::Init()
 {
 	Create();
 
+	mtlData_.resolution = WinApp::WindowSize();
 
+	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise0.png");
 }
 
 
 // 描画処理
 void RetroCRTEffect::Draw()
 {
+	mtlData_.time = g_ElapsedTime;
+
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
 	mtlBuffer_.WriteData(&mtlData_);
@@ -39,6 +44,21 @@ void RetroCRTEffect::DrawImGui(std::string name)
 // コマンドコール
 void RetroCRTEffect::CommandCall()
 {
+	// コマンドの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// PipeLineの設定
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::RetroCRT);
 
+	// SRVをコマンドに積む
+	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+
+	// MtlBufferをコマンドに積む
+	mtlBuffer_.CommandCall(4);
+
+	// MaksTexture
+	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
+
+	// 描画
+	commands.List->DrawInstanced(3, 1, 0, 0);
 }

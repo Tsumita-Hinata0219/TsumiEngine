@@ -11,7 +11,7 @@
 
 #include "../../Tsumi/Utilities/RandomGenerator/RandomGenerator.h"
 #include "../../Tsumi/Utilities/TimedCall/TimedCall.h"
-#include "../../Tsumi/SmartPointer/SmartPtr.h"
+#include "../../Tsumi/Utilities/SmartPointer/SmartPtr.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

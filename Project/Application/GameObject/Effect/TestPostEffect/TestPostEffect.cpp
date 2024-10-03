@@ -45,6 +45,10 @@ void TestPostEffect::Initialize()
 	random_ = std::make_unique<RandomEffect>();
 	random_->Init();
 
+	// RetroCRT
+	retroCRT_ = std::make_unique<RetroCRTEffect>();
+	retroCRT_->Init();
+
 	// SepiaTone
 	sepiaTone_ = std::make_unique<SepiaToneEffect>();
 	sepiaTone_->Init();
@@ -67,6 +71,7 @@ void TestPostEffect::Initialize()
 		"LuminanceOutLine",
 		"RadialBlur",
 		"Random",
+		"RetroCRT",
 		"SepiaTone",
 		"Vignetting"
 	};
@@ -113,6 +118,9 @@ void TestPostEffect::Update()
 		}
 		else if (activeEffects_ == EffectType::Random) {
 			random_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::RetroCRT) {
+			retroCRT_->DrawImGui();
 		}
 		else if (activeEffects_ == EffectType::SepiaTone) {
 			sepiaTone_->DrawImGui();
@@ -162,6 +170,10 @@ void TestPostEffect::Draw()
 	else if (activeEffects_ == EffectType::Random) {
 		random_->Draw();
 	}
+	else if (activeEffects_ == EffectType::RetroCRT) {
+		retroCRT_->Draw();
+		//absent_->Draw();
+	}
 	else if (activeEffects_ == EffectType::SepiaTone) {
 		sepiaTone_->Draw();
 	}
@@ -195,8 +207,9 @@ void TestPostEffect::ChangeImGui()
 		case 8: activeEffects_ = EffectType::LuminanceOutLine; break;
 		case 9: activeEffects_ = EffectType::RadialBlur; break;
 		case 10: activeEffects_ = EffectType::Random; break;
-		case 11: activeEffects_ = EffectType::SepiaTone; break;
-		case 12: activeEffects_ = EffectType::Vignetting; break;
+		case 11: activeEffects_ = EffectType::RetroCRT; break;
+		case 12: activeEffects_ = EffectType::SepiaTone; break;
+		case 13: activeEffects_ = EffectType::Vignetting; break;
 		}
 	}
 

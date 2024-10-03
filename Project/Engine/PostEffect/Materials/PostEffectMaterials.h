@@ -59,8 +59,8 @@ struct GrainMtl {
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat((label + "_grainAmount").c_str(), &grainAmount, 0.01f);
-		ImGui::DragFloat2((label + "_noiseFactors").c_str(), &noiseFactors.x);
+		ImGui::DragFloat((label + "_grainAmount").c_str(), &grainAmount, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2((label + "_noiseFactors").c_str(), &noiseFactors.x, 0.01f, 0.0f, 1.0f);
 	}
 };
 
@@ -126,40 +126,40 @@ struct RandomMtl {
 
 /* RetroCRT用 */
 struct RetroCRTMtl {
-	Vector4 color;            // エッジカラー
-	float threshold;         // マスクの閾値
-	float thinkness;         // エッジの厚さ
-	float scanlineStrength;  // スキャンラインの強度
-	int scanlineActive;     // スキャンラインの有効フラグ
-	float chromaIntensity;   // 色収差の強度
-	int chromaActive;       // 色収差の有効フラグ
-	float barrelDistortion;  // バレル歪みの強度
-	int barrelActive;       // バレル歪みの有効フラグ
-	float noiseStrength;     // ノイズの強度
-	int noiseActive;        // ノイズの有効フラグ
-	float bloomStrength;     // ブルームの強度
-	int bloomActive;        // ブルームの有効フラグ
-	Vector2 resolution;       // ウィンドウサイズ
-	float time;             // ゲーム開始時からのタイマー
+	Vector4 color{};            // エッジカラー
+	float threshold = 0.0f;         // マスクの閾値
+	float thinkness = 0.0f;         // エッジの厚さ
+	float scanlineStrength = 0.0f;  // スキャンラインの強度
+	int scanlineActive = false;     // スキャンラインの有効フラグ
+	float chromaIntensity = 0.0f;   // 色収差の強度
+	int chromaActive = false;       // 色収差の有効フラグ
+	float barrelDistortion = 0.0f;  // バレル歪みの強度
+	int barrelActive = false;       // バレル歪みの有効フラグ
+	float noiseStrength = 0.0f;     // ノイズの強度
+	int noiseActive = false;        // ノイズの有効フラグ
+	float bloomStrength = 0.0f;     // ブルームの強度
+	int bloomActive = false;        // ブルームの有効フラグ
+	Vector2 resolution = WinApp::WindowSize(); // ウィンドウサイズ
+	float time = 0.0f;             // ゲーム開始時からのタイマー
 	uint32_t maskTexture = 0; // マスク画像
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat((label + "_threshold").c_str(), &threshold);
-		ImGui::DragFloat((label + "_thinkness").c_str(), &thinkness);
-		ImGui::DragFloat((label + "_scanlineStrength").c_str(), &scanlineStrength);
+		ImGui::DragFloat((label + "_threshold").c_str(), &threshold, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_thinkness").c_str(), &thinkness, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_scanlineStrength").c_str(), &scanlineStrength, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_scanlineDisabled").c_str(), &scanlineActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_scanlineEnabled").c_str(), &scanlineActive, 1);
-		ImGui::DragFloat((label + "_chromaIntensity").c_str(), &chromaIntensity);
+		ImGui::DragFloat((label + "_chromaIntensity").c_str(), &chromaIntensity, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_chromaDisabled").c_str(), &chromaActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_chromaEnabled").c_str(), &chromaActive, 1);
-		ImGui::DragFloat((label + "_barrelDistortion").c_str(), &barrelDistortion);
+		ImGui::DragFloat((label + "_barrelDistortion").c_str(), &barrelDistortion, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_barrelDisabled").c_str(), &barrelActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_barrelEnabled").c_str(), &barrelActive, 1);
-		ImGui::DragFloat((label + "_noiseStrength").c_str(), &noiseStrength);
+		ImGui::DragFloat((label + "_noiseStrength").c_str(), &noiseStrength, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_noiseDisabled").c_str(), &noiseActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_noiseEnabled").c_str(), &noiseActive, 1);
-		ImGui::DragFloat((label + "_bloomStrength").c_str(), &bloomStrength);
+		ImGui::DragFloat((label + "_bloomStrength").c_str(), &bloomStrength, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_bloomDisabled").c_str(), &bloomActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_bloomEnabled").c_str(), &bloomActive, 1);
 		ImGui::DragFloat2((label + "_resolution").c_str(), &resolution.x, 0.0f);

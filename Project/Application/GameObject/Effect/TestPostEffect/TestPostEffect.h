@@ -16,6 +16,7 @@
 #include "PostEffect/IPostEffect/LuminanceOutLine/LuminanceOutLineEffect.h"
 #include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 #include "PostEffect/IPostEffect/Random/RandomEffect.h"
+#include "PostEffect/IPostEffect/RetroCRT/RetroCRTEffect.h"
 #include "PostEffect/IPostEffect/SepiaTone/SepiaToneEffect.h"
 #include "PostEffect/IPostEffect/Vignetting/VignettingEffect.h"
 
@@ -32,8 +33,9 @@ enum EffectType {
 	LuminanceOutLine = 1 << 7,
 	RadialBlur = 1 << 8,
 	Random = 1 << 9,
-	SepiaTone = 1 << 10,
-	Vignetting = 1 << 11,
+	RetroCRT = 1 << 10,
+	SepiaTone = 1 << 11,
+	Vignetting = 1 << 12,
 };
 
 
@@ -92,6 +94,9 @@ private:
 
 	// Random
 	std::unique_ptr<RandomEffect> random_;
+
+	// RetroCRT
+	std::unique_ptr<RetroCRTEffect> retroCRT_;
 
 	// SepiaTone
 	std::unique_ptr<SepiaToneEffect> sepiaTone_;

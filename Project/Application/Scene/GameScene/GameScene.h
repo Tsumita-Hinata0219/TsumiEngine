@@ -84,6 +84,9 @@ private: // クラス
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
 
+	// PostEffect
+	std::unique_ptr<TestPostEffect> testPostEffect_;
+
 	// GameSceneUI
 	std::unique_ptr<GameSceneUI> gameSceneUI_;
 

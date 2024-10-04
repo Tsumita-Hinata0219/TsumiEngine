@@ -32,6 +32,10 @@ void GameScene::Initialize()
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
 
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_ = make_unique<TestPostEffect>();
+	testPostEffect_->Initialize();
+
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameSceneUI_->Init();
@@ -80,10 +84,14 @@ void GameScene::Initialize()
 /// </summary>
 void GameScene::Update(GameManager* state)
 {
+	state;
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
+
 	/* ----- SceneChange シーンチェンジ ----- */
-	if (SceneChangeCheck(state)) {
-		return; // 後の更新処理は入らない
-	}
+	//if (SceneChangeCheck(state)) {
+	//	return; // 後の更新処理は入らない
+	//}
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
@@ -163,6 +171,9 @@ void GameScene::ModelDraw()
 void GameScene::FrontSpriteDraw()
 {
 	absentEffect_->Draw();
+
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_->Draw();
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Draw2DFront();

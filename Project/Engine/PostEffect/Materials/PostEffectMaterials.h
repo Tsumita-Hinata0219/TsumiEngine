@@ -2,6 +2,7 @@
 
 #include <sstream>
 
+#include "Base/WinApp/WinApp.h"
 #include "BufferResource/BufferResource.h"
 
 #include "Math/MyMath.h"
@@ -127,8 +128,6 @@ struct RandomMtl {
 /* RetroCRT用 */
 struct RetroCRTMtl {
 	Vector4 color{};            // エッジカラー
-	float threshold = 0.0f;         // マスクの閾値
-	float thinkness = 0.0f;         // エッジの厚さ
 	float scanlineStrength = 0.0f;  // スキャンラインの強度
 	int scanlineActive = false;     // スキャンラインの有効フラグ
 	float chromaIntensity = 0.0f;   // 色収差の強度
@@ -141,12 +140,9 @@ struct RetroCRTMtl {
 	int bloomActive = false;        // ブルームの有効フラグ
 	Vector2 resolution = WinApp::WindowSize(); // ウィンドウサイズ
 	float time = 0.0f;             // ゲーム開始時からのタイマー
-	uint32_t maskTexture = 0; // マスク画像
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat((label + "_threshold").c_str(), &threshold, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat((label + "_thinkness").c_str(), &thinkness, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat((label + "_scanlineStrength").c_str(), &scanlineStrength, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_scanlineDisabled").c_str(), &scanlineActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_scanlineEnabled").c_str(), &scanlineActive, 1);

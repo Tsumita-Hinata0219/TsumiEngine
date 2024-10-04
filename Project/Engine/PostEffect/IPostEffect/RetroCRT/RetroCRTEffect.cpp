@@ -9,8 +9,6 @@ void RetroCRTEffect::Init()
 	Create();
 
 	mtlData_.resolution = WinApp::WindowSize();
-
-	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise0.png");
 }
 
 
@@ -55,9 +53,6 @@ void RetroCRTEffect::CommandCall()
 
 	// MtlBufferをコマンドに積む
 	mtlBuffer_.CommandCall(4);
-
-	// MaksTexture
-	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

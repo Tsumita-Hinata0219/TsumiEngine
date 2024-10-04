@@ -6,8 +6,6 @@ SamplerState gSampler : register(s0);
 struct Material
 {
     float4 color; // エッジカラー
-    float threshold; // マスクの閾値
-    float thinkness; // エッジの厚さ
     float scanlineStrength; // スキャンラインの強度
     int scanlineActive; // スキャンラインの有効フラグ
     float chromaIntensity; // 色収差の強度
@@ -22,9 +20,6 @@ struct Material
     float time; // ゲーム開始時からのタイマー
 };
 ConstantBuffer<Material> gMaterial : register(b1);
-
-// マスク画像
-Texture2D<float> gMaskTexture : register(t1);
 
 struct PixelShaderOutput
 {
@@ -78,28 +73,20 @@ float3 BloomEffect(float3 color)
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
-    
-    float mask = gMaskTexture.Sample(gSampler, input.texcoord);
-    if (mask <= gMaterial.threshold)
-    {
-        discard;
-    }
-    
-    // エッジ効果
-    float edge = 1.0f - smoothstep(gMaterial.threshold, gMaterial.threshold + gMaterial.thinkness, mask);
-    output.color = gTexture.Sample(gSampler, input.texcoord);
-    output.color.rgb += edge * gMaterial.color.rgb;
-    
+
+    // 歪ませたUV座標でテクスチャをサンプリング
+    float2 distortesUV = gMaterial.barrelActive ? ApplyBarrelDistortion(input.texcoord) : input.texcoord;
+    output.color = gTexture.Sample(gSampler, distortesUV);
+
     // --- ブラウン管エフェクトの追加 ---
     float scanline = gMaterial.scanlineActive ? ScanlineEffect(input.texcoord) : 0.0f;
-    float3 chromaticColor = gMaterial.chromaActive ? ChromaticAberration(input.texcoord) : output.color.rgb;
-    float2 distortesUV = gMaterial.barrelActive ? ApplyBarrelDistortion(input.texcoord) : input.texcoord;
+    float3 chromaticColor = gMaterial.chromaActive ? ChromaticAberration(distortesUV) : output.color.rgb;
     float noise = gMaterial.noiseActive ? NoiseEffect(input.texcoord) : 0.0f;
     float3 bloomColor = gMaterial.bloomActive ? BloomEffect(chromaticColor) : chromaticColor;
-    
-    // 最終的な色にスキャンライトノイズを加える
+
+    // 最終的な色にスキャンラインやノイズを加える
     output.color.rgb = bloomColor + scanline + noise;
     output.color.a = 1.0f;
-    
+
     return output;
 }

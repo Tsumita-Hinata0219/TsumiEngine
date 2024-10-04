@@ -172,7 +172,6 @@ void TestPostEffect::Draw()
 	}
 	else if (activeEffects_ == EffectType::RetroCRT) {
 		retroCRT_->Draw();
-		//absent_->Draw();
 	}
 	else if (activeEffects_ == EffectType::SepiaTone) {
 		sepiaTone_->Draw();

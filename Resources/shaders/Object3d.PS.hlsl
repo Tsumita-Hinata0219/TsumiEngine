@@ -61,7 +61,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     //float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
 
     // アルファ値が0.9f未満なら描画をスキップ
-    if (textureColor.a < 0.01f)
+    if (textureColor.a < 0.9f)
     {
         discard;
     }

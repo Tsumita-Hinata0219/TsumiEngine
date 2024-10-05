@@ -1,4 +1,4 @@
-#include "Project/GameManager/GameManager.h"
+#include "GameManager/GameManager.h"
 
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 	std::unique_ptr<GameManager> gameManager = 

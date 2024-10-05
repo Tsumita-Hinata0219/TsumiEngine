@@ -50,8 +50,8 @@ float2 ApplyBarrelDistortion(float2 texcoord)
 {
     float2 centeredUV = (texcoord - 0.5f) * 2.0f;
     float radius = length(centeredUV);
-    float barrelDistorion = 1.0f + gMaterial.barrelDistortion * pow(radius, 2.0f);
-    centeredUV /= barrelDistorion;
+    float barrelDistortion = 1.0f - gMaterial.barrelDistortion * pow(radius, 2.0f); // îΩì]Ç≥ÇπÇÈ
+    centeredUV *= barrelDistortion;
     return centeredUV * 0.5f + 0.5f; // ê≥ãKâª
 }
 

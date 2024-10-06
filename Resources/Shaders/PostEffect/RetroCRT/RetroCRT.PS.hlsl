@@ -8,7 +8,8 @@ struct Material
     float4 color; // エッジカラー
     float scanlineStrength; // スキャンラインの強度
     int scanlineActive; // スキャンラインの有効フラグ
-    float chromaIntensity; // 色収差の強度
+    float2 chromaOffsetR; // Rチャンネルの色収差オフセット (x, y)
+    float2 chromaOffsetB; // Bチャンネルの色収差オフセット (x, y)
     int chromaActive; // 色収差の有効フラグ
     float barrelDistortion; // バレル歪みの強度
     int barrelActive; // バレル歪みの有効フラグ
@@ -36,12 +37,10 @@ float ScanlineEffect(float2 texcoord)
 // 色収差効果を計算する関数
 float3 ChromaticAberration(float2 texcoord)
 {
-    float2 chromaOffsetR = float2(gMaterial.chromaIntensity, 0.0f);
-    float2 chromaOffsetB = float2(-gMaterial.chromaIntensity, 0.0f);
     float3 color;
-    color.r = gTexture.Sample(gSampler, texcoord + chromaOffsetR).r;
-    color.g = gTexture.Sample(gSampler, texcoord).g;
-    color.b = gTexture.Sample(gSampler, texcoord + chromaOffsetB).b;
+    color.r = gTexture.Sample(gSampler, texcoord + gMaterial.chromaOffsetR).r; // Rチャンネルのずらし
+    color.g = gTexture.Sample(gSampler, texcoord).g; // Gチャンネルはそのまま
+    color.b = gTexture.Sample(gSampler, texcoord + gMaterial.chromaOffsetB).b; // Bチャンネルのずらし
     return color;
 }
 
@@ -68,8 +67,14 @@ float2 ApplyBarrelDistortion(float2 texcoord)
 // ノイズ効果を計算する関数
 float NoiseEffect(float2 texcoord)
 {
-    float noise = frac(sin(dot(texcoord * gMaterial.resolution.xy, float2(12.9898f, 78.233f)) + gMaterial.time) * 43758.5453f);
-    return (noise - 0.5f) * gMaterial.noiseStrength;
+   // ここで、より自然なノイズを生成
+    float noise = frac(sin(dot(texcoord * gMaterial.resolution.xy * 0.1f, float2(12.9898f, 78.233f)) + gMaterial.time) * 43758.5453f);
+    
+    // ノイズをスケーリングして強度を調整
+    float scaledNoise = (noise - 0.5f) * gMaterial.noiseStrength; // -0.5から0.5の範囲にする
+
+    // ノイズを適用する際は、色に直接加えるのではなく、輝度を変化させる
+    return scaledNoise;
 }
 
 // ブルーム効果を計算する関数

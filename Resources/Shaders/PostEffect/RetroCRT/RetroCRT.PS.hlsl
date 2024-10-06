@@ -45,18 +45,24 @@ float3 ChromaticAberration(float2 texcoord)
     return color;
 }
 
-// バレルゆがみを適応する関数（ブラウン管っぽい歪みを再現）
+// 樽型の歪みを適用する関数（ブラウン管テレビの湾曲を再現）
 float2 ApplyBarrelDistortion(float2 texcoord)
 {
-    float2 centeredUV = (texcoord - 0.5f) * 2.0f; // UV座標を中心基準に
+    // UV座標を中心基準に調整
+    float2 centeredUV = (texcoord - 0.5f) * 2.0f;
     float radius = length(centeredUV); // 中心からの距離を計算
 
-    // バレル歪みの強度に基づいて、非線形な変形を適用
-    float distortionFactor = 1.0f + gMaterial.barrelDistortion * (radius * radius); // 非線形な曲線的歪み
-    centeredUV /= distortionFactor; // 歪みを適用
+    // バレルディストーション (中央に縮むように)
+    float distortionFactor = 1.0f + gMaterial.barrelDistortion * (radius * radius);
+    centeredUV *= distortionFactor;
 
-    // UVを正規化して元に戻す
-    return centeredUV * 0.5f + 0.5f;
+    // 正規化して元に戻す
+    float2 distortedUV = centeredUV * 0.5f + 0.5f;
+
+    // UV座標をクランプ (0.0 ~ 1.0 の範囲に制限)
+    distortedUV = clamp(distortedUV, 0.0f, 1.0f);
+
+    return distortedUV;
 }
 
 // ノイズ効果を計算する関数

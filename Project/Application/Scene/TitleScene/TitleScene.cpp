@@ -27,9 +27,13 @@ void TitleScene::Initialize()
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
 
-	/* ----- AbsentEffect アブセントエフェクト----- */
+	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
+
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_ = std::make_unique<TestPostEffect>();
+	testPostEffect_->Init();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
@@ -52,6 +56,9 @@ void TitleScene::Initialize()
 void TitleScene::Update(GameManager* state)
 {
 	state;
+
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
 
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
@@ -117,6 +124,9 @@ void TitleScene::FrontSpriteDraw()
 {
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_->Draw();
+
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_->Draw();
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Draw2DFront();

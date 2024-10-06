@@ -5,14 +5,12 @@
 #include "GameObject/GameObject.h"
 #include "Utilities/FadeManager/FadeManager.h"
 
+#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
+
 #include "GameObject/Terrain/Skybox/Skybox.h"
 
 #include "GameObject/Terrain/TitleScreen/TitleScreen.h"
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
-
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 
 class TitleScene : public IScene {
@@ -68,6 +66,9 @@ private:
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
+
+	// TestPostEffect
+	std::unique_ptr<TestPostEffect> testPostEffect_;
 
 	// TitleScreen
 	std::unique_ptr<TitleScreen> titleScreen_;

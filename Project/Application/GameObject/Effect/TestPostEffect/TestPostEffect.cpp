@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void TestPostEffect::Initialize()
+void TestPostEffect::Init()
 {
 	// Absent
 	absent_ = std::make_unique<AbsentEffect>();

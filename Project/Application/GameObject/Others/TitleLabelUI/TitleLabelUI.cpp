@@ -22,4 +22,10 @@ void TitleLabelUI::Draw3D()
 
 
 }
+void TitleLabelUI::Draw2DFront()
+{
+}
+void TitleLabelUI::Draw2DBack()
+{
+}
 

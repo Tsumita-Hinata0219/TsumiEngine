@@ -19,8 +19,6 @@ void TitleLabelObject::Init()
 
 	// Transformの初期化
 	trans_.Init();
-	trans_.srt.translate = Vector3::zero;
-	trans_.srt.translate.z = 5.0f;
 }
 
 

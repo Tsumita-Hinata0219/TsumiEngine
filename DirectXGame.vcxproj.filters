@@ -217,6 +217,7 @@
     <ClCompile Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -427,6 +428,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

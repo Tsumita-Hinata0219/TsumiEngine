@@ -17,6 +17,9 @@ void TitleLabelObject::Init()
 	modelManager_->LoadModel(file_.first, file_.second);
 	model_ = modelManager_->GetModel(RemoveExtension(file_.second)); // ファイル名だけを抽出
 
+	// 初期カラーは黒
+	model_->SetColor(Samp::Color::BLACK);
+
 	// Transformの初期化
 	trans_.Init();
 }

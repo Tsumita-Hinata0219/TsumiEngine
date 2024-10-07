@@ -119,7 +119,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
 
 	// Color
-	void SetColor(Vector4 color) { this->color_ = color; }
+	void SetColor(Vector4 color) { this->modelState_->SetMaterialColor(color); }
 
 	// Light
 	void SetDirectionalLight(DirectionalLight light) { this->light_ = light; }

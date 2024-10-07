@@ -50,6 +50,8 @@ public: // メンバ変数
 	// Material
 	MaterialDataN GetMaterialData() const { return this->datas_.material; }
 	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+	// Color
+	void SetMaterialColor(Vector4 setColor) { this->datas_.material.color = setColor; }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->datas_.light; }

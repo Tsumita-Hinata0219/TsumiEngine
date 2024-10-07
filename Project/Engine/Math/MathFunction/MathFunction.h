@@ -34,6 +34,8 @@ std::string ConvertString(const std::wstring& str);
 void Log(const std::string& message);
 // ファイルパスから拡張子を抽出する関数
 std::string GetExtension(const std::string& path);
+// ファイルパスからファイル名を抽出する関数
+std::string RemoveExtension(const std::string& filePath);
 // 指定されたディレクトリ内のファイル名を取得
 std::vector<std::string> GetFileNamesInDirectory(const std::string& directoryPath);
 // 指定されたディレクトリ内のサブディレクトリ名を取得
@@ -42,7 +44,6 @@ std::vector<std::string> GetSubdirectories(const std::string& directoryPath);
 std::string FilterFileByExtension(const std::vector<std::string>& filenames, const std::string& extension);
 // 指定された拡張子を持つ最初のファイル名を返す関数
 std::string FindFirstFileWithExtension(const std::string& directoryPath, const std::string& extension);
-
 
 
 

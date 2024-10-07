@@ -3,6 +3,8 @@
 #include "GameObject/GameObject.h"
 #include "GameObject/IObject/IObject.h"
 
+#include "TitleLabelObject/TitleLabelObject.h"
+
 
 // Labelの種類
 enum class TitleLabelType {
@@ -30,6 +32,13 @@ public:
 
 private:
 
+	// ラベル
+	std::vector<std::unique_ptr<TitleLabelObject>> labelObjs_;
+
+	// ラベルのBase座標
+	Vector3 labelBasePos_{};
+	// オフセット
+	Vector3 labelOffset_{};
 
 };
 

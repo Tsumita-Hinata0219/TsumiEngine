@@ -2,21 +2,42 @@
 
 
 
+// パラメータ付きコンストラクタ
+TitleLabelObject::TitleLabelObject(std::pair<std::string, std::string> file)
+{
+	this->file_ = file;
+}
+
+
 // 初期化処理
 void TitleLabelObject::Init()
 {
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();
-	model_ = modelManager_->GetModel("Player_Center_Body");
+	modelManager_->LoadModel(file_.first, file_.second);
+	model_ = modelManager_->GetModel(RemoveExtension(file_.second)); // ファイル名だけを抽出
 
 	// Transformの初期化
 	trans_.Init();
-
+	trans_.srt.translate = Vector3::zero;
+	trans_.srt.translate.z = 5.0f;
 }
 
 
 // 更新処理
-void TitleLabelObject::Update() {}
+void TitleLabelObject::Update() 
+{
+
+#ifdef _DEBUG
+
+	if (ImGui::TreeNode("TitleLabel")) {
+
+		trans_.DrawImGui(RemoveExtension(file_.second));
+		ImGui::TreePop();
+	}
+
+#endif // _DEBUG
+}
 
 
 // 描画処理

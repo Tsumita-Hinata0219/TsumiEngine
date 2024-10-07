@@ -52,6 +52,16 @@ std::string GetExtension(const std::string& path)
 	return path.substr(dotPos);
 }
 
+// ファイルパスからファイル名を抽出する関数
+std::string RemoveExtension(const std::string& filePath)
+{
+	size_t lastDotPos = filePath.find_last_of('.');
+	if (lastDotPos != std::string::npos) {
+		return filePath.substr(0, lastDotPos); // 拡張子より前の部分を返す
+	}
+	return filePath; // 拡張子がなければそのまま返す
+}
+
 // 指定されたディレクトリ内のファイル名を取得
 std::vector<std::string> GetFileNamesInDirectory(const std::string& directoryPath)
 {

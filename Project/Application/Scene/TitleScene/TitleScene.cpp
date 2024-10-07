@@ -130,6 +130,9 @@ void TitleScene::ModelDraw()
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	//titleScreen_->Draw3D();
+
+	/* ----- TitleLabelUI タイトルラベルUI ----- */
+	titleLabel_->Draw3D();
 }\
 
 

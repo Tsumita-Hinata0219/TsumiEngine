@@ -7,13 +7,14 @@ void SelectBar::Init()
 {
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/GameNameBar", "GameNameBar.obj");
-	model_ = modelManager_->GetModel("GameNameBar");
+	modelManager_->LoadModel("Obj/SelectBar", "SelectBar.obj");
+	model_ = modelManager_->GetModel("SelectBar");
 
 	// Transformの初期化
 	trans_.Init();
-	trans_.srt.translate.y = 0.35f;
-	trans_.srt.translate.z = 5.0f;
+	trans_.srt.scale.x = 2.0f;
+	trans_.srt.scale.y = 0.4f;
+	trans_.srt.translate.z = 20.0f;
 }
 
 
@@ -23,7 +24,7 @@ void SelectBar::Update()
 
 #ifdef _DEBUG
 
-	if (ImGui::TreeNode("GameNameBar")) {
+	if (ImGui::TreeNode("SelectBar")) {
 
 		trans_.DrawImGui();
 		ImGui::TreePop();

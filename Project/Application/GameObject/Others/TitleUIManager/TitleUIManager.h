@@ -5,6 +5,7 @@
 
 #include "GameNameBar/GameNameBar.h"
 #include "TitleLabelObject/TitleLabelObject.h"
+#include "SelectBar/SelectBar.h"
 
 
 // Labelの種類
@@ -48,6 +49,9 @@ private:
 	Vector3 startLabelPos_{};
 	// 終了ラベルの座標
 	Vector3 exsitLabelPos_{};
+
+	// セレクトバー
+	std::unique_ptr<SelectBar> selectBar_;
 
 };
 

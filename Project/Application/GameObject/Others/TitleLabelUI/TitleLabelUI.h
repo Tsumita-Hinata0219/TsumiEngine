@@ -22,13 +22,11 @@ public:
 	// 初期化、更新、描画
 	void Init();
 	void Update();
-	void Draw2DFront();
+	void Draw3D();
 
 
 private:
 
-	// ラベル
-	std::vector<SpriteProperty> label_;
 
 };
 

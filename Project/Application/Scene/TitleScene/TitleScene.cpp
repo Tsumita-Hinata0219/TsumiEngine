@@ -48,6 +48,9 @@ void TitleScene::Initialize()
 	titleBG_ = std::make_unique<TitleBackGround>();
 	titleBG_->Init();
 
+	/* ----- TitleLabelUI タイトルラベルUI ----- */
+	titleLabel_ = std::make_unique<TitleLabelUI>();
+	titleLabel_->Init();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
@@ -76,6 +79,9 @@ void TitleScene::Update(GameManager* state)
 
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Update();
+	
+	/* ----- TitleLabelUI タイトルラベルUI ----- */
+	titleLabel_->Update();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -141,6 +147,9 @@ void TitleScene::FrontSpriteDraw()
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	//titleScreen_->Draw2DFront();
 
+	/* ----- TitleLabelUI タイトルラベルUI ----- */
+	titleLabel_->Draw2DFront();
+	
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Draw2DFront();
 

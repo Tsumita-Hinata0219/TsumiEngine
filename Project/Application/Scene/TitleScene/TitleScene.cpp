@@ -48,9 +48,9 @@ void TitleScene::Initialize()
 	titleBG_ = std::make_unique<TitleBackGround>();
 	titleBG_->Init();
 
-	/* ----- TitleLabelUI タイトルラベルUI ----- */
-	titleLabel_ = std::make_unique<TitleLabelUI>();
-	titleLabel_->Init();
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_ = std::make_unique<TitleUIManager>();
+	uiManager_->Init();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
@@ -80,8 +80,8 @@ void TitleScene::Update(GameManager* state)
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Update();
 	
-	/* ----- TitleLabelUI タイトルラベルUI ----- */
-	titleLabel_->Update();
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Update();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -131,9 +131,9 @@ void TitleScene::ModelDraw()
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	//titleScreen_->Draw3D();
 
-	/* ----- TitleLabelUI タイトルラベルUI ----- */
-	titleLabel_->Draw3D();
-}\
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Draw3D();
+}
 
 
 /// <summary>
@@ -150,8 +150,8 @@ void TitleScene::FrontSpriteDraw()
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	//titleScreen_->Draw2DFront();
 
-	/* ----- TitleLabelUI タイトルラベルUI ----- */
-	titleLabel_->Draw2DFront();
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Draw2DFront();
 	
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Draw2DFront();

@@ -1,14 +1,14 @@
-#include "TitleLabelUI.h"
+#include "TitleUIManager.h"
 
 
 
 // 初期化処理
-void TitleLabelUI::Init()
+void TitleUIManager::Init()
 {
     // ラベルのモデルパス
     std::pair<std::string, std::string> myArray[2] = {
         {"Obj/TitleLabel/Start", "TitleLabel_Start.obj"},
-        {"Obj/TitleLabel/Exsit", "TitleLabel_Exsit.obj"} 
+        {"Obj/TitleLabel/Exsit", "TitleLabel_Exsit.obj"}
     };
 
     // ラベル配列のresize
@@ -24,13 +24,13 @@ void TitleLabelUI::Init()
         labelObjs_[i] = std::make_unique<TitleLabelObject>(myArray[i]);
         labelObjs_[i]->Init();
         labelObjs_[i]->SetPosition(labelBasePos_ + labelOffset_);
-        labelOffset_ *= -1.0f;
+        labelOffset_ *= -1.0f; // -1をかけて値を反転
     }
 }
 
 
 // 更新処理
-void TitleLabelUI::Update()
+void TitleUIManager::Update()
 {
     for (auto& element : labelObjs_) {
         element->Update();
@@ -39,16 +39,16 @@ void TitleLabelUI::Update()
 
 
 // 描画処理
-void TitleLabelUI::Draw3D()
+void TitleUIManager::Draw3D()
 {
     for (auto& element : labelObjs_) {
         element->Draw3D();
     }
 }
-void TitleLabelUI::Draw2DFront()
+void TitleUIManager::Draw2DFront()
 {
 }
-void TitleLabelUI::Draw2DBack()
+void TitleUIManager::Draw2DBack()
 {
 }
 

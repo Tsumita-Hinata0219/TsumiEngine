@@ -12,7 +12,7 @@
 
 #include "GameObject/Terrain/TitleScreen/TitleScreen.h"
 #include "GameObject/Others/TitleBackGround/TitleBackGround.h"
-#include "GameObject/Others/TitleLabelUI/TitleLabelUI.h"
+#include "GameObject/Others/TitleUIManager/TitleUIManager.h"
 
 
 class TitleScene : public IScene {
@@ -78,8 +78,8 @@ private:
 	// TitleBackGround
 	std::unique_ptr<TitleBackGround> titleBG_;
 
-	// TitleLabelUI
-	std::unique_ptr<TitleLabelUI> titleLabel_;
+	// TitleUIManager
+	std::unique_ptr<TitleUIManager> uiManager_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

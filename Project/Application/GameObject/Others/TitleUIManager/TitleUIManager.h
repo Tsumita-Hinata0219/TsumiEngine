@@ -13,14 +13,15 @@ enum class TitleLabelType {
 	Count,
 };
 
-/* TitleLabelUIクラス */
-class TitleLabelUI {
+
+/* TitleUIManagerクラス */
+class TitleUIManager {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	TitleLabelUI() = default;
-	~TitleLabelUI() = default;
+	TitleUIManager() = default;
+	~TitleUIManager() = default;
 
 	// 初期化処理　更新処理　描画処理
 	void Init();
@@ -39,6 +40,10 @@ private:
 	Vector3 labelBasePos_{};
 	// オフセット
 	Vector3 labelOffset_{};
+	// スタートラベルの座標
+	Vector3 startLabelPos_{};
+	// 終了ラベルの座標
+	Vector3 exsitLabelPos_{};
 
 };
 

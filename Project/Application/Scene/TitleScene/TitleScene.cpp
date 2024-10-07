@@ -44,6 +44,11 @@ void TitleScene::Initialize()
 	titleScreen_ = std::make_unique<TitleScreen>();
 	titleScreen_->Init();
 
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_ = std::make_unique<TitleBackGround>();
+	titleBG_->Init();
+
+
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
 	fadeManager_->Initialize(func_FadeIn);
@@ -68,6 +73,9 @@ void TitleScene::Update(GameManager* state)
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Update();
+
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Update();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -101,6 +109,8 @@ void TitleScene::Update(GameManager* state)
 /// </summary>
 void TitleScene::BackSpriteDraw()
 {
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Draw2DBack();
 }
 
 
@@ -110,10 +120,10 @@ void TitleScene::BackSpriteDraw()
 void TitleScene::ModelDraw()
 {
 	/* ----- Skybox 天箱 ----- */
-	skybox_->Draw();
+	//skybox_->Draw();
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_->Draw3D();
+	//titleScreen_->Draw3D();
 }
 
 
@@ -129,7 +139,10 @@ void TitleScene::FrontSpriteDraw()
 	testPostEffect_->Draw();
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_->Draw2DFront();
+	//titleScreen_->Draw2DFront();
+
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Draw2DFront();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_->Draw();

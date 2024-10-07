@@ -22,6 +22,7 @@ public:
 	void Init();
 	void Update();
 	void Draw2DBack();
+	void Draw2DFront();
 
 
 private:

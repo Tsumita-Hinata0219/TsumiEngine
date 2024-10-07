@@ -43,7 +43,14 @@ void TitleBackGround::Update()
 // 描画処理
 void TitleBackGround::Draw2DBack()
 {
-	for (auto& element : back_) {
-		element.sprite->Draw(element.texture, element.transfrom);
-	}
+	back_[enum_val(TitleSceneBGType::Monochromatic)].sprite->Draw(
+		back_[enum_val(TitleSceneBGType::Monochromatic)].texture, 
+		back_[enum_val(TitleSceneBGType::Monochromatic)].transfrom);
+}
+
+void TitleBackGround::Draw2DFront()
+{
+	back_[enum_val(TitleSceneBGType::Vignetting)].sprite->Draw(
+		back_[enum_val(TitleSceneBGType::Vignetting)].texture,
+		back_[enum_val(TitleSceneBGType::Vignetting)].transfrom);
 }

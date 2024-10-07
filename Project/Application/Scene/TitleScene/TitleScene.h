@@ -11,6 +11,7 @@
 #include "GameObject/Terrain/Skybox/Skybox.h"
 
 #include "GameObject/Terrain/TitleScreen/TitleScreen.h"
+#include "GameObject/Others/TitleBackGround/TitleBackGround.h"
 
 
 class TitleScene : public IScene {
@@ -72,6 +73,9 @@ private:
 
 	// TitleScreen
 	std::unique_ptr<TitleScreen> titleScreen_;
+
+	// TitleBackGround
+	std::unique_ptr<TitleBackGround> titleBG_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

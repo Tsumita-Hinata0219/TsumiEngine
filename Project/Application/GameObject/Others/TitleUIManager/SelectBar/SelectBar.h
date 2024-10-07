@@ -4,13 +4,13 @@
 #include "GameObject/IObject/IObject.h"
 
 /* タイトルバー */
-class GameNameBar : public IObject {
+class SelectBar : public IObject {
 
 public:
 
 	// コンストラクタ、デストラクタ
-	GameNameBar() {};
-	~GameNameBar() {};
+	SelectBar() {};
+	~SelectBar() {};
 
 	// 初期化処理　更新処理　描画処理
 	void Init() override;

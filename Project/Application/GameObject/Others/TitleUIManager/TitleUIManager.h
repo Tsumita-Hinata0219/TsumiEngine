@@ -3,6 +3,7 @@
 #include "GameObject/GameObject.h"
 #include "GameObject/IObject/IObject.h"
 
+#include "GameNameBar/GameNameBar.h"
 #include "TitleLabelObject/TitleLabelObject.h"
 
 
@@ -32,6 +33,9 @@ public:
 
 
 private:
+
+	// ゲームネーム
+	std::unique_ptr<GameNameBar> gameName_;
 
 	// ラベル
 	std::vector<std::unique_ptr<TitleLabelObject>> labelObjs_;

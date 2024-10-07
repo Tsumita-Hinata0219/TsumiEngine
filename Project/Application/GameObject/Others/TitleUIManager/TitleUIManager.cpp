@@ -5,6 +5,11 @@
 // 初期化処理
 void TitleUIManager::Init()
 {
+    // ゲーム名オブジェクトの初期化
+    gameName_ = std::make_unique<GameNameBar>();
+    gameName_->Init();
+
+
     // ラベルのモデルパス
     std::pair<std::string, std::string> myArray[2] = {
         {"Obj/TitleLabel/Start", "TitleLabel_Start.obj"},
@@ -32,6 +37,8 @@ void TitleUIManager::Init()
 // 更新処理
 void TitleUIManager::Update()
 {
+    gameName_->Update();
+
     for (auto& element : labelObjs_) {
         element->Update();
     }
@@ -41,6 +48,8 @@ void TitleUIManager::Update()
 // 描画処理
 void TitleUIManager::Draw3D()
 {
+    gameName_->Draw3D();
+
     for (auto& element : labelObjs_) {
         element->Draw3D();
     }

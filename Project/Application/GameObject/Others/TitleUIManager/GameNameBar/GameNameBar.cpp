@@ -7,12 +7,12 @@ void GameNameBar::Init()
 {
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/GameNameBar", "GameNameBar");
+	modelManager_->LoadModel("Obj/GameNameBar", "GameNameBar.obj");
 	model_ = modelManager_->GetModel("GameNameBar");
 
 	// Transformの初期化
 	trans_.Init();
-	trans_.srt.translate = Vector3::zero;
+	trans_.srt.translate.y = 0.35f;
 	trans_.srt.translate.z = 5.0f;
 }
 

@@ -22,6 +22,9 @@ void TitleLabelObject::Init()
 
 	// Transformの初期化
 	trans_.Init();
+
+	// セレクトされているときのスケール
+	selectingScale_ = 1.3f;
 }
 
 
@@ -53,4 +56,24 @@ void TitleLabelObject::Draw2DBack() {}
 // 衝突判定コールバック関数
 void TitleLabelObject::onCollision([[maybe_unused]] IObject* object)
 {
+}
+
+
+// セレクトされていない時の処理
+void TitleLabelObject::NonSelecting()
+{
+	// カラーを黒へ
+	model_->SetColor(Samp::Color::BLACK);
+	// scale = 1.0fへ
+	trans_.srt.scale = Vector3::one;
+}
+
+
+// セレクトされているときの処理
+void TitleLabelObject::OnSelecting()
+{
+	// カラーを白へ
+	model_->SetColor(Samp::Color::WHITE);
+	// 少し大きくする
+	trans_.srt.scale = { selectingScale_ , selectingScale_ , 1.0f };
 }

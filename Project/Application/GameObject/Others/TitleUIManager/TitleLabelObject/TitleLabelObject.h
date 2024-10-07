@@ -25,12 +25,20 @@ public:
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	// セレクトされていない時の処理
+	void NonSelecting();
+
+	// セレクトされているときの処理
+	void OnSelecting();
+
 
 #pragma region Accessor アクセッサ
 
 	// 座標の設定
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
+	// カラーの設定
+	void SetColor(Vector4 setColor) { this->model_->SetColor(setColor); }
 
 #pragma endregion 
 
@@ -45,5 +53,8 @@ private:
 
 	// トランスフォーム
 	Transform trans_{};
+
+	// セレクトされているときのスケール
+	float selectingScale_ = 0.0f;
 
 };

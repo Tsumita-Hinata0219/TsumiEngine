@@ -11,7 +11,7 @@
 // Labelの種類
 enum class TitleLabelType {
 	Start,
-	Exsit,
+	Exit,
 	Count,
 };
 
@@ -31,6 +31,12 @@ public:
 	void Draw3D();
 	void Draw2DFront();
 	void Draw2DBack();
+
+
+private:
+
+	// 何をセレクトしているかによって生じる処理
+	void CheckNowSelect();
 
 
 private:

@@ -215,6 +215,7 @@
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleLabelUI\TitleLabelUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -423,6 +424,7 @@
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleLabelUI\TitleLabelUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

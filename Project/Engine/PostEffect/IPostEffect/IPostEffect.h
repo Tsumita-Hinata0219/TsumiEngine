@@ -30,6 +30,9 @@ public: // メンバ関数
 	// ImGuiの描画
 	virtual void DrawImGui(std::string name = "") = 0;
 
+	// MtlDataの設定
+	virtual void SetMtlData(T setData) { this->mtlData_ = setData; }
+
 
 protected:
 

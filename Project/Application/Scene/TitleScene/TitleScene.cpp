@@ -35,6 +35,21 @@ void TitleScene::Initialize()
 	testPostEffect_ = std::make_unique<TestPostEffect>();
 	testPostEffect_->Init();
 
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_ = std::make_unique<RetroCRTEffect>();
+	retroCRT_->Init();
+	retroEffectData_ = {
+		Samp::Color::WHITE,
+		0.1f, true,
+		{0.002f, 0.004f}, {-0.002f, -0.004f}, true,
+		0.1f, true,
+		0.25f, true,
+		0.0f, false,
+		WinApp::WindowSize(),
+		0.0f
+	};
+	retroCRT_->SetMtlData(retroEffectData_);
+
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "kokuban.dds");
@@ -103,6 +118,8 @@ void TitleScene::Update(GameManager* state)
 
 	ImGui::Text("");
 	ImGui::Text("");
+	retroEffectData_.DrawImGui();
+	retroCRT_->SetMtlData(retroEffectData_);
 
 	ImGui::End();
 
@@ -146,6 +163,9 @@ void TitleScene::FrontSpriteDraw()
 
 	/* ----- TestPostffect テストポストエフェクト ----- */
 	testPostEffect_->Draw();
+
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->Draw();
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	//titleScreen_->Draw2DFront();

@@ -72,6 +72,10 @@ private:
 	// TestPostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
 
+	// RetroCRT
+	std::unique_ptr<RetroCRTEffect> retroCRT_;
+	RetroCRTMtl retroEffectData_{};
+
 	// TitleScreen
 	std::unique_ptr<TitleScreen> titleScreen_;
 

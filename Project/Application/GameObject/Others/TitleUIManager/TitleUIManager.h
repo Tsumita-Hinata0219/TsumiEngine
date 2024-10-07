@@ -34,7 +34,7 @@ public:
 
 private:
 
-	// ゲームネーム
+	// ゲーム名
 	std::unique_ptr<GameNameBar> gameName_;
 
 	// ラベル

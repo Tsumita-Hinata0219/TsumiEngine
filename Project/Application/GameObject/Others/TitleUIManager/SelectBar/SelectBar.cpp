@@ -17,7 +17,7 @@ void SelectBar::Init()
 	trans_.Init();
 	trans_.srt.scale.x = 2.0f;
 	trans_.srt.scale.y = 0.5f;
-	trans_.srt.translate.z = 20.0f;
+	trans_.srt.translate.z = 18.0f;
 
 	// 選択中
 	nowOption_ = SelectOption::Start;

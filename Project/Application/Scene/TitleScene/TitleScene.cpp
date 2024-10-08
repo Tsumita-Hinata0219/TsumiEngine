@@ -40,10 +40,10 @@ void TitleScene::Initialize()
 	retroCRT_->Init();
 	retroEffectData_ = {
 		Samp::Color::WHITE,
-		0.1f, true,
-		{0.002f, 0.004f}, {-0.002f, -0.004f}, true,
-		0.1f, true,
-		0.25f, true,
+		0.15f, true,
+		{0.003f, 0.005f}, {-0.003f, -0.005f}, true,
+		0.15f, true,
+		0.3f, true,
 		0.0f, false,
 		WinApp::WindowSize(),
 		0.0f

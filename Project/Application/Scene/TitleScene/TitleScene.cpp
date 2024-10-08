@@ -27,9 +27,28 @@ void TitleScene::Initialize()
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
 
-	/* ----- AbsentEffect アブセントエフェクト----- */
+	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
+
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_ = std::make_unique<TestPostEffect>();
+	testPostEffect_->Init();
+
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_ = std::make_unique<RetroCRTEffect>();
+	retroCRT_->Init();
+	retroEffectData_ = {
+		Samp::Color::WHITE,
+		0.15f, true,
+		{0.003f, 0.005f}, {-0.003f, -0.005f}, true,
+		0.15f, true,
+		0.3f, true,
+		0.0f, false,
+		WinApp::WindowSize(),
+		0.0f
+	};
+	retroCRT_->SetMtlData(retroEffectData_);
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
@@ -39,6 +58,14 @@ void TitleScene::Initialize()
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_ = std::make_unique<TitleScreen>();
 	titleScreen_->Init();
+
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_ = std::make_unique<TitleBackGround>();
+	titleBG_->Init();
+
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_ = std::make_unique<TitleUIManager>();
+	uiManager_->Init();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
@@ -53,6 +80,9 @@ void TitleScene::Update(GameManager* state)
 {
 	state;
 
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_->Update();
+
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
 
@@ -61,6 +91,12 @@ void TitleScene::Update(GameManager* state)
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
 	titleScreen_->Update();
+
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Update();
+	
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Update();
 
 	// ボタン押下でフェードイン
 	if (input_->Trigger(PadData::A)) {
@@ -82,6 +118,8 @@ void TitleScene::Update(GameManager* state)
 
 	ImGui::Text("");
 	ImGui::Text("");
+	retroEffectData_.DrawImGui();
+	retroCRT_->SetMtlData(retroEffectData_);
 
 	ImGui::End();
 
@@ -94,6 +132,8 @@ void TitleScene::Update(GameManager* state)
 /// </summary>
 void TitleScene::BackSpriteDraw()
 {
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Draw2DBack();
 }
 
 
@@ -103,10 +143,13 @@ void TitleScene::BackSpriteDraw()
 void TitleScene::ModelDraw()
 {
 	/* ----- Skybox 天箱 ----- */
-	skybox_->Draw();
+	//skybox_->Draw();
 
 	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_->Draw3D();
+	//titleScreen_->Draw3D();
+
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Draw3D();
 }
 
 
@@ -118,8 +161,20 @@ void TitleScene::FrontSpriteDraw()
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_->Draw();
 
+	/* ----- TestPostffect テストポストエフェクト ----- */
+	testPostEffect_->Draw();
+
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->Draw();
+
 	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_->Draw2DFront();
+	//titleScreen_->Draw2DFront();
+
+	/* ----- TitleUIManager タイトルラベルUI ----- */
+	uiManager_->Draw2DFront();
+	
+	/* ----- TitleBackGround タイトルバックグラウンド ----- */
+	titleBG_->Draw2DFront();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_->Draw();

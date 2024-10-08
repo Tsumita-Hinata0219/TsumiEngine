@@ -5,14 +5,14 @@
 #include "GameObject/GameObject.h"
 #include "Utilities/FadeManager/FadeManager.h"
 
+#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
+
 #include "GameObject/Terrain/Skybox/Skybox.h"
 
 #include "GameObject/Terrain/TitleScreen/TitleScreen.h"
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
-
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "GameObject/Others/TitleBackGround/TitleBackGround.h"
+#include "GameObject/Others/TitleUIManager/TitleUIManager.h"
 
 
 class TitleScene : public IScene {
@@ -69,8 +69,21 @@ private:
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
 
+	// TestPostEffect
+	std::unique_ptr<TestPostEffect> testPostEffect_;
+
+	// RetroCRT
+	std::unique_ptr<RetroCRTEffect> retroCRT_;
+	RetroCRTMtl retroEffectData_{};
+
 	// TitleScreen
 	std::unique_ptr<TitleScreen> titleScreen_;
+
+	// TitleBackGround
+	std::unique_ptr<TitleBackGround> titleBG_;
+
+	// TitleUIManager
+	std::unique_ptr<TitleUIManager> uiManager_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

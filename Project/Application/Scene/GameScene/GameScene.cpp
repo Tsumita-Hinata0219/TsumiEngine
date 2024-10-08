@@ -34,7 +34,7 @@ void GameScene::Initialize()
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Initialize();
+	testPostEffect_->Init();
 
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();

@@ -183,6 +183,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Floor\Floor.cpp" />
@@ -327,6 +332,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />

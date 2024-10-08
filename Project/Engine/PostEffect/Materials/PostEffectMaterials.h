@@ -130,7 +130,8 @@ struct RetroCRTMtl {
 	Vector4 color{};            // エッジカラー
 	float scanlineStrength = 0.0f;  // スキャンラインの強度
 	int scanlineActive = false;     // スキャンラインの有効フラグ
-	float chromaIntensity = 0.0f;   // 色収差の強度
+	Vector2 chromaOffsetR{};        // Rチャンネルの色収差オフセット (x, y) 
+	Vector2 chromaOffsetB{};        // Bチャンネルの色収差オフセット (x, y) 
 	int chromaActive = false;       // 色収差の有効フラグ
 	float barrelDistortion = 0.0f;  // バレル歪みの強度
 	int barrelActive = false;       // バレル歪みの有効フラグ
@@ -146,7 +147,8 @@ struct RetroCRTMtl {
 		ImGui::DragFloat((label + "_scanlineStrength").c_str(), &scanlineStrength, 0.01f, 0.0f, 1.0f);
 		ImGui::RadioButton((label + "_scanlineDisabled").c_str(), &scanlineActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_scanlineEnabled").c_str(), &scanlineActive, 1);
-		ImGui::DragFloat((label + "_chromaIntensity").c_str(), &chromaIntensity, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2((label + "_chromaOffset_R").c_str(), &chromaOffsetR.x, 0.0001f, -1.0f, 1.0f);
+		ImGui::DragFloat2((label + "_chromaOffset_B").c_str(), &chromaOffsetB.x, 0.0001f, -1.0f, 1.0f);
 		ImGui::RadioButton((label + "_chromaDisabled").c_str(), &chromaActive, 0); ImGui::SameLine();
 		ImGui::RadioButton((label + "_chromaEnabled").c_str(), &chromaActive, 1);
 		ImGui::DragFloat((label + "_barrelDistortion").c_str(), &barrelDistortion, 0.01f, 0.0f, 1.0f);

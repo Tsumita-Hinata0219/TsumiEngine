@@ -43,7 +43,7 @@ void DebugScene::Initialize()
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Initialize();
+	testPostEffect_->Init();
 
 	/* ----- TestHuman テストヒューマン ----- */
 	testHuman_ = make_unique<TestHuman>();

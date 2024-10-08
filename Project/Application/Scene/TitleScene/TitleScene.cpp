@@ -31,10 +31,6 @@ void TitleScene::Initialize()
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
 
-	/* ----- TestPostffect テストポストエフェクト ----- */
-	testPostEffect_ = std::make_unique<TestPostEffect>();
-	testPostEffect_->Init();
-
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_ = std::make_unique<RetroCRTEffect>();
 	retroCRT_->Init();
@@ -49,15 +45,6 @@ void TitleScene::Initialize()
 		0.0f
 	};
 	retroCRT_->SetMtlData(retroEffectData_);
-
-	/* ----- Skybox 天箱 ----- */
-	skybox_ = std::make_unique<Skybox>();
-	uint32_t dds = TextureManager::LoadTexture("Texture", "kokuban.dds");
-	skybox_->Init(dds);
-
-	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_ = std::make_unique<TitleScreen>();
-	titleScreen_->Init();
 
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_ = std::make_unique<TitleBackGround>();
@@ -80,17 +67,8 @@ void TitleScene::Update(GameManager* state)
 {
 	state;
 
-	/* ----- TestPostffect テストポストエフェクト ----- */
-	testPostEffect_->Update();
-
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
-
-	/* ----- Skybox 天箱 ----- */
-	skybox_->Update();
-
-	/* ----- TitleScreen タイトルスクリーン ----- */
-	titleScreen_->Update();
 
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Update();
@@ -142,12 +120,6 @@ void TitleScene::BackSpriteDraw()
 /// </summary>
 void TitleScene::ModelDraw()
 {
-	/* ----- Skybox 天箱 ----- */
-	//skybox_->Draw();
-
-	/* ----- TitleScreen タイトルスクリーン ----- */
-	//titleScreen_->Draw3D();
-
 	/* ----- TitleUIManager タイトルラベルUI ----- */
 	uiManager_->Draw3D();
 }
@@ -161,14 +133,8 @@ void TitleScene::FrontSpriteDraw()
 	/* ----- AbsentEffect アブセントエフェクト----- */
 	absentEffect_->Draw();
 
-	/* ----- TestPostffect テストポストエフェクト ----- */
-	testPostEffect_->Draw();
-
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_->Draw();
-
-	/* ----- TitleScreen タイトルスクリーン ----- */
-	//titleScreen_->Draw2DFront();
 
 	/* ----- TitleUIManager タイトルラベルUI ----- */
 	uiManager_->Draw2DFront();

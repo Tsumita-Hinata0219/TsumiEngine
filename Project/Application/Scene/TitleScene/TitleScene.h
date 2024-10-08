@@ -69,24 +69,15 @@ private:
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
 
-	// TestPostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
-
 	// RetroCRT
 	std::unique_ptr<RetroCRTEffect> retroCRT_;
 	RetroCRTMtl retroEffectData_{};
-
-	// TitleScreen
-	std::unique_ptr<TitleScreen> titleScreen_;
 
 	// TitleBackGround
 	std::unique_ptr<TitleBackGround> titleBG_;
 
 	// TitleUIManager
 	std::unique_ptr<TitleUIManager> uiManager_;
-
-	// Skybox
-	std::unique_ptr<Skybox> skybox_;
 
 	// FadeManager
 	FadeManager* fadeManager_ = nullptr;

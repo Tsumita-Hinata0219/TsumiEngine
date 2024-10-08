@@ -81,3 +81,11 @@ void CollisionShapeSphere::CalcBounding()
 	this->bounding_.min = min;
 	this->bounding_.max = max;
 }
+
+
+// ImGuiの描画
+void CollisionShapeSphere::DrawImGui(const std::string& label)
+{
+	ImGui::DragFloat3((label + "_Center").c_str(), &this->sphere_.center.x, 0.0f);
+	ImGui::DragFloat((label + "_Radius").c_str(), &this->sphere_.radius, 0.0f);
+}

@@ -62,6 +62,9 @@ private:
 	// 無効なポインタは削除
 	void CheckAndCleanPointers();
 
+	// ImGuiの描画
+	void DrawImGui();
+
 
 private:
 

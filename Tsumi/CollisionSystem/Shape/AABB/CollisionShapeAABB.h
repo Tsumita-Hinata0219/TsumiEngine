@@ -28,6 +28,9 @@ public:
 	// コライダーの境界ボックスを求める
 	void CalcBounding() override;
 
+	// ImGuiの描画
+	void DrawImGui(const std::string& label) override;
+
 
 #pragma region Accessor
 

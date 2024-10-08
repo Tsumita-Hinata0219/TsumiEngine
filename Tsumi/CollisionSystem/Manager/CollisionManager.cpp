@@ -23,6 +23,10 @@ void CollisionManager::Update()
 
 	// コリジョン判定を行う
 	CheckCollisions();
+
+#ifdef _DEBUG
+	DrawImGui(); // Debug表示
+#endif // _DEBUG
 }
 
 
@@ -40,5 +44,21 @@ void CollisionManager::CheckAndCleanPointers()
 		std::remove_if(shapes_.begin(), shapes_.end(),
 			[](CollisionShape* ptr) {return ptr == nullptr; }),
 		shapes_.end());
+}
+
+
+// ImGuiの描画
+void CollisionManager::DrawImGui()
+{
+	if (ImGui::TreeNode("CollisionManager")) {
+		
+
+
+
+
+		ImGui::TreePop();
+	}
+
+
 }
 

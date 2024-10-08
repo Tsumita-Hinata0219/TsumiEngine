@@ -49,3 +49,4 @@ void CollisionShape::CalcSpaceLevel()
 	// 所属空間
 	spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
 }
+

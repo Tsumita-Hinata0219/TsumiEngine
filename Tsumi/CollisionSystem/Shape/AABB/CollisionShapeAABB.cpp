@@ -71,3 +71,9 @@ void CollisionShapeAABB::CalcBounding()
     // 境界ボックスに情報を挿入
     this->bounding_ = this->aabb_;
 }
+
+
+// ImGuiの描画
+void CollisionShapeAABB::DrawImGui(const std::string& label)
+{
+}

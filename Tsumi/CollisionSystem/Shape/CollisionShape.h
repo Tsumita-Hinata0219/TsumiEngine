@@ -72,6 +72,9 @@ public:
 	// 境界ボックスから空間レベルと所属空間を求める
 	void CalcSpaceLevel();
 
+	// ImGuiの描画
+	virtual void DrawImGui(const std::string& label) = 0;
+
 
 #pragma region Accessor アクセッサ
 

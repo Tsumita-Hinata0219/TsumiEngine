@@ -24,6 +24,10 @@ void PipeLineManager::Initialize()
 	instance->linePipeLine_ = make_unique<LinePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Line] = instance->linePipeLine_->SetUpPso();
 
+	// Object2D
+	instance->object2DPipeLine_ = make_unique<Object2DPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Object2D] = instance->object2DPipeLine_->SetUpPso();
+
 	// Object3D
 	instance->object3DPipeLine_ = make_unique<Object3DPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Object3D] = instance->object3DPipeLine_->SetUpPso();

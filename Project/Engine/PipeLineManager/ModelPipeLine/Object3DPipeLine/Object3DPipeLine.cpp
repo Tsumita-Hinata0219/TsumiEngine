@@ -113,6 +113,17 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号
 
+	// マテリアルテクスチャ
+	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
+	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
+	materiaTexture[0].NumDescriptors = 1; // 数は1つ
+	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
+
 	// 頂点位置に関する
 	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
@@ -124,17 +135,6 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[2].Descriptor.ShaderRegister = 1; // レジスタ番号
-
-	// マテリアルテクスチャ
-	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
-	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
-	materiaTexture[0].NumDescriptors = 1; // 数は1つ
-	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
-	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
 
 	// 光に関する
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う

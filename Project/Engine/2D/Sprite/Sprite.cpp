@@ -235,7 +235,7 @@ void Sprite::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Sprite);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object2D);
 
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);

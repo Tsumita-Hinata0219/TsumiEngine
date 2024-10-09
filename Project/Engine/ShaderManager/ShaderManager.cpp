@@ -257,7 +257,7 @@ void ShaderManager::Object2DShader()
 		L"Resources/Shaders/Object2d/Object2d.VS.hlsl",
 		L"Resources/Shaders/Object2d/Object2d.PS.hlsl",
 		shader);
-	modelShadersMap_["Object2d"] = shader;
+	modelShadersMap_["Object2D"] = shader;
 }
 
 void ShaderManager::Object3DShader()

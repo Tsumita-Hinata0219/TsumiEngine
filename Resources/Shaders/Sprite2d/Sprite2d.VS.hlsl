@@ -1,5 +1,4 @@
-#include "Object3d.hlsli"
-#include "MathFunc.hlsli"
+#include "Sprite2d.hlsli"
 
 struct TransformationMatrix
 {
@@ -8,6 +7,16 @@ struct TransformationMatrix
     float4x4 WorldInverseTranspose;
 };
 ConstantBuffer<TransformationMatrix> gTransformationMat : register(b0);
+
+
+struct ViewProjectionMatrix
+{
+    float4x4 view;
+    float4x4 projection;
+    float4x4 orthoGraphic;
+    float3 cameraPosition;
+};
+ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
 
 
 struct VertexShaderInput
@@ -20,20 +29,21 @@ struct VertexShaderInput
 
 
 VertexShaderOutput main(VertexShaderInput input)
-{    
+{
     VertexShaderOutput output;
     
-    // 頂点の位置をワールド・ビュー・プロジェクション行列で変換
-    output.position = mul(input.position, gTransformationMat.WVP);
+    // 頂点座標を行列との計算で求める
+    float4x4 mat = mul(gTransformationMat.World, gViewProjectionMat.orthoGraphic);
+    output.position = mul(input.position, mat);
     
     // テクスチャ座標はそのまま渡す
-    output.texCoord = input.texCoord;
+    output.texCoord = input.texCoord;    
     
-    // 法線ベクトルをワールド行列の逆転置行列で変換し、正規化する
+    // 法線ベクトル
     output.normal = normalize(mul(input.normal, (float3x3) gTransformationMat.WorldInverseTranspose));
     
-    // ワールド空間での位置を計算して出力に設定
-    output.worldPos = mul(input.position, gTransformationMat.World).xyz;
+    // ワールド空間で位置
+    output.worldPos = mul(input.position, gTransformationMat.World).wyz;    
     
     return output;
 }

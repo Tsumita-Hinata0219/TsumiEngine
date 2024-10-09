@@ -21,8 +21,17 @@ struct SpriteBuffers {
 	// メッシュ
 	BufferResource<SP::MeshData> mesh;
 
+	// VertexDataBuffer
+	BufferResource<VertexData> vertex;
+
+	// IndexDataBuffer
+	BufferResource<uint32_t> indeces;
+
 	// マテリアル
 	BufferResource<SP::MaterialData> material;
+
+	// Transform
+	BufferResource<TransformationMat> transform;
 
 	// Dissolve
 	BufferResource<SP::DissolveData> dissolve;

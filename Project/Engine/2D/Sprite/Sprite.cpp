@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include "GameObject/Camera/Manager/CameraManager.h"
 
 
 /// <summary>
@@ -40,6 +40,7 @@ void Sprite::Init(Vector2 size, Vector4 color) {
 }
 
 
+
 /// <summary>
 /// 描画処理
 /// </summary>
@@ -75,7 +76,6 @@ void Sprite::Draw(uint32_t texHandle, WorldTransform& transform) {
 	// 描画！(DrawCall/ドローコール)
 	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
-
 
 
 /// <summary>
@@ -166,4 +166,109 @@ Vector4 Sprite::FloatColor(unsigned int color) {
 	};
 
 	return colorf;
+}
+
+
+
+
+
+// 初期化処理
+void Sprite::Initn(Vector2 size)
+{
+	// CameraManagerのインスタンスの取得
+	cameraManager_ = CameraManager::GetInstance();
+
+	// サイズの初期設定
+	size_ = size;
+
+	// 基準の初期設定。左上
+	anchor_ = SpriteAnchor::TopLeft;
+
+	// DatasをもとにBufferを作成
+	CreateBufferResource();
+}
+
+
+// 描画処理
+void Sprite::Draw(uint32_t texHandle, Transform& transform)
+{
+	// cameraResourceの取得
+	auto cameraResource = cameraManager_->GetResource();
+
+	// 諸々の計算
+	transform.UpdateMatrix();
+	transform.transformationMatData.World = transform.matWorld;
+	transform.transformationMatData.WVP =
+		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
+
+	// Textureをここで設定
+	datas_.material.textureHandle = texHandle;
+
+	// ここで書き込み
+	// VBV
+	buffers_.vertex.Map();
+	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
+	buffers_.vertex.UnMap();
+	// IBV
+	buffers_.indeces.Map();
+	buffers_.indeces.WriteData(datas_.mesh.indices.data());
+	buffers_.indeces.UnMap();
+	// Material
+	buffers_.material.Map();
+	buffers_.material.WriteData(&datas_.material);
+	buffers_.material.UnMap();
+	// Transform
+	buffers_.transform.Map();
+	buffers_.transform.WriteData(&transform.transformationMatData);
+	buffers_.transform.UnMap();
+
+	// コマンドコール
+	CommandCall();
+}
+
+
+// コマンドコール
+void Sprite::CommandCall()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Sprite);
+
+	// VertexBufferView
+	buffers_.vertex.IASetVertexBuffers(1);
+	// IndexBufferView
+	buffers_.indeces.IASetIndexBuffer();
+	// Material
+	buffers_.material.CommandCall(0);
+	// Transform
+	buffers_.transform.CommandCall(1);
+	// MaterialTexture
+	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	// Draw!!
+	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
+}
+
+
+// DatasをもとにBufferを作成
+void Sprite::CreateBufferResource()
+{
+	// VerticesとIndicesのresize
+	datas_.mesh.vertices.resize(verticesSize_);
+	datas_.mesh.indices.resize(indicesSize_);
+
+	// mesh
+	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
+	// vertexBufferView
+	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+	buffers_.vertex.CreateVertexBufferView();
+	// indexBufferView
+	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+	buffers_.indeces.CreateIndexBufferView();
+	// material
+	buffers_.material.CreateResource();
+	// transform
+	buffers_.transform.CreateResource();
 }

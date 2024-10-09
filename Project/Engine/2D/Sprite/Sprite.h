@@ -45,12 +45,14 @@ public:
 	/// 初期化処理
 	/// </summary>
 	void Init(Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
+	void Initn(Vector2 size = { 128.0f, 128.0f });
 
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw(uint32_t texHandle, WorldTransform& transform);
+	void Draw(uint32_t texHandle, Transform& transform);
 
 	/// <summary>
 	/// 色の変換
@@ -71,6 +73,12 @@ public:
 
 
 private:
+
+	// コマンドコール
+	void CommandCall();
+
+	// DatasをもとにBufferを作成
+	void CreateBufferResource();
 
 	/// <summary>
 	/// 頂点データを設定する
@@ -106,9 +114,6 @@ private:
 		{1.0f, 1.0f},
 	};
 
-	// 
-	SpriteAnchor anchor_ = SpriteAnchor::TopLeft;
-
 	uint32_t srv_ = 0;
 
 
@@ -120,6 +125,13 @@ private:
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
+
+	// スプライトの基準
+	SpriteAnchor anchor_ = SpriteAnchor::TopLeft;
+
+	// VerticesとIndicesのサイズ
+	const uint32_t verticesSize_ = 4;
+	const uint32_t indicesSize_ = 6;
 };
 
 

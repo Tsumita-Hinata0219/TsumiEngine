@@ -1,5 +1,5 @@
 #include "Object3d.hlsli"
-#include "MathFunc.hlsli"
+#include "../MathFunc.hlsli"
 
 
 // マテリアル
@@ -58,7 +58,6 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     // テクスチャから色をサンプリング
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-    //float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
 
     // アルファ値が0.9f未満なら描画をスキップ
     if (textureColor.a < 0.9f)

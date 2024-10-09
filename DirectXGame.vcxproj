@@ -255,6 +255,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
@@ -341,6 +342,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.h" />
     <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />

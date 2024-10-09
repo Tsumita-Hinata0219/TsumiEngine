@@ -223,6 +223,7 @@
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.cpp" />
     <ClCompile Include="Project\Engine\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -437,6 +438,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

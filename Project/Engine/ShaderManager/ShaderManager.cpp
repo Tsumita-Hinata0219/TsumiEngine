@@ -133,6 +133,7 @@ void ShaderManager::ModelShadersCompiles()
 	PhongNormalMapShader();
 	ParticleShader();
 	LineShader();
+	Object2DShader();
 	Object3DShader();
 	SkinningObject3dShader();
 	SkyboxShader();
@@ -169,8 +170,8 @@ void ShaderManager::SetShader(const std::wstring& vertexPath, const std::wstring
 
 
 
-void ShaderManager::NormalShader() {
-
+void ShaderManager::NormalShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/NormalObject3d.VS.hlsl", 
@@ -179,8 +180,8 @@ void ShaderManager::NormalShader() {
 	modelShadersMap_["Normal"] = shader;
 }
 
-void ShaderManager::SpriteShader() {
-
+void ShaderManager::SpriteShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/SpriteObject3d.VS.hlsl",
@@ -189,8 +190,8 @@ void ShaderManager::SpriteShader() {
 	modelShadersMap_["Sprite"] = shader;
 }
 
-void ShaderManager::LightShader() {
-
+void ShaderManager::LightShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/LightObject.VS.hlsl",
@@ -229,8 +230,8 @@ void ShaderManager::PhongNormalMapShader()
 	modelShadersMap_["PhongNormalMap"] = shader;
 }
 
-void ShaderManager::ParticleShader() {
-
+void ShaderManager::ParticleShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/ParticleObject3D.VS.hlsl",
@@ -239,14 +240,24 @@ void ShaderManager::ParticleShader() {
 	modelShadersMap_["Particle"] = shader;
 }
 
-void ShaderManager::LineShader() {
-
+void ShaderManager::LineShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/LineObject3d.VS.hlsl",
 		L"Resources/Shaders/LineObject3d.PS.hlsl",
 		shader);
 	modelShadersMap_["Line"] = shader;
+}
+
+void ShaderManager::Object2DShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/Object2d/Object2d.VS.hlsl",
+		L"Resources/Shaders/Object2d/Object2d.PS.hlsl",
+		shader);
+	modelShadersMap_["Object2d"] = shader;
 }
 
 void ShaderManager::Object3DShader()
@@ -281,8 +292,8 @@ void ShaderManager::SkyboxShader()
 
 
 
-void ShaderManager::PostEffectShader() {
-
+void ShaderManager::PostEffectShader() 
+{
 	ShadersMode shader{};
 	SetShader(
 		L"Resources/Shaders/PostEffect.VS.hlsl",

@@ -39,8 +39,8 @@
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\HSV\HSV.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\RetroCRT\RetroCRT.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Sprite2d\Sprite2d.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Sprite2d\Sprite2d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -452,7 +452,7 @@
     <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
-    <None Include="Resources\Shaders\Sprite2d\Sprite2d.hlsli" />
+    <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

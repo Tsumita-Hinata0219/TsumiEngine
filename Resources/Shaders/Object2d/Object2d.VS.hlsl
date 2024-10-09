@@ -1,4 +1,5 @@
-#include "Sprite2d.hlsli"
+#include "Object2d.hlsli"
+
 
 struct TransformationMatrix
 {

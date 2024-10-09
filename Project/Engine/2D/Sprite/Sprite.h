@@ -12,8 +12,14 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
+#include "../SpriteResource/SpriteResource.h"
 
-enum class SpriteOrigin {
+
+
+// CameraManagerの前方宣言
+class CameraManager;
+
+enum class SpriteAnchor {
 	TopLeft,
 	Center,
 };
@@ -59,7 +65,7 @@ public:
 	void SetTextureHandle(uint32_t texHD) { useTexture_ = texHD; }
 	void SetColor(Vector4 color) { color_ = color; }
 	void SetSrc(QuadVertex2 src) { src_ = src; }
-	void SetSpriteOrigin(SpriteOrigin setOrigin) { origin_ = setOrigin; }
+	void SetAnchor(SpriteAnchor setOrigin) { anchor_ = setOrigin; }
 
 #pragma endregion
 
@@ -101,9 +107,19 @@ private:
 	};
 
 	// 
-	SpriteOrigin origin_ = SpriteOrigin::TopLeft;
+	SpriteAnchor anchor_ = SpriteAnchor::TopLeft;
 
 	uint32_t srv_ = 0;
+
+
+	// バッファーに書き込むデータ
+	SpriteDatas datas_{};
+
+	// バッファー
+	SpriteBuffers buffers_{};
+
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
 };
 
 

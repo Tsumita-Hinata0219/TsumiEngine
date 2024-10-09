@@ -28,7 +28,7 @@ void Sprite::Init(Vector2 size, Vector4 color) {
 	useTexture_ = 1;
 
 	// 
-	origin_ = SpriteOrigin::TopLeft;
+	anchor_ = SpriteAnchor::TopLeft;
 
 	// リソースの作成
 	resource_.Vertex = CreateResource::CreateBufferResource(sizeof(VertexData) * 4);
@@ -96,9 +96,9 @@ void Sprite::SetVertex(WorldTransform transform) {
 	worldTransform_ = transform;
 
 
-	switch (origin_) 
+	switch (anchor_) 
 	{
-	case SpriteOrigin::TopLeft:
+	case SpriteAnchor::TopLeft:
 
 		// 左下
 		vertexData[0].position = { 0.0f, size_.y, 0.0f, 1.0f };
@@ -113,7 +113,7 @@ void Sprite::SetVertex(WorldTransform transform) {
 		vertexData[3].position = { size_.x, 0.0f, 0.0f, 1.0f };
 		break;
 
-	case SpriteOrigin::Center:
+	case SpriteAnchor::Center:
 
 		// 左下
 		vertexData[0].position = { -size_.x / 2.0f, size_.y / 2.0f, 0.0f, 1.0f };

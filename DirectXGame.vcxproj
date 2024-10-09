@@ -196,6 +196,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Wall\Wall.cpp" />
+    <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Project\Engine\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Project\Engine\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Project\Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Project\Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -337,6 +339,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.h" />
+    <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />

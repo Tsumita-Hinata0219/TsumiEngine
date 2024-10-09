@@ -1,0 +1,25 @@
+#pragma once
+
+#include "Math/MyMath.h"
+#include "Math/Struct.h"
+
+
+namespace SP {
+
+	// メッシュデータ
+	struct MeshData {
+		std::vector<VertexData> vertices;
+		std::vector<uint32_t> indices;
+	};
+
+	// マテリアルデータ
+	struct MaterialData {
+		Vector4 color = Samp::Color::WHITE;
+		Matrix4x4 uxTransform = Matrix4x4::identity;
+		uint32_t textureHandle = 1u;
+	};
+
+	// DissolveData
+	struct DissolveData {
+	};
+}

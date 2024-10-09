@@ -219,6 +219,8 @@
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.cpp" />
+    <ClCompile Include="Project\Engine\2D\Structure\SpriteStructure.cpp" />
+    <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -431,6 +433,8 @@
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
+    <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
+    <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -80,9 +80,10 @@ private:
 	// DatasをもとにBufferを作成
 	void CreateBufferResource();
 
-	/// <summary>
-	/// 頂点データを設定する
-	/// </summary>
+	// メッシュデータの設定
+	void SetMeshData();
+
+	// 頂点データを設定する
 	void SetVertex(WorldTransform transform);
 
 

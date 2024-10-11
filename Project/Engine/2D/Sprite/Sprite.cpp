@@ -195,17 +195,23 @@ void Sprite::Draw(uint32_t texHandle, Transform& transform)
 	// cameraResourceの取得
 	auto cameraResource = cameraManager_->GetResource();
 
-	// 諸々の計算
+	// --- 諸々の計算 ---
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
 	transform.transformationMatData.WVP =
 		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
-	// Textureをここで設定
-	datas_.material.textureHandle = texHandle;
+	// --- Meshの設定 --- 
+	SetMeshData();
 
-	// ここで書き込み
+	// --- Materialの設定 ---
+	datas_.material.textureHandle = texHandle;
+	// uvTransformの設定
+	datas_.material.uvTransform = 
+		MakeAffineMatrix(uvTransform_.scale, uvTransform_.rotate, uvTransform_.translate);
+
+	// --- ここで書き込み ---
 	// VBV
 	buffers_.vertex.Map();
 	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
@@ -271,4 +277,56 @@ void Sprite::CreateBufferResource()
 	buffers_.material.CreateResource();
 	// transform
 	buffers_.transform.CreateResource();
+}
+
+
+// 四角形の頂点の設定
+void Sprite::SetMeshData()
+{
+	// Anchorで処理を変える
+	SP::MeshData mesh{};
+	// VerticesとIndicesのresize
+	mesh.vertices.resize(verticesSize_);
+	mesh.indices.resize(indicesSize_);
+
+	// --- Vertices ---
+	switch (anchor_)
+	{
+	case SpriteAnchor::TopLeft:
+		// 左下
+		mesh.vertices[0].position = { 0.0f, size_.y, 0.0f, 1.0f };
+		// 左上
+		mesh.vertices[1].position = { 0.0f, 0.0f, 0.0f, 1.0f };
+		// 右下
+		mesh.vertices[2].position = { size_.x, size_.y, 0.0f, 1.0f };
+		// 右上
+		mesh.vertices[3].position = { size_.x, 0.0f, 0.0f, 1.0f };
+		break;
+
+	case SpriteAnchor::Center:
+		// 左下
+		mesh.vertices[0].position = { -size_.x / 2.0f, size_.y / 2.0f, 0.0f, 1.0f };
+		// 左上
+		mesh.vertices[1].position = { -size_.x / 2.0f, -size_.y / 2.0f, 0.0f, 1.0f };
+		// 右下
+		mesh.vertices[2].position = { size_.x / 2.0f, size_.y / 2.0f, 0.0f, 1.0f };
+		// 右上
+		mesh.vertices[3].position = { size_.x / 2.0f, -size_.y / 2.0f, 0.0f, 1.0f };
+		break;
+	}
+	// 左下
+	mesh.vertices[0].texCoord = src_.LeftDown;
+	// 左上
+	mesh.vertices[1].texCoord = src_.LeftUp;
+	// 右下
+	mesh.vertices[2].texCoord = src_.RightDown;
+	// 右上
+	mesh.vertices[3].texCoord = src_.RightUp;
+
+	// --- Indices ---
+	mesh.indices[0] = 0; mesh.indices[1] = 1; mesh.indices[2] = 2;
+	mesh.indices[3] = 1; mesh.indices[4] = 3; mesh.indices[5] = 2;
+
+	// DatasのMeshに値をいれる
+	datas_.mesh = mesh;
 }

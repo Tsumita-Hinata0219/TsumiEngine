@@ -16,7 +16,7 @@ struct Dissolve
     int isActive;
     float threshold;
 };
-ConstantBuffer<Material> gDissolve : register(b1);
+ConstantBuffer<Dissolve> gDissolve : register(b1);
 Texture2D<float4> gMasktexture : register(t1);
 
 SamplerState gSampler : register(s0);
@@ -30,11 +30,33 @@ PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
     
+    //float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
+    //float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
+
+    //output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
+    //output.color.a = gMaterial.color.a * textureColor.a;
+    
+    
+    // UV変換
     float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-
+    
+    // 通常のカラー処理
     output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     output.color.a = gMaterial.color.a * textureColor.a;
+    
+    // Dissolveが有効化確認
+    if (gDissolve.isActive == 1)
+    {
+        // Dissolve用のマスク画像をサンプル
+        float maskValue = gMasktexture.Sample(gSampler, transformedUV.xy).r;
+        
+        // Dissolveの閾値よりマスク値が低い場合、そのピクセルを破棄
+        if (maskValue <= gDissolve.threshold)
+        {
+            discard;
+        }
+    }
 
     return output;
 }

@@ -265,7 +265,7 @@ void Sprite::CommandCall()
 	// Material
 	buffers_.material.CommandCall(0);
 	// Dissolve
-	buffers_.dissolve.CommandCall(1);
+	buffers_.dissolve.CommandCall(4);
 	// Transform
 	buffers_.transform.CommandCall(1);
 	// View

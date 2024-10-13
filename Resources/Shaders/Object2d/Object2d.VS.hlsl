@@ -24,8 +24,6 @@ struct VertexShaderInput
 {
     float4 position : POSITION0;
     float2 texCoord : TEXCOORD0;
-    float3 normal : NORMAL0;
-    float3 worldPos : WORLDPOSITION0;
 };
 
 
@@ -39,12 +37,6 @@ VertexShaderOutput main(VertexShaderInput input)
     
     // テクスチャ座標はそのまま渡す
     output.texCoord = input.texCoord;    
-    
-    // 法線ベクトル
-    output.normal = normalize(mul(input.normal, (float3x3) gTransformationMat.WorldInverseTranspose));
-    
-    // ワールド空間で位置
-    output.worldPos = mul(input.position, gTransformationMat.World).wyz;    
     
     return output;
 }

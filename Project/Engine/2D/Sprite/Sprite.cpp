@@ -184,6 +184,13 @@ void Sprite::Initn(Vector2 size)
 	// 基準の初期設定。左上
 	anchor_ = SpriteAnchor::TopLeft;
 
+	// vuTransformの初期化
+	uvTransform_ = {
+		Vector3::one,
+		Vector3::zero,
+		Vector3::zero,
+	};
+
 	// DatasをもとにBufferを作成
 	CreateBufferResource();
 }

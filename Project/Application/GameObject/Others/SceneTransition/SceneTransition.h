@@ -48,5 +48,8 @@ private:
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
 
+	// SpriteDissolve
+	SP::DissolveData dissolve_{};
+
 };
 

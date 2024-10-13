@@ -52,7 +52,7 @@ public:
 	/// 描画処理
 	/// </summary>
 	void Draw(uint32_t texHandle, WorldTransform& transform);
-	void Draw(uint32_t texHandle, Transform& transform);
+	void Draw(Transform& transform);
 
 	/// <summary>
 	/// 色の変換
@@ -64,10 +64,11 @@ public:
 
 	void SetSize(Vector2 size) { size_ = size; }
 	void SetUVTransform(UVTransform uvTransform) { uvTransform_ = uvTransform; }
-	void SetTextureHandle(uint32_t texHD) { useTexture_ = texHD; }
+	void SetTexture(uint32_t texHD) { useTexture_ = texHD; }
 	void SetColor(Vector4 color) { color_ = color; }
 	void SetSrc(QuadVertex2 src) { src_ = src; }
 	void SetAnchor(SpriteAnchor setOrigin) { anchor_ = setOrigin; }
+	void SetDissolveData(SP::DissolveData setData) { datas_.dissolve = setData; }
 
 #pragma endregion
 
@@ -82,6 +83,9 @@ private:
 
 	// メッシュデータの設定
 	void SetMeshData();
+
+	// マテリアルデータの設定
+	void SetMaterialData();
 
 	// 頂点データを設定する
 	void SetVertex(WorldTransform transform);
@@ -99,7 +103,7 @@ private:
 	uint32_t useTexture_ = 0;
 
 	// 色データ
-	Vector4 color_;
+	Vector4 color_ = Samp::Color::WHITE;
 
 	// リソース
 	ResourcePeroperty resource_{};

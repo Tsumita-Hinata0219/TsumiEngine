@@ -184,6 +184,10 @@ void Sprite::Initn(Vector2 size)
 	// 基準の初期設定。左上
 	anchor_ = SpriteAnchor::TopLeft;
 
+	// TextureはデフォではuvChecker
+	datas_.material.textureHandle = 
+		TextureManager::LoadTexture("Texture", "uvChecker.png");
+
 	// vuTransformの初期化
 	uvTransform_ = {
 		Vector3::one,
@@ -191,7 +195,7 @@ void Sprite::Initn(Vector2 size)
 		Vector3::zero,
 	};
 
-	// Mask画像はuvCheckerを入れておく
+	// Mask画像はデフォではuvChecker
 	datas_.dissolve.maskTexHandle = 
 		TextureManager::LoadTexture("Texture", "uvChecker.png");
 
@@ -201,7 +205,7 @@ void Sprite::Initn(Vector2 size)
 
 
 // 描画処理
-void Sprite::Draw(uint32_t texHandle, Transform& transform)
+void Sprite::Draw(Transform& transform)
 {
 	// cameraResourceの取得
 	auto cameraResource = cameraManager_->GetResource();
@@ -217,10 +221,7 @@ void Sprite::Draw(uint32_t texHandle, Transform& transform)
 	SetMeshData();
 
 	// --- Materialの設定 ---
-	datas_.material.textureHandle = texHandle;
-	// uvTransformの設定
-	datas_.material.uvTransform = 
-		MakeAffineMatrix(uvTransform_.scale, uvTransform_.rotate, uvTransform_.translate);
+	SetMaterialData();
 
 	// --- ここで書き込み ---
 	// VBV
@@ -352,4 +353,19 @@ void Sprite::SetMeshData()
 
 	// DatasのMeshに値をいれる
 	datas_.mesh = mesh;
+}
+
+
+// マテリアルデータの設定
+void Sprite::SetMaterialData()
+{
+	// --- TextureHandle ---
+	datas_.material.textureHandle = useTexture_;
+
+	// --- uvTransform ---
+	datas_.material.uvTransform =
+		MakeAffineMatrix(uvTransform_.scale, uvTransform_.rotate, uvTransform_.translate);
+
+	// --- Color ---
+	datas_.material.color = color_;
 }

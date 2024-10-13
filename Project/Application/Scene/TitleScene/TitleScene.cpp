@@ -94,6 +94,9 @@ void TitleScene::Update(GameManager* state)
 		}
 	}
 
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+
 #ifdef _DEBUG
 
 	ImGui::Begin("TitleScene");

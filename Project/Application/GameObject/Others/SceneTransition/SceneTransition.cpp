@@ -10,10 +10,17 @@ void SceneTransition::Init()
 
 	// スプライトの初期化
 	sprite_ = std::make_unique<Sprite>();
-	sprite_->Initn({ 256.0f, 256.0f });
+	sprite_->Initn({ 1280.0f, 720.0f });
+	// Textureの設定
+	sprite_->SetTexture(textureHandle_);
 
 	// トランスフォームの初期化
 	trans_.Init();
+
+	// Dissolve関連の初期化
+	dissolve_.isActive = false;
+	dissolve_.threshold = 1.0f;
+	dissolve_.maskTexHandle = TextureManager::LoadTexture("Texture", "SceneTransitionMaskTexture.png");
 
 }
 
@@ -21,16 +28,20 @@ void SceneTransition::Init()
 // 更新処理
 void SceneTransition::Update()
 {
+	// DissolveDataの設定
+	sprite_->SetDissolveData(dissolve_);
 
-
-
+#ifdef _DEBUG
+	// ImGuiの描画
+	DrawImGui();
+#endif // _DEBUG
 }
 
 
 // 描画処理
 void SceneTransition::Draw2DFront()
 {
-	sprite_->Draw(textureHandle_, trans_);
+	sprite_->Draw(trans_);
 }
 
 
@@ -39,11 +50,10 @@ void SceneTransition::DrawImGui()
 {
 	if (ImGui::TreeNode("SceneTransition")) {
 
-
-
-
+		ImGui::Text("Dissolve");
+		ImGui::RadioButton("Disabled", &dissolve_.isActive, 0); ImGui::SameLine();
+		ImGui::RadioButton("Enabled", &dissolve_.isActive, 1);
+		ImGui::DragFloat("threshold", &dissolve_.threshold, 0.01f, 0.0f, 1.0f);
 		ImGui::TreePop();
 	}
-
-
 }

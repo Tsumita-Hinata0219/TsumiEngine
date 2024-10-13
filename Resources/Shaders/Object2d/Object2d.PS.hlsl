@@ -10,6 +10,14 @@ struct Material
 ConstantBuffer<Material> gMaterial : register(b0);
 Texture2D<float4> gTexture : register(t0);
 
+// Dissolve
+struct Dissolve
+{
+    int isActive;
+    float threshold;
+};
+ConstantBuffer<Material> gDissolve : register(b1);
+Texture2D<float4> gMasktexture : register(t1);
 
 SamplerState gSampler : register(s0);
 

@@ -30,9 +30,9 @@ struct SpriteBuffers {
 	// マテリアル
 	BufferResource<SP::MaterialData> material;
 
-	// Transform
-	BufferResource<TransformationMat> transform;
-
 	// Dissolve
 	BufferResource<SP::DissolveData> dissolve;
+
+	// Transform
+	BufferResource<TransformationMat> transform;
 };

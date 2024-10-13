@@ -21,5 +21,8 @@ namespace SP {
 
 	// DissolveData
 	struct DissolveData {
+		int isActive = false;
+		float threshold = 0.0f;
+		uint32_t maskTexHandle = 0u;
 	};
 }

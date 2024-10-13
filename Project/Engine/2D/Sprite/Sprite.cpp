@@ -191,6 +191,10 @@ void Sprite::Initn(Vector2 size)
 		Vector3::zero,
 	};
 
+	// Mask画像はuvCheckerを入れておく
+	datas_.dissolve.maskTexHandle = 
+		TextureManager::LoadTexture("Texture", "uvChecker.png");
+
 	// DatasをもとにBufferを作成
 	CreateBufferResource();
 }
@@ -231,6 +235,10 @@ void Sprite::Draw(uint32_t texHandle, Transform& transform)
 	buffers_.material.Map();
 	buffers_.material.WriteData(&datas_.material);
 	buffers_.material.UnMap();
+	// Dissolve
+	buffers_.dissolve.Map();
+	buffers_.dissolve.WriteData(&datas_.dissolve);
+	buffers_.dissolve.UnMap();
 	// Transform
 	buffers_.transform.Map();
 	buffers_.transform.WriteData(&transform.transformationMatData);
@@ -256,10 +264,16 @@ void Sprite::CommandCall()
 	buffers_.indeces.IASetIndexBuffer();
 	// Material
 	buffers_.material.CommandCall(0);
+	// Dissolve
+	buffers_.dissolve.CommandCall(1);
 	// Transform
 	buffers_.transform.CommandCall(1);
+	// View
+	CameraManager::GetInstance()->CommandCall(2);
 	// MaterialTexture
 	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	// MaskTexture
+	SRVManager::SetGraphicsRootDescriptorTable(5, datas_.dissolve.maskTexHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
@@ -282,6 +296,8 @@ void Sprite::CreateBufferResource()
 	buffers_.indeces.CreateIndexBufferView();
 	// material
 	buffers_.material.CreateResource();
+	// Dissolve
+	buffers_.dissolve.CreateResource();
 	// transform
 	buffers_.transform.CreateResource();
 }

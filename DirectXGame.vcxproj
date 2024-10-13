@@ -323,6 +323,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Project\Engine\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Project\Engine\View\SRVManager\SRVManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -335,6 +336,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />

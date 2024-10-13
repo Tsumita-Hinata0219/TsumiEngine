@@ -54,6 +54,10 @@ void TitleScene::Initialize()
 	uiManager_ = std::make_unique<TitleUIManager>();
 	uiManager_->Init();
 
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
 	fadeManager_->Initialize(func_FadeIn);
@@ -141,6 +145,9 @@ void TitleScene::FrontSpriteDraw()
 	
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Draw2DFront();
+
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_->Draw();

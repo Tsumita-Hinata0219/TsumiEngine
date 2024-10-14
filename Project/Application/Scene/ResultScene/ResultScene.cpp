@@ -56,6 +56,16 @@ void ResultScene::Update(GameManager* state)
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
 
+	// ボタン押下でトランジション開始
+	if (input_->Trigger(PadData::A)) {
+		sceneTransition_->StartFadeOut();
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new TitleScene);
+		return;
+	}
+
 
 #ifdef _DEBUG
 

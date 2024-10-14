@@ -35,7 +35,7 @@ void ResultScene::Initialize()
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
-	sceneTransition_->Init(Closing);
+	sceneTransition_->Init();
 	sceneTransition_->StartFadeIn();
 }
 

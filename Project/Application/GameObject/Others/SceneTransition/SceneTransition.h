@@ -37,7 +37,7 @@ public:
 	}
 
 	// 初期化、更新、描画
-	void Init(TransitionState state);
+	void Init();
 	void Update();
 	void Draw2DFront();
 
@@ -52,6 +52,8 @@ public:
 
 	// ステートの取得
 	TransitionState GetNowState() const { return this->nowState_; }
+	// ステートの設定
+	void SetState(TransitionState state) { this->nowState_ = state; }
 
 #pragma endregion
 

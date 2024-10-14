@@ -3,16 +3,18 @@
 
 
 // 初期化処理
-void SceneTransition::Init(TransitionState state)
+void SceneTransition::Init()
 {
 	// テクスチャの読み込み
-	textureHandle_ = TextureManager::LoadTexture("Texture", "uvChecker.png");
+	textureHandle_ = TextureManager::LoadTexture("Texture", "Fade.png");
 
 	// スプライトの初期化
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn({ 1280.0f, 720.0f });
 	// Textureの設定
 	sprite_->SetTexture(textureHandle_);
+	// Colorは黒
+	sprite_->SetColor(Samp::Color::BLACK);
 
 	// トランスフォームの初期化
 	trans_.Init();
@@ -20,14 +22,6 @@ void SceneTransition::Init(TransitionState state)
 	// Dissolve関連の初期化
 	dissolve_.isActive = true;
 	dissolve_.maskTexHandle = TextureManager::LoadTexture("Texture", "noise0.png");
-
-	// stateがOpenなら明けた状態、Cloaseなら閉じた状態で始める
-	if (state == Opened) {
-		dissolve_.threshold = 1.0f;
-	}
-	else if (state == Cloased) {
-		dissolve_.threshold = 0.0f;
-	}
 
 	// TransitionTimerの初期設定
 	transitionDuration_ = 2.0f * 60.0f; // 2秒

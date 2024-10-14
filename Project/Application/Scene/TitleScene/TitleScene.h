@@ -84,13 +84,5 @@ private:
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;
 
-	// FadeManager
-	FadeManager* fadeManager_ = nullptr;
-
-
-private:
-
-	// フェード処理のフラグ
-	bool isFadeFunc_ = false;
 };
 

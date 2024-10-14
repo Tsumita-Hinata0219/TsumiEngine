@@ -57,10 +57,6 @@ void TitleScene::Initialize()
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
 	sceneTransition_->Init(Opened);
-
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_ = FadeManager::GetInstance();
-	fadeManager_->Initialize(func_FadeIn);
 }
 
 
@@ -94,28 +90,11 @@ void TitleScene::Update(GameManager* state)
 	}
 
 
-	//// ボタン押下でフェードイン
-	//if (input_->Trigger(PadData::A)) {
-	//	isFadeFunc_ = true;
-	//}
-
-	//// フェード処理のフラグが立っていたらフェード処理に入る
-	//if (isFadeFunc_) {
-
-	//	if (fadeManager_->IsFadeIn()) {
-	//		state->ChangeSceneState(new GameScene);
-	//		return;
-	//	}
-	//}
-
 #ifdef _DEBUG
 
 	ImGui::Begin("TitleScene");
-
-	ImGui::Text("");
-	ImGui::Text("");
 	retroEffectData_.DrawImGui();
-	retroCRT_->SetMtlData(retroEffectData_);
+	ImGui::Text("");
 
 	ImGui::End();
 
@@ -152,6 +131,7 @@ void TitleScene::FrontSpriteDraw()
 	absentEffect_->Draw();
 
 	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();
 
 	/* ----- TitleUIManager タイトルラベルUI ----- */
@@ -162,7 +142,4 @@ void TitleScene::FrontSpriteDraw()
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Draw2DFront();
-
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_->Draw();
 }

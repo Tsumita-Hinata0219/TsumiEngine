@@ -22,7 +22,18 @@ void SceneTransition::Init()
 	// Dissolve関連の初期化
 	dissolve_.isActive = true;
 	dissolve_.maskTexHandle = 
-		TextureManager::LoadTexture("Texture", "MaskTex_7.png");
+		TextureManager::LoadTexture("Texture", "noise0.png");
+
+	// Mask画像の読み込み
+	std::array<std::string, 4> maskTexName = {
+		"MaskTex_1",
+		"MaskTex_2",
+		"MaskTex_3",
+		"MaskTex_4",
+	};
+	for (auto& tex : maskTexName) {
+		maskTextures_.push_back(TextureManager::LoadTexture("Texture", tex + ".png"));
+	}
 
 	// TransitionTimerの初期設定
 	transitionDuration_ = 1.0f * 60.0f; // 1秒
@@ -65,6 +76,11 @@ void SceneTransition::StartFadeIn()
 		startThreshold_ = 0.0f;
 		targetThreshold_ = 1.0f;
 
+		// マスク画像をランダムで設定
+		Scope scope = { 0.0f, 3.9f };
+		uint32_t index = uint32_t(RandomGenerator::getRandom(scope));
+		dissolve_.maskTexHandle = maskTextures_[index];
+
 		// タイマースタート
 		transitionTimer_.Start();
 	}
@@ -82,6 +98,11 @@ void SceneTransition::StartFadeOut()
 		// 閾値の開始と目標を設定
 		startThreshold_ = 1.0f;
 		targetThreshold_ = 0.0f;
+
+		// マスク画像をランダムで設定
+		Scope scope = { 0.0f, 3.9f };
+		uint32_t index = uint32_t(RandomGenerator::getRandom(scope));
+		dissolve_.maskTexHandle = maskTextures_[index];
 
 		// タイマースタート
 		transitionTimer_.Start();

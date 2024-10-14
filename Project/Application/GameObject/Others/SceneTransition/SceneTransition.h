@@ -79,6 +79,9 @@ private:
 	// SpriteDissolve
 	SP::DissolveData dissolve_{};
 
+	// Mask画像の配列
+	std::vector<uint32_t> maskTextures_;
+
 	// 現在のステート
 	TransitionState nowState_ = Opened;
 

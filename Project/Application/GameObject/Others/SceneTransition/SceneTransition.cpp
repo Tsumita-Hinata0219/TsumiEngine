@@ -85,8 +85,8 @@ void SceneTransition::StartFadeOut()
 		nowState_ = TransitionState::Closing;
 
 		// 閾値の開始と目標を設定
-		startThreshold_ = 0.0f;
-		targetThreshold_ = 1.0f;
+		startThreshold_ = 1.0f;
+		targetThreshold_ = 0.0f;
 
 		// タイマースタート
 		transitionTimer_.Start();

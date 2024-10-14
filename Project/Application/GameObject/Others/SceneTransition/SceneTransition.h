@@ -50,6 +50,8 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// ステートの取得
+	TransitionState GetNowState() const { return this->nowState_; }
 
 #pragma endregion
 

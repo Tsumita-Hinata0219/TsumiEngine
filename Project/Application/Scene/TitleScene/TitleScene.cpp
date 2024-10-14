@@ -80,22 +80,33 @@ void TitleScene::Update(GameManager* state)
 	/* ----- TitleUIManager タイトルラベルUI ----- */
 	uiManager_->Update();
 
-	// ボタン押下でフェードイン
-	if (input_->Trigger(PadData::A)) {
-		isFadeFunc_ = true;
-	}
-
-	// フェード処理のフラグが立っていたらフェード処理に入る
-	if (isFadeFunc_) {
-
-		if (fadeManager_->IsFadeIn()) {
-			state->ChangeSceneState(new GameScene);
-			return;
-		}
-	}
-
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
+
+	// ボタン押下でトランジション開始
+	if (input_->Trigger(PadData::A)) {
+		sceneTransition_->StartFadeOut();
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new ResultScene);
+		return;
+	}
+
+
+	//// ボタン押下でフェードイン
+	//if (input_->Trigger(PadData::A)) {
+	//	isFadeFunc_ = true;
+	//}
+
+	//// フェード処理のフラグが立っていたらフェード処理に入る
+	//if (isFadeFunc_) {
+
+	//	if (fadeManager_->IsFadeIn()) {
+	//		state->ChangeSceneState(new GameScene);
+	//		return;
+	//	}
+	//}
 
 #ifdef _DEBUG
 

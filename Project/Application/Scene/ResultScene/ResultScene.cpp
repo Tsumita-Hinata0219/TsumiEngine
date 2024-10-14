@@ -33,9 +33,10 @@ void ResultScene::Initialize()
 	resultSp_->Init({ 1280.0f, 720.0f });
 	resultWt_.Initialize();
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_ = FadeManager::GetInstance();
-	fadeManager_->Initialize(func_FadeIn);
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init(Closing);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -52,19 +53,9 @@ void ResultScene::Update(GameManager* state)
 	/* ----- Result リザルト ----- */
 	resultWt_.UpdateMatrix();
 
-	// ボタン押下でフェードイン
-	if (input_->Trigger(PadData::A)) {
-		isFadeFunc_ = true;
-	}
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
 
-	// フェード処理のフラグが立っていたらフェード処理に入る
-	if (isFadeFunc_) {
-
-		if (fadeManager_->IsFadeIn()) {
-			state->ChangeSceneState(new TitleScene);
-			return;
-		}
-	}
 
 #ifdef _DEBUG
 
@@ -103,6 +94,6 @@ void ResultScene::FrontSpriteDraw()
 	/* ----- Result リザルト ----- */
 	resultSp_->Draw(resultTexHD_, resultWt_);
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_->Draw();
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }

@@ -56,7 +56,7 @@ void TitleScene::Initialize()
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
-	sceneTransition_->Init();
+	sceneTransition_->Init(Opened);
 
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();

@@ -21,7 +21,8 @@ void SceneTransition::Init()
 
 	// Dissolve関連の初期化
 	dissolve_.isActive = true;
-	dissolve_.maskTexHandle = TextureManager::LoadTexture("Texture", "noise0.png");
+	dissolve_.maskTexHandle = 
+		TextureManager::LoadTexture("Texture", "SceneTransitionMaskTexture.png");
 
 	// TransitionTimerの初期設定
 	transitionDuration_ = 2.0f * 60.0f; // 2秒

@@ -66,7 +66,8 @@ private:
 
 	// コリジョンシェイプ
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
-	std::map<int, CollisionShape*> shapes_;
+	//std::map<int, CollisionShape*> shapes_;
+	std::map<int, std::unique_ptr<CollisionShape>> shapes_;
 
 	// インデックス
 	uint32_t index_ = 0;

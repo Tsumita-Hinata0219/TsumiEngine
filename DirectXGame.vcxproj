@@ -290,6 +290,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
+    <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
@@ -347,6 +348,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
+    <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />

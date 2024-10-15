@@ -25,6 +25,10 @@ void TestPostEffect::Init()
 	gaussianFilter_ = std::make_unique<GaussianFilterEffect>();
 	gaussianFilter_->Init();
 
+	// Glitch
+	glitch_ = std::make_unique<GlitchEffect>();
+	glitch_->Init();
+
 	// Grain
 	grain_ = std::make_unique<GrainEffect>();
 	grain_->Init();
@@ -65,6 +69,7 @@ void TestPostEffect::Init()
 		"ColorGrading",
 		"Dissolve",
 		"GaussianFilter",
+		"Glitch",
 		"Grain",
 		"GrayScale",
 		"HSV",
@@ -103,6 +108,9 @@ void TestPostEffect::Update()
 		}
 		else if (activeEffects_ == EffectType::GauusianFilter) {
 			gaussianFilter_->DrawImGui();
+		}
+		else if (activeEffects_ == EffectType::Glitch) {
+			glitch_->DrawImGui();
 		}
 		else if (activeEffects_ == EffectType::Grain) {
 			grain_->DrawImGui();
@@ -155,6 +163,9 @@ void TestPostEffect::Draw()
 	else if (activeEffects_ == EffectType::GauusianFilter) {
 		gaussianFilter_->Draw();
 	}
+	else if (activeEffects_ == EffectType::Glitch) {
+		glitch_->Draw();
+	}
 	else if (activeEffects_ == EffectType::Grain) {
 		grain_->Draw();
 	}
@@ -200,16 +211,16 @@ void TestPostEffect::ChangeImGui()
 		case 2: activeEffects_ = EffectType::ColorGrading; break;
 		case 3: activeEffects_ = EffectType::Dissolve; break;
 		case 4: activeEffects_ = EffectType::GauusianFilter; break;
-		case 5: activeEffects_ = EffectType::Grain; break;
-		case 6: activeEffects_ = EffectType::GrayScale; break;
-		case 7: activeEffects_ = EffectType::HSV; break;
-		case 8: activeEffects_ = EffectType::LuminanceOutLine; break;
-		case 9: activeEffects_ = EffectType::RadialBlur; break;
-		case 10: activeEffects_ = EffectType::Random; break;
-		case 11: activeEffects_ = EffectType::RetroCRT; break;
-		case 12: activeEffects_ = EffectType::SepiaTone; break;
-		case 13: activeEffects_ = EffectType::Vignetting; break;
+		case 5: activeEffects_ = EffectType::Glitch; break;
+		case 6: activeEffects_ = EffectType::Grain; break;
+		case 7: activeEffects_ = EffectType::GrayScale; break;
+		case 8: activeEffects_ = EffectType::HSV; break;
+		case 9: activeEffects_ = EffectType::LuminanceOutLine; break;
+		case 10: activeEffects_ = EffectType::RadialBlur; break;
+		case 11: activeEffects_ = EffectType::Random; break;
+		case 12: activeEffects_ = EffectType::RetroCRT; break;
+		case 13: activeEffects_ = EffectType::SepiaTone; break;
+		case 14: activeEffects_ = EffectType::Vignetting; break;
 		}
 	}
-
 }

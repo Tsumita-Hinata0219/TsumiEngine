@@ -52,6 +52,21 @@ struct GaussianFilterMtl {
 	}
 };
 
+/* Glitch用 */
+struct GlitchMtl {
+	Vector4 color{};
+	float intensity = 0.0f;  //  強度
+	Vector2 noiseFactors{}; // ノイズ生成用の係数
+	Vector2 glitchShift{}; // ピクセルのシフト量
+
+	void DrawImGui(std::string label = "") {
+		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
+		ImGui::DragFloat((label + "_intensity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2((label + "_noiseFactors").c_str(), &noiseFactors.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat2((label + "_glitchShift").c_str(), &glitchShift.x, 0.01f, 0.0f, 1.0f);
+	}
+};
+
 /* Grain用 */
 struct GrainMtl {
 	Vector4 color{};

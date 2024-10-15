@@ -16,7 +16,7 @@ void GameSceneUI::Init()
 	}
 
 	// スプライトのオリジンを設定
-	ui_[int(GameSceneUIType::ClearTask)].sprite->SetSpriteOrigin(SpriteOrigin::Center);
+	ui_[int(GameSceneUIType::ClearTask)].sprite->SetAnchor(SpriteAnchor::Center);
 
 	// テクスチャのサイズ設定
 	ui_[int(GameSceneUIType::ClearTask)].sprite->SetSize({ 480.0f, 96.0f });

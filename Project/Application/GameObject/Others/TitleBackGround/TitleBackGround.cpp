@@ -15,7 +15,7 @@ void TitleBackGround::Init()
 		element.transfrom.Initialize();
 
 		// オリジンの設定
-		element.sprite->SetSpriteOrigin(SpriteOrigin::Center);
+		element.sprite->SetAnchor(SpriteAnchor::Center);
 		// サイズの設定
 		element.sprite->SetSize(WinApp::WindowSize());
 		// 座標の設定

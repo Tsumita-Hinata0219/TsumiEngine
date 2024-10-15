@@ -54,9 +54,11 @@ void TitleScene::Initialize()
 	uiManager_ = std::make_unique<TitleUIManager>();
 	uiManager_->Init();
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_ = FadeManager::GetInstance();
-	fadeManager_->Initialize(func_FadeIn);
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+	sceneTransition_->SetState(Cloased);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -76,28 +78,25 @@ void TitleScene::Update(GameManager* state)
 	/* ----- TitleUIManager タイトルラベルUI ----- */
 	uiManager_->Update();
 
-	// ボタン押下でフェードイン
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+
+	// ボタン押下でトランジション開始
 	if (input_->Trigger(PadData::A)) {
-		isFadeFunc_ = true;
+		sceneTransition_->StartFadeOut();
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new ResultScene);
+		return;
 	}
 
-	// フェード処理のフラグが立っていたらフェード処理に入る
-	if (isFadeFunc_) {
-
-		if (fadeManager_->IsFadeIn()) {
-			state->ChangeSceneState(new GameScene);
-			return;
-		}
-	}
 
 #ifdef _DEBUG
 
 	ImGui::Begin("TitleScene");
-
-	ImGui::Text("");
-	ImGui::Text("");
 	retroEffectData_.DrawImGui();
-	retroCRT_->SetMtlData(retroEffectData_);
+	ImGui::Text("");
 
 	ImGui::End();
 
@@ -134,6 +133,7 @@ void TitleScene::FrontSpriteDraw()
 	absentEffect_->Draw();
 
 	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();
 
 	/* ----- TitleUIManager タイトルラベルUI ----- */
@@ -142,6 +142,6 @@ void TitleScene::FrontSpriteDraw()
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Draw2DFront();
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_->Draw();
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }

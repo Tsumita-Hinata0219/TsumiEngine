@@ -1,5 +1,5 @@
 #include "Object3d.hlsli"
-#include "MathFunc.hlsli"
+#include "../MathFunc.hlsli"
 
 struct TransformationMatrix
 {

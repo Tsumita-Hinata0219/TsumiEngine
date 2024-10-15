@@ -14,6 +14,8 @@
 #include "GameObject/Others/TitleBackGround/TitleBackGround.h"
 #include "GameObject/Others/TitleUIManager/TitleUIManager.h"
 
+#include "GameObject/Others/SceneTransition/SceneTransition.h"
+
 
 class TitleScene : public IScene {
 
@@ -79,13 +81,8 @@ private:
 	// TitleUIManager
 	std::unique_ptr<TitleUIManager> uiManager_;
 
-	// FadeManager
-	FadeManager* fadeManager_ = nullptr;
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
 
-
-private:
-
-	// フェード処理のフラグ
-	bool isFadeFunc_ = false;
 };
 

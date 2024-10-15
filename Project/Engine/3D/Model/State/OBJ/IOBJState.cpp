@@ -79,7 +79,7 @@ void IOBJState::CommandCall()
 	buffers_.indeces.IASetIndexBuffer();
 	// Material
 	buffers_.material.CommandCall(0);
-	// TransformationMatrix
+	// Transform
 	buffers_.transform.CommandCall(1);
 	// Camera
 	cameraManager_->CommandCall(2);

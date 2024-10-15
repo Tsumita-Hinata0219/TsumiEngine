@@ -15,6 +15,7 @@
 #include "ModelPipeLine/LambertPipeLine/LambertPipeLine.h"
 #include "ModelPipeLine/LightPipeLine/LightPipeLine.h"
 #include "ModelPipeLine/LinePipeLine/LinePipeLine.h"
+#include "ModelPipeLine/Object2DPipeLine/Object2DPipeLine.h"
 #include "ModelPipeLine/Object3DPipeLine/Object3DPipeLine.h"
 #include "ModelPipeLine/ParticlePipeLine/ParticlePipeLine.h"
 #include "ModelPipeLine/PhongNormalMapPipeLine/PhongNormalMapPipeLine.h"
@@ -44,6 +45,7 @@ enum class PipeLineType : uint32_t {
 	Lambert,
 	Light,
 	Line,
+	Object2D,
 	Object3D,
 	Particle,
 	PhongNormalMap,
@@ -116,6 +118,9 @@ private: // メンバ変数
 
 	// Line
 	std::unique_ptr<LinePipeLine> linePipeLine_;
+
+	// Object2D
+	std::unique_ptr<Object2DPipeLine> object2DPipeLine_;
 
 	// Object3D
 	std::unique_ptr<Object3DPipeLine> object3DPipeLine_;

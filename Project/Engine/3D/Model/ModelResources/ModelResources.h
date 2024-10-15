@@ -49,7 +49,7 @@ struct ModelBuffers {
 	// マテリアル
 	BufferResource<MaterialDataN> material;
 
-	// WorldTransform
+	// Transform
 	BufferResource<TransformationMat> transform;
 
 	// ライト

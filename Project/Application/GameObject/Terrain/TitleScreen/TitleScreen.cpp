@@ -28,7 +28,7 @@ void TitleScreen::Init()
 	cursorTexHD_ = TextureManager::LoadTexture("Texture", "8.png");
 	cursorSprite_ = std::make_unique<Sprite>();
 	cursorSprite_->Init({ 64.0f, 64.0f });
-	cursorSprite_->SetSpriteOrigin(SpriteOrigin::Center);
+	cursorSprite_->SetAnchor(SpriteAnchor::Center);
 	cursorSprite_->SetColor(Samp::Color::YELLOW);
 	// Transfromの初期化
 	cursorTrans_.Initialize();

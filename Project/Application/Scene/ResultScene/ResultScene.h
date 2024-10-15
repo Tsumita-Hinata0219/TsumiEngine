@@ -3,7 +3,8 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
-#include "Utilities/FadeManager/FadeManager.h"
+
+#include "GameObject/Others/SceneTransition/SceneTransition.h"
 
 
 class ResultScene : public IScene {
@@ -57,15 +58,12 @@ private:
 	// カメラ本体
 	CameraResource camera_{};
 
-	// リザルトテクスチャ
+	// ResultTexture
 	uint32_t resultTexHD_{};
 	WorldTransform resultWt_{};;
 	std::unique_ptr<Sprite> resultSp_;
 
-	// FadeManager
-	FadeManager* fadeManager_ = nullptr;
-
-	// フェード処理のフラグ
-	bool isFadeFunc_ = false;
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
 };
 

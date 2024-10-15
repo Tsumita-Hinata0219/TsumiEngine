@@ -104,6 +104,7 @@ private: // メンバ関数
 	void PhongNormalMapShader();
 	void ParticleShader();
 	void LineShader();
+	void Object2DShader();
 	void Object3DShader();
 	void SkinningObject3dShader();
 	void SkyboxShader();

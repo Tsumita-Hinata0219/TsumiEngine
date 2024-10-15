@@ -33,9 +33,10 @@ void ResultScene::Initialize()
 	resultSp_->Init({ 1280.0f, 720.0f });
 	resultWt_.Initialize();
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_ = FadeManager::GetInstance();
-	fadeManager_->Initialize(func_FadeIn);
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -52,19 +53,19 @@ void ResultScene::Update(GameManager* state)
 	/* ----- Result リザルト ----- */
 	resultWt_.UpdateMatrix();
 
-	// ボタン押下でフェードイン
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+
+	// ボタン押下でトランジション開始
 	if (input_->Trigger(PadData::A)) {
-		isFadeFunc_ = true;
+		sceneTransition_->StartFadeOut();
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new TitleScene);
+		return;
 	}
 
-	// フェード処理のフラグが立っていたらフェード処理に入る
-	if (isFadeFunc_) {
-
-		if (fadeManager_->IsFadeIn()) {
-			state->ChangeSceneState(new TitleScene);
-			return;
-		}
-	}
 
 #ifdef _DEBUG
 
@@ -103,6 +104,6 @@ void ResultScene::FrontSpriteDraw()
 	/* ----- Result リザルト ----- */
 	resultSp_->Draw(resultTexHD_, resultWt_);
 
-	/* ----- FadeManager フェードマネージャー ----- */
-	fadeManager_->Draw();
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }

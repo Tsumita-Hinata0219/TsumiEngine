@@ -196,6 +196,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Wall\Wall.cpp" />
+    <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Project\Engine\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Project\Engine\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Project\Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Project\Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -253,6 +255,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\NormalPipeLine\NormalPipeLine.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\ParticlePipeLine\ParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\PhongNormalMapPipeLine\PhongNormalMapPipeLine.cpp" />
@@ -320,6 +323,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Project\Engine\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Project\Engine\View\SRVManager\SRVManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -332,11 +336,15 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.h" />
+    <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />
@@ -572,7 +580,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Object3d.PS.hlsl">
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
@@ -580,7 +588,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\Object3d.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
@@ -770,6 +778,22 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
     <FxCompile Include="Resources\Shaders\SpriteObject3d.PS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -800,13 +824,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\LineObject3d.hlsli" />
     <None Include="Resources\Shaders\MathFunc.hlsli" />
     <None Include="Resources\Shaders\NormalObject3d.hlsli" />
-    <None Include="Resources\Shaders\Object3d.hlsli" />
+    <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\ParticleObject3D.hlsli" />
     <None Include="Resources\Shaders\PhongNormalMap.hlsli" />
     <None Include="Resources\Shaders\PhongObject.hlsli" />
     <None Include="Resources\Shaders\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
+    <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
     <None Include="Resources\Shaders\SpriteObject3d.hlsli" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -85,9 +85,9 @@ void CollisionComponent::UpdateShape(const Col::Sphere& sphere)
 	// IDが存在する場合
 	if (it != this->shapeMap_.end()) {
 
-		it->second->SetData(sphere); // データを更新
-		it->second->CalcBounding(); // Bounding更新
-		it->second->CalcSpaceLevel(); // コライダーの空間レベルと所属空間をを更新
+		it->second->SetData(sphere);  // データ更新
+		it->second->CalcBounding();   // Bounding更新
+		it->second->CalcSpaceLevel(); // 八分木更新
 	}
 	else {
 		// IDが存在しない場合はエラー処理
@@ -99,12 +99,20 @@ void CollisionComponent::UpdateShape(const Col::Sphere& sphere)
 
 void CollisionComponent::Update(const Col::ColData& colData)
 {
-	//auto it = this->shapes_.find(colData.id);
+	auto it = this->shapes_.find(colData.id);
 
-	//// IDが存在する場合、データの更新
-	//if (it != this->shapes_.end()) {
-	//	it->second->SetData(colData);
-	//}
+	// IDが存在する場合、データの更新
+	if (it != this->shapes_.end()) {
+		it->second->SetData(colData); // データ更新
+		it->second->CalcBounding();	  // Bounding更新
+		it->second->CalcSpaceLevel(); // 八分木更新
+	}
+	else {
+		// IDが存在しない場合はエラー処理
+		Log("Error: Shape with ID :  not found.\n");
+		// 例外を投げる場合
+		throw std::runtime_error("Shape ID not found.");
+	}
 }
 
 

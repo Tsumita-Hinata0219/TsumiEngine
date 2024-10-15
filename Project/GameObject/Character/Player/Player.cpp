@@ -38,7 +38,6 @@ void Player::Init()
 	colComp_->RegisterCollider(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
-	colComp_->Register(sphere_);
 
 	// キルカウントを0で初期化
 	killCount_ = 0;

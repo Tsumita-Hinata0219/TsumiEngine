@@ -47,6 +47,15 @@ public:
 			throw std::bad_variant_access(); // 型が一致しない場合のエラー処理
 		}
 	}
+	void SetData(const Col::ColData& data) override {
+
+		if (const auto* setData = dynamic_cast<const Col::Sphere*>(&data)) {
+			this->sphere_ = *setData;  // Sphere型の場合、値をコピー
+		}
+		else {
+			throw std::runtime_error("Invalid type: ColData is not AABB.");
+		}
+	}
 
 #pragma endregion 
 

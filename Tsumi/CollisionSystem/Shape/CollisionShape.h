@@ -81,6 +81,7 @@ public:
 	// 各コライダーデータ
 	virtual ColShapeData GetData() const = 0;
 	virtual void SetData(const ColShapeData& data) = 0;
+	virtual void SetData(const Col::ColData& data) = 0;
 
 	// Bounding
 	Col::AABB GetBounding() const { return this->bounding_; }

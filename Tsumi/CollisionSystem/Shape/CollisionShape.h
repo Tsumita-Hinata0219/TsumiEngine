@@ -73,7 +73,7 @@ public:
 	void CalcSpaceLevel();
 
 	// ImGuiの描画
-	virtual void DrawImGui(const std::string& label) = 0;
+	virtual void DrawImGui(const std::string& label = "") = 0;
 
 
 #pragma region Accessor アクセッサ

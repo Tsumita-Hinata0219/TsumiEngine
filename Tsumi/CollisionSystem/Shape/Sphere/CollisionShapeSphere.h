@@ -29,7 +29,7 @@ public:
 	void CalcBounding() override;
 
 	// ImGuiの描画
-	void DrawImGui(const std::string& label) override;
+	void DrawImGui(const std::string& label = "") override;
 
 
 #pragma region Accessor

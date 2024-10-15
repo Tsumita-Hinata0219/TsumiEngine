@@ -52,9 +52,9 @@ void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
 		
-
-
-
+		for (auto& shape : shapes_) {
+			shape->DrawImGui();
+		}
 
 		ImGui::TreePop();
 	}

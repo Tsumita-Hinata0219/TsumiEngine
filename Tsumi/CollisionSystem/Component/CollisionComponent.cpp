@@ -97,6 +97,16 @@ void CollisionComponent::UpdateShape(const Col::Sphere& sphere)
 	}
 }
 
+void CollisionComponent::Update(const Col::ColData& colData)
+{
+	//auto it = this->shapes_.find(colData.id);
+
+	//// IDが存在する場合、データの更新
+	//if (it != this->shapes_.end()) {
+	//	it->second->SetData(colData);
+	//}
+}
+
 
 // コリジョンのチェック
 bool CollisionComponent::CheckCollision(const CollisionComponent& other) const

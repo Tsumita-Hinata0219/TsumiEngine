@@ -36,6 +36,7 @@ public:
 
 	// シェイプの更新
 	void UpdateShape(const Col::Sphere& sphere);
+	void Update(const Col::ColData& colData);
 
 	// コリジョンのチェック
 	bool CheckCollision(const CollisionComponent& other) const;

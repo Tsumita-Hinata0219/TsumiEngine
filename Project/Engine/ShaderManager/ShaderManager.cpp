@@ -146,6 +146,7 @@ void ShaderManager::PostEffectShadersCompiles()
 	//ColorGrading();
 	DissolveShader();
 	GaussianFilterShader();
+	GlitchShader();
 	GrainShader();
 	GrayScaleShader();
 	HSVShader();
@@ -350,6 +351,16 @@ void ShaderManager::GaussianFilterShader()
 		L"Resources/Shaders/PostEffect/GaussianFilter/GaussianFilter.PS.hlsl",
 		shader);
 	postEffectShadersMap_["GaussianFilter"] = shader;
+}
+
+void ShaderManager::GlitchShader()
+{
+	ShadersMode shader{};
+	SetShader(
+		L"Resources/Shaders/PostEffect.VS.hlsl",
+		L"Resources/Shaders/PostEffect/Glitch/Glitch.PS.hlsl",
+		shader);
+	postEffectShadersMap_["Glitch"] = shader;
 }
 
 void ShaderManager::GrainShader()

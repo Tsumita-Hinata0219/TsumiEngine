@@ -1,9 +1,9 @@
-#include "GaussianFilterPipeLine.h"
+#include "GlitchPipeLine.h"
 
 
 
 // Psoを構築する
-PsoProperty GaussianFilterPipeLine::SetUpPso()
+PsoProperty GlitchPipeLine::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -35,7 +35,7 @@ PsoProperty GaussianFilterPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpPostEffectShader(vertexShaderBlob, pixelShaderBlob, "GaussianFilter");
+	SetUpPostEffectShader(vertexShaderBlob, pixelShaderBlob, "Glitch");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -99,7 +99,7 @@ PsoProperty GaussianFilterPipeLine::SetUpPso()
 
 
 // RootSignatureのセットアップ
-void GaussianFilterPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void GlitchPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;

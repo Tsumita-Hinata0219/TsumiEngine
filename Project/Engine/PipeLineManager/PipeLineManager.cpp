@@ -73,6 +73,10 @@ void PipeLineManager::Initialize()
 	instance->gaussianFilterPipeLine_ = make_unique<GaussianFilterPipeLine>();
 	instance->pipeLineMap_[PipeLineType::GaussianFilter] = instance->gaussianFilterPipeLine_->SetUpPso();
 
+	// Glitch
+	instance->glitchPipeLine_ = make_unique<GlitchPipeLine>();
+	instance->pipeLineMap_[PipeLineType::Glitch] = instance->glitchPipeLine_->SetUpPso();
+
 	// Grain
 	instance->grainPipeLine_ = make_unique<GrainPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Grain] = instance->grainPipeLine_->SetUpPso();

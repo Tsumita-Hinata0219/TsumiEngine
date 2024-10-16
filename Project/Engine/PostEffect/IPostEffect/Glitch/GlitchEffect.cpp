@@ -1,5 +1,5 @@
 #include "GlitchEffect.h"
-
+#include "GameManager/GameManager.h"
 
 
 // 初期化処理
@@ -7,14 +7,16 @@ void GlitchEffect::Init()
 {
 	Create();
 
-	// MtlData初期値
 	mtlData_.color = Vector4::one;
+	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise1.png");
 }
 
 
 // 描画処理
 void GlitchEffect::Draw()
 {
+	mtlData_.time = g_ElapsedTime;
+
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();
 	mtlBuffer_.WriteData((&mtlData_));
@@ -51,6 +53,9 @@ void GlitchEffect::CommandCall()
 
 	// MtlBufferをコマンドに積む
 	mtlBuffer_.CommandCall(4);
+
+	// MaksTexture
+	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

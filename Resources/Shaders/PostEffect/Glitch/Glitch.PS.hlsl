@@ -6,9 +6,10 @@ SamplerState gSampler : register(s0);
 struct Material
 {
     float4 color;
-    float glitchIntensity; // グリッチの強度
     float2 noiseFactors; // ノイズ生成用の係数
     float2 glitchShift; // ピクセルのシフト量
+    
+    float glitchIntensity; // グリッチの強度
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 

@@ -6,10 +6,11 @@ SamplerState gSampler : register(s0);
 struct Material
 {
     float4 color;
+    float grainAmount; // ノイズの強度
     float2 noiseFactors; // ノイズ生成用の係数
-    float2 glitchShift; // ピクセルのシフト量
-    
-    float glitchIntensity; // グリッチの強度
+    float displacementStrength; // ディスプレイスメントの強さ
+    float scanlineStrength; // スキャンラインの強さ
+    float aberrationStrength; // 色収差の強さ
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -19,48 +20,76 @@ struct PixelShaderOutput
 };
 
 
+// フラクタルノイズ
+float FractalNoise(float2 uv)
+{
+    float noise = frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
+    return noise;
+}
+
+// ディスプレイスメントマップ
+float2 ApplyDisplacement(float2 uv, float displacementStrength)
+{
+    float noise = FractalNoise(uv * 10.0f); // フラクタルノイズの強さを調整
+    float2 displacement = (noise - 0.5) * displacementStrength;
+    return uv + displacement;
+}
+
+// スキャンライン
+float ScanlineEffect(float2 uv, float scanlineStrength)
+{
+    float scanline = sin(uv.y * 800.0) * scanlineStrength;
+    return scanline;
+}
+float3 ApplyScanlines(float3 color, float2 uv, float scanlineStrength)
+{
+    float scanline = ScanlineEffect(uv, scanlineStrength);
+    return color * (1.0 - scanline);
+}
+
+// RGB分離(色収差)
+float3 ApplyChromaticAberration(float2 uv, float aberrationStrength)
+{
+    // R, G, B のそれぞれのUV座標をずらす
+    float3 color;
+    color.r = gTexture.Sample(gSampler, uv + aberrationStrength).r;
+    color.g = gTexture.Sample(gSampler, uv).g;
+    color.b = gTexture.Sample(gSampler, uv - aberrationStrength).b;
+    
+    return color;
+}
+
+
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
     
-    // テクスチャのサンプルカラーを取得
-    output.color = gTexture.Sample(gSampler, input.texcoord);
+   // UVディスプレイスメントを適用
+    float2 displacedUV = ApplyDisplacement(input.texcoord, gMaterial.displacementStrength);
     
-    // テクスチャサイズを取得
+    // テクスチャサンプル
+    output.color = gTexture.Sample(gSampler, displacedUV);
+
+    // スキャンラインの適用
+    output.color.rgb = ApplyScanlines(output.color.rgb, input.texcoord, gMaterial.scanlineStrength);
+
+    // 色収差の適用
+    output.color.rgb = ApplyChromaticAberration(displacedUV, gMaterial.aberrationStrength);
+
+    // ノイズの適用
     uint width, height;
     gTexture.GetDimensions(width, height);
-    float2 screenSize = float2(width, height);
-    
-    // ピクセル位置を取得
-    uint2 pixelCoord = uint2(input.texcoord * screenSize);
-
-    // 擬似乱数でグリッチのタイミングを生成
-    float randomValue = frac(sin(dot(pixelCoord, gMaterial.noiseFactors)) * 43758.5453);
-
-    // ランダムに発生するグリッチを特定の閾値で制御
-    if (randomValue < gMaterial.glitchIntensity)
-    {
-        // グリッチ効果：RGBチャンネルをずらす
-        float3 glitchShift = float3(
-            frac(sin(randomValue * 12.9898) * 43758.5453) * gMaterial.glitchShift.x,
-            frac(sin(randomValue * 78.233) * 43758.5453) * gMaterial.glitchShift.y,
-            frac(sin(randomValue * 57.5453) * 43758.5453) * gMaterial.glitchShift.x
-        );
-
-        // 新しいUV座標を計算して、ピクセルをシフト
-        float2 shiftedUV = input.texcoord + glitchShift.xy / screenSize;
-        output.color.rgb = gTexture.Sample(gSampler, shiftedUV).rgb;
-    }
-
-    // 元の色に少しだけノイズを追加（微小なデジタルノイズの効果）
+    uint2 pixelCoord = uint2(displacedUV * float2(width, height));
     float noise = frac(sin(dot(pixelCoord, gMaterial.noiseFactors)) * 43758.5453);
-    float3 noiseColor = float3(
+    
+    float grainAmount = gMaterial.grainAmount;
+    float3 grainColor = float3(
         frac(sin(noise * 12.9898) * 43758.5453),
         frac(sin(noise * 78.233) * 43758.5453),
         frac(sin(noise * 57.5453) * 43758.5453)
-    ) * 0.1; // 微小ノイズの強度
+    ) * grainAmount * gMaterial.color.rgb;
     
-    output.color.rgb += noiseColor * gMaterial.glitchIntensity;
+    output.color.rgb += grainColor;
 
     return output;
 }

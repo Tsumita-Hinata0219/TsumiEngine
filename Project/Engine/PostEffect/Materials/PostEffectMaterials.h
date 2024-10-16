@@ -54,17 +54,20 @@ struct GaussianFilterMtl {
 
 /* Glitch用 */
 struct GlitchMtl {
-	Vector4 color{};
-	
-	Vector2 noiseFactors{}; // ノイズ生成用の係数
-	Vector2 glitchShift{}; // ピクセルのシフト量
-	float intensity = 0.0f;  //  強度
+	Vector4 color;
+	float grainAmount; // ノイズの強度
+	Vector2 noiseFactors; // ノイズ生成用の係数
+	float displacementStrength; // ディスプレイスメントの強さ
+	float scanlineStrength; // スキャンラインの強さ
+	float aberrationStrength; // 色収差の強さ
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat((label + "_intensity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat2((label + "_noiseFactors").c_str(), &noiseFactors.x, 0.01f, 0.0f, 1.0f);
-		ImGui::DragFloat2((label + "_glitchShift").c_str(), &glitchShift.x, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_grainAmount").c_str(), &grainAmount, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_displacementStrength").c_str(), &displacementStrength, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_scanlineStrength").c_str(), &scanlineStrength, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_aberrationStrength").c_str(), &aberrationStrength, 0.01f, 0.0f, 1.0f);
 	}
 };
 

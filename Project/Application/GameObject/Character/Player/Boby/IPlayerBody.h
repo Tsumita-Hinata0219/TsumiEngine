@@ -14,14 +14,11 @@ enum class PlayerBodyTyep {
 	Count,
 };
 
-
 // Player前方宣言
 class Player;
 
-
 /* PlayerBodyの基底クラス */
 class IPlayerBody : public IObject {
-
 
 public:
 
@@ -30,5 +27,4 @@ public:
 
 	// ペアレントを結ぶ
 	virtual void SetParent(Transform* parent) = 0;
-
 };

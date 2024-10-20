@@ -55,18 +55,10 @@ struct GaussianFilterMtl {
 /* Glitch用 */
 struct GlitchMtl {
 	Vector4 color{};
-	float glitchIntensity; // グリッチ強度
-	float blockScale; // ブロックスケール
-	float noiseSpeed; // ノイズ速度
-	float time = 0.0f; // 時間
 	uint32_t maskTexture = 0;
 
 	void DrawImGui(std::string label = "") {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
-		ImGui::DragFloat((label + "_glitchIntensity").c_str(), &glitchIntensity, 0.001f, 0.0f, 1.0f);
-		ImGui::DragFloat((label + "_blockScale").c_str(), &blockScale, 0.001f, 0.0f, 1.0f);
-		ImGui::DragFloat((label + "_noiseSpeed").c_str(), &noiseSpeed, 0.001f, 0.0f, 100.0f);
-		ImGui::DragFloat((label + "_time").c_str(), &time, 0.0f);
 	}
 };
 

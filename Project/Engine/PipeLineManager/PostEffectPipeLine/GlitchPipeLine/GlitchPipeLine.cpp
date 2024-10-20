@@ -160,16 +160,26 @@ void GlitchPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRo
 
 
 	// Samplerの設定
-	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};
+	D3D12_STATIC_SAMPLER_DESC staticSamplers[2]{};
 	staticSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR; // バイリニアフィルタ
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP; // 0～1の範囲外をリピート
 	staticSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
 	staticSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-
 	staticSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER; // 比較しない
 	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX; // ありったけのMipmapを使う
 	staticSamplers[0].ShaderRegister = 0; // レジスタ番号0を使う
 	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	// 2つ目のサンプラー設定
+	staticSamplers[1].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR; // バイリニアフィルタ
+	staticSamplers[1].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP; // 0～1の範囲外をリピート
+	staticSamplers[1].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[1].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
+	staticSamplers[1].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER; // 比較しない
+	staticSamplers[1].MaxLOD = D3D12_FLOAT32_MAX; // ありったけのMipmapを使う
+	staticSamplers[1].ShaderRegister = 1; // レジスタ番号1を使う（ノイズ用）
+	staticSamplers[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+
+
 
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);

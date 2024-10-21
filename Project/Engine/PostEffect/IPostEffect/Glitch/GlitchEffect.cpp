@@ -8,7 +8,7 @@ void GlitchEffect::Init()
 	Create();
 
 	mtlData_.color = Vector4::one;
-	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise3.png");
+	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise4.png");
 	mtlData_.time = 0.0f;
 }
 

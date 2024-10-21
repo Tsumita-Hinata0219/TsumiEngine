@@ -92,14 +92,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
-	/* ----- StartDirection スタート演出 ----- */
-	startDirection_->Update();
-
-	/* ----- SceneChange シーンチェンジ ----- */
-	//if (SceneChangeCheck(state)) {
-	//	return; // 後の更新処理は入らない
-	//}
-
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
@@ -115,8 +107,9 @@ void GameScene::Update(GameManager* state)
 	/* ----- Floor 床 ----- */
 	floor_->Update();
 
-	/* ----- Building1 建物1 ----- */
-	//building1_->Update();
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_->Update();
+	if (!startDirection_->IsFinish()) { return; }
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();

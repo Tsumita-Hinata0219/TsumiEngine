@@ -21,6 +21,14 @@ public:
 	void Draw2DFront();
 
 
+#pragma region Accessor アクセッサ
+
+	// 終了フラグ
+	bool IsFinish() const { return this->isFinish_; }
+
+#pragma endregion
+
+
 private:
 
 	// サイズの移行処理

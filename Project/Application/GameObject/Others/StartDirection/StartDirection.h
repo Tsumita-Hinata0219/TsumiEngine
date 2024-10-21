@@ -41,12 +41,22 @@ private:
 
 	// Sprite
 	std::unique_ptr<Sprite> sprite_;
-	Vector2 texSize_{};
 
 	// Transform
 	Transform trans_{};
 
+	// Size
+	Vector2 texSize_{};
+	Vector2 targetSize_{};
+
+	// Rotate
+	float startRotateZ_ = 0.0f;
+	float targetRotateZ_ = 0.0f;
+
 	// timer
 	Timer timer_{};
+
+	// IsFinish
+	bool isFinish_ = false;
 };
 

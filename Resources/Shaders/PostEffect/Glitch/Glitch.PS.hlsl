@@ -52,17 +52,19 @@ PixelShaderOutput main(VertexShaderOutput input)
     float2 scaledUV = (uv - 0.5f) / float2(gMaterial.noiseScale.x, gMaterial.noiseScale.y) + 0.5f;
 
     // ノイズオフセットの計算
-    float2 noiseOffset = CalculateNoiseOffset(uv, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
-    scaledUV += noiseOffset;
-
-    // ノイズテクスチャをサンプリング
-    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
+    float2 noiseOffset = CalculateNoiseOffset(scaledUV, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
+    
+    // ノイズを使って元のUVを変換
+    float2 distortedUV = uv + noiseOffset * 0.1f; // ずれる量を調整（ここでエフェクトの強さを調整）
 
     // 元のテクスチャをサンプリング
-    float4 originalColor = gTexture.Sample(gSampler, uv);
+    float4 originalColor = gTexture.Sample(gSampler, distortedUV);
+
+    // ノイズテクスチャをサンプリング（もし必要であれば）
+    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
 
     // ノイズを元の色に適用
-    output.color = originalColor * noiseValue;
+    output.color = originalColor * noiseValue; // ノイズを使った効果（オプション）
 
     return output;
 }

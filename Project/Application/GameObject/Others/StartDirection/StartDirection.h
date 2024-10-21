@@ -29,6 +29,9 @@ private:
 	// 姿勢の移行処理
 	void RotateFunc();
 
+	// ImGuiの描画
+	void DrawImGui();
+
 
 private:
 
@@ -42,5 +45,8 @@ private:
 
 	// Transform
 	Transform trans_{};
+
+	// timer
+	Timer timer_{};
 };
 

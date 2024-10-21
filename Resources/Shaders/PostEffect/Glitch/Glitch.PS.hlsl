@@ -41,15 +41,6 @@ float2 CalculateNoiseOffset(float2 uv, float time, float speed, float frequency)
     return float2(randomX * 2.0f - 1.0f, randomY * 2.0f - 1.0f); // -1.0fから1.0fの範囲に変換
 }
 
-float2 CalculateDisplacement(float2 uv, float2 noiseOffset)
-{
-    // ノイズ値を基にディスプレイスメントを計算
-    float horizontalDisplacement = noiseOffset.x * gMaterial.maxDisplacement.x;
-    float verticalDisplacement = noiseOffset.y * gMaterial.maxDisplacement.y;
-
-    return float2(horizontalDisplacement, verticalDisplacement);
-}
-
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
@@ -61,7 +52,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     float2 scaledUV = (uv - 0.5f) / float2(gMaterial.noiseScale.x, gMaterial.noiseScale.y) + 0.5f;
 
     // ノイズオフセットの計算
-    float2 noiseOffset = CalculateNoiseOffset(scaledUV, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
+    float2 noiseOffset = CalculateNoiseOffset(uv, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
     scaledUV += noiseOffset;
 
     // ノイズテクスチャをサンプリング

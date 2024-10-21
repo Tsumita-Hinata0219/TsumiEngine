@@ -44,6 +44,10 @@ void GameScene::Initialize()
 	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Init();
 
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_ = std::make_unique<StartDirection>();
+	startDirection_->Init();
+
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
@@ -87,6 +91,9 @@ void GameScene::Update(GameManager* state)
 	state;
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
+
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_->Update();
 
 	/* ----- SceneChange シーンチェンジ ----- */
 	//if (SceneChangeCheck(state)) {
@@ -180,6 +187,9 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront();
+
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_->Draw2DFront();
 }
 
 

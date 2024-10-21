@@ -7,10 +7,11 @@
 #include "GameObject/Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/FollowCamera/FollowCamera.h"
 
+#include "GameObject/Others/StartDirection/StartDirection.h"
+
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "GameObject/Terrain/Skybox/Skybox.h"
 #include "GameObject/Terrain/Ground/Ground.h"
-
 #include "GameObject/Terrain/Wall/Wall.h"
 #include "GameObject/Terrain/Floor/Floor.h"
 #include "GameObject/Terrain/Building1/Building1.h"
@@ -92,6 +93,9 @@ private: // クラス
 
 	// FollowCamera
 	std::unique_ptr<FollowCamera> followCamera_;
+
+	// StartDirection
+	std::unique_ptr<StartDirection> startDirection_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

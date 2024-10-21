@@ -13,6 +13,7 @@ struct Material
     // ノイズ設定
     float2 noiseScale; // ノイズのスケール（引き延ばし用）
     float timeSpeed; // ノイズの動きの速さ
+    float time;
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -34,11 +35,20 @@ PixelShaderOutput main(VertexShaderOutput input)
     // テクスチャ座標を取得
     float2 uv = input.texcoord; // テクスチャ座標が入力として渡されることを想定
 
-    // スケールを逆に適用
-    float2 noiseUV = uv * (1.0f / gMaterial.noiseScale); // スケールを逆にする
+    // 時間を取得（Materialから取得）
+    float time = gMaterial.time * gMaterial.timeSpeed; // timeSpeedを使って時間を調整
+
+    // ランダムな動きを加えるためのオフセット
+    float2 randomOffset = float2(
+        Noise(uv * 10.0f + float2(time * 0.1f, 0)), // 水平オフセット
+        Noise(uv * 10.0f + float2(0, time * 0.1f)) // 垂直オフセット
+    );
+
+    // UVに時間とランダムなオフセットを加算してノイズを動かす
+    float2 animatedNoiseUV = (uv * (1.0f / gMaterial.noiseScale)) + randomOffset * 0.1f;
 
     // ノイズテクスチャからサンプリング
-    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, noiseUV).r;
+    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, animatedNoiseUV).r;
 
     // ノイズ値を元に色を変更（ここではノイズ値をそのまま色として使用）
     output.color = gTexture.Sample(gSampler, uv) * noiseValue; // 元のテクスチャにノイズを適用

@@ -79,7 +79,6 @@ private:
 private: // クラス
 
 	// CollisionManager
-	//std::unique_ptr<CollisionManager> collisionManager_;
 	std::unique_ptr<CollisionSystem> collisionSystem_;
 
 	// AbsentEffect
@@ -112,6 +111,7 @@ private: // クラス
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
 
+	int time_ = 0;
 
 private:
 

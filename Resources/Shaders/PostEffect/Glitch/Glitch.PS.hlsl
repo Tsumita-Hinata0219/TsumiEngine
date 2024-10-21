@@ -12,8 +12,9 @@ struct Material
     float4 color;
     // ノイズ設定
     float2 noiseScale; // ノイズのスケール（引き延ばし用）
-    float timeSpeed; // ノイズの動きの速さ
-    float time;
+    float noiseSpeed; // ノイズの動きの速さ
+    float noiseFrequency; // ノイズの動きの頻度
+    float time; // 現在の時間
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -22,8 +23,8 @@ struct PixelShaderOutput
     float4 color : SV_TARGET0;
 };
 
-// シンプルなノイズ生成
-float Noise(float2 uv)
+// ランダム関数の実装
+float Random(float2 uv)
 {
     return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
 }
@@ -32,26 +33,32 @@ PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
 
-    // テクスチャ座標を取得
-    float2 uv = input.texcoord; // テクスチャ座標が入力として渡されることを想定
+    // UV座標の取得
+    float2 uv = input.texcoord;
 
-    // 時間を取得（Materialから取得）
-    float time = gMaterial.time * gMaterial.timeSpeed; // timeSpeedを使って時間を調整
+    // スケールを反転（小さい値が引き延ばされる）
+    float2 scaledUV = uv * (1.0f / gMaterial.noiseScale); // scaleを反転
 
-    // ランダムな動きを加えるためのオフセット
-    float2 randomOffset = float2(
-        Noise(uv * 10.0f + float2(time * 0.1f, 0)), // 水平オフセット
-        Noise(uv * 10.0f + float2(0, time * 0.1f)) // 垂直オフセット
-    );
+    // ランダムなオフセットを生成
+    float randomOffsetX = Random(float2(gMaterial.time, 0.0)) * 0.1; // ランダムなオフセットをX軸に適用
+    float randomOffsetY = Random(float2(0.0, gMaterial.time)) * 0.1; // ランダムなオフセットをY軸に適用
 
-    // UVに時間とランダムなオフセットを加算してノイズを動かす
-    float2 animatedNoiseUV = (uv * (1.0f / gMaterial.noiseScale)) + randomOffset * 0.1f;
+    // ノイズの動きがない場合はオフセットを0にする
+    if (gMaterial.noiseFrequency > 0.0f)
+    {
+        // 時間に基づいたオフセットを追加
+        scaledUV += float2((gMaterial.noiseSpeed * gMaterial.time + randomOffsetX) * gMaterial.noiseFrequency,
+                           (gMaterial.noiseSpeed * gMaterial.time + randomOffsetY) * gMaterial.noiseFrequency);
+    }
 
-    // ノイズテクスチャからサンプリング
-    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, animatedNoiseUV).r;
+    // ノイズテクスチャをサンプリング
+    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
 
-    // ノイズ値を元に色を変更（ここではノイズ値をそのまま色として使用）
-    output.color = gTexture.Sample(gSampler, uv) * noiseValue; // 元のテクスチャにノイズを適用
+    // 元のテクスチャをサンプリング
+    float4 originalColor = gTexture.Sample(gSampler, uv);
+
+    // ノイズを元の色に適用
+    output.color = originalColor * noiseValue; // ここでノイズを掛け合わせ
 
     return output;
 }

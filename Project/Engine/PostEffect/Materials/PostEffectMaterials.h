@@ -55,8 +55,9 @@ struct GaussianFilterMtl {
 /* Glitch用 */
 struct GlitchMtl {
 	Vector4 color{};
-	Vector2 noiseScale; // ノイズのスケール（X, Y）
+	Vector2 noiseScale = Vector2::one; // ノイズのスケール（X, Y）
 	float noiseSpeed; // ノイズの動く速さ
+	float noiseFrequency; // ノイズの動きの頻度
 	float time; // 現在の時間
 	uint32_t maskTexture = 0;
 
@@ -64,6 +65,7 @@ struct GlitchMtl {
 		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
 		ImGui::DragFloat2((label + "_noiseScale").c_str(), &noiseScale.x, 0.01f, 0.0f, 10.0f);
 		ImGui::DragFloat((label + "_noiseSpeed").c_str(), &noiseSpeed, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat((label + "_noiseFrequency").c_str(), &noiseFrequency, 0.01f, 0.0f, 1.0f);
 		ImGui::DragFloat((label + "_time").c_str(), &time, 0.0f);
 
 	}

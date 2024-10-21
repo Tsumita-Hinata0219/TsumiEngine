@@ -179,6 +179,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestHuman\TestHuman.cpp" />
@@ -339,6 +340,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />

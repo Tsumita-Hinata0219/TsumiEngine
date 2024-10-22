@@ -20,7 +20,7 @@ void Player::Init()
 	// BulletModelのロード
 	modelManager_->LoadModel("Obj/Player/Bullet", "PlayerBullet.obj");
 
-	// BodyTransformの初期化
+	//Transformの初期化
 	trans_.Init();
 
 	// 各ボディの初期化とペアレントを結ぶ

@@ -10,6 +10,7 @@
 #include "PostEffect/IPostEffect/ColorGrading/ColorGradingEffect.h"
 #include "PostEffect/IPostEffect/Dissolve/DissolveEffect.h"
 #include "PostEffect/IPostEffect/GaussianFilter/GaussianFilterEffect.h"
+#include "PostEffect/IPostEffect/Glitch/GlitchEffect.h"
 #include "PostEffect/IPostEffect/Grain/GrainEffect.h"
 #include "PostEffect/IPostEffect/GrayScale/GrayScaleEffect.h"
 #include "PostEffect/IPostEffect/HSV/HSVEffect.h"
@@ -27,15 +28,16 @@ enum EffectType {
 	ColorGrading = 1 << 1,
 	Dissolve = 1 << 2,
 	GauusianFilter = 1 << 3,
-	Grain = 1 << 4,
-	GrayScale = 1 << 5,
-	HSV = 1 << 6,
-	LuminanceOutLine = 1 << 7,
-	RadialBlur = 1 << 8,
-	Random = 1 << 9,
-	RetroCRT = 1 << 10,
-	SepiaTone = 1 << 11,
-	Vignetting = 1 << 12,
+	Glitch = 1 << 4,
+	Grain = 1 << 5,
+	GrayScale = 1 << 6,
+	HSV = 1 << 7,
+	LuminanceOutLine = 1 << 8,
+	RadialBlur = 1 << 9,
+	Random = 1 << 10,
+	RetroCRT = 1 << 11,
+	SepiaTone = 1 << 12,
+	Vignetting = 1 << 13,
 };
 
 
@@ -79,6 +81,9 @@ private:
 
 	// GaussianFilter
 	std::unique_ptr<GaussianFilterEffect> gaussianFilter_;
+
+	// Glitch
+	std::unique_ptr<GlitchEffect> glitch_;
 
 	// Grain
 	std::unique_ptr<GrainEffect> grain_;

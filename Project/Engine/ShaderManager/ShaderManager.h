@@ -119,6 +119,7 @@ private: // メンバ関数
 	void ColorGrading();
 	void DissolveShader();
 	void GaussianFilterShader();
+	void GlitchShader();
 	void GrainShader();
 	void GrayScaleShader();
 	void HSVShader();

@@ -44,6 +44,10 @@ void GameScene::Initialize()
 	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Init();
 
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_ = std::make_unique<StartDirection>();
+	startDirection_->Init();
+
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
@@ -56,10 +60,6 @@ void GameScene::Initialize()
 	/* ----- Floor 床 ----- */
 	floor_ = std::make_unique<Floor>();
 	floor_->Init();
-
-	/* ----- Building1 建物1 ----- */
-	/*building1_ = std::make_unique<Building1>();
-	building1_->Init();*/
 
 	/* ----- Player プレイヤー ----- */
 	player_ = make_unique<Player>();
@@ -88,11 +88,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
-	/* ----- SceneChange シーンチェンジ ----- */
-	//if (SceneChangeCheck(state)) {
-	//	return; // 後の更新処理は入らない
-	//}
-
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
@@ -108,8 +103,14 @@ void GameScene::Update(GameManager* state)
 	/* ----- Floor 床 ----- */
 	floor_->Update();
 
-	/* ----- Building1 建物1 ----- */
-	//building1_->Update();
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_->Update();
+	/*if (!startDirection_->IsFinish()) { return; }
+	time_++;
+	if (time_ >= 2.0f * 60.0f) {
+		state->ChangeSceneState(new TitleScene());
+		return;
+	}*/
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
@@ -121,11 +122,9 @@ void GameScene::Update(GameManager* state)
 	CheckAllCollision();
 
 #ifdef _DEBUG
-
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
 	ImGui::End();
-
 #endif // _DEBUG
 }
 
@@ -150,9 +149,6 @@ void GameScene::ModelDraw()
 {
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Draw();
-
-	/* ----- Wall 壁 ----- */
-	//wall_->Draw3D();
 
 	/* ----- Floor 床 ----- */
 	floor_->Draw3D();
@@ -180,6 +176,9 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Draw2DFront();
+
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_->Draw2DFront();
 }
 
 
@@ -232,37 +231,4 @@ void GameScene::CheckAllCollision()
 
 	// コリジョン判定を行う
 	collisionSystem_->Update();
-
-
-	//// Player with EnemyBullet
-	//for (auto& enemy : enemyManager_->GetEnemyList()) {
-	//	for (auto& bullet : enemy->GetBulletList()) {
-	//		if (collisionManager_->CheckOBBxOBB(player_->GetOBBCollider(), bullet->GetOBBCollider())) {
-	//			player_->OnCollisionWithEnemyBullet();
-	//			bullet->OnCollisionWithPlayer();
-	//		}
-	//	}
-	//}
-
-	//// PlayerBullet with Enemy
-	//for (auto& bullet : player_->GetBulletList()) {
-	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
-	//		if (collisionManager_->CheckOBBxOBB(bullet->GetOBBCollider(), enemy->GetOBBCollider())) {
-	//			bullet->OnCollisionWithEnemy();
-	//			enemy->OnCollisionWithPlayerBullet();
-	//		}
-	//	}
-	//}
-
-	//// PlayerBullet with EnemyBullet
-	//for (auto& playerBullet : player_->GetBulletList()) {
-	//	for (auto& enemy : enemyManager_->GetEnemyList()) {
-	//		for (auto& enemyBullet : enemy->GetBulletList()) {
-	//			if (collisionManager_->CheckOBBxOBB(playerBullet->GetOBBCollider(), enemyBullet->GetOBBCollider())) {
-	//				playerBullet->OnCollisionWithEnemyBullet();
-	//				enemyBullet->OnCollisionWithPlayerBullet();
-	//			}
-	//		}
-	//	}
-	//}
 }

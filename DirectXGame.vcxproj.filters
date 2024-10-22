@@ -41,6 +41,7 @@
     <FxCompile Include="Resources\Shaders\PostEffect\RetroCRT\RetroCRT.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\PostEffect\Glitch\Glitch.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -225,6 +226,9 @@
     <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp" />
+    <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -441,6 +445,9 @@
     <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
+    <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

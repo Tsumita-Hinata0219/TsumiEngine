@@ -28,6 +28,7 @@
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
 #include "PostEffectPipeLine/DissolvePipeLine/DissolvePipeLine.h"
 #include "PostEffectPipeLine/GaussianFilterPipeLine/GaussianFilterPipeLine.h"
+#include "PostEffectPipeLine/GlitchPipeLine/GlitchPipeLine.h"
 #include "PostEffectPipeLine/GrayScalePipeLine/GrayScalePipeLine.h"
 #include "PostEffectPipeLine/HSVPipeLine/HSVPipeLine.h"
 #include "PostEffectPipeLine/OutLinePipeLine/OutLinePipeLine.h"
@@ -58,6 +59,7 @@ enum class PipeLineType : uint32_t {
 	BoxFilter,
 	Dissolve,
 	GaussianFilter,
+	Glitch,
 	Grain,
 	GrayScale,
 	HSV,
@@ -155,6 +157,9 @@ private: // メンバ変数
 
 	// GaussianFilter
 	std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
+
+	// Glitch
+	std::unique_ptr<GlitchPipeLine> glitchPipeLine_;
 
 	// Grain
 	std::unique_ptr<GrainPipeLine> grainPipeLine_;

@@ -179,6 +179,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestHuman\TestHuman.cpp" />
@@ -268,6 +269,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
@@ -289,6 +291,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
+    <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
@@ -337,6 +340,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
@@ -345,6 +349,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
+    <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />
@@ -675,6 +681,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\PostEffect\GaussianFilter\GaussianFilter.PS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Glitch\Glitch.PS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Pixel</ShaderType>

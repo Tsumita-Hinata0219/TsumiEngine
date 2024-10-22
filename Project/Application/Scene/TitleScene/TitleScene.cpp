@@ -82,12 +82,12 @@ void TitleScene::Update(GameManager* state)
 	sceneTransition_->Update();
 
 	// ボタン押下でトランジション開始
-	if (input_->Trigger(PadData::A)) {
+	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
 		sceneTransition_->StartFadeOut();
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new ResultScene);
+		state->ChangeSceneState(new GameScene);
 		return;
 	}
 

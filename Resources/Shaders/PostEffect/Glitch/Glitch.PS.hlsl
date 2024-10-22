@@ -55,9 +55,11 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     // 元のテクスチャをサンプリング
     float4 originalColor = gTexture.Sample(gSampler, uv);
+    //float4 originalColor = gTexture.Sample(gSampler, noiseValue);
 
     // ノイズを元の色に適用
     output.color = originalColor * noiseValue;
+    //output.color = originalColor;
 
     return output;
 }

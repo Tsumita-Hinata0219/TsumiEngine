@@ -11,6 +11,9 @@ void Timer::Init(float setStart, float setEnd)
 	saveTimer_ = { setStart, setEnd };
 
 	frameRatio_ = nowFrame_ / endFrame_;
+
+	isActive_ = true;
+	isFinish_ = false;
 }
 
 // スタート時に呼び出す処理

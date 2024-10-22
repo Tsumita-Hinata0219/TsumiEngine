@@ -36,8 +36,12 @@ void SceneTransition::Init()
 	}
 
 	// TransitionTimerの初期設定
-	transitionDuration_ = 1.0f * 60.0f; // 1秒
-	transitionTimer_.Init(0.0f, 2.0f * transitionDuration_);
+	transitionDuration_ = 2.0f * 60.0f; // 2秒
+	transitionTimer_.Init(0.0f, transitionDuration_);
+
+	// Delayの設定
+	inDelay_ = false;
+	delayTimer_.Init(0.0f, 1.0f * 60.0f);
 }
 
 
@@ -49,6 +53,9 @@ void SceneTransition::Update()
 
 	// 遷移処理
 	FuncTransition();
+
+	// ディレイ
+	FuncDelay();
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -113,6 +120,9 @@ void SceneTransition::StartFadeOut()
 // 遷移処理
 void SceneTransition::FuncTransition()
 {
+	// フラグが立っていたら早期return
+	if (inDelay_) { return; }
+
 	if (nowState_ == Opening || nowState_ == Closing) {
 
 		transitionTimer_.Update(); // タイマー更新
@@ -125,18 +135,45 @@ void SceneTransition::FuncTransition()
 		// タイマー終了
 		if (transitionTimer_.IsFinish()) {
 
-			// ステート変更
-			if (nowState_ == Opening) {
-				nowState_ = Opened;
-			}
-			else if (nowState_ == Closing) {
-				nowState_ = Cloased;
-			}
-
 			// タイマー停止 & 時間の再設定
 			transitionTimer_.Clear();
-			transitionTimer_.Init(0.0f, 2.0f * transitionDuration_);
+			transitionTimer_.Init(0.0f, transitionDuration_);
+			
+			// 遅延処理に入るフラグを立てる
+			inDelay_ = true;
+			// 遅延タイマースタート
+			delayTimer_.Start();
 		}
+	}
+}
+
+
+// 閉じた後の遅延
+void SceneTransition::FuncDelay()
+{
+	// フラグが立っていなかったら早期return
+	if (!inDelay_) { return; }
+
+	// タイマー更新
+	delayTimer_.Update();
+
+	// タイマー終了
+	if (delayTimer_.IsFinish()) {
+
+		// ステート変更
+		if (nowState_ == Opening) {
+			nowState_ = Opened;
+		}
+		else if (nowState_ == Closing) {
+			nowState_ = Cloased;
+		}
+
+		// フラグを折る
+		inDelay_ = false;
+
+		// タイマー停止 & 時間の再設定
+		delayTimer_.Clear();
+		delayTimer_.Init(0.0f, 1.0f * 60.0f);
 	}
 }
 

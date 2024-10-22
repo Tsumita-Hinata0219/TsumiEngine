@@ -63,6 +63,9 @@ private:
 	// 遷移処理
 	void FuncTransition();
 
+	// 閉じた後の遅延
+	void FuncDelay();
+
 	// ImGuiの描画
 	void DrawImGui();
 
@@ -93,5 +96,10 @@ private:
 	float startThreshold_ = 0.0f;
 	// 目標Dissolve進行度
 	float targetThreshold_ = 0.0f;
+
+	// 遅延の時間に入るかのフラグ
+	bool inDelay_ = false;
+	// 遅延の時間
+	Timer delayTimer_{};
 };
 

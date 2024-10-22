@@ -25,11 +25,6 @@ struct PixelShaderOutput
     float4 color : SV_TARGET0;
 };
 
-// ランダム関数の実装
-float Random(float2 uv)
-{
-    return frac(sin(dot(uv, float2(12.9898f, 78.233f))) * 43758.5453f);
-}
 
 float2 CalculateNoiseOffset(float2 uv, float time, float speed, float frequency)
 {
@@ -52,19 +47,17 @@ PixelShaderOutput main(VertexShaderOutput input)
     float2 scaledUV = (uv - 0.5f) / float2(gMaterial.noiseScale.x, gMaterial.noiseScale.y) + 0.5f;
 
     // ノイズオフセットの計算
-    float2 noiseOffset = CalculateNoiseOffset(scaledUV, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
-    
-    // ノイズを使って元のUVを変換
-    float2 distortedUV = uv + noiseOffset * 0.1f; // ずれる量を調整（ここでエフェクトの強さを調整）
+    float2 noiseOffset = CalculateNoiseOffset(uv, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
+    scaledUV += noiseOffset;
 
-    // 元のテクスチャをサンプリング
-    float4 originalColor = gTexture.Sample(gSampler, distortedUV);
-
-    // ノイズテクスチャをサンプリング（もし必要であれば）
+    // ノイズテクスチャをサンプリング
     float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
 
+    // 元のテクスチャをサンプリング
+    float4 originalColor = gTexture.Sample(gSampler, uv);
+
     // ノイズを元の色に適用
-    output.color = originalColor * noiseValue; // ノイズを使った効果（オプション）
+    output.color = originalColor * noiseValue;
 
     return output;
 }

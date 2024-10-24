@@ -58,7 +58,5 @@ void CollisionManager::DrawImGui()
 
 		ImGui::TreePop();
 	}
-
-
 }
 

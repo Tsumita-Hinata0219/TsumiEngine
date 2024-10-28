@@ -39,83 +39,104 @@ void Player::Init()
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 
-
 	// キルカウントを0で初期化
 	killCount_ = 0;
 
 	// HPの設定
 	hp_ = 3;
+
+	// 死亡演出にかかるタイマー
+	deadDirTimer_.Init(0.0f, 1.0f * 60.0f);
 }
 
 
 // 更新処理
 void Player::Update()
 {
-	// UI
-	ui_->Update();
-
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
-	// 入力を受け取る
-	InputFunc();
+	// 死んでいたら死亡演出に入る
+	if (!isDead_) {
 
-	// プレイヤーの操作関連
-	MoveFunc();
+		// UI
+		ui_->Update();
 
-	// 射撃の処理
-	ExecuteShot();
+		// 入力を受け取る
+		InputFunc();
 
-	// Bulletの更新処理
-	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
-		bullet->Update();
+		// プレイヤーの操作関連
+		MoveFunc();
+
+		// 射撃の処理
+		ExecuteShot();
+
+		// Bulletの更新処理
+		for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
+			bullet->Update();
+		}
+
+		// 死亡フラグが立っていたら削除
+		bulletList_.remove_if([](std::shared_ptr<PlayerBullet> bullet) {
+			if (bullet->IsDead()) {
+				bullet.reset();
+				return true;
+			}
+			return false;
+			}
+		);
+
+		// ColliderのSRTの設定
+		//collider_->SetSrt(trans_.srt);
+		sphere_.center = trans_.GetWorldPos();
+		colComp_->UpdateShape(sphere_);
+
+		//// キルカウントが一定を超えていたら勝利フラグを立てる
+		//if (killCount_ >= 15) {
+		//	isWin_ = true;
+		//	isLose_ = false;
+		//}
+		// 体力が0なら敗北フラグを立てる
+		if (hp_ <= 0) {
+			isDead_ = true;
+			deadDirTimer_.Start();
+			deadDirScl_.first = trans_.srt.scale.x;
+			deadDirScl_.second = 0.01f;
+			deadDirRotX_.first = trans_.srt.rotate.x;
+			deadDirRotX_.second = ToRadians(90.0f);
+			deadDirRotY_.first = trans_.srt.rotate.y;
+			deadDirRotY_.second = ToRadians(1800.0f);
+			deadDirPos_.first = trans_.GetWorldPos().y;
+			deadDirPos_.second = trans_.GetWorldPos().y - 3.0f;
+			/*isWin_ = false;
+			isLose_ = true;*/
+		}
+
+		if (input_->Trigger(DIK_RETURN)) {
+			// HP減少
+			hp_--;
+
+			// 体力がなければ消すモデルもないので通らない
+			if (hp_ >= 1) {
+
+				// 体力減少具合でボディを減らす
+				iBodys_[hp_].reset();
+
+				// nullになった要素を削除
+				iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
+					return body == nullptr;
+					}
+				),
+					iBodys_.end()
+				);
+			}
+		}
+	}
+	else { 
+		// 死亡演出
+		DeadDirection();
 	}
 
-	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<PlayerBullet> bullet) {
-		if (bullet->IsDead()) {
-			bullet.reset();
-			return true;
-		}
-		return false;
-		}
-	);
-
-	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
-	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
-
-	//// キルカウントが一定を超えていたら勝利フラグを立てる
-	//if (killCount_ >= 15) {
-	//	isWin_ = true;
-	//	isLose_ = false;
-	//}
-	//// 体力が0なら敗北フラグを立てる
-	//if (hp_ <= 0) {
-	//	isWin_ = false;
-	//	isLose_ = true;
-	//}
-
-	if (input_->Trigger(DIK_RETURN)) {
-		// HP減少
-		hp_--;
-
-		// 体力がなければ消すモデルもないので通らない
-		if (hp_ >= 0) {
-
-			// 体力減少具合でボディを減らす
-			iBodys_[hp_].reset();
-
-			// nullになった要素を削除
-			iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
-				return body == nullptr;
-				}
-			),
-				iBodys_.end()
-			);
-		}
-	}
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -163,20 +184,20 @@ void Player::OnCollisionWithEnemyBullet()
 	// HP減少
 	//hp_--;
 
-	// 体力がなければ消すモデルもないので通らない
-	if (hp_ >= 0) {
+	//// 体力がなければ消すモデルもないので通らない
+	//if (hp_ >= 0) {
 
-		// 体力減少具合でボディを減らす
-		iBodys_[hp_].reset();
+	//	// 体力減少具合でボディを減らす
+	//	iBodys_[hp_].reset();
 
-		// nullになった要素を削除
-		iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
-			return body == nullptr;
-			}
-		),
-			iBodys_.end()
-		);
-	}
+	//	// nullになった要素を削除
+	//	iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
+	//		return body == nullptr;
+	//		}
+	//	),
+	//		iBodys_.end()
+	//	);
+	//}
 }
 
 
@@ -290,12 +311,6 @@ void Player::MoveLimited()
 }
 
 
-// HPチェック
-void Player::HPCheck()
-{
-}
-
-
 // カメラの方向に体の向きを合わせる
 void Player::FaceCameraDirection()
 {
@@ -389,6 +404,44 @@ void Player::CreateNewBullet()
 
 	// リストに追加
 	bulletList_.push_back(newBullet);
+}
+
+
+// 死亡演出
+void Player::DeadDirection()
+{
+	// タイマー更新
+	deadDirTimer_.Update();
+
+	// 補間で小さくなる
+	trans_.srt.scale.x = deadDirScl_.first + (deadDirScl_.second - deadDirScl_.first) *
+		Ease::InCirc(deadDirTimer_.GetRatio());
+	trans_.srt.scale.y = deadDirScl_.first + (deadDirScl_.second - deadDirScl_.first) *
+		Ease::InCirc(deadDirTimer_.GetRatio());
+	trans_.srt.scale.z = deadDirScl_.first + (deadDirScl_.second - deadDirScl_.first) *
+		Ease::InCirc(deadDirTimer_.GetRatio());
+
+	// 下に向く
+	trans_.srt.rotate.x = 
+		deadDirRotX_.first + (deadDirRotX_.second - deadDirRotX_.first) *
+		Ease::OutElastic(deadDirTimer_.GetRatio());
+
+	// 回転
+	trans_.srt.rotate.y =
+		deadDirRotY_.first + (deadDirRotY_.second - deadDirRotY_.first) *
+		Ease::InOutCirc(deadDirTimer_.GetRatio());
+
+	// 補間で下に落ちる
+	trans_.srt.translate.y =
+		deadDirPos_.first + (deadDirPos_.second - deadDirPos_.first) *
+		Ease::InBack(deadDirTimer_.GetRatio(), 30.0f);
+
+
+	// 終了したら勝敗のフラグを設定
+	if (deadDirTimer_.IsFinish()) {
+		isWin_ = true;
+		isLose_ = false;
+	}
 }
 
 

@@ -44,7 +44,7 @@ struct Ease {
 	static float OutCirc(float num);
 	static float InOutCirc(float num);
 
-	static float InBack(float num);
+	static float InBack(float num, float intensity = 1.70158f);
 	static float OutBack(float num);
 	static float InOutBack(float num);
 

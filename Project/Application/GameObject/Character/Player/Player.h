@@ -2,6 +2,8 @@
 
 #include <list>
 #include <memory>
+#include <iostream>
+#include <utility>
 
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
@@ -101,9 +103,6 @@ private:
 	// 移動限界処理
 	void MoveLimited();
 
-	// HPチェック
-	void HPCheck();
-
 	// カメラの方向に体の向きを合わせる
 	void FaceCameraDirection();
 
@@ -118,6 +117,9 @@ private:
 
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
+
+	// 死亡演出
+	void DeadDirection();
 
 	// ImGuiの描画
 	void DrawImGui();
@@ -147,18 +149,26 @@ private:
 	// 姿勢計算の補間速度
 	float orientationLerpSpeed_ = 0.1f;
 
-	// 死亡フラグ
-	bool isDead_ = false;
-
 	// HP
 	uint32_t hp_ = 0;
 
 	// キルカウント
 	uint32_t killCount_ = 0;
 
+	// 死亡フラグ
+	bool isDead_ = false;
+
 	// ゲームに勝利したかのフラグ
 	bool isWin_ = false;
 	bool isLose_ = false;
+
+	// 死亡演出にかかるタイマー
+	Timer deadDirTimer_{};
+	// 死亡演出時各数値
+	std::pair<float, float> deadDirScl_{};
+	std::pair<float, float> deadDirRotX_{};
+	std::pair<float, float> deadDirRotY_{};
+	std::pair<float, float> deadDirPos_{};
 
 #pragma region System
 

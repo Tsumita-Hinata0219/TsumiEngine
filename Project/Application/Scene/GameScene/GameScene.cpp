@@ -91,9 +91,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
-	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Update();
-
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();
 
@@ -105,12 +102,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
-	/*if (!startDirection_->IsFinish()) { return; }
-	time_++;
-	if (time_ >= 2.0f * 60.0f) {
-		state->ChangeSceneState(new TitleScene());
-		return;
-	}*/
+
+	/* ----- FollowCamera フォローカメラ ----- */
+	followCamera_->Update();
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();

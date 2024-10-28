@@ -57,8 +57,9 @@ struct GlitchMtl {
 	Vector4 color{};
 	Vector2 noiseScale = Vector2::one; // ノイズのスケール（X, Y）
 	float noiseSpeed; // ノイズの動く速さ
+	float contrast = 1.5f; // コントラストの値（1.0が通常、1.5でコントラストが強くなる）
+	float brightness = -0.2f; // 明るさの値（0.0が通常、負の値で暗くする）
 	float time; // 現在の時間
-	Vector2 maxDisplacement; // 最大置き換え（x: 水平, y: 垂直）
 	uint32_t maskTexture = 0;
 
 	void DrawImGui(std::string label = "") {
@@ -66,9 +67,9 @@ struct GlitchMtl {
 		ImGui::Text("Noise");
 		ImGui::DragFloat2((label + "_noiseScale").c_str(), &noiseScale.x, 0.01f, 0.0f, 10.0f);
 		ImGui::DragFloat((label + "_noiseSpeed").c_str(), &noiseSpeed, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat((label + "_contrast").c_str(), &contrast, 0.01f, 0.0f, 10.0f);
+		ImGui::DragFloat((label + "_brightness").c_str(), &brightness, 0.001f, -1.0f, 10.0f);
 		ImGui::DragFloat((label + "_time").c_str(), &time, 0.0f);
-		ImGui::Text("Map");
-		ImGui::DragFloat2((label + "_maxDisplacement").c_str(), &maxDisplacement.x, 0.01f, 0.0f, 10.0f);
 	}
 };
 

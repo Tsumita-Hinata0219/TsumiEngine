@@ -13,9 +13,9 @@ struct Material
     // ノイズ設定
     float2 noiseScale; // ノイズのスケール（引き延ばし用）
     float noiseSpeed; // ノイズの動きの速さ
+    float contrast; // コントラストの値（1.0が通常、1.5でコントラストが強くなる）
+    float brightness; // 明るさの値（0.0が通常、負の値で暗くする）
     float time; // 現在の時間
-    // ディスプレイスメントマップの設定
-    float2 maxDisplacement; // 最大置き換え（x: 水平, y: 垂直）
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -35,7 +35,6 @@ float2 CalculateNoiseOffset(float2 uv, float time, float speed)
     return float2(randomX * 2.0f - 1.0f, randomY * 2.0f - 1.0f); // -1.0fから1.0fの範囲に変換
 }
 
-
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
@@ -51,13 +50,20 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     // ノイズテクスチャをサンプリング
     float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
+    
+    // コントラストの調整
+    noiseValue = ((noiseValue - 0.5f) * gMaterial.contrast) + 0.5f;
+
+    // 明るさの調整
+    noiseValue += gMaterial.brightness;
 
     // 元のテクスチャをサンプリング
     float4 originalColor = gTexture.Sample(gSampler, noiseValue);
 
     // ノイズを元の色に適用
-    //output.color = originalColor * noiseValue;
-    output.color = originalColor;
+    //output.color = originalColor * noiseValue; // ノイズ値を色に乗算
+    // ノイズテクスチャをそのまま描画
+    output.color = float4(noiseValue, noiseValue, noiseValue, 1.0f);
 
     return output;
 }

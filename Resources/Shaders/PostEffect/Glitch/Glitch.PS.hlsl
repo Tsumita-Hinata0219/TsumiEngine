@@ -10,6 +10,13 @@ SamplerState gNoiseSampler : register(s1);
 struct Material
 {
     float4 color;
+    // ノイズ設定
+    float2 noiseScale; // ノイズのスケール（引き延ばし用）
+    float noiseSpeed; // ノイズの動きの速さ
+    float noiseFrequency; // ノイズの動きの頻度
+    // ディスプレイスメントマップの設定
+    float2 maxDisplacement; // 最大置き換え（x: 水平, y: 垂直）
+    float time; // 現在の時間
 };
 ConstantBuffer<Material> gMaterial : register(b1);
 
@@ -19,36 +26,55 @@ struct PixelShaderOutput
 };
 
 
-// ランダムなオフセットを生成
-float random(float2 uv)
+float2 CalculateNoiseOffset(float2 uv, float time, float speed, float frequency)
 {
-    return frac(sin(dot(uv, float2(12.9898, 78.233))) * 43758.5453);
-}
+    // ランダムな値を生成するためにノイズをサンプリング
+    float randomX = gNoiseTexture.Sample(gNoiseSampler, uv * frequency + time * speed).r;
+    float randomY = gNoiseTexture.Sample(gNoiseSampler, uv * frequency + time * speed + 100.0f).r;
 
-float2 applyGlitchEffect(float2 uv, float intensity, float noise)
-{
-    // ノイズに基づいたオフセットを生成
-    float offset = (random(uv) - 0.5) * intensity * noise;
-    uv.x += offset; // X方向にずらす
-    return uv;
+    // ノイズ値をスケーリング
+    return float2(randomX * 2.0f - 1.0f, randomY * 2.0f - 1.0f); // -1.0fから1.0fの範囲に変換
 }
-
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
+    //PixelShaderOutput output;
+
+    //float2 uv = input.texcoord;
+
+    //// スケールを使用してUVを引き延ばす（数値が大きいほど引き延ばされるように計算）
+    //float2 scaledUV = (uv - 0.5f) / float2(gMaterial.noiseScale.x, gMaterial.noiseScale.y) + 0.5f;
+
+    //// ノイズオフセットの計算
+    //float2 noiseOffset = CalculateNoiseOffset(uv, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
+    //scaledUV += noiseOffset;
+
+    //// ノイズテクスチャをサンプリング
+    //float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
+
+    //// 元のテクスチャをサンプリング
+    //float4 originalColor = gTexture.Sample(gSampler, noiseValue);
+
+    //// ノイズを元の色に適用
+    //output.color = originalColor;
+
+    //return output;
     PixelShaderOutput output;
 
-    // ノイズテクスチャから現在のUVに対応するノイズ値を取得
-    float noise = gNoiseTexture.Sample(gNoiseSampler, input.texcoord);
-    
-    // オフセットの強度
-    float intensity = 0.05;
-    
-    // グリッチエフェクトを適用したUV座標
-    float2 glitchUV = applyGlitchEffect(input.texcoord, intensity, noise);
-    
-    // ずらしたUVでテクスチャをサンプリング
-    output.color = gTexture.Sample(gSampler, glitchUV) * gMaterial.color;
+    float2 uv = input.texcoord;
+
+    // スケールを使用してUVを引き延ばす（数値が大きいほど引き延ばされるように計算）
+    float2 scaledUV = (uv - 0.5f) / float2(gMaterial.noiseScale.x, gMaterial.noiseScale.y) + 0.5f;
+
+    // ノイズオフセットの計算
+    float2 noiseOffset = CalculateNoiseOffset(uv, gMaterial.time, gMaterial.noiseSpeed, gMaterial.noiseFrequency);
+    scaledUV += noiseOffset;
+
+    // ノイズテクスチャをサンプリング
+    float noiseValue = gNoiseTexture.Sample(gNoiseSampler, scaledUV);
+
+    // ノイズテクスチャをそのまま描画
+    output.color = float4(noiseValue, noiseValue, noiseValue, 1.0f);
 
     return output;
 }

@@ -9,14 +9,14 @@ void GlitchEffect::Init()
 
 	mtlData_.color = Vector4::one;
 	mtlData_.maskTexture = TextureManager::LoadTexture("Texture", "noise4.png");
-	//mtlData_.time = 0.0f;
+	mtlData_.time = 0.0f;
 }
 
 
 // 描画処理
 void GlitchEffect::Draw()
 {
-	//mtlData_.time = g_ElapsedTime;
+	mtlData_.time = g_ElapsedTime;
 
 	// MtlBufferにMtlを書き込む
 	mtlBuffer_.Map();

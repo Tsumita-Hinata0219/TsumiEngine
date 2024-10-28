@@ -97,6 +97,26 @@ void Player::Update()
 	//	isLose_ = true;
 	//}
 
+	if (input_->Trigger(DIK_RETURN)) {
+		// HP減少
+		hp_--;
+
+		// 体力がなければ消すモデルもないので通らない
+		if (hp_ >= 0) {
+
+			// 体力減少具合でボディを減らす
+			iBodys_[hp_].reset();
+
+			// nullになった要素を削除
+			iBodys_.erase(std::remove_if(iBodys_.begin(), iBodys_.end(), [](const std::shared_ptr<IPlayerBody>& body) {
+				return body == nullptr;
+				}
+			),
+				iBodys_.end()
+			);
+		}
+	}
+
 #ifdef _DEBUG
 	// ImGuiの描画
 	DrawImGui();
@@ -117,12 +137,12 @@ void Player::Draw3D()
 		bullet->Draw3D();
 	}
 }
-void Player::Draw2DBack() 
+void Player::Draw2DBack()
 {
 	// UI Back
 	ui_->Draw2DBack();
 }
-void Player::Draw2DFront() 
+void Player::Draw2DFront()
 {
 	// UI Front
 	ui_->Draw2DFront();
@@ -270,6 +290,12 @@ void Player::MoveLimited()
 }
 
 
+// HPチェック
+void Player::HPCheck()
+{
+}
+
+
 // カメラの方向に体の向きを合わせる
 void Player::FaceCameraDirection()
 {
@@ -307,7 +333,7 @@ void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 		float shortestAngle = ShortestAngle(trans_.srt.rotate.y, targetAngle);
 
 		// 現在の角度を目標角度の間を補間
-		trans_.srt.rotate.y = 
+		trans_.srt.rotate.y =
 			Lerp(trans_.srt.rotate.y, trans_.srt.rotate.y + shortestAngle, orientationLerpSpeed_);
 	}
 }
@@ -333,7 +359,7 @@ void Player::ExecuteShot()
 	}
 	// キーorボタンを離したら、最初の1発目がすぐ出るように1フレームを入れておく
 	else if (input_->Release(DIK_SPACE) || input_->Release(PadData::RIGHT_SHOULDER)) {
-		
+
 		shotPressFrame_ = 1;
 
 		// フラグを折る

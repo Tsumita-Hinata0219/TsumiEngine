@@ -101,6 +101,9 @@ private:
 	// 移動限界処理
 	void MoveLimited();
 
+	// HPチェック
+	void HPCheck();
+
 	// カメラの方向に体の向きを合わせる
 	void FaceCameraDirection();
 

@@ -157,7 +157,7 @@ void GameScene::ModelDraw()
 	player_->Draw3D();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_->Draw3D();
+	//enemyManager_->Draw3D();
 }
 
 

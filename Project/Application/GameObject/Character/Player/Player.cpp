@@ -410,6 +410,10 @@ void Player::CreateNewBullet()
 // 死亡演出
 void Player::DeadDirection()
 {
+	if (!deadDirTimer_.IsActive()) {
+		return;
+	}
+
 	// タイマー更新
 	deadDirTimer_.Update();
 
@@ -436,9 +440,9 @@ void Player::DeadDirection()
 		deadDirPos_.first + (deadDirPos_.second - deadDirPos_.first) *
 		Ease::InBack(deadDirTimer_.GetRatio(), 30.0f);
 
-
 	// 終了したら勝敗のフラグを設定
 	if (deadDirTimer_.IsFinish()) {
+		deadDirTimer_.Clear();
 		isWin_ = true;
 		isLose_ = false;
 	}

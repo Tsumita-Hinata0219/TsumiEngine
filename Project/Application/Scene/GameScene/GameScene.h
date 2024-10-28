@@ -4,6 +4,8 @@
 #include "GameManager/GameManager.h"
 #include "JsonManager/JsonManager.h"
 
+#include "GameObject/Others/SceneTransition/SceneTransition.h"
+
 #include "GameObject/Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/FollowCamera/FollowCamera.h"
 
@@ -69,9 +71,6 @@ public:
 
 private: 
 
-	// シーンチェンジチェック
-	bool SceneChangeCheck(GameManager* state);
-
 	// 衝突判定処理
 	void CheckAllCollision();
 
@@ -111,11 +110,12 @@ private: // クラス
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
 
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
+
 	int time_ = 0;
 
 private:
 
-	// シーンチェンジにかかる時間
-	Timer sceneChange_;
 };
 

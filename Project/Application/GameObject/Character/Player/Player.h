@@ -69,7 +69,9 @@ public:
 
 	// 勝敗のフラグ
 	bool IsWin() const { return this->isWin_; }
+	void SetIsWin(bool state) { this->isWin_ = state; }
 	bool IsLose() const { return this->isLose_; }
+	void SetIsLose(bool state) { this->isLose_ = state; }
 
 #pragma endregion 
 

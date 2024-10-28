@@ -74,8 +74,11 @@ void GameScene::Initialize()
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
-	// シーンチェンジにかかる時間。3秒
-	sceneChange_.Init(0.0f, 60.0f * 3.0f);
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+	sceneTransition_->SetState(Cloased);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -85,6 +88,22 @@ void GameScene::Initialize()
 void GameScene::Update(GameManager* state)
 {
 	state;
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+	// プレイヤーの勝敗条件
+	if (player_->IsWin() || player_->IsLose()) {
+		// トランジション開始
+		sceneTransition_->StartFadeOut();
+		// 何度も通ってしまうためフラグを再設定
+		player_->SetIsWin(false);
+		player_->SetIsLose(false);
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new GameScene);
+		return;
+	}
+
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
 
@@ -110,7 +129,7 @@ void GameScene::Update(GameManager* state)
 	player_->Update();
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_->Update();
+	//enemyManager_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
 	CheckAllCollision();
@@ -173,33 +192,9 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
-}
 
-
-// シーンチェンジチェック
-bool GameScene::SceneChangeCheck(GameManager* state)
-{
-	// プレイヤーの勝敗条件
-	if (player_->IsWin() || player_->IsLose()) {
-
-		if (!sceneChange_.IsActive()) {
-
-			// SceneChangeTimeスタート
-			sceneChange_.Start();
-		}
-
-		// タイマー更新
-		sceneChange_.Update();
-
-		// 終了したらシーンチェンジ
-		if (sceneChange_.IsFinish()) {
-			state->ChangeSceneState(new ResultScene());
-		}
-
-		return true;
-	}
-
-	return false;
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }
 
 

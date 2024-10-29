@@ -11,6 +11,7 @@ CollisionShape::~CollisionShape()
 	}
 }
 
+
 // 境界ボックスから空間レベルと所属空間を求める
 void CollisionShape::CalcSpaceLevel()
 {

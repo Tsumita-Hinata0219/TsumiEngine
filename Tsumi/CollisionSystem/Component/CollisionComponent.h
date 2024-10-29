@@ -2,6 +2,7 @@
 
 #include "../../Project/Math/MyMath.h"
 #include "../Shape/CollisionShape.h"
+#include "../Collider/ColliderConfig.h"
 
 #include <memory>
 #include <vector>
@@ -45,6 +46,9 @@ public:
 	// IObject
 	IObject* GetOwner() const { return this->owner_; }
 
+	// Attribute
+	void SetAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
+
 #pragma endregion 
 
 
@@ -69,5 +73,8 @@ private:
 
 	// インデックス
 	uint32_t index_ = 0;
+
+	// 識別
+	uint32_t attribute_ = ColliderAttribute::None;
 };
 

@@ -75,7 +75,7 @@ void CollisionComponent::Register(Col::ColData& colData)
 
 		// マネージャーにポインタを渡す
 		CollisionManager::GetInstance()->
-			Register(shapes_[colData.id].get());
+			Register(attribute_, shapes_[colData.id].get());
 	}
 	else {
 		std::cerr << "Error : Unsupported collision shape type." << std::endl;

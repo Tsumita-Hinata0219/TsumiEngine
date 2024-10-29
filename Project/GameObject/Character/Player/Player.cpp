@@ -39,6 +39,7 @@ void Player::Init()
 	sphere_1_.center = trans_.GetWorldPos();
 	sphere_1_.radius = 2.0f;
 	// Collider_2
+	colComp_->SetAttribute(ColliderAttribute::Player);
 	colComp_->Register(sphere_2_);
 	sphere_2_.center = trans_.GetWorldPos();
 	sphere_2_.radius = 2.0f;

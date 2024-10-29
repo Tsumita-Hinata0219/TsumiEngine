@@ -15,16 +15,25 @@ void CollisionManager::Finalize()
 
 
 // コライダーの登録
-void CollisionManager::Register(CollisionShape* shape)
+void CollisionManager::Register(uint32_t attribute, CollisionShape* shape)
 {
-	shapes_.push_back(shape);
+	//shapes_.push_back(shape);
+	shapes_[attribute].push_back(shape);
 }
 
 
 // 登録されているShapeを削除する
 void CollisionManager::UnRegister(CollisionShape* shape)
 {
-	shapes_.erase(std::remove(shapes_.begin(), shapes_.end(), shape), shapes_.end());
+	//shapes_.erase(std::remove(shapes_.begin(), shapes_.end(), shape), shapes_.end());
+	// 各属性のリストをループ
+	for (auto& pair : shapes_) {
+		// 属性に関連するShapeのリストをループ
+		auto& shapeList = pair.second;
+		shapeList.remove_if([](CollisionShape* shape) {
+			return shape == nullptr; // nullptrを削除
+			});
+	}
 }
 
 
@@ -53,10 +62,10 @@ void CollisionManager::CheckCollisions()
 // 無効なポインタは削除
 void CollisionManager::CheckAndCleanPointers()
 {
-	shapes_.erase(
+	/*shapes_.erase(
 		std::remove_if(shapes_.begin(), shapes_.end(),
 			[](CollisionShape* ptr) {return ptr == nullptr; }),
-		shapes_.end());
+		shapes_.end());*/
 }
 
 
@@ -64,11 +73,20 @@ void CollisionManager::CheckAndCleanPointers()
 void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
-		
-		for (auto& shape : shapes_) {
-			shape->DrawImGui();
-		}
+		// 各属性のリストをループ
+		for (const auto& pair : shapes_) {
+			// 属性を文字列に変換
+			std::string attributeName = "Attribute: " + std::to_string(pair.first);
 
+			// 属性ごとにツリーを作成
+			if (ImGui::TreeNode(attributeName.c_str())) { // 文字列をc_str()に変換して渡す
+				// その属性に関連するShapeをループ
+				for (const auto& shape : pair.second) {
+					shape->DrawImGui(); // 各ShapeのImGui描画メソッドを呼び出す
+				}
+				ImGui::TreePop(); // ツリーを閉じる
+			}
+		}
 		ImGui::TreePop();
 	}
 }

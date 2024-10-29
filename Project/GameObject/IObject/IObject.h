@@ -27,7 +27,10 @@ class IObject {
 public: // メンバ関数
 
 	// コンストラクタ
-	IObject(){ modelManager_ = ModelManager::GetInstance(); }
+	IObject() { 
+		modelManager_ = ModelManager::GetInstance();
+		colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	}
 
 	// 仮想デストラクタ
 	virtual ~IObject() {};

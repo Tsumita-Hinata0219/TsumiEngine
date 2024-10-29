@@ -1,17 +1,9 @@
 #pragma once
 
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
-#include "../Collider/Box/AABBCollider.h"
-#include "../Collider/Box/OBBCollider.h"
-#include "../Collider/Segment/SegmentCollider.h"
 #include "../Collider/ColliderConfig.h"
 #include "../IsCollision/IsCollision.h"
-
-#include "../Component/CollisionComponent.h"
 #include "../Event/CollisionEvent.h"
 #include "../ColEventManager/ColEventManager.h"
-
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
@@ -22,6 +14,7 @@
 
 // 前方宣言
 class CollisionComponent;
+class CollisionShape;
 
 
 /* CollisionManagerクラス */
@@ -50,8 +43,17 @@ public:
 	// コライダーの登録
 	void Register(CollisionShape* shape);
 
+	// 登録されているShapeを削除する
+	void UnRegister(CollisionShape* shape);
+
 	// 更新処理
 	void Update();
+
+
+#pragma region Accessor アクセッサ
+
+
+#pragma endregion 
 
 
 private:

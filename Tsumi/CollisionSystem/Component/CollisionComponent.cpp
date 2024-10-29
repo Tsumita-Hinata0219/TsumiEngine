@@ -1,5 +1,8 @@
 #include "CollisionComponent.h"
 #include "../Manager/CollisionManager.h"
+#include "../Shape/CollisionShape.h"
+#include "../Shape/Sphere/CollisionShapeSphere.h"
+#include "../Shape/AABB/CollisionShapeAABB.h"
 
 
 // ファクトリマップを作る関数

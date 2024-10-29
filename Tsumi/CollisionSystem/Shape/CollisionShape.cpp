@@ -1,5 +1,15 @@
 #include "CollisionShape.h"
+#include "../Manager/CollisionManager.h"
 
+
+// 仮想デストラクタ
+CollisionShape::~CollisionShape()
+{
+	if (CollisionManager::GetInstance()) {
+		// shapeが消えることを知らせる
+		CollisionManager::GetInstance()->UnRegister(this);
+	}
+}
 
 // 境界ボックスから空間レベルと所属空間を求める
 void CollisionShape::CalcSpaceLevel()

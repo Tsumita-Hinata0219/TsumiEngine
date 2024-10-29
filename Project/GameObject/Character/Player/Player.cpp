@@ -33,8 +33,7 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
-	// Colliderの初期化
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	// Colliderの登録
 	// Collider_1
 	colComp_->RegisterCollider(sphere_1_);
 	sphere_1_.center = trans_.GetWorldPos();

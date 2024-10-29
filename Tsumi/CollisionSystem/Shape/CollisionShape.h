@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
+//#include "../Manager/CollisionManager.h"
 #include <variant>
 
 #define ROOT_EDGE_LENGTH 100
@@ -59,7 +60,7 @@ class CollisionShape {
 public:
 
 	// 仮想デストラクタ
-	virtual ~CollisionShape() = default;
+	virtual ~CollisionShape();
 
 	// 純粋仮想関数 : 異なるシェイプに応じた衝突判定処理
 	virtual bool Intersects(const CollisionShape& other) const = 0;
@@ -120,4 +121,3 @@ protected:
 	// ID
 	uint32_t id_ = 0;
 };
-

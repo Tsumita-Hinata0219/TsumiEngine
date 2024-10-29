@@ -41,7 +41,7 @@ public:
 	static void Finalize();
 
 	// コライダーの登録
-	void Register(uint32_t attribute, CollisionShape* shape);
+	void Register(CollisionShape* shape);
 
 	// 登録されているShapeを削除する
 	void UnRegister(CollisionShape* shape);
@@ -71,7 +71,6 @@ private:
 private:
 
 	// コライダーのポインタ配列
-	//std::vector<CollisionShape*> shapes_;
-	std::map<uint32_t, std::list<CollisionShape*>> shapes_;
+	std::vector<CollisionShape*> shapes_;
 
 };

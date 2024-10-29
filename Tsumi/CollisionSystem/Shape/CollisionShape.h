@@ -2,6 +2,7 @@
 
 #include "../../Project/Math/MyMath.h"
 //#include "../Manager/CollisionManager.h"
+#include "../Collider/ColliderConfig.h"
 #include <variant>
 
 #define ROOT_EDGE_LENGTH 100
@@ -96,6 +97,10 @@ public:
 	uint32_t GetSpaceIndex() const { return this->spaceIndex_; }
 	void SetSpaceIndex(uint32_t setIndex) { this->spaceIndex_ = setIndex; }
 
+	// 識別属性
+	uint32_t GetAttribute() const { return this->attribute_; }
+	void SetAttribute(const uint32_t setAttribute) { this->attribute_ = setAttribute; }
+
 #pragma endregion 
 
 
@@ -120,4 +125,7 @@ protected:
 
 	// ID
 	uint32_t id_ = 0;
+
+	// 識別属性
+	uint32_t attribute_ = ColliderAttribute::None;
 };

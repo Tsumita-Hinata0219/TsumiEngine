@@ -66,6 +66,9 @@ void CollisionComponent::Register(Col::ColData& colData)
 		// std::unique_ptr でシェイプを生成
 		std::unique_ptr<CollisionShape> shape = it->second(this, &colData);
 
+		// コンポーネントに登録されている属性を設定する
+		shape->SetAttribute(attribute_);
+
 		// シェイプのBoundingと空間レベルを求める
 		shape->CalcBounding();
 		shape->CalcSpaceLevel();
@@ -75,7 +78,7 @@ void CollisionComponent::Register(Col::ColData& colData)
 
 		// マネージャーにポインタを渡す
 		CollisionManager::GetInstance()->
-			Register(attribute_, shapes_[colData.id].get());
+			Register(shapes_[colData.id].get());
 	}
 	else {
 		std::cerr << "Error : Unsupported collision shape type." << std::endl;

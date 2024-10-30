@@ -6,6 +6,21 @@
 #include "../Collider/Box/AABBCollider.h"
 #include "../Collider/Box/OBBCollider.h"
 #include "../Collider/Segment/SegmentCollider.h"
+#include "../Shape/CollisionShape.h"
+#include "../Shape/Sphere/CollisionShapeSphere.h"
+#include "../Shape/AABB/CollisionShapeAABB.h"
+
+
+// ファクトリマップを作る関数
+std::unordered_map<std::type_index, ShapeFactory> CreateShapeFactoryMap() {
+	return {
+		{ typeid(Col::Sphere), [](CollisionComponent* self, Col::ColData* data) {
+			return std::make_unique<CollisionShapeSphere>(self, static_cast<Col::Sphere*>(data)); }},
+		{ typeid(Col::AABB), [](CollisionComponent* self, Col::ColData* data) {
+			return std::make_unique<CollisionShapeAABB>(self, static_cast<Col::AABB*>(data)); }},
+			/* 他の型も同様に追加 */
+	};
+}
 
 
 // 解放処理
@@ -19,23 +34,55 @@ void CollisionManager::Register(CollisionShape* shape)
 {
 	shapes_.push_back(shape);
 }
+void CollisionManager::Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component)
+{
+	// データの型に基づいてシェイプを生成する
+	const auto& factoryMap = GetFactoryMap();
+	auto it = factoryMap.find(typeid(data));
+
+
+	if (it != factoryMap.end()) {
+
+		// std::unique_ptr でシェイプを生成
+		std::unique_ptr<CollisionShape> shape = it->second(component, data);
+
+		// コンポーネントに登録されている属性を設定する
+		shape->SetAttribute(attribute);
+
+		// シェイプのBoundingと空間レベルを求める
+		shape->CalcBounding();
+		shape->CalcSpaceLevel();
+
+		// マップに保存
+		this->shapeMap_[data] = std::move(shape);
+	}
+	else {
+		std::cerr << "Error : Unsupported collision shape type." << std::endl;
+	}
+}
 
 
 // 登録されているShapeを削除する
-void CollisionManager::UnRegister(CollisionShape* shape)
+void CollisionManager::UnRegister(Col::ColData* data)
 {
-	shapes_.erase(std::remove(shapes_.begin(), shapes_.end(), shape), shapes_.end());
+	// nullptrか指定されたポインタをキーとする要素が存在するか確認
+	auto it = shapeMap_.find(data);
+	if (it != shapeMap_.end()) {
+		// 存在する場合はその要素を削除
+		shapeMap_.erase(it);
+	}
 }
 
 
 // 更新処理
 void CollisionManager::Update()
 {
-	// 無効なポインタは削除
-	//CheckAndCleanPointers();
+	// データの更新
+	UpdateCollisionData();
 
 	// コリジョン判定を行う
 	CheckCollisions();
+
 
 #ifdef _DEBUG
 	DrawImGui(); // Debug表示
@@ -46,17 +93,16 @@ void CollisionManager::Update()
 // コリジョン判定を行う
 void CollisionManager::CheckCollisions()
 {
-
+	
 }
 
 
-// 無効なポインタは削除
-void CollisionManager::CheckAndCleanPointers()
+// データの更新
+void CollisionManager::UpdateCollisionData()
 {
-	shapes_.erase(
-		std::remove_if(shapes_.begin(), shapes_.end(),
-			[](CollisionShape* ptr) {return ptr == nullptr; }),
-		shapes_.end());
+	for (auto& element : shapeMap_) {
+		element.second->SetData(*element.first);
+	}
 }
 
 
@@ -71,5 +117,14 @@ void CollisionManager::DrawImGui()
 
 		ImGui::TreePop();
 	}
+}
+
+
+// Shapeのインスタンスの取得
+const std::unordered_map<std::type_index, ShapeFactory>& CollisionManager::GetFactoryMap()
+{
+	static const std::unordered_map<std::type_index, ShapeFactory> factoryMap 
+		= CreateShapeFactoryMap();
+	return factoryMap;
 }
 

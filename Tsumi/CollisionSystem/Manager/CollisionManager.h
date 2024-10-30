@@ -4,6 +4,7 @@
 #include "../IsCollision/IsCollision.h"
 #include "../Event/CollisionEvent.h"
 #include "../ColEventManager/ColEventManager.h"
+#include "../Detect/CollisionDetect.h"
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
@@ -15,6 +16,10 @@
 // 前方宣言
 class CollisionComponent;
 class CollisionShape;
+
+
+// ファクトリ関数
+using ShapeFactory = std::function<std::unique_ptr<CollisionShape>(CollisionComponent*, Col::ColData*)>;
 
 
 /* CollisionManagerクラス */
@@ -42,9 +47,10 @@ public:
 
 	// コライダーの登録
 	void Register(CollisionShape* shape);
+	void Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component);
 
 	// 登録されているShapeを削除する
-	void UnRegister(CollisionShape* shape);
+	void UnRegister(Col::ColData* data);
 
 	// 更新処理
 	void Update();
@@ -61,16 +67,19 @@ private:
 	// コリジョン判定を行う
 	void CheckCollisions();
 
-	// 無効なポインタは削除
-	void CheckAndCleanPointers();
+	// データの更新
+	void UpdateCollisionData();
 
 	// ImGuiの描画
 	void DrawImGui();
+
+	// Shapeのインスタンスの取得
+	static const std::unordered_map<std::type_index, ShapeFactory>& GetFactoryMap();
 
 
 private:
 
 	// コライダーのポインタ配列
 	std::vector<CollisionShape*> shapes_;
-
+	std::map<Col::ColData*, std::unique_ptr<CollisionShape>> shapeMap_;
 };

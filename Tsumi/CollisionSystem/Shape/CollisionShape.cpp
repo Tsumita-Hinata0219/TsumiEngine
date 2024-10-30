@@ -2,8 +2,8 @@
 #include "../Manager/CollisionManager.h"
 
 
-// 仮想デストラクタ
-CollisionShape::~CollisionShape()
+// ColDataの仮想デストラクタ
+Col::ColData::~ColData()
 {
 	if (CollisionManager::GetInstance()) {
 		// shapeが消えることを知らせる
@@ -60,4 +60,3 @@ void CollisionShape::CalcSpaceLevel()
 	// 所属空間
 	spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
 }
-

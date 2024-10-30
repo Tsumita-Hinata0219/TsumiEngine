@@ -13,10 +13,6 @@
 // IObjectの前方宣言
 class IObject;
 
-// ファクトリ関数
-using ShapeFactory = std::function<std::unique_ptr<CollisionShape>(CollisionComponent*, Col::ColData*)>;
-
-
 /* コリジョンシェイプを保持するクラス */
 class CollisionComponent {
 
@@ -54,12 +50,6 @@ public:
 
 private:
 
-
-	static const std::unordered_map<std::type_index, ShapeFactory>& GetFactoryMap();
-
-
-private:
-
 	// オーナー
 	IObject* owner_ = nullptr;
 
@@ -68,8 +58,8 @@ private:
 
 	// コリジョンシェイプ
 	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
-	//std::map<int, CollisionShape*> shapes_;
-	std::map<int, std::unique_ptr<CollisionShape>> shapes_;
+	////std::map<int, CollisionShape*> shapes_;
+	//std::map<int, std::unique_ptr<CollisionShape>> shapes_;
 
 	// インデックス
 	uint32_t index_ = 0;

@@ -14,7 +14,7 @@ namespace Col {
 	public:
 		uint32_t id;
 		// 仮想デストラクタ
-		virtual ~ColData() = default;
+		virtual ~ColData();
 	};
 
 	struct Sphere : public ColData {
@@ -61,7 +61,7 @@ class CollisionShape {
 public:
 
 	// 仮想デストラクタ
-	virtual ~CollisionShape();
+	virtual ~CollisionShape() = default;
 
 	// 純粋仮想関数 : 異なるシェイプに応じた衝突判定処理
 	virtual bool Intersects(const CollisionShape& other) const = 0;
@@ -76,6 +76,11 @@ public:
 
 	// ImGuiの描画
 	virtual void DrawImGui(const std::string& label = "") = 0;
+
+	// 衝突判定
+	virtual void OnCollision() {
+		this->component_->GetOwner()->onCollision();
+	}
 
 
 #pragma region Accessor アクセッサ

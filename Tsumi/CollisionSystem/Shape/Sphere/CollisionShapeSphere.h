@@ -47,6 +47,9 @@ public:
 			throw std::bad_variant_access(); // 型が一致しない場合のエラー処理
 		}
 	}
+	Col::ColData GetColData() const override {
+		return this->sphere_;
+	}
 	void SetData(const Col::ColData& data) override {
 
 		if (const auto* setData = dynamic_cast<const Col::Sphere*>(&data)) {

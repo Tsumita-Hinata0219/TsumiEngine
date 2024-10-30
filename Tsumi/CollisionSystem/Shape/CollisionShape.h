@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../../Project/Math/MyMath.h"
-//#include "../Manager/CollisionManager.h"
 #include "../Collider/ColliderConfig.h"
 #include <variant>
 
@@ -12,14 +11,14 @@ namespace Col {
 
 	struct ColData {
 	public:
-		uint32_t id;
+		uint32_t id = 0;
 		// 仮想デストラクタ
 		virtual ~ColData();
 	};
 
 	struct Sphere : public ColData {
 		Vector3 center{}; // !< 中心座標
-		float radius;	  // !< 半径
+		float radius = 0.0f;	  // !< 半径
 	};
 	struct AABB : public ColData {
 		Vector3 center{}; // !< 中心座標
@@ -83,6 +82,7 @@ public:
 	// 各コライダーデータ
 	virtual ColShapeData GetData() const = 0;
 	virtual void SetData(const ColShapeData& data) = 0;
+	virtual Col::ColData GetColData() const = 0;
 	virtual void SetData(const Col::ColData& data) = 0;
 
 	// Bounding

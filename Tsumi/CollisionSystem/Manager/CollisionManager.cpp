@@ -89,7 +89,20 @@ void CollisionManager::Update()
 // コリジョン判定を行う
 void CollisionManager::CheckCollisions()
 {
-	
+	for (auto itr1 = shapeMap_.begin(); itr1 != shapeMap_.end(); ++itr1) {
+		for (auto itr2 = std::next(itr1); itr2 != shapeMap_.end(); ++itr2) {
+
+			// itr1とit2の属性が同じなら判定をスキップする
+			if (itr1->second->GetAttribute() == itr2->second->GetAttribute()) {
+				continue;
+			}
+
+			// 衝突を検出する
+			if (itr1->second->Intersects(*itr2->second)) {
+				Log("hit!\n");
+			}
+		}
+	}
 }
 
 

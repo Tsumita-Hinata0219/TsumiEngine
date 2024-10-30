@@ -30,15 +30,11 @@ void CollisionManager::Finalize()
 
 
 // コライダーの登録
-void CollisionManager::Register(CollisionShape* shape)
-{
-	shapes_.push_back(shape);
-}
 void CollisionManager::Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component)
 {
 	// データの型に基づいてシェイプを生成する
 	const auto& factoryMap = GetFactoryMap();
-	auto it = factoryMap.find(typeid(data));
+	auto it = factoryMap.find(typeid(*data));
 
 
 	if (it != factoryMap.end()) {
@@ -111,8 +107,8 @@ void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
 		
-		for (auto& shape : shapes_) {
-			shape->DrawImGui();
+		for (auto& element : shapeMap_) {
+			element.second->DrawImGui();
 		}
 
 		ImGui::TreePop();

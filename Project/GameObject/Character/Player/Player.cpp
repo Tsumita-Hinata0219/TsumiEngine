@@ -91,7 +91,7 @@ void Player::Update()
 	colComp_->UpdateShape(sphere_1_);
 	// Collider_2
 	sphere_2_.center = trans_.GetWorldPos();
-	colComp_->Update(sphere_2_);
+	//colComp_->Update(sphere_2_);
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
 	if (killCount_ >= 15) {

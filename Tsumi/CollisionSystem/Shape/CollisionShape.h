@@ -77,11 +77,6 @@ public:
 	// ImGuiの描画
 	virtual void DrawImGui(const std::string& label = "") = 0;
 
-	// 衝突判定
-	virtual void OnCollision() {
-		this->component_->GetOwner()->onCollision();
-	}
-
 
 #pragma region Accessor アクセッサ
 

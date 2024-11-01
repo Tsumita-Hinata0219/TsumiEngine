@@ -28,6 +28,7 @@ void GameScene::Initialize()
 	collisionSystem_ = std::make_unique<CollisionSystem>();
 	collisionSystem_->Init();
 	CollisionManager_ = CollisionManager::GetInstance();
+	colMang_ = CollisionManager::GetInstance();
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -111,7 +112,7 @@ void GameScene::Update(GameManager* state)
 	enemyManager_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
-	CheckAllCollision();
+	//CheckAllCollision();
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");

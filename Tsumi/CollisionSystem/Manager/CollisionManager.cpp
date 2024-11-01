@@ -119,6 +119,8 @@ void CollisionManager::UpdateCollisionData()
 void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
+
+		ImGui::Text("Collider Count = %d", shapeMap_.size());
 		
 		for (auto& element : shapeMap_) {
 			element.second->DrawImGui();

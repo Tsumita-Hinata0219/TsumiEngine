@@ -43,7 +43,6 @@ void TitleScene::Initialize()
 	/* ----- FadeManager フェードマネージャー ----- */
 	fadeManager_ = FadeManager::GetInstance();
 	fadeManager_->Initialize(func_FadeIn);
-
 }
 
 

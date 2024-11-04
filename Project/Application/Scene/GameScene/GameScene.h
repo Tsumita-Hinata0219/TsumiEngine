@@ -115,6 +115,9 @@ private: // クラス
 
 private:
 
+	// 入力処理
+	Input* input_ = nullptr;
+
 	// シーンチェンジにかかる時間
 	Timer sceneChange_;
 };

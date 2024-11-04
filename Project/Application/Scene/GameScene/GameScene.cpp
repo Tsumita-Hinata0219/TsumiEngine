@@ -19,6 +19,9 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- Input 入力 ----- */
+	input_ = Input::GetInstance();
+
 	/* ----- JsonManager Jsonマネージャー ----- */
 	JsonManager::GetInstance()->Initialize();
 	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
@@ -106,8 +109,12 @@ void GameScene::Update(GameManager* state)
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
 	if (!startDirection_->IsFinish()) { return; }
-	time_++;
+	/*time_++;
 	if (time_ >= 2.0f * 60.0f) {
+		state->ChangeSceneState(new TitleScene());
+		return;
+	}*/
+	if (input_->Trigger(DIK_RETURN)) {
 		state->ChangeSceneState(new TitleScene());
 		return;
 	}

@@ -105,12 +105,12 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
-	if (!startDirection_->IsFinish()) { return; }
+	/*if (!startDirection_->IsFinish()) { return; }
 	time_++;
 	if (time_ >= 2.0f * 60.0f) {
 		state->ChangeSceneState(new TitleScene());
 		return;
-	}
+	}*/
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();

@@ -112,6 +112,10 @@ void PipeLineManager::Initialize()
 	// Vignetting
 	instance->vignettingPipeLine_ = make_unique<VignettingPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Vignetting] = instance->vignettingPipeLine_->SetUpPso();
+
+	// CSParticle
+	instance->csParticlePipeLine_ = make_unique<CSParticlePipeLine>();
+	instance->pipeLineMap_[PipeLineType::CSParticle] = instance->csParticlePipeLine_->SetUpPso();
 }
 
 

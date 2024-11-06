@@ -447,5 +447,5 @@ void ShaderManager::CSParticleShader()
 	ShadersMode shader = {
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/GPUParticle.CS.hlsli"),
 	};
-	computeShadersMap_["Particle"] = shader;
+	computeShadersMap_["CSParticle"] = shader;
 }

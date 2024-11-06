@@ -39,6 +39,8 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
+#include "CSPipeLine/Particle/CSParticlePipeLine.h"
+
 
 // PipeLineTypeのenum構造体
 enum class PipeLineType : uint32_t {
@@ -69,6 +71,7 @@ enum class PipeLineType : uint32_t {
 	RetroCRT,
 	SepiaTone,
 	Vignetting,
+	CSParticle,
 };
 
 
@@ -187,6 +190,10 @@ private: // メンバ変数
 
 	// Vignetting
 	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
+
+
+	// CSParticle
+	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
 
 };
 

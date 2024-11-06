@@ -2,7 +2,7 @@
 
 
 // Particleの要素
-StructuredBuffer<ParticleCS> gParticles : register(t0);
+RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 // Particleの最大数
 static int kMaxParticles = 1024;
 
@@ -14,6 +14,6 @@ void main(int3 DTid : SV_DispatchThreadID)
     if (particleIndex < kMaxParticles)
     {
         // particle構造体の全要素を0で埋めるという書き方
-        gParticles[particleIndex] = (ParticleCS) 0;
+        gParticles[particleIndex] = (ParticleCS)0;
     }
 }

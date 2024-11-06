@@ -42,8 +42,8 @@
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Glitch\Glitch.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -231,6 +231,7 @@
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -333,7 +334,7 @@
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PipeLineManager.h" />
     <ClInclude Include="Project\Engine\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="Project\Engine\PipeLineManager\PipeLineStructure\PipeLineStructure.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\IPipeLineState\PipeLineStructure.h" />
     <ClInclude Include="Project\Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
     <ClInclude Include="Project\Engine\Animation\AnimationStructure\Joint\Joint.h" />
     <ClInclude Include="Project\Engine\Animation\AnimationStructure\Node\Node.h" />
@@ -451,6 +452,7 @@
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Structure\GPUParticleStructure.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />
@@ -467,8 +469,8 @@
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
+    <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.CS.hlsli" />
+    <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

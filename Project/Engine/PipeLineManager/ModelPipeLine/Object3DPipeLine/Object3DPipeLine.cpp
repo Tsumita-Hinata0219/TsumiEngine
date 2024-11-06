@@ -33,7 +33,7 @@ PsoProperty Object3DPipeLine::SetUpPso()
 	SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 
-	/* --- Shaderをcompileする --- */
+	/* --- Shaderを設定する --- */
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;

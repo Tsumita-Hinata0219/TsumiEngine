@@ -84,6 +84,8 @@ private:
 	// mappedData
 	T* mappedData_{};
 
+	// SRV_Index
+	uint32_t srvIndex_;
 };
 
 

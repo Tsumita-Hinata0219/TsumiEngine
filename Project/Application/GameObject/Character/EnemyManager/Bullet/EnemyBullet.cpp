@@ -26,8 +26,8 @@ void EnemyBullet::Init()
 
 	colComp_->SetAttribute(ColliderAttribute::Enemy);
 	colComp_->Register(sphere_);
-	sphere_2_.center = trans_.GetWorldPos();
-	sphere_2_.radius = 2.0f;
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 }
 
 

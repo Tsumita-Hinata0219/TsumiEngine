@@ -40,6 +40,7 @@ void BasicEnemy::Init()
 
 	//// Colliderの初期化
 	colComp_->SetAttribute(ColliderAttribute::Enemy);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 }

@@ -214,23 +214,23 @@ bool GameScene::SceneChangeCheck(GameManager* state)
 // 衝突判定処理
 void GameScene::CheckAllCollision()
 {
-	// コンポーネントをクリア
-	collisionSystem_->ClearComponent();
+	//// コンポーネントをクリア
+	//collisionSystem_->ClearComponent();
 
-	// コンポーネントを追加
-	collisionSystem_->AAddComponent(player_->GetColComponent());
-	for (auto& plaBullet : player_->GetBulletList()) {
-		collisionSystem_->AAddComponent(plaBullet->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		collisionSystem_->AAddComponent(enemy->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		for (auto& eneBullet : enemy->GetBulletList()) {
-			collisionSystem_->AAddComponent(eneBullet->GetColComponent());
-		}
-	}
+	//// コンポーネントを追加
+	//collisionSystem_->AAddComponent(player_->GetColComponent());
+	//for (auto& plaBullet : player_->GetBulletList()) {
+	//	collisionSystem_->AAddComponent(plaBullet->GetColComponent());
+	//}
+	//for (auto& enemy : enemyManager_->GetEnemys()) {
+	//	collisionSystem_->AAddComponent(enemy->GetColComponent());
+	//}
+	//for (auto& enemy : enemyManager_->GetEnemys()) {
+	//	for (auto& eneBullet : enemy->GetBulletList()) {
+	//		collisionSystem_->AAddComponent(eneBullet->GetColComponent());
+	//	}
+	//}
 
-	// コリジョン判定を行う
-	collisionSystem_->Update();
+	//// コリジョン判定を行う
+	//collisionSystem_->Update();
 }

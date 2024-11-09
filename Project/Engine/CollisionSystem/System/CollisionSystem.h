@@ -13,30 +13,30 @@ class CollisionSystem {
 public:
 
 	// コンストラクタ、デストラクタ
-	CollisionSystem();
-	~CollisionSystem() {};
+	//CollisionSystem();
+	//~CollisionSystem() {};
 
 	// 初期化処理
-	void Init();
+	//void Init();
 
 	// コンポーネント追加
-	void AAddComponent(CollisionComponent* component);
-	void AAddComponentN(CollisionComponent* component);
+	//void AAddComponent(CollisionComponent* component);
+	//void AAddComponentN(CollisionComponent* component);
 
 	// コンポーネントのクリア
-	void ClearComponent();
+	//void ClearComponent();
 
 	// コリジョン判定を実行
-	void Update();
+	//void Update();
 
 	// シェイプの追加
-	void RegisterShape(ColShapeData& data);
+	//void RegisterShape(ColShapeData& data);
 
 
 private:
 
 	// コリジョン判定を行う
-	void CheckCollisions();
+	//void CheckCollisions();
 
 
 private:
@@ -45,12 +45,12 @@ private:
 	//std::unique_ptr<OctreeNode> node_;
 
 	// コンポーネントリスト
-	std::vector<CollisionComponent*> components_;
+	//std::vector<CollisionComponent*> components_;
 
 	// シェイプリスト
-	std::vector<CollisionShape*> shapes_;
-	std::map<uint32_t, CollisionShape*> shapeMap_;
+	//std::vector<CollisionShape*> shapes_;
+	//std::map<uint32_t, CollisionShape*> shapeMap_;
 	// 追加したシェイプのインデックス
-	uint32_t shapeIndex_ = 0;
+	//uint32_t shapeIndex_ = 0;
 };
 

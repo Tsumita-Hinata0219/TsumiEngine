@@ -83,7 +83,7 @@ public:
 private:
 
 	// コライダーの更新
-	void UpdateCollider();
+	//void UpdateCollider();
 
 	// 入力を受け取る
 	void InputFunc();
@@ -128,7 +128,7 @@ private:
 	DirectionalLightData light_;
 
 	// コライダー
-	Col::Sphere sphere_1_;
+	//Col::Sphere sphere_1_;
 	Col::Sphere sphere_2_;
 
 	// サイズ

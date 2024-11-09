@@ -26,15 +26,15 @@ public:
 	CollisionComponent(IObject* setObject);
 
 	// シェイプの追加
-	void RegisterCollider(Col::Sphere& sphere);
+	//void RegisterCollider(Col::Sphere& sphere);
 	void Register(Col::ColData& colData);
 
 	// シェイプの更新
-	void UpdateShape(const Col::Sphere& sphere);
+	//void UpdateShape(const Col::Sphere& sphere);
 	//void Update(const Col::ColData& colData);
 
 	// コリジョンのチェック
-	bool CheckCollision(const CollisionComponent& other) const;
+	//bool CheckCollision(const CollisionComponent& other) const;
 
 
 #pragma region Accessor
@@ -57,7 +57,7 @@ private:
 	int nextID_ = 0;
 
 	// コリジョンシェイプ
-	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
+	//std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
 	////std::map<int, CollisionShape*> shapes_;
 	//std::map<int, std::unique_ptr<CollisionShape>> shapes_;
 

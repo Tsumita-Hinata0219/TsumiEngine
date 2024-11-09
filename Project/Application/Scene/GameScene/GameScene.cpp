@@ -118,7 +118,8 @@ void GameScene::Update(GameManager* state)
 	enemyManager_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
-	//CheckAllCollision();
+	CollisionManager_->Update();
+
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");

@@ -79,7 +79,7 @@ private:
 private: // クラス
 
 	// CollisionManager
-	std::unique_ptr<CollisionSystem> collisionSystem_;
+	//std::unique_ptr<CollisionSystem> collisionSystem_;
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 
 	// AbsentEffect

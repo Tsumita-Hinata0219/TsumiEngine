@@ -114,7 +114,7 @@ void BasicEnemy::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
-void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
+void BasicEnemy::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYER) {
 

@@ -20,10 +20,6 @@ void EnemyBullet::Init()
 	life_.Start();
 
 	//// Colliderの初期化
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
-
 	colComp_->SetAttribute(ColliderAttribute::Enemy);
 	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
@@ -58,7 +54,7 @@ void EnemyBullet::Draw2DBack() {}
 
 
 // 衝突自コールバック関数
-void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
+void EnemyBullet::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYER) {
 		isDead_ = true;

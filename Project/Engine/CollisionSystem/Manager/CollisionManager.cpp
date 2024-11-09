@@ -100,7 +100,7 @@ void CollisionManager::CheckCollisions()
 			// 衝突を検出する
 			if (itr1->second->Intersects(*itr2->second)) {
 				//Log("hit!\n");
-				itr1->second->OnCollision(*itr2->second);
+				itr1->second->OnCollision(*itr2->second, itr2->second->GetColData());
 			}
 		}
 	}

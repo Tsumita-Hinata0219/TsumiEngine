@@ -33,6 +33,6 @@ void PlayerLeftBody::Draw2DBack() {}
 
 
 // 衝突判定コールバック関数
-void PlayerLeftBody::onCollision([[maybe_unused]] IObject* object)
+void PlayerLeftBody::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 }

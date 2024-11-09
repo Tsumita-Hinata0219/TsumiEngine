@@ -62,7 +62,7 @@ void FollowCamera::Draw2DBack()
 
 
 // 衝突判定コールバック関数
-void FollowCamera::onCollision(IObject* object)
+void FollowCamera::onCollision(IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 	object;
 }

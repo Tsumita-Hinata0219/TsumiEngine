@@ -101,7 +101,7 @@ void TitleScreen::Draw2DBack() {}
 
 
 // 衝突判定コールバック関数
-void TitleScreen::onCollision([[maybe_unused]] IObject* object)
+void TitleScreen::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 }
 

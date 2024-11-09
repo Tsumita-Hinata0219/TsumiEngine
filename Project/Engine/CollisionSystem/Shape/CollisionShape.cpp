@@ -63,7 +63,7 @@ void CollisionShape::CalcSpaceLevel()
 
 
 // 衝突時コールバック関数
-void CollisionShape::OnCollision(const CollisionShape& other)
+void CollisionShape::OnCollision(const CollisionShape& other, Col::ColData colData)
 {
-	this->component_->GetOwner()->onCollision(other.component_->GetOwner());
+	this->component_->GetOwner()->onCollision(other.component_->GetOwner(), colData);
 }

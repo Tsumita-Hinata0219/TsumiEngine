@@ -26,18 +26,10 @@ void PlayerBullet::Init()
 	light_.direction = Vector3::one;
 
 	//// Colliderの初期化
-	//collider_ = std::make_unique<OBBCollider>();
-	//collider_->Init();
-	//collider_->SetSize(size_);
-	//colComp_ = std::make_unique<CollisionComponent>(this);
-	//colComp_->RegisterCollider(sphere_);
+	colComp_->SetAttribute(ColliderAttribute::Player);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
-
-	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_2_);
-	sphere_2_.center = trans_.GetWorldPos();
-	sphere_2_.radius = 2.0f;
 }
 
 
@@ -57,12 +49,7 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	//colComp_->UpdateShape(sphere_);
-
-	// Collider_2
-	sphere_2_.center = trans_.GetWorldPos();
 }
 
 

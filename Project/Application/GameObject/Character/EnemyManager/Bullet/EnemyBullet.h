@@ -48,8 +48,6 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
-	// Collider
-	//OBBCollider* GetOBBCollider() { return this->collider_.get(); }
 
 #pragma endregion 
 
@@ -83,9 +81,7 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f,2.0f };
 
 	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
 	Col::Sphere sphere_;
-	Col::Sphere sphere_2_;
 
 	// 移動速度
 	Vector3 velocity_;

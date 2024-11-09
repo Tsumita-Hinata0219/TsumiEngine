@@ -34,15 +34,10 @@ void Player::Init()
 	}
 
 	// Colliderの登録
-	// Collider_1
-	/*colComp_->RegisterCollider(sphere_1_);
-	sphere_1_.center = trans_.GetWorldPos();
-	sphere_1_.radius = 2.0f;*/
-	// Collider_2
 	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_2_);
-	sphere_2_.center = trans_.GetWorldPos();
-	sphere_2_.radius = 2.0f;
+	colComp_->Register(sphere_);
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
@@ -86,12 +81,7 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	// Collider_1
-	/*sphere_1_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_1_);*/
-	// Collider_2
-	sphere_2_.center = trans_.GetWorldPos();
-	//colComp_->Update(sphere_2_);
+	sphere_.center = trans_.GetWorldPos();
 
 	//// キルカウントが一定を超えていたら勝利フラグを立てる
 	//if (killCount_ >= 15) {

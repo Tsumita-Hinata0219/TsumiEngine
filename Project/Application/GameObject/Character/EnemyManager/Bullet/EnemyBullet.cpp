@@ -53,7 +53,7 @@ void EnemyBullet::Draw2DFront() {}
 void EnemyBullet::Draw2DBack() {}
 
 
-// 衝突自コールバック関数
+// 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYER) {

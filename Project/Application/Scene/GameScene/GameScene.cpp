@@ -28,7 +28,6 @@ void GameScene::Initialize()
 	collisionSystem_ = std::make_unique<CollisionSystem>();
 	collisionSystem_->Init();
 	CollisionManager_ = CollisionManager::GetInstance();
-	colMang_ = CollisionManager::GetInstance();
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();

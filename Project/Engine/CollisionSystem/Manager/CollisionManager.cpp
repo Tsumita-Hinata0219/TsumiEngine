@@ -101,6 +101,7 @@ void CollisionManager::CheckCollisions()
 			if (itr1->second->Intersects(*itr2->second)) {
 				//Log("hit!\n");
 				itr1->second->OnCollision(*itr2->second, itr2->second->GetColData());
+				itr2->second->OnCollision(*itr1->second, itr1->second->GetColData());
 			}
 		}
 	}

@@ -128,7 +128,8 @@ private:
 	DirectionalLightData light_;
 
 	// コライダー
-	Col::Sphere sphere_;
+	Col::Sphere sphere_1_;
+	Col::Sphere sphere_2_;
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

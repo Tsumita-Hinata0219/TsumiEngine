@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Component/CollisionComponent.h"
+#include "../Shape/CollisionShape.h"
 #include "../Event/CollisionEvent.h"
 #include "../ColEventManager/ColEventManager.h"
 

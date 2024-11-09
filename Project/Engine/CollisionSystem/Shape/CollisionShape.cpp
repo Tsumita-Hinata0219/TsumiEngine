@@ -1,4 +1,15 @@
 #include "CollisionShape.h"
+#include "../Manager/CollisionManager.h"
+
+
+// ColDataの仮想デストラクタ
+Col::ColData::~ColData()
+{
+	if (CollisionManager::GetInstance()) {
+		// shapeが消えることを知らせる
+		CollisionManager::GetInstance()->UnRegister(this);
+	}
+}
 
 
 // 境界ボックスから空間レベルと所属空間を求める

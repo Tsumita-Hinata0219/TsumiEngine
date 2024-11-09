@@ -100,7 +100,7 @@ private: // メンバ変数
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;
 	Col::Sphere sphere_;
-
+	Col::Sphere sphere_2_;
 
 	// 移動速度
 	Vector3 velocity_;

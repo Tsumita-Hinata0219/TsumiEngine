@@ -33,6 +33,11 @@ void PlayerBullet::Init()
 	colComp_->RegisterCollider(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
+
+	colComp_->SetAttribute(ColliderAttribute::Player);
+	colComp_->Register(sphere_2_);
+	sphere_2_.center = trans_.GetWorldPos();
+	sphere_2_.radius = 2.0f;
 }
 
 
@@ -55,6 +60,9 @@ void PlayerBullet::Update()
 	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
 	colComp_->UpdateShape(sphere_);
+
+	// Collider_2
+	sphere_2_.center = trans_.GetWorldPos();
 }
 
 

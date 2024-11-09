@@ -18,7 +18,7 @@ public:
 
 	// パラメータ付きコンストラクタ
 	CollisionShapeAABB(CollisionComponent* comp);
-	CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData);
+	CollisionShapeAABB(CollisionComponent* comp, Col::AABB* setData);
 
 	// 衝突判定処理
 	bool Intersects(const CollisionShape& other) const override;
@@ -27,6 +27,9 @@ public:
 
 	// コライダーの境界ボックスを求める
 	void CalcBounding() override;
+
+	// ImGuiの描画
+	void DrawImGui(const std::string& label = "") override;
 
 
 #pragma region Accessor
@@ -42,6 +45,18 @@ public:
 		}
 		else {
 			throw std::bad_variant_access(); // 型が一致しない場合のエラー処理
+		}
+	}
+	Col::ColData GetColData() const override {
+		return this->aabb_;
+	}
+	void SetData(const Col::ColData& data) override {
+		
+		if (const auto* setData = dynamic_cast<const Col::AABB*>(&data)) {
+			this->aabb_ = *setData;  // AABB型の場合、値をコピー
+		}
+		else {
+			throw std::runtime_error("Invalid type: ColData is not AABB.");
 		}
 	}
 

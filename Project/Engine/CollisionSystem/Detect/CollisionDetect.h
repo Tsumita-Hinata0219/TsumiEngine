@@ -116,14 +116,14 @@ namespace Detect {
 		TransformByMatrix(
 			s.center, Inverse(ColUtil::CreateOBBWorldMatrix(obb))) };
 
-		Col::AABB abbOBBLocal = {
-			.min = { -obb.size.x, -obb.size.y, -obb.size.z },
-			.max = { obb.size.x, obb.size.y, obb.size.z }
-		};
-		Col::Sphere sphereOBBLocal = {
-			.center = centerInOBBLocalSpace,
-			.radius = s.radius
-		};
+		Col::AABB abbOBBLocal{};
+		abbOBBLocal.min = { -obb.size.x, -obb.size.y, -obb.size.z };
+		abbOBBLocal.max = { obb.size.x, obb.size.y, obb.size.z };
+		
+		Col::Sphere sphereOBBLocal{};
+		sphereOBBLocal.center = centerInOBBLocalSpace;
+		sphereOBBLocal.radius = s.radius;
+
 
 		// ローカル座標で衝突判定
 		if (Detect::Intersects(abbOBBLocal, sphereOBBLocal)) {
@@ -142,19 +142,17 @@ namespace Detect {
 	{
 		Matrix4x4 obbInverse = Inverse(ColUtil::CreateOBBWorldMatrix(obb));
 
-		Col::AABB aabbOBBLocal = {
-			.min = { -obb.size.x, -obb.size.y, -obb.size.z },
-			.max = { obb.size.x, obb.size.y, obb.size.z }
-		};
+		Col::AABB aabbOBBLocal{};
+		aabbOBBLocal.min = { -obb.size.x, -obb.size.y, -obb.size.z };
+		aabbOBBLocal.max = { obb.size.x, obb.size.y, obb.size.z };
 
 
 		Vector3 localOrigin = TransformByMatrix(s.origin, obbInverse);
 		Vector3 LocalEnd = TransformByMatrix(s.origin + s.diff, obbInverse);
 
-		Col::Segment localSegment = {
-			.origin = localOrigin,
-			.diff = LocalEnd - localOrigin,
-		};
+		Col::Segment localSegment{};
+		localSegment.origin = localOrigin;
+		localSegment.diff = LocalEnd - localOrigin;
 
 
 		// AABBとSegmentの当たり判定を使う

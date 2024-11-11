@@ -121,6 +121,9 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
+	if (!startDirection_->IsFinish()) {
+		return;
+	}
 
 	/* ----- Player プレイヤー ----- */
 	player_->Update();

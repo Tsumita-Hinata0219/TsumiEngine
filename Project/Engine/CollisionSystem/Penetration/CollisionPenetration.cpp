@@ -85,7 +85,7 @@ Vector3 Penetration::HandleAABBOBBPenetration(Col::AABB& ownerAABB, Col::OBB& hi
 
 
 // OBB 同士の交差判定と押し出し
-Vector3 Penetration::HandleOBBObbPenetration(Col::OBB& ownerOBB, Col::OBB& hitOBB)
+Vector3 Penetration::HandleOBBOBBPenetration(Col::OBB& ownerOBB, Col::OBB& hitOBB)
 {
 	// OBB同士の交差判定処理
 	Vector3 push = ColUtil::GetPenetrationPush(ownerOBB, hitOBB);

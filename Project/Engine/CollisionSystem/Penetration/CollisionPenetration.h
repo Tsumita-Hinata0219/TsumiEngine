@@ -27,7 +27,7 @@ namespace Penetration {
 	Vector3 HandleAABBOBBPenetration(Col::AABB& ownerAABB, Col::OBB& hitOBB);
 
 	// OBB 同士の交差判定と押し出し
-	Vector3 HandleOBBObbPenetration(Col::OBB& ownerOBB, Col::OBB& hitOBB);
+	Vector3 HandleOBBOBBPenetration(Col::OBB& ownerOBB, Col::OBB& hitOBB);
 
 	// OBB と Sphere の交差判定と押し出し
 	Vector3 HandleOBBSpherePenetration(Col::OBB& ownerOBB, Col::Sphere& hitSphere);

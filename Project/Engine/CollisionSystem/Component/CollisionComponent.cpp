@@ -3,6 +3,7 @@
 #include "../Shape/CollisionShape.h"
 #include "../Shape/Sphere/CollisionShapeSphere.h"
 #include "../Shape/AABB/CollisionShapeAABB.h"
+#include "../Util/CollisionUtilities.h"
 
 
 // コンストラクタ

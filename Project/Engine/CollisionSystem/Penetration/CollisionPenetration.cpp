@@ -1,4 +1,5 @@
 #include "CollisionPenetration.h"
+#include "../Util/CollisionUtilities.h"
 
 
 
@@ -20,7 +21,7 @@ Vector3 Penetration::HandleSphereSpherePenetration(Col::Sphere& ownerSphere, Col
 // Sphere と AABB の交差判定と押し出し
 Vector3 Penetration::HandleSphereAABBPpenetration(Col::Sphere& ownerSphere, Col::AABB& hitAABB)
 {
-	Vector3 closestPoint = hitAABB.GetClosestPoint(ownerSphere.center);
+	Vector3 closestPoint = ColUtil::GetClosestPoint(hitAABB, ownerSphere.center);
 	Vector3 direction = ownerSphere.center - closestPoint;
 	float distance = Length(direction);
 	float overlap = ownerSphere.radius - distance;
@@ -36,7 +37,7 @@ Vector3 Penetration::HandleSphereAABBPpenetration(Col::Sphere& ownerSphere, Col:
 // Sphere と OBB の交差判定と押し出し
 Vector3 Penetration::HandleSphereOBBPpenetration(Col::Sphere& ownerSphere, Col::OBB& hitOBB)
 {
-	Vector3 closestPoint = hitOBB.GetClosestPoint(ownerSphere.center);
+	Vector3 closestPoint = ColUtil::GetClosestPoint(hitOBB, ownerSphere.center);
 	Vector3 direction = ownerSphere.center - closestPoint;
 	float distance = Length(direction);
 	float overlap = ownerSphere.radius - distance;
@@ -53,7 +54,7 @@ Vector3 Penetration::HandleSphereOBBPpenetration(Col::Sphere& ownerSphere, Col::
 Vector3 Penetration::HandleAABBAABBPpenetration(Col::AABB& ownerAABB, Col::AABB& hitAABB)
 {
 	// AABB同士の押し出し処理（例：最小のオーバーラップを計算し、押し出す）
-	Vector3 push = ownerAABB.GetPenetrationPush(hitAABB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerAABB, hitAABB);
 	return push;
 }
 
@@ -61,7 +62,7 @@ Vector3 Penetration::HandleAABBAABBPpenetration(Col::AABB& ownerAABB, Col::AABB&
 // AABB と Sphere の交差判定と押し出し
 Vector3 Penetration::HandleAABBSpherePenetration(Col::AABB& ownerAABB, Col::Sphere& hitSphere)
 {
-	Vector3 closestPoint = ownerAABB.GetClosestPoint(hitSphere.center);
+	Vector3 closestPoint = ColUtil::GetPenetrationPush(ownerAABB, hitSphere);
 	Vector3 direction = hitSphere.center - closestPoint;
 	float distance = Length(direction);
 	float overlap = hitSphere.radius - distance;
@@ -78,7 +79,7 @@ Vector3 Penetration::HandleAABBSpherePenetration(Col::AABB& ownerAABB, Col::Sphe
 Vector3 Penetration::HandleAABBOBBPenetration(Col::AABB& ownerAABB, Col::OBB& hitOBB)
 {
 	// AABB と OBB の交差判定処理
-	Vector3 push = ownerAABB.GetPenetrationPush(hitOBB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerAABB, hitOBB);
 	return push;
 }
 
@@ -87,7 +88,7 @@ Vector3 Penetration::HandleAABBOBBPenetration(Col::AABB& ownerAABB, Col::OBB& hi
 Vector3 Penetration::HandleOBBObbPenetration(Col::OBB& ownerOBB, Col::OBB& hitOBB)
 {
 	// OBB同士の交差判定処理
-	Vector3 push = ownerOBB.GetPenetrationPush(hitOBB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerOBB, hitOBB);
 	return push;
 }
 
@@ -96,7 +97,7 @@ Vector3 Penetration::HandleOBBObbPenetration(Col::OBB& ownerOBB, Col::OBB& hitOB
 Vector3 Penetration::HandleOBBSpherePenetration(Col::OBB& ownerOBB, Col::Sphere& hitSphere)
 {
 	// OBB と Sphere の交差判定処理
-	Vector3 closestPoint = ownerOBB.GetClosestPoint(hitSphere.center);
+	Vector3 closestPoint = ColUtil::GetPenetrationPush(ownerOBB, hitSphere);
 	Vector3 direction = hitSphere.center - closestPoint;
 	float distance = Length(direction);
 	float overlap = hitSphere.radius - distance;
@@ -113,7 +114,7 @@ Vector3 Penetration::HandleOBBSpherePenetration(Col::OBB& ownerOBB, Col::Sphere&
 Vector3 Penetration::HandleOBBAABBPpenetration(Col::OBB& ownerOBB, Col::AABB& hitAABB)
 {
 	// OBB と AABB の交差判定処理
-	Vector3 push = ownerOBB.GetPenetrationPush(hitAABB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerOBB, hitAABB);
 	return push;
 }
 
@@ -122,7 +123,7 @@ Vector3 Penetration::HandleOBBAABBPpenetration(Col::OBB& ownerOBB, Col::AABB& hi
 Vector3 Penetration::HandleSegmentSpherePenetration(Col::Segment& ownerSegment, Col::Sphere& hitSphere)
 {
 	// Segment と Sphere の交差判定処理
-	Vector3 push = ownerSegment.GetPenetrationPush(hitSphere);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerSegment, hitSphere);
 	return push;
 }
 
@@ -131,7 +132,7 @@ Vector3 Penetration::HandleSegmentSpherePenetration(Col::Segment& ownerSegment, 
 Vector3 Penetration::HandleCapsuleSpherePenetration(Col::Capsule& ownerCapsule, Col::Sphere& hitSphere)
 {
 	// Capsule と Sphere の交差判定処理
-	Vector3 push = ownerCapsule.GetPenetrationPush(hitSphere);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerCapsule, hitSphere);
 	return push;
 }
 
@@ -140,7 +141,7 @@ Vector3 Penetration::HandleCapsuleSpherePenetration(Col::Capsule& ownerCapsule, 
 Vector3 Penetration::HandleSegmentAABBPpenetration(Col::Segment& ownerSegment, Col::AABB& hitAABB)
 {
 	// Segment と AABB の交差判定処理
-	Vector3 push = ownerSegment.GetPenetrationPush(hitAABB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerSegment, hitAABB);
 	return push;
 }
 
@@ -149,7 +150,7 @@ Vector3 Penetration::HandleSegmentAABBPpenetration(Col::Segment& ownerSegment, C
 Vector3 Penetration::HandleCapsuleAABBPpenetration(Col::Capsule& ownerCapsule, Col::AABB& hitAABB)
 {
 	// Capsule と AABB の交差判定処理
-	Vector3 push = ownerCapsule.GetPenetrationPush(hitAABB);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerCapsule, hitAABB);
 	return push;
 }
 
@@ -158,7 +159,7 @@ Vector3 Penetration::HandleCapsuleAABBPpenetration(Col::Capsule& ownerCapsule, C
 Vector3 Penetration::HandleCapsuleCapsulePenetration(Col::Capsule& ownerCapsule, Col::Capsule& hitCapsule)
 {
 	// Capsule と Capsule の交差判定処理
-	Vector3 push = ownerCapsule.GetPenetrationPush(hitCapsule);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerCapsule, hitCapsule);
 	return push;
 }
 
@@ -167,6 +168,6 @@ Vector3 Penetration::HandleCapsuleCapsulePenetration(Col::Capsule& ownerCapsule,
 Vector3 Penetration::HandleSegmentSegmentPenetration(Col::Segment& ownerSegment, Col::Segment& hitSegment)
 {
 	// Segment と Segment の交差判定処理
-	Vector3 push = ownerSegment.GetPenetrationPush(hitSegment);
+	Vector3 push = ColUtil::GetPenetrationPush(ownerSegment, hitSegment);
 	return push;
 }

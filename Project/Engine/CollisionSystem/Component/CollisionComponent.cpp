@@ -31,55 +31,49 @@ void CollisionComponent::Register(Col::ColData& colData)
 
 
 // 押し出し処理
-void CollisionComponent::Penetration(Vector3* translate, Col::ColData& colData)
+void CollisionComponent::Penetration(Vector3* translate)
 {
-    // Sphere型のコリジョン処理
-    if (Col::Sphere* sphere = dynamic_cast<Col::Sphere*>(&colData)) {
-        Vector3 direction = *translate - sphere->center;
-        float distance = Length(direction);
-        float overlap = sphere->radius - distance;
+    // hitData_ が null でない場合のみ処理を行う
+    if (hitData_.index() == 0) { 
 
-        if (overlap > 0.0f) { // めり込みがある場合
-            direction = Normalize(direction);
-            *translate += direction * overlap; // 押し出し処理
-        }
-    }
-    // AABB型のコリジョン処理
-    else if (Col::AABB* aabb = dynamic_cast<Col::AABB*>(&colData)) {
-        Vector3 minTranslate = aabb->min - *translate;
-        Vector3 maxTranslate = aabb->max - *translate;
+        // 衝突相手のコライダーデータに基づいて処理を行う
+        std::visit([&](auto&& shape) {
+            using T = std::decay_t<decltype(shape)>;
 
-        Vector3 push;
-        push.x = std::fabs(minTranslate.x) < std::fabs(maxTranslate.x) ? minTranslate.x : maxTranslate.x;
-        push.y = std::fabs(minTranslate.y) < std::fabs(maxTranslate.y) ? minTranslate.y : maxTranslate.y;
-        push.z = std::fabs(minTranslate.z) < std::fabs(maxTranslate.z) ? minTranslate.z : maxTranslate.z;
+            if constexpr (std::is_same_v<T, Col::Sphere>) {  // Sphere型のコリジョン処理
+                Vector3 direction = *translate - shape.center;
+                float distance = Length(direction);
+                float overlap = shape.radius - distance;
 
-        *translate += push; // 押し出し処理
-    }
-    // OBB型のコリジョン処理
-    else if (Col::OBB* obb = dynamic_cast<Col::OBB*>(&colData)) {
-        //// OBBとの押し出しには、OBBの軸方向への投影が必要
-        //Vector3 direction = *translate - obb->center;
-        //Vector3 projection;
-        //for (int i = 0; i < 3; ++i) {
-        //    float length = obb->orientations[i].Dot(direction);
-        //    if (length > obb->size[i]) {
-        //        projection += obb->orientations[i] * (length - obb->size[i]);
-        //    }
-        //    else if (length < -obb->size[i]) {
-        //        projection += obb->orientations[i] * (length + obb->size[i]);
-        //    }
-        //}
-        //*translate += projection; // 押し出し処理
-    }
-    // Segment型のコリジョン処理
-    else if (Col::Segment* segment = dynamic_cast<Col::Segment*>(&colData)) {
-        
-    }
-    // Capsule型のコリジョン処理
-    else if (Col::Capsule* capsule = dynamic_cast<Col::Capsule*>(&colData)) {
-        
-    }
+                if (overlap > 0.0f) { // めり込みがある場合
+                    direction = Normalize(direction);
+                    *translate += direction * overlap; // 押し出し処理
+                }
+            }
+            else if constexpr (std::is_same_v<T, Col::AABB>) { // AABB型のコリジョン処理
+                Vector3 minTranslate = shape.min - *translate;
+                Vector3 maxTranslate = shape.max - *translate;
 
+                Vector3 push;
+                push.x = std::fabs(minTranslate.x) < std::fabs(maxTranslate.x) ? minTranslate.x : maxTranslate.x;
+                push.y = std::fabs(minTranslate.y) < std::fabs(maxTranslate.y) ? minTranslate.y : maxTranslate.y;
+                push.z = std::fabs(minTranslate.z) < std::fabs(maxTranslate.z) ? minTranslate.z : maxTranslate.z;
+
+                *translate += push; // 押し出し処理
+            }
+            else if constexpr (std::is_same_v<T, Col::OBB>) { // OBB型のコリジョン処理
+
+            }
+            else if constexpr (std::is_same_v<T, Col::Segment>) { // Segment型のコリジョン処理
+
+            }
+            else if constexpr (std::is_same_v<T, Col::Capsule>) { // Capsule型のコリジョン処理
+
+            }
+            }, hitData_); // std::variantに格納されたコライダーデータを処理
+
+        // 処理が終わったら hitData_ を null に設定（std::variant を初期状態に戻す）
+        hitData_ = {}; // 空の状態にする（全型におけるデフォルト値を設定）
+    }
 }
 

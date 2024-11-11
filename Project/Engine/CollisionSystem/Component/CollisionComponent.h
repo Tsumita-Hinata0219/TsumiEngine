@@ -29,7 +29,7 @@ public:
 	void Register(Col::ColData& colData);
 
 	// 押し出し処理
-	void Penetration(Vector3* translate, Col::ColData& colData);
+	void Penetration(Vector3* translate);
 
 
 #pragma region Accessor

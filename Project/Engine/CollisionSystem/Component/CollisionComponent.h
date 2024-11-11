@@ -29,7 +29,7 @@ public:
 	void Register(Col::ColData& colData);
 
 	// 押し出し処理
-	void Penetration(Vector3* translate);
+	void Penetration(Vector3* translate, ColShapeData ownerCollider);
 
 
 #pragma region Accessor
@@ -41,10 +41,16 @@ public:
 	void SetAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
 
 	// 衝突相手のコライダーデータ
-	ColShapeData GetHitData() const { return this->hitData_; }
-	void SetHitData(ColShapeData setData) { this->hitData_ = setData; }
+	ColShapeData GetHitData() const { return this->hitCollider_; }
+	void SetHitData(ColShapeData setData) { this->hitCollider_ = setData; }
 
 #pragma endregion 
+
+
+private:
+
+	// コライダーとの押し出し処理
+
 
 
 private:
@@ -62,6 +68,6 @@ private:
 	uint32_t attribute_ = ColliderAttribute::None;
 
 	// 衝突相手のコライダーデータ
-	ColShapeData hitData_{};
+	ColShapeData hitCollider_{};
 };
 

@@ -115,3 +115,215 @@ Col::OBB ColUtil::SettingOBBProperties(Col::OBB& obb) {
 //	Col::Sphere result;
 //	return result;
 //}
+
+// コライダー間の最寄点を計算する関数
+Vector3 ColUtil::GetClosestPoint(const Col::Sphere& sphere, const Vector3& point)
+{
+	Vector3 direction = point - sphere.center;
+	float distance = Length(direction);
+	if (distance < sphere.radius) {
+		return point;  // コライダー内にある場合、その点が最寄点
+	}
+	return sphere.center + Normalize(direction) * sphere.radius;  // 半径外なら最寄点
+}
+Vector3 ColUtil::GetClosestPoint(const Col::AABB& aabb, const Vector3& point)
+{
+	float closestX = Clamp(point.x, aabb.min.x, aabb.max.x);
+	float closestY = Clamp(point.y, aabb.min.y, aabb.max.y);
+	float closestZ = Clamp(point.z, aabb.min.z, aabb.max.z);
+	return Vector3(closestX, closestY, closestZ);
+}
+Vector3 ColUtil::GetClosestPoint(const Col::OBB& obb, const Vector3& point)
+{
+	// OBB内での最寄点を計算するロジック
+	// OBBに投影して最寄点を得る方法などを使う
+	return Vector3();  // 仮の処理
+}
+Vector3 ColUtil::GetClosestPoint(const Col::Segment& segment, const Vector3& point)
+{
+	Vector3 direction = segment.origin - segment.diff;
+	float length = Length(direction);
+	direction = Normalize(direction);
+	float projection = Dot(point - segment.origin, direction);
+	if (projection < 0.0f) return segment.origin;  // 始点より前
+	if (projection > length) return segment.diff;  // 終点より後
+	return segment.origin + direction * projection;
+}
+Vector3 ColUtil::GetClosestPoint(const Col::Capsule& capsule, const Vector3& point)
+{
+	// カプセルの最寄点を計算する方法
+	return Vector3();  // 仮の処理
+}
+
+
+// コライダー間の交差時に押し出すためのベクトルを計算する関数
+Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere1, const Col::Sphere& sphere2)
+{
+	Vector3 direction = sphere1.center - sphere2.center;
+	float distance = Length(direction);
+	float overlap = sphere1.radius + sphere2.radius - distance;
+	if (overlap > 0.0f) {
+		direction = Normalize(direction);
+		return direction * overlap;
+	}
+	return Vector3();
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere, const Col::AABB& aabb)
+{
+	Vector3 closestPoint = GetClosestPoint(aabb, sphere.center);
+	Vector3 direction = sphere.center - closestPoint;
+	float distance = Length(direction);
+	float overlap = sphere.radius - distance;
+	if (overlap > 0.0f) {
+		direction = Normalize(direction);
+		return direction * overlap;
+	}
+	return Vector3();
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere, const Col::OBB& obb)
+{
+	Vector3 closestPoint = GetClosestPoint(obb, sphere.center);
+	Vector3 direction = sphere.center - closestPoint;
+	float distance = Length(direction);
+	float overlap = sphere.radius - distance;
+	if (overlap > 0.0f) {
+		direction = Normalize(direction);
+		return direction * overlap;
+	}
+	return Vector3();
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb1, const Col::AABB& aabb2)
+{
+	// それぞれの AABB の最小・最大の座標を取得
+	Vector3 overlap = Vector3(0.0f, 0.0f, 0.0f);
+
+	// X軸でのオーバーラップチェック
+	if (aabb1.max.x > aabb2.min.x && aabb1.min.x < aabb2.max.x) {
+		float overlapX = min(aabb1.max.x - aabb2.min.x, aabb2.max.x - aabb1.min.x);
+		overlap.x = overlapX;
+	}
+
+	// Y軸でのオーバーラップチェック
+	if (aabb1.max.y > aabb2.min.y && aabb1.min.y < aabb2.max.y) {
+		float overlapY = min(aabb1.max.y - aabb2.min.y, aabb2.max.y - aabb1.min.y);
+		overlap.y = overlapY;
+	}
+
+	// Z軸でのオーバーラップチェック
+	if (aabb1.max.z > aabb2.min.z && aabb1.min.z < aabb2.max.z) {
+		float overlapZ = min(aabb1.max.z - aabb2.min.z, aabb2.max.z - aabb1.min.z);
+		overlap.z = overlapZ;
+	}
+
+	// オーバーラップがない場合、押し出しは必要ない
+	if (overlap.x <= 0.0f || overlap.y <= 0.0f || overlap.z <= 0.0f) {
+		return Vector3();  // オーバーラップなし
+	}
+
+	// 最小のオーバーラップ量を基準に押し出しベクトルを決定
+	Vector3 push = Vector3(0.0f, 0.0f, 0.0f);
+
+	// どの軸に沿って押し出すかを決定
+	if (overlap.x <= overlap.y && overlap.x <= overlap.z) {
+		// X軸での押し出し
+		if (aabb1.center.x < aabb2.center.x) {
+			push.x = -overlap.x;  // aabb1 が aabb2 の右側にある
+		}
+		else {
+			push.x = overlap.x;   // aabb1 が aabb2 の左側にある
+		}
+	}
+	else if (overlap.y <= overlap.x && overlap.y <= overlap.z) {
+		// Y軸での押し出し
+		if (aabb1.center.y < aabb2.center.y) {
+			push.y = -overlap.y;  // aabb1 が aabb2 の上側にある
+		}
+		else {
+			push.y = overlap.y;   // aabb1 が aabb2 の下側にある
+		}
+	}
+	else {
+		// Z軸での押し出し
+		if (aabb1.center.z < aabb2.center.z) {
+			push.z = -overlap.z;  // aabb1 が aabb2 の手前側にある
+		}
+		else {
+			push.z = overlap.z;   // aabb1 が aabb2 の奥側にある
+		}
+	}
+
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::Sphere& sphere)
+{
+	Vector3 closestPoint = GetClosestPoint(aabb, sphere.center);
+	Vector3 direction = sphere.center - closestPoint;
+	float distance = Length(direction);
+	float overlap = sphere.radius - distance;
+	if (overlap > 0.0f) {
+		direction = Normalize(direction);
+		return direction * overlap;
+	}
+	return Vector3();
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::OBB& obb)
+{
+	// AABB と OBB の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb1, const Col::OBB& obb2)
+{
+	// OBB同士の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::Sphere& sphere)
+{
+	// OBB と Sphere の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::AABB& aabb)
+{
+	// OBB と AABB の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::Sphere& sphere)
+{
+	// Segment と Sphere の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::Sphere& sphere)
+{
+	// Capsule と Sphere の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::AABB& aabb)
+{
+	// Segment と AABB の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::AABB& aabb)
+{
+	// Capsule と AABB の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule1, const Col::Capsule& capsule2)
+{
+	// Capsule と Capsule の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment1, const Col::Segment& segment2)
+{
+	// Segment と Segment の交差処理
+	Vector3 push = Vector3();  // 仮の処理
+	return push;
+}
+

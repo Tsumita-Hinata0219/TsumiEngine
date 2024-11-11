@@ -79,3 +79,4 @@ void CollisionComponent::Penetration(Vector3* translate, ColShapeData ownerColli
         // 他の組み合わせも必要に応じて追加
         }, ownerCollider, hitCollider_);
 }
+

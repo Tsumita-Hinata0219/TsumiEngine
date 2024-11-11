@@ -76,6 +76,9 @@ public:
 	// ImGuiの描画
 	virtual void DrawImGui(const std::string& label = "") = 0;
 
+	// 衝突時コールバック関数
+	virtual void OnCollision(const CollisionShape& other, const ColShapeData& hitData);
+
 
 #pragma region Accessor アクセッサ
 
@@ -84,6 +87,9 @@ public:
 	virtual void SetData(const ColShapeData& data) = 0;
 	virtual Col::ColData GetColData() const = 0;
 	virtual void SetData(const Col::ColData& data) = 0;
+
+	// コンポーネント
+	virtual CollisionComponent* GetComponent() { return this->component_; }
 
 	// Bounding
 	Col::AABB GetBounding() const { return this->bounding_; }
@@ -128,4 +134,5 @@ protected:
 
 	// 識別属性
 	uint32_t attribute_ = ColliderAttribute::None;
+
 };

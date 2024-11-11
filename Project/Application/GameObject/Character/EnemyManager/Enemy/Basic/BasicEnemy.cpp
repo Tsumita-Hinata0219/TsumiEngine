@@ -20,7 +20,7 @@ void BasicEnemy::Init()
 	shotFrame_ = kShotInterval_;
 
 	// HPの設定
-	hp_ = 10;
+	hp_ = 15;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -39,11 +39,8 @@ void BasicEnemy::Init()
 	stateVector_[currentStateNo_]->Enter(this);
 
 	//// Colliderの初期化
-	//collider_ = std::make_unique<OBBCollider>();
-	//collider_->Init();
-	//collider_->SetSize(size_);
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	colComp_->RegisterCollider(sphere_);
+	colComp_->SetAttribute(ColliderAttribute::Enemy);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 }
@@ -92,7 +89,7 @@ void BasicEnemy::Update()
 	// ColliderのSRTの設定
 	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
+	/*colComp_->UpdateShape(sphere_);*/
 
 #ifdef _DEBUG
 
@@ -120,7 +117,7 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突自コールバック関数
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 
 		// HPを減らす
 		hp_--;
@@ -273,7 +270,7 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = 0.1f;
+	initVel.z = 0.3f;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化

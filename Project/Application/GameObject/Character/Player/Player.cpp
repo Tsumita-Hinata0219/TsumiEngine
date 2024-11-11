@@ -22,6 +22,7 @@ void Player::Init()
 
 	//Transformの初期化
 	trans_.Init();
+	trans_.srt.translate.z = -5.0f;
 
 	// 各ボディの初期化とペアレントを結ぶ
 	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
@@ -34,15 +35,10 @@ void Player::Init()
 	}
 
 	// Colliderの登録
-	// Collider_1
-	colComp_->RegisterCollider(sphere_1_);
-	sphere_1_.center = trans_.GetWorldPos();
-	sphere_1_.radius = 2.0f;
-	// Collider_2
 	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_2_);
-	sphere_2_.center = trans_.GetWorldPos();
-	sphere_2_.radius = 2.0f;
+	colComp_->Register(sphere_);
+	sphere_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
@@ -86,12 +82,7 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	// Collider_1
-	sphere_1_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_1_);
-	// Collider_2
-	sphere_2_.center = trans_.GetWorldPos();
-	//colComp_->Update(sphere_2_);
+	sphere_.center = trans_.GetWorldPos();
 
 	//// キルカウントが一定を超えていたら勝利フラグを立てる
 	//if (killCount_ >= 15) {
@@ -139,6 +130,11 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
+	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+
+		// 押し出しの処理
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	}
 }
 void Player::OnCollisionWithEnemy()
 {
@@ -274,6 +270,12 @@ void Player::KeyMove()
 // 移動限界処理
 void Player::MoveLimited()
 {
+	// 移動限界
+	const float kMoveMit = 100.0f;
+	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
 }
 
 

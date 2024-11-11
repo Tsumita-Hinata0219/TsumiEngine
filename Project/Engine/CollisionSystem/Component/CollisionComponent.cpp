@@ -3,6 +3,8 @@
 #include "../Shape/CollisionShape.h"
 #include "../Shape/Sphere/CollisionShapeSphere.h"
 #include "../Shape/AABB/CollisionShapeAABB.h"
+#include "../Util/CollisionUtilities.h"
+#include "../Penetration/CollisionPenetration.h"
 
 
 // コンストラクタ
@@ -20,26 +22,6 @@ CollisionComponent::CollisionComponent(IObject* setObject)
 }
 
 
-// シェイプの追加
-void CollisionComponent::RegisterCollider(Col::Sphere& sphere)
-{
-	this->nextID_++; // IDの加算
-	sphere.id = this->nextID_; // IDの設定
-
-	// 新しくシェイプを作成
-	std::unique_ptr<CollisionShapeSphere> shape =
-		std::make_unique<CollisionShapeSphere>(this, &sphere);
-
-	// Boundingの計算も求める
-	shape->CalcBounding();
-
-	// コライダーの空間レベルと所属空間を求める
-	shape->CalcSpaceLevel();
-
-	// シェイプコンテナに作ったシェイプを追加
-	this->shapeMap_[sphere.id] = std::move(shape);
-}
-
 void CollisionComponent::Register(Col::ColData& colData)
 {
 	this->nextID_++; // IDの加算
@@ -50,54 +32,51 @@ void CollisionComponent::Register(Col::ColData& colData)
 }
 
 
-// シェイプの更新
-void CollisionComponent::UpdateShape(const Col::Sphere& sphere)
+// 押し出し処理
+void CollisionComponent::Penetration(Vector3* translate, ColShapeData ownerCollider)
 {
-	auto it = this->shapeMap_.find(sphere.id);
+    // std::visit を使って、二つのコライダーの型に応じた処理を実行
+    std::visit([&](auto&& ownerCollider, auto&& hitCollider_) {
+        using T1 = std::decay_t<decltype(ownerCollider)>;
+        using T2 = std::decay_t<decltype(hitCollider_)>;
 
-	// IDが存在する場合
-	if (it != this->shapeMap_.end()) {
-
-		it->second->SetData(sphere);  // データ更新
-		it->second->CalcBounding();   // Bounding更新
-		it->second->CalcSpaceLevel(); // 八分木更新
-	}
-	else {
-		// IDが存在しない場合はエラー処理
-		Log("Error: Shape with ID :  not found.\n");
-		// 例外を投げる場合
-		throw std::runtime_error("Shape ID not found.");
-	}
+        if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::Sphere>) {
+            // Sphere と Sphere の場合の処理
+            *translate += Penetration::HandleSphereSpherePenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::AABB>) {
+            // Sphere と AABB の場合の処理
+            *translate += Penetration::HandleSphereAABBPpenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::OBB>) {
+            // Sphere と OBB の場合の処理
+            *translate += Penetration::HandleSphereOBBPpenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::AABB>) {
+            // AABB と AABB の場合の処理
+            *translate += Penetration::HandleAABBAABBPpenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::Sphere>) {
+            // AABB と Sphere の場合の処理
+            *translate += Penetration::HandleAABBSpherePenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::OBB>) {
+            // AABB と OBB の場合の処理
+            *translate += Penetration::HandleAABBOBBPenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::Sphere>) {
+            // OBB と Sphere の場合の処理
+            *translate += Penetration::HandleOBBSpherePenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::AABB>) {
+            // OBB と AABB の場合の処理
+            *translate += Penetration::HandleOBBAABBPpenetration(ownerCollider, hitCollider_);
+        }
+        else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::OBB>) {
+            // OBB と OBB の場合の処理
+            *translate += Penetration::HandleOBBOBBPenetration(ownerCollider, hitCollider_);
+        }
+        // 他の組み合わせも必要に応じて追加
+        }, ownerCollider, hitCollider_);
 }
-//
-//void CollisionComponent::Update(const Col::ColData& colData)
-//{
-//	//auto it = this->shapes_.find(colData.id);
-//
-//	//// IDが存在する場合、データの更新
-//	//if (it != this->shapes_.end()) {
-//	//	it->second->SetData(colData); // データ更新
-//	//	it->second->CalcBounding();	  // Bounding更新
-//	//	it->second->CalcSpaceLevel(); // 八分木更新
-//	//}
-//	//else {
-//	//	// IDが存在しない場合はエラー処理
-//	//	Log("Error: Shape with ID :  not found.\n");
-//	//	// 例外を投げる場合
-//	//	throw std::runtime_error("Shape ID not found.");
-//	//}
-//}
 
-
-// コリジョンのチェック
-bool CollisionComponent::CheckCollision(const CollisionComponent& other) const
-{
-	for (const auto& shapeA : shapeMap_) {
-		for (const auto& shapeB : other.shapeMap_) {
-			if (shapeA.second->Intersects(*shapeB.second)) {
-				return true; // 衝突が検出された
-			}
-		}
-	}
-	return false; // 衝突なし
-}

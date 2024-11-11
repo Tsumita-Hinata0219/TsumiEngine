@@ -60,3 +60,11 @@ void CollisionShape::CalcSpaceLevel()
 	// 所属空間
 	spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
 }
+
+
+// 衝突時コールバック関数
+void CollisionShape::OnCollision(const CollisionShape& other, const ColShapeData& hitData)
+{
+	this->component_->SetHitData(hitData);
+	this->component_->GetOwner()->onCollision(other.component_->GetOwner());
+}

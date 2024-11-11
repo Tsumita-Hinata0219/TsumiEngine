@@ -19,11 +19,8 @@ void StaticEnemy::Init()
 	light_.direction = Vector3::one;
 
 	// Colliderの初期化
-	/*collider_ = std::make_unique<OBBCollider>();
-	collider_->Init();
-	collider_->SetSize(size_);*/
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	colComp_->RegisterCollider(sphere_);
+	colComp_->SetAttribute(ColliderAttribute::Enemy);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 
@@ -31,7 +28,7 @@ void StaticEnemy::Init()
 	addRadSpeed_ = 1.0f;
 	
 	// HPの設定
-	hp_ = 10;
+	hp_ = 25;
 }
 
 
@@ -60,7 +57,8 @@ void StaticEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
+	sphere_.center = trans_.GetWorldPos();
+
 
 #ifdef _DEBUG
 
@@ -87,7 +85,7 @@ void StaticEnemy::Draw2DBack() {}
 // 衝突判定コールバック関数
 void StaticEnemy::onCollision(IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 
 		// HPを減らす
 		hp_--;
@@ -129,7 +127,7 @@ void StaticEnemy::CreateNewBullet()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = 0.1f;
+	initVel.z = 0.2f;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化

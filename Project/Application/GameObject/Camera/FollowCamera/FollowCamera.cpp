@@ -16,7 +16,7 @@ void FollowCamera::Init()
 	cameraManager_->ReSetData(camera_);
 
 	// 相対位置
-	constOffset_ = { 0.0f, 20.0f, -50.0f };
+	constOffset_ = { 0.0f, 15.0f, -50.0f };
 
 	// オフセットの設定
 	playerOffset_ = constOffset_;

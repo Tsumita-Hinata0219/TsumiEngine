@@ -143,7 +143,7 @@ private:
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 40.0f;
+	float combatTriggerDistance_ = 50.0f;
 
 	// HP
 	uint32_t hp_ = 0;
@@ -153,7 +153,7 @@ private:
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
-	int kShotInterval_ = 80;
+	int kShotInterval_ = 40;
 
 
 	// ステートパターン

@@ -16,22 +16,14 @@ void EnemyBullet::Init()
 	// 速度の設定。呼び出し先でaccessorで設定
 
 	// 寿命のタイマーをスタート。10秒で設定
-	life_.Init(0.0f, 10.0f * 60.0f);
+	life_.Init(0.0f, 5.0f * 60.0f);
 	life_.Start();
 
 	//// Colliderの初期化
-	//collider_ = std::make_unique<OBBCollider>();
-	//collider_->Init();
-	//collider_->SetSize(size_);
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	colComp_->RegisterCollider(sphere_);
+	colComp_->SetAttribute(ColliderAttribute::Enemy);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
-
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_2_);
-	sphere_2_.center = trans_.GetWorldPos();
-	sphere_2_.radius = 2.0f;
 }
 
 
@@ -48,11 +40,7 @@ void EnemyBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
-	colComp_->UpdateShape(sphere_);
-	sphere_2_.center = trans_.GetWorldPos();
 }
 
 
@@ -65,10 +53,11 @@ void EnemyBullet::Draw2DFront() {}
 void EnemyBullet::Draw2DBack() {}
 
 
-// 衝突自コールバック関数
+// 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+	if (object->GetAttribute() == ObjAttribute::PLAYER || 
+		object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 		isDead_ = true;
 	}
 }

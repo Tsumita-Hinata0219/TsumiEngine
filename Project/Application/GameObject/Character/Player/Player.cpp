@@ -22,6 +22,7 @@ void Player::Init()
 
 	//Transformの初期化
 	trans_.Init();
+	trans_.srt.translate.z = -5.0f;
 
 	// 各ボディの初期化とペアレントを結ぶ
 	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);

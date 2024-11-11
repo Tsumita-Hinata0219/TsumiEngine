@@ -448,6 +448,7 @@
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
+    <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

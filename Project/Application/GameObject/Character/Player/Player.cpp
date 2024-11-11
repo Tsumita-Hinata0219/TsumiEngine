@@ -129,6 +129,8 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
+	// 押し出しの処理
+
 }
 void Player::OnCollisionWithEnemy()
 {

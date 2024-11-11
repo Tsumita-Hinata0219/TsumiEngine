@@ -56,7 +56,8 @@ void EnemyBullet::Draw2DBack() {}
 // 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+	if (object->GetAttribute() == ObjAttribute::PLAYER || 
+		object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 		isDead_ = true;
 	}
 }

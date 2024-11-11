@@ -84,16 +84,16 @@ void Player::Update()
 	// ColliderのSRTの設定
 	sphere_.center = trans_.GetWorldPos();
 
-	//// キルカウントが一定を超えていたら勝利フラグを立てる
-	//if (killCount_ >= 15) {
-	//	isWin_ = true;
-	//	isLose_ = false;
-	//}
-	//// 体力が0なら敗北フラグを立てる
-	//if (hp_ <= 0) {
-	//	isWin_ = false;
-	//	isLose_ = true;
-	//}
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -130,10 +130,14 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
 
 		// 押し出しの処理
 		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	}
+	if (object->GetAttribute() == ObjAttribute::ENEMY) {
+
+		OnCollisionWithEnemyBullet();
 	}
 }
 void Player::OnCollisionWithEnemy()
@@ -143,8 +147,14 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
+	if (hp_ <= 0) {
+		return;
+	}
+
 	// HP減少
-	//hp_--;
+	if (hp_ > 0) {
+		hp_--;
+	}
 
 	// 体力がなければ消すモデルもないので通らない
 	if (hp_ >= 0) {

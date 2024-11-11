@@ -9,6 +9,7 @@
 #include "GameObject/Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/FollowCamera/FollowCamera.h"
 
+#include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
@@ -70,7 +71,7 @@ public:
 private: 
 
 	// シーンチェンジチェック
-	bool SceneChangeCheck(GameManager* state);
+	void SceneChangeCheck();
 
 
 private: // クラス
@@ -108,11 +109,7 @@ private: // クラス
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
 
-	int time_ = 0;
-
-private:
-
-	// シーンチェンジにかかる時間
-	Timer sceneChange_;
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
 };
 

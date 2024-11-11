@@ -71,7 +71,7 @@ public:
 private: 
 
 	// シーンチェンジチェック
-	bool SceneChangeCheck(GameManager* state);
+	void SceneChangeCheck();
 
 
 private: // クラス
@@ -111,6 +111,5 @@ private: // クラス
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;
-
 };
 

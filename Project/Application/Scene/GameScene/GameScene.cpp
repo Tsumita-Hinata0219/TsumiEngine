@@ -107,11 +107,17 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new TitleScene);
+		return;
+	}
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
 		return;
 	}
+	SceneChangeCheck();
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
@@ -192,9 +198,12 @@ void GameScene::FrontSpriteDraw()
 
 
 // シーンチェンジチェック
-bool GameScene::SceneChangeCheck(GameManager* state)
+void GameScene::SceneChangeCheck()
 {
-	state;
-	return 0;
+	// プレイヤーが勝利するか敗北するかすれば
+	// シーンを変更する
+	if (player_->IsWin() || player_->IsLose()) {
+		sceneTransition_->StartFadeOut();
+	}
 }
 

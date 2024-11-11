@@ -130,8 +130,11 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	// 押し出しの処理
-	colComp_->Penetration(&trans_.srt.translate, sphere_);
+	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+
+		// 押し出しの処理
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	}
 }
 void Player::OnCollisionWithEnemy()
 {
@@ -267,6 +270,12 @@ void Player::KeyMove()
 // 移動限界処理
 void Player::MoveLimited()
 {
+	// 移動限界
+	const float kMoveMit = 100.0f;
+	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
 }
 
 

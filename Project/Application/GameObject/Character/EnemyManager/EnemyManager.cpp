@@ -44,11 +44,16 @@ void EnemyManager::Init()
 
 	scope_ = { 0.0f, 2.5f };
 
-	//// 最初に何体か湧かせておく
-	//for (int i = 0; i < 3; ++i) {
-	//	AddBasicEnemy();
-	//	AddStaticEnemy();
-	//}
+	// 最初に何体か湧かせておく
+	for (int i = 0; i < 3; ++i) {
+		AddBasicEnemy();
+		AddStaticEnemy();
+	}
+
+	// EnemyListの更新処理
+	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+		enemy->Update();
+	}
 }
 
 
@@ -56,7 +61,7 @@ void EnemyManager::Init()
 void EnemyManager::Update()
 {
 	// エネミーカウントチェック
-	//EnemyCountCheck();
+	EnemyCountCheck();
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
@@ -102,8 +107,8 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// FlagModel
-	//flagModel_->DrawN(transform_);
-	/*for (int i = 0; i < 3; ++i) {
+	/*flagModel_->DrawN(transform_);
+	for (int i = 0; i < 3; ++i) {
 		spawn_[i]->DrawN(trans_[i]);
 	}*/
 
@@ -188,3 +193,4 @@ void EnemyManager::EnemyCountCheck()
 		}
 	}
 }
+

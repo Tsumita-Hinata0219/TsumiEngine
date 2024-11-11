@@ -16,7 +16,7 @@ void EnemyBullet::Init()
 	// 速度の設定。呼び出し先でaccessorで設定
 
 	// 寿命のタイマーをスタート。10秒で設定
-	life_.Init(0.0f, 10.0f * 60.0f);
+	life_.Init(0.0f, 5.0f * 60.0f);
 	life_.Start();
 
 	//// Colliderの初期化

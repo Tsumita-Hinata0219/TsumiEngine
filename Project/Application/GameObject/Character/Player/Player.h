@@ -139,7 +139,7 @@ private:
 	// 移動量
 	Vector3 velocity_{};
 	// 移動速度
-	float moveSpeed_ = 0.3f;
+	float moveSpeed_ = 0.2f;
 
 	// 姿勢計算の補間速度
 	float orientationLerpSpeed_ = 0.1f;

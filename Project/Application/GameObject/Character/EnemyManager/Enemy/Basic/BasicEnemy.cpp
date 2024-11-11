@@ -20,7 +20,7 @@ void BasicEnemy::Init()
 	shotFrame_ = kShotInterval_;
 
 	// HPの設定
-	hp_ = 10;
+	hp_ = 15;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -270,7 +270,7 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = 0.1f;
+	initVel.z = 0.3f;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化

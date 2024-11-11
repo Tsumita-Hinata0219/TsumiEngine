@@ -28,7 +28,7 @@ void StaticEnemy::Init()
 	addRadSpeed_ = 1.0f;
 	
 	// HPの設定
-	hp_ = 10;
+	hp_ = 25;
 }
 
 
@@ -39,7 +39,7 @@ void StaticEnemy::Update()
 	trans_.srt.rotate.y += ToRadians(addRadSpeed_);
 
 	// 射撃の処理
-	//ExecutexShot();
+	ExecutexShot();
 
 	// Bullet更新処理
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
@@ -127,7 +127,7 @@ void StaticEnemy::CreateNewBullet()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = 0.1f;
+	initVel.z = 0.2f;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 
 	// newBulletの初期化

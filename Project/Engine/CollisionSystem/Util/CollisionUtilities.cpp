@@ -135,6 +135,7 @@ Vector3 ColUtil::GetClosestPoint(const Col::AABB& aabb, const Vector3& point)
 }
 Vector3 ColUtil::GetClosestPoint(const Col::OBB& obb, const Vector3& point)
 {
+	obb, point;
 	// OBB内での最寄点を計算するロジック
 	// OBBに投影して最寄点を得る方法などを使う
 	return Vector3();  // 仮の処理
@@ -151,6 +152,7 @@ Vector3 ColUtil::GetClosestPoint(const Col::Segment& segment, const Vector3& poi
 }
 Vector3 ColUtil::GetClosestPoint(const Col::Capsule& capsule, const Vector3& point)
 {
+	capsule, point;
 	// カプセルの最寄点を計算する方法
 	return Vector3();  // 仮の処理
 }
@@ -268,60 +270,70 @@ Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::Sphere& sp
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::OBB& obb)
 {
+	aabb, obb;
 	// AABB と OBB の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb1, const Col::OBB& obb2)
 {
+	obb1, obb2;
 	// OBB同士の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::Sphere& sphere)
 {
+	obb, sphere;
 	// OBB と Sphere の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::AABB& aabb)
 {
+	obb, aabb;
 	// OBB と AABB の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::Sphere& sphere)
 {
+	segment, sphere;
 	// Segment と Sphere の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::Sphere& sphere)
 {
+	capsule, sphere;
 	// Capsule と Sphere の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::AABB& aabb)
 {
+	segment, aabb;
 	// Segment と AABB の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::AABB& aabb)
 {
+	capsule, aabb;
 	// Capsule と AABB の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule1, const Col::Capsule& capsule2)
 {
+	capsule1, capsule2;
 	// Capsule と Capsule の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;
 }
 Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment1, const Col::Segment& segment2)
 {
+	segment1, segment2;
 	// Segment と Segment の交差処理
 	Vector3 push = Vector3();  // 仮の処理
 	return push;

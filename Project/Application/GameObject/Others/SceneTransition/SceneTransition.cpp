@@ -26,9 +26,9 @@ void SceneTransition::Init()
 
 	// Mask画像の読み込み
 	std::array<std::string, 4> maskTexName = {
-		"MaskTex_1",
-		"MaskTex_2",
-		"MaskTex_3",
+		"MaskTex_4",
+		"MaskTex_4",
+		"MaskTex_4",
 		"MaskTex_4",
 	};
 	for (auto& tex : maskTexName) {

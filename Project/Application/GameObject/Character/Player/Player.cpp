@@ -84,16 +84,16 @@ void Player::Update()
 	// ColliderのSRTの設定
 	sphere_.center = trans_.GetWorldPos();
 
-	//// キルカウントが一定を超えていたら勝利フラグを立てる
-	//if (killCount_ >= 15) {
-	//	isWin_ = true;
-	//	isLose_ = false;
-	//}
-	//// 体力が0なら敗北フラグを立てる
-	//if (hp_ <= 0) {
-	//	isWin_ = false;
-	//	isLose_ = true;
-	//}
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -144,7 +144,7 @@ void Player::OnCollisionWithEnemy()
 void Player::OnCollisionWithEnemyBullet()
 {
 	// HP減少
-	//hp_--;
+	hp_--;
 
 	// 体力がなければ消すモデルもないので通らない
 	if (hp_ >= 0) {

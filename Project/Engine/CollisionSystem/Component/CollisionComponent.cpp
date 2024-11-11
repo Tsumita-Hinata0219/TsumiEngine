@@ -42,39 +42,39 @@ void CollisionComponent::Penetration(Vector3* translate, ColShapeData ownerColli
 
         if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::Sphere>) {
             // Sphere と Sphere の場合の処理
-            *translate = Penetration::HandleSphereSpherePenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleSphereSpherePenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::AABB>) {
             // Sphere と AABB の場合の処理
-            *translate = Penetration::HandleSphereAABBPpenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleSphereAABBPpenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::Sphere> && std::is_same_v<T2, Col::OBB>) {
             // Sphere と OBB の場合の処理
-            *translate = Penetration::HandleSphereOBBPpenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleSphereOBBPpenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::AABB>) {
             // AABB と AABB の場合の処理
-            *translate = Penetration::HandleAABBAABBPpenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleAABBAABBPpenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::Sphere>) {
             // AABB と Sphere の場合の処理
-            *translate = Penetration::HandleAABBSpherePenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleAABBSpherePenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::AABB> && std::is_same_v<T2, Col::OBB>) {
             // AABB と OBB の場合の処理
-            *translate = Penetration::HandleAABBOBBPenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleAABBOBBPenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::Sphere>) {
             // OBB と Sphere の場合の処理
-            *translate = Penetration::HandleOBBSpherePenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleOBBSpherePenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::AABB>) {
             // OBB と AABB の場合の処理
-            *translate = Penetration::HandleOBBAABBPpenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleOBBAABBPpenetration(ownerCollider, hitCollider_);
         }
         else if constexpr (std::is_same_v<T1, Col::OBB> && std::is_same_v<T2, Col::OBB>) {
             // OBB と OBB の場合の処理
-            *translate = Penetration::HandleOBBOBBPenetration(ownerCollider, hitCollider_);
+            *translate += Penetration::HandleOBBOBBPenetration(ownerCollider, hitCollider_);
         }
         // 他の組み合わせも必要に応じて追加
         }, ownerCollider, hitCollider_);

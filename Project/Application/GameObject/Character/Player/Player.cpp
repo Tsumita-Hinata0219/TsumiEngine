@@ -130,7 +130,7 @@ void Player::Draw2DFront()
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
 	// 押し出しの処理
-	//colComp_->Penetration(&trans_.srt.translate);
+	colComp_->Penetration(&trans_.srt.translate, sphere_);
 }
 void Player::OnCollisionWithEnemy()
 {

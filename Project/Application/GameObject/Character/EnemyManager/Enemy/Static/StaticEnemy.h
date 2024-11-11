@@ -25,7 +25,7 @@ public:
 	void Draw2DBack() override;
 
 	// 衝突判定コールバック関数
-	void onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData) override;
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 
 #pragma region Accessor アクセッサ

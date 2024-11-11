@@ -77,7 +77,7 @@ public:
 	virtual void DrawImGui(const std::string& label = "") = 0;
 
 	// 衝突時コールバック関数
-	virtual void OnCollision(const CollisionShape& other, Col::ColData colData);
+	virtual void OnCollision(const CollisionShape& other, const ColShapeData& hitData);
 
 
 #pragma region Accessor アクセッサ

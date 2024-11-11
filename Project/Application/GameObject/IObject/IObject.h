@@ -37,7 +37,7 @@ public: // メンバ関数
 	virtual void Draw2DBack() = 0;
 
     // 衝突時コールバック関数
-    virtual void onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData) = 0;
+    virtual void onCollision([[maybe_unused]] IObject* object) = 0;
 
 
 #pragma region Accessor アクセッサ

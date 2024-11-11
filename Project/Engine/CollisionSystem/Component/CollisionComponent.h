@@ -40,6 +40,10 @@ public:
 	// Attribute
 	void SetAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
 
+	// 衝突相手のコライダーデータ
+	ColShapeData GetHitData() const { return this->hitData_; }
+	void SetHitData(ColShapeData setData) { this->hitData_ = setData; }
+
 #pragma endregion 
 
 
@@ -56,5 +60,8 @@ private:
 
 	// 識別
 	uint32_t attribute_ = ColliderAttribute::None;
+
+	// 衝突相手のコライダーデータ
+	ColShapeData hitData_{};
 };
 

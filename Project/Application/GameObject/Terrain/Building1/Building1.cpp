@@ -34,6 +34,6 @@ void Building1::Draw2DBack() {}
 
 
 // 衝突判定コールバック関数
-void Building1::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
+void Building1::onCollision([[maybe_unused]] IObject* object)
 {
 }

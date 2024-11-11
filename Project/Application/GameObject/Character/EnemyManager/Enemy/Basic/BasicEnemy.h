@@ -31,7 +31,7 @@ public:
 	void Draw2DBack() override;
 
 	// 衝突判定コールバック関数
-	void onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData) override;
+	void onCollision([[maybe_unused]] IObject* object) override;
 
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = enum_val(state); }

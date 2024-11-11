@@ -62,7 +62,7 @@ void SelectBar::Draw2DBack() {}
 
 
 // 衝突判定コールバック関数
-void SelectBar::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
+void SelectBar::onCollision([[maybe_unused]] IObject* object)
 {
 }
 

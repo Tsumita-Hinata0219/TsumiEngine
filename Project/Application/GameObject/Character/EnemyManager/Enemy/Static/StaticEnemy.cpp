@@ -83,7 +83,7 @@ void StaticEnemy::Draw2DBack() {}
 
 
 // 衝突判定コールバック関数
-void StaticEnemy::onCollision(IObject* object, [[maybe_unused]] Col::ColData colData)
+void StaticEnemy::onCollision(IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 

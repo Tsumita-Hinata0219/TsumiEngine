@@ -45,7 +45,7 @@ void Ground::Draw2DBack()
 
 
 // 衝突判定コールバック関数
-void Ground::onCollision([[maybe_unused]] IObject* object, [[maybe_unused]] Col::ColData colData)
+void Ground::onCollision([[maybe_unused]] IObject* object)
 {
 }
 

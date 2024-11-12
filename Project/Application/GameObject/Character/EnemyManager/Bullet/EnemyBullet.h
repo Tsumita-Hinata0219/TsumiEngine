@@ -6,6 +6,14 @@
 #include "../../../GameObject.h"
 
 
+
+// EnemyのBulletのType
+enum class EnemyBulletType {
+	Normal,       // 消える弾
+	Resistant,    // 消えない弾
+};
+
+
 /* PlayerBulletクラス */
 class EnemyBullet : public IObject {
 
@@ -26,6 +34,9 @@ public: // メンバ関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
 #pragma region Accessor アクセッサ
+
+	// Type
+	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType;	}
 
 	// 座標
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
@@ -51,14 +62,6 @@ public: // メンバ関数
 
 #pragma endregion 
 
-#pragma region Collision 衝突判定
-
-	// 衝突自コールバック関数
-	void OnCollisionWithPlayer();
-	void OnCollisionWithPlayerBullet();
-
-#pragma endregion 
-
 
 private:
 
@@ -70,6 +73,9 @@ private:
 
 
 private: // メンバ変数
+
+	// BulletType
+	EnemyBulletType bulletType_ = EnemyBulletType::Normal;
 
 	// モデル
 	std::unique_ptr<Model> model_;

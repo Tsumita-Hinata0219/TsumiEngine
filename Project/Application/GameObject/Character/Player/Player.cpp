@@ -181,6 +181,11 @@ void Player::OnCollisionWithEnemyBullet()
 		),
 			iBodys_.end()
 		);
+
+		// ボディモデルのカラーを赤にする
+		for (auto& body : this->iBodys_) {
+			body->SetModelColor(Samp::Color::RED);
+		}
 	}
 }
 
@@ -402,6 +407,15 @@ void Player::SubtructInvincibilityTime()
 {
 	// 無敵状態の時間を減らす
 	invincibilityTime_--;
+
+	// 一定フレームたったら
+	if (invincibilityTime_ == invincibilityInterval_ - 7) {
+
+		// モデルのカラーを白に戻す
+		for (auto& body : this->iBodys_) {
+			body->SetModelColor(Samp::Color::WHITE);
+		}
+	}
 
 	if (invincibilityTime_ <= 0) {
 		// 状態解除

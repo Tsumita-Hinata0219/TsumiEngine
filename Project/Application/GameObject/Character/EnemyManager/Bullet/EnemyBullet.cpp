@@ -6,9 +6,15 @@
 void EnemyBullet::Init()
 {
 	// BodyModelのロードと初期化
-	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/DemoBullet", "DemoBullet.obj");
-	model_ = modelManager_->GetModel("DemoBullet");
+	// 設定されているTypeで読み込むモデルを変える
+	if (bulletType_ == EnemyBulletType::Normal) {
+		modelManager_->LoadModel("Obj/DemoBullet", "DemoBullet.obj");
+		model_ = modelManager_->GetModel("DemoBullet");
+	}
+	else if (bulletType_ == EnemyBulletType::Resistant) {
+		modelManager_->LoadModel("Obj/DemoBullet", "DemoBullet.obj");
+		model_ = modelManager_->GetModel("DemoBullet");
+	}
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	trans_.Init();
@@ -58,16 +64,11 @@ void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::PLAYER || 
 		object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+
+		// 消えない弾ならreturn
+		if (bulletType_ == EnemyBulletType::Resistant) return;
 		isDead_ = true;
 	}
-}
-void EnemyBullet::OnCollisionWithPlayer()
-{
-	isDead_ = true;
-}
-void EnemyBullet::OnCollisionWithPlayerBullet()
-{
-	isDead_ = true;
 }
 
 

@@ -36,7 +36,7 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// Type
-	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType; }
+	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType;	}
 
 	// 座標
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
@@ -59,14 +59,6 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
-
-#pragma endregion 
-
-#pragma region Collision 衝突判定
-
-	// 衝突自コールバック関数
-	void OnCollisionWithPlayer();
-	void OnCollisionWithPlayerBullet();
 
 #pragma endregion 
 

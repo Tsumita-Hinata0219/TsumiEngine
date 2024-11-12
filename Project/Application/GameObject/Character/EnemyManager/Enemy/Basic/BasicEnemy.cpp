@@ -269,6 +269,6 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = 0.3f;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewEnemyBullet(initPos, initVel);
+	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
 }
 

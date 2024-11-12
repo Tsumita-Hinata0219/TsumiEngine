@@ -194,6 +194,7 @@ void EnemyManager::CreateBasicEnemy()
 	// newEnemyの初期化
 	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
 	newEnemy->SetPosition(initPos);
 
 	// リストに追加
@@ -213,6 +214,7 @@ void EnemyManager::CreateStaticEnemy()
 	// newEnemyの初期化
 	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
 	newEnemy->SetPosition(initPos);
 
 	// リストに追加

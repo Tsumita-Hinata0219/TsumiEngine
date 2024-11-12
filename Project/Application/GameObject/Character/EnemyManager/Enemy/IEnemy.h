@@ -11,6 +11,7 @@
 
 // Player前方宣言
 class Player;
+class EnemyManager;
 
 
 /* Enemyの基底クラス */
@@ -26,6 +27,9 @@ public:
 
 	// Playerの設定
 	virtual void SetPlayer(Player* setPlayer) = 0;
+
+	// EnemyManagerの設定
+	virtual void SetEnemyManager(EnemyManager* setManager) = 0;
 
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;

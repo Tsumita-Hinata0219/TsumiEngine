@@ -1,6 +1,6 @@
 #include "BasicEnemy.h"
 #include "../../../Player/Player.h"
-
+#include "../../EnemyManager.h"
 
 
 // 初期化処理

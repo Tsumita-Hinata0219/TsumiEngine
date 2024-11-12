@@ -20,7 +20,7 @@ class EnemyBullet : public IObject {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	EnemyBullet() { attribute_ = ObjAttribute::ENEMY; };
+	EnemyBullet() { attribute_ = ObjAttribute::ENEMYBULLET; };
 	~EnemyBullet() {};
 
 	// 初期化処理　更新処理　描画処理

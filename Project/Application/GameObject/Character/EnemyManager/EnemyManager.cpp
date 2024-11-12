@@ -46,8 +46,8 @@ void EnemyManager::Init()
 
 	// 最初に何体か湧かせておく
 	for (int i = 0; i < 3; ++i) {
-		AddBasicEnemy();
-		AddStaticEnemy();
+		AddNewBasicEnemy();
+		AddNewStaticEnemy();
 	}
 
 	// EnemyListの更新処理
@@ -67,11 +67,24 @@ void EnemyManager::Update()
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
 	}
-
 	// 死亡フラグが立っていたら削除
 	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
 		if (enemy->IsDead()) {
 			enemy.reset();
+			return true;
+		}
+		return false;
+		}
+	);
+
+	// Bullet更新処理
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
+		if (bullet->IsDead()) {
+			bullet.reset();
 			return true;
 		}
 		return false;
@@ -89,10 +102,10 @@ void EnemyManager::Update()
 
 		ImGui::Text("");
 		if (ImGui::Button("AddBasicEnemy")) {
-			AddBasicEnemy();
+			AddNewBasicEnemy();
 		}
 		if (ImGui::Button("AddStaticnemy")) {
-			AddStaticEnemy();
+			AddNewStaticEnemy();
 		}
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
 		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
@@ -116,58 +129,29 @@ void EnemyManager::Draw3D()
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Draw3D();
 	}
+
+	// Bulletsの描画
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Draw3D();
+	}
 }
 
 
 // 新しいEnemyを追加する
-void EnemyManager::AddBasicEnemy()
+void EnemyManager::AddNewBasicEnemy()
 {
 	CreateBasicEnemy(); // 新しいEnemyを生成する
 }
-void EnemyManager::AddStaticEnemy()
+void EnemyManager::AddNewStaticEnemy()
 {
 	CreateStaticEnemy(); // 新しいエネミーを生成する
 }
 
 
-// 新しいEnemyを生成する
-void EnemyManager::CreateBasicEnemy()
+// 新しいEnemyBulletを追加する
+void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
 {
-	// 新しいEnemyのインスタンス
-	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
-
-	int index = int(RandomGenerator::getRandom(scope_));
-
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos =
-		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
-
-	// newEnemyの初期化
-	newEnemy->Init();
-	newEnemy->SetPlayer(this->player_);
-	newEnemy->SetPosition(initPos);
-
-	// リストに追加
-	enemys_.push_back(newEnemy);
-}
-void EnemyManager::CreateStaticEnemy()
-{
-	// 新しいEnemyのインスタンス
-	std::shared_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
-
-	int index = int(RandomGenerator::getRandom(scope_));
-
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos =
-		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
-
-	// newEnemyの初期化
-	newEnemy->Init();
-	newEnemy->SetPlayer(this->player_);
-	newEnemy->SetPosition(initPos);
-
-	// リストに追加
-	enemys_.push_back(newEnemy);
+	CreateEnemyBullet(setType, initPos, initVel);
 }
 
 
@@ -192,5 +176,66 @@ void EnemyManager::EnemyCountCheck()
 			}
 		}
 	}
+}
+
+
+// 新しいEnemyを生成する
+void EnemyManager::CreateBasicEnemy()
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
+
+	int index = int(RandomGenerator::getRandom(scope_));
+
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos =
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
+	newEnemy->SetPosition(initPos);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
+}
+void EnemyManager::CreateStaticEnemy()
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
+
+	int index = int(RandomGenerator::getRandom(scope_));
+
+	// 初期座標。多少ランダムに湧く
+	Vector3 initPos =
+		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
+	newEnemy->SetPosition(initPos);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
+}
+
+
+// 新しいEnemyBulletを生成する
+void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+{
+	// newBulletのインスタンス
+	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
+
+	// newBulletの初期化
+	newBullet->SetBulletType(setType);
+	newBullet->Init();
+	newBullet->SetPosition(initPos);
+	newBullet->SetVelocity(initVel);
+	newBullet->SetRotationFromVelocity();
+
+	// リストに追加
+	bulletList_.push_back(newBullet);
 }
 

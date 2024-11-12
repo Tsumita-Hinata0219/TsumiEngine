@@ -30,8 +30,11 @@ public: // メンバ関数
 	void Draw3D();
 
 	// 新しいEnemyを追加する
-	void AddBasicEnemy();
-	void AddStaticEnemy();
+	void AddNewBasicEnemy();
+	void AddNewStaticEnemy();
+
+	// 新しいEnemyBulletを追加する
+	void AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
 #pragma region Accessor アクセッサ
 
@@ -46,12 +49,15 @@ public: // メンバ関数
 
 private:
 
+	// エネミーカウントチェック
+	void EnemyCountCheck();
+
 	// 新しいEnemyを生成する
 	void CreateBasicEnemy();
 	void CreateStaticEnemy();
 
-	// エネミーカウントチェック
-	void EnemyCountCheck();
+	// 新しいEnemyBulletを生成する
+	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
 
 private: // メンバ変数
@@ -68,6 +74,9 @@ private: // メンバ変数
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
+	// EnemyBulletのList配列
+	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
+
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};
@@ -77,7 +86,6 @@ private: // メンバ変数
 
 	// エネミーのカウントチェックタイマー
 	Timer enemyCountCheckTime_;
-
 
 	ModelManager* modelManager_ = nullptr;
 	std::vector<std::unique_ptr<Model>> spawn_;

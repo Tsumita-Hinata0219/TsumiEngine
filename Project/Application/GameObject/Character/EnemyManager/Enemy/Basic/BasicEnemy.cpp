@@ -263,25 +263,6 @@ void BasicEnemy::ExecuteShot()
 // 新しいバレットを生成する
 void BasicEnemy::CreateNewBullet()
 {
-	//// newBulletのインスタンス
-	//std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
-
-	//// 初期座標
-	//Vector3 initPos = trans_.GetWorldPos();
-	//// 初期速度
-	//Vector3 initVel = Vector3::oneZ;
-	//initVel.z = 0.3f;
-	//initVel = TransformNormal(initVel, trans_.matWorld);
-
-	//// newBulletの初期化
-	//newBullet->Init();
-	//newBullet->SetPosition(initPos);
-	//newBullet->SetVelocity(initVel);
-	//newBullet->SetRotationFromVelocity();
-
-	//// リストに追加
-	//bulletList_.push_back(newBullet);
-
 	// 初期座標
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度

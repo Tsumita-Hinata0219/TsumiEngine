@@ -238,4 +238,3 @@ void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel)
 	bulletList_.push_back(newBullet);
 }
 
-

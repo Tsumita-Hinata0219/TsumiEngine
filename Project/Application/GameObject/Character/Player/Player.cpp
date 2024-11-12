@@ -22,6 +22,7 @@ void Player::Init()
 
 	//Transformの初期化
 	trans_.Init();
+	trans_.srt.translate.z = -5.0f;
 
 	// 各ボディの初期化とペアレントを結ぶ
 	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
@@ -33,18 +34,20 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
-	// Colliderの初期化
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	colComp_->RegisterCollider(sphere_);
+	// Colliderの登録
+	colComp_->SetAttribute(ColliderAttribute::Player);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
-
 
 	// キルカウントを0で初期化
 	killCount_ = 0;
 
 	// HPの設定
 	hp_ = 3;
+
+	// 無敵状態の時間を設定しておく
+	invincibilityTime_ = invincibilityInterval_;
 }
 
 
@@ -82,20 +85,24 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
 
-	//// キルカウントが一定を超えていたら勝利フラグを立てる
-	//if (killCount_ >= 15) {
-	//	isWin_ = true;
-	//	isLose_ = false;
-	//}
-	//// 体力が0なら敗北フラグを立てる
-	//if (hp_ <= 0) {
-	//	isWin_ = false;
-	//	isLose_ = true;
-	//}
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
+
+	// 無敵状態のタイマーを減らす処理
+	if (isInvincibility_) {
+		SubtructInvincibilityTime();
+	}
+
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -132,6 +139,15 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
+	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+
+		// 押し出しの処理
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	}
+	if (object->GetAttribute() == ObjAttribute::ENEMY) {
+
+		OnCollisionWithEnemyBullet();
+	}
 }
 void Player::OnCollisionWithEnemy()
 {
@@ -140,8 +156,17 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
+	// 早期return
+	if (isInvincibility_) return; // 無敵時間
+	if (hp_ <= 0) return; // 体力が0以下
+
+	// 無敵時間にする
+	isInvincibility_ = true;
+
 	// HP減少
-	//hp_--;
+	if (hp_ > 0) {
+		hp_--;
+	}
 
 	// 体力がなければ消すモデルもないので通らない
 	if (hp_ >= 0) {
@@ -267,6 +292,12 @@ void Player::KeyMove()
 // 移動限界処理
 void Player::MoveLimited()
 {
+	// 移動限界
+	const float kMoveMit = 100.0f;
+	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
 }
 
 
@@ -366,6 +397,21 @@ void Player::CreateNewBullet()
 }
 
 
+// 無敵状態のタイマーを減らす処理
+void Player::SubtructInvincibilityTime()
+{
+	// 無敵状態の時間を減らす
+	invincibilityTime_--;
+
+	if (invincibilityTime_ <= 0) {
+		// 状態解除
+		isInvincibility_ = false;
+		// タイマーリセット
+		invincibilityTime_ = invincibilityInterval_;
+	}
+}
+
+
 // ImGuiの描画
 void Player::DrawImGui()
 {
@@ -392,6 +438,11 @@ void Player::DrawImGui()
 
 		ImGui::Text("Shoot");
 		ImGui::Checkbox("isShooting", &isShooting_);
+		ImGui::Text("");
+
+		ImGui::Text("Invincibility");
+		ImGui::Checkbox("Invincibility", &isInvincibility_);
+		ImGui::Text("InvincibilityTime = %d", invincibilityTime_);
 		ImGui::Text("");
 
 		ImGui::TreePop();

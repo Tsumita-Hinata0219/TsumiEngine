@@ -1,7 +1,9 @@
 #pragma once
 
-#include "../Component/CollisionComponent.h"
+#include "Math/MyMath.h"
 
+// 前方宣言
+class CollisionComponent;
 
 /* コリジョンが発生したときに必要な情報を保持するためのクラス */
 class CollisionEvent {
@@ -13,10 +15,7 @@ public:
 	~CollisionEvent() {};
 
 	// パラメータ付きコンストラクタ
-	CollisionEvent(CollisionComponent* comp1, CollisionComponent* comp2) {
-		this->component1_ = comp1;
-		this->component2_ = comp2;
-	}
+	CollisionEvent(CollisionComponent* comp1, CollisionComponent* comp2);
 
 
 #pragma region Accessor アクセッサ

@@ -11,12 +11,12 @@ CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp)
     // コンポーネントの設定
     component_ = comp;
 }
-CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp, Col::AABB setData)
+CollisionShapeAABB::CollisionShapeAABB(CollisionComponent* comp, Col::AABB* setData)
 {
     // コンポーネントのの設定
     component_ = comp;
     // データの設定
-    aabb_ = setData;
+    aabb_ = *setData;
 }
 
 
@@ -70,4 +70,13 @@ void CollisionShapeAABB::CalcBounding()
 {
     // 境界ボックスに情報を挿入
     this->bounding_ = this->aabb_;
+}
+
+
+// ImGuiの描画
+void CollisionShapeAABB::DrawImGui(const std::string& label)
+{
+    ImGui::DragFloat3((label + "_Center").c_str(), &this->aabb_.center.x, 0.0f);
+    ImGui::DragFloat3((label + "_Min").c_str(), &this->aabb_.min.x, 0.0f);
+    ImGui::DragFloat3((label + "_Max").c_str(), &this->aabb_.max.x, 0.0f);
 }

@@ -25,8 +25,7 @@ void GameScene::Initialize()
 	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
 
 	/* ----- CollisionManager コリジョンマネージャー ----- */
-	collisionSystem_ = std::make_unique<CollisionSystem>();
-	collisionSystem_->Init();
+	CollisionManager_ = CollisionManager::GetInstance();
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -74,8 +73,11 @@ void GameScene::Initialize()
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
-	// シーンチェンジにかかる時間。3秒
-	sceneChange_.Init(0.0f, 60.0f * 3.0f);
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+	sceneTransition_->SetState(Cloased);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -103,12 +105,23 @@ void GameScene::Update(GameManager* state)
 	/* ----- Floor 床 ----- */
 	floor_->Update();
 
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new TitleScene);
+		return;
+	}
+	// シーントランジション中は以下の処理に入らない
+	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
+		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
+	SceneChangeCheck();
+
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
-	if (!startDirection_->IsFinish()) { return; }
-	time_++;
-	if (time_ >= 2.0f * 60.0f) {
-		state->ChangeSceneState(new TitleScene());
+	if (!startDirection_->IsFinish()) {
 		return;
 	}
 
@@ -119,11 +132,13 @@ void GameScene::Update(GameManager* state)
 	enemyManager_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
-	CheckAllCollision();
+	CollisionManager_->Update();
+
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
+	CollisionManager_->Update();
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -179,56 +194,19 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
+
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }
 
 
 // シーンチェンジチェック
-bool GameScene::SceneChangeCheck(GameManager* state)
+void GameScene::SceneChangeCheck()
 {
-	// プレイヤーの勝敗条件
+	// プレイヤーが勝利するか敗北するかすれば
+	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
-
-		if (!sceneChange_.IsActive()) {
-
-			// SceneChangeTimeスタート
-			sceneChange_.Start();
-		}
-
-		// タイマー更新
-		sceneChange_.Update();
-
-		// 終了したらシーンチェンジ
-		if (sceneChange_.IsFinish()) {
-			state->ChangeSceneState(new ResultScene());
-		}
-
-		return true;
+		sceneTransition_->StartFadeOut();
 	}
-
-	return false;
 }
 
-
-// 衝突判定処理
-void GameScene::CheckAllCollision()
-{
-	// コンポーネントをクリア
-	collisionSystem_->ClearComponent();
-
-	// コンポーネントを追加
-	collisionSystem_->AAddComponent(player_->GetColComponent());
-	for (auto& plaBullet : player_->GetBulletList()) {
-		collisionSystem_->AAddComponent(plaBullet->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		collisionSystem_->AAddComponent(enemy->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		for (auto& eneBullet : enemy->GetBulletList()) {
-			collisionSystem_->AAddComponent(eneBullet->GetColComponent());
-		}
-	}
-
-	// コリジョン判定を行う
-	collisionSystem_->Update();
-}

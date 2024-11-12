@@ -81,7 +81,7 @@ private:
 	const float DZone_ = 0.2f;
 
 	// 回転速度
-	float addOrientationSpeed_ = 0.3f;
+	float addOrientationSpeed_ = 0.15f;
 	// 姿勢計算の補間速度
 	float orientationLerpSpeed_ = 0.5f;
 

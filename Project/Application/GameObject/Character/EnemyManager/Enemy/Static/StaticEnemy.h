@@ -110,7 +110,7 @@ private:
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
-	int kShotInterval_ = 50;
+	int kShotInterval_ = 30;
 
 };
 

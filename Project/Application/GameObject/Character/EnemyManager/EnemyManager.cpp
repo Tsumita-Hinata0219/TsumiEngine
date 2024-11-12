@@ -49,6 +49,11 @@ void EnemyManager::Init()
 		AddBasicEnemy();
 		AddStaticEnemy();
 	}
+
+	// EnemyListの更新処理
+	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+		enemy->Update();
+	}
 }
 
 
@@ -102,8 +107,8 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// FlagModel
-	//flagModel_->DrawN(transform_);
-	/*for (int i = 0; i < 3; ++i) {
+	/*flagModel_->DrawN(transform_);
+	for (int i = 0; i < 3; ++i) {
 		spawn_[i]->DrawN(trans_[i]);
 	}*/
 
@@ -188,3 +193,4 @@ void EnemyManager::EnemyCountCheck()
 		}
 	}
 }
+

@@ -11,12 +11,12 @@ CollisionShapeSphere::CollisionShapeSphere(CollisionComponent* comp)
 	// コンポーネントの設定
 	component_ = comp;
 }
-CollisionShapeSphere::CollisionShapeSphere(CollisionComponent* comp, Col::Sphere setData)
+CollisionShapeSphere::CollisionShapeSphere(CollisionComponent* comp, Col::Sphere* setData)
 {
 	// コンポーネントのの設定
 	component_ = comp;
 	// データの設定
-	sphere_ = setData;
+	sphere_ = *setData;
 }
 
 
@@ -76,10 +76,16 @@ void CollisionShapeSphere::CalcBounding()
 	uint32_t id = this->sphere_.id;
 
 	// 境界ボックスに情報を挿入
-	this->bounding_ = {
-		id,
-		center,
-		min,
-		max,
-	};
+	this->bounding_.id = id;
+	this->bounding_.center = center;
+	this->bounding_.min = min;
+	this->bounding_.max = max;
+}
+
+
+// ImGuiの描画
+void CollisionShapeSphere::DrawImGui(const std::string& label)
+{
+	ImGui::DragFloat3((label + "_Center").c_str(), &this->sphere_.center.x, 0.0f);
+	ImGui::DragFloat((label + "_Radius").c_str(), &this->sphere_.radius, 0.0f);
 }

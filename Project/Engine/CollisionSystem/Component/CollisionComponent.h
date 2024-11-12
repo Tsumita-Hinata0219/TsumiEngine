@@ -2,12 +2,12 @@
 
 #include "Math/MyMath.h"
 #include "../Shape/CollisionShape.h"
-#include "../Shape/Sphere/CollisionShapeSphere.h"
-#include "../Shape/AABB/CollisionShapeAABB.h"
-
+#include "../Collider/ColliderConfig.h"
 
 #include <memory>
 #include <vector>
+#include <functional>
+#include <typeindex>
 
 
 // IObjectの前方宣言
@@ -26,13 +26,10 @@ public:
 	CollisionComponent(IObject* setObject);
 
 	// シェイプの追加
-	void RegisterCollider(Col::Sphere& sphere);
+	void Register(Col::ColData& colData);
 
-	// シェイプの更新
-	void UpdateShape(const Col::Sphere& sphere);
-
-	// コリジョンのチェック
-	bool CheckCollision(const CollisionComponent& other) const;
+	// 押し出し処理
+	void Penetration(Vector3* translate, ColShapeData ownerCollider);
 
 
 #pragma region Accessor
@@ -40,7 +37,20 @@ public:
 	// IObject
 	IObject* GetOwner() const { return this->owner_; }
 
+	// Attribute
+	void SetAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
+
+	// 衝突相手のコライダーデータ
+	ColShapeData GetHitData() const { return this->hitCollider_; }
+	void SetHitData(ColShapeData setData) { this->hitCollider_ = setData; }
+
 #pragma endregion 
+
+
+private:
+
+	// コライダーとの押し出し処理
+
 
 
 private:
@@ -51,10 +61,13 @@ private:
 	// シェイプと構造体を繋ぐID
 	int nextID_ = 0;
 
-	// コリジョンシェイプ
-	std::map<int, std::unique_ptr<CollisionShape>> shapeMap_;
-
 	// インデックス
 	uint32_t index_ = 0;
+
+	// 識別
+	uint32_t attribute_ = ColliderAttribute::None;
+
+	// 衝突相手のコライダーデータ
+	ColShapeData hitCollider_{};
 };
 

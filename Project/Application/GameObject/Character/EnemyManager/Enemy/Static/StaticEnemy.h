@@ -71,6 +71,7 @@ private:
 
 	// 新しいバレットを生成する
 	void CreateNewBullet();
+	void CreateNewBullet2();
 
 
 private:

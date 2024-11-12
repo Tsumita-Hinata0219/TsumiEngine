@@ -110,6 +110,7 @@ void StaticEnemy::ExecutexShot()
 
 		// バレット生成
 		CreateNewBullet();
+		CreateNewBullet2();
 
 		// タイマー再設定
 		shotFrame_ = kShotInterval_;
@@ -129,3 +130,15 @@ void StaticEnemy::CreateNewBullet()
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
 }
 
+
+// 新しいバレットを生成する
+void StaticEnemy::CreateNewBullet2()
+{
+	// 初期座標
+	Vector3 initPos = trans_.GetWorldPos();
+	// 初期速度
+	Vector3 initVel = Vector3::oneZ;
+	initVel.z = -0.3f;
+	initVel = TransformNormal(initVel, trans_.matWorld);
+	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Resistant, initPos, initVel);
+}

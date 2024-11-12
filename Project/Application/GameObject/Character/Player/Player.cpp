@@ -45,6 +45,9 @@ void Player::Init()
 
 	// HPの設定
 	hp_ = 3;
+
+	// 無敵状態の時間を設定しておく
+	invincibilityTime_ = invincibilityInterval_;
 }
 
 
@@ -94,6 +97,12 @@ void Player::Update()
 		isWin_ = false;
 		isLose_ = true;
 	}
+
+	// 無敵状態のタイマーを減らす処理
+	if (isInvincibility_) {
+		SubtructInvincibilityTime();
+	}
+
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -147,9 +156,12 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
-	if (hp_ <= 0) {
-		return;
-	}
+	// 早期return
+	if (isInvincibility_) return; // 無敵時間
+	if (hp_ <= 0) return; // 体力が0以下
+
+	// 無敵時間にする
+	isInvincibility_ = true;
 
 	// HP減少
 	if (hp_ > 0) {
@@ -385,6 +397,21 @@ void Player::CreateNewBullet()
 }
 
 
+// 無敵状態のタイマーを減らす処理
+void Player::SubtructInvincibilityTime()
+{
+	// 無敵状態の時間を減らす
+	invincibilityTime_--;
+
+	if (invincibilityTime_ <= 0) {
+		// 状態解除
+		isInvincibility_ = false;
+		// タイマーリセット
+		invincibilityTime_ = invincibilityInterval_;
+	}
+}
+
+
 // ImGuiの描画
 void Player::DrawImGui()
 {
@@ -411,6 +438,11 @@ void Player::DrawImGui()
 
 		ImGui::Text("Shoot");
 		ImGui::Checkbox("isShooting", &isShooting_);
+		ImGui::Text("");
+
+		ImGui::Text("Invincibility");
+		ImGui::Checkbox("Invincibility", &isInvincibility_);
+		ImGui::Text("InvincibilityTime = %d", invincibilityTime_);
 		ImGui::Text("");
 
 		ImGui::TreePop();

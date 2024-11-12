@@ -82,9 +82,6 @@ public:
 
 private:
 
-	// コライダーの更新
-	//void UpdateCollider();
-
 	// 入力を受け取る
 	void InputFunc();
 
@@ -116,8 +113,12 @@ private:
 	// バレットリストの追加
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
+	// 無敵状態のタイマーを減らす処理
+	void SubtructInvincibilityTime();
+
 	// ImGuiの描画
 	void DrawImGui();
+
 
 private:
 
@@ -156,6 +157,13 @@ private:
 	// ゲームに勝利したかのフラグ
 	bool isWin_ = false;
 	bool isLose_ = false;
+
+	// 無敵中
+	bool isInvincibility_ = false;
+
+	// 無敵時間 インターバル時間
+	uint32_t invincibilityTime_ = 0;
+	uint32_t invincibilityInterval_ = 2 * 60; // 2秒
 
 #pragma region System
 

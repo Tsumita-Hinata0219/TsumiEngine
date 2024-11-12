@@ -46,8 +46,8 @@ void EnemyManager::Init()
 
 	// 最初に何体か湧かせておく
 	for (int i = 0; i < 3; ++i) {
-		AddBasicEnemy();
-		AddStaticEnemy();
+		AddNewBasicEnemy();
+		AddNewStaticEnemy();
 	}
 
 	// EnemyListの更新処理
@@ -67,11 +67,24 @@ void EnemyManager::Update()
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
 	}
-
 	// 死亡フラグが立っていたら削除
 	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
 		if (enemy->IsDead()) {
 			enemy.reset();
+			return true;
+		}
+		return false;
+		}
+	);
+
+	// Bullet更新処理
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
+		if (bullet->IsDead()) {
+			bullet.reset();
 			return true;
 		}
 		return false;
@@ -89,10 +102,10 @@ void EnemyManager::Update()
 
 		ImGui::Text("");
 		if (ImGui::Button("AddBasicEnemy")) {
-			AddBasicEnemy();
+			AddNewBasicEnemy();
 		}
 		if (ImGui::Button("AddStaticnemy")) {
-			AddStaticEnemy();
+			AddNewStaticEnemy();
 		}
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
 		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
@@ -116,17 +129,53 @@ void EnemyManager::Draw3D()
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Draw3D();
 	}
+
+	// Bulletsの描画
+	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+		bullet->Draw3D();
+	}
 }
 
 
 // 新しいEnemyを追加する
-void EnemyManager::AddBasicEnemy()
+void EnemyManager::AddNewBasicEnemy()
 {
 	CreateBasicEnemy(); // 新しいEnemyを生成する
 }
-void EnemyManager::AddStaticEnemy()
+void EnemyManager::AddNewStaticEnemy()
 {
 	CreateStaticEnemy(); // 新しいエネミーを生成する
+}
+
+
+// 新しいEnemyBulletを追加する
+void EnemyManager::AddNewEnemyBullet(Vector3 initPos, Vector3 initVel)
+{
+	CreateEnemyBullet(initPos, initVel);
+}
+
+
+// エネミーカウントチェック
+void EnemyManager::EnemyCountCheck()
+{
+	// タイマー更新
+	enemyCountCheckTime_.Update(true);
+
+	// タイマー終了でチェック
+	if (enemyCountCheckTime_.IsFinish()) {
+
+		// エネミーが一定数以下なら新しく湧くようにする
+		if (enemyMinInstance_ >= int(enemys_.size())) {
+
+			// 最低数との差分
+			int shortageCount = enemyMinInstance_ - int(enemys_.size());
+
+			// 足りない分、新しいEnemyを生成する
+			for (int i = 0; i < shortageCount; ++i) {
+				CreateBasicEnemy();
+			}
+		}
+	}
 }
 
 
@@ -171,26 +220,20 @@ void EnemyManager::CreateStaticEnemy()
 }
 
 
-// エネミーカウントチェック
-void EnemyManager::EnemyCountCheck()
+// 新しいEnemyBulletを生成する
+void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel)
 {
-	// タイマー更新
-	enemyCountCheckTime_.Update(true);
+	// newBulletのインスタンス
+	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
 
-	// タイマー終了でチェック
-	if (enemyCountCheckTime_.IsFinish()) {
+	// newBulletの初期化
+	newBullet->Init();
+	newBullet->SetPosition(initPos);
+	newBullet->SetVelocity(initVel);
+	newBullet->SetRotationFromVelocity();
 
-		// エネミーが一定数以下なら新しく湧くようにする
-		if (enemyMinInstance_ >= int(enemys_.size())) {
-
-			// 最低数との差分
-			int shortageCount = enemyMinInstance_ - int(enemys_.size());
-
-			// 足りない分、新しいEnemyを生成する
-			for (int i = 0; i < shortageCount; ++i) {
-				CreateBasicEnemy();
-			}
-		}
-	}
+	// リストに追加
+	bulletList_.push_back(newBullet);
 }
+
 

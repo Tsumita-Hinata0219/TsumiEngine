@@ -30,8 +30,11 @@ public: // メンバ関数
 	void Draw3D();
 
 	// 新しいEnemyを追加する
-	void AddBasicEnemy();
-	void AddStaticEnemy();
+	void AddNewBasicEnemy();
+	void AddNewStaticEnemy();
+
+	// 新しいEnemyBulletを追加する
+	void AddNewEnemyBullet(Vector3 initPos, Vector3 initVel);
 
 #pragma region Accessor アクセッサ
 
@@ -46,12 +49,15 @@ public: // メンバ関数
 
 private:
 
+	// エネミーカウントチェック
+	void EnemyCountCheck();
+
 	// 新しいEnemyを生成する
 	void CreateBasicEnemy();
 	void CreateStaticEnemy();
 
-	// エネミーカウントチェック
-	void EnemyCountCheck();
+	// 新しいEnemyBulletを生成する
+	void CreateEnemyBullet(Vector3 initPos, Vector3 initVel);
 
 
 private: // メンバ変数

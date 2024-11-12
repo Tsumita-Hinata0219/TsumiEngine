@@ -165,6 +165,7 @@ private:
 	uint32_t invincibilityTime_ = 0;
 	uint32_t invincibilityInterval_ = 2 * 60; // 2秒
 
+
 #pragma region System
 
 	// Inputクラス

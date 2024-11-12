@@ -144,7 +144,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 		// 押し出しの処理
 		colComp_->Penetration(&trans_.srt.translate, sphere_);
 	}
-	if (object->GetAttribute() == ObjAttribute::ENEMY) {
+	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 
 		OnCollisionWithEnemyBullet();
 	}

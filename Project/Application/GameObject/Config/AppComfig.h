@@ -7,6 +7,7 @@ enum class ObjAttribute {
     PLAYER,
     PLAYERBULLET,
     ENEMY,
+    ENEMYBULLET,
     TERRAIN,
     OTHER,
 };

@@ -162,6 +162,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Camera.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Manager\CameraManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
@@ -344,6 +346,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlStateh.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />

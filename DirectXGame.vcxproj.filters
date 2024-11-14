@@ -233,6 +233,8 @@
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -458,6 +460,9 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlStateh.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

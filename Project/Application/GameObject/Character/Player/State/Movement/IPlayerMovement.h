@@ -14,7 +14,7 @@ public:
 	virtual ~IPlayerMovement() = default;
 
 	// 初期化、更新
-	virtual void Eneter() = 0;
+	virtual void Enter(Player* pPlayer) = 0;
 	virtual void Update() = 0;
 
 

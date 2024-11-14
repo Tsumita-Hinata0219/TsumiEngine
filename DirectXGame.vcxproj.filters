@@ -232,6 +232,7 @@
     <ClCompile Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -456,6 +457,7 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

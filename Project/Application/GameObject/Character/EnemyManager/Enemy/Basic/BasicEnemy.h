@@ -146,7 +146,7 @@ private:
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 50.0f;
+	float combatTriggerDistance_ = 60.0f;
 
 	// HP
 	uint32_t hp_ = 0;

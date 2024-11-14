@@ -177,6 +177,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
@@ -340,6 +342,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />

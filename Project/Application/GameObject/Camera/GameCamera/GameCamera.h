@@ -6,6 +6,17 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "State/Control/ICameraControlState.h"
+#include "State/Control/Orbital/OrbitalCameraControl.h"
+#include "State/Control/TopDown/TopDownCameraControl.h"
+
+
+// GameCameraのタイプ
+enum class GameCameraType {
+	ORBITAL,
+	TOPDOWN,
+};
+
 
 // 前方宣言
 class Player;
@@ -51,6 +62,9 @@ public: // メンバ関数
 
 
 #pragma region Accessor アクセッサ
+
+	// Type
+	void SetCameraType(GameCameraType setType) { this->cametaType_ = setType; }
 
 	// Player
 	void SetPlayer(Player* player) { this->player_ = player; }
@@ -101,6 +115,13 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	// カメラ本体
 	CameraResource camera_{};
+
+	// カメラのタイプ
+	GameCameraType cametaType_ = GameCameraType::ORBITAL;
+
+	// 操作のステート
+	std::unique_ptr<ICameraControlState> controlState_;
+
 
 	// 入力
 	Input* input_ = nullptr;

@@ -460,7 +460,7 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
-    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlStateh.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlState.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
   </ItemGroup>

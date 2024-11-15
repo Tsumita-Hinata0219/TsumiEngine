@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../ICameraControlStateh.h"
+#include "../ICameraControlState.h"
 
 
 /* カメラの操作処理の
    フォローカメラ時の処理*/
-class OrbitalCameraControl : public ICameraControlStateh {
+class OrbitalCameraControl : public ICameraControlState {
 
 public:
 

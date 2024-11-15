@@ -17,6 +17,17 @@ void GameCamera::Init()
 	camera_.srt.rotate = { 0.3f, 0.0f, 0.0f };
 	cameraManager_->ReSetData(camera_);
 
+	// 操作ステート
+	// TypeがOrbitalとTopDownでわける
+	if (cametaType_ == GameCameraType::ORBITAL) {
+		controlState_ = std::make_unique<OrbitalCameraControl>();
+	}
+	else if (cametaType_ == GameCameraType::TOPDOWN) {
+		controlState_ = std::make_unique<TopDownCameraControl>();
+	}
+	controlState_->SetPlayer(player_);
+	controlState_->Enter(this, &camera_);
+
 	// 相対位置
 	constOffset_ = { 0.0f, 20.0f, -50.0f };
 
@@ -36,11 +47,14 @@ void GameCamera::Update()
 	// stickの入力を受け取る
 	iRStick_ = input_->GetRStick();
 
-	// 回転処理
-	FuncOrientation();
+	// 操作の更新処理
+	controlState_->Update();
 
-	// フォロー処理
-	FuncFollow();
+	//// 回転処理
+	//FuncOrientation();
+
+	//// フォロー処理
+	//FuncFollow();
 
 	// 前方ベクトルと右方ベクトルを求める
 	CalcForwardVec();

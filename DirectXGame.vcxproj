@@ -346,7 +346,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
-    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlStateh.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlState.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />

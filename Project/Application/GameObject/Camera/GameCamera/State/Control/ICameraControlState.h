@@ -8,14 +8,14 @@ class Player;
 
 /* IPlayerMovementの基底クラス
    移動処理のステートパターン */
-class ICameraControlStateh {
+class ICameraControlState {
 
 public:
 
 	/// <summary>
 	/// 仮想デストラクタ
 	/// </summary>
-	virtual ~ICameraControlStateh() = default;
+	virtual ~ICameraControlState() = default;
 
 	/// <summary>
 	/// 初期化処理

@@ -13,7 +13,7 @@ public:
 	TopDownCameraControl() = default;
 
 	// 初期化、更新
-	void Enter(GameCamera* pCamera) override;
+	void Enter(GameCamera* pCamera, CameraResource* pData) override;
 	void Update() override;
 
 

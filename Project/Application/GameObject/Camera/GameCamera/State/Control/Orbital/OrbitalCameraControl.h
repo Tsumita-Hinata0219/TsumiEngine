@@ -17,7 +17,7 @@ public:
 	/// <summary>
 	/// 初期化
 	/// </summary>
-	void Enter(GameCamera* pCamera) override;
+	void Enter(GameCamera* pCamera, CameraResource* pData) override;
 
 	/// <summary>
 	///	更新処理
@@ -39,6 +39,13 @@ private:
 
 
 private:
+
+	// 入力
+	Input* input_ = nullptr;
+	// LStickの入力
+	Vector2 iRStick_{};
+	// デッドゾーン
+	const float DZone_ = 0.2f;
 
 	// 回転速度
 	float addOrientationSpeed_ = 0.15f;

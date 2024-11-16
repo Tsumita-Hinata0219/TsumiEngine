@@ -39,23 +39,22 @@ void OrbitalCameraMovement::Update()
 		iKeys_.x = 1.0f;
 	}
 
-
 	// Velocityは0で初期化しておく
 	velocity_ = Vector3::zero;
 
 	// 移動処理
-	PadMove();
-	KeyMove();
+	/*PadMove();
+	KeyMove();*/
 
-	if (pPlayer_->IsShooting()) {
-		// 射撃中はカメラの進行方向に姿勢を合わせる
-		FaceCameraDirection();
-	}
-	else {
-		// 移動方向からY軸の姿勢を合わせる
-		CalcBodyOrienation(iLStick_, stickMoveDirection_);
-		CalcBodyOrienation(iKeys_, keyMoveDirection_);
-	}
+	//if (pPlayer_->IsShooting()) {
+	//	// 射撃中はカメラの進行方向に姿勢を合わせる
+	//	FaceCameraDirection();
+	//}
+	//else {
+	//	// 移動方向からY軸の姿勢を合わせる
+	//	CalcBodyOrienation(iLStick_, stickMoveDirection_);
+	//	CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	//}
 }
 
 

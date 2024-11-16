@@ -77,10 +77,11 @@ void Player::Update()
 	trans_.UpdateMatrix();
 
 	// 入力を受け取る
-	InputFunc();
+	//InputFunc();
 
 	// プレイヤーの操作関連
-	MoveFunc();
+	//MoveFunc();
+	movementState_->Update();
 
 	// 射撃の処理
 	ExecuteShot();

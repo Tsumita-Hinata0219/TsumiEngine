@@ -16,7 +16,7 @@ GameScene::GameScene()
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_ = std::make_unique<FollowCamera>();
+	//followCamera_ = std::make_unique<FollowCamera>();
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_ = std::make_unique<GameCamera>();
 	/* ----- StartDirection スタート演出 ----- */
@@ -53,10 +53,10 @@ void GameScene::Initialize()
 	/* ----- クラスにポインタを渡す ----- */
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
-	player_->SetFollowCamera(followCamera_.get());
+	//player_->SetFollowCamera(followCamera_.get());
 	// カメラにプレイヤーを渡す
 	gameCamera_->SetPlayer(player_.get());
-	followCamera_->SetPlayer(player_.get());
+	//followCamera_->SetPlayer(player_.get());
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());
 
@@ -76,7 +76,7 @@ void GameScene::Initialize()
 	gameSceneUI_->Init();
 
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Init();
+	//followCamera_->Init();
 
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_->SetCameraType(GameCameraType::ORBITAL);
@@ -121,7 +121,7 @@ void GameScene::Update(GameManager* state)
 	gameSceneUI_->Update();
 
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Update();
+	//followCamera_->Update();
 
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_->Update();

@@ -260,10 +260,10 @@ void Player::MoveFunc()
 void Player::CalcMoveDirection()
 {
 	// カメラの前方と右方
-	Vector3 forward = followCamera_->GetForwardVec();
-	Vector3 right = followCamera_->GetRightVec();
-	/*Vector3 forward = gameCamera_->GetForwardVec();
-	Vector3 right = gameCamera_->GetRightVec();*/
+	/*Vector3 forward = followCamera_->GetForwardVec();
+	Vector3 right = followCamera_->GetRightVec();*/
+	Vector3 forward = gameCamera_->GetForwardVec();
+	Vector3 right = gameCamera_->GetRightVec();
 
 	stickMoveDirection_ = {
 		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
@@ -333,8 +333,8 @@ void Player::MoveLimited()
 void Player::FaceCameraDirection()
 {
 	// カメラの前方ベクトルを取得
-	Vector3 cameraForward = followCamera_->GetForwardVec();
-	//Vector3 cameraForward = gameCamera_->GetForwardVec();
+	//Vector3 cameraForward = followCamera_->GetForwardVec();
+	Vector3 cameraForward = gameCamera_->GetForwardVec();
 
 	// カメラのY成分を無視して水平面上の方向を計算
 	cameraForward.y = 0.0f;

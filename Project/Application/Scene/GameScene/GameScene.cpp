@@ -127,7 +127,7 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();
-
+	
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更

@@ -8,6 +8,7 @@
 
 #include "GameObject/Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/FollowCamera/FollowCamera.h"
+#include "GameObject/Camera/GameCamera/GameCamera.h"
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
@@ -90,6 +91,9 @@ private: // クラス
 
 	// FollowCamera
 	std::unique_ptr<FollowCamera> followCamera_;
+
+	// GameCamera
+	std::unique_ptr<GameCamera> gameCamera_;
 
 	// StartDirection
 	std::unique_ptr<StartDirection> startDirection_;

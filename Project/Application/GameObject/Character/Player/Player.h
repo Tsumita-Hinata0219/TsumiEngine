@@ -15,9 +15,12 @@
 
 #include "UI/PlayerUI.h"
 
+#include "Movement/PlayerMovement.h"
+
 
 // 前方宣言
 class FollowCamera;
+class GameCamera;
 
 
 /* Playerクラス */
@@ -25,30 +28,51 @@ class Player : public IObject {
 
 public:
 
-	// コンストラクタとデストラクタ
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	Player() { attribute_ = ObjAttribute::PLAYER; }
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~Player() {};
 
-	// 初期化処理　更新処理　描画処理
+	/// <summary>
+	/// 初期化
+	/// </summary>
 	void Init() override;
+
+	/// <summary>
+	///  更新処理
+	/// </summary>
 	void Update() override;
+
+	/// <summary>
+	/// 描画処理
+	/// </summary>
 	void Draw3D() override;
 	void Draw2DFront() override;
 	void Draw2DBack() override;
 
-	// 衝突判定コールバック関数
+	/// <summary>
+	/// 衝突判定コールバック関数
+	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
 #pragma region Accessor アクセッサ
 
-	// フォローカメラ
-	void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
+	// ゲームカメラ
+	void SetGameCamera(GameCamera* setCamera) { this->gameCamera_ = setCamera; }
 
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
 	// BulletList
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
+
+	// 射撃フラグ
+	bool IsShooting() { return this->isShooting_; }
 
 	// KillCount
 	uint32_t GetKillCount() const { return this->killCount_; }
@@ -82,41 +106,65 @@ public:
 
 private:
 
-	// 入力を受け取る
+	/// <summary>
+	/// 入力を受け取る
+	/// </summary>
 	void InputFunc();
 
-	// プレイヤーの移動
+	/// <summary>
+	/// プレイヤーの移動
+	/// </summary>
 	void MoveFunc();
 
-	// 移動方向を求める
+	/// <summary>
+	/// 移動方向を求める
+	/// </summary>
 	void CalcMoveDirection();
 
-	// 移動処理
+	/// <summary>
+	/// 移動処理
+	/// </summary>
 	void PadMove();
 	void KeyMove();
 
-	// 移動限界処理
+	/// <summary>
+	/// 移動限界処理
+	/// </summary>
 	void MoveLimited();
 
-	// カメラの方向に体の向きを合わせる
+	/// <summary>
+	/// カメラの方向に体の向きを合わせる
+	/// </summary>
 	void FaceCameraDirection();
 
-	// 移動方向からY軸の姿勢を合わせる
+	/// <summary>
+	/// 移動方向からY軸の姿勢を合わせる
+	/// </summary>
 	void CalcBodyOrienation(Vector2 input, Vector3 direction);
 
-	// 射撃処理
+	/// <summary>
+	/// 射撃処理
+	/// </summary>
 	void ExecuteShot();
 
-	// 新しいバレットを生成する
+	/// <summary>
+	/// 新しいバレットを生成する
+	/// </summary>
 	void CreateNewBullet();
 
-	// バレットリストの追加
+	/// <summary>
+	/// バレットリストの追加
+	/// </summary>
 	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
-	// 無敵状態のタイマーを減らす処理
+	/// <summary>
+	/// 無敵状態のタイマーを減らす処理
+	/// </summary>
 	void SubtructInvincibilityTime();
 
-	// ImGuiの描画
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
 	void DrawImGui();
 
 
@@ -189,6 +237,12 @@ private: // ボディ関連
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 
+private:
+
+	// 移動処理クラス
+	std::unique_ptr<PlayerMovement> movement_;
+
+
 private: // バレット関連
 
 	// リスト
@@ -210,10 +264,9 @@ private: // UI関連
 	std::unique_ptr<PlayerUI> ui_;
 
 
-private: // フォローカメラ関連
+private: // ゲームカメラ
 
-	FollowCamera* followCamera_ = nullptr;
-
+	GameCamera* gameCamera_ = nullptr;
 
 };
 

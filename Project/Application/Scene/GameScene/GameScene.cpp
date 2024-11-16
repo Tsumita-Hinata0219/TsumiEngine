@@ -48,12 +48,14 @@ GameScene::~GameScene() {}
 void GameScene::Initialize()
 {
 	/* ----- クラスにポインタを渡す ----- */
-	// プレイヤーにフォローカメラを渡す
-	player_->SetFollowCamera(followCamera_.get());
+	// プレイヤーにゲームカメラを渡す
+	player_->SetGameCamera(gameCamera_.get());
 	// プレイヤーにカメラリソースのポインタを渡す
 	player_->SetCameraResource(gameCamera_->GetCameraResourcePtr());
-	// フォローカメラにカメラを渡す
-	followCamera_->SetPlayer(player_.get());
+	// ゲームカメラにプレイヤーを渡す
+	gameCamera_->SetPlayer(player_.get());
+	// エネミーにプレイヤーを渡す
+	enemyManager_->SetPlayer(player_.get());
 
 
 	/* ----- JsonManager Jsonマネージャー ----- */
@@ -71,7 +73,7 @@ void GameScene::Initialize()
 	gameSceneUI_->Init();
 
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Init();
+	//followCamera_->Init();
 
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_->SetCameraType(GameCameraType::ORBITAL);
@@ -92,7 +94,6 @@ void GameScene::Initialize()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Init();
-	
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Init();
@@ -117,7 +118,10 @@ void GameScene::Update(GameManager* state)
 	gameSceneUI_->Update();
 
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Update();
+	//followCamera_->Update();
+
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_->Update();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();

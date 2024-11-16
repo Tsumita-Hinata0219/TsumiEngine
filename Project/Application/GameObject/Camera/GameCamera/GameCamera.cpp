@@ -28,11 +28,11 @@ void GameCamera::Init()
 	controlState_->SetPlayer(player_);
 	controlState_->Enter(this, &camera_);
 
-	// 相対位置
-	constOffset_ = { 0.0f, 20.0f, -50.0f };
+	//// 相対位置
+	//constOffset_ = { 0.0f, 20.0f, -50.0f };
 
-	// オフセットの設定
-	playerOffset_ = constOffset_;
+	//// オフセットの設定
+	//playerOffset_ = constOffset_;
 }
 
 

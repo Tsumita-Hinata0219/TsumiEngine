@@ -1,5 +1,7 @@
 #pragma once
 
+#include "GameObject/GameObject.h"
+#include "Math/MyMath.h"
 
 // GameCameraの前方宣言
 class GameCamera;

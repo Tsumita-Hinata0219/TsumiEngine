@@ -44,7 +44,7 @@ void Player::Init()
 	else if (gameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 		movementState_ = std::make_unique<TopDownCameraMovement>();
 	}
-	movementState_->Enter(this);
+	movementState_->Enter(this, &trans_);
 
 
 	// Colliderの登録

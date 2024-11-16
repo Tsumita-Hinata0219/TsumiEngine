@@ -15,7 +15,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Enter(Player* pPlayer) override;
+	void Enter(Player* pPlayer, Transform* pTrans) override;
 
 	/// <summary>
 	/// 更新処理

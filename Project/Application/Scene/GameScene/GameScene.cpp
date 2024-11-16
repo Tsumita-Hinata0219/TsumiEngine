@@ -79,8 +79,8 @@ void GameScene::Initialize()
 	followCamera_->Init();
 
 	/* ----- GameCamera ゲームカメラ ----- */
-	//gameCamera_->SetCameraType(GameCameraType::ORBITAL);
-	//gameCamera_->Init();
+	gameCamera_->SetCameraType(GameCameraType::ORBITAL);
+	gameCamera_->Init();
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Init();
@@ -124,7 +124,7 @@ void GameScene::Update(GameManager* state)
 	followCamera_->Update();
 
 	/* ----- GameCamera ゲームカメラ ----- */
-	//gameCamera_->Update();
+	gameCamera_->Update();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();

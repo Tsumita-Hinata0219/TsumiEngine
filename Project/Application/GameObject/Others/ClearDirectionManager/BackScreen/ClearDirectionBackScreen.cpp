@@ -1,0 +1,62 @@
+#include "ClearDirectionBackScreen.h"
+
+
+
+/// <summary>
+/// 初期化処理
+/// </summary>
+void ClearDirectionBackScreen::Init()
+{
+	// テクスチャ
+	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirection.png");
+
+	// スプライト
+	Vector2 screenSize = { 1280.0f, 720.0f };
+	sprite_ = std::make_unique<Sprite>();
+	sprite_->Initn(screenSize);
+	sprite_->SetTexture(textureHandle_);
+
+	// トランスフォーム
+	trans_.Init();
+
+	// カラー
+	color_ = Samp::Color::WHITE;
+}
+
+
+/// <summary>
+/// 更新処理
+/// </summary>
+void ClearDirectionBackScreen::Update()
+{
+}
+
+
+/// <summary>
+/// 描画処理
+/// </summary>
+void ClearDirectionBackScreen::Draw2DFront()
+{
+	sprite_->SetColor(color_);l
+	sprite_->Draw(trans_);
+}
+
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
+void ClearDirectionBackScreen::DrawImGui()
+{
+	if (ImGui::TreeNode("ClearDirection_Screen")) {
+
+		ImGui::Text("Transform");
+		trans_.DrawImGui();
+		ImGui::Text("");
+
+		ImGui::ColorEdit4("Color", &color_);
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
+}
+

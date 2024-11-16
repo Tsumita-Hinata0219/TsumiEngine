@@ -230,6 +230,8 @@
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -451,6 +453,8 @@
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -29,6 +29,9 @@ public:
 	/// </summary>
 	virtual void Update() = 0;
 
+	/// <summary>
+	/// プレイヤーのアクセッサ
+	/// </summary>
 	virtual void SetPlayer(Player* setPlayer) { this->pPlayer_ = setPlayer; }
 
 

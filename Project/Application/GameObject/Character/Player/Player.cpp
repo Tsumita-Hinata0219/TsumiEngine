@@ -40,6 +40,7 @@ void Player::Init()
 	// 移動処理のステートパターン
 	if (gameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
 		movementState_ = std::make_unique<OrbitalCameraMovement>();
+		movementState_->SetCamera(gameCamera_);
 	}
 	else if (gameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 		movementState_ = std::make_unique<TopDownCameraMovement>();

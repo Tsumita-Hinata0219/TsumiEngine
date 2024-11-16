@@ -1,5 +1,6 @@
 #include "OrbitalCameraMovement.h"
-
+#include "../../../Player.h"
+#include "GameObject/Camera/GameCamera/GameCamera.h"
 
 
 /// <summary>
@@ -46,9 +47,15 @@ void OrbitalCameraMovement::Update()
 	PadMove();
 	KeyMove();
 
-	// 移動方向からY軸の姿勢を合わせる
-	CalcBodyOrienation(iLStick_, stickMoveDirection_);
-	CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	if (pPlayer_->IsShooting()) {
+		// 射撃中はカメラの進行方向に姿勢を合わせる
+		FaceCameraDirection();
+	}
+	else {
+		// 移動方向からY軸の姿勢を合わせる
+		CalcBodyOrienation(iLStick_, stickMoveDirection_);
+		CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	}
 }
 
 
@@ -57,6 +64,20 @@ void OrbitalCameraMovement::Update()
 /// </summary>
 void OrbitalCameraMovement::CalcMoveDirection()
 {
+	// カメラの前方と右方
+	Vector3 forward = pGameCamera_->GetForwardVec();
+	Vector3 right = pGameCamera_->GetRightVec();
+
+	stickMoveDirection_ = {
+		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
+		0.0f,
+		(iLStick_.x * right.z) + (iLStick_.y * forward.z),
+	};
+	keyMoveDirection_ = {
+		(iKeys_.x * right.x) + (iKeys_.y * forward.x),
+		0.0f,
+		(iKeys_.x * right.z) + (iKeys_.y * forward.z),
+	};
 }
 
 
@@ -100,6 +121,22 @@ void OrbitalCameraMovement::KeyMove()
 /// </summary>
 void OrbitalCameraMovement::FaceCameraDirection()
 {
+	// カメラの前方ベクトルを取得
+	Vector3 cameraForward = pGameCamera_->GetForwardVec();
+
+	// カメラのY成分を無視して水平面上の方向を計算
+	cameraForward.y = 0.0f;
+	cameraForward = Normalize(cameraForward);  // 正規化して方向ベクトルにする
+
+	// 目標の回転角度を求める（Y軸の回転）
+	float targetAngle = std::atan2(cameraForward.x, cameraForward.z);
+
+	// 現在の角度と目標角度から最短を求める
+	float shortestAngle = ShortestAngle(pTrans_->srt.rotate.y, targetAngle);
+
+	// 現在の角度を目標角度の間を補間
+	pTrans_->srt.rotate.y =
+		Lerp(pTrans_->srt.rotate.y, pTrans_->srt.rotate.y + shortestAngle, orientationLerpSpeed_);
 }
 
 

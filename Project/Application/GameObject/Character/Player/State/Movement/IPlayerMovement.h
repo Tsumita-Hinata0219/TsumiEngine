@@ -15,12 +15,26 @@ class IPlayerMovement {
 
 public:
 
-	// 仮想デストラクタ
+	/// <summary>
+	/// 仮想デストラクタ
+	/// </summary>
 	virtual ~IPlayerMovement() = default;
 
-	// 初期化、更新
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	virtual void Enter(Player* pPlayer, Transform* pTrans) = 0;
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	virtual void Update() = 0;
+
+	/// <summary>
+	/// カメラの設定
+	/// </summary>
+	void SetCamera(GameCamera* setCamera) { this->pGameCamera_ = setCamera; }
+
 
 protected:
 

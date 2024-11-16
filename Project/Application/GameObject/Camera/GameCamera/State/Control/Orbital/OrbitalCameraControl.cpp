@@ -16,7 +16,7 @@ void OrbitalCameraControl::Enter(GameCamera* pCamera, CameraResource* pData)
 
 	// 姿勢
 	initRotate_ = { 0.3f, 0.0f, 0.0f };
-	pData_ ->srt.rotate = initRotate_
+	pData_->srt.rotate = initRotate_;
 
 	// 相対位置
 	constOffset_ = { 0.0f, 20.0f, -50.0f };

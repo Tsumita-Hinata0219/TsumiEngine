@@ -61,13 +61,10 @@ public:
 #pragma region Accessor アクセッサ
 
 	// フォローカメラ
-	//void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
+	void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
 
 	// ゲームカメラ
 	void SetGameCamera(GameCamera* setCamera) { this->gameCamera_ = setCamera; }
-
-	// カメラデータ
-	void SetCameraResource(CameraResource* setResource) { this->camera_ = setResource; }
 
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
@@ -261,20 +258,12 @@ private: // UI関連
 
 private: // フォローカメラ関連
 
-	//FollowCamera* followCamera_ = nullptr;
+	FollowCamera* followCamera_ = nullptr;
 
 
 private: // ゲームカメラ
 
 	GameCamera* gameCamera_ = nullptr;
-
-
-private: // カメラデータ
-
-	CameraResource* camera_{};
-
-	
-
 
 };
 

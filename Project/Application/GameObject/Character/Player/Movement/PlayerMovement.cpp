@@ -22,6 +22,43 @@ void PlayerMovement::Init(Player* pPlayer, GameCamera* pGameCamera, Transform* p
 /// </summary>
 void PlayerMovement::Update()
 {
+	// stickの入力を取得
+	iLStick_ = input_->GetLStick();
+
+	// keyの入力を取得
+	iKeys_ = Vector2::zero;
+	if (input_->Press(DIK_W)) {
+		iKeys_.y = 1.0f;
+	}
+	if (input_->Press(DIK_S)) {
+		iKeys_.y = -1.0f;
+	}
+	if (input_->Press(DIK_A)) {
+		iKeys_.x = -1.0f;
+	}
+	if (input_->Press(DIK_D)) {
+		iKeys_.x = 1.0f;
+	}
+
+	// 移動方向を求める
+	CalcMoveDirection();
+
+	// Velocityは0で初期化しておく
+	velocity_ = Vector3::zero;
+
+	// 移動処理
+	PadMove();
+	KeyMove();
+
+	if (pPlayer_->IsShooting()) {
+		// 射撃中はカメラの進行方向に姿勢を合わせる
+		FaceCameraDirection();
+	}
+	else {
+		// 移動方向からY軸の姿勢を合わせる
+		CalcBodyOrienation(iLStick_, stickMoveDirection_);
+		CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	}
 }
 
 

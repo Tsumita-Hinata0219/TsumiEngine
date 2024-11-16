@@ -13,16 +13,9 @@ void GameCamera::Init()
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
 
-	// 操作ステート
-	// TypeがOrbitalとTopDownでわける
-	if (cametaType_ == GameCameraType::ORBITAL) {
-		controlState_ = std::make_unique<OrbitalCameraControl>();
-	}
-	else if (cametaType_ == GameCameraType::TOPDOWN) {
-		controlState_ = std::make_unique<TopDownCameraControl>();
-	}
-	controlState_->SetPlayer(player_);
-	controlState_->Enter(this, &camera_);
+	// 操作処理クラス
+	control_ = std::make_unique<GameCameraControl>();
+	control_->Init(this, player_, &camera_);
 }
 
 
@@ -34,8 +27,8 @@ void GameCamera::Update()
 	// カメラデータの更新
 	camera_.Update();
 
-	// 操作の更新処理
-	controlState_->Update();
+	// 操作処理
+	control_->Update();
 
 	// 前方ベクトルと右方ベクトルを求める
 	CalcForwardVec();

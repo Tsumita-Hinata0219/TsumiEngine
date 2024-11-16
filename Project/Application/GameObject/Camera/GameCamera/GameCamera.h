@@ -6,9 +6,7 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
-#include "State/Control/ICameraControlState.h"
-#include "State/Control/Orbital/OrbitalCameraControl.h"
-#include "State/Control/TopDown/TopDownCameraControl.h"
+#include "Control/GameCameraControl.h"
 
 
 // GameCameraのタイプ
@@ -113,8 +111,8 @@ private:
 	// カメラのタイプ
 	GameCameraType cametaType_ = GameCameraType::ORBITAL;
 
-	// 操作のステート
-	std::unique_ptr<ICameraControlState> controlState_;
+	// 操作処理クラス
+	std::unique_ptr<GameCameraControl> control_;
 
 	// 前方ベクトル
 	Vector3 forwardVec_{};

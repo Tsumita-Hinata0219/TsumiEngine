@@ -69,6 +69,9 @@ public: // メンバ関数
 	// Player
 	void SetPlayer(Player* player) { this->player_ = player; }
 
+	// CameraResouce
+	CameraResource* GetCameraResourcePtr() { return &this->camera_; }
+
 	// ForwardVec
 	Vector3& GetForwardVec() { return this->forwardVec_; }
 

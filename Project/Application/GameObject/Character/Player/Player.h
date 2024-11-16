@@ -63,6 +63,9 @@ public:
 	// フォローカメラ
 	void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
 
+	// カメラデータ
+	void SetCameraResource(CameraResource* setResource) { this->camera_ = setResource; }
+
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
@@ -261,6 +264,13 @@ private: // フォローカメラ関連
 private: // ゲームカメラ
 
 	GameCamera* gameCamera_ = nullptr;
+
+
+private: // カメラデータ
+
+	CameraResource* camera_;
+
+	
 
 
 };

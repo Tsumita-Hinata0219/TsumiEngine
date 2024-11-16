@@ -47,6 +47,15 @@ GameScene::~GameScene() {}
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- クラスにポインタを渡す ----- */
+	// プレイヤーにフォローカメラを渡す
+	player_->SetFollowCamera(followCamera_.get());
+	// プレイヤーにカメラリソースのポインタを渡す
+	player_->SetCameraResource(gameCamera_->GetCameraResourcePtr());
+	// フォローカメラにカメラを渡す
+	followCamera_->SetPlayer(player_.get());
+
+
 	/* ----- JsonManager Jsonマネージャー ----- */
 	JsonManager::GetInstance()->Initialize();
 	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
@@ -83,13 +92,9 @@ void GameScene::Initialize()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Init();
-	// プレイヤーにフォローカメラを渡す
-	player_->SetFollowCamera(followCamera_.get());
-	// フォローカメラにカメラを渡す
-	followCamera_->SetPlayer(player_.get());
+	
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
 	/* ----- SceneTransition シーントランジション ----- */

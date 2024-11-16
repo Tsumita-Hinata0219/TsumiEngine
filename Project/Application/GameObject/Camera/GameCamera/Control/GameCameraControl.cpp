@@ -16,13 +16,20 @@ void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraResourc
 	// Inputクラス
 	input_ = Input::GetInstance();
 
+	// 俯瞰とFollowCameraで姿勢と相対位置を変える
+	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
+
+		initRotate_ = { 0.3f, 0.0f, 0.0f };
+		constOffset_ = { 0.0f, 20.0f, -50.0f };
+	}
+	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
+
+		initRotate_ = { 0.6f, 0.0f, 0.0f };
+		constOffset_ = { 0.0f, 65.0f, -90.0f };
+	}
+
 	// 姿勢
-	initRotate_ = { 0.3f, 0.0f, 0.0f };
 	pData_->srt.rotate = initRotate_;
-
-	// 相対位置
-	constOffset_ = { 0.0f, 20.0f, -50.0f };
-
 	// オフセットの設定
 	playerOffset_ = constOffset_;
 }

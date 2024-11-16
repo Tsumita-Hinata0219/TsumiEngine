@@ -103,7 +103,7 @@ void GameCamera::CalcRightVec()
 /// </summary>
 void GameCamera::DrawImGui()
 {
-	if (ImGui::TreeNode("FollowCamera")) {
+	if (ImGui::TreeNode("GameCamera")) {
 
 		camera_.DrawImGui();
 

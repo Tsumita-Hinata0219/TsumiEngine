@@ -29,6 +29,12 @@ void ClearDirectionBackScreen::Init()
 /// </summary>
 void ClearDirectionBackScreen::Update()
 {
+
+
+#ifdef _DEBUG
+	// ImGuiの描画
+	DrawImGui();
+#endif // _DEBUG
 }
 
 
@@ -37,7 +43,7 @@ void ClearDirectionBackScreen::Update()
 /// </summary>
 void ClearDirectionBackScreen::Draw2DFront()
 {
-	sprite_->SetColor(color_);l
+	sprite_->SetColor(color_);
 	sprite_->Draw(trans_);
 }
 
@@ -53,7 +59,7 @@ void ClearDirectionBackScreen::DrawImGui()
 		trans_.DrawImGui();
 		ImGui::Text("");
 
-		ImGui::ColorEdit4("Color", &color_);
+		ImGui::ColorEdit4("Color", &color_.x);
 		ImGui::Text("");
 
 		ImGui::TreePop();

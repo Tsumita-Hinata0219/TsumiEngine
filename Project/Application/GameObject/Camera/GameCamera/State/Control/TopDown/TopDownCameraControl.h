@@ -24,12 +24,29 @@ public:
 	/// </summary>
 	void Update() override;
 
+
 private:
 
-	// カメラの姿勢
-	Vector3 orientatin_{};
+	/// <summary>
+	/// 回転処理
+	/// </summary>
+	void FuncOrientation();
+
+	/// <summary>
+	/// フォロー処理
+	/// </summary>
+	void FuncFollow();
+
+
+private:
+
+	// 姿勢
+	Vector3 initRotate_{};
+
 	// 相対位置
 	Vector3 constOffset_{};
+	// プレイヤーからのオフセット
+	Vector3 playerOffset_{};
 
 };
 

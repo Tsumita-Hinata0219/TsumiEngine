@@ -12,13 +12,14 @@ void TopDownCameraControl::Enter(GameCamera* pCamera, CameraResource* pData)
 	pData_ = pData;
 
 	// 姿勢
-	orientatin_ = Vector3::one;
+	initRotate_ = { 0.3f, 0.0f, 0.0f };
+	pData_->srt.rotate = initRotate_;
 
 	// 相対位置
-	constOffset_ = Vector3::one;
+	constOffset_ = { 0.0f, 20.0f, -50.0f };
 
-	// カメラ姿勢のデータに設定
-	pData_->srt.rotate = orientatin_;
+	// オフセットの設定
+	playerOffset_ = constOffset_;
 
 }
 
@@ -28,8 +29,38 @@ void TopDownCameraControl::Enter(GameCamera* pCamera, CameraResource* pData)
 /// </summary>
 void TopDownCameraControl::Update() 
 {
-	pData_->srt.translate =
-		pPlayer_->GetWorldPos() + constOffset_;
+	// フォロー処理
+	FuncFollow();
+}
 
+
+/// <summary>
+/// 回転処理
+/// </summary>
+void TopDownCameraControl::FuncOrientation()
+{
+}
+
+
+/// <summary>
+/// フォロー処理
+/// </summary>
+void TopDownCameraControl::FuncFollow()
+{
+	// オフセットの設定
+	playerOffset_ = constOffset_;
+
+	// カメラの前方方向に基づいてカメラのオフセットを回転させる
+	Matrix4x4 rotateMat = Matrix4x4::identity;
+	rotateMat = MakeRotateYMatrix(pData_->srt.rotate.y);
+
+	// カメラのオフセットの回転
+	playerOffset_ = TransformWithPerspective(playerOffset_, rotateMat);
+
+	// プレイヤーの位置にオフセットを加えてカメラの位置を更新
+	pData_->srt.translate = pPlayer_->GetWorldPos() + playerOffset_;
+
+	// Yの位置だけ固定
+	pData_->srt.translate.y = constOffset_.y;
 }
 

@@ -28,11 +28,6 @@ public:
 private:
 
 	/// <summary>
-	/// 回転処理
-	/// </summary>
-	void FuncOrientation();
-
-	/// <summary>
 	/// フォロー処理
 	/// </summary>
 	void FuncFollow();

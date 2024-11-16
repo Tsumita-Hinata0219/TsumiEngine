@@ -35,14 +35,6 @@ void TopDownCameraControl::Update()
 
 
 /// <summary>
-/// 回転処理
-/// </summary>
-void TopDownCameraControl::FuncOrientation()
-{
-}
-
-
-/// <summary>
 /// フォロー処理
 /// </summary>
 void TopDownCameraControl::FuncFollow()

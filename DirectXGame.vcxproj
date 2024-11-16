@@ -157,6 +157,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="main.cpp" />
@@ -179,6 +180,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.cpp" />
@@ -343,12 +345,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlState.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />

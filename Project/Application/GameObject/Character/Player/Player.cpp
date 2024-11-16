@@ -4,7 +4,7 @@
 
 
 /// <summary>
-/// 初期化
+/// 初期化処理
 /// </summary>
 void Player::Init()
 {
@@ -40,13 +40,12 @@ void Player::Init()
 	// 移動処理のステートパターン
 	if (gameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
 		movementState_ = std::make_unique<OrbitalCameraMovement>();
-		movementState_->SetCamera(gameCamera_);
 	}
 	else if (gameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 		movementState_ = std::make_unique<TopDownCameraMovement>();
 	}
 	movementState_->Enter(this, &trans_);
-
+	movementState_->SetCamera(gameCamera_);
 
 	// Colliderの登録
 	colComp_->SetAttribute(ColliderAttribute::Player);
@@ -76,11 +75,7 @@ void Player::Update()
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
-	// 入力を受け取る
-	//InputFunc();
-
 	// プレイヤーの操作関連
-	//MoveFunc();
 	movementState_->Update();
 
 	// 射撃の処理

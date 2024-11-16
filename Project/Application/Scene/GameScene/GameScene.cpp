@@ -72,7 +72,7 @@ void GameScene::Initialize()
 	gameSceneUI_->Init();
 
 	/* ----- GameCamera ゲームカメラ ----- */
-	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
+	gameCamera_->SetCameraType(GameCameraType::ORBITAL);
 	gameCamera_->Init();
 
 	/* ----- StartDirection スタート演出 ----- */

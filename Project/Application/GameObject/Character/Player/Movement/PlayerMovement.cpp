@@ -14,6 +14,8 @@ void PlayerMovement::Init(Player* pPlayer, GameCamera* pGameCamera, Transform* p
 	pGameCamera_ = pGameCamera;
 	pTrans_ = pTrans;
 
+	// Inputのインスタンス取得
+	input_ = Input::GetInstance();
 }
 
 

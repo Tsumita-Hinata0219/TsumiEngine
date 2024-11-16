@@ -15,9 +15,7 @@
 
 #include "UI/PlayerUI.h"
 
-#include "State/Movement/IPlayerMovement.h"
-#include "State/Movement/Orbital/OrbitalCameraMovement.h"
-#include "State/Movement/TopDown/TopDownCameraMovement.h"
+#include "Movement/PlayerMovement.h"
 
 
 // 前方宣言
@@ -241,8 +239,8 @@ private: // ボディ関連
 
 private:
 
-	// 移動ステート
-	std::unique_ptr<IPlayerMovement> movementState_;
+	// 移動処理クラス
+	std::unique_ptr<PlayerMovement> movement_;
 
 
 private: // バレット関連

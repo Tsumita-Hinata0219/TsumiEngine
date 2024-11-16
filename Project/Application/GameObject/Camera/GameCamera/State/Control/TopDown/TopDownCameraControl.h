@@ -24,6 +24,12 @@ public:
 	/// </summary>
 	void Update() override;
 
+private:
+
+	// カメラの姿勢
+	Vector3 orientatin_{};
+	// 相対位置
+	Vector3 constOffset_{};
 
 };
 

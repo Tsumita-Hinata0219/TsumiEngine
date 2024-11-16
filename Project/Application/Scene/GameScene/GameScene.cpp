@@ -5,7 +5,35 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {}
+GameScene::GameScene() 
+{
+	/* ----- CollisionManager コリジョンマネージャー ----- */
+	CollisionManager_ = CollisionManager::GetInstance();
+	/* ----- AbsentEffect アブセントエフェクト ----- */
+	absentEffect_ = std::make_unique<AbsentEffect>();
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_ = make_unique<TestPostEffect>();
+	/* ----- GameSceneUI ゲームシーンUI ----- */
+	gameSceneUI_ = std::make_unique<GameSceneUI>();
+	/* ----- FollowCamera フォローカメラ ----- */
+	followCamera_ = std::make_unique<FollowCamera>();
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_ = std::make_unique<GameCamera>();
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_ = std::make_unique<StartDirection>();
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	/* ----- Wall 壁 ----- */
+	wall_ = std::make_unique<Wall>();
+	/* ----- Floor 床 ----- */
+	floor_ = std::make_unique<Floor>();
+	/* ----- Player プレイヤー ----- */
+	player_ = make_unique<Player>();
+	/* ----- EnemyManager エネミーマネージャー ----- */
+	enemyManager_ = std::make_unique<EnemyManager>();
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+}
 
 
 /// <summary>
@@ -24,44 +52,36 @@ void GameScene::Initialize()
 	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
 	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
 
-	/* ----- CollisionManager コリジョンマネージャー ----- */
-	CollisionManager_ = CollisionManager::GetInstance();
-
 	/* ----- AbsentEffect アブセントエフェクト ----- */
-	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
 	testPostEffect_->Init();
 
 	/* ----- GameSceneUI ゲームシーンUI ----- */
-	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameSceneUI_->Init();
 
 	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_ = std::make_unique<FollowCamera>();
 	followCamera_->Init();
 
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_->SetCameraType(GameCameraType::ORBITAL);
+	gameCamera_->Init();
+
 	/* ----- StartDirection スタート演出 ----- */
-	startDirection_ = std::make_unique<StartDirection>();
 	startDirection_->Init();
 
 	/* ----- Skybox 天箱 ----- */
-	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
 	skybox_->Init(dds);
 
 	/* ----- Wall 壁 ----- */
-	wall_ = std::make_unique<Wall>();
 	wall_->Init();
 
 	/* ----- Floor 床 ----- */
-	floor_ = std::make_unique<Floor>();
 	floor_->Init();
 
 	/* ----- Player プレイヤー ----- */
-	player_ = make_unique<Player>();
 	player_->Init();
 	// プレイヤーにフォローカメラを渡す
 	player_->SetFollowCamera(followCamera_.get());
@@ -69,12 +89,10 @@ void GameScene::Initialize()
 	followCamera_->SetPlayer(player_.get());
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_ = std::make_unique<EnemyManager>();
 	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
 	/* ----- SceneTransition シーントランジション ----- */
-	sceneTransition_ = SceneTransition::GetInstance();
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();

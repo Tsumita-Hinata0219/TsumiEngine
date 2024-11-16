@@ -60,9 +60,6 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// フォローカメラ
-	void SetFollowCamera(FollowCamera* camera) { this->followCamera_ = camera; }
-
 	// ゲームカメラ
 	void SetGameCamera(GameCamera* setCamera) { this->gameCamera_ = setCamera; }
 
@@ -254,11 +251,6 @@ private: // バレット関連
 private: // UI関連
 
 	std::unique_ptr<PlayerUI> ui_;
-
-
-private: // フォローカメラ関連
-
-	FollowCamera* followCamera_ = nullptr;
 
 
 private: // ゲームカメラ

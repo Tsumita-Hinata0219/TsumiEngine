@@ -15,8 +15,6 @@ GameScene::GameScene()
 	testPostEffect_ = make_unique<TestPostEffect>();
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_ = std::make_unique<GameSceneUI>();
-	/* ----- FollowCamera フォローカメラ ----- */
-	//followCamera_ = std::make_unique<FollowCamera>();
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_ = std::make_unique<GameCamera>();
 	/* ----- StartDirection スタート演出 ----- */
@@ -53,10 +51,8 @@ void GameScene::Initialize()
 	/* ----- クラスにポインタを渡す ----- */
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
-	//player_->SetFollowCamera(followCamera_.get());
 	// カメラにプレイヤーを渡す
 	gameCamera_->SetPlayer(player_.get());
-	//followCamera_->SetPlayer(player_.get());
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());
 
@@ -74,9 +70,6 @@ void GameScene::Initialize()
 
 	/* ----- GameSceneUI ゲームシーンUI ----- */
 	gameSceneUI_->Init();
-
-	/* ----- FollowCamera フォローカメラ ----- */
-	//followCamera_->Init();
 
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_->SetCameraType(GameCameraType::ORBITAL);

@@ -7,7 +7,6 @@
 #include "CollisionSystem/Manager/CollisionManager.h"
 
 #include "GameObject/Camera/Manager/CameraManager.h"
-#include "GameObject/Camera/FollowCamera/FollowCamera.h"
 #include "GameObject/Camera/GameCamera/GameCamera.h"
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
@@ -88,9 +87,6 @@ private: // クラス
 
 	// GameSceneUI
 	std::unique_ptr<GameSceneUI> gameSceneUI_;
-
-	// FollowCamera
-	std::unique_ptr<FollowCamera> followCamera_;
 
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;

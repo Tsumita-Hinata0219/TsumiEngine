@@ -55,7 +55,7 @@ void GameScene::Initialize()
 	player_->SetGameCamera(gameCamera_.get());
 	player_->SetFollowCamera(followCamera_.get());
 	// カメラにプレイヤーを渡す
-	//gameCamera_->SetPlayer(player_.get());
+	gameCamera_->SetPlayer(player_.get());
 	followCamera_->SetPlayer(player_.get());
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());

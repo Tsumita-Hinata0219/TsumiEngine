@@ -230,11 +230,7 @@
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
   </ItemGroup>
@@ -458,13 +454,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
-    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\IPlayerMovement.h" />
-    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\Orbital\OrbitalCameraMovement.h" />
-    <ClInclude Include="Project\Application\GameObject\Character\Player\State\Movement\TopDown\TopDownCameraMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
-    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\ICameraControlState.h" />
-    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\Orbital\OrbitalCameraControl.h" />
-    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\State\Control\TopDown\TopDownCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
   </ItemGroup>

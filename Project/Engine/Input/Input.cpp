@@ -211,7 +211,7 @@ Vector2 GamePadInput::GetRStick(const float& mode)
 {
 	Vector2 result = {
 		static_cast<float>(joyState_.Gamepad.sThumbRX) / mode * 1.0f,
-		static_cast<float>(joyState_.Gamepad.sThumbRX) / mode * 1.0f,
+		static_cast<float>(joyState_.Gamepad.sThumbRY) / mode * 1.0f,
 	};
 
 	result.x = max(-1.0f, min(1.0f, result.x));

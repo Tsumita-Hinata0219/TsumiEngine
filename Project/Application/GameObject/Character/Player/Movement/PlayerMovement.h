@@ -68,7 +68,8 @@ private:
 
 
 	// 移動方向
-	Vector3 stickMoveDirection_{};
+	Vector3 LStickMoveDirection_{};
+	Vector3 RStickMoveDirection_{};
 	Vector3 keyMoveDirection_{};
 	// 移動量
 	Vector3 velocity_{};

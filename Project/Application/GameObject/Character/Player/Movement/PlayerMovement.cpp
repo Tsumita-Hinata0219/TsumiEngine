@@ -53,14 +53,30 @@ void PlayerMovement::Update()
 	PadMove();
 	KeyMove();
 
-	if (pPlayer_->IsShooting()) {
-		// 射撃中はカメラの進行方向に姿勢を合わせる
-		FaceCameraDirection();
+	// カメラのタイプで処理を分ける
+	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
+
+		if (pPlayer_->IsShooting()) {
+			// カメラの進行方向に姿勢を合わせる
+			FaceCameraDirection();
+		}
+		else {
+			// 移動方向からY軸の姿勢を合わせる
+			CalcBodyOrienation(iLStick_, LStickMoveDirection_);
+			CalcBodyOrienation(iKeys_, keyMoveDirection_);
+		}
 	}
-	else {
-		// 移動方向からY軸の姿勢を合わせる
-		CalcBodyOrienation(iLStick_, stickMoveDirection_);
-		CalcBodyOrienation(iKeys_, keyMoveDirection_);
+	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
+
+		if (pPlayer_->IsShooting()) {
+			// RStickからY軸の姿勢を合わせる
+			CalcBodyOrienation(iRStick_, RStickMoveDirection_);
+		}
+		else {
+			// 移動方向からY軸の姿勢を合わせる
+			CalcBodyOrienation(iLStick_, LStickMoveDirection_);
+			CalcBodyOrienation(iKeys_, keyMoveDirection_);
+		}
 	}
 }
 
@@ -74,10 +90,15 @@ void PlayerMovement::CalcMoveDirection()
 	Vector3 forward = pGameCamera_->GetForwardVec();
 	Vector3 right = pGameCamera_->GetRightVec();
 
-	stickMoveDirection_ = {
+	LStickMoveDirection_ = {
 		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
 		0.0f,
 		(iLStick_.x * right.z) + (iLStick_.y * forward.z),
+	};
+	RStickMoveDirection_ = {
+		(iRStick_.x * right.x) + (iRStick_.y * forward.x),
+		0.0f,
+		(iRStick_.x * right.z) + (iRStick_.y * forward.z),
 	};
 	keyMoveDirection_ = {
 		(iKeys_.x * right.x) + (iKeys_.y * forward.x),
@@ -96,7 +117,7 @@ void PlayerMovement::PadMove()
 	if (std::abs(iLStick_.x) > DZone_ || std::abs(iLStick_.y) > DZone_) {
 
 		// 移動量の計算(カメラの前方と右方に基づく)
-		velocity_ = stickMoveDirection_;
+		velocity_ = LStickMoveDirection_;
 
 		// 移動方向を正規化し速さを乗算
 		velocity_ = Normalize(velocity_) * moveSpeed_;

@@ -2,7 +2,9 @@
 #include "../../Camera/FollowCamera/FollowCamera.h"
 
 
-// 初期化処理
+/// <summary>
+/// 初期化
+/// </summary>
 void Player::Init()
 {
 	// Inputクラス
@@ -51,7 +53,9 @@ void Player::Init()
 }
 
 
-// 更新処理
+/// <summary>
+///  更新処理
+/// </summary>
 void Player::Update()
 {
 	// UI
@@ -111,7 +115,9 @@ void Player::Update()
 }
 
 
-// 描画処理
+/// <summary>
+/// 描画処理
+/// </summary>
 void Player::Draw3D()
 {
 	// BodyModelの描画
@@ -136,7 +142,9 @@ void Player::Draw2DFront()
 }
 
 
-// 衝突自コールバック関数
+/// <summary>
+/// 衝突判定コールバック関数
+/// </summary>
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
@@ -190,7 +198,9 @@ void Player::OnCollisionWithEnemyBullet()
 }
 
 
-// 入力を受け取る
+/// <summary>
+/// 入力を受け取る
+/// </summary>
 void Player::InputFunc()
 {
 	// stickの入力を取得
@@ -213,7 +223,9 @@ void Player::InputFunc()
 }
 
 
-// プレイヤーの移動
+/// <summary>
+/// プレイヤーの移動
+/// </summary>
 void Player::MoveFunc()
 {
 	// 移動方向を求める
@@ -241,7 +253,9 @@ void Player::MoveFunc()
 }
 
 
-// 移動方向を求める
+/// <summary>
+/// 移動方向を求める
+/// </summary>
 void Player::CalcMoveDirection()
 {
 	// カメラの前方と右方
@@ -261,7 +275,9 @@ void Player::CalcMoveDirection()
 }
 
 
-// 移動処理
+/// <summary>
+/// 移動処理
+/// </summary>
 void Player::PadMove()
 {
 	// 移動量の計算
@@ -294,7 +310,9 @@ void Player::KeyMove()
 }
 
 
-// 移動限界処理
+/// <summary>
+/// 移動限界処理
+/// </summary>
 void Player::MoveLimited()
 {
 	// 移動限界
@@ -306,7 +324,9 @@ void Player::MoveLimited()
 }
 
 
-// カメラの方向に体の向きを合わせる
+/// <summary>
+/// カメラの方向に体の向きを合わせる
+/// </summary>
 void Player::FaceCameraDirection()
 {
 	// カメラの前方ベクトルを取得
@@ -328,7 +348,9 @@ void Player::FaceCameraDirection()
 }
 
 
-// 移動方向からY軸の姿勢を合わせる
+/// <summary>
+/// 移動方向からY軸の姿勢を合わせる
+/// </summary>
 void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 {
 	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
@@ -349,7 +371,9 @@ void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 }
 
 
-// 射撃処理
+/// <summary>
+/// 射撃処理
+/// </summary>
 void Player::ExecuteShot()
 {
 	// キーorボタン押下でタイマーをデクリメント
@@ -378,7 +402,9 @@ void Player::ExecuteShot()
 }
 
 
-// 新しいバレットを生成する
+/// <summary>
+/// 新しいバレットを生成する
+/// </summary>
 void Player::CreateNewBullet()
 {
 	// newBulletのインスタンス
@@ -402,7 +428,9 @@ void Player::CreateNewBullet()
 }
 
 
-// 無敵状態のタイマーを減らす処理
+/// <summary>
+/// 無敵状態のタイマーを減らす処理
+/// </summary>
 void Player::SubtructInvincibilityTime()
 {
 	// 無敵状態の時間を減らす
@@ -426,7 +454,9 @@ void Player::SubtructInvincibilityTime()
 }
 
 
-// ImGuiの描画
+/// <summary>
+/// ImGuiの描画
+/// </summary>
 void Player::DrawImGui()
 {
 	if (ImGui::TreeNode("Player")) {

@@ -64,6 +64,7 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// Type
+	GameCameraType GetCameraType() const { return this->cametaType_; }
 	void SetCameraType(GameCameraType setType) { this->cametaType_ = setType; }
 
 	// Player

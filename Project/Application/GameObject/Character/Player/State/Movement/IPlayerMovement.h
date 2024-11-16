@@ -17,6 +17,9 @@ public:
 	virtual void Enter(Player* pPlayer) = 0;
 	virtual void Update() = 0;
 
+protected:
+
+	Player* pPlayer_ = nullptr;
 
 };
 

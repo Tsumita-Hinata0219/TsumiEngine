@@ -12,8 +12,14 @@ public:
 	// コンストラクタ
 	OrbitalCameraMovement() = default;
 
-	// 初期化、更新
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	void Enter(Player* pPlayer) override;
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void Update() override;
 
 private:

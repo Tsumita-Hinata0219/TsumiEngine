@@ -37,6 +37,15 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
+	// 移動処理のステートパターン
+	if (gameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
+		movementState_ = std::make_unique<OrbitalCameraMovement>();
+	}
+	else if (gameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
+		movementState_ = std::make_unique<TopDownCameraMovement>();
+	}
+
+
 	// Colliderの登録
 	colComp_->SetAttribute(ColliderAttribute::Player);
 	colComp_->Register(sphere_);

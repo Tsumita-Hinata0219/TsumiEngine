@@ -15,6 +15,10 @@
 
 #include "UI/PlayerUI.h"
 
+#include "State/Movement/IPlayerMovement.h"
+#include "State/Movement/Orbital/OrbitalCameraMovement.h"
+#include "State/Movement/TopDown/TopDownCameraMovement.h"
+
 
 // 前方宣言
 class FollowCamera;
@@ -230,6 +234,12 @@ private: // ボディ関連
 
 	// リスト
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
+
+
+private:
+
+	// 移動ステート
+	std::unique_ptr<IPlayerMovement> movementState_;
 
 
 private: // バレット関連

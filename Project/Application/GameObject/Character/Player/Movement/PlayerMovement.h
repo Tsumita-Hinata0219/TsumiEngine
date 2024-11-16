@@ -86,6 +86,7 @@ private:
 
 	//Stickの入力を取得
 	Vector2 iLStick_{};
+	Vector2 iRStick_{};
 	// Keyの入力
 	Vector2 iKeys_{};
 

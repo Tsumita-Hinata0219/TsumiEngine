@@ -26,6 +26,7 @@ void PlayerMovement::Update()
 {
 	// stickの入力を取得
 	iLStick_ = input_->GetLStick();
+	iRStick_ = input_->GetRStick();
 
 	// keyの入力を取得
 	iKeys_ = Vector2::zero;

@@ -52,6 +52,9 @@ private:
 	// 姿勢計算の補間速度
 	float orientationLerpSpeed_ = 0.5f;
 
+	// 姿勢
+	Vector3 initRotate_{};
+
 	// 相対位置
 	Vector3 constOffset_{};
 	// プレイヤーからのオフセット

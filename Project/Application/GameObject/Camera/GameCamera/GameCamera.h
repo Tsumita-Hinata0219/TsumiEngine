@@ -85,16 +85,6 @@ public: // メンバ関数
 private:
 
 	/// <summary>
-	/// 回転処理
-	/// </summary>
-	void FuncOrientation();
-
-	/// <summary>
-	/// フォロー処理
-	/// </summary>
-	void FuncFollow();
-
-	/// <summary>
 	/// 前方ベクトルを求める
 	/// </summary>
 	void CalcForwardVec();
@@ -125,24 +115,6 @@ private:
 
 	// 操作のステート
 	std::unique_ptr<ICameraControlState> controlState_;
-
-
-	// 入力
-	Input* input_ = nullptr;
-	// LStickの入力
-	Vector2 iRStick_{};
-	// デッドゾーン
-	const float DZone_ = 0.2f;
-
-	// 回転速度
-	float addOrientationSpeed_ = 0.15f;
-	// 姿勢計算の補間速度
-	float orientationLerpSpeed_ = 0.5f;
-
-	// 相対位置
-	Vector3 constOffset_{};
-	// プレイヤーからのオフセット
-	Vector3 playerOffset_{};
 
 	// 前方ベクトル
 	Vector3 forwardVec_{};

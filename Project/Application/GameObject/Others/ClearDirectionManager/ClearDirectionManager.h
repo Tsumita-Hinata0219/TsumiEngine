@@ -42,6 +42,21 @@ public:
 
 private:
 
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
+
+	/// <summary>
+	/// Stateの描画
+	/// </summary>
+	void ShowState(const char* label, ClearDirectionState state);
+
+
+private:
+
+	Input* input_ = nullptr;
+
 	// ClearDirections
 	std::vector<std::unique_ptr<IClearDirection>> directions_;
 

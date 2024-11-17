@@ -7,6 +7,8 @@
 /// </summary>
 void ClearDirectionManager::Init()
 {
+	input_ = Input::GetInstance();
+
 	/* ----- Direction 演出 ----- */
 	directions_.resize(3);
 	directions_[0] = std::make_unique<ClearDirectionBackScreen>();
@@ -28,6 +30,12 @@ void ClearDirectionManager::Update()
 	for (auto& element : directions_) {
 		element->Update();
 	}
+
+	if (input_->Trigger(DIK_RETURN)) {
+		for (auto& element : directions_) {
+			element->StartDirection();
+		}
+	}
 }
 
 
@@ -41,5 +49,44 @@ void ClearDirectionManager::Draw2DFront()
 		element->Draw2DFront();
 	}
 
+}
+
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
+void ClearDirectionManager::DrawImGui()
+{
+	if (ImGui::TreeNode("ClearDirection_Manager")) {
+
+		ImGui::Text("Directions_State");
+		ShowState("BackScreen", directions_[0]->GetState());
+		ShowState("Liner", directions_[1]->GetState());
+		ShowState("Moji", directions_[2]->GetState());
+
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
+}
+
+
+/// <summary>
+/// Stateの描画
+/// </summary>
+void ClearDirectionManager::ShowState(const char* label, ClearDirectionState state)
+{
+	ImGui::Text("%s_State : ", label); ImGui::SameLine();
+	switch (state) {
+	case ClearDirectionState::Idle:
+		ImGui::Text("Idle");
+		break;
+	case ClearDirectionState::Processing:
+		ImGui::Text("Processing");
+		break;
+	case ClearDirectionState::Finished:
+		ImGui::Text("Finished");
+		break;
+	}
 }
 

@@ -51,6 +51,5 @@ public:
 
 protected:
 
-	ClearDirectionState state_;
-
+	ClearDirectionState state_ = ClearDirectionState::Idle;
 };

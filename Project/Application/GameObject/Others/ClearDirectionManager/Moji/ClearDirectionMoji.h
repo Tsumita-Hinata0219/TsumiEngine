@@ -83,6 +83,6 @@ private:
 	float targetAlpha_ = 1.0f;
 
 	// 座標の初期値、目標値
-	float initPos_ = 50.0f;
+	float initPos_ = 80.0f;
 	float targetPos_ = 0.0f;
 };

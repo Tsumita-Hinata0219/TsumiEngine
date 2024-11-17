@@ -65,9 +65,13 @@ private:
 
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;
+	// マスク画像
+	uint32_t maskTexture_;
 
 	// スプライト
 	std::unique_ptr<Sprite> sprite_;
+	// SpriteDissolve
+	SP::DissolveData dissolve_{};
 
 	// トランスフォーム
 	Transform trans_{};
@@ -81,5 +85,9 @@ private:
 	// Alpha値の初期値、目標値
 	float initAlpha_ = 0.0f;
 	float targetAlpha_ = 1.0f;
+
+	// Threshold値の初期値、目標値
+	float initThreshold_ = 1.0f;
+	float targetThreshold_ = 0.0f;
 };
 

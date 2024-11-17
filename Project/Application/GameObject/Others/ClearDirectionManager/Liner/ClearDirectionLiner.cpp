@@ -9,12 +9,18 @@ void ClearDirectionLiner::Init()
 {
 	// テクスチャ
 	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionLiner.png");
+	// マスク画像
+	maskTexture_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionMask.png");
 
 	// スプライト
 	Vector2 screenSize = { 1280.0f, 720.0f };
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn(screenSize);
-	sprite_->SetTexture(textureHandle_);
+	sprite_->SetTexture(textureHandle_); 
+	// Dissolve関連の初期化
+	dissolve_.isActive = true;
+	dissolve_.maskTexHandle = maskTexture_;
+	dissolve_.threshold = initThreshold_;
 
 	// トランスフォーム
 	trans_.Init();
@@ -56,7 +62,8 @@ void ClearDirectionLiner::Update()
 /// </summary>
 void ClearDirectionLiner::Draw2DFront()
 {
-	sprite_->SetColor(color_);
+	sprite_->SetColor(color_); // カラー
+	sprite_->SetDissolveData(dissolve_); // Dissolve
 	sprite_->Draw(trans_);
 }
 
@@ -84,6 +91,10 @@ void ClearDirectionLiner::DirectionUpdate()
 	// 初期値から目標値へアルファ値を補間する
 	color_.w =
 		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::OutExpo);
+
+	// 初期値から目標値へスレッド値を補完する
+	dissolve_.threshold =
+		Interpolate(initThreshold_, targetThreshold_, timer_.GetRatio(), Ease::OutQuart);
 }
 
 

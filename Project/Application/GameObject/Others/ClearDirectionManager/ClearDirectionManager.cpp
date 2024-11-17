@@ -7,18 +7,15 @@
 /// </summary>
 void ClearDirectionManager::Init()
 {
-	/* ----- BackScreen 背景スクリーン ----- */
-	backScreen_ = std::make_unique<ClearDirectionBackScreen>();
-	backScreen_->Init();
-
-	/* ----- Liner ライナー ----- */
-	liner_ = std::make_unique<ClearDirectionLiner>();
-	liner_->Init();
-
-	/* ----- Moji 文字 ----- */
-	moji_ = std::make_unique<ClearDirectionMoji>();
-	moji_->Init();
-
+	/* ----- Direction 演出 ----- */
+	directions_.resize(3);
+	directions_[0] = std::make_unique<ClearDirectionBackScreen>();
+	directions_[1] = std::make_unique<ClearDirectionLiner>();
+	directions_[2] = std::make_unique<ClearDirectionMoji>();
+	// 各演出の初期化
+	for (auto& element : directions_) {
+		element->Init();
+	}
 }
 
 
@@ -27,14 +24,10 @@ void ClearDirectionManager::Init()
 /// </summary>
 void ClearDirectionManager::Update()
 {
-	/* ----- BackScreen 背景スクリーン ----- */
-	backScreen_->Update();
-
-	/* ----- Liner ライナー ----- */
-	liner_->Update();
-
-	/* ----- Moji 文字 ----- */
-	moji_->Update();
+	// 各演出の更新
+	for (auto& element : directions_) {
+		element->Update();
+	}
 }
 
 
@@ -43,14 +36,10 @@ void ClearDirectionManager::Update()
 /// </summary>
 void ClearDirectionManager::Draw2DFront()
 {
-	/* ----- BackScreen 背景スクリーン ----- */
-	backScreen_->Draw2DFront();
-
-	/* ----- Liner ライナー ----- */
-	liner_->Draw2DFront();
-
-	/* ----- Moji 文字 ----- */
-	moji_->Draw2DFront();
+	// 各演出の描画
+	for (auto& element : directions_) {
+		element->Draw2DFront();
+	}
 
 }
 

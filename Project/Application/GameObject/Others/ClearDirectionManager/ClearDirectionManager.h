@@ -3,6 +3,7 @@
 #include "GameObject/GameObject.h"
 #include "Math/MyMath.h"
 
+#include "IClearDirection.h"
 #include "BackScreen/ClearDirectionBackScreen.h"
 #include "Liner/ClearDirectionLiner.h"
 #include "Moji/ClearDirectionMoji.h"
@@ -41,14 +42,8 @@ public:
 
 private:
 
-	// BackScreen
-	std::unique_ptr<ClearDirectionBackScreen> backScreen_;
-
-	// Liner
-	std::unique_ptr<ClearDirectionLiner> liner_;
-
-	// Moji
-	std::unique_ptr<ClearDirectionMoji> moji_;
+	// ClearDirections
+	std::vector<std::unique_ptr<IClearDirection>> directions_;
 
 
 };

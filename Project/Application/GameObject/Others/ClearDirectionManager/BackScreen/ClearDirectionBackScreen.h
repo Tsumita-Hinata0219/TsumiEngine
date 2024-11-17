@@ -5,10 +5,11 @@
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
+#include "../IClearDirection.h"
 
 
 /* クリア演出時のバックスクリーン */
-class ClearDirectionBackScreen {
+class ClearDirectionBackScreen : public IClearDirection {
 
 public:
 
@@ -25,24 +26,24 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init();
+	void Init() override;
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update();
+	void Update() override;
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw2DFront();
+	void Draw2DFront() override;
 
 private:
 
 	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
-	void DrawImGui();
+	void DrawImGui() override;
 
 
 private:

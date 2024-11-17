@@ -459,6 +459,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

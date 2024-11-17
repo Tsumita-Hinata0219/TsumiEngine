@@ -26,6 +26,11 @@ void ClearDirectionManager::Init()
 /// </summary>
 void ClearDirectionManager::Update()
 {
+#ifdef _DEBUG
+	// ImGuiの描画
+	DrawImGui();
+#endif // _DEBUG
+
 	// 各演出の更新
 	for (auto& element : directions_) {
 		element->Update();
@@ -60,9 +65,9 @@ void ClearDirectionManager::DrawImGui()
 	if (ImGui::TreeNode("ClearDirection_Manager")) {
 
 		ImGui::Text("Directions_State");
-		ShowState("BackScreen", directions_[0]->GetState());
-		ShowState("Liner", directions_[1]->GetState());
-		ShowState("Moji", directions_[2]->GetState());
+		ShowState("	BackScreen", directions_[0]->GetState());
+		ShowState("	Liner", directions_[1]->GetState());
+		ShowState("	Moji", directions_[2]->GetState());
 
 		ImGui::Text("");
 

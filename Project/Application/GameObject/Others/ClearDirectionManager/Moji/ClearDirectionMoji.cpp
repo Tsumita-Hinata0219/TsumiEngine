@@ -33,9 +33,10 @@ void ClearDirectionMoji::Init()
 /// </summary>
 void ClearDirectionMoji::Update()
 {
-	// ステートが処理中ならタイマー更新
+	// ステートが処理中
 	if (state_ == ClearDirectionState::Processing) {
-		timer_.Update();
+		timer_.Update(); // タイマー更新
+		DirectionUpdate(); // 演出更新
 	}
 
 	// タイマーが終了したら終了時処理

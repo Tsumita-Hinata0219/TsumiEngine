@@ -56,6 +56,11 @@ private:
 	void DirectionExsit() override;
 
 	/// <summary>
+	/// 初期値から目標値へアルファ値を補間する
+	/// </summary>
+	void CalculateAlpha();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui() override;
@@ -77,5 +82,9 @@ private:
 
 	// タイマー
 	Timer timer_{};
+
+	// Alpha値の初期値、目標値
+	float initAlpha_ = 0.0f;
+	float targetAlpha_ = 1.0f;
 };
 

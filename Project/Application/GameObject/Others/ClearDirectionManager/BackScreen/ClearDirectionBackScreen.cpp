@@ -23,7 +23,7 @@ void ClearDirectionBackScreen::Init()
 	color_ = Samp::Color::BLACK;
 	color_.w = initAlpha_;
 
-	// タイマー
+	// タイマー(1秒)
 	timer_.Init(0.0f, 1.0f * 30.0f);
 }
 
@@ -81,10 +81,8 @@ void ClearDirectionBackScreen::DirectionStart()
 /// </summary>
 void ClearDirectionBackScreen::DirectionUpdate()
 {
-	// カラーのAlpha値を補間で上げる
-	color_.w =
-		initAlpha_ + (targetAlpha_ - initAlpha_) *
-		Ease::OutExpo(timer_.GetRatio());
+	// 初期値から目標値へアルファ値を補間する
+	CalculateAlpha();
 }
 
 
@@ -95,6 +93,18 @@ void ClearDirectionBackScreen::DirectionExsit()
 {
 	// ステートを終了へ
 	state_ = ClearDirectionState::Finished;
+}
+
+
+/// <summary>
+/// 初期値から目標値へアルファ値を補間する
+/// </summary>
+void ClearDirectionBackScreen::CalculateAlpha()
+{
+	// カラーのAlpha値を補間で上げる
+	color_.w =
+		initAlpha_ + (targetAlpha_ - initAlpha_) *
+		Ease::OutExpo(timer_.GetRatio());
 }
 
 

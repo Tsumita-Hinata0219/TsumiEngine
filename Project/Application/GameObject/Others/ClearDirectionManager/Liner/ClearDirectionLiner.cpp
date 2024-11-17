@@ -21,10 +21,10 @@ void ClearDirectionLiner::Init()
 
 	// カラー
 	color_ = Samp::Color::WHITE;
-	color_.w = 0.0f;
+	color_.w = initAlpha_;
 
-	// タイマー
-	timer_.Init(0.0f, 1.0f * 50.0f);
+	// タイマー(10秒)
+	timer_.Init(0.0f, 10.0f * 60.0f);
 }
 
 
@@ -33,9 +33,10 @@ void ClearDirectionLiner::Init()
 /// </summary>
 void ClearDirectionLiner::Update()
 {
-	// ステートが処理中ならタイマー更新
+	// ステートが処理中
 	if (state_ == ClearDirectionState::Processing) {
-		timer_.Update();
+		timer_.Update(); // タイマー更新
+		DirectionUpdate(); // 演出更新
 	}
 
 	// タイマーが終了したら終了時処理
@@ -80,6 +81,8 @@ void ClearDirectionLiner::DirectionStart()
 /// </summary>
 void ClearDirectionLiner::DirectionUpdate()
 {
+	// 初期値から目標値へアルファ値を補間する
+	CalculateAlpha();
 }
 
 
@@ -90,6 +93,18 @@ void ClearDirectionLiner::DirectionExsit()
 {
 	// ステートを終了へ
 	state_ = ClearDirectionState::Finished;
+}
+
+
+/// <summary>
+/// 初期値から目標値へアルファ値を補間する
+/// </summary>
+void ClearDirectionLiner::CalculateAlpha()
+{
+	// カラーのAlpha値を補間で上げる
+	color_.w =
+		initAlpha_ + (targetAlpha_ - initAlpha_) *
+		Ease::OutExpo(timer_.GetRatio());
 }
 
 

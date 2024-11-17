@@ -37,9 +37,12 @@ void ClearDirectionManager::Update()
 	}
 
 	if (input_->Trigger(DIK_RETURN)) {
-		for (auto& element : directions_) {
-			element->DirectionStart();
-		}
+		directions_[0]->DirectionStart();
+	}
+	// バックスクリーン終わったらその他の演出を始める
+	if (directions_[0]->GetState() == ClearDirectionState::Finished) {
+		directions_[1]->DirectionStart();
+		directions_[2]->DirectionStart();
 	}
 }
 

@@ -116,17 +116,6 @@ void ClearDirectionMoji::DrawImGui()
 		ImGui::ColorEdit4("Color", &color_.x);
 		ImGui::Text("");
 
-		if (state_ == ClearDirectionState::Idle) {
-			ImGui::Text("State = Idle");
-		}
-		else if (state_ == ClearDirectionState::Processing) {
-			ImGui::Text("State = Processing");
-		}
-		else if (state_ == ClearDirectionState::Finished) {
-			ImGui::Text("State = Finished");
-		}
-		ImGui::Text("");
-
 		ImGui::TreePop();
 	}
 }

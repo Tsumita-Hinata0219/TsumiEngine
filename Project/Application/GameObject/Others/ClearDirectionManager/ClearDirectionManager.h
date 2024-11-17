@@ -4,6 +4,7 @@
 #include "Math/MyMath.h"
 
 #include "IClearDirection.h"
+#include "Blur/ClearDirectionBlur.h"
 #include "BackScreen/ClearDirectionBackScreen.h"
 #include "Liner/ClearDirectionLiner.h"
 #include "Moji/ClearDirectionMoji.h"
@@ -60,6 +61,8 @@ private:
 	// ClearDirections
 	std::vector<std::unique_ptr<IClearDirection>> directions_;
 
+	// 演出をするかのフラグ
+	bool isActive_ = false;
 
 };
 

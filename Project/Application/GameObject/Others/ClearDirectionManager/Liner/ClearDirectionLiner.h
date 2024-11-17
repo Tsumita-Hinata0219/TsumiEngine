@@ -41,6 +41,11 @@ public:
 private:
 
 	/// <summary>
+	/// 演出開始
+	/// </summary>
+	void StartDirection() override;
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui() override;

@@ -49,6 +49,20 @@ void ClearDirectionBackScreen::Draw2DFront()
 
 
 /// <summary>
+/// 演出開始
+/// </summary>
+void ClearDirectionBackScreen::StartDirection()
+{
+	if (state_ == ClearDirectionState::Idle) {
+
+		// ステートを処理中へ
+		state_ = ClearDirectionState::Processing;
+
+	}
+}
+
+
+/// <summary>
 /// ImGuiの描画
 /// </summary>
 void ClearDirectionBackScreen::DrawImGui()

@@ -35,6 +35,11 @@ public:
 	virtual void Draw2DFront() = 0;
 
 	/// <summary>
+	/// 演出開始
+	/// </summary>
+	virtual void StartDirection() = 0;
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	virtual void DrawImGui() = 0;

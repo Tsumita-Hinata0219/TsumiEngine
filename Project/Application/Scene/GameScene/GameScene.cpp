@@ -94,6 +94,10 @@ void GameScene::Initialize()
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Init();
 
+	/* ----- ClearDirectionManager クリア演出 ----- */
+	clearDirectionManager_ = std::make_unique<ClearDirectionManager>();
+	clearDirectionManager_->Init();
+
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
@@ -157,6 +161,8 @@ void GameScene::Update(GameManager* state)
 	/* ----- Collision 衝突判定 ----- */
 	CollisionManager_->Update();
 
+	/* ----- ClearDirectionManager クリア演出 ----- */
+	clearDirectionManager_->Update();
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
@@ -217,6 +223,9 @@ void GameScene::FrontSpriteDraw()
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
+
+	/* ----- ClearDirectionManager クリア演出 ----- */
+	clearDirectionManager_->Draw2DFront();
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Draw2DFront();

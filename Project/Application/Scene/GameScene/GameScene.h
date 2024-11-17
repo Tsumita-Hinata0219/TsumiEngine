@@ -27,6 +27,8 @@
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
+#include "GameObject/Others/ClearDirectionManager/ClearDirectionManager.h"
+
 
 class GameScene : public IScene {
 
@@ -108,6 +110,9 @@ private: // クラス
 
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
+
+	// ClearDirectionManager
+	std::unique_ptr<ClearDirectionManager> clearDirectionManager_;
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;

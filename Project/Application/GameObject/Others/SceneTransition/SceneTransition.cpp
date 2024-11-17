@@ -26,10 +26,10 @@ void SceneTransition::Init()
 
 	// Mask画像の読み込み
 	std::array<std::string, 4> maskTexName = {
-		"MaskTex_4",
-		"MaskTex_4",
-		"MaskTex_4",
-		"MaskTex_4",
+		"MaskTex_5",
+		"MaskTex_5",
+		"MaskTex_5",
+		"MaskTex_5",
 	};
 	for (auto& tex : maskTexName) {
 		maskTextures_.push_back(TextureManager::LoadTexture("Texture", tex + ".png"));

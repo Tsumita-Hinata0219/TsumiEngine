@@ -230,6 +230,10 @@
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
@@ -454,6 +458,12 @@
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
+    <ClInclude Include="Project\Engine\Math\MathInterpolate\MathInterpolate.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />

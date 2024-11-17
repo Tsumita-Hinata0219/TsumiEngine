@@ -21,6 +21,10 @@ void ClearDirectionBackScreen::Init()
 
 	// カラー
 	color_ = Samp::Color::BLACK;
+	color_.w = 0.0f;
+
+	// タイマー
+	timer_.Init(0.0f, 1.0f * 30.0f);
 }
 
 
@@ -29,7 +33,15 @@ void ClearDirectionBackScreen::Init()
 /// </summary>
 void ClearDirectionBackScreen::Update()
 {
+	// ステートが処理中ならタイマー更新
+	if (state_ == ClearDirectionState::Processing) {
+		timer_.Update();
+	}
 
+	// タイマーが終了したら終了時処理
+	if (timer_.IsFinish()) {
+		DirectionExsit();
+	}
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -51,14 +63,33 @@ void ClearDirectionBackScreen::Draw2DFront()
 /// <summary>
 /// 演出開始
 /// </summary>
-void ClearDirectionBackScreen::StartDirection()
+void ClearDirectionBackScreen::DirectionStart()
 {
 	if (state_ == ClearDirectionState::Idle) {
 
 		// ステートを処理中へ
 		state_ = ClearDirectionState::Processing;
-
+		// タイマースタート
+		timer_.Start();
 	}
+}
+
+
+/// <summary>
+/// 演出更新
+/// </summary>
+void ClearDirectionBackScreen::DirectionUpdate()
+{
+}
+
+
+/// <summary>
+/// 演出終了
+/// </summary>
+void ClearDirectionBackScreen::DirectionExsit()
+{
+	// ステートを終了へ
+	state_ = ClearDirectionState::Finished;
 }
 
 

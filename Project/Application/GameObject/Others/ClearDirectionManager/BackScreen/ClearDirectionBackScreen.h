@@ -43,7 +43,17 @@ private:
 	/// <summary>
 	/// 演出開始
 	/// </summary>
-	void StartDirection() override;
+	void DirectionStart() override;
+
+	/// <summary>
+	/// 演出更新
+	/// </summary>
+	void DirectionUpdate() override;
+
+	/// <summary>
+	/// 演出終了
+	/// </summary>
+	void DirectionExsit() override;
 
 	/// <summary>
 	/// ImGuiの描画
@@ -65,5 +75,7 @@ private:
 	// カラー
 	Vector4 color_{};
 
+	// タイマー
+	Timer timer_{};
 };
 

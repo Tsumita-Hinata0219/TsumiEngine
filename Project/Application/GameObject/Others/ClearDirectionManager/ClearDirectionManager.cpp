@@ -38,7 +38,7 @@ void ClearDirectionManager::Update()
 
 	if (input_->Trigger(DIK_RETURN)) {
 		for (auto& element : directions_) {
-			element->StartDirection();
+			element->DirectionStart();
 		}
 	}
 }

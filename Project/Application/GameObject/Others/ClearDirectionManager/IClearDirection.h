@@ -37,7 +37,17 @@ public:
 	/// <summary>
 	/// 演出開始
 	/// </summary>
-	virtual void StartDirection() = 0;
+	virtual void DirectionStart() = 0;
+
+	/// <summary>
+	/// 演出更新
+	/// </summary>
+	virtual void DirectionUpdate() = 0;
+
+	/// <summary>
+	/// 演出終了
+	/// </summary>
+	virtual void DirectionExsit() = 0;
 
 	/// <summary>
 	/// ImGuiの描画

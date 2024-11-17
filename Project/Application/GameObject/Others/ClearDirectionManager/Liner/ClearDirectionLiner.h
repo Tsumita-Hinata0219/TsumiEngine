@@ -56,11 +56,6 @@ private:
 	void DirectionExsit() override;
 
 	/// <summary>
-	/// 初期値から目標値へアルファ値を補間する
-	/// </summary>
-	void CalculateAlpha();
-
-	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui() override;

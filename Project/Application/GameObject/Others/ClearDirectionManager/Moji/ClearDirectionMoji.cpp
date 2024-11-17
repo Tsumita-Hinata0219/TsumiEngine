@@ -18,13 +18,14 @@ void ClearDirectionMoji::Init()
 
 	// トランスフォーム
 	trans_.Init();
+	trans_.srt.translate.y = initPos_;
 
 	// カラー
 	color_ = Samp::Color::WHITE;
-	color_.w = 0.0f;
+	color_.w = initAlpha_;
 
-	// タイマー
-	timer_.Init(0.0f, 1.0f * 30.0f);
+	// タイマー(秒)
+	timer_.Init(0.0f, 2.0f * 60.0f);
 }
 
 
@@ -81,6 +82,13 @@ void ClearDirectionMoji::DirectionStart()
 /// </summary>
 void ClearDirectionMoji::DirectionUpdate()
 {
+	// 初期値から目標値へアルファ値を補間する
+	color_.w =
+		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::InCubic);
+
+	// 初期値から目標値へ座標を補完する
+	trans_.srt.translate.y = 
+		Interpolate(initPos_, targetPos_, timer_.GetRatio(), Ease::OutExpo);
 }
 
 

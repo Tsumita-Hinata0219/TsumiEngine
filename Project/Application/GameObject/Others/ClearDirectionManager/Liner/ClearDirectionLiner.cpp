@@ -82,7 +82,8 @@ void ClearDirectionLiner::DirectionStart()
 void ClearDirectionLiner::DirectionUpdate()
 {
 	// 初期値から目標値へアルファ値を補間する
-	CalculateAlpha();
+	color_.w =
+		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::OutExpo);
 }
 
 
@@ -93,18 +94,6 @@ void ClearDirectionLiner::DirectionExsit()
 {
 	// ステートを終了へ
 	state_ = ClearDirectionState::Finished;
-}
-
-
-/// <summary>
-/// 初期値から目標値へアルファ値を補間する
-/// </summary>
-void ClearDirectionLiner::CalculateAlpha()
-{
-	// カラーのAlpha値を補間で上げる
-	color_.w =
-		initAlpha_ + (targetAlpha_ - initAlpha_) *
-		Ease::OutExpo(timer_.GetRatio());
 }
 
 

@@ -5,6 +5,7 @@
 #include "MathQuaternion/MathQuaternion.h"
 #include "MathOperations/MathOperations.h"
 #include "MathFunction/MathFunction.h"
+#include "MathInterpolate/MathInterpolate.h"
 #include "MyColor/MyColor.h"
 #include "MyParlinNoise/ParlinNoise.h"
 #include "MathEasing/MathEasing.h"

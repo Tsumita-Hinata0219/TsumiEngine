@@ -460,6 +460,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
+    <ClInclude Include="Project\Engine\Math\MathInterpolate\MathInterpolate.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

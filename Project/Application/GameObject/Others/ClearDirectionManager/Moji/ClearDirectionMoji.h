@@ -77,4 +77,12 @@ private:
 
 	// タイマー
 	Timer timer_{};
+
+	// Alpha値の初期値、目標値
+	float initAlpha_ = 0.0f;
+	float targetAlpha_ = 1.0f;
+
+	// 座標の初期値、目標値
+	float initPos_ = 50.0f;
+	float targetPos_ = 0.0f;
 };

@@ -59,6 +59,9 @@ public:
 	/// </summary>
 	virtual ClearDirectionState GetState() { return this->state_; }
 
+
+
+
 protected:
 
 	ClearDirectionState state_ = ClearDirectionState::Idle;

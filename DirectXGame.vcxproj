@@ -360,6 +360,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
+    <ClInclude Include="Project\Engine\Math\MathInterpolate\MathInterpolate.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />

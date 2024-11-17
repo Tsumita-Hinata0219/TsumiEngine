@@ -157,6 +157,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\Application\GameManager\GameManager.cpp" />
@@ -176,6 +178,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
@@ -342,8 +345,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.h" />

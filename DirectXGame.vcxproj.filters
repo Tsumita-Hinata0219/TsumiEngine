@@ -234,6 +234,9 @@
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -461,6 +464,9 @@
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
     <ClInclude Include="Project\Engine\Math\MathInterpolate\MathInterpolate.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

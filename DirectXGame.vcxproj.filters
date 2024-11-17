@@ -232,6 +232,8 @@
     <ClCompile Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -455,6 +457,8 @@
     <ClInclude Include="Project\Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

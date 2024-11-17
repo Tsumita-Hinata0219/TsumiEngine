@@ -31,6 +31,8 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
+	/* ----- ClearDirectionManager クリア演出 ----- */
+	clearDirectionManager_ = std::make_unique<ClearDirectionManager>();
 }
 
 
@@ -95,7 +97,6 @@ void GameScene::Initialize()
 	enemyManager_->Init();
 
 	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_ = std::make_unique<ClearDirectionManager>();
 	clearDirectionManager_->Init();
 
 	/* ----- SceneTransition シーントランジション ----- */
@@ -116,9 +117,6 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
-
-	/* ----- FollowCamera フォローカメラ ----- */
-	//followCamera_->Update();
 
 	/* ----- GameCamera ゲームカメラ ----- */
 	gameCamera_->Update();
@@ -152,6 +150,12 @@ void GameScene::Update(GameManager* state)
 		return;
 	}
 
+	/* ----- ClearDirectionManager クリア演出 ----- */
+	clearDirectionManager_->Update();
+	if (clearDirectionManager_->GetState() == ClearDirectionState::Finished) {
+		return;
+	}
+
 	/* ----- Player プレイヤー ----- */
 	player_->Update();
 
@@ -161,8 +165,6 @@ void GameScene::Update(GameManager* state)
 	/* ----- Collision 衝突判定 ----- */
 	CollisionManager_->Update();
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_->Update();
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
@@ -218,14 +220,14 @@ void GameScene::FrontSpriteDraw()
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Draw2DFront();
 
-	/* ----- Player プレイヤー ----- */
-	player_->Draw2DFront();
-
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
 
 	/* ----- ClearDirectionManager クリア演出 ----- */
 	clearDirectionManager_->Draw2DFront();
+
+	/* ----- Player プレイヤー ----- */
+	player_->Draw2DFront();
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Draw2DFront();
@@ -238,7 +240,7 @@ void GameScene::SceneChangeCheck()
 	// プレイヤーが勝利するか敗北するかすれば
 	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
-		sceneTransition_->StartFadeOut();
+		clearDirectionManager_->DirectionStart();
 	}
 }
 

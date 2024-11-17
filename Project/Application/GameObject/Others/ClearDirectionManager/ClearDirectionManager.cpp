@@ -22,6 +22,9 @@ void ClearDirectionManager::Init()
 
 	// フラグは折っておく
 	isActive_ = false;
+
+	// 初期ステートは待機
+	state_ = ClearDirectionState::Idle;
 }
 
 
@@ -35,16 +38,14 @@ void ClearDirectionManager::Update()
 	DrawImGui();
 #endif // _DEBUG
 
+	// ステートが処理中以外なら早期return
+	if (state_ != ClearDirectionState::Processing) { return; }
+
 	// 各演出の更新
 	for (auto& element : directions_) {
 		element->Update();
 	}
 
-	if (input_->Trigger(DIK_RETURN)) {
-		isActive_ = true;
-		directions_[0]->DirectionStart();
-		directions_[1]->DirectionStart();
-	}
 	// バックスクリーン終わったらその他の演出を始める
 	if (directions_[1]->GetState() == ClearDirectionState::Finished) {
 		directions_[2]->DirectionStart();
@@ -63,6 +64,26 @@ void ClearDirectionManager::Draw2DFront()
 	// 各演出の描画
 	for (auto& element : directions_) {
 		element->Draw2DFront();
+	}
+}
+
+
+/// <summary>
+/// 演出開始
+/// </summary>
+void ClearDirectionManager::DirectionStart()
+{
+	if (state_ == ClearDirectionState::Idle) {
+
+		// ステートを処理中へ
+		state_ = ClearDirectionState::Processing;
+
+		// フラグを立て
+		isActive_ = true;
+
+		// ブラーとバックスクリーンの演出開始
+		directions_[0]->DirectionStart();
+		directions_[1]->DirectionStart();
 	}
 }
 

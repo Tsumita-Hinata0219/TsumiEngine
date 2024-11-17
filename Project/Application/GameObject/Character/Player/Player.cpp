@@ -109,6 +109,10 @@ void Player::Update()
 		SubtructInvincibilityTime();
 	}
 
+	if (input_->Trigger(DIK_RETURN)) {
+		isWin_ = true;
+	}
+
 
 #ifdef _DEBUG
 	// ImGuiの描画

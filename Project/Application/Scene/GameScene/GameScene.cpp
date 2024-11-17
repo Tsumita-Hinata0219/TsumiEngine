@@ -234,7 +234,9 @@ void GameScene::FrontSpriteDraw()
 }
 
 
-// シーンチェンジチェック
+/// <summary>
+/// シーンチェンジチェック
+/// </summary>
 void GameScene::SceneChangeCheck()
 {
 	// プレイヤーが勝利するか敗北するかすれば

@@ -7,7 +7,7 @@
 #include "../../../GameObject.h"
 
 
-/* GameScene内のUI */
+/* クリア演出時のバックスクリーン */
 class ClearDirectionBackScreen {
 
 public:

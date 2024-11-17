@@ -8,7 +8,7 @@
 void ClearDirectionBackScreen::Init()
 {
 	// テクスチャ
-	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionBackScreen.png.png");
+	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionBackScreen.png");
 
 	// スプライト
 	Vector2 screenSize = { 1280.0f, 720.0f };
@@ -20,7 +20,7 @@ void ClearDirectionBackScreen::Init()
 	trans_.Init();
 
 	// カラー
-	color_ = Samp::Color::WHITE;
+	color_ = Samp::Color::BLACK;
 }
 
 

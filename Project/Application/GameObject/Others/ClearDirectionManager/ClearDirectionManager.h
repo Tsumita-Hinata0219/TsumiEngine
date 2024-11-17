@@ -4,6 +4,8 @@
 #include "Math/MyMath.h"
 
 #include "BackScreen/ClearDirectionBackScreen.h"
+#include "Liner/ClearDirectionLiner.h"
+#include "Moji/ClearDirectionMoji.h"
 
 
 /* クリア演出のクラス */
@@ -41,6 +43,12 @@ private:
 
 	// BackScreen
 	std::unique_ptr<ClearDirectionBackScreen> backScreen_;
+
+	// Liner
+	std::unique_ptr<ClearDirectionLiner> liner_;
+
+	// Moji
+	std::unique_ptr<ClearDirectionMoji> moji_;
 
 
 };

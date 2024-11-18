@@ -59,6 +59,11 @@ public:
 	void DirectionStart();
 
 	/// <summary>
+	/// 終了処理
+	/// </summary>
+	void FuncEndDirection();
+
+	/// <summary>
 	/// 終了演出開始
 	/// </summary>
 	void EndDirectionStart() { this->naviBack_->EndDirectionStart(); }

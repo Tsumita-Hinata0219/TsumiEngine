@@ -54,11 +54,6 @@ void StageTransitionMenuNaviBack::Init()
 /// </summary>
 void StageTransitionMenuNaviBack::Update()
 {
-	// 終了処理に入る
-	if (IsEndDirection_) {
-
-	}
-
 	// セレクト操作
 	SelectOperation();
 
@@ -77,12 +72,35 @@ void StageTransitionMenuNaviBack::Update()
 /// </summary>
 void StageTransitionMenuNaviBack::Draw2DFront()
 {
-	/*for (int i = 0; i < arraySize_; ++i) {
+	for (int i = 0; i < arraySize_; ++i) {
 		spriteArr_[i]->Draw(transArr_[i]);
-	}*/
-	spriteArr_[1]->Draw(transArr_[1]);
-	spriteArr_[0]->Draw(transArr_[0]);
-	/*spriteArr_[1]->Draw(transArr_[1]);*/
+	}
+}
+
+
+/// <summary>
+/// 終了処理
+/// </summary>
+void StageTransitionMenuNaviBack::FuncEndDirection()
+{
+	if (!IsEndDirection_) { return; }
+
+	if (timer_.IsActive()) {
+
+		// タイマー更新
+		timer_.Update();
+
+		Vector2 setSize = targetSize_;
+		setSize.y =
+			targetSize_.y + (initSize_.y - targetSize_.y) * Ease::InBack(timer_.GetRatio(), 5.0f);
+
+		// 初期値から目標値へY軸サイズを補完する
+		spriteArr_[1]->SetSize(setSize);
+
+		if (timer_.IsFinish()) {
+			timer_.Clear();
+		}
+	}
 }
 
 
@@ -93,6 +111,13 @@ void StageTransitionMenuNaviBack::EndDirectionStart()
 {
 	// 終了処理に入る
 	IsEndDirection_ = true;
+
+	// タイマー設定
+	timer_.Init(0.0f, 1.0f * 60.0f);
+	timer_.Start();
+
+	// サイズを初期値にする
+	spriteArr_[1]->SetSize(targetSize_);
 }
 
 

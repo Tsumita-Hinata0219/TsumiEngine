@@ -129,6 +129,15 @@ void StageTransitionMenuManager::DirectionStart()
 
 
 /// <summary>
+/// 終了処理
+/// </summary>
+void StageTransitionMenuManager::FuncEndDirection()
+{
+	naviBack_->FuncEndDirection();
+}
+
+
+/// <summary>
 /// ImGuiの描画
 /// </summary>
 void StageTransitionMenuManager::DrawImGui()

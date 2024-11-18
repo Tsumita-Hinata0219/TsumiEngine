@@ -47,6 +47,11 @@ public:
 	void Draw2DFront();
 
 	/// <summary>
+	/// 終了処理
+	/// </summary>
+	void FuncEndDirection();
+
+	/// <summary>
 	/// 終了処理開始
 	/// </summary>
 	void EndDirectionStart();

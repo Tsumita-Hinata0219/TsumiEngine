@@ -138,6 +138,7 @@ void ShaderManager::ModelShadersCompiles()
 	Object3DShader();
 	SkinningObject3dShader();
 	SkyboxShader();
+	CPUParticleShader();
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
@@ -293,6 +294,15 @@ void ShaderManager::SkyboxShader()
 		.PixelBlob = SetShader(PS, L"Resources/Shaders/Skybox/Skybox.PS.hlsl"),
 	};
 	modelShadersMap_["Skybox"] = shader;
+}
+
+void ShaderManager::CPUParticleShader()
+{
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/CPUParticle/CPUParticle.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/CPUParticle/CPUParticle.PS.hlsl"),
+	};
+	modelShadersMap_["CPUParticle"] = shader;
 }
 
 

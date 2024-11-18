@@ -20,7 +20,6 @@ ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
 
 SamplerState gSampler : register(s0);
 
-
 struct PixelShaderOutput
 {
     float4 color : SV_TARGET0;
@@ -43,6 +42,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     }
     
     // アルファ値の計算
+    output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     output.color.a = gMaterial.color.a * textureColor.a;
 
     return output;

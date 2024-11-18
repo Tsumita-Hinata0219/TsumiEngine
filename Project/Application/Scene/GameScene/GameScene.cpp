@@ -138,7 +138,7 @@ void GameScene::Update(GameManager* state)
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
-			state->ChangeSceneState(new GameScene);
+			state->ChangeSceneState(new TitleScene);
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			state->ChangeSceneState(new GameScene);

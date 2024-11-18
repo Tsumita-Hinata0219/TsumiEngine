@@ -5,23 +5,24 @@
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
-#include "../IClearDirection.h"
+#include "../IStageTransitionMenu.h"
+#include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
-/* クリア演出時の文字 */
-class ClearDirectionMoji : public IClearDirection {
+/* ゲーム終了メニューのバックスクリーン */
+class StageTransitionMenuBackScreen : public IStageTransitionMenu {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ClearDirectionMoji() = default;
+	StageTransitionMenuBackScreen() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~ClearDirectionMoji() = default;
+	~StageTransitionMenuBackScreen() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -63,26 +64,11 @@ private:
 
 private:
 
-	// テクスチャハンドル
-	uint32_t textureHandle_ = 0;
-
-	// スプライト
-	std::unique_ptr<Sprite> sprite_;
-
-	// トランスフォーム
-	Transform trans_{};
-
-	// カラー
-	Vector4 color_{};
-
 	// タイマー
 	Timer timer_{};
 
 	// Alpha値の初期値、目標値
 	float initAlpha_ = 0.0f;
 	float targetAlpha_ = 1.0f;
-
-	// 座標の初期値、目標値
-	float initPos_ = 80.0f;
-	float targetPos_ = 0.0f;
 };
+

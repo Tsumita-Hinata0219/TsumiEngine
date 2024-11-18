@@ -5,24 +5,24 @@
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
-#include "../IClearDirection.h"
+#include "../IStageTransitionMenu.h"
 #include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
-/* クリア演出時のバックスクリーン */
-class ClearDirectionBlur : public IClearDirection {
+/* ゲーム終了メニューのナビ */
+class StageTransitionMenuNavigation : public IStageTransitionMenu {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ClearDirectionBlur() = default;
+	StageTransitionMenuNavigation() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~ClearDirectionBlur() = default;
+	~StageTransitionMenuNavigation() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -64,11 +64,14 @@ private:
 
 private:
 
-	// Blur
-	std::unique_ptr<RadialBlurEffect> blur_;
-	RadialBlurMtl blurData_;
-
 	// タイマー
 	Timer timer_{};
-};
 
+	// Alpha値の初期値、目標値
+	float initAlpha_ = 0.0f;
+	float targetAlpha_ = 1.0f;
+
+	// 座標の初期値、目標値
+	float initPos_ = 80.0f;
+	float targetPos_ = 0.0f;
+};

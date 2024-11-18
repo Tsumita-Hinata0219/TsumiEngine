@@ -129,9 +129,9 @@ float Ease::InOutCirc(float num)
 
 
 
-float Ease::InBack(float num)
+float Ease::InBack(float num, float intensity)
 {
-	const float c1 = 1.70158f;
+	const float c1 = intensity;
 	const float c3 = c1 + 1.0f;
 
 	return c3 * num * num * num - c1 * num * num;

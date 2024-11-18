@@ -1,10 +1,10 @@
-#include "ClearDirectionBlur.h"
+#include "StageTransitionMenuBlur.h"
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void ClearDirectionBlur::Init()
+void StageTransitionMenuBlur::Init()
 {
 	// ブラー
 	blur_ = std::make_unique<RadialBlurEffect>();
@@ -20,10 +20,10 @@ void ClearDirectionBlur::Init()
 /// <summary>
 /// 更新処理
 /// </summary>
-void ClearDirectionBlur::Update()
+void StageTransitionMenuBlur::Update()
 {
 	// ステートが処理中
-	if (state_ == ClearDirectionState::Processing) {
+	if (state_ == MenuDirectionState::Processing) {
 		timer_.Update(); // タイマー更新
 		DirectionUpdate(); // 演出更新
 	}
@@ -43,7 +43,7 @@ void ClearDirectionBlur::Update()
 /// <summary>
 /// 描画処理
 /// </summary>
-void ClearDirectionBlur::Draw2DFront()
+void StageTransitionMenuBlur::Draw2DFront()
 {
 	blur_->SetMtlData(blurData_);
 	blur_->Draw();
@@ -53,33 +53,27 @@ void ClearDirectionBlur::Draw2DFront()
 /// <summary>
 /// 演出開始
 /// </summary>
-void ClearDirectionBlur::DirectionStart()
-{
-}
+void StageTransitionMenuBlur::DirectionStart() {}
 
 
 /// <summary>
 /// 演出更新
 /// </summary>
-void ClearDirectionBlur::DirectionUpdate()
-{
-}
+void StageTransitionMenuBlur::DirectionUpdate() {}
 
 
 /// <summary>
 /// 演出終了
 /// </summary>
-void ClearDirectionBlur::DirectionExsit()
-{
-}
+void StageTransitionMenuBlur::DirectionExsit() {}
 
 
 /// <summary>
 /// ImGuiの描画
 /// </summary>
-void ClearDirectionBlur::DrawImGui()
+void StageTransitionMenuBlur::DrawImGui()
 {
-	if (ImGui::TreeNode("ClearDirection_Blur")) {
+	if (ImGui::TreeNode("StageTransitionMenu_Blur")) {
 
 		blurData_.DrawImGui();
 		ImGui::Text("");
@@ -87,3 +81,4 @@ void ClearDirectionBlur::DrawImGui()
 		ImGui::TreePop();
 	}
 }
+

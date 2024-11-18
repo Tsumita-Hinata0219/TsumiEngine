@@ -1,11 +1,11 @@
-#include "ClearDirectionMoji.h"
+#include "StageTransitionMenuResultUI.h"
 
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void ClearDirectionMoji::Init()
+void StageTransitionMenuResultUI::Init()
 {
 	// テクスチャ
 	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionMoji.png");
@@ -15,6 +15,10 @@ void ClearDirectionMoji::Init()
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn(screenSize);
 	sprite_->SetTexture(textureHandle_);
+
+	// 座標の初期値、目標値
+	initPos_ = 130.0f;
+	targetPos_ = 0.0f;
 
 	// トランスフォーム
 	trans_.Init();
@@ -32,10 +36,10 @@ void ClearDirectionMoji::Init()
 /// <summary>
 /// 更新処理
 /// </summary>
-void ClearDirectionMoji::Update()
+void StageTransitionMenuResultUI::Update()
 {
 	// ステートが処理中以外なら早期return
-	if (state_ != ClearDirectionState::Processing) { return; }
+	if (state_ != MenuDirectionState::Processing) { return; }
 
 	timer_.Update(); // タイマー更新
 	DirectionUpdate(); // 演出更新
@@ -55,7 +59,7 @@ void ClearDirectionMoji::Update()
 /// <summary>
 /// 描画処理
 /// </summary>
-void ClearDirectionMoji::Draw2DFront()
+void StageTransitionMenuResultUI::Draw2DFront()
 {
 	sprite_->SetColor(color_);
 	sprite_->Draw(trans_);
@@ -65,12 +69,12 @@ void ClearDirectionMoji::Draw2DFront()
 /// <summary>
 /// 演出開始
 /// </summary>
-void ClearDirectionMoji::DirectionStart()
+void StageTransitionMenuResultUI::DirectionStart()
 {
-	if (state_ == ClearDirectionState::Idle) {
-		
+	if (state_ == MenuDirectionState::Idle) {
+
 		// ステートを処理中へ
-		state_ = ClearDirectionState::Processing;
+		state_ = MenuDirectionState::Processing;
 		// タイマースタート
 		timer_.Start();
 	}
@@ -80,14 +84,14 @@ void ClearDirectionMoji::DirectionStart()
 /// <summary>
 /// 演出更新
 /// </summary>
-void ClearDirectionMoji::DirectionUpdate()
+void StageTransitionMenuResultUI::DirectionUpdate()
 {
 	// 初期値から目標値へアルファ値を補間する
 	color_.w =
 		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::InCubic);
 
 	// 初期値から目標値へ座標を補完する
-	trans_.srt.translate.y = 
+	trans_.srt.translate.y =
 		Interpolate(initPos_, targetPos_, timer_.GetRatio(), Ease::OutExpo);
 }
 
@@ -95,19 +99,19 @@ void ClearDirectionMoji::DirectionUpdate()
 /// <summary>
 /// 演出終了
 /// </summary>
-void ClearDirectionMoji::DirectionExsit()
+void StageTransitionMenuResultUI::DirectionExsit()
 {
 	// ステートを終了へ
-	state_ = ClearDirectionState::Finished;
+	state_ = MenuDirectionState::Finished;
 }
 
 
 /// <summary>
 /// ImGuiの描画
 /// </summary>
-void ClearDirectionMoji::DrawImGui()
+void StageTransitionMenuResultUI::DrawImGui()
 {
-	if (ImGui::TreeNode("ClearDirection_Moji")) {
+	if (ImGui::TreeNode("StageTransitionMenu_ResultUI")) {
 
 		ImGui::Text("Transform");
 		trans_.DrawImGui();
@@ -119,5 +123,4 @@ void ClearDirectionMoji::DrawImGui()
 		ImGui::TreePop();
 	}
 }
-
 

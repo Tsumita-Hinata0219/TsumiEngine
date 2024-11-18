@@ -27,7 +27,7 @@
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "GameObject/Others/ClearDirectionManager/ClearDirectionManager.h"
+#include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
 
 
 class GameScene : public IScene {
@@ -80,6 +80,8 @@ private:
 
 private: // クラス
 
+	Input* input_ = nullptr;
+
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 
@@ -113,8 +115,8 @@ private: // クラス
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
 
-	// ClearDirectionManager
-	std::unique_ptr<ClearDirectionManager> clearDirectionManager_;
+	// StageTransitionMenuManager
+	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;

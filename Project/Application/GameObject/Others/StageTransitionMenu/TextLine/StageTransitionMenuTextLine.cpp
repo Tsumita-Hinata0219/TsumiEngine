@@ -1,11 +1,11 @@
-#include "ClearDirectionLiner.h"
+#include "StageTransitionMenuTextLine.h"
 
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void ClearDirectionLiner::Init()
+void StageTransitionMenuTextLine::Init()
 {
 	// テクスチャ
 	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionLiner.png");
@@ -16,7 +16,7 @@ void ClearDirectionLiner::Init()
 	Vector2 screenSize = { 1280.0f, 720.0f };
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn(screenSize);
-	sprite_->SetTexture(textureHandle_); 
+	sprite_->SetTexture(textureHandle_);
 	// Dissolve関連の初期化
 	dissolve_.isActive = true;
 	dissolve_.maskTexHandle = maskTexture_;
@@ -37,10 +37,10 @@ void ClearDirectionLiner::Init()
 /// <summary>
 /// 更新処理
 /// </summary>
-void ClearDirectionLiner::Update()
+void StageTransitionMenuTextLine::Update()
 {
 	// ステートが処理中以外なら早期return
-	if (state_ != ClearDirectionState::Processing) { return; }
+	if (state_ != MenuDirectionState::Processing) { return; }
 
 	timer_.Update(); // タイマー更新
 	DirectionUpdate(); // 演出更新
@@ -60,7 +60,7 @@ void ClearDirectionLiner::Update()
 /// <summary>
 /// 描画処理
 /// </summary>
-void ClearDirectionLiner::Draw2DFront()
+void StageTransitionMenuTextLine::Draw2DFront()
 {
 	sprite_->SetColor(color_); // カラー
 	sprite_->SetDissolveData(dissolve_); // Dissolve
@@ -71,12 +71,12 @@ void ClearDirectionLiner::Draw2DFront()
 /// <summary>
 /// 演出開始
 /// </summary>
-void ClearDirectionLiner::DirectionStart()
+void StageTransitionMenuTextLine::DirectionStart()
 {
-	if (state_ == ClearDirectionState::Idle) {
+	if (state_ == MenuDirectionState::Idle) {
 
 		// ステートを処理中へ
-		state_ = ClearDirectionState::Processing;
+		state_ = MenuDirectionState::Processing;
 		// タイマースタート
 		timer_.Start();
 	}
@@ -86,7 +86,7 @@ void ClearDirectionLiner::DirectionStart()
 /// <summary>
 /// 演出更新
 /// </summary>
-void ClearDirectionLiner::DirectionUpdate()
+void StageTransitionMenuTextLine::DirectionUpdate()
 {
 	// 初期値から目標値へアルファ値を補間する
 	color_.w =
@@ -101,19 +101,19 @@ void ClearDirectionLiner::DirectionUpdate()
 /// <summary>
 /// 演出終了
 /// </summary>
-void ClearDirectionLiner::DirectionExsit()
+void StageTransitionMenuTextLine::DirectionExsit()
 {
 	// ステートを終了へ
-	state_ = ClearDirectionState::Finished;
+	state_ = MenuDirectionState::Finished;
 }
 
 
 /// <summary>
 /// ImGuiの描画
 /// </summary>
-void ClearDirectionLiner::DrawImGui()
+void StageTransitionMenuTextLine::DrawImGui()
 {
-	if (ImGui::TreeNode("ClearDirection_Liner")) {
+	if (ImGui::TreeNode("StageTransitionMenu_TextLine")) {
 
 		ImGui::Text("Transform");
 		trans_.DrawImGui();

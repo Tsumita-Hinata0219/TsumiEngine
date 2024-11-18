@@ -1,40 +1,42 @@
-#include "ClearDirectionBackScreen.h"
+#include "StageTransitionMenuNavigation.h"
 
 
 
 /// <summary>
 /// 初期化処理
 /// </summary>
-void ClearDirectionBackScreen::Init()
+void StageTransitionMenuNavigation::Init()
 {
 	// テクスチャ
-	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionBackScreen.png");
+	textureHandle_ = TextureManager::LoadTexture("Texture", "uvChecker.png");
 
 	// スプライト
-	Vector2 screenSize = { 1280.0f, 720.0f };
+	Vector2 screenSize = { 108.0f, 52.0f };
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn(screenSize);
 	sprite_->SetTexture(textureHandle_);
+	sprite_->SetAnchor(SpriteAnchor::Center);
 
 	// トランスフォーム
 	trans_.Init();
+	//trans_.srt.translate.y = initPos_;
 
 	// カラー
-	color_ = Samp::Color::BLACK;
+	color_ = color_ = Samp::Color::WHITE;
 	color_.w = initAlpha_;
 
-	// タイマー(1秒)
-	timer_.Init(0.0f, 1.0f * 60.0f);
+	// タイマー(秒)
+	timer_.Init(0.0f, 2.0f * 60.0f);
 }
 
 
 /// <summary>
 /// 更新処理
 /// </summary>
-void ClearDirectionBackScreen::Update()
+void StageTransitionMenuNavigation::Update()
 {
 	// ステートが処理中以外なら早期return
-	if (state_ != ClearDirectionState::Processing) { return; }
+	if (state_ != MenuDirectionState::Processing) { return; }
 
 	timer_.Update(); // タイマー更新
 	DirectionUpdate(); // 演出更新
@@ -54,7 +56,7 @@ void ClearDirectionBackScreen::Update()
 /// <summary>
 /// 描画処理
 /// </summary>
-void ClearDirectionBackScreen::Draw2DFront()
+void StageTransitionMenuNavigation::Draw2DFront()
 {
 	sprite_->SetColor(color_);
 	sprite_->Draw(trans_);
@@ -64,12 +66,12 @@ void ClearDirectionBackScreen::Draw2DFront()
 /// <summary>
 /// 演出開始
 /// </summary>
-void ClearDirectionBackScreen::DirectionStart()
+void StageTransitionMenuNavigation::DirectionStart()
 {
-	if (state_ == ClearDirectionState::Idle) {
+	if (state_ == MenuDirectionState::Idle) {
 
 		// ステートを処理中へ
-		state_ = ClearDirectionState::Processing;
+		state_ = MenuDirectionState::Processing;
 		// タイマースタート
 		timer_.Start();
 	}
@@ -79,30 +81,34 @@ void ClearDirectionBackScreen::DirectionStart()
 /// <summary>
 /// 演出更新
 /// </summary>
-void ClearDirectionBackScreen::DirectionUpdate()
+void StageTransitionMenuNavigation::DirectionUpdate()
 {
 	// 初期値から目標値へアルファ値を補間する
 	color_.w =
-		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::OutExpo);
+		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::InCubic);
+
+	// 初期値から目標値へ座標を補完する
+	/*trans_.srt.translate.y =
+		Interpolate(initPos_, targetPos_, timer_.GetRatio(), Ease::OutExpo);*/
 }
 
 
 /// <summary>
 /// 演出終了
 /// </summary>
-void ClearDirectionBackScreen::DirectionExsit()
+void StageTransitionMenuNavigation::DirectionExsit()
 {
 	// ステートを終了へ
-	state_ = ClearDirectionState::Finished;
+	state_ = MenuDirectionState::Finished;
 }
 
 
 /// <summary>
 /// ImGuiの描画
 /// </summary>
-void ClearDirectionBackScreen::DrawImGui()
+void StageTransitionMenuNavigation::DrawImGui()
 {
-	if (ImGui::TreeNode("ClearDirection_Screen")) {
+	if (ImGui::TreeNode("StageTransitionMenu_Navigation")) {
 
 		ImGui::Text("Transform");
 		trans_.DrawImGui();

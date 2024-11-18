@@ -7,6 +7,7 @@
 /// </summary>
 GameScene::GameScene() 
 {
+	input_ = Input::GetInstance();
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CollisionManager_ = CollisionManager::GetInstance();
 	/* ----- AbsentEffect アブセントエフェクト ----- */
@@ -31,8 +32,8 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_ = std::make_unique<ClearDirectionManager>();
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
 }
 
 
@@ -96,8 +97,8 @@ void GameScene::Initialize()
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Init();
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_->Init();
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Init();
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Init();
@@ -129,20 +130,28 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();
-	
+
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new TitleScene);
+
+		// セレクトバーが何を選択したかでチェンジ先シーンを変える
+		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
+			state->ChangeSceneState(new TitleScene);
+		}
+		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
+			state->ChangeSceneState(new GameScene);
+		}
 		return;
 	}
+	// 終了処理
+	STMenuManager_->FuncEndDirection();
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
 		return;
 	}
-	SceneChangeCheck();
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
@@ -150,9 +159,10 @@ void GameScene::Update(GameManager* state)
 		return;
 	}
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_->Update();
-	if (clearDirectionManager_->GetState() == ClearDirectionState::Processing) {
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Update();
+	SceneChangeCheck();
+	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
 		return;
 	}
 
@@ -217,17 +227,20 @@ void GameScene::FrontSpriteDraw()
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw();
 
-	/* ----- GameSceneUI ゲームシーンUI----- */
-	gameSceneUI_->Draw2DFront();
+	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
+
+		/* ----- GameSceneUI ゲームシーンUI----- */
+		gameSceneUI_->Draw2DFront();
+
+		/* ----- Player プレイヤー ----- */
+		player_->Draw2DFront();
+	}
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	clearDirectionManager_->Draw2DFront();
-
-	/* ----- Player プレイヤー ----- */
-	player_->Draw2DFront();
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Draw2DFront();
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Draw2DFront();
@@ -242,7 +255,20 @@ void GameScene::SceneChangeCheck()
 	// プレイヤーが勝利するか敗北するかすれば
 	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
-		clearDirectionManager_->DirectionStart();
+		STMenuManager_->DirectionStart();
+	}
+
+	// 演出が終了していれば押せる
+	if (STMenuManager_->IsFinish()) {
+
+		// Aボタンを押したらシーントランジション開始
+		if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+
+			if (STMenuManager_->GetSelect() == MenuSelect::Other) { return; }
+
+			STMenuManager_->EndDirectionStart(); // 終了演出開始
+			sceneTransition_->StartFadeOut(); // シーントランジション開始
+		}
 	}
 }
 

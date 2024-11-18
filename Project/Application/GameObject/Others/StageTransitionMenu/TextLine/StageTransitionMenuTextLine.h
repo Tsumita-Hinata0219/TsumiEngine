@@ -1,27 +1,25 @@
 #pragma once
 
-#include <list>
-#include <memory>
-
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
-#include "../IClearDirection.h"
+#include "../IStageTransitionMenu.h"
+#include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
-/* クリア演出時の文字につくライナー */
-class ClearDirectionLiner : public IClearDirection {
+/* ゲーム終了メニューのテキストライン */
+class StageTransitionMenuTextLine : public IStageTransitionMenu {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ClearDirectionLiner() = default;
+	StageTransitionMenuTextLine() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~ClearDirectionLiner() = default;
+	~StageTransitionMenuTextLine() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -63,21 +61,11 @@ private:
 
 private:
 
-	// テクスチャハンドル
-	uint32_t textureHandle_ = 0;
 	// マスク画像
 	uint32_t maskTexture_;
 
-	// スプライト
-	std::unique_ptr<Sprite> sprite_;
 	// SpriteDissolve
 	SP::DissolveData dissolve_{};
-
-	// トランスフォーム
-	Transform trans_{};
-
-	// カラー
-	Vector4 color_{};
 
 	// タイマー
 	Timer timer_{};

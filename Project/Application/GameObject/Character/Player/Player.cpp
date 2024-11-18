@@ -48,7 +48,7 @@ void Player::Init()
 	sphere_.radius = 2.0f;
 
 	// キルカウントを0で初期化
-	killCount_ = 0;
+	killCount_ =14;
 
 	// HPの設定
 	hp_ = 3;

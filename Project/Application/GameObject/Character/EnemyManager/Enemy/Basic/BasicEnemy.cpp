@@ -65,10 +65,10 @@ void BasicEnemy::Update()
 	if (isCombatActive_) {
 
 		// 移動処理
-		Move();
+		//Move();
 
 		// 射撃の処理
-		ExecuteShot();
+		//ExecuteShot();
 	}
 
 	// Bullet更新処理

@@ -72,9 +72,8 @@ void StageTransitionMenuNaviBack::Update()
 /// </summary>
 void StageTransitionMenuNaviBack::Draw2DFront()
 {
-	for (int i = 0; i < arraySize_; ++i) {
-		spriteArr_[i]->Draw(transArr_[i]);
-	}
+	spriteArr_[1]->Draw(transArr_[1]);
+	spriteArr_[0]->Draw(transArr_[0]);
 }
 
 

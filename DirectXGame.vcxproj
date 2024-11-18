@@ -184,6 +184,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.cpp" />
@@ -357,6 +358,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\IStageTransitionMenu.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.h" />

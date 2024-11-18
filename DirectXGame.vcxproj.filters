@@ -239,6 +239,7 @@
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -471,6 +472,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

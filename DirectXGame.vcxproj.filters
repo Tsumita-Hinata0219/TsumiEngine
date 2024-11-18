@@ -471,6 +471,9 @@
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
     <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.CS.hlsli" />
     <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.hlsli" />
+    <None Include="Resources\Shaders\Particle\CPUParticle.hlsli" />
+    <None Include="Resources\Shaders\Particle\CPUParticle.PS" />
+    <None Include="Resources\Shaders\Particle\CPUParticle.VS" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

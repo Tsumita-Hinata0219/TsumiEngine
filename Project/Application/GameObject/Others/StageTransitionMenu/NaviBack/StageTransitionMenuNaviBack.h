@@ -95,7 +95,8 @@ private:
 	std::array<std::unique_ptr<Sprite>, arraySize_> spriteArr_;
 
 	// スプライトサイズ
-	std::array<Vector2, arraySize_> sizeArr_;
+	Vector2 initSize_{};
+	Vector2 targetSize_{};
 
 	// トランスフォーム
 	std::array<Transform, arraySize_> transArr_;

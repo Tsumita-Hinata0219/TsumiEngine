@@ -18,14 +18,14 @@ void StageTransitionMenuNaviBack::Init()
 	texHDArr_ = { backTexHD, frameTexHD };
 
 	// スプライトサイズ
-	Vector2 spriteSize = { 192.0f, 36.0f };
-	sizeArr_ = { spriteSize, spriteSize };
+	initSize_ = { 192.0f, 36.0f };
+	targetSize_ = { 192.0f, 44.0f };
 
 	for (int i = 0; i < arraySize_; ++i) {
 
 		// スプライト
 		spriteArr_[i] = std::make_unique<Sprite>();
-		spriteArr_[i]->Initn(spriteSize);
+		spriteArr_[i]->Initn(initSize_);
 		spriteArr_[i]->SetAnchor(SpriteAnchor::Center);
 		spriteArr_[i]->SetTexture(texHDArr_[i]);
 		spriteArr_[i]->SetColor(Samp::Color::WHITE);
@@ -60,7 +60,6 @@ void StageTransitionMenuNaviBack::Update()
 void StageTransitionMenuNaviBack::Draw2DFront()
 {
 	for (int i = 0; i < arraySize_; ++i) {
-		spriteArr_[i]->SetSize(sizeArr_[i]);
 		spriteArr_[i]->Draw(transArr_[i]);
 	}
 }
@@ -79,9 +78,10 @@ void StageTransitionMenuNaviBack::SelectOperation()
 		input_->Trigger(DIK_LEFT) || input_->Trigger(DIK_A)) {
 		ChangeSelect(MenuSelect::Back);
 	}
-	else if (iLStick_.x > DZone_ || input_->Trigger(PadData::RIGHT) || 
+	// 右入力
+	if (iLStick_.x > DZone_ || input_->Trigger(PadData::RIGHT) || 
 		input_->Trigger(DIK_RIGHT) || input_->Trigger(DIK_D)) {
-		ChangeSelect(MenuSelect::Next);
+		ChangeSelect(MenuSelect::Next);	
 	}
 }
 
@@ -91,6 +91,7 @@ void StageTransitionMenuNaviBack::SelectOperation()
 /// </summary>
 void StageTransitionMenuNaviBack::ChangeSelect(MenuSelect select)
 {
+	// ステートが異なるなら処理に入る
 	if (nowSelect_ != select) {
 
 		// 選択中を更新

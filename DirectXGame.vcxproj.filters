@@ -239,8 +239,11 @@
     <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -473,8 +476,12 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\IStageTransitionMenu.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

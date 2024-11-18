@@ -27,7 +27,6 @@
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "GameObject/Others/ClearDirectionManager/ClearDirectionManager.h"
 #include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
 
 
@@ -113,9 +112,6 @@ private: // クラス
 
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
-
-	// ClearDirectionManager
-	//std::unique_ptr<ClearDirectionManager> clearDirectionManager_;
 
 	// StageTransitionMenuManager
 	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;

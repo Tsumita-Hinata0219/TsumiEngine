@@ -31,8 +31,6 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_ = SceneTransition::GetInstance();
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	//clearDirectionManager_ = std::make_unique<ClearDirectionManager>();
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
 }
@@ -98,9 +96,6 @@ void GameScene::Initialize()
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Init();
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	//clearDirectionManager_->Init();
-
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Init();
 
@@ -154,12 +149,6 @@ void GameScene::Update(GameManager* state)
 	if (!startDirection_->IsFinish()) {
 		return;
 	}
-
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	/*clearDirectionManager_->Update();
-	if (clearDirectionManager_->GetState() == ClearDirectionState::Processing) {
-		return;
-	}*/
 
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Update();
@@ -234,9 +223,6 @@ void GameScene::FrontSpriteDraw()
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
 
-	/* ----- ClearDirectionManager クリア演出 ----- */
-	//clearDirectionManager_->Draw2DFront();
-
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Draw2DFront();
 
@@ -256,7 +242,6 @@ void GameScene::SceneChangeCheck()
 	// プレイヤーが勝利するか敗北するかすれば
 	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
-		//clearDirectionManager_->DirectionStart();
 		STMenuManager_->DirectionStart();
 	}
 }

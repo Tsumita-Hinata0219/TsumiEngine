@@ -182,11 +182,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.cpp" />
@@ -358,12 +353,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
     <ClInclude Include="Project\Application\GameObject\Config\AppComfig.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\BackScreen\ClearDirectionBackScreen.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.h" />

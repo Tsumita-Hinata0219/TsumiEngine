@@ -12,8 +12,8 @@
 
 
 enum class STMenuType {
-	BackScreen,
 	Blur,
+	BackScreen,
 	Navigation_Back,
 	Navigation_Next,
 	ResultUI,

@@ -11,8 +11,8 @@ void StageTransitionMenuManager::Init()
 
 	/* ----- Menu メニュー ----- */
 	menus_.resize(EnumSize<STMenuType>::value);
-	menus_[int(STMenuType::BackScreen)] = std::make_unique<StageTransitionMenuBackScreen>();
 	menus_[int(STMenuType::Blur)] = std::make_unique<StageTransitionMenuBlur>();
+	menus_[int(STMenuType::BackScreen)] = std::make_unique<StageTransitionMenuBackScreen>();
 	menus_[int(STMenuType::Navigation_Back)] = std::make_unique<StageTransitionMenuNavigation>();
 	menus_[int(STMenuType::Navigation_Next)] = std::make_unique<StageTransitionMenuNavigation>();
 	menus_[int(STMenuType::ResultUI)] = std::make_unique<StageTransitionMenuResultUI>();
@@ -98,7 +98,7 @@ void StageTransitionMenuManager::DirectionStart()
 /// </summary>
 void StageTransitionMenuManager::DrawImGui()
 {
-	if (ImGui::TreeNode("ClearDirection_Manager")) {
+	if (ImGui::TreeNode("StageTransitionMenu_Manager")) {
 
 		ImGui::Text("Directions_State");
 		ShowState("	BackScreen", menus_[int(STMenuType::BackScreen)]->GetState());

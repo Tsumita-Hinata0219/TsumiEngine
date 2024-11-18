@@ -65,7 +65,16 @@ public:
 	/// </summary>
 	virtual void SetTextureHandle(const uint32_t& setTexHandle) { sprite_->SetTexture(setTexHandle); }
 
+	/// <summary>
+	/// 座標の設定
+	/// </summary>
 	virtual void SetPosition(const Vector3& setPos) { this->trans_.srt.translate = setPos; }
+
+	/// <summary>
+	/// カラーの設定
+	/// </summary>
+	virtual void SetColor(const Vector4& setColor) { this->color_ = setColor; }
+
 
 protected:
 

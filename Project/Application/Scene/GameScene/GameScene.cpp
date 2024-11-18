@@ -217,17 +217,20 @@ void GameScene::FrontSpriteDraw()
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw();
 
-	/* ----- GameSceneUI ゲームシーンUI----- */
-	gameSceneUI_->Draw2DFront();
+	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
+
+		/* ----- GameSceneUI ゲームシーンUI----- */
+		gameSceneUI_->Draw2DFront();
+
+		/* ----- Player プレイヤー ----- */
+		player_->Draw2DFront();
+	}
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
 
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Draw2DFront();
-
-	/* ----- Player プレイヤー ----- */
-	player_->Draw2DFront();
 
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Draw2DFront();

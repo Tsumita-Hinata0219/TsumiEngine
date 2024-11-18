@@ -61,15 +61,30 @@ void StageTransitionMenuManager::Update()
 	for (auto& element : menus_) {
 		element->Update();
 	}
-	naviBack_->Update();
 
-	// バックスクリーン終わったらその他の演出を始める
+	// バックスクリーンの演出が終わったらその他の演出を始める
 	if (menus_[int(STMenuType::BackScreen)]->GetState() == MenuDirectionState::Finished) {
-
-		menus_[int(STMenuType::Navigation_Back)]->DirectionStart();
-		menus_[int(STMenuType::Navigation_Next)]->DirectionStart();
 		menus_[int(STMenuType::ResultUI)]->DirectionStart();
 		menus_[int(STMenuType::TextLine)]->DirectionStart();
+	}
+	// リザルトUIの演出が終わったらNaviGationの演出を始める
+	if (menus_[int(STMenuType::ResultUI)]->GetState() == MenuDirectionState::Finished) {
+		menus_[int(STMenuType::Navigation_Back)]->DirectionStart();
+		menus_[int(STMenuType::Navigation_Next)]->DirectionStart();
+	}
+
+	// ナビゲーションの演出が終わったらセレクトバーの更新を入れる
+	if (menus_[int(STMenuType::Navigation_Back)]->GetState() == MenuDirectionState::Finished) {
+		naviBack_->Update();
+
+		if (naviBack_->GetNowSelect() == MenuSelect::Back) {
+			menus_[int(STMenuType::Navigation_Back)]->SetColor(Samp::Color::BLACK);
+			menus_[int(STMenuType::Navigation_Next)]->SetColor(Samp::Color::WHITE);
+		}
+		else if (naviBack_->GetNowSelect() == MenuSelect::Next) {
+			menus_[int(STMenuType::Navigation_Back)]->SetColor(Samp::Color::WHITE);
+			menus_[int(STMenuType::Navigation_Next)]->SetColor(Samp::Color::BLACK);
+		}
 	}
 }
 

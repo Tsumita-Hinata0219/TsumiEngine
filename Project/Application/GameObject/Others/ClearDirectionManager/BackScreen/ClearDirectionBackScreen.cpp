@@ -23,8 +23,8 @@ void ClearDirectionBackScreen::Init()
 	color_ = Samp::Color::BLACK;
 	color_.w = initAlpha_;
 
-	// タイマー()
-	timer_.Init(0.0f, 1.0f * 30.0f);
+	// タイマー(1秒)
+	timer_.Init(0.0f, 1.0f * 60.0f);
 }
 
 
@@ -33,11 +33,11 @@ void ClearDirectionBackScreen::Init()
 /// </summary>
 void ClearDirectionBackScreen::Update()
 {
-	// ステートが処理中
-	if (state_ == ClearDirectionState::Processing) {
-		timer_.Update(); // タイマー更新
-		DirectionUpdate(); // 演出更新
-	}
+	// ステートが処理中以外なら早期return
+	if (state_ != ClearDirectionState::Processing) { return; }
+
+	timer_.Update(); // タイマー更新
+	DirectionUpdate(); // 演出更新
 
 	// タイマーが終了したら終了時処理
 	if (timer_.IsFinish()) {
@@ -109,17 +109,6 @@ void ClearDirectionBackScreen::DrawImGui()
 		ImGui::Text("");
 
 		ImGui::ColorEdit4("Color", &color_.x);
-		ImGui::Text("");
-
-		if (state_ == ClearDirectionState::Idle) {
-			ImGui::Text("State = Idle");
-		}
-		else if (state_ == ClearDirectionState::Processing) {
-			ImGui::Text("State = Processing");
-		}
-		else if (state_ == ClearDirectionState::Finished) {
-			ImGui::Text("State = Finished");
-		}
 		ImGui::Text("");
 
 		ImGui::TreePop();

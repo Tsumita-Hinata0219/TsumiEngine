@@ -72,7 +72,9 @@ public:
 
 private: 
 
-	// シーンチェンジチェック
+	/// <summary>
+	/// シーンチェンジチェック
+	/// </summary>
 	void SceneChangeCheck();
 
 

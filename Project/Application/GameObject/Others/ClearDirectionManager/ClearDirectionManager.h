@@ -4,6 +4,7 @@
 #include "Math/MyMath.h"
 
 #include "IClearDirection.h"
+#include "Blur/ClearDirectionBlur.h"
 #include "BackScreen/ClearDirectionBackScreen.h"
 #include "Liner/ClearDirectionLiner.h"
 #include "Moji/ClearDirectionMoji.h"
@@ -39,6 +40,16 @@ public:
 	/// </summary>
 	void Draw2DFront();
 
+	/// <summary>
+	/// 演出開始
+	/// </summary>
+	void DirectionStart();
+
+	/// <summary>
+	/// ステートの取得
+	/// </summary>
+	ClearDirectionState GetState() const { return this->state_; }
+
 
 private:
 
@@ -60,6 +71,11 @@ private:
 	// ClearDirections
 	std::vector<std::unique_ptr<IClearDirection>> directions_;
 
+	// State
+	ClearDirectionState state_;
+
+	// 演出をするかのフラグ
+	bool isActive_ = false;
 
 };
 

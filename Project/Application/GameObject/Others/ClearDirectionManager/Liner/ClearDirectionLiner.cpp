@@ -39,11 +39,11 @@ void ClearDirectionLiner::Init()
 /// </summary>
 void ClearDirectionLiner::Update()
 {
-	// ステートが処理中
-	if (state_ == ClearDirectionState::Processing) {
-		timer_.Update(); // タイマー更新
-		DirectionUpdate(); // 演出更新
-	}
+	// ステートが処理中以外なら早期return
+	if (state_ != ClearDirectionState::Processing) { return; }
+
+	timer_.Update(); // タイマー更新
+	DirectionUpdate(); // 演出更新
 
 	// タイマーが終了したら終了時処理
 	if (timer_.IsFinish()) {
@@ -120,17 +120,6 @@ void ClearDirectionLiner::DrawImGui()
 		ImGui::Text("");
 
 		ImGui::ColorEdit4("Color", &color_.x);
-		ImGui::Text("");
-
-		if (state_ == ClearDirectionState::Idle) {
-			ImGui::Text("State = Idle");
-		}
-		else if (state_ == ClearDirectionState::Processing) {
-			ImGui::Text("State = Processing");
-		}
-		else if (state_ == ClearDirectionState::Finished) {
-			ImGui::Text("State = Finished");
-		}
 		ImGui::Text("");
 
 		ImGui::TreePop();

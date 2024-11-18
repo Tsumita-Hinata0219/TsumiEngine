@@ -9,6 +9,7 @@
 #include "Navigation/StageTransitionMenuNavigation.h"
 #include "ResultUI/StageTransitionMenuResultUI.h"
 #include "TextLine/StageTransitionMenuTextLine.h"
+#include "NaviBack/StageTransitionMenuNaviBack.h"
 
 
 enum class STMenuType {
@@ -83,6 +84,9 @@ private:
 
 	// Menu
 	std::vector<std::unique_ptr<IStageTransitionMenu>> menus_;
+
+	// NaviBack
+	std::unique_ptr<StageTransitionMenuNaviBack> naviBack_;
 
 	// State
 	MenuDirectionState state_;

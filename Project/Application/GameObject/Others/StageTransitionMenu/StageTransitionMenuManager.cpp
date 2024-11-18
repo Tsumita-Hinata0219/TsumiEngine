@@ -21,7 +21,6 @@ void StageTransitionMenuManager::Init()
 	for (auto& element : menus_) {
 		element->Init();
 	}
-
 	// Navigationだけテクスチャと座標を変える
 	uint32_t backTexHD = TextureManager::LoadTexture("Texture/Game/StageTransitionMenu", "StageTransitionMenu_Back.png");
 	uint32_t nextTexHD = TextureManager::LoadTexture("Texture/Game/StageTransitionMenu", "StageTransitionMenu_Next.png");
@@ -31,6 +30,11 @@ void StageTransitionMenuManager::Init()
 	Vector3 nextInitPos = { 760.0f, 450.0f, 0.0f };
 	menus_[int(STMenuType::Navigation_Back)]->SetPosition(backInitPos);
 	menus_[int(STMenuType::Navigation_Next)]->SetPosition(nextInitPos);
+
+	/* ----- NavigatiuonTextBack ナビゲーションバック ----- */
+	naviBack_ = std::make_unique<StageTransitionMenuNaviBack>();
+	naviBack_->Init();
+	naviBack_->SetTargetPos(backInitPos, nextInitPos);
 
 	// フラグは折っておく
 	isActive_ = false;
@@ -57,6 +61,7 @@ void StageTransitionMenuManager::Update()
 	for (auto& element : menus_) {
 		element->Update();
 	}
+	naviBack_->Update();
 
 	// バックスクリーン終わったらその他の演出を始める
 	if (menus_[int(STMenuType::BackScreen)]->GetState() == MenuDirectionState::Finished) {
@@ -77,9 +82,14 @@ void StageTransitionMenuManager::Draw2DFront()
 	if (!isActive_) { return; }
 
 	// 各演出の描画
-	for (auto& element : menus_) {
-		element->Draw2DFront();
-	}
+	menus_[int(STMenuType::Blur)]->Draw2DFront();
+	menus_[int(STMenuType::BackScreen)]->Draw2DFront();
+	// NavigationTextBackはNavigationの後ろに入れる
+	naviBack_->Draw2DFront();
+	menus_[int(STMenuType::Navigation_Back)]->Draw2DFront();
+	menus_[int(STMenuType::Navigation_Next)]->Draw2DFront();
+	menus_[int(STMenuType::ResultUI)]->Draw2DFront();
+	menus_[int(STMenuType::TextLine)]->Draw2DFront();
 }
 
 

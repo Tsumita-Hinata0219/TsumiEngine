@@ -9,6 +9,13 @@
 #include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
+enum class MenuNowSelect {
+	Back,
+	Next,
+	None,
+};
+
+
 /* ゲーム終了メニューのナビゲーションバック */
 class StageTransitionMenuNaviBack {
 
@@ -45,6 +52,9 @@ public:
 	// ターゲット座標
 	void SetTargetPos(Vector3 setA, Vector3 setB) { targetPos_ = { setA, setB }; }
 
+	// セレクト
+	MenuNowSelect GetNowSelect() const { return this->nowSelect_; }
+
 #pragma endregion 
 
 
@@ -75,6 +85,9 @@ private:
 
 	// ターゲット座標
 	std::array<Vector3, arraySize_> targetPos_;
+
+	// セレクトステート
+	MenuNowSelect nowSelect_ = MenuNowSelect::None;
 
 };
 

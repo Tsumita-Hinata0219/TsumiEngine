@@ -63,8 +63,9 @@ public:
 	/// <summary>
 	/// テクスチャハンドルの設定
 	/// </summary>
-	virtual void SetTextureHandle(uint32_t setTexHandle) { this->textureHandle_ = setTexHandle; }
+	virtual void SetTextureHandle(const uint32_t& setTexHandle) { sprite_->SetTexture(setTexHandle); }
 
+	virtual void SetPosition(const Vector3& setPos) { this->trans_.srt.translate = setPos; }
 
 protected:
 

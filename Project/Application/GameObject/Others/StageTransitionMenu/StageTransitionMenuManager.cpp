@@ -22,6 +22,16 @@ void StageTransitionMenuManager::Init()
 		element->Init();
 	}
 
+	// Navigationだけテクスチャと座標を変える
+	uint32_t backTexHD = TextureManager::LoadTexture("Texture/Game/StageTransitionMenu", "StageTransitionMenu_Back.png");
+	uint32_t nextTexHD = TextureManager::LoadTexture("Texture/Game/StageTransitionMenu", "StageTransitionMenu_Next.png");
+	menus_[int(STMenuType::Navigation_Back)]->SetTextureHandle(backTexHD);
+	menus_[int(STMenuType::Navigation_Next)]->SetTextureHandle(nextTexHD);
+	Vector3 backInitPos = { 520.0f, 450.0f, 0.0f };
+	Vector3 nextInitPos = { 760.0f, 450.0f, 0.0f };
+	menus_[int(STMenuType::Navigation_Back)]->SetPosition(backInitPos);
+	menus_[int(STMenuType::Navigation_Next)]->SetPosition(nextInitPos);
+
 	// フラグは折っておく
 	isActive_ = false;
 

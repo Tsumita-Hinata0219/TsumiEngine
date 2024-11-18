@@ -11,14 +11,15 @@ void StageTransitionMenuNavigation::Init()
 	textureHandle_ = TextureManager::LoadTexture("Texture", "uvChecker.png");
 
 	// スプライト
-	Vector2 screenSize = { 1280.0f, 720.0f };
+	Vector2 screenSize = { 108.0f, 52.0f };
 	sprite_ = std::make_unique<Sprite>();
 	sprite_->Initn(screenSize);
 	sprite_->SetTexture(textureHandle_);
+	sprite_->SetAnchor(SpriteAnchor::Center);
 
 	// トランスフォーム
 	trans_.Init();
-	trans_.srt.translate.y = initPos_;
+	//trans_.srt.translate.y = initPos_;
 
 	// カラー
 	color_ = color_ = Samp::Color::WHITE;
@@ -58,7 +59,7 @@ void StageTransitionMenuNavigation::Update()
 void StageTransitionMenuNavigation::Draw2DFront()
 {
 	sprite_->SetColor(color_);
-	//sprite_->Draw(trans_);
+	sprite_->Draw(trans_);
 }
 
 
@@ -87,8 +88,8 @@ void StageTransitionMenuNavigation::DirectionUpdate()
 		Interpolate(initAlpha_, targetAlpha_, timer_.GetRatio(), Ease::InCubic);
 
 	// 初期値から目標値へ座標を補完する
-	trans_.srt.translate.y =
-		Interpolate(initPos_, targetPos_, timer_.GetRatio(), Ease::OutExpo);
+	/*trans_.srt.translate.y =
+		Interpolate(initPos_, targetPos_, timer_.GetRatio(), Ease::OutExpo);*/
 }
 
 

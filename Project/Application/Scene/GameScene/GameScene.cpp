@@ -152,7 +152,7 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- ClearDirectionManager クリア演出 ----- */
 	clearDirectionManager_->Update();
-	if (clearDirectionManager_->GetState() == ClearDirectionState::Finished) {
+	if (clearDirectionManager_->GetState() == ClearDirectionState::Processing) {
 		return;
 	}
 

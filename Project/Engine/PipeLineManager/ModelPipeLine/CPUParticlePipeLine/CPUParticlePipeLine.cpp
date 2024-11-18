@@ -1,9 +1,11 @@
-#include "Object3DPipeLine.h"
+#include "CPUParticlePipeLine.h"
 
 
 
-// Psoを構築する
-PsoProperty Object3DPipeLine::SetUpPso()
+/// <summary>
+/// PSOを構築する
+/// </summary>
+PsoProperty CPUParticlePipeLine::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -37,7 +39,7 @@ PsoProperty Object3DPipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "Object3D");
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "CPUParticle");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -100,18 +102,36 @@ PsoProperty Object3DPipeLine::SetUpPso()
 }
 
 
-// RootSignatureのセットアップ
-void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+/// <summary>
+/// RootSignatureのセットアップ
+/// </summary>
+void CPUParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	descriptionRootSignature.Flags =
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
 	// マテリアルに関する
-	D3D12_ROOT_PARAMETER rootParameters[7]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号
+
+	// 頂点位置に関する
+	D3D12_DESCRIPTOR_RANGE instancing[1]{};
+	instancing[0].BaseShaderRegister = 0; // 0から始まる
+	instancing[0].NumDescriptors = 1; // 数は1つ
+	instancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	instancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
+	rootParameters[1].DescriptorTable.pDescriptorRanges = instancing; // Tableの中身の配列を指定
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(instancing); // Tableで利用する
+
+	// Viewに関する
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[2].Descriptor.ShaderRegister = 1; // レジスタ番号
 
 	// マテリアルテクスチャ
 	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
@@ -123,37 +143,6 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
 	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
-
-	// 頂点位置に関する
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
-	rootParameters[1].Descriptor.ShaderRegister = 0;// レジスタ番号
-	
-	// Viewに関する
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[2].Descriptor.ShaderRegister = 1; // レジスタ番号
-
-	// 光に関する
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 2; // レジスタ番号
-
-	// 環境マップ
-	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[5].Descriptor.ShaderRegister = 3; // レジスタ番号
-
-	D3D12_DESCRIPTOR_RANGE environmentTexture[1]{};
-	environmentTexture[0].BaseShaderRegister = 1; // 1から始まる
-	environmentTexture[0].NumDescriptors = 1; // 数は1つ
-	environmentTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	environmentTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[6].DescriptorTable.pDescriptorRanges = environmentTexture; // Tableの中身の配列を指定
-	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(environmentTexture); // Tableで利用する
-
 
 	// Samplerの設定
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};

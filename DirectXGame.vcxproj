@@ -253,6 +253,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\JsonManager\JsonManager.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LambertPipeLine\LambertPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LightPipeLine\LightPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\LinePipeLine\LinePipeLine.cpp" />
@@ -351,6 +352,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Structure\GPUParticleStructure.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />

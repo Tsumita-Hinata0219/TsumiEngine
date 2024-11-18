@@ -3,8 +3,8 @@
 #include "../../IPipeLineState/IPipeLineState.h"
 
 
-/* Object3DPipeLineクラス */
-class Object3DPipeLine : public IPipeLineState {
+/* CPUParticlePipeLineクラス */
+class CPUParticlePipeLine : public IPipeLineState {
 
 public:
 

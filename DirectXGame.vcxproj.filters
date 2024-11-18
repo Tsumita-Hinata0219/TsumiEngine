@@ -234,6 +234,7 @@
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -455,6 +456,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Structure\GPUParticleStructure.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

@@ -23,6 +23,7 @@
 #include "ModelPipeLine/SkinningObject3dPipeLine/SkinningObject3dPipeLine.h"
 #include "ModelPipeLine/SkyboxPipeLine/SkyboxPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
+#include "ModelPipeLine/CPUParticlePipeLine/CPUParticlePipeLine.h"
 
 #include "PostEffectPipeLine/AbsentPipeLine/AbsentPipeLine.h"
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
@@ -56,6 +57,7 @@ enum class PipeLineType : uint32_t {
 	SkinningObject3D,
 	Skybox,
 	Sprite,
+	CPUParticle,
 	PostEffect,
 	Absent,
 	BoxFilter,
@@ -148,6 +150,8 @@ private: // メンバ変数
 	// Sprite
 	std::unique_ptr<SpritePipeLine> spritePipeLine_;
 
+	// CPUParticle
+	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
 
 	// Absent
 	std::unique_ptr<AbsentPipeLine> absentPipeLine_;

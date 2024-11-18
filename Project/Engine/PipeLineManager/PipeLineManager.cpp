@@ -56,6 +56,10 @@ void PipeLineManager::Initialize()
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
+	// CPUParticle
+	instance->cpuParticlePipeLine_ = make_unique<CPUParticlePipeLine>();
+	instance->pipeLineMap_[PipeLineType::CPUParticle] = instance->cpuParticlePipeLine_->SetUpPso();
+
 
 	// Absent
 	instance->absentPipeLine_ = make_unique<AbsentPipeLine>();

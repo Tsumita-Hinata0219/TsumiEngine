@@ -34,16 +34,18 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     // テクスチャから色をサンプリング
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
+    
+    // カラーの計算
+    output.color = gMaterial.color * textureColor;
+    //// アルファ値の計算
+    //output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
+    //output.color.a = gMaterial.color.a * textureColor.a;
 
     // アルファ値が0.9f未満なら描画をスキップ
-    if (textureColor.a < 0.9f)
+    if (textureColor.a == 0.0f)
     {
         discard;
     }
-    
-    // アルファ値の計算
-    output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
-    output.color.a = gMaterial.color.a * textureColor.a;
 
     return output;
 }

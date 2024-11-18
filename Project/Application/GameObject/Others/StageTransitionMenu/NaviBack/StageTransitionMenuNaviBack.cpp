@@ -28,11 +28,13 @@ void StageTransitionMenuNaviBack::Init()
 		spriteArr_[i]->Initn(initSize_);
 		spriteArr_[i]->SetAnchor(SpriteAnchor::Center);
 		spriteArr_[i]->SetTexture(texHDArr_[i]);
-		spriteArr_[i]->SetColor(Samp::Color::WHITE);
+		spriteArr_[i]->SetColor(Samp::Color::BLACK);
 
 		// トランスフォーム
 		transArr_[i].Init();
+		transArr_[i].srt.translate = { -100.0f, -100.0f, 0.0f }; // 画面外に出しておく
 	}
+	spriteArr_[1]->SetColor(Samp::Color::RED);
 
 	// 選択しているものはNoneにしておく
 	nowSelect_ = MenuSelect::Other;
@@ -47,6 +49,9 @@ void StageTransitionMenuNaviBack::Update()
 	// セレクト操作
 	SelectOperation();
 
+
+	//spriteArr_[1]->SetSize(targetSize_);
+
 #ifdef _DEBUG
 	// ImGuiの描画
 	DrawImGui();
@@ -59,9 +64,11 @@ void StageTransitionMenuNaviBack::Update()
 /// </summary>
 void StageTransitionMenuNaviBack::Draw2DFront()
 {
-	for (int i = 0; i < arraySize_; ++i) {
+	/*for (int i = 0; i < arraySize_; ++i) {
 		spriteArr_[i]->Draw(transArr_[i]);
-	}
+	}*/
+	spriteArr_[1]->Draw(transArr_[1]);
+	spriteArr_[0]->Draw(transArr_[0]);
 }
 
 
@@ -101,6 +108,8 @@ void StageTransitionMenuNaviBack::ChangeSelect(MenuSelect select)
 		for (auto& element : transArr_) {
 			element.srt.translate = targetPos_[int(nowSelect_)];
 		}
+		
+		spriteArr_[1]->SetSize(initSize_);
 	}
 }
 
@@ -121,6 +130,10 @@ void StageTransitionMenuNaviBack::DrawImGui()
 		else if (nowSelect_ == MenuSelect::Next) {
 			ImGui::Text("NowSelect : Next");
 		}
+		ImGui::Text("");
+
+		ImGui::Text("TargetSize");
+		ImGui::DragFloat2("size", &targetSize_.x, 0.1f);
 		ImGui::Text("");
 
 		ImGui::Text("Input");

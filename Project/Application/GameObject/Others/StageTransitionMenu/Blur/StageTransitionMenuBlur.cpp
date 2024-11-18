@@ -23,7 +23,7 @@ void StageTransitionMenuBlur::Init()
 void StageTransitionMenuBlur::Update()
 {
 	// ステートが処理中
-	if (state_ == ClearDirectionState::Processing) {
+	if (state_ == MenuDirectionState::Processing) {
 		timer_.Update(); // タイマー更新
 		DirectionUpdate(); // 演出更新
 	}

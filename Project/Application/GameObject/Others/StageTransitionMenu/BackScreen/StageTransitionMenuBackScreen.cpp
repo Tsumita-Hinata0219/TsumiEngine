@@ -34,7 +34,7 @@ void StageTransitionMenuBackScreen::Init()
 void StageTransitionMenuBackScreen::Update()
 {
 	// ステートが処理中以外なら早期return
-	if (state_ != ClearDirectionState::Processing) { return; }
+	if (state_ != MenuDirectionState::Processing) { return; }
 
 	timer_.Update(); // タイマー更新
 	DirectionUpdate(); // 演出更新
@@ -66,10 +66,10 @@ void StageTransitionMenuBackScreen::Draw2DFront()
 /// </summary>
 void StageTransitionMenuBackScreen::DirectionStart()
 {
-	if (state_ == ClearDirectionState::Idle) {
+	if (state_ == MenuDirectionState::Idle) {
 
 		// ステートを処理中へ
-		state_ = ClearDirectionState::Processing;
+		state_ = MenuDirectionState::Processing;
 		// タイマースタート
 		timer_.Start();
 	}
@@ -93,7 +93,7 @@ void StageTransitionMenuBackScreen::DirectionUpdate()
 void StageTransitionMenuBackScreen::DirectionExsit()
 {
 	// ステートを終了へ
-	state_ = ClearDirectionState::Finished;
+	state_ = MenuDirectionState::Finished;
 }
 
 

@@ -28,6 +28,7 @@
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Others/ClearDirectionManager/ClearDirectionManager.h"
+#include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
 
 
 class GameScene : public IScene {
@@ -114,7 +115,10 @@ private: // クラス
 	std::unique_ptr<EnemyManager> enemyManager_;
 
 	// ClearDirectionManager
-	std::unique_ptr<ClearDirectionManager> clearDirectionManager_;
+	//std::unique_ptr<ClearDirectionManager> clearDirectionManager_;
+
+	// StageTransitionMenuManager
+	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;

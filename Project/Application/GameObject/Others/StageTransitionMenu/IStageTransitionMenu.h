@@ -58,7 +58,7 @@ public:
 	/// <summary>
 	/// ステートの取得
 	/// </summary>
-	virtual ClearDirectionState GetState() { return this->state_; }
+	virtual MenuDirectionState GetState() { return this->state_; }
 
 	/// <summary>
 	/// テクスチャハンドルの設定

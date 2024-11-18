@@ -13,7 +13,8 @@ void StageTransitionMenuManager::Init()
 	menus_.resize(EnumSize<STMenuType>::value);
 	menus_[int(STMenuType::BackScreen)] = std::make_unique<StageTransitionMenuBackScreen>();
 	menus_[int(STMenuType::Blur)] = std::make_unique<StageTransitionMenuBlur>();
-	menus_[int(STMenuType::Navigation)] = std::make_unique<StageTransitionMenuNavigation>();
+	menus_[int(STMenuType::Navigation_Back)] = std::make_unique<StageTransitionMenuNavigation>();
+	menus_[int(STMenuType::Navigation_Next)] = std::make_unique<StageTransitionMenuNavigation>();
 	menus_[int(STMenuType::ResultUI)] = std::make_unique<StageTransitionMenuResultUI>();
 	menus_[int(STMenuType::TextLine)] = std::make_unique<StageTransitionMenuTextLine>();
 	// 各演出の初期化
@@ -49,6 +50,9 @@ void StageTransitionMenuManager::Update()
 
 	// バックスクリーン終わったらその他の演出を始める
 	if (menus_[int(STMenuType::BackScreen)]->GetState() == MenuDirectionState::Finished) {
+
+		menus_[int(STMenuType::Navigation_Back)]->DirectionStart();
+		menus_[int(STMenuType::Navigation_Next)]->DirectionStart();
 		menus_[int(STMenuType::ResultUI)]->DirectionStart();
 		menus_[int(STMenuType::TextLine)]->DirectionStart();
 	}
@@ -99,7 +103,8 @@ void StageTransitionMenuManager::DrawImGui()
 		ImGui::Text("Directions_State");
 		ShowState("	BackScreen", menus_[int(STMenuType::BackScreen)]->GetState());
 		ShowState("	Blur", menus_[int(STMenuType::Blur)]->GetState());
-		ShowState("	Navigation", menus_[int(STMenuType::Navigation)]->GetState());
+		ShowState("	Navigation_Back", menus_[int(STMenuType::Navigation_Back)]->GetState());
+		ShowState("	Navigation_Next", menus_[int(STMenuType::Navigation_Next)]->GetState());
 		ShowState("	ResultUI", menus_[int(STMenuType::ResultUI)]->GetState());
 		ShowState("	TextLine", menus_[int(STMenuType::TextLine)]->GetState());
 

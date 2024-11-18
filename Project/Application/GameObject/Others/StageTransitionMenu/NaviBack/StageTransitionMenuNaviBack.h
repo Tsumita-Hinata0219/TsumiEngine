@@ -39,6 +39,15 @@ public:
 	/// </summary>
 	void Draw2DFront();
 
+
+#pragma region Accessor アクセッサ
+	
+	// ターゲット座標
+	void SetTargetPos(Vector3 setA, Vector3 setB) { targetPos_ = { setA, setB }; }
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>
@@ -49,20 +58,23 @@ private:
 
 private:
 
+	// 配列サイズ
+	static const uint32_t arraySize_ = 2;
+
 	// テクスチャハンドル
-	uint32_t backTexHD_ = 0;
-	uint32_t frameTexHD_ = 0;
+	std::array<uint32_t, arraySize_> texHDArr_;
 
 	// スプライト
-	std::unique_ptr<Sprite> back_;
-	std::unique_ptr<Sprite> frame_;
+	std::array<std::unique_ptr<Sprite>, arraySize_> spriteArr_;
+
+	// スプライトサイズ
+	std::array<Vector2, arraySize_> sizeArr_;
 
 	// トランスフォーム
-	Transform backTrans_{};
-	Transform frameTrans_{};
+	std::array<Transform, arraySize_> transArr_;
 
-	// カラー
-	Vector4 color_{};
+	// ターゲット座標
+	std::array<Vector3, arraySize_> targetPos_;
 
 };
 

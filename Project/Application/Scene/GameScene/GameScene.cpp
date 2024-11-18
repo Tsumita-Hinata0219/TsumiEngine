@@ -130,7 +130,7 @@ void GameScene::Update(GameManager* state)
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();
-	
+
 	/* ----- SceneTransition シーントランジション ----- */
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
@@ -145,7 +145,13 @@ void GameScene::Update(GameManager* state)
 		}
 		return;
 	}
-	
+	// 終了処理
+	STMenuManager_->FuncEndDirection();
+	// シーントランジション中は以下の処理に入らない
+	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
+		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
@@ -155,30 +161,8 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Update();
-	// 終了処理
-	STMenuManager_->FuncEndDirection();
 	SceneChangeCheck();
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
-		return;
-	}
-
-	/* ----- SceneTransition シーントランジション ----- */
-	sceneTransition_->Update();
-	// 画面が閉じたらシーン変更
-	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-
-		// セレクトバーが何を選択したかでチェンジ先シーンを変える
-		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
-			state->ChangeSceneState(new GameScene);
-		}
-		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
-			state->ChangeSceneState(new GameScene);
-		}
-		return;
-	}
-	// シーントランジション中は以下の処理に入らない
-	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
-		sceneTransition_->GetNowState() == TransitionState::Closing) {
 		return;
 	}
 
@@ -274,10 +258,17 @@ void GameScene::SceneChangeCheck()
 		STMenuManager_->DirectionStart();
 	}
 
-	// Aボタンを押したらシーントランジション開始
-	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
-		STMenuManager_->EndDirectionStart(); // 終了演出開始
-		sceneTransition_->StartFadeOut(); // シーントランジション開始
+	// 演出が終了していれば押せる
+	if (STMenuManager_->IsFinish()) {
+
+		// Aボタンを押したらシーントランジション開始
+		if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+
+			if (STMenuManager_->GetSelect() == MenuSelect::Other) { return; }
+
+			STMenuManager_->EndDirectionStart(); // 終了演出開始
+			sceneTransition_->StartFadeOut(); // シーントランジション開始
+		}
 	}
 }
 

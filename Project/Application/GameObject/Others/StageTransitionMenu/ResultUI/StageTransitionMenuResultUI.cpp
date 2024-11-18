@@ -17,7 +17,7 @@ void StageTransitionMenuResultUI::Init()
 	sprite_->SetTexture(textureHandle_);
 
 	// 座標の初期値、目標値
-	initPos_ = 100.0f;
+	initPos_ = 130.0f;
 	targetPos_ = 0.0f;
 
 	// トランスフォーム

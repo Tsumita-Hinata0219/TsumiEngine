@@ -38,6 +38,7 @@ void StageTransitionMenuManager::Init()
 
 	// フラグは折っておく
 	isActive_ = false;
+	isFinish_ = false;
 
 	// 初期ステートは待機
 	state_ = MenuDirectionState::Idle;
@@ -75,6 +76,7 @@ void StageTransitionMenuManager::Update()
 
 	// ナビゲーションの演出が終わったらセレクトバーの更新を入れる
 	if (menus_[int(STMenuType::Navigation_Back)]->GetState() == MenuDirectionState::Finished) {
+		isFinish_ = true;
 		naviBack_->Update();
 
 		if (naviBack_->GetNowSelect() == MenuSelect::Back) {

@@ -78,6 +78,11 @@ public:
 	/// </summary>
 	MenuSelect GetSelect() const { return this->naviBack_->GetNowSelect(); }
 
+	/// <summary>
+	/// 演出が終了しているかのフラグ
+	/// </summary>
+	bool IsFinish() const { return this->isFinish_; }
+
 private:
 
 	/// <summary>
@@ -107,5 +112,7 @@ private:
 	// 演出をするかのフラグ
 	bool isActive_ = false;
 
+	// 演出が終了したかのフラグ
+	bool isFinish_ = false;
 };
 

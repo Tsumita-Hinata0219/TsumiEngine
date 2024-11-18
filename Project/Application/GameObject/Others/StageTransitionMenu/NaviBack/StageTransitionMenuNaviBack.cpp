@@ -91,7 +91,7 @@ void StageTransitionMenuNaviBack::FuncEndDirection()
 
 		Vector2 setSize = targetSize_;
 		setSize.y =
-			targetSize_.y + (initSize_.y - targetSize_.y) * Ease::InBack(timer_.GetRatio(), 5.0f);
+			targetSize_.y + (initSize_.y - targetSize_.y) * Ease::InBack(timer_.GetRatio(), 8.0f);
 
 		// 初期値から目標値へY軸サイズを補完する
 		spriteArr_[1]->SetSize(setSize);

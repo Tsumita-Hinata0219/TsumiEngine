@@ -9,10 +9,10 @@
 #include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
-enum class MenuNowSelect {
+enum class MenuSelect {
 	Back,
 	Next,
-	None,
+	Other,
 };
 
 
@@ -48,17 +48,27 @@ public:
 
 
 #pragma region Accessor アクセッサ
-	
+
 	// ターゲット座標
 	void SetTargetPos(Vector3 setA, Vector3 setB) { targetPos_ = { setA, setB }; }
 
 	// セレクト
-	MenuNowSelect GetNowSelect() const { return this->nowSelect_; }
+	MenuSelect GetNowSelect() const { return this->nowSelect_; }
 
 #pragma endregion 
 
 
 private:
+
+	/// <summary>
+	/// セレクト操作
+	/// </summary>
+	void SelectOperation();
+
+	/// <summary>
+	/// セレクト変更
+	/// </summary>
+	void ChangeSelect(MenuSelect select);
 
 	/// <summary>
 	/// ImGuiの描画
@@ -67,6 +77,13 @@ private:
 
 
 private:
+
+	// 入力
+	Input* input_ = nullptr;
+	//Stickの入力を取得
+	Vector2 iLStick_{};
+	// デッドゾーン
+	const float DZone_ = 0.4f;
 
 	// 配列サイズ
 	static const uint32_t arraySize_ = 2;
@@ -87,7 +104,7 @@ private:
 	std::array<Vector3, arraySize_> targetPos_;
 
 	// セレクトステート
-	MenuNowSelect nowSelect_ = MenuNowSelect::None;
+	MenuSelect nowSelect_ = MenuSelect::Other;
 
 };
 

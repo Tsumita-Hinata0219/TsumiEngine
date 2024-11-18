@@ -4,7 +4,7 @@
 #include "Math/MyMath.h"
 
 // ステート
-enum class ClearDirectionState {
+enum class MenuDirectionState {
 	Idle,       // 待機中
 	Processing, // 処理中
 	Finished    // 処理終了
@@ -69,7 +69,7 @@ public:
 protected:
 
 	// ステート
-	ClearDirectionState state_ = ClearDirectionState::Idle;
+	MenuDirectionState state_ = MenuDirectionState::Idle;
 
 	// テクスチャハンドル
 	uint32_t textureHandle_ = 0;

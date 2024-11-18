@@ -7,6 +7,25 @@
 /// </summary>
 void StageTransitionMenuManager::Init()
 {
+	input_ = Input::GetInstance();
+
+	/* ----- Menu メニュー ----- */
+	menus_.resize(EnumSize<STMenuType>::value);
+	menus_[int(STMenuType::BackScreen)] = std::make_unique<StageTransitionMenuBackScreen>();
+	menus_[int(STMenuType::Blur)] = std::make_unique<StageTransitionMenuBlur>();
+	menus_[int(STMenuType::Navigation)] = std::make_unique<StageTransitionMenuNavigation>();
+	menus_[int(STMenuType::ResultUI)] = std::make_unique<StageTransitionMenuResultUI>();
+	menus_[int(STMenuType::TextLine)] = std::make_unique<StageTransitionMenuTextLine>();
+	// 各演出の初期化
+	for (auto& element : menus_) {
+		element->Init();
+	}
+
+	// フラグは折っておく
+	isActive_ = false;
+
+	// 初期ステートは待機
+	state_ = MenuDirectionState::Idle;
 }
 
 
@@ -15,6 +34,24 @@ void StageTransitionMenuManager::Init()
 /// </summary>
 void StageTransitionMenuManager::Update()
 {
+#ifdef _DEBUG
+	// ImGuiの描画
+	DrawImGui();
+#endif // _DEBUG
+
+	// ステートが処理中以外なら早期return
+	if (state_ != MenuDirectionState::Processing) { return; }
+
+	// 各演出の更新
+	for (auto& element : menus_) {
+		element->Update();
+	}
+
+	// バックスクリーン終わったらその他の演出を始める
+	if (menus_[int(STMenuType::BackScreen)]->GetState() == MenuDirectionState::Finished) {
+		menus_[int(STMenuType::ResultUI)]->DirectionStart();
+		menus_[int(STMenuType::TextLine)]->DirectionStart();
+	}
 }
 
 
@@ -23,6 +60,32 @@ void StageTransitionMenuManager::Update()
 /// </summary>
 void StageTransitionMenuManager::Draw2DFront()
 {
+	if (!isActive_) { return; }
+
+	// 各演出の描画
+	for (auto& element : menus_) {
+		element->Draw2DFront();
+	}
+}
+
+
+/// <summary>
+/// 演出開始
+/// </summary>
+void StageTransitionMenuManager::DirectionStart()
+{
+	if (state_ == MenuDirectionState::Idle) {
+
+		// ステートを処理中へ
+		state_ = MenuDirectionState::Processing;
+
+		// フラグを立て
+		isActive_ = true;
+
+		// ブラーとバックスクリーンの演出開始
+		menus_[int(STMenuType::Blur)]->DirectionStart();
+		menus_[int(STMenuType::BackScreen)]->DirectionStart();
+	}
 }
 
 
@@ -31,4 +94,37 @@ void StageTransitionMenuManager::Draw2DFront()
 /// </summary>
 void StageTransitionMenuManager::DrawImGui()
 {
+	if (ImGui::TreeNode("ClearDirection_Manager")) {
+
+		ImGui::Text("Directions_State");
+		ShowState("	BackScreen", menus_[int(STMenuType::BackScreen)]->GetState());
+		ShowState("	Blur", menus_[int(STMenuType::Blur)]->GetState());
+		ShowState("	Navigation", menus_[int(STMenuType::Navigation)]->GetState());
+		ShowState("	ResultUI", menus_[int(STMenuType::ResultUI)]->GetState());
+		ShowState("	TextLine", menus_[int(STMenuType::TextLine)]->GetState());
+
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
+}
+
+
+/// <summary>
+/// Stateの描画
+/// </summary>
+void StageTransitionMenuManager::ShowState(const char* label, MenuDirectionState state)
+{
+	ImGui::Text("%s_State : ", label); ImGui::SameLine();
+	switch (state) {
+	case MenuDirectionState::Idle:
+		ImGui::Text("Idle");
+		break;
+	case MenuDirectionState::Processing:
+		ImGui::Text("Processing");
+		break;
+	case MenuDirectionState::Finished:
+		ImGui::Text("Finished");
+		break;
+	}
 }

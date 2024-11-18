@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init();
+	void Init(const std::string& fileName);
 
 	/// <summary>
 	/// 更新処理
@@ -36,6 +36,15 @@ public:
 	/// 描画処理
 	/// </summary>
 	void Draw2DFront();
+
+
+#pragma region Accessor アクセッサ
+
+	// 座標
+	Vector3 GetPosition() { return this->trans_.GetWorldPos(); }
+	void SetPosition(const Vector3 setPos) { this->trans_.srt.translate = setPos; }
+
+#pragma endregion 
 
 
 private:

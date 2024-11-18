@@ -61,21 +61,11 @@ private:
 
 private:
 
-	// テクスチャハンドル
-	uint32_t textureHandle_ = 0;
 	// マスク画像
 	uint32_t maskTexture_;
 
-	// スプライト
-	std::unique_ptr<Sprite> sprite_;
 	// SpriteDissolve
 	SP::DissolveData dissolve_{};
-
-	// トランスフォーム
-	Transform trans_{};
-
-	// カラー
-	Vector4 color_{};
 
 	// タイマー
 	Timer timer_{};

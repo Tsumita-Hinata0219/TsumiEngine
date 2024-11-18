@@ -8,7 +8,7 @@
 void StageTransitionMenuNavigation::Init()
 {
 	// テクスチャ
-	textureHandle_ = TextureManager::LoadTexture("Texture/Game/ClearDirection", "ClearDirectionMoji.png");
+	textureHandle_ = TextureManager::LoadTexture("Texture", "uvChecker.png");
 
 	// スプライト
 	Vector2 screenSize = { 1280.0f, 720.0f };

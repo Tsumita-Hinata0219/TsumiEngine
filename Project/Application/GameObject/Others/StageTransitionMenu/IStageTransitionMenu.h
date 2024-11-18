@@ -60,8 +60,29 @@ public:
 	/// </summary>
 	virtual ClearDirectionState GetState() { return this->state_; }
 
+	/// <summary>
+	/// テクスチャハンドルの設定
+	/// </summary>
+	virtual void SetTextureHandle(uint32_t setTexHandle) { this->textureHandle_ = setTexHandle; }
+
 
 protected:
 
+	// ステート
 	ClearDirectionState state_ = ClearDirectionState::Idle;
+
+	// テクスチャハンドル
+	uint32_t textureHandle_ = 0;
+
+	// スプライト
+	std::unique_ptr<Sprite> sprite_;
+
+	// トランスフォーム
+	Transform trans_{};
+
+	// カラー
+	Vector4 color_{};
+
+	// タイマー
+	Timer timer_{};
 };

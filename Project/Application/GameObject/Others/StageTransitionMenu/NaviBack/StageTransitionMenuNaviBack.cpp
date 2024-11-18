@@ -17,24 +17,26 @@ void StageTransitionMenuNaviBack::Init()
 		"Texture/Game/StageTransitionMenu",	"StageTransitionMenu_Frame.png");
 	texHDArr_ = { backTexHD, frameTexHD };
 
-	// スプライトサイズ
-	initSize_ = { 192.0f, 36.0f };
-	targetSize_ = { 192.0f, 44.0f };
+	// 補間に使用するスプライトサイズ
+	initSize_ = { 192.0f, 24.0f };
+	targetSize_ = { 192.0f, 52.0f };
+
+	// 初期化で使用するサイズ
+	Vector2 size_ = { 192.0f, 36.0f };
 
 	for (int i = 0; i < arraySize_; ++i) {
 
 		// スプライト
 		spriteArr_[i] = std::make_unique<Sprite>();
-		spriteArr_[i]->Initn(initSize_);
+		spriteArr_[i]->Initn(size_);
 		spriteArr_[i]->SetAnchor(SpriteAnchor::Center);
 		spriteArr_[i]->SetTexture(texHDArr_[i]);
-		spriteArr_[i]->SetColor(Samp::Color::BLACK);
+		spriteArr_[i]->SetColor(Samp::Color::WHITE);
 
 		// トランスフォーム
 		transArr_[i].Init();
 		transArr_[i].srt.translate = { -100.0f, -100.0f, 0.0f }; // 画面外に出しておく
 	}
-	spriteArr_[1]->SetColor(Samp::Color::RED);
 
 	// タイマー
 	timer_.Init(0.0f, 1.0f * 60.0f);
@@ -52,8 +54,8 @@ void StageTransitionMenuNaviBack::Update()
 	// セレクト操作
 	SelectOperation();
 
-
-	//spriteArr_[1]->SetSize(targetSize_);
+	// Y軸サイズの補間処理
+	InterpolateSizeY();
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -72,6 +74,7 @@ void StageTransitionMenuNaviBack::Draw2DFront()
 	}*/
 	spriteArr_[1]->Draw(transArr_[1]);
 	spriteArr_[0]->Draw(transArr_[0]);
+	/*spriteArr_[1]->Draw(transArr_[1]);*/
 }
 
 
@@ -111,8 +114,36 @@ void StageTransitionMenuNaviBack::ChangeSelect(MenuSelect select)
 		for (auto& element : transArr_) {
 			element.srt.translate = targetPos_[int(nowSelect_)];
 		}
+
+		// タイマー設定
+		timer_.Init(0.0f, 1.0f * 60.0f);
+		timer_.Start();
 		
+		// サイズを初期値にする
 		spriteArr_[1]->SetSize(initSize_);
+	}
+}
+
+
+/// <summary>
+/// Y軸サイズの補間処理
+/// </summary>
+void StageTransitionMenuNaviBack::InterpolateSizeY()
+{
+	if (timer_.IsActive()) {
+
+		// タイマー更新
+		timer_.Update();
+
+		Vector2 setSize = initSize_;
+		setSize.y = Interpolate(initSize_.y, targetSize_.y, timer_.GetRatio(), Ease::OutCubic);
+
+		// 初期値から目標値へY軸サイズを補完する
+		spriteArr_[1]->SetSize(setSize);
+
+		if (timer_.IsFinish()) {
+			timer_.Clear();
+		}
 	}
 }
 

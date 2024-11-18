@@ -71,6 +71,11 @@ private:
 	void ChangeSelect(MenuSelect select);
 
 	/// <summary>
+	/// Y軸サイズの補間処理
+	/// </summary>
+	void InterpolateSizeY();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();

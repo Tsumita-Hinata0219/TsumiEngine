@@ -20,7 +20,7 @@ DebugScene::~DebugScene() {}
 void DebugScene::Initialize()
 {
 	/* ----- Camera カメラ ----- */
-	camera_.Init({ 0.2f, 0.0f, 0.0f }, { 0.0f, 1.7f, -4.0f });
+	camera_.Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	
@@ -75,7 +75,7 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- Skybox 天箱 ----- */
-	skybox_->Draw();
+	//skybox_->Draw();
 }
 
 

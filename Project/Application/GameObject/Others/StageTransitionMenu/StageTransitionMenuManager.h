@@ -63,7 +63,10 @@ public:
 	/// </summary>
 	MenuDirectionState GetState() const { return this->state_; }
 
-
+	/// <summary>
+	/// セレクトしているかの取得
+	/// </summary>
+	MenuSelect GetSelect() const { return this->naviBack_->GetNowSelect(); }
 
 private:
 
@@ -89,7 +92,7 @@ private:
 	std::unique_ptr<StageTransitionMenuNaviBack> naviBack_;
 
 	// State
-	MenuDirectionState state_;
+	MenuDirectionState state_ = MenuDirectionState::Idle;
 
 	// 演出をするかのフラグ
 	bool isActive_ = false;

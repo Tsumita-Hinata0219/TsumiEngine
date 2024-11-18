@@ -7,6 +7,7 @@
 /// </summary>
 GameScene::GameScene() 
 {
+	input_ = Input::GetInstance();
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CollisionManager_ = CollisionManager::GetInstance();
 	/* ----- AbsentEffect アブセントエフェクト ----- */
@@ -134,7 +135,14 @@ void GameScene::Update(GameManager* state)
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new TitleScene);
+
+		// セレクトバーが何を選択したかでチェンジ先シーンを変える
+		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
+			state->ChangeSceneState(new GameScene);
+		}
+		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
+			state->ChangeSceneState(new GameScene);
+		}
 		return;
 	}
 	// シーントランジション中は以下の処理に入らない
@@ -142,7 +150,6 @@ void GameScene::Update(GameManager* state)
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
 		return;
 	}
-	SceneChangeCheck();
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
@@ -152,6 +159,7 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Update();
+	SceneChangeCheck();
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
 		return;
 	}
@@ -246,6 +254,11 @@ void GameScene::SceneChangeCheck()
 	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
 		STMenuManager_->DirectionStart();
+	}
+
+	// Aボタンを押したらシーントランジション開始
+	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+		sceneTransition_->StartFadeOut();
 	}
 }
 

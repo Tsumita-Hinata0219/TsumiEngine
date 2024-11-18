@@ -59,6 +59,11 @@ public:
 	void DirectionStart();
 
 	/// <summary>
+	/// 終了演出開始
+	/// </summary>
+	void EndDirectionStart() { this->naviBack_->EndDirectionStart(); }
+
+	/// <summary>
 	/// ステートの取得
 	/// </summary>
 	MenuDirectionState GetState() const { return this->state_; }

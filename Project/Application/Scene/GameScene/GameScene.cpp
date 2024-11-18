@@ -258,7 +258,8 @@ void GameScene::SceneChangeCheck()
 
 	// Aボタンを押したらシーントランジション開始
 	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
-		sceneTransition_->StartFadeOut();
+		STMenuManager_->EndDirectionStart(); // 終了演出開始
+		sceneTransition_->StartFadeOut(); // シーントランジション開始
 	}
 }
 

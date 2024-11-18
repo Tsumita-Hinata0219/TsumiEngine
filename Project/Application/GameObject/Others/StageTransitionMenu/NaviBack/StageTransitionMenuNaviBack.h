@@ -46,6 +46,11 @@ public:
 	/// </summary>
 	void Draw2DFront();
 
+	/// <summary>
+	/// 終了処理開始
+	/// </summary>
+	void EndDirectionStart();
+
 
 #pragma region Accessor アクセッサ
 
@@ -114,6 +119,9 @@ private:
 
 	// タイマー
 	Timer timer_{};
+
+	// 終了処理に入るかのフラグ
+	bool IsEndDirection_ = false;
 
 };
 

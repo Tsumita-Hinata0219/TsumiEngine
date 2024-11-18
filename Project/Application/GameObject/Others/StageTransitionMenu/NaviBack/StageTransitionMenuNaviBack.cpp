@@ -43,6 +43,9 @@ void StageTransitionMenuNaviBack::Init()
 
 	// 選択しているものはNoneにしておく
 	nowSelect_ = MenuSelect::Other;
+
+	// 終了処理に入るフラグは折っておく
+	IsEndDirection_ = false;
 }
 
 
@@ -51,6 +54,11 @@ void StageTransitionMenuNaviBack::Init()
 /// </summary>
 void StageTransitionMenuNaviBack::Update()
 {
+	// 終了処理に入る
+	if (IsEndDirection_) {
+
+	}
+
 	// セレクト操作
 	SelectOperation();
 
@@ -75,6 +83,16 @@ void StageTransitionMenuNaviBack::Draw2DFront()
 	spriteArr_[1]->Draw(transArr_[1]);
 	spriteArr_[0]->Draw(transArr_[0]);
 	/*spriteArr_[1]->Draw(transArr_[1]);*/
+}
+
+
+/// <summary>
+/// 終了処理開始
+/// </summary>
+void StageTransitionMenuNaviBack::EndDirectionStart()
+{
+	// 終了処理に入る
+	IsEndDirection_ = true;
 }
 
 

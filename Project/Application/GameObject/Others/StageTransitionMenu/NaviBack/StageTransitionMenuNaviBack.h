@@ -107,5 +107,8 @@ private:
 	// セレクトステート
 	MenuSelect nowSelect_ = MenuSelect::Other;
 
+	// タイマー
+	Timer timer_{};
+
 };
 

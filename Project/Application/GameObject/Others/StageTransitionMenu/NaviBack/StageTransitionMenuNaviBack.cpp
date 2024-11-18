@@ -36,6 +36,9 @@ void StageTransitionMenuNaviBack::Init()
 	}
 	spriteArr_[1]->SetColor(Samp::Color::RED);
 
+	// タイマー
+	timer_.Init(0.0f, 1.0f * 60.0f);
+
 	// 選択しているものはNoneにしておく
 	nowSelect_ = MenuSelect::Other;
 }

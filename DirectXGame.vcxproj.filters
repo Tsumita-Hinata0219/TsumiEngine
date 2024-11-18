@@ -238,6 +238,9 @@
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -465,6 +468,13 @@
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\IClearDirection.h" />
     <ClInclude Include="Project\Engine\Math\MathInterpolate\MathInterpolate.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
+    <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Blur\ClearDirectionBlur.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

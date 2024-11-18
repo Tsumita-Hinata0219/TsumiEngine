@@ -187,6 +187,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\ClearDirectionManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
@@ -359,6 +362,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Liner\ClearDirectionLiner.h" />
     <ClInclude Include="Project\Application\GameObject\Others\ClearDirectionManager\Moji\ClearDirectionMoji.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Back\StageTransitionMenuBack.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Moji\StageTransitionMenuMoji.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StartDirection\StartDirection.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />

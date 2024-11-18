@@ -16,6 +16,10 @@ void StageTransitionMenuResultUI::Init()
 	sprite_->Initn(screenSize);
 	sprite_->SetTexture(textureHandle_);
 
+	// 座標の初期値、目標値
+	initPos_ = 100.0f;
+	targetPos_ = 0.0f;
+
 	// トランスフォーム
 	trans_.Init();
 	trans_.srt.translate.y = initPos_;

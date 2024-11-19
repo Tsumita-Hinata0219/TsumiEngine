@@ -33,7 +33,7 @@ public:
 	/// </summary>
 	void Draw3D();
 
-
+	
 private:
 
 	// CameraManager

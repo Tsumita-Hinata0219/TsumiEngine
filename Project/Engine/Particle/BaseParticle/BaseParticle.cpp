@@ -24,3 +24,4 @@ void BaseParticle::Update()
 void BaseParticle::Draw3D()
 {
 }
+

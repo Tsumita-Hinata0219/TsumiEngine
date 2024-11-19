@@ -67,6 +67,9 @@ private:
 	// バッファー
 	GPUParticleResources buffers_{};
 
+	// パーティクルのインスタンス数
+	uint32_t instanceNum_ = 0;
+
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 

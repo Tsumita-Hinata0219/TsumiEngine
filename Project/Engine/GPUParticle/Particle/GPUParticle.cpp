@@ -7,6 +7,17 @@
 /// </summary>
 void GPUParticle::Init(uint32_t instanceNum)
 {
+	// CameraManagerのインスタンス取得
+	cameraManager_ = CameraManager::GetInstance();
+
+	// インスタンス数の設定
+	instanceNum_ = instanceNum;
+
+	// BufferResourceを作成
+	CreateBufferResource();
+
+	// 初期化コマンドコール <-多分必要になる
+	CommandCallInit(); 
 }
 
 
@@ -15,6 +26,11 @@ void GPUParticle::Init(uint32_t instanceNum)
 /// </summary>
 void GPUParticle::Update()
 {
+
+
+
+	// 更新コマンドコール <-多分必要になる
+	CommandCallUpdate();
 }
 
 
@@ -23,6 +39,9 @@ void GPUParticle::Update()
 /// </summary>
 void GPUParticle::Draw()
 {
+
+	// 描画コマンドコール
+	CommandCallDraw();
 }
 
 

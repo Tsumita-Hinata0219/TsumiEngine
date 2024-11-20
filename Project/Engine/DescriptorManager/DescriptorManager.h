@@ -61,6 +61,11 @@ public:
 	uint32_t CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
+	/// SRVを作成するDescriptorHeapの場所を決める
+	/// </summary>
+	void AssignSRVHandles();
+
+	/// <summary>
 	/// CPUとGPUの.ptrをずらす
 	/// </summary>
 	void ShiftSRVHandlePtr();

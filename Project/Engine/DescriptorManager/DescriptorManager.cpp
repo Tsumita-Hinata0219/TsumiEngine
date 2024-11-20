@@ -62,10 +62,8 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 
 	// SRVを作成するDescriptorHeapの場所を決める
 	AssignSRVHandles();
-
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
-
 	// SRVの生成
 	CreateShaderResourceView(resource, srvDesc, index_);
 
@@ -85,10 +83,8 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 
 	// SRVを作成するDescriptorHeapの場所を決める
 	AssignSRVHandles();
-
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
-
 	// SRVの生成
 	CreateShaderResourceView(resource, srvDesc, index_);
 
@@ -108,10 +104,8 @@ uint32_t DescriptorManager::CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& 
 
 	// SRVを作成するDescriptorHeapの場所を決める
 	AssignSRVHandles();
-
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
-
 	// SRVの生成
 	CreateShaderResourceView(resource, srvDesc, index_);
 

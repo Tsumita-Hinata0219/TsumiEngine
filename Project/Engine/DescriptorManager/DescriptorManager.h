@@ -90,6 +90,11 @@ public:
 	/// </summary>
 	DescriptorSize GetDescriptorSize() { return DescriptorManager::GetInstance()->descriptorSize_; }
 
+	/// <summary>
+	/// GPUハンドルの取得
+	/// </summary>
+	DescriptorSRVHandle GetSRVHandle(uint32_t handle) { return this->srvHandle_[handle]; }
+
 #pragma endregion 
 
 
@@ -147,3 +152,4 @@ private:
 	// 配列のIndex
 	uint32_t index_;
 };
+

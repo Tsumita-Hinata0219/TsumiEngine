@@ -13,6 +13,7 @@
 
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
+#include "DescriptorManager/DescriptorManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
@@ -173,9 +174,10 @@ inline void BufferResource<T>::CommandCall(UINT number, uint32_t index)
 {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
-	commands.List->SetGraphicsRootDescriptorTable(rootPatramerterIndex, instance->handleMap_[index]._GPU);
+	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(index));
 }
 
 template<typename T>

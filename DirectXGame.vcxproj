@@ -306,7 +306,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
     <ClCompile Include="Project\Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Project\Engine\Transform\Transform.cpp" />
-    <ClCompile Include="Project\Engine\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Project\Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
     <ClCompile Include="Project\Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Project\Engine\2D\Sprite\Sprite.cpp" />
@@ -529,7 +528,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Project\Engine\PostEffect\Materials\PostEffectMaterials.h" />
-    <ClInclude Include="Project\Engine\PostEffect\PostEffect.h" />
     <ClInclude Include="Project\Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Project\Engine\Utilities\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Project\Engine\TextureManager\TextureManager.h" />

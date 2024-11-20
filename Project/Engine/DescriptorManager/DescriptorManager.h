@@ -1,9 +1,10 @@
 #pragma once
 
+#include "DirectXTex.h"
 #include "Math/Struct.h"
 #include "../Base/DXCommon/DirectXCommon.h"
-#include "../CreateResource/CreateResource.h"
 #include "../CommandManager/CommandManager.h"
+#include "../CreateResource/CreateResource.h"
 
 
 
@@ -41,25 +42,26 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init();
+	static void Init();
 
 	/// <summary>
 	/// Descriptorがindex数を超えていないか
 	/// </summary>
-	void BeginFrame();
+	static void BeginFrame();
 
 	/// <summary>
 	/// indexをクリアにする
 	/// </summary>
-	void Clear();
+	static void Clear();
 
 	/// <summary>
 	/// SRVを作成する
 	/// </summary>
 	uint32_t CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size);
-	uint32_t CreateRenderTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
+	uint32_t CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const DirectX::TexMetadata& metadata);
 	uint32_t CreateRenderTextureDepthSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
 	uint32_t CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
+	uint32_t CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const Skeleton& skeleton);
 
 	/// <summary>
 	/// DescriptorTableを設定する

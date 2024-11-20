@@ -46,10 +46,11 @@ void BoxFilterEffect::CommandCall()
 	// PipeLineの設定
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::BoxFilter);
 
-	// SRVをコマンドに積む
-	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	// RenderTex
+	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/
+	renderTexBuffer_.CommandCallSRV(3, srv_);
 
-	// MtlBufferをコマンドに積む
+	// MtlBuffer
 	mtlBuffer_.CommandCall(4);
 
 	// 描画

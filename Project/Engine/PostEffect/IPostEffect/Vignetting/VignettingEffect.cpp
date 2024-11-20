@@ -44,7 +44,8 @@ void VignettingEffect::CommandCall()
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Vignetting);
 
 	// SRVをコマンドに積む
-	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	renderTexBuffer_.CommandCallSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
 	mtlBuffer_.CommandCall(4);

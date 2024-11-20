@@ -70,6 +70,9 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
@@ -89,7 +92,8 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// DescriptorTableを設定する
 	if (pModel->GetObjData().textureHD != 0) {
-		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -97,7 +101,8 @@ void ModelObjState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		//SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 	// 描画！(DrawCall / ドローコール)。

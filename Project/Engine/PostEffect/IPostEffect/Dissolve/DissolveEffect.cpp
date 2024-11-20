@@ -45,14 +45,16 @@ void DissolveEffect::CommandCall()
 	// PipeLineの設定
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Dissolve);
 
-	// SRVをコマンドに積む
-	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	// RenderTex
+	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	renderTexBuffer_.CommandCallSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
 	mtlBuffer_.CommandCall(4);
 
 	// MaksTexture
-	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
+	//SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
+	mtlBuffer_.CommandCallSRV(5, mtlData_.maskTexture);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

@@ -256,6 +256,9 @@ void Model::ApplyAnimation(Skeleton& skeleton, const Animation& animation, float
 /// </summary>
 SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 {
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+
 	// 作成するSkinCluster
 	SkinCluster result{};
 
@@ -264,7 +267,8 @@ SkinCluster Model::CreateSkinCluster(const Skeleton& skeleton)
 	WellForGPU* mappedPalette = nullptr;
 	result.paletteResource->Map(0, nullptr, reinterpret_cast<void**>(&mappedPalette));
 	result.mappedPallette = { mappedPalette, skeleton.joints.size() }; // spanを使ってアクセスするようにする
-	result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton); // SRVHandleの設定
+	//result.srvHandle = SRVManager::CreateSkinClusterSRV(result.paletteResource, skeleton); // SRVHandleの設定
+	result.srvHandle = descriptor->CreateSkinClusterSRV(result.paletteResource, skeleton); // SRVHandleの設定
 
 	// influence用のResourceを確保
 	result.influenceResource = CreateResource::CreateBufferResource(sizeof(VertexInfluence) * this->objData_.vertices.size());

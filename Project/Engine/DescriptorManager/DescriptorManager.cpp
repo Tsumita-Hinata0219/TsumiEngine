@@ -5,7 +5,7 @@
 /// <summary>
 /// インスタンスの取得
 /// </summary>
-DescriptorManager* DescriptorManager::GetInstance() 
+DescriptorManager* DescriptorManager::GetInstance()
 {
 	static DescriptorManager instance;
 	return &instance;
@@ -15,27 +15,29 @@ DescriptorManager* DescriptorManager::GetInstance()
 /// <summary>
 /// 初期化処理
 /// </summary>
-void DescriptorManager::Init() 
+void DescriptorManager::Init()
 {
+	// DescriptorManagerのインスタンス取得
+	DescriptorManager* thisClass = DescriptorManager::GetInstance();
 	// DirectXCommonのインスタンス取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
-	descriptorSize_.SRV =
+	thisClass->descriptorSize_.SRV =
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	descriptorSize_.RTV =
+	thisClass->descriptorSize_.RTV =
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_RTV);
-	descriptorSize_.DSV =
+	thisClass->descriptorSize_.DSV =
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_DSV);
-	index_ = 0;
+	thisClass->index_ = 0;
 }
 
 
 /// <summary>
 /// Descriptorがindex数を超えていないか
 /// </summary>
-void DescriptorManager::BeginFrame() 
+void DescriptorManager::BeginFrame()
 {
-	if (index_ >= descriptor_Max) {
+	if (DescriptorManager::GetInstance()->index_ >= descriptor_Max) {
 
 		Log("The number of DescripterIndexes has exceeded the limit.");
 		assert(0);
@@ -46,9 +48,9 @@ void DescriptorManager::BeginFrame()
 /// <summary>
 /// indexをクリアにする
 /// </summary>
-void DescriptorManager::Clear() 
+void DescriptorManager::Clear()
 {
-	index_ = 0;
+	DescriptorManager::GetInstance()->index_ = 0;
 }
 
 
@@ -79,17 +81,27 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, Microsof
 
 	return index_;
 }
-uint32_t DescriptorManager::CreateRenderTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource)
+uint32_t DescriptorManager::CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const DirectX::TexMetadata& metadata)
 {
 	// indexをインクリメント
 	index_++;
 
 	// SRVの設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
-	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
+	srvDesc.Format = metadata.format;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
-	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
-	srvDesc.Texture2D.MipLevels = 1;
+
+	// CubeMapかどうかで分岐
+	if (metadata.IsCubemap()) {
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURECUBE;
+		srvDesc.TextureCube.MostDetailedMip = 0; // unionがTextureCubeになったが、内部パラメータの意味はTexture2Dと変わらない
+		srvDesc.TextureCube.MipLevels = UINT_MAX;
+		srvDesc.TextureCube.ResourceMinLODClamp = 0.0f;
+	}
+	else {
+		srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D; // 2Dテクスチャ
+		srvDesc.Texture2D.MipLevels = UINT(metadata.mipLevels);
+	}
 
 	// SRVを作成するDescriptorHeapの場所を決める
 	AssignSRVHandles();
@@ -132,6 +144,30 @@ uint32_t DescriptorManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Res
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;
+
+	// SRVを作成するDescriptorHeapの場所を決める
+	AssignSRVHandles();
+	// CPUとGPUの.ptrをずらす
+	ShiftSRVHandlePtr();
+	// SRVの生成
+	CreateSRV(resource, srvDesc, index_);
+
+	return index_;
+}
+uint32_t DescriptorManager::CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const Skeleton& skeleton)
+{
+	// indexをインクリメント
+	index_++;
+
+	// SRVの設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = DXGI_FORMAT_UNKNOWN;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_BUFFER;
+	srvDesc.Buffer.FirstElement = 0;
+	srvDesc.Buffer.Flags = D3D12_BUFFER_SRV_FLAG_NONE;
+	srvDesc.Buffer.NumElements = UINT(skeleton.joints.size());
+	srvDesc.Buffer.StructureByteStride = sizeof(WellForGPU);
 
 	// SRVを作成するDescriptorHeapの場所を決める
 	AssignSRVHandles();

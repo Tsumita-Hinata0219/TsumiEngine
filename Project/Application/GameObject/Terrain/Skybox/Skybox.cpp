@@ -1,5 +1,5 @@
 #include "Skybox.h"
-
+#include "DescriptorManager/DescriptorManager.h"
 
 
 // 初期化処理
@@ -159,7 +159,8 @@ void Skybox::CommandCall()
 
 	// DescriptorTableを設定する
 	if (!texture_ == 0) {
-		SRVManager::SetGraphicsRootDescriptorTable(3, texture_);
+		//SRVManager::SetGraphicsRootDescriptorTable(3, texture_);
+		DescriptorManager::GetInstance()->SetGraphicsRootDescriptorTable(3, texture_);
 	}
 
 	// 描画！(DrawCall / ドローコール)。

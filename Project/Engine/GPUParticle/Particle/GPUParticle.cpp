@@ -75,7 +75,8 @@ void GPUParticle::CommandCallDraw()
 	// Camera
 	cameraManager_->CommandCall(2);
 	// MaterialTexture
-	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	buffers_.material.CommandCallSRV(3, datas_.material.textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!

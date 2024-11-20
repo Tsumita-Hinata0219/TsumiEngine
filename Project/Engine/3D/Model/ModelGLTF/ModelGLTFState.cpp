@@ -107,6 +107,9 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
@@ -126,8 +129,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
-		SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//SRVManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -135,8 +138,8 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
-		SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		//SRVManager::SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 	// 描画！(DrawCall / ドローコール)。
@@ -148,8 +151,10 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 	// コマンドの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	// SRVManagerの取得
-	SRVManager* srvManager = SRVManager::GetInstance();
+	//SRVManager* srvManager = SRVManager::GetInstance();
 
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SkinningObject3D);
@@ -176,8 +181,8 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 
 	// DescriptorTableを設定する
 	if (!pModel->GetObjData().textureHD == 0) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
-		srvManager->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
+		//srvManager->SetGraphicsRootDescriptorTable(3, pModel->GetObjData().textureHD);
 	}
 
 	// 光用のCBufferの場所を設定
@@ -185,12 +190,12 @@ void ModelGLTFState::AnimCommandCall(Model* pModel, WorldTransform worldTransfor
 
 	// Skinning
 	//commands.List->SetGraphicsRootDescriptorTable(5, skinCluster.paletteSrvHandle.second);
-	srvManager->SetGraphicsRootDescriptorTable(5, skinCluster.srvHandle);
+	descriptor->SetGraphicsRootDescriptorTable(5, skinCluster.srvHandle);
 
 	// ノーマルマップ用のテクスチャの設定
 	if (pModel->GetModelDrawType() == PhongNormalMap) {
-		//DescriptorManager::SetGraphicsRootDescriptorTable(5, pModel->GetNormalMapTex());
-		srvManager->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		descriptor->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
+		//srvManager->SetGraphicsRootDescriptorTable(5, pModel->GetObjData().textureHD);
 	}
 
 

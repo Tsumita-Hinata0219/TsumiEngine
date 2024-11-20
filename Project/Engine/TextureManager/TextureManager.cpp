@@ -116,6 +116,9 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
 
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+
 	// 新しく作成するTextureDataを用意
 	TextureData textureData{};
 
@@ -132,7 +135,8 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	instance->ExeCommands();
 
 	// SRV作成
-	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+	//textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+	textureData.index = descriptor->CreateTextureSRV(textureData.resource, metadata);
 
 	// textureのサイズの取得
 	textureData.size = {
@@ -150,6 +154,9 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
 
+	// DescriptorManagerの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+
 	// 新しく作成するTextureDataを用意
 	TextureData textureData{};
 
@@ -166,7 +173,8 @@ void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::strin
 	instance->ExeCommands();
 
 	// SRV作成
-	textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+	//textureData.index = SRVManager::CreateTextureSRV(textureData.resource, metadata);
+	textureData.index = descriptor->CreateTextureSRV(textureData.resource, metadata);
 
 	// textureのサイズの取得
 	textureData.size = {

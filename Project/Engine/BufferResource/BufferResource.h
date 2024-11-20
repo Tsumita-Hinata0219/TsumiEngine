@@ -49,7 +49,7 @@ public:
 
 	// コマンドを積む
 	void CommandCall(UINT number);
-	void CommandCall(UINT number, uint32_t index);
+	void CommandCallSRV(UINT number, uint32_t index);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -169,15 +169,16 @@ inline void BufferResource<T>::CommandCall(UINT number)
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
+
 template<typename T>
-inline void BufferResource<T>::CommandCall(UINT number, uint32_t index)
+inline void BufferResource<T>::CommandCallSRV(UINT number, uint32_t index)
 {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
-	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(index));
+	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(index)._GPU);
 }
 
 template<typename T>

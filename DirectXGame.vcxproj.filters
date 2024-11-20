@@ -101,7 +101,6 @@
     <ClCompile Include="Project\Engine\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Project\Engine\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Project\Engine\Particle\ParticleArray\ParticleArray.cpp" />
-    <ClCompile Include="Project\Engine\PostEffect\PostEffect.cpp" />
     <ClCompile Include="Project\Engine\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Project\Engine\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Project\Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
@@ -301,7 +300,6 @@
     <ClInclude Include="Project\Engine\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Project\Engine\Utilities\Timer\Timer.h" />
     <ClInclude Include="Project\Engine\Particle\ParticleArray\ParticleArray.h" />
-    <ClInclude Include="Project\Engine\PostEffect\PostEffect.h" />
     <ClInclude Include="Project\Engine\3D\Model\ModelGLTF\ModelGLTFState.h" />
     <ClInclude Include="Project\Engine\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Project\Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />

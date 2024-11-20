@@ -45,7 +45,7 @@ void DescriptorManager::Clear()
 
 
 // SRVを作成する
-uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<ID3D12Resource>& resource, UINT size) 
+uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size)
 {
 	// indexをインクリメント
 	index_++;
@@ -69,7 +69,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 
 	return index_;
 }
-uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource) 
+uint32_t DescriptorManager::CreateRenderTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource)
 {
 	// indexをインクリメント
 	index_++;
@@ -90,7 +90,7 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 
 	return index_;
 }
-uint32_t DescriptorManager::CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource)
+uint32_t DescriptorManager::CreateRenderTextureDepthSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource)
 {
 	// indexをインクリメント
 	index_++;
@@ -98,6 +98,27 @@ uint32_t DescriptorManager::CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& 
 	// SRVの設定
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
 	srvDesc.Format = DXGI_FORMAT_R24_UNORM_X8_TYPELESS;
+	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
+	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
+	srvDesc.Texture2D.MipLevels = 1;
+
+	// SRVを作成するDescriptorHeapの場所を決める
+	AssignSRVHandles();
+	// CPUとGPUの.ptrをずらす
+	ShiftSRVHandlePtr();
+	// SRVの生成
+	CreateShaderResourceView(resource, srvDesc, index_);
+
+	return index_;
+}
+uint32_t DescriptorManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource)
+{
+	// indexをインクリメント
+	index_++;
+
+	// SRVの設定
+	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc{};
+	srvDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM_SRGB;
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MipLevels = 1;

@@ -56,9 +56,10 @@ public:
 	/// <summary>
 	/// SRVを作成する
 	/// </summary>
-	uint32_t CreateInstancingSRV(uint32_t instancingNum, ComPtr<ID3D12Resource>& resource, UINT size);
-	uint32_t CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource);
-	uint32_t CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource);
+	uint32_t CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size);
+	uint32_t CreateRenderTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
+	uint32_t CreateRenderTextureDepthSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
+	uint32_t CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
 	/// SRVを作成するDescriptorHeapの場所を決める

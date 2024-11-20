@@ -2,7 +2,9 @@
 
 
 
-// インスタンスの取得
+/// <summary>
+/// インスタンスの取得
+/// </summary>
 DescriptorManager* DescriptorManager::GetInstance() 
 {
 	static DescriptorManager instance;
@@ -10,7 +12,9 @@ DescriptorManager* DescriptorManager::GetInstance()
 }
 
 
-// 初期化処理
+/// <summary>
+/// 初期化処理
+/// </summary>
 void DescriptorManager::Init() 
 {
 	// DirectXCommonのインスタンス取得
@@ -26,7 +30,9 @@ void DescriptorManager::Init()
 }
 
 
-// Descriptorがindex数を超えていないか
+/// <summary>
+/// Descriptorがindex数を超えていないか
+/// </summary>
 void DescriptorManager::BeginFrame() 
 {
 	if (index_ >= descriptor_Max) {
@@ -37,14 +43,18 @@ void DescriptorManager::BeginFrame()
 }
 
 
-// indexをクリアにする
+/// <summary>
+/// indexをクリアにする
+/// </summary>
 void DescriptorManager::Clear() 
 {
 	index_ = 0;
 }
 
 
-// SRVを作成する
+/// <summary>
+/// SRVを作成する
+/// </summary>
 uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size)
 {
 	// indexをインクリメント
@@ -65,7 +75,7 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, Microsof
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
 	// SRVの生成
-	CreateShaderResourceView(resource, srvDesc, index_);
+	CreateSRV(resource, srvDesc, index_);
 
 	return index_;
 }
@@ -86,7 +96,7 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(Microsoft::WRL::ComPtr<ID3D12
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
 	// SRVの生成
-	CreateShaderResourceView(resource, srvDesc, index_);
+	CreateSRV(resource, srvDesc, index_);
 
 	return index_;
 }
@@ -107,7 +117,7 @@ uint32_t DescriptorManager::CreateRenderTextureDepthSRV(Microsoft::WRL::ComPtr<I
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
 	// SRVの生成
-	CreateShaderResourceView(resource, srvDesc, index_);
+	CreateSRV(resource, srvDesc, index_);
 
 	return index_;
 }
@@ -128,9 +138,40 @@ uint32_t DescriptorManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Res
 	// CPUとGPUの.ptrをずらす
 	ShiftSRVHandlePtr();
 	// SRVの生成
-	CreateShaderResourceView(resource, srvDesc, index_);
+	CreateSRV(resource, srvDesc, index_);
 
 	return index_;
+}
+
+
+/// <summary>
+/// DescriptorTableを設定する
+/// </summary>
+void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t texHandle)
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	commands.List->SetGraphicsRootDescriptorTable(
+		rootPatramerterIndex,
+		srvHandle_[texHandle]._GPU);
+}
+
+
+/// <summary>
+/// DescriptorHandleの取得
+/// </summary>
+D3D12_CPU_DESCRIPTOR_HANDLE DescriptorManager::GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index)
+{
+	D3D12_CPU_DESCRIPTOR_HANDLE handleCPU = descriptorHeap->GetCPUDescriptorHandleForHeapStart();
+	handleCPU.ptr += (static_cast<unsigned long long>(descriptorSize) * index);
+	return handleCPU;
+}
+D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManager::GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index)
+{
+	D3D12_GPU_DESCRIPTOR_HANDLE handleGPU = descriptorHeap->GetGPUDescriptorHandleForHeapStart();
+	handleGPU.ptr += (static_cast<unsigned long long>(descriptorSize) * index);
+	return handleGPU;
 }
 
 
@@ -154,41 +195,35 @@ void DescriptorManager::AssignSRVHandles()
 }
 
 
-// CPUとGPUの.ptrをずらす
-void DescriptorManager::ShiftSRVHandlePtr() 
+/// <summary>
+/// CPUとGPUの.ptrをずらす
+/// </summary>
+void DescriptorManager::ShiftSRVHandlePtr()
 {
 	// DirectXCommonのインスタンス取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
 	srvHandle_[index_]._CPU.ptr +=
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
-	
+
 	srvHandle_[index_]._GPU.ptr +=
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 }
 
 
-// indexをインクリメント
-void DescriptorManager::IncrementIndex() 
+/// <summary>
+/// indexをインクリメント
+/// </summary>
+void DescriptorManager::IncrementIndex()
 {
 	index_++;
 }
 
 
-// DescriptorTableを設定する
-void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t texHandle) 
-{
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-
-	commands.List->SetGraphicsRootDescriptorTable(
-		rootPatramerterIndex, 
-		srvHandle_[texHandle]._GPU);
-}
-
-
-// SRVの生成
-void DescriptorManager::CreateShaderResourceView(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index) 
+/// <summary>
+/// SRVの生成
+/// </summary>
+void DescriptorManager::CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index)
 {
 	// DirectXCommonのインスタンス取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
@@ -198,19 +233,3 @@ void DescriptorManager::CreateShaderResourceView(ComPtr<ID3D12Resource> resource
 		&srvDesc,
 		srvHandle_[index]._CPU);
 }
-
-
-// DescriptorHandleを取得する
-D3D12_CPU_DESCRIPTOR_HANDLE DescriptorManager::GetCPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index)
-{
-	D3D12_CPU_DESCRIPTOR_HANDLE handleCPU = descriptorHeap->GetCPUDescriptorHandleForHeapStart();
-	handleCPU.ptr += (static_cast<unsigned long long>(descriptorSize) * index);
-	return handleCPU;
-}
-D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManager::GetGPUDescriptorHandle(ComPtr<ID3D12DescriptorHeap> descriptorHeap, uint32_t descriptorSize, uint32_t index)
-{
-	D3D12_GPU_DESCRIPTOR_HANDLE handleGPU = descriptorHeap->GetGPUDescriptorHandleForHeapStart();
-	handleGPU.ptr += (static_cast<unsigned long long>(descriptorSize) * index);
-	return handleGPU;
-}
-

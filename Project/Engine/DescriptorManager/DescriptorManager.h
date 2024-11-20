@@ -26,12 +26,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	DescriptorManager() {};
+	DescriptorManager() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~DescriptorManager() {};
+	~DescriptorManager() = default;
 
 	/// <summary>
 	/// インスタンスの取得
@@ -62,29 +62,9 @@ public:
 	uint32_t CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
 
 	/// <summary>
-	/// SRVを作成するDescriptorHeapの場所を決める
-	/// </summary>
-	void AssignSRVHandles();
-
-	/// <summary>
-	/// CPUとGPUの.ptrをずらす
-	/// </summary>
-	void ShiftSRVHandlePtr();
-
-	/// <summary>
-	/// indexをインクリメント
-	/// </summary>
-	void IncrementIndex();
-
-	/// <summary>
 	/// DescriptorTableを設定する
 	/// </summary>
 	void SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint32_t texHandle);
-
-	/// <summary>
-	/// SRVの生成
-	/// </summary>
-	void CreateShaderResourceView(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
 
 
 #pragma region Get
@@ -134,8 +114,36 @@ public:
 
 private:
 
+	/// <summary>
+	/// SRVを作成するDescriptorHeapの場所を決める
+	/// </summary>
+	void AssignSRVHandles();
+
+	/// <summary>
+	/// CPUとGPUの.ptrをずらす
+	/// </summary>
+	void ShiftSRVHandlePtr();
+
+	/// <summary>
+	/// indexをインクリメント
+	/// </summary>
+	void IncrementIndex();
+
+	/// <summary>
+	/// SRVの生成
+	/// </summary>
+	void CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
+
+
+
+private:
+
+	// 最大数
 	static const uint32_t descriptor_Max = 64;
+	// サイズ
 	DescriptorSize descriptorSize_{};
+	// SRV
 	DescriptorSRVHandle srvHandle_[descriptor_Max]{};
+	// 配列のIndex
 	uint32_t index_;
 };

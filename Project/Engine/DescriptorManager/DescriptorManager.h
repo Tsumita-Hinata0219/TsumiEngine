@@ -124,8 +124,6 @@ public:
 
 #pragma endregion 
 
-
-
 	static const uint32_t descriptor_Max = 64;
 	DescriptorSize descriptorSize_{};
 	DescriptorSRVHandle srvHandle_[descriptor_Max]{};

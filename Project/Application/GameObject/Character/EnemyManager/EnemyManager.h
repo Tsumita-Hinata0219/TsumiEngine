@@ -57,7 +57,7 @@ private:
 	void CreateStaticEnemy();
 
 	// 新しいEnemyBulletを生成する
-	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void CreateEnemyBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
 
 
 private: // メンバ変数

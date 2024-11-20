@@ -78,8 +78,8 @@ public:
 	uint32_t GetKillCount() const { return this->killCount_; }
 
 	// KillCount加算 & 減算
-	void AddKillCount(uint32_t addCount = 1) { this->killCount_ += addCount; }
-	void SubKillCount(uint32_t subCount = 1) { this->killCount_ -= subCount; }
+	void AddKillCount(const uint32_t addCount = 1) { this->killCount_ += addCount; }
+	void SubKillCount(const uint32_t subCount = 1) { this->killCount_ -= subCount; }
 
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
@@ -87,7 +87,7 @@ public:
 
 	// HP
 	uint32_t GetHP() const { return this->hp_; }
-	void SetHP(uint32_t setHP) { this->hp_ = setHP; }
+	void SetHP(const uint32_t setHP) { this->hp_ = setHP; }
 
 	// 勝敗のフラグ
 	bool IsWin() const { return this->isWin_; }

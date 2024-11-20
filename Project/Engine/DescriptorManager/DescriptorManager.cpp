@@ -47,9 +47,6 @@ void DescriptorManager::Clear()
 // SRVを作成する
 uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<ID3D12Resource>& resource, UINT size) 
 {
-	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
 	// indexをインクリメント
 	index_++;
 
@@ -76,9 +73,6 @@ uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, ComPtr<I
 }
 uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resource) 
 {
-	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
 	// indexをインクリメント
 	index_++;
 
@@ -102,9 +96,6 @@ uint32_t DescriptorManager::CreateRenderTextureSRV(ComPtr<ID3D12Resource>& resou
 }
 uint32_t DescriptorManager::CreateRenderTextureDepthSRV(ComPtr<ID3D12Resource>& resource)
 {
-	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
-
 	// indexをインクリメント
 	index_++;
 

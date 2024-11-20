@@ -1,11 +1,10 @@
 #pragma once
 
 #include "DirectXTex.h"
-#include "Math/Struct.h"
+#include "Math/MyMath.h"
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
 #include "../CreateResource/CreateResource.h"
-
 
 
 struct DescriptorSize {
@@ -18,6 +17,7 @@ struct DescriptorSRVHandle {
 	D3D12_GPU_DESCRIPTOR_HANDLE _GPU;
 };
 
+struct Skeleton;
 
 /* DescriptorManagerクラス */
 class DescriptorManager {
@@ -140,7 +140,6 @@ private:
 	/// SRVの生成
 	/// </summary>
 	void CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
-
 
 
 private:

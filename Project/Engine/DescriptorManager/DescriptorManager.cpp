@@ -1,5 +1,5 @@
 #include "DescriptorManager.h"
-
+#include "Math/Struct.h"
 
 
 /// <summary>
@@ -188,6 +188,8 @@ void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	ID3D12DescriptorHeap* desc[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex,
 		srvHandle_[texHandle]._GPU);

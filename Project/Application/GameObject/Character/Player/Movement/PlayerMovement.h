@@ -56,7 +56,7 @@ private:
 	/// <summary>
 	/// 移動方向からY軸の姿勢を合わせる
 	/// </summary>
-	void CalcBodyOrienation(Vector2 input, Vector3 direction);
+	void CalcBodyOrienation(const Vector2& input, const Vector3& direction);
 
 
 private:

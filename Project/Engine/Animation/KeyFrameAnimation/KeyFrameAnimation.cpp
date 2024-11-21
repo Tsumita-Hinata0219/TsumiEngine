@@ -11,7 +11,7 @@ void KeyFrameAnimation::Update() {}
 
 
 // Animationを再生する
-Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, Animation animation, float time)
+Matrix4x4 KeyFrameAnimation::PlayAnimation(string name, const Animation& animation, float time)
 {
 	// 時刻を進める
 	//time += 1.0f / 60.0f; // 多分この処理いらない

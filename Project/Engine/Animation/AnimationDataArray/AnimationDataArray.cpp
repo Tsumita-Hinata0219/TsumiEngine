@@ -3,7 +3,7 @@
 
 
 // コンストラクタ
-AnimationDataArray::AnimationDataArray(Animation animation) {
+AnimationDataArray::AnimationDataArray(const Animation& animation) {
 
 	this->animation_ = animation;
 }

@@ -28,7 +28,7 @@ public:
 	void ReSetData(const CameraResource& data);
 
 	// コマンドコール
-	void CommandCall(UINT number);
+	void CommandCall(const UINT& number);
 
 #pragma region Accessor アクセッサ
 

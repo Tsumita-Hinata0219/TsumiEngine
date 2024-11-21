@@ -170,7 +170,7 @@ void PlayerMovement::FaceCameraDirection()
 /// <summary>
 /// 移動方向からY軸の姿勢を合わせる
 /// </summary>
-void PlayerMovement::CalcBodyOrienation(Vector2 input, Vector3 direction)
+void PlayerMovement::CalcBodyOrienation(const Vector2& input, const Vector3& direction)
 {
 	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
 	{

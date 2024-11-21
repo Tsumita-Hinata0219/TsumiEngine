@@ -45,7 +45,7 @@ public:
 	/// 初期化処理
 	/// </summary>
 	void Init(Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
-	void Initn(Vector2 size = { 128.0f, 128.0f });
+	void Initn(const Vector2& size = { 128.0f, 128.0f });
 
 
 	/// <summary>

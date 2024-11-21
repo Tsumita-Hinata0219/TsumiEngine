@@ -35,7 +35,7 @@ class AnimationDataArray {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	AnimationDataArray(Animation animation);
+	AnimationDataArray(const Animation& animation);
 	~AnimationDataArray() {};
 
 #pragma region Get

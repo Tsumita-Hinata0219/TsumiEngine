@@ -13,11 +13,12 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 5> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
 		SetUpInputElementDescs("NORMAL"),
 		SetUpInputElementDescs("WORLDPOSITION"),
+		SetUpInputElementDescs("COLOR"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
 	SetUpInputLayout(inputLayoutDesc, inputElementDesc.data(), static_cast<UINT>(inputElementDesc.size()));

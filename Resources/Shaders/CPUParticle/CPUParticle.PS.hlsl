@@ -1,45 +1,26 @@
 #include "CPUParticle.hlsli"
 
-// マテリアル
-struct Material
-{
-    float4 color;
-    float4x4 uvTransform;
-};
-ConstantBuffer<Material> gMaterial : register(b0);
+// テクスチャ& サンプラー
 Texture2D<float4> gTexture : register(t0);
-
-// カメラ
-struct ViewProjectionMatrix
-{
-    float4x4 view;
-    float4x4 projection;
-    float3 cameraPosition;
-};
-ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
-
 SamplerState gSampler : register(s0);
 
-struct PixelShaderOutput
-{
-    float4 color : SV_TARGET0;
-};
+// マテリアル
+StructuredBuffer<Material> gMaterial : register(t1);
 
+
+// Main
 PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
 
     // UV変換を適用
-    float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
+    float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial[input.instanceID].uvTransform);
 
     // テクスチャから色をサンプリング
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     
     // カラーの計算
-    output.color = gMaterial.color * textureColor;
-    //// アルファ値の計算
-    //output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
-    //output.color.a = gMaterial.color.a * textureColor.a;
+    output.color = gMaterial[input.instanceID].color * textureColor;
 
     // アルファ値が0.9f未満なら描画をスキップ
     if (textureColor.a == 0.0f)
@@ -49,3 +30,4 @@ PixelShaderOutput main(VertexShaderOutput input)
 
     return output;
 }
+

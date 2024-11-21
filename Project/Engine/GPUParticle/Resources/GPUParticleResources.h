@@ -5,6 +5,12 @@
 #include "../../3D/Model/ModelStructure/ModelStructure.h"
 
 
+struct ParticleData {
+	Matrix4x4 world;
+	Vector4 color;
+};
+
+
 struct GPUParticleDatas {
 	
 	// モデルの名前

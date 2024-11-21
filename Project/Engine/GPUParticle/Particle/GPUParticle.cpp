@@ -43,6 +43,16 @@ void GPUParticle::Update()
 /// </summary>
 void GPUParticle::Draw()
 {
+	// ここで書き込み
+	// VBV
+	buffers_.vertex.Map();
+	buffers_.vertex.WriteData(model_->GetMeshData().vertices.data());
+	buffers_.vertex.UnMap();
+	// IBV
+	buffers_.indeces.Map();
+	buffers_.indeces.WriteData(model_->GetMeshData().indices.data());
+	buffers_.indeces.UnMap();
+
 
 	// 描画コマンドコール
 	CommandCallDraw();
@@ -101,8 +111,10 @@ void GPUParticle::CreateBufferResource()
 	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	buffers_.indeces.CreateIndexBufferView();
 	// transform
+	buffers_.transform.CreateResource(instanceNum_);
 	buffers_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる
 	// material
+	buffers_.material.CreateResource(instanceNum_);
 	buffers_.material.CreateInstancingResource(instanceNum_);
 	// light
 	//buffers_.light.CreateResource();

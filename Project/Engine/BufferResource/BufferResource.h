@@ -68,6 +68,7 @@ public:
 	/// データを書き込む
 	/// </summary>
 	void WriteData(const T* data);
+	void WriteData(const std::vector<T>* datas);
 
 	/// <summary>
 	/// コマンドを積む
@@ -192,8 +193,18 @@ inline void BufferResource<T>::UnMap()
 template<typename T>
 inline void BufferResource<T>::WriteData(const T* data)
 {
-	assert(mappedData_);
+	assert(datas != nullptr); // ポインタが有効か確認
+	assert(mappedData_ != nullptr); // mappedData_ が初期化されているか確認
 	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
+}
+
+template<typename T>
+inline void BufferResource<T>::WriteData(const std::vector<T>* datas)
+{
+	assert(datas != nullptr); // ポインタが有効か確認
+	assert(mappedData_ != nullptr); // mappedData_ が初期化されているか確認
+	assert(datas->size() == itemCount_); // コピーする要素数が一致しているか確認
+	std::memcpy(mappedData_, datas->data(), sizeof(T) * itemCount_); // 一括コピー
 }
 
 

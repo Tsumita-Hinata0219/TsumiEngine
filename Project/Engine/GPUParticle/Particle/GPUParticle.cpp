@@ -47,7 +47,7 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	std::vector<TransformationMat> metaDataArray;
 	for (auto& element : transforms) {
 		element.UpdateMatrix();
-		element.transformationMatData.World = Matrix4x4::identity;
+		element.transformationMatData.World = element.matWorld;
 		metaDataArray.push_back(element.transformationMatData);
 	}
 

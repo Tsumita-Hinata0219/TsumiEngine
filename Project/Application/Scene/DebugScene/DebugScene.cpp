@@ -20,7 +20,7 @@ DebugScene::~DebugScene() {}
 void DebugScene::Initialize()
 {
 	/* ----- Camera カメラ ----- */
-	camera_.Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -5.0f });
+	camera_.Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
 	
@@ -40,6 +40,7 @@ void DebugScene::Initialize()
 	transforms_.resize(dParticleInstanceNum_);
 	for (auto& element : transforms_) {
 		element.Init();
+		element.srt.translate.z = 5.0f;
 	}
 	materials_.resize(dParticleInstanceNum_);
 	for (auto& element : materials_) {

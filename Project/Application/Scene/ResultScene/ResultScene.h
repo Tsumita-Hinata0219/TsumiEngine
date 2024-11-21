@@ -50,7 +50,7 @@ public:
 private:
 
 	// Input
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;

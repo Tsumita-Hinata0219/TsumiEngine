@@ -38,29 +38,29 @@ struct ModelDatas {
 struct ModelBuffers {
 
 	// メッシュ
-	BufferResource<MeshData> mesh;
+	TsumiEngine::BufferResource<MeshData> mesh;
 
 	// VertexDataBuffer
-	BufferResource<VertexData> vertex;
+	TsumiEngine::BufferResource<VertexData> vertex;
 
 	// IndexDataBuffer
-	BufferResource<uint32_t> indeces;
+	TsumiEngine::BufferResource<uint32_t> indeces;
 
 	// マテリアル
-	BufferResource<MaterialDataN> material;
+	TsumiEngine::BufferResource<MaterialDataN> material;
 
 	// Transform
-	BufferResource<TransformationMat> transform;
+	TsumiEngine::BufferResource<TransformationMat> transform;
 
 	// ライト
-	BufferResource<DirectionalLightData> light;
+	TsumiEngine::BufferResource<DirectionalLightData> light;
 
 	// 環境マップ
-	BufferResource<EnvironmentData> enviroment;
+	TsumiEngine::BufferResource<EnvironmentData> enviroment;
 
 	// インフルエンス
-	BufferResource<VertexInfluence> influence;
+	TsumiEngine::BufferResource<VertexInfluence> influence;
 
 	// パレット
-	BufferResource<WellForGPU> palette;
+	TsumiEngine::BufferResource<WellForGPU> palette;
 };

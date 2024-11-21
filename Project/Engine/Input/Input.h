@@ -39,225 +39,226 @@ enum class PadData {
 };
 
 
+namespace TsumiEngine {
+
+	// -------------------------------------------------------------------------
+	// 入力
+	// -------------------------------------------------------------------------
+	// KeyInput : キーボード
+	// -------------------------------------------------------------------------
+	class KeysInput {
+
+	public: // メンバ関数
+
+		/// <summary>
+		/// インスタンス取得
+		/// </summary>
+		static KeysInput* GetInstance() {
+			static KeysInput instance;
+			return &instance;
+		}
+
+		/// <summary>
+		/// 初期化処理
+		/// </summary>
+		void Initialize();
+
+		/// <summary>
+		/// 更新処理
+		/// </summary>
+		void BeginFrame();
+
+		/// <summary>
+		/// 押されていない
+		/// </summary>
+		bool NoneKey(uint32_t keyNum) const;
+
+		/// <summary>
+		/// 押した瞬間
+		/// </summary>
+		bool TriggerKey(uint32_t keyNum) const;
+
+		/// <summary>
+		/// 押しっぱなし
+		/// </summary>
+		bool PressKeys(uint32_t keyNum) const;
+
+		/// <summary>
+		/// 離された瞬間
+		/// </summary>
+		bool ReleaseKeys(uint32_t keyNum) const;
 
 
-// -------------------------------------------------------------------------
-// 入力
-// -------------------------------------------------------------------------
-// KeyInput : キーボード
-// -------------------------------------------------------------------------
-class KeysInput {
+	private: // メンバ変数
 
-public: // メンバ関数
+		ComPtr<IDirectInput8> directInput_ = nullptr;
+		ComPtr<IDirectInputDevice8> keyboard_ = nullptr;
 
-	/// <summary>
-	/// インスタンス取得
-	/// </summary>
-	static KeysInput* GetInstance() {
-		static KeysInput instance;
-		return &instance;
-	}
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void BeginFrame();
-
-	/// <summary>
-	/// 押されていない
-	/// </summary>
-	bool NoneKey(uint32_t keyNum) const;
-
-	/// <summary>
-	/// 押した瞬間
-	/// </summary>
-	bool TriggerKey(uint32_t keyNum) const;
-
-	/// <summary>
-	/// 押しっぱなし
-	/// </summary>
-	bool PressKeys(uint32_t keyNum) const;
-
-	/// <summary>
-	/// 離された瞬間
-	/// </summary>
-	bool ReleaseKeys(uint32_t keyNum) const;
-
-
-private: // メンバ変数
-
-	ComPtr<IDirectInput8> directInput_ = nullptr;
-	ComPtr<IDirectInputDevice8> keyboard_ = nullptr;
-
-	BYTE Keys[256] = {};
-	BYTE preKeys[256] = {};
-};
-
-
-
-// -------------------------------------------------------------------------
-// 入力
-// -------------------------------------------------------------------------
-// GamePadInput : ゲームパッド
-// -------------------------------------------------------------------------
-class GamePadInput {
-
-public: // メンバ関数
-
-	/// <summary>
-	/// インスタンス取得
-	/// </summary>
-	static GamePadInput* GetInstance() {
-		static GamePadInput instance;
-		return &instance;
-	}
-
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
-
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void BeginFrame();
-
-	/// <summary>
-	/// パッドの更新
-	/// </summary>
-	bool GetJoyState();
-
-	/// <summary>
-	/// 各ボタンのトリガー状態の初期化処理
-	/// </summary>
-	void ResetButtonTriggers();
-
-	/// <summary>
-	/// ジョイコンの入力の取得
-	/// </summary>
-	bool GetJoyStickState();
-
-	/// <summary>
-	/// 押されていない
-	/// </summary>
-	bool NoneButton(PadData button) const;
-
-	/// <summary>
-	/// 押した瞬間
-	/// </summary>
-	bool TriggerButton(PadData button) const;
-
-	/// <summary>
-	/// 押しっぱなし
-	/// </summary>
-	bool PressButton(PadData button) const;
-
-	/// <summary>
-	/// 離された瞬間
-	/// </summary>
-	bool ReleaseButton(PadData button) const;
-
-	/// <summary>
-	/// Lスティック
-	/// </summary>
-	Vector2 GetLStick(const float& mode);
-
-	/// <summary>
-	/// Rスティック
-	/// </summary>
-	Vector2 GetRStick(const float& mode);
-
-
-private: // メンバ変数
-
-	XINPUT_STATE joyState_{};
-	XINPUT_STATE preJoyState_{};
-
-	WORD buttonTriggers[XINPUT_GAMEPAD_MAX]{};
-};
+		BYTE Keys[256] = {};
+		BYTE preKeys[256] = {};
+	};
 
 
 
-// -------------------------------------------------------------------------
-// 入力
-// -------------------------------------------------------------------------
-class Input {
+	// -------------------------------------------------------------------------
+	// 入力
+	// -------------------------------------------------------------------------
+	// GamePadInput : ゲームパッド
+	// -------------------------------------------------------------------------
+	class GamePadInput {
 
-private: // シングルトンデザインパターン
+	public: // メンバ関数
 
-	Input() {};
-	~Input() {};
+		/// <summary>
+		/// インスタンス取得
+		/// </summary>
+		static GamePadInput* GetInstance() {
+			static GamePadInput instance;
+			return &instance;
+		}
 
-public: // メンバ関数
+		/// <summary>
+		/// 初期化処理
+		/// </summary>
+		void Initialize();
 
-	/// <summary>
-	/// インスタンス取得
-	/// </summary>
-	static Input* GetInstance() {
-		static Input instance;
-		return &instance;
-	}
+		/// <summary>
+		/// 更新処理
+		/// </summary>
+		void BeginFrame();
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Initialize();
+		/// <summary>
+		/// パッドの更新
+		/// </summary>
+		bool GetJoyState();
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void BeginFrame();
+		/// <summary>
+		/// 各ボタンのトリガー状態の初期化処理
+		/// </summary>
+		void ResetButtonTriggers();
 
-	/// <summary>
-	/// 押されていない
-	/// </summary>
-	bool None(uint32_t keyNum);
-	bool None(PadData button);
+		/// <summary>
+		/// ジョイコンの入力の取得
+		/// </summary>
+		bool GetJoyStickState();
 
-	/// <summary>
-	/// 押した瞬間
-	/// </summary>
-	bool Trigger(uint32_t keyNum);
-	bool Trigger(PadData button);
+		/// <summary>
+		/// 押されていない
+		/// </summary>
+		bool NoneButton(PadData button) const;
 
-	/// <summary>
-	/// 押しっぱなし
-	/// </summary>
-	bool Press(uint32_t keyNum);
-	bool Press(PadData button);
+		/// <summary>
+		/// 押した瞬間
+		/// </summary>
+		bool TriggerButton(PadData button) const;
 
-	/// <summary>
-	/// 離された瞬間
-	/// </summary>
-	bool Release(uint32_t keyNum);
-	bool Release(PadData button);
+		/// <summary>
+		/// 押しっぱなし
+		/// </summary>
+		bool PressButton(PadData button) const;
 
-	/// <summary>
-	/// Lスティック
-	/// </summary>
-	Vector2 GetLStick(const float& mode = SHRT_MAX);
+		/// <summary>
+		/// 離された瞬間
+		/// </summary>
+		bool ReleaseButton(PadData button) const;
 
-	/// <summary>
-	/// Rスティック
-	/// </summary>
-	Vector2 GetRStick(const float& mode = SHRT_MAX);
+		/// <summary>
+		/// Lスティック
+		/// </summary>
+		Vector2 GetLStick(const float& mode);
 
-	/// <summary>
-	/// 倍部
-	/// </summary>
-	/// <param name="val1"></param>
-	/// <param name="val2"></param>
-	void Vibration(int val1, int val2);
+		/// <summary>
+		/// Rスティック
+		/// </summary>
+		Vector2 GetRStick(const float& mode);
 
-private: // メンバ変数
 
-	KeysInput* keysInput_ = nullptr;
-	GamePadInput* gamePadInput_ = nullptr;
+	private: // メンバ変数
 
-	XINPUT_VIBRATION vibration;
-};
+		XINPUT_STATE joyState_{};
+		XINPUT_STATE preJoyState_{};
+
+		WORD buttonTriggers[XINPUT_GAMEPAD_MAX]{};
+	};
+
+
+
+	// -------------------------------------------------------------------------
+	// 入力
+	// -------------------------------------------------------------------------
+	class Input {
+
+	private: // シングルトンデザインパターン
+
+		Input() {};
+		~Input() {};
+
+	public: // メンバ関数
+
+		/// <summary>
+		/// インスタンス取得
+		/// </summary>
+		static Input* GetInstance() {
+			static Input instance;
+			return &instance;
+		}
+
+		/// <summary>
+		/// 初期化処理
+		/// </summary>
+		void Initialize();
+
+		/// <summary>
+		/// 更新処理
+		/// </summary>
+		void BeginFrame();
+
+		/// <summary>
+		/// 押されていない
+		/// </summary>
+		bool None(uint32_t keyNum);
+		bool None(PadData button);
+
+		/// <summary>
+		/// 押した瞬間
+		/// </summary>
+		bool Trigger(uint32_t keyNum);
+		bool Trigger(PadData button);
+
+		/// <summary>
+		/// 押しっぱなし
+		/// </summary>
+		bool Press(uint32_t keyNum);
+		bool Press(PadData button);
+
+		/// <summary>
+		/// 離された瞬間
+		/// </summary>
+		bool Release(uint32_t keyNum);
+		bool Release(PadData button);
+
+		/// <summary>
+		/// Lスティック
+		/// </summary>
+		Vector2 GetLStick(const float& mode = SHRT_MAX);
+
+		/// <summary>
+		/// Rスティック
+		/// </summary>
+		Vector2 GetRStick(const float& mode = SHRT_MAX);
+
+		/// <summary>
+		/// 倍部
+		/// </summary>
+		/// <param name="val1"></param>
+		/// <param name="val2"></param>
+		void Vibration(int val1, int val2);
+
+	private: // メンバ変数
+
+		KeysInput* keysInput_ = nullptr;
+		GamePadInput* gamePadInput_ = nullptr;
+
+		XINPUT_VIBRATION vibration;
+	};
+}

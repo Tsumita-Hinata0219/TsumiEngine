@@ -6,7 +6,7 @@
 void FollowCamera::Init()
 {
 	// Inputクラス
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	// カメラマネージャーのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();

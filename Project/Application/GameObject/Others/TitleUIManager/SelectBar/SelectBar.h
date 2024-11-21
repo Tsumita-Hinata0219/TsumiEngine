@@ -63,7 +63,7 @@ private:
 private:
 
 	// Input
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_;

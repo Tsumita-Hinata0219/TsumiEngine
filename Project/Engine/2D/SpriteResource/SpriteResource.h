@@ -19,20 +19,20 @@ struct SpriteDatas {
 struct SpriteBuffers {
 
 	// メッシュ
-	BufferResource<SP::MeshData> mesh;
+	TsumiEngine::BufferResource<SP::MeshData> mesh;
 
 	// VertexDataBuffer
-	BufferResource<VertexData> vertex;
+	TsumiEngine::BufferResource<VertexData> vertex;
 
 	// IndexDataBuffer
-	BufferResource<uint32_t> indeces;
+	TsumiEngine::BufferResource<uint32_t> indeces;
 
 	// マテリアル
-	BufferResource<SP::MaterialData> material;
+	TsumiEngine::BufferResource<SP::MaterialData> material;
 
 	// Dissolve
-	BufferResource<SP::DissolveData> dissolve;
+	TsumiEngine::BufferResource<SP::DissolveData> dissolve;
 
 	// Transform
-	BufferResource<TransformationMat> transform;
+	TsumiEngine::BufferResource<TransformationMat> transform;
 };

@@ -33,7 +33,7 @@ void Tsumi::Initialize() {
 	ImGuiManager::Initialize();
 
 	// Inputの初期化処理
-	Input::GetInstance()->Initialize();
+	TsumiEngine::Input::GetInstance()->Initialize();
 
 	// Audioの初期化処理
 	Audio::Initialize();
@@ -67,7 +67,7 @@ void Tsumi::Finalize() {
 void Tsumi::BeginFlame() {
 
 	ImGuiManager::BeginFrame();
-	Input::GetInstance()->BeginFrame();
+	TsumiEngine::Input::GetInstance()->BeginFrame();
 	//DescriptorManager::BeginFrame();
 	RTVManager::BeginFrame();
 	SRVManager::BeginFrame();

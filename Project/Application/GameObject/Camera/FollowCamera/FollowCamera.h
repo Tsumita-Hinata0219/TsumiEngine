@@ -74,7 +74,7 @@ private:
 	CameraResource camera_{};
 
 	// 入力
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 	// LStickの入力
 	Vector2 iRStick_{};
 	// デッドゾーン

@@ -20,7 +20,7 @@ TitleScene::~TitleScene() {}
 void TitleScene::Initialize()
 {
 	/* ----- Input インプット ----- */
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	/* ----- Camera カメラ ----- */
 	cameraManager_ = CameraManager::GetInstance();

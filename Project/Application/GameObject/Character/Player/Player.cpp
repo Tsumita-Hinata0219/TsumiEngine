@@ -9,7 +9,7 @@
 void Player::Init()
 {
 	// Inputクラス
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	// UI
 	ui_ = std::make_unique<PlayerUI>();

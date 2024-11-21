@@ -98,7 +98,7 @@ private:
 
 private:
 
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// Menu
 	std::vector<std::unique_ptr<IStageTransitionMenu>> menus_;

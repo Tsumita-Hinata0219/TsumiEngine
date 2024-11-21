@@ -7,7 +7,7 @@
 // -------------------------------------------------------------------------
 
 // 初期化処理
-void KeysInput::Initialize() 
+void TsumiEngine::KeysInput::Initialize()
 {
 	// DirectInputのインスタンス生成
 	HRESULT result = DirectInput8Create(
@@ -30,7 +30,7 @@ void KeysInput::Initialize()
 }
 
 // 更新処理
-void KeysInput::BeginFrame() 
+void TsumiEngine::KeysInput::BeginFrame()
 {
 	// メモリコピー
 	memcpy(preKeys, Keys, 256);
@@ -43,7 +43,7 @@ void KeysInput::BeginFrame()
 }
 
 // 押されていない
-bool KeysInput::NoneKey(uint32_t keyNum) const 
+bool TsumiEngine::KeysInput::NoneKey(uint32_t keyNum) const
 {
 	if (preKeys[keyNum] == 0x00 && Keys[keyNum] == 0x00) {
 		return true;
@@ -52,7 +52,7 @@ bool KeysInput::NoneKey(uint32_t keyNum) const
 }
 
 // 押した瞬間
-bool KeysInput::TriggerKey(uint32_t keyNum) const 
+bool TsumiEngine::KeysInput::TriggerKey(uint32_t keyNum) const
 {
 	if (preKeys[keyNum] == 0x00 && Keys[keyNum] == 0x80) {
 		return true;
@@ -61,7 +61,7 @@ bool KeysInput::TriggerKey(uint32_t keyNum) const
 }
 
 // 押しっぱなし
-bool KeysInput::PressKeys(uint32_t keyNum) const 
+bool TsumiEngine::KeysInput::PressKeys(uint32_t keyNum) const
 {
 	if (preKeys[keyNum] == 0x80 && Keys[keyNum] == 0x80) {
 		return true;
@@ -70,7 +70,7 @@ bool KeysInput::PressKeys(uint32_t keyNum) const
 }
 
 // 離された瞬間
-bool KeysInput::ReleaseKeys(uint32_t keyNum) const 
+bool TsumiEngine::KeysInput::ReleaseKeys(uint32_t keyNum) const
 {
 	if (preKeys[keyNum] == 0x80 && Keys[keyNum] == 0x00) {
 		return true;
@@ -89,14 +89,14 @@ bool KeysInput::ReleaseKeys(uint32_t keyNum) const
 // -------------------------------------------------------------------------
 
 // 初期化処理
-void GamePadInput::Initialize() 
+void TsumiEngine::GamePadInput::Initialize()
 {
 	// 各ボタンのトリガー状態の初期化処理
 	ResetButtonTriggers();
 }
 
 // 更新処理
-void GamePadInput::BeginFrame() 
+void TsumiEngine::GamePadInput::BeginFrame()
 {
 	// メモリコピー
 	preJoyState_ = joyState_;
@@ -111,7 +111,7 @@ void GamePadInput::BeginFrame()
 }
 
 // パッドの状態更新
-bool GamePadInput::GetJoyState()
+bool TsumiEngine::GamePadInput::GetJoyState()
 {
 	DWORD dwResult = XInputGetState(0, &joyState_);
 	if (dwResult == ERROR_SUCCESS) {
@@ -121,13 +121,13 @@ bool GamePadInput::GetJoyState()
 }
 
 // 各ボタンのトリガー状態の初期化処理
-void GamePadInput::ResetButtonTriggers()
+void TsumiEngine::GamePadInput::ResetButtonTriggers()
 {
 	ZeroMemory(buttonTriggers, sizeof(buttonTriggers));
 }
 
 // ジョイコンの入力の取得
-bool GamePadInput::GetJoyStickState()
+bool TsumiEngine::GamePadInput::GetJoyStickState()
 {
 	DWORD dwresult = XInputGetState(0, &joyState_);
 
@@ -138,14 +138,14 @@ bool GamePadInput::GetJoyStickState()
 }
 
 // 押されていない
-bool GamePadInput::NoneButton(PadData button) const
+bool TsumiEngine::GamePadInput::NoneButton(PadData button) const
 {
 	button;
 	return false;
 }
 
 // 押した瞬間
-bool GamePadInput::TriggerButton(PadData button) const
+bool TsumiEngine::GamePadInput::TriggerButton(PadData button) const
 {
 	bool preFlag = false;
 
@@ -163,7 +163,7 @@ bool GamePadInput::TriggerButton(PadData button) const
 }
 
 // 押しっぱなし
-bool GamePadInput::PressButton(PadData button) const
+bool TsumiEngine::GamePadInput::PressButton(PadData button) const
 {
 	if (joyState_.Gamepad.wButtons & (WORD)button)
 	{
@@ -173,7 +173,7 @@ bool GamePadInput::PressButton(PadData button) const
 }
 
 // 離された瞬間
-bool GamePadInput::ReleaseButton(PadData button) const
+bool TsumiEngine::GamePadInput::ReleaseButton(PadData button) const
 {
 	bool preFlag = false;
 
@@ -193,7 +193,7 @@ bool GamePadInput::ReleaseButton(PadData button) const
 }
 
 // Lスティック
-Vector2 GamePadInput::GetLStick(const float& mode)
+Vector2 TsumiEngine::GamePadInput::GetLStick(const float& mode)
 {
 	Vector2 result = {
 		static_cast<float>(joyState_.Gamepad.sThumbLX) / mode * 1.0f,
@@ -207,7 +207,7 @@ Vector2 GamePadInput::GetLStick(const float& mode)
 }
 
 // Rスティック
-Vector2 GamePadInput::GetRStick(const float& mode)
+Vector2 TsumiEngine::GamePadInput::GetRStick(const float& mode)
 {
 	Vector2 result = {
 		static_cast<float>(joyState_.Gamepad.sThumbRX) / mode * 1.0f,
@@ -235,7 +235,7 @@ Vector2 GamePadInput::GetRStick(const float& mode)
 /// <summary>
 /// 初期化処理
 /// </summary>
-void Input::Initialize()
+void TsumiEngine::Input::Initialize()
 {
 	keysInput_ = KeysInput::GetInstance();
 	keysInput_->Initialize();
@@ -246,7 +246,7 @@ void Input::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void Input::BeginFrame()
+void TsumiEngine::Input::BeginFrame()
 {
 	keysInput_->BeginFrame();
 	gamePadInput_->BeginFrame();
@@ -255,11 +255,11 @@ void Input::BeginFrame()
 /// <summary>
 /// 押されていない
 /// </summary>
-bool Input::None(uint32_t keyNum)
+bool TsumiEngine::Input::None(uint32_t keyNum)
 {
 	return keysInput_->NoneKey(keyNum);
 }
-bool Input::None(PadData button)
+bool TsumiEngine::Input::None(PadData button)
 {
 	return gamePadInput_->NoneButton(button);
 }
@@ -267,11 +267,11 @@ bool Input::None(PadData button)
 /// <summary>
 /// 押した瞬間
 /// </summary>
-bool Input::Trigger(uint32_t keyNum)
+bool TsumiEngine::Input::Trigger(uint32_t keyNum)
 {
 	return keysInput_->TriggerKey(keyNum);
 }
-bool Input::Trigger(PadData button)
+bool TsumiEngine::Input::Trigger(PadData button)
 {
 	return gamePadInput_->TriggerButton(button);
 }
@@ -279,11 +279,11 @@ bool Input::Trigger(PadData button)
 /// <summary>
 /// 押しっぱなし
 /// </summary>
-bool Input::Press(uint32_t keyNum)
+bool TsumiEngine::Input::Press(uint32_t keyNum)
 {
 	return keysInput_->PressKeys(keyNum);
 }
-bool Input::Press(PadData button)
+bool TsumiEngine::Input::Press(PadData button)
 {
 	return gamePadInput_->PressButton(button);
 }
@@ -291,11 +291,11 @@ bool Input::Press(PadData button)
 /// <summary>
 /// 離された瞬間
 /// </summary>
-bool Input::Release(uint32_t keyNum)
+bool TsumiEngine::Input::Release(uint32_t keyNum)
 {
 	return keysInput_->ReleaseKeys(keyNum);
 }
-bool Input::Release(PadData button)
+bool TsumiEngine::Input::Release(PadData button)
 {
 	return gamePadInput_->ReleaseButton(button);
 }
@@ -303,7 +303,7 @@ bool Input::Release(PadData button)
 /// <summary>
 /// Lスティック
 /// </summary>
-Vector2 Input::GetLStick(const float& mode)
+Vector2 TsumiEngine::Input::GetLStick(const float& mode)
 {
 	return gamePadInput_->GetLStick(mode);
 }
@@ -311,13 +311,13 @@ Vector2 Input::GetLStick(const float& mode)
 /// <summary>
 /// Rスティック
 /// </summary>
-Vector2 Input::GetRStick(const float& mode)
+Vector2 TsumiEngine::Input::GetRStick(const float& mode)
 {
 	return gamePadInput_->GetRStick(mode);
 }
 
 
-void Input::Vibration(int val1, int val2)
+void TsumiEngine::Input::Vibration(int val1, int val2)
 {
 	std::memset(&Input::GetInstance()->vibration, 0, sizeof(XINPUT_VIBRATION));
 

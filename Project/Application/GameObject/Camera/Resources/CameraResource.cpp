@@ -13,7 +13,7 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 	bufferData = new TransformationViewMatrix();
 
 	// バッファー作成
-	buffer = std::make_unique<BufferResource<TransformationViewMatrix>>();
+	buffer = std::make_unique<TsumiEngine::BufferResource<TransformationViewMatrix>>();
 	buffer->CreateResource();
 
 	// 行列の計算を通しておく

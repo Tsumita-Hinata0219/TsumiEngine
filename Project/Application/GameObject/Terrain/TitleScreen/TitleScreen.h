@@ -39,7 +39,7 @@ private:
 private:
 
 	// Inputクラス
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// ScreenModel
 	std::unique_ptr<Model> screenModel_;

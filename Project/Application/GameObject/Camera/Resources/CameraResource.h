@@ -55,7 +55,7 @@ public:
 	TransformationViewMatrix* bufferData = nullptr;
 
 	// バッファー
-	std::unique_ptr<BufferResource<TransformationViewMatrix>> buffer;
+	std::unique_ptr<TsumiEngine::BufferResource<TransformationViewMatrix>> buffer;
 
 #pragma endregion 
 

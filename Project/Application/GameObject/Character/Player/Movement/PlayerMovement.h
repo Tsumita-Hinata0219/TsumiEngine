@@ -80,7 +80,7 @@ private:
 	float orientationLerpSpeed_ = 0.1f;
 
 	// Inputクラス
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// デッドゾーン
 	const float DZone_ = 0.2f;

@@ -7,7 +7,7 @@
 /// </summary>
 void StageTransitionMenuManager::Init()
 {
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	/* ----- Menu メニュー ----- */
 	menus_.resize(EnumSize<STMenuType>::value);

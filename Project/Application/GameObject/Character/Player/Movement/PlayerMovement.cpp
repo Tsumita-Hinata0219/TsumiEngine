@@ -15,7 +15,7 @@ void PlayerMovement::Init(Player* pPlayer, GameCamera* pGameCamera, Transform* p
 	pTrans_ = pTrans;
 
 	// Inputのインスタンス取得
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 }
 
 

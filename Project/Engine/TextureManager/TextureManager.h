@@ -81,14 +81,14 @@ private: // メンバ関数
 	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
-	bool CheckTextureData(std::string key);
+	bool CheckTextureData(const std::string& key);
 
 	/// <summary>
 	/// TextureDataを生成する
 	/// </summary>
-	void CreateTextureDataFormatPng(std::string filePath, std::string key);
-	void CreateTextureDataFormatJpeg(std::string filePath, std::string key);
-	void CreateTextureDataFormatDDS(std::string filePath, std::string key);
+	void CreateTextureDataFormatPng(const std::string& filePath, const std::string& key);
+	void CreateTextureDataFormatJpeg(const std::string& filePath, const std::string& key);
+	void CreateTextureDataFormatDDS(const std::string& filePath, const std::string& key);
 
 	/// <summary>
 	/// Textureファイルを開く

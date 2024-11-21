@@ -95,7 +95,7 @@ void TextureManager::CreateFence()
 /// <summary>
 /// 一回読み込んだものは読み込まない
 /// </summary>
-bool TextureManager::CheckTextureData(std::string key) {
+bool TextureManager::CheckTextureData(const std::string& key) {
 
 	// マップコンテナに検索をかける
 	auto data = textureMaps_.find(key);
@@ -111,7 +111,7 @@ bool TextureManager::CheckTextureData(std::string key) {
 /// <summary>
 /// TextureDataを生成する
 /// </summary>
-void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::string key)
+void TextureManager::CreateTextureDataFormatPng(const std::string& filePath, const std::string& key)
 {
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();
@@ -142,10 +142,11 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 	// コンテナに保存
 	instance->textureMaps_[key] = textureData;
 }
-void TextureManager::CreateTextureDataFormatJpeg(std::string filePath, std::string key)
+void TextureManager::CreateTextureDataFormatJpeg(const std::string& filePath, const std::string& key)
 {
+	filePath, key;
 }
-void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::string key)
+void TextureManager::CreateTextureDataFormatDDS(const std::string& filePath, const std::string& key)
 {
 	// インスタンスの取得
 	TextureManager* instance = TextureManager::GetInstance();

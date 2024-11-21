@@ -66,11 +66,11 @@ float Lerp(const float& start, const float& end, float t);
 // クランプ
 float Clamp(const float& value, const float& minValue, const float& maxValue);
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
-float APOneAsZeroCloser(float value);
+float APOneAsZeroCloser(const float& value);
 // 角度を度からラジアンに変換する処理
-float ToRadians(float degrees);
+float ToRadians(const float& degrees);
 // 範囲に変換
-float ConvertToRange(Vector2 input, Vector2 output, float value);
+float ConvertToRange(const Vector2& input, const Vector2& output, const float& value);
 
 
 
@@ -158,17 +158,17 @@ Matrix4x4 Inverse(const Matrix4x4& m);
 // 転置行列
 Matrix4x4 Transpose(const Matrix4x4& m);
 // 平行移動行列
-Matrix4x4 MakeTranslateMatrix(const Vector3 translate);
+Matrix4x4 MakeTranslateMatrix(const Vector3& translate);
 // 拡大縮小行列
-Matrix4x4 MakeScaleMatrix(const Vector3 scale);
+Matrix4x4 MakeScaleMatrix(const Vector3& scale);
 // 回転行列(X,Y,Z)
 Matrix4x4 MakeRotateXMatrix(float radian);
 Matrix4x4 MakeRotateYMatrix(float radian);
 Matrix4x4 MakeRotateZMatrix(float radian);
 // 回転行列(all)
-Matrix4x4 MakeRotateXYZMatrix(Vector3 rotate);
+Matrix4x4 MakeRotateXYZMatrix(const Vector3& rotate);
 // 平行移動行列
-Matrix4x4 MakeTranslateMatrix(const Vector3 translate);
+Matrix4x4 MakeTranslateMatrix(const Vector3& translate);
 // 3次元アフィン変換行列 (W = SRT)
 Matrix4x4 MakeAffineMatrix(const Vector3& scale, const Vector3& rotate, const Vector3& translate);
 // 透視投影行列

@@ -195,18 +195,18 @@ float Clamp(const float& value, const float& minValue, const float& maxValue) {
 }
 
 // 0に近づくほど1になり、1や-1になるほど0を返す関数
-float APOneAsZeroCloser(float value) {
+float APOneAsZeroCloser(const float& value) {
 	return exp(-pow(value, 2.0f));
 }
 
 // 角度を度からラジアンに変換する処理
-float ToRadians(float degrees)
+float ToRadians(const float& degrees)
 {
 	return degrees * (float(M_PI) / 180.0f);
 }
 
 // 範囲に変換
-float ConvertToRange(Vector2 input, Vector2 output, float value)
+float ConvertToRange(const Vector2& input, const Vector2& output, const float& value)
 {
 	// 入力値を範囲に制限
 	//float clampedInput = std::clamp(static_cast<float>(value), input.x, input.y);
@@ -679,7 +679,7 @@ Matrix4x4 Transpose(const Matrix4x4& m) {
 }
 
 // 平行移動行列
-Matrix4x4 MakeTranslateMatrix(const Vector3 translate) {
+Matrix4x4 MakeTranslateMatrix(const Vector3& translate) {
 	Matrix4x4 result{};
 
 	result.m[0][0] = 1.0f;
@@ -707,7 +707,7 @@ Matrix4x4 MakeTranslateMatrix(const Vector3 translate) {
 }
 
 // 拡大縮小行列
-Matrix4x4 MakeScaleMatrix(const Vector3 scale) {
+Matrix4x4 MakeScaleMatrix(const Vector3& scale) {
 	Matrix4x4 result{};
 
 	result.m[0][0] = scale.x;
@@ -812,7 +812,7 @@ Matrix4x4 MakeRotateZMatrix(float radian) {
 }
 
 // 回転行列(all)
-Matrix4x4 MakeRotateXYZMatrix(Vector3 rotate) {
+Matrix4x4 MakeRotateXYZMatrix(const Vector3& rotate) {
 	Matrix4x4 result{};
 
 	Matrix4x4 rotateXMatrix = MakeRotateXMatrix(rotate.x);

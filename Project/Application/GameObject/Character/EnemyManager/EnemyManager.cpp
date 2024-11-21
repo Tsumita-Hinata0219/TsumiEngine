@@ -162,7 +162,7 @@ void EnemyManager::AddNewStaticEnemy()
 
 
 // 新しいEnemyBulletを追加する
-void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel)
 {
 	CreateEnemyBullet(setType, initPos, initVel);
 }

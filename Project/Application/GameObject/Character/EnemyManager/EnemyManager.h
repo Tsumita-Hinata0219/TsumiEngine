@@ -34,7 +34,7 @@ public: // メンバ関数
 	void AddNewStaticEnemy();
 
 	// 新しいEnemyBulletを追加する
-	void AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void AddNewEnemyBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
 
 #pragma region Accessor アクセッサ
 

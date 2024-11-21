@@ -24,32 +24,57 @@ class BufferResource {
 
 public:
 
-	// コンストラクタ、デストラクタ
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	BufferResource() = default;
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~BufferResource() = default;
 
-
-	// Resource作成
+	/// <summary>
+	/// Resource作成
+	/// </summary>
 	void CreateResource(UINT itemCount = 1);
 
-	// VertexBufferViewの作成
+	/// <summary>
+	/// VertexBufferViewの作成
+	/// </summary>
 	void CreateVertexBufferView();
 
-	// IndexBufferViewの作成
+	/// <summary>
+	/// IndexBufferViewの作成
+	/// </summary>
 	void CreateIndexBufferView();
 
-	// ResourceをマップしてCPUアクセスを可能にする
+	/// <summary>
+	/// InstancingResourceの作成
+	/// </summary>
+	void CreateInstancingResource(uint32_t instancingNum, UINT size);
+
+	/// <summary>
+	/// ResourceをマップしてCPUアクセスを可能にする
+	/// </summary>
 	void Map();
 
-	// Resourceのマップを解除してGPUアクセスを解除する
+	/// <summary>
+	/// Resourceのマップを解除してGPUアクセスを解除する
+	/// </summary>
 	void UnMap();
 
-	// データを書き込む
+	/// <summary>
+	/// データを書き込む
+	/// </summary>
 	void WriteData(const T* data);
 
-	// コマンドを積む
+	/// <summary>
+	/// コマンドを積む
+	/// </summary>
 	void CommandCall(UINT number);
 	void CommandCallSRV(UINT number, uint32_t index);
+	void CommandCallInstancingSRV(UINT number);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -66,7 +91,9 @@ public:
 
 private:
 
-	// BufferResourceの生成
+	/// <summary>
+	/// BufferResourceの生成
+	/// </summary>
 	void CreateBufferResource();
 
 
@@ -120,6 +147,14 @@ inline void BufferResource<T>::CreateIndexBufferView()
 	indexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	indexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
 	indexBufferView_.Format = DXGI_FORMAT_R32_UINT;
+}
+
+// InstancingResourceの作成
+template<typename T>
+inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum, UINT size)
+{
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, size);
 }
 
 
@@ -179,6 +214,17 @@ inline void BufferResource<T>::CommandCallSRV(UINT number, uint32_t index)
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(index)._GPU);
+}
+
+template<typename T>
+inline void BufferResource<T>::CommandCallInstancingSRV(UINT number)
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
+	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
 }
 
 template<typename T>

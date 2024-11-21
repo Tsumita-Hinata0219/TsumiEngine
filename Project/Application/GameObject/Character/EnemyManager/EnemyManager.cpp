@@ -162,7 +162,7 @@ void EnemyManager::AddNewStaticEnemy()
 
 
 // 新しいEnemyBulletを追加する
-void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel)
 {
 	CreateEnemyBullet(setType, initPos, initVel);
 }
@@ -236,7 +236,7 @@ void EnemyManager::CreateStaticEnemy()
 
 
 // 新しいEnemyBulletを生成する
-void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel)
 {
 	// newBulletのインスタンス
 	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();

@@ -56,7 +56,7 @@ public: // メンバ関数
 
 	// コマンド
 	Commands const GetCommands() { return this->commands_; }
-	void SetCommands(Commands setCommands) { this->commands_ = setCommands; }
+	void SetCommands(const Commands& setCommands) { this->commands_ = setCommands; }
 
 	// コマンドキュー
 	ID3D12CommandQueue* const GetQueue() { return this->commands_.Queue.Get(); }

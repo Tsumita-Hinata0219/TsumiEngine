@@ -78,8 +78,8 @@ public:
 	uint32_t GetKillCount() const { return this->killCount_; }
 
 	// KillCount加算 & 減算
-	void AddKillCount(uint32_t addCount = 1) { this->killCount_ += addCount; }
-	void SubKillCount(uint32_t subCount = 1) { this->killCount_ -= subCount; }
+	void AddKillCount(const uint32_t addCount = 1) { this->killCount_ += addCount; }
+	void SubKillCount(const uint32_t subCount = 1) { this->killCount_ -= subCount; }
 
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
@@ -87,7 +87,7 @@ public:
 
 	// HP
 	uint32_t GetHP() const { return this->hp_; }
-	void SetHP(uint32_t setHP) { this->hp_ = setHP; }
+	void SetHP(const uint32_t setHP) { this->hp_ = setHP; }
 
 	// 勝敗のフラグ
 	bool IsWin() const { return this->isWin_; }
@@ -140,7 +140,7 @@ private:
 	/// <summary>
 	/// 移動方向からY軸の姿勢を合わせる
 	/// </summary>
-	void CalcBodyOrienation(Vector2 input, Vector3 direction);
+	void CalcBodyOrienation(const Vector2& input, const Vector3& direction);
 
 	/// <summary>
 	/// 射撃処理
@@ -217,7 +217,7 @@ private:
 #pragma region System
 
 	// Inputクラス
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// デッドゾーン
 	const float DZone_ = 0.2f;

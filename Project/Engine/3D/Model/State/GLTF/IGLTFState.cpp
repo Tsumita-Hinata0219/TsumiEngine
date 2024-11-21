@@ -15,7 +15,7 @@ IGLTFState::IGLTFState(ModelDatas datas)
 	datas_ = datas;
 
 	// DatasをもとにBufferを作成
-	CreateBufferResource(datas_);
+	CreateBufferResource();
 }
 
 // 描画処理

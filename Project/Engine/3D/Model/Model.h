@@ -113,25 +113,25 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 #pragma region Set
 
 	// TextureHandle
-	void SetTexHandle(uint32_t texHD) { this->objData_.textureHD = texHD; }
+	void SetTexHandle(const uint32_t& texHD) { this->objData_.textureHD = texHD; }
 
 	// NormalMapTexture
-	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
+	void SetNormalMapTex(const uint32_t& texHD) { this->normalMapTex_ = texHD; }
 
 	// Color
-	void SetColor(Vector4 color) { this->modelState_->SetMaterialColor(color); }
+	void SetColor(const Vector4& color) { this->modelState_->SetMaterialColor(color); }
 
 	// Light
-	void SetDirectionalLight(DirectionalLight light) { this->light_ = light; }
+	void SetDirectionalLight(const DirectionalLight& light) { this->light_ = light; }
 
 	// DrawType
-	void SetModelDrawType(ModelLightingType type) { this->modelDrawType_ = type; }
+	void SetModelDrawType(const ModelLightingType& type) { this->modelDrawType_ = type; }
 
 	// Node
-	void SetNode(Node node) { this->objData_.rootNode = node; }
+	void SetNode(const Node& node) { this->objData_.rootNode = node; }
 
 	// Node.localMatrix
-	void SetNodeMatrix(Matrix4x4 setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
+	void SetNodeMatrix(const Matrix4x4& setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
 
 #pragma endregion
 
@@ -143,19 +143,19 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 	// Mesh
 	MeshData GetMeshData() const { return this->modelState_->GetMeshData(); }
-	void SetMeshData(MeshData setData) { this->modelState_->SetMeshData(setData); }
+	void SetMeshData(const MeshData& setData) { this->modelState_->SetMeshData(setData); }
 
 	// Material
 	MaterialDataN GetMaterialData() const { return this->modelState_->GetMaterialData(); }
-	void SetMaterialData(MaterialDataN seteData) { this->modelState_->SetMaterialData(seteData); }
+	void SetMaterialData(const MaterialDataN& seteData) { this->modelState_->SetMaterialData(seteData); }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->modelState_->GetLightData(); }
-	void SetLightData(DirectionalLightData setData) { this->modelState_->SetLightData(setData); }
+	void SetLightData(const DirectionalLightData& setData) { this->modelState_->SetLightData(setData); }
 
 	// Environment
 	EnvironmentData GetEnvironmentData() const { return this->modelState_->GetEnvironmentData(); }
-	void SetEnvironmentData(EnvironmentData setData) { this->modelState_->SetEnvironmentData(setData); }
+	void SetEnvironmentData(const EnvironmentData& setData) { this->modelState_->SetEnvironmentData(setData); }
 
 #pragma endregion 
 

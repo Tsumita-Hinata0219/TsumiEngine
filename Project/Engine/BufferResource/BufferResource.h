@@ -16,80 +16,83 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
+namespace TsumiEngine {
 
-/* BufferResourceクラス */
-template<typename T>
-class BufferResource {
+	/* BufferResourceクラス */
+	template<typename T>
+	class BufferResource {
 
-public:
+	public:
 
-	// コンストラクタ、デストラクタ
-	BufferResource() {};
-	~BufferResource() {};
+		// コンストラクタ、デストラクタ
+		BufferResource() {};
+		~BufferResource() {};
 
 
-	// Resource作成
-	void CreateResource(UINT itemCount = 1);
+		// Resource作成
+		void CreateResource(UINT itemCount = 1);
 
-	// VertexBufferViewの作成
-	void CreateVertexBufferView();
+		// VertexBufferViewの作成
+		void CreateVertexBufferView();
 
-	// IndexBufferViewの作成
-	void CreateIndexBufferView();
+		// IndexBufferViewの作成
+		void CreateIndexBufferView();
 
-	// ResourceをマップしてCPUアクセスを可能にする
-	void Map();
+		// ResourceをマップしてCPUアクセスを可能にする
+		void Map();
 
-	// Resourceのマップを解除してGPUアクセスを解除する
-	void UnMap();
+		// Resourceのマップを解除してGPUアクセスを解除する
+		void UnMap();
 
-	// データを書き込む
-	void WriteData(const T* data);
+		// データを書き込む
+		void WriteData(const T* data);
 
-	// コマンドを積む
-	void CommandCall(UINT number);
-	void IASetVertexBuffers(UINT number);
-	void IASetIndexBuffer();
+		// コマンドを積む
+		void CommandCall(UINT number);
+		void IASetVertexBuffers(UINT number);
+		void IASetIndexBuffer();
 
 #pragma region Accessor アクセッサ
 
-	// VertexBufferView
-	D3D12_VERTEX_BUFFER_VIEW GetVBV() { return this->vertexBufferView_; }
+		// VertexBufferView
+		D3D12_VERTEX_BUFFER_VIEW GetVBV() { return this->vertexBufferView_; }
 
-	// IndexBufferView
-	D3D12_INDEX_BUFFER_VIEW GetIBV() { return this->indexBufferView_; }
+		// IndexBufferView
+		D3D12_INDEX_BUFFER_VIEW GetIBV() { return this->indexBufferView_; }
 
 #pragma endregion 
 
 
-private:
+	private:
 
-	// BufferResourceの生成
-	void CreateBufferResource();
+		// BufferResourceの生成
+		void CreateBufferResource();
 
 
-private: 
+	private:
 
-	// Resource
-	Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
+		// Resource
+		Microsoft::WRL::ComPtr<ID3D12Resource> buffer_;
 
-	// VertexBufferView
-	D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
-	// IndexBufferView
-	D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
+		// VertexBufferView
+		D3D12_VERTEX_BUFFER_VIEW vertexBufferView_{};
+		// IndexBufferView
+		D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
 
-	// 作成するResourceの要素数
-	UINT itemCount_ = 1;
+		// 作成するResourceの要素数
+		UINT itemCount_ = 1;
 
-	// mappedData
-	T* mappedData_{};
+		// mappedData
+		T* mappedData_{};
 
-};
+	};
+}
+
 
 
 // Resourceの作成
 template<typename T>
-inline void BufferResource<T>::CreateResource(UINT itemCount) 
+inline void TsumiEngine::BufferResource<T>::CreateResource(UINT itemCount)
 {
 	// 作成するResourceの要素数
 	this->itemCount_ = itemCount;
@@ -101,7 +104,7 @@ inline void BufferResource<T>::CreateResource(UINT itemCount)
 
 // VertexBufferViewの作成
 template<typename T>
-inline void BufferResource<T>::CreateVertexBufferView()
+inline void TsumiEngine::BufferResource<T>::CreateVertexBufferView()
 {
 	vertexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	vertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
@@ -111,7 +114,7 @@ inline void BufferResource<T>::CreateVertexBufferView()
 
 // IndexBufferViewの作成
 template<typename T>
-inline void BufferResource<T>::CreateIndexBufferView()
+inline void TsumiEngine::BufferResource<T>::CreateIndexBufferView()
 {
 	indexBufferView_.BufferLocation = buffer_->GetGPUVirtualAddress();
 	indexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
@@ -121,7 +124,7 @@ inline void BufferResource<T>::CreateIndexBufferView()
 
 // ResourceをマップしてCPUアクセスを可能にする
 template<typename T>
-inline void BufferResource<T>::Map()
+inline void TsumiEngine::BufferResource<T>::Map()
 {
 	// buffer_ が nullptr の場合はエラー
 	if (!buffer_) {
@@ -139,7 +142,7 @@ inline void BufferResource<T>::Map()
 
 // Resourceのマップを解除してGPUアクセスを解除する
 template<typename T>
-inline void BufferResource<T>::UnMap()
+inline void TsumiEngine::BufferResource<T>::UnMap()
 {
 	// buffer_ と mappedData_ が有効な時にUnMap
 	if (buffer_ && mappedData_) {
@@ -151,7 +154,7 @@ inline void BufferResource<T>::UnMap()
 
 // データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T* data)
+inline void TsumiEngine::BufferResource<T>::WriteData(const T* data)
 {
 	assert(mappedData_);
 	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
@@ -160,21 +163,21 @@ inline void BufferResource<T>::WriteData(const T* data)
 
 // コマンドを積む
 template<typename T>
-inline void BufferResource<T>::CommandCall(UINT number)
+inline void TsumiEngine::BufferResource<T>::CommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
-inline void BufferResource<T>::IASetVertexBuffers(UINT number)
+inline void TsumiEngine::BufferResource<T>::IASetVertexBuffers(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->IASetVertexBuffers(0, number, &vertexBufferView_);
 }
 
 template<typename T>
-inline void BufferResource<T>::IASetIndexBuffer()
+inline void TsumiEngine::BufferResource<T>::IASetIndexBuffer()
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->IASetIndexBuffer(&indexBufferView_);
@@ -183,7 +186,7 @@ inline void BufferResource<T>::IASetIndexBuffer()
 
 // BufferResourceの生成
 template<typename T>
-inline void BufferResource<T>::CreateBufferResource()
+inline void TsumiEngine::BufferResource<T>::CreateBufferResource()
 {
 	// Resource用のHeap設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};

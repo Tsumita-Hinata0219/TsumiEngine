@@ -94,7 +94,7 @@ private:
 private:
 
 	// 入力
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 	//Stickの入力を取得
 	Vector2 iLStick_{};
 	// デッドゾーン

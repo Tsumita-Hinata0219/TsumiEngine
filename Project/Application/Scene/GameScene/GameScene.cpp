@@ -7,7 +7,7 @@
 /// </summary>
 GameScene::GameScene() 
 {
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CollisionManager_ = CollisionManager::GetInstance();
 	/* ----- AbsentEffect アブセントエフェクト ----- */

@@ -173,7 +173,7 @@ Vector4 Sprite::FloatColor(unsigned int color) {
 
 
 // 初期化処理
-void Sprite::Initn(Vector2 size)
+void Sprite::Initn(const Vector2& size)
 {
 	// CameraManagerのインスタンスの取得
 	cameraManager_ = CameraManager::GetInstance();

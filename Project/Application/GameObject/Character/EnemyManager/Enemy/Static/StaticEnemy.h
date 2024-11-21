@@ -35,11 +35,11 @@ public:
 
 	// SRT
 	SRTN GetSRT() const { return this->trans_.srt; }
-	void SetSRT(SRTN setSRT) { this->trans_.srt = setSRT; }
+	void SetSRT(const SRTN& setSRT) { this->trans_.srt = setSRT; }
 
 	// カラー
 	Vector4 GetModelColor() const { return this->modelColor_; }
-	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
+	void SetModelColor(const Vector4& setColor) { this->modelColor_ = setColor; }
 
 
 	// プレイヤー　
@@ -50,13 +50,13 @@ public:
 
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
-	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
+	void SetDeadFlag(const bool& setFlag) override { this->isDead_ = setFlag; }
 
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
 
 	// 座標
-	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
+	void SetPosition(const Vector3& setPos) override { this->trans_.srt.translate = setPos; }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }

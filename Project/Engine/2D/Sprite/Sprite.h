@@ -45,7 +45,7 @@ public:
 	/// 初期化処理
 	/// </summary>
 	void Init(Vector2 size = { 128.0f, 128.0f }, Vector4 color = Vector4::one);
-	void Initn(Vector2 size = { 128.0f, 128.0f });
+	void Initn(const Vector2& size = { 128.0f, 128.0f });
 
 
 	/// <summary>
@@ -62,13 +62,13 @@ public:
 
 #pragma region Set 設定
 
-	void SetSize(Vector2 size) { size_ = size; }
-	void SetUVTransform(UVTransform uvTransform) { uvTransform_ = uvTransform; }
+	void SetSize(const Vector2& size) { size_ = size; }
+	void SetUVTransform(const UVTransform& uvTransform) { uvTransform_ = uvTransform; }
 	void SetTexture(uint32_t texHD) { useTexture_ = texHD; }
-	void SetColor(Vector4 color) { color_ = color; }
-	void SetSrc(QuadVertex2 src) { src_ = src; }
-	void SetAnchor(SpriteAnchor setOrigin) { anchor_ = setOrigin; }
-	void SetDissolveData(SP::DissolveData setData) { datas_.dissolve = setData; }
+	void SetColor(const Vector4& color) { color_ = color; }
+	void SetSrc(const QuadVertex2& src) { src_ = src; }
+	void SetAnchor(const SpriteAnchor& setOrigin) { anchor_ = setOrigin; }
+	void SetDissolveData(const SP::DissolveData& setData) { datas_.dissolve = setData; }
 
 #pragma endregion
 

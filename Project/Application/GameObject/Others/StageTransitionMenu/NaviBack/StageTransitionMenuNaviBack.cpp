@@ -8,7 +8,7 @@
 void StageTransitionMenuNaviBack::Init()
 {
 	// 入力
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	// テクスチャ
 	uint32_t backTexHD = TextureManager::LoadTexture(

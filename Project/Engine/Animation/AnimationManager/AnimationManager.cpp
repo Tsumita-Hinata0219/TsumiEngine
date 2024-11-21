@@ -85,7 +85,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 
 
 // 同じファイルは読み込まない
-bool AnimationManager::CheckAnimationFile(string fileName)
+bool AnimationManager::CheckAnimationFile(const string& fileName)
 {
 	if (animationDataMap_.find(fileName) == animationDataMap_.end()) {
 		return true;

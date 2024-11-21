@@ -41,25 +41,25 @@ public: // メンバ変数
 
 	// データのセット
 	ModelDatas GetModelDatas() { return this->datas_; }
-	void SetModelDatas(ModelDatas setData) { this->datas_ = setData; }
+	void SetModelDatas(const ModelDatas& setData) { this->datas_ = setData; }
 	
 	// Mesh
 	MeshData GetMeshData() const { return this->datas_.mesh; }
-	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+	void SetMeshData(const MeshData& setData) { this->datas_.mesh = setData; }
 
 	// Material
 	MaterialDataN GetMaterialData() const { return this->datas_.material; }
-	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+	void SetMaterialData(const MaterialDataN& seteData) { this->datas_.material = seteData; }
 	// Color
 	void SetMaterialColor(Vector4 setColor) { this->datas_.material.color = setColor; }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->datas_.light; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+	void SetLightData(const DirectionalLightData& setData) { this->datas_.light = setData; }
 
 	// Environment
 	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
-	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
+	void SetEnvironmentData(const EnvironmentData& setData) { this->datas_.environment = setData; }
 
 #pragma endregion 
 
@@ -67,14 +67,14 @@ public: // メンバ変数
 protected:
 
 	// BufferResourceの生成
-	void CreateBufferResource(ModelDatas datas) {
+	void CreateBufferResource() {
 		// mesh
-		buffers_.mesh.CreateResource(UINT(datas.mesh.vertices.size()));
+		buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
 		// vertexBufferView
-		buffers_.vertex.CreateResource(UINT(datas.mesh.vertices.size()));
+		buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
 		buffers_.vertex.CreateVertexBufferView();
 		// indexBufferView
-		buffers_.indeces.CreateResource(UINT(datas.mesh.indices.size()));
+		buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
 		buffers_.indeces.CreateIndexBufferView();
 		// material
 		buffers_.material.CreateResource();
@@ -87,7 +87,7 @@ protected:
 
 		if (stateType_ == GLTF) {
 			// influence
-			buffers_.influence.CreateResource(UINT(datas.mesh.vertices.size()));
+			buffers_.influence.CreateResource(UINT(datas_.mesh.vertices.size()));
 			// palette
 			//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
 		}

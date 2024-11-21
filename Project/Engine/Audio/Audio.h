@@ -79,7 +79,7 @@ private: // メンバ関数
 	/// <summary>
 	/// 一回読み込んだものは読み込まない
 	/// </summary>
-	static bool CheckAudioDatas(std::string filePath);
+	static bool CheckAudioDatas(const std::string& filePath);
 
 
 private: // メンバ変数

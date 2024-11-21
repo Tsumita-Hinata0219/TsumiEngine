@@ -282,7 +282,7 @@ void Audio::SoundUnload() {
 /// <summary>
 /// 一回読み込んだものは読み込まない
 /// </summary>
-bool Audio::CheckAudioDatas(std::string filePath) {
+bool Audio::CheckAudioDatas(const std::string& filePath) {
 
 	// filePaht同じものがあるならそれを返す
 	if (Audio::GetInstance()->AudioDatas_.find(filePath) == Audio::GetInstance()->AudioDatas_.end()) {

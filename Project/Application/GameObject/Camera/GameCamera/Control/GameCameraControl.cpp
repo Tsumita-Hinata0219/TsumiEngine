@@ -14,7 +14,7 @@ void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraResourc
 	pData_ = pData;
 
 	// Inputクラス
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	// 俯瞰とFollowCameraで姿勢と相対位置を変える
 	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {

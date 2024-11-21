@@ -31,7 +31,7 @@ public:
 	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
 
 	// モデルのカラーの設定
-	void SetModelColor(Vector4 setColor) override { 
+	void SetModelColor(const Vector4& setColor) override {
 		for (auto& model : this->models_) {
 			model->SetColor(setColor);
 		}

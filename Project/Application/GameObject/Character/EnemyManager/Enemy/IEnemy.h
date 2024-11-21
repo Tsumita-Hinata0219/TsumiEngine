@@ -33,13 +33,13 @@ public:
 
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
-	virtual void SetDeadFlag(bool setFlag) = 0;
+	virtual void SetDeadFlag(const bool& setFlag) = 0;
 
 	// BulletListの取得
 	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// 座標
-	virtual void SetPosition(Vector3 setPos) = 0;
+	virtual void SetPosition(const Vector3& setPos) = 0;
 
 	//// Collider
 	//virtual OBBCollider* GetOBBCollider() = 0;

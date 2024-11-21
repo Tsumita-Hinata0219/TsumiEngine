@@ -80,7 +80,7 @@ private:
 
 private: // クラス
 
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン

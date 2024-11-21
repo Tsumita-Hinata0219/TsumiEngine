@@ -56,7 +56,7 @@ private:
 	/// <summary>
 	/// 移動方向からY軸の姿勢を合わせる
 	/// </summary>
-	void CalcBodyOrienation(Vector2 input, Vector3 direction);
+	void CalcBodyOrienation(const Vector2& input, const Vector3& direction);
 
 
 private:
@@ -80,7 +80,7 @@ private:
 	float orientationLerpSpeed_ = 0.1f;
 
 	// Inputクラス
-	Input* input_ = nullptr;
+	TsumiEngine::Input* input_ = nullptr;
 
 	// デッドゾーン
 	const float DZone_ = 0.2f;

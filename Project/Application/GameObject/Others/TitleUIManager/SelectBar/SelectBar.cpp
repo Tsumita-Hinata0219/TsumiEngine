@@ -6,7 +6,7 @@
 void SelectBar::Init()
 {
 	/* ----- Input インプット ----- */
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();

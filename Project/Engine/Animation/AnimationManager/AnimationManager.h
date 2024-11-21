@@ -39,7 +39,7 @@ public: // メンバ関数
 private: // メンバ関数
 
 	// 同じファイルは読み込まない
-	bool CheckAnimationFile(string fileName);
+	bool CheckAnimationFile(const string& fileName);
 
 private: // メンバ変数
 

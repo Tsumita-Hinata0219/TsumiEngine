@@ -60,7 +60,7 @@ protected: // メンバ変数
 	T mtlData_{};
 
 	// バッファー
-	BufferResource<T> mtlBuffer_{};
+	TsumiEngine::BufferResource<T> mtlBuffer_{};
 
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;

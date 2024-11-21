@@ -86,16 +86,6 @@ public: // メンバ関数
 	/// </summary>
 	ID3D12Device* const GetDevice() { return DirectXCommon::GetInstance()->device_.Get(); };
 
-	///// <summary>
-	///// 
-	///// </summary>
-	//Commands const GetCommands() { return DirectXCommon::GetInstance()->commands_; }
-
-	///// <summary>
-	///// 
-	///// </summary>
-	//ID3D12GraphicsCommandList* const GetCommandList() { return DirectXCommon::GetInstance()->commands_.List.Get(); }
-
 	/// <summary>
 	/// 
 	/// </summary>

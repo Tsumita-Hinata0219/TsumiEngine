@@ -19,7 +19,7 @@ void CameraManager::ReSetData(const CameraResource& data)
 
 
 // コマンドコール
-void CameraManager::CommandCall(UINT number)
+void CameraManager::CommandCall(const UINT& number)
 {
 	resource_->buffer->CommandCall(number);
 }

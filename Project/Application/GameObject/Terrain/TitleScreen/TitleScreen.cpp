@@ -6,7 +6,7 @@
 void TitleScreen::Init()
 {
 	// Inputクラス
-	input_ = Input::GetInstance();
+	input_ = TsumiEngine::Input::GetInstance();
 	
 	/* ----- Screen スクリーン ----- */
 	// Modelの読み込みと設定

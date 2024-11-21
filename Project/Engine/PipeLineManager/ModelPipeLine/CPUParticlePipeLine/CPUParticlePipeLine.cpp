@@ -132,7 +132,7 @@ void CPUParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descript
 	// ─── PS
 	// t0 : テクスチャ
 	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
-	materiaTexture[0].BaseShaderRegister = 1; // 0から始まる
+	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
 	materiaTexture[0].NumDescriptors = 1; // 数は1つ
 	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
@@ -154,7 +154,7 @@ void CPUParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descript
 
 	// t1 : マテリアル
 	D3D12_DESCRIPTOR_RANGE materialInstancing[1] {};
-	materialInstancing[0].BaseShaderRegister = 2; // 1から始まる
+	materialInstancing[0].BaseShaderRegister = 1; // 1から始まる
 	materialInstancing[0].NumDescriptors = 1; // 数は1つ
 	materialInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	materialInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算

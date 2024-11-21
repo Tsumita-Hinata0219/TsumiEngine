@@ -2,11 +2,11 @@
 
 
 // テクスチャ& サンプラー
-Texture2D<float4> gTexture : register(t1);
+Texture2D<float4> gTexture : register(t0);
 SamplerState gSampler : register(s0);
 
 // マテリアル
-StructuredBuffer<Material> gMaterial : register(t2);
+StructuredBuffer<Material> gMaterial : register(t1);
 
 
 // Main

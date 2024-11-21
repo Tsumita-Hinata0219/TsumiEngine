@@ -61,6 +61,9 @@ private:
 
 private:
 
+	// カメラマネージャー
+	CameraManager* cameraManager_ = nullptr;
+
 	// バッファーに書き込むデータ
 	GPUParticleDatas datas_{};
 
@@ -70,8 +73,8 @@ private:
 	// パーティクルのインスタンス数
 	uint32_t instanceNum_ = 0;
 
-	// カメラマネージャー
-	CameraManager* cameraManager_ = nullptr;
+	// 使用するモデル
+	std::unique_ptr<Model> model_;
 
 };
 

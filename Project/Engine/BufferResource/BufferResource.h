@@ -52,7 +52,7 @@ public:
 	/// <summary>
 	/// InstancingResourceの作成
 	/// </summary>
-	void CreateInstancingResource(uint32_t instancingNum, UINT size);
+	void CreateInstancingResource(uint32_t instancingNum);
 
 	/// <summary>
 	/// ResourceをマップしてCPUアクセスを可能にする
@@ -151,10 +151,10 @@ inline void BufferResource<T>::CreateIndexBufferView()
 
 // InstancingResourceの作成
 template<typename T>
-inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum, UINT size)
+inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum)
 {
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
-	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, size);
+	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, UINT(sizeof(T)));
 }
 
 

@@ -37,11 +37,11 @@ struct GPUParticleResources {
 	// IndexDataBuffer
 	BufferResource<uint32_t> indeces;
 
-	// マテリアル
-	BufferResource<MaterialDataN> material;
-
 	// Transform
 	BufferResource<TransformationMat> transform;
+
+	// マテリアル
+	BufferResource<MaterialDataN> material;
 
 	// ライト
 	//BufferResource<DirectionalLightData> light;

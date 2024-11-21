@@ -1,5 +1,5 @@
 #include "GPUParticle.h"
-
+#include "3D/Model/ModelManager/ModelManager.h"
 
 
 /// <summary>
@@ -7,6 +7,10 @@
 /// </summary>
 void GPUParticle::Init(uint32_t instanceNum)
 {
+	ModelManager* modelManager = ModelManager::GetInstance();
+	modelManager->LoadModel("Obj/Plane", "Plane.obj");
+	model_ = modelManager->GetModel("Plane");
+
 	// CameraManagerのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();
 
@@ -68,19 +72,18 @@ void GPUParticle::CommandCallDraw()
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
-	// Material
-	buffers_.material.CommandCall(0);
 	// Transform
-	buffers_.transform.CommandCall(1);
+	buffers_.transform.CommandCall(0);
 	// Camera
-	cameraManager_->CommandCall(2);
+	cameraManager_->CommandCall(1);
+	// Material
+	buffers_.material.CommandCall(3);
 	// MaterialTexture
-	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
-	buffers_.material.CommandCallSRV(3, datas_.material.textureHandle);
+	buffers_.material.CommandCallSRV(2, datas_.material.textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!
-	commands.List->DrawInstanced(6, instanceNum_, 0, 0);
+	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }
 
 
@@ -90,17 +93,17 @@ void GPUParticle::CommandCallDraw()
 void GPUParticle::CreateBufferResource()
 {
 	// mesh
-	buffers_.mesh.CreateResource();
+	buffers_.mesh.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	// vertexBufferView
-	buffers_.vertex.CreateResource();
+	buffers_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	buffers_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	buffers_.indeces.CreateResource();
+	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	buffers_.indeces.CreateIndexBufferView();
-	// material
-	buffers_.material.CreateResource();
 	// transform
-	buffers_.transform.CreateResource(instanceNum_); // インスタンス数分つくる
+	buffers_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる
+	// material
+	buffers_.material.CreateInstancingResource(instanceNum_);
 	// light
 	//buffers_.light.CreateResource();
 }

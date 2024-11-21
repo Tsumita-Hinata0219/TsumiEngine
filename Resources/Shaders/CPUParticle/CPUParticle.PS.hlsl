@@ -1,5 +1,6 @@
 #include "CPUParticle.hlsli"
 
+
 // テクスチャ& サンプラー
 Texture2D<float4> gTexture : register(t0);
 SamplerState gSampler : register(s0);

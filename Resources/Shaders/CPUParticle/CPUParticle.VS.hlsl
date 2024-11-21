@@ -3,6 +3,7 @@
 
 // トランスフォーム
 StructuredBuffer<TransformationMatrix> gTransformationMat : register(t0);
+
 // カメラ
 ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b0);
 

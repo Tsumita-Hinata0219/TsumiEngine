@@ -41,7 +41,7 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw();
+	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
 
 
 private:
@@ -75,6 +75,8 @@ private:
 
 	// 使用するモデル
 	std::unique_ptr<Model> model_;
+
+
 
 };
 

@@ -41,8 +41,15 @@ void GPUParticle::Update()
 /// <summary>
 /// 描画処理
 /// </summary>
-void GPUParticle::Draw()
+void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials)
 {
+	// 計算と抽出
+	std::vector<TransformationMat> metaDataArray;
+	for (auto& element : transforms) {
+		element.UpdateMatrix();
+		metaDataArray.push_back(element.transformationMatData);
+	}
+
 	// ここで書き込み
 	// VBV
 	buffers_.vertex.Map();
@@ -52,7 +59,15 @@ void GPUParticle::Draw()
 	buffers_.indeces.Map();
 	buffers_.indeces.WriteData(model_->GetMeshData().indices.data());
 	buffers_.indeces.UnMap();
-
+	// Transform
+	buffers_.transform.Map();
+	buffers_.transform.WriteData(metaDataArray.data());
+	buffers_.transform.UnMap();
+	// Material
+	buffers_.material.Map();
+	buffers_.material.WriteData(materials.data());
+	buffers_.material.UnMap();
+	
 
 	// 描画コマンドコール
 	CommandCallDraw();

@@ -2,11 +2,11 @@
 
 
 // テクスチャ& サンプラー
-Texture2D<float4> gTexture : register(t0);
+Texture2D<float4> gTexture : register(t1);
 SamplerState gSampler : register(s0);
 
 // マテリアル
-StructuredBuffer<Material> gMaterial : register(t1);
+StructuredBuffer<Material> gMaterial : register(t2);
 
 
 // Main
@@ -21,14 +21,8 @@ PixelShaderOutput main(VertexShaderOutput input)
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
     
     // カラーの計算
-    output.color = gMaterial[input.instanceID].color * textureColor;
-
-    // アルファ値が0.9f未満なら描画をスキップ
-    if (textureColor.a == 0.0f)
-    {
-        discard;
-    }
-
+    output.color = textureColor;
+    
     return output;
 }
 

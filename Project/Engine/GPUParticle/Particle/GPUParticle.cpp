@@ -47,8 +47,10 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	std::vector<TransformationMat> metaDataArray;
 	for (auto& element : transforms) {
 		element.UpdateMatrix();
+		element.transformationMatData.World = Matrix4x4::identity;
 		metaDataArray.push_back(element.transformationMatData);
 	}
+
 
 	// ここで書き込み
 	// VBV
@@ -61,11 +63,11 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	buffers_.indeces.UnMap();
 	// Transform
 	buffers_.transform.Map();
-	buffers_.transform.WriteData(metaDataArray.data());
+	buffers_.transform.WriteData(metaDataArray, instanceNum_);
 	buffers_.transform.UnMap();
 	// Material
 	buffers_.material.Map();
-	buffers_.material.WriteData(materials.data());
+	buffers_.material.WriteData(materials, instanceNum_);
 	buffers_.material.UnMap();
 	
 
@@ -91,20 +93,22 @@ void GPUParticle::CommandCallDraw()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::CPUParticle);
 
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Transform
-	buffers_.transform.CommandCall(0);
+	//buffers_.transform.CommandCall(0);
+	buffers_.transform.CommandCallInstancingSRV(0);
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	buffers_.material.CommandCall(3);
+	//buffers_.material.CommandCall(3);
+	buffers_.material.CommandCallInstancingSRV(3);
 	// MaterialTexture
-	buffers_.material.CommandCallSRV(2, datas_.material.textureHandle);
+	buffers_.material.CommandCallSRV(2, model_->GetMaterialData().textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!
@@ -123,7 +127,7 @@ void GPUParticle::CreateBufferResource()
 	buffers_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	buffers_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().vertices.size()));
+	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
 	buffers_.indeces.CreateIndexBufferView();
 	// transform
 	buffers_.transform.CreateResource(instanceNum_);

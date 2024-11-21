@@ -14,7 +14,7 @@ VertexShaderOutput main(VertexShaderInput input, uint instanceID : SV_InstanceID
     VertexShaderOutput output;
     
     float4x4 cameraMat = mul(gViewProjectionMat.view, gViewProjectionMat.projection);
-    float4x4 wvpMat = gTransformationMat[instanceID].World;
+    float4x4 wvpMat = mul(gTransformationMat[instanceID].World, cameraMat);
     
     // 頂点の位置をワールド・ビュー・プロジェクション行列で変換
     output.position = mul(input.position, wvpMat);

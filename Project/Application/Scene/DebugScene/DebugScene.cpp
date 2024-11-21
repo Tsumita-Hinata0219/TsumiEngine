@@ -32,6 +32,20 @@ void DebugScene::Initialize()
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_ = make_unique<TestPostEffect>();
 	testPostEffect_->Init();
+
+	/* ----- DemoParticle デモパーティクル ----- */
+	dParticleInstanceNum_ = 10;
+	dParticle_ = std::make_unique<GPUParticle>();
+	dParticle_->Init(dParticleInstanceNum_);
+	transforms_.resize(dParticleInstanceNum_);
+	for (auto& element : transforms_) {
+		element.Init();
+	}
+	materials_.resize(dParticleInstanceNum_);
+	for (auto& element : materials_) {
+		element.color = Samp::Color::WHITE;
+		element.uvTransform = Matrix4x4::identity;
+	}
 }
 
 
@@ -76,6 +90,9 @@ void DebugScene::ModelDraw()
 {
 	/* ----- Skybox 天箱 ----- */
 	//skybox_->Draw();
+
+	/* ----- DemoParticle デモパーティクル ----- */
+	dParticle_->Draw(transforms_, materials_);
 }
 
 

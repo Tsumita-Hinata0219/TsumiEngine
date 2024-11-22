@@ -55,6 +55,45 @@ void DescriptorManager::Clear()
 
 
 /// <summary>
+/// CVBを作成する
+/// </summary>
+void DescriptorManager::CreateCBV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count)
+{
+	// Resource用のHeap設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+
+	// BufferResource。Textureの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+
+	// Resourceのサイズ
+	resourceDesc.Width = uint64_t(size) * count;
+		
+	// Bufferの場合はこれらは1にする決まり
+	resourceDesc.Height = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
+
+	// Bufferの場合はこれにする決まり
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際にBufferResourceを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&resource));
+	assert(SUCCEEDED(hr_));
+	if (FAILED(hr_)) {
+		// エラーハンドリング
+		std::cerr << "CreateCommittedResource failed: " << std::hex << hr_ << std::endl;
+	}
+}
+
+
+/// <summary>
 /// SRVを作成する
 /// </summary>
 uint32_t DescriptorManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size)
@@ -177,6 +216,55 @@ uint32_t DescriptorManager::CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Re
 	CreateSRV(resource, srvDesc, index_);
 
 	return index_;
+}
+
+
+/// <summary>
+/// UAVを作る
+/// </summary>
+void DescriptorManager::CreateUAV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count)
+{
+	// Resource用のHeap設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	//uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_DEFAULT; // DefaultHeapを使う
+
+	// BufferResource。Textureの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+
+	// 専用のフラグを立てる
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+
+	// Resourceのサイズ
+	resourceDesc.Width = uint64_t(size) * count;
+
+	// Bufferの場合はこれらは1にする決まり
+	resourceDesc.Height = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
+
+	// Bufferの場合はこれにする決まり
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際にBufferResourceを作る
+	HRESULT hr_;
+	/*hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		IID_PPV_ARGS(&resource));*/
+
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr,
+		IID_PPV_ARGS(&resource));
+
+	assert(SUCCEEDED(hr_));
+	if (FAILED(hr_)) {
+		// エラーハンドリング
+		std::cerr << "CreateCommittedResource failed: " << std::hex << hr_ << std::endl;
+	}
 }
 
 

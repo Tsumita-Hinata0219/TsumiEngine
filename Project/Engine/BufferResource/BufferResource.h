@@ -38,6 +38,7 @@ public:
 	/// Resource作成
 	/// </summary>
 	void CreateResource(UINT itemCount = 1);
+	void CreateCBV(UINT itemCount = 1);
 
 	/// <summary>
 	/// VertexBufferViewの作成
@@ -53,6 +54,11 @@ public:
 	/// InstancingResourceの作成
 	/// </summary>
 	void CreateInstancingResource(uint32_t instancingNum);
+
+	/// <summary>
+	/// UAVの作成
+	/// </summary>
+	void CreateUAV(UINT itemCount = 1);
 
 	/// <summary>
 	/// ResourceをマップしてCPUアクセスを可能にする
@@ -108,13 +114,13 @@ private:
 	// IndexBufferView
 	D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
 
-	// 作成するResourceの要素数
+	// 作成するResourceの数
 	UINT itemCount_ = 1;
 
 	// mappedData
 	T* mappedData_{};
 
-	// SRV_Index
+	// Index
 	uint32_t srvIndex_ = 0;
 };
 
@@ -130,6 +136,18 @@ inline void BufferResource<T>::CreateResource(UINT itemCount)
 	CreateBufferResource();
 }
 
+// CBVの作成
+template<typename T>
+inline void BufferResource<T>::CreateCBV(UINT itemCount)
+{
+	// 作成するResourceの要素数
+	this->itemCount_ = itemCount;
+
+	// DescriptorManagerのインスタンスの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	// CBVの作成
+	descriptor->CreateCBV(this->buffer_, sizeof(T), this->itemCount_);
+}
 
 // VertexBufferViewの作成
 template<typename T>
@@ -139,7 +157,6 @@ inline void BufferResource<T>::CreateVertexBufferView()
 	vertexBufferView_.SizeInBytes = UINT(sizeof(T) * itemCount_);
 	vertexBufferView_.StrideInBytes = UINT(sizeof(T));
 }
-
 
 // IndexBufferViewの作成
 template<typename T>
@@ -158,6 +175,18 @@ inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum)
 	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, UINT(sizeof(T)));
 }
 
+// UAVの作成
+template<typename T>
+inline void BufferResource<T>::CreateUAV(UINT itemCount)
+{
+	// 作成するResourceの要素数
+	this->itemCount_ = itemCount;
+
+	// DescriptorManagerのインスタンスの取得
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	// UAVの作成
+	descriptor->CreateCBV(this->buffer_, sizeof(T), this->itemCount_);
+}
 
 // ResourceをマップしてCPUアクセスを可能にする
 template<typename T>
@@ -176,7 +205,6 @@ inline void BufferResource<T>::Map()
 	assert(SUCCEEDED(result));
 }
 
-
 // Resourceのマップを解除してGPUアクセスを解除する
 template<typename T>
 inline void BufferResource<T>::UnMap()
@@ -187,7 +215,6 @@ inline void BufferResource<T>::UnMap()
 		mappedData_ = nullptr;
 	}
 }
-
 
 // データを書き込む
 template<typename T>
@@ -208,7 +235,6 @@ inline void BufferResource<T>::WriteData(const std::vector<T>& datas, uint32_t n
 	// 実際のデータを書き込む処理
 	std::memcpy(mappedData_, datas.data(), sizeof(T) * num);
 }
-
 
 // コマンドを積む
 template<typename T>
@@ -253,7 +279,6 @@ inline void BufferResource<T>::IASetIndexBuffer()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->IASetIndexBuffer(&indexBufferView_);
 }
-
 
 // BufferResourceの生成
 template<typename T>

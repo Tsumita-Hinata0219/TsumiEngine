@@ -55,6 +55,11 @@ public:
 	static void Clear();
 
 	/// <summary>
+	/// CVBを作成する
+	/// </summary>
+	void CreateCBV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count);
+
+	/// <summary>
 	/// SRVを作成する
 	/// </summary>
 	uint32_t CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size);
@@ -62,6 +67,11 @@ public:
 	uint32_t CreateRenderTextureDepthSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
 	uint32_t CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource);
 	uint32_t CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const Skeleton& skeleton);
+
+	/// <summary>
+	/// UAVを作成する
+	/// </summary>
+	void CreateUAV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count);
 
 	/// <summary>
 	/// DescriptorTableを設定する
@@ -145,7 +155,7 @@ private:
 private:
 
 	// 最大数
-	static const uint32_t descriptor_Max = 64;
+	static const uint32_t descriptor_Max = 64000;
 	// サイズ
 	DescriptorSize descriptorSize_{};
 	// SRV

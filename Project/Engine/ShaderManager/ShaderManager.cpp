@@ -313,7 +313,7 @@ void ShaderManager::GPUParticle_Draw()
 		.VertexBlob = SetShader(VS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.VS.hlsl"),
 		.PixelBlob = SetShader(PS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
 	};
-	postEffectShadersMap_["GPUParticle_Init"] = shader;
+	modelShadersMap_["GPUParticle_Draw"] = shader;
 }
 
 

@@ -4,12 +4,11 @@
 
 // Particleを表す構造体
 struct GPUParticleCS {
-    Matrix4x4 matWorld{};
-    Vector4 color{};
     Vector3 scale{};
     Vector3 rotate{};
     Vector3 translate{};
-    
+    Matrix4x4 matWorld{};
+    Vector4 color{};
 };
 
 // Material

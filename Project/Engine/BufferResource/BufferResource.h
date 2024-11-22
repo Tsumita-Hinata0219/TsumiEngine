@@ -129,7 +129,7 @@ private:
 
 	// Index
 	uint32_t srvIndex_ = 0;
-	uint32_t uavIndex_ = 0;
+	//uint32_t uavIndex_ = 0;
 };
 
 
@@ -285,7 +285,7 @@ inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
-	commands.List->SetComputeRootDescriptorTable(number, descriptor->GetSRVHandle(uavIndex_)._GPU);
+	commands.List->SetComputeRootDescriptorTable(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
 }
 
 template<typename T>
@@ -372,7 +372,7 @@ inline void BufferResource<T>::CreateUAVResource()
 
 	// DescriptorManagerでUAVを作る
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
-	this->uavIndex_ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
+	this->srvIndex_ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
 
 	assert(SUCCEEDED(hr_));
 	if (FAILED(hr_)) {

@@ -110,12 +110,12 @@ void GPUParticle::CommandCallDraw()
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Transform
-	//buffers_.transform.CommandCall(0);
-	buffers_.transform.GraphicsCommandCallInstancingSRV(0);
+	//buffers_.transform.GraphicsCommandCallInstancingSRV(0);
+	// ParticleElement
+	buffers_.particleElement.GraphicsCommandCallInstancingSRV(0);
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	////buffers_.material.CommandCall(3);
 	//buffers_.material.GraphicsCommandCallInstancingSRV(3);
 	// MaterialTexture
 	buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);

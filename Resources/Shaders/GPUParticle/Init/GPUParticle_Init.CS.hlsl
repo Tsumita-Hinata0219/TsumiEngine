@@ -16,5 +16,9 @@ void main(int3 DTid : SV_DispatchThreadID)
     {
         // particleç\ë¢ëÃÇÃëSóvëfÇ0Ç≈ñÑÇﬂÇÈ
         gParticles[particleIndex] = (ParticleCS) 0;
+        gParticles[particleIndex].scale = float3(0.5f, 0.5f, 0.5f);
+        gParticles[particleIndex].color = float4(1.0f, 1.0f, 1.0f, 1.0f);
+        gParticles[particleIndex].matWorld = Mat4x4Identity();
+
     }
 }

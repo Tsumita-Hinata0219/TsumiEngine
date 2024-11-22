@@ -908,6 +908,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </None>
     <None Include="Resources\Shaders\LineObject3d.hlsli" />
     <None Include="Resources\Shaders\MathFunc.hlsli" />
+    <None Include="Resources\Shaders\Math\Math.hlsli" />
     <None Include="Resources\Shaders\NormalObject3d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\ParticleObject3D.hlsli" />

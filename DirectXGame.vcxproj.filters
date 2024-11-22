@@ -484,6 +484,7 @@
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
     <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli" />
+    <None Include="Resources\Shaders\Math\Math.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Project\externals\imgui\LICENSE.txt" />

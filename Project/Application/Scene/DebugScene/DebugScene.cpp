@@ -93,7 +93,7 @@ void DebugScene::ModelDraw()
 	//skybox_->Draw();
 
 	/* ----- DemoParticle デモパーティクル ----- */
-	//dParticle_->Draw(transforms_, materials_);
+	dParticle_->Draw(transforms_, materials_);
 }
 
 

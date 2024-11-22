@@ -28,18 +28,18 @@ struct Material
 // ParticleÇï\Ç∑ç\ë¢ëÃ
 struct ParticleCS
 {
-    float3 translate;
-    float3 scale;
-    float lifeTime;
-    float3 velocity;
-    float currentTime;
-    float4 color;
+    float32_t4x4 matWorld;
+    float32_t4 color;
+    float32_t3 scale;
+    float32_t3 rotate;
+    float32_t3 translate;
+    
 };
 
 // PreView
 struct PreView
 {
-    float4x4 viewProjection;
-    float4x4 billboardMatrix;
+    float32_t4x4 viewProjection;
+    float32_t4x4 billboardMatrix;
 };
 

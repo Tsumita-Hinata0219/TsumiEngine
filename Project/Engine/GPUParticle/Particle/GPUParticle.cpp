@@ -87,6 +87,9 @@ void GPUParticle::CommandCallInit()
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Init);
 
+	// Particleの要素の初期化値
+	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
+
 	// Dispach
 	commands.List->Dispatch(instanceNum_ / 1024, 1, 1);
 }

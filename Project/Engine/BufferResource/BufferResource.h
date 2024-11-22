@@ -274,7 +274,7 @@ template<typename T>
 inline void BufferResource<T>::ComputeCommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
-	commands.List->SetComputeRootDescriptorTable(number, buffer_->GetGPUVirtualAddress());
+	commands.List->SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
@@ -285,7 +285,7 @@ inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
-	commands.List->SetComputeRootConstantBufferView(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
+	commands.List->SetComputeRootDescriptorTable(number, descriptor->GetSRVHandle(uavIndex_)._GPU);
 }
 
 template<typename T>

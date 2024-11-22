@@ -4,11 +4,12 @@
 
 // Particleを表す構造体
 struct GPUParticleCS {
-    Vector3 translate;
-    Vector3 scale;
-    float lifeTime;
-    Vector3 velocity;
-    float currentTime;
+    Matrix4x4 matWorld{};
+    Vector4 color{};
+    Vector3 scale{};
+    Vector3 rotate{};
+    Vector3 translate{};
+    
 };
 
 // Material

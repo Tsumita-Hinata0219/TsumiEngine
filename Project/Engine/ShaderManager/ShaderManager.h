@@ -118,6 +118,7 @@ private: // メンバ関数
 	void SkinningObject3dShader();
 	void SkyboxShader();
 	void CPUParticleShader();
+	void GPUParticle_Draw();
 
 #pragma endregion
 
@@ -146,7 +147,6 @@ private: // メンバ関数
 
 	void CSParticleShader();
 	void GPUParticle_Init();
-	void GPUParticle_Draw();
 
 #pragma endregion
 

@@ -352,7 +352,7 @@ inline void BufferResource<T>::CreateUAVResource()
 
 	// DescriptorManagerでUAVを作る
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
-	this->uavIndex__ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
+	this->uavIndex_ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
 
 	assert(SUCCEEDED(hr_));
 	if (FAILED(hr_)) {

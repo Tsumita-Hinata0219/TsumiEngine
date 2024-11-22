@@ -42,13 +42,13 @@
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Glitch\Glitch.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Init\GPUParticle_Init.CS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Init\GPUParticle_Init.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -239,6 +239,7 @@
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\GPUParticle\Particle\GPUParticle.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -463,6 +464,7 @@
     <ClInclude Include="Project\Engine\GPUParticle\Particle\GPUParticle.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Resources\GPUParticleResources.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />
@@ -479,8 +481,8 @@
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
-    <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.CS.hlsli" />
-    <None Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.hlsli" />
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
     <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli" />
   </ItemGroup>
   <ItemGroup>

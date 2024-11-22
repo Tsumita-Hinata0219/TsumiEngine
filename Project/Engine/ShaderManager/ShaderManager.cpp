@@ -310,8 +310,8 @@ void ShaderManager::CPUParticleShader()
 void ShaderManager::GPUParticle_Draw()
 {
 	ShadersMode shader{
-		.VertexBlob = SetShader(VS, L"Resources/Shaders/Compute/GPUParticle/Draw/GPUParticle_Draw.VS.hlsl"),
-		.PixelBlob = SetShader(PS, L"Resources/Shaders/Compute/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
 	};
 	postEffectShadersMap_["GPUParticle_Init"] = shader;
 }
@@ -466,7 +466,7 @@ void ShaderManager::VignettingShader()
 void ShaderManager::CSParticleShader()
 {
 	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/GPUParticle.CS.hlsli"),
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/GPUParticle.CS.hlsli"),
 	};
 	computeShadersMap_["CSParticle"] = shader;
 }
@@ -474,7 +474,7 @@ void ShaderManager::CSParticleShader()
 void ShaderManager::GPUParticle_Init()
 {
 	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Init"] = shader;
 }

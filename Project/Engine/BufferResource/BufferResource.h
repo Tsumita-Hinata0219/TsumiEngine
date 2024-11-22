@@ -79,9 +79,9 @@ public:
 	/// <summary>
 	/// コマンドを積む
 	/// </summary>
-	void CommandCall(UINT number);
-	void CommandCallSRV(UINT number, uint32_t index);
-	void CommandCallInstancingSRV(UINT number);
+	void GraphicsCommandCall(UINT number);
+	void GraphicsCommandCallSRV(UINT number, uint32_t index);
+	void GraphicsCommandCallInstancingSRV(UINT number);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -240,14 +240,14 @@ inline void BufferResource<T>::WriteData(const std::vector<T>& datas, uint32_t n
 
 // コマンドを積む
 template<typename T>
-inline void BufferResource<T>::CommandCall(UINT number)
+inline void BufferResource<T>::GraphicsCommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
-inline void BufferResource<T>::CommandCallSRV(UINT number, uint32_t index)
+inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t index)
 {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -258,7 +258,7 @@ inline void BufferResource<T>::CommandCallSRV(UINT number, uint32_t index)
 }
 
 template<typename T>
-inline void BufferResource<T>::CommandCallInstancingSRV(UINT number)
+inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
 {
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();

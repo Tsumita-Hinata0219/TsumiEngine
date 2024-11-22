@@ -48,10 +48,10 @@ void BoxFilterEffect::CommandCall()
 
 	// RenderTex
 	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/
-	renderTexBuffer_.CommandCallSRV(3, srv_);
+	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
 
 	// MtlBuffer
-	mtlBuffer_.CommandCall(4);
+	mtlBuffer_.GraphicsCommandCall(4);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

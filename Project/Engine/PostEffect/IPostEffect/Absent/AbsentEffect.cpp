@@ -39,7 +39,7 @@ void AbsentEffect::CommandCall()
 
 	// RenderTex
 	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/
-	renderTexBuffer_.CommandCallSRV(3, srv_);
+	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

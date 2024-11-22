@@ -268,19 +268,19 @@ void Sprite::CommandCall()
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Material
-	buffers_.material.CommandCall(0);
+	buffers_.material.GraphicsCommandCall(0);
 	// Dissolve
-	buffers_.dissolve.CommandCall(4);
+	buffers_.dissolve.GraphicsCommandCall(4);
 	// Transform
-	buffers_.transform.CommandCall(1);
+	buffers_.transform.GraphicsCommandCall(1);
 	// View
 	CameraManager::GetInstance()->CommandCall(2);
 	// MaterialTexture
 	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
-	buffers_.material.CommandCallSRV(3, datas_.material.textureHandle);
+	buffers_.material.GraphicsCommandCallSRV(3, datas_.material.textureHandle);
 	// MaskTexture
 	//SRVManager::SetGraphicsRootDescriptorTable(5, datas_.dissolve.maskTexHandle);
-	buffers_.material.CommandCallSRV(5, datas_.dissolve.maskTexHandle);
+	buffers_.material.GraphicsCommandCallSRV(5, datas_.dissolve.maskTexHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }

@@ -82,6 +82,8 @@ public:
 	void GraphicsCommandCall(UINT number);
 	void GraphicsCommandCallSRV(UINT number, uint32_t index);
 	void GraphicsCommandCallInstancingSRV(UINT number);
+	void ComputeCommandCall(UINT number);
+	void ComputeCommandCallInstancingSRV(UINT number);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -266,6 +268,24 @@ inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
+}
+
+template<typename T>
+inline void BufferResource<T>::ComputeCommandCall(UINT number)
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->SetComputeRootDescriptorTable(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
+	commands.List->SetComputeRootConstantBufferView(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
 }
 
 template<typename T>

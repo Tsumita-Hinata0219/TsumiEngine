@@ -46,6 +46,7 @@
     <FxCompile Include="Resources\Shaders\Compute\GPUParticle\GPUParticle.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Init\GPUParticle_Init.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\GPUParticle\Particle\GPUParticle.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -458,6 +460,7 @@
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Particle\GPUParticle.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Resources\GPUParticleResources.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

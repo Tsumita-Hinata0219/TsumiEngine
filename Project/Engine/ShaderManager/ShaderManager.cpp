@@ -162,6 +162,7 @@ void ShaderManager::PostEffectShadersCompiles()
 void ShaderManager::ComputeShadersCompiles()
 {
 	CSParticleShader();
+	GPUParticle_Init();
 }
 
 
@@ -458,4 +459,12 @@ void ShaderManager::CSParticleShader()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/GPUParticle.CS.hlsli"),
 	};
 	computeShadersMap_["CSParticle"] = shader;
+}
+
+void ShaderManager::GPUParticle_Init()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
+	};
+	computeShadersMap_["GPUParticle_Init"] = shader;
 }

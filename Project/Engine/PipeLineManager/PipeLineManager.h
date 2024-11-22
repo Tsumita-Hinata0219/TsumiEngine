@@ -41,6 +41,7 @@
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
+#include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLineManager.h"
 
 
 // PipeLineTypeのenum構造体
@@ -58,6 +59,7 @@ enum class PipeLineType : uint32_t {
 	Skybox,
 	Sprite,
 	CPUParticle,
+	GPUParticle_Init,
 	PostEffect,
 	Absent,
 	BoxFilter,
@@ -152,6 +154,9 @@ private: // メンバ変数
 
 	// CPUParticle
 	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
+
+	// GPUParticle_Init
+	std::unique_ptr<GPUParticle_Init_PipeLineManager> gParticle_Init_PipeLine_;
 
 	// Absent
 	std::unique_ptr<AbsentPipeLine> absentPipeLine_;

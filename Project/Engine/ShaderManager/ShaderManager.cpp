@@ -163,6 +163,7 @@ void ShaderManager::ComputeShadersCompiles()
 {
 	CSParticleShader();
 	GPUParticle_Init();
+	GPUParticle_Draw();
 }
 
 
@@ -467,4 +468,13 @@ void ShaderManager::GPUParticle_Init()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Compute/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Init"] = shader;
+}
+
+void ShaderManager::GPUParticle_Draw()
+{
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/Compute/GPUParticle/Draw/GPUParticle_Draw.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/Compute/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
+	};
+	postEffectShadersMap_["GPUParticle_Init"] = shader;
 }

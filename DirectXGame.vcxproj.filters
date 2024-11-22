@@ -47,6 +47,8 @@
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Init\GPUParticle_Init.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Compute\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="externals\imgui\imgui.cpp" />

@@ -128,7 +128,7 @@ void PipeLineManager::Initialize()
 
 
 // PipeLineのチェックと設定
-void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type)
+void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type, bool state)
 {
 	// PipeLineTypeが違っていたらcommandを再設定
 	if (nowPipeLineType_ != type) {
@@ -142,11 +142,18 @@ void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type)
 		// nowPipeLineTypeの再設定
 		nowPipeLineType_ = type;
 
-		// 引数typeにあったPipeLineを積みなおす
-		commands.List->SetGraphicsRootSignature(instance->pipeLineMap_[type].rootSignature);
-		commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
-		// 形状を設定。基本PipeLineで設定したものと同じもの
-		commands.List->IASetPrimitiveTopology(instance->pipeLineMap_[type].primitiveTopologyType);
+		if (state) {
+			// 引数typeにあったPipeLineを積みなおす
+			commands.List->SetGraphicsRootSignature(instance->pipeLineMap_[type].rootSignature);
+			commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
+			// 形状を設定。基本PipeLineで設定したものと同じもの
+			commands.List->IASetPrimitiveTopology(instance->pipeLineMap_[type].primitiveTopologyType);
+		}
+		else {
+			// 引数typeにあったPipeLineを積みなおす
+			commands.List->SetComputeRootSignature(instance->pipeLineMap_[type].rootSignature);
+			commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
+		}
 	}
 }
 

@@ -85,13 +85,13 @@ void GPUParticle::CommandCallInit()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Init);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Init, false);
 
 	// Particleの要素の初期化値
 	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
 
 	// Dispach
-	commands.List->Dispatch(instanceNum_ / 1024, 1, 1);
+	commands.List->Dispatch(1, 1, 1);
 }
 void GPUParticle::CommandCallUpdate()
 {
@@ -115,8 +115,8 @@ void GPUParticle::CommandCallDraw()
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	//buffers_.material.CommandCall(3);
-	buffers_.material.GraphicsCommandCallInstancingSRV(3);
+	////buffers_.material.CommandCall(3);
+	//buffers_.material.GraphicsCommandCallInstancingSRV(3);
 	// MaterialTexture
 	buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
 	// Light

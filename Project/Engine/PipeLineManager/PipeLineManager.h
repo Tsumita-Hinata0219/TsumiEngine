@@ -79,6 +79,7 @@ enum class PipeLineType : uint32_t {
 };
 
 
+
 /* PipeLineManagerクラス */
 class PipeLineManager {
 
@@ -94,7 +95,7 @@ public: // メンバ関数
 	static void Initialize();
 
 	// PipeLineのチェックと設定
-	static void PipeLineCheckAndSet(const PipeLineType type);
+	static void PipeLineCheckAndSet(const PipeLineType type, bool state = true);
 
 	// PipeLineTypeのリセット
 	static void PipeLineTypeReset() {

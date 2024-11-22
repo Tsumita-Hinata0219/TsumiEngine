@@ -6,7 +6,6 @@ Texture2D<float4> gTexture : register(t0);
 SamplerState gSampler : register(s0);
 
 // ƒ}ƒeƒŠƒAƒ‹
-//ConstantBuffer<Material> gMaterial : register(b0);
 StructuredBuffer<Material> gMaterial : register(t1);
 
 // Main
@@ -20,7 +19,8 @@ PixcelShaderOutput main(VertexShaderOutput input)
     {
         discard;
     }
-    output.color = textureColor;
+    output.color.rgb = textureColor.rgb * gMaterial[input.instanceID].color.rgb;
+    output.color.a = textureColor.a * gMaterial[input.instanceID].color.a;
 
     return output;
 }

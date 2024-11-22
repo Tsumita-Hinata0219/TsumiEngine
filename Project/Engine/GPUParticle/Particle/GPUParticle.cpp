@@ -129,6 +129,10 @@ void GPUParticle::CreateBufferResource()
 	// indexBufferView
 	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
 	buffers_.indeces.CreateIndexBufferView();
+	// ParticleElement
+	buffers_.particleElement.CreateUAV(instanceNum_);
+	// PreView
+	buffers_.preView.CreateCBV();
 	// transform
 	buffers_.transform.CreateResource(instanceNum_);
 	buffers_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる

@@ -99,9 +99,14 @@ public:
 private:
 
 	/// <summary>
-	/// BufferResourceの生成
+	/// CBVの生成
 	/// </summary>
-	void CreateBufferResource();
+	void CreateCBVResource();
+
+	/// <summary>
+	/// UAVの作成
+	/// </summary>
+	void CreateUAVResource();
 
 
 private: 
@@ -122,6 +127,7 @@ private:
 
 	// Index
 	uint32_t srvIndex_ = 0;
+	uint32_t uavIndex_ = 0;
 };
 
 
@@ -133,7 +139,7 @@ inline void BufferResource<T>::CreateResource(UINT itemCount)
 	this->itemCount_ = itemCount;
 
 	// BufferResourceの作成
-	CreateBufferResource();
+	CreateCBVResource();
 }
 
 // CBVの作成
@@ -143,10 +149,8 @@ inline void BufferResource<T>::CreateCBV(UINT itemCount)
 	// 作成するResourceの要素数
 	this->itemCount_ = itemCount;
 
-	// DescriptorManagerのインスタンスの取得
-	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	// CBVの作成
-	descriptor->CreateCBV(this->buffer_, sizeof(T), this->itemCount_);
+	CreateCBVResource();
 }
 
 // VertexBufferViewの作成
@@ -182,10 +186,8 @@ inline void BufferResource<T>::CreateUAV(UINT itemCount)
 	// 作成するResourceの要素数
 	this->itemCount_ = itemCount;
 
-	// DescriptorManagerのインスタンスの取得
-	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	// UAVの作成
-	descriptor->CreateCBV(this->buffer_, sizeof(T), this->itemCount_);
+	CreateUAVResource();
 }
 
 // ResourceをマップしてCPUアクセスを可能にする
@@ -282,7 +284,7 @@ inline void BufferResource<T>::IASetIndexBuffer()
 
 // BufferResourceの生成
 template<typename T>
-inline void BufferResource<T>::CreateBufferResource()
+inline void BufferResource<T>::CreateCBVResource()
 {
 	// Resource用のHeap設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
@@ -310,6 +312,48 @@ inline void BufferResource<T>::CreateBufferResource()
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
+	assert(SUCCEEDED(hr_));
+	if (FAILED(hr_)) {
+		// エラーハンドリング
+		std::cerr << "CreateCommittedResource failed: " << std::hex << hr_ << std::endl;
+	}
+}
+
+// UAVの作成
+template<typename T>
+inline void BufferResource<T>::CreateUAVResource()
+{
+	// Resource用のHeap設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	//uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_DEFAULT; // DefaultHeapを使う
+
+	// BufferResource。Textureの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	// 専用のフラグを立てる
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+	// Resourceのサイズ
+	resourceDesc.Width = sizeof(T) * itemCount_;
+	// Bufferの場合はこれらは1にする決まり
+	resourceDesc.Height = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
+	// Bufferの場合はこれにする決まり
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際にBufferResourceを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr,
+		IID_PPV_ARGS(&buffer_));
+
+	// DescriptorManagerでUAVを作る
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	this->uavIndex__ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
+
 	assert(SUCCEEDED(hr_));
 	if (FAILED(hr_)) {
 		// エラーハンドリング

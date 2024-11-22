@@ -1,33 +1,26 @@
 #include "GPUParticle.hlsli"
 
-// Particleの要素
-StructuredBuffer<ParticleCS> gParticles : register(t0);
-// PreView
-ConstantBuffer<PreView> gPreView : register(b0);
+
+// テクスチャ&サンプラー
+Texture2D<float4> gTexture : register(t0);
+SamplerState gSampler : register(s0);
+
+// マテリアル
+ConstantBuffer<Material> gMaterial : register(b0);
 
 
-struct VertexShaderInput
+PixcelShaderOutput main(VertexShaderOutput input)
 {
-    float4 position : POSITION0;
-    float2 texcoord : TEXCOORD0;
-    float4 color : COLOR0;
-};
+    PixcelShaderOutput output;
+    float4 transUV = mul(float4(input.texcoord, 0.0f, 1.0f), gMaterial.uvTransform);
+    float4 textureColor = gTexture.Sample(gSampler, input.texcoord);
+    
+    if (textureColor.a == 0.0f)
+    {
+        discard;
+    }
+    output.color.rgb = gMaterial.color.rgb * textureColor.rgb * input.color.rgb;
+    output.color.a = gMaterial.color.a * textureColor.a * input.color.a;
 
-
-VertexShaderOutput main(VertexShaderInput input, uint instanceID : SV_InstanceID)
-{
-    VertexShaderOutput output;
-    
-    ParticleCS particle = gParticles[instanceID];
-    float4x4 worldMatrix = gPreView.billboardMatrix; // worldMatrixを作る
-    worldMatrix[0] += particle.scale.x;
-    worldMatrix[1] += particle.scale.y;
-    worldMatrix[2] += particle.scale.z;
-    worldMatrix[3].xyz += particle.translate;
-    
-    output.position = mul(input.position, mul(worldMatrix, gPreView.viewProjection));
-    output.texcoord = input.texcoord;
-    output.color = particle.color;    
-    
     return output;
 }

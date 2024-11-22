@@ -3,6 +3,7 @@
 #include "../../BufferResource/BufferResource.h"
 #include "../../Transform/Transform.h"
 #include "../../3D/Model/ModelStructure/ModelStructure.h"
+#include "../Structure/GPUParticleStructure.h"
 
 
 struct ParticleData {
@@ -36,6 +37,12 @@ struct GPUParticleResources {
 
 	// IndexDataBuffer
 	BufferResource<uint32_t> indeces;
+
+	// ParticleElement
+	BufferResource<GPUParticleCS> particleElement;
+
+	// PreView
+	BufferResource<GPUParticlePreView> preView;
 
 	// Transform
 	BufferResource<TransformationMat> transform;

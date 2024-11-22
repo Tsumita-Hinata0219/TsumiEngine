@@ -5,6 +5,19 @@ struct VertexShaderOutput
     float4 color : COLOR0;
 };
 
+struct VertexShaderInput
+{
+    float4 position : POSITION0;
+    float2 texcoord : TEXCOORD0;
+    float4 color : COLOR0;
+};
+
+struct PixcelShaderOutput
+{
+    float4 color : SV_TARGET0;
+};
+
+
 // Material
 struct Material
 {
@@ -29,3 +42,4 @@ struct PreView
     float4x4 viewProjection;
     float4x4 billboardMatrix;
 };
+

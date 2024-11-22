@@ -54,10 +54,10 @@ public:
 	/// </summary>
 	static void Clear();
 
-	/// <summary>
-	/// CVBを作成する
-	/// </summary>
-	void CreateCBV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count);
+	///// <summary>
+	///// CVBを作成する
+	///// </summary>
+	//void CreateCBV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count);
 
 	/// <summary>
 	/// SRVを作成する
@@ -71,7 +71,7 @@ public:
 	/// <summary>
 	/// UAVを作成する
 	/// </summary>
-	void CreateUAV(Microsoft::WRL::ComPtr<ID3D12Resource>* resource, UINT size, uint32_t count);
+	uint32_t CreateUAV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size, uint32_t count);
 
 	/// <summary>
 	/// DescriptorTableを設定する
@@ -151,6 +151,10 @@ private:
 	/// </summary>
 	void CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index);
 
+	/// <summary>
+	/// UAVの生成
+	/// </summary>
+	void RegisterUAV(ComPtr<ID3D12Resource> resource, D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc, uint32_t index);
 
 private:
 

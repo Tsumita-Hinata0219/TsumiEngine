@@ -81,7 +81,14 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 /// </summary>
 void GPUParticle::CommandCallInit()
 {
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Init);
+
+	// Dispach
+	commands.List->Dispatch(instanceNum_ / 1024, 1, 1);
 }
 void GPUParticle::CommandCallUpdate()
 {

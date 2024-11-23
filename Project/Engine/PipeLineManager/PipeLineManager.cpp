@@ -61,9 +61,12 @@ void PipeLineManager::Initialize()
 	instance->pipeLineMap_[PipeLineType::CPUParticle] = instance->cpuParticlePipeLine_->SetUpPso();
 
 	// GPUParticle_Init
-	instance->gParticle_Init_PipeLine_ = make_unique<GPUParticle_Init_PipeLineManager>();
+	instance->gParticle_Init_PipeLine_ = make_unique<GPUParticle_Init_PipeLine>();
 	instance->pipeLineMap_[PipeLineType::GPUParticle_Init] = instance->gParticle_Init_PipeLine_->SetUpPso();
 
+	// GPUParticle_Draw
+	instance->gParticle_Draw_PipeLine_ = make_unique<GPUParticle_Draw_PipeLine>();
+	instance->pipeLineMap_[PipeLineType::GPUParticle_Draw] = instance->gParticle_Draw_PipeLine_->SetUpPso();
 
 	// Absent
 	instance->absentPipeLine_ = make_unique<AbsentPipeLine>();

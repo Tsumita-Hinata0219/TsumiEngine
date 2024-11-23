@@ -238,7 +238,7 @@
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Project\Engine\GPUParticle\Particle\GPUParticle.cpp" />
-    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -463,7 +463,7 @@
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Particle\GPUParticle.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Resources\GPUParticleResources.h" />
-    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h" />
   </ItemGroup>
   <ItemGroup>

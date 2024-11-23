@@ -24,6 +24,7 @@
 #include "ModelPipeLine/SkyboxPipeLine/SkyboxPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
 #include "ModelPipeLine/CPUParticlePipeLine/CPUParticlePipeLine.h"
+#include "ModelPipeLine/GPUParticle_Draw/GPUParticle_Draw_PipeLine.h"
 
 #include "PostEffectPipeLine/AbsentPipeLine/AbsentPipeLine.h"
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
@@ -41,7 +42,7 @@
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
-#include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLineManager.h"
+#include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 
 
 // PipeLineTypeのenum構造体
@@ -60,6 +61,7 @@ enum class PipeLineType : uint32_t {
 	Sprite,
 	CPUParticle,
 	GPUParticle_Init,
+	GPUParticle_Draw,
 	PostEffect,
 	Absent,
 	BoxFilter,
@@ -157,7 +159,10 @@ private: // メンバ変数
 	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
 
 	// GPUParticle_Init
-	std::unique_ptr<GPUParticle_Init_PipeLineManager> gParticle_Init_PipeLine_;
+	std::unique_ptr<GPUParticle_Init_PipeLine> gParticle_Init_PipeLine_;
+
+	// GPUParticle_ Draw
+	std::unique_ptr<GPUParticle_Draw_PipeLine> gParticle_Draw_PipeLine_;
 
 	// Absent
 	std::unique_ptr<AbsentPipeLine> absentPipeLine_;

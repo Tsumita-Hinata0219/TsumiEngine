@@ -1,9 +1,9 @@
-#include "GPUParticle_Init_PipeLineManager.h"
+#include "GPUParticle_Init_PipeLine.h"
 
 
 
 // Psoを構築する
-PsoProperty GPUParticle_Init_PipeLineManager::SetUpPso()
+PsoProperty GPUParticle_Init_PipeLine::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -32,7 +32,7 @@ PsoProperty GPUParticle_Init_PipeLineManager::SetUpPso()
 
 
 // RootSignatureのセットアップ
-void GPUParticle_Init_PipeLineManager::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void GPUParticle_Init_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
 	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる

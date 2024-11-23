@@ -3,7 +3,7 @@
 #include "../../../IPipeLineState/IPipeLineState.h"
 
 /* GPUParticle_Init_PipeLineクラス */
-class GPUParticle_Init_PipeLineManager : public IPipeLineState {
+class GPUParticle_Init_PipeLine : public IPipeLineState {
 
 public:
 

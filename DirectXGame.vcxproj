@@ -157,7 +157,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.cpp" />
+    <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\Application\GameManager\GameManager.cpp" />
@@ -341,7 +341,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
-    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLineManager.h" />
+    <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\Others\SceneTransition\SceneTransition.h" />

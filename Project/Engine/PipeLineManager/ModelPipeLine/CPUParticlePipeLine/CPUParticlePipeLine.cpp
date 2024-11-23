@@ -155,30 +155,6 @@ void CPUParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descript
 	staticSamplers[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 
 
-
-	//// t0 : トランスフォーム
-	//D3D12_DESCRIPTOR_RANGE transInstancing[1]{};
-	//transInstancing[0].BaseShaderRegister = 0; // 0から始まる
-	//transInstancing[0].NumDescriptors = 1; // 数は1つ
-	//transInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	//transInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	//rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	//rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
-	//rootParameters[0].DescriptorTable.pDescriptorRanges = transInstancing; // Tableの中身の配列を指定
-	//rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(transInstancing); // Tableで利用する
-
-	//// t1 : マテリアル
-	//D3D12_DESCRIPTOR_RANGE materialInstancing[1] {};
-	//materialInstancing[0].BaseShaderRegister = 1; // 1から始まる
-	//materialInstancing[0].NumDescriptors = 1; // 数は1つ
-	//materialInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	//materialInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	//rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	//rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;//PixelShaderで使う
-	//rootParameters[3].DescriptorTable.pDescriptorRanges = materialInstancing; // Tableの中身の配列を指定
-	//rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materialInstancing); // Tableで利用する
-
-
 	descriptionRootSignature.pParameters = rootParameters; // ルートパラメータ配列へのポインタ
 	descriptionRootSignature.NumParameters = _countof(rootParameters); // 配列の長さ
 

@@ -103,7 +103,7 @@ void GPUParticle::CommandCall_Draw()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::CPUParticle);
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Draw);
 
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);

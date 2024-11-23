@@ -49,9 +49,9 @@ private:
 	/// <summary>
 	/// コマンドコール
 	/// </summary>
-	void CommandCallInit();
-	void CommandCallUpdate();
-	void CommandCallDraw();
+	void CommandCall_Init();
+	void CommandCall_Update();
+	void CommandCall_Draw();
 
 	/// <summary>
 	/// BufferResourceの作成

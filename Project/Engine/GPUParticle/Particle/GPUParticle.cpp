@@ -21,7 +21,7 @@ void GPUParticle::Init(uint32_t instanceNum)
 	CreateBufferResource();
 
 	// 初期化コマンドコール <-多分必要になる
-	CommandCallInit(); 
+	CommandCall_Init(); 
 }
 
 
@@ -34,7 +34,7 @@ void GPUParticle::Update()
 
 
 	// 更新コマンドコール <-多分必要になる
-	CommandCallUpdate();
+	CommandCall_Update();
 }
 
 
@@ -72,14 +72,14 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	
 
 	// 描画コマンドコール
-	CommandCallDraw();
+	CommandCall_Draw();
 }
 
 
 /// <summary>
 /// コマンドコール
 /// </summary>
-void GPUParticle::CommandCallInit()
+void GPUParticle::CommandCall_Init()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -93,11 +93,11 @@ void GPUParticle::CommandCallInit()
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
 }
-void GPUParticle::CommandCallUpdate()
+void GPUParticle::CommandCall_Update()
 {
 
 }
-void GPUParticle::CommandCallDraw()
+void GPUParticle::CommandCall_Draw()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();

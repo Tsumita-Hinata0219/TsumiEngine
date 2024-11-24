@@ -251,6 +251,7 @@
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
+    <ClCompile Include="Project\Engine\GPUParticle\Emitter\GPUParticleEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -490,6 +491,8 @@
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\Navigation\StageTransitionMenuNavigation.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\ResultUI\StageTransitionMenuResultUI.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.h" />
+    <ClInclude Include="Project\Engine\GPUParticle\Structure\GPUParticleEmitterStructure.h" />
+    <ClInclude Include="Project\Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

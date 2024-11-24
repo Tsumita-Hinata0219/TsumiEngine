@@ -10,7 +10,7 @@ RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
 // 今回スレッド数は1。複数のEmitterを扱い、同時に処理したい場合は適宜すれっと数を増やすといい
 [numthreads(1, 1, 1)]
-void main( uint3 DTid : SV_DispatchThreadID )
+void main(uint3 DTid : SV_DispatchThreadID)
 {
     // 射出許可が出たので射出
     if (gEmitter.emit != 0)

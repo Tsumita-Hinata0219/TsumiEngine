@@ -12,7 +12,6 @@
 
 #include "Utilities/RandomGenerator/RandomGenerator.h"
 #include "Utilities/TimedCall/TimedCall.h"
-#include "Utilities/SmartPointer/SmartPtr.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>

@@ -3,9 +3,8 @@
 #include "Math/MyMath.h"
 
 // GPUParticleのエミッター
-namespace GPUParticle {
+namespace Particle {
 	namespace Emit {
-
 		// Sphere型のEmitter
 		struct SphereEmitter {
 			Vector3 translate{}; // 座標

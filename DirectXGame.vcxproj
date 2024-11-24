@@ -355,6 +355,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
+    <ClInclude Include="Project\Engine\GPUParticle\Resources\GPUParticleEmitterResources.h" />
     <ClInclude Include="Project\Engine\GPUParticle\Structure\GPUParticleEmitterStructure.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Emitter\GPUParticleEmitterPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
@@ -949,6 +950,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\LineObject3d.hlsli" />
     <None Include="Resources\Shaders\MathFunc.hlsli" />
     <None Include="Resources\Shaders\Math\Math.hlsli" />
+    <None Include="Resources\Shaders\Math\Rand\RandomGenerator.hlsli" />
     <None Include="Resources\Shaders\NormalObject3d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\ParticleObject3D.hlsli" />

@@ -11,7 +11,11 @@
 #include "Scene/ResultScene/ResultScene.h"
 
 #include "Utilities/TextLog/TextLog.h"
+#include <limits>
 
+
+// 疑似無限値
+extern float INFINITY_VALUE;
 // グローバル変数の定義
 extern float g_ElapsedTime;
 

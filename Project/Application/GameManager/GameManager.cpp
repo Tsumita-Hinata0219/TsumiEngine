@@ -1,7 +1,7 @@
 #include "GameManager.h"
 
-
-// グローバル変数の定義
+// 疑似無限値
+float INFINITY_VALUE = 4294967295.0f;
 float g_ElapsedTime = 0.0f;
 
 /// <summary>

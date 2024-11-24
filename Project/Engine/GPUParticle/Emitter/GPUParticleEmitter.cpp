@@ -1,5 +1,5 @@
 #include "GPUParticleEmitter.h"
-
+#include "GameManager/GameManager.h"
 
 /// <summary>
 /// 初期化処理
@@ -7,15 +7,20 @@
 void Particle::Emit::GPUParticleEmitter::Init()
 {
 	// BufferResourceを作成
-	emitBuffer_.CreateCBV();
+	CreateBufferResource();
 
-	// Dataの初期値
-	emitData_.count = 10;
-	emitData_.frequency = 0.5f;
-	emitData_.frequencyTime = 0.0f;
-	emitData_.translate = Vector3::zero;
-	emitData_.radius = 1.0f;
-	emitData_.emit = 0;
+	// SphereEmitterの初期値
+	datas_.sphereEmitter.count = 10;
+	datas_.sphereEmitter.frequency = 0.5f;
+	datas_.sphereEmitter.frequencyTime = 0.0f;
+	datas_.sphereEmitter.translate = Vector3::zero;
+	datas_.sphereEmitter.radius = 1.0f;
+	datas_.sphereEmitter.emit = 0;
+
+	// PerFrameの初期値
+	scope_ = { 0.0f, INFINITY_VALUE };
+	datas_.perFrame.time = g_ElapsedTime + RandomGenerator::getRandom(scope_);
+	datas_.perFrame.deltaTime = 0.0f;
 }
 
 
@@ -24,14 +29,14 @@ void Particle::Emit::GPUParticleEmitter::Init()
 /// </summary>
 void Particle::Emit::GPUParticleEmitter::Update()
 {
-	emitData_.frequencyTime++;
+	datas_.sphereEmitter.frequencyTime++;
 	// 射出間隔を上回ったら射出許可をだして時間を調整
-	if (emitData_.frequency <= emitData_.frequencyTime) {
-		emitData_.frequencyTime -= emitData_.frequency;
-		emitData_.emit = 1;
+	if (datas_.sphereEmitter.frequency <= datas_.sphereEmitter.frequencyTime) {
+		datas_.sphereEmitter.frequencyTime -= datas_.sphereEmitter.frequency;
+		datas_.sphereEmitter.emit = 1;
 	}
 	else { // 射出間隔を上回っていないので、射出許可は出せない
-		emitData_.emit = 0;
+		datas_.sphereEmitter.emit = 0;
 	}
 }
 
@@ -56,15 +61,28 @@ void Particle::Emit::GPUParticleEmitter::Emit(std::unique_ptr<GPUParticle>& part
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::CSEmitter, false);
 
 	// Emitter
-	emitBuffer_.Map();
-	emitBuffer_.WriteData(&emitData_);
-	emitBuffer_.UnMap();
+	buffers_.sphereEmitter.Map();
+	buffers_.sphereEmitter.WriteData(&datas_.sphereEmitter);
+	buffers_.sphereEmitter.UnMap();
 
 	// Emitterのコマンドコール
-	emitBuffer_.ComputeCommandCall(0);
+	buffers_.sphereEmitter.ComputeCommandCall(0);
 	// Particleのコマンドコール
 	particle->ComputeCommandCall(1);
 
 	// Dispach 
 	commands.List->Dispatch(1, 1, 1);
+}
+
+
+/// <summary>
+/// BufferResourceの作成
+/// </summary>
+void Particle::Emit::GPUParticleEmitter::CreateBufferResource()
+{
+	// SphereEmitter
+	buffers_.sphereEmitter.CreateCBV();
+	// PerFrame
+	buffers_.perFrame.CreateCBV();
+
 }

@@ -3,6 +3,9 @@
 #include "GameObject/GameObject.h"
 #include "../Structure/GPUParticleEmitterStructure.h"
 #include "BufferResource/BufferResource.h"
+#include "../Resources/GPUParticleEmitterResources.h"
+
+#include <limits>
 
 
 namespace Particle {
@@ -46,11 +49,22 @@ namespace Particle {
 
 		private:
 
+			/// <summary>
+			/// BufferResourceの作成
+			/// </summary>
+			void CreateBufferResource();
+
+
+		private:
+
 			// バッファーに書き込むデータ
-			SphereEmitter emitData_{};
+			GPUParticleEmitterDatas datas_{};
 
 			// バッファー
-			BufferResource<SphereEmitter> emitBuffer_;
+			GPUParticleEmitterResouces buffers_{};
+
+			// ランダム数値を得るためのスコープ
+			Scope scope_{};
 		};
 	}
 }

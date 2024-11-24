@@ -60,3 +60,9 @@ struct SphereEmitter
     float32_t frequencyTime; // 射出間隔調整用時間
     uint32_t emit; // 射出許可
 };
+
+struct PerFrame
+{
+    float32_t time; // 時間
+    float32_t deltaTime; // 1フレームの経過時間
+};

@@ -15,5 +15,10 @@ namespace Particle {
 			uint32_t emit = 0; // 射出許可
 		};
 	}
+
+	struct PerFrame {
+		float time = 0.0f; // 時間
+		float deltaTime = 0.0f; // 1フレームの経過時間
+	};
 }
 

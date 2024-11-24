@@ -13,6 +13,7 @@ void StaticEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
+	trans_.srt.scale = { 2.0f, 2.0f, 2.0f };
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -22,7 +23,7 @@ void StaticEnemy::Init()
 	colComp_->SetAttribute(ColliderAttribute::Enemy);
 	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	sphere_.radius = 2.0f * trans_.srt.scale.x;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -40,7 +41,7 @@ void StaticEnemy::Update()
 
 	// 射撃の処理
 	ExecutexShot();
-
+		
 	// Bullet更新処理
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
 		bullet->Update();

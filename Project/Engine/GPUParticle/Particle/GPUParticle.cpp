@@ -101,7 +101,6 @@ void GPUParticle::CommandCall_Draw()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
-
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Draw);
 
@@ -109,18 +108,12 @@ void GPUParticle::CommandCall_Draw()
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
-	// Transform
-	//buffers_.transform.GraphicsCommandCallInstancingSRV(0);
 	// ParticleElement
 	buffers_.particleElement.GraphicsCommandCallInstancingSRV(0);
 	// Camera
 	cameraManager_->CommandCall(1);
-	// Material
-	//buffers_.material.GraphicsCommandCallInstancingSRV(3);
 	// MaterialTexture
 	buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
-	// Light
-	//buffers_.light.CommandCall(4);
 	// Draw!!
 	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }

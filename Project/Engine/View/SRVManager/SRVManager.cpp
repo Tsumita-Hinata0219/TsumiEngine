@@ -224,3 +224,4 @@ void SRVManager::CreateSRV(Microsoft::WRL::ComPtr<ID3D12Resource> resource, D3D1
 
 	device->CreateShaderResourceView(resource.Get(), &srvDesc, instance->handleMap_[index]._CPU);
 }
+

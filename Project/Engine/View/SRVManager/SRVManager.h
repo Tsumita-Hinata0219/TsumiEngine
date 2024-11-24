@@ -72,7 +72,7 @@ public: // メンバ関数
 	static uint32_t GetEmptyIndex() {
 		uint32_t index = SRVManager::GetInstance()->index_;
 		return index++; // 空きインデックスなのでインクリメントして返す
-	}
+	}	
 
 #pragma endregion
 

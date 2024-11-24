@@ -14,6 +14,7 @@ void ShaderManager::Initialize() {
 	// シェーダーをコンパイルする
 	ShaderManager::GetInstance()->ModelShadersCompiles();
 	ShaderManager::GetInstance()->PostEffectShadersCompiles();
+	ShaderManager::GetInstance()->ComputeShadersCompiles();
 }
 
 
@@ -26,7 +27,7 @@ IDxcBlob* ShaderManager::CompileShader(const std::wstring& filePath, const wchar
 	IDxcUtils* dxcUtils = ShaderManager::GetInstance()->dxc_.Utils;
 	IDxcCompiler3* dxcCompiler = ShaderManager::GetInstance()->dxc_.Compiler;
 	IDxcIncludeHandler* includeHandler = ShaderManager::GetInstance()->dxc_.includeHandler;
- 
+
 	/* --- 1. hlslファイルを読む --- */
 
 	// これからシェーダーをコンパイルする旨をログに出す
@@ -137,6 +138,8 @@ void ShaderManager::ModelShadersCompiles()
 	Object3DShader();
 	SkinningObject3dShader();
 	SkyboxShader();
+	CPUParticleShader();
+	GPUParticle_Draw();
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
@@ -157,298 +160,321 @@ void ShaderManager::PostEffectShadersCompiles()
 	SepiaToneShader();
 	VignettingShader();
 }
+void ShaderManager::ComputeShadersCompiles()
+{
+	CSParticleShader();
+	GPUParticle_Init();
+}
 
 
 
 /// <summary>
 /// シェーダーをセットする
 /// </summary>
-void ShaderManager::SetShader(const std::wstring& vertexPath, const std::wstring& pixelPath, ShadersMode& shader)
+IDxcBlob* ShaderManager::SetShader(ShaderType type, const std::wstring& path)
 {
-	shader.VertexBlob = ShaderManager::CompileShader(vertexPath.c_str(), L"vs_6_0");
-	shader.PixelBlob = ShaderManager::CompileShader(pixelPath.c_str(), L"ps_6_0");
+	std::wstring targetProfile{};
+
+	if (type == VS) {
+		targetProfile = L"vs_6_0";
+	}
+	else if (type == PS) {
+		targetProfile = L"ps_6_0";
+	}
+	else if (type == CS) {
+		targetProfile = L"cs_6_0";
+	}
+
+	return ShaderManager::CompileShader(path.c_str(), targetProfile.c_str());
 }
 
 
 
-void ShaderManager::NormalShader() 
+void ShaderManager::NormalShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/NormalObject3d.VS.hlsl", 
-		L"Resources/Shaders/NormalObject3d.PS.hlsl", 
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/NormalObject3d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/NormalObject3d.PS.hlsl"),
+	};
 	modelShadersMap_["Normal"] = shader;
 }
 
-void ShaderManager::SpriteShader() 
+void ShaderManager::SpriteShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/SpriteObject3d.VS.hlsl",
-		L"Resources/Shaders/SpriteObject3d.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/SpriteObject3d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/SpriteObject3d.PS.hlsl"),
+	};
 	modelShadersMap_["Sprite"] = shader;
 }
 
-void ShaderManager::LightShader() 
+void ShaderManager::LightShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/LightObject.VS.hlsl",
-		L"Resources/Shaders/LightObject.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/LightObject.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/LightObject.PS.hlsl"),
+	};
 	modelShadersMap_["Light"] = shader;
 }
 
 void ShaderManager::LambertShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/LambertObject.VS.hlsl",
-		L"Resources/Shaders/LambertObject.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/LambertObject.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/LambertObject.PS.hlsl"),
+	};
 	modelShadersMap_["Lambert"] = shader;
 }
 
 void ShaderManager::PhongShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PhongObject.VS.hlsl",
-		L"Resources/Shaders/PhongObject.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PhongObject.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PhongObject.PS.hlsl"),
+	};
 	modelShadersMap_["Phong"] = shader;
 }
 
 void ShaderManager::PhongNormalMapShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PhongNormalMap.VS.hlsl",
-		L"Resources/Shaders/PhongNormalMap.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PhongNormalMap.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PhongNormalMap.PS.hlsl"),
+	};
 	modelShadersMap_["PhongNormalMap"] = shader;
 }
 
-void ShaderManager::ParticleShader() 
+void ShaderManager::ParticleShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/ParticleObject3D.VS.hlsl",
-		L"Resources/Shaders/ParticleObject3D.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/ParticleObject3D.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/ParticleObject3D.PS.hlsl"),
+	};
 	modelShadersMap_["Particle"] = shader;
 }
 
-void ShaderManager::LineShader() 
+void ShaderManager::LineShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/LineObject3d.VS.hlsl",
-		L"Resources/Shaders/LineObject3d.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/LineObject3d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/LineObject3d.PS.hlsl"),
+	};
 	modelShadersMap_["Line"] = shader;
 }
 
 void ShaderManager::Object2DShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/Object2d/Object2d.VS.hlsl",
-		L"Resources/Shaders/Object2d/Object2d.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/Object2d/Object2d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/Object2d/Object2d.PS.hlsl"),
+	};
 	modelShadersMap_["Object2D"] = shader;
 }
 
 void ShaderManager::Object3DShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/Object3d/Object3d.VS.hlsl",
-		L"Resources/Shaders/Object3d/Object3d.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/Object3d/Object3d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/Object3d/Object3d.PS.hlsl"),
+	};
 	modelShadersMap_["Object3D"] = shader;
 }
 
 void ShaderManager::SkinningObject3dShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/SkinningObject3d.VS.hlsl",
-		L"Resources/Shaders/SkinningObject3d.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/SkinningObject3d.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/SkinningObject3d.PS.hlsl"),
+	};
 	modelShadersMap_["SkinningObject3d"] = shader;
 }
 
 void ShaderManager::SkyboxShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/Skybox/Skybox.VS.hlsl",
-		L"Resources/Shaders/Skybox/Skybox.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/Skybox/Skybox.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/Skybox/Skybox.PS.hlsl"),
+	};
 	modelShadersMap_["Skybox"] = shader;
+}
+
+void ShaderManager::CPUParticleShader()
+{
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/CPUParticle/CPUParticle.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/CPUParticle/CPUParticle.PS.hlsl"),
+	};
+	modelShadersMap_["CPUParticle"] = shader;
+}
+
+void ShaderManager::GPUParticle_Draw()
+{
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
+	};
+	modelShadersMap_["GPUParticle_Draw"] = shader;
 }
 
 
 
-void ShaderManager::PostEffectShader() 
+void ShaderManager::PostEffectShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect.PS.hlsl"),
+	};
 	postEffectShadersMap_["PostEffect"] = shader;
 }
 
 void ShaderManager::AbsentShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Absent/Absent.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Absent/Absent.PS.hlsl"),
+	};
 	postEffectShadersMap_["Absent"] = shader;
 }
 
 void ShaderManager::BoxFilterShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/BoxFilter/BoxFilter.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/BoxFilter/BoxFilter.PS.hlsl"),
+	};
 	postEffectShadersMap_["BoxFilter"] = shader;
 }
 
 void ShaderManager::ColorGrading()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/ColorGrading/ColorGrading.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/ColorGrading/ColorGrading.PS.hlsl"),
+	};
 	postEffectShadersMap_["ColorGrading"] = shader;
 }
 
 void ShaderManager::DissolveShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Dissolve/Dissolve.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Dissolve/Dissolve.PS.hlsl"),
+	};
 	postEffectShadersMap_["Dissolve"] = shader;
 }
 
 void ShaderManager::GaussianFilterShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/GaussianFilter/GaussianFilter.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/GaussianFilter/GaussianFilter.PS.hlsl"),
+	};
 	postEffectShadersMap_["GaussianFilter"] = shader;
 }
 
 void ShaderManager::GlitchShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Glitch/Glitch.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Glitch/Glitch.PS.hlsl"),
+	};
 	postEffectShadersMap_["Glitch"] = shader;
 }
 
 void ShaderManager::GrainShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Grain/Grain.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Grain/Grain.PS.hlsl"),
+	};
 	postEffectShadersMap_["Grain"] = shader;
 }
 
 void ShaderManager::GrayScaleShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/GrayScale/GrayScale.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/GrayScale/GrayScale.PS.hlsl"),
+	};
 	postEffectShadersMap_["GrayScale"] = shader;
 }
 
 void ShaderManager::HSVShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/HSV/HSV.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/HSV/HSV.PS.hlsl"),
+	};
 	postEffectShadersMap_["HSV"] = shader;
 }
 
 void ShaderManager::OutLineShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/OutLine/OutLine.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/OutLine/OutLine.PS.hlsl"),
+	};
 	postEffectShadersMap_["OutLine"] = shader;
 }
 
 void ShaderManager::RadialBlurShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/RadialBlur/RadialBlur.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/RadialBlur/RadialBlur.PS.hlsl"),
+	};
 	postEffectShadersMap_["RadialBlur"] = shader;
 }
 
 void ShaderManager::RandomShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Random/Random.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Random/Random.PS.hlsl"),
+	};
 	postEffectShadersMap_["Random"] = shader;
 }
 
 void ShaderManager::RetroCRTShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/RetroCRT/RetroCRT.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/RetroCRT/RetroCRT.PS.hlsl"),
+	};
 	postEffectShadersMap_["RetroCRT"] = shader;
 }
 
 void ShaderManager::SepiaToneShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/SepiaTone/SepiaTone.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/SepiaTone/SepiaTone.PS.hlsl"),
+	};
 	postEffectShadersMap_["SepiaTone"] = shader;
 }
 
 void ShaderManager::VignettingShader()
 {
-	ShadersMode shader{};
-	SetShader(
-		L"Resources/Shaders/PostEffect.VS.hlsl",
-		L"Resources/Shaders/PostEffect/Vignetting/Vignetting.PS.hlsl",
-		shader);
+	ShadersMode shader{
+		.VertexBlob = SetShader(VS, L"Resources/Shaders/PostEffect.VS.hlsl"),
+		.PixelBlob = SetShader(PS, L"Resources/Shaders/PostEffect/Vignetting/Vignetting.PS.hlsl"),
+	};
 	postEffectShadersMap_["Vignetting"] = shader;
+}
+
+
+void ShaderManager::CSParticleShader()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/GPUParticle.CS.hlsli"),
+	};
+	computeShadersMap_["CSParticle"] = shader;
+}
+
+void ShaderManager::GPUParticle_Init()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
+	};
+	computeShadersMap_["GPUParticle_Init"] = shader;
 }

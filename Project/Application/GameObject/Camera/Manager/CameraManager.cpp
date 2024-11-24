@@ -21,5 +21,5 @@ void CameraManager::ReSetData(const CameraResource& data)
 // コマンドコール
 void CameraManager::CommandCall(UINT number)
 {
-	resource_->buffer->CommandCall(number);
+	resource_->buffer->GraphicsCommandCall(number);
 }

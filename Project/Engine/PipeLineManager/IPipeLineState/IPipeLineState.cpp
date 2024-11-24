@@ -73,6 +73,14 @@ D3D12_INPUT_ELEMENT_DESC IPipeLineState::SetUpInputElementDescs(LPCSTR SemanticN
 		inputElementDescs.InputSlot = 1;
 		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
 	}
+	else if (strcmp(SemanticName, "INSTANCEID") == 0)
+	{
+		inputElementDescs.SemanticName = "INSTANCEID";
+		inputElementDescs.SemanticIndex = 0;
+		inputElementDescs.Format = DXGI_FORMAT_R32_UINT;
+		inputElementDescs.InputSlot = 1;
+		inputElementDescs.AlignedByteOffset = D3D12_APPEND_ALIGNED_ELEMENT;
+	}
 
 	return inputElementDescs;
 }

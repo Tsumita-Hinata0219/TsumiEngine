@@ -23,6 +23,8 @@
 #include "ModelPipeLine/SkinningObject3dPipeLine/SkinningObject3dPipeLine.h"
 #include "ModelPipeLine/SkyboxPipeLine/SkyboxPipeLine.h"
 #include "ModelPipeLine/SpritePipeLine/SpritePipeLine.h"
+#include "ModelPipeLine/CPUParticlePipeLine/CPUParticlePipeLine.h"
+#include "ModelPipeLine/GPUParticle_Draw/GPUParticle_Draw_PipeLine.h"
 
 #include "PostEffectPipeLine/AbsentPipeLine/AbsentPipeLine.h"
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
@@ -39,6 +41,9 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
+#include "CSPipeLine/Particle/CSParticlePipeLine.h"
+#include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
+
 
 // PipeLineTypeのenum構造体
 enum class PipeLineType : uint32_t {
@@ -54,6 +59,9 @@ enum class PipeLineType : uint32_t {
 	SkinningObject3D,
 	Skybox,
 	Sprite,
+	CPUParticle,
+	GPUParticle_Init,
+	GPUParticle_Draw,
 	PostEffect,
 	Absent,
 	BoxFilter,
@@ -69,7 +77,9 @@ enum class PipeLineType : uint32_t {
 	RetroCRT,
 	SepiaTone,
 	Vignetting,
+	CSParticle,
 };
+
 
 
 /* PipeLineManagerクラス */
@@ -87,7 +97,7 @@ public: // メンバ関数
 	static void Initialize();
 
 	// PipeLineのチェックと設定
-	static void PipeLineCheckAndSet(const PipeLineType type);
+	static void PipeLineCheckAndSet(const PipeLineType type, bool state = true);
 
 	// PipeLineTypeのリセット
 	static void PipeLineTypeReset() {
@@ -145,6 +155,14 @@ private: // メンバ変数
 	// Sprite
 	std::unique_ptr<SpritePipeLine> spritePipeLine_;
 
+	// CPUParticle
+	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
+
+	// GPUParticle_Init
+	std::unique_ptr<GPUParticle_Init_PipeLine> gParticle_Init_PipeLine_;
+
+	// GPUParticle_ Draw
+	std::unique_ptr<GPUParticle_Draw_PipeLine> gParticle_Draw_PipeLine_;
 
 	// Absent
 	std::unique_ptr<AbsentPipeLine> absentPipeLine_;
@@ -187,6 +205,10 @@ private: // メンバ変数
 
 	// Vignetting
 	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
+
+
+	// CSParticle
+	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
 
 };
 

@@ -18,8 +18,9 @@ public:
 	// Imguiの描画
 	void DrawImGui(std::string name = "") override;
 
-protected:
+private:
 
 	// コマンドコール
 	void CommandCall() override;
+
 };

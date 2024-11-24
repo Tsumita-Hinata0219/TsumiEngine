@@ -47,10 +47,11 @@ void GrayScaleEffect::CommandCall()
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GrayScale);
 
 	// SRVをコマンドに積む
-	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
-	mtlBuffer_.CommandCall(4);
+	mtlBuffer_.GraphicsCommandCall(4);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

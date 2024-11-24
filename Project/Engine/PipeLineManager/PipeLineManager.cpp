@@ -56,6 +56,17 @@ void PipeLineManager::Initialize()
 	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
 	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
+	// CPUParticle
+	instance->cpuParticlePipeLine_ = make_unique<CPUParticlePipeLine>();
+	instance->pipeLineMap_[PipeLineType::CPUParticle] = instance->cpuParticlePipeLine_->SetUpPso();
+
+	// GPUParticle_Init
+	instance->gParticle_Init_PipeLine_ = make_unique<GPUParticle_Init_PipeLine>();
+	instance->pipeLineMap_[PipeLineType::GPUParticle_Init] = instance->gParticle_Init_PipeLine_->SetUpPso();
+
+	// GPUParticle_Draw
+	instance->gParticle_Draw_PipeLine_ = make_unique<GPUParticle_Draw_PipeLine>();
+	instance->pipeLineMap_[PipeLineType::GPUParticle_Draw] = instance->gParticle_Draw_PipeLine_->SetUpPso();
 
 	// Absent
 	instance->absentPipeLine_ = make_unique<AbsentPipeLine>();
@@ -112,11 +123,15 @@ void PipeLineManager::Initialize()
 	// Vignetting
 	instance->vignettingPipeLine_ = make_unique<VignettingPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Vignetting] = instance->vignettingPipeLine_->SetUpPso();
+
+	// CSParticle
+	instance->csParticlePipeLine_ = make_unique<CSParticlePipeLine>();
+	instance->pipeLineMap_[PipeLineType::CSParticle] = instance->csParticlePipeLine_->SetUpPso();
 }
 
 
 // PipeLineのチェックと設定
-void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type)
+void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type, bool state)
 {
 	// PipeLineTypeが違っていたらcommandを再設定
 	if (nowPipeLineType_ != type) {
@@ -130,11 +145,18 @@ void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type)
 		// nowPipeLineTypeの再設定
 		nowPipeLineType_ = type;
 
-		// 引数typeにあったPipeLineを積みなおす
-		commands.List->SetGraphicsRootSignature(instance->pipeLineMap_[type].rootSignature);
-		commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
-		// 形状を設定。基本PipeLineで設定したものと同じもの
-		commands.List->IASetPrimitiveTopology(instance->pipeLineMap_[type].primitiveTopologyType);
+		if (state) {
+			// 引数typeにあったPipeLineを積みなおす
+			commands.List->SetGraphicsRootSignature(instance->pipeLineMap_[type].rootSignature);
+			commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
+			// 形状を設定。基本PipeLineで設定したものと同じもの
+			commands.List->IASetPrimitiveTopology(instance->pipeLineMap_[type].primitiveTopologyType);
+		}
+		else {
+			// 引数typeにあったPipeLineを積みなおす
+			commands.List->SetComputeRootSignature(instance->pipeLineMap_[type].rootSignature);
+			commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
+		}
 	}
 }
 

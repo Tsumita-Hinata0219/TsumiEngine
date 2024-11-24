@@ -2,7 +2,7 @@
 
 #include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
-#include "../../View/SRVManager/SRVManager.h"
+#include "../../DescriptorManager/DescriptorManager.h"
 #include "../../Transform/WorldTransform/WorldTransform.h"
 #include "../../Transform/Transform.h"
 #include "../../PipeLineManager/PipeLineManager.h"

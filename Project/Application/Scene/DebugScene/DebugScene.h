@@ -60,29 +60,20 @@ public:
 
 private:
 
-	// ConfigManager
-	ConfigManager* configManager_ = nullptr;
-
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource camera_;
 
-	// Skydome
-	std::unique_ptr<Skydome> skydome_;
-
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;
-
-	// Ground
-	std::unique_ptr<Ground> ground_;
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
 
-	// TestHuman
-	std::unique_ptr<TestHuman> testHuman_;
-
-	// TestJsonObject
-	std::unique_ptr<TestJsonObject> testJsonObject_;
+	// DemoParticle
+	std::unique_ptr<GPUParticle> dParticle_;
+	uint32_t dParticleInstanceNum_ = 0;
+	std::vector<Transform> transforms_;
+	std::vector<MaterialDataN> materials_;
 };
 

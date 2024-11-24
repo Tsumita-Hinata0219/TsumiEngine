@@ -76,19 +76,21 @@ void IGLTFState::CommandCall()
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Material
-	buffers_.material.CommandCall(0);
+	buffers_.material.GraphicsCommandCall(0);
 	// TransformationMatrix
-	buffers_.transform.CommandCall(1);
+	buffers_.transform.GraphicsCommandCall(1);
 	// Camera
 	cameraManager_->CommandCall(2);
 	// MaterialTexture
-	SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
+	buffers_.material.GraphicsCommandCallSRV(3, datas_.material.textureHandle);
 	// Light
-	buffers_.light.CommandCall(4);
+	buffers_.light.GraphicsCommandCall(4);
 	// Environment
-	buffers_.enviroment.CommandCall(5);
+	buffers_.enviroment.GraphicsCommandCall(5);
 	// EnvironmentTexture
-	SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
+	//SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
+	buffers_.material.GraphicsCommandCallSRV(6, datas_.environment.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

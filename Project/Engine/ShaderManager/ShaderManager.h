@@ -20,10 +20,16 @@ struct Shaders {
 	IDxcIncludeHandler* includeHandler;
 };
 
-
 struct ShadersMode {
 	IDxcBlob* VertexBlob;
 	IDxcBlob* PixelBlob;
+	IDxcBlob* ComputeBlob;
+};
+
+enum ShaderType {
+	VS,
+	PS,
+	CS,
 };
 
 
@@ -60,6 +66,7 @@ public: // メンバ関数
 	/// </summary>
 	ShadersMode GetModelShader(const std::string key) { return this->modelShadersMap_[key]; }
 	ShadersMode GetPostEffectShader(const std::string key) { return this->postEffectShadersMap_[key]; }
+	ShadersMode GetComputeShader(const std::string key) { return this->computeShadersMap_[key]; }
 
 #pragma endregion
 
@@ -88,11 +95,13 @@ private: // メンバ関数
 	/// </summary>
 	void ModelShadersCompiles();
 	void PostEffectShadersCompiles();
+	void ComputeShadersCompiles();
 
 	/// <summary>
 	/// シェーダーをセットする
 	/// </summary>
-	void SetShader(const std::wstring& vertexPath, const std::wstring& pixelPath, ShadersMode& shader);
+	IDxcBlob* SetShader(ShaderType type, const std::wstring& path);
+
 
 #pragma region ModelShaders
 
@@ -108,6 +117,8 @@ private: // メンバ関数
 	void Object3DShader();
 	void SkinningObject3dShader();
 	void SkyboxShader();
+	void CPUParticleShader();
+	void GPUParticle_Draw();
 
 #pragma endregion
 
@@ -132,10 +143,18 @@ private: // メンバ関数
 
 #pragma endregion
 
+#pragma region ComputeShaders
+
+	void CSParticleShader();
+	void GPUParticle_Init();
+
+#pragma endregion
+
 
 private: // メンバ変数
 
 	Shaders dxc_{};
 	std::map<std::string, ShadersMode> modelShadersMap_;
 	std::map<std::string, ShadersMode> postEffectShadersMap_;
+	std::map<std::string, ShadersMode> computeShadersMap_;
 };

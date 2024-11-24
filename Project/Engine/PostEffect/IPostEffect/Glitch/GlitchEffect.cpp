@@ -50,13 +50,15 @@ void GlitchEffect::CommandCall()
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Glitch);
 
 	// SRVをコマンドに積む
-	SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
+	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
-	mtlBuffer_.CommandCall(4);
+	mtlBuffer_.GraphicsCommandCall(4);
 
 	// MaksTexture
-	SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
+	//SRVManager::SetGraphicsRootDescriptorTable(5, mtlData_.maskTexture);
+	mtlBuffer_.GraphicsCommandCallSRV(5, mtlData_.maskTexture);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

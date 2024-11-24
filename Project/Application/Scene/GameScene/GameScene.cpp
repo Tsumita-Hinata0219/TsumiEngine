@@ -51,6 +51,9 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- Input 入力 ----- */
+	input_ = Input::GetInstance();
+  
 	/* ----- クラスにポインタを渡す ----- */
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -155,6 +158,10 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
+	if (!startDirection_->IsFinish()) { return; }
+	/*time_++;
+	if (time_ >= 2.0f * 60.0f) {
+		state->ChangeSceneState(new TitleScene());
 	if (!startDirection_->IsFinish()) {
 		return;
 	}
@@ -163,6 +170,10 @@ void GameScene::Update(GameManager* state)
 	STMenuManager_->Update();
 	SceneChangeCheck();
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
+		return;
+	}*/
+	if (input_->Trigger(DIK_RETURN)) {
+		state->ChangeSceneState(new TitleScene());
 		return;
 	}
 

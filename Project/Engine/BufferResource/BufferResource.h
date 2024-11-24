@@ -13,6 +13,7 @@
 
 #include "../Base/DXCommon/DirectXCommon.h"
 #include "../CommandManager/CommandManager.h"
+#include "DescriptorManager/DescriptorManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
@@ -23,31 +24,66 @@ class BufferResource {
 
 public:
 
-	// コンストラクタ、デストラクタ
-	BufferResource() {};
-	~BufferResource() {};
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	BufferResource() = default;
 
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	~BufferResource() = default;
 
-	// Resource作成
+	/// <summary>
+	/// Resource作成
+	/// </summary>
 	void CreateResource(UINT itemCount = 1);
+	void CreateCBV(UINT itemCount = 1);
 
-	// VertexBufferViewの作成
+	/// <summary>
+	/// VertexBufferViewの作成
+	/// </summary>
 	void CreateVertexBufferView();
 
-	// IndexBufferViewの作成
+	/// <summary>
+	/// IndexBufferViewの作成
+	/// </summary>
 	void CreateIndexBufferView();
 
-	// ResourceをマップしてCPUアクセスを可能にする
+	/// <summary>
+	/// InstancingResourceの作成
+	/// </summary>
+	void CreateInstancingResource(uint32_t instancingNum);
+
+	/// <summary>
+	/// UAVの作成
+	/// </summary>
+	void CreateUAV(UINT itemCount = 1);
+
+	/// <summary>
+	/// ResourceをマップしてCPUアクセスを可能にする
+	/// </summary>
 	void Map();
 
-	// Resourceのマップを解除してGPUアクセスを解除する
+	/// <summary>
+	/// Resourceのマップを解除してGPUアクセスを解除する
+	/// </summary>
 	void UnMap();
 
-	// データを書き込む
+	/// <summary>
+	/// データを書き込む
+	/// </summary>
 	void WriteData(const T* data);
+	void WriteData(const std::vector<T>& datas, uint32_t num);
 
-	// コマンドを積む
-	void CommandCall(UINT number);
+	/// <summary>
+	/// コマンドを積む
+	/// </summary>
+	void GraphicsCommandCall(UINT number);
+	void GraphicsCommandCallSRV(UINT number, uint32_t index);
+	void GraphicsCommandCallInstancingSRV(UINT number);
+	void ComputeCommandCall(UINT number);
+	void ComputeCommandCallInstancingSRV(UINT number);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -64,8 +100,15 @@ public:
 
 private:
 
-	// BufferResourceの生成
-	void CreateBufferResource();
+	/// <summary>
+	/// CBVの生成
+	/// </summary>
+	void CreateCBVResource();
+
+	/// <summary>
+	/// UAVの作成
+	/// </summary>
+	void CreateUAVResource();
 
 
 private: 
@@ -78,12 +121,15 @@ private:
 	// IndexBufferView
 	D3D12_INDEX_BUFFER_VIEW indexBufferView_{};
 
-	// 作成するResourceの要素数
+	// 作成するResourceの数
 	UINT itemCount_ = 1;
 
 	// mappedData
 	T* mappedData_{};
 
+	// Index
+	uint32_t srvIndex_ = 0;
+	//uint32_t uavIndex_ = 0;
 };
 
 
@@ -95,9 +141,19 @@ inline void BufferResource<T>::CreateResource(UINT itemCount)
 	this->itemCount_ = itemCount;
 
 	// BufferResourceの作成
-	CreateBufferResource();
+	CreateCBVResource();
 }
 
+// CBVの作成
+template<typename T>
+inline void BufferResource<T>::CreateCBV(UINT itemCount)
+{
+	// 作成するResourceの要素数
+	this->itemCount_ = itemCount;
+
+	// CBVの作成
+	CreateCBVResource();
+}
 
 // VertexBufferViewの作成
 template<typename T>
@@ -108,7 +164,6 @@ inline void BufferResource<T>::CreateVertexBufferView()
 	vertexBufferView_.StrideInBytes = UINT(sizeof(T));
 }
 
-
 // IndexBufferViewの作成
 template<typename T>
 inline void BufferResource<T>::CreateIndexBufferView()
@@ -118,6 +173,24 @@ inline void BufferResource<T>::CreateIndexBufferView()
 	indexBufferView_.Format = DXGI_FORMAT_R32_UINT;
 }
 
+// InstancingResourceの作成
+template<typename T>
+inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum)
+{
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, UINT(sizeof(T)));
+}
+
+// UAVの作成
+template<typename T>
+inline void BufferResource<T>::CreateUAV(UINT itemCount)
+{
+	// 作成するResourceの要素数
+	this->itemCount_ = itemCount;
+
+	// UAVの作成
+	CreateUAVResource();
+}
 
 // ResourceをマップしてCPUアクセスを可能にする
 template<typename T>
@@ -136,7 +209,6 @@ inline void BufferResource<T>::Map()
 	assert(SUCCEEDED(result));
 }
 
-
 // Resourceのマップを解除してGPUアクセスを解除する
 template<typename T>
 inline void BufferResource<T>::UnMap()
@@ -148,22 +220,72 @@ inline void BufferResource<T>::UnMap()
 	}
 }
 
-
 // データを書き込む
 template<typename T>
 inline void BufferResource<T>::WriteData(const T* data)
 {
-	assert(mappedData_);
+	assert(data != nullptr); // ポインタが有効か確認
+	assert(mappedData_ != nullptr); // mappedData_ が初期化されているか確認
 	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
 }
 
+template<typename T>
+inline void BufferResource<T>::WriteData(const std::vector<T>& datas, uint32_t num)
+{
+	// ベクトルが空でないことを確認
+	assert(!datas.empty());
+	// データ数が一致しているか確認する
+	assert(num == itemCount_);
+	// 実際のデータを書き込む処理
+	std::memcpy(mappedData_, datas.data(), sizeof(T) * num);
+}
 
 // コマンドを積む
 template<typename T>
-inline void BufferResource<T>::CommandCall(UINT number)
+inline void BufferResource<T>::GraphicsCommandCall(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t index)
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
+	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(index)._GPU);
+}
+
+template<typename T>
+inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
+	commands.List->SetGraphicsRootDescriptorTable(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
+}
+
+template<typename T>
+inline void BufferResource<T>::ComputeCommandCall(UINT number)
+{
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	commands.List->SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
+}
+
+template<typename T>
+inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
+{
+	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
+	commands.List->SetDescriptorHeaps(1, desc);
+	commands.List->SetComputeRootDescriptorTable(number, descriptor->GetSRVHandle(srvIndex_)._GPU);
 }
 
 template<typename T>
@@ -180,10 +302,9 @@ inline void BufferResource<T>::IASetIndexBuffer()
 	commands.List->IASetIndexBuffer(&indexBufferView_);
 }
 
-
 // BufferResourceの生成
 template<typename T>
-inline void BufferResource<T>::CreateBufferResource()
+inline void BufferResource<T>::CreateCBVResource()
 {
 	// Resource用のHeap設定
 	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
@@ -211,6 +332,48 @@ inline void BufferResource<T>::CreateBufferResource()
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
+	assert(SUCCEEDED(hr_));
+	if (FAILED(hr_)) {
+		// エラーハンドリング
+		std::cerr << "CreateCommittedResource failed: " << std::hex << hr_ << std::endl;
+	}
+}
+
+// UAVの作成
+template<typename T>
+inline void BufferResource<T>::CreateUAVResource()
+{
+	// Resource用のHeap設定
+	D3D12_HEAP_PROPERTIES uploadHeapProperties_{};
+	//uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
+	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_DEFAULT; // DefaultHeapを使う
+
+	// BufferResource。Textureの場合はまた別の設定をする
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	// 専用のフラグを立てる
+	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+	// Resourceのサイズ
+	resourceDesc.Width = sizeof(T) * itemCount_;
+	// Bufferの場合はこれらは1にする決まり
+	resourceDesc.Height = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
+	// Bufferの場合はこれにする決まり
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+
+	// 実際にBufferResourceを作る
+	HRESULT hr_;
+	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
+		&resourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr,
+		IID_PPV_ARGS(&buffer_));
+
+	// DescriptorManagerでUAVを作る
+	DescriptorManager* descriptor = DescriptorManager::GetInstance();
+	this->srvIndex_ = descriptor->CreateUAV(this->buffer_, sizeof(T), itemCount_);
+
 	assert(SUCCEEDED(hr_));
 	if (FAILED(hr_)) {
 		// エラーハンドリング

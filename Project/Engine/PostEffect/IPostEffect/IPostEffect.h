@@ -7,6 +7,7 @@
 #include "CommandManager/CommandManager.h"
 #include "View/SRVManager/SRVManager.h"
 #include "View/RTVManager/RTVManager.h"
+#include "DescriptorManager/DescriptorManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "TextureManager/TextureManager.h"
 #include "../Materials/PostEffectMaterials.h"
@@ -20,8 +21,8 @@ class IPostEffect {
 
 public: // メンバ関数
 
-	// デストラクタ
-	virtual ~IPostEffect() {};
+	// 仮想デストラクタ
+	virtual ~IPostEffect() = default;
 
 	// 初期化処理、更新処理、描画処理
 	virtual void Init() = 0;
@@ -41,10 +42,14 @@ protected:
 
 	// SRVやBufferの作成
 	virtual void Create() {
+		// インスタンス取得
+		descriptor_ = DescriptorManager::GetInstance();
+		cameraManager_ = CameraManager::GetInstance();
+
 		// SRV作成
 		Microsoft::WRL::ComPtr<ID3D12Resource> stv = 
 			RTVManager::GetRTV("PostEffect")->GetRTVPrope().Resources.Get();
-		srv_ = SRVManager::CreatePostEffectSRV(stv);
+		srv_ = descriptor_->CreatePostEffectSRV(stv);
 
 		// バッファー作成
 		mtlBuffer_.CreateResource();
@@ -56,13 +61,21 @@ protected: // メンバ変数
 	// SRV
 	uint32_t srv_ = 0;
 
+	// レンダーテクスチャバッファー
+	BufferResource<uint32_t> renderTexBuffer_;
+
 	// バッファーにセットするMaterialData
 	T mtlData_{};
 
 	// バッファー
 	BufferResource<T> mtlBuffer_{};
 
+	// マスクテクスチャバッファー
+	BufferResource<uint32_t> maskTexBuffer_;
+
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
-};
 
+	// ディスクリプマネージャー
+	DescriptorManager* descriptor_ = nullptr;
+};

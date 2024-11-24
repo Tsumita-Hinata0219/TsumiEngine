@@ -171,7 +171,7 @@ void GameScene::Update(GameManager* state)
 	SceneChangeCheck();
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
 		return;
-	}*/
+	}
 	if (input_->Trigger(DIK_RETURN)) {
 		state->ChangeSceneState(new TitleScene());
 		return;

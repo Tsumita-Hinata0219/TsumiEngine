@@ -118,9 +118,6 @@ private: // クラス
 	// StageTransitionMenuManager
 	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
 
-	// 入力処理
-	Input* input_ = nullptr;
-
 	// シーンチェンジにかかる時間
 	Timer sceneChange_;
 	// SceneTransition

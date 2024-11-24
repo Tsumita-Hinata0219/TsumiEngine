@@ -43,6 +43,7 @@
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
+#include "CSPipeLine/GPUParticle/Emitter/GPUParticleEmitterPipeLine.h"
 
 
 // PipeLineTypeのenum構造体
@@ -78,6 +79,7 @@ enum class PipeLineType : uint32_t {
 	SepiaTone,
 	Vignetting,
 	CSParticle,
+	CSEmitter,
 };
 
 
@@ -210,5 +212,7 @@ private: // メンバ変数
 	// CSParticle
 	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
 
+	// CSEmitter
+	std::unique_ptr<GPUParticleEmitterPipeLine> particleEmitterPipeLine_;
 };
 

@@ -127,6 +127,11 @@ void PipeLineManager::Initialize()
 	// CSParticle
 	instance->csParticlePipeLine_ = make_unique<CSParticlePipeLine>();
 	instance->pipeLineMap_[PipeLineType::CSParticle] = instance->csParticlePipeLine_->SetUpPso();
+
+	// GPUParticleEmitterPipeLine
+	instance->particleEmitterPipeLine_ = make_unique<GPUParticleEmitterPipeLine>();
+	instance->pipeLineMap_[PipeLineType::CSEmitter] = instance->particleEmitterPipeLine_->SetUpPso();
+
 }
 
 

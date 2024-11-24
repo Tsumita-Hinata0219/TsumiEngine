@@ -32,7 +32,6 @@ void StaticEnemy::Init()
 }
 
 
-
 // 更新処理
 void StaticEnemy::Update()
 {

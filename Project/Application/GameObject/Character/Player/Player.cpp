@@ -1,8 +1,11 @@
 #include "Player.h"
 #include "../../Camera/FollowCamera/FollowCamera.h"
+#include "../../Camera/GameCamera/GameCamera.h"
 
 
-// 初期化処理
+/// <summary>
+/// 初期化処理
+/// </summary>
 void Player::Init()
 {
 	// Inputクラス
@@ -22,6 +25,7 @@ void Player::Init()
 
 	//Transformの初期化
 	trans_.Init();
+	trans_.srt.translate.z = -5.0f;
 
 	// 各ボディの初期化とペアレントを結ぶ
 	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
@@ -33,22 +37,30 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
-	// Colliderの初期化
-	colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	colComp_->RegisterCollider(sphere_);
+	// 移動処理クラス
+	movement_ = std::make_unique<PlayerMovement>();
+	movement_->Init(this, gameCamera_, &trans_);
+
+	// Colliderの登録
+	colComp_->SetAttribute(ColliderAttribute::Player);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 
-
 	// キルカウントを0で初期化
-	killCount_ = 0;
+	killCount_ =14;
 
 	// HPの設定
 	hp_ = 3;
+
+	// 無敵状態の時間を設定しておく
+	invincibilityTime_ = invincibilityInterval_;
 }
 
 
-// 更新処理
+/// <summary>
+///  更新処理
+/// </summary>
 void Player::Update()
 {
 	// UI
@@ -57,11 +69,8 @@ void Player::Update()
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
-	// 入力を受け取る
-	InputFunc();
-
 	// プレイヤーの操作関連
-	MoveFunc();
+	movement_->Update();
 
 	// 射撃の処理
 	ExecuteShot();
@@ -82,20 +91,28 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
 
-	//// キルカウントが一定を超えていたら勝利フラグを立てる
-	//if (killCount_ >= 15) {
-	//	isWin_ = true;
-	//	isLose_ = false;
-	//}
-	//// 体力が0なら敗北フラグを立てる
-	//if (hp_ <= 0) {
-	//	isWin_ = false;
-	//	isLose_ = true;
-	//}
+	// キルカウントが一定を超えていたら勝利フラグを立てる
+	if (killCount_ >= 15) {
+		isWin_ = true;
+		isLose_ = false;
+	}
+	// 体力が0なら敗北フラグを立てる
+	if (hp_ <= 0) {
+		isWin_ = false;
+		isLose_ = true;
+	}
+
+	// 無敵状態のタイマーを減らす処理
+	if (isInvincibility_) {
+		SubtructInvincibilityTime();
+	}
+
+	if (input_->Trigger(DIK_RETURN)) {
+		isWin_ = true;
+	}
+
 
 #ifdef _DEBUG
 	// ImGuiの描画
@@ -104,7 +121,9 @@ void Player::Update()
 }
 
 
-// 描画処理
+/// <summary>
+/// 描画処理
+/// </summary>
 void Player::Draw3D()
 {
 	// BodyModelの描画
@@ -129,9 +148,20 @@ void Player::Draw2DFront()
 }
 
 
-// 衝突自コールバック関数
+/// <summary>
+/// 衝突判定コールバック関数
+/// </summary>
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
+	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+
+		// 押し出しの処理
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	}
+	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
+
+		OnCollisionWithEnemyBullet();
+	}
 }
 void Player::OnCollisionWithEnemy()
 {
@@ -140,8 +170,17 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
+	// 早期return
+	if (isInvincibility_) return; // 無敵時間
+	if (hp_ <= 0) return; // 体力が0以下
+
+	// 無敵時間にする
+	isInvincibility_ = true;
+
 	// HP減少
-	//hp_--;
+	if (hp_ > 0) {
+		hp_--;
+	}
 
 	// 体力がなければ消すモデルもないので通らない
 	if (hp_ >= 0) {
@@ -156,11 +195,18 @@ void Player::OnCollisionWithEnemyBullet()
 		),
 			iBodys_.end()
 		);
+
+		// ボディモデルのカラーを赤にする
+		for (auto& body : this->iBodys_) {
+			body->SetModelColor(Samp::Color::RED);
+		}
 	}
 }
 
 
-// 入力を受け取る
+/// <summary>
+/// 入力を受け取る
+/// </summary>
 void Player::InputFunc()
 {
 	// stickの入力を取得
@@ -183,7 +229,9 @@ void Player::InputFunc()
 }
 
 
-// プレイヤーの移動
+/// <summary>
+/// プレイヤーの移動
+/// </summary>
 void Player::MoveFunc()
 {
 	// 移動方向を求める
@@ -211,12 +259,14 @@ void Player::MoveFunc()
 }
 
 
-// 移動方向を求める
+/// <summary>
+/// 移動方向を求める
+/// </summary>
 void Player::CalcMoveDirection()
 {
 	// カメラの前方と右方
-	Vector3 forward = followCamera_->GetForwardVec();
-	Vector3 right = followCamera_->GetRightVec();
+	Vector3 forward = gameCamera_->GetForwardVec();
+	Vector3 right = gameCamera_->GetRightVec();
 
 	stickMoveDirection_ = {
 		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
@@ -231,7 +281,9 @@ void Player::CalcMoveDirection()
 }
 
 
-// 移動処理
+/// <summary>
+/// 移動処理
+/// </summary>
 void Player::PadMove()
 {
 	// 移動量の計算
@@ -264,17 +316,27 @@ void Player::KeyMove()
 }
 
 
-// 移動限界処理
+/// <summary>
+/// 移動限界処理
+/// </summary>
 void Player::MoveLimited()
 {
+	// 移動限界
+	const float kMoveMit = 100.0f;
+	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
+	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
+	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
+	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
 }
 
 
-// カメラの方向に体の向きを合わせる
+/// <summary>
+/// カメラの方向に体の向きを合わせる
+/// </summary>
 void Player::FaceCameraDirection()
 {
 	// カメラの前方ベクトルを取得
-	Vector3 cameraForward = followCamera_->GetForwardVec();
+	Vector3 cameraForward = gameCamera_->GetForwardVec();
 
 	// カメラのY成分を無視して水平面上の方向を計算
 	cameraForward.y = 0.0f;
@@ -292,7 +354,9 @@ void Player::FaceCameraDirection()
 }
 
 
-// 移動方向からY軸の姿勢を合わせる
+/// <summary>
+/// 移動方向からY軸の姿勢を合わせる
+/// </summary>
 void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 {
 	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
@@ -313,7 +377,9 @@ void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
 }
 
 
-// 射撃処理
+/// <summary>
+/// 射撃処理
+/// </summary>
 void Player::ExecuteShot()
 {
 	// キーorボタン押下でタイマーをデクリメント
@@ -342,7 +408,9 @@ void Player::ExecuteShot()
 }
 
 
-// 新しいバレットを生成する
+/// <summary>
+/// 新しいバレットを生成する
+/// </summary>
 void Player::CreateNewBullet()
 {
 	// newBulletのインスタンス
@@ -366,7 +434,35 @@ void Player::CreateNewBullet()
 }
 
 
-// ImGuiの描画
+/// <summary>
+/// 無敵状態のタイマーを減らす処理
+/// </summary>
+void Player::SubtructInvincibilityTime()
+{
+	// 無敵状態の時間を減らす
+	invincibilityTime_--;
+
+	// 一定フレームたったら
+	if (invincibilityTime_ == invincibilityInterval_ - 7) {
+
+		// モデルのカラーを白に戻す
+		for (auto& body : this->iBodys_) {
+			body->SetModelColor(Samp::Color::WHITE);
+		}
+	}
+
+	if (invincibilityTime_ <= 0) {
+		// 状態解除
+		isInvincibility_ = false;
+		// タイマーリセット
+		invincibilityTime_ = invincibilityInterval_;
+	}
+}
+
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
 void Player::DrawImGui()
 {
 	if (ImGui::TreeNode("Player")) {
@@ -392,6 +488,11 @@ void Player::DrawImGui()
 
 		ImGui::Text("Shoot");
 		ImGui::Checkbox("isShooting", &isShooting_);
+		ImGui::Text("");
+
+		ImGui::Text("Invincibility");
+		ImGui::Checkbox("Invincibility", &isInvincibility_);
+		ImGui::Text("InvincibilityTime = %d", invincibilityTime_);
 		ImGui::Text("");
 
 		ImGui::TreePop();

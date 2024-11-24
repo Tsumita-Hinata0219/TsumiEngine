@@ -5,13 +5,45 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() {}
+GameScene::GameScene() 
+{
+	input_ = Input::GetInstance();
+	/* ----- CollisionManager コリジョンマネージャー ----- */
+	CollisionManager_ = CollisionManager::GetInstance();
+	/* ----- AbsentEffect アブセントエフェクト ----- */
+	absentEffect_ = std::make_unique<AbsentEffect>();
+	/* ----- TestPostEffect テストポストエフェクト ----- */
+	testPostEffect_ = make_unique<TestPostEffect>();
+	/* ----- GameSceneUI ゲームシーンUI ----- */
+	gameSceneUI_ = std::make_unique<GameSceneUI>();
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_ = std::make_unique<GameCamera>();
+	/* ----- StartDirection スタート演出 ----- */
+	startDirection_ = std::make_unique<StartDirection>();
+	/* ----- Skybox 天箱 ----- */
+	skybox_ = std::make_unique<Skybox>();
+	/* ----- Wall 壁 ----- */
+	wall_ = std::make_unique<Wall>();
+	/* ----- Floor 床 ----- */
+	floor_ = std::make_unique<Floor>();
+	/* ----- Player プレイヤー ----- */
+	player_ = make_unique<Player>();
+	/* ----- EnemyManager エネミーマネージャー ----- */
+	enemyManager_ = std::make_unique<EnemyManager>();
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_ = SceneTransition::GetInstance();
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
+}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() {}
+GameScene::~GameScene() 
+{
+
+}
 
 
 /// <summary>
@@ -21,64 +53,60 @@ void GameScene::Initialize()
 {
 	/* ----- Input 入力 ----- */
 	input_ = Input::GetInstance();
+  
+	/* ----- クラスにポインタを渡す ----- */
+	// プレイヤーにカメラを渡す
+	player_->SetGameCamera(gameCamera_.get());
+	// カメラにプレイヤーを渡す
+	gameCamera_->SetPlayer(player_.get());
+	// エネミーにプレイヤーを渡す
+	enemyManager_->SetPlayer(player_.get());
+
 
 	/* ----- JsonManager Jsonマネージャー ----- */
 	JsonManager::GetInstance()->Initialize();
 	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
 	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
 
-	/* ----- CollisionManager コリジョンマネージャー ----- */
-	collisionSystem_ = std::make_unique<CollisionSystem>();
-	collisionSystem_->Init();
-
 	/* ----- AbsentEffect アブセントエフェクト ----- */
-	absentEffect_ = std::make_unique<AbsentEffect>();
 	absentEffect_->Init();
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
 	testPostEffect_->Init();
 
 	/* ----- GameSceneUI ゲームシーンUI ----- */
-	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameSceneUI_->Init();
 
-	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_ = std::make_unique<FollowCamera>();
-	followCamera_->Init();
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
+	gameCamera_->Init();
 
 	/* ----- StartDirection スタート演出 ----- */
-	startDirection_ = std::make_unique<StartDirection>();
 	startDirection_->Init();
 
 	/* ----- Skybox 天箱 ----- */
-	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
 	skybox_->Init(dds);
 
 	/* ----- Wall 壁 ----- */
-	wall_ = std::make_unique<Wall>();
 	wall_->Init();
 
 	/* ----- Floor 床 ----- */
-	floor_ = std::make_unique<Floor>();
 	floor_->Init();
 
 	/* ----- Player プレイヤー ----- */
-	player_ = make_unique<Player>();
 	player_->Init();
-	// プレイヤーにフォローカメラを渡す
-	player_->SetFollowCamera(followCamera_.get());
-	// フォローカメラにカメラを渡す
-	followCamera_->SetPlayer(player_.get());
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
-	enemyManager_ = std::make_unique<EnemyManager>();
-	enemyManager_->SetPlayer(player_.get());
 	enemyManager_->Init();
 
-	// シーンチェンジにかかる時間。3秒
-	sceneChange_.Init(0.0f, 60.0f * 3.0f);
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Init();
+
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Init();
+	sceneTransition_->SetState(Cloased);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -94,8 +122,8 @@ void GameScene::Update(GameManager* state)
 	/* ----- GameSceneUI ゲームシーンUI----- */
 	gameSceneUI_->Update();
 
-	/* ----- FollowCamera フォローカメラ ----- */
-	followCamera_->Update();
+	/* ----- GameCamera ゲームカメラ ----- */
+	gameCamera_->Update();
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();
@@ -106,12 +134,42 @@ void GameScene::Update(GameManager* state)
 	/* ----- Floor 床 ----- */
 	floor_->Update();
 
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Update();
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+
+		// セレクトバーが何を選択したかでチェンジ先シーンを変える
+		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
+			state->ChangeSceneState(new TitleScene);
+		}
+		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
+			state->ChangeSceneState(new GameScene);
+		}
+		return;
+	}
+	// 終了処理
+	STMenuManager_->FuncEndDirection();
+	// シーントランジション中は以下の処理に入らない
+	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
+		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
+
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Update();
 	if (!startDirection_->IsFinish()) { return; }
 	/*time_++;
 	if (time_ >= 2.0f * 60.0f) {
 		state->ChangeSceneState(new TitleScene());
+	if (!startDirection_->IsFinish()) {
+		return;
+	}
+
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Update();
+	SceneChangeCheck();
+	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
 		return;
 	}*/
 	if (input_->Trigger(DIK_RETURN)) {
@@ -126,11 +184,13 @@ void GameScene::Update(GameManager* state)
 	enemyManager_->Update();
 
 	/* ----- Collision 衝突判定 ----- */
-	CheckAllCollision();
+	CollisionManager_->Update();
+
 
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
+	CollisionManager_->Update();
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -178,64 +238,48 @@ void GameScene::FrontSpriteDraw()
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Draw();
 
-	/* ----- GameSceneUI ゲームシーンUI----- */
-	gameSceneUI_->Draw2DFront();
+	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
 
-	/* ----- Player プレイヤー ----- */
-	player_->Draw2DFront();
+		/* ----- GameSceneUI ゲームシーンUI----- */
+		gameSceneUI_->Draw2DFront();
+
+		/* ----- Player プレイヤー ----- */
+		player_->Draw2DFront();
+	}
 
 	/* ----- StartDirection スタート演出 ----- */
 	startDirection_->Draw2DFront();
+
+	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
+	STMenuManager_->Draw2DFront();
+
+	/* ----- SceneTransition シーントランジション ----- */
+	sceneTransition_->Draw2DFront();
 }
 
 
-// シーンチェンジチェック
-bool GameScene::SceneChangeCheck(GameManager* state)
+/// <summary>
+/// シーンチェンジチェック
+/// </summary>
+void GameScene::SceneChangeCheck()
 {
-	// プレイヤーの勝敗条件
+	// プレイヤーが勝利するか敗北するかすれば
+	// シーンを変更する
 	if (player_->IsWin() || player_->IsLose()) {
-
-		if (!sceneChange_.IsActive()) {
-
-			// SceneChangeTimeスタート
-			sceneChange_.Start();
-		}
-
-		// タイマー更新
-		sceneChange_.Update();
-
-		// 終了したらシーンチェンジ
-		if (sceneChange_.IsFinish()) {
-			state->ChangeSceneState(new ResultScene());
-		}
-
-		return true;
+		STMenuManager_->DirectionStart();
 	}
 
-	return false;
+	// 演出が終了していれば押せる
+	if (STMenuManager_->IsFinish()) {
+
+		// Aボタンを押したらシーントランジション開始
+		if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+
+			if (STMenuManager_->GetSelect() == MenuSelect::Other) { return; }
+
+			STMenuManager_->EndDirectionStart(); // 終了演出開始
+			sceneTransition_->StartFadeOut(); // シーントランジション開始
+		}
+	}
 }
 
-
-// 衝突判定処理
-void GameScene::CheckAllCollision()
-{
-	// コンポーネントをクリア
-	collisionSystem_->ClearComponent();
-
-	// コンポーネントを追加
-	collisionSystem_->AAddComponent(player_->GetColComponent());
-	for (auto& plaBullet : player_->GetBulletList()) {
-		collisionSystem_->AAddComponent(plaBullet->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		collisionSystem_->AAddComponent(enemy->GetColComponent());
-	}
-	for (auto& enemy : enemyManager_->GetEnemys()) {
-		for (auto& eneBullet : enemy->GetBulletList()) {
-			collisionSystem_->AAddComponent(eneBullet->GetColComponent());
-		}
-	}
-
-	// コリジョン判定を行う
-	collisionSystem_->Update();
-}

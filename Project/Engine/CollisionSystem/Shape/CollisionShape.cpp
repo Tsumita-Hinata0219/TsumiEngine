@@ -1,4 +1,15 @@
 #include "CollisionShape.h"
+#include "../Manager/CollisionManager.h"
+
+
+// ColDataの仮想デストラクタ
+Col::ColData::~ColData()
+{
+	if (CollisionManager::GetInstance()) {
+		// shapeが消えることを知らせる
+		CollisionManager::GetInstance()->UnRegister(this);
+	}
+}
 
 
 // 境界ボックスから空間レベルと所属空間を求める
@@ -48,4 +59,12 @@ void CollisionShape::CalcSpaceLevel()
 
 	// 所属空間
 	spaceIndex_ = vertexSpaceID_.first >> highestBitPos;
+}
+
+
+// 衝突時コールバック関数
+void CollisionShape::OnCollision(const CollisionShape& other, const ColShapeData& hitData)
+{
+	this->component_->SetHitData(hitData);
+	this->component_->GetOwner()->onCollision(other.component_->GetOwner());
 }

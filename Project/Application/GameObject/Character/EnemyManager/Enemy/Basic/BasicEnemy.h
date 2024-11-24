@@ -54,6 +54,9 @@ public:
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
 
+	// エネミーマネージャー
+	void SetEnemyManager(EnemyManager* setManager) override { this->enemyManager_ = setManager; }
+
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
@@ -63,9 +66,6 @@ public:
 
 	// 座標
 	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
-
-	// Collider
-	//OBBCollider* GetOBBCollider() override { return this->collider_.get(); }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
@@ -110,6 +110,9 @@ private:
 	// プレイヤー
 	Player* player_ = nullptr;
 
+	// エネミーマネージャー
+	EnemyManager* enemyManager_ = nullptr;
+
 	// Model
 	std::unique_ptr<Model> model_;
 
@@ -143,7 +146,7 @@ private:
 	bool isCombatActive_ = false;
 
 	// 戦闘状態になるかならないかの距離の閾値
-	float combatTriggerDistance_ = 40.0f;
+	float combatTriggerDistance_ = 60.0f;
 
 	// HP
 	uint32_t hp_ = 0;
@@ -153,7 +156,7 @@ private:
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
-	int kShotInterval_ = 80;
+	int kShotInterval_ = 40;
 
 
 	// ステートパターン

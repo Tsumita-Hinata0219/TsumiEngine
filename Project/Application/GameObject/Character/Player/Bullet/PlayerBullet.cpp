@@ -15,7 +15,7 @@ void PlayerBullet::Init()
 	// 速度の設定。呼び出し先でaccessorで設定
 
 	// 寿命のタイマーをスタート。2秒で設定
-	life_.Init(0.0f, 2.0f * 60.0f);
+	life_.Init(0.0f, 1.8f * 60.0f);
 	life_.Start();
 
 	// 回転速度の設定
@@ -26,11 +26,8 @@ void PlayerBullet::Init()
 	light_.direction = Vector3::one;
 
 	//// Colliderの初期化
-	//collider_ = std::make_unique<OBBCollider>();
-	//collider_->Init();
-	//collider_->SetSize(size_);
-	colComp_ = std::make_unique<CollisionComponent>(this);
-	colComp_->RegisterCollider(sphere_);
+	colComp_->SetAttribute(ColliderAttribute::Player);
+	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 }
@@ -52,9 +49,7 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
 	sphere_.center = trans_.GetWorldPos();
-	colComp_->UpdateShape(sphere_);
 }
 
 

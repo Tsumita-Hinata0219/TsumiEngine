@@ -3,10 +3,13 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "JsonManager/JsonManager.h"
+#include "CollisionSystem/System/CollisionSystem.h"
+#include "CollisionSystem/Manager/CollisionManager.h"
 
 #include "GameObject/Camera/Manager/CameraManager.h"
-#include "GameObject/Camera/FollowCamera/FollowCamera.h"
+#include "GameObject/Camera/GameCamera/GameCamera.h"
 
+#include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
@@ -24,7 +27,7 @@
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "CollisionSystem/System/CollisionSystem.h"
+#include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
 
 
 class GameScene : public IScene {
@@ -69,17 +72,18 @@ public:
 
 private: 
 
-	// シーンチェンジチェック
-	bool SceneChangeCheck(GameManager* state);
-
-	// 衝突判定処理
-	void CheckAllCollision();
+	/// <summary>
+	/// シーンチェンジチェック
+	/// </summary>
+	void SceneChangeCheck();
 
 
 private: // クラス
 
+	Input* input_ = nullptr;
+
 	// CollisionManager
-	std::unique_ptr<CollisionSystem> collisionSystem_;
+	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;
@@ -90,8 +94,8 @@ private: // クラス
 	// GameSceneUI
 	std::unique_ptr<GameSceneUI> gameSceneUI_;
 
-	// FollowCamera
-	std::unique_ptr<FollowCamera> followCamera_;
+	// GameCamera
+	std::unique_ptr<GameCamera> gameCamera_;
 
 	// StartDirection
 	std::unique_ptr<StartDirection> startDirection_;
@@ -111,14 +115,15 @@ private: // クラス
 	// EnemyManager
 	std::unique_ptr<EnemyManager> enemyManager_;
 
-	int time_ = 0;
-
-private:
+	// StageTransitionMenuManager
+	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
 
 	// 入力処理
 	Input* input_ = nullptr;
 
 	// シーンチェンジにかかる時間
 	Timer sceneChange_;
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
 };
 

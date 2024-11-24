@@ -1,124 +1,83 @@
 #pragma once
 
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
-#include "../Collider/Box/AABBCollider.h"
-#include "../Collider/Box/OBBCollider.h"
-#include "../Collider/Segment/SegmentCollider.h"
 #include "../Collider/ColliderConfig.h"
 #include "../IsCollision/IsCollision.h"
+#include "../Event/CollisionEvent.h"
+#include "../ColEventManager/ColEventManager.h"
+#include "../Detect/CollisionDetect.h"
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 #include "GameObject/IObject/IObject.h"
 
 #include <list>
+#include <vector>
+
+// 前方宣言
+class CollisionComponent;
+class CollisionShape;
+
+
+// ファクトリ関数
+using ShapeFactory = std::function<std::unique_ptr<CollisionShape>(CollisionComponent*, Col::ColData*)>;
 
 
 /* CollisionManagerクラス */
 class CollisionManager {
 
+private: // シングルトン
+
+	// コンストラクタ、デストラクタ
+	CollisionManager() = default;
+	~CollisionManager() = default;
+	CollisionManager(const CollisionManager&) = delete;
+	const CollisionManager& operator=(const CollisionManager&) = delete;
+
+
 public:
 
+	// インスタンス取得
+	static CollisionManager* GetInstance() {
+		static CollisionManager instance;
+		return &instance;
+	}
+
+	// 解放処理
+	static void Finalize();
+
+	// コライダーの登録
+	void Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component);
+
+	// 登録されているShapeを削除する
+	void UnRegister(Col::ColData* data);
+
+	// 更新処理
+	void Update();
 
 
+#pragma region Accessor アクセッサ
+
+
+#pragma endregion 
+
+
+private:
+
+	// コリジョン判定を行う
+	void CheckCollisions();
+
+	// データの更新
+	void UpdateCollisionData();
+
+	// ImGuiの描画
+	void DrawImGui();
+
+	// Shapeのインスタンスの取得
+	static const std::unordered_map<std::type_index, ShapeFactory>& GetFactoryMap();
+
+
+private:
+
+	// コライダーのポインタ配列
+	std::map<Col::ColData*, std::unique_ptr<CollisionShape>> shapeMap_;
 };
-
-//using namespace std;
-//
-//
-//
-///* CollisionManagerクラス */
-//class CollisionManager {
-//
-//public: // 総当たり用
-//
-//	/// <summary>
-//	/// 登録されたすべてのコライダーに対して衝突を検出する。
-//	/// </summary>
-//	void CheckAllCollision();
-//
-//    /// <summary>
-//    /// 各種コライダーをリストに登録するメソッド
-//    /// </summary>
-//    void AddSphereColliders(SphereCollider* collider) { sphereColliders_.push_back(collider); }
-//    void AddSegmentColliders(SegmentCollider* collider) { segmentColliders_.push_back(collider); }
-//    void AddAABBColliders(AABBCollider* collider) { aabbColliders_.push_back(collider); }
-//    void AddOBBColliders(OBBCollider* collider) { obbColliders_.push_back(collider); }
-//
-//    /// <summary>
-//    /// 登録されたコライダーリストをクリアするメソッド
-//    /// </summary>
-//    void ColliderClear()	{
-//		sphereColliders_.clear();
-//        segmentColliders_.clear();
-//		aabbColliders_.clear();
-//        obbColliders_.clear();
-//	}
-//
-//    //// 衝突判定検出
-//    //void CheckCollisions(const std::vector<IObject*>& obj) {
-//    //    for (size_t i = 0; i < obj.size(); ++i) {
-//    //        for (size_t j = i + 1; j < obj.size(); ++j) {
-//    //            if (obj[i]->DetectCollisions(*obj[j])) {
-//    //                std::cout << "Collision detected between objects!" << std::endl;
-//    //                obj[i]->onCollision(obj[j]);
-//    //                obj[j]->onCollision(obj[i]);
-//    //            }
-//    //        }
-//    //    }
-//    //}
-//
-//
-//private:
-//
-//    // -------------------------------------------------------------------------
-//    // 衝突検出メソッド
-//    // -------------------------------------------------------------------------
-//    //  各種コライダー同士のイテレーター処理と衝突判定の呼び出し
-//    // -------------------------------------------------------------------------
-//    void DetectSphere2SphereList(list<SphereCollider*>::iterator itrA);
-//    void DetectAABB2AABBList(list<AABBCollider*>::iterator itrA);
-//    void DetectAABB2SphereList(list<AABBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB);
-//    void DetectAABB2SegmentList(list<AABBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB);
-//    void DetectOBB2SphereList(list<OBBCollider*>::iterator itrA, list<SphereCollider*>::iterator itrB);
-//    void DetectOBB2SegmentList(list<OBBCollider*>::iterator itrA, list<SegmentCollider*>::iterator itrB);
-//    void DetectOBB2OBBList(list<OBBCollider*>::iterator itrA);
-//
-//    // -------------------------------------------------------------------------
-//    // 衝突検出と応答メソッド
-//    // -------------------------------------------------------------------------
-//    // 2つのコライダーの衝突フィルターと衝突判定
-//    // -------------------------------------------------------------------------
-//    void CheckCollisionSpherexSphere(SphereCollider* cA, SphereCollider* cB);
-//    void CheckCollisionAABBxAABB(AABBCollider* cA, AABBCollider* cB);
-//    void CheckCollisionAABBxSphere(AABBCollider* cA, SphereCollider* cB);
-//    void CheckCollisionAABBxSegment(AABBCollider* cA, SegmentCollider* cB);
-//    void CheckCollisionOBBxSphere(OBBCollider* cA, SphereCollider* cB);
-//    void CheckCollisionOBBxSegment(OBBCollider* cA, SegmentCollider* cB);
-//    void CheckCollisionOBBxOBB(OBBCollider* cA, OBBCollider* cB);
-//
-//private:
-//
-//	// コライダーリスト
-//	list<SphereCollider*> sphereColliders_;
-//	list<SegmentCollider*> segmentColliders_;
-//    list<AABBCollider*> aabbColliders_;
-//    list<OBBCollider*> obbColliders_;
-//
-//
-//public: // 個別用
-//
-//    // -------------------------------------------------------------------------
-//    // 衝突検出と応答メソッド
-//    // -------------------------------------------------------------------------
-//    // 2つのコライダーの衝突判定
-//    // -------------------------------------------------------------------------
-//    static bool CheckSpherexSphere(SphereCollider* cA, SphereCollider* cB);
-//    static bool CheckAABBxAABB(AABBCollider* cA, AABBCollider* cB);
-//    static bool CheckAABBxSphere(AABBCollider* cA, SphereCollider* cB);
-//    static bool CheckAABBxSegment(AABBCollider* cA, SegmentCollider* cB);
-//    static bool CheckOBBxSphere(OBBCollider* cA, SphereCollider* cB);
-//    static bool CheckOBBxSegment(OBBCollider* cA, SegmentCollider* cB);
-//    static bool CheckOBBxOBB(OBBCollider* cA, OBBCollider* cB);
-//};

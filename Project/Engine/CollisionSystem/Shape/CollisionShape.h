@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Math/MyMath.h"
+#include "../Collider/ColliderConfig.h"
 #include <variant>
 
 #define ROOT_EDGE_LENGTH 100
@@ -10,13 +11,14 @@ namespace Col {
 
 	struct ColData {
 	public:
-		uint32_t id;
+		uint32_t id = 0;
+		// 仮想デストラクタ
+		virtual ~ColData();
 	};
 
 	struct Sphere : public ColData {
 		Vector3 center{}; // !< 中心座標
-		float radius;	  // !< 半径
-		int id;
+		float radius = 0.0f;	  // !< 半径
 	};
 	struct AABB : public ColData {
 		Vector3 center{}; // !< 中心座標
@@ -71,12 +73,23 @@ public:
 	// 境界ボックスから空間レベルと所属空間を求める
 	void CalcSpaceLevel();
 
+	// ImGuiの描画
+	virtual void DrawImGui(const std::string& label = "") = 0;
+
+	// 衝突時コールバック関数
+	virtual void OnCollision(const CollisionShape& other, const ColShapeData& hitData);
+
 
 #pragma region Accessor アクセッサ
 
 	// 各コライダーデータ
 	virtual ColShapeData GetData() const = 0;
 	virtual void SetData(const ColShapeData& data) = 0;
+	virtual Col::ColData GetColData() const = 0;
+	virtual void SetData(const Col::ColData& data) = 0;
+
+	// コンポーネント
+	virtual CollisionComponent* GetComponent() { return this->component_; }
 
 	// Bounding
 	Col::AABB GetBounding() const { return this->bounding_; }
@@ -89,6 +102,10 @@ public:
 	// 所属空間
 	uint32_t GetSpaceIndex() const { return this->spaceIndex_; }
 	void SetSpaceIndex(uint32_t setIndex) { this->spaceIndex_ = setIndex; }
+
+	// 識別属性
+	uint32_t GetAttribute() const { return this->attribute_; }
+	void SetAttribute(const uint32_t setAttribute) { this->attribute_ = setAttribute; }
 
 #pragma endregion 
 
@@ -114,5 +131,8 @@ protected:
 
 	// ID
 	uint32_t id_ = 0;
-};
 
+	// 識別属性
+	uint32_t attribute_ = ColliderAttribute::None;
+
+};

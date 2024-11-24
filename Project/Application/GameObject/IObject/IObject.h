@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../GameObject.h"
+#include "../Config/AppComfig.h"
 #include "3D/Model/Model.h"
 #include "3D/Model/ModelManager/ModelManager.h"
 #include "Transform/Transform.h"
@@ -12,13 +13,6 @@
 #include <unordered_set>
 
 
-// オブジェクトの属性
-enum class ObjAttribute {
-    PLAYER,
-    ENEMY,
-    TERRAIN,
-    OTHER,
-};
 
 
 /* オブジェクトの基底クラス */
@@ -27,7 +21,10 @@ class IObject {
 public: // メンバ関数
 
 	// コンストラクタ
-	IObject(){ modelManager_ = ModelManager::GetInstance(); }
+	IObject() { 
+		modelManager_ = ModelManager::GetInstance();
+		colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
+	}
 
 	// 仮想デストラクタ
 	virtual ~IObject() {};

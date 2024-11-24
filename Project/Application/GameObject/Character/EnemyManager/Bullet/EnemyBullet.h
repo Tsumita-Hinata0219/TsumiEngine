@@ -6,13 +6,21 @@
 #include "../../../GameObject.h"
 
 
+
+// EnemyのBulletのType
+enum class EnemyBulletType {
+	Normal,       // 消える弾
+	Resistant,    // 消えない弾
+};
+
+
 /* PlayerBulletクラス */
 class EnemyBullet : public IObject {
 
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	EnemyBullet() { attribute_ = ObjAttribute::ENEMY; };
+	EnemyBullet() { attribute_ = ObjAttribute::ENEMYBULLET; };
 	~EnemyBullet() {};
 
 	// 初期化処理　更新処理　描画処理
@@ -26,6 +34,9 @@ public: // メンバ関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
 #pragma region Accessor アクセッサ
+
+	// Type
+	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType;	}
 
 	// 座標
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
@@ -48,16 +59,6 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
-	// Collider
-	//OBBCollider* GetOBBCollider() { return this->collider_.get(); }
-
-#pragma endregion 
-
-#pragma region Collision 衝突判定
-
-	// 衝突自コールバック関数
-	void OnCollisionWithPlayer();
-	void OnCollisionWithPlayerBullet();
 
 #pragma endregion 
 
@@ -73,6 +74,9 @@ private:
 
 private: // メンバ変数
 
+	// BulletType
+	EnemyBulletType bulletType_ = EnemyBulletType::Normal;
+
 	// モデル
 	std::unique_ptr<Model> model_;
 
@@ -83,7 +87,6 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f,2.0f };
 
 	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
 	Col::Sphere sphere_;
 
 	// 移動速度

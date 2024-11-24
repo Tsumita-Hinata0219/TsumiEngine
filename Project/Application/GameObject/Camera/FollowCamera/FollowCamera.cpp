@@ -12,7 +12,7 @@ void FollowCamera::Init()
 	cameraManager_ = CameraManager::GetInstance();
 	// カメラリソース
 	camera_.Init();
-	camera_.srt.rotate = { 0.2f, 0.0f, 0.0f };
+	camera_.srt.rotate = { 0.3f, 0.0f, 0.0f };
 	cameraManager_->ReSetData(camera_);
 
 	// 相対位置

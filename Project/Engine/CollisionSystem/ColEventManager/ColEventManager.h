@@ -3,6 +3,7 @@
 #include <vector>
 #include <functional>
 #include <unordered_map>
+#include <memory>
 
 #include "../Event/CollisionEvent.h"
 

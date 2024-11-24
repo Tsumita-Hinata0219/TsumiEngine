@@ -23,7 +23,7 @@ void TitleUIManager::Init()
     };
 
     // ラベルのベースの座標の設定　
-    labelBasePos_ = { 0.0f, -2.0f, 18.0f };
+    labelBasePos_ = { 0.0f, -2.5f, 18.0f };
     // ラベルのオフセット
     labelOffset_ = { 0.0f, 0.5f, 0.0f };
 

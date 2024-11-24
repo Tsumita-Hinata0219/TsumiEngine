@@ -28,14 +28,7 @@ struct PixelShaderOutput
 
 PixelShaderOutput main(VertexShaderOutput input)
 {
-    PixelShaderOutput output;
-    
-    //float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
-    //float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
-
-    //output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
-    //output.color.a = gMaterial.color.a * textureColor.a;
-    
+    PixelShaderOutput output;    
     
     // UV変換
     float4 transformedUV = mul(float4(input.texCoord, 0.0f, 1.0f), gMaterial.uvTransform);
@@ -45,7 +38,7 @@ PixelShaderOutput main(VertexShaderOutput input)
     output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     output.color.a = gMaterial.color.a * textureColor.a;
     
-    // Dissolveが有効化確認
+    // Dissolveが有効か確認
     if (gDissolve.isActive == 1)
     {
         // Dissolve用のマスク画像をサンプル

@@ -71,8 +71,8 @@ private:
 	std::unique_ptr<TestPostEffect> testPostEffect_;
 
 	// DemoParticle
-	std::unique_ptr<GPUParticle> dParticle_;
-	uint32_t dParticleInstanceNum_ = 0;
+	std::unique_ptr<GPUParticle> gParticle_;
+	uint32_t gParticleInstanceNum_ = 0;
 	std::vector<Transform> transforms_;
 	std::vector<MaterialDataN> materials_;
 };

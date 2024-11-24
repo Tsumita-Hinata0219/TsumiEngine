@@ -34,15 +34,15 @@ void DebugScene::Initialize()
 	testPostEffect_->Init();
 
 	/* ----- DemoParticle デモパーティクル ----- */
-	dParticleInstanceNum_ = 10;
-	dParticle_ = std::make_unique<GPUParticle>();
-	dParticle_->Init(dParticleInstanceNum_);
-	transforms_.resize(dParticleInstanceNum_);
+	gParticleInstanceNum_ = 10;
+	gParticle_ = std::make_unique<GPUParticle>();
+	gParticle_->Init(gParticleInstanceNum_);
+	transforms_.resize(gParticleInstanceNum_);
 	for (auto& element : transforms_) {
 		element.Init();
 		element.srt.translate.z = 5.0f;
 	}
-	materials_.resize(dParticleInstanceNum_);
+	materials_.resize(gParticleInstanceNum_);
 	for (auto& element : materials_) {
 		element.color = Samp::Color::WHITE;
 		element.uvTransform = Matrix4x4::identity;
@@ -93,7 +93,7 @@ void DebugScene::ModelDraw()
 	//skybox_->Draw();
 
 	/* ----- DemoParticle デモパーティクル ----- */
-	dParticle_->Draw(transforms_, materials_);
+	gParticle_->Draw(transforms_, materials_);
 }
 
 

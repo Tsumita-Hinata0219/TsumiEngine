@@ -38,6 +38,11 @@ namespace Particle {
 			/// </summary>
 			void Draw();
 
+			/// <summary>
+			/// Particle発生処理
+			/// </summary>
+			void Emit(std::unique_ptr<GPUParticle>& particle);
+
 
 		private:
 

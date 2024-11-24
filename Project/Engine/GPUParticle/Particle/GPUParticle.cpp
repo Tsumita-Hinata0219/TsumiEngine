@@ -90,7 +90,7 @@ void GPUParticle::CommandCall_Init()
 	// Particleの要素の初期化値
 	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
 
-	// Dispach
+	// Dispach!!
 	commands.List->Dispatch(1, 1, 1);
 }
 void GPUParticle::CommandCall_Update()

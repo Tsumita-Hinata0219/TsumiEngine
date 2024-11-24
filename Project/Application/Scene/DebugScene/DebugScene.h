@@ -17,6 +17,9 @@
 #include "GameObject/Others/TestJsonObject/TestJsonObject.h"
 #include "GameObject/Others/TestBaseObject/TestBaseObject.h"
 
+#include "GPUParticle/Particle/GPUParticle.h"
+#include "GPUParticle/Emitter/GPUParticleEmitter.h"
+
 
 class DebugScene : public IScene {
 
@@ -75,5 +78,8 @@ private:
 	uint32_t gParticleInstanceNum_ = 0;
 	std::vector<Transform> transforms_;
 	std::vector<MaterialDataN> materials_;
+
+	// DemoParticleEmitter
+	std::unique_ptr<Particle::Emit::GPUParticleEmitter> dEmitter_;
 };
 

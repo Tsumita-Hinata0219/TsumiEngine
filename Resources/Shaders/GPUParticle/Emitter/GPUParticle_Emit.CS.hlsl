@@ -1,6 +1,5 @@
 #include "../GPUParticle.hlsli"
 
-
 // Emitterの要素
 ConstantBuffer<SphereEmitter> gEmitter : register(b0);
 
@@ -19,9 +18,10 @@ void main(uint3 DTid : SV_DispatchThreadID)
         {
             // カウント分Particleを射出する
             gParticles[countIndex].scale = float3(0.3f, 0.3f, 0.3f);
-            gParticles[countIndex].translate = float3(0.0f, 0.0f, 0.0f);
-            gParticles[countIndex].color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-            
+            gParticles[countIndex].translate = float3(2.0f, 0.0f, 0.0f);
+            gParticles[countIndex].color = float4(1.0f, 0.0f, 0.0f, 1.0f);
+            gParticles[countIndex].matWorld = AffineMatrix(gParticles[countIndex].scale, float3(0.0f, 0.0f, 0.0f), gParticles[countIndex].translate);
+
         }
 
     }

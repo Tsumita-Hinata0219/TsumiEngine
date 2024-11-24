@@ -42,3 +42,29 @@ void Particle::Emit::GPUParticleEmitter::Update()
 void Particle::Emit::GPUParticleEmitter::Draw()
 {
 }
+
+
+/// <summary>
+/// Particle発生処理
+/// </summary>
+void Particle::Emit::GPUParticleEmitter::Emit(std::unique_ptr<GPUParticle>& particle)
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::PipeLineCheckAndSet(PipeLineType::CSEmitter, false);
+
+	// Emitter
+	emitBuffer_.Map();
+	emitBuffer_.WriteData(&emitData_);
+	emitBuffer_.UnMap();
+
+	// Emitterのコマンドコール
+	emitBuffer_.ComputeCommandCall(0);
+	// Particleのコマンドコール
+	particle->ComputeCommandCall(1);
+
+	// Dispach 
+	commands.List->Dispatch(1, 1, 1);
+}

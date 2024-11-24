@@ -47,6 +47,10 @@ void DebugScene::Initialize()
 		element.color = Samp::Color::WHITE;
 		element.uvTransform = Matrix4x4::identity;
 	}
+
+	/* ----- DemoParticleEmitter デモパーティクルエミッター ----- */
+	dEmitter_ = std::make_unique<Particle::Emit::GPUParticleEmitter>();
+	dEmitter_->Init();
 }
 
 
@@ -66,6 +70,10 @@ void DebugScene::Update(GameManager* state)
 
 	/* ----- TestPostEffect テストポストエフェクト ----- */
 	testPostEffect_->Update();
+
+	/* ----- DemoParticleEmitter デモパーティクルエミッター ----- */
+	dEmitter_->Update();
+	dEmitter_->Emit(gParticle_);
 
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");

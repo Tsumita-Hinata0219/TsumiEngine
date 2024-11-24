@@ -44,29 +44,16 @@ void EnemyManager::Init()
 
 	scope_ = { 0.0f, 2.5f };
 
-	//// 最初に何体か湧かせておく
-	//for (int i = 0; i < 3; ++i) {
-	//	AddNewBasicEnemy();
-	//	AddNewStaticEnemy();
-	//}
+	// 最初に何体か湧かせておく
+	for (int i = 0; i < 1; ++i) {
+		//AddNewBasicEnemy();
+		AddNewStaticEnemy();
+	}
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
 	}
-
-
-	// 一体だけ沸かす
-	// 新しいEnemyのインスタンス
-	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos = { 0.0f, 0.0f, 5.0f };
-	// newEnemyの初期化
-	newEnemy->Init();
-	newEnemy->SetPlayer(this->player_);
-	newEnemy->SetEnemyManager(this);
-	newEnemy->SetPosition(initPos);
-	enemys_.push_back(newEnemy);
 }
 
 

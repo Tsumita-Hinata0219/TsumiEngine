@@ -162,7 +162,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 	}
 	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 
-		OnCollisionWithEnemyBullet();
+		//OnCollisionWithEnemyBullet();
 	}
 }
 void Player::OnCollisionWithEnemy()

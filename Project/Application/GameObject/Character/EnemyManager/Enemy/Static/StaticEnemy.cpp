@@ -13,7 +13,6 @@ void StaticEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
-	//trans_.srt.scale = { 2.0f, 2.0f, 2.0f };
 
 	// ライトの初期設定
 	light_.enable = true;

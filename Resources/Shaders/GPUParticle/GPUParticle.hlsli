@@ -53,10 +53,10 @@ struct ViewProjectionMatrix
 
 struct SphereEmitter
 {
-    float3 translate; // 座標
-    float radius = 0.0f; // 射出半径
-    uint count = 0; // 射出数
-    float frequency = 0.0f; // 射出間隔
-    float frequencyTime = 0.0f; // 射出間隔調整用時間
-    uint emit = 0; // 射出許可
+    float32_t3 translate; // 座標
+    float32_t radius = 0.0f; // 射出半径
+    uint32_t count = 0; // 射出数
+    float32_t frequency = 0.0f; // 射出間隔
+    float32_t frequencyTime = 0.0f; // 射出間隔調整用時間
+    uint32_t emit = 0; // 射出許可
 };

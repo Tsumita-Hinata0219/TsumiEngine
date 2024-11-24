@@ -147,6 +147,7 @@ private: // メンバ関数
 
 	void CSParticleShader();
 	void GPUParticle_Init();
+	void GPUParticle_Sphere_Emitter();
 
 #pragma endregion
 

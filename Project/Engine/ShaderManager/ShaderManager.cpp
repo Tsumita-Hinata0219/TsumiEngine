@@ -164,6 +164,7 @@ void ShaderManager::ComputeShadersCompiles()
 {
 	CSParticleShader();
 	GPUParticle_Init();
+	GPUParticle_Sphere_Emitter();
 }
 
 
@@ -477,4 +478,12 @@ void ShaderManager::GPUParticle_Init()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Init"] = shader;
+}
+
+void ShaderManager::GPUParticle_Sphere_Emitter()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Emitter/GPUParticle_Emit.CS.hlsl"),
+	};
+	computeShadersMap_["GPUParticle_Sphere_Emitter"] = shader;
 }

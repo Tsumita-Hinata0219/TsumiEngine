@@ -5,40 +5,48 @@
 #include "BufferResource/BufferResource.h"
 
 
-/* GPUParticleのEmitterクラス */
-class GPUParticleEmitter {
+namespace Particle {
+	namespace Emit {
 
-public: 
-	
-	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	GPUParticleEmitter() = default;
+		/* GPUParticleのEmitterクラス */
+		class GPUParticleEmitter {
 
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~GPUParticleEmitter() = default;
+		public:
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	void Init();
+			/// <summary>
+			/// コンストラクタ
+			/// </summary>
+			GPUParticleEmitter() = default;
 
-	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update();
+			/// <summary>
+			/// デストラクタ
+			/// </summary>
+			~GPUParticleEmitter() = default;
 
-	/// <summary>
-	/// 描画処理
-	/// </summary>
-	void Draw();
+			/// <summary>
+			/// 初期化処理
+			/// </summary>
+			void Init();
+
+			/// <summary>
+			/// 更新処理
+			/// </summary>
+			void Update();
+
+			/// <summary>
+			/// 描画処理
+			/// </summary>
+			void Draw();
 
 
-private:
+		private:
 
+			// バッファーに書き込むデータ
+			SphereEmitter emitData_{};
 
-
-};
+			// バッファー
+			BufferResource<SphereEmitter> emitBuffer_;
+		};
+	}
+}
 

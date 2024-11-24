@@ -130,10 +130,12 @@ void Player::Draw2DFront()
 // 衝突自コールバック関数
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetAttribute() == ObjAttribute::ENEMY) {
 
 		// 押し出しの処理
+		trans_.UpdateMatrix();
 		colComp_->Penetration(&trans_.srt.translate, sphere_);
+		trans_.UpdateMatrix();
 	}
 }
 void Player::OnCollisionWithEnemy()

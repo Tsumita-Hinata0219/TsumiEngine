@@ -39,7 +39,7 @@ void StaticEnemy::Update()
 	trans_.srt.rotate.y += ToRadians(addRadSpeed_);
 
 	// 射撃の処理
-	ExecutexShot();
+	//ExecutexShot();
 
 	// Bullet更新処理
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {

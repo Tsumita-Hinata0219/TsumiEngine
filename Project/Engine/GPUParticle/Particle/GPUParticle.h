@@ -43,12 +43,10 @@ public:
 	/// </summary>
 	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
 
-
-#pragma region Accessor アクセッサ
-
-	void ComputeCommandCall(UINT num) { this->buffers_.particleElement.ComputeCommandCallInstancingSRV(num); }
-
-#pragma endregion 
+	/// <summary>
+	/// コンピュータコマンドコール
+	/// </summary>
+	void ComputeCommandCall();
 
 
 private:

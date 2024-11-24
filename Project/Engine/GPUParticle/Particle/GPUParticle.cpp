@@ -77,6 +77,18 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 
 
 /// <summary>
+/// コンピュータコマンドコール
+/// </summary>
+void GPUParticle::ComputeCommandCall()
+{
+	// Parameter
+	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
+	// FreeCounter
+	buffers_.freeCounter.ComputeCommandCallInstancingSRV(1);
+}
+
+
+/// <summary>
 /// コマンドコール
 /// </summary>
 void GPUParticle::CommandCall_Init()
@@ -87,8 +99,8 @@ void GPUParticle::CommandCall_Init()
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GPUParticle_Init, false);
 
-	// Particleの要素の初期化値
-	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
+	// コマンドコール
+	ComputeCommandCall();
 
 	// Dispach!!
 	commands.List->Dispatch(1, 1, 1);
@@ -134,6 +146,8 @@ void GPUParticle::CreateBufferResource()
 	buffers_.indeces.CreateIndexBufferView();
 	// ParticleElement
 	buffers_.particleElement.CreateUAV(instanceNum_);
+	// FreeCounter
+	buffers_.freeCounter.CreateUAV(instanceNum_);
 	// PreView
 	buffers_.preView.CreateCBV();
 	// transform

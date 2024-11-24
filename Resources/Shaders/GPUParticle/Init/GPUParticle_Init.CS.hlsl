@@ -6,6 +6,8 @@ static const uint kMaclParticles = 1024;
 
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+// FreeCounter
+RWStructuredBuffer<uint> gFreeCounter : register(u1);
 
 [numthreads(1024, 1, 1)]
 void main(int3 DTid : SV_DispatchThreadID)
@@ -19,6 +21,12 @@ void main(int3 DTid : SV_DispatchThreadID)
         gParticles[particleIndex].scale = float3(0.5f, 0.5f, 0.5f);
         gParticles[particleIndex].color = float4(1.0f, 1.0f, 1.0f, 1.0f);
         gParticles[particleIndex].matWorld = Mat4x4Identity();
+        
+        // FreeCounterの初期化
+        if (particleIndex == 0)
+        {
+            gFreeCounter[0] = 0;
+        }
 
     }
 }

@@ -34,18 +34,29 @@ PsoProperty GPUParticle_Init_PipeLine::SetUpPso()
 // RootSignatureのセットアップ
 void GPUParticle_Init_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
-	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる
-	descriptorRange[0].NumDescriptors = 1; // 数は1つ
-	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
-	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-
-	D3D12_ROOT_PARAMETER rootParameters[1]{};
-	// Particleの要素
+	D3D12_ROOT_PARAMETER rootParameters[2]{};
+	// ─── CS
+	// u0 : パーティクルパラメータ
+	D3D12_DESCRIPTOR_RANGE parameterInstancing[1]{};
+	parameterInstancing[0].BaseShaderRegister = 0; // 0から始まる
+	parameterInstancing[0].NumDescriptors = 1; // 数は1つ
+	parameterInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	parameterInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
-	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
-	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
+	rootParameters[0].DescriptorTable.pDescriptorRanges = parameterInstancing; // Tableの中身の配列を指定
+	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(parameterInstancing); // Tableで利用する
+
+	// u1 : FreeCounter
+	D3D12_DESCRIPTOR_RANGE freeCounterRange[1]{};
+	freeCounterRange[0].BaseShaderRegister = 1; // 0から始まる
+	freeCounterRange[0].NumDescriptors = 1; // 数は1つ
+	freeCounterRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	freeCounterRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
+	rootParameters[1].DescriptorTable.pDescriptorRanges = freeCounterRange; // Tableの中身の配列を指定
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(freeCounterRange); // Tableで利用する
 
 
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE; // コンピュートシェーダーに適用

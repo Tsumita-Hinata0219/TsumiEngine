@@ -19,9 +19,9 @@ void Particle::Emit::GPUParticleEmitter::Init()
 	datas_.sphereEmitter.emit = 0;
 
 	// PerFrameの初期値
-	scope_ = { 0.0f, INFINITY_VALUE };
-	datas_.perFrame.time = g_ElapsedTime + RandomGenerator::getRandom(scope_);
-	datas_.perFrame.deltaTime = 0.0f;
+	scope_ = { 0.0f, 1000.0f };
+	datas_.perFrame.time = 0.0f;
+	datas_.perFrame.deltaTime = g_ElapsedTime + RandomGenerator::getRandom(scope_);
 }
 
 
@@ -30,6 +30,8 @@ void Particle::Emit::GPUParticleEmitter::Init()
 /// </summary>
 void Particle::Emit::GPUParticleEmitter::Update()
 {
+	datas_.perFrame.deltaTime = g_ElapsedTime + RandomGenerator::getRandom(scope_);
+
 	datas_.sphereEmitter.frequencyTime++;
 	// 射出間隔を上回ったら射出許可をだして時間を調整
 	if (datas_.sphereEmitter.frequency <= datas_.sphereEmitter.frequencyTime) {
@@ -65,11 +67,17 @@ void Particle::Emit::GPUParticleEmitter::Emit(std::unique_ptr<GPUParticle>& part
 	buffers_.sphereEmitter.Map();
 	buffers_.sphereEmitter.WriteData(&datas_.sphereEmitter);
 	buffers_.sphereEmitter.UnMap();
+	// PerFrame
+	buffers_.perFrame.Map();
+	buffers_.perFrame.WriteData(&datas_.perFrame);
+	buffers_.perFrame.UnMap();
 
-	// Emitterのコマンドコール
-	buffers_.sphereEmitter.ComputeCommandCall(0);
 	// Particleのコマンドコール
-	particle->ComputeCommandCall(1);
+	particle->ComputeCommandCall();
+	// Emitterのコマンドコール
+	buffers_.sphereEmitter.ComputeCommandCall(2);
+	// PerFrameのコマンドコール
+	buffers_.perFrame.ComputeCommandCall(3);
 
 	// Dispach 
 	commands.List->Dispatch(1, 1, 1);

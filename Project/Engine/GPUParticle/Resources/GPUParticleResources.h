@@ -18,10 +18,13 @@ struct GPUParticleDatas {
 	std::string name;
 
 	// メッシュ
-	MeshData mesh;
+	MeshData mesh{};
 
 	// マテリアル
 	MaterialDataN material{};
+
+	// フリーカウンター
+	uint32_t freeCounter = 0;
 
 	// ライト
 	//DirectionalLightData light{};
@@ -40,6 +43,9 @@ struct GPUParticleResources {
 
 	// ParticleElement
 	BufferResource<GPUParticleCS> particleElement;
+
+	// FreeCounter
+	BufferResource<uint32_t> freeCounter;
 
 	// PreView
 	BufferResource<GPUParticlePreView> preView;

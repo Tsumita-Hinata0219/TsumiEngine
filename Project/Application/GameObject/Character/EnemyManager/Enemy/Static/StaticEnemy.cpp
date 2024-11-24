@@ -8,8 +8,9 @@ void StaticEnemy::Init()
 {
 	// BodyModelのロードと初期化
 	modelManager_ = ModelManager::GetInstance();
-	modelManager_->LoadModel("Obj/Enemys/Static", "Static.obj");
-	model_ = modelManager_->GetModel("Static");
+	//modelManager_->LoadModel("Obj/Enemys/Static", "Static.obj");
+	modelManager_->LoadModel("Obj/Box", "Box.obj");
+	model_ = modelManager_->GetModel("Box");
 
 	// BodyTransfromの初期化
 	trans_.Init();
@@ -36,7 +37,7 @@ void StaticEnemy::Init()
 void StaticEnemy::Update()
 {
 	// オブジェクトの回転
-	trans_.srt.rotate.y += ToRadians(addRadSpeed_);
+	//trans_.srt.rotate.y += ToRadians(addRadSpeed_);
 
 	// 射撃の処理
 	//ExecutexShot();

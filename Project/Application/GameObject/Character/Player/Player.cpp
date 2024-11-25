@@ -40,6 +40,7 @@ void Player::Init()
 	// パーティクルマネージャー
 	particleManager_ = std::make_unique<PlayerParticleManager>();
 	particleManager_->Init();
+	particleManager_->SetPlayer(this);
 
 	// 移動処理クラス
 	movement_ = std::make_unique<PlayerMovement>();

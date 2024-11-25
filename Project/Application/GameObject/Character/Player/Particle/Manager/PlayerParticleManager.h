@@ -39,13 +39,34 @@ public:
 	void Draw();
 
 
+#pragma region Accessor アクセッサ
+
+	// Playerのポインタ
+	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
+
+#pragma endregion 
+
+
+private:
+
+	/// <summary>
+	/// 移動パーティクルの追加
+	/// </summary>
+	void AddMovementPartiucle();
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
+
+
 private:
 
 	// Player
-	Player* player = nullptr;
+	Player* player_ = nullptr;
 
 	// MovementParticle
-	std::list<PlayerMovementParticle> movementParticles_;
+	std::list<std::unique_ptr<PlayerMovementParticle>> movementParticles_;
 
 };
 

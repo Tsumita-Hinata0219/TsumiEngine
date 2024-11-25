@@ -7,6 +7,14 @@
 /// </summary>
 void PlayerMovementParticle::Init()
 {
+	// モデルの読み込み
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/MovementParticle1", "MovementParticle1.obj");
+	model_ = modelManager_->GetModel("MovementParticle1");
+
+	// トランスフォームの初期化
+	trans_.Init();
+
 }
 
 
@@ -23,5 +31,6 @@ void PlayerMovementParticle::Update()
 /// </summary>
 void PlayerMovementParticle::Draw3D()
 {
+	model_->DrawN(trans_);
 }
 

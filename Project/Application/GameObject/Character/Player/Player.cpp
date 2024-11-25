@@ -37,6 +37,10 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
+	// パーティクルマネージャー
+	particleManager_ = std::make_unique<PlayerParticleManager>();
+	particleManager_->Init();
+
 	// 移動処理クラス
 	movement_ = std::make_unique<PlayerMovement>();
 	movement_->Init(this, gameCamera_, &trans_);
@@ -68,6 +72,9 @@ void Player::Update()
 
 	// Transformの更新処理
 	trans_.UpdateMatrix();
+
+	// パーティクルマネージャー
+	particleManager_->Update();
 
 	// プレイヤーの操作関連
 	movement_->Update();
@@ -130,6 +137,9 @@ void Player::Draw3D()
 	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
 		body->Draw3D();
 	}
+
+	// ParticleManagerの描画
+	particleManager_->Draw();
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {

@@ -17,6 +17,8 @@
 
 #include "Movement/PlayerMovement.h"
 
+#include "Particle/Manager/PlayerParticleManager.h"
+
 
 // 前方宣言
 class FollowCamera;
@@ -235,6 +237,12 @@ private: // ボディ関連
 
 	// リスト
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
+
+
+private: // パーティクル
+
+	// パーティクルマネージャー
+	std::unique_ptr<PlayerParticleManager> particleManager_;
 
 
 private:

@@ -50,6 +50,7 @@ public:
 protected:
 
 	// モデル
+	ModelManager* modelManager_ = nullptr;
 	std::unique_ptr<Model> model_;
 
 	// トランスフォーム

@@ -4,6 +4,10 @@
 #include "../Movement/PlayerMovementParticle.h"
 
 
+// 前方宣言
+class Player;
+
+
 /* プレイヤー関連のパーティクルマネージャー */
 class PlayerParticleManager {
 
@@ -36,6 +40,9 @@ public:
 
 
 private:
+
+	// Player
+	Player* player = nullptr;
 
 	// MovementParticle
 	std::list<PlayerMovementParticle> movementParticles_;

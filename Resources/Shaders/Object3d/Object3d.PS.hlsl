@@ -60,10 +60,10 @@ PixelShaderOutput main(VertexShaderOutput input)
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
 
     // アルファ値が0.9f未満なら描画をスキップ
-    if (textureColor.a == 0.0f)
-    {
-        discard;
-    }
+    //if (textureColor.a == 0.0f)
+    //{
+    //    discard;
+    //}
     
     // ライト処理を追加
     if (gDirectionalLight.eneble) // ライトが有効な場合

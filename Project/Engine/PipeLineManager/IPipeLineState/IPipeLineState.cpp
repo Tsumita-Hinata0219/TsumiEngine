@@ -102,12 +102,12 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 	switch (blendMode)
 	{
 	case None:
-		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
-		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
-		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
-		blendDesc.BlendOp = D3D12_BLEND_OP_ADD;
 		blendDesc.SrcBlend = D3D12_BLEND_SRC_ALPHA;
+		blendDesc.BlendOp = D3D12_BLEND_OP_ADD;
 		blendDesc.DestBlend = D3D12_BLEND_INV_SRC_ALPHA;
+		blendDesc.SrcBlendAlpha = D3D12_BLEND_ONE;
+		blendDesc.BlendOpAlpha = D3D12_BLEND_OP_ADD;
+		blendDesc.DestBlendAlpha = D3D12_BLEND_ZERO;
 		break;
 
 	case Add:

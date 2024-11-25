@@ -136,6 +136,7 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->SetModelColor(color_);
 		body->Draw3D();
 	}
 
@@ -483,6 +484,9 @@ void Player::DrawImGui()
 		ImGui::Text("Transform");
 		trans_.DrawImGui();
 		ImGui::Text("");
+
+		ImGui::Text("BodyColor");
+		ImGui::ColorEdit4("color", &color_.x);
 
 		ImGui::Text("Move");
 		ImGui::DragFloat3("Velocity", &velocity_.x, 0.0f);

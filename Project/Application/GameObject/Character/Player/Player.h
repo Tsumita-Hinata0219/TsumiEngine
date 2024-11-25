@@ -238,6 +238,9 @@ private: // ボディ関連
 	// リスト
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
+	// カラー　
+	Vector4 color_ = Samp::Color::WHITE;
+
 
 private: // パーティクル
 

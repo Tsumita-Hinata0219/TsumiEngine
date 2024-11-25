@@ -15,10 +15,31 @@ void PlayerParticleManager::Init()
 /// </summary>
 void PlayerParticleManager::Update()
 {
+	//// MovementParticle
+	//for (auto& element : movementParticles_) {
+	//	element->Update();
+	//}
+	//// 死亡フラグが立っていたら削除
+	//movementParticles_.remove_if([](std::shared_ptr<PlayerMovementParticle> particle) {
+	//	if (particle->IsDead()) {
+	//		return true;
+	//	}
+	//	return false;
+	//	}
+	//);
+	
 	// MovementParticle
-	for (auto& element : movementParticles_) {
+	for (auto& element : particleList_) {
 		element->Update();
 	}
+	// 死亡フラグが立っていたら削除
+	particleList_.remove_if([](std::shared_ptr<IPlayerParticle> particle) {
+		if (particle->IsDead()) {
+			return true;
+		}
+		return false;
+		}
+	);
 
 #ifdef _DEBUG
 	DrawImGui();
@@ -32,7 +53,10 @@ void PlayerParticleManager::Update()
 void PlayerParticleManager::Draw()
 {
 	// MovementParticle
-	for (auto& element : movementParticles_) {
+	/*for (auto& element : movementParticles_) {
+		element->Draw3D();
+	}*/
+	for (auto& element : particleList_) {
 		element->Draw3D();
 	}
 }
@@ -44,13 +68,13 @@ void PlayerParticleManager::Draw()
 void PlayerParticleManager::AddMovementPartiucle()
 {
 	// 追加するインスタンス
-	std::unique_ptr<PlayerMovementParticle> newParticle =
+	std::shared_ptr<PlayerMovementParticle> newParticle =
 		std::make_unique<PlayerMovementParticle>();
 
 	newParticle->Init(); // 初期化
 	newParticle->SetTranslate(player_->GetWorldPos());
 
-	this->movementParticles_.push_back(std::move(newParticle));
+	this->particleList_.push_back(std::move(newParticle));
 }
 
 

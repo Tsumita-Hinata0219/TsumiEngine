@@ -5,6 +5,7 @@
 
 #include "GameObject/IObject/IObject.h"
 #include "GameObject/GameObject.h"
+#include "Math/MyMath.h"
 
 
 /* PlayerのParticleの基底クラス */
@@ -35,6 +36,9 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// 死亡フラグ
+	bool IsDead() const { return this->isDead_; }
+
 	// スケール
 	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
 
@@ -44,10 +48,16 @@ public:
 	// 座標
 	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
 
+	// カラー
+	void SetColor(const Vector4& setColor) { this->color_ = setColor; }
+
 #pragma endregion 
 
 
 protected:
+
+	//死亡フラグ
+	bool isDead_ = false;
 
 	// モデル
 	ModelManager* modelManager_ = nullptr;
@@ -55,5 +65,8 @@ protected:
 
 	// トランスフォーム
 	Transform trans_{};
+
+	// カラー
+	Vector4 color_ = Samp::Color::WHITE;
 
 };

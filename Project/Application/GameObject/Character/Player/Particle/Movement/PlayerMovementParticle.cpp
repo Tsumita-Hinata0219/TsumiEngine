@@ -15,6 +15,13 @@ void PlayerMovementParticle::Init()
 	// トランスフォームの初期化
 	trans_.Init();
 
+	// 補間に使用するAlpha値の設定。不透明->透明
+	alpha_.first = 1.0f;
+	alpha_.second = 0.0f;
+
+	// Timerの初期化&スタート。(1秒)
+	timer_.Init(0.0f, 1.0f * 60.0f);
+	timer_.Start();
 }
 
 
@@ -23,6 +30,15 @@ void PlayerMovementParticle::Init()
 /// </summary>
 void PlayerMovementParticle::Update()
 {
+	// タイマーの更新
+	timer_.Update();
+	// タイマー終了で死亡フラグを立てる
+	if (timer_.IsFinish()) {
+		isDead_ = true;
+	}
+
+	// Alpha値の計算
+	CalcAlpha();
 }
 
 
@@ -31,6 +47,17 @@ void PlayerMovementParticle::Update()
 /// </summary>
 void PlayerMovementParticle::Draw3D()
 {
+	model_->SetColor(color_);
 	model_->DrawN(trans_);
+}
+
+
+/// <summary>
+/// Alpha値の計算
+/// </summary>
+void PlayerMovementParticle::CalcAlpha()
+{
+	color_.w =
+		Interpolate(alpha_.first, alpha_.second, timer_.GetRatio(), Ease::OutSine);
 }
 

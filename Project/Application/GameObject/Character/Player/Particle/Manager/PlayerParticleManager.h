@@ -66,7 +66,8 @@ private:
 	Player* player_ = nullptr;
 
 	// MovementParticle
-	std::list<std::unique_ptr<PlayerMovementParticle>> movementParticles_;
+	//std::list<std::shared_ptr<PlayerMovementParticle>> movementParticles_;
+	std::list<std::shared_ptr<IPlayerParticle>> particleList_;;
 
 };
 

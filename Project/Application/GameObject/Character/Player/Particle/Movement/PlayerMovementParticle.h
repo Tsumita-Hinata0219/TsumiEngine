@@ -36,6 +36,19 @@ public:
 
 private:
 
+	/// <summary>
+	/// Alpha値の計算
+	/// </summary>
+	void CalcAlpha();
+
+
+private:
+
+	// タイマー
+	Timer timer_{};
+
+	// 補間に使用するAlpha値
+	std::pair<float, float> alpha_;
 
 };
 

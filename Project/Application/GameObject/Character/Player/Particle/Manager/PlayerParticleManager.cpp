@@ -7,6 +7,9 @@
 /// </summary>
 void PlayerParticleManager::Init()
 {
+	// モデルの読み込み
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/MovementParticle1", "MovementParticle1.obj");
 }
 
 
@@ -56,6 +59,7 @@ void PlayerParticleManager::AddMovementPartiucle()
 		std::make_unique<PlayerMovementParticle>();
 
 	newParticle->Init(); // 初期化
+	newParticle->SetModel(modelManager_->GetModel("MovementParticle1"));
 	Scope scope = { -1.0f, 1.0f };
 	Vector3 diff = {
 		RandomGenerator::getRandom(scope),

@@ -39,6 +39,9 @@ public:
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
+	// モデル
+	void SetModel(std::unique_ptr<Model> setModel) { this->model_ = std::move(setModel); }
+
 	// スケール
 	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
 
@@ -60,7 +63,6 @@ protected:
 	bool isDead_ = false;
 
 	// モデル
-	ModelManager* modelManager_ = nullptr;
 	std::unique_ptr<Model> model_;
 
 	// トランスフォーム

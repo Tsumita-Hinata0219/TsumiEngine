@@ -65,8 +65,10 @@ private:
 	// Player
 	Player* player_ = nullptr;
 
-	// MovementParticle
-	//std::list<std::shared_ptr<PlayerMovementParticle>> movementParticles_;
+	// モデルマネージャー
+	ModelManager* modelManager_ = nullptr;
+
+	// パーティクルの配列
 	std::list<std::shared_ptr<IPlayerParticle>> particleList_;;
 
 };

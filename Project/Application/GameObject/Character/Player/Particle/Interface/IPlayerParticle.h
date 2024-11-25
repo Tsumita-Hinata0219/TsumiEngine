@@ -33,6 +33,20 @@ public:
 	virtual void Draw3D() = 0;
 
 
+#pragma region Accessor アクセッサ
+
+	// スケール
+	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
+
+	// 姿勢
+	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
+
+	// 座標
+	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
+
+#pragma endregion 
+
+
 protected:
 
 	// モデル

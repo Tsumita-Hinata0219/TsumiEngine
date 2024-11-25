@@ -497,6 +497,10 @@ void Player::DrawImGui()
 		ImGui::Text("InvincibilityTime = %d", invincibilityTime_);
 		ImGui::Text("");
 
+		ImGui::Text("Movement");
+		ImGui::Checkbox("isMovement", &movement_->IsMovement());
+		ImGui::Text("");
+
 		ImGui::TreePop();
 	}
 }

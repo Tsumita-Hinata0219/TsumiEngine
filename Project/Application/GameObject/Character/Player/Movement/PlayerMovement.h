@@ -35,6 +35,14 @@ public:
 	void Update();
 
 
+#pragma region Accessor アクセッサ
+
+	// 移動中かのフラグ
+	bool& IsMovement() { return this->isMovement_; }
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>
@@ -90,6 +98,9 @@ private:
 	Vector2 iRStick_{};
 	// Keyの入力
 	Vector2 iKeys_{};
+
+	// 移中フラグ
+	bool isMovement_ = false;
 
 };
 

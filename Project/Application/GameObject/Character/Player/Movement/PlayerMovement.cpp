@@ -43,6 +43,9 @@ void PlayerMovement::Update()
 		iKeys_.x = 1.0f;
 	}
 
+	// 移動中のフラグを折っておく
+	isMovement_ = false;
+
 	// 移動方向を求める
 	CalcMoveDirection();
 
@@ -124,6 +127,9 @@ void PlayerMovement::PadMove()
 
 		// 座標に加算
 		pTrans_->srt.translate += velocity_;
+
+		// 移動中フラグを立てる
+		isMovement_ = true;
 	}
 }
 void PlayerMovement::KeyMove()
@@ -139,6 +145,9 @@ void PlayerMovement::KeyMove()
 
 		// 座標に加算
 		pTrans_->srt.translate += velocity_;
+
+		// 移動中フラグを立てる
+		isMovement_ = true;
 	}
 }
 

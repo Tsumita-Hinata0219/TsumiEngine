@@ -72,7 +72,7 @@ public:
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// 射撃フラグ
-	bool IsShooting() { return this->isShooting_; }
+	bool IsShooting() const { return this->isShooting_; }
 
 	// KillCount
 	uint32_t GetKillCount() const { return this->killCount_; }

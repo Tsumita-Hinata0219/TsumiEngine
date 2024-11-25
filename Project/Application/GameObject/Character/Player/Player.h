@@ -87,6 +87,9 @@ public:
 	bool IsDead() const { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
 
+	// 移動フラグ
+	bool IsMovement() const { return this->movement_->IsMovement(); }
+
 	// HP
 	uint32_t GetHP() const { return this->hp_; }
 	void SetHP(uint32_t setHP) { this->hp_ = setHP; }

@@ -49,10 +49,14 @@ public:
 
 private:
 
+	void MovementParticle();
+
+
 	/// <summary>
 	/// 移動パーティクルの追加
 	/// </summary>
-	void AddMovementPartiucle();
+	void AddMovementPartiucle1();
+	void AddMovementPartiucle2();
 
 	/// <summary>
 	/// ImGuiの描画
@@ -69,7 +73,10 @@ private:
 	ModelManager* modelManager_ = nullptr;
 
 	// パーティクルの配列
-	std::list<std::shared_ptr<IPlayerParticle>> particleList_;;
+	std::list<std::shared_ptr<IPlayerParticle>> particleList_;
 
+	// タイマー
+	Timer movement1Timer_{};
+	Timer movement2Timer_{};
 };
 

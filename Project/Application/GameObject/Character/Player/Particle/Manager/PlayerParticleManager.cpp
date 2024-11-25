@@ -15,6 +15,13 @@ void PlayerParticleManager::Init()
 /// </summary>
 void PlayerParticleManager::Update()
 {
+	// MovementParticle
+	for (std::list<PlayerMovementParticle>::iterator itr = movementParticles_.begin();
+		itr != movementParticles_.end(); ++itr) {
+		itr->Update();
+	}
+
+
 }
 
 
@@ -23,4 +30,9 @@ void PlayerParticleManager::Update()
 /// </summary>
 void PlayerParticleManager::Draw()
 {
+	// MovementParticle
+	for (std::list<PlayerMovementParticle>::iterator itr = movementParticles_.begin();
+		itr != movementParticles_.end(); ++itr) {
+		itr->Draw3D();
+	}
 }

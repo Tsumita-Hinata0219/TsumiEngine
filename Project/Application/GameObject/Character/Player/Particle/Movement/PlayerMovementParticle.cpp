@@ -16,7 +16,7 @@ void PlayerMovementParticle::Init()
 	trans_.Init();
 
 	// 補間に使用するAlpha値の設定。不透明->透明
-	scale_.first = 1.0f;
+	scale_.first = 0.7f;
 	scale_.second = -0.01f;
 
 	// Timerの初期化&スタート。(1秒)

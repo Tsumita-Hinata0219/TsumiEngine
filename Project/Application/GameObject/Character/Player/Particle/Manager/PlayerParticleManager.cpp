@@ -15,20 +15,7 @@ void PlayerParticleManager::Init()
 /// </summary>
 void PlayerParticleManager::Update()
 {
-	//// MovementParticle
-	//for (auto& element : movementParticles_) {
-	//	element->Update();
-	//}
-	//// 死亡フラグが立っていたら削除
-	//movementParticles_.remove_if([](std::shared_ptr<PlayerMovementParticle> particle) {
-	//	if (particle->IsDead()) {
-	//		return true;
-	//	}
-	//	return false;
-	//	}
-	//);
-	
-	// MovementParticle
+	// IParticle
 	for (auto& element : particleList_) {
 		element->Update();
 	}
@@ -52,10 +39,7 @@ void PlayerParticleManager::Update()
 /// </summary>
 void PlayerParticleManager::Draw()
 {
-	// MovementParticle
-	/*for (auto& element : movementParticles_) {
-		element->Draw3D();
-	}*/
+	// IParticle
 	for (auto& element : particleList_) {
 		element->Draw3D();
 	}
@@ -72,7 +56,14 @@ void PlayerParticleManager::AddMovementPartiucle()
 		std::make_unique<PlayerMovementParticle>();
 
 	newParticle->Init(); // 初期化
-	newParticle->SetTranslate(player_->GetWorldPos());
+	Scope scope = { -1.0f, 1.0f };
+	Vector3 diff = {
+		RandomGenerator::getRandom(scope),
+		RandomGenerator::getRandom(scope),
+		RandomGenerator::getRandom(scope),
+	};
+	newParticle->SetTranslate(player_->GetWorldPos() + diff);
+	newParticle->SetRotate(diff);
 
 	this->particleList_.push_back(std::move(newParticle));
 }

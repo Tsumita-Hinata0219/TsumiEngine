@@ -37,9 +37,9 @@ public:
 private:
 
 	/// <summary>
-	/// Alpha値の計算
+	/// Scale値の計算
 	/// </summary>
-	void CalcAlpha();
+	void CalcScale();
 
 
 private:
@@ -48,7 +48,7 @@ private:
 	Timer timer_{};
 
 	// 補間に使用するAlpha値
-	std::pair<float, float> alpha_;
+	std::pair<float, float> scale_;
 
 };
 

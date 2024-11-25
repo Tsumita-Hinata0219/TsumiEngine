@@ -16,8 +16,8 @@ void PlayerMovementParticle::Init()
 	trans_.Init();
 
 	// 補間に使用するAlpha値の設定。不透明->透明
-	alpha_.first = 1.0f;
-	alpha_.second = 0.0f;
+	scale_.first = 1.0f;
+	scale_.second = -0.01f;
 
 	// Timerの初期化&スタート。(1秒)
 	timer_.Init(0.0f, 1.0f * 60.0f);
@@ -38,7 +38,7 @@ void PlayerMovementParticle::Update()
 	}
 
 	// Alpha値の計算
-	CalcAlpha();
+	CalcScale();
 }
 
 
@@ -53,11 +53,15 @@ void PlayerMovementParticle::Draw3D()
 
 
 /// <summary>
-/// Alpha値の計算
+/// Scale値の計算
 /// </summary>
-void PlayerMovementParticle::CalcAlpha()
+void PlayerMovementParticle::CalcScale()
 {
-	color_.w =
-		Interpolate(alpha_.first, alpha_.second, timer_.GetRatio(), Ease::OutSine);
+	trans_.srt.scale.x =
+		Interpolate(scale_.first, scale_.second, timer_.GetRatio(), Ease::OutSine);
+	trans_.srt.scale.y =
+		Interpolate(scale_.first, scale_.second, timer_.GetRatio(), Ease::OutSine);
+	trans_.srt.scale.z =
+		Interpolate(scale_.first, scale_.second, timer_.GetRatio(), Ease::OutSine);
 }
 

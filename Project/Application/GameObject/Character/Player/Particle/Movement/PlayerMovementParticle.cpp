@@ -19,6 +19,9 @@ void PlayerMovementParticle::Init()
 	scale_.first = 0.7f;
 	scale_.second = -0.01f;
 
+	// 速度
+	velocity_ = 0.07f;
+
 	// Timerの初期化&スタート。(1秒)
 	timer_.Init(0.0f, 1.0f * 60.0f);
 	timer_.Start();
@@ -36,6 +39,9 @@ void PlayerMovementParticle::Update()
 	if (timer_.IsFinish()) {
 		isDead_ = true;
 	}
+
+	// 軽く上に移動する
+	trans_.srt.translate.y += velocity_;
 
 	// Alpha値の計算
 	CalcScale();

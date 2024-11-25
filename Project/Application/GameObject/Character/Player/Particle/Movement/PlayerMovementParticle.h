@@ -50,5 +50,8 @@ private:
 	// 補間に使用するAlpha値
 	std::pair<float, float> scale_;
 
+	// 速度
+	float velocity_ = 0.0f;
+
 };
 

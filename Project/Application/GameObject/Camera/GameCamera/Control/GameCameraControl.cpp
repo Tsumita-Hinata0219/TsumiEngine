@@ -20,7 +20,7 @@ void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraResourc
 	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
 
 		initRotate_ = { 0.3f, 0.0f, 0.0f };
-		constOffset_ = { 0.0f, 20.0f, -50.0f };
+		constOffset_ = { 0.0f, 15.0f, -45.0f };
 	}
 	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 

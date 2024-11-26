@@ -53,7 +53,7 @@ void Player::Init()
 	sphere_.radius = 2.0f;
 
 	// キルカウントを0で初期化
-	killCount_ =14;
+	killCount_ =0;
 
 	// HPの設定
 	hp_ = 3;
@@ -174,7 +174,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 	}
 	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 
-		//OnCollisionWithEnemyBullet();
+		OnCollisionWithEnemyBullet();
 	}
 }
 void Player::OnCollisionWithEnemy()

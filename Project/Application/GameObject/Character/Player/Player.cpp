@@ -37,6 +37,11 @@ void Player::Init()
 		body->SetParent(&trans_);
 	}
 
+	// パーティクルマネージャー
+	particleManager_ = std::make_unique<PlayerParticleManager>();
+	particleManager_->Init();
+	particleManager_->SetPlayer(this);
+
 	// 移動処理クラス
 	movement_ = std::make_unique<PlayerMovement>();
 	movement_->Init(this, gameCamera_, &trans_);
@@ -68,6 +73,9 @@ void Player::Update()
 
 	// Transformの更新処理
 	trans_.UpdateMatrix();
+
+	// パーティクルマネージャー
+	particleManager_->Update();
 
 	// プレイヤーの操作関連
 	movement_->Update();
@@ -128,8 +136,12 @@ void Player::Draw3D()
 {
 	// BodyModelの描画
 	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
+		body->SetModelColor(color_);
 		body->Draw3D();
 	}
+
+	// ParticleManagerの描画
+	particleManager_->Draw();
 
 	// Bulletsの描画
 	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
@@ -473,6 +485,9 @@ void Player::DrawImGui()
 		trans_.DrawImGui();
 		ImGui::Text("");
 
+		ImGui::Text("BodyColor");
+		ImGui::ColorEdit4("color", &color_.x);
+
 		ImGui::Text("Move");
 		ImGui::DragFloat3("Velocity", &velocity_.x, 0.0f);
 		ImGui::Text("");
@@ -495,6 +510,10 @@ void Player::DrawImGui()
 		ImGui::Text("Invincibility");
 		ImGui::Checkbox("Invincibility", &isInvincibility_);
 		ImGui::Text("InvincibilityTime = %d", invincibilityTime_);
+		ImGui::Text("");
+
+		ImGui::Text("Movement");
+		ImGui::Checkbox("isMovement", &movement_->IsMovement());
 		ImGui::Text("");
 
 		ImGui::TreePop();

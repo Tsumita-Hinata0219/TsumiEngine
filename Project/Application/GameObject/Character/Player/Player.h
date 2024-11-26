@@ -17,6 +17,8 @@
 
 #include "Movement/PlayerMovement.h"
 
+#include "Particle/Manager/PlayerParticleManager.h"
+
 
 // 前方宣言
 class FollowCamera;
@@ -72,7 +74,7 @@ public:
 	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
 
 	// 射撃フラグ
-	bool IsShooting() { return this->isShooting_; }
+	bool IsShooting() const { return this->isShooting_; }
 
 	// KillCount
 	uint32_t GetKillCount() const { return this->killCount_; }
@@ -84,6 +86,9 @@ public:
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) { this->isDead_ = setFlag; }
+
+	// 移動フラグ
+	bool IsMovement() const { return this->movement_->IsMovement(); }
 
 	// HP
 	uint32_t GetHP() const { return this->hp_; }
@@ -235,6 +240,15 @@ private: // ボディ関連
 
 	// リスト
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
+
+	// カラー　
+	Vector4 color_ = Samp::Color::WHITE;
+
+
+private: // パーティクル
+
+	// パーティクルマネージャー
+	std::unique_ptr<PlayerParticleManager> particleManager_;
 
 
 private:

@@ -48,8 +48,8 @@ void EnemyManager::Init()
 	bulletPool_.Create(100);
 
 	// 最初に何体か湧かせておく
-	for (int i = 0; i < 1; ++i) {
-		//AddNewBasicEnemy();
+	for (int i = 0; i < 3; ++i) {
+		AddNewBasicEnemy();
 		AddNewStaticEnemy();
 	}
 

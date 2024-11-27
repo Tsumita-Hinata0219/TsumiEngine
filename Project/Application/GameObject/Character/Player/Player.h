@@ -70,9 +70,6 @@ public:
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
-	// BulletList
-	std::list<std::shared_ptr<PlayerBullet>>& GetBulletList() { return this->bulletList_; }
-
 	// 射撃フラグ
 	bool IsShooting() const { return this->isShooting_; }
 
@@ -156,11 +153,6 @@ private:
 	/// 新しいバレットを生成する
 	/// </summary>
 	void CreateNewBullet();
-
-	/// <summary>
-	/// バレットリストの追加
-	/// </summary>
-	void AddBulletList(std::shared_ptr<PlayerBullet> addBullet) { this->bulletList_.push_back(addBullet); }
 
 	/// <summary>
 	/// 無敵状態のタイマーを減らす処理
@@ -259,8 +251,11 @@ private:
 
 private: // バレット関連
 
-	// リスト
-	std::list<std::shared_ptr<PlayerBullet>> bulletList_;
+	// オブジェクトプール
+	ObjectPool<PlayerBullet> bulletPool_;
+
+	// バレットリスト
+	std::list<PlayerBullet*> bulletList_;
 
 	// 射撃中かのフラグ
 	bool isShooting_ = false;

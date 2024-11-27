@@ -33,11 +33,9 @@ void EnemyManager::Init()
 	enemyCountCheckTime_.Start();
 
 	// 湧きポイントのフラッグ
-	spawn_.resize(3);
 	trans_.resize(3);
 
 	for (int i = 0; i < 3; ++i) {
-		spawn_[i] = modelManager_->GetModel("Flag");
 		trans_[i].Init();
 	}
 	trans_[0].srt.translate.x = -30.0f;
@@ -46,9 +44,12 @@ void EnemyManager::Init()
 
 	scope_ = { 0.0f, 2.5f };
 
+	// BulletのObjectPoolを先に作っておく
+	bulletPool_.Create(100);
+
 	// 最初に何体か湧かせておく
-	for (int i = 0; i < 3; ++i) {
-		AddNewBasicEnemy();
+	for (int i = 0; i < 1; ++i) {
+		//AddNewBasicEnemy();
 		AddNewStaticEnemy();
 	}
 
@@ -81,14 +82,15 @@ void EnemyManager::Update()
 		}
 	);
 
-	// Bullet更新処理
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+	// Bulletの更新処理
+	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
+	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
-			bullet.reset();
+			// 死亡したバレットをプールに返却
+			bulletPool_.Return(bullet);
 			return true;
 		}
 		return false;
@@ -107,19 +109,13 @@ void EnemyManager::Update()
 /// </summary>
 void EnemyManager::Draw3D()
 {
-	// FlagModel
-	/*flagModel_->DrawN(transform_);
-	for (int i = 0; i < 3; ++i) {
-		spawn_[i]->DrawN(trans_[i]);
-	}*/
-
 	// EnemyListの描画
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Draw3D();
 	}
 
 	// Bulletsの描画
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Draw3D();
 	}
 }
@@ -223,8 +219,8 @@ void EnemyManager::CreateStaticEnemy()
 /// </summary>
 void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
 {
-	// newBulletのインスタンス
-	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
+	// オブジェクトプール空新しいバレットを取得
+	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
 	newBullet->SetBulletType(setType);
@@ -265,6 +261,7 @@ void EnemyManager::DrawimGui()
 
 		int instance = int(bulletList_.size());
 		ImGui::DragInt("Bullet_InstanceSize", &instance);
+		ImGui::Text("");
 
 		ImGui::TreePop();
 	}

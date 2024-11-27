@@ -90,7 +90,6 @@ void Player::Update()
 	for (PlayerBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
-
 	// 死亡フラグが立っていたら削除
 	bulletList_.remove_if([this](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {

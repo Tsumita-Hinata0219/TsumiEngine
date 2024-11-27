@@ -104,9 +104,10 @@ private: // メンバ変数
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
+	// EnemyBulletのObjectPool
+	ObjectPool<EnemyBullet> bulletPool_;
 	// EnemyBulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-
+	std::list<EnemyBullet*> bulletList_;
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};
@@ -118,7 +119,6 @@ private: // メンバ変数
 	Timer enemyCountCheckTime_;
 
 	ModelManager* modelManager_ = nullptr;
-	std::vector<std::unique_ptr<Model>> spawn_;
 	std::vector<Transform> trans_;
 	Scope scope_{};
 };

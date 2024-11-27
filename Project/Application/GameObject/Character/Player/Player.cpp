@@ -94,7 +94,7 @@ void Player::Update()
 	// 死亡フラグが立っていたら削除
 	bulletList_.remove_if([this](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
-			// 死亡したバレットはプールに返却
+			// 死亡したバレットをプールに返却
 			bulletPool_.Return(bullet);
 			return true;
 		}
@@ -178,7 +178,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 	}
 	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 
-		OnCollisionWithEnemyBullet();
+		//OnCollisionWithEnemyBullet();
 	}
 }
 void Player::OnCollisionWithEnemy()

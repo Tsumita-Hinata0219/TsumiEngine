@@ -30,6 +30,9 @@ void PlayerBullet::Init()
 	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
+
+	// 死亡フラグは折っておく
+	isDead_ = false;
 }
 
 

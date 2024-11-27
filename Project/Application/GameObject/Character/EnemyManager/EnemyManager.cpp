@@ -2,7 +2,9 @@
 #include "../Player/Player.h"
 
 
-// 初期化処理
+/// <summary>
+/// 初期化処理
+/// </summary>
 void EnemyManager::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
@@ -31,11 +33,9 @@ void EnemyManager::Init()
 	enemyCountCheckTime_.Start();
 
 	// 湧きポイントのフラッグ
-	spawn_.resize(3);
 	trans_.resize(3);
 
 	for (int i = 0; i < 3; ++i) {
-		spawn_[i] = modelManager_->GetModel("Flag");
 		trans_[i].Init();
 	}
 	trans_[0].srt.translate.x = -30.0f;
@@ -43,6 +43,9 @@ void EnemyManager::Init()
 	trans_[2].srt.translate.x = 30.0f;
 
 	scope_ = { 0.0f, 2.5f };
+
+	// BulletのObjectPoolを先に作っておく
+	bulletPool_.Create(100);
 
 	// 最初に何体か湧かせておく
 	for (int i = 0; i < 3; ++i) {
@@ -57,11 +60,13 @@ void EnemyManager::Init()
 }
 
 
-// 更新処理
+/// <summary>
+/// 更新処理
+/// </summary>
 void EnemyManager::Update()
 {
 	// エネミーカウントチェック
-	EnemyCountCheck();
+	//EnemyCountCheck();
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
@@ -77,14 +82,15 @@ void EnemyManager::Update()
 		}
 	);
 
-	// Bullet更新処理
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+	// Bulletの更新処理
+	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
+	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
-			bullet.reset();
+			// 死亡したバレットをプールに返却
+			bulletPool_.Return(bullet);
 			return true;
 		}
 		return false;
@@ -93,51 +99,31 @@ void EnemyManager::Update()
 
 
 #ifdef _DEBUG
-	if (ImGui::TreeNode("EnemyManager")) {
-
-		ImGui::Text("Transform");
-		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
-		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
-
-		ImGui::Text("");
-		if (ImGui::Button("AddBasicEnemy")) {
-			AddNewBasicEnemy();
-		}
-		if (ImGui::Button("AddStaticnemy")) {
-			AddNewStaticEnemy();
-		}
-		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
-		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
-
-		ImGui::TreePop();
-	}
+	DrawimGui();
 #endif // _DEBUG
 }
 
 
-// 描画処理
+/// <summary>
+/// 描画処理
+/// </summary>
 void EnemyManager::Draw3D()
 {
-	// FlagModel
-	/*flagModel_->DrawN(transform_);
-	for (int i = 0; i < 3; ++i) {
-		spawn_[i]->DrawN(trans_[i]);
-	}*/
-
 	// EnemyListの描画
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Draw3D();
 	}
 
 	// Bulletsの描画
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
+	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Draw3D();
 	}
 }
 
 
-// 新しいEnemyを追加する
+/// <summary>
+/// 新しいEnemyを追加する
+/// </summary>
 void EnemyManager::AddNewBasicEnemy()
 {
 	CreateBasicEnemy(); // 新しいEnemyを生成する
@@ -148,14 +134,18 @@ void EnemyManager::AddNewStaticEnemy()
 }
 
 
-// 新しいEnemyBulletを追加する
+/// <summary>
+/// 新しいEnemyBulletを追加する
+/// </summary>
 void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
 {
 	CreateEnemyBullet(setType, initPos, initVel);
 }
 
 
-// エネミーカウントチェック
+/// <summary>
+/// エネミーカウントチェック
+/// </summary>
 void EnemyManager::EnemyCountCheck()
 {
 	// タイマー更新
@@ -179,7 +169,9 @@ void EnemyManager::EnemyCountCheck()
 }
 
 
-// 新しいEnemyを生成する
+/// <summary>
+/// 新しいEnemyを生成する
+/// </summary>
 void EnemyManager::CreateBasicEnemy()
 {
 	// 新しいEnemyのインスタンス
@@ -222,11 +214,13 @@ void EnemyManager::CreateStaticEnemy()
 }
 
 
-// 新しいEnemyBulletを生成する
+/// <summary>
+/// 新しいEnemyBulletを生成する
+/// </summary>
 void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
 {
-	// newBulletのインスタンス
-	std::shared_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
+	// オブジェクトプール空新しいバレットを取得
+	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
 	newBullet->SetBulletType(setType);
@@ -237,5 +231,39 @@ void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 
 	// リストに追加
 	bulletList_.push_back(newBullet);
+}
+
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
+void EnemyManager::DrawimGui()
+{
+	if (ImGui::TreeNode("EnemyManager")) {
+
+		ImGui::Text("Transform");
+		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
+		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
+		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
+		ImGui::Text("");
+
+		if (ImGui::Button("AddBasicEnemy")) {
+			AddNewBasicEnemy();
+		}
+		if (ImGui::Button("AddStaticnemy")) {
+			AddNewStaticEnemy();
+		}
+		ImGui::Text("");
+
+		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
+		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
+		ImGui::Text("");
+
+		int instance = int(bulletList_.size());
+		ImGui::DragInt("Bullet_InstanceSize", &instance);
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
 }
 

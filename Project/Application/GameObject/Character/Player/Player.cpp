@@ -46,6 +46,9 @@ void Player::Init()
 	movement_ = std::make_unique<PlayerMovement>();
 	movement_->Init(this, gameCamera_, &trans_);
 
+	// BulletのObjectPoolを先に作っておく
+	bulletPool_.Create(50);
+
 	// Colliderの登録
 	colComp_->SetAttribute(ColliderAttribute::Player);
 	colComp_->Register(sphere_);
@@ -84,14 +87,14 @@ void Player::Update()
 	ExecuteShot();
 
 	// Bulletの更新処理
-	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
+	for (PlayerBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
-
 	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<PlayerBullet> bullet) {
+	bulletList_.remove_if([this](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
-			bullet.reset();
+			// 死亡したバレットをプールに返却
+			bulletPool_.Return(bullet);
 			return true;
 		}
 		return false;
@@ -144,7 +147,7 @@ void Player::Draw3D()
 	particleManager_->Draw();
 
 	// Bulletsの描画
-	for (std::shared_ptr<PlayerBullet> bullet : bulletList_) {
+	for (PlayerBullet* bullet : bulletList_) {
 		bullet->Draw3D();
 	}
 }
@@ -174,7 +177,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 	}
 	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 
-		OnCollisionWithEnemyBullet();
+		//OnCollisionWithEnemyBullet();
 	}
 }
 void Player::OnCollisionWithEnemy()
@@ -427,8 +430,8 @@ void Player::ExecuteShot()
 /// </summary>
 void Player::CreateNewBullet()
 {
-	// newBulletのインスタンス
-	std::shared_ptr<PlayerBullet> newBullet = std::make_unique<PlayerBullet>();
+	// オブジェクトプール空新しいバレットを取得
+	PlayerBullet* newBullet = bulletPool_.Get();
 
 	// 初期座標
 	Vector3 initPos = trans_.GetWorldPos();
@@ -506,6 +509,10 @@ void Player::DrawImGui()
 		ImGui::Text("Shoot");
 		ImGui::Checkbox("isShooting", &isShooting_);
 		ImGui::Text("");
+
+		ImGui::Text("Bullet");
+		int instance = int(bulletList_.size());
+		ImGui::DragInt("Bullet_InstanceSize", &instance, 0);
 
 		ImGui::Text("Invincibility");
 		ImGui::Checkbox("Invincibility", &isInvincibility_);

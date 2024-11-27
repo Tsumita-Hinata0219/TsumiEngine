@@ -8,6 +8,7 @@
 #include "Input/Input.h"
 #include "Transform/WorldTransform/WorldTransform.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
+#include "Utilities/ObjectPool/ObjectPool.h"
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"

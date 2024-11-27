@@ -20,20 +20,40 @@ class EnemyManager {
 
 public: // メンバ関数
 
-	// コンストラクタ、デストラクタ
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
 	EnemyManager() {};
+
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~EnemyManager() {};
 
-	// 初期化処理、更新処理、描画処理
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	void Init();
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// 描画処理
+	/// </summary>
 	void Draw3D();
 
-	// 新しいEnemyを追加する
+	/// <summary>
+	/// 新しいEnemyを追加する
+	/// </summary>
 	void AddNewBasicEnemy();
 	void AddNewStaticEnemy();
 
-	// 新しいEnemyBulletを追加する
+	/// <summary>
+	/// 新しいEnemyBulletを追加する
+	/// </summary>
 	void AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
 #pragma region Accessor アクセッサ
@@ -49,16 +69,26 @@ public: // メンバ関数
 
 private:
 
-	// エネミーカウントチェック
+	/// <summary>
+	/// エネミーカウントチェック
+	/// </summary>
 	void EnemyCountCheck();
 
-	// 新しいEnemyを生成する
+	/// <summary>
+	/// 新しいEnemyを生成する
+	/// </summary>
 	void CreateBasicEnemy();
 	void CreateStaticEnemy();
 
-	// 新しいEnemyBulletを生成する
+	/// <summary>
+	/// 新しいEnemyBulletを生成する
+	/// </summary>
 	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawimGui();
 
 private: // メンバ変数
 
@@ -74,9 +104,10 @@ private: // メンバ変数
 	// EnemyのLIst配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
+	// EnemyBulletのObjectPool
+	ObjectPool<EnemyBullet> bulletPool_;
 	// EnemyBulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-
+	std::list<EnemyBullet*> bulletList_;
 
 	// Vector3Scope。エネミーの湧き範囲
 	ScopeVec3 scope3_{};
@@ -88,7 +119,6 @@ private: // メンバ変数
 	Timer enemyCountCheckTime_;
 
 	ModelManager* modelManager_ = nullptr;
-	std::vector<std::unique_ptr<Model>> spawn_;
 	std::vector<Transform> trans_;
 	Scope scope_{};
 };

@@ -392,6 +392,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
+    <ClInclude Include="Project\Engine\Utilities\ObjectPool\ObjectPool.h" />
     <ClInclude Include="Project\GameObject\Camera\MainCamera\MainCamera.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Manager\CameraManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Resources\CameraResource.h" />

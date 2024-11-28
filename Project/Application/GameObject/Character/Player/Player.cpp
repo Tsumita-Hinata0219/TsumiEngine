@@ -417,7 +417,7 @@ void Player::ExecuteShot()
 	// キーorボタンを離したら、最初の1発目がすぐ出るように1フレームを入れておく
 	else if (input_->Release(DIK_SPACE) || input_->Release(PadData::RIGHT_SHOULDER)) {
 		
-		shotPressFrame_ = 1;
+		shotPressFrame_ = kInitialShotPressFrame;
 
 		// フラグを折る
 		isShooting_ = false;
@@ -456,11 +456,14 @@ void Player::CreateNewBullet()
 /// </summary>
 void Player::SubtructInvincibilityTime()
 {
+	// 定数定義
+	constexpr int kColorResetThreshold = 7; // モデルカラーをリセットするまでのフレーム数
+
 	// 無敵状態の時間を減らす
 	invincibilityTime_--;
 
 	// 一定フレームたったら
-	if (invincibilityTime_ == invincibilityInterval_ - 7) {
+	if (invincibilityTime_ == invincibilityInterval_ - kColorResetThreshold) {
 
 		// モデルのカラーを白に戻す
 		for (auto& body : this->iBodys_) {
@@ -468,7 +471,7 @@ void Player::SubtructInvincibilityTime()
 		}
 	}
 
-	if (invincibilityTime_ <= 0) {
+	if (invincibilityTime_ <= invincibilityResetTime_) {
 		// 状態解除
 		isInvincibility_ = false;
 		// タイマーリセット

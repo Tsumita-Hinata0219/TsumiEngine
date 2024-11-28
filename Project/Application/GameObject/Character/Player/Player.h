@@ -211,6 +211,7 @@ private:
 	// 無敵時間 インターバル時間
 	uint32_t invincibilityTime_ = 0;
 	uint32_t invincibilityInterval_ = 2 * 60; // 2秒
+	const uint32_t invincibilityResetTime_ = 0; // リセット値
 
 
 #pragma region System
@@ -268,6 +269,7 @@ private: // バレット関連
 	// 射撃ボタン押下フレーム&インターバル
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 5;
+	const int kInitialShotPressFrame = 1;
 
 
 private: // UI関連

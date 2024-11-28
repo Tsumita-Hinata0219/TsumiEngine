@@ -148,6 +148,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// Material
 	MaterialDataN GetMaterialData() const { return this->modelState_->GetMaterialData(); }
 	void SetMaterialData(MaterialDataN seteData) { this->modelState_->SetMaterialData(seteData); }
+	void SetMaterialTexture(uint32_t setTexture) { this->modelState_->SetMaterialTexture(setTexture); }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->modelState_->GetLightData(); }

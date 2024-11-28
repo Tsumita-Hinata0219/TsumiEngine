@@ -112,6 +112,7 @@ private:
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
+	const float kBulletSpeed_ = 0.3f;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;

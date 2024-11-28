@@ -125,7 +125,7 @@ void StaticEnemy::CreateNewBullet()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = 0.3f;
+	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
 }
@@ -138,7 +138,7 @@ void StaticEnemy::CreateNewBullet2()
 	Vector3 initPos = trans_.GetWorldPos();
 	// 初期速度
 	Vector3 initVel = Vector3::oneZ;
-	initVel.z = -0.3f;
+	initVel.z = -kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Resistant, initPos, initVel);
 }

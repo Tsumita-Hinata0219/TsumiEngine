@@ -56,9 +56,6 @@ void GameManager::Run() {
 
 		Tsumi::EndFlame();
 		DirectXCommon::PostDrawForSwapChain();
-
-		// 経過時間の表示（デバッグ用）
-		std::cout << "Elapsed Time: " << g_ElapsedTime << " seconds" << std::endl;
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();

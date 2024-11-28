@@ -195,9 +195,11 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
+	const uint32_t HP_MIN = 0;
 
 	// キルカウント
 	uint32_t killCount_ = 0;
+	const uint32_t MaxKillCount_ = 15;
 
 	// ゲームに勝利したかのフラグ
 	bool isWin_ = false;

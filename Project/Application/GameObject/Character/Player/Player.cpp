@@ -105,12 +105,12 @@ void Player::Update()
 	sphere_.center = trans_.GetWorldPos();
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
-	if (killCount_ >= 15) {
+	if (killCount_ >= MaxKillCount_) {
 		isWin_ = true;
 		isLose_ = false;
 	}
 	// 体力が0なら敗北フラグを立てる
-	if (hp_ <= 0) {
+	if (hp_ <= HP_MIN) {
 		isWin_ = false;
 		isLose_ = true;
 	}
@@ -189,18 +189,18 @@ void Player::OnCollisionWithEnemyBullet()
 {
 	// 早期return
 	if (isInvincibility_) return; // 無敵時間
-	if (hp_ <= 0) return; // 体力が0以下
+	if (hp_ <= HP_MIN) return; // 体力が0以下
 
 	// 無敵時間にする
 	isInvincibility_ = true;
 
 	// HP減少
-	if (hp_ > 0) {
+	if (hp_ > HP_MIN) {
 		hp_--;
 	}
 
 	// 体力がなければ消すモデルもないので通らない
-	if (hp_ >= 0) {
+	if (hp_ >= HP_MIN) {
 
 		// 体力減少具合でボディを減らす
 		iBodys_[hp_].reset();

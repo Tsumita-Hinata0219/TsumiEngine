@@ -103,9 +103,6 @@ private: // クラス
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;
 
-	// Wall
-	std::unique_ptr<Wall> wall_;
-
 	// Floor
 	std::unique_ptr<Floor> floor_;
 

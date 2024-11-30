@@ -6,6 +6,7 @@
 void Floor::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/Floor", "Floor.obj");
 	model_ = modelManager_->GetModel("Floor");
 
 	trans_.Init();

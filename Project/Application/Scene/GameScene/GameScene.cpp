@@ -22,8 +22,6 @@ GameScene::GameScene()
 	startDirection_ = std::make_unique<StartDirection>();
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
-	/* ----- Wall 壁 ----- */
-	wall_ = std::make_unique<Wall>();
 	/* ----- Floor 床 ----- */
 	floor_ = std::make_unique<Floor>();
 	/* ----- Player プレイヤー ----- */
@@ -64,9 +62,7 @@ void GameScene::Initialize()
 
 
 	/* ----- JsonManager Jsonマネージャー ----- */
-	JsonManager::GetInstance()->Initialize();
-	JsonManager::GetInstance()->LoadSceneFile("Json", "kari.json");
-	JsonManager::GetInstance()->LoadSceneFile("Json", "nise.json");
+
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_->Init();
@@ -87,9 +83,6 @@ void GameScene::Initialize()
 	/* ----- Skybox 天箱 ----- */
 	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
 	skybox_->Init(dds);
-
-	/* ----- Wall 壁 ----- */
-	wall_->Init();
 
 	/* ----- Floor 床 ----- */
 	floor_->Init();
@@ -127,9 +120,6 @@ void GameScene::Update(GameManager* state)
 
 	/* ----- Skybox 天箱 ----- */
 	skybox_->Update();
-
-	/* ----- Wall 壁 ----- */
-	wall_->Update();
 	
 	/* ----- Floor 床 ----- */
 	floor_->Update();

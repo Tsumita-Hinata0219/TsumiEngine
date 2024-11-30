@@ -27,14 +27,10 @@ struct LevelData {
 	struct ObjectData {
 		std::string type;
 		std::string file_name;
-		SRT srt;
+		SRTN srt;
 		std::map<std::string, std::unique_ptr<ObjectData>> children;
 	};
 	std::map<std::string, std::unique_ptr<ObjectData>> objects;
-};
-struct LevelObject {
-	std::unique_ptr<Model> model;
-	WorldTransform transform;
 };
 
 
@@ -83,14 +79,14 @@ public: // メンバ関数
 		return nullptr;
 	}
 
-	SRT GetObjectSRT(const std::string& key) const {
+	SRTN GetObjectSRT(const std::string& key) const {
 
 		auto it = levelData_->objects.find(key);
 		if (it != levelData_->objects.end()) {
 			return it->second.get()->srt;
 		}
 
-		return SRT();
+		return SRTN();
 	}
 
 #pragma endregion 
@@ -112,9 +108,6 @@ private: // メンバ変数
 
 	// Jsonファイルから読み込んだ情報をまとめておく変数
 	std::unique_ptr<LevelData> levelData_;
-
-	// 配置するための変数
-	std::map<const std::string, std::list<std::unique_ptr<LevelObject>>> levelObjectMap_;
 
 	// 読み込んだ情報をまとめておくコンテナ
 	std::map<const std::string, SRTN> srtMap_;

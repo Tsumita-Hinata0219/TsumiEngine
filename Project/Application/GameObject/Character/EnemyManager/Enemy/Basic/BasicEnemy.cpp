@@ -11,6 +11,10 @@ void BasicEnemy::Init()
 	modelManager_->LoadModel("Obj/Enemys/Basic", "Basic.obj");
 	model_ = modelManager_->GetModel("Basic");
 
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
@@ -102,7 +106,7 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
-	//model_->SetLightData(light_);
+	model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

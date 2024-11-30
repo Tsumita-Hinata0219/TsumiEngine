@@ -23,10 +23,6 @@ void Player::Init()
 	// BulletModelのロード
 	modelManager_->LoadModel("Obj/Player/Bullet", "PlayerBullet.obj");
 
-	//Transformの初期化
-	trans_.Init();
-	trans_.srt.translate.z = -5.0f;
-
 	// 各ボディの初期化とペアレントを結ぶ
 	iBodys_.resize(EnumSize<PlayerBodyTyep>::value);
 	iBodys_[enum_val(PlayerBodyTyep::MAIN)] = std::make_unique<PlayerMainBody>();
@@ -36,6 +32,14 @@ void Player::Init()
 		body->Init();
 		body->SetParent(&trans_);
 	}
+
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+
+	//Transformの初期化
+	trans_.Init();
+	trans_.srt.translate.z = -5.0f;
 
 	// パーティクルマネージャー
 	particleManager_ = std::make_unique<PlayerParticleManager>();
@@ -140,6 +144,7 @@ void Player::Draw3D()
 	// BodyModelの描画
 	for (std::shared_ptr<IPlayerBody> body : iBodys_) {
 		body->SetModelColor(color_);
+		body->SetModelLight(light_);
 		body->Draw3D();
 	}
 
@@ -493,6 +498,11 @@ void Player::DrawImGui()
 
 		ImGui::Text("BodyColor");
 		ImGui::ColorEdit4("color", &color_.x);
+		ImGui::Text("");
+
+		ImGui::Text("BodyLight");
+		light_.DrawImGui();
+		ImGui::Text("");
 
 		ImGui::Text("Move");
 		ImGui::DragFloat3("Velocity", &velocity_.x, 0.0f);

@@ -116,6 +116,9 @@ private:
 	// Model
 	std::unique_ptr<Model> model_;
 
+	// ライト
+	DirectionalLightData light_{};
+
 	// トランスフォーム
 	Transform trans_{};
 
@@ -124,9 +127,6 @@ private:
 
 	// 死亡フラグ
 	bool isDead_ = false;
-
-	// Light
-	DirectionalLightData light_;
 
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;

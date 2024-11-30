@@ -13,10 +13,6 @@ void PlayerMainBody::Init()
 
 	// Transformの初期化
 	trans_.Init();
-
-	// ライトの初期設定
-	light_.enable = true;
-	light_.direction = Vector3::one;
 }
 
 
@@ -28,7 +24,6 @@ void PlayerMainBody::Update() {}
 void PlayerMainBody::Draw3D()
 {
 	for (int i = 0; i < 2; ++i) {
-		models_[i]->SetLightData(light_);
 		models_[i]->DrawN(trans_);
 	}
 }

@@ -48,10 +48,10 @@ void EnemyManager::Init()
 	bulletPool_.Create(100);
 
 	// 最初に何体か湧かせておく
-	for (int i = 0; i < 3; ++i) {
+	/*for (int i = 0; i < 3; ++i) {
 		AddNewBasicEnemy();
 		AddNewStaticEnemy();
-	}
+	}*/
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {

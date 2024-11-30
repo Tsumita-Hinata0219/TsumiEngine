@@ -29,6 +29,7 @@ void BasicEnemy::Init()
 	// ライトの初期設定
 	light_.enable = true;
 	light_.direction = Vector3::one;
+	light_.intensity = 0.7f;
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存

@@ -35,7 +35,8 @@ void Player::Init()
 
 	// ライトの初期設定
 	light_.enable = true;
-	light_.direction = Vector3::one;
+	light_.direction = Vector3::oneY;
+	light_.intensity = 0.7f;
 
 	//Transformの初期化
 	trans_.Init();

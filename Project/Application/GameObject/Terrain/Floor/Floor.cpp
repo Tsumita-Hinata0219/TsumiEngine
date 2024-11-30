@@ -7,8 +7,6 @@ void Floor::Init()
 {
 	modelManager_ = ModelManager::GetInstance();
 	model_ = modelManager_->GetModel("Floor");
-	uint32_t ddsFile = TextureManager::LoadTexture("Texture", "uvChecker.dds");
-	model_->SetMaterialTexture(ddsFile);
 
 	trans_.Init();
 	trans_.srt.translate.y = -2.0f;

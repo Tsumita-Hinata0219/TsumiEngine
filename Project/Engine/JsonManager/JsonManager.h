@@ -54,78 +54,48 @@ private: // シングルトンデザインパターン
 
 public: // メンバ関数
 
-	// インスタンスの取得
-	static JsonManager* GetInstance() {
-		static JsonManager instance;
-		return &instance;
-	}
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
+	static JsonManager* GetInstance();
 
-	// 初期化処理、解放処理
-	void Initialize();
-	void Finalize();
-
-	// Jsonファイルの読み込み
+	/// <summary>
+	/// シーンのJsonの読み込み
+	/// </summary>
 	void LoadSceneFile(const std::string& path, const std::string& fileName);
-
-	void LoadJsonFile(const std::string& path, const std::string& fileName);
 
 
 #pragma region Accessor アクセッサ
 
 
-	LevelData::ObjectData* GetObjectData(const std::string& key) const {
-
-		if (!levelData_) {
-			return nullptr;
-		}
-
-		auto it = levelData_->objects.find(key);
-		if (it != levelData_->objects.end()) {
-			return it->second.get();
-		}
-
-		return nullptr;
-	}
-
-	SRTN GetObjectSRT(const std::string& key) const {
-
-		auto it = levelData_->objects.find(key);
-		if (it != levelData_->objects.end()) {
-			return it->second.get()->srt;
-		}
-
-		return SRTN();
-	}
 
 #pragma endregion 
 
 
 private:
 
-	// オブジェクトの走査
-	void ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
+	/// <summary>
+	/// オブジェクトの走査
+	/// </summary>
 	std::unique_ptr<EntityData> ScanningEntityData(const std::string& path, nlohmann::json& object);
 
-	// タイプ
+	/// <summary>
+	/// タイプ
+	/// </summary>
 	std::string ScanningType(nlohmann::json& object);
 
-	// エンティティ名
+	/// <summary>
+	/// エンティティ名
+	/// </summary>
 	std::string ScanningEntityName(nlohmann::json& object);
 
-	// SRTの読み込み
+	/// <summary>
+	/// SRTの読み込み
+	/// </summary>
 	SRTN ScanningSRT(nlohmann::json& object);
 
 
 private: // メンバ変数
-
-	// モデルマネージャー
-	ModelManager* modelManager_ = nullptr;
-
-	// Jsonファイルから読み込んだ情報をまとめておく変数
-	std::unique_ptr<LevelData> levelData_;
-
-	// 読み込んだ情報をまとめておくコンテナ
-	std::map<const std::string, SRTN> srtMap_;
 
 	// 読み込んだ情報をまとめておくコンテナ
 	std::map<const std::string, std::vector<std::unique_ptr<EntityData>>> entityMap_;

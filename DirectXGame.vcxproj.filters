@@ -61,7 +61,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Camera.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Project\Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -271,7 +270,6 @@
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\GameObject.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Project\Engine\Math\MathFunction\MathFunction.h" />
     <ClInclude Include="Project\Engine\Math\MathOperations\MathOperations.h" />

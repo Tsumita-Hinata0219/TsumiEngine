@@ -11,7 +11,6 @@
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "GameObject/Terrain/Skybox/Skybox.h"
-#include "GameObject/Terrain/Ground/Ground.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 #include "GameObject/Others/TestHuman/TestHuman.h"
 #include "GameObject/Others/TestJsonObject/TestJsonObject.h"

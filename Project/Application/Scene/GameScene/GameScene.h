@@ -14,10 +14,7 @@
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "GameObject/Terrain/Skybox/Skybox.h"
-#include "GameObject/Terrain/Ground/Ground.h"
-#include "GameObject/Terrain/Wall/Wall.h"
 #include "GameObject/Terrain/Floor/Floor.h"
-#include "GameObject/Terrain/Building1/Building1.h"
 
 #include "GameObject/Character/Player/Player.h"
 #include "GameObject/Character/EnemyManager/EnemyManager.h"

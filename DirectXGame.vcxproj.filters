@@ -177,8 +177,6 @@
     <ClCompile Include="Project\Application\GameObject\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Wall\Wall.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Project\Application\Scene\ResultScene\ResultScene.cpp" />
@@ -398,8 +396,6 @@
     <ClInclude Include="Project\Application\GameObject\IObject\IObject.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Wall\Wall.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Building1\Building1.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Project\Application\Scene\ResultScene\ResultScene.h" />

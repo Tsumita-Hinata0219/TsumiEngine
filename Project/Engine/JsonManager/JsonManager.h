@@ -17,21 +17,6 @@
 
 
 
-struct ColliderData {
-	std::string type;
-	Vector3 center;
-	Vector3 size;
-};
-struct LevelData {
-
-	struct ObjectData {
-		std::string type;
-		std::string file_name;
-		SRTN srt;
-		std::map<std::string, std::unique_ptr<ObjectData>> children;
-	};
-	std::map<std::string, std::unique_ptr<ObjectData>> objects;
-};
 struct EntityData {
 	std::string type;
 	std::string entityName;

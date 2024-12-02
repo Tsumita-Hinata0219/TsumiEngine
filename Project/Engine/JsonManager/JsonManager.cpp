@@ -108,19 +108,19 @@ void JsonManager::LoadJsonFile(const std::string& path, const std::string& fileN
 
 	/* ──────────── オブジェクトの走査 ──────────── */
 
-	// レベルデータ格納用インスタンスを生成
-	std::unique_ptr<EntityData> entity = std::make_unique<EntityData>();
 	// "objects"の全オブジェクトを走査
 	if (deserialized.contains("objects") && deserialized["objects"].is_array()) {
 
-		// 走査してく
 		for (nlohmann::json& object : deserialized["objects"]) {
-			entity = ScanningEntityData(path, object);
+
+			// レベルデータ格納用インスタンスを生成
+			std::unique_ptr<EntityData> entity = std::make_unique<EntityData>();
+			entity = ScanningEntityData(path, object); // 走査
+
+			// 走査した情報をマップコンテナに追加
+			entityMap_[entity->entityName].push_back(std::move(entity));
 		}
 	}
-
-	// マップコンテナに追加
-	entityMap_[entity->entityName].push_back(std::move(entity));
 }
 
 
@@ -230,27 +230,27 @@ std::unique_ptr<EntityData> JsonManager::ScanningEntityData(const std::string& p
 	/* ──────────── メッシュの読み込み ──────────── */
 	if (type.compare("MESH") == 0) {
 
-		// 新しくオブジェクトを作成
-		auto entityData = make_unique<EntityData>();
-
 		/* ──────────── タイプ ──────────── */
-		entityData->type = ScanningType(object);
+		result->type = ScanningType(object);
 
 		/* ──────────── エンティティネーム ──────────── */
-		entityData->entityName = ScanningEntityName(object);
+		result->entityName = ScanningEntityName(object);
 
 		/* ──────────── SRT ──────────── */
-		entityData->srt = ScanningSRT(object);
+		result->srt = ScanningSRT(object);
 
 		/* ──────────── コライダーの読み込み ──────────── */
 
 
 		/* ──────────── ツリー構造の走査 ──────────── */
 		if (object.contains("children") && object["children"].is_array()) {
-
 			for (nlohmann::json& child : object["children"]) {
+
+				// 新しく子供を作る
 				std::unique_ptr<EntityData> childResult = std::make_unique<EntityData>();
-				childResult = ScanningEntityData(path, child);
+				childResult = ScanningEntityData(path, child); // 子供の情報を走査
+
+				// 走査した情報を親に入れる
 				result->children[childResult->entityName] = std::move(childResult);
 			}
 		}

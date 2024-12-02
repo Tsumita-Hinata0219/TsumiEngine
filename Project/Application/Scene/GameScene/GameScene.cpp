@@ -63,7 +63,7 @@ void GameScene::Initialize()
 
 	/* ----- JsonManager Jsonマネージャー ----- */
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager;
+	jsonManager->LoadJsonFile("Json", "Stage_1.json");
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_->Init();

@@ -62,7 +62,7 @@ void GameScene::Initialize()
 
 
 	/* ----- JsonManager Jsonマネージャー ----- */
-
+	JsonManager* jsonManager = JsonManager::GetInstance();
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_->Init();

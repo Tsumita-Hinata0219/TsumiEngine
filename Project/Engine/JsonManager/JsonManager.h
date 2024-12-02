@@ -32,6 +32,12 @@ struct LevelData {
 	};
 	std::map<std::string, std::unique_ptr<ObjectData>> objects;
 };
+struct EntityData {
+	std::string type;
+	std::string entityName;
+	SRTN srt;
+	std::map<std::string, std::unique_ptr<EntityData>> children;
+};
 
 
 /* JsonManagerクラス */
@@ -60,6 +66,8 @@ public: // メンバ関数
 
 	// Jsonファイルの読み込み
 	void LoadSceneFile(const std::string& path, const std::string& fileName);
+
+	void LoadJsonFile(const std::string& path, const std::string& fileName);
 
 
 #pragma region Accessor アクセッサ
@@ -96,9 +104,16 @@ private:
 
 	// オブジェクトの走査
 	void ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
+	std::unique_ptr<EntityData> ScanningEntityData(const std::string& path, nlohmann::json& object);
 
-	// 読み込んだ情報からモデル作成
-	void CreateModel();
+	// タイプ
+	std::string ScanningType(nlohmann::json& object);
+
+	// エンティティ名
+	std::string ScanningEntityName(nlohmann::json& object);
+
+	// SRTの読み込み
+	SRTN ScanningSRT(nlohmann::json& object);
 
 
 private: // メンバ変数
@@ -111,6 +126,9 @@ private: // メンバ変数
 
 	// 読み込んだ情報をまとめておくコンテナ
 	std::map<const std::string, SRTN> srtMap_;
+
+	// 読み込んだ情報をまとめておくコンテナ
+	std::map<const std::string, std::vector<std::unique_ptr<EntityData>>> entityMap_;
 
 };
 

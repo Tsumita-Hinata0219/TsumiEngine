@@ -120,7 +120,7 @@ void JsonManager::LoadJsonFile(const std::string& path, const std::string& fileN
 	}
 
 	// マップコンテナに追加
-	entityMap_[entity->entityName].push_back(entity);
+	entityMap_[entity->entityName].push_back(std::move(entity));
 }
 
 
@@ -256,7 +256,7 @@ std::unique_ptr<EntityData> JsonManager::ScanningEntityData(const std::string& p
 		}
 	}
 
-	return result;
+	return std::move(result);
 }
 
 

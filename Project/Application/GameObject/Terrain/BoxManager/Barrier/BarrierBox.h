@@ -71,6 +71,7 @@ private:
 
 	// コライダー
 	Col::AABB aabb_{};
+	Col::Sphere sphere_{};
 
 };
 

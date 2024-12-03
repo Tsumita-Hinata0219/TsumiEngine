@@ -68,8 +68,13 @@ void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 	if (object->GetAttribute() == ObjAttribute::PLAYER || 
 		object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 
-		// 消えない弾ならreturn
-		if (bulletType_ == EnemyBulletType::Resistant) return;
+		// タイプが消えない弾ならreturn
+		if (bulletType_ == EnemyBulletType::Resistant) { return; }
+		isDead_ = true;
+	}
+	else if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+
+		// 衝突相手が地形ならタイプ構わずフラグを立てる
 		isDead_ = true;
 	}
 }

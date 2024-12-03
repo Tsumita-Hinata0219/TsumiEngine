@@ -19,6 +19,13 @@ void BarrierBox::Init()
 
 	// トランスフォームの初期化
 	trans_.Init();
+
+	// コライダーの初期化
+	colComp_->SetAttribute(ColliderAttribute::Terrain);
+	colComp_->Register(aabb_);
+	aabb_.center = trans_.GetWorldPos();
+	aabb_.max = { 2.0f, 2.0f, 2.0f };
+	aabb_.min = { -2.0f, -2.0f, -2.0f };
 }
 
 

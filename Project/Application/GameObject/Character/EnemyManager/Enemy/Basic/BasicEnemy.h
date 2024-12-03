@@ -136,7 +136,7 @@ private:
 
 	// コライダー
 	//std::unique_ptr<OBBCollider> collider_;
-	Col::Sphere sphere_;
+	Col::Sphere sphere_{};
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

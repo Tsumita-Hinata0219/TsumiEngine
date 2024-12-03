@@ -69,5 +69,8 @@ private:
 	// トランスフォーム
 	Transform trans_{};
 
+	// コライダー
+	Col::AABB aabb_{};
+
 };
 

@@ -46,7 +46,6 @@ void GameScene::Initialize()
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());
 
-
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();
 	jsonManager->LoadSceneFile("Json", "Stage_Demo.json");

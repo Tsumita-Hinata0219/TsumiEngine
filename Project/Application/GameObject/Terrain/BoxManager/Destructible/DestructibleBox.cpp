@@ -7,6 +7,12 @@
 /// </summary>
 void DestructibleBox::Init()
 {
+	// モデルのロードと初期化
+	modelManager_->LoadModel("Obj/Boxs/DestructibleBox", "DestructibleBox.obj");
+	model_ = modelManager_->GetModel("DestructibleBox");
+
+	// トランスフォームの初期化
+	trans_.Init();
 }
 
 

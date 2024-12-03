@@ -8,8 +8,8 @@
 void BarrierBox::Init()
 {
 	// モデルのロードと初期化
-	modelManager_->LoadModel("", "");
-	model_ = modelManager_->GetModel("");
+	modelManager_->LoadModel("Obj/Boxs/BarrierBox", "BarrierBox.obj");
+	model_ = modelManager_->GetModel("BarrierBox");
 
 	// トランスフォームの初期化
 	trans_.Init();

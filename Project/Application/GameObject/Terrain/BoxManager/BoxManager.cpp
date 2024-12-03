@@ -73,6 +73,14 @@ void BoxManager::CreateNewBox(BoxType type, const SRTN& setSRT)
 	// 壊れるボックス
 	else if (type == BoxType::Destructible) {
 
+		std::shared_ptr<DestructibleBox> newBox = std::make_shared<DestructibleBox>();
+
+		// 初期化と設定
+		newBox->SetManager(this);
+		newBox->Init();
+		newBox->SetSRT(setSRT);
+
+		boxs_.push_back(newBox);
 	}
 }
 

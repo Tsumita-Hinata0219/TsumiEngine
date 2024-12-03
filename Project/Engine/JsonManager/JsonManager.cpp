@@ -166,8 +166,8 @@ SRTN JsonManager::ScanningSRT(nlohmann::json& object)
 		srt.rotate.z = -(float)transform["rotation"][1] * (float(std::numbers::pi) / 180.0f);
 		// スケーリング
 		srt.scale.x = (float)transform["scaling"][0];
-		srt.scale.y = (float)transform["scaling"][2];
-		srt.scale.z = (float)transform["scaling"][1];
+		srt.scale.y = (float)transform["scaling"][1];
+		srt.scale.z = (float)transform["scaling"][2];
 	}
 
 	return srt;

@@ -10,8 +10,6 @@ void Floor::Init()
 	model_ = modelManager_->GetModel("Floor");
 
 	trans_.Init();
-	trans_.srt.scale = { 50.0f, 1.0f, 50.0f };
-	trans_.srt.translate.y = -2.0f;
 }
 
 

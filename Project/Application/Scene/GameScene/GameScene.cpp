@@ -72,6 +72,7 @@ void GameScene::Initialize()
 
 	// ──────── Floor
 	floor_->Init();
+	floor_->LoadEntityData(jsonManager->GetEntityData("Floor"));
 
 	// ──────── Player
 	player_->Init();

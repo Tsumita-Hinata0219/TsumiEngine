@@ -23,12 +23,12 @@ public: // メンバ関数
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyManager() {};
+	EnemyManager() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~EnemyManager() {};
+	~EnemyManager() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -95,7 +95,7 @@ private: // メンバ変数
 	// Transform
 	Transform transform_{};
 
-	// EnemyのLIst配列
+	// EnemyのList配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
 	// EnemyBulletのObjectPool

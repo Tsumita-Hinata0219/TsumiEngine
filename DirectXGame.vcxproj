@@ -159,6 +159,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
@@ -353,6 +356,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Interface\IBoxObject.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />

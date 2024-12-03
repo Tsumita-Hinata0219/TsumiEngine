@@ -249,6 +249,9 @@
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -488,6 +491,10 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Engine\Utilities\ObjectPool\ObjectPool.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Interface\IBoxObject.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

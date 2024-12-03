@@ -51,7 +51,6 @@ public:
 	// Translate
 	virtual void SetTranslate(const Vector3& setTranslate) = 0;
 
-
 	// HP
 	virtual uint32_t GetHP() = 0;
 

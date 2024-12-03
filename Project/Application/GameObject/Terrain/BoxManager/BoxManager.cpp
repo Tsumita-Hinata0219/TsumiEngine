@@ -19,6 +19,15 @@ void BoxManager::Update()
 	for (std::shared_ptr<IBoxObject> box : boxs_) {
 		box->Update();
 	}
+	// 死亡フラグが立っていたら削除
+	boxs_.remove_if([this](std::shared_ptr<IBoxObject> box) {
+		if (box->IsDead()) {
+			box.reset();
+			return true;
+		}
+		return false;
+		}
+	);
 }
 
 
@@ -48,4 +57,39 @@ void BoxManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& 
 void BoxManager::CreateNewBox(BoxType type, const SRTN& setSRT)
 {
 	type, setSRT;
+
+	// 壊れないボックス
+	if (type == BoxType::Barrier) {
+
+		std::shared_ptr<BarrierBox> newBox = std::make_shared<BarrierBox>();
+
+		// 初期化と設定
+		newBox->SetManager(this);
+		newBox->Init();
+		newBox->SetSRT(setSRT);
+
+		boxs_.push_back(newBox);
+	}
+	// 壊れるボックス
+	else if (type == BoxType::Destructible) {
+
+	}
+}
+
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
+void BoxManager::DrawImGui()
+{
+	if (ImGui::TreeNode("BoxManager")) {
+
+		ImGui::Text("InstanceNum");
+		int num = int(boxs_.size());
+		ImGui::DragInt("Instance", &num, 0.0f);
+		ImGui::Text("");
+
+
+		ImGui::TreePop();
+	}
 }

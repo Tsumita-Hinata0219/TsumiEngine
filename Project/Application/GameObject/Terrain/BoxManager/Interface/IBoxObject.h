@@ -32,7 +32,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// Manager
-	virtual void SetManager(BoxManager* setManager) = 0;
+	virtual void SetManager(BoxManager* setManager) { this->manager_ = setManager; }
 
 	// IsDead
 	bool IsDead() const { return this->isDead_; }

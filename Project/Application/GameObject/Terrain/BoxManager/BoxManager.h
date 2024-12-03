@@ -44,6 +44,13 @@ class BoxManager {
 	/// </summary>
 	void CreateNewBox(BoxType type, const SRTN& setSRT);
 
+private:
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
+
 
 private:
 

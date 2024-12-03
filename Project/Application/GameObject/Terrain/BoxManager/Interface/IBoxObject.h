@@ -57,6 +57,9 @@ protected:
 	// マネージャー
 	BoxManager* manager_ = nullptr;
 
+	// HP
+	int HP_ = 0;
+
 	// 死亡フラグ
 	bool isDead_ = false;
 

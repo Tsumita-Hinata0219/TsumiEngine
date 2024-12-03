@@ -7,6 +7,12 @@
 /// </summary>
 void BarrierBox::Init()
 {
+	// モデルのロードと初期化
+	modelManager_->LoadModel("", "");
+	model_ = modelManager_->GetModel("");
+
+	// トランスフォームの初期化
+	trans_.Init();
 }
 
 
@@ -23,10 +29,19 @@ void BarrierBox::Update()
 /// </summary>
 void BarrierBox::Draw3D()
 {
+	model_->DrawN(trans_);
 }
 void BarrierBox::Draw2DFront()
 {
 }
 void BarrierBox::Draw2DBack()
+{
+}
+
+
+/// <summary>
+/// 衝突判定コールバック関数
+/// </summary>
+void BarrierBox::onCollision([[maybe_unused]] IObject* object)
 {
 }

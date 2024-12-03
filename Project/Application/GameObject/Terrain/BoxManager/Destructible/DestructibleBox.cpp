@@ -30,3 +30,11 @@ void DestructibleBox::Draw2DFront()
 void DestructibleBox::Draw2DBack()
 {
 }
+
+
+/// <summary>
+/// 衝突判定コールバック関数
+/// </summary>
+void DestructibleBox::onCollision([[maybe_unused]] IObject* object)
+{
+}

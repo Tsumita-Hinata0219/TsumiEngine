@@ -35,6 +35,11 @@ public:
 	void Draw2DFront() override;
 	void Draw2DBack() override;
 
+	/// <summary>
+	/// 衝突判定コールバック関数
+	/// </summary>
+	void onCollision([[maybe_unused]] IObject* object) override;
+
 
 #pragma region Accessor アクセッサ
 

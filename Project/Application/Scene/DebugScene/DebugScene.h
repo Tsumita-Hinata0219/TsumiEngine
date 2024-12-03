@@ -16,7 +16,6 @@
 #include "GameObject/Others/TestJsonObject/TestJsonObject.h"
 #include "GameObject/Others/TestBaseObject/TestBaseObject.h"
 
-
 class DebugScene : public IScene {
 
 public:

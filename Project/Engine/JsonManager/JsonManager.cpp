@@ -58,7 +58,8 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 			entity = ScanningEntityData(path, object); // 走査
 
 			// 走査した情報をマップコンテナに追加
-			entityMap_[entity->entityName].push_back(std::move(entity));
+			//entityMap_[entity->entityName].push_back(std::move(entity));
+			AddEntityData(std::move(entity));
 		}
 	}
 }

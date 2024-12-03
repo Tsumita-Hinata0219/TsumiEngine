@@ -79,6 +79,28 @@ private:
 	/// </summary>
 	SRTN ScanningSRT(nlohmann::json& object);
 
+#pragma region Accessor アクセッサ
+
+	/// <summary>
+	/// EntityDataのリストの取得
+	/// </summary>
+	const std::vector<std::unique_ptr<EntityData>>* GetEntityData(const std::string& key) const {
+		auto it = entityMap_.find(key);
+		if (it != entityMap_.end()) {
+			return &it->second;
+		}
+		return nullptr; // キーが存在しない場合
+	}
+
+	/// <summary>
+	/// データを追加
+	/// </summary>
+	void AddEntityData(std::unique_ptr<EntityData> entity) {
+		entityMap_[entity->entityName].emplace_back(std::move(entity));
+	}
+
+#pragma endregion 
+
 
 private: // メンバ変数
 

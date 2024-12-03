@@ -49,10 +49,31 @@ public: // メンバ関数
 	/// </summary>
 	void LoadSceneFile(const std::string& path, const std::string& fileName);
 
+	/// <summary>
+	/// マップを空にする
+	/// </summary>
+	void Clear() { entityMap_.clear(); }
+
 
 #pragma region Accessor アクセッサ
 
+	/// <summary>
+	/// EntityDataのリストの取得
+	/// </summary>
+	const std::vector<std::unique_ptr<EntityData>>* GetEntityData(const std::string& key) const {
+		auto it = entityMap_.find(key);
+		if (it != entityMap_.end()) {
+			return &it->second;
+		}
+		return nullptr; // キーが存在しない場合
+	}
 
+	/// <summary>
+	/// データを追加
+	/// </summary>
+	void AddEntityData(std::unique_ptr<EntityData> entity) {
+		entityMap_[entity->entityName].emplace_back(std::move(entity));
+	}
 
 #pragma endregion 
 
@@ -78,28 +99,6 @@ private:
 	/// SRTの読み込み
 	/// </summary>
 	SRTN ScanningSRT(nlohmann::json& object);
-
-#pragma region Accessor アクセッサ
-
-	/// <summary>
-	/// EntityDataのリストの取得
-	/// </summary>
-	const std::vector<std::unique_ptr<EntityData>>* GetEntityData(const std::string& key) const {
-		auto it = entityMap_.find(key);
-		if (it != entityMap_.end()) {
-			return &it->second;
-		}
-		return nullptr; // キーが存在しない場合
-	}
-
-	/// <summary>
-	/// データを追加
-	/// </summary>
-	void AddEntityData(std::unique_ptr<EntityData> entity) {
-		entityMap_[entity->entityName].emplace_back(std::move(entity));
-	}
-
-#pragma endregion 
 
 
 private: // メンバ変数

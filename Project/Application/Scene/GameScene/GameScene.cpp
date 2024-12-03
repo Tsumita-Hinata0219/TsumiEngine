@@ -7,7 +7,10 @@
 /// </summary>
 GameScene::GameScene() 
 {
+	/* ----- Input 入力 ----- */
 	input_ = Input::GetInstance();
+	/* ----- JsonManager Jsonマネージャー ----- */
+	jsonManager_ = JsonManager::GetInstance();
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CollisionManager_ = CollisionManager::GetInstance();
 	/* ----- AbsentEffect アブセントエフェクト ----- */
@@ -49,9 +52,6 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize()
 {
-	/* ----- Input 入力 ----- */
-	input_ = Input::GetInstance();
-  
 	/* ----- クラスにポインタを渡す ----- */
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -62,8 +62,7 @@ void GameScene::Initialize()
 
 
 	/* ----- JsonManager Jsonマネージャー ----- */
-	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", "Stage_1.json");
+	jsonManager_->LoadSceneFile("Json", "Stage_1.json");
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_->Init();
@@ -101,6 +100,10 @@ void GameScene::Initialize()
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
+
+
+	// 読み込んだJsonデータはもう使わないので、破棄しておく
+	jsonManager_->Clear();
 }
 
 

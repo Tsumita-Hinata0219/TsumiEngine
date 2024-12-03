@@ -46,10 +46,9 @@ public: // メンバ関数
 	void Draw3D();
 
 	/// <summary>
-	/// 新しいEnemyを追加する
+	/// Jsonで読み込んだ情報を受け取る
 	/// </summary>
-	void AddNewBasicEnemy();
-	void AddNewStaticEnemy();
+	void LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas);
 
 	/// <summary>
 	/// 新しいEnemyBulletを追加する
@@ -70,15 +69,10 @@ public: // メンバ関数
 private:
 
 	/// <summary>
-	/// エネミーカウントチェック
-	/// </summary>
-	void EnemyCountCheck();
-
-	/// <summary>
 	/// 新しいEnemyを生成する
 	/// </summary>
-	void CreateBasicEnemy();
-	void CreateStaticEnemy();
+	void CreateBasicEnemy(const SRTN& setSRT);
+	void CreateStaticEnemy(const SRTN& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する

@@ -79,8 +79,6 @@ private: // クラス
 
 	Input* input_ = nullptr;
 
-	JsonManager* jsonManager_ = nullptr;
-
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 

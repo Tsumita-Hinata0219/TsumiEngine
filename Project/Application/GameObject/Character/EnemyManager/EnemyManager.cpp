@@ -47,12 +47,6 @@ void EnemyManager::Init()
 	// BulletのObjectPoolを先に作っておく
 	bulletPool_.Create(100);
 
-	// 最初に何体か湧かせておく
-	for (int i = 0; i < 3; ++i) {
-		AddNewBasicEnemy();
-		AddNewStaticEnemy();
-	}
-
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
@@ -65,9 +59,6 @@ void EnemyManager::Init()
 /// </summary>
 void EnemyManager::Update()
 {
-	// エネミーカウントチェック
-	//EnemyCountCheck();
-
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
@@ -122,15 +113,21 @@ void EnemyManager::Draw3D()
 
 
 /// <summary>
-/// 新しいEnemyを追加する
+/// Jsonで読み込んだ情報を受け取る
 /// </summary>
-void EnemyManager::AddNewBasicEnemy()
+void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas)
 {
-	CreateBasicEnemy(); // 新しいEnemyを生成する
-}
-void EnemyManager::AddNewStaticEnemy()
-{
-	CreateStaticEnemy(); // 新しいエネミーを生成する
+	for (const auto& entityData : datas) {
+		if (entityData) {
+
+			if (entityData->entityName == "BasicEnemy") {
+				CreateBasicEnemy(entityData->srt);
+			}
+			else if (entityData->entityName == "StaticEnemy") {
+				CreateStaticEnemy(entityData->srt);
+			}
+		}
+	}
 }
 
 
@@ -143,71 +140,36 @@ void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 }
 
 
-/// <summary>
-/// エネミーカウントチェック
-/// </summary>
-void EnemyManager::EnemyCountCheck()
-{
-	// タイマー更新
-	enemyCountCheckTime_.Update(true);
-
-	// タイマー終了でチェック
-	if (enemyCountCheckTime_.IsFinish()) {
-
-		// エネミーが一定数以下なら新しく湧くようにする
-		if (enemyMinInstance_ >= int(enemys_.size())) {
-
-			// 最低数との差分
-			int shortageCount = enemyMinInstance_ - int(enemys_.size());
-
-			// 足りない分、新しいEnemyを生成する
-			for (int i = 0; i < shortageCount; ++i) {
-				CreateBasicEnemy();
-			}
-		}
-	}
-}
-
 
 /// <summary>
 /// 新しいEnemyを生成する
 /// </summary>
-void EnemyManager::CreateBasicEnemy()
+void EnemyManager::CreateBasicEnemy(const SRTN& setSRT)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
-
-	int index = int(RandomGenerator::getRandom(scope_));
-
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos =
-		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetPosition(initPos);
+	newEnemy->SetRotate(setSRT.rotate);
+	newEnemy->SetTranslate(setSRT.translate);
 
 	// リストに追加
 	enemys_.push_back(newEnemy);
 }
-void EnemyManager::CreateStaticEnemy()
+void EnemyManager::CreateStaticEnemy(const SRTN& setSRT)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
-
-	int index = int(RandomGenerator::getRandom(scope_));
-
-	// 初期座標。多少ランダムに湧く
-	Vector3 initPos =
-		trans_[index].GetWorldPos() + RandomGenerator::getRandom(scope3_);
+	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetPosition(initPos);
+	newEnemy->SetRotate(setSRT.rotate);
+	newEnemy->SetTranslate(setSRT.translate);
 
 	// リストに追加
 	enemys_.push_back(newEnemy);
@@ -245,14 +207,6 @@ void EnemyManager::DrawimGui()
 		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
 		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
 		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
-		ImGui::Text("");
-
-		if (ImGui::Button("AddBasicEnemy")) {
-			AddNewBasicEnemy();
-		}
-		if (ImGui::Button("AddStaticnemy")) {
-			AddNewStaticEnemy();
-		}
 		ImGui::Text("");
 
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));

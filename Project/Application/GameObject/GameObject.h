@@ -13,6 +13,7 @@
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
+#include "JsonManager/JsonManager.h"
 
 #include "Math/MyMath.h"
 

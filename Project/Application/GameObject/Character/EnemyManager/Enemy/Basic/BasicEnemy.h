@@ -42,10 +42,6 @@ public:
 	// WorldPos
 	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
-	// SRT
-	SRTN GetSRT() const { return this->trans_.srt; }
-	void SetSRT(SRTN setSRT) { this->trans_.srt = setSRT; }
-
 	// カラー
 	Vector4 GetModelColor() const { return this->modelColor_; }
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
@@ -64,8 +60,18 @@ public:
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
 
-	// 座標
-	void SetPosition(Vector3 setPos) override { this->trans_.srt.translate = setPos; }
+	// SRT
+	SRTN GetSRT() const { return this->trans_.srt; }
+	void SetSRT(const SRTN& setSRT) override { this->trans_.srt = setSRT; }
+
+	// Scale
+	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
+
+	// Rotate
+	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
+
+	// Translate
+	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }

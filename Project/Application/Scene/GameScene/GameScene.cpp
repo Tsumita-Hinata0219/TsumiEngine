@@ -9,8 +9,6 @@ GameScene::GameScene()
 {
 	/* ----- Input 入力 ----- */
 	input_ = Input::GetInstance();
-	/* ----- JsonManager Jsonマネージャー ----- */
-	jsonManager_ = JsonManager::GetInstance();
 	/* ----- CollisionManager コリジョンマネージャー ----- */
 	CollisionManager_ = CollisionManager::GetInstance();
 	/* ----- AbsentEffect アブセントエフェクト ----- */
@@ -62,7 +60,8 @@ void GameScene::Initialize()
 
 
 	/* ----- JsonManager Jsonマネージャー ----- */
-	jsonManager_->LoadSceneFile("Json", "Stage_1.json");
+	JsonManager* jsonManager = JsonManager::GetInstance();
+	jsonManager->LoadSceneFile("Json", "Stage_1.json");
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_->Init();
@@ -89,9 +88,12 @@ void GameScene::Initialize()
 
 	/* ----- Player プレイヤー ----- */
 	player_->Init();
+	player_->LoadEntityData(jsonManager->GetEntityData("Player"));
 
 	/* ----- EnemyManager エネミーマネージャー ----- */
 	enemyManager_->Init();
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 
 	/* ----- StageTransitionMenuManager ステージ終了時メニュー ----- */
 	STMenuManager_->Init();
@@ -101,9 +103,6 @@ void GameScene::Initialize()
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
 
-
-	// 読み込んだJsonデータはもう使わないので、破棄しておく
-	jsonManager_->Clear();
 }
 
 

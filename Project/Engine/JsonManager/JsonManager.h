@@ -10,8 +10,6 @@
 
 #include "json.hpp"
 
-#include "3D/Model/ModelManager/ModelManager.h"
-
 #include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
@@ -60,12 +58,10 @@ public: // メンバ関数
 	/// <summary>
 	/// EntityDataのリストの取得
 	/// </summary>
-	const std::vector<std::unique_ptr<EntityData>>* GetEntityData(const std::string& key) const {
+	const std::vector<std::unique_ptr<EntityData>>& GetEntityData(const std::string& key) const {
+		static const std::vector<std::unique_ptr<EntityData>> empty; // デフォルトの空リスト
 		auto it = entityMap_.find(key);
-		if (it != entityMap_.end()) {
-			return &it->second;
-		}
-		return nullptr; // キーが存在しない場合
+		return (it != entityMap_.end()) ? it->second : empty;
 	}
 
 	/// <summary>

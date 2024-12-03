@@ -11,6 +11,12 @@ void BarrierBox::Init()
 	modelManager_->LoadModel("Obj/Boxs/BarrierBox", "BarrierBox.obj");
 	model_ = modelManager_->GetModel("BarrierBox");
 
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+	light_.intensity = 0.7f;
+	model_->SetLightData(light_);
+
 	// トランスフォームの初期化
 	trans_.Init();
 }

@@ -14,6 +14,8 @@ void BasicEnemy::Init()
 	// ライトの初期設定
 	light_.enable = true;
 	light_.direction = Vector3::one;
+	light_.intensity = 0.7f;
+	model_->SetLightData(light_);
 
 	// BodyTransformの初期化
 	trans_.Init();
@@ -25,11 +27,6 @@ void BasicEnemy::Init()
 
 	// HPの設定
 	hp_ = 15;
-
-	// ライトの初期設定
-	light_.enable = true;
-	light_.direction = Vector3::one;
-	light_.intensity = 0.7f;
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
@@ -107,7 +104,6 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
-	model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画

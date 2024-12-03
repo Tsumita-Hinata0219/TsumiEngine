@@ -63,10 +63,11 @@ private:
 	// モデル
 	std::unique_ptr<Model> model_;
 
+	// ライト
+	DirectionalLightData light_{};
+
 	// トランスフォーム
 	Transform trans_{};
-
-
 
 };
 

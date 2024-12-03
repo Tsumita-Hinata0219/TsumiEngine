@@ -47,7 +47,17 @@ void BoxManager::Draw3D()
 /// </summary>
 void BoxManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas)
 {
-	datas;
+	for (const auto& entityData : datas) {
+		if (entityData) {
+
+			if (entityData->entityName == "BarrierBox") {
+				CreateNewBox(BoxType::Barrier, entityData->srt);
+			}
+			else if (entityData->entityName == "DestructibleBox") {
+				CreateNewBox(BoxType::Barrier, entityData->srt);
+			}
+		}
+	}
 }
 
 

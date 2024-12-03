@@ -9,6 +9,8 @@
 /* BoxManagerクラス */
 class BoxManager {
 
+public:
+
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
@@ -56,7 +58,6 @@ private:
 
 	// Boxのリスト
 	std::list<std::shared_ptr<IBoxObject>> boxs_;
-
 
 };
 

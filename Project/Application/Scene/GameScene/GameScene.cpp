@@ -16,6 +16,7 @@ GameScene::GameScene()
 	startDirection_ = std::make_unique<StartDirection>();
 	skybox_ = std::make_unique<Skybox>();
 	floor_ = std::make_unique<Floor>();
+	boxManager_ = std::make_unique<BoxManager>();
 	player_ = make_unique<Player>();
 	enemyManager_ = std::make_unique<EnemyManager>();
 	sceneTransition_ = SceneTransition::GetInstance();
@@ -74,6 +75,10 @@ void GameScene::Initialize()
 	floor_->Init();
 	floor_->LoadEntityData(jsonManager->GetEntityData("Floor"));
 
+	// ──────── BoxManager
+	boxManager_->Init();
+	boxManager_->LoadEntityData(jsonManager->GetEntityData("BarrierBox"));
+
 	// ──────── Player
 	player_->Init();
 	player_->LoadEntityData(jsonManager->GetEntityData("Player"));
@@ -113,6 +118,9 @@ void GameScene::Update(GameManager* state)
 	
 	// ──────── Floor
 	floor_->Update();
+
+	// ──────── BoxManager
+	boxManager_->Update();
 
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
@@ -193,6 +201,9 @@ void GameScene::ModelDraw()
 
 	// ──────── Floor
 	floor_->Draw3D();
+
+	// ──────── BoxManager
+	boxManager_->Draw3D();
 
 	// ──────── Player
 	player_->Draw3D();

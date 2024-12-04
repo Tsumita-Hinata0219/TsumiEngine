@@ -564,7 +564,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Project\Engine\PostEffect\Materials\PostEffectMaterials.h" />
     <ClInclude Include="Project\Engine\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="Project\Engine\Utilities\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Project\Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Project\Engine\Transform\Transform.h" />
     <ClInclude Include="Project\Engine\Transform\WorldTransform\WorldTransform.h" />

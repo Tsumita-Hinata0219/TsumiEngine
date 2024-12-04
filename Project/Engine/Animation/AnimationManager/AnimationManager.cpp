@@ -22,7 +22,7 @@ Animation AnimationManager::LoadAnimationFile(const std::string& routeFilePath, 
 		string file = ("Resources/gLTF/" + routeFilePath + "/" + fileName + ".gltf");
 		const aiScene* scene = importer.ReadFile(file.c_str(), 0);
 		
-		assert(scene->mNumAnimations && "アニメーションがない");
+		assert(scene->mNumAnimations);
 
 		// 最初のアニメーションだけ採用。もちろん複数対応するに越したことはない
 		aiAnimation* animationAssimp = scene->mAnimations[0];

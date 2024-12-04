@@ -53,7 +53,7 @@ void KeyFrameAnimation::ApplyAnimation(Skeleton& skeleton, const Animation& anim
 Vector3 KeyFrameAnimation::CalculateValueVector3(const vector<KeyFrameVector3>& keyFrame, float time)
 {
 	// キーがないものは返す値がわからないのでassert
-	assert(!keyFrame.empty() && "キーがないものは返す値が分からない");
+	assert(!keyFrame.empty());
 
 	// キーが1つか、時刻がキーフレーム前なら最初の値とする
 	if (keyFrame.size() == 1 || time <= keyFrame[0].time) {
@@ -83,7 +83,7 @@ Vector3 KeyFrameAnimation::CalculateValueVector3(const vector<KeyFrameVector3>& 
 Quaternion KeyFrameAnimation::CalculateValueQuaternion(const vector<KeyFrameQuaternion>& keyFrame, float time)
 {
 	// キーがないものは返す値がわからないのでassert
-	assert(!keyFrame.empty() && "キーがないものは返す値が分からない");
+	assert(!keyFrame.empty());
 
 	// キーが1つか、時刻がキーフレーム前なら最初の値とする
 	if (keyFrame.size() == 1 || time <= keyFrame[0].time) {

@@ -142,7 +142,7 @@ void JsonManager::ScanningObjects(const std::string& path, nlohmann::json& objec
 				}
 				// それでもなければエラー
 				if (fileName.empty()) {
-					Log("ロードするモデルがない");
+					Log("No Load Model");
 					assert(0);
 				}
 

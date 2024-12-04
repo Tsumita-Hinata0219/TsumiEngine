@@ -8,6 +8,9 @@
 #include "Math/Struct.h"
 #include "GameObject/IObject/IObject.h"
 
+#include "../Collider/Interface/ICollider.h"
+#include "../Collider/Sphere/SphereCollider.h"
+
 #include <list>
 #include <vector>
 
@@ -46,6 +49,11 @@ public:
 	// コライダーの登録
 	void Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component);
 
+	// コライダー登録
+	void Register(Collider::ICollider* collider);
+
+
+
 	// 登録されているShapeを削除する
 	void UnRegister(Col::ColData* data);
 
@@ -78,4 +86,7 @@ private:
 
 	// コライダーのポインタ配列
 	std::map<Col::ColData*, std::unique_ptr<CollisionShape>> shapeMap_;
+
+	// コライダーポインタリスト
+	std::list<Collider::ICollider*> pColliders_;
 };

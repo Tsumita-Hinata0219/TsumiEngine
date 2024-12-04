@@ -52,6 +52,13 @@ void CollisionManager::Register(uint32_t attribute, Col::ColData* data, Collisio
 }
 
 
+// コライダー登録
+void CollisionManager::Register(Collider::ICollider* collider)
+{
+	this->pColliders_.push_back(collider);
+}
+
+
 // 登録されているShapeを削除する
 void CollisionManager::UnRegister(Col::ColData* data)
 {

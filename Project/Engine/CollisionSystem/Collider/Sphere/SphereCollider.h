@@ -11,9 +11,9 @@ namespace Collider {
 	public:
 
 		/// <summary>
-		/// コンストラクタ
+		/// パラメータ付きコンストラクタ
 		/// </summary>
-		SphereCollider() = default;
+		SphereCollider(IObject* setOwner);
 
 		/// <summary>
 		/// デストラクタ

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Structure/ColliderStructure.h"
+#include "../ColliderConfig.h"
 
 
 // 前方宣言
@@ -35,6 +36,10 @@ namespace Collider {
 		// オーナー
 		virtual IObject* getOwner() { return this->owner_; }
 
+		// 属性
+		virtual uint32_t GetAttribute() { return this->attribute_; }
+		virtual void ColliderAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
+
 #pragma endregion 
 
 
@@ -42,6 +47,9 @@ namespace Collider {
 
 		// コライダーを持つオーナー
 		IObject* owner_ = nullptr;
+
+		// 属性
+		uint32_t attribute_;
 
 	};
 }

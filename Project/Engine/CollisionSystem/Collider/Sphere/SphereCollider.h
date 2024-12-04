@@ -5,6 +5,7 @@
 
 namespace Collider {
 
+	/* Sphereコライダークラス */
 	class SphereCollider : public ICollider	{
 
 	public:
@@ -36,7 +37,8 @@ namespace Collider {
 
 	private:
 
+		// コライダーのデータ
 		Sphere sphere_{};
-
 	};
 }
+

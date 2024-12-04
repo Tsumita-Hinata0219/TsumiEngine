@@ -1,10 +1,10 @@
-#include "CollisionUtilities.h"
+//#include "CollisionUtilities.h"
 //
 //
 //
 //
 //// OBBのワールドマトリックス作成
-//Matrix4x4 ColUtil::CreateOBBWorldMatrix(const Col::OBB& obb)
+//Matrix4x4 ColUtil::CreateOBBWorldMatrix(const Collider::OBB& obb)
 //{
 //	Matrix4x4 worldMatrix{};
 //
@@ -24,7 +24,7 @@
 //}
 //
 //// 射影の重複チェック
-//bool ColUtil::TestAxis(const Vector3& axis, const Col::OBB& obb1, const Col::OBB& obb2)
+//bool ColUtil::TestAxis(const Vector3& axis, const Collider::OBB& obb1, const Collider::OBB& obb2)
 //{
 //	// OBBの射影を計算
 //	auto projection1 = ColUtil::OBBProjection(obb1, axis);
@@ -43,7 +43,7 @@
 //}
 //
 //// 頂点を軸に射影
-//std::pair<float, float> ColUtil::OBBProjection(const Col::OBB& obb, const Vector3& axis)
+//std::pair<float, float> ColUtil::OBBProjection(const Collider::OBB& obb, const Vector3& axis)
 //{
 //	float val = std::sqrt(axis.x * axis.x + axis.y * axis.y + axis.z * axis.z); // 正規化
 //	float newAxis = 0.0f;
@@ -77,8 +77,8 @@
 //}
 //
 //// OBBの設定
-//Col::OBB ColUtil::SettingOBBProperties(Col::OBB& obb) {
-//	Col::OBB result{};
+//Collider::OBB ColUtil::SettingOBBProperties(Collider::OBB& obb) {
+//	Collider::OBB result{};
 //
 //	result.center = obb.center;
 //
@@ -99,25 +99,25 @@
 //}
 //
 //// AABBの設定
-////Col::AABB ColUtil::SettingAABBProperties(Col::AABB& aabb)
-////{
-////	Col::AABB result{};
-////
-////	result.min = aabb.center - (aabb.size / 2.0f);
-////	result.max = aabb.center + (aabb.size / 2.0f);
-////
-////	return result;
-////}
+//Collider::AABB ColUtil::SettingAABBProperties(Collider::AABB& aabb)
+//{
+//	Collider::AABB result{};
 //
-////// Capsuleの設定
-////Col::Sphere ColUtil::SettingCapusulePropertirs() 
-////{
-////	Col::Sphere result;
-////	return result;
-////}
+//	result.min = aabb.center - (aabb.size / 2.0f);
+//	result.max = aabb.center + (aabb.size / 2.0f);
+//
+//	return result;
+//}
+//
+//////// Capsuleの設定
+//////Col::Sphere ColUtil::SettingCapusulePropertirs() 
+//////{
+//////	Col::Sphere result;
+//////	return result;
+//////}
 //
 //// コライダー間の最寄点を計算する関数
-//Vector3 ColUtil::GetClosestPoint(const Col::Sphere& sphere, const Vector3& point)
+//Vector3 ColUtil::GetClosestPoint(const Collider::Sphere& sphere, const Vector3& point)
 //{
 //	Vector3 direction = point - sphere.center;
 //	float distance = Length(direction);
@@ -126,21 +126,21 @@
 //	}
 //	return sphere.center + Normalize(direction) * sphere.radius;  // 半径外なら最寄点
 //}
-//Vector3 ColUtil::GetClosestPoint(const Col::AABB& aabb, const Vector3& point)
+//Vector3 ColUtil::GetClosestPoint(const Collider::AABB& aabb, const Vector3& point)
 //{
 //	float closestX = Clamp(point.x, aabb.min.x, aabb.max.x);
 //	float closestY = Clamp(point.y, aabb.min.y, aabb.max.y);
 //	float closestZ = Clamp(point.z, aabb.min.z, aabb.max.z);
 //	return Vector3(closestX, closestY, closestZ);
 //}
-//Vector3 ColUtil::GetClosestPoint(const Col::OBB& obb, const Vector3& point)
+//Vector3 ColUtil::GetClosestPoint(const Collider::OBB& obb, const Vector3& point)
 //{
 //	obb, point;
 //	// OBB内での最寄点を計算するロジック
 //	// OBBに投影して最寄点を得る方法などを使う
 //	return Vector3();  // 仮の処理
 //}
-//Vector3 ColUtil::GetClosestPoint(const Col::Segment& segment, const Vector3& point)
+//Vector3 ColUtil::GetClosestPoint(const Collider::Segment& segment, const Vector3& point)
 //{
 //	Vector3 direction = segment.origin - segment.diff;
 //	float length = Length(direction);
@@ -150,7 +150,7 @@
 //	if (projection > length) return segment.diff;  // 終点より後
 //	return segment.origin + direction * projection;
 //}
-//Vector3 ColUtil::GetClosestPoint(const Col::Capsule& capsule, const Vector3& point)
+//Vector3 ColUtil::GetClosestPoint(const Collider::Capsule& capsule, const Vector3& point)
 //{
 //	capsule, point;
 //	// カプセルの最寄点を計算する方法
@@ -159,7 +159,7 @@
 //
 //
 //// コライダー間の交差時に押し出すためのベクトルを計算する関数
-//Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere1, const Col::Sphere& sphere2)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Sphere& sphere1, const Collider::Sphere& sphere2)
 //{
 //	Vector3 direction = sphere1.center - sphere2.center;
 //	float distance = Length(direction);
@@ -170,7 +170,7 @@
 //	}
 //	return Vector3();
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere, const Col::AABB& aabb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Sphere& sphere, const Collider::AABB& aabb)
 //{
 //	Vector3 closestPoint = GetClosestPoint(aabb, sphere.center);
 //	Vector3 direction = sphere.center - closestPoint;
@@ -182,7 +182,7 @@
 //	}
 //	return Vector3();
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Sphere& sphere, const Col::OBB& obb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Sphere& sphere, const Collider::OBB& obb)
 //{
 //	Vector3 closestPoint = GetClosestPoint(obb, sphere.center);
 //	Vector3 direction = sphere.center - closestPoint;
@@ -194,7 +194,7 @@
 //	}
 //	return Vector3();
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb1, const Col::AABB& aabb2)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::AABB& aabb1, const Collider::AABB& aabb2)
 //{
 //	// それぞれの AABB の最小・最大の座標を取得
 //	Vector3 overlap = Vector3(0.0f, 0.0f, 0.0f);
@@ -256,7 +256,7 @@
 //
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::Sphere& sphere)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::AABB& aabb, const Collider::Sphere& sphere)
 //{
 //	Vector3 closestPoint = GetClosestPoint(aabb, sphere.center);
 //	Vector3 direction = sphere.center - closestPoint;
@@ -268,70 +268,70 @@
 //	}
 //	return Vector3();
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::AABB& aabb, const Col::OBB& obb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::AABB& aabb, const Collider::OBB& obb)
 //{
 //	aabb, obb;
 //	// AABB と OBB の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb1, const Col::OBB& obb2)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::OBB& obb1, const Collider::OBB& obb2)
 //{
 //	obb1, obb2;
 //	// OBB同士の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::Sphere& sphere)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::OBB& obb, const Collider::Sphere& sphere)
 //{
 //	obb, sphere;
 //	// OBB と Sphere の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::OBB& obb, const Col::AABB& aabb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::OBB& obb, const Collider::AABB& aabb)
 //{
 //	obb, aabb;
 //	// OBB と AABB の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::Sphere& sphere)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Segment& segment, const Collider::Sphere& sphere)
 //{
 //	segment, sphere;
 //	// Segment と Sphere の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::Sphere& sphere)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Capsule& capsule, const Collider::Sphere& sphere)
 //{
 //	capsule, sphere;
 //	// Capsule と Sphere の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment, const Col::AABB& aabb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Segment& segment, const Collider::AABB& aabb)
 //{
 //	segment, aabb;
 //	// Segment と AABB の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule, const Col::AABB& aabb)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Capsule& capsule, const Collider::AABB& aabb)
 //{
 //	capsule, aabb;
 //	// Capsule と AABB の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Capsule& capsule1, const Col::Capsule& capsule2)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Capsule& capsule1, const Collider::Capsule& capsule2)
 //{
 //	capsule1, capsule2;
 //	// Capsule と Capsule の交差処理
 //	Vector3 push = Vector3();  // 仮の処理
 //	return push;
 //}
-//Vector3 ColUtil::GetPenetrationPush(const Col::Segment& segment1, const Col::Segment& segment2)
+//Vector3 ColUtil::GetPenetrationPush(const Collider::Segment& segment1, const Collider::Segment& segment2)
 //{
 //	segment1, segment2;
 //	// Segment と Segment の交差処理

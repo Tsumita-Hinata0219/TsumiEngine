@@ -1,40 +1,43 @@
 #pragma once
 
 #include "Math/MyMath.h"
+#include "../Collider/Structure/ColliderStructure.h"
 #include "../Util/CollisionUtilities.h"
 
-//
-//namespace Detect {
-//
-//	// 球と球の当たり判定
-//	inline bool Intersects(const Col::Sphere& s1, const Col::Sphere& s2)
-//	{
-//		// 中心からの距離
-//		float distance = Length(s2.center - s1.center);
-//
-//		// 距離と半径を比べる
-//		if (distance <= s1.radius + s2.radius) {
-//
-//			// 当たってる
-//			return true;
-//		}
-//		// 当たってない
-//		return false;
-//	}
-//	// AABBとAABBの当たり判定
-//	inline bool Intersects(const Col::AABB& aabb1, const Col::AABB& aabb2)
-//	{
-//		if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
-//			(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
-//			(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
-//			) {
-//
-//			// 当たっている
-//			return true;
-//		}
-//		// 当たってない
-//		return false;
-//	}
+
+namespace Detect {
+
+	// 球と球の当たり判定
+	inline bool Intersects(const Collider::Sphere& s1, const Collider::Sphere& s2)
+	{
+		// 中心からの距離
+		float distance = Length(s2.center - s1.center);
+
+		// 距離と半径を比べる
+		if (distance <= s1.radius + s2.radius) {
+
+			// 当たってる
+			return true;
+		}
+		// 当たってない
+		return false;
+	}
+	//// AABBとAABBの当たり判定
+	//inline bool Intersects(const Collider::AABB& aabb1, const Collider::AABB& aabb2)
+	//{
+	//	std::vecto
+
+	//	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
+	//		(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
+	//		(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
+	//		) {
+
+	//		// 当たっている
+	//		return true;
+	//	}
+	//	// 当たってない
+	//	return false;
+	//}
 //	// AABBと球の当たり判定
 //	inline bool Intersects(const Col::AABB& aabb, const Col::Sphere& s)
 //	{
@@ -257,4 +260,4 @@
 //			return false;
 //		}
 //	}
-//}
+}

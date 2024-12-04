@@ -11,7 +11,6 @@
 
 #include <list>
 #include <vector>
-#include <typeindex>
 
 // 前方宣言
 class IObject;

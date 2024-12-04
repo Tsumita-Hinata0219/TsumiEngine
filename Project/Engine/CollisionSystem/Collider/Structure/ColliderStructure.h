@@ -18,6 +18,8 @@ namespace Collider {
 	struct AABB : public ColliderData {
 		Vector3 center{};
 		Vector3 size{};
+		Vector3 min{};
+		Vector3 max{};
 	};
 
 	struct OBB : public ColliderData {

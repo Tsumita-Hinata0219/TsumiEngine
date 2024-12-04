@@ -76,28 +76,18 @@ void CollisionManager::Update()
 /// </summary>
 void CollisionManager::CheckCollisions()
 {
-	//for (auto itr1 = shapeMap_.begin(); itr1 != shapeMap_.end(); ++itr1) {
-	//	for (auto itr2 = std::next(itr1); itr2 != shapeMap_.end(); ++itr2) {
+	for (auto itr1 = pColliderMap_.begin(); itr1 != pColliderMap_.end(); ++itr1) {
+		for (auto itr2 = std::next(itr1); itr2 != pColliderMap_.end(); ++itr2) {
 
-	//		// itr1とit2の属性が同じなら判定をスキップする
-	//		if (itr1->second->GetAttribute() == itr2->second->GetAttribute()) {
-	//			continue;
-	//		}
+			// itr1とit2の属性が同じなら判定をスキップする
+			if (itr1->second->GetAttribute() == itr2->second->GetAttribute()) {
+				continue;
+			}
 
-	//		// 衝突を検出する
-	//		if (itr1->second->Intersects(*itr2->second)) {
-	//			itr1->second->OnCollision(*itr2->second, itr2->second->GetData());
-	//			itr2->second->OnCollision(*itr1->second, itr1->second->GetData());
-	//		}
-
-	//		auto shape1 = itr1->second->GetData();
-	//		auto shape2 = itr2->second->GetData();
-
-	//		/*if (Detect::Intersects(shape1, shape2)) {
-
-	//		}*/
-	//	}
-	//}
+			// 衝突を検出する
+			
+		}
+	}
 }
 
 

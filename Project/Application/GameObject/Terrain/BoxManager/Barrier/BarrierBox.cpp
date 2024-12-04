@@ -22,12 +22,13 @@ void BarrierBox::Init()
 
 	// コライダーの初期化
 	colComp_->SetAttribute(ColliderAttribute::Terrain);
-	colComp_->Register(sphere_);
+	/*colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
-	/*aabb_.center = trans_.GetWorldPos();
+	sphere_.radius = 2.0f;*/
+	colComp_->Register(aabb_);
+	aabb_.center = trans_.GetWorldPos();
 	aabb_.max = { 2.0f, 2.0f, 2.0f };
-	aabb_.min = { -2.0f, -2.0f, -2.0f };*/
+	aabb_.min = { -2.0f, -2.0f, -2.0f };
 }
 
 

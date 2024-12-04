@@ -22,6 +22,7 @@ namespace Col {
 	};
 	struct AABB : public ColData {
 		Vector3 center{}; // !< 中心座標
+		Vector3 size;     // !< サイズ
 		Vector3 min;      // !< 最少点
 		Vector3 max;      // !< 最大点
 	};
@@ -136,3 +137,4 @@ protected:
 	uint32_t attribute_ = ColliderAttribute::None;
 
 };
+

@@ -80,37 +80,37 @@ namespace GeometryCollision {
 	}
 
 
-	// OBBの設定
-	OBB SettingOBBProperties(OBBCollider* c) {
+	//// OBBの設定
+	//OBB SettingOBBProperties(OBBCollider* c) {
 
-		OBB result{};
+	//	OBB result{};
 
-		result.center = c->GetWorldPos();
+	//	result.center = c->GetWorldPos();
 
-		Matrix4x4 rotateMat = MakeRotateXYZMatrix(c->GetRotate());
-		result.orientations[0].x = rotateMat.m[0][0];
-		result.orientations[0].y = rotateMat.m[0][1];
-		result.orientations[0].z = rotateMat.m[0][2];
-		result.orientations[1].x = rotateMat.m[1][0];
-		result.orientations[1].y = rotateMat.m[1][1];
-		result.orientations[1].z = rotateMat.m[1][2];
-		result.orientations[2].x = rotateMat.m[2][0];
-		result.orientations[2].y = rotateMat.m[2][1];
-		result.orientations[2].z = rotateMat.m[2][2];
+	//	Matrix4x4 rotateMat = MakeRotateXYZMatrix(c->GetRotate());
+	//	result.orientations[0].x = rotateMat.m[0][0];
+	//	result.orientations[0].y = rotateMat.m[0][1];
+	//	result.orientations[0].z = rotateMat.m[0][2];
+	//	result.orientations[1].x = rotateMat.m[1][0];
+	//	result.orientations[1].y = rotateMat.m[1][1];
+	//	result.orientations[1].z = rotateMat.m[1][2];
+	//	result.orientations[2].x = rotateMat.m[2][0];
+	//	result.orientations[2].y = rotateMat.m[2][1];
+	//	result.orientations[2].z = rotateMat.m[2][2];
 
-		result.halfSize = c->GetSize() / 2.0f;
+	//	result.halfSize = c->GetSize() / 2.0f;
 
-		return result;
-	}
+	//	return result;
+	//}
 
-	// AABBの設定
-	AABB SettingAABBProperties(AABBCollider* c) {
+	//// AABBの設定
+	//AABB SettingAABBProperties(AABBCollider* c) {
 
-		AABB result{};
+	//	AABB result{};
 
-		result.min = c->GetWorldPos() - (c->GetSize() / 2.0f);
-		result.max = c->GetWorldPos() + (c->GetSize() / 2.0f);
+	//	result.min = c->GetWorldPos() - (c->GetSize() / 2.0f);
+	//	result.max = c->GetWorldPos() + (c->GetSize() / 2.0f);
 
-		return result;
-	}
+	//	return result;
+	//}
 }

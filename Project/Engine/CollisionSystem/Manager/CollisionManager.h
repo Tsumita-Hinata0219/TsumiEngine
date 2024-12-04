@@ -2,8 +2,6 @@
 
 #include "../Collider/ColliderConfig.h"
 #include "../IsCollision/IsCollision.h"
-#include "../Event/CollisionEvent.h"
-#include "../ColEventManager/ColEventManager.h"
 #include "../Detect/CollisionDetect.h"
 
 #include "Math/MyMath.h"

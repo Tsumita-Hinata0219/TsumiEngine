@@ -116,6 +116,8 @@ protected:
 	// シェイプを持っているコンポーネント
 	CollisionComponent* component_ = nullptr;
 
+
+
 	// コライダーの境界ボックス
 	Col::AABB bounding_{};
 
@@ -127,8 +129,6 @@ protected:
 
 	// どの空間に属しているかのモートン番号
 	uint32_t spaceIndex_ = 0;
-
-	uint8_t i = 0;
 
 	// ID
 	uint32_t id_ = 0;

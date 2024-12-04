@@ -1,12 +1,6 @@
 #include "CollisionManager.h"
 #include "../Component/CollisionComponent.h"
 #include "../Shape/CollisionShape.h"
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
-#include "../Collider/Box/AABBCollider.h"
-#include "../Collider/Box/OBBCollider.h"
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Shape/CollisionShape.h"
 #include "../Shape/Sphere/CollisionShapeSphere.h"
 #include "../Shape/AABB/CollisionShapeAABB.h"
 

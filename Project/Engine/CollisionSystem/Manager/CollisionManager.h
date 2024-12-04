@@ -45,7 +45,6 @@ public:
 	/// <summary>
 	/// コライダー登録
 	/// </summary>
-	void Register(ICollider* collider);
 	void Register(Collider::ColliderData* data, IObject* owner);
 
 	/// <summary>

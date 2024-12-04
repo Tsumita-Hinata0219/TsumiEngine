@@ -5,7 +5,7 @@
 /// <summary>
 /// ファクトリマップを作る関数
 /// </summary>
-std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactoryMap() {
+static std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactoryMap() {
 	return {
 		{ typeid(Collider::Sphere), [](IObject* owner) {
 			return std::make_unique<SphereCollider>(owner); }
@@ -19,13 +19,23 @@ std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactoryMap() 
 /// <summary>
 /// コライダー登録
 /// </summary>
-void CollisionManager::Register(ICollider* collider)
-{
-	this->pColliders_.push_back(collider);
-}
 void CollisionManager::Register(Collider::ColliderData* data, IObject* owner)
 {
-	data, owner;
+	// データの火tらに基づいてコライダーを作る
+	const auto& factoryMap = GetColliderFactoryMap();
+	auto it = factoryMap.find(typeid(*data));
+
+	if (it != factoryMap.end()) {
+
+		// ユニークポインタでコライダーを作成
+		std::unique_ptr<ICollider> newCollider = it->second(owner);
+
+		// マップに追加
+		pColliderMap_[data] = std::move(newCollider);
+	}
+	else {
+		std::cerr << "Error : Unsupported collision collider type." << std::endl;
+	}
 }
 
 
@@ -34,6 +44,12 @@ void CollisionManager::Register(Collider::ColliderData* data, IObject* owner)
 /// </summary>
 void CollisionManager::UnRegister(Collider::ColliderData* data)
 {
+	// ポインタが存在するか確認
+	auto it = pColliderMap_.find(data);
+	// 存在するならその要素を削除
+	if (it != pColliderMap_.end()) {
+		pColliderMap_.erase(it);
+	}
 }
 
 
@@ -43,7 +59,7 @@ void CollisionManager::UnRegister(Collider::ColliderData* data)
 void CollisionManager::Update()
 {
 	// データの更新
-	//UpdateCollisionData();
+	UpdateCollisionData();
 
 	// コリジョン判定を行う
 	CheckCollisions();

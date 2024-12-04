@@ -12,6 +12,7 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
+struct SRTN;
 
 
 /* Enemyの基底クラス */
@@ -38,11 +39,17 @@ public:
 	// BulletListの取得
 	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
-	// 座標
-	virtual void SetPosition(Vector3 setPos) = 0;
+	// SRT
+	virtual void SetSRT(const SRTN& setSRT) = 0;
 
-	//// Collider
-	//virtual OBBCollider* GetOBBCollider() = 0;
+	// Scale
+	virtual void SetScale(const Vector3& setScale) = 0;
+
+	// Rotate
+	virtual void SetRotate(const Vector3& setRotate) = 0;
+
+	// Translate
+	virtual void SetTranslate(const Vector3& setTranslate) = 0;
 
 	// HP
 	virtual uint32_t GetHP() = 0;

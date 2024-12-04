@@ -14,10 +14,8 @@
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "GameObject/Terrain/Skybox/Skybox.h"
-#include "GameObject/Terrain/Ground/Ground.h"
-#include "GameObject/Terrain/Wall/Wall.h"
 #include "GameObject/Terrain/Floor/Floor.h"
-#include "GameObject/Terrain/Building1/Building1.h"
+#include "GameObject/Terrain/BoxManager/BoxManager.h"
 
 #include "GameObject/Character/Player/Player.h"
 #include "GameObject/Character/EnemyManager/EnemyManager.h"
@@ -103,11 +101,11 @@ private: // クラス
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;
 
-	// Wall
-	std::unique_ptr<Wall> wall_;
-
 	// Floor
 	std::unique_ptr<Floor> floor_;
+
+	// BoxManager
+	std::unique_ptr<BoxManager> boxManager_;
 
 	// Player
 	std::unique_ptr<Player> player_;

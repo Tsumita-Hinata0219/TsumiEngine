@@ -61,7 +61,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Project\Application\GameManager\GameManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\Camera.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Project\Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -177,8 +176,6 @@
     <ClCompile Include="Project\Application\GameObject\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Wall\Wall.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Project\Application\Scene\ResultScene\ResultScene.cpp" />
@@ -195,7 +192,6 @@
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Center\PlayerCenterBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
@@ -253,6 +249,9 @@
     <ClCompile Include="Project\Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -274,7 +273,6 @@
     <ClInclude Include="Project\Application\GameManager\GameManager.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Project\Application\GameObject\GameObject.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Project\Engine\Math\MathFunction\MathFunction.h" />
     <ClInclude Include="Project\Engine\Math\MathOperations\MathOperations.h" />
@@ -399,8 +397,6 @@
     <ClInclude Include="Project\Application\GameObject\IObject\IObject.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Wall\Wall.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Building1\Building1.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Project\Application\Scene\ResultScene\ResultScene.h" />
@@ -420,7 +416,6 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.h" />
     <ClInclude Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
-    <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Center\PlayerCenterBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\IPlayerBody.h" />
@@ -495,6 +490,10 @@
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Engine\Utilities\ObjectPool\ObjectPool.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Interface\IBoxObject.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

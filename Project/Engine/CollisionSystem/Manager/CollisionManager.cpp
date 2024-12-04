@@ -99,10 +99,16 @@ void CollisionManager::CheckCollisions()
 
 			// 衝突を検出する
 			if (itr1->second->Intersects(*itr2->second)) {
-				//Log("hit!\n");
 				itr1->second->OnCollision(*itr2->second, itr2->second->GetData());
 				itr2->second->OnCollision(*itr1->second, itr1->second->GetData());
 			}
+
+			auto shape1 = itr1->second->GetData();
+			auto shape2 = itr2->second->GetData();
+
+			/*if (Detect::Intersects(shape1, shape2)) {
+
+			}*/
 		}
 	}
 }

@@ -159,6 +159,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
@@ -176,7 +179,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Center\PlayerCenterBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
@@ -203,13 +205,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleUIManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Building1\Building1.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Floor\Floor.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Ground\Ground.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Terrain\Wall\Wall.cpp" />
     <ClCompile Include="Project\Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Project\Engine\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Project\Engine\GPUParticle\Particle\GPUParticle.cpp" />
@@ -357,6 +356,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
+    <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Interface\IBoxObject.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />
@@ -406,7 +409,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
-    <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Center\PlayerCenterBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\IPlayerBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
@@ -423,13 +425,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Project\Application\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Building1\Building1.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Floor\Floor.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Ground\Ground.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\TitleScreen\TitleScreen.h" />
-    <ClInclude Include="Project\Application\GameObject\Terrain\Wall\Wall.h" />
     <ClInclude Include="Project\Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Project\Engine\Math\MathFunction\MathFunction.h" />
     <ClInclude Include="Project\Engine\Math\MathGeometry\MathGeometry.h" />

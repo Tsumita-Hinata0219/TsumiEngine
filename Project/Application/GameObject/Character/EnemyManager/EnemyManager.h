@@ -23,12 +23,12 @@ public: // メンバ関数
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyManager() {};
+	EnemyManager() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~EnemyManager() {};
+	~EnemyManager() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -46,10 +46,9 @@ public: // メンバ関数
 	void Draw3D();
 
 	/// <summary>
-	/// 新しいEnemyを追加する
+	/// Jsonで読み込んだ情報を受け取る
 	/// </summary>
-	void AddNewBasicEnemy();
-	void AddNewStaticEnemy();
+	void LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas);
 
 	/// <summary>
 	/// 新しいEnemyBulletを追加する
@@ -70,15 +69,10 @@ public: // メンバ関数
 private:
 
 	/// <summary>
-	/// エネミーカウントチェック
-	/// </summary>
-	void EnemyCountCheck();
-
-	/// <summary>
 	/// 新しいEnemyを生成する
 	/// </summary>
-	void CreateBasicEnemy();
-	void CreateStaticEnemy();
+	void CreateBasicEnemy(const SRTN& setSRT);
+	void CreateStaticEnemy(const SRTN& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する
@@ -101,7 +95,7 @@ private: // メンバ変数
 	// Transform
 	Transform transform_{};
 
-	// EnemyのLIst配列
+	// EnemyのList配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
 	// EnemyBulletのObjectPool

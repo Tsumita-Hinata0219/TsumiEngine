@@ -16,6 +16,7 @@ enum class PlayerBodyTyep {
 
 // Player前方宣言
 class Player;
+struct DirectionalLightData;
 
 /* PlayerBodyの基底クラス */
 class IPlayerBody : public IObject {
@@ -29,5 +30,8 @@ public:
 	virtual void SetParent(Transform* parent) = 0;
 
 	// モデルのカラーの設定
-	virtual void SetModelColor(Vector4 setColor) = 0;
+	virtual void SetModelColor(const Vector4& setColor) = 0;
+
+	// モデルのライトの設定
+	virtual void SetModelLight(const DirectionalLightData& setLight) = 0;
 };

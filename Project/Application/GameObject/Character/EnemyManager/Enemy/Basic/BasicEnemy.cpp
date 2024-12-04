@@ -11,6 +11,12 @@ void BasicEnemy::Init()
 	modelManager_->LoadModel("Obj/Enemys/Basic", "Basic.obj");
 	model_ = modelManager_->GetModel("Basic");
 
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::one;
+	light_.intensity = 0.7f;
+	model_->SetLightData(light_);
+
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
@@ -21,10 +27,6 @@ void BasicEnemy::Init()
 
 	// HPの設定
 	hp_ = 15;
-
-	// ライトの初期設定
-	light_.enable = true;
-	light_.direction = Vector3::one;
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
@@ -102,7 +104,6 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
-	//model_->SetLightData(light_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画
@@ -117,6 +118,18 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突自コールバック関数
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
+	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+		// 押し出し処理
+		trans_.UpdateMatrix();
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+		trans_.UpdateMatrix();
+	}
+	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+		// 押し出し処理
+		trans_.UpdateMatrix();
+		colComp_->Penetration(&trans_.srt.translate, sphere_);
+		trans_.UpdateMatrix();
+	}
 	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 
 		// HPを減らす

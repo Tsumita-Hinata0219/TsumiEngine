@@ -31,7 +31,10 @@ public:
 	void SetParent(Transform* parent) override { this->trans_.SetParent(parent); }
 
 	// モデルのカラーの設定
-	void SetModelColor(Vector4 setColor) override { this->model_->SetColor(setColor); }
+	void SetModelColor(const Vector4& setColor) override { this->model_->SetColor(setColor); }
+
+	// モデルのライトの設定
+	void SetModelLight(const DirectionalLightData& setLight) override { this->model_->SetLightData(setLight); }
 
 #pragma endregion 
 
@@ -43,8 +46,5 @@ private:
 
 	// トランスフォーム
 	Transform trans_{};
-
-	// ライト
-	DirectionalLightData light_{};
 };
 

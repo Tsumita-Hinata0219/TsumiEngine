@@ -10,31 +10,16 @@
 
 #include "json.hpp"
 
-#include "3D/Model/ModelManager/ModelManager.h"
-
 #include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
 
 
-struct ColliderData {
+struct EntityData {
 	std::string type;
-	Vector3 center;
-	Vector3 size;
-};
-struct LevelData {
-
-	struct ObjectData {
-		std::string type;
-		std::string file_name;
-		SRT srt;
-		std::map<std::string, std::unique_ptr<ObjectData>> children;
-	};
-	std::map<std::string, std::unique_ptr<ObjectData>> objects;
-};
-struct LevelObject {
-	std::unique_ptr<Model> model;
-	WorldTransform transform;
+	std::string entityName;
+	SRTN srt;
+	std::map<std::string, std::unique_ptr<EntityData>> children;
 };
 
 
@@ -52,45 +37,38 @@ private: // シングルトンデザインパターン
 
 public: // メンバ関数
 
-	// インスタンスの取得
-	static JsonManager* GetInstance() {
-		static JsonManager instance;
-		return &instance;
-	}
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
+	static JsonManager* GetInstance();
 
-	// 初期化処理、解放処理
-	void Initialize();
-	void Finalize();
-
-	// Jsonファイルの読み込み
+	/// <summary>
+	/// シーンのJsonの読み込み
+	/// </summary>
 	void LoadSceneFile(const std::string& path, const std::string& fileName);
+
+	/// <summary>
+	/// マップを空にする
+	/// </summary>
+	void Clear() { entityMap_.clear(); }
 
 
 #pragma region Accessor アクセッサ
 
-
-	LevelData::ObjectData* GetObjectData(const std::string& key) const {
-
-		if (!levelData_) {
-			return nullptr;
-		}
-
-		auto it = levelData_->objects.find(key);
-		if (it != levelData_->objects.end()) {
-			return it->second.get();
-		}
-
-		return nullptr;
+	/// <summary>
+	/// EntityDataのリストの取得
+	/// </summary>
+	const std::vector<std::unique_ptr<EntityData>>& GetEntityData(const std::string& key) const {
+		static const std::vector<std::unique_ptr<EntityData>> empty; // デフォルトの空リスト
+		auto it = entityMap_.find(key);
+		return (it != entityMap_.end()) ? it->second : empty;
 	}
 
-	SRT GetObjectSRT(const std::string& key) const {
-
-		auto it = levelData_->objects.find(key);
-		if (it != levelData_->objects.end()) {
-			return it->second.get()->srt;
-		}
-
-		return SRT();
+	/// <summary>
+	/// データを追加
+	/// </summary>
+	void AddEntityData(std::unique_ptr<EntityData> entity) {
+		entityMap_[entity->entityName].emplace_back(std::move(entity));
 	}
 
 #pragma endregion 
@@ -98,26 +76,31 @@ public: // メンバ関数
 
 private:
 
-	// オブジェクトの走査
-	void ScanningObjects(const std::string& path, nlohmann::json& object, std::map<std::string, std::unique_ptr<LevelData::ObjectData>>& objects);
+	/// <summary>
+	/// オブジェクトの走査
+	/// </summary>
+	std::unique_ptr<EntityData> ScanningEntityData(const std::string& path, nlohmann::json& object);
 
-	// 読み込んだ情報からモデル作成
-	void CreateModel();
+	/// <summary>
+	/// タイプ
+	/// </summary>
+	std::string ScanningType(nlohmann::json& object);
+
+	/// <summary>
+	/// エンティティ名
+	/// </summary>
+	std::string ScanningEntityName(nlohmann::json& object);
+
+	/// <summary>
+	/// SRTの読み込み
+	/// </summary>
+	SRTN ScanningSRT(nlohmann::json& object);
 
 
 private: // メンバ変数
 
-	// モデルマネージャー
-	ModelManager* modelManager_ = nullptr;
-
-	// Jsonファイルから読み込んだ情報をまとめておく変数
-	std::unique_ptr<LevelData> levelData_;
-
-	// 配置するための変数
-	std::map<const std::string, std::list<std::unique_ptr<LevelObject>>> levelObjectMap_;
-
 	// 読み込んだ情報をまとめておくコンテナ
-	std::map<const std::string, SRTN> srtMap_;
+	std::map<const std::string, std::vector<std::unique_ptr<EntityData>>> entityMap_;
 
 };
 

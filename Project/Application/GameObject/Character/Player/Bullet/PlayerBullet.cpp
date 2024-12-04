@@ -69,7 +69,8 @@ void PlayerBullet::Draw2DBack() {}
 // 衝突自コールバック関数
 void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::ENEMY) {
+	if (object->GetAttribute() == ObjAttribute::ENEMY ||
+		object->GetAttribute() == ObjAttribute::TERRAIN) {
 		isDead_ = true;
 	}
 }

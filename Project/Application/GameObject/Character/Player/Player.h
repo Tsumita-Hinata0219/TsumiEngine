@@ -62,6 +62,19 @@ public:
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// Jsonで読み込んだ情報を受け取る
+	/// </summary>
+	void LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& data) {
+
+		for (const auto& entityData : data) {
+			if (entityData) {
+				// SRTの設定
+				trans_.srt = entityData->srt;
+			}
+		}
+	}
+
 #pragma region Accessor アクセッサ
 
 	// ゲームカメラ

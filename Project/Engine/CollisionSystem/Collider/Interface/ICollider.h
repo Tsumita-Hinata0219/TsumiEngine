@@ -31,6 +31,9 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// データ
+	virtual void SetData(const Collider::ColliderData& data) = 0;
+
 	// オーナー
 	virtual IObject* getOwner() { return this->owner_; }
 

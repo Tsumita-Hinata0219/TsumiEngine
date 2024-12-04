@@ -104,6 +104,17 @@ void CollisionManager::CheckCollisions()
 /// <summary>
 /// データの更新
 /// </summary>
+void CollisionManager::UpdateCollisionData()
+{
+	for (auto& element : pColliderMap_) {
+		element.second->SetData(*element.first);
+	}
+}
+
+
+/// <summary>
+/// データの更新
+/// </summary>
 //void CollisionManager::UpdateCollisionData()
 //{
 //	for (auto& element : shapeMap_) {
@@ -124,12 +135,6 @@ void CollisionManager::DrawImGui()
 		for (auto& element : shapeMap_) {
 			element.second->DrawImGui();
 		}*/
-
-		ImGui::Text("Collider Ptr Count = %d", pColliders_.size());
-		for (auto& element : pColliders_) {
-			element->DrawImGui();
-		}
-		ImGui::Text("");
 
 		ImGui::TreePop();
 	}

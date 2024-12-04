@@ -90,6 +90,5 @@ private:
 private:
 
 	// コライダーポインタリスト
-	std::list<ICollider*> pColliders_;
 	std::map<Collider::ColliderData*, std::unique_ptr<ICollider>> pColliderMap_;
 };

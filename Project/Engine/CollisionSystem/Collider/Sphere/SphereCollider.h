@@ -33,7 +33,11 @@ public:
 
 	// Collider
 	const Sphere& GetData() const { return this->data_; }
-	void SetData(const Sphere& setData) { this->data_ = setData; }
+	void SetData(const Collider::ColliderData& setData) override { 
+		if (const auto* data = dynamic_cast<const Sphere*> (&setData)) {
+			this->data_ = (*data);
+		}
+	}
 
 #pragma endregion 
 

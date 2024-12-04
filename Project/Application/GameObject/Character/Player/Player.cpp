@@ -60,6 +60,9 @@ void Player::Init()
 	sphere_.center = trans_.GetWorldPos();
 	sphere_.radius = 2.0f;
 
+	sphere2_ = std::make_unique<SphereCollider>(this);
+	IObject::RegisterCollider(sphere2_.get());
+
 	// キルカウントを0で初期化
 	killCount_ =0;
 
@@ -108,6 +111,7 @@ void Player::Update()
 
 	// ColliderのSRTの設定
 	sphere_.center = trans_.GetWorldPos();
+	sphere2_->data_.center = trans_.GetWorldPos();
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
 	if (killCount_ >= MaxKillCount_) {

@@ -1,12 +1,10 @@
 #pragma once
 
 #include "../Collider/ColliderConfig.h"
-#include "../IsCollision/IsCollision.h"
 #include "../Detect/CollisionDetect.h"
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "GameObject/IObject/IObject.h"
 
 #include "../Collider/Interface/ICollider.h"
 #include "../Collider/Sphere/SphereCollider.h"
@@ -15,12 +13,11 @@
 #include <vector>
 
 // 前方宣言
-class CollisionComponent;
-class CollisionShape;
+class IObject;
 
 
 // ファクトリ関数
-using ShapeFactory = std::function<std::unique_ptr<CollisionShape>(CollisionComponent*, Col::ColData*)>;
+//using ColliderFactory = std::function<std::unique_ptr<ICollider>(IObject*)>;
 
 
 /* CollisionManagerクラス */
@@ -46,16 +43,14 @@ public:
 	// 解放処理
 	static void Finalize();
 
-	// コライダーの登録
-	void Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component);
-
 	// コライダー登録
-	void Register(Collider::ICollider* collider);
+	void Register(ICollider* collider);
+	void Register(Collider::ColliderData* data, IObject* owner);
 
 
 
 	// 登録されているShapeを削除する
-	void UnRegister(Col::ColData* data);
+	//void UnRegister(Col::ColData* data);
 
 	// 更新処理
 	void Update();
@@ -73,20 +68,18 @@ private:
 	void CheckCollisions();
 
 	// データの更新
-	void UpdateCollisionData();
+	//void UpdateCollisionData();
 
 	// ImGuiの描画
 	void DrawImGui();
 
 	// Shapeのインスタンスの取得
-	static const std::unordered_map<std::type_index, ShapeFactory>& GetFactoryMap();
+	//static const std::unordered_map<std::type_index, ColliderFactory>& GetColliderFactoryMap();
 
 
 private:
 
-	// コライダーのポインタ配列
-	std::map<Col::ColData*, std::unique_ptr<CollisionShape>> shapeMap_;
-
 	// コライダーポインタリスト
-	std::list<Collider::ICollider*> pColliders_;
+	std::list<ICollider*> pColliders_;
+	std::map<Collider::ColliderData*, std::unique_ptr<ICollider>> pColliderMap_;
 };

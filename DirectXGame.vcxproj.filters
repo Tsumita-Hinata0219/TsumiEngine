@@ -199,10 +199,6 @@
     <ClCompile Include="Project\Engine\CollisionSystem\Manager\CollisionManager.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\CollisionShape.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Component\CollisionComponent.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
@@ -242,6 +238,7 @@
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.cpp" />
+    <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -416,10 +413,6 @@
     <ClInclude Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\ColliderConfig.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\CollisionShape.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Component\CollisionComponent.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Detect\CollisionDetect.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.h" />

@@ -159,6 +159,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
+    <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
@@ -242,13 +243,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Project\Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Project\Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Component\CollisionComponent.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Manager\CollisionManager.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\CollisionShape.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="Project\Engine\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Project\Engine\ConfigManager\ConfigManager.cpp" />
@@ -469,14 +466,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\Base\WinApp\WinApp.h" />
     <ClInclude Include="Project\Engine\BufferResource\BufferResource.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\ColliderConfig.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Component\CollisionComponent.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Detect\CollisionDetect.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Manager\CollisionManager.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\CollisionShape.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.h" />
     <ClInclude Include="Project\Engine\CommandManager\CommandManager.h" />

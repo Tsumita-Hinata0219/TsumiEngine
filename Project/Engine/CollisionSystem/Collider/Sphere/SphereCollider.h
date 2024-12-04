@@ -3,42 +3,40 @@
 #include "../Interface/ICollider.h"
 
 
-namespace Collider {
+/* Sphereコライダークラス */
+class SphereCollider : public ICollider {
 
-	/* Sphereコライダークラス */
-	class SphereCollider : public ICollider	{
+public:
 
-	public:
+	/// <summary>
+	/// パラメータ付きコンストラクタ
+	/// </summary>
+	SphereCollider(IObject* setOwner);
 
-		/// <summary>
-		/// パラメータ付きコンストラクタ
-		/// </summary>
-		SphereCollider(IObject* setOwner);
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
+	~SphereCollider() = default;
 
-		/// <summary>
-		/// デストラクタ
-		/// </summary>
-		~SphereCollider() = default;
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	void Update() override {};
 
-		/// <summary>
-		/// 更新処理
-		/// </summary>
-		void Update() override {};
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui(const std::string& label = "") override;
 
 
 #pragma region Accessor アクセッサ
 
-		// Collider
-		const Sphere& GetData() { return this->sphere_; }
-		void SetData(const Sphere& setData) { this->sphere_ = setData; }
+	// Collider
+	const Sphere& GetData() const { return this->data_; }
+	void SetData(const Sphere& setData) { this->data_ = setData; }
 
 #pragma endregion 
 
-
-	private:
-
-		// コライダーのデータ
-		Sphere sphere_{};
-	};
-}
-
+	// コライダーのデータ
+	Sphere data_{};
+};

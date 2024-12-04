@@ -98,7 +98,7 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// コライダー
-	Col::Sphere sphere_;
+	//Col::Sphere sphere_;
 
 	// 移動速度
 	Vector3 velocity_;

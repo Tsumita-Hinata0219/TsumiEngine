@@ -54,14 +54,14 @@ void Player::Init()
 	// BulletのObjectPoolを先に作っておく
 	bulletPool_.Create(50);
 
-	// Colliderの登録
-	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	//// Colliderの登録
+	//colComp_->SetAttribute(ColliderAttribute::Player);
+	//colComp_->Register(sphere_);
+	//sphere_.center = trans_.GetWorldPos();
+	//sphere_.radius = 2.0f;
 
-	sphere2_ = std::make_unique<SphereCollider>(this);
-	IObject::RegisterCollider(sphere2_.get());
+	//sphere2_ = std::make_unique<SphereCollider>(this);
+	//IObject::RegisterCollider(sphere2_.get());
 
 	// キルカウントを0で初期化
 	killCount_ =0;
@@ -109,9 +109,9 @@ void Player::Update()
 		}
 	);
 
-	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
-	sphere2_->data_.center = trans_.GetWorldPos();
+	//// ColliderのSRTの設定
+	//sphere_.center = trans_.GetWorldPos();
+	//sphere2_->data_.center = trans_.GetWorldPos();
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
 	if (killCount_ >= MaxKillCount_) {
@@ -180,10 +180,10 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
 
-		// 押し出しの処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
-		trans_.UpdateMatrix();
+		//// 押し出しの処理
+		//trans_.UpdateMatrix();
+		//colComp_->Penetration(&trans_.srt.translate, sphere_);
+		//trans_.UpdateMatrix();
 	}
 	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
 

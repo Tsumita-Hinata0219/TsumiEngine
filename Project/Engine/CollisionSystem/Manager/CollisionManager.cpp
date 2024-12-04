@@ -36,7 +36,7 @@ void CollisionManager::Register(ICollider* collider)
 
 void CollisionManager::Register(Collider::ColliderData* data, IObject* owner)
 {
-	
+	data, owner;	
 }
 
 
@@ -44,7 +44,7 @@ void CollisionManager::Register(Collider::ColliderData* data, IObject* owner)
 void CollisionManager::Update()
 {
 	// データの更新
-	UpdateCollisionData();
+	//UpdateCollisionData();
 
 	// コリジョン判定を行う
 	CheckCollisions();

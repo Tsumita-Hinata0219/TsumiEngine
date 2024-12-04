@@ -26,10 +26,10 @@ void EnemyBullet::Init()
 	life_.Start();
 
 	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
+	/*colComp_->SetAttribute(ColliderAttribute::Enemy);
 	colComp_->Register(sphere_);
 	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	sphere_.radius = 2.0f;*/
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -49,7 +49,7 @@ void EnemyBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	//sphere_.center = trans_.GetWorldPos();
 }
 
 

@@ -18,11 +18,11 @@ void StaticEnemy::Init()
 	light_.enable = true;
 	light_.direction = Vector3::one;
 
-	// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f * trans_.srt.scale.x;
+	//// Colliderの初期化
+	//colComp_->SetAttribute(ColliderAttribute::Enemy);
+	//colComp_->Register(sphere_);
+	//sphere_.center = trans_.GetWorldPos();
+	//sphere_.radius = 2.0f * trans_.srt.scale.x;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -56,8 +56,8 @@ void StaticEnemy::Update()
 		}
 	);
 
-	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	//// ColliderのSRTの設定
+	//sphere_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG

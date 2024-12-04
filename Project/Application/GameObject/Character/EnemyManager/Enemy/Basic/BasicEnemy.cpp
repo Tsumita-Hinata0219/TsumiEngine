@@ -40,11 +40,11 @@ void BasicEnemy::Init()
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Enter(this);
 
-	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	////// Colliderの初期化
+	//colComp_->SetAttribute(ColliderAttribute::Enemy);
+	//colComp_->Register(sphere_);
+	//sphere_.center = trans_.GetWorldPos();
+	//sphere_.radius = 2.0f;
 }
 
 
@@ -90,7 +90,7 @@ void BasicEnemy::Update()
 
 	// ColliderのSRTの設定
 	//collider_->SetSrt(trans_.srt);
-	sphere_.center = trans_.GetWorldPos();
+	//sphere_.center = trans_.GetWorldPos();
 	/*colComp_->UpdateShape(sphere_);*/
 
 #ifdef _DEBUG
@@ -119,16 +119,16 @@ void BasicEnemy::Draw2DBack() {}
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
-		// 押し出し処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
-		trans_.UpdateMatrix();
+		//// 押し出し処理
+		//trans_.UpdateMatrix();
+		//colComp_->Penetration(&trans_.srt.translate, sphere_);
+		//trans_.UpdateMatrix();
 	}
 	if (object->GetAttribute() == ObjAttribute::PLAYER) {
-		// 押し出し処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
-		trans_.UpdateMatrix();
+		//// 押し出し処理
+		//trans_.UpdateMatrix();
+		//colComp_->Penetration(&trans_.srt.translate, sphere_);
+		//trans_.UpdateMatrix();
 	}
 	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
 

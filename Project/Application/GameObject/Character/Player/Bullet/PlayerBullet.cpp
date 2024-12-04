@@ -25,11 +25,11 @@ void PlayerBullet::Init()
 	light_.enable = true;
 	light_.direction = Vector3::one;
 
-	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	////// Colliderの初期化
+	//colComp_->SetAttribute(ColliderAttribute::Player);
+	//colComp_->Register(sphere_);
+	//sphere_.center = trans_.GetWorldPos();
+	//sphere_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -52,7 +52,7 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	//sphere_.center = trans_.GetWorldPos();
 }
 
 

@@ -32,9 +32,8 @@ public:
 #pragma region Accessor アクセッサ
 
 	// Collider
-	const Sphere& GetData() const { return this->data_; }
 	void SetData(const Collider::ColliderData& setData) override { 
-		if (const auto* data = dynamic_cast<const Sphere*> (&setData)) {
+		if (const auto* data = dynamic_cast<const Collider::Sphere*> (&setData)) {
 			this->data_ = (*data);
 		}
 	}
@@ -42,5 +41,5 @@ public:
 #pragma endregion 
 
 	// コライダーのデータ
-	Sphere data_{};
+	Collider::Sphere data_{};
 };

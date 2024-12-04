@@ -11,13 +11,14 @@
 
 #include <list>
 #include <vector>
+#include <typeindex>
 
 // 前方宣言
 class IObject;
 
 
 // ファクトリ関数
-//using ColliderFactory = std::function<std::unique_ptr<ICollider>(IObject*)>;
+using ColliderFactory = std::function<std::unique_ptr<ICollider>(IObject*)>;
 
 
 /* CollisionManagerクラス */
@@ -25,7 +26,6 @@ class CollisionManager {
 
 private: // シングルトン
 
-	// コンストラクタ、デストラクタ
 	CollisionManager() = default;
 	~CollisionManager() = default;
 	CollisionManager(const CollisionManager&) = delete;
@@ -34,25 +34,28 @@ private: // シングルトン
 
 public:
 
-	// インスタンス取得
+	/// <summary>
+	/// インスタンス取得
+	/// </summary>
 	static CollisionManager* GetInstance() {
 		static CollisionManager instance;
 		return &instance;
 	}
 
-	// 解放処理
-	static void Finalize();
-
-	// コライダー登録
+	/// <summary>
+	/// コライダー登録
+	/// </summary>
 	void Register(ICollider* collider);
 	void Register(Collider::ColliderData* data, IObject* owner);
 
+	/// <summary>
+	/// 登録されているShapeを削除する
+	/// </summary>
+	void UnRegister(Collider::ColliderData* data);
 
-
-	// 登録されているShapeを削除する
-	//void UnRegister(Col::ColData* data);
-
-	// 更新処理
+	/// <summary>
+	/// 更新処理
+	/// </summary>
 	void Update();
 
 
@@ -64,17 +67,25 @@ public:
 
 private:
 
-	// コリジョン判定を行う
+	/// <summary>
+	/// コリジョン判定を行う
+	/// </summary>
 	void CheckCollisions();
 
-	// データの更新
-	//void UpdateCollisionData();
+	/// <summary>
+	/// データの更新
+	/// </summary>
+	void UpdateCollisionData();
 
-	// ImGuiの描画
+	/// <summary>
+	/// ImGuiの描画LD
+	/// </summary>
 	void DrawImGui();
 
-	// Shapeのインスタンスの取得
-	//static const std::unordered_map<std::type_index, ColliderFactory>& GetColliderFactoryMap();
+	/// <summary>
+	/// Colliderのインスタンスの取得
+	/// </summary>
+	static const std::unordered_map<std::type_index, ColliderFactory>& GetColliderFactoryMap();
 
 
 private:

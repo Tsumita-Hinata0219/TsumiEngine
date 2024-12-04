@@ -2,45 +2,44 @@
 #include "GameObject/IObject/IObject.h"
 
 
-// ファクトリマップを作る関数
-//std::unordered_map<std::type_index, ShapeFactory> CreateShapeFactoryMap() {
-//	return {
-//		{ typeid(Col::Sphere), [](CollisionComponent* self, Col::ColData* data) {
-//			return std::make_unique<CollisionShapeSphere>(self, static_cast<Col::Sphere*>(data)); }},
-//		{ typeid(Col::AABB), [](CollisionComponent* self, Col::ColData* data) {
-//			return std::make_unique<CollisionShapeAABB>(self, static_cast<Col::AABB*>(data)); }},
-//			/* 他の型も同様に追加 */
-//	};
-//}
-//std::unordered_map<std::type_index, ShapeFactory> CreateColliderFactoryMap() {
-//	return {
-//		{ typeid(Collider::Sphere), [](IObject* owner) {
-//			return std::make_unique<SphereCollider>(owner); }},
-//			/* 他の型も同様に追加 */
-//	};
-//}
+/// <summary>
+/// ファクトリマップを作る関数
+/// </summary>
+std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactoryMap() {
+	return {
+		{ typeid(Collider::Sphere), [](IObject* owner) {
+			return std::make_unique<SphereCollider>(owner); }
+		},
 
-
-
-// 解放処理
-void CollisionManager::Finalize()
-{
+			/* 他の型も同様に追加 */
+	};
 }
 
 
-// コライダー登録
+/// <summary>
+/// コライダー登録
+/// </summary>
 void CollisionManager::Register(ICollider* collider)
 {
 	this->pColliders_.push_back(collider);
 }
-
 void CollisionManager::Register(Collider::ColliderData* data, IObject* owner)
 {
-	data, owner;	
+	data, owner;
 }
 
 
-// 更新処理
+/// <summary>
+/// 登録されているShapeを削除する
+/// </summary>
+void CollisionManager::UnRegister(Collider::ColliderData* data)
+{
+}
+
+
+/// <summary>
+/// 更新処理
+/// </summary>
 void CollisionManager::Update()
 {
 	// データの更新
@@ -56,7 +55,9 @@ void CollisionManager::Update()
 }
 
 
-// コリジョン判定を行う
+/// <summary>
+/// コリジョン判定を行う
+/// </summary>
 void CollisionManager::CheckCollisions()
 {
 	//for (auto itr1 = shapeMap_.begin(); itr1 != shapeMap_.end(); ++itr1) {
@@ -83,8 +84,10 @@ void CollisionManager::CheckCollisions()
 	//}
 }
 
-//
-//// データの更新
+
+/// <summary>
+/// データの更新
+/// </summary>
 //void CollisionManager::UpdateCollisionData()
 //{
 //	for (auto& element : shapeMap_) {
@@ -93,13 +96,15 @@ void CollisionManager::CheckCollisions()
 //}
 
 
-// ImGuiの描画
+/// <summary>
+/// ImGuiの描画
+/// </summary>
 void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
 
 		/*ImGui::Text("Collider Count = %d", shapeMap_.size());
-		
+
 		for (auto& element : shapeMap_) {
 			element.second->DrawImGui();
 		}*/
@@ -115,15 +120,13 @@ void CollisionManager::DrawImGui()
 }
 
 
-// Shapeのインスタンスの取得
-//const std::unordered_map<std::type_index, ShapeFactory>& CollisionManager::GetFactoryMap()
-//{
-//	static const std::unordered_map<std::type_index, ShapeFactory> factoryMap 
-//		= CreateShapeFactoryMap();
-//	return factoryMap;
-//}
-//
-//const std::unordered_map<std::type_index, ColliderFactory>& CollisionManager::GetColliderFactoryMap()
-//{
-//	// TODO: return ステートメントをここに挿入します
-//}
+/// <summary>
+/// Colliderのインスタンスの取得
+/// </summary>
+
+const std::unordered_map<std::type_index, ColliderFactory>& CollisionManager::GetColliderFactoryMap()
+{
+	static const std::unordered_map<std::type_index, ColliderFactory> factoryMap =
+		CreateColliderFactoryMap();
+	return factoryMap;
+}

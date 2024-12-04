@@ -113,28 +113,17 @@ void CollisionManager::UpdateCollisionData()
 
 
 /// <summary>
-/// データの更新
-/// </summary>
-//void CollisionManager::UpdateCollisionData()
-//{
-//	for (auto& element : shapeMap_) {
-//		element.second->SetData(*element.first);
-//	}
-//}
-
-
-/// <summary>
 /// ImGuiの描画
 /// </summary>
 void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
 
-		/*ImGui::Text("Collider Count = %d", shapeMap_.size());
+		ImGui::Text("Collider Instance Count = %d", pColliderMap_.size());
 
-		for (auto& element : shapeMap_) {
+		for (auto& element : pColliderMap_) {
 			element.second->DrawImGui();
-		}*/
+		}
 
 		ImGui::TreePop();
 	}

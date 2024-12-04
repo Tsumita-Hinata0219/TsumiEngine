@@ -446,7 +446,6 @@
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
-    <ClInclude Include="Project\Engine\Utilities\SmartPointer\SmartPtr.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Octree.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.h" />

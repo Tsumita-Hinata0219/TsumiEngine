@@ -200,7 +200,7 @@ void Model::DrawN(Transform& transform)
 void Model::PlayAnimation(Animation animation, float time)
 {
 	// GLTFで読み込んだモデルじゃないとダメ
-	assert(this->state_->GetStateType() == ModelStateType::gLTF && "その読み込み形式はだめだよ");
+	assert(this->state_->GetStateType() == ModelStateType::gLTF);
 
 	// timeにあったAnimationを解析して、LocalMatrixに入れる
 	this->objData_.rootNode.localMatrix = keyFrameAnimation_->PlayAnimation(this->objData_.rootNode.name, animation, time);
@@ -213,7 +213,7 @@ void Model::PlayAnimation(Animation animation, float time)
 Skeleton Model::CreateSkeleton()
 {
 	// GLTFで読み込んだモデルじゃないとダメ
-	assert(this->state_->GetStateType() == ModelStateType::gLTF && "その読み込み形式はだめだよ");
+	assert(this->state_->GetStateType() == ModelStateType::gLTF);
 
 	return modelManager_->CreateSkeleton(this->objData_.rootNode);
 }

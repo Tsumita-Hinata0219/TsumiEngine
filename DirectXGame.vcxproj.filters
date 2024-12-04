@@ -240,6 +240,8 @@
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -464,6 +466,9 @@
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Structure\ColliderStructure.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

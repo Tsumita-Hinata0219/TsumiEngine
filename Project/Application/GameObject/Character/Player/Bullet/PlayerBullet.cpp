@@ -30,9 +30,9 @@ void PlayerBullet::Init()
 	//colComp_->Register(sphere_);
 	//sphere_.center = trans_.GetWorldPos();
 	//sphere_.radius = 2.0f;
-	sphere2_ = std::make_unique<SphereCollider>(this);
-	sphere2_->data_.center = trans_.GetWorldPos();
-	sphere2_->data_.radius = 2.0f;
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -56,7 +56,7 @@ void PlayerBullet::Update()
 
 	// ColliderのSRTの設定
 	//sphere_.center = trans_.GetWorldPos();
-	sphere2_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 }
 
 
@@ -120,5 +120,5 @@ void PlayerBullet::MarkAsDead()
 	// 死亡フラグを立てる
 	isDead_ = true;
 	// コライダーを無効化
-	sphere2_->Deactivate();
+	sphere_->Deactivate();
 }

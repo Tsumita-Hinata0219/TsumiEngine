@@ -75,6 +75,8 @@ private:
 	void CreateNewBullet();
 	void CreateNewBullet2();
 
+	// マークを死亡状態に設定
+	void MarkAsDead();
 
 private:
 
@@ -97,8 +99,7 @@ private:
 	DirectionalLightData light_{};
 
 	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
-	//Col::Sphere sphere_;
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

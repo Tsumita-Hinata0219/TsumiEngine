@@ -40,11 +40,10 @@ void BasicEnemy::Init()
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Enter(this);
 
-	////// Colliderの初期化
-	//colComp_->SetAttribute(ColliderAttribute::Enemy);
-	//colComp_->Register(sphere_);
-	//sphere_.center = trans_.GetWorldPos();
-	//sphere_.radius = 2.0f;
+	// Colliderの初期化
+	/*sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;*/
 }
 
 
@@ -89,9 +88,8 @@ void BasicEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
-	//sphere_.center = trans_.GetWorldPos();
-	/*colComp_->UpdateShape(sphere_);*/
+	//sphere_->data_.center = trans_.GetWorldPos();
+
 
 #ifdef _DEBUG
 
@@ -139,7 +137,8 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
-			isDead_ = true;
+			// 死亡状態に設定
+			MarkAsDead();
 			player_->AddKillCount();
 		}
 	}
@@ -285,5 +284,15 @@ void BasicEnemy::CreateNewBullet()
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
+}
+
+
+// マークを死亡状態に設定
+void BasicEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
+	// コライダーを無効化
+	sphere_->Deactivate();
 }
 

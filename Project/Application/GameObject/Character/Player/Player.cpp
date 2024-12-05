@@ -54,15 +54,10 @@ void Player::Init()
 	// BulletのObjectPoolを先に作っておく
 	bulletPool_.Create(50);
 
-	//// Colliderの登録
-	//colComp_->SetAttribute(ColliderAttribute::Player);
-	//colComp_->Register(sphere_);
-	//sphere_.center = trans_.GetWorldPos();
-	//sphere_.radius = 2.0f;
-
-	sphere2_ = std::make_unique<SphereCollider>(this);
-	sphere2_->data_.center = trans_.GetWorldPos();
-	sphere2_->data_.radius = 2.0f;
+	// Colliderの初期化
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 
 
 	// キルカウントを0で初期化
@@ -112,7 +107,7 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	sphere2_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる

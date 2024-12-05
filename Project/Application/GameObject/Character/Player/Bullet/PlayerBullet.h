@@ -94,7 +94,7 @@ private: // メンバ変数
 
 	// コライダー
 	//Col::Sphere sphere_;
-	std::unique_ptr<SphereCollider> sphere2_;
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// 移動速度
 	Vector3 velocity_;

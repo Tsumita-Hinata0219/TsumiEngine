@@ -71,6 +71,9 @@ private:
 	// 寿命の処理
 	void RemoveAfterlifeTime();
 
+	// マークを死亡状態に設定
+	void MarkAsDead();
+
 
 private: // メンバ変数
 
@@ -87,7 +90,7 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f,2.0f };
 
 	// コライダー
-	//Col::Sphere sphere_;
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// 移動速度
 	Vector3 velocity_;

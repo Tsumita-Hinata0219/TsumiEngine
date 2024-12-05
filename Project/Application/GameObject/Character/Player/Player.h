@@ -186,9 +186,8 @@ private:
 	// Light
 	DirectionalLightData light_;
 
-	//// コライダー
-	//Col::Sphere sphere_;
-	std::unique_ptr<SphereCollider> sphere2_;
+	// コライダー
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

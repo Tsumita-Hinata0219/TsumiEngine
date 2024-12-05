@@ -18,11 +18,10 @@ void StaticEnemy::Init()
 	light_.enable = true;
 	light_.direction = Vector3::one;
 
-	//// Colliderの初期化
-	//colComp_->SetAttribute(ColliderAttribute::Enemy);
-	//colComp_->Register(sphere_);
-	//sphere_.center = trans_.GetWorldPos();
-	//sphere_.radius = 2.0f * trans_.srt.scale.x;
+	// Colliderの初期化
+	/*sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;*/
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -56,8 +55,8 @@ void StaticEnemy::Update()
 		}
 	);
 
-	//// ColliderのSRTの設定
-	//sphere_.center = trans_.GetWorldPos();
+	// ColliderのSRTの設定
+	//sphere_->data_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG
@@ -93,7 +92,8 @@ void StaticEnemy::onCollision(IObject* object)
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
-			isDead_ = true;
+			// 死亡状態に設定
+			MarkAsDead();
 			player_->AddKillCount();
 		}
 	}
@@ -142,4 +142,14 @@ void StaticEnemy::CreateNewBullet2()
 	initVel.z = -kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Resistant, initPos, initVel);
+}
+
+
+// マークを死亡状態に設定
+void StaticEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
+	// コライダーを無効化
+	sphere_->Deactivate();
 }

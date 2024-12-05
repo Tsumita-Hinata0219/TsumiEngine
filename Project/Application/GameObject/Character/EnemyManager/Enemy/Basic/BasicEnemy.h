@@ -107,6 +107,9 @@ private:
 	// 新しいバレットを生成する
 	void CreateNewBullet();
 
+	// マークを死亡状態に設定
+	void MarkAsDead();
+
 
 private:
 
@@ -129,8 +132,7 @@ private:
 	bool isDead_ = false;
 
 	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
-	//Col::Sphere sphere_{};
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

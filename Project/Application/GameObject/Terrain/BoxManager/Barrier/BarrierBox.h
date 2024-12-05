@@ -69,9 +69,8 @@ private:
 	// トランスフォーム
 	Transform trans_{};
 
-	//// コライダー
-	//Col::AABB aabb_{};
-	//Col::Sphere sphere_{};
+	// コライダー
+	std::unique_ptr<SphereCollider> sphere_;
 
 };
 

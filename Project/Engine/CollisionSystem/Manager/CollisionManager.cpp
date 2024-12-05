@@ -58,13 +58,16 @@ void CollisionManager::CheckCollisions()
 		for (auto itr2 = std::next(itr1); itr2 != pColliders_.end(); ++itr2) {
 
 			// itr1とit2の属性が同じなら判定をスキップする
-			if ((*itr1)->GetAttribute() == (*itr2)->GetAttribute()) {
+			if ((*itr1)->GetCategory() == (*itr2)->GetCategory()) {
 				continue;
 			}
 
 			// 衝突判定をとる
 			if ((*itr1)->Intersects((**itr2))) {
-				
+				// 衝突したら各コライダーが持つオーナーの
+				// onCollision関数を呼び出して、衝突相手のownerを送る
+				(*itr1)->GetOwner()->onCollision((*itr2)->GetOwner());
+				(*itr2)->GetOwner()->onCollision((*itr1)->GetOwner());
 			}
 		}
 	}

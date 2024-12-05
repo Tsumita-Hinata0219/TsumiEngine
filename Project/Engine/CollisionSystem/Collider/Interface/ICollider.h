@@ -3,6 +3,7 @@
 #include "../Structure/ColliderStructure.h"
 #include "../ColliderConfig.h"
 #include <variant>
+#include <utility>
 
 
 // 前方宣言
@@ -22,8 +23,7 @@ public:
 		Collider::AABB,
 		Collider::OBB,
 		Collider::Segment,
-		Collider::ColliderData,
-		>;
+		Collider::Capsule>;
 
 public:
 
@@ -65,14 +65,14 @@ public:
 	virtual void SetData(const Collider::ColliderData& setData) = 0;
 
 	// オーナー
-	virtual IObject* getOwner() { return this->owner_; }
-
-	// 属性
-	virtual uint32_t GetAttribute() { return this->attribute_; }
-	virtual void ColliderAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
+	virtual IObject* GetOwner() { return this->owner_; }
 
 	// アクティブ
 	virtual bool IsActive() const { return this->isActive_; }
+
+	// 属性
+	ObjCategory GetCategory() const { return this->attribute_.first; }
+	ObjType GetType() const { return this->attribute_.second; }
 
 #pragma endregion 
 
@@ -85,11 +85,11 @@ protected:
 	// コライダーを持つオーナー
 	IObject* owner_ = nullptr;
 
-	// 属性
-	uint32_t attribute_ = 0;
-
 	// アクティブフラグ
 	bool isActive_ = false;
 
+	// オブジェクトの属性
+	std::pair<ObjCategory, ObjType> attribute_
+		= { ObjCategory::OTHER, ObjType::OTHER };
 };
 

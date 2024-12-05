@@ -8,8 +8,11 @@
 SphereCollider::SphereCollider(IObject* setOwner)
 {
 	// オーナーと属性の設定
-	this->owner_ = setOwner;
-	this->attribute_ = int(this->owner_->GetAttribute());
+	owner_ = setOwner;
+	// 属性を設定
+	attribute_ = {
+		owner_->GetCategory(), owner_->GetType()
+	};
 }
 
 
@@ -26,9 +29,9 @@ void SphereCollider::Update()
 /// </summary>
 bool SphereCollider::Intersects(const ICollider& other)
 {
-	// this Sphere x other Sphere
-	if (auto sphere = std::get_if<Collider::Sphere>(&other.GetData())) {
-		
+	ColliderDataType type = other.GetData();
+	
+	if (auto sphere = std::get_if<Collider::Sphere>(&type)) {
 		// 判定結果を返す
 		return Detect::Intersects(this->data_, *sphere);
 	}

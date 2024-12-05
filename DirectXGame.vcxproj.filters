@@ -237,9 +237,10 @@
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp" />
     <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -462,7 +463,8 @@
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Structure\ColliderStructure.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

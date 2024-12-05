@@ -7,7 +7,7 @@
 #include "Math/Struct.h"
 
 #include "../Collider/Interface/ICollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
+#include "../Collider/Shape/Sphere/SphereCollider.h"
 
 #include <list>
 #include <vector>

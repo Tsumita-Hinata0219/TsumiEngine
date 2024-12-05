@@ -1,22 +1,22 @@
 #pragma once
 
-#include "../Interface/ICollider.h"
+#include "../../Interface/ICollider.h"
 
 
-/* Sphereコライダークラス */
-class SphereCollider : public ICollider {
+/* AABBコライダークラス */
+class AABBCollider : public ICollider {
 
 public:
 
 	/// <summary>
 	/// パラメータ付きコンストラクタ
 	/// </summary>
-	SphereCollider(IObject* setOwner);
+	AABBCollider(IObject* setOwner);
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~SphereCollider() = default;
+	~AABBCollider() = default;
 
 	/// <summary>
 	/// 更新処理
@@ -39,13 +39,14 @@ public:
 	// データ
 	ColliderDataType GetData() const override { return this->data_; }
 	void SetData(const Collider::ColliderData& setData) override {
-		if (const auto* data = dynamic_cast<const Collider::Sphere*>(&setData)) {
+		if (const auto* data = dynamic_cast<const Collider::AABB*>(&setData)) {
 			this->data_ = *data;  // AABB型の場合、値をコピー
 		}
 	}
 
 #pragma endregion 
 
+
 	// コライダーのポインターデータ
-	Collider::Sphere data_;
+	Collider::AABB data_;
 };

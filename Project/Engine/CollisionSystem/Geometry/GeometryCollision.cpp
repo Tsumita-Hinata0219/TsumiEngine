@@ -103,14 +103,11 @@ namespace GeometryCollision {
 	//	return result;
 	//}
 
-	//// AABBの設定
-	//AABB SettingAABBProperties(AABBCollider* c) {
-
-	//	AABB result{};
-
-	//	result.min = c->GetWorldPos() - (c->GetSize() / 2.0f);
-	//	result.max = c->GetWorldPos() + (c->GetSize() / 2.0f);
-
-	//	return result;
-	//}
+	// AABBの設定
+	Collider::AABB SettingAABBProperties(const Collider::AABB& a) {
+		Collider::AABB result{};
+		result.min = a.center - (a.size / 2.0f);
+		result.max = a.center + (a.size / 2.0f);
+		return result;
+	}
 }

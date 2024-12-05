@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../Structure/CollisionStructures.h"
 #include "Math/MyMath.h"
+#include "../Collider/Structure/ColliderStructure.h"
 
 #include <array>
 
@@ -23,8 +23,8 @@ namespace GeometryCollision {
 	//// OBBの設定
 	//OBB SettingOBBProperties(OBBCollider* c);
 
-	//// AABBの設定
-	//AABB SettingAABBProperties(AABBCollider* c);
+	// AABBの設定
+	Collider::AABB SettingAABBProperties(const Collider::AABB& c);
 
 	// Capsuleの設定
 	Capsule SettingCapusulePropertirs();

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "../Collider/Structure/ColliderStructure.h"
+#include "../Geometry/GeometryCollision.h"
 #include "../Util/CollisionUtilities.h"
 
 
@@ -22,45 +22,48 @@ namespace Detect {
 		// 当たってない
 		return false;
 	}
-	//// AABBとAABBの当たり判定
-	//inline bool Intersects(const Collider::AABB& aabb1, const Collider::AABB& aabb2)
-	//{
-	//	std::vecto
+	// AABBとAABBの当たり判定
+	inline bool Intersects(const Collider::AABB& aabb1, const Collider::AABB& aabb2)
+	{
+		Collider::AABB col1 = GeometryCollision::SettingAABBProperties(aabb1);
+		Collider::AABB col2 = GeometryCollision::SettingAABBProperties(aabb2);
 
-	//	if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
-	//		(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
-	//		(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
-	//		) {
+		if ((col1.min.x <= col2.max.x && col1.max.x >= col2.min.x) &&
+			(col1.min.y <= col2.max.y && col1.max.y >= col2.min.y) &&
+			(col1.min.z <= col2.max.z && col1.max.z >= col2.min.z)
+			) {
 
-	//		// 当たっている
-	//		return true;
-	//	}
-	//	// 当たってない
-	//	return false;
-	//}
-//	// AABBと球の当たり判定
-//	inline bool Intersects(const Col::AABB& aabb, const Col::Sphere& s)
-//	{
-//		// 最近接点を求める
-//		const Vector3 ClosestPoint = {
-//			std::clamp(s.center.x, aabb.min.x, aabb.max.x),
-//			std::clamp(s.center.y, aabb.min.y, aabb.max.y),
-//			std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
-//
-//		// 最近接点と球の中心と距離を求める
-//		float dist = Length(ClosestPoint - s.center);
-//
-//		// 距離が半径よりも小さければ衝突
-//		if (dist <= s.radius) {
-//
-//			// 当たってる
-//			return true;
-//		}
-//		else {
-//			// 当たってない
-//			return false;
-//		}
-//	}
+			// 当たっている
+			return true;
+		}
+		// 当たってない
+		return false;
+	}
+	// AABBと球の当たり判定
+	inline bool Intersects(const Collider::AABB& a, const Collider::Sphere& s)
+	{
+		Collider::AABB aabb = GeometryCollision::SettingAABBProperties(a);
+
+		// 最近接点を求める
+		const Vector3 ClosestPoint = {
+			std::clamp(s.center.x, aabb.min.x, aabb.max.x),
+			std::clamp(s.center.y, aabb.min.y, aabb.max.y),
+			std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
+
+		// 最近接点と球の中心と距離を求める
+		float dist = Length(ClosestPoint - s.center);
+
+		// 距離が半径よりも小さければ衝突
+		if (dist <= s.radius) {
+
+			// 当たってる
+			return true;
+		}
+		else {
+			// 当たってない
+			return false;
+		}
+	}
 //	// AABBと線の当たり判定
 //	inline bool Intersects(const Col::AABB& aabb, const Col::Segment& s)
 //	{

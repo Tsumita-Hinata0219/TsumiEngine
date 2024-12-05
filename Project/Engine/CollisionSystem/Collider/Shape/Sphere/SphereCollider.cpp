@@ -31,9 +31,14 @@ bool SphereCollider::Intersects(const ICollider& other)
 {
 	ColliderDataType type = other.GetData();
 	
+	// this Sphere x other Sphere
 	if (auto sphere = std::get_if<Collider::Sphere>(&type)) {
-		// 判定結果を返す
+
 		return Detect::Intersects(this->data_, *sphere);
+	}
+	else if (auto aabb = std::get_if<Collider::AABB>(&type)) {
+
+		return Detect::Intersects(*aabb, this->data_);
 	}
 	return false;
 }

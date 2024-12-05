@@ -125,8 +125,6 @@ void PlayerBullet::RemoveAfterlifeTime()
 // マークを死亡状態に設定
 void PlayerBullet::MarkAsDead()
 {
-	// コライダーを無効にしておく
-	sphere_->Deactivate();
 	// 死亡フラグを立てる
 	isDead_ = true;
 }

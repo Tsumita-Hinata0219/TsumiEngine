@@ -26,7 +26,12 @@ void SphereCollider::Update()
 /// </summary>
 bool SphereCollider::Intersects(const ICollider& other)
 {
-	other;
+	// this Sphere x other Sphere
+	if (auto sphere = std::get_if<Collider::Sphere>(&other.GetData())) {
+		
+		// 判定結果を返す
+		return Detect::Intersects(this->data_, *sphere);
+	}
 	return false;
 }
 

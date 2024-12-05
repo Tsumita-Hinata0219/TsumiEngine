@@ -37,7 +37,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// データ
-	Collider::ColliderData GetData() const override { return this->data_; }
+	ColliderDataType GetData() const override { return this->data_; }
 	void SetData(const Collider::ColliderData& setData) override {
 		if (const auto* data = dynamic_cast<const Collider::Sphere*>(&setData)) {
 			this->data_ = *data;  // AABB型の場合、値をコピー

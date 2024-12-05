@@ -2,6 +2,7 @@
 
 #include "../Structure/ColliderStructure.h"
 #include "../ColliderConfig.h"
+#include <variant>
 
 
 // 前方宣言
@@ -11,6 +12,18 @@ class CollisionManager;
 
 /* コライダーの基底クラス */
 class ICollider {
+
+public:
+
+	// variant型で構造体をまとめる
+	using ColliderDataType =
+		std::variant<
+		Collider::Sphere,
+		Collider::AABB,
+		Collider::OBB,
+		Collider::Segment,
+		Collider::ColliderData,
+		>;
 
 public:
 
@@ -48,7 +61,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// データ
-	virtual Collider::ColliderData GetData() const = 0;
+	virtual ColliderDataType GetData() const = 0;
 	virtual void SetData(const Collider::ColliderData& setData) = 0;
 
 	// オーナー

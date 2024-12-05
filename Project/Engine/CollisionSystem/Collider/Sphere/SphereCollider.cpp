@@ -26,6 +26,7 @@ void SphereCollider::Update()
 /// </summary>
 bool SphereCollider::Intersects(const ICollider& other)
 {
+	other;
 	return false;
 }
 

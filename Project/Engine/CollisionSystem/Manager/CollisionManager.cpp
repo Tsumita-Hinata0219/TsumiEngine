@@ -30,8 +30,13 @@ void CollisionManager::Register(ICollider* pCollider)
 /// </summary>
 void CollisionManager::UnRegister(ICollider* pCollider)
 {
-	// 指定されたコライダーをリストから削除
-	pColliders_.remove(pCollider);
+	// nullptrか指定されたポインタがリストに存在するか確認
+	auto it = std::find(pColliders_.begin(), pColliders_.end(), pCollider);
+
+	if (it != pColliders_.end()) {
+		// 存在する場合はその要素を削除
+		pColliders_.erase(it);
+	}
 }
 
 
@@ -40,12 +45,27 @@ void CollisionManager::UnRegister(ICollider* pCollider)
 /// </summary>
 void CollisionManager::Update()
 {
+	// nullチェック
+	//RemoveNullColliders();
+
 	// コリジョン判定を行う
 	CheckCollisions();
 
 #ifdef _DEBUG
 	DrawImGui(); // Debug表示
 #endif // _DEBUG
+}
+
+
+/// <summary>
+/// nullチェック
+/// </summary>
+void CollisionManager::RemoveNullColliders()
+{
+	pColliders_.remove_if([](ICollider* collider) {
+		return collider == nullptr;  // ポインタがnullptrなら削除
+		}
+	);
 }
 
 

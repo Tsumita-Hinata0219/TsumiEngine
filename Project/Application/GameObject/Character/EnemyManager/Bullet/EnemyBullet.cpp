@@ -26,9 +26,9 @@ void EnemyBullet::Init()
 	life_.Start();
 
 	// Colliderの初期化
-	/*sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;*/
+	sphere_->data_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -48,7 +48,7 @@ void EnemyBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	//sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 
 }
 
@@ -110,6 +110,4 @@ void EnemyBullet::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
-	// コライダーを無効化
-	sphere_->Deactivate();
 }

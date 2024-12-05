@@ -82,6 +82,14 @@ void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 }
 
 
+// プールに返却前のリセット処理
+void PlayerBullet::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
+}
+
+
 // 移動処理
 void PlayerBullet::Move()
 {
@@ -119,6 +127,4 @@ void PlayerBullet::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
-	// コライダーを無効化
-	sphere_->Deactivate();
 }

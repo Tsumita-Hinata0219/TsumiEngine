@@ -98,6 +98,8 @@ void Player::Update()
 	// 死亡フラグが立っていたら削除
 	bulletList_.remove_if([this](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
+			// 返却する前にリセット処理を入れておく
+			bullet->Reset();
 			// 死亡したバレットをプールに返却
 			bulletPool_.Return(bullet);
 			return true;

@@ -66,6 +66,11 @@ public:
 private:
 
 	/// <summary>
+	/// nullチェック
+	/// </summary>
+	void RemoveNullColliders();
+
+	/// <summary>
 	/// コリジョン判定を行う
 	/// </summary>
 	void CheckCollisions();

@@ -41,9 +41,9 @@ void BasicEnemy::Init()
 	stateVector_[currentStateNo_]->Enter(this);
 
 	// Colliderの初期化
-	/*sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;*/
+	sphere_->data_.radius = 2.0f;
 }
 
 
@@ -88,7 +88,7 @@ void BasicEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	//sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG
@@ -292,7 +292,5 @@ void BasicEnemy::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
-	// コライダーを無効化
-	sphere_->Deactivate();
 }
 

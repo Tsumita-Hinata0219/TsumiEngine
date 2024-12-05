@@ -19,9 +19,9 @@ void StaticEnemy::Init()
 	light_.direction = Vector3::one;
 
 	// Colliderの初期化
-	/*sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;*/
+	sphere_->data_.radius = 2.0f;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -56,7 +56,7 @@ void StaticEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	//sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG
@@ -150,6 +150,4 @@ void StaticEnemy::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
-	// コライダーを無効化
-	sphere_->Deactivate();
 }

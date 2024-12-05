@@ -19,11 +19,6 @@ public:
 	~SphereCollider() = default;
 
 	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update() override;
-
-	/// <summary>
 	/// 衝突判定
 	/// </summary>
 	bool Intersects(const ICollider& other) override;

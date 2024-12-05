@@ -17,14 +17,6 @@ AABBCollider::AABBCollider(IObject* setOwner)
 
 
 /// <summary>
-/// 更新処理
-/// </summary>
-void AABBCollider::Update()
-{
-}
-
-
-/// <summary>
 /// 衝突判定
 /// </summary>
 bool AABBCollider::Intersects(const ICollider& other)

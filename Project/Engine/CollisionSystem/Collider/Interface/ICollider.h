@@ -38,11 +38,6 @@ public:
 	virtual ~ICollider();
 
 	/// <summary>
-	/// 更新処理
-	/// </summary>
-	virtual void Update() = 0;
-
-	/// <summary>
 	/// コライダー無効化
 	/// </summary>
 	void Deactivate();

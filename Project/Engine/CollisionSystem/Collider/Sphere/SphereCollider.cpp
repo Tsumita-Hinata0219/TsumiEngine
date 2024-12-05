@@ -22,6 +22,15 @@ void SphereCollider::Update()
 
 
 /// <summary>
+/// 衝突判定
+/// </summary>
+bool SphereCollider::Intersects(const ICollider& other)
+{
+	return false;
+}
+
+
+/// <summary>
 /// ImGuiの描画
 /// </summary>
 void SphereCollider::DrawImGui(const std::string& label)

@@ -28,9 +28,10 @@ void CollisionManager::Register(ICollider* pCollider)
 /// <summary>
 /// 登録されているShapeを削除する
 /// </summary>
-void CollisionManager::UnRegister(Collider::ColliderData* data)
+void CollisionManager::UnRegister(ICollider* pCollider)
 {
-	data;
+	// 指定されたコライダーをリストから削除
+	pColliders_.remove(pCollider);
 }
 
 

@@ -24,6 +24,11 @@ public:
 	void Update() override;
 
 	/// <summary>
+	/// 衝突判定
+	/// </summary>
+	bool Intersects(const ICollider& other) override;
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui(const std::string& label = "") override;

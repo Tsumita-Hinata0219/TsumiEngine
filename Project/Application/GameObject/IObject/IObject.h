@@ -55,7 +55,7 @@ public: // メンバ関数
 	/// <summary>
 	/// コライダーの登録処理
 	/// </summary>
-	virtual void RegisterCollider(Collider::ColliderData& pData);
+	virtual void RegisterCollider(ICollider* pCollider);
 
 
 #pragma region Accessor アクセッサ

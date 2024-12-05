@@ -6,6 +6,7 @@
 
 // 前方宣言
 class IObject;
+class CollisionManager;
 
 
 /* コライダーの基底クラス */
@@ -14,9 +15,14 @@ class ICollider {
 public:
 
 	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	ICollider();
+
+	/// <summary>
 	/// 仮想デストラク
 	/// </summary>
-	virtual ~ICollider() = default;
+	virtual ~ICollider();
 
 	/// <summary>
 	/// 更新処理
@@ -52,11 +58,14 @@ public:
 
 protected:
 
+	// マネージャ
+	CollisionManager* manager_ = nullptr;
+
 	// コライダーを持つオーナー
 	IObject* owner_ = nullptr;
 
 	// 属性
-	uint32_t attribute_;
+	uint32_t attribute_ = 0;
 
 };
 

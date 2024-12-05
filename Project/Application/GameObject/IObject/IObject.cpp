@@ -14,8 +14,8 @@ IObject::IObject()
 /// <summary>
 /// コライダーの登録処理
 /// </summary>
-void IObject::RegisterCollider(Collider::ColliderData& pData)
+void IObject::RegisterCollider(ICollider* pCollider)
 {
 	CollisionManager* collisionManager = CollisionManager::GetInstance();
-	collisionManager->Register(&pData, this);
+	collisionManager->Register(pCollider);
 }

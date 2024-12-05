@@ -49,7 +49,7 @@ public:
 	/// <summary>
 	/// 登録されているShapeを削除する
 	/// </summary>
-	void UnRegister(Collider::ColliderData* data);
+	void UnRegister(ICollider* pCollider);
 
 	/// <summary>
 	/// 更新処理
@@ -84,6 +84,5 @@ private:
 private:
 
 	// コライダーポインタリスト
-	//std::map<Collider::ColliderData*, std::unique_ptr<ICollider>> pColliderMap_;
 	std::list<ICollider*> pColliders_;
 };

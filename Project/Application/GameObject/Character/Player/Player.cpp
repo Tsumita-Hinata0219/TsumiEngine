@@ -61,7 +61,6 @@ void Player::Init()
 	//sphere_.radius = 2.0f;
 
 	sphere2_ = std::make_unique<SphereCollider>(this);
-	IObject::RegisterCollider(sphere2_.get());
 
 
 	// キルカウントを0で初期化

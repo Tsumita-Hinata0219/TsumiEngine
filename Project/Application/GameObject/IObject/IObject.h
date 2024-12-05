@@ -52,12 +52,6 @@ public: // メンバ関数
     /// </summary>
     virtual void onCollision([[maybe_unused]] IObject* object) = 0;
 
-	/// <summary>
-	/// コライダーの登録処理
-	/// </summary>
-	virtual void RegisterCollider(ICollider* pCollider);
-
-
 #pragma region Accessor アクセッサ
 
 	// ObjAttribute
@@ -72,6 +66,6 @@ protected: // メンバ変数
 	ModelManager* modelManager_ = nullptr;
 
 	// オブジェクトの属性
-	ObjAttribute attribute_ = ObjAttribute::OTHER;
+	ObjAttribute attribute_ = ObjAttribute::NONE;
 };
 

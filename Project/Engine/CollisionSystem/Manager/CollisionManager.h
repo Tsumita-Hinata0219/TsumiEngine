@@ -44,7 +44,7 @@ public:
 	/// <summary>
 	/// コライダー登録
 	/// </summary>
-	void Register(Collider::ColliderData* data, IObject* owner);
+	void Register(ICollider* pCollider);
 
 	/// <summary>
 	/// 登録されているShapeを削除する
@@ -71,11 +71,6 @@ private:
 	void CheckCollisions();
 
 	/// <summary>
-	/// データの更新
-	/// </summary>
-	void UpdateCollisionData();
-
-	/// <summary>
 	/// ImGuiの描画LD
 	/// </summary>
 	void DrawImGui();
@@ -89,5 +84,6 @@ private:
 private:
 
 	// コライダーポインタリスト
-	std::map<Collider::ColliderData*, std::unique_ptr<ICollider>> pColliderMap_;
+	//std::map<Collider::ColliderData*, std::unique_ptr<ICollider>> pColliderMap_;
+	std::list<ICollider*> pColliders_;
 };

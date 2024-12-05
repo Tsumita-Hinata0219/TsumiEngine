@@ -40,10 +40,6 @@ public:
 
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
-
-	// エネミーマネージャー
-	void SetEnemyManager(EnemyManager* setManager) override { this->enemyManager_ = setManager; }
-
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
@@ -84,9 +80,6 @@ private:
 
 	// プレイヤー
 	Player* player_ = nullptr;
-
-	// エネミーマネージャー
-	EnemyManager* enemyManager_ = nullptr;
 
 	// Model
 	std::unique_ptr<Model> model_;

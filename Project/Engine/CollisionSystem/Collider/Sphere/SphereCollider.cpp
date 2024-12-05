@@ -14,6 +14,14 @@ SphereCollider::SphereCollider(IObject* setOwner)
 
 
 /// <summary>
+/// 更新処理
+/// </summary>
+void SphereCollider::Update()
+{
+}
+
+
+/// <summary>
 /// ImGuiの描画
 /// </summary>
 void SphereCollider::DrawImGui(const std::string& label)

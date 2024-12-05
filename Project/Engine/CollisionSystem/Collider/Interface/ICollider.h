@@ -24,6 +24,11 @@ public:
 	virtual void Update() = 0;
 
 	/// <summary>
+	/// 衝突判定
+	/// </summary>
+	virtual bool Intersects(const ICollider& other) = 0;
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	virtual void DrawImGui(const std::string& label = "") = 0;
@@ -32,7 +37,8 @@ public:
 #pragma region Accessor アクセッサ
 
 	// データ
-	virtual void SetData(const Collider::ColliderData& data) = 0;
+	virtual Collider::ColliderData GetData() const = 0;
+	virtual void SetData(const Collider::ColliderData& setData) = 0;
 
 	// オーナー
 	virtual IObject* getOwner() { return this->owner_; }

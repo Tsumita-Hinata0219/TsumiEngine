@@ -21,7 +21,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	void Update() override {};
+	void Update() override;
 
 	/// <summary>
 	/// ImGuiの描画
@@ -31,15 +31,16 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// Collider
-	void SetData(const Collider::ColliderData& setData) override { 
-		if (const auto* data = dynamic_cast<const Collider::Sphere*> (&setData)) {
-			this->data_ = (*data);
+	// データ
+	Collider::ColliderData GetData() const override { return this->data_; }
+	void SetData(const Collider::ColliderData& setData) override {
+		if (const auto* data = dynamic_cast<const Collider::Sphere*>(&setData)) {
+			this->data_ = *data;  // AABB型の場合、値をコピー
 		}
 	}
 
 #pragma endregion 
 
-	// コライダーのデータ
-	Collider::Sphere data_{};
+	// コライダーのポインターデータ
+	Collider::Sphere data_;
 };

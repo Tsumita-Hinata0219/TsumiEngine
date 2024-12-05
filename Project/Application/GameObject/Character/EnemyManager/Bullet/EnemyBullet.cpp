@@ -81,6 +81,14 @@ void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 }
 
 
+// プールに返却前のリセット処理
+void EnemyBullet::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
+}
+
+
 // 移動処理
 void EnemyBullet::Move()
 {

@@ -30,6 +30,11 @@ public:
 	/// </summary>
 	void AddNewBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
 
+	/// <summary>
+	/// プールに返却前のリセット処理
+	/// </summary>
+	virtual void Reset() = 0;
+
 
 #pragma region Accessor アクセッサ
 

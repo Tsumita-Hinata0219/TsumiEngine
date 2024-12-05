@@ -161,6 +161,16 @@ void BasicEnemy::OnCollisionWithPlayerBullet()
 }
 
 
+/// <summary>
+/// プールに返却前のリセット処理
+/// </summary>
+void BasicEnemy::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
+}
+
+
 // ステートパターン処理
 void BasicEnemy::FuncStatePattern()
 {

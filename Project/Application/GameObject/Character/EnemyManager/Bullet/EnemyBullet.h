@@ -33,6 +33,9 @@ public: // メンバ関数
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	// プールに返却前のリセット処理
+	void Reset();
+
 #pragma region Accessor アクセッサ
 
 	// Type

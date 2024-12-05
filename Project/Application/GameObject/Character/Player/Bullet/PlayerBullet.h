@@ -15,7 +15,7 @@ class PlayerBullet : public IObject {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	PlayerBullet() { attribute_ = ObjAttribute::PLAYERBULLET; };
+	PlayerBullet() { attribute_ = { Attributes::Category::PLAYER, Attributes::Type::BULLET }; };
 	~PlayerBullet() {};
 
 	// 初期化処理　更新処理　描画処理

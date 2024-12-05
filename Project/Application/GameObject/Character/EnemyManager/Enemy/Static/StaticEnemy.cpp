@@ -85,7 +85,8 @@ void StaticEnemy::Draw2DBack() {}
 // 衝突判定コールバック関数
 void StaticEnemy::onCollision(IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;

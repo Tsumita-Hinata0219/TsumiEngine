@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Player() { attribute_ = ObjAttribute::PLAYER; }
+	Player() { attribute_ = { Attributes::Category::PLAYER, Attributes::Type::BODY }; }
 
 	/// <summary>
 	/// デストラクタ

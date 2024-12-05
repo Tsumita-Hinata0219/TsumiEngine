@@ -118,19 +118,21 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突自コールバック関数
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 		//// 押し出し処理
 		//trans_.UpdateMatrix();
 		//colComp_->Penetration(&trans_.srt.translate, sphere_);
 		//trans_.UpdateMatrix();
 	}
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BODY) {
 		//// 押し出し処理
 		//trans_.UpdateMatrix();
 		//colComp_->Penetration(&trans_.srt.translate, sphere_);
 		//trans_.UpdateMatrix();
 	}
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;

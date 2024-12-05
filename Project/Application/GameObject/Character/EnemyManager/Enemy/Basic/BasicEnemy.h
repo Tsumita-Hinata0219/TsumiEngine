@@ -20,7 +20,7 @@ class BasicEnemy : public IEnemy {
 public:
 
 	// コンストラクタとデストラクタ
-	BasicEnemy() { attribute_ = ObjAttribute::ENEMY; };
+	BasicEnemy() { attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BODY }; };
 	~BasicEnemy() {};
 
 	// 初期化処理　更新処理　描画処理

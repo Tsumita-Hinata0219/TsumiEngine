@@ -11,7 +11,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BarrierBox() { attribute_ = ObjAttribute::TERRAIN; }
+	BarrierBox() { attribute_ = { Attributes::Category::TERRAIN, Attributes::Type::SOLID }; }
 
 	/// <summary>
 	/// デストラクタ

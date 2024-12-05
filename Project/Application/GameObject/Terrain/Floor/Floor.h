@@ -12,7 +12,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Floor() { attribute_ = ObjAttribute::TERRAIN; }
+	Floor() { attribute_ = { Attributes::Category::TERRAIN, Attributes::Type::SOLID }; }
 
 	/// <summary>
 	/// デストラクタ

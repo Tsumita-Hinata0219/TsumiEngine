@@ -55,8 +55,8 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// ObjAttribute
-	ObjCategory GetCategory() const { return this->attribute_.first; }
-	ObjType GetType() const { return this->attribute_.second; }
+	Attributes::Category GetCategory() const { return this->attribute_.first; }
+	Attributes::Type GetType() const { return this->attribute_.second; }
 
 #pragma endregion 
 
@@ -67,6 +67,6 @@ protected: // メンバ変数
 	ModelManager* modelManager_ = nullptr;
 
 	// オブジェクトの属性
-	std::pair<ObjCategory, ObjType> attribute_ 
-		= { ObjCategory::OTHER, ObjType::OTHER };
+	std::pair<Attributes::Category, Attributes::Type> attribute_
+		= { Attributes::Category::OTHER, Attributes::Type::OTHER };
 };

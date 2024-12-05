@@ -14,7 +14,7 @@ class StaticEnemy : public IEnemy {
 public:
 
 	// コンストラクタ、デストラクタ
-	StaticEnemy() { attribute_ = ObjAttribute::ENEMY; };
+	StaticEnemy() { attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BODY }; };
 	~StaticEnemy() {};
 
 	// 初期化処理　更新処理　描画処理

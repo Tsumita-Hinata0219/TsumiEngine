@@ -180,14 +180,15 @@ void Player::Draw2DFront()
 /// </summary>
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
 		//// 押し出しの処理
 		//trans_.UpdateMatrix();
 		//colComp_->Penetration(&trans_.srt.translate, sphere_);
 		//trans_.UpdateMatrix();
 	}
-	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
+	if (object->GetCategory() == Attributes::Category::ENEMY && 
+		object->GetType() == Attributes::Type::BULLET) {
 
 		//OnCollisionWithEnemyBullet();
 	}

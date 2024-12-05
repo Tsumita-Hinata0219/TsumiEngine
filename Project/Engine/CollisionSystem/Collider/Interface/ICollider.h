@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../Structure/ColliderStructure.h"
-#include "../ColliderConfig.h"
+#include "GameObject/Config/AppComfig.h"
 #include <variant>
 #include <utility>
 
@@ -71,8 +71,8 @@ public:
 	virtual bool IsActive() const { return this->isActive_; }
 
 	// 属性
-	ObjCategory GetCategory() const { return this->attribute_.first; }
-	ObjType GetType() const { return this->attribute_.second; }
+	Attributes::Category GetCategory() const { return this->attribute_.first; }
+	Attributes::Type GetType() const { return this->attribute_.second; }
 
 #pragma endregion 
 
@@ -89,7 +89,7 @@ protected:
 	bool isActive_ = false;
 
 	// オブジェクトの属性
-	std::pair<ObjCategory, ObjType> attribute_
-		= { ObjCategory::OTHER, ObjType::OTHER };
+	std::pair<Attributes::Category, Attributes::Type> attribute_
+		= { Attributes::Category::OTHER, Attributes::Type::OTHER };
 };
 

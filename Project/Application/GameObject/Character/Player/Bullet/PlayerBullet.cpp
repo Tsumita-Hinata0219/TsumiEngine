@@ -73,8 +73,8 @@ void PlayerBullet::Draw2DBack() {}
 // 衝突自コールバック関数
 void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::ENEMY ||
-		object->GetAttribute() == ObjAttribute::TERRAIN) 
+	if (object->GetCategory() == Attributes::Category::ENEMY ||
+		object->GetCategory() == Attributes::Category::TERRAIN)
 	{
 		// 死亡状態に設定
 		MarkAsDead();

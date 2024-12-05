@@ -59,14 +59,6 @@ public: // メンバ関数
 
 #pragma endregion 
 
-#pragma region Collision 衝突判定
-
-	// 衝突自コールバック関数
-	void OnCollisionWithEnemy();
-	void OnCollisionWithEnemyBullet();
-
-#pragma endregion 
-
 
 private:
 
@@ -78,6 +70,9 @@ private:
 
 	// 寿命の処理
 	void RemoveAfterlifeTime();
+
+	// マークを死亡状態に設定
+	void MarkAsDead();
 
 
 private: // メンバ変数
@@ -99,6 +94,7 @@ private: // メンバ変数
 
 	// コライダー
 	//Col::Sphere sphere_;
+	std::unique_ptr<SphereCollider> sphere2_;
 
 	// 移動速度
 	Vector3 velocity_;

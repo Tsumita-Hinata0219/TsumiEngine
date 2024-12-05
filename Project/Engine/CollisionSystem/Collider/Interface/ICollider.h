@@ -30,6 +30,11 @@ public:
 	virtual void Update() = 0;
 
 	/// <summary>
+	/// コライダー無効化
+	/// </summary>
+	void Deactivate();
+
+	/// <summary>
 	/// 衝突判定
 	/// </summary>
 	virtual bool Intersects(const ICollider& other) = 0;
@@ -53,6 +58,9 @@ public:
 	virtual uint32_t GetAttribute() { return this->attribute_; }
 	virtual void ColliderAttribute(uint32_t setAttribute) { this->attribute_ = setAttribute; }
 
+	// アクティブ
+	virtual bool IsActive() const { return this->isActive_; }
+
 #pragma endregion 
 
 
@@ -66,6 +74,9 @@ protected:
 
 	// 属性
 	uint32_t attribute_ = 0;
+
+	// アクティブフラグ
+	bool isActive_ = false;
 
 };
 

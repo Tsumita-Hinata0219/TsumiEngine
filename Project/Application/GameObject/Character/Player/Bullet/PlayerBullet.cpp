@@ -30,6 +30,9 @@ void PlayerBullet::Init()
 	//colComp_->Register(sphere_);
 	//sphere_.center = trans_.GetWorldPos();
 	//sphere_.radius = 2.0f;
+	sphere2_ = std::make_unique<SphereCollider>(this);
+	sphere2_->data_.center = trans_.GetWorldPos();
+	sphere2_->data_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -53,6 +56,7 @@ void PlayerBullet::Update()
 
 	// ColliderのSRTの設定
 	//sphere_.center = trans_.GetWorldPos();
+	sphere2_->data_.center = trans_.GetWorldPos();
 }
 
 
@@ -70,18 +74,13 @@ void PlayerBullet::Draw2DBack() {}
 void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 {
 	if (object->GetAttribute() == ObjAttribute::ENEMY ||
-		object->GetAttribute() == ObjAttribute::TERRAIN) {
-		isDead_ = true;
+		object->GetAttribute() == ObjAttribute::TERRAIN) 
+	{
+		// 死亡状態に設定
+		MarkAsDead();
 	}
 }
-void PlayerBullet::OnCollisionWithEnemy()
-{
-	isDead_ = true;
-}
-void PlayerBullet::OnCollisionWithEnemyBullet()
-{
-	isDead_ = true;
-}
+
 
 // 移動処理
 void PlayerBullet::Move()
@@ -106,10 +105,20 @@ void PlayerBullet::RemoveAfterlifeTime()
 	// タイマーが規定値になったら
 	if (life_.IsFinish()) {
 
-		// 死亡フラグを立てる
-		isDead_ = true;
+		// 死亡状態に設定
+		MarkAsDead();
 
 		// 寿命のタイマーをクリアしとく
 		life_.Clear();
 	}
+}
+
+
+// マークを死亡状態に設定
+void PlayerBullet::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
+	// コライダーを無効化
+	sphere2_->Deactivate();
 }

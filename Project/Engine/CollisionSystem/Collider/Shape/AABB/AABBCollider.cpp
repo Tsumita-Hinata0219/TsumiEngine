@@ -17,6 +17,17 @@ AABBCollider::AABBCollider(IObject* setOwner)
 
 
 /// <summary>
+/// 更新処理
+/// </summary>
+void AABBCollider::Update()
+{
+	// min と max を求める
+	data_.min = data_.center - (data_.size / 2.0f);
+	data_.max = data_.center + (data_.size / 2.0f);
+}
+
+
+/// <summary>
 /// 衝突判定
 /// </summary>
 bool AABBCollider::Intersects(const ICollider& other)

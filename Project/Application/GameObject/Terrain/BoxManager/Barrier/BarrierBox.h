@@ -70,7 +70,7 @@ private:
 	Transform trans_{};
 
 	// コライダー
-	std::unique_ptr<SphereCollider> sphere_;
+	std::unique_ptr<AABBCollider> aabb_;
 
 };
 

@@ -43,6 +43,11 @@ public:
 	void Deactivate();
 
 	/// <summary>
+	/// 更新処理
+	/// </summary>
+	virtual void Update() = 0;
+
+	/// <summary>
 	/// 衝突判定
 	/// </summary>
 	virtual bool Intersects(const ICollider& other) = 0;

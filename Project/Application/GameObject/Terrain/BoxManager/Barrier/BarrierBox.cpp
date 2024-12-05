@@ -21,9 +21,9 @@ void BarrierBox::Init()
 	trans_.Init();
 
 	// Colliderの初期化
-	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	aabb_ = std::make_unique<AABBCollider>(this);
+	aabb_->data_.center = trans_.GetWorldPos();
+	aabb_->data_.size = { 2.0f, 2.0f,2.0f };
 }
 
 
@@ -33,7 +33,8 @@ void BarrierBox::Init()
 void BarrierBox::Update()
 {
 	// ColliderのSRTの設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	aabb_->data_.center = trans_.GetWorldPos();
+	aabb_->Update();
 }
 
 

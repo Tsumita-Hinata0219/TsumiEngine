@@ -8,6 +8,7 @@
 
 #include "../Collider/Interface/ICollider.h"
 #include "../Collider/Shape/Sphere/SphereCollider.h"
+#include "../Collider/Shape/AABB/AABBCollider.h"
 
 #include <list>
 #include <vector>

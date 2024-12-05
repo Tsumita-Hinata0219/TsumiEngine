@@ -6,7 +6,7 @@
 #include <array>
 
 
-namespace GeometryCollision {
+namespace Geometry {
 
 	// OBBのワールドマトリックス作成
 	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb);
@@ -24,7 +24,7 @@ namespace GeometryCollision {
 	//OBB SettingOBBProperties(OBBCollider* c);
 
 	// AABBの設定
-	Collider::AABB SettingAABBProperties(const Collider::AABB& c);
+	//Collider::AABB SettingAABBPrope(const Collider::AABB& c);
 
 	// Capsuleの設定
 	Capsule SettingCapusulePropertirs();

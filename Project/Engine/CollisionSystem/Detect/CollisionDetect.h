@@ -25,12 +25,9 @@ namespace Detect {
 	// AABBとAABBの当たり判定
 	inline bool Intersects(const Collider::AABB& aabb1, const Collider::AABB& aabb2)
 	{
-		Collider::AABB col1 = GeometryCollision::SettingAABBProperties(aabb1);
-		Collider::AABB col2 = GeometryCollision::SettingAABBProperties(aabb2);
-
-		if ((col1.min.x <= col2.max.x && col1.max.x >= col2.min.x) &&
-			(col1.min.y <= col2.max.y && col1.max.y >= col2.min.y) &&
-			(col1.min.z <= col2.max.z && col1.max.z >= col2.min.z)
+		if ((aabb1.min.x <= aabb2.max.x && aabb1.max.x >= aabb2.min.x) &&
+			(aabb1.min.y <= aabb2.max.y && aabb1.max.y >= aabb2.min.y) &&
+			(aabb1.min.z <= aabb2.max.z && aabb1.max.z >= aabb2.min.z)
 			) {
 
 			// 当たっている
@@ -42,13 +39,11 @@ namespace Detect {
 	// AABBと球の当たり判定
 	inline bool Intersects(const Collider::AABB& a, const Collider::Sphere& s)
 	{
-		Collider::AABB aabb = GeometryCollision::SettingAABBProperties(a);
-
 		// 最近接点を求める
 		const Vector3 ClosestPoint = {
-			std::clamp(s.center.x, aabb.min.x, aabb.max.x),
-			std::clamp(s.center.y, aabb.min.y, aabb.max.y),
-			std::clamp(s.center.z, aabb.min.z, aabb.max.z), };
+			std::clamp(s.center.x, a.min.x, a.max.x),
+			std::clamp(s.center.y, a.min.y, a.max.y),
+			std::clamp(s.center.z, a.min.z, a.max.z), };
 
 		// 最近接点と球の中心と距離を求める
 		float dist = Length(ClosestPoint - s.center);

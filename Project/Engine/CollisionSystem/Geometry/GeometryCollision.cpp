@@ -1,7 +1,7 @@
 #include "GeometryCollision.h"
 
 
-namespace GeometryCollision {
+namespace Geometry {
 
 	// OBBのワールドマトリックス作成
 	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb) {
@@ -104,10 +104,7 @@ namespace GeometryCollision {
 	//}
 
 	// AABBの設定
-	Collider::AABB SettingAABBProperties(const Collider::AABB& a) {
-		Collider::AABB result{};
-		result.min = a.center - (a.size / 2.0f);
-		result.max = a.center + (a.size / 2.0f);
-		return result;
-	}
+	/*Collider::AABB SettingAABBPrope(const Collider::AABB& a) {
+		
+	}*/
 }

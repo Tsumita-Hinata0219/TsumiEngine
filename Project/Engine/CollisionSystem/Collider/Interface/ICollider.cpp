@@ -7,15 +7,17 @@
 /// </summary>
 ICollider::ICollider() 
 {
-	// マネージャーに自身のポインタを登録
+	// マネージャーにインスタンス取得し登録
 	manager_ = CollisionManager::GetInstance();
 	manager_->Register(this);
-
 	// アクティブにする
 	isActive_ = true;
 }
 
 
+/// <summary>
+/// 仮想デストラク
+/// </summary>
 ICollider::~ICollider() 
 {
 	// 死ぬときにマネージャーに死んだことを報告し

@@ -9,3 +9,4 @@ IObject::IObject()
 {
 	modelManager_ = ModelManager::GetInstance();
 }
+

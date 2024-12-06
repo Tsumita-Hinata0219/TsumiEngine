@@ -116,18 +116,11 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突自コールバック関数
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
+	// 地形は押し出し
 	if (object->GetCategory() == Attributes::Category::TERRAIN) {
-		//// 押し出し処理
-		//trans_.UpdateMatrix();
-		//colComp_->Penetration(&trans_.srt.translate, sphere_);
-		//trans_.UpdateMatrix();
-	}
-	if (object->GetCategory() == Attributes::Category::PLAYER &&
-		object->GetType() == Attributes::Type::BODY) {
-		//// 押し出し処理
-		//trans_.UpdateMatrix();
-		//colComp_->Penetration(&trans_.srt.translate, sphere_);
-		//trans_.UpdateMatrix();
+		// 押し出しの処理
+		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
+		trans_.UpdateMatrix();
 	}
 	if (object->GetCategory() == Attributes::Category::PLAYER &&
 		object->GetType() == Attributes::Type::BULLET) {

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Collider/ColliderConfig.h"
-#include "../Detect/CollisionDetect.h"
-
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
+
+#include "../Detect/CollisionDetect.h"
+#include "../Penetration/CollisionPenetration.h"
 
 #include "../Collider/Interface/ICollider.h"
 #include "../Collider/Shape/Sphere/SphereCollider.h"

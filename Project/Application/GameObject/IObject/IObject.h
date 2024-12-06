@@ -52,11 +52,17 @@ public: // メンバ関数
     /// </summary>
     virtual void onCollision([[maybe_unused]] IObject* object) = 0;
 
+
 #pragma region Accessor アクセッサ
 
 	// ObjAttribute
 	Attributes::Category GetCategory() const { return this->attribute_.first; }
 	Attributes::Type GetType() const { return this->attribute_.second; }
+
+	// 衝突相手のコライダーデータ
+	void SetHitCollider(const ICollider::ColliderDataType& setCollider) {
+		this->hitCollider_ = setCollider;
+	}
 
 #pragma endregion 
 
@@ -69,4 +75,7 @@ protected: // メンバ変数
 	// オブジェクトの属性
 	std::pair<Attributes::Category, Attributes::Type> attribute_
 		= { Attributes::Category::OTHER, Attributes::Type::OTHER };
+
+	// 衝突相手のコライダーデータ
+	ICollider::ColliderDataType hitCollider_{};
 };

@@ -84,8 +84,8 @@ void GameScene::Initialize()
 
 	// ──────── EnemyManager
 	enemyManager_->Init();
-	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
-	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 
 	// ──────── SceneTransition
 	STMenuManager_->Init();

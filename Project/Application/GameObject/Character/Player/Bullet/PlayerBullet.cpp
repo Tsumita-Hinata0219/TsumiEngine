@@ -51,7 +51,6 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	//sphere_.center = trans_.GetWorldPos();
 	sphere_->data_.center = trans_.GetWorldPos();
 }
 

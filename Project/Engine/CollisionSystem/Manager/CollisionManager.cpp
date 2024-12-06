@@ -84,8 +84,11 @@ void CollisionManager::CheckCollisions()
 
 			// 衝突判定をとる
 			if ((*itr1)->Intersects((**itr2))) {
-				// 衝突したら各コライダーが持つオーナーの
-				// onCollision関数を呼び出して、衝突相手のownerを送る
+
+				// オーナーに衝突相手のコライダーデータを送る
+				(*itr1)->GetOwner()->SetHitCollider((*itr2)->GetData());
+				(*itr2)->GetOwner()->SetHitCollider((*itr1)->GetData());
+				// オーナーのonCollision関数を呼び出して、衝突相手のownerを送る
 				(*itr1)->GetOwner()->onCollision((*itr2)->GetOwner());
 				(*itr2)->GetOwner()->onCollision((*itr1)->GetOwner());
 			}

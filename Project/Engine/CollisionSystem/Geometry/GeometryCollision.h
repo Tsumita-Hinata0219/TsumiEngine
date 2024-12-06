@@ -1,17 +1,12 @@
 #pragma once
 
-#include "../Structure/CollisionStructures.h"
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
-#include "../Collider/Box/AABBCollider.h"
-#include "../Collider/Box/OBBCollider.h"
-#include "../Collider/Segment/SegmentCollider.h"
 #include "Math/MyMath.h"
+#include "../Collider/Structure/ColliderStructure.h"
 
 #include <array>
 
 
-namespace GeometryCollision {
+namespace Geometry {
 
 	// OBBのワールドマトリックス作成
 	Matrix4x4 CreateOBBWorldMatrix(const OBB& obb);
@@ -25,11 +20,11 @@ namespace GeometryCollision {
 	// 頂点を軸に射影
 	std::pair<float, float> obbProjection(const OBB& obb, const Vector3& axis);
 
-	// OBBの設定
-	OBB SettingOBBProperties(OBBCollider* c);
+	//// OBBの設定
+	//OBB SettingOBBProperties(OBBCollider* c);
 
 	// AABBの設定
-	AABB SettingAABBProperties(AABBCollider* c);
+	//Collider::AABB SettingAABBPrope(const Collider::AABB& c);
 
 	// Capsuleの設定
 	Capsule SettingCapusulePropertirs();

@@ -54,11 +54,11 @@ void Player::Init()
 	// BulletのObjectPoolを先に作っておく
 	bulletPool_.Create(50);
 
-	// Colliderの登録
-	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	// Colliderの初期化
+	aabb_ = std::make_unique<AABBCollider>(this);
+	aabb_->data_.center = trans_.GetWorldPos();
+	aabb_->data_.size = { 2.0f, 2.0f, 2.0f };
+
 
 	// キルカウントを0で初期化
 	killCount_ =0;
@@ -98,6 +98,8 @@ void Player::Update()
 	// 死亡フラグが立っていたら削除
 	bulletList_.remove_if([this](PlayerBullet* bullet) {
 		if (bullet->IsDead()) {
+			// 返却する前にリセット処理を入れておく
+			bullet->Reset();
 			// 死亡したバレットをプールに返却
 			bulletPool_.Return(bullet);
 			return true;
@@ -107,7 +109,9 @@ void Player::Update()
 	);
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	aabb_->data_.center = trans_.GetWorldPos();
+	aabb_->Update();
+
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
 	if (killCount_ >= MaxKillCount_) {
@@ -174,14 +178,17 @@ void Player::Draw2DFront()
 /// </summary>
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+	// 地形もしくは敵ボディは押し出し
+	if (object->GetCategory() == Attributes::Category::TERRAIN || 
+		object->GetCategory() == Attributes::Category::ENEMY &&
+		object->GetType() == Attributes::Type::BODY) {
 
-		// 押し出しの処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
+		//// 押し出しの処理
+		trans_.srt.translate += Penetration::Execute(aabb_->GetData(), IObject::hitCollider_);
 		trans_.UpdateMatrix();
 	}
-	if (object->GetAttribute() == ObjAttribute::ENEMYBULLET) {
+	if (object->GetCategory() == Attributes::Category::ENEMY && 
+		object->GetType() == Attributes::Type::BULLET) {
 
 		//OnCollisionWithEnemyBullet();
 	}

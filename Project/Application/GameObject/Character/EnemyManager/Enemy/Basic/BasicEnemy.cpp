@@ -40,11 +40,10 @@ void BasicEnemy::Init()
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Enter(this);
 
-	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	// Colliderの初期化
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 }
 
 
@@ -89,9 +88,8 @@ void BasicEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	//collider_->SetSrt(trans_.srt);
-	sphere_.center = trans_.GetWorldPos();
-	/*colComp_->UpdateShape(sphere_);*/
+	sphere_->data_.center = trans_.GetWorldPos();
+
 
 #ifdef _DEBUG
 
@@ -118,26 +116,22 @@ void BasicEnemy::Draw2DBack() {}
 // 衝突自コールバック関数
 void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::TERRAIN) {
-		// 押し出し処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
-		trans_.UpdateMatrix();
-	}
-	if (object->GetAttribute() == ObjAttribute::PLAYER) {
-		// 押し出し処理
-		trans_.UpdateMatrix();
-		colComp_->Penetration(&trans_.srt.translate, sphere_);
+	// 地形は押し出し
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
+		// 押し出しの処理
+		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
 		trans_.UpdateMatrix();
 	}
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
-			isDead_ = true;
+			// 死亡状態に設定
+			MarkAsDead();
 			player_->AddKillCount();
 		}
 	}
@@ -157,6 +151,16 @@ void BasicEnemy::OnCollisionWithPlayerBullet()
 		// プレイヤーのキルカウントを加算する
 		player_->AddKillCount();
 	}
+}
+
+
+/// <summary>
+/// プールに返却前のリセット処理
+/// </summary>
+void BasicEnemy::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
 }
 
 
@@ -283,5 +287,13 @@ void BasicEnemy::CreateNewBullet()
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
+}
+
+
+// マークを死亡状態に設定
+void BasicEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }
 

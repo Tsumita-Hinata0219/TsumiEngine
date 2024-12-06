@@ -19,10 +19,9 @@ void StaticEnemy::Init()
 	light_.direction = Vector3::one;
 
 	// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f * trans_.srt.scale.x;
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -57,7 +56,7 @@ void StaticEnemy::Update()
 	);
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG
@@ -85,17 +84,29 @@ void StaticEnemy::Draw2DBack() {}
 // 衝突判定コールバック関数
 void StaticEnemy::onCollision(IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
-			isDead_ = true;
+			// 死亡状態に設定
+			MarkAsDead();
 			player_->AddKillCount();
 		}
 	}
+}
+
+
+/// <summary>
+/// プールに返却前のリセット処理
+/// </summary>
+void StaticEnemy::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
 }
 
 
@@ -141,4 +152,12 @@ void StaticEnemy::CreateNewBullet2()
 	initVel.z = -kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Resistant, initPos, initVel);
+}
+
+
+// マークを死亡状態に設定
+void StaticEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }

@@ -14,7 +14,7 @@ class StaticEnemy : public IEnemy {
 public:
 
 	// コンストラクタ、デストラクタ
-	StaticEnemy() { attribute_ = ObjAttribute::ENEMY; };
+	StaticEnemy() { attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BODY }; };
 	~StaticEnemy() {};
 
 	// 初期化処理　更新処理　描画処理
@@ -26,6 +26,11 @@ public:
 
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
+
+	/// <summary>
+	/// プールに返却前のリセット処理
+	/// </summary>
+	void Reset() override;
 
 
 #pragma region Accessor アクセッサ
@@ -40,10 +45,6 @@ public:
 
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
-
-	// エネミーマネージャー
-	void SetEnemyManager(EnemyManager* setManager) override { this->enemyManager_ = setManager; }
-
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
@@ -79,14 +80,13 @@ private:
 	void CreateNewBullet();
 	void CreateNewBullet2();
 
+	// マークを死亡状態に設定
+	void MarkAsDead();
 
 private:
 
 	// プレイヤー
 	Player* player_ = nullptr;
-
-	// エネミーマネージャー
-	EnemyManager* enemyManager_ = nullptr;
 
 	// Model
 	std::unique_ptr<Model> model_;
@@ -104,8 +104,7 @@ private:
 	DirectionalLightData light_{};
 
 	// コライダー
-	//std::unique_ptr<OBBCollider> collider_;
-	Col::Sphere sphere_;
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;

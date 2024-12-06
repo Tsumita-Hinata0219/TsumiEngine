@@ -27,3 +27,4 @@
 #include <string>
 #include <optional>
 #include <map>
+#include <typeindex>

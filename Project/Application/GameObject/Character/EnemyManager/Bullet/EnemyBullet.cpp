@@ -25,11 +25,10 @@ void EnemyBullet::Init()
 	life_.Init(0.0f, 3.0f * 60.0f);
 	life_.Start();
 
-	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Enemy);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	// Colliderの初期化
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -49,7 +48,8 @@ void EnemyBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
+
 }
 
 
@@ -65,18 +65,27 @@ void EnemyBullet::Draw2DBack() {}
 // 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::PLAYER || 
-		object->GetAttribute() == ObjAttribute::PLAYERBULLET) {
+	if (object->GetCategory() == Attributes::Category::PLAYER) {
 
 		// タイプが消えない弾ならreturn
 		if (bulletType_ == EnemyBulletType::Resistant) { return; }
-		isDead_ = true;
+		// 死亡状態に設定
+		MarkAsDead();
 	}
-	else if (object->GetAttribute() == ObjAttribute::TERRAIN) {
+	else if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
 		// 衝突相手が地形ならタイプ構わずフラグを立てる
-		isDead_ = true;
+		// 死亡状態に設定
+		MarkAsDead();
 	}
+}
+
+
+// プールに返却前のリセット処理
+void EnemyBullet::Reset()
+{
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
 }
 
 
@@ -96,10 +105,17 @@ void EnemyBullet::RemoveAfterlifeTime()
 	// タイマーが規定値になったら
 	if (life_.IsFinish()) {
 
-		// 死亡フラグを立てる
-		isDead_ = true;
-
+		// 死亡状態に設定
+		MarkAsDead();
 		// 寿命のタイマーをクリアしとく
 		life_.Clear();
 	}
+}
+
+
+// マークを死亡状態に設定
+void EnemyBullet::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }

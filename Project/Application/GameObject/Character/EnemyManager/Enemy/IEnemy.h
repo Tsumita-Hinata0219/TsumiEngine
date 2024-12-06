@@ -20,8 +20,20 @@ class IEnemy : public IObject {
 
 public:
 
-	// 仮想デストラクタ
+	/// <summary>
+	/// 仮想デストラクタ
+	/// </summary>
 	virtual ~IEnemy() = default;
+
+	/// <summary>
+	/// Bulletを新しく追加
+	/// </summary>
+	void AddNewBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
+
+	/// <summary>
+	/// プールに返却前のリセット処理
+	/// </summary>
+	virtual void Reset() = 0;
 
 
 #pragma region Accessor アクセッサ
@@ -30,7 +42,7 @@ public:
 	virtual void SetPlayer(Player* setPlayer) = 0;
 
 	// EnemyManagerの設定
-	virtual void SetEnemyManager(EnemyManager* setManager) = 0;
+	virtual void SetEnemyManager(EnemyManager* setManager) { this->enemyManager_ = setManager; }
 
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
@@ -55,5 +67,11 @@ public:
 	virtual uint32_t GetHP() = 0;
 
 #pragma endregion 
+
+
+protected:
+
+	// 親ポインタ
+	EnemyManager* enemyManager_ = nullptr;
 	
 };

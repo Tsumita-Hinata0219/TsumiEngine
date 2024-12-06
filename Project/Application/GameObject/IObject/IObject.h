@@ -5,14 +5,14 @@
 #include "3D/Model/Model.h"
 #include "3D/Model/ModelManager/ModelManager.h"
 #include "Transform/Transform.h"
-#include "CollisionSystem/Collider/Collider.h"
 
-#include "CollisionSystem/Component/CollisionComponent.h"
-
+#include "CollisionSystem/Manager/CollisionManager.h"
 
 #include <unordered_set>
 
 
+// 前方宣言
+class ICollider;
 
 
 /* オブジェクトの基底クラス */
@@ -20,33 +20,49 @@ class IObject {
 
 public: // メンバ関数
 
-	// コンストラクタ
-	IObject() { 
-		modelManager_ = ModelManager::GetInstance();
-		colComp_ = std::make_unique<CollisionComponent>(this); // コライダーの登録
-	}
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	IObject();
 
-	// 仮想デストラクタ
+	/// <summary>
+	/// 仮想デストラクタ
+	/// </summary>
 	virtual ~IObject() {};
 
-	// 初期化、更新、描画
+	/// <summary>
+	/// 初期化処理 : 純粋仮想関数
+	/// </summary>
 	virtual void Init() = 0;
+
+	/// <summary>
+	/// 更新処理 : 純粋仮想関数
+	/// </summary>
 	virtual void Update() = 0;
+
+	/// <summary>
+	/// 描画処理 : 純粋仮想関数
+	/// </summary>
 	virtual void Draw3D() = 0;
 	virtual void Draw2DFront() = 0;
 	virtual void Draw2DBack() = 0;
 
-    // 衝突時コールバック関数
+    /// <summary>
+    /// 衝突時コールバック関数
+    /// </summary>
     virtual void onCollision([[maybe_unused]] IObject* object) = 0;
 
 
 #pragma region Accessor アクセッサ
 
-	// CollisionComponent
-	CollisionComponent* GetColComponent() const { return this->colComp_.get(); }
-
 	// ObjAttribute
-	ObjAttribute GetAttribute() const { return this->attribute_; }
+	Attributes::Category GetCategory() const { return this->attribute_.first; }
+	Attributes::Type GetType() const { return this->attribute_.second; }
+
+	// 衝突相手のコライダーデータ
+	void SetHitCollider(const ICollider::ColliderDataType& setCollider) {
+		this->hitCollider_ = setCollider;
+	}
 
 #pragma endregion 
 
@@ -56,10 +72,10 @@ protected: // メンバ変数
 	// ModelManager
 	ModelManager* modelManager_ = nullptr;
 
-	// コライダー
-	std::unique_ptr<CollisionComponent> colComp_;
-
 	// オブジェクトの属性
-	ObjAttribute attribute_ = ObjAttribute::OTHER;
-};
+	std::pair<Attributes::Category, Attributes::Type> attribute_
+		= { Attributes::Category::OTHER, Attributes::Type::OTHER };
 
+	// 衝突相手のコライダーデータ
+	ICollider::ColliderDataType hitCollider_{};
+};

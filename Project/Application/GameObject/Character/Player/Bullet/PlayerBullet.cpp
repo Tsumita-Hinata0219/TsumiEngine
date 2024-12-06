@@ -25,11 +25,10 @@ void PlayerBullet::Init()
 	light_.enable = true;
 	light_.direction = Vector3::one;
 
-	//// Colliderの初期化
-	colComp_->SetAttribute(ColliderAttribute::Player);
-	colComp_->Register(sphere_);
-	sphere_.center = trans_.GetWorldPos();
-	sphere_.radius = 2.0f;
+	// Colliderの初期化
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 2.0f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -52,7 +51,7 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_.center = trans_.GetWorldPos();
+	sphere_->data_.center = trans_.GetWorldPos();
 }
 
 
@@ -69,19 +68,22 @@ void PlayerBullet::Draw2DBack() {}
 // 衝突自コールバック関数
 void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetAttribute() == ObjAttribute::ENEMY ||
-		object->GetAttribute() == ObjAttribute::TERRAIN) {
-		isDead_ = true;
+	if (object->GetCategory() == Attributes::Category::ENEMY ||
+		object->GetCategory() == Attributes::Category::TERRAIN)
+	{
+		// 死亡状態に設定
+		MarkAsDead();
 	}
 }
-void PlayerBullet::OnCollisionWithEnemy()
+
+
+// プールに返却前のリセット処理
+void PlayerBullet::Reset()
 {
-	isDead_ = true;
+	// コライダーを無効にしておく
+	sphere_->Deactivate();
 }
-void PlayerBullet::OnCollisionWithEnemyBullet()
-{
-	isDead_ = true;
-}
+
 
 // 移動処理
 void PlayerBullet::Move()
@@ -106,10 +108,18 @@ void PlayerBullet::RemoveAfterlifeTime()
 	// タイマーが規定値になったら
 	if (life_.IsFinish()) {
 
-		// 死亡フラグを立てる
-		isDead_ = true;
+		// 死亡状態に設定
+		MarkAsDead();
 
 		// 寿命のタイマーをクリアしとく
 		life_.Clear();
 	}
+}
+
+
+// マークを死亡状態に設定
+void PlayerBullet::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }

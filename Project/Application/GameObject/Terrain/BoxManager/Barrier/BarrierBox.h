@@ -11,7 +11,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	BarrierBox() { attribute_ = ObjAttribute::TERRAIN; }
+	BarrierBox() { attribute_ = { Attributes::Category::TERRAIN, Attributes::Type::SOLID }; }
 
 	/// <summary>
 	/// デストラクタ
@@ -70,8 +70,7 @@ private:
 	Transform trans_{};
 
 	// コライダー
-	Col::AABB aabb_{};
-	Col::Sphere sphere_{};
+	std::unique_ptr<AABBCollider> aabb_;
 
 };
 

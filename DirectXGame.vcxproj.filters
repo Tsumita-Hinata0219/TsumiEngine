@@ -199,23 +199,7 @@
     <ClCompile Include="Project\Engine\CollisionSystem\Manager\CollisionManager.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\CollisionShape.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Component\CollisionComponent.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\System\CollisionSystem.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Event\CollisionEvent.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\ColEventManager\ColEventManager.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\Listener\CollisionListener.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Octree.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.cpp" />
-    <ClCompile Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.cpp" />
     <ClCompile Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Project\Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
@@ -252,6 +236,11 @@
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp" />
+    <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
+    <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -425,31 +414,9 @@
     <ClInclude Include="Project\Engine\CollisionSystem\Manager\CollisionManager.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\IsCollision\IsCollision.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Geometry\GeometryCollision.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Box\AABBCollider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Capsule\CapsuleCollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\ColliderConfig.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Box\OBBCollider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Segment\SegmentCollider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Sphere\SphereCollider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Collider.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\CollisionShape.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\Sphere\CollisionShapeSphere.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Shape\AABB\CollisionShapeAABB.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Component\CollisionComponent.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\System\CollisionSystem.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Event\CollisionEvent.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\ColEventManager\ColEventManager.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\Listener\CollisionListener.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Detect\CollisionDetect.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Util\CollisionUtilities.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\QuadTree.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Node\QuadTreeNode.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Object\QuadTreeObject.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\QuadTree\Space\QuadTreeSpace.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Octree.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Space\OctreeSpace.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Object\OctreeObject.h" />
-    <ClInclude Include="Project\Engine\CollisionSystem\SpatialPartition\Tree\Octree\Node\OctreeNode.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h" />
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
@@ -494,6 +461,10 @@
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Structure\ColliderStructure.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
+    <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

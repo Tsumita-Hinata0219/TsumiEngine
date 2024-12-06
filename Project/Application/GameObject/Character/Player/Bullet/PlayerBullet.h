@@ -15,7 +15,7 @@ class PlayerBullet : public IObject {
 public: // メンバ関数
 
 	// コンストラクタ、デストラクタ
-	PlayerBullet() { attribute_ = ObjAttribute::PLAYERBULLET; };
+	PlayerBullet() { attribute_ = { Attributes::Category::PLAYER, Attributes::Type::BULLET }; };
 	~PlayerBullet() {};
 
 	// 初期化処理　更新処理　描画処理
@@ -27,6 +27,9 @@ public: // メンバ関数
 
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
+
+	// プールに返却前のリセット処理
+	void Reset();
 
 #pragma region Accessor アクセッサ
 
@@ -59,14 +62,6 @@ public: // メンバ関数
 
 #pragma endregion 
 
-#pragma region Collision 衝突判定
-
-	// 衝突自コールバック関数
-	void OnCollisionWithEnemy();
-	void OnCollisionWithEnemyBullet();
-
-#pragma endregion 
-
 
 private:
 
@@ -78,6 +73,9 @@ private:
 
 	// 寿命の処理
 	void RemoveAfterlifeTime();
+
+	// マークを死亡状態に設定
+	void MarkAsDead();
 
 
 private: // メンバ変数
@@ -98,7 +96,8 @@ private: // メンバ変数
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 
 	// コライダー
-	Col::Sphere sphere_;
+	//Col::Sphere sphere_;
+	std::unique_ptr<SphereCollider> sphere_;
 
 	// 移動速度
 	Vector3 velocity_;

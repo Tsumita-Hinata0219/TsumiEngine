@@ -1,53 +1,53 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "../Shape/CollisionShape.h"
+#include "../Collider/Structure/ColliderStructure.h"
 
 
 namespace ColUtil {
 
 	// OBBのワールドマトリックス作成
-	Matrix4x4 CreateOBBWorldMatrix(const Col::OBB& obb);
+	Matrix4x4 CreateOBBWorldMatrix(const Collider::OBB& obb);
 
 	// 射影の重複チェック
-	bool TestAxis(const Vector3& axis, const Col::OBB& obb1, const Col::OBB& obb2);
+	bool TestAxis(const Vector3& axis, const Collider::OBB& obb1, const Collider::OBB& obb2);
 
 	// 実際に重なってるかの計算
 	bool projectionOverlap(const std::pair<float, float>& projection1, const std::pair<float, float>& projection2);
 
 	// 頂点を軸に射影
-	std::pair<float, float> OBBProjection(const Col::OBB& obb, const Vector3& axis);
+	std::pair<float, float> OBBProjection(const Collider::OBB& obb, const Vector3& axis);
 
 	// OBBの設定
-	Col::OBB SettingOBBProperties(Col::OBB& obb);
+	Collider::OBB SettingOBBProperties(Collider::OBB& obb);
 
 	// AABBの設定
-	//Col::AABB SettingAABBProperties(Col::AABB& aabb);
+	Collider::AABB SettingAABBProperties(Collider::AABB& aabb);
 
 	// Capsuleの設定
-	//Col::Sphere SettingCapusulePropertirs();
+	//Collider::Sphere SettingCapusulePropertirs();
 
 	// コライダー間の最寄点を計算する関数
-	Vector3 GetClosestPoint(const Col::Sphere& sphere, const Vector3& point);
-	Vector3 GetClosestPoint(const Col::AABB& aabb, const Vector3& point);
-	Vector3 GetClosestPoint(const Col::OBB& obb, const Vector3& point);
-	Vector3 GetClosestPoint(const Col::Segment& segment, const Vector3& point);
-	Vector3 GetClosestPoint(const Col::Capsule& capsule, const Vector3& point);
+	Vector3 GetClosestPoint(const Collider::Sphere& sphere, const Vector3& point);
+	Vector3 GetClosestPoint(const Collider::AABB& aabb, const Vector3& point);
+	Vector3 GetClosestPoint(const Collider::OBB& obb, const Vector3& point);
+	Vector3 GetClosestPoint(const Collider::Segment& segment, const Vector3& point);
+	Vector3 GetClosestPoint(const Collider::Capsule& capsule, const Vector3& point);
 
 	// コライダー間の交差時に押し出すためのベクトルを計算する関数
-	Vector3 GetPenetrationPush(const Col::Sphere& sphere1, const Col::Sphere& sphere2);
-	Vector3 GetPenetrationPush(const Col::Sphere& sphere, const Col::AABB& aabb);
-	Vector3 GetPenetrationPush(const Col::Sphere& sphere, const Col::OBB& obb);
-	Vector3 GetPenetrationPush(const Col::AABB& aabb1, const Col::AABB& aabb2);
-	Vector3 GetPenetrationPush(const Col::AABB& aabb, const Col::Sphere& sphere);
-	Vector3 GetPenetrationPush(const Col::AABB& aabb, const Col::OBB& obb);
-	Vector3 GetPenetrationPush(const Col::OBB& obb1, const Col::OBB& obb2);
-	Vector3 GetPenetrationPush(const Col::OBB& obb, const Col::Sphere& sphere);
-	Vector3 GetPenetrationPush(const Col::OBB& obb, const Col::AABB& aabb);
-	Vector3 GetPenetrationPush(const Col::Segment& segment, const Col::Sphere& sphere);
-	Vector3 GetPenetrationPush(const Col::Capsule& capsule, const Col::Sphere& sphere);
-	Vector3 GetPenetrationPush(const Col::Segment& segment, const Col::AABB& aabb);
-	Vector3 GetPenetrationPush(const Col::Capsule& capsule, const Col::AABB& aabb);
-	Vector3 GetPenetrationPush(const Col::Capsule& capsule1, const Col::Capsule& capsule2);
-	Vector3 GetPenetrationPush(const Col::Segment& segment1, const Col::Segment& segment2);
+	Vector3 GetPenetrationPush(const Collider::Sphere& sphere1, const Collider::Sphere& sphere2);
+	Vector3 GetPenetrationPush(const Collider::Sphere& sphere, const Collider::AABB& aabb);
+	Vector3 GetPenetrationPush(const Collider::Sphere& sphere, const Collider::OBB& obb);
+	Vector3 GetPenetrationPush(const Collider::AABB& aabb1, const Collider::AABB& aabb2);
+	Vector3 GetPenetrationPush(const Collider::AABB& aabb, const Collider::Sphere& sphere);
+	Vector3 GetPenetrationPush(const Collider::AABB& aabb, const Collider::OBB& obb);
+	Vector3 GetPenetrationPush(const Collider::OBB& obb1, const Collider::OBB& obb2);
+	Vector3 GetPenetrationPush(const Collider::OBB& obb, const Collider::Sphere& sphere);
+	Vector3 GetPenetrationPush(const Collider::OBB& obb, const Collider::AABB& aabb);
+	Vector3 GetPenetrationPush(const Collider::Segment& segment, const Collider::Sphere& sphere);
+	Vector3 GetPenetrationPush(const Collider::Capsule& capsule, const Collider::Sphere& sphere);
+	Vector3 GetPenetrationPush(const Collider::Segment& segment, const Collider::AABB& aabb);
+	Vector3 GetPenetrationPush(const Collider::Capsule& capsule, const Collider::AABB& aabb);
+	Vector3 GetPenetrationPush(const Collider::Capsule& capsule1, const Collider::Capsule& capsule2);
+	Vector3 GetPenetrationPush(const Collider::Segment& segment1, const Collider::Segment& segment2);
 }

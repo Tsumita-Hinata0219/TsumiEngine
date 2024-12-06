@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	Player() { attribute_ = ObjAttribute::PLAYER; }
+	Player() { attribute_ = { Attributes::Category::PLAYER, Attributes::Type::BODY }; }
 
 	/// <summary>
 	/// デストラクタ
@@ -187,7 +187,7 @@ private:
 	DirectionalLightData light_;
 
 	// コライダー
-	Col::Sphere sphere_;
+	std::unique_ptr<AABBCollider> aabb_;
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

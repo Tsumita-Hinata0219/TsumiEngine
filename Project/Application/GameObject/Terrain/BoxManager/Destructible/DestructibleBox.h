@@ -11,7 +11,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	DestructibleBox() { attribute_ = ObjAttribute::TERRAIN; }
+	DestructibleBox() { attribute_ = { Attributes::Category::TERRAIN, Attributes::Type::SOLID }; }
 
 	/// <summary>
 	/// デストラクタ

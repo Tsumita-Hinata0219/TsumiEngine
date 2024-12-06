@@ -1,84 +1,55 @@
 #include "CollisionManager.h"
-#include "../Component/CollisionComponent.h"
-#include "../Shape/CollisionShape.h"
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Collider/Sphere/SphereCollider.h"
-#include "../Collider/Box/AABBCollider.h"
-#include "../Collider/Box/OBBCollider.h"
-#include "../Collider/Segment/SegmentCollider.h"
-#include "../Shape/CollisionShape.h"
-#include "../Shape/Sphere/CollisionShapeSphere.h"
-#include "../Shape/AABB/CollisionShapeAABB.h"
+#include "GameObject/IObject/IObject.h"
 
 
-// ファクトリマップを作る関数
-std::unordered_map<std::type_index, ShapeFactory> CreateShapeFactoryMap() {
+/// <summary>
+/// ファクトリマップを作る関数
+/// </summary>
+static std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactoryMap() {
 	return {
-		{ typeid(Col::Sphere), [](CollisionComponent* self, Col::ColData* data) {
-			return std::make_unique<CollisionShapeSphere>(self, static_cast<Col::Sphere*>(data)); }},
-		{ typeid(Col::AABB), [](CollisionComponent* self, Col::ColData* data) {
-			return std::make_unique<CollisionShapeAABB>(self, static_cast<Col::AABB*>(data)); }},
+		{ typeid(Collider::Sphere), [](IObject* owner) {
+			return std::make_unique<SphereCollider>(owner); }
+		},
+
 			/* 他の型も同様に追加 */
 	};
 }
 
 
-// 解放処理
-void CollisionManager::Finalize()
+/// <summary>
+/// コライダー登録
+/// </summary>
+void CollisionManager::Register(ICollider* pCollider)
 {
+	pColliders_.push_back(pCollider);
 }
 
 
-// コライダーの登録
-void CollisionManager::Register(uint32_t attribute, Col::ColData* data, CollisionComponent* component)
+/// <summary>
+/// 登録されているShapeを削除する
+/// </summary>
+void CollisionManager::UnRegister(ICollider* pCollider)
 {
-	// データの型に基づいてシェイプを生成する
-	const auto& factoryMap = GetFactoryMap();
-	auto it = factoryMap.find(typeid(*data));
+	// nullptrか指定されたポインタがリストに存在するか確認
+	auto it = std::find(pColliders_.begin(), pColliders_.end(), pCollider);
 
-
-	if (it != factoryMap.end()) {
-
-		// std::unique_ptr でシェイプを生成
-		std::unique_ptr<CollisionShape> shape = it->second(component, data);
-
-		// コンポーネントに登録されている属性を設定する
-		shape->SetAttribute(attribute);
-
-		// シェイプのBoundingと空間レベルを求める
-		shape->CalcBounding();
-		shape->CalcSpaceLevel();
-
-		// マップに保存
-		this->shapeMap_[data] = std::move(shape);
-	}
-	else {
-		std::cerr << "Error : Unsupported collision shape type." << std::endl;
-	}
-}
-
-
-// 登録されているShapeを削除する
-void CollisionManager::UnRegister(Col::ColData* data)
-{
-	// nullptrか指定されたポインタをキーとする要素が存在するか確認
-	auto it = shapeMap_.find(data);
-	if (it != shapeMap_.end()) {
+	if (it != pColliders_.end()) {
 		// 存在する場合はその要素を削除
-		shapeMap_.erase(it);
+		pColliders_.erase(it);
 	}
 }
 
 
-// 更新処理
+/// <summary>
+/// 更新処理
+/// </summary>
 void CollisionManager::Update()
 {
-	// データの更新
-	UpdateCollisionData();
+	// nullチェック
+	//RemoveNullColliders();
 
 	// コリジョン判定を行う
 	CheckCollisions();
-
 
 #ifdef _DEBUG
 	DrawImGui(); // Debug表示
@@ -86,52 +57,57 @@ void CollisionManager::Update()
 }
 
 
-// コリジョン判定を行う
+/// <summary>
+/// nullチェック
+/// </summary>
+void CollisionManager::RemoveNullColliders()
+{
+	pColliders_.remove_if([](ICollider* collider) {
+		return collider == nullptr;  // ポインタがnullptrなら削除
+		}
+	);
+}
+
+
+/// <summary>
+/// コリジョン判定を行う
+/// </summary>
 void CollisionManager::CheckCollisions()
 {
-	for (auto itr1 = shapeMap_.begin(); itr1 != shapeMap_.end(); ++itr1) {
-		for (auto itr2 = std::next(itr1); itr2 != shapeMap_.end(); ++itr2) {
+	for (auto itr1 = pColliders_.begin(); itr1 != pColliders_.end(); ++itr1) {
+		for (auto itr2 = std::next(itr1); itr2 != pColliders_.end(); ++itr2) {
 
 			// itr1とit2の属性が同じなら判定をスキップする
-			if (itr1->second->GetAttribute() == itr2->second->GetAttribute()) {
+			if ((*itr1)->GetCategory() == (*itr2)->GetCategory()) {
 				continue;
 			}
 
-			// 衝突を検出する
-			if (itr1->second->Intersects(*itr2->second)) {
-				itr1->second->OnCollision(*itr2->second, itr2->second->GetData());
-				itr2->second->OnCollision(*itr1->second, itr1->second->GetData());
+			// 衝突判定をとる
+			if ((*itr1)->Intersects((**itr2))) {
+
+				// オーナーに衝突相手のコライダーデータを送る
+				(*itr1)->GetOwner()->SetHitCollider((*itr2)->GetData());
+				(*itr2)->GetOwner()->SetHitCollider((*itr1)->GetData());
+				// オーナーのonCollision関数を呼び出して、衝突相手のownerを送る
+				(*itr1)->GetOwner()->onCollision((*itr2)->GetOwner());
+				(*itr2)->GetOwner()->onCollision((*itr1)->GetOwner());
 			}
-
-			auto shape1 = itr1->second->GetData();
-			auto shape2 = itr2->second->GetData();
-
-			/*if (Detect::Intersects(shape1, shape2)) {
-
-			}*/
 		}
 	}
 }
 
 
-// データの更新
-void CollisionManager::UpdateCollisionData()
-{
-	for (auto& element : shapeMap_) {
-		element.second->SetData(*element.first);
-	}
-}
-
-
-// ImGuiの描画
+/// <summary>
+/// ImGuiの描画
+/// </summary>
 void CollisionManager::DrawImGui()
 {
 	if (ImGui::TreeNode("CollisionManager")) {
 
-		ImGui::Text("Collider Count = %d", shapeMap_.size());
-		
-		for (auto& element : shapeMap_) {
-			element.second->DrawImGui();
+		ImGui::Text("Collider Instance Count = %d", pColliders_.size());
+
+		for (auto& element : pColliders_) {
+			element->DrawImGui();
 		}
 
 		ImGui::TreePop();
@@ -139,11 +115,13 @@ void CollisionManager::DrawImGui()
 }
 
 
-// Shapeのインスタンスの取得
-const std::unordered_map<std::type_index, ShapeFactory>& CollisionManager::GetFactoryMap()
+/// <summary>
+/// Colliderのインスタンスの取得
+/// </summary>
+
+const std::unordered_map<std::type_index, ColliderFactory>& CollisionManager::GetColliderFactoryMap()
 {
-	static const std::unordered_map<std::type_index, ShapeFactory> factoryMap 
-		= CreateShapeFactoryMap();
+	static const std::unordered_map<std::type_index, ColliderFactory> factoryMap =
+		CreateColliderFactoryMap();
 	return factoryMap;
 }
-

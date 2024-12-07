@@ -12,6 +12,9 @@ void StageSelectOperation::Init()
 
 	// ステージのセレクト番号
 	selectNum_ = 0;
+
+	// 選択したかのフラグ
+	isSelect_ = false;
 }
 
 
@@ -20,6 +23,9 @@ void StageSelectOperation::Init()
 /// </summary>
 void StageSelectOperation::Update()
 {
+	// 決定していれば後の処理は入らない
+	if (isSelect_) { return; }
+
 	// LStickの入力を取得
 	iLStick_ = input_->GetLStick();
 
@@ -35,6 +41,10 @@ void StageSelectOperation::Update()
 	// セレクト操作
 	SelectOperation();
 
+	// Aボタンを押したら決定
+	if (input_->Trigger(PadData::A)) {
+		isSelect_ = true;
+	}
 
 
 #ifdef _DEBUG

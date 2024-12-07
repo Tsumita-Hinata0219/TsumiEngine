@@ -39,6 +39,10 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	bool IsSelect() const { return operation_->IsSelect(); }
+
+	static std::string GetFilePath() { return StageSelectManager::GetInstrance()->selectStageFP_; }
+
 #pragma endregion 
 
 
@@ -46,9 +50,6 @@ public:
 
 	// ステージのMax数
 	static const uint32_t kMaxStage = 10;
-
-	// セレクトしたステージのファイルパス(FP)
-	std::string selectStageFP_{};
 
 
 private:
@@ -58,6 +59,9 @@ private:
 
 	// Jsonファイルパスの配列
 	std::array<std::string, kMaxStage> stageJsonFilePaths_;
+
+	// セレクトしたステージのファイルパス(FP)
+	std::string selectStageFP_ = "";
 
 	// 操作クラス
 	std::unique_ptr<StageSelectOperation> operation_;

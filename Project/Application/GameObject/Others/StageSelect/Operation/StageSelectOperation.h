@@ -35,6 +35,18 @@ public:
 	/// </summary>
 	void Update();
 
+
+#pragma region Accessor アクセッサ
+
+	// 決定ボタンを押したかのフラグ
+	bool IsSelect() const { return this->isSelect_; }
+
+	// セレクトしている番号
+	int GetSelectNum() const { return this->selectNum_; }
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>
@@ -68,6 +80,9 @@ private:
 
 	// 操作を行ったかのフラグ
 	bool isOperationFunc_ = false;
+
+	// 選択したか
+	bool isSelect_ = false;
 
 };
 

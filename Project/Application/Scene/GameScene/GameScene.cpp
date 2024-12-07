@@ -1,5 +1,5 @@
 #include "GameScene.h"
-
+#include "GameObject/Others/StageSelect/Manager/StageSelectManager.h"
 
 
 /// <summary>
@@ -49,7 +49,8 @@ void GameScene::Initialize()
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();
 	jsonManager->LoadSceneFile("Json", "Stage_Demo.json");
-
+	std::string stageJsonPath = StageSelectManager::GetFilePath();
+	stageJsonPath;
 	// ──────── AbsentEffect
 	absentEffect_->Init();
 

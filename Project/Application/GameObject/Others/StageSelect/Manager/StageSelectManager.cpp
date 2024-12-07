@@ -50,8 +50,11 @@ void StageSelectManager::Update()
 	// 操作クラス
 	operation_->Update();
 
-
-
-
+	// 決定ボタンを押したらその時の番号に応じて
+	// ファイルパスを設定する
+	if (operation_->IsSelect()) {
+		selectStageFP_ = 
+			stageJsonFilePaths_[operation_->GetSelectNum()];
+	}
 }
 

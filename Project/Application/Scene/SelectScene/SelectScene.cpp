@@ -7,9 +7,20 @@
 /// </summary>
 void SelectScene::Initialize()
 {
+	// カメラ
+	cameraManager_ = CameraManager::GetInstance();
+	camera_.Init();
+	cameraManager_->ReSetData(camera_);
+
 	// セレクト
 	selectManager_ = StageSelectManager::GetInstrance();
 	selectManager_->Init();
+
+	// シーントランジション
+	sceneTransition_ = SceneTransition::GetInstance();
+	sceneTransition_->Init();
+	sceneTransition_->SetState(Cloased);
+	sceneTransition_->StartFadeIn();
 }
 
 
@@ -18,11 +29,24 @@ void SelectScene::Initialize()
 /// </summary>
 void SelectScene::Update(GameManager* state)
 {
-	state;
+	// カメラ
+	camera_.Update();
+
+	// シーントランジション
+	sceneTransition_->Update();
 
 	// セレクト
 	selectManager_->Update();
 
+	// 決定ボタンが押されたらシーンチェンジ
+	if (selectManager_->IsSelect()) {
+		sceneTransition_->StartFadeOut();
+	}
+	// 画面が閉じたらシーン変更
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
+		state->ChangeSceneState(new GameScene);
+		return;
+	}
 
 #ifdef _DEBUG
 	ImGui::Begin("ResultScene");
@@ -52,4 +76,6 @@ void SelectScene::ModelDraw()
 /// </summary>
 void SelectScene::FrontSpriteDraw()
 {
+	// シーントランジション
+	sceneTransition_->Draw2DFront();
 }

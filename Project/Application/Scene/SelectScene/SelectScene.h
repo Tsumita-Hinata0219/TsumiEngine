@@ -63,6 +63,9 @@ private:
 	// カメラ本体
 	CameraResource camera_{};
 
+	// SceneTransition
+	SceneTransition* sceneTransition_ = nullptr;
+
 	// セレクト
 	StageSelectManager* selectManager_ = nullptr;
 };

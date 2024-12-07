@@ -78,14 +78,19 @@ void GameScene::Initialize()
 	boxManager_->Init();
 	boxManager_->LoadEntityData(jsonManager->GetEntityData("BarrierBox"));
 
-	// ──────── Player
-	player_->Init();
-	player_->LoadEntityData(jsonManager->GetEntityData("Player"));
-
 	// ──────── EnemyManager
 	enemyManager_->Init();
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
+
+	// ──────── Player
+	player_->Init();
+	player_->LoadEntityData(jsonManager->GetEntityData("Player"));
+
+	//// ──────── EnemyManager
+	//enemyManager_->Init();
+	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
+	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 
 	// ──────── SceneTransition
 	STMenuManager_->Init();

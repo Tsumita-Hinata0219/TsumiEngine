@@ -87,7 +87,7 @@ void TitleScene::Update(GameManager* state)
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new GameScene);
+		state->ChangeSceneState(new SelectScene);
 		return;
 	}
 

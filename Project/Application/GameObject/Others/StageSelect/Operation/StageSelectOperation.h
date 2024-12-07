@@ -7,6 +7,12 @@
 /* ステージセレクトの操作クラス */
 class StageSelectOperation {
 
+private:
+	enum class SelectionDirection {
+		Previous, // 上方向
+		Next      // 下方向
+	};
+
 public:
 
 	/// <summary>
@@ -37,6 +43,11 @@ private:
 	void SelectOperation();
 
 	/// <summary>
+	/// セレクトチェンジ
+	/// </summary>
+	void ChangeSelect(SelectionDirection dir);
+
+	/// <summary>
 	/// DrawImGuiの描画
 	/// </summary>
 	void DrawImGui();
@@ -54,6 +65,9 @@ private:
 	Vector2 iLStick_{};
 	// デッドゾーン
 	const float DZone_ = 0.4f;
+
+	// 操作を行ったかのフラグ
+	bool isOperationFunc_ = false;
 
 };
 

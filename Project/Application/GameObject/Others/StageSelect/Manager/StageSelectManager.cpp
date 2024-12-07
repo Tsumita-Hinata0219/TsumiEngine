@@ -7,7 +7,8 @@
 /// </summary>
 StageSelectManager* StageSelectManager::GetInstrance()
 {
-	return nullptr;
+	static StageSelectManager instance;
+	return &instance;
 }
 
 
@@ -32,6 +33,10 @@ void StageSelectManager::Init()
 	// セレクトしたステージのファイルパス
 	selectStageFP_ = stageJsonFilePaths_[0];
 
+	// 操作クラス
+	operation_ = std::make_unique<StageSelectOperation>();
+	operation_->Init();
+
 	// 一度通った
 	isVisited_ = true;
 }
@@ -42,5 +47,11 @@ void StageSelectManager::Init()
 /// </summary>
 void StageSelectManager::Update()
 {
+	// 操作クラス
+	operation_->Update();
+
+
+
+
 }
 

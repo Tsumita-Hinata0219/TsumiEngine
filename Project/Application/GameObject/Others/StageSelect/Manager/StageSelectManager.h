@@ -3,6 +3,8 @@
 #include "GameObject/IObject/IObject.h"
 #include "GameObject/GameObject.h"
 
+#include "../Operation/StageSelectOperation.h"
+
 #include <array>
 #include <string>
 
@@ -22,7 +24,7 @@ public:
 	/// <summary>
 	/// インスタンス取得
 	/// </summary>
-	StageSelectManager* GetInstrance();
+	static StageSelectManager* GetInstrance();
 
 	/// <summary>
 	/// 初期化処理
@@ -40,17 +42,23 @@ public:
 #pragma endregion 
 
 
+public:
+
+	// ステージのMax数
+	static const uint32_t kMaxStage = 10;
+
+	// セレクトしたステージのファイルパス(FP)
+	std::string selectStageFP_{};
+
+
 private:
 
 	// 一度通ったかのフラグ
 	bool isVisited_ = false;
 
-	// ステージのMax数
-	static const uint32_t kMaxStage = 10;
-
 	// Jsonファイルパスの配列
 	std::array<std::string, kMaxStage> stageJsonFilePaths_;
 
-	// セレクトしたステージのファイルパス(FP)
-	std::string selectStageFP_{};
-};
+	// 操作クラス
+	std::unique_ptr<StageSelectOperation> operation_;
+}; 

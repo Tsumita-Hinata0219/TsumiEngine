@@ -12,8 +12,10 @@ void GameNameBar::Init()
 
 	// Transformの初期化
 	trans_.Init();
-	trans_.srt.translate.y = 0.23f;
-	trans_.srt.translate.z = 3.5f;
+	float initScale = 6.0f;
+	trans_.srt.scale = { initScale, initScale, initScale };
+	trans_.srt.translate.y = 1.2f;
+	trans_.srt.translate.z = 20.0f;
 }
 
 

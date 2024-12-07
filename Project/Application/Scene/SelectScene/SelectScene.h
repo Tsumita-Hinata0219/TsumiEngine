@@ -6,6 +6,8 @@
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
 
+#include "GameObject/Others/StageSelect/Manager/StageSelectManager.h"
+
 
 /* ステージセレクトシーン */
 class SelectScene : public IScene {
@@ -61,6 +63,7 @@ private:
 	// カメラ本体
 	CameraResource camera_{};
 
-
+	// セレクト
+	StageSelectManager* selectManager_ = nullptr;
 };
 

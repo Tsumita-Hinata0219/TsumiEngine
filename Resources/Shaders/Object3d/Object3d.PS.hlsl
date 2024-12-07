@@ -92,7 +92,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         float NdotH = dot(normal, halfVector);
         float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
         float3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specularPow;
-        
+       
         // ägéUîΩéÀÇ∆ãæñ îΩéÀÇÃçáê¨
         float3 finalColor = diffuse;
         

@@ -7,6 +7,9 @@
 /// </summary>
 void SelectScene::Initialize()
 {
+	// セレクト
+	selectManager_ = StageSelectManager::GetInstrance();
+	selectManager_->Init();
 }
 
 
@@ -16,6 +19,9 @@ void SelectScene::Initialize()
 void SelectScene::Update(GameManager* state)
 {
 	state;
+
+	// セレクト
+	selectManager_->Update();
 
 
 #ifdef _DEBUG

@@ -18,6 +18,10 @@ void SelectScene::Update(GameManager* state)
 	state;
 
 
+#ifdef _DEBUG
+	ImGui::Begin("ResultScene");
+	ImGui::End();
+#endif // _DEBUG
 }
 
 

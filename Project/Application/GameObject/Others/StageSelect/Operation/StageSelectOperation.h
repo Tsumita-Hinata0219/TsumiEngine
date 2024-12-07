@@ -50,5 +50,10 @@ private:
 	// ステージのセレクト番号
 	int selectNum_ = 0;
 
+	//Stickの入力を取得
+	Vector2 iLStick_{};
+	// デッドゾーン
+	const float DZone_ = 0.4f;
+
 };
 

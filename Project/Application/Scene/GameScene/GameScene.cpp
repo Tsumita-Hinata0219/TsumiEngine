@@ -204,11 +204,11 @@ void GameScene::ModelDraw()
 	// ──────── BoxManager
 	boxManager_->Draw3D();
 
-	// ──────── Player
-	player_->Draw3D();
-
 	// ──────── EnemyManager
 	enemyManager_->Draw3D();
+
+	// ──────── Player
+	player_->Draw3D();
 }
 
 

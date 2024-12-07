@@ -10,9 +10,13 @@ void PlayerMovementParticle::Init()
 	// トランスフォームの初期化
 	trans_.Init();
 
-	// 補間に使用するAlpha値の設定。不透明->透明
-	scale_.first = 0.7f;
+	// 補間に使用するScale値の設定
+	scale_.first = 0.8f;
 	scale_.second = -0.01f;
+
+	// 補間に使用するAlpha値の設定。不透明->透明
+	alpha.first = 1.0f;
+	alpha.second = 0.0f;
 
 	// 速度
 	velocity_ = 0.07f;
@@ -38,8 +42,11 @@ void PlayerMovementParticle::Update()
 	// 軽く上に移動する
 	trans_.srt.translate.y += velocity_;
 
-	// Alpha値の計算
+	// Scale値の計算
 	CalcScale();
+
+	// Alpha値の計算
+	CalcColor();
 }
 
 
@@ -64,5 +71,15 @@ void PlayerMovementParticle::CalcScale()
 		Interpolate(scale_.first, scale_.second, timer_.GetRatio(), Ease::OutSine);
 	trans_.srt.scale.z =
 		Interpolate(scale_.first, scale_.second, timer_.GetRatio(), Ease::OutSine);
+}
+
+
+/// <summary>
+/// Color値の計算
+/// </summary>
+void PlayerMovementParticle::CalcColor()
+{
+	color_.w =
+		Interpolate(alpha.first, alpha.second, timer_.GetRatio(), Ease::InSine);
 }
 

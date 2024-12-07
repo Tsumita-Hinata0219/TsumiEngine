@@ -36,6 +36,16 @@ void StageSelectOperation::Update()
 /// </summary>
 void StageSelectOperation::SelectOperation()
 {
+	//// 左入力
+	//if (iLStick_.x < -DZone_ || input_->Trigger(PadData::LEFT) ||
+	//	input_->Trigger(DIK_LEFT) || input_->Trigger(DIK_A)) {
+	//	ChangeSelect(MenuSelect::Back);
+	//}
+	//// 右入力
+	//if (iLStick_.x > DZone_ || input_->Trigger(PadData::RIGHT) ||
+	//	input_->Trigger(DIK_RIGHT) || input_->Trigger(DIK_D)) {
+	//	ChangeSelect(MenuSelect::Next);
+	//}
 }
 
 

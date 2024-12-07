@@ -34,6 +34,11 @@ void SelectScene::Update(GameManager* state)
 
 	// シーントランジション
 	sceneTransition_->Update();
+	// シーントランジション中は以下の処理に入らない
+	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
+		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
 
 	// セレクト
 	selectManager_->Update();

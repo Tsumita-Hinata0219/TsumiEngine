@@ -49,7 +49,7 @@ public:
 public:
 
 	// ステージのMax数
-	static const uint32_t kMaxStage = 10;
+	static const uint32_t kMaxStage = 6;
 
 
 private:

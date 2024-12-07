@@ -48,9 +48,8 @@ void GameScene::Initialize()
 
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", "Stage_Demo.json");
-	std::string stageJsonPath = StageSelectManager::GetFilePath();
-	stageJsonPath;
+	jsonManager->LoadSceneFile("Json", StageSelectManager::GetFilePath());
+
 	// ──────── AbsentEffect
 	absentEffect_->Init();
 

@@ -190,7 +190,6 @@
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
@@ -406,7 +405,6 @@
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />

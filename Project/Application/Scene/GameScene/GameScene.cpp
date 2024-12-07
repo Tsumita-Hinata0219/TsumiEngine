@@ -11,7 +11,6 @@ GameScene::GameScene()
 	CollisionManager_ = CollisionManager::GetInstance();
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	testPostEffect_ = make_unique<TestPostEffect>();
-	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	skybox_ = std::make_unique<Skybox>();
@@ -55,9 +54,6 @@ void GameScene::Initialize()
 
 	// ──────── TestPostEffect
 	testPostEffect_->Init();
-
-	// ──────── GameSceneUI
-	gameSceneUI_->Init();
 
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
@@ -106,9 +102,6 @@ void GameScene::Update(GameManager* state)
 	// ──────── TestPostEffect
 	testPostEffect_->Update();
 
-	// ──────── GameSceneUI
-	gameSceneUI_->Update();
-
 	// ──────── GameCamera
 	gameCamera_->Update();
 
@@ -128,7 +121,7 @@ void GameScene::Update(GameManager* state)
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
-			state->ChangeSceneState(new TitleScene);
+			state->ChangeSceneState(new SelectScene);
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			state->ChangeSceneState(new GameScene);
@@ -182,9 +175,6 @@ void GameScene::Update(GameManager* state)
 /// </summary>
 void GameScene::BackSpriteDraw()
 {
-	// ──────── GameSceneUI
-	gameSceneUI_->Draw2DBack();
-
 	// ──────── Player
 	player_->Draw2DBack();
 }
@@ -223,9 +213,6 @@ void GameScene::FrontSpriteDraw()
 	testPostEffect_->Draw();
 
 	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-
-		// ──────── GameSceneUI
-		gameSceneUI_->Draw2DFront();
 
 		// ──────── Player
 		player_->Draw2DFront();

@@ -20,16 +20,6 @@
 // グローバル変数の定義
 extern float g_ElapsedTime;
 
-// ステージの情報が入ったJsonファイルのファイル名
-extern std::array<std::string, 10> sceneFilePathArray = {
-	"Stage_Demo.json",
-	"Stage_1.json",
-	"Stage_2.json",
-	"Stage_3.json",
-	"Stage_4.json",
-	"Stage_5.json",
-};
-
 
 /* GameManagerクラス */
 class GameManager {

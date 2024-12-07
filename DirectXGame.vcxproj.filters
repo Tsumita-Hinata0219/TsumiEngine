@@ -242,6 +242,8 @@
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
     <ClCompile Include="Project\Application\Scene\SelectScene\SelectScene.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -467,6 +469,8 @@
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
     <ClInclude Include="Project\Application\Scene\SelectScene\SelectScene.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

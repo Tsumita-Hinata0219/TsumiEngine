@@ -112,7 +112,7 @@ private:
 	// 新しいバレットを生成する
 	void CreateNewBullet();
 
-	// マークを死亡状態に設定
+	// 死亡状態に設定
 	void MarkAsDead();
 
 

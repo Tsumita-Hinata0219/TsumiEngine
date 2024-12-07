@@ -9,6 +9,7 @@
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"
+#include "Enemy/Boss/BossEnemy.h"
 
 
 // Player前方宣言
@@ -73,6 +74,7 @@ private:
 	/// </summary>
 	void CreateBasicEnemy(const SRTN& setSRT);
 	void CreateStaticEnemy(const SRTN& setSRT);
+	void CreateBossEnemy(const SRTN& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する

@@ -92,6 +92,15 @@ public:
 
 private:
 
+
+	/// <summary>
+	/// 死亡状態に設定
+	/// </summary>
+	void MarkAsDead();
+
+
+private:
+
 	// プレイヤー
 	Player* player_ = nullptr;
 

@@ -7,7 +7,6 @@
 void BasicEnemy::Init()
 {
 	// BodyModelのロードと初期化
-	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Basic", "Basic.obj");
 	model_ = modelManager_->GetModel("Basic");
 

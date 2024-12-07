@@ -78,19 +78,14 @@ void GameScene::Initialize()
 	boxManager_->Init();
 	boxManager_->LoadEntityData(jsonManager->GetEntityData("BarrierBox"));
 
-	// ──────── EnemyManager
-	enemyManager_->Init();
-	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
-	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
-
 	// ──────── Player
 	player_->Init();
 	player_->LoadEntityData(jsonManager->GetEntityData("Player"));
 
-	//// ──────── EnemyManager
-	//enemyManager_->Init();
-	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
-	//enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
+	// ──────── EnemyManager
+	enemyManager_->Init();
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
+	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 
 	// ──────── SceneTransition
 	STMenuManager_->Init();
@@ -252,8 +247,8 @@ void GameScene::FrontSpriteDraw()
 /// </summary>
 void GameScene::SceneChangeCheck()
 {
-	// プレイヤーが勝利 or 敗北でシーンを変更
-	if (player_->IsWin() || player_->IsLose()) {
+	// プレイヤー死亡 or エネミー全滅でシーン遷移にに入る
+	if (player_->IsDead() || enemyManager_->IsEliminated()) {
 		STMenuManager_->DirectionStart();
 	}
 

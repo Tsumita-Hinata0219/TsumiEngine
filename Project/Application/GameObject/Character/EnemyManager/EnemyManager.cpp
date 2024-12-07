@@ -51,6 +51,9 @@ void EnemyManager::Init()
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
 	}
+
+	// エネミーが全滅したかのフラグは折っておく
+	isEliminated_ = false;
 }
 
 
@@ -59,6 +62,9 @@ void EnemyManager::Init()
 /// </summary>
 void EnemyManager::Update()
 {
+	// 全滅していたら処理を通さない
+	if (isEliminated_) { return; }
+
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
 		enemy->Update();
@@ -89,6 +95,9 @@ void EnemyManager::Update()
 		return false;
 		}
 	);
+
+	// 全滅したかのチェック
+	EliminatedChecker();
 
 
 #ifdef _DEBUG
@@ -141,6 +150,19 @@ void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 	CreateEnemyBullet(setType, initPos, initVel);
 }
 
+
+/// <summary>
+/// 全滅したかのチェック
+/// </summary>
+void EnemyManager::EliminatedChecker()
+{
+	int instanceNum = int(enemys_.size());
+
+	// インスタンスが0なので全滅フラグを立てる
+	if (instanceNum <= 0) {
+		isEliminated_ = true;
+	}
+}
 
 
 /// <summary>

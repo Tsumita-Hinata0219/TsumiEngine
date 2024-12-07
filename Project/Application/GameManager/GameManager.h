@@ -7,6 +7,7 @@
 #include "Scene/DebugScene/DebugScene.h"
 
 #include "Scene/TitleScene/TitleScene.h"
+#include "Scene/SelectScene/SelectScene.h"
 #include "Scene/GameScene/GameScene.h"
 #include "Scene/ResultScene/ResultScene.h"
 

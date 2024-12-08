@@ -4,6 +4,7 @@
 #include "GameObject/GameObject.h"
 
 #include "../Operation/StageSelectOperation.h"
+#include "../Navigation/StageSelectNavigation.h"
 
 #include <array>
 #include <string>
@@ -27,6 +28,11 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	void Draw2DFront();
+
 
 #pragma region Accessor アクセッサ
 
@@ -49,4 +55,7 @@ private:
 
 	// 操作クラス
 	std::unique_ptr<StageSelectOperation> operation_;
+
+	// ナビゲーション
+	std::unique_ptr<StageSelectNavigation> navigation_;
 }; 

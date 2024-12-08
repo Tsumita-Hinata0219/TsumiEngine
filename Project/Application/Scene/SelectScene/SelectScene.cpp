@@ -11,6 +11,7 @@ void SelectScene::Initialize()
 	cameraManager_ = CameraManager::GetInstance();
 	camera_.Init();
 	cameraManager_->ReSetData(camera_);
+	camera_.Update();
 
 	// セレクト
 	selectManager_ = std::make_unique<StageSelectManager>();
@@ -90,6 +91,8 @@ void SelectScene::ModelDraw()
 /// </summary>
 void SelectScene::FrontSpriteDraw()
 {
+	selectManager_->Draw2DFront();
+
 	// シーントランジション
 	sceneTransition_->Draw2DFront();
 }

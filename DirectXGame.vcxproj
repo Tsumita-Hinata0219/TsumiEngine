@@ -357,6 +357,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Structure\ColliderStructure.h" />
+    <ClInclude Include="Project\Engine\GameData\GameData.h" />
     <ClInclude Include="Project\Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Project\Application\GameObject\Camera\GameCamera\GameCamera.h" />

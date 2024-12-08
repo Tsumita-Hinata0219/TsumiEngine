@@ -10,6 +10,7 @@ float g_ElapsedTime = 0.0f;
 GameManager::GameManager(IScene* newScene) {
 
 	Tsumi::Initialize();
+	gameData_ = std::make_unique<GameData>();
 	Scene_ = newScene;
 	Scene_->Initialize();
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録

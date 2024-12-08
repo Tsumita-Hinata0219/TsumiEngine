@@ -469,6 +469,7 @@
     <ClInclude Include="Project\Application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
+    <ClInclude Include="Project\Engine\GameData\GameData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

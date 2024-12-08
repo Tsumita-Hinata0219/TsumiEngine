@@ -11,6 +11,8 @@
 #include "Scene/GameScene/GameScene.h"
 #include "Scene/ResultScene/ResultScene.h"
 
+#include "GameData/GameData.h"
+
 #include "Utilities/TextLog/TextLog.h"
 
 #include <array>
@@ -47,11 +49,16 @@ public:
 	void ChangeSceneState(IScene* newScene);
 
 
+public:
+
+	// シーンをまたいで使用したい値を保存しておくクラス
+	std::unique_ptr<GameData> gameData_;
+
+
 private:
 
 	IScene* Scene_ = nullptr;
 
 	std::chrono::steady_clock::time_point startTime_;
-
 
 };

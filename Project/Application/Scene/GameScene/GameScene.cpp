@@ -46,8 +46,10 @@ void GameScene::Initialize()
 	enemyManager_->SetPlayer(player_.get());
 
 	// ──────── JsonManager
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", StageSelectManager::GetFilePath());
+	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
 	// ──────── AbsentEffect
 	absentEffect_->Init();
@@ -124,6 +126,7 @@ void GameScene::Update(GameManager* state)
 			state->ChangeSceneState(new SelectScene);
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
+			GameData::GetInstance()->NextStageSet();
 			state->ChangeSceneState(new GameScene);
 		}
 		return;

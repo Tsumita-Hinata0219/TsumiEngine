@@ -1,5 +1,5 @@
 #include "SelectScene.h"
-
+#include "GameManager/GameManager.h"
 
 
 /// <summary>
@@ -13,8 +13,13 @@ void SelectScene::Initialize()
 	cameraManager_->ReSetData(camera_);
 
 	// セレクト
-	selectManager_ = StageSelectManager::GetInstrance();
+	selectManager_ = std::make_unique<StageSelectManager>();
 	selectManager_->Init();
+
+	// 一回だけ通る処理
+	if (!isVisited_) {
+		OnceInit();
+	}
 
 	// シーントランジション
 	sceneTransition_ = SceneTransition::GetInstance();
@@ -45,6 +50,10 @@ void SelectScene::Update(GameManager* state)
 
 	// 決定ボタンが押されたらシーンチェンジ
 	if (selectManager_->IsSelect()) {
+
+		// GameDataに選択したステージ番号を保存しておく
+		GameData::GetInstance()->Set_StageSelectNum(selectManager_->GetSelectStageNum());
+		// シーントランジション開始
 		sceneTransition_->StartFadeOut();
 	}
 	// 画面が閉じたらシーン変更
@@ -83,4 +92,33 @@ void SelectScene::FrontSpriteDraw()
 {
 	// シーントランジション
 	sceneTransition_->Draw2DFront();
+}
+
+
+/// <summary>
+/// ゲーム起動してから一度だけ入る初期化
+/// </summary>
+void SelectScene::OnceInit()
+{
+	// ToDo : 以下のパスの変数は外部ファイルに追い出して実装する
+
+	// ステージファイルパスの設定（ローカル変数）
+	std::vector<std::string> stagePaths = {
+		"Stage_Demo.json",
+		"Stage_1.json",
+		"Stage_2.json",
+		"Stage_3.json",
+		"Stage_4.json",
+		"Stage_5.json"
+	};
+
+	// ToDo
+
+	// 保存しておく
+	for (auto& element : stagePaths) {
+		GameData::GetInstance()->AddStageJsonFilePath(element);
+	}
+
+	// 一度訪れた￥フラグを立てておく
+	isVisited_;
 }

@@ -49,12 +49,6 @@ public:
 	void ChangeSceneState(IScene* newScene);
 
 
-public:
-
-	// シーンをまたいで使用したい値を保存しておくクラス
-	std::unique_ptr<GameData> gameData_;
-
-
 private:
 
 	IScene* Scene_ = nullptr;

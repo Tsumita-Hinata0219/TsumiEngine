@@ -12,19 +12,10 @@
 /* ステージのセレクトクラス */
 class StageSelectManager {
 
-private: // シングルトン
+public:
 
 	StageSelectManager() = default;
 	~StageSelectManager() = default;
-	StageSelectManager(const StageSelectManager&) = delete;
-	const StageSelectManager& operator=(const StageSelectManager&) = delete;
-
-public:
-
-	/// <summary>
-	/// インスタンス取得
-	/// </summary>
-	static StageSelectManager* GetInstrance();
 
 	/// <summary>
 	/// 初期化処理
@@ -39,9 +30,11 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// 選択したか
 	bool IsSelect() const { return operation_->IsSelect(); }
 
-	static std::string GetFilePath() { return StageSelectManager::GetInstrance()->selectStageFP_; }
+	// 選んだステージ番号
+	int GetSelectStageNum() const { return operation_->GetSelectNum(); }
 
 #pragma endregion 
 
@@ -49,19 +42,10 @@ public:
 public:
 
 	// ステージのMax数
-	static const uint32_t kMaxStage = 6;
+	static const uint32_t kMaxStage = 5;
 
 
 private:
-
-	// 一度通ったかのフラグ
-	bool isVisited_ = false;
-
-	// Jsonファイルパスの配列
-	std::array<std::string, kMaxStage> stageJsonFilePaths_;
-
-	// セレクトしたステージのファイルパス(FP)
-	std::string selectStageFP_ = "";
 
 	// 操作クラス
 	std::unique_ptr<StageSelectOperation> operation_;

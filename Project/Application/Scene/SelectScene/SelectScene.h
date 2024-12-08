@@ -51,6 +51,13 @@ public:
 	void FrontSpriteDraw() override;
 
 
+private:
+
+	/// <summary>
+	/// ゲーム起動してから一度だけ入る初期化
+	/// </summary>
+	void OnceInit();
+
 
 private:
 
@@ -67,6 +74,9 @@ private:
 	SceneTransition* sceneTransition_ = nullptr;
 
 	// セレクト
-	StageSelectManager* selectManager_ = nullptr;
+	std::unique_ptr<StageSelectManager> selectManager_;
+
+	// 一度訪れたかのフラグ
+	bool isVisited_ = false;
 };
 

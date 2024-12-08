@@ -33,12 +33,16 @@ public:
 	/// </summary>
 	void Draw2DFront();
 
+	// オペレーションクラスのセット
+	void SetOperation(StageSelectOperation* setPtr) { this->pOperation_ = setPtr; }
+
 
 private:
 
 	StageSelectOperation* pOperation_;
 
 	std::vector<std::unique_ptr<Sprite>> sprites_;
+	std::vector<uint32_t> textures_;
 	Transform trans_{};
 
 };

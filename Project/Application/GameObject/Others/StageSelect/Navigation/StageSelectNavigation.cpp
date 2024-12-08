@@ -8,12 +8,23 @@
 /// </summary>
 void StageSelectNavigation::Init()
 {
+	textures_ = {
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_Demo.png"),
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_1.png"),
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_2.png"),
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_3.png"),
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_4.png"),
+		TextureManager::LoadTexture("Texture/Select/StageNumber", "StageNum_5.png"),
+	};
+
+
 	// スプライト配列のresize
 	sprites_.resize(StageSelectManager::kMaxStage);
 	Vector2 initSize = { 0.0f, 0.0f };
-	for (auto& element : sprites_) {
-		element = std::make_unique<Sprite>();
-		element->Initn();
+	for (int i = 0; i < StageSelectManager::kMaxStage; ++i) {
+		sprites_[i] = std::make_unique<Sprite>();
+		sprites_[i]->Init();
+		sprites_[i]->SetTexture(textures_[i]);
 	}
 
 	trans_.Init();

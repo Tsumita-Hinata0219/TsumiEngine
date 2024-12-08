@@ -162,6 +162,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
@@ -348,6 +349,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\Barrier\BarrierBox.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\BoxManager\BoxManager.h" />

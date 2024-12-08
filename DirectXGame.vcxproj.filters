@@ -243,6 +243,7 @@
     <ClCompile Include="Project\Application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -470,6 +471,7 @@
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
     <ClInclude Include="Project\Engine\GameData\GameData.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

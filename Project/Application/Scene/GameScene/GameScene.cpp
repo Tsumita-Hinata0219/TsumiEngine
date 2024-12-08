@@ -92,6 +92,9 @@ void GameScene::Initialize()
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
+
+
+	jsonManager->Clear();
 }
 
 

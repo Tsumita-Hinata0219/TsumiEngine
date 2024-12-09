@@ -1,5 +1,5 @@
 #include "EnemyHitEffectCircle.h"
-
+#include "../../../Enemy/IEnemy.h"
 
 
 /// <summary>
@@ -8,13 +8,16 @@
 void EnemyHitEffectCircle::Init()
 {
 	// モデルの設定
-
+	modelManager_->LoadModel("Obj/Enemys/Effect/HitCircle", "EnemyBullet_Normal.obj");
+	model_ = modelManager_->GetModel("EnemyBullet_Normal");
 
 	// トランスフォームの初期化
 	trans_.Init();
 
 	// タイマーの設定 (1秒)
 	timer_.Init(0.0f, 1.0f * 60.0f);
+	// 座標は親エネミーと同じ場所
+	trans_.srt.translate = pEnemy_->GetTranslate();
 
 	// 死亡フラグは折る
 	isDead_ = false;
@@ -23,13 +26,12 @@ void EnemyHitEffectCircle::Init()
 	color_ = Samp::Color::WHITE;
 
 	// 補間に使用するScaleの値
-	scale_.first = 1.0f;
+	scale_.first = 0.1f;
 	scale_.second = 2.0f;
 
 	// 補間に使用するAlpha値の設定。不透明->透明
 	alpha_.first = 1.0f;
 	alpha_.second = 0.0f;
-
 }
 
 
@@ -40,10 +42,17 @@ void EnemyHitEffectCircle::Update()
 {
 	// タイマー更新
 	timer_.Update();
-	// タイマー終了で死亡フラグを立てる
+	// タイマー終了
 	if (timer_.IsFinish()) {
+		
+		// 死亡フラグを立てる
 		isDead_ = true;
+		// 親エネミーをnullにしておく
+		pEnemy_ = nullptr;
 	}
+
+	// 座標は親エネミーと同じ場所
+	trans_.srt.translate = pEnemy_->GetTranslate();
 
 	// Scaleの計算
 	CalcScale();

@@ -135,9 +135,18 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 /// <summary>
 /// 新しいEnemyBulletを追加する
 /// </summary>
-void EnemyManager::AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
 {
 	CreateEnemyBullet(setType, initPos, initVel);
+}
+
+
+/// <summary>
+/// 新しいヒットエフェクトを追加する
+/// </summary>
+void EnemyManager::AddNewHitEffect(IEnemy* enemyPtr)
+{
+	CreateEffect(enemyPtr);
 }
 
 

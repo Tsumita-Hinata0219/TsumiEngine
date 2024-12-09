@@ -56,7 +56,12 @@ public: // メンバ関数
 	/// <summary>
 	/// 新しいEnemyBulletを追加する
 	/// </summary>
-	void AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+
+	/// <summary>
+	/// 新しいヒットエフェクトを追加する
+	/// </summary>
+	void AddNewHitEffect(IEnemy* enemyPtr);
 
 
 #pragma region Accessor アクセッサ

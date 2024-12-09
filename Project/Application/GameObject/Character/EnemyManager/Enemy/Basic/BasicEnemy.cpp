@@ -128,6 +128,9 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		// HPを減らす
 		hp_--;
 
+		// エフェクトを出す
+		enemyManager_->AddNewHitEffect();
+
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
 			// 死亡状態に設定
@@ -286,7 +289,7 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
+	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
 }
 
 

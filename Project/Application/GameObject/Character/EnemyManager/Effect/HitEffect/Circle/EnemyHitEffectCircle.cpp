@@ -8,8 +8,8 @@
 void EnemyHitEffectCircle::Init()
 {
 	// モデルの設定
-	modelManager_->LoadModel("Obj/Enemys/Effect/HitCircle", "EnemyBullet_Normal.obj");
-	model_ = modelManager_->GetModel("EnemyBullet_Normal");
+	modelManager_->LoadModel("Obj/Enemys/Effect/HitCircle", "HitCircle.obj");
+	model_ = modelManager_->GetModel("HitCircle");
 
 	// トランスフォームの初期化
 	trans_.Init();
@@ -50,11 +50,11 @@ void EnemyHitEffectCircle::Update()
 		isDead_ = true;
 	}
 
-	//// 座標は親エネミーと同じ場所
-	//trans_.srt.translate = pEnemy_->GetTranslate();
+	// 座標は親エネミーと同じ場所
+	trans_.srt.translate = pEnemy_->GetTranslate();
 
-	//// Scaleの計算
-	//CalcScale();
+	// Scaleの計算
+	CalcScale();
 
 	//// Alphaの計算
 	//CalcAlpha();

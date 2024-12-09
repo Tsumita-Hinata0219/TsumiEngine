@@ -129,7 +129,7 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		hp_--;
 
 		// エフェクトを出す
-		enemyManager_->AddNewHitEffect();
+		enemyManager_->AddNewHitEffect(this);
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {

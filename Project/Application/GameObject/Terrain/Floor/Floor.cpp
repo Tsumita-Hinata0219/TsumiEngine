@@ -9,6 +9,9 @@ void Floor::Init()
 	modelManager_->LoadModel("Obj/Floor", "Floor.obj");
 	model_ = modelManager_->GetModel("Floor");
 
+	uint32_t demoDDS = TextureManager::LoadTexture("Texture", "uvChecker.dds");
+	model_->SetMaterialTexture(demoDDS);
+
 	trans_.Init();
 }
 
@@ -18,11 +21,10 @@ void Floor::Update()
 {
 
 #ifdef _DEBUG
-
-	/*if (ImGui::TreeNode("Ground")) {
+	if (ImGui::TreeNode("Floor")) {
+		trans_.DrawImGui();
 		ImGui::TreePop();
-	}*/
-
+	}
 #endif // _DEBUG
 }
 

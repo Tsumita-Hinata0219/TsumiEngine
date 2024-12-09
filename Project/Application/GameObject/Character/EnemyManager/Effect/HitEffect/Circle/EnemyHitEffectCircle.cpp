@@ -30,8 +30,8 @@ void EnemyHitEffectCircle::Init()
 	alpha_.first = 1.0f;
 	alpha_.second = 0.0f;
 
-	// タイマーの設定 (0.3秒)
-	timer_.Init(0.0f, 0.5f * 60.0f);
+	// タイマーの設定 (0.2秒)
+	timer_.Init(0.0f, 0.2f * 60.0f);
 	timer_.Start();
 }
 

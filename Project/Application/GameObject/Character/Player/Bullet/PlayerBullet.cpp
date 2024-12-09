@@ -1,5 +1,6 @@
 #include "PlayerBullet.h"
 #include "../Player.h"
+#include "../../EnemyManager/Bullet/EnemyBullet.h"
 
 
 // 初期化処理
@@ -29,7 +30,7 @@ void PlayerBullet::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.7f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;
@@ -69,11 +70,28 @@ void PlayerBullet::Draw2DBack() {}
 // 衝突自コールバック関数
 void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetCategory() == Attributes::Category::ENEMY ||
-		object->GetCategory() == Attributes::Category::TERRAIN)
-	{
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 		// 死亡状態に設定
 		MarkAsDead();
+	}
+	if (object->GetCategory() == Attributes::Category::ENEMY && 
+		object->GetType() == Attributes::Type::BODY) {
+		// 死亡状態に設定
+		MarkAsDead();
+	}
+	if (object->GetCategory() == Attributes::Category::ENEMY &&
+		object->GetType() == Attributes::Type::BULLET) {
+
+		// dynamic_castを使って、objectがEnemyBullet型か確認
+		EnemyBullet* bullet = dynamic_cast<EnemyBullet*>(object);
+		if (bullet) {
+			// 死なない弾とは当たらない
+			if (bullet->GetBulletType() == EnemyBulletType::Resistant) {
+				return;
+			}
+			// 死亡状態に設定
+			MarkAsDead();
+		}
 	}
 }
 

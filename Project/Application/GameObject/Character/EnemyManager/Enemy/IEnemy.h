@@ -75,13 +75,47 @@ public:
 
 protected:
 
+	/// <summary>
+	/// ヒットリアクション
+	/// </summary>
+	void HitReaction();
+
+
+private:
+
+
+	/// <summary>
+	/// スケールのリアクション
+	/// </summary>
+	void HitReaction_Scale();
+
+	/// <summary>
+	/// 色のアクション
+	/// </summary>
+	void HitReaction_Color();
+
+
+protected:
+
 	// 親ポインタ
 	EnemyManager* enemyManager_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_;
 
+	// 色加算
+	ColorAddition colorAdd_{};
+
 	// トランスフォーム
 	Transform trans_;
+
+
+	// ヒットリアクションフラグ
+	bool isHitReactioning_ = false;
+	// ヒットリアクションタイマー
+	Timer hitReactionTimer_{};
+	// リアクション時に使用する値
+	Vector3 hitReactionScale_{};
+	std::pair<float, float> hitReactionColor_;
 
 };

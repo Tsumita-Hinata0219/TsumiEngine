@@ -38,11 +38,11 @@ void BasicEnemy::Init()
 	// ヒットリアクションフラグ
 	isHitReactioning_ = false;
 	// タイマー
-	hitReactionTimer_.Init(0.0f, 0.3f * 60.0f);
+	hitReactionTimer_.Init(0.0f, 0.4f * 60.0f);
 	// スケール
 	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
 	// 色加算
-	hitReactionColor_.first = 0.6f;
+	hitReactionColor_.first = 0.8f;
 	hitReactionColor_.second = 0.0f;
 
 	/* ----- StatePattern ステートパターン ----- */
@@ -60,7 +60,7 @@ void BasicEnemy::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.8f;
 }
 
 
@@ -147,7 +147,7 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
-		//hp_--;
+		hp_--;
 
 		// ヒットリアクション中にする
 		isHitReactioning_ = true;
@@ -317,49 +317,6 @@ void BasicEnemy::CreateNewBullet()
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
 	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
-}
-
-
-// ヒットリアクション
-void BasicEnemy::HitReaction()
-{
-	// フラグが折れていたら早期return
-	if (!isHitReactioning_) { return; }
-
-	// タイマー更新
-	hitReactionTimer_.Update();
-	// タイマー終了
-	if (hitReactionTimer_.IsFinish()) {
-		// リセット
-		hitReactionTimer_.Reset();
-		// リアクション中のフラグを折る
-		isHitReactioning_ = false;
-	}
-
-	// スケール
-	HitReaction_Scale();
-	// カラー
-	HitReaction_Color();
-}
-
-
-// スケールのリアクション
-void BasicEnemy::HitReaction_Scale()
-{
-	trans_.srt.scale.x =
-		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
-	trans_.srt.scale.y =
-		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
-	trans_.srt.scale.z =
-		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
-}
-
-
-// 色のアクション
-void BasicEnemy::HitReaction_Color()
-{
-	colorAdd_.intensity =
-		Interpolate(hitReactionColor_.first, hitReactionColor_.second, hitReactionTimer_.GetRatio(), Ease::OutQuint);
 }
 
 

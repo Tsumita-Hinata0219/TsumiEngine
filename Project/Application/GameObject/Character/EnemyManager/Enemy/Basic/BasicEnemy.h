@@ -99,15 +99,6 @@ private:
 	// 新しいバレットを生成する
 	void CreateNewBullet();
 
-	// ヒットリアクション
-	void HitReaction();
-
-	// スケールのリアクション
-	void HitReaction_Scale();
-
-	// 色のアクション
-	void HitReaction_Color();
-
 	// マークを死亡状態に設定
 	void MarkAsDead();
 
@@ -122,9 +113,6 @@ private:
 
 	// ライト
 	DirectionalLightData light_{};
-
-	// 色加算
-	ColorAddition colorAdd_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
@@ -156,19 +144,11 @@ private:
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-	const float kBulletSpeed_ = 0.3f;
+	const float kBulletSpeed_ = 0.25f;
 
 	// 射撃するまでのフレーム&インターバル
 	int shotFrame_ = 0;
 	int kShotInterval_ = 40;
-
-	// ヒットリアクションフラグ
-	bool isHitReactioning_ = false;
-	// ヒットリアクションタイマー
-	Timer hitReactionTimer_{};
-	// リアクション時に使用する値
-	Vector3 hitReactionScale_{};
-	std::pair<float, float> hitReactionColor_;
 
 	// ステートパターン
 	std::vector<std::unique_ptr<IBasicEnemyState>> stateVector_; // ステートコンテナ

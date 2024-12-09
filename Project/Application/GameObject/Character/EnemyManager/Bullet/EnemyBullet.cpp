@@ -28,7 +28,7 @@ void EnemyBullet::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.3f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;

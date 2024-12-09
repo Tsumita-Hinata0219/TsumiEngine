@@ -164,12 +164,11 @@ private:
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;
-
 	// ヒットリアクションタイマー
 	Timer hitReactionTimer_{};
-
 	// リアクション時に使用する値
-	std::pair<float, float> hitReactionScale_;
+	Vector3 hitReactionScale_{};
+	std::pair<float, float> hitReactionColor_;
 
 	// ステートパターン
 	std::vector<std::unique_ptr<IBasicEnemyState>> stateVector_; // ステートコンテナ

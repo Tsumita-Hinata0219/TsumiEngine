@@ -16,7 +16,10 @@ public: // メンバ関数
 	// タイマーの更新処理
 	void Update(bool roop = false);
 
-	// リセットみたいなやつ
+	// リセット
+	void Reset();
+
+	// クリア
 	void Clear();
 
 

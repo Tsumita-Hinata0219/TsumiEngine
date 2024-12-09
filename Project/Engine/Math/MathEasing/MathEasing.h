@@ -55,5 +55,7 @@ struct Ease {
 	static float InBounce(float num);
 	static float OutBounce(float num);
 	static float InOutBounce(float num);
+
+	static float WithPeak(float start, float peak, float end, float ratio);
 };
 

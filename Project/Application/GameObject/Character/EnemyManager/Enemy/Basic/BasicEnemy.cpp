@@ -34,6 +34,17 @@ void BasicEnemy::Init()
 	// HPの設定
 	hp_ = 15;
 
+	// ヒットリアクション関連数値の初期設定
+	// ヒットリアクションフラグ
+	isHitReactioning_ = false;
+	// タイマー
+	hitReactionTimer_.Init(0.0f, 0.3f * 60.0f);
+	// スケール
+	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
+	// 色加算
+	hitReactionColor_.first = 0.6f;
+	hitReactionColor_.second = 0.0f;
+
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
 	stateVector_.resize(EnumSize<BasicEnemyStateType>::value);
@@ -92,6 +103,9 @@ void BasicEnemy::Update()
 		return false;
 		}
 	);
+
+	// ヒットリアクション
+	HitReaction();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -313,9 +327,11 @@ void BasicEnemy::HitReaction()
 	if (!isHitReactioning_) { return; }
 
 	// タイマー更新
-	hitReactionTimer_.Update(true);
+	hitReactionTimer_.Update();
 	// タイマー終了
 	if (hitReactionTimer_.IsFinish()) {
+		// リセット
+		hitReactionTimer_.Reset();
 		// リアクション中のフラグを折る
 		isHitReactioning_ = false;
 	}
@@ -330,12 +346,20 @@ void BasicEnemy::HitReaction()
 // スケールのリアクション
 void BasicEnemy::HitReaction_Scale()
 {
+	trans_.srt.scale.x =
+		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
+	trans_.srt.scale.y =
+		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
+	trans_.srt.scale.z =
+		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
 }
 
 
 // 色のアクション
 void BasicEnemy::HitReaction_Color()
 {
+	colorAdd_.intensity =
+		Interpolate(hitReactionColor_.first, hitReactionColor_.second, hitReactionTimer_.GetRatio(), Ease::OutQuint);
 }
 
 

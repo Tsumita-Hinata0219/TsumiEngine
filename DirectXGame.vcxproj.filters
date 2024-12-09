@@ -243,6 +243,7 @@
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
     <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -470,6 +471,8 @@
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
     <ClInclude Include="Project\Engine\GameData\GameData.h" />
     <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

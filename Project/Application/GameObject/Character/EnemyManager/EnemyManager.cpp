@@ -15,7 +15,7 @@ void EnemyManager::Init()
 	bulletPool_.Create(100);
 
 	// EffectのPoolのインスタンスを先に作っておく
-	effectPool_.Create(100);
+	circleEffectPool_.Create(100);
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
@@ -67,14 +67,14 @@ void EnemyManager::Update()
 	);
 
 	// Effectの更新処理
-	for (IEnemyEffect* effect : effectList_) {
+	for (EnemyHitEffectCircle* effect : circleEffectList_) {
 		effect->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	effectList_.remove_if([this](IEnemyEffect* effect) {
+	circleEffectList_.remove_if([this](EnemyHitEffectCircle* effect) {
 		if (effect->IsDead()) {
 			// 死亡したエフェクトはプールに返却
-			effectPool_.Return(effect);
+			circleEffectPool_.Return(effect);
 			return true;
 		}
 		return false;
@@ -107,7 +107,7 @@ void EnemyManager::Draw3D()
 	}
 
 	// Effectの描画
-	for (IEnemyEffect* effect : effectList_) {
+	for (EnemyHitEffectCircle* effect : circleEffectList_) {
 		effect->Draw3D();
 	}
 }
@@ -216,13 +216,13 @@ void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 void EnemyManager::CreateEffect()
 {
 	// プールから新しいエフェクトを取得
-	IEnemyEffect* newEffect = effectPool_.Get();
+	EnemyHitEffectCircle* newEffect = circleEffectPool_.Get();
 
 	// newEffectの初期化
 	newEffect->Init();
 
 	// リストに追加
-	effectList_.push_back(newEffect);
+	circleEffectList_.push_back(newEffect);
 }
 
 

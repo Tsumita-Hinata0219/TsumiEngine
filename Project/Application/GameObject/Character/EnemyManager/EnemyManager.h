@@ -11,6 +11,7 @@
 #include "Enemy/Static/StaticEnemy.h"
 
 #include "Effect/Interface/IEnemyEffect.h"
+#include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
 
 
 // Player前方宣言
@@ -117,9 +118,9 @@ private: // メンバ変数
 	std::list<EnemyBullet*> bulletList_;
 
 	// EffectのPool
-	ObjectPool<IEnemyEffect> effectPool_;
+	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;
 	// EffectのList配列
-	std::list<IEnemyEffect*> effectList_;
+	std::list<EnemyHitEffectCircle*> circleEffectList_;
 
 	// エネミーが全滅したかのフラグ
 	bool isEliminated_ = false;

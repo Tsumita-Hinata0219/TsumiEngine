@@ -13,6 +13,11 @@ void EnemyHitEffectCircle::Init()
 	// トランスフォームの初期化
 	trans_.Init();
 
+	// タイマーの設定 (1秒)
+	timer_.Init(0.0f, 1.0f * 60.0f);
+
+	// 死亡フラグは折る
+	isDead_ = false;
 
 }
 

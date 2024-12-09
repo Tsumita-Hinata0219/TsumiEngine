@@ -16,7 +16,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IEnemyEffect() = default;
+	IEnemyEffect();
 
 	/// <summary>
 	/// 仮想デストラク
@@ -59,6 +59,9 @@ protected:
 
 	// 親エネミーのポインタ
 	IEnemy* pEnemy_ = nullptr;
+
+	// モデルマネージャー
+	ModelManager* modelManager_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_;

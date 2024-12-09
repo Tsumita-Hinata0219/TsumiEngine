@@ -13,9 +13,6 @@ void EnemyHitEffectCircle::Init()
 
 	// トランスフォームの初期化
 	trans_.Init();
-
-	// タイマーの設定 (1秒)
-	timer_.Init(0.0f, 1.0f * 60.0f);
 	// 座標は親エネミーと同じ場所
 	trans_.srt.translate = pEnemy_->GetTranslate();
 
@@ -32,6 +29,10 @@ void EnemyHitEffectCircle::Init()
 	// 補間に使用するAlpha値の設定。不透明->透明
 	alpha_.first = 1.0f;
 	alpha_.second = 0.0f;
+
+	// タイマーの設定 (1秒)
+	timer_.Init(0.0f, 1.0f * 60.0f);
+	timer_.Start();
 }
 
 

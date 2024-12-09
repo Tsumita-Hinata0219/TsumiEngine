@@ -55,6 +55,4 @@ private:
 	// 補間に使用する値
 	std::pair<float, float> scale_;
 	std::pair<float, float> alpha_;
-
-
 };

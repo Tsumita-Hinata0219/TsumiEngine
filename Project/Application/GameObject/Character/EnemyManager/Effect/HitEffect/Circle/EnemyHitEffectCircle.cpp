@@ -24,7 +24,7 @@ void EnemyHitEffectCircle::Init()
 
 	// 補間に使用するScaleの値
 	scale_.first = 2.0f;
-	scale_.second = 5.0f;
+	scale_.second = 4.0f;
 
 	// 補間に使用するAlpha値の設定。不透明->透明
 	alpha_.first = 1.0f;
@@ -94,4 +94,6 @@ void EnemyHitEffectCircle::CalcAlpha()
 	color_.w =
 		Interpolate(alpha_.first, alpha_.second, timer_.GetRatio(), Ease::InSine);
 }
+
+
 

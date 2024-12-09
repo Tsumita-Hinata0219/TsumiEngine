@@ -143,20 +143,21 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 
 	// Mesh
 	MeshData GetMeshData() const { return this->modelState_->GetMeshData(); }
-	void SetMeshData(MeshData setData) { this->modelState_->SetMeshData(setData); }
+	void SetMeshData(const MeshData& setData) { this->modelState_->SetMeshData(setData); }
 
 	// Material
 	MaterialDataN GetMaterialData() const { return this->modelState_->GetMaterialData(); }
-	void SetMaterialData(MaterialDataN seteData) { this->modelState_->SetMaterialData(seteData); }
+	void SetMaterialData(const MaterialDataN& seteData) { this->modelState_->SetMaterialData(seteData); }
 	void SetMaterialTexture(uint32_t setTexture) { this->modelState_->SetMaterialTexture(setTexture); }
+	void SetMaterialUVMat(const Matrix4x4& setMat) { this->modelState_->SetMaterialUVMat(setMat); }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->modelState_->GetLightData(); }
-	void SetLightData(DirectionalLightData setData) { this->modelState_->SetLightData(setData); }
+	void SetLightData(const DirectionalLightData& setData) { this->modelState_->SetLightData(setData); }
 
 	// Environment
 	EnvironmentData GetEnvironmentData() const { return this->modelState_->GetEnvironmentData(); }
-	void SetEnvironmentData(EnvironmentData setData) { this->modelState_->SetEnvironmentData(setData); }
+	void SetEnvironmentData(const EnvironmentData& setData) { this->modelState_->SetEnvironmentData(setData); }
 
 #pragma endregion 
 

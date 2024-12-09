@@ -54,10 +54,8 @@ void DebugScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void DebugScene::Update(GameManager* state)
+void DebugScene::Update()
 {
-	state;
-
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
 

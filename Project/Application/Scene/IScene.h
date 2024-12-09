@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	virtual void Update(GameManager* state) = 0;
+	virtual void Update() = 0;
 
 	/// <summary>
 	/// 背景スプライトの描画処理
@@ -41,4 +41,17 @@ public:
 	/// 前景スプライトの描画処理
 	/// </summary>
 	virtual void FrontSpriteDraw() = 0;
+
+	/// <summary>
+	/// 親マネージャーのポインタ
+	/// </summary>
+	/// <param name="setManager"></param>
+	void SetManager(GameManager* setManager) { this->Manager_ = setManager; }
+
+
+protected:
+
+	GameManager* Manager_ = nullptr;
+
+
 };

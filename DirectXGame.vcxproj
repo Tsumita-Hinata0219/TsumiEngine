@@ -229,7 +229,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Project\Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Project\Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Project\Application\Scene\GameScene\GameScene.cpp" />
-    <ClCompile Include="Project\Application\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Project\Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Project\Engine\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Project\Engine\3D\Model\Loader\ModelFileLoader.cpp" />
@@ -442,7 +441,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Project\Application\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Project\Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Project\Application\Scene\IScene.h" />
-    <ClInclude Include="Project\Application\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Project\Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Project\Engine\2D\Sprite\Sprite.h" />
     <ClInclude Include="Project\Engine\3D\DrawSystem\DrawSystem.h" />

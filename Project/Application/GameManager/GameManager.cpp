@@ -7,11 +7,12 @@ float g_ElapsedTime = 0.0f;
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameManager::GameManager(IScene* newScene) {
+GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 
 	Tsumi::Initialize();
-	Scene_ = newScene;
-	Scene_->Initialize();
+	scene_ = std::move(initScene);
+	scene_->SetManager(this);
+	scene_->Initialize();
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
 }
 
@@ -20,8 +21,6 @@ GameManager::GameManager(IScene* newScene) {
 /// デストラクタ
 /// </summary>
 GameManager::~GameManager() {
-
-	delete Scene_;
 	Tsumi::Finalize();
 }
 
@@ -39,20 +38,20 @@ void GameManager::Run() {
 		g_ElapsedTime = std::chrono::duration<float>(currentTime - startTime_).count();
 
 		Tsumi::BeginFlame();
-		Scene_->Update(this);
+		scene_->Update();
 
 		//// ポストエフェクト
 		DirectXCommon::PreDrawForPostEffect();
 		
-		Scene_->BackSpriteDraw();
-		Scene_->ModelDraw();
+		scene_->BackSpriteDraw();
+		scene_->ModelDraw();
 
 		DirectXCommon::PostDrawForPostEffect();
 
 		// スワップチェーン
 		DirectXCommon::PreDrawForSwapChain();
 
-		Scene_->FrontSpriteDraw();
+		scene_->FrontSpriteDraw();
 
 		Tsumi::EndFlame();
 		DirectXCommon::PostDrawForSwapChain();
@@ -65,10 +64,9 @@ void GameManager::Run() {
 /// <summary>
 /// シーンチェンジ
 /// </summary>
-void GameManager::ChangeSceneState(IScene* newScene) {
-
-	delete Scene_;
-	Scene_ = newScene;
-	Scene_->Initialize();
+void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
+	scene_ = std::move(newScene);
+	scene_->SetManager(this);
+	scene_->Initialize();
 	return;
 }

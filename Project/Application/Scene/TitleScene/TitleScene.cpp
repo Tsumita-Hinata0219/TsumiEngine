@@ -1,4 +1,5 @@
 #include "TitleScene.h"
+#include "../../GameManager/GameManager.h"
 
 
 
@@ -65,10 +66,8 @@ void TitleScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void TitleScene::Update(GameManager* state)
+void TitleScene::Update()
 {
-	state;
-
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
 
@@ -87,19 +86,16 @@ void TitleScene::Update(GameManager* state)
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new SelectScene);
+		Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		return;
 	}
 
 
 #ifdef _DEBUG
-
 	ImGui::Begin("TitleScene");
 	retroEffectData_.DrawImGui();
 	ImGui::Text("");
-
 	ImGui::End();
-
 #endif // _DEBUG
 }
 

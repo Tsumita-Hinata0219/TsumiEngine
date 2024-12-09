@@ -178,7 +178,6 @@
     <ClCompile Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Project\Application\Scene\TitleScene\TitleScene.cpp" />
-    <ClCompile Include="Project\Application\Scene\ResultScene\ResultScene.cpp" />
     <ClCompile Include="Project\Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Project\Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Project\Engine\3D\Model\Loader\ModelFileLoader.cpp" />
@@ -391,7 +390,6 @@
     <ClInclude Include="Project\Engine\PostEffect\IPostEffect\HSV\HSVEffect.h" />
     <ClInclude Include="Project\Application\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Project\Application\Scene\TitleScene\TitleScene.h" />
-    <ClInclude Include="Project\Application\Scene\ResultScene\ResultScene.h" />
     <ClInclude Include="Project\Engine\3D\Model\State\ModelState.h" />
     <ClInclude Include="Project\Engine\3D\Model\State\GLTF\IGLTFState.h" />
     <ClInclude Include="Project\Engine\3D\Model\State\OBJ\IOBJState.h" />

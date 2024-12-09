@@ -33,7 +33,7 @@ void SelectScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void SelectScene::Update(GameManager* state)
+void SelectScene::Update()
 {
 	// カメラ
 	camera_.Update();
@@ -59,7 +59,7 @@ void SelectScene::Update(GameManager* state)
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		state->ChangeSceneState(new GameScene);
+		Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		return;
 	}
 

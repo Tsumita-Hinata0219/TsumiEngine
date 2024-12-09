@@ -1,5 +1,5 @@
 #include "GameScene.h"
-#include "GameObject/Others/StageSelect/Manager/StageSelectManager.h"
+#include "../../GameManager/GameManager.h"
 
 
 /// <summary>
@@ -101,9 +101,8 @@ void GameScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void GameScene::Update(GameManager* state)
+void GameScene::Update()
 {
-	state;
 	// ──────── TestPostEffect
 	testPostEffect_->Update();
 
@@ -126,11 +125,11 @@ void GameScene::Update(GameManager* state)
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
-			state->ChangeSceneState(new SelectScene);
+			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
-			state->ChangeSceneState(new GameScene);
+			Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		}
 		return;
 	}
@@ -150,10 +149,6 @@ void GameScene::Update(GameManager* state)
 	STMenuManager_->Update();
 	SceneChangeCheck();
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
-		return;
-	}
-	if (input_->Trigger(DIK_RETURN)) {
-		state->ChangeSceneState(new TitleScene());
 		return;
 	}
 

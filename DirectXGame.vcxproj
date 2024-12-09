@@ -157,6 +157,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="externals\imgui\imgui_impl_win32.cpp" />
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
@@ -344,6 +346,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.h" />
+    <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />

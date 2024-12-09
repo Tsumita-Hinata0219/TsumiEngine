@@ -225,4 +225,19 @@ float Ease::InOutBounce(float num)
 		: (1.0f + Ease::OutBounce(2.0f * num - 1.0f)) / 2.0f;
 }
 
+float Ease::WithPeak(float start, float peak, float end, float ratio)
+{
+	// 正規化された時間を計算
+	float midPoint = 0.5f;
+
+	// 前半部分（start -> peak）で補間
+	if (ratio < midPoint) {
+		return start + (peak - start) * (ratio / midPoint);
+	}
+	// 後半部分（peak -> end）で補間
+	else {
+		return peak + (end - peak) * ((ratio - midPoint) / (1.0f - midPoint));
+	}
+}
+
 

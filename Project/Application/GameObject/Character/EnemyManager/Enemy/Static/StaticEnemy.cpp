@@ -17,11 +17,30 @@ void StaticEnemy::Init()
 	// ライトの初期設定
 	light_.enable = true;
 	light_.direction = Vector3::one;
+	light_.intensity = 0.7f;
+	model_->SetLightData(light_);
+
+	// 色加算の初期設定
+	colorAdd_.enable = true;
+	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.intensity = 0.0f;
+	model_->SetColorAddition(colorAdd_);
+
+	// ヒットリアクション関連数値の初期設定
+	// ヒットリアクションフラグ
+	isHitReactioning_ = false;
+	// タイマー
+	hitReactionTimer_.Init(0.0f, 0.4f * 60.0f);
+	// スケール
+	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
+	// 色加算
+	hitReactionColor_.first = 0.8f;
+	hitReactionColor_.second = 0.0f;
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.8f;
 
 	// 回転スピード(ラジアン)
 	addRadSpeed_ = 1.0f;
@@ -55,6 +74,9 @@ void StaticEnemy::Update()
 		}
 	);
 
+	// ヒットリアクション
+	HitReaction();
+
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
 
@@ -69,7 +91,8 @@ void StaticEnemy::Update()
 void StaticEnemy::Draw3D()
 {
 	// BodyModelの描画
-	//model_->SetLightData(light_);
+	model_->SetLightData(light_);
+	model_->SetColorAddition(colorAdd_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画
@@ -89,6 +112,15 @@ void StaticEnemy::onCollision(IObject* object)
 
 		// HPを減らす
 		hp_--;
+
+		// ヒットリアクション中にする
+		isHitReactioning_ = true;
+
+		// ヒットリアクションのタイマースタート
+		hitReactionTimer_.Start();
+
+		// エフェクトを出す
+		enemyManager_->AddNewHitEffect(this);
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
@@ -138,7 +170,7 @@ void StaticEnemy::CreateNewBullet()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
+	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
 }
 
 
@@ -151,7 +183,7 @@ void StaticEnemy::CreateNewBullet2()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = -kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Resistant, initPos, initVel);
+	enemyManager_->AddNewBullet(EnemyBulletType::Resistant, initPos, initVel);
 }
 
 

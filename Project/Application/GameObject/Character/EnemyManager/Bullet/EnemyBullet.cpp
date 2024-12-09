@@ -8,11 +8,11 @@ void EnemyBullet::Init()
 	// BodyModelのロードと初期化
 	// 設定されているTypeで読み込むモデルを変える
 	if (bulletType_ == EnemyBulletType::Normal) {
-		modelManager_->LoadModel("Obj/EnemyBullet/Normal", "EnemyBullet_Normal.obj");
+		modelManager_->LoadModel("Obj/Enemys/Bullet/Normal", "EnemyBullet_Normal.obj");
 		model_ = modelManager_->GetModel("EnemyBullet_Normal");
 	}
 	else if (bulletType_ == EnemyBulletType::Resistant) {
-		modelManager_->LoadModel("Obj/EnemyBullet/Resistant", "EnemyBullet_Resistant.obj");
+		modelManager_->LoadModel("Obj/Enemys/Bullet/Resistant", "EnemyBullet_Resistant.obj");
 		model_ = modelManager_->GetModel("EnemyBullet_Resistant");
 	}
 
@@ -28,7 +28,7 @@ void EnemyBullet::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.3f;
 
 	// 死亡フラグは折っておく
 	isDead_ = false;

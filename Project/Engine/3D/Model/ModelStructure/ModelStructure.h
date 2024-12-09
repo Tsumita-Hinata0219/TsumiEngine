@@ -53,6 +53,20 @@ struct EnvironmentData {
 	}
 };
 
+// 色加算
+struct ColorAddition {
+	Vector4 addColor{};
+	float intensity = 0.0f;
+	int enable = false;
+
+	void DrawImGui(std::string label = "") {
+		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
+		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
+		ImGui::ColorEdit4((label + "_Color").c_str(), &addColor.x);
+		ImGui::DragFloat((label + "_Intensity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
+	}
+};
+
 // スキンクラスターデータ
 struct SkinClusterData {
 	std::vector<Matrix4x4> inverseBindPosematrices;

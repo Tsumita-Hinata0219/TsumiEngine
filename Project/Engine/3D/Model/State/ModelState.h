@@ -41,27 +41,33 @@ public: // メンバ変数
 
 	// データのセット
 	ModelDatas GetModelDatas() { return this->datas_; }
-	void SetModelDatas(ModelDatas setData) { this->datas_ = setData; }
+	void SetModelDatas(const ModelDatas& setData) { this->datas_ = setData; }
 	
 	// Mesh
 	MeshData GetMeshData() const { return this->datas_.mesh; }
-	void SetMeshData(MeshData setData) { this->datas_.mesh = setData; }
+	void SetMeshData(const MeshData& setData) { this->datas_.mesh = setData; }
 
 	// Material
 	MaterialDataN GetMaterialData() const { return this->datas_.material; }
-	void SetMaterialData(MaterialDataN seteData) { this->datas_.material = seteData; }
+	void SetMaterialData(const MaterialDataN& seteData) { this->datas_.material = seteData; }
 	// Color
-	void SetMaterialColor(Vector4 setColor) { this->datas_.material.color = setColor; }
+	void SetMaterialColor(const Vector4& setColor) { this->datas_.material.color = setColor; }
 	// Texture
 	void SetMaterialTexture(uint32_t setTexture) { this->datas_.material.textureHandle = setTexture; }
+	// uvTransform
+	void SetMaterialUVMat(const Matrix4x4& setMat) { this->datas_.material.uvTransform = setMat; }
 
 	// Light
 	DirectionalLightData GetLightData() const { return this->datas_.light; }
-	void SetLightData(DirectionalLightData setData) { this->datas_.light = setData; }
+	void SetLightData(const DirectionalLightData& setData) { this->datas_.light = setData; }
 
 	// Environment
 	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
-	void SetEnvironmentData(EnvironmentData setData) { this->datas_.environment = setData; }
+	void SetEnvironmentData(const EnvironmentData& setData) { this->datas_.environment = setData; }
+
+	// ColorAddition
+	ColorAddition GetColorAddition() const { return this->datas_.colorAddition; }
+	void SetColorAddition(const ColorAddition& setData) { this->datas_.colorAddition = setData; }
 
 #pragma endregion 
 
@@ -78,14 +84,16 @@ protected:
 		// indexBufferView
 		buffers_.indeces.CreateResource(UINT(datas.mesh.indices.size()));
 		buffers_.indeces.CreateIndexBufferView();
-		// material
-		buffers_.material.CreateResource();
 		// transform
 		buffers_.transform.CreateResource();
+		// material
+		buffers_.material.CreateResource();
 		// light
 		buffers_.light.CreateResource();
 		// encironment
 		buffers_.enviroment.CreateResource();
+		// colorAddition
+		buffers_.colorAddition.CreateResource();
 
 		if (stateType_ == GLTF) {
 			// influence

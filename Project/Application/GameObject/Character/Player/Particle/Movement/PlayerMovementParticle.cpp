@@ -15,8 +15,8 @@ void PlayerMovementParticle::Init()
 	scale_.second = -0.01f;
 
 	// 補間に使用するAlpha値の設定。不透明->透明
-	alpha.first = 1.0f;
-	alpha.second = 0.0f;
+	alpha_.first = 1.0f;
+	alpha_.second = 0.0f;
 
 	// 速度
 	velocity_ = 0.07f;
@@ -80,6 +80,6 @@ void PlayerMovementParticle::CalcScale()
 void PlayerMovementParticle::CalcColor()
 {
 	color_.w =
-		Interpolate(alpha.first, alpha.second, timer_.GetRatio(), Ease::InSine);
+		Interpolate(alpha_.first, alpha_.second, timer_.GetRatio(), Ease::InSine);
 }
 

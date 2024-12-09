@@ -52,7 +52,17 @@ void Timer::Update(bool roop)
 }
 
 
-// リセットみたいなやつ
+// リセット
+void Timer::Reset()
+{
+	nowFrame_ = saveTimer_.first;
+	endFrame_ = saveTimer_.second;
+	isActive_ = false;
+	isFinish_ = true;
+}
+
+
+// クリア
 void Timer::Clear()
 {
 	nowFrame_ = 0;

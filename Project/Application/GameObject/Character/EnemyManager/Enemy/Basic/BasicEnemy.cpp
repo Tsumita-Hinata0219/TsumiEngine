@@ -17,6 +17,12 @@ void BasicEnemy::Init()
 	light_.intensity = 0.7f;
 	model_->SetLightData(light_);
 
+	// 色加算の初期設定
+	colorAdd_.enable = true;
+	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.intensity = 0.0f;
+	model_->SetColorAddition(colorAdd_);
+
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
@@ -27,6 +33,17 @@ void BasicEnemy::Init()
 
 	// HPの設定
 	hp_ = 15;
+
+	// ヒットリアクション関連数値の初期設定
+	// ヒットリアクションフラグ
+	isHitReactioning_ = false;
+	// タイマー
+	hitReactionTimer_.Init(0.0f, 0.4f * 60.0f);
+	// スケール
+	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
+	// 色加算
+	hitReactionColor_.first = 0.8f;
+	hitReactionColor_.second = 0.0f;
 
 	/* ----- StatePattern ステートパターン ----- */
 	// 各ステートをコンテナに保存
@@ -43,7 +60,7 @@ void BasicEnemy::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f;
+	sphere_->data_.radius = 1.8f;
 }
 
 
@@ -87,12 +104,15 @@ void BasicEnemy::Update()
 		}
 	);
 
+	// ヒットリアクション
+	HitReaction();
+
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
 
 
 #ifdef _DEBUG
-
+	DrawImGui();
 #endif // _DEBUG
 }
 
@@ -102,6 +122,7 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
+	model_->SetColorAddition(colorAdd_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画
@@ -127,6 +148,15 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 
 		// HPを減らす
 		hp_--;
+
+		// ヒットリアクション中にする
+		isHitReactioning_ = true;
+
+		// ヒットリアクションのタイマースタート
+		hitReactionTimer_.Start();
+
+		// エフェクトを出す
+		enemyManager_->AddNewHitEffect(this);
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
@@ -286,7 +316,7 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewEnemyBullet(EnemyBulletType::Normal, initPos, initVel);
+	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
 }
 
 
@@ -295,5 +325,19 @@ void BasicEnemy::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
+}
+
+
+// DrawImGuiの描画
+void BasicEnemy::DrawImGui()
+{
+	if (ImGui::TreeNode("BasicEnemy")) {
+
+		ImGui::Text("ColorAddition");
+		colorAdd_.DrawImGui();
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
 }
 

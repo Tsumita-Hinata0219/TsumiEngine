@@ -108,60 +108,68 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 
 
 	// マテリアルに関する
-	D3D12_ROOT_PARAMETER rootParameters[7]{};
-	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[0].Descriptor.ShaderRegister = 0; // レジスタ番号
+	D3D12_ROOT_PARAMETER rootParameters[8]{};
 
-	// マテリアルテクスチャ
+	// ─── VS
+	// b0 : 頂点位置
+	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
+	rootParameters[0].Descriptor.ShaderRegister = 0;// レジスタ番号
+
+	// ─── PS
+	// b0 : マテリアル
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[1].Descriptor.ShaderRegister = 0; // レジスタ番号
+
+	// b1 : カメラ
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[2].Descriptor.ShaderRegister = 1; // レジスタ番号
+
+	// b2 : ライト
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[3].Descriptor.ShaderRegister = 2; // レジスタ番号
+
+	// b3 : 環境マップ
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[4].Descriptor.ShaderRegister = 3; // レジスタ番号
+
+	// b4 : 色加算
+	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[5].Descriptor.ShaderRegister = 4; // レジスタ番号
+
+	// t0 : モデルテクスチャ
 	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
 	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
 	materiaTexture[0].NumDescriptors = 1; // 数は1つ
 	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
-	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[6].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
+	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
 
-	// 頂点位置に関する
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;// VertexShaderで使う
-	rootParameters[1].Descriptor.ShaderRegister = 0;// レジスタ番号
-	
-	// Viewに関する
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[2].Descriptor.ShaderRegister = 1; // レジスタ番号
-
-	// 光に関する
-	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 2; // レジスタ番号
-
-	// 環境マップ
-	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
-	rootParameters[5].Descriptor.ShaderRegister = 3; // レジスタ番号
-
+	// t1 : 環境マップテクスチャ
 	D3D12_DESCRIPTOR_RANGE environmentTexture[1]{};
 	environmentTexture[0].BaseShaderRegister = 1; // 1から始まる
 	environmentTexture[0].NumDescriptors = 1; // 数は1つ
 	environmentTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	environmentTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[6].DescriptorTable.pDescriptorRanges = environmentTexture; // Tableの中身の配列を指定
-	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(environmentTexture); // Tableで利用する
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[7].DescriptorTable.pDescriptorRanges = environmentTexture; // Tableの中身の配列を指定
+	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(environmentTexture); // Tableで利用する
 
-
-	// Samplerの設定
+	// s0 : サンプラー
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};
 	staticSamplers[0].Filter = D3D12_FILTER_MIN_MAG_MIP_LINEAR; // バイリニアフィルタ
 	staticSamplers[0].AddressU = D3D12_TEXTURE_ADDRESS_MODE_WRAP; // 0～1の範囲外をリピート
 	staticSamplers[0].AddressV = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
 	staticSamplers[0].AddressW = D3D12_TEXTURE_ADDRESS_MODE_WRAP;
-
 	staticSamplers[0].ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER; // 比較しない
 	staticSamplers[0].MaxLOD = D3D12_FLOAT32_MAX; // ありったけのMipmapを使う
 	staticSamplers[0].ShaderRegister = 0; // レジスタ番号
@@ -170,7 +178,6 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 
 	descriptionRootSignature.pParameters = rootParameters; // ルートパラメータ配列へのポインタ
 	descriptionRootSignature.NumParameters = _countof(rootParameters); // 配列の長さ
-
 	descriptionRootSignature.pStaticSamplers = staticSamplers;
 	descriptionRootSignature.NumStaticSamplers = _countof(staticSamplers);
 

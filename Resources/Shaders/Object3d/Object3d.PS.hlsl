@@ -40,6 +40,15 @@ struct Environment
 ConstantBuffer<Environment> gEnvironment : register(b3);
 TextureCube<float4> gEnvironmentTexture : register(t1);
 
+// 色加算
+struct ColorAddition
+{
+    float4 addColor;
+    float intensity;
+    int enable;
+};
+ConstantBuffer<ColorAddition> gColorAddition : register(b4);
+
 
 
 SamplerState gSampler : register(s0);
@@ -60,12 +69,12 @@ PixelShaderOutput main(VertexShaderOutput input)
     float4 textureColor = gTexture.Sample(gSampler, transformedUV.xy);
 
     // アルファ値が0.9f未満なら描画をスキップ
-    //if (textureColor.a == 0.0f)
-    //{
-    //    discard;
-    //}
+    if (textureColor.a == 0.0f)
+    {
+        discard;
+    }
     
-    // ライト処理を追加
+    // ライト処理
     if (gDirectionalLight.eneble) // ライトが有効な場合
     {
         // 法線ベクトルの計算
@@ -111,6 +120,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     }
     
+    // 環境マップ
     if (gEnvironment.enable)
     {
         float3 cameraToPos = normalize(input.worldPos - gViewProjectionMat.cameraPosition);
@@ -120,7 +130,13 @@ PixelShaderOutput main(VertexShaderOutput input)
         output.color.rgb += environmentColor.rgb;
     }
     
-    // アルファ値の計算
+    // 色加算
+    if (gColorAddition.enable)
+    {
+        output.color.rgb += gColorAddition.addColor.rgb * gColorAddition.intensity;
+    }
+
+    // アルファ値の設定
     output.color.a = gMaterial.color.a * textureColor.a;
 
     return output;

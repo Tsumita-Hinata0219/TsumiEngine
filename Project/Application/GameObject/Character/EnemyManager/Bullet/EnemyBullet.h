@@ -14,7 +14,7 @@ enum class EnemyBulletType {
 };
 
 
-/* PlayerBulletクラス */
+/* EnemyBulletクラス */
 class EnemyBullet : public IObject {
 
 public: // メンバ関数
@@ -39,6 +39,7 @@ public: // メンバ関数
 #pragma region Accessor アクセッサ
 
 	// Type
+	EnemyBulletType GetBulletType() const { return this->bulletType_; }
 	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType;	}
 
 	// 座標

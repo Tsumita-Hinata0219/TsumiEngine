@@ -3,33 +3,6 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "立方体",
-            "transform": {
-                "translation": [
-                    0.0,
-                    0.0,
-                    -2.0
-                ],
-                "rotation": [
-                    0.0,
-                    -180.00000500895632,
-                    0.0
-                ],
-                "scaling": [
-                    -50.0,
-                    -50.0,
-                    -1.0
-                ]
-            },
-            "file_name": "Floor",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
             "name": "Cube",
             "transform": {
                 "translation": [
@@ -57,7 +30,7 @@
         },
         {
             "type": "MESH",
-            "name": "立方体.001",
+            "name": "円柱",
             "transform": {
                 "translation": [
                     0.0,
@@ -67,7 +40,7 @@
                 "rotation": [
                     0.0,
                     -0.0,
-                    -179.99997768819966
+                    0.0
                 ],
                 "scaling": [
                     1.0,
@@ -75,7 +48,34 @@
                     1.0
                 ]
             },
-            "file_name": "BasicEnemy",
+            "file_name": "StaticEnemy",
+            "collider": {
+                "type": "NONE"
+            },
+            "load_model": true,
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "立方体",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    -2.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    50.0,
+                    50.0,
+                    1.0
+                ]
+            },
+            "file_name": "Floor",
             "collider": {
                 "type": "NONE"
             },

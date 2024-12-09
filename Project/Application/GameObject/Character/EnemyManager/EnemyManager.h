@@ -60,6 +60,9 @@ public: // メンバ関数
 	// Playerの設定
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
+	// 全滅したかのフラグ
+	bool IsEliminated() const { return this->isEliminated_; }
+
 	// EnemyListの取得
 	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
 
@@ -67,6 +70,11 @@ public: // メンバ関数
 
 
 private:
+
+	/// <summary>
+	/// 全滅したかのチェック
+	/// </summary>
+	void EliminatedChecker();
 
 	/// <summary>
 	/// 新しいEnemyを生成する
@@ -111,6 +119,9 @@ private: // メンバ変数
 
 	// エネミーのカウントチェックタイマー
 	Timer enemyCountCheckTime_;
+
+	// エネミーが全滅したかのフラグ
+	bool isEliminated_ = false;
 
 	ModelManager* modelManager_ = nullptr;
 	std::vector<Transform> trans_;

@@ -190,7 +190,6 @@
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
-    <ClCompile Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
@@ -241,6 +240,10 @@
     <ClCompile Include="Project\Application\GameObject\IObject\IObject.cpp" />
     <ClCompile Include="Project\Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
     <ClCompile Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
+    <ClCompile Include="Project\Application\Scene\SelectScene\SelectScene.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
+    <ClCompile Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -403,7 +406,6 @@
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
     <ClInclude Include="Project\Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\UI\PlayerUI.h" />
-    <ClInclude Include="Project\Application\GameObject\Others\UI\Game\GameSceneUI.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Project\Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
@@ -465,6 +467,11 @@
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Interface\ICollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
     <ClInclude Include="Project\Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
+    <ClInclude Include="Project\Application\Scene\SelectScene\SelectScene.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
+    <ClInclude Include="Project\Engine\GameData\GameData.h" />
+    <ClInclude Include="Project\Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\LambertObject.hlsli" />

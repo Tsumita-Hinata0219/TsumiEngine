@@ -92,9 +92,9 @@ PixelShaderOutput main(VertexShaderOutput input)
         float NdotH = dot(normal, halfVector);
         float3 specularPow = pow(saturate(NdotH), gDirectionalLight.shininess);
         float3 specular = gDirectionalLight.color.rgb * gDirectionalLight.intensity * specularPow;
-        
+       
         // 拡散反射と鏡面反射の合成
-        float3 finalColor = diffuse + specular;
+        float3 finalColor = diffuse;
         
         // テクスチャのアルファが0の場合はピクセルを破棄
         if (textureColor.a <= 0.5f)

@@ -41,6 +41,11 @@ private:
 	/// </summary>
 	void CalcScale();
 
+	/// <summary>
+	/// Color値の計算
+	/// </summary>
+	void CalcColor();
+
 
 private:
 
@@ -49,6 +54,7 @@ private:
 
 	// 補間に使用するAlpha値
 	std::pair<float, float> scale_;
+	std::pair<float, float> alpha;
 
 	// 速度
 	float velocity_ = 0.0f;

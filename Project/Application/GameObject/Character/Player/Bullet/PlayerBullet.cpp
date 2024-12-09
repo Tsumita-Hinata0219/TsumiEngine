@@ -11,6 +11,7 @@ void PlayerBullet::Init()
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	trans_.Init();
+	trans_.srt.rotate = Vector3::zero;
 
 	// 速度の設定。呼び出し先でaccessorで設定
 

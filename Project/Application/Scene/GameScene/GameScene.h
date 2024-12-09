@@ -19,8 +19,6 @@
 #include "GameObject/Character/Player/Player.h"
 #include "GameObject/Character/EnemyManager/EnemyManager.h"
 
-#include "GameObject/Others/UI/Game/GameSceneUI.h"
-
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
@@ -87,9 +85,6 @@ private: // クラス
 
 	// PostEffect
 	std::unique_ptr<TestPostEffect> testPostEffect_;
-
-	// GameSceneUI
-	std::unique_ptr<GameSceneUI> gameSceneUI_;
 
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;

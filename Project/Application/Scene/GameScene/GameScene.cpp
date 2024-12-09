@@ -1,5 +1,5 @@
 #include "GameScene.h"
-
+#include "GameObject/Others/StageSelect/Manager/StageSelectManager.h"
 
 
 /// <summary>
@@ -11,7 +11,6 @@ GameScene::GameScene()
 	CollisionManager_ = CollisionManager::GetInstance();
 	absentEffect_ = std::make_unique<AbsentEffect>();
 	testPostEffect_ = make_unique<TestPostEffect>();
-	gameSceneUI_ = std::make_unique<GameSceneUI>();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	skybox_ = std::make_unique<Skybox>();
@@ -47,17 +46,16 @@ void GameScene::Initialize()
 	enemyManager_->SetPlayer(player_.get());
 
 	// ──────── JsonManager
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", "Stage_Demo.json");
+	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
 	// ──────── AbsentEffect
 	absentEffect_->Init();
 
 	// ──────── TestPostEffect
 	testPostEffect_->Init();
-
-	// ──────── GameSceneUI
-	gameSceneUI_->Init();
 
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
@@ -94,6 +92,9 @@ void GameScene::Initialize()
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
+
+
+	jsonManager->Clear();
 }
 
 
@@ -105,9 +106,6 @@ void GameScene::Update(GameManager* state)
 	state;
 	// ──────── TestPostEffect
 	testPostEffect_->Update();
-
-	// ──────── GameSceneUI
-	gameSceneUI_->Update();
 
 	// ──────── GameCamera
 	gameCamera_->Update();
@@ -128,9 +126,10 @@ void GameScene::Update(GameManager* state)
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
-			state->ChangeSceneState(new TitleScene);
+			state->ChangeSceneState(new SelectScene);
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
+			GameData::GetInstance()->NextStageSet();
 			state->ChangeSceneState(new GameScene);
 		}
 		return;
@@ -182,9 +181,6 @@ void GameScene::Update(GameManager* state)
 /// </summary>
 void GameScene::BackSpriteDraw()
 {
-	// ──────── GameSceneUI
-	gameSceneUI_->Draw2DBack();
-
 	// ──────── Player
 	player_->Draw2DBack();
 }
@@ -204,11 +200,11 @@ void GameScene::ModelDraw()
 	// ──────── BoxManager
 	boxManager_->Draw3D();
 
-	// ──────── Player
-	player_->Draw3D();
-
 	// ──────── EnemyManager
 	enemyManager_->Draw3D();
+
+	// ──────── Player
+	player_->Draw3D();
 }
 
 
@@ -223,9 +219,6 @@ void GameScene::FrontSpriteDraw()
 	testPostEffect_->Draw();
 
 	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-
-		// ──────── GameSceneUI
-		gameSceneUI_->Draw2DFront();
 
 		// ──────── Player
 		player_->Draw2DFront();
@@ -247,8 +240,8 @@ void GameScene::FrontSpriteDraw()
 /// </summary>
 void GameScene::SceneChangeCheck()
 {
-	// プレイヤーが勝利 or 敗北でシーンを変更
-	if (player_->IsWin() || player_->IsLose()) {
+	// プレイヤー死亡 or エネミー全滅でシーン遷移にに入る
+	if (player_->IsDead() || enemyManager_->IsEliminated()) {
 		STMenuManager_->DirectionStart();
 	}
 

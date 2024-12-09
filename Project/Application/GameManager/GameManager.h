@@ -7,10 +7,17 @@
 #include "Scene/DebugScene/DebugScene.h"
 
 #include "Scene/TitleScene/TitleScene.h"
+#include "Scene/SelectScene/SelectScene.h"
 #include "Scene/GameScene/GameScene.h"
 #include "Scene/ResultScene/ResultScene.h"
 
+#include "GameData/GameData.h"
+
 #include "Utilities/TextLog/TextLog.h"
+
+#include <array>
+#include <string>
+
 
 // グローバル変数の定義
 extern float g_ElapsedTime;
@@ -47,4 +54,5 @@ private:
 	IScene* Scene_ = nullptr;
 
 	std::chrono::steady_clock::time_point startTime_;
+
 };

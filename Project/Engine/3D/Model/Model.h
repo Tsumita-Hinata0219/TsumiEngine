@@ -159,6 +159,11 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	EnvironmentData GetEnvironmentData() const { return this->modelState_->GetEnvironmentData(); }
 	void SetEnvironmentData(const EnvironmentData& setData) { this->modelState_->SetEnvironmentData(setData); }
 
+	// ColorAddition
+	ColorAddition GetColorAddition() const { return this->modelState_->GetColorAddition(); }
+	void SetColorAddition(const ColorAddition& setData) { this->modelState_->SetColorAddition(setData); }
+
+
 #pragma endregion 
 
 

@@ -17,6 +17,12 @@ void BasicEnemy::Init()
 	light_.intensity = 0.7f;
 	model_->SetLightData(light_);
 
+	// 色加算の初期設定
+	colorAdd_.enable = true;
+	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.intensity = 0.0f;
+	model_->SetColorAddition(colorAdd_);
+
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
@@ -102,6 +108,7 @@ void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetColor(modelColor_);
+	model_->SetColorAddition(colorAdd_);
 	model_->DrawN(trans_);
 
 	// Bulletsの描画
@@ -345,8 +352,8 @@ void BasicEnemy::DrawImGui()
 {
 	if (ImGui::TreeNode("BasicEnemy")) {
 
-		ImGui::Text("BodyColor");
-		ImGui::ColorEdit4("color", &modelColor_.x);
+		ImGui::Text("ColorAddition");
+		colorAdd_.DrawImGui();
 		ImGui::Text("");
 
 		ImGui::TreePop();

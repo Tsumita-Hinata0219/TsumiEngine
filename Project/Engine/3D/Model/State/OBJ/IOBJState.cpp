@@ -42,14 +42,14 @@ void IOBJState::Draw(Transform& transform)
 	buffers_.indeces.Map();
 	buffers_.indeces.WriteData(datas_.mesh.indices.data());
 	buffers_.indeces.UnMap();
-	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(&datas_.material);
-	buffers_.material.UnMap();
 	// Transform
 	buffers_.transform.Map();
 	buffers_.transform.WriteData((&transform.transformationMatData));
 	buffers_.transform.UnMap();
+	// Material
+	buffers_.material.Map();
+	buffers_.material.WriteData(&datas_.material);
+	buffers_.material.UnMap();
 	// Light
 	buffers_.light.Map();
 	buffers_.light.WriteData(&datas_.light);
@@ -58,6 +58,10 @@ void IOBJState::Draw(Transform& transform)
 	buffers_.enviroment.Map();
 	buffers_.enviroment.WriteData(&datas_.environment);
 	buffers_.enviroment.UnMap();
+	// ColorAddition
+	buffers_.colorAddition.Map();
+	buffers_.colorAddition.WriteData(&datas_.colorAddition);
+	buffers_.colorAddition.UnMap();
 
 	// コマンドコール
 	CommandCall();
@@ -77,22 +81,22 @@ void IOBJState::CommandCall()
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
-	// Material
-	buffers_.material.GraphicsCommandCall(0);
 	// Transform
-	buffers_.transform.GraphicsCommandCall(1);
+	buffers_.transform.GraphicsCommandCall(0);
+	// Material
+	buffers_.material.GraphicsCommandCall(1);
 	// Camera
 	cameraManager_->CommandCall(2);
-	// MaterialTexture
-	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
-	buffers_.material.GraphicsCommandCallSRV(3, datas_.material.textureHandle);
 	// Light
-	buffers_.light.GraphicsCommandCall(4);
+	buffers_.light.GraphicsCommandCall(3);
 	// Environment
-	buffers_.enviroment.GraphicsCommandCall(5);
+	buffers_.enviroment.GraphicsCommandCall(4);
+	// ColorAddition
+	buffers_.colorAddition.GraphicsCommandCall(5);
+	// MaterialTexture
+	buffers_.material.GraphicsCommandCallSRV(6, datas_.material.textureHandle);
 	// EnvironmentTexture
-	//SRVManager::SetGraphicsRootDescriptorTable(6, datas_.environment.textureHandle);
-	buffers_.material.GraphicsCommandCallSRV(6, datas_.environment.textureHandle);
+	buffers_.material.GraphicsCommandCallSRV(7, datas_.environment.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

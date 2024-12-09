@@ -123,6 +123,9 @@ private:
 	// ライト
 	DirectionalLightData light_{};
 
+	// 色加算
+	ColorAddition colorAdd_{};
+
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
 

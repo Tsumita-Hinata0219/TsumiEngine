@@ -65,6 +65,10 @@ public: // メンバ変数
 	EnvironmentData GetEnvironmentData() const { return this->datas_.environment; }
 	void SetEnvironmentData(const EnvironmentData& setData) { this->datas_.environment = setData; }
 
+	// ColorAddition
+	ColorAddition GetColorAddition() const { return this->datas_.colorAddition; }
+	void SetColorAddition(const ColorAddition& setData) { this->datas_.colorAddition = setData; }
+
 #pragma endregion 
 
 
@@ -80,14 +84,16 @@ protected:
 		// indexBufferView
 		buffers_.indeces.CreateResource(UINT(datas.mesh.indices.size()));
 		buffers_.indeces.CreateIndexBufferView();
-		// material
-		buffers_.material.CreateResource();
 		// transform
 		buffers_.transform.CreateResource();
+		// material
+		buffers_.material.CreateResource();
 		// light
 		buffers_.light.CreateResource();
 		// encironment
 		buffers_.enviroment.CreateResource();
+		// colorAddition
+		buffers_.colorAddition.CreateResource();
 
 		if (stateType_ == GLTF) {
 			// influence

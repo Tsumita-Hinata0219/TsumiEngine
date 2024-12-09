@@ -25,6 +25,9 @@ struct ModelDatas {
 	// 環境マップ
 	EnvironmentData environment{};
 
+	// 色加算
+	ColorAddition colorAddition{};
+
 	// ジョイントウェイト
 	JointWeightData jointWeight{};
 
@@ -57,6 +60,9 @@ struct ModelBuffers {
 
 	// 環境マップ
 	BufferResource<EnvironmentData> enviroment;
+
+	// 色加算
+	BufferResource<ColorAddition> colorAddition;
 
 	// インフルエンス
 	BufferResource<VertexInfluence> influence;

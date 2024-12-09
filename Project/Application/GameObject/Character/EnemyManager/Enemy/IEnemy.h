@@ -52,16 +52,20 @@ public:
 	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// SRT
-	virtual void SetSRT(const SRTN& setSRT) = 0;
+	SRTN GetSRT() const { return this->trans_.srt; }
+	void SetSRT(const SRTN& setSRT) { this->trans_.srt = setSRT; }
 
 	// Scale
-	virtual void SetScale(const Vector3& setScale) = 0;
+	Vector3 GetScale() const { return this->trans_.srt.scale; }
+	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
 
 	// Rotate
-	virtual void SetRotate(const Vector3& setRotate) = 0;
+	Vector3 GetRotate() const { return this->trans_.srt.rotate; }
+	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
 
 	// Translate
-	virtual void SetTranslate(const Vector3& setTranslate) = 0;
+	Vector3 GetTranslate() const { return this->trans_.srt.translate; }
+	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
 
 	// HP
 	virtual uint32_t GetHP() = 0;
@@ -73,5 +77,11 @@ protected:
 
 	// 親ポインタ
 	EnemyManager* enemyManager_ = nullptr;
+
+	// モデル
+	std::unique_ptr<Model> model_;
+
+	// トランスフォーム
+	Transform trans_;
 	
 };

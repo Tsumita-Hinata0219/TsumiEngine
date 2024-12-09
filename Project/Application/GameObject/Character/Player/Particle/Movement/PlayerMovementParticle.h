@@ -52,9 +52,9 @@ private:
 	// タイマー
 	Timer timer_{};
 
-	// 補間に使用するAlpha値
+	// 補間に使用する値
 	std::pair<float, float> scale_;
-	std::pair<float, float> alpha;
+	std::pair<float, float> alpha_;
 
 	// 速度
 	float velocity_ = 0.0f;

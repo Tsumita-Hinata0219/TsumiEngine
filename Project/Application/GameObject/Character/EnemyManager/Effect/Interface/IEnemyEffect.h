@@ -5,7 +5,7 @@
 
 
 // 前方宣言
-
+class IEnemy;
 
 
 /* エネミーのエフェクトの基底クラス */
@@ -41,6 +41,9 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// 親エネミー
+	void SetEnemyPtr(IEnemy* enemyPtr) { this->pEnemy_ = enemyPtr; }
+
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
@@ -53,6 +56,9 @@ public:
 
 
 protected:
+
+	// 親エネミーのポインタ
+	IEnemy* pEnemy_ = nullptr;
 
 	// モデル
 	std::unique_ptr<Model> model_;

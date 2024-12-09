@@ -94,7 +94,7 @@ private:
 	/// <summary>
 	/// 新しいEffectを生成する
 	/// </summary>
-	void CreateEffect();
+	void CreateEffect(IEnemy* enemyPtr);
 
 	/// <summary>
 	/// ImGuiの描画

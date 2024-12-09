@@ -36,5 +36,25 @@ public:
 
 private:
 
+	/// <summary>
+	/// Scaleの計算
+	/// </summary>
+	void CalcScale();
+
+	/// <summary>
+	/// Alphaの計算
+	/// </summary>
+	void CalcAlpha();
+
+
+private:
+
+	// モデルにセットするカラー
+	Vector4 color_{};
+
+	// 補間に使用する値
+	std::pair<float, float> scale_;
+	std::pair<float, float> alpha_;
+
 
 };

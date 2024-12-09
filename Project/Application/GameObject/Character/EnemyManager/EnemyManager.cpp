@@ -213,12 +213,13 @@ void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 /// <summary>
 /// 新しいEffectを生成する
 /// </summary>
-void EnemyManager::CreateEffect()
+void EnemyManager::CreateEffect(IEnemy* enemyPtr)
 {
 	// プールから新しいエフェクトを取得
 	EnemyHitEffectCircle* newEffect = circleEffectPool_.Get();
 
 	// newEffectの初期化
+	newEffect->SetEnemyPtr(enemyPtr);
 	newEffect->Init();
 
 	// リストに追加

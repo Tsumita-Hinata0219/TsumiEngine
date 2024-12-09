@@ -62,19 +62,6 @@ public:
 	// BulletListの取得
 	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
 
-	// SRT
-	SRTN GetSRT() const { return this->trans_.srt; }
-	void SetSRT(const SRTN& setSRT) override { this->trans_.srt = setSRT; }
-
-	// Scale
-	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
-
-	// Rotate
-	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
-
-	// Translate
-	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
-
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
 
@@ -121,14 +108,8 @@ private:
 	// プレイヤー
 	Player* player_ = nullptr;
 
-	// Model
-	std::unique_ptr<Model> model_;
-
 	// ライト
 	DirectionalLightData light_{};
-
-	// トランスフォーム
-	Transform trans_{};
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };

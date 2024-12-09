@@ -92,7 +92,7 @@ void BasicEnemy::Update()
 
 
 #ifdef _DEBUG
-
+	DrawImGui();
 #endif // _DEBUG
 }
 
@@ -127,6 +127,12 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 
 		// HPを減らす
 		//hp_--;
+
+		// ヒットリアクション中にする
+		isHitReactioning_ = true;
+
+		// ヒットリアクションのタイマースタート
+		hitReactionTimer_.Start();
 
 		// エフェクトを出す
 		enemyManager_->AddNewHitEffect(this);
@@ -293,10 +299,57 @@ void BasicEnemy::CreateNewBullet()
 }
 
 
+// ヒットリアクション
+void BasicEnemy::HitReaction()
+{
+	// フラグが折れていたら早期return
+	if (!isHitReactioning_) { return; }
+
+	// タイマー更新
+	hitReactionTimer_.Update(true);
+	// タイマー終了
+	if (hitReactionTimer_.IsFinish()) {
+		// リアクション中のフラグを折る
+		isHitReactioning_ = false;
+	}
+
+	// スケール
+	HitReaction_Scale();
+	// カラー
+	HitReaction_Color();
+}
+
+
+// スケールのリアクション
+void BasicEnemy::HitReaction_Scale()
+{
+}
+
+
+// 色のアクション
+void BasicEnemy::HitReaction_Color()
+{
+}
+
+
 // マークを死亡状態に設定
 void BasicEnemy::MarkAsDead()
 {
 	// 死亡フラグを立てる
 	isDead_ = true;
+}
+
+
+// DrawImGuiの描画
+void BasicEnemy::DrawImGui()
+{
+	if (ImGui::TreeNode("BasicEnemy")) {
+
+		ImGui::Text("BodyColor");
+		ImGui::ColorEdit4("color", &modelColor_.x);
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
 }
 

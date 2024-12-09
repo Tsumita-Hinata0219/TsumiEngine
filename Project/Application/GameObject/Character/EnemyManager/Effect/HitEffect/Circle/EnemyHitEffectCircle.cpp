@@ -1,5 +1,6 @@
 #include "EnemyHitEffectCircle.h"
 #include "../../../Enemy/IEnemy.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 
 
 /// <summary>
@@ -30,6 +31,7 @@ void EnemyHitEffectCircle::Init()
 	alpha_.first = 1.0f;
 	alpha_.second = 0.0f;
 
+
 	// タイマーの設定 (0.2秒)
 	timer_.Init(0.0f, 0.2f * 60.0f);
 	timer_.Start();
@@ -48,7 +50,6 @@ void EnemyHitEffectCircle::Update()
 		
 		// 死亡フラグを立てる
 		isDead_ = true;
-
 	}
 
 	// 座標は親エネミーと同じ場所
@@ -59,6 +60,9 @@ void EnemyHitEffectCircle::Update()
 
 	// Alphaの計算
 	CalcAlpha();
+
+	// Rotateの計算
+	CalcRotate();
 }
 
 
@@ -93,6 +97,26 @@ void EnemyHitEffectCircle::CalcAlpha()
 {
 	color_.w =
 		Interpolate(alpha_.first, alpha_.second, timer_.GetRatio(), Ease::InSine);
+}
+
+
+/// <summary>
+/// Rotateの計算
+/// </summary>
+void EnemyHitEffectCircle::CalcRotate()
+{
+	// カメラ座標の取得
+	auto camera = CameraManager::GetInstance()->GetResource();
+	Vector3 cameraPos = camera->srt.translate;
+
+	// 正規化
+	Vector3 diffRotate = Normalize(trans_.GetWorldPos() - cameraPos);
+
+	// 姿勢の計算
+	trans_.srt.rotate.y = atan2(diffRotate.x, diffRotate.z);
+	float vecZ = sqrt((diffRotate.x * diffRotate.x) + (diffRotate.z * diffRotate.z));
+	float height = -diffRotate.y;
+	trans_.srt.rotate.x = atan2(height, vecZ);
 }
 
 

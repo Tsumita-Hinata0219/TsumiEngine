@@ -99,8 +99,20 @@ private:
 	// 新しいバレットを生成する
 	void CreateNewBullet();
 
+	// ヒットリアクション
+	void HitReaction();
+
+	// スケールのリアクション
+	void HitReaction_Scale();
+
+	// 色のアクション
+	void HitReaction_Color();
+
 	// マークを死亡状態に設定
 	void MarkAsDead();
+
+	// DrawImGuiの描画
+	void DrawImGui();
 
 
 private:
@@ -147,6 +159,14 @@ private:
 	int shotFrame_ = 0;
 	int kShotInterval_ = 40;
 
+	// ヒットリアクションフラグ
+	bool isHitReactioning_ = false;
+
+	// ヒットリアクションタイマー
+	Timer hitReactionTimer_{};
+
+	// リアクション時に使用する値
+	std::pair<float, float> hitReactionScale_;
 
 	// ステートパターン
 	std::vector<std::unique_ptr<IBasicEnemyState>> stateVector_; // ステートコンテナ

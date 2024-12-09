@@ -23,15 +23,15 @@ void EnemyHitEffectCircle::Init()
 	color_ = Samp::Color::WHITE;
 
 	// 補間に使用するScaleの値
-	scale_.first = 0.1f;
-	scale_.second = 2.0f;
+	scale_.first = 2.0f;
+	scale_.second = 6.0f;
 
 	// 補間に使用するAlpha値の設定。不透明->透明
 	alpha_.first = 1.0f;
 	alpha_.second = 0.0f;
 
-	// タイマーの設定 (1秒)
-	timer_.Init(0.0f, 1.0f * 60.0f);
+	// タイマーの設定 (0.3秒)
+	timer_.Init(0.0f, 0.5f * 60.0f);
 	timer_.Start();
 }
 
@@ -48,6 +48,7 @@ void EnemyHitEffectCircle::Update()
 		
 		// 死亡フラグを立てる
 		isDead_ = true;
+
 	}
 
 	// 座標は親エネミーと同じ場所
@@ -56,8 +57,8 @@ void EnemyHitEffectCircle::Update()
 	// Scaleの計算
 	CalcScale();
 
-	//// Alphaの計算
-	//CalcAlpha();
+	// Alphaの計算
+	CalcAlpha();
 }
 
 

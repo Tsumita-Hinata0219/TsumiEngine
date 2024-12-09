@@ -126,7 +126,7 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
-		hp_--;
+		//hp_--;
 
 		// エフェクトを出す
 		enemyManager_->AddNewHitEffect(this);

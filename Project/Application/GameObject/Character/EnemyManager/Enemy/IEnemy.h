@@ -83,5 +83,5 @@ protected:
 
 	// トランスフォーム
 	Transform trans_;
-	
+
 };

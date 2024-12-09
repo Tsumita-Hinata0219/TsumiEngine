@@ -48,18 +48,16 @@ void EnemyHitEffectCircle::Update()
 		
 		// 死亡フラグを立てる
 		isDead_ = true;
-		// 親エネミーをnullにしておく
-		pEnemy_ = nullptr;
 	}
 
-	// 座標は親エネミーと同じ場所
-	trans_.srt.translate = pEnemy_->GetTranslate();
+	//// 座標は親エネミーと同じ場所
+	//trans_.srt.translate = pEnemy_->GetTranslate();
 
-	// Scaleの計算
-	CalcScale();
+	//// Scaleの計算
+	//CalcScale();
 
-	// Alphaの計算
-	CalcAlpha();
+	//// Alphaの計算
+	//CalcAlpha();
 }
 
 

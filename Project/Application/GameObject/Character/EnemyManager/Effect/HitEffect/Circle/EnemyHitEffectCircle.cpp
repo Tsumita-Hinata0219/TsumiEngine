@@ -7,6 +7,13 @@
 /// </summary>
 void EnemyHitEffectCircle::Init()
 {
+	// モデルの設定
+
+
+	// トランスフォームの初期化
+	trans_.Init();
+
+
 }
 
 
@@ -23,4 +30,6 @@ void EnemyHitEffectCircle::Update()
 /// </summary>
 void EnemyHitEffectCircle::Draw3D()
 {
+	model_->DrawN(trans_);
 }
+

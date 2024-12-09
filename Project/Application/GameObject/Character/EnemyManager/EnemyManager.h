@@ -10,6 +10,8 @@
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"
 
+#include "Effect/Interface/IEnemyEffect.h"
+
 
 // Player前方宣言
 class Player;
@@ -55,6 +57,7 @@ public: // メンバ関数
 	/// </summary>
 	void AddNewEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
+
 #pragma region Accessor アクセッサ
 
 	// Playerの設定
@@ -88,6 +91,11 @@ private:
 	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
 
 	/// <summary>
+	/// 新しいEffectを生成する
+	/// </summary>
+	void CreateEffect();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawimGui();
@@ -97,34 +105,24 @@ private: // メンバ変数
 	// Player
 	Player* player_ = nullptr;
 
-	// FlagModel
-	std::unique_ptr<Model> flagModel_;
-
 	// Transform
 	Transform transform_{};
 
 	// EnemyのList配列
 	std::list<std::shared_ptr<IEnemy>> enemys_;
 
-	// EnemyBulletのObjectPool
+	// BulletのPool
 	ObjectPool<EnemyBullet> bulletPool_;
-	// EnemyBulletのList配列
+	// BulletのList配列
 	std::list<EnemyBullet*> bulletList_;
 
-	// Vector3Scope。エネミーの湧き範囲
-	ScopeVec3 scope3_{};
-
-	// エネミーの最低数
-	int enemyMinInstance_ = 0;
-
-	// エネミーのカウントチェックタイマー
-	Timer enemyCountCheckTime_;
+	// EffectのPool
+	ObjectPool<IEnemyEffect> effectPool_;
+	// EffectのList配列
+	std::list<IEnemyEffect*> effectList_;
 
 	// エネミーが全滅したかのフラグ
 	bool isEliminated_ = false;
 
-	ModelManager* modelManager_ = nullptr;
-	std::vector<Transform> trans_;
-	Scope scope_{};
 };
 

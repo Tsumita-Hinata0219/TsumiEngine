@@ -7,45 +7,15 @@
 /// </summary>
 void EnemyManager::Init()
 {
-	modelManager_ = ModelManager::GetInstance();
-
-	// FlagModel
-	modelManager_->LoadModel("Obj/Flag", "Flag.obj");
-	flagModel_ = modelManager_->GetModel("Flag");
-	
-
 	// Transformの初期化
 	transform_.Init();
 	transform_.srt.translate.z = 30.0f;
 
-	// 湧き範囲のスコープ
-	scope3_ = {
-		{ -6.0f, 6.0f },
-		{  0.0f, 0.0f },
-		{ -6.0f, 6.0f },
-	};
-
-	// エネミーの最低数の設定
-	enemyMinInstance_ = 7;
-
-	// エネミーのカウントチェックタイマーの設定。4秒
-	enemyCountCheckTime_.Init(0.0f, 240.0f);
-	enemyCountCheckTime_.Start();
-
-	// 湧きポイントのフラッグ
-	trans_.resize(3);
-
-	for (int i = 0; i < 3; ++i) {
-		trans_[i].Init();
-	}
-	trans_[0].srt.translate.x = -30.0f;
-	trans_[1].srt.translate.z = 30.0f;
-	trans_[2].srt.translate.x = 30.0f;
-
-	scope_ = { 0.0f, 2.5f };
-
-	// BulletのObjectPoolを先に作っておく
+	// BulletのPoolのインスタンスを先に作っておく
 	bulletPool_.Create(100);
+
+	// EffectのPoolのインスタンスを先に作っておく
+	effectPool_.Create(100);
 
 	// EnemyListの更新処理
 	for (std::shared_ptr<IEnemy> enemy : enemys_) {
@@ -86,10 +56,25 @@ void EnemyManager::Update()
 	// 死亡フラグが立っていたら削除
 	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
-			// 返却する前にリセット処理を入れておく
+			// 返却する前にリセット処理
 			bullet->Reset();
-			// 死亡したバレットをプールに返却
+			// プールに返却
 			bulletPool_.Return(bullet);
+			return true;
+		}
+		return false;
+		}
+	);
+
+	// Effectの更新処理
+	for (IEnemyEffect* effect : effectList_) {
+		effect->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	effectList_.remove_if([this](IEnemyEffect* effect) {
+		if (effect->IsDead()) {
+			// 死亡したエフェクトはプールに返却
+			effectPool_.Return(effect);
 			return true;
 		}
 		return false;
@@ -119,6 +104,11 @@ void EnemyManager::Draw3D()
 	// Bulletsの描画
 	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Draw3D();
+	}
+
+	// Effectの描画
+	for (IEnemyEffect* effect : effectList_) {
+		effect->Draw3D();
 	}
 }
 
@@ -221,6 +211,22 @@ void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, V
 
 
 /// <summary>
+/// 新しいEffectを生成する
+/// </summary>
+void EnemyManager::CreateEffect()
+{
+	// プールから新しいエフェクトを取得
+	IEnemyEffect* newEffect = effectPool_.Get();
+
+	// newEffectの初期化
+	newEffect->Init();
+
+	// リストに追加
+	effectList_.push_back(newEffect);
+}
+
+
+/// <summary>
 /// ImGuiの描画
 /// </summary>
 void EnemyManager::DrawimGui()
@@ -234,7 +240,6 @@ void EnemyManager::DrawimGui()
 		ImGui::Text("");
 
 		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
-		ImGui::Text("CountCheckTime : %.1f / %.1f", enemyCountCheckTime_.GetNowFrame(), enemyCountCheckTime_.GetEndFrame());
 		ImGui::Text("");
 
 		int instance = int(bulletList_.size());

@@ -44,10 +44,15 @@ public:
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
+	// SRTの設定
+	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
+	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
+	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
+
 #pragma endregion 
 
 
-private:
+protected:
 
 	// モデル
 	std::unique_ptr<Model> model_;

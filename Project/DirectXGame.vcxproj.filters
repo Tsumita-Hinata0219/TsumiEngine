@@ -19,7 +19,7 @@
     <FxCompile Include="Resources\Shaders\LineObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object3d\Object3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PostEffect.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffect.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\BoxFilter\BoxFilter.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Dissolve\Dissolve.PS.hlsl" />
@@ -486,7 +486,7 @@
     <None Include="Resources\Shaders\LineObject3d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\MathFunc.hlsli" />
-    <None Include="Resources\Shaders\PostEffect.hlsli" />
+    <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />

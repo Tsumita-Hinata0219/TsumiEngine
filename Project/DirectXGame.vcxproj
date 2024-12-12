@@ -730,7 +730,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\PostEffect.VS.hlsl">
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffect.VS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Vertex</ShaderType>
@@ -938,7 +938,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli" />
     <None Include="Resources\Shaders\PhongNormalMap.hlsli" />
     <None Include="Resources\Shaders\PhongObject.hlsli" />
-    <None Include="Resources\Shaders\PostEffect.hlsli" />
+    <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
     <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />

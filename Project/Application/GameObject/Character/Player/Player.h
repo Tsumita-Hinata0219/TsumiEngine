@@ -122,40 +122,9 @@ public:
 private:
 
 	/// <summary>
-	/// 入力を受け取る
-	/// </summary>
-	void InputFunc();
-
-	/// <summary>
-	/// プレイヤーの移動
-	/// </summary>
-	void MoveFunc();
-
-	/// <summary>
-	/// 移動方向を求める
-	/// </summary>
-	void CalcMoveDirection();
-
-	/// <summary>
-	/// 移動処理
-	/// </summary>
-	void PadMove();
-	void KeyMove();
-
-	/// <summary>
 	/// 移動限界処理
 	/// </summary>
 	void MoveLimited();
-
-	/// <summary>
-	/// カメラの方向に体の向きを合わせる
-	/// </summary>
-	void FaceCameraDirection();
-
-	/// <summary>
-	/// 移動方向からY軸の姿勢を合わせる
-	/// </summary>
-	void CalcBodyOrienation(Vector2 input, Vector3 direction);
 
 	/// <summary>
 	/// 射撃処理
@@ -191,17 +160,6 @@ private:
 
 	// サイズ
 	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
-
-	// 移動方向
-	Vector3 stickMoveDirection_{};
-	Vector3 keyMoveDirection_{};
-	// 移動量
-	Vector3 velocity_{};
-	// 移動速度
-	float moveSpeed_ = 0.3f;
-
-	// 姿勢計算の補間速度
-	float orientationLerpSpeed_ = 0.1f;
 
 	// 死亡フラグ
 	bool isDead_ = false;

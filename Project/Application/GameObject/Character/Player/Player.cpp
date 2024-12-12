@@ -235,118 +235,6 @@ void Player::OnCollisionWithEnemyBullet()
 
 
 /// <summary>
-/// 入力を受け取る
-/// </summary>
-void Player::InputFunc()
-{
-	// stickの入力を取得
-	iLStick_ = input_->GetLStick();
-
-	// keyの入力を取得
-	iKeys_ = Vector2::zero;
-	if (input_->Press(DIK_W)) {
-		iKeys_.y = 1.0f;
-	}
-	if (input_->Press(DIK_S)) {
-		iKeys_.y = -1.0f;
-	}
-	if (input_->Press(DIK_A)) {
-		iKeys_.x = -1.0f;
-	}
-	if (input_->Press(DIK_D)) {
-		iKeys_.x = 1.0f;
-	}
-}
-
-
-/// <summary>
-/// プレイヤーの移動
-/// </summary>
-void Player::MoveFunc()
-{
-	// 移動方向を求める
-	CalcMoveDirection();
-
-	// Velocityは0で初期化しておく
-	velocity_ = Vector3::zero;
-
-	// 移動処理
-	PadMove();
-	KeyMove();
-
-	// 移動限界処理
-	MoveLimited();
-
-	if (isShooting_) {
-		// 射撃中はカメラの進行方向に姿勢を合わせる
-		FaceCameraDirection();
-	}
-	else {
-		// 移動方向からY軸の姿勢を合わせる
-		CalcBodyOrienation(iLStick_, stickMoveDirection_);
-		CalcBodyOrienation(iKeys_, keyMoveDirection_);
-	}
-}
-
-
-/// <summary>
-/// 移動方向を求める
-/// </summary>
-void Player::CalcMoveDirection()
-{
-	// カメラの前方と右方
-	Vector3 forward = gameCamera_->GetForwardVec();
-	Vector3 right = gameCamera_->GetRightVec();
-
-	stickMoveDirection_ = {
-		(iLStick_.x * right.x) + (iLStick_.y * forward.x),
-		0.0f,
-		(iLStick_.x * right.z) + (iLStick_.y * forward.z),
-	};
-	keyMoveDirection_ = {
-		(iKeys_.x * right.x) + (iKeys_.y * forward.x),
-		0.0f,
-		(iKeys_.x * right.z) + (iKeys_.y * forward.z),
-	};
-}
-
-
-/// <summary>
-/// 移動処理
-/// </summary>
-void Player::PadMove()
-{
-	// 移動量の計算
-	if (std::abs(iLStick_.x) > DZone_ || std::abs(iLStick_.y) > DZone_) {
-
-		// 移動量の計算(カメラの前方と右方に基づく)
-		velocity_ = stickMoveDirection_;
-
-		// 移動方向を正規化し速さを乗算
-		velocity_ = Normalize(velocity_) * moveSpeed_;
-
-		// 座標に加算
-		trans_.srt.translate += velocity_;
-	}
-}
-void Player::KeyMove()
-{
-	// 移動量の計算
-	if (std::abs(iKeys_.x) > DZone_ || std::abs(iKeys_.y) > DZone_) {
-
-		// 移動量の計算(カメラの前方と右方に基づく)
-		velocity_ = keyMoveDirection_;
-
-		// 移動方向を正規化し速さを乗算
-		velocity_ = Normalize(velocity_) * moveSpeed_;
-
-		// 座標に加算
-		trans_.srt.translate += velocity_;
-	}
-}
-
-
-/// <summary>
 /// 移動限界処理
 /// </summary>
 void Player::MoveLimited()
@@ -357,53 +245,6 @@ void Player::MoveLimited()
 	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
 	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
 	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
-}
-
-
-/// <summary>
-/// カメラの方向に体の向きを合わせる
-/// </summary>
-void Player::FaceCameraDirection()
-{
-	// カメラの前方ベクトルを取得
-	Vector3 cameraForward = gameCamera_->GetForwardVec();
-
-	// カメラのY成分を無視して水平面上の方向を計算
-	cameraForward.y = 0.0f;
-	cameraForward = Normalize(cameraForward);  // 正規化して方向ベクトルにする
-
-	// 目標の回転角度を求める（Y軸の回転）
-	float targetAngle = std::atan2(cameraForward.x, cameraForward.z);
-
-	// 現在の角度と目標角度から最短を求める
-	float shortestAngle = ShortestAngle(trans_.srt.rotate.y, targetAngle);
-
-	// 現在の角度を目標角度の間を補間
-	trans_.srt.rotate.y =
-		Lerp(trans_.srt.rotate.y, trans_.srt.rotate.y + shortestAngle, orientationLerpSpeed_);
-}
-
-
-/// <summary>
-/// 移動方向からY軸の姿勢を合わせる
-/// </summary>
-void Player::CalcBodyOrienation(Vector2 input, Vector3 direction)
-{
-	if (std::abs(input.x) > DZone_ || std::abs(input.y) > DZone_)
-	{
-		// 正規化した移動方向
-		Vector3 normalizeDirection = Normalize(direction);
-
-		// 目標回転角度
-		float targetAngle = std::atan2(normalizeDirection.x, normalizeDirection.z);
-
-		// 現在の角度と目標角度から最短を求める
-		float shortestAngle = ShortestAngle(trans_.srt.rotate.y, targetAngle);
-
-		// 現在の角度を目標角度の間を補間
-		trans_.srt.rotate.y = 
-			Lerp(trans_.srt.rotate.y, trans_.srt.rotate.y + shortestAngle, orientationLerpSpeed_);
-	}
 }
 
 
@@ -510,10 +351,6 @@ void Player::DrawImGui()
 
 		ImGui::Text("BodyLight");
 		light_.DrawImGui();
-		ImGui::Text("");
-
-		ImGui::Text("Move");
-		ImGui::DragFloat3("Velocity", &velocity_.x, 0.0f);
 		ImGui::Text("");
 
 		ImGui::Text("KillCount = %d", killCount_);

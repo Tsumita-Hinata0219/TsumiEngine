@@ -41,8 +41,9 @@ void StageSelectOperation::Update()
 	// セレクト操作
 	SelectOperation();
 
-	// Aボタンを押したら決定
-	if (input_->Trigger(PadData::A)) {
+	// Pad::A or Space ボタンを押したら決定
+	if (input_->Trigger(PadData::A) || 
+		input_->Trigger(DIK_SPACE)) {
 		isSelect_ = true;
 	}
 

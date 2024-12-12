@@ -124,7 +124,6 @@
     <ClCompile Include="Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp" />
-    <ClCompile Include="Engine\3D\DrawSystem\DrawSystem.cpp" />
     <ClCompile Include="Engine\3D\Model\Loader\ModelFileLoader.cpp" />
     <ClCompile Include="Engine\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
@@ -339,7 +338,6 @@
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Engine\2D\Sprite\Sprite.h" />
-    <ClInclude Include="Engine\3D\DrawSystem\DrawSystem.h" />
     <ClInclude Include="Engine\3D\Model\IModelState.h" />
     <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Engine\3D\Model\Model.h" />

@@ -14,12 +14,6 @@
 #include "3D/DrawSystem/DrawSystem.h"
 
 
-/// Tsumi Engine 
-/// 努力の「積」み重ねのエンジンになるか
-/// ゴミ性能の「罪」なエンジンになるか
-/// 自分の努力次第。頑張れ
-
-
 /* Tsumiクラス */
 class Tsumi {
 

@@ -25,7 +25,7 @@ void StartDirection::Init()
 
 	// スプライト
 	sprite_ = std::make_unique<Sprite>();
-	sprite_->Initn(texSize_);
+	sprite_->Init(texSize_);
 	sprite_->SetTexture(textures_[texArrayNum_]);
 	sprite_->SetAnchor(SpriteAnchor::Center); // 中心原点
 

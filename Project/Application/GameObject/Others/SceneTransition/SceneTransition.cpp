@@ -10,7 +10,7 @@ void SceneTransition::Init()
 
 	// スプライトの初期化
 	sprite_ = std::make_unique<Sprite>();
-	sprite_->Initn({ 1280.0f, 720.0f });
+	sprite_->Init({ 1280.0f, 720.0f });
 	// Textureの設定
 	sprite_->SetTexture(textureHandle_);
 	// Colorは黒

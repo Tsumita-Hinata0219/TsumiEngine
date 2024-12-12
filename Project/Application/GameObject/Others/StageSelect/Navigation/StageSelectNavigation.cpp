@@ -23,7 +23,7 @@ void StageSelectNavigation::Init()
 	Vector2 initSize = { 0.0f, 0.0f };
 	for (int i = 0; i < StageSelectManager::kMaxStage + 1; ++i) {
 		sprites_[i] = std::make_unique<Sprite>();
-		sprites_[i]->Initn({ 341.0f, 256.0f });
+		sprites_[i]->Init({ 341.0f, 256.0f });
 		sprites_[i]->SetTexture(textures_[i]);
 	}
 

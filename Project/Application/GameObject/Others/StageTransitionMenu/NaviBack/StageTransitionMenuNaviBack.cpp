@@ -28,7 +28,7 @@ void StageTransitionMenuNaviBack::Init()
 
 		// スプライト
 		spriteArr_[i] = std::make_unique<Sprite>();
-		spriteArr_[i]->Initn(size_);
+		spriteArr_[i]->Init(size_);
 		spriteArr_[i]->SetAnchor(SpriteAnchor::Center);
 		spriteArr_[i]->SetTexture(texHDArr_[i]);
 		spriteArr_[i]->SetColor(Samp::Color::WHITE);

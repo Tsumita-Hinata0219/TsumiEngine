@@ -13,7 +13,7 @@ void StageTransitionMenuBackScreen::Init()
 	// スプライト
 	Vector2 screenSize = { 1280.0f, 720.0f };
 	sprite_ = std::make_unique<Sprite>();
-	sprite_->Initn(screenSize);
+	sprite_->Init(screenSize);
 	sprite_->SetTexture(textureHandle_);
 
 	// トランスフォーム

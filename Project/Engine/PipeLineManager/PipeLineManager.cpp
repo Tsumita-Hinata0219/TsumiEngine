@@ -12,18 +12,6 @@ void PipeLineManager::Initialize()
 	PipeLineManager* instance = PipeLineManager::GetInstance();
 
 
-	// Lambert
-	instance->lambertPipeLine_ = make_unique<LambertPipeLine>();
-	instance->pipeLineMap_[PipeLineType::Lambert] = instance->lambertPipeLine_->SetUpPso();
-
-	// Light
-	instance->lightPipeLine_ = make_unique<LightPipeLine>();
-	instance->pipeLineMap_[PipeLineType::Light] = instance->lightPipeLine_->SetUpPso();
-
-	// Line
-	instance->linePipeLine_ = make_unique<LinePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Line] = instance->linePipeLine_->SetUpPso();
-
 	// Object2D
 	instance->object2DPipeLine_ = make_unique<Object2DPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Object2D] = instance->object2DPipeLine_->SetUpPso();
@@ -32,18 +20,6 @@ void PipeLineManager::Initialize()
 	instance->object3DPipeLine_ = make_unique<Object3DPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Object3D] = instance->object3DPipeLine_->SetUpPso();
 
-	// Particle
-	instance->particlePipeLine_ = make_unique<ParticlePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Particle] = instance->particlePipeLine_->SetUpPso();
-
-	// PhongNormalMap
-	instance->phongNormalMapPipeLine_ = make_unique<PhongNormalMapPipeLine>();
-	instance->pipeLineMap_[PipeLineType::PhongNormalMap] = instance->phongNormalMapPipeLine_->SetUpPso();
-
-	// Phong
-	instance->phongPipeLine_ = make_unique<PhongPipeLine>();
-	instance->pipeLineMap_[PipeLineType::Phong] = instance->phongPipeLine_->SetUpPso();
-
 	// SkinningObject3d
 	instance->skinningObject3DPipeLine_ = make_unique<SkinningObject3dPipeLine>();
 	instance->pipeLineMap_[PipeLineType::SkinningObject3D] = instance->skinningObject3DPipeLine_->SetUpPso();
@@ -51,10 +27,6 @@ void PipeLineManager::Initialize()
 	// Skybox
 	instance->skyboxPipeLine_ = make_unique<SkyboxPipeLine>();
 	instance->pipeLineMap_[PipeLineType::Skybox] = instance->skyboxPipeLine_->SetUpPso();
-
-	// Sprite
-	instance->spritePipeLine_ = make_unique<SpritePipeLine>();
-	instance->pipeLineMap_[PipeLineType::Sprite] = instance->spritePipeLine_->SetUpPso();
 
 	// CPUParticle
 	instance->cpuParticlePipeLine_ = make_unique<CPUParticlePipeLine>();

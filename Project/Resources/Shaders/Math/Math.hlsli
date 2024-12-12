@@ -78,3 +78,15 @@ float32_t4x4 AffineMatrix(float32_t3 scale, float32_t3 rotate, float32_t3 transl
     return mul(scalingMatrix, mul(rotateXYZ, translationMatrix));
 
 }
+
+//float32_3x3 InverseTranspose(float32_3x3 input)
+//{
+//    float32_3x3 result = input;
+    
+//    for (int i = 0; i < 3; i++)
+//    {
+//        result[i] /= length(result[i]);
+//    }
+    
+//    return result;
+//}

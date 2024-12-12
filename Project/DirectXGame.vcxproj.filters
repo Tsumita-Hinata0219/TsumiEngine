@@ -1,26 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <FxCompile Include="Resources\Shaders\LambertObject.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\LambertObject.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\LightObject.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\LightObject.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\NormalObject3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\NormalObject3d.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\ParticleObject3D.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\ParticleObject3D.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PhongNormalMap.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PhongNormalMap.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PhongObject.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PhongObject.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SpriteObject3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SpriteObject3d.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\LineObject3d.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\LineObject3d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\Object3d\Object3d.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\PostEffect.VS.hlsl" />
-    <FxCompile Include="Resources\Shaders\PostEffect.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\BoxFilter\BoxFilter.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Dissolve\Dissolve.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\GaussianFilter\GaussianFilter.PS.hlsl" />
@@ -31,8 +14,8 @@
     <FxCompile Include="Resources\Shaders\PostEffect\GrayScale\GrayScale.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Random\Random.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SkinningObject3d.PS.hlsl" />
-    <FxCompile Include="Resources\Shaders\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.VS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Grain\Grain.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\PostEffect\Absent\Absent.PS.hlsl" />
     <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
@@ -476,18 +459,9 @@
     <ClInclude Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Shaders\LambertObject.hlsli" />
-    <None Include="Resources\Shaders\LightObject.hlsli" />
-    <None Include="Resources\Shaders\NormalObject3d.hlsli" />
-    <None Include="Resources\Shaders\ParticleObject3D.hlsli" />
-    <None Include="Resources\Shaders\PhongNormalMap.hlsli" />
-    <None Include="Resources\Shaders\PhongObject.hlsli" />
-    <None Include="Resources\Shaders\SpriteObject3d.hlsli" />
-    <None Include="Resources\Shaders\LineObject3d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
-    <None Include="Resources\Shaders\MathFunc.hlsli" />
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
-    <None Include="Resources\Shaders\SkinningObject3d.hlsli" />
+    <None Include="Resources\Shaders\Skinning\SkinningObject3d.hlsli" />
     <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />

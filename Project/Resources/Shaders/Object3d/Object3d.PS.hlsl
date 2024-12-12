@@ -1,5 +1,4 @@
 #include "Object3d.hlsli"
-#include "../MathFunc.hlsli"
 
 
 // ƒ}ƒeƒŠƒAƒ‹

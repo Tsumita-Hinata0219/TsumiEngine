@@ -105,14 +105,6 @@ private: // メンバ関数
 
 #pragma region ModelShaders
 
-	void NormalShader();
-	void SpriteShader();
-	void LightShader();
-	void LambertShader();
-	void PhongShader();
-	void PhongNormalMapShader();
-	void ParticleShader();
-	void LineShader();
 	void Object2DShader();
 	void Object3DShader();
 	void SkinningObject3dShader();
@@ -124,7 +116,6 @@ private: // メンバ関数
 
 #pragma region PostEffectShaders
 
-	void PostEffectShader();
 	void AbsentShader();
 	void BoxFilterShader();
 	void ColorGrading();

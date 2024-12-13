@@ -56,7 +56,7 @@ void PlayerMovementParticle::Update()
 void PlayerMovementParticle::Draw3D()
 {
 	model_->SetMaterialColor(color_);
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 
 

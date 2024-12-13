@@ -29,7 +29,7 @@ void Floor::Update()
 // 描画処理
 void Floor::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 
 void Floor::Draw2DFront()

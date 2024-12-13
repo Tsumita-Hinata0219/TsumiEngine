@@ -34,7 +34,7 @@ public:
 	~Model() {};
 	
 	// 描画処理
-	void DrawN(Transform& transform);
+	void Draw(Transform& transform);
 
 	// アニメーションの再生
 	void PlayAnimation(Animation animation, float time);

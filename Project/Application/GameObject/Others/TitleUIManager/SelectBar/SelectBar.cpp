@@ -55,7 +55,7 @@ void SelectBar::Update()
 // 描画処理
 void SelectBar::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void SelectBar::Draw2DFront() {}
 void SelectBar::Draw2DBack() {}

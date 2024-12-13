@@ -29,7 +29,7 @@ void DestructibleBox::Update()
 /// </summary>
 void DestructibleBox::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void DestructibleBox::Draw2DFront()
 {

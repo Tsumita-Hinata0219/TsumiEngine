@@ -218,7 +218,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\StartDirection\StartDirection.cpp" />
     <ClCompile Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\TestHuman\TestHuman.cpp" />
-    <ClCompile Include="Application\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.cpp" />
@@ -420,7 +419,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h" />
     <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h" />
-    <ClInclude Include="Application\GameObject\Others\TestJsonObject\TestJsonObject.h" />
     <ClInclude Include="Application\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skydome\Skydome.h" />

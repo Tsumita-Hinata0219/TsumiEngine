@@ -61,7 +61,7 @@ void PlayerBullet::Update()
 void PlayerBullet::Draw3D()
 {
 	//model_->SetLightData(light_);
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void PlayerBullet::Draw2DFront() {}
 void PlayerBullet::Draw2DBack() {}

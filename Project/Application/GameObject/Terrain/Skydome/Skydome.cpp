@@ -21,7 +21,7 @@ void Skydome::Update() {}
 // 描画処理
 void Skydome::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void Skydome::Draw2DFront() {}
 void Skydome::Draw2DBack() {}

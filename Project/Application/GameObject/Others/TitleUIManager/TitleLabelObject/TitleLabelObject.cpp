@@ -47,7 +47,7 @@ void TitleLabelObject::Update()
 // 描画処理
 void TitleLabelObject::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void TitleLabelObject::Draw2DFront() {}
 void TitleLabelObject::Draw2DBack() {}

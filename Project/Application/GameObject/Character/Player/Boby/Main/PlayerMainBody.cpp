@@ -24,7 +24,7 @@ void PlayerMainBody::Update() {}
 void PlayerMainBody::Draw3D()
 {
 	for (int i = 0; i < 2; ++i) {
-		models_[i]->DrawN(trans_);
+		models_[i]->Draw(trans_);
 	}
 }
 void PlayerMainBody::Draw2DFront() {}

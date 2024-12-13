@@ -70,5 +70,5 @@ void TestHuman::Draw()
 	// 環境マップの設定
 	humanModel_->SetEnvironmentData(enviroment_);
 	// ヒューマンモデルの描画
-	humanModel_->DrawN(humanTrans_);
+	humanModel_->Draw(humanTrans_);
 }

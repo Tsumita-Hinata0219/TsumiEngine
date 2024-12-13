@@ -123,7 +123,7 @@ void BasicEnemy::Draw3D()
 	// BodyModelの描画
 	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {

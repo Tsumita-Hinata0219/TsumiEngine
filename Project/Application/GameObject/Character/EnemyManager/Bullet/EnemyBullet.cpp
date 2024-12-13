@@ -56,7 +56,7 @@ void EnemyBullet::Update()
 // 描画処理
 void EnemyBullet::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void EnemyBullet::Draw2DFront() {}
 void EnemyBullet::Draw2DBack() {}

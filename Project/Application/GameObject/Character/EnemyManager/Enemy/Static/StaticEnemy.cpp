@@ -93,7 +93,7 @@ void StaticEnemy::Draw3D()
 	// BodyModelの描画
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 
 	// Bulletsの描画
 	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {

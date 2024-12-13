@@ -38,7 +38,7 @@ void GameNameBar::Update()
 // 描画処理
 void GameNameBar::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void GameNameBar::Draw2DFront() {}
 void GameNameBar::Draw2DBack() {}

@@ -43,7 +43,7 @@ void BarrierBox::Update()
 /// </summary>
 void BarrierBox::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void BarrierBox::Draw2DFront()
 {

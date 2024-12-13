@@ -21,7 +21,7 @@ void PlayerLeftBody::Update() {}
 // 描画処理
 void PlayerLeftBody::Draw3D()
 {
-	model_->DrawN(trans_);
+	model_->Draw(trans_);
 }
 void PlayerLeftBody::Draw2DFront() {}
 void PlayerLeftBody::Draw2DBack() {}

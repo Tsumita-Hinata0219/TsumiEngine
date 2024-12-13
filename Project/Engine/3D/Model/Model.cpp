@@ -42,7 +42,7 @@ Model::Model(ModelDatas datas)
 /// <summary>
 /// 描画処理
 /// </summary>
-void Model::DrawN(Transform& transform)
+void Model::Draw(Transform& transform)
 {
 	modelState_->Draw(transform);
 }

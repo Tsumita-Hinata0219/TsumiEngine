@@ -2,7 +2,7 @@
 
 #include "../../../BufferResource/BufferResource.h"
 #include "../../../Transform/Transform.h"
-#include "../ModelStructure/ModelStructure.h"
+#include "../Structure/ModelStructure.h"
 
 
 struct ModelDatas {

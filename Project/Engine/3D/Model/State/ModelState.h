@@ -5,8 +5,8 @@
 #include "../../../View/SRVManager/SRVManager.h"
 #include "../../../Transform/Transform.h"
 #include "../../../PipeLineManager/PipeLineManager.h"
-#include "../ModelStructure/ModelStructure.h"
-#include "../ModelResources/ModelResources.h"
+#include "../Structure/ModelStructure.h"
+#include "../Resources/ModelResources.h"
 
 
 enum StateType {

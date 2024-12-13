@@ -2,7 +2,7 @@
 
 #include "../../BufferResource/BufferResource.h"
 #include "../../Transform/Transform.h"
-#include "../../3D/Model/ModelStructure/ModelStructure.h"
+#include "../../3D/Model/Structure/ModelStructure.h"
 #include "../Structure/GPUParticleStructure.h"
 
 

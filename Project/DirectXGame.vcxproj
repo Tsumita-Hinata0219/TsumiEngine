@@ -442,8 +442,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Engine\3D\Model\Model.h" />
     <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h" />
-    <ClInclude Include="Engine\3D\Model\ModelResources\ModelResources.h" />
-    <ClInclude Include="Engine\3D\Model\ModelStructure\ModelStructure.h" />
+    <ClInclude Include="Engine\3D\Model\Resources\ModelResources.h" />
+    <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h" />
     <ClInclude Include="Engine\3D\Model\State\ModelState.h" />
     <ClInclude Include="Engine\3D\Model\State\OBJ\IOBJState.h" />

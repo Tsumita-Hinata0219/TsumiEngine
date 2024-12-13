@@ -8,8 +8,8 @@
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "IModelState.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
-#include "ModelStructure/ModelStructure.h"
-#include "ModelResources/ModelResources.h"
+#include "Structure/ModelStructure.h"
+#include "Resources/ModelResources.h"
 
 #include "State/ModelState.h"
 #include "State/OBJ/IOBJState.h"

@@ -207,7 +207,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
-    <ClCompile Include="Application\GameObject\Character\Player\UI\PlayerUI.cpp" />
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
@@ -229,7 +228,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Terrain\Floor\Floor.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Skybox\Skybox.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Skydome\Skydome.cpp" />
-    <ClCompile Include="Application\GameObject\Terrain\TitleScreen\TitleScreen.cpp" />
     <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
@@ -331,7 +329,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Engine\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Engine\Tsumi.cpp" />
-    <ClCompile Include="Engine\Utilities\FadeManager\FadeManager.cpp" />
     <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
@@ -421,7 +418,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Player.h" />
-    <ClInclude Include="Application\GameObject\Character\Player\UI\PlayerUI.h" />
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
@@ -433,7 +429,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Terrain\Floor\Floor.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skybox\Skybox.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skydome\Skydome.h" />
-    <ClInclude Include="Application\GameObject\Terrain\TitleScreen\TitleScreen.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />
     <ClInclude Include="Engine\Math\MathGeometry\MathGeometry.h" />
@@ -541,7 +536,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
-    <ClInclude Include="Engine\Utilities\FadeManager\FadeManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
     <ClInclude Include="Engine\Utilities\RandomGenerator\RandomGenerator.h" />

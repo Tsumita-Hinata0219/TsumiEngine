@@ -19,13 +19,6 @@ void Sprite::Init(Vector2 size)
 	datas_.material.textureHandle = 
 		TextureManager::LoadTexture("Texture", "uvChecker.png");
 
-	// vuTransformの初期化
-	uvTransform_ = {
-		Vector3::one,
-		Vector3::zero,
-		Vector3::zero,
-	};
-
 	// Mask画像はデフォではuvChecker
 	datas_.dissolve.maskTexHandle = 
 		TextureManager::LoadTexture("Texture", "uvChecker.png");

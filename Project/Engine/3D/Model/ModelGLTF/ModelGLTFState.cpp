@@ -111,7 +111,7 @@ void ModelGLTFState::CommandCall(Model* pModel, WorldTransform worldTransform) {
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
+	//PipeLineManager::PipeLineCheckAndSet(PipeLineType::Phong);
 
 	///// いざ描画！！！！！
 	// VBVを設定

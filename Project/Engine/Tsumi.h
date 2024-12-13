@@ -11,7 +11,6 @@
 #include "DescriptorManager/DescriptorManager.h"
 #include "View/RTVManager/RTVManager.h"
 #include "View/SRVManager/SRVManager.h"
-#include "3D/DrawSystem/DrawSystem.h"
 
 
 /* Tsumiクラス */

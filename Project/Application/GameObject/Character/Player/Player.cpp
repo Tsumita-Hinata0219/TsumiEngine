@@ -11,10 +11,6 @@ void Player::Init()
 	// Inputクラス
 	input_ = Input::GetInstance();
 
-	// UI
-	ui_ = std::make_unique<PlayerUI>();
-	ui_->Init();
-
 	// BodyModelのロード
 	modelManager_->LoadModel("Obj/Player/Body/Main", "Player_Main_Body.obj");
 	modelManager_->LoadModel("Obj/Player/Body/Center", "Player_Center_Body.obj");
@@ -76,9 +72,6 @@ void Player::Init()
 /// </summary>
 void Player::Update()
 {
-	// UI
-	ui_->Update();
-
 	// Transformの更新処理
 	trans_.UpdateMatrix();
 
@@ -163,13 +156,9 @@ void Player::Draw3D()
 }
 void Player::Draw2DBack() 
 {
-	// UI Back
-	ui_->Draw2DBack();
 }
 void Player::Draw2DFront() 
 {
-	// UI Front
-	ui_->Draw2DFront();
 }
 
 

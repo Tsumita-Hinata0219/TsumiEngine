@@ -13,8 +13,6 @@
 
 #include "Bullet/PlayerBullet.h"
 
-#include "UI/PlayerUI.h"
-
 #include "Movement/PlayerMovement.h"
 
 #include "Particle/Manager/PlayerParticleManager.h"
@@ -241,11 +239,6 @@ private: // バレット関連
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 8;
 	const int kInitialShotPressFrame = 1;
-
-
-private: // UI関連
-
-	std::unique_ptr<PlayerUI> ui_;
 
 
 private: // ゲームカメラ

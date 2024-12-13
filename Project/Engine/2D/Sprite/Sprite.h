@@ -126,6 +126,6 @@ private:
 // UIの描画に必要なもの
 struct SpriteProperty {
 	std::unique_ptr<Sprite> sprite;
-	WorldTransform transfrom;
+	Transform transform;
 	uint32_t texture = 0;
 };

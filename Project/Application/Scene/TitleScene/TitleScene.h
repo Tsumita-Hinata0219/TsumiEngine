@@ -3,14 +3,12 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
-#include "Utilities/FadeManager/FadeManager.h"
 
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Terrain/Skybox/Skybox.h"
 
-#include "GameObject/Terrain/TitleScreen/TitleScreen.h"
 #include "GameObject/Others/TitleBackGround/TitleBackGround.h"
 #include "GameObject/Others/TitleUIManager/TitleUIManager.h"
 

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "3D/Model/Model.h"
-#include "3D/DrawSystem/DrawSystem.h"
 #include "2D/Sprite/Sprite.h"
 #include "TextureManager/TextureManager.h"
 #include "Audio/Audio.h"

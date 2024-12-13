@@ -1,5 +1,5 @@
 #include "Model.h"
-#include "ModelManager/ModelManager.h"
+#include "Manager/ModelManager.h"
 #include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 #include "GameObject/Camera/Manager/CameraManager.h"
 

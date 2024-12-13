@@ -314,7 +314,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\3D\Model\Model.cpp" />
-    <ClCompile Include="Engine\3D\Model\ModelManager\ModelManager.cpp" />
+    <ClCompile Include="Engine\3D\Model\Manager\ModelManager.cpp" />
     <ClCompile Include="Engine\Audio\Audio.cpp" />
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
     <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp" />
@@ -441,7 +441,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\IModelState.h" />
     <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Engine\3D\Model\Model.h" />
-    <ClInclude Include="Engine\3D\Model\ModelManager\ModelManager.h" />
+    <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h" />
     <ClInclude Include="Engine\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Engine\3D\Model\ModelStructure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h" />

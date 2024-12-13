@@ -3,7 +3,7 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
-#include "3D/Model/ModelManager/ModelManager.h"
+#include "3D/Model/Manager/ModelManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "ConfigManager/ConfigManager.h"
 

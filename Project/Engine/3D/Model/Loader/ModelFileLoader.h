@@ -5,7 +5,7 @@
 #include "Math/Struct.h"
 #include "../../../TextureManager/TextureManager.h"
 #include "../Model.h"
-#include "../ModelManager/ModelManager.h"
+#include "../Manager/ModelManager.h"
 
 #include <map>
 #include <unordered_map>

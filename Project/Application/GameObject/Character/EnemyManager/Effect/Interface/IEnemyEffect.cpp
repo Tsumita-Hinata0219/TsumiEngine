@@ -1,5 +1,5 @@
 #include "IEnemyEffect.h"
-#include "3D/Model/ModelManager/ModelManager.h"
+#include "3D/Model/Manager/ModelManager.h"
 
 
 /// <summary>

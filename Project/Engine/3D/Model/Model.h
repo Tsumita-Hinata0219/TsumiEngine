@@ -34,10 +34,6 @@ public:
 	~Model() {};
 	
 	// 描画処理
-	void Draw(WorldTransform worldTransform);
-	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster);
-
-	// 描画処理 <- new
 	void DrawN(Transform& transform);
 
 	// アニメーションの再生

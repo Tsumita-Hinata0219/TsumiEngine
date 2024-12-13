@@ -42,14 +42,6 @@ Model::Model(ModelDatas datas)
 /// <summary>
 /// 描画処理
 /// </summary>
-void Model::Draw(WorldTransform worldTransform) 
-{
-	this->state_->Draw(this, worldTransform);
-}
-void Model::AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster)
-{
-	this->state_->AnimDraw(this, worldTransform, skinCluster);
-}
 void Model::DrawN(Transform& transform)
 {
 	modelState_->Draw(transform);

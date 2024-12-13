@@ -18,7 +18,7 @@ void TitleLabelObject::Init()
 	model_ = modelManager_->GetModel(RemoveExtension(file_.second)); // ファイル名だけを抽出
 
 	// 初期カラーは黒
-	model_->SetColor(Samp::Color::BLACK);
+	model_->SetMaterialColor(Samp::Color::BLACK);
 
 	// Transformの初期化
 	trans_.Init();
@@ -63,7 +63,7 @@ void TitleLabelObject::onCollision([[maybe_unused]] IObject* object)
 void TitleLabelObject::NonSelecting()
 {
 	// カラーを黒へ
-	model_->SetColor(Samp::Color::BLACK);
+	model_->SetMaterialColor(Samp::Color::BLACK);
 	// scale = 1.0fへ
 	trans_.srt.scale = Vector3::one;
 }
@@ -73,7 +73,7 @@ void TitleLabelObject::NonSelecting()
 void TitleLabelObject::OnSelecting()
 {
 	// カラーを白へ
-	model_->SetColor(Samp::Color::WHITE);
+	model_->SetMaterialColor(Samp::Color::WHITE);
 	// 少し大きくする
 	trans_.srt.scale = { selectingScale_ , selectingScale_ , 1.0f };
 }

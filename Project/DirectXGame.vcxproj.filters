@@ -96,7 +96,6 @@
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\StartDirection\StartDirection.cpp" />
-    <ClCompile Include="Application\GameObject\Others\TestAnimationCube\TestAnimationCube.cpp" />
     <ClCompile Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Application\GameObject\Others\TestJsonObject\TestJsonObject.cpp" />
@@ -123,7 +122,6 @@
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Engine\3D\Model\Loader\ModelFileLoader.cpp" />
-    <ClCompile Include="Engine\3D\Model\ModelGLTF\ModelGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp" />
@@ -198,8 +196,6 @@
     <ClCompile Include="Engine\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\3D\Model\Model.cpp" />
     <ClCompile Include="Engine\3D\Model\ModelManager\ModelManager.cpp" />
-    <ClCompile Include="Engine\3D\Model\ModelObj\ModelObjState.cpp" />
-    <ClCompile Include="Engine\3D\Model\ModelObj\ObjDataResource\ObjDataResource.cpp" />
     <ClCompile Include="Engine\Audio\Audio.cpp" />
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
     <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp" />
@@ -310,7 +306,6 @@
     <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
     <ClInclude Include="Application\GameObject\IObject\IObject.h" />
-    <ClInclude Include="Application\GameObject\Others\TestAnimationCube\TestAnimationCube.h" />
     <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h" />
     <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Application\GameObject\Others\TestJsonObject\TestJsonObject.h" />
@@ -336,10 +331,7 @@
     <ClInclude Include="Engine\3D\Model\IModelState.h" />
     <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Engine\3D\Model\Model.h" />
-    <ClInclude Include="Engine\3D\Model\ModelGLTF\ModelGLTFState.h" />
     <ClInclude Include="Engine\3D\Model\ModelManager\ModelManager.h" />
-    <ClInclude Include="Engine\3D\Model\ModelObj\ModelObjState.h" />
-    <ClInclude Include="Engine\3D\Model\ModelObj\ObjDataResource\ObjDataResource.h" />
     <ClInclude Include="Engine\3D\Model\ModelResources\ModelResources.h" />
     <ClInclude Include="Engine\3D\Model\ModelStructure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h" />

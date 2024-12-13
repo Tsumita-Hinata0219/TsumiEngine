@@ -3,7 +3,6 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 #include "../../../TextureManager/TextureManager.h"
-#include "../ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../Loader/ModelFileLoader.h"
 #include "../Model.h"
 
@@ -70,16 +69,11 @@ public: // メンバ関数
 	/// </summary>
 	void AllRemove();
 
-
 	/// <summary>
 	/// Objファイルを読み込む
 	/// </summary>
-	ModelData LoadObjFile(const std::string& routeFilePath, const std::string& fileName);
-	ModelData LoadObjFileAssimpVer(const std::string& routeFilePath, const std::string& fileName);
-	ModelData LoadGLTF(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName);
 	void LoadModel(const std::string& path, const std::string fileName);
 	
-
 	/// <summary>
 	/// Nodeの階層構造からSkeletonを作る
 	/// </summary>
@@ -92,11 +86,6 @@ public: // メンバ関数
 
 
 private: // メンバ関数
-
-	/// <summary>
-	/// 一回読み込んだものは読み込まない
-	/// </summary>
-	bool CheckObjData(std::string filePath);
 
 	/// <summary>
 	/// mtlファイルを読み込む関数
@@ -115,9 +104,6 @@ private: // メンバ関数
 
 
 private: // メンバ変数
-
-	// ObjDataResource
-	map<std::string, unique_ptr<ObjDataResource>> objModelDatas_;
 
 	uint32_t objHandle_ = 0;
 

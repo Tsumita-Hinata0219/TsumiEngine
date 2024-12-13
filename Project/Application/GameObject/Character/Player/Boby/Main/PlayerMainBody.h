@@ -33,7 +33,7 @@ public:
 	// モデルのカラーの設定
 	void SetModelColor(const Vector4& setColor) override { 
 		for (auto& model : this->models_) {
-			model->SetColor(setColor);
+			model->SetMaterialColor(setColor);
 		}
 	}
 

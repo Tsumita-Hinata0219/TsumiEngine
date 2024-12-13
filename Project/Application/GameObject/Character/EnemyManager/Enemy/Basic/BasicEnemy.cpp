@@ -121,7 +121,7 @@ void BasicEnemy::Update()
 void BasicEnemy::Draw3D()
 {
 	// BodyModelの描画
-	model_->SetColor(modelColor_);
+	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
 	model_->DrawN(trans_);
 

@@ -38,7 +38,7 @@ public:
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
 	// カラーの設定
-	void SetColor(Vector4 setColor) { this->model_->SetColor(setColor); }
+	void SetColor(Vector4 setColor) { this->model_->SetMaterialColor(setColor); }
 
 #pragma endregion 
 

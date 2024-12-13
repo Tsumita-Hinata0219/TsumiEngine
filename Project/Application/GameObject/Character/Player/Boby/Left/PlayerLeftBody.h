@@ -31,7 +31,7 @@ public:
 	void SetParent(Transform* parent) override { this->trans_.SetParent(parent); }
 
 	// モデルのカラーの設定
-	void SetModelColor(const Vector4& setColor) override { this->model_->SetColor(setColor); }
+	void SetModelColor(const Vector4& setColor) override { this->model_->SetMaterialColor(setColor); }
 
 	// モデルのライトの設定
 	void SetModelLight(const DirectionalLightData& setLight) override { this->model_->SetLightData(setLight); }

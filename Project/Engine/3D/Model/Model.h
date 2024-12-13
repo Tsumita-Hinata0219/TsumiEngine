@@ -7,46 +7,32 @@
 #include "../../Transform/Transform.h"
 #include "../../PipeLineManager/PipeLineManager.h"
 #include "IModelState.h"
-#include "ModelGLTF/ModelGLTFState.h"
-#include "ModelObj/ModelObjState.h"
-#include "ModelObj/ObjDataResource/ObjDataResource.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
 #include "ModelStructure/ModelStructure.h"
 #include "ModelResources/ModelResources.h"
-
 
 #include "State/ModelState.h"
 #include "State/OBJ/IOBJState.h"
 #include "State/GLTF/IGLTFState.h"
 
 
-
+// 前方宣言
 class ModelManager;
 class KeyFrameAnimation;
 class CameraManager;
 struct aiScene;
 
 
-
-/* Model繧ｯ繝ｩ繧ｹ */
+/* Modelクラス */
 class Model {
 
-public: // 繝｡繝ｳ繝宣未謨ｰ
+public:
 
 	// コンストラクタ、デストラクタ
 	Model();
 	Model(ModelDatas datas);
 	~Model() {};
 	
-	
-	// 初期化処理 
-	void Initialize(IModelState* state, WorldTransform worldTransform = WorldTransform());
-
-	// モデル読み込み
-	void CreateFromObj(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
-	void CreateFromObjAssimpVer(const std::string& routeFilePath, const std::string& fileName, WorldTransform worldTransform = WorldTransform());
-	void CreateGLTFModel(const std::string& routeFilePath, const std::string& fileName, const std::string& textureName, WorldTransform worldTransform = WorldTransform());
-
 	// 描画処理
 	void Draw(WorldTransform worldTransform);
 	void AnimDraw(WorldTransform worldTransform, SkinCluster skinCluster);
@@ -72,69 +58,6 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// スキンクラスターの更新
 	void UpdateSkinCluster(SkinCluster& skinCluster, const Skeleton& skeleton);
 
-#pragma region Get
-
-	// WorldTransform
-	WorldTransform GetWorldTransform() { return this->worldTransform_; }
-
-	// UseTexture
-	uint32_t GetUseTexture() const { return this->useTexture_; }
-
-	// NormalMapTexture
-	uint32_t GetNormalMapTex() const { return this->normalMapTex_; }
-
-	// Color
-	Vector4 GetColor() const { return this->color_; }
-
-	// DirectionalLight
-	DirectionalLight GetDirectionalLight() const { return this->light_; }
-
-	// SphereRadius
-	float GetRadius() const { return this->radius_; }
-
-	// fileName_
-	const std::string GetObjFileName() { return this->fileName_; }
-
-	// ObjHandle
-	uint32_t GetObjHandle() const { return this->objHandle_; }
-
-	// ObjData
-	ModelData GetObjData() { return this->objData_; }
-
-	// なにこれ・
-	ModelLightingType GetModelDrawType() const { return this->modelDrawType_; }
-
-	// Node
-	Node GetNode() const { return this->objData_.rootNode; }
-
-#pragma endregion 
-
-
-#pragma region Set
-
-	// TextureHandle
-	void SetTexHandle(uint32_t texHD) { this->objData_.textureHD = texHD; }
-
-	// NormalMapTexture
-	void SetNormalMapTex(uint32_t texHD) { this->normalMapTex_ = texHD; }
-
-	// Color
-	void SetColor(Vector4 color) { this->modelState_->SetMaterialColor(color); }
-
-	// Light
-	void SetDirectionalLight(DirectionalLight light) { this->light_ = light; }
-
-	// DrawType
-	void SetModelDrawType(ModelLightingType type) { this->modelDrawType_ = type; }
-
-	// Node
-	void SetNode(Node node) { this->objData_.rootNode = node; }
-
-	// Node.localMatrix
-	void SetNodeMatrix(Matrix4x4 setLocalMat) { this->objData_.rootNode.localMatrix = setLocalMat; }
-
-#pragma endregion
-
 
 #pragma region Accessor アクセッサ
 
@@ -148,6 +71,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 	// Material
 	MaterialDataN GetMaterialData() const { return this->modelState_->GetMaterialData(); }
 	void SetMaterialData(const MaterialDataN& seteData) { this->modelState_->SetMaterialData(seteData); }
+	void SetMaterialColor(Vector4 color) { this->modelState_->SetMaterialColor(color); }
 	void SetMaterialTexture(uint32_t setTexture) { this->modelState_->SetMaterialTexture(setTexture); }
 	void SetMaterialUVMat(const Matrix4x4& setMat) { this->modelState_->SetMaterialUVMat(setMat); }
 
@@ -167,7 +91,7 @@ public: // 繝｡繝ｳ繝宣未謨ｰ
 #pragma endregion 
 
 
-private: // 繝｡繝ｳ繝仙､画焚
+private:
 
 	// 繝｢繝・Ν繝槭ロ繝ｼ繧ｸ繝｣繝ｼ
 	ModelManager* modelManager_ = nullptr;

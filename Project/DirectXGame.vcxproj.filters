@@ -208,6 +208,27 @@
     <ClCompile Include="Engine\JsonManager\JsonManager.cpp">
       <Filter>Engine\JsonManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Math\MathEasing\MathEasing.cpp">
+      <Filter>Engine\Math\MathEasing</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MathFunction\MathFunction.cpp">
+      <Filter>Engine\Math\MathFunction</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp">
+      <Filter>Engine\Math\MathQuaternion</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MathStructure\Matrix\Matrix.cpp">
+      <Filter>Engine\Math\MathStructure\Matrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp">
+      <Filter>Engine\Math\MathStructure\Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MyColor\MyColor.cpp">
+      <Filter>Engine\Math\MyColor</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
+      <Filter>Engine\Math\MyParlinNoise</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -463,6 +484,42 @@
     </ClInclude>
     <ClInclude Include="Engine\JsonManager\JsonManager.h">
       <Filter>Engine\JsonManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MyMath.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\Struct.h">
+      <Filter>Engine\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathEasing\MathEasing.h">
+      <Filter>Engine\Math\MathEasing</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathFunction\MathFunction.h">
+      <Filter>Engine\Math\MathFunction</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathGeometry\MathGeometry.h">
+      <Filter>Engine\Math\MathGeometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathInterpolate\MathInterpolate.h">
+      <Filter>Engine\Math\MathInterpolate</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathOperations\MathOperations.h">
+      <Filter>Engine\Math\MathOperations</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathQuaternion\MathQuaternion.h">
+      <Filter>Engine\Math\MathQuaternion</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathStructure\Matrix\Matrix.h">
+      <Filter>Engine\Math\MathStructure\Matrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MathStructure\Vector\Vector.h">
+      <Filter>Engine\Math\MathStructure\Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MyColor\MyColor.h">
+      <Filter>Engine\Math\MyColor</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
+      <Filter>Engine\Math\MyParlinNoise</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -774,6 +831,39 @@
     </Filter>
     <Filter Include="Engine\Math">
       <UniqueIdentifier>{580753e2-5558-4b32-a727-0d255026e5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathEasing">
+      <UniqueIdentifier>{4e3d0250-2c63-457e-9b8f-3ebe4fb3bae5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathFunction">
+      <UniqueIdentifier>{9f639ea5-5434-4677-86a0-430ac303e724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathGeometry">
+      <UniqueIdentifier>{2f16116f-e8ef-47be-87e6-50d5c072c755}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathInterpolate">
+      <UniqueIdentifier>{70f7781c-5dae-4d74-a72e-f858cf89f6cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathOperations">
+      <UniqueIdentifier>{41f7a2ef-9825-4c64-bc44-ef5352fea38c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathQuaternion">
+      <UniqueIdentifier>{e820fca5-549c-4981-b53a-48363a5bfe96}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathStructure">
+      <UniqueIdentifier>{7192194e-a087-4e7b-b93f-af8d553c9e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MyColor">
+      <UniqueIdentifier>{88ad076b-92af-4e35-a259-4c931f1f46ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MyParlinNoise">
+      <UniqueIdentifier>{da0449f4-c606-4789-a30f-ecbf30c81f98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathStructure\Matrix">
+      <UniqueIdentifier>{dca8d564-eee7-44b6-83e5-8acf2900206c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math\MathStructure\Vector">
+      <UniqueIdentifier>{50b2dcc9-cee3-443e-8063-77ba3dc10430}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

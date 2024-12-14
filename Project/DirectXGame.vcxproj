@@ -233,6 +233,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\JsonManager\JsonManager.cpp" />
+    <ClCompile Include="Engine\Math\MathEasing\MathEasing.cpp" />
+    <ClCompile Include="Engine\Math\MathFunction\MathFunction.cpp" />
+    <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp" />
+    <ClCompile Include="Engine\Math\MathStructure\Matrix\Matrix.cpp" />
+    <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp" />
+    <ClCompile Include="Engine\Math\MyColor\MyColor.cpp" />
+    <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -318,6 +325,18 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h" />
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
+    <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
+    <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />
+    <ClInclude Include="Engine\Math\MathGeometry\MathGeometry.h" />
+    <ClInclude Include="Engine\Math\MathInterpolate\MathInterpolate.h" />
+    <ClInclude Include="Engine\Math\MathOperations\MathOperations.h" />
+    <ClInclude Include="Engine\Math\MathQuaternion\MathQuaternion.h" />
+    <ClInclude Include="Engine\Math\MathStructure\Matrix\Matrix.h" />
+    <ClInclude Include="Engine\Math\MathStructure\Vector\Vector.h" />
+    <ClInclude Include="Engine\Math\MyColor\MyColor.h" />
+    <ClInclude Include="Engine\Math\MyMath.h" />
+    <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h" />
+    <ClInclude Include="Engine\Math\Struct.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -190,6 +190,18 @@
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp">
       <Filter>Engine\CommandManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp">
+      <Filter>Engine\ConfigManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CreateResource\CreateResource.cpp">
+      <Filter>Engine\CreateResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp">
+      <Filter>Engine\DescriptorManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp">
+      <Filter>Engine\GPUParticle\Particle</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -418,6 +430,27 @@
     </ClInclude>
     <ClInclude Include="Engine\CommandManager\CommandManager.h">
       <Filter>Engine\CommandManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ConfigManager\ConfigManager.h">
+      <Filter>Engine\ConfigManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CreateResource\CreateResource.h">
+      <Filter>Engine\CreateResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h">
+      <Filter>Engine\DescriptorManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GameData\GameData.h">
+      <Filter>Engine\GameData</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h">
+      <Filter>Engine\GPUParticle\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h">
+      <Filter>Engine\GPUParticle\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h">
+      <Filter>Engine\GPUParticle\Structure</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -696,6 +729,33 @@
     </Filter>
     <Filter Include="Engine\CommandManager">
       <UniqueIdentifier>{427d269f-5c87-4486-b506-e9aa9286a4fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ConfigManager">
+      <UniqueIdentifier>{a594bee4-a9c3-42b3-853a-3d7f657af543}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CreateResource">
+      <UniqueIdentifier>{ccec9be0-5911-4627-861f-5e781d9b72e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\DescriptorManager">
+      <UniqueIdentifier>{9d4500b2-5582-4c6b-afd9-7e4676f9e403}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GameData">
+      <UniqueIdentifier>{25e949b9-47a9-4594-8235-5203e714a163}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GPUParticle">
+      <UniqueIdentifier>{5e934239-8447-4f3d-9552-de7c52c21906}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GPUParticle\Particle">
+      <UniqueIdentifier>{b9073bbf-7746-4f19-b83a-28d3fd13215c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GPUParticle\Resources">
+      <UniqueIdentifier>{41505459-e58c-43f9-a418-5c821a3303e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\GPUParticle\Structure">
+      <UniqueIdentifier>{d520d9fe-2b8b-4c6f-99cb-9d9a52a6654c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Input">
+      <UniqueIdentifier>{67460f6e-cadb-4587-ad26-1d91135f6e79}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -247,6 +247,9 @@
     <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp">
       <Filter>Engine\Particle\ParticleArray</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PipeLineManager.cpp">
+      <Filter>Engine\PipeLineManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -559,6 +562,9 @@
     </ClInclude>
     <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h">
       <Filter>Engine\Particle\ParticleArray</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PipeLineManager.h">
+      <Filter>Engine\PipeLineManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -924,6 +930,21 @@
     </Filter>
     <Filter Include="Engine\Particle\ParticleSystem">
       <UniqueIdentifier>{8fd24b2b-b61b-4b81-8933-3acdc3c347f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager">
+      <UniqueIdentifier>{60d5f58e-f210-40dc-aa0b-00bf3b0eefc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\CSPipeLine">
+      <UniqueIdentifier>{3c30d82d-0f66-4d2f-a087-c0d5bf14e5a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\IPipeLineState">
+      <UniqueIdentifier>{9b2b8999-9227-446c-8366-ae025ed9a863}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine">
+      <UniqueIdentifier>{e6673992-03ea-41ec-a545-3c8bf38bb840}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine">
+      <UniqueIdentifier>{8132aab6-bb9f-4600-964c-d313b30a41eb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

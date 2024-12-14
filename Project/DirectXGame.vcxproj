@@ -246,6 +246,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp" />
     <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp" />
     <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\PipeLineManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +351,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h" />
     <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h" />
     <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h" />
+    <ClInclude Include="Engine\PipeLineManager\PipeLineManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

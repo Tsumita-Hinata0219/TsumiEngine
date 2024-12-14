@@ -289,6 +289,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Engine\Transform\Transform.cpp" />
+    <ClCompile Include="Engine\Tsumi.cpp" />
+    <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
+    <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
+    <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
+    <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
+    <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp" />
+    <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -439,6 +447,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Transform.h" />
+    <ClInclude Include="Engine\Tsumi.h" />
+    <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
+    <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
+    <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
+    <ClInclude Include="Engine\Utilities\ObjectPool\ObjectPool.h" />
+    <ClInclude Include="Engine\Utilities\RandomGenerator\RandomGenerator.h" />
+    <ClInclude Include="Engine\Utilities\TextLog\TextLog.h" />
+    <ClInclude Include="Engine\Utilities\TimedCall\TimedCall.h" />
+    <ClInclude Include="Engine\Utilities\Timer\Timer.h" />
+    <ClInclude Include="Engine\View\RTVManager\RTVManager.h" />
+    <ClInclude Include="Engine\View\SRVManager\SRVManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

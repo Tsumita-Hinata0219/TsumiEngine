@@ -376,6 +376,30 @@
     <ClCompile Include="Engine\Transform\Transform.cpp">
       <Filter>Engine\Transform</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp">
+      <Filter>Engine\Utilities\EnumUtilities</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp">
+      <Filter>Engine\Utilities\ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\Timer\Timer.cpp">
+      <Filter>Engine\Utilities\Timer</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp">
+      <Filter>Engine\Utilities\TimedCall</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp">
+      <Filter>Engine\Utilities\TextLog</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp">
+      <Filter>Engine\View\RTVManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp">
+      <Filter>Engine\View\SRVManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Tsumi.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -826,6 +850,39 @@
     </ClInclude>
     <ClInclude Include="Engine\Transform\Transform.h">
       <Filter>Engine\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h">
+      <Filter>Engine\Utilities\EnumUtilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h">
+      <Filter>Engine\Utilities\ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h">
+      <Filter>Engine\Utilities\ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\Timer\Timer.h">
+      <Filter>Engine\Utilities\Timer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\TimedCall\TimedCall.h">
+      <Filter>Engine\Utilities\TimedCall</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\TextLog\TextLog.h">
+      <Filter>Engine\Utilities\TextLog</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\RandomGenerator\RandomGenerator.h">
+      <Filter>Engine\Utilities\RandomGenerator</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Utilities\ObjectPool\ObjectPool.h">
+      <Filter>Engine\Utilities\ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\View\RTVManager\RTVManager.h">
+      <Filter>Engine\View\RTVManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\View\SRVManager\SRVManager.h">
+      <Filter>Engine\View\SRVManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Tsumi.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1341,6 +1398,39 @@
     </Filter>
     <Filter Include="Engine\Transform">
       <UniqueIdentifier>{1c832ea2-3d57-4957-a906-51da4021bcde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities">
+      <UniqueIdentifier>{5c092840-3c14-4082-9958-b32dc92c8cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\EnumUtilities">
+      <UniqueIdentifier>{05bf8554-b2ae-4654-9fb8-f5b66b1236f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\ImGuiManager">
+      <UniqueIdentifier>{2d6739c4-b1d3-4037-957c-6f11b8c8e79e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\ObjectPool">
+      <UniqueIdentifier>{7d934b61-403c-4a39-b7e7-ecf0ae030d85}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\RandomGenerator">
+      <UniqueIdentifier>{467bff1a-e687-4458-ad20-a46964369515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\TextLog">
+      <UniqueIdentifier>{138e4018-14af-452c-8942-31e751e47395}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\TimedCall">
+      <UniqueIdentifier>{133efc1b-5996-4922-80e8-d0662e0eef29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Utilities\Timer">
+      <UniqueIdentifier>{085ac3ec-920b-480d-a5a4-f8d040106cec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\View">
+      <UniqueIdentifier>{0dc380d6-7df8-46d5-825a-d27163b828ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\View\RTVManager">
+      <UniqueIdentifier>{9bcacdfd-1905-494b-9d34-9364745ea323}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\View\SRVManager">
+      <UniqueIdentifier>{f560fc95-1cbd-4ab1-aead-b0a8bc4c1670}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

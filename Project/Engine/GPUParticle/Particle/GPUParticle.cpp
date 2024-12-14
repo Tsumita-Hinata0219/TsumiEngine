@@ -1,4 +1,5 @@
 #include "GPUParticle.h"
+#include "GameObject/Camera/Manager/CameraManager.h"
 #include "3D/Model/Manager/ModelManager.h"
 
 
@@ -9,7 +10,7 @@ void GPUParticle::Init(uint32_t instanceNum)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
 	modelManager->LoadModel("Obj/Plane", "Plane.obj");
-	//model_ = modelManager->GetModel("Plane");
+	model_ = modelManager->GetModel("Plane");
 
 	// CameraManagerのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();
@@ -55,11 +56,11 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	// ここで書き込み
 	// VBV
 	buffers_.vertex.Map();
-	//buffers_.vertex.WriteData(model_->GetMeshData().vertices.data());
+	buffers_.vertex.WriteData(model_->GetMeshData().vertices.data());
 	buffers_.vertex.UnMap();
 	// IBV
 	buffers_.indeces.Map();
-	//buffers_.indeces.WriteData(model_->GetMeshData().indices.data());
+	buffers_.indeces.WriteData(model_->GetMeshData().indices.data());
 	buffers_.indeces.UnMap();
 	// Transform
 	buffers_.transform.Map();
@@ -110,19 +111,19 @@ void GPUParticle::CommandCall_Draw()
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Transform
-	//buffers_.transform.GraphicsCommandCallInstancingSRV(0);
+	buffers_.transform.GraphicsCommandCallInstancingSRV(0);
 	// ParticleElement
 	buffers_.particleElement.GraphicsCommandCallInstancingSRV(0);
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	//buffers_.material.GraphicsCommandCallInstancingSRV(3);
+	buffers_.material.GraphicsCommandCallInstancingSRV(3);
 	// MaterialTexture
-	//buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
+	buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!
-	//commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
+	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }
 
 
@@ -132,12 +133,12 @@ void GPUParticle::CommandCall_Draw()
 void GPUParticle::CreateBufferResource()
 {
 	// mesh
-	//buffers_.mesh.CreateResource(UINT(model_->GetMeshData().vertices.size()));
+	buffers_.mesh.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	// vertexBufferView
-	//buffers_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
+	buffers_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	buffers_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	//buffers_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
+	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
 	buffers_.indeces.CreateIndexBufferView();
 	// ParticleElement
 	buffers_.particleElement.CreateUAV(instanceNum_);

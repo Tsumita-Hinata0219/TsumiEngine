@@ -4,12 +4,15 @@
 #include "CommandManager/CommandManager.h"
 #include "Transform/Transform.h"
 #include "PipeLineManager/PipeLineManager.h"
-#include "3D/Model/Model.h"
 
 #include "../Resources/GPUParticleResources.h"
 
-#include "GameObject/GameObject.h"
 #include "Math/MyMath.h"
+
+
+// 前方宣言
+class CameraManager;
+class Model;
 
 
 /* GPUParticleクラス */
@@ -74,9 +77,6 @@ private:
 	uint32_t instanceNum_ = 0;
 
 	// 使用するモデル
-	//std::unique_ptr<Model> model_;
-	Model* model_ = nullptr;
-
-
+	std::unique_ptr<Model> model_;
 };
 

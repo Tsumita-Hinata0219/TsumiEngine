@@ -118,13 +118,6 @@ private:
 	ModelData objData_{};
 
 
-
-	// バッファーに書き込むデータ
-	//ModelDatas datas_{};
-
-	// バッファー
-	//ModelBuffers buffers_{};
-
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 

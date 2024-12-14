@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../../BufferResource/BufferResource.h"
-#include "../../CommandManager/CommandManager.h"
-#include "../../View/SRVManager/SRVManager.h"
-#include "../../Transform/Transform.h"
-#include "../../PipeLineManager/PipeLineManager.h"
+#include "BufferResource/BufferResource.h"
+#include "CommandManager/CommandManager.h"
+#include "Transform/Transform.h"
+#include "PipeLineManager/PipeLineManager.h"
+#include "3D/Model/Model.h"
 
 #include "../Resources/GPUParticleResources.h"
 
@@ -75,7 +75,7 @@ private:
 
 	// 使用するモデル
 	//std::unique_ptr<Model> model_;
-
+	Model* model_ = nullptr;
 
 
 };

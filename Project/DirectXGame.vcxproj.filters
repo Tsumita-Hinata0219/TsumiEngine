@@ -115,6 +115,42 @@
     <ClCompile Include="Engine\3D\Model\Model.cpp">
       <Filter>Engine\3D\Model</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp">
+      <Filter>Engine\Animation\AnimationDataArray</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationManager\AnimationManager.cpp">
+      <Filter>Engine\Animation\AnimationManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp">
+      <Filter>Engine\Animation\KeyFrameAnimation</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\Joint\Joint.cpp">
+      <Filter>Engine\Animation\AnimationStructure\Joint</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp">
+      <Filter>Engine\Animation\AnimationStructure\JointWeightData</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp">
+      <Filter>Engine\Animation\AnimationStructure\WellForGPU</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp">
+      <Filter>Engine\Animation\AnimationStructure\VertexWeightData</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp">
+      <Filter>Engine\Animation\AnimationStructure\VertexInfluence</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp">
+      <Filter>Engine\Animation\AnimationStructure\SkinCluster</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\Skeleton\Skeleton.cpp">
+      <Filter>Engine\Animation\AnimationStructure\Skeleton</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp">
+      <Filter>Engine\Animation\AnimationStructure\QuaternionTransform</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Animation\AnimationStructure\Node\Node.cpp">
+      <Filter>Engine\Animation\AnimationStructure\Node</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -253,6 +289,42 @@
     </ClInclude>
     <ClInclude Include="Engine\3D\Model\Model.h">
       <Filter>Engine\3D\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h">
+      <Filter>Engine\Animation\AnimationDataArray</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationManager\AnimationManager.h">
+      <Filter>Engine\Animation\AnimationManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h">
+      <Filter>Engine\Animation\KeyFrameAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\Joint\Joint.h">
+      <Filter>Engine\Animation\AnimationStructure\Joint</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h">
+      <Filter>Engine\Animation\AnimationStructure\JointWeightData</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.h">
+      <Filter>Engine\Animation\AnimationStructure\WellForGPU</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h">
+      <Filter>Engine\Animation\AnimationStructure\VertexWeightData</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h">
+      <Filter>Engine\Animation\AnimationStructure\VertexInfluence</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\SkinCluster\SkinCluster.h">
+      <Filter>Engine\Animation\AnimationStructure\SkinCluster</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\Skeleton\Skeleton.h">
+      <Filter>Engine\Animation\AnimationStructure\Skeleton</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h">
+      <Filter>Engine\Animation\AnimationStructure\QuaternionTransform</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Animation\AnimationStructure\Node\Node.h">
+      <Filter>Engine\Animation\AnimationStructure\Node</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -426,6 +498,48 @@
     </Filter>
     <Filter Include="Engine\3D\Model\State\OBJ">
       <UniqueIdentifier>{239058df-fea9-4a15-a57e-11b5c84fc566}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation">
+      <UniqueIdentifier>{d1ebd089-4e8e-417e-aae5-fe127577dba0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationDataArray">
+      <UniqueIdentifier>{44ed089e-be82-4456-a293-febdb03a3054}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationManager">
+      <UniqueIdentifier>{0180d3ac-81b1-446f-95de-20335b26f911}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure">
+      <UniqueIdentifier>{39035d32-0e24-4c72-89f3-2cb284bbf616}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\KeyFrameAnimation">
+      <UniqueIdentifier>{6c54a4ab-5594-4020-9246-5e7026f77c08}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\Joint">
+      <UniqueIdentifier>{c0f7b6b3-3117-4ee8-a6aa-9a47e88f778a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\JointWeightData">
+      <UniqueIdentifier>{163288ec-db6f-435c-8a58-d1b149f941e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\Node">
+      <UniqueIdentifier>{1a5c2eac-7cb6-440b-af07-c6f2152afce5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\QuaternionTransform">
+      <UniqueIdentifier>{f4fa4ecd-739e-4405-b076-e10cf399ceea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\Skeleton">
+      <UniqueIdentifier>{37b6fec9-6501-4979-b1d8-e21dadf9f974}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\SkinCluster">
+      <UniqueIdentifier>{8ba4ad90-789f-4532-ade5-0c66509b1d1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\VertexInfluence">
+      <UniqueIdentifier>{fddf8a5f-0caa-45fb-ac4a-661d56745502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\VertexWeightData">
+      <UniqueIdentifier>{b0773faa-03fc-46ab-ae99-1eab6e4b7bb8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Animation\AnimationStructure\WellForGPU">
+      <UniqueIdentifier>{8cc4acfc-dfee-45b9-a637-328f5ec7f3c7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

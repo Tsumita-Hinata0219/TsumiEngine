@@ -202,6 +202,18 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationManager\AnimationManager.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\Joint\Joint.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\Node\Node.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\Skeleton\Skeleton.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
+    <ClCompile Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -248,6 +260,18 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
     <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
+    <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h" />
+    <ClInclude Include="Engine\Animation\AnimationManager\AnimationManager.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\Joint\Joint.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\Node\Node.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\Skeleton\Skeleton.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
+    <ClInclude Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

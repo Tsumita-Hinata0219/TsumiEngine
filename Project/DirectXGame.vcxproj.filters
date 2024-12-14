@@ -250,6 +250,78 @@
     <ClCompile Include="Engine\PipeLineManager\PipeLineManager.cpp">
       <Filter>Engine\PipeLineManager</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp">
+      <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp">
+      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -565,6 +637,81 @@
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\PipeLineManager.h">
       <Filter>Engine\PipeLineManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h">
+      <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h">
+      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h">
+      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\IPipeLineState\PipeLineStructure.h">
+      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h">
+      <Filter>Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h">
+      <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -945,6 +1092,78 @@
     </Filter>
     <Filter Include="Engine\PipeLineManager\PostEffectPipeLine">
       <UniqueIdentifier>{8132aab6-bb9f-4600-964c-d313b30a41eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\CSPipeLine\GPUParticle">
+      <UniqueIdentifier>{f10faff7-297f-4672-b9b4-8de89d5e8b8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\CSPipeLine\Particle">
+      <UniqueIdentifier>{9cdc8f01-e487-4bcc-b986-39e6496ce6b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init">
+      <UniqueIdentifier>{53890244-6966-4647-a7fb-31039d27db68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine">
+      <UniqueIdentifier>{c9f64d37-611b-4c29-a6b4-5486193e7efa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw">
+      <UniqueIdentifier>{2e8f81ad-5b13-44ae-801e-7339f9998eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine">
+      <UniqueIdentifier>{2ae676dc-435e-4e34-9098-05e1e7c4ec21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine">
+      <UniqueIdentifier>{d7dc714f-681f-413d-8021-9fcf17404a63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine">
+      <UniqueIdentifier>{204fd20a-1c5b-4842-a43e-88646bbfc495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine">
+      <UniqueIdentifier>{ac434c8f-f130-4d9f-8e22-abb5d95f24c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine">
+      <UniqueIdentifier>{46645e1c-d023-475d-84d8-d78430a77de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine">
+      <UniqueIdentifier>{9e545c5f-9705-4a42-b293-d382e7b72266}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine">
+      <UniqueIdentifier>{ef7030ab-b338-4116-bd19-e6bd7b016b44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine">
+      <UniqueIdentifier>{ee0594b6-3b44-401c-aa88-7722fa93dc35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine">
+      <UniqueIdentifier>{2e788ca7-3271-4b00-8bf3-beba477b71ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine">
+      <UniqueIdentifier>{3fe4fecb-cb0e-4ecc-a01d-9189fe66caa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine">
+      <UniqueIdentifier>{ad47092e-4bdf-4ff4-8de0-ff7d1685f36f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine">
+      <UniqueIdentifier>{06abfe81-be4b-4a19-a61d-97fad779a22d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine">
+      <UniqueIdentifier>{5ec91ceb-1a17-4ab4-8e12-3ae4f24521da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine">
+      <UniqueIdentifier>{e587903a-441c-4eea-b27f-95912fb1d4b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine">
+      <UniqueIdentifier>{d34b5425-f658-499f-9099-57c43dbb15ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine">
+      <UniqueIdentifier>{d6aeabc5-dad9-4a4e-802b-58d3250f8db8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine">
+      <UniqueIdentifier>{b3abdc81-7b9c-40ec-80ba-c0ede20158c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine">
+      <UniqueIdentifier>{f817307b-9d60-46cd-a9a3-b40ec6c3925c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine">
+      <UniqueIdentifier>{eba71fea-2704-4c83-b357-598196e23cc2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

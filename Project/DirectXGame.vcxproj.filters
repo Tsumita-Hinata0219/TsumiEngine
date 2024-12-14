@@ -367,6 +367,15 @@
     <ClCompile Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp">
+      <Filter>Engine\ShaderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\TextureManager\TextureManager.cpp">
+      <Filter>Engine\TextureManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Transform\Transform.cpp">
+      <Filter>Engine\Transform</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -808,6 +817,15 @@
     </ClInclude>
     <ClInclude Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\ShaderManager\ShaderManager.h">
+      <Filter>Engine\ShaderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\TextureManager\TextureManager.h">
+      <Filter>Engine\TextureManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Transform\Transform.h">
+      <Filter>Engine\Transform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1314,6 +1332,15 @@
     </Filter>
     <Filter Include="Engine\PostEffect\IPostEffect\Vignetting">
       <UniqueIdentifier>{c90eaf79-a7da-4e71-a4b4-e8402699c37b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\ShaderManager">
+      <UniqueIdentifier>{acff722c-8c0e-433d-95a0-c796268949cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\TextureManager">
+      <UniqueIdentifier>{cabc9511-e7f6-4f38-93e5-886924e82413}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Transform">
+      <UniqueIdentifier>{1c832ea2-3d57-4957-a906-51da4021bcde}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

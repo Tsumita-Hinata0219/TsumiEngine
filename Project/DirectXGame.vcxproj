@@ -286,6 +286,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
+    <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
+    <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
+    <ClCompile Include="Engine\Transform\Transform.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -433,6 +436,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Engine\PostEffect\Materials\PostEffectMaterials.h" />
+    <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Engine\TextureManager\TextureManager.h" />
+    <ClInclude Include="Engine\Transform\Transform.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

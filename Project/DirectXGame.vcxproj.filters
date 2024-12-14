@@ -1468,6 +1468,51 @@
     <Filter Include="Resources\Shaders\Object2d">
       <UniqueIdentifier>{fc4586f8-0baf-4c70-b134-72668086ed3e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\BoxFilter">
+      <UniqueIdentifier>{e29cf043-93b4-439f-a811-8eafdbaa0b0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Absent">
+      <UniqueIdentifier>{d9c231e0-88e0-4be8-8514-81083851cf11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\ColorGrading">
+      <UniqueIdentifier>{560c67a5-2fe1-4525-8639-38367391fb17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Dissolve">
+      <UniqueIdentifier>{674b6cb1-9dec-4c75-8627-cf3062378f19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\GaussianFilter">
+      <UniqueIdentifier>{4479c72a-c789-4b46-a1b3-f18032dd1a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Glitch">
+      <UniqueIdentifier>{a8e7f16e-0e68-4da3-94d5-12edee24e296}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Grain">
+      <UniqueIdentifier>{df311ef2-495c-4fbc-bd35-00089317b361}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\HSV">
+      <UniqueIdentifier>{9a8a7b87-db45-4a94-a605-5b4ffafa59ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\OutLine">
+      <UniqueIdentifier>{e7f52c45-646a-480f-b5fd-76bc4fa882a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\RadialBlur">
+      <UniqueIdentifier>{73e03312-dfab-4dde-b247-2beaac2e809c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\RetroCRT">
+      <UniqueIdentifier>{06d76f42-b76b-4150-b919-aefdf6d1b883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\SepiaTone">
+      <UniqueIdentifier>{a9bcf955-d534-42ab-bf7d-2525f8bfac48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Vignetting">
+      <UniqueIdentifier>{61317961-657b-4b86-9399-3c801e24bf48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\GrayScale">
+      <UniqueIdentifier>{f1a87e57-f2f5-4407-a779-1b4f3b664ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect\Random">
+      <UniqueIdentifier>{dde56324-8a47-4a2e-b79c-b6c183e7e95f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli">
@@ -1493,6 +1538,9 @@
     </None>
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli">
       <Filter>Resources\Shaders\Object3d</Filter>
+    </None>
+    <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli">
+      <Filter>Resources\Shaders\PostEffect</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1540,6 +1588,54 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl">
       <Filter>Resources\Shaders\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Absent\Absent.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Absent</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\BoxFilter\BoxFilter.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\BoxFilter</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\ColorGrading\ColorGrading.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\ColorGrading</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Dissolve\Dissolve.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Dissolve</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GaussianFilter\GaussianFilter.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\GaussianFilter</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Glitch\Glitch.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Glitch</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Grain\Grain.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Grain</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\GrayScale\GrayScale.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\GrayScale</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\HSV\HSV.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\HSV</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Random\Random.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Random</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\Vignetting\Vignetting.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\Vignetting</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\SepiaTone\SepiaTone.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\SepiaTone</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\RetroCRT\RetroCRT.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\RetroCRT</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\RadialBlur\RadialBlur.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\RadialBlur</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\OutLine\OutLine.PS.hlsl">
+      <Filter>Resources\Shaders\PostEffect\OutLine</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\PostEffect\PostEffect.VS.hlsl">
+      <Filter>Resources\Shaders\PostEffect</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

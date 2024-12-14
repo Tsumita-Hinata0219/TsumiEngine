@@ -163,6 +163,30 @@
     <ClCompile Include="Engine\Base\WinApp\WinApp.cpp">
       <Filter>Engine\Base\WinApp</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Collider\Interface\ICollider.cpp">
+      <Filter>Engine\CollisionSystem\Collider\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp">
+      <Filter>Engine\CollisionSystem\Collider\Shape\AABB</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp">
+      <Filter>Engine\CollisionSystem\Collider\Shape\Sphere</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Geometry\GeometryCollision.cpp">
+      <Filter>Engine\CollisionSystem\Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\IsCollision\IsCollision.cpp">
+      <Filter>Engine\CollisionSystem\IsCollision</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Manager\CollisionManager.cpp">
+      <Filter>Engine\CollisionSystem\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp">
+      <Filter>Engine\CollisionSystem\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp">
+      <Filter>Engine\CollisionSystem\Penetration</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -352,6 +376,42 @@
     </ClInclude>
     <ClInclude Include="Engine\BufferResource\BufferResource.h">
       <Filter>Engine\BufferResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Collider\ColliderConfig.h">
+      <Filter>Engine\CollisionSystem\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Collider\Interface\ICollider.h">
+      <Filter>Engine\CollisionSystem\Collider\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Collider\Structure\ColliderStructure.h">
+      <Filter>Engine\CollisionSystem\Collider\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h">
+      <Filter>Engine\CollisionSystem\Collider\Shape\AABB</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h">
+      <Filter>Engine\CollisionSystem\Collider\Shape\Sphere</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Detect\CollisionDetect.h">
+      <Filter>Engine\CollisionSystem\Detect</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Geometry\GeometryCollision.h">
+      <Filter>Engine\CollisionSystem\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\IsCollision\IsCollision.h">
+      <Filter>Engine\CollisionSystem\IsCollision</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Manager\CollisionManager.h">
+      <Filter>Engine\CollisionSystem\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h">
+      <Filter>Engine\CollisionSystem\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h">
+      <Filter>Engine\CollisionSystem\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CollisionSystem\Penetration\CollisionPenetration.h">
+      <Filter>Engine\CollisionSystem\Penetration</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -588,6 +648,45 @@
     </Filter>
     <Filter Include="Engine\CollisionSystem">
       <UniqueIdentifier>{6b3c3c61-932e-4a4a-b7a2-0d00accb20bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider">
+      <UniqueIdentifier>{ef766848-decc-465f-bcdf-f02d3ab1b6ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Detect">
+      <UniqueIdentifier>{9d2453b8-fa5a-44ed-ba82-5be4826afd9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Geometry">
+      <UniqueIdentifier>{5704c1b9-468f-4bee-b4f6-fb7b4c1f95fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\IsCollision">
+      <UniqueIdentifier>{de989dd2-ec50-4cc0-9aa1-cb7c089ad883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Manager">
+      <UniqueIdentifier>{57b992aa-1523-4369-b1cb-0751944b37d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Penetration">
+      <UniqueIdentifier>{618c6e70-44e1-4d88-b010-85e02f89c82c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Structure">
+      <UniqueIdentifier>{a06e4b8f-b58a-47ab-a088-43ecb8e66a52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Util">
+      <UniqueIdentifier>{d375f484-dc93-4af1-b131-cee89f5fab19}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider\Interface">
+      <UniqueIdentifier>{825281bc-64c1-4f79-9507-0ac13de3124b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider\Shape">
+      <UniqueIdentifier>{f5118c20-5a16-4d07-876b-c701be5d1aac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider\Structure">
+      <UniqueIdentifier>{1c85dbc7-9907-4e67-8bd7-088e2f96bb43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider\Shape\AABB">
+      <UniqueIdentifier>{7042dd7f-11e5-4412-b2be-1a5156842b4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem\Collider\Shape\Sphere">
+      <UniqueIdentifier>{5d7f55f3-1a28-4e71-a3ee-86047c62e2a1}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

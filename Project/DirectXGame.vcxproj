@@ -218,6 +218,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
     <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp" />
     <ClCompile Include="Engine\Base\WinApp\WinApp.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Geometry\GeometryCollision.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -281,6 +289,18 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Base\DXCommon\DirectXCommon.h" />
     <ClInclude Include="Engine\Base\WinApp\WinApp.h" />
     <ClInclude Include="Engine\BufferResource\BufferResource.h" />
+    <ClInclude Include="Engine\CollisionSystem\Collider\ColliderConfig.h" />
+    <ClInclude Include="Engine\CollisionSystem\Collider\Interface\ICollider.h" />
+    <ClInclude Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
+    <ClInclude Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
+    <ClInclude Include="Engine\CollisionSystem\Collider\Structure\ColliderStructure.h" />
+    <ClInclude Include="Engine\CollisionSystem\Detect\CollisionDetect.h" />
+    <ClInclude Include="Engine\CollisionSystem\Geometry\GeometryCollision.h" />
+    <ClInclude Include="Engine\CollisionSystem\IsCollision\IsCollision.h" />
+    <ClInclude Include="Engine\CollisionSystem\Manager\CollisionManager.h" />
+    <ClInclude Include="Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
+    <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h" />
+    <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

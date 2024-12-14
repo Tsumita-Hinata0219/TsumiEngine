@@ -271,6 +271,21 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -401,6 +416,23 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\IPostEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
+    <ClInclude Include="Engine\PostEffect\Materials\PostEffectMaterials.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

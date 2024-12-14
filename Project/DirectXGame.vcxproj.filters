@@ -322,6 +322,51 @@
     <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp">
       <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp">
+      <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -712,6 +757,57 @@
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h">
       <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\Materials\PostEffectMaterials.h">
+      <Filter>Engine\PostEffect\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\IPostEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h">
+      <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1164,6 +1260,60 @@
     </Filter>
     <Filter Include="Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine">
       <UniqueIdentifier>{eba71fea-2704-4c83-b357-598196e23cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect">
+      <UniqueIdentifier>{299dc579-d1fc-4fc0-a57f-0901486485e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect">
+      <UniqueIdentifier>{de4cf860-d352-4076-b27a-f91818929efe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\Materials">
+      <UniqueIdentifier>{852b4eba-8ea7-4f49-9487-5377d7bee08c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Absent">
+      <UniqueIdentifier>{d672805e-8cf7-4ace-8d36-9f491e60e0e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\BoxFilter">
+      <UniqueIdentifier>{c03710b9-2643-40d8-9936-5a30e5ac8dfa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\ColorGrading">
+      <UniqueIdentifier>{a85bd319-07cd-4e75-add2-c0fec11ae662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Dissolve">
+      <UniqueIdentifier>{e928c79a-91cc-457a-b571-a5615a6d035b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\GaussianFilter">
+      <UniqueIdentifier>{0929589e-16d7-4372-8d0c-068071fa0d57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Glitch">
+      <UniqueIdentifier>{a1f53a06-8af9-4e94-8ccb-98fa84c38aa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Grain">
+      <UniqueIdentifier>{ab529f05-9557-4705-b34e-f7d3575f6eb2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\GrayScale">
+      <UniqueIdentifier>{38f80ff7-8e4a-41bf-a835-3cfab2f77fee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\HSV">
+      <UniqueIdentifier>{36fb1896-8858-4ec1-8400-5ac95f389ec2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\LuminanceOutLine">
+      <UniqueIdentifier>{79b371c4-101f-466a-bba6-3b5ecd090412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\RadialBlur">
+      <UniqueIdentifier>{419286ae-8a84-4e31-aeac-044344906e6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Random">
+      <UniqueIdentifier>{45624608-34bd-4a9d-8c10-3332bbf255d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\RetroCRT">
+      <UniqueIdentifier>{99660278-7f35-4169-bf91-ef0ebc1801cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\SepiaTone">
+      <UniqueIdentifier>{ab6e9560-f34d-49a1-9946-9efc0e36a84d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\PostEffect\IPostEffect\Vignetting">
+      <UniqueIdentifier>{c90eaf79-a7da-4e71-a4b4-e8402699c37b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

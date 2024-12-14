@@ -202,6 +202,12 @@
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp">
       <Filter>Engine\GPUParticle\Particle</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Input\Input.cpp">
+      <Filter>Engine\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\JsonManager\JsonManager.cpp">
+      <Filter>Engine\JsonManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -451,6 +457,12 @@
     </ClInclude>
     <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h">
       <Filter>Engine\GPUParticle\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Input\Input.h">
+      <Filter>Engine\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\JsonManager\JsonManager.h">
+      <Filter>Engine\JsonManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -756,6 +768,12 @@
     </Filter>
     <Filter Include="Engine\Input">
       <UniqueIdentifier>{67460f6e-cadb-4587-ad26-1d91135f6e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\JsonManager">
+      <UniqueIdentifier>{76bdaae6-a007-4f6a-98af-3d7f370ed419}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Math">
+      <UniqueIdentifier>{580753e2-5558-4b32-a727-0d255026e5bb}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -231,6 +231,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
+    <ClCompile Include="Engine\Input\Input.cpp" />
+    <ClCompile Include="Engine\JsonManager\JsonManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +316,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h" />
     <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h" />
+    <ClInclude Include="Engine\Input\Input.h" />
+    <ClInclude Include="Engine\JsonManager\JsonManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

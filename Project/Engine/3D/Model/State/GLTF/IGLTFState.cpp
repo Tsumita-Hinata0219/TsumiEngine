@@ -37,9 +37,9 @@ void IGLTFState::Draw(Transform& transform)
 	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
 	buffers_.vertex.UnMap();
 	// IBV
-	buffers_.indeces.Map();
-	buffers_.indeces.WriteData(datas_.mesh.indices.data());
-	buffers_.indeces.UnMap();
+	buffers_.indices.Map();
+	buffers_.indices.WriteData(datas_.mesh.indices.data());
+	buffers_.indices.UnMap();
 	// Material
 	buffers_.material.Map();
 	buffers_.material.WriteData(&datas_.material);
@@ -74,7 +74,7 @@ void IGLTFState::CommandCall()
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
-	buffers_.indeces.IASetIndexBuffer();
+	buffers_.indices.IASetIndexBuffer();
 	// Material
 	buffers_.material.GraphicsCommandCall(0);
 	// TransformationMatrix

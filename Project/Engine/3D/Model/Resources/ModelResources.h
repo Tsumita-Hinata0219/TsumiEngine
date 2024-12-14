@@ -47,7 +47,7 @@ struct ModelBuffers {
 	BufferResource<VertexData> vertex;
 
 	// IndexDataBuffer
-	BufferResource<uint32_t> indeces;
+	BufferResource<uint32_t> indices;
 
 	// マテリアル
 	BufferResource<MaterialDataN> material;

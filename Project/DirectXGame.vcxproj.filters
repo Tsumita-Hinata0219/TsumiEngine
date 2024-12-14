@@ -420,6 +420,7 @@
     <ClInclude Include="Engine\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Engine\View\SRVManager\SRVManager.h" />
     <ClInclude Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
+    <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />

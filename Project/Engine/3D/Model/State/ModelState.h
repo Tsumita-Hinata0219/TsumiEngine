@@ -82,8 +82,8 @@ protected:
 		buffers_.vertex.CreateResource(UINT(datas.mesh.vertices.size()));
 		buffers_.vertex.CreateVertexBufferView();
 		// indexBufferView
-		buffers_.indeces.CreateResource(UINT(datas.mesh.indices.size()));
-		buffers_.indeces.CreateIndexBufferView();
+		buffers_.indices.CreateResource(UINT(datas.mesh.indices.size()));
+		buffers_.indices.CreateIndexBufferView();
 		// transform
 		buffers_.transform.CreateResource();
 		// material

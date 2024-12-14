@@ -2,7 +2,14 @@
 #include "DescriptorManager/DescriptorManager.h"
 
 
-// 初期化処理
+/// <summary>
+/// コンストラクタ
+/// </summary>
+
+
+/// <summary>
+/// 初期化処理
+/// </summary>
 void Skybox::Init(uint32_t dds)
 {
 	// テクスチャの読み込み
@@ -17,152 +24,186 @@ void Skybox::Init(uint32_t dds)
 	transform_.srt.rotate.y = ToRadians(180.0f);
 
 	// カラー
-	color_ = Vector4::one;
+	datas_.color = Samp::Color::WHITE;
+
+	// カメラマネージャーのインスタンス取得
+	cameraManager_ = CameraManager::GetInstance();
+
+	// verticesとindicesの配列のresize
+	datas_.vertices.resize(kNumVertices_);
+	datas_.indices.resize(kNumIndices_);
 
 	// リソースの作成
-	resource_.Vertex = CreateResource::CreateBufferResource(sizeof(VertexData) * kNumVertices_);
-	resource_.Material = CreateResource::CreateBufferResource(sizeof(Material));
-	resource_.VertexBufferView = CreateResource::CreateVertexBufferView(sizeof(VertexData) * kNumVertices_, resource_.Vertex.Get(), static_cast<int>(kNumVertices_));
-	resource_.Index = CreateResource::CreateBufferResource(sizeof(uint32_t) * kNumIndices_);
-	resource_.IndexBufferView = CreateResource::CreateIndexBufferview(sizeof(uint32_t) * kNumIndices_, resource_.Index.Get());
+	// mesh
+	buffers_.vetrices.CreateCBV(UINT(kNumVertices_));
+	buffers_.vetrices.CreateVertexBufferView();
+	buffers_.indices.CreateCBV(UINT(kNumIndices_));
+	buffers_.indices.CreateIndexBufferView();
+	// material
+	buffers_.material.CreateCBV();
+	// Transform
+	buffers_.transform.CreateCBV();
+
+	// MeshDataの書き込み
+	WriteMeshData();
 }
 
 
-// 更新処理
+/// <summary>
+/// 更新処理
+/// </summary>
 void Skybox::Update()
 {
-	// Transformの更新
-	transform_.UpdateMatrix();
-
 
 #ifdef _DEBUG
-
 	if (ImGui::TreeNode("Skybox")) {
-
 		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.1f);
 		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.1f);
 		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
-
 		ImGui::TreePop();
 	}
-
 #endif // _DEBUG
 }
 
 
-// 描画処理
+/// <summary>
+/// 描画処理
+/// </summary>
 void Skybox::Draw()
 {
-	VertexData* vertexData = nullptr;
-	Material* material = nullptr;
-	uint32_t* indexData = nullptr;
+	// CameraResourceの取得
+	auto cameraResource = cameraManager_->GetResource();
+
+	// 諸々の計算
+	transform_.UpdateMatrix();
+	transform_.transformationMatData.World = transform_.matWorld;
+	transform_.transformationMatData.WVP =
+		transform_.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+	transform_.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform_.matWorld));
 
 
-	// 書き込むためにアドレスを取得
-	resource_.Vertex->Map(0, nullptr, reinterpret_cast<void**>(&vertexData));
-	resource_.Material->Map(0, nullptr, reinterpret_cast<void**>(&material));
-	resource_.Index->Map(0, nullptr, reinterpret_cast<void**>(&indexData));
-
-
-	// 右面。描画インデックスは [0, 1, 2][2, 1, 3]
-	vertexData[0].position = { 1.0f, 1.0f, 1.0f, 1.0f };
-	vertexData[1].position = { 1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[2].position = { 1.0f, -1.0f, 1.0f, 1.0f };
-	vertexData[3].position = { 1.0f, -1.0f, -1.0f, 1.0f };
-
-	indexData[0] = 0; indexData[1] = 1; indexData[2] = 2;
-	indexData[3] = 2; indexData[4] = 1; indexData[5] = 3;
-
-	// 左面。描画インデックスは [4, 5, 6][6, 5, 7]
-	vertexData[4].position = { -1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[5].position = { -1.0f, 1.0f, 1.0f, 1.0f };
-	vertexData[6].position = { -1.0f, -1.0f, -1.0f, 1.0f };
-	vertexData[7].position = { -1.0f, -1.0f, 1.0f, 1.0f };
-
-	indexData[6] = 4; indexData[7] = 5; indexData[8] = 6;
-	indexData[9] = 6; indexData[10] = 5; indexData[11] = 7;
-
-	// 前面。描画インデックスは [8, 9, 10][10, 9, 11]
-	vertexData[8].position = { -1.0f, 1.0f, 1.0f, 1.0f };
-	vertexData[9].position = { 1.0f, 1.0f, 1.0f, 1.0f };
-	vertexData[10].position = { -1.0f, -1.0f, 1.0f, 1.0f };
-	vertexData[11].position = { 1.0f, -1.0f, 1.0f, 1.0f };
-
-	indexData[12] = 8; indexData[13] = 9; indexData[14] = 10;
-	indexData[15] = 10; indexData[16] = 9; indexData[17] = 11;
-
-	// 後面。描画インデックスは [12, 13, 14][14, 13, 15]
-	vertexData[12].position = { 1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[13].position = { -1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[14].position = { 1.0f, -1.0f, -1.0f, 1.0f };
-	vertexData[15].position = { -1.0f, -1.0f, -1.0f, 1.0f };
-
-	indexData[18] = 12; indexData[19] = 13; indexData[20] = 14;
-	indexData[21] = 14; indexData[22] = 13; indexData[23] = 15;
-
-	// 上面。描画インデックスは [16, 17, 18][18, 17, 19]
-	vertexData[16].position = { -1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[17].position = { 1.0f, 1.0f, -1.0f, 1.0f };
-	vertexData[18].position = { -1.0f, 1.0f, 1.0f, 1.0f };
-	vertexData[19].position = { 1.0f, 1.0f, 1.0f, 1.0f };
-
-	indexData[24] = 16; indexData[25] = 17; indexData[26] = 18;
-	indexData[27] = 18; indexData[28] = 17; indexData[29] = 19;
-
-	// 下面。描画インデックスは [20, 21, 22][22, 21, 23]
-	vertexData[20].position = { -1.0f, -1.0f, 1.0f, 1.0f };
-	vertexData[21].position = { 1.0f, -1.0f, 1.0f, 1.0f };
-	vertexData[22].position = { -1.0f, -1.0f, -1.0f, 1.0f };
-	vertexData[23].position = { 1.0f, -1.0f, -1.0f, 1.0f };
-
-	indexData[30] = 20; indexData[31] = 21; indexData[32] = 22;
-	indexData[33] = 22; indexData[34] = 21; indexData[35] = 23;
-
-
-	// マテリアルの情報を書き込む
-	material->color = color_;
-
-
-	// マップを解除
-	resource_.Vertex->Unmap(0, nullptr);
-	resource_.Material->Unmap(0, nullptr);
-	resource_.Index->Unmap(0, nullptr);
-
+	// ここで書き込み
+	// VBV
+	buffers_.vetrices.Map();
+	buffers_.vetrices.WriteData(datas_.vertices.data());
+	buffers_.vetrices.UnMap();
+	// IBV
+	buffers_.indices.Map();
+	buffers_.indices.WriteData(datas_.indices.data());
+	buffers_.indices.UnMap();
+	// Transform
+	buffers_.transform.Map();
+	buffers_.transform.WriteData((&transform_.transformationMatData));
+	buffers_.transform.UnMap();
+	// Material
+	buffers_.material.Map();
+	buffers_.material.WriteData(&datas_.color);
+	buffers_.material.UnMap();
 
 	// コマンドコール
 	CommandCall();
 }
 
 
-// コマンドコール
+/// <summary>
+/// MeshDataの書き込み
+/// </summary>
+void Skybox::WriteMeshData()
+{
+	// ───── verticesの書き込み
+	// 右面
+	datas_.vertices[0].position = { 1.0f, 1.0f, 1.0f, 1.0f };
+	datas_.vertices[1].position = { 1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[2].position = { 1.0f, -1.0f, 1.0f, 1.0f };
+	datas_.vertices[3].position = { 1.0f, -1.0f, -1.0f, 1.0f };
+
+	// 左面
+	datas_.vertices[4].position = { -1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[5].position = { -1.0f, 1.0f, 1.0f, 1.0f };
+	datas_.vertices[6].position = { -1.0f, -1.0f, -1.0f, 1.0f };
+	datas_.vertices[7].position = { -1.0f, -1.0f, 1.0f, 1.0f };
+
+	// 前面
+	datas_.vertices[8].position = { -1.0f, 1.0f, 1.0f, 1.0f };
+	datas_.vertices[9].position = { 1.0f, 1.0f, 1.0f, 1.0f };
+	datas_.vertices[10].position = { -1.0f, -1.0f, 1.0f, 1.0f };
+	datas_.vertices[11].position = { 1.0f, -1.0f, 1.0f, 1.0f };
+
+	// 後面
+	datas_.vertices[12].position = { 1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[13].position = { -1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[14].position = { 1.0f, -1.0f, -1.0f, 1.0f };
+	datas_.vertices[15].position = { -1.0f, -1.0f, -1.0f, 1.0f };
+
+	// 上面
+	datas_.vertices[16].position = { -1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[17].position = { 1.0f, 1.0f, -1.0f, 1.0f };
+	datas_.vertices[18].position = { -1.0f, 1.0f, 1.0f, 1.0f };
+	datas_.vertices[19].position = { 1.0f, 1.0f, 1.0f, 1.0f };
+
+	// 下面
+	datas_.vertices[20].position = { -1.0f, -1.0f, 1.0f, 1.0f };
+	datas_.vertices[21].position = { 1.0f, -1.0f, 1.0f, 1.0f };
+	datas_.vertices[22].position = { -1.0f, -1.0f, -1.0f, 1.0f };
+	datas_.vertices[23].position = { 1.0f, -1.0f, -1.0f, 1.0f };
+
+
+	// ───── indicesの書き込み
+	// 右面
+	datas_.indices[0] = 0; datas_.indices[1] = 1;   
+	datas_.indices[2] = 2; datas_.indices[3] = 2;   
+	datas_.indices[4] = 1; datas_.indices[5] = 3;
+
+	// 左面
+	datas_.indices[6] = 4; datas_.indices[7] = 5;   
+	datas_.indices[8] = 6; datas_.indices[9] = 6;   
+	datas_.indices[10] = 5;datas_.indices[11] = 7;
+
+	// 前面
+	datas_.indices[12] = 8; datas_.indices[13] = 9;  
+	datas_.indices[14] = 10; datas_.indices[15] = 10; 
+	datas_.indices[16] = 9; datas_.indices[17] = 11;
+
+	// 後面
+	datas_.indices[18] = 12; datas_.indices[19] = 13; 
+	datas_.indices[20] = 14; datas_.indices[21] = 14; 
+	datas_.indices[22] = 13; datas_.indices[23] = 15;
+
+	// 上面
+	datas_.indices[24] = 16; datas_.indices[25] = 17; 
+	datas_.indices[26] = 18; datas_.indices[27] = 18; 
+	datas_.indices[28] = 17; datas_.indices[29] = 19;
+
+	// 下面
+	datas_.indices[30] = 20; datas_.indices[31] = 21; 
+	datas_.indices[32] = 22; datas_.indices[33] = 22; 
+	datas_.indices[34] = 21; datas_.indices[35] = 23;
+}
+
+
+/// <summary>
+/// コマンドコール
+/// </summary>
 void Skybox::CommandCall()
 {
-	// コマンドの取得
+	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
 	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Skybox);
 
-	///// いざ描画！！！！！
-	// 頂点の設定
-	commands.List->IASetVertexBuffers(0, 1, &resource_.VertexBufferView);
-	commands.List->IASetIndexBuffer(&resource_.IndexBufferView);
-
-	// CBVを設定する
-	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
-
-	// wvp用のCBufferの場所を設定
-	//commands.List->SetGraphicsRootConstantBufferView(1, transform_.constBuffer->GetGPUVirtualAddress());
-
-	// View用のCBufferの場所を設定
-	CameraManager::GetInstance()->CommandCall(2);
-
-	// DescriptorTableを設定する
-	if (!texture_ == 0) {
-		//SRVManager::SetGraphicsRootDescriptorTable(3, texture_);
-		DescriptorManager::GetInstance()->SetGraphicsRootDescriptorTable(3, texture_);
-	}
-
-	// 描画！(DrawCall / ドローコール)。
-	commands.List->DrawIndexedInstanced(UINT(kNumIndices_), 1, 0, 0, 0);
+	// VertexBufferView
+	buffers_.vetrices.IASetVertexBuffers(1);
+	// IndexBufferView
+	buffers_.indices.IASetIndexBuffer();
+	// Transform
+	buffers_.transform.GraphicsCommandCall(1);
+	// Material
+	buffers_.material.GraphicsCommandCall(0);
+	// Camera
+	cameraManager_->CommandCall(2);
+	// MaterialTexture
+	buffers_.material.GraphicsCommandCallSRV(3, texture_);
+	// Draw!!
+	commands.List->DrawIndexedInstanced(UINT(datas_.indices.size()), 1, 0, 0, 0);
 }

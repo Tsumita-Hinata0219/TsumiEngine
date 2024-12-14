@@ -74,7 +74,7 @@ private:
 	uint32_t instanceNum_ = 0;
 
 	// 使用するモデル
-	std::unique_ptr<Model> model_;
+	//std::unique_ptr<Model> model_;
 
 
 

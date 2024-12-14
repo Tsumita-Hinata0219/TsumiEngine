@@ -39,9 +39,9 @@ void IOBJState::Draw(Transform& transform)
 	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
 	buffers_.vertex.UnMap();
 	// IBV
-	buffers_.indeces.Map();
-	buffers_.indeces.WriteData(datas_.mesh.indices.data());
-	buffers_.indeces.UnMap();
+	buffers_.indices.Map();
+	buffers_.indices.WriteData(datas_.mesh.indices.data());
+	buffers_.indices.UnMap();
 	// Transform
 	buffers_.transform.Map();
 	buffers_.transform.WriteData((&transform.transformationMatData));
@@ -80,7 +80,7 @@ void IOBJState::CommandCall()
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
-	buffers_.indeces.IASetIndexBuffer();
+	buffers_.indices.IASetIndexBuffer();
 	// Transform
 	buffers_.transform.GraphicsCommandCall(0);
 	// Material

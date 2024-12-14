@@ -1432,5 +1432,114 @@
     <Filter Include="Engine\View\SRVManager">
       <UniqueIdentifier>{f560fc95-1cbd-4ab1-aead-b0a8bc4c1670}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{9280d76c-102c-4763-995d-ee28da8cbf8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders">
+      <UniqueIdentifier>{4f645de7-a620-4508-bf35-14ad248671b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\CPUParticle">
+      <UniqueIdentifier>{eda3588c-2792-4b92-8247-8b4e4ad3f8f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Math">
+      <UniqueIdentifier>{234081a7-76af-48e5-8646-5901f934ab0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Object3d">
+      <UniqueIdentifier>{258711f2-d159-4a52-a9e4-a17fa87461dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\PostEffect">
+      <UniqueIdentifier>{b006b47a-7452-47fe-a9b2-47e892fb66f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Skinning">
+      <UniqueIdentifier>{ce0ca144-e7fd-452c-bdac-9386f0978462}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Skybox">
+      <UniqueIdentifier>{7c6c6086-1183-42ef-a5a1-78e3e61154f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\GPUParticle">
+      <UniqueIdentifier>{93c5e513-17f3-4b1d-a4a0-a4a937efb16e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\GPUParticle\Draw">
+      <UniqueIdentifier>{4211dbbf-3b9d-4d85-a289-c9fb18f1dd1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\GPUParticle\Init">
+      <UniqueIdentifier>{c49412e8-39e7-4537-83fc-eb8d73aafebb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Shaders\Object2d">
+      <UniqueIdentifier>{fc4586f8-0baf-4c70-b134-72668086ed3e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli">
+      <Filter>Resources\Shaders\CPUParticle</Filter>
+    </None>
+    <None Include="Resources\Shaders\Math\Math.hlsli">
+      <Filter>Resources\Shaders\Math</Filter>
+    </None>
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli">
+      <Filter>Resources\Shaders\GPUParticle</Filter>
+    </None>
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli">
+      <Filter>Resources\Shaders\GPUParticle</Filter>
+    </None>
+    <None Include="Resources\Shaders\Object2d\Object2d.hlsli">
+      <Filter>Resources\Shaders\Object2d</Filter>
+    </None>
+    <None Include="Resources\Shaders\Skybox\Skybox.hlsli">
+      <Filter>Resources\Shaders\Skybox</Filter>
+    </None>
+    <None Include="Resources\Shaders\Skinning\SkinningObject3d.hlsli">
+      <Filter>Resources\Shaders\Skinning</Filter>
+    </None>
+    <None Include="Resources\Shaders\Object3d\Object3d.hlsli">
+      <Filter>Resources\Shaders\Object3d</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
+      <Filter>Resources\Shaders\CPUParticle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl">
+      <Filter>Resources\Shaders\CPUParticle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl">
+      <Filter>Resources\Shaders\GPUParticle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl">
+      <Filter>Resources\Shaders\GPUParticle</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl">
+      <Filter>Resources\Shaders\GPUParticle\Draw</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl">
+      <Filter>Resources\Shaders\GPUParticle\Draw</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Init\GPUParticle_Init.CS.hlsl">
+      <Filter>Resources\Shaders\GPUParticle\Init</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl">
+      <Filter>Resources\Shaders\Object2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl">
+      <Filter>Resources\Shaders\Object2d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl">
+      <Filter>Resources\Shaders\Skybox</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl">
+      <Filter>Resources\Shaders\Skybox</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.PS.hlsl">
+      <Filter>Resources\Shaders\Skinning</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.VS.hlsl">
+      <Filter>Resources\Shaders\Skinning</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.PS.hlsl">
+      <Filter>Resources\Shaders\Object3d</Filter>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl">
+      <Filter>Resources\Shaders\Object3d</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

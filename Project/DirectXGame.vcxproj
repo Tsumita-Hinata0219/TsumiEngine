@@ -459,6 +459,33 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\View\RTVManager\RTVManager.h" />
     <ClInclude Include="Engine\View\SRVManager\SRVManager.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli" />
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
+    <None Include="Resources\Shaders\Math\Math.hlsli" />
+    <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
+    <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
+    <None Include="Resources\Shaders\Skinning\SkinningObject3d.hlsli" />
+    <None Include="Resources\Shaders\Skybox\Skybox.hlsli" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Init\GPUParticle_Init.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object2d\Object2d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Object3d\Object3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skinning\SkinningObject3d.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.PS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Skybox\Skybox.VS.hlsl" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -47,30 +47,30 @@ void Model::Draw(Transform& transform)
 	modelState_->Draw(transform);
 }
 
-
-/// <summary>
-/// Animationの再生
-/// </summary>
-void Model::PlayAnimation(Animation animation, float time)
-{
-	// GLTFで読み込んだモデルじゃないとダメ
-	assert(this->state_->GetStateType() == ModelStateType::gLTF);
-
-	// timeにあったAnimationを解析して、LocalMatrixに入れる
-	this->objData_.rootNode.localMatrix = keyFrameAnimation_->PlayAnimation(this->objData_.rootNode.name, animation, time);
-}
-
-
-/// <summary>
-/// Nodeの階層構造からSkeletonを作る
-/// </summary>
-Skeleton Model::CreateSkeleton()
-{
-	// GLTFで読み込んだモデルじゃないとダメ
-	assert(this->state_->GetStateType() == ModelStateType::gLTF);
-
-	return modelManager_->CreateSkeleton(this->objData_.rootNode);
-}
+//
+///// <summary>
+///// Animationの再生
+///// </summary>
+//void Model::PlayAnimation(Animation animation, float time)
+//{
+//	// GLTFで読み込んだモデルじゃないとダメ
+//	assert(this->state_->GetStateType() == ModelStateType::gLTF);
+//
+//	// timeにあったAnimationを解析して、LocalMatrixに入れる
+//	this->objData_.rootNode.localMatrix = keyFrameAnimation_->PlayAnimation(this->objData_.rootNode.name, animation, time);
+//}
+//
+//
+///// <summary>
+///// Nodeの階層構造からSkeletonを作る
+///// </summary>
+//Skeleton Model::CreateSkeleton()
+//{
+//	// GLTFで読み込んだモデルじゃないとダメ
+//	assert(this->state_->GetStateType() == ModelStateType::gLTF);
+//
+//	return modelManager_->CreateSkeleton(this->objData_.rootNode);
+//}
 
 
 /// <summary>

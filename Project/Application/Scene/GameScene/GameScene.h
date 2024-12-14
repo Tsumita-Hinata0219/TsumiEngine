@@ -12,7 +12,7 @@
 #include "GameObject/Others/StartDirection/StartDirection.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
-#include "GameObject/Terrain/Skybox/Skybox.h"
+#include "3D/Skybox/Skybox.h"
 #include "GameObject/Terrain/Floor/Floor.h"
 #include "GameObject/Terrain/BoxManager/BoxManager.h"
 

@@ -18,7 +18,7 @@
 struct EntityData {
 	std::string type;
 	std::string entityName;
-	SRTN srt;
+	SRT srt;
 	std::map<std::string, std::unique_ptr<EntityData>> children;
 };
 
@@ -94,7 +94,7 @@ private:
 	/// <summary>
 	/// SRTの読み込み
 	/// </summary>
-	SRTN ScanningSRT(nlohmann::json& object);
+	SRT ScanningSRT(nlohmann::json& object);
 
 
 private: // メンバ変数

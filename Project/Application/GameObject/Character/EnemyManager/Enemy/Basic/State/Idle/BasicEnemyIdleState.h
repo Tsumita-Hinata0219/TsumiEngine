@@ -28,7 +28,7 @@ private:
 private:
 
 	// SRT
-	SRTN srt_{};
+	SRT srt_{};
 
 	// アイドル状態になった座標
 	Vector3 enterIdlePos_{};

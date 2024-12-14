@@ -9,7 +9,7 @@
 
 // 前方宣言
 class BoxManager;
-struct SRTN;
+struct SRT;
 
 // Boxのタイプ
 enum class BoxType {
@@ -38,7 +38,7 @@ public:
 	bool IsDead() const { return this->isDead_; }
 
 	// SRT
-	virtual void SetSRT(const SRTN& setSRT) = 0;
+	virtual void SetSRT(const SRT& setSRT) = 0;
 
 	// Scale
 	virtual void SetScale(const Vector3& setScale) = 0;

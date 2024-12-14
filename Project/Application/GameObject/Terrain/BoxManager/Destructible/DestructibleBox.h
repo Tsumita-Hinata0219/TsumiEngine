@@ -44,7 +44,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// SRT
-	void SetSRT(const SRTN& setSRT) override { this->trans_.srt = setSRT; }
+	void SetSRT(const SRT& setSRT) override { this->trans_.srt = setSRT; }
 
 	// Scale
 	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }

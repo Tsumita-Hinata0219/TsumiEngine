@@ -12,7 +12,7 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
-struct SRTN;
+struct SRT;
 
 
 /* Enemyの基底クラス */
@@ -52,8 +52,8 @@ public:
 	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// SRT
-	SRTN GetSRT() const { return this->trans_.srt; }
-	void SetSRT(const SRTN& setSRT) { this->trans_.srt = setSRT; }
+	SRT GetSRT() const { return this->trans_.srt; }
+	void SetSRT(const SRT& setSRT) { this->trans_.srt = setSRT; }
 
 	// Scale
 	Vector3 GetScale() const { return this->trans_.srt.scale; }

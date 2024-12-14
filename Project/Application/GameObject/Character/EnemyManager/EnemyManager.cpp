@@ -167,7 +167,7 @@ void EnemyManager::EliminatedChecker()
 /// <summary>
 /// 新しいEnemyを生成する
 /// </summary>
-void EnemyManager::CreateBasicEnemy(const SRTN& setSRT)
+void EnemyManager::CreateBasicEnemy(const SRT& setSRT)
 {
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
@@ -182,7 +182,7 @@ void EnemyManager::CreateBasicEnemy(const SRTN& setSRT)
 	// リストに追加
 	enemys_.push_back(newEnemy);
 }
-void EnemyManager::CreateStaticEnemy(const SRTN& setSRT)
+void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 {
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();

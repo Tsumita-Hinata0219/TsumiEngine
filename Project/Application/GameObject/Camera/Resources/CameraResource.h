@@ -2,6 +2,7 @@
 
 #include "Base/WinApp/WinApp.h"
 #include "BufferResource/BufferResource.h"
+#include "Transform/Transform.h"
 #include "Math/MyMath.h"
 
 

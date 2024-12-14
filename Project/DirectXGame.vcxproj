@@ -224,7 +224,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\TitleUIManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\TitleLabelObject\TitleLabelObject.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Floor\Floor.cpp" />
-    <ClCompile Include="Application\GameObject\Terrain\Skybox\Skybox.cpp" />
+    <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\2D\Structure\SpriteStructure.cpp" />
@@ -322,7 +322,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
-    <ClCompile Include="Engine\Transform\WorldTransform\WorldTransform.cpp" />
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
@@ -420,7 +419,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h" />
     <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Application\GameObject\Terrain\Floor\Floor.h" />
-    <ClInclude Include="Application\GameObject\Terrain\Skybox\Skybox.h" />
+    <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />
@@ -438,7 +437,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Engine\2D\Sprite\Sprite.h" />
-    <ClInclude Include="Engine\3D\Model\IModelState.h" />
     <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
     <ClInclude Include="Engine\3D\Model\Model.h" />
     <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h" />
@@ -523,7 +521,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Transform.h" />
-    <ClInclude Include="Engine\Transform\WorldTransform\WorldTransform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />

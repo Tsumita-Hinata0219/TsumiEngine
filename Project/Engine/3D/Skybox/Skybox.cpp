@@ -12,7 +12,7 @@ void Skybox::Init(uint32_t dds)
 	initScale_ = 1000.0f;
 
 	// Transformの初期化処理
-	transform_.Initialize();
+	transform_.Init();
 	transform_.srt.scale = { initScale_, initScale_, initScale_ };
 	transform_.srt.rotate.y = ToRadians(180.0f);
 
@@ -152,7 +152,7 @@ void Skybox::CommandCall()
 	commands.List->SetGraphicsRootConstantBufferView(0, resource_.Material->GetGPUVirtualAddress());
 
 	// wvp用のCBufferの場所を設定
-	commands.List->SetGraphicsRootConstantBufferView(1, transform_.constBuffer->GetGPUVirtualAddress());
+	//commands.List->SetGraphicsRootConstantBufferView(1, transform_.constBuffer->GetGPUVirtualAddress());
 
 	// View用のCBufferの場所を設定
 	CameraManager::GetInstance()->CommandCall(2);

@@ -31,7 +31,7 @@ private:
 private: // メンバ変数
 
 	// Transform
-	WorldTransform transform_{};
+	Transform transform_{};
 	float initScale_ = 1.0f;
 
 	// 使用するTextureHandle

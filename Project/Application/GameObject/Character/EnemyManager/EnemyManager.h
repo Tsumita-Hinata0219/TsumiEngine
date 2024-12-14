@@ -88,8 +88,8 @@ private:
 	/// <summary>
 	/// 新しいEnemyを生成する
 	/// </summary>
-	void CreateBasicEnemy(const SRTN& setSRT);
-	void CreateStaticEnemy(const SRTN& setSRT);
+	void CreateBasicEnemy(const SRT& setSRT);
+	void CreateStaticEnemy(const SRT& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する

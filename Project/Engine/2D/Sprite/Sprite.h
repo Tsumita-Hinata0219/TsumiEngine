@@ -2,7 +2,6 @@
 
 #include "Base/WinApp/WinApp.h"
 #include "Base/DXCommon/DirectXCommon.h"
-#include "Transform/WorldTransform/WorldTransform.h"
 #include "TextureManager/TextureManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "DescriptorManager/DescriptorManager.h"

@@ -44,7 +44,7 @@ public:
 	/// <summary>
 	/// 新しいボックスを作る
 	/// </summary>
-	void CreateNewBox(BoxType type, const SRTN& setSRT);
+	void CreateNewBox(BoxType type, const SRT& setSRT);
 
 private:
 

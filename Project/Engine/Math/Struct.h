@@ -12,18 +12,13 @@ using namespace std;
 #include <vector>
 #include <iostream>
 #include <cstdint>
-#include "Transform/WorldTransform/WorldTransform.h"
 #include <optional>
 #include <map>
 #include <span>
 #include <utility>
 #include <array>
 
-
 #include "MyMath.h"
-
-//#include "Node.h"
-//#include "JointWeightData.h"
 
 
 // 頂点データ

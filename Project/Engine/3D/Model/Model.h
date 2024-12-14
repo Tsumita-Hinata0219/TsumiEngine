@@ -3,10 +3,8 @@
 #include "../../BufferResource/BufferResource.h"
 #include "../../CommandManager/CommandManager.h"
 #include "../../DescriptorManager/DescriptorManager.h"
-#include "../../Transform/WorldTransform/WorldTransform.h"
 #include "../../Transform/Transform.h"
 #include "../../PipeLineManager/PipeLineManager.h"
-#include "IModelState.h"
 #include "../../Animation/AnimationManager/AnimationManager.h"
 #include "Structure/ModelStructure.h"
 #include "Resources/ModelResources.h"
@@ -95,12 +93,6 @@ private:
 	// 繧ｭ繝ｼ繝輔Ξ繝ｼ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
 	KeyFrameAnimation* keyFrameAnimation_ = nullptr;
 
-	// 繧ｹ繝・・繝医ヱ繧ｿ繝ｼ繝ｳ
-	IModelState* state_ = nullptr;
-
-	// 繝ｯ繝ｼ繝ｫ繝牙ｺｧ讓・
-	WorldTransform worldTransform_{};
-
 	// 繝・け繧ｹ繝√Ε
 	uint32_t useTexture_{};
 	uint32_t normalMapTex_{};
@@ -124,9 +116,6 @@ private:
 	ModelData modelData_{};
 
 	ModelData objData_{};
-
-	ModelLightingType modelDrawType_ = Non;
-
 
 
 

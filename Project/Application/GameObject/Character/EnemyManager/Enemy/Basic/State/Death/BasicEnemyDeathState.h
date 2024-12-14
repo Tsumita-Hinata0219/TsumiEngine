@@ -29,7 +29,7 @@ private:
 private:
 
 	// SRT
-	SRTN srt_{};
+	SRT srt_{};
 
 	// 開始値と終了値
 	std::pair<float, float> posPair_;

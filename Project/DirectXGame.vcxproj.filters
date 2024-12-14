@@ -187,6 +187,9 @@
     <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp">
       <Filter>Engine\CollisionSystem\Penetration</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\CommandManager\CommandManager.cpp">
+      <Filter>Engine\CommandManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -412,6 +415,9 @@
     </ClInclude>
     <ClInclude Include="Engine\CollisionSystem\Penetration\CollisionPenetration.h">
       <Filter>Engine\CollisionSystem\Penetration</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\CommandManager\CommandManager.h">
+      <Filter>Engine\CommandManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -687,6 +693,9 @@
     </Filter>
     <Filter Include="Engine\CollisionSystem\Collider\Shape\Sphere">
       <UniqueIdentifier>{5d7f55f3-1a28-4e71-a3ee-86047c62e2a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CommandManager">
+      <UniqueIdentifier>{427d269f-5c87-4486-b506-e9aa9286a4fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

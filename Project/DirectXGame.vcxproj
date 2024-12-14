@@ -226,6 +226,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CollisionSystem\Manager\CollisionManager.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
+    <ClCompile Include="Engine\CommandManager\CommandManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +302,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CollisionSystem\Penetration\CollisionPenetration.h" />
     <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h" />
+    <ClInclude Include="Engine\CommandManager\CommandManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

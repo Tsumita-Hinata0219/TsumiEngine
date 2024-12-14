@@ -87,37 +87,6 @@ public:
 
 private:
 
-	// 繝｢繝・Ν繝槭ロ繝ｼ繧ｸ繝｣繝ｼ
-	ModelManager* modelManager_ = nullptr;
-
-	// 繧ｭ繝ｼ繝輔Ξ繝ｼ繧｢繝九Γ繝ｼ繧ｷ繝ｧ繝ｳ
-	KeyFrameAnimation* keyFrameAnimation_ = nullptr;
-
-	// 繝・け繧ｹ繝√Ε
-	uint32_t useTexture_{};
-	uint32_t normalMapTex_{};
-
-	// 濶ｲ繝・・繧ｿ
-	Vector4 color_{};
-
-	// 蜈峨ョ繝ｼ繧ｿ
-	DirectionalLight light_{};
-
-	// 繧ｹ繝輔ぅ繧｢縺ｮ蜊雁ｾ・
-	float radius_ = 1.0f;
-
-	// Obj縺ｮ繝輔ぃ繧､繝ｫ繝代せ
-	std::string fileName_{};
-	std::string routeFilePath_{};
-
-	// Obj縺ｮ繝上Φ繝峨Ν
-	uint32_t objHandle_{};
-
-	ModelData modelData_{};
-
-	ModelData objData_{};
-
-
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 

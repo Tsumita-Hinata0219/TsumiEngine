@@ -9,6 +9,84 @@
     <ClCompile Include="externals\imgui\imgui_tables.cpp" />
     <ClCompile Include="externals\imgui\imgui_widgets.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Application\GameManager\GameManager.cpp">
+      <Filter>Application\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\Camera.cpp">
+      <Filter>Application\GameObject\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp">
+      <Filter>Application\GameObject\Camera\FollowCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp">
+      <Filter>Application\GameObject\Camera\GameCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp">
+      <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\Manager\CameraManager.cpp">
+      <Filter>Application\GameObject\Camera\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Camera\Resources\CameraResource.cpp">
+      <Filter>Application\GameObject\Camera\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\EnemyManager.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Effect\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Static</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Player.cpp">
+      <Filter>Application\GameObject\Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp">
+      <Filter>Application\GameObject\Character\Player\Boby\Right</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp">
+      <Filter>Application\GameObject\Character\Player\Boby\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp">
+      <Filter>Application\GameObject\Character\Player\Boby\Left</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp">
+      <Filter>Application\GameObject\Character\Player\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Movement\PlayerMovement.cpp">
+      <Filter>Application\GameObject\Character\Player\Movement</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp">
+      <Filter>Application\GameObject\Character\Player\Particle\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp">
+      <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -19,5 +97,223 @@
     <ClInclude Include="externals\imgui\imstb_rectpack.h" />
     <ClInclude Include="externals\imgui\imstb_textedit.h" />
     <ClInclude Include="externals\imgui\imstb_truetype.h" />
+    <ClInclude Include="Application\GameManager\GameManager.h">
+      <Filter>Application\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\GameObject.h">
+      <Filter>Application\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\Camera.h">
+      <Filter>Application\GameObject\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h">
+      <Filter>Application\GameObject\Camera\FollowCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h">
+      <Filter>Application\GameObject\Camera\GameCamera</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h">
+      <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\Manager\CameraManager.h">
+      <Filter>Application\GameObject\Camera\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Camera\Resources\CameraResource.h">
+      <Filter>Application\GameObject\Camera\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\EnemyManager.h">
+      <Filter>Application\GameObject\Character\EnemyManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Effect\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Static</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.h">
+      <Filter>Application\GameObject\Character\EnemyManager\Enemy\Basic</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Player.h">
+      <Filter>Application\GameObject\Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\IPlayerBody.h">
+      <Filter>Application\GameObject\Character\Player\Boby</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h">
+      <Filter>Application\GameObject\Character\Player\Boby\Right</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h">
+      <Filter>Application\GameObject\Character\Player\Boby\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h">
+      <Filter>Application\GameObject\Character\Player\Boby\Left</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.h">
+      <Filter>Application\GameObject\Character\Player\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Movement\PlayerMovement.h">
+      <Filter>Application\GameObject\Character\Player\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h">
+      <Filter>Application\GameObject\Character\Player\Particle\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h">
+      <Filter>Application\GameObject\Character\Player\Particle\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h">
+      <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Application">
+      <UniqueIdentifier>{51fe84ac-f022-4546-8294-3931f775f4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{04153a2f-eabb-42ea-b95a-88aa430ff026}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameManager">
+      <UniqueIdentifier>{2ce573a6-99b0-4765-8923-ebba9bf765dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject">
+      <UniqueIdentifier>{da9b6a92-1a2f-4882-a302-a6e22442e0ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\Scene">
+      <UniqueIdentifier>{572ee099-9bf0-49cc-b663-becc0096719f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera">
+      <UniqueIdentifier>{771e98ef-8b0c-4217-a278-92636f00543e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character">
+      <UniqueIdentifier>{c887f5f6-5f39-4b4e-82cb-a16c571d3a7b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Config">
+      <UniqueIdentifier>{abc46923-8d58-401e-a989-8229bb30f22e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Effect">
+      <UniqueIdentifier>{2ac55f44-b041-4cd8-888c-02e9d84a66a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\IObject">
+      <UniqueIdentifier>{052a2d61-594d-483a-b412-47d0c52d5b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Others">
+      <UniqueIdentifier>{3bf5302f-1b17-41c6-a77e-93e16acd0afb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Terrain">
+      <UniqueIdentifier>{e9b418ad-d523-4719-bbcb-ddc2814553ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera\FollowCamera">
+      <UniqueIdentifier>{dea861db-2ad9-49c6-8397-21fb0d473148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera\GameCamera">
+      <UniqueIdentifier>{6cb86715-81f7-4905-9dce-e8b92931fbce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera\Manager">
+      <UniqueIdentifier>{e00b3106-080d-4ea9-a04c-42cedd19aa9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera\Resources">
+      <UniqueIdentifier>{daa81e5e-4d54-4b1a-bc80-8c0357f62cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Camera\GameCamera\Control">
+      <UniqueIdentifier>{622f60a0-e9bd-471e-9fa5-438b22a7a62f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager">
+      <UniqueIdentifier>{8c8a25f6-32c5-4e35-9b30-314e8cb321f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player">
+      <UniqueIdentifier>{33632093-5666-461d-b510-2853a89a5427}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Bullet">
+      <UniqueIdentifier>{c5cdeca3-c91c-4f41-8d85-259536da28b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Effect">
+      <UniqueIdentifier>{b1b8240e-d556-44b4-a317-99905071fbec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy">
+      <UniqueIdentifier>{58bc945b-0e88-4824-a601-c564653f0845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect">
+      <UniqueIdentifier>{26ca3744-0b91-4fe3-b66d-9e7170be67a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Effect\Interface">
+      <UniqueIdentifier>{e4d2a002-fda0-4811-8363-0c24b4f87c02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle">
+      <UniqueIdentifier>{8a17f0db-cc9f-4872-89d5-93b97f12c705}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic">
+      <UniqueIdentifier>{2fa6462d-91df-4f3d-8397-8d1ef4d1e721}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Static">
+      <UniqueIdentifier>{ad8a2d2d-e463-402f-b1d8-03495d89b53f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State">
+      <UniqueIdentifier>{5e379fe4-65e6-4f1c-b33e-e0849accca6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn">
+      <UniqueIdentifier>{ad488c96-5618-4a4e-a5db-37102c74972e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle">
+      <UniqueIdentifier>{3d023bda-f8fc-42b8-8824-dd0e1cea6230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death">
+      <UniqueIdentifier>{0154628b-cd96-43c9-a70e-3c8e7589d515}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach">
+      <UniqueIdentifier>{9f69ccd3-f9ad-4869-94c7-872f08401a29}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Boby">
+      <UniqueIdentifier>{6935027c-f325-4660-8be7-0211939b8fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Bullet">
+      <UniqueIdentifier>{08a52b8e-320e-4990-8e19-2d48a9a2d915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Movement">
+      <UniqueIdentifier>{92f90b9b-b7c0-41be-90d5-ba287d175113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Particle">
+      <UniqueIdentifier>{24de68fc-809e-48c0-9747-10936e3b13fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Boby\Left">
+      <UniqueIdentifier>{8b317d0d-dc66-4d2d-8f96-2a3e0e4d86ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Boby\Main">
+      <UniqueIdentifier>{986ffd1e-4df9-4456-8180-d9b7fbcbe05b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Boby\Right">
+      <UniqueIdentifier>{f50b642d-1b43-4158-8ab7-94911e10bf55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Particle\Interface">
+      <UniqueIdentifier>{c3a5a9a0-7f6d-4700-9701-19a0733bde01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Particle\Manager">
+      <UniqueIdentifier>{a7a1d751-0f1c-44e2-89dd-11738275de1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Application\GameObject\Character\Player\Particle\Movement">
+      <UniqueIdentifier>{d8ec13df-557e-4eb9-93f5-a921e565c4e5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

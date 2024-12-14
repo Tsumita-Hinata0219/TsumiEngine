@@ -166,6 +166,66 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <Project>{371b9fa9-4c90-4ac6-a123-aced756d6c77}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application\GameManager\GameManager.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\Camera.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\Manager\CameraManager.cpp" />
+    <ClCompile Include="Application\GameObject\Camera\Resources\CameraResource.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\EnemyManager.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Movement\PlayerMovement.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application\GameManager\GameManager.h" />
+    <ClInclude Include="Application\GameObject\Camera\Camera.h" />
+    <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
+    <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
+    <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h" />
+    <ClInclude Include="Application\GameObject\Camera\Manager\CameraManager.h" />
+    <ClInclude Include="Application\GameObject\Camera\Resources\CameraResource.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\EnemyManager.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\BasicEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Approach\BasicEnemyApproachState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\IPlayerBody.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Bullet\PlayerBullet.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Movement\PlayerMovement.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Interface\IPlayerParticle.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\Player.h" />
+    <ClInclude Include="Application\GameObject\GameObject.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

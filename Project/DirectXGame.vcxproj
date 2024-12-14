@@ -240,6 +240,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Engine\Math\MyColor\MyColor.cpp" />
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
+    <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp" />
+    <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp" />
+    <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp" />
+    <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp" />
+    <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp" />
+    <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +343,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\MyMath.h" />
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Engine\Math\Struct.h" />
+    <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h" />
+    <ClInclude Include="Engine\Particle\IParticle.h" />
+    <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h" />
+    <ClInclude Include="Engine\Particle\ParticleEmitter\ParticleEmitter.h" />
+    <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h" />
+    <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h" />
+    <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -229,6 +229,24 @@
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
       <Filter>Engine\Math\MyParlinNoise</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp">
+      <Filter>Engine\Particle\BaseParticle</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp">
+      <Filter>Engine\Particle\ParticleSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp">
+      <Filter>Engine\Particle\ParticleRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp">
+      <Filter>Engine\Particle\ParticleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp">
+      <Filter>Engine\Particle\ParticleEmitter</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp">
+      <Filter>Engine\Particle\ParticleArray</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -520,6 +538,27 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
       <Filter>Engine\Math\MyParlinNoise</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\IParticle.h">
+      <Filter>Engine\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h">
+      <Filter>Engine\Particle\BaseParticle</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h">
+      <Filter>Engine\Particle\ParticleSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h">
+      <Filter>Engine\Particle\ParticleRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h">
+      <Filter>Engine\Particle\ParticleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\ParticleEmitter\ParticleEmitter.h">
+      <Filter>Engine\Particle\ParticleEmitter</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h">
+      <Filter>Engine\Particle\ParticleArray</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -864,6 +903,27 @@
     </Filter>
     <Filter Include="Engine\Math\MathStructure\Vector">
       <UniqueIdentifier>{50b2dcc9-cee3-443e-8063-77ba3dc10430}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle">
+      <UniqueIdentifier>{5a32b318-2fe9-407c-94f6-24df1906a0f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\BaseParticle">
+      <UniqueIdentifier>{91b15476-490f-4bb7-a4db-0ec3227a4399}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\ParticleArray">
+      <UniqueIdentifier>{7e4d8f13-d0d7-4edc-b045-b2aef6d1790a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\ParticleEmitter">
+      <UniqueIdentifier>{22560dd8-5a15-4a0b-bc70-65c492f44cca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\ParticleManager">
+      <UniqueIdentifier>{5fb1334b-3c77-42d2-b203-53de9c77ccb0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\ParticleRenderer">
+      <UniqueIdentifier>{6b272d86-7d07-47d7-8c01-82654c62c979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Particle\ParticleSystem">
+      <UniqueIdentifier>{8fd24b2b-b61b-4b81-8933-3acdc3c347f2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

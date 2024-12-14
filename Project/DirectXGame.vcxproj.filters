@@ -87,6 +87,34 @@
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp">
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
     </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Engine\2D\Sprite\Sprite.cpp">
+      <Filter>Engine\2D\Sprite</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp">
+      <Filter>Engine\2D\SpriteResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\2D\Structure\SpriteStructure.cpp">
+      <Filter>Engine\2D\Structure</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Skybox\Skybox.cpp">
+      <Filter>Engine\3D\Skybox</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Model\Loader\ModelFileLoader.cpp">
+      <Filter>Engine\3D\Model\Loader</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Model\Manager\ModelManager.cpp">
+      <Filter>Engine\3D\Model\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp">
+      <Filter>Engine\3D\Model\State\GLTF</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp">
+      <Filter>Engine\3D\Model\State\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\3D\Model\Model.cpp">
+      <Filter>Engine\3D\Model</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -186,6 +214,45 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h">
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2D\Sprite\Sprite.h">
+      <Filter>Engine\2D\Sprite</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2D\SpriteResource\SpriteResource.h">
+      <Filter>Engine\2D\SpriteResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\2D\Structure\SpriteStructure.h">
+      <Filter>Engine\2D\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Skybox\Skybox.h">
+      <Filter>Engine\3D\Skybox</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h">
+      <Filter>Engine\3D\Skybox\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h">
+      <Filter>Engine\3D\Model\Loader</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h">
+      <Filter>Engine\3D\Model\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h">
+      <Filter>Engine\3D\Model\Structure</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\Resources\ModelResources.h">
+      <Filter>Engine\3D\Model\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\State\ModelState.h">
+      <Filter>Engine\3D\Model\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h">
+      <Filter>Engine\3D\Model\State\GLTF</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\State\OBJ\IOBJState.h">
+      <Filter>Engine\3D\Model\State\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\3D\Model\Model.h">
+      <Filter>Engine\3D\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,6 +381,51 @@
     </Filter>
     <Filter Include="Application\GameObject\Character\Player\Particle\Movement">
       <UniqueIdentifier>{d8ec13df-557e-4eb9-93f5-a921e565c4e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\2D">
+      <UniqueIdentifier>{772ded45-7e6e-43c5-9b2d-eae14b3470e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\2D\Sprite">
+      <UniqueIdentifier>{e7eb4815-86a1-421e-8fd9-51803303da50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\2D\SpriteResource">
+      <UniqueIdentifier>{99577c05-1816-4aaf-91a3-9ada07047dc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\2D\Structure">
+      <UniqueIdentifier>{d1e1fcb2-007f-4165-8806-daf97d4def92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D">
+      <UniqueIdentifier>{6e4c9596-aa14-4984-85c6-3c52a8d5fb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model">
+      <UniqueIdentifier>{f46903e1-242a-4e0b-8dea-7785a8ecabf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Skybox">
+      <UniqueIdentifier>{25139a6c-e8bc-4fd3-9d6d-e7b425f15fd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Skybox\Resource">
+      <UniqueIdentifier>{b0e711e5-7451-4759-a6aa-1e53d6667f4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\Loader">
+      <UniqueIdentifier>{f100e042-1bf3-4e47-80a2-d911de17631e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\Manager">
+      <UniqueIdentifier>{49c61e9a-33db-4e61-ac88-e37a3ccb4d75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\Resources">
+      <UniqueIdentifier>{5af4e2b3-be5a-43b4-9420-89c230bd6f0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\State">
+      <UniqueIdentifier>{5474f5e6-62c4-48c1-92cb-eb68c413eddc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\Structure">
+      <UniqueIdentifier>{f3d79209-4cf0-40b0-9cb9-7072406abc0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\State\GLTF">
+      <UniqueIdentifier>{876bc7cf-5544-4931-95e5-87c4627f8a86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\3D\Model\State\OBJ">
+      <UniqueIdentifier>{239058df-fea9-4a15-a57e-11b5c84fc566}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

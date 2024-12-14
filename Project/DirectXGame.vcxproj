@@ -193,6 +193,16 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Manager\PlayerParticleManager.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
+    <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Engine\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="Engine\2D\Structure\SpriteStructure.cpp" />
+    <ClCompile Include="Engine\3D\Model\Loader\ModelFileLoader.cpp" />
+    <ClCompile Include="Engine\3D\Model\Manager\ModelManager.cpp" />
+    <ClCompile Include="Engine\3D\Model\Model.cpp" />
+    <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
+    <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
+    <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h" />
@@ -225,6 +235,19 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Player.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
+    <ClInclude Include="Engine\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Engine\2D\Sprite\Sprite.h" />
+    <ClInclude Include="Engine\2D\Structure\SpriteStructure.h" />
+    <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h" />
+    <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h" />
+    <ClInclude Include="Engine\3D\Model\Model.h" />
+    <ClInclude Include="Engine\3D\Model\Resources\ModelResources.h" />
+    <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h" />
+    <ClInclude Include="Engine\3D\Model\State\ModelState.h" />
+    <ClInclude Include="Engine\3D\Model\State\OBJ\IOBJState.h" />
+    <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
+    <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
+    <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

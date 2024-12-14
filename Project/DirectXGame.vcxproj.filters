@@ -151,6 +151,18 @@
     <ClCompile Include="Engine\Animation\AnimationStructure\Node\Node.cpp">
       <Filter>Engine\Animation\AnimationStructure\Node</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp">
+      <Filter>Engine\Audio\AudioDataResource</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Audio\Audio.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp">
+      <Filter>Engine\Base\DXCommon</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine\Base\WinApp\WinApp.cpp">
+      <Filter>Engine\Base\WinApp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="externals\imgui\imconfig.h" />
@@ -325,6 +337,21 @@
     </ClInclude>
     <ClInclude Include="Engine\Animation\AnimationStructure\Node\Node.h">
       <Filter>Engine\Animation\AnimationStructure\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h">
+      <Filter>Engine\Audio\AudioDataResource</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Audio\Audio.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Base\DXCommon\DirectXCommon.h">
+      <Filter>Engine\Base\DXCommon</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\Base\WinApp\WinApp.h">
+      <Filter>Engine\Base\WinApp</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\BufferResource\BufferResource.h">
+      <Filter>Engine\BufferResource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -540,6 +567,27 @@
     </Filter>
     <Filter Include="Engine\Animation\AnimationStructure\WellForGPU">
       <UniqueIdentifier>{8cc4acfc-dfee-45b9-a637-328f5ec7f3c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{35c62fb8-817c-497b-a101-470952dc81e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Audio\AudioDataResource">
+      <UniqueIdentifier>{1de3bbac-b6d7-4a1d-922b-018f6474bb8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base">
+      <UniqueIdentifier>{db9360a9-7851-4dc4-9612-7f2e6556e2df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\DXCommon">
+      <UniqueIdentifier>{c192e503-a08c-4531-9bbf-f851e6a4a646}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\WinApp">
+      <UniqueIdentifier>{8f7efcc4-3701-41f2-9af2-24d160bbae54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\BufferResource">
+      <UniqueIdentifier>{b1f8ea6b-4133-4859-b141-ce43a0587099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\CollisionSystem">
+      <UniqueIdentifier>{6b3c3c61-932e-4a4a-b7a2-0d00accb20bf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

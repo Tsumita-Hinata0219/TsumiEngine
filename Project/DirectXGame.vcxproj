@@ -214,6 +214,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
     <ClCompile Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
     <ClCompile Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Engine\Audio\Audio.cpp" />
+    <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
+    <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="Engine\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -272,6 +276,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
     <ClInclude Include="Engine\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
+    <ClInclude Include="Engine\Audio\Audio.h" />
+    <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h" />
+    <ClInclude Include="Engine\Base\DXCommon\DirectXCommon.h" />
+    <ClInclude Include="Engine\Base\WinApp\WinApp.h" />
+    <ClInclude Include="Engine\BufferResource\BufferResource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

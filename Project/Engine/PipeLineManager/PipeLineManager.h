@@ -175,5 +175,9 @@ private: // メンバ変数
 	// CSParticle
 	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
 
+
+	// PipeLineの情報を格納するコンテナ
+	std::map<string, std::map<string, string>> pipeLineMaps_;
+
 };
 

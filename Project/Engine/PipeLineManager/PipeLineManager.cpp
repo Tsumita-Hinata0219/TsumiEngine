@@ -4,6 +4,9 @@ using namespace PipeLine;
 // PipeLineType
 PipeLineType PipeLineManager::nowPipeLineType_ = PipeLineType::None;
 
+Category PipeLineManager::preCategory_ = Category::None;
+SubFilter PipeLineManager::preSubFilter_ = SubFilter::None;
+
 
 // 初期化処理
 void PipeLineManager::Initialize()
@@ -178,13 +181,13 @@ void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type, bool state)
 /// </summary>
 void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFilter subFilter)
 {
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-	// インスタンスの取得
-	PipeLineManager* instance = PipeLineManager::GetInstance();
-
 	// カテゴリーもしくはサブフィルターが異なればコマンドを積みなおす
-	if (instance->preCategory_ != category || instance->preSubFilter_ != subFilter) {
+	if (preCategory_ != category || preSubFilter_ != subFilter) {
+
+		// Commandの取得
+		Commands commands = CommandManager::GetInstance()->GetCommands();
+		// インスタンスの取得
+		PipeLineManager* instance = PipeLineManager::GetInstance();
 
 		// カテゴリーとサブフィルターを再設定
 		instance->preCategory_ = category;

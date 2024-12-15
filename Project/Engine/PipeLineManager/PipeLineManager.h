@@ -137,7 +137,6 @@ private:
 	/// <summary>
 	/// GPUパーティクル関連
 	/// </summary>
-	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Draw();
 
 	/// <summary>
@@ -161,6 +160,7 @@ private:
 	/// <summary>
 	/// ComputeShader
 	/// </summary>
+	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_CSParticle();
 
 
@@ -195,9 +195,6 @@ private: // メンバ変数
 
 	// CPUParticle
 	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
-
-	// GPUParticle_Init
-	std::unique_ptr<GPUParticle_Init_PipeLine> gParticle_Init_PipeLine_;
 
 	// GPUParticle_ Draw
 	std::unique_ptr<GPUParticle_Draw_PipeLine> gParticle_Draw_PipeLine_;
@@ -245,8 +242,11 @@ private: // メンバ変数
 	// Vignetting
 	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
 
-
 	// CSParticle
 	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
+
+	// GPUParticle_Init
+	std::unique_ptr<GPUParticle_Init_PipeLine> gParticle_Init_PipeLine_;
+
 };
 

@@ -41,7 +41,6 @@ namespace PipeLine {
 		Skybox,
 
 		CPUParticle,
-		GPUParticle_Init,
 		GPUParticle_Draw,
 
 		Absent,
@@ -59,6 +58,7 @@ namespace PipeLine {
 		SepiaTone,
 		Vignetting,
 
+		GPUParticle_Init,
 		CSParticle,
 	};
 

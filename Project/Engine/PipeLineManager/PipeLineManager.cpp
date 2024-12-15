@@ -121,7 +121,6 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_CPUParticle();
 
 	// GPUパーティクル関連
-	instance->CreatePipeLine_GPUParticle_Init();
 	instance->CreatePipeLine_GPUParticle_Draw();
 
 	// ポストエフェクト
@@ -141,6 +140,7 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_Vignetting();
 
 	// ComputeShader
+	instance->CreatePipeLine_GPUParticle_Init();
 	instance->CreatePipeLine_CSParticle();
 }
 
@@ -245,11 +245,6 @@ void PipeLineManager::CreatePipeLine_CPUParticle()
 /// <summary>
 /// GPUパーティクル関連
 /// </summary>
-void PipeLineManager::CreatePipeLine_GPUParticle_Init()
-{
-	std::unique_ptr<GPUParticle_Init_PipeLine> pipeline = std::make_unique<GPUParticle_Init_PipeLine>();
-	pipeLineMaps_[Category::GPUParticle_Init][SubFilter::None] = pipeline->SetUpPso();
-}
 void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
 {
 	std::unique_ptr<GPUParticle_Draw_PipeLine> pipeline = std::make_unique<GPUParticle_Draw_PipeLine>();
@@ -335,6 +330,11 @@ void PipeLineManager::CreatePipeLine_Vignetting()
 /// <summary>
 /// ComputeShader
 /// </summary>
+void PipeLineManager::CreatePipeLine_GPUParticle_Init()
+{
+	std::unique_ptr<GPUParticle_Init_PipeLine> pipeline = std::make_unique<GPUParticle_Init_PipeLine>();
+	pipeLineMaps_[Category::GPUParticle_Init][SubFilter::None] = pipeline->SetUpPso();
+}
 void PipeLineManager::CreatePipeLine_CSParticle()
 {
 	std::unique_ptr<CSParticlePipeLine> pipeline = std::make_unique<CSParticlePipeLine>();

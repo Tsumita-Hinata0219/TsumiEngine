@@ -107,35 +107,38 @@ void PipeLineManager::Initialize()
 /// </summary>
 void PipeLineManager::CreatePipeLine()
 {
+	// インスタンスの取得
+	PipeLineManager* instance = PipeLineManager::GetInstance();
+
 	// オブジェクト関連
-	CreatePipeLine_Object3d();
-	CreatePipeLine_Object2d();
-	CreatePipeLine_SkinningObject3D();
-	CreatePipeLine_Skybox();
-	CreatePipeLine_CPUParticle();
+	instance->CreatePipeLine_Object3d();
+	instance->CreatePipeLine_Object2d();
+	instance->CreatePipeLine_SkinningObject3D();
+	instance->CreatePipeLine_Skybox();
+	instance->CreatePipeLine_CPUParticle();
 
 	// GPUパーティクル関連
-	CreatePipeLine_GPUParticle_Init();
-	CreatePipeLine_GPUParticle_Draw();
+	instance->CreatePipeLine_GPUParticle_Init();
+	instance->CreatePipeLine_GPUParticle_Draw();
 
 	// ポストエフェクト
-	CreatePipeLine_Absent();
-	CreatePipeLine_BoxFilter();
-	CreatePipeLine_Dissolve();
-	CreatePipeLine_GaussianFilter();
-	CreatePipeLine_Glitch();
-	CreatePipeLine_Grain();
-	CreatePipeLine_GrayScale();
-	CreatePipeLine_HSV();
-	CreatePipeLine_OutLine();
-	CreatePipeLine_RadialBlur();
-	CreatePipeLine_Random();
-	CreatePipeLine_RetroCRT();
-	CreatePipeLine_SepiaTone();
-	CreatePipeLine_Vignetting();
+	instance->CreatePipeLine_Absent();
+	instance->CreatePipeLine_BoxFilter();
+	instance->CreatePipeLine_Dissolve();
+	instance->CreatePipeLine_GaussianFilter();
+	instance->CreatePipeLine_Glitch();
+	instance->CreatePipeLine_Grain();
+	instance->CreatePipeLine_GrayScale();
+	instance->CreatePipeLine_HSV();
+	instance->CreatePipeLine_OutLine();
+	instance->CreatePipeLine_RadialBlur();
+	instance->CreatePipeLine_Random();
+	instance->CreatePipeLine_RetroCRT();
+	instance->CreatePipeLine_SepiaTone();
+	instance->CreatePipeLine_Vignetting();
 
 	// ComputeShader
-	CreatePipeLine_CSParticle();
+	instance->CreatePipeLine_CSParticle();
 }
 
 

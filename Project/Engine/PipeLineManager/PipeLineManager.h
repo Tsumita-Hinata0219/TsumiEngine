@@ -170,7 +170,6 @@ private: // メンバ変数
 	std::map<Category, std::map<SubFilter, PsoProperty>> pipeLineMaps_;
 
 	// それぞれの区分
-	Container preContainer_ = Container::None;
 	Category preCategory_ = Category::None;
 	SubFilter preSubFilter_ = SubFilter::None;
 

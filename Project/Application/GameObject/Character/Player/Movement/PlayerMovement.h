@@ -66,6 +66,10 @@ private:
 	/// </summary>
 	void CalcBodyOrienation(Vector2 input, Vector3 direction);
 
+	/// <summary>
+	/// 移動限界処理
+	/// </summary>
+	void MoveLimited();
 
 private:
 

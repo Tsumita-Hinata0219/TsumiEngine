@@ -81,6 +81,9 @@ void PlayerMovement::Update()
 			CalcBodyOrienation(iKeys_, keyMoveDirection_);
 		}
 	}
+
+	// 移動限界処理
+	MoveLimited();
 }
 
 
@@ -196,5 +199,19 @@ void PlayerMovement::CalcBodyOrienation(Vector2 input, Vector3 direction)
 		pTrans_->srt.rotate.y =
 			Lerp(pTrans_->srt.rotate.y, pTrans_->srt.rotate.y + shortestAngle, orientationLerpSpeed_);
 	}
+}
+
+
+/// <summary>
+/// 移動限界処理
+/// </summary>
+void PlayerMovement::MoveLimited()
+{
+	// 移動限界
+	const float kMoveMit = 50.0f;
+	pTrans_->srt.translate.x = max(pTrans_->srt.translate.x, -kMoveMit);
+	pTrans_->srt.translate.x = min(pTrans_->srt.translate.x, +kMoveMit);
+	pTrans_->srt.translate.z = max(pTrans_->srt.translate.z, -kMoveMit);
+	pTrans_->srt.translate.z = min(pTrans_->srt.translate.z, +kMoveMit);
 }
 

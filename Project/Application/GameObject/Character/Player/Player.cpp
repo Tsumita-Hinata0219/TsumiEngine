@@ -224,20 +224,6 @@ void Player::OnCollisionWithEnemyBullet()
 
 
 /// <summary>
-/// 移動限界処理
-/// </summary>
-void Player::MoveLimited()
-{
-	// 移動限界
-	const float kMoveMit = 100.0f;
-	trans_.srt.translate.x = max(trans_.srt.translate.x, -kMoveMit);
-	trans_.srt.translate.x = min(trans_.srt.translate.x, +kMoveMit);
-	trans_.srt.translate.z = max(trans_.srt.translate.z, -kMoveMit);
-	trans_.srt.translate.z = min(trans_.srt.translate.z, +kMoveMit);
-}
-
-
-/// <summary>
 /// 射撃処理
 /// </summary>
 void Player::ExecuteShot()

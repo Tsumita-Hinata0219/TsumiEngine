@@ -120,11 +120,6 @@ public:
 private:
 
 	/// <summary>
-	/// 移動限界処理
-	/// </summary>
-	void MoveLimited();
-
-	/// <summary>
 	/// 射撃処理
 	/// </summary>
 	void ExecuteShot();

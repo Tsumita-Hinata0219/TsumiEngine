@@ -11,6 +11,7 @@
 #include "../CommandManager/CommandManager.h"
 
 #include "IPipeLineState/IPipeLineState.h"
+#include "IPipeLineState/PipeLineStructure.h"
 
 #include "ModelPipeLine/Object2DPipeLine/Object2DPipeLine.h"
 #include "ModelPipeLine/Object3DPipeLine/Object3DPipeLine.h"
@@ -36,6 +37,9 @@
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
+
+
+using namespace PipeLine;
 
 
 // PipeLineTypeのenum構造体
@@ -73,19 +77,33 @@ class PipeLineManager {
 
 public: // メンバ関数
 
-	// インスタンスの取得
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
+	/// <returns></returns>
 	static PipeLineManager* GetInstance() {
 		static PipeLineManager instance;
 		return &instance;
 	}
 
-	// 初期化処理
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
 	static void Initialize();
 
-	// PipeLineのチェックと設定
+	/// <summary>
+	/// PipeLineのチェックと設定
+	/// </summary>
 	static void PipeLineCheckAndSet(const PipeLineType type, bool state = true);
 
-	// PipeLineTypeのリセット
+	/// <summary>
+	/// PipeLineの設定
+	/// </summary>
+	static void SetPipeLine(Container cantainer = Container::None, Category category = Category::None, SubFilter subFilter = SubFilter::None);
+
+	/// <summary>
+	/// PipeLineTypeのリセット
+	/// </summary>
 	static void PipeLineTypeReset() {
 		nowPipeLineType_ = PipeLineType::None;
 	}
@@ -100,7 +118,54 @@ public: // メンバ関数
 #pragma endregion
 
 
+private:
+
+	/// <summary>
+	/// オブジェクト関連
+	/// </summary>
+	void CreatePipeLine_Object3d();
+	void CreatePipeLine_Object2d();
+	void CreatePipeLine_SkinningObject3D();
+	void CreatePipeLine_Skybox();
+	void CreatePipeLine_CPUParticle();
+
+	/// <summary>
+	/// GPUパーティクル関連
+	/// </summary>
+	void CreatePipeLine_GPUParticle_Init();
+	void CreatePipeLine_GPUParticle_Draw();
+
+	/// <summary>
+	/// ポストエフェクト
+	/// </summary>
+	void CreatePipeLine_Absent();
+	void CreatePipeLine_BoxFilter();
+	void CreatePipeLine_Dissolve();
+	void CreatePipeLine_GaussianFilter();
+	void CreatePipeLine_Glitch();
+	void CreatePipeLine_Grain();
+	void CreatePipeLine_HSV();
+	void CreatePipeLine_OutLine();
+	void CreatePipeLine_RadialBlur();
+	void CreatePipeLine_Random();
+	void CreatePipeLine_RetroCRT();
+	void CreatePipeLine_SepiaTone();
+	void CreatePipeLine_Vignetting();
+	void CreatePipeLine_CSParticle();
+
+
 private: // メンバ変数
+	
+	// PipeLineの情報を格納するコンテナ
+	std::map<Category, std::map<SubFilter, PsoProperty>> pipeLineMaps_;
+
+	// それぞれの区分
+	Container preContainer_ = Container::None;
+	Category preCategory_ = Category::None;
+	SubFilter preSubFilter_ = SubFilter::None;
+
+
+
 
 	// PipeLineのタイプ
 	static PipeLineType nowPipeLineType_;
@@ -174,10 +239,5 @@ private: // メンバ変数
 
 	// CSParticle
 	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
-
-
-	// PipeLineの情報を格納するコンテナ
-	std::map<string, std::map<string, string>> pipeLineMaps_;
-
 };
 

@@ -1,6 +1,6 @@
 #include "PipeLineManager.h"
 
-
+using namespace PipeLine;
 // PipeLineType
 PipeLineType PipeLineManager::nowPipeLineType_ = PipeLineType::None;
 
@@ -130,5 +130,102 @@ void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type, bool state)
 			commands.List->SetPipelineState(instance->pipeLineMap_[type].graphicsPipelineState);
 		}
 	}
+}
+
+
+/// <summary>
+/// PipeLineの設定
+/// </summary>
+void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFilter subFilter)
+{
+	cantainer, category, subFilter;
+}
+
+
+/// <summary>
+/// オブジェクト関連
+/// </summary>
+void PipeLineManager::CreatePipeLine_Object3d()
+{
+	std::unique_ptr<Object3DPipeLine> pipeline = std::make_unique<Object3DPipeLine>();
+	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_Back] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_Object2d()
+{
+	std::unique_ptr<Object2DPipeLine> pipeline = std::make_unique<Object2DPipeLine>();
+	pipeLineMaps_[Category::Object2D][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_SkinningObject3D()
+{
+	std::unique_ptr<SkinningObject3dPipeLine> pipeline = std::make_unique<SkinningObject3dPipeLine>();
+	pipeLineMaps_[Category::SkinningObject3D][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_Skybox()
+{
+	std::unique_ptr<SkyboxPipeLine> pipeline = std::make_unique<SkyboxPipeLine>();
+	pipeLineMaps_[Category::Skybox][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_CPUParticle()
+{
+	std::unique_ptr<CPUParticlePipeLine> pipeline = std::make_unique<CPUParticlePipeLine>();
+	pipeLineMaps_[Category::CPUParticle][SubFilter::None] = pipeline->SetUpPso();
+}
+
+
+/// <summary>
+/// GPUパーティクル関連
+/// </summary>
+void PipeLineManager::CreatePipeLine_GPUParticle_Init()
+{
+}
+void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
+{
+}
+
+
+/// <summary>
+/// ポストエフェクト
+/// </summary>
+void PipeLineManager::CreatePipeLine_Absent()
+{
+}
+void PipeLineManager::CreatePipeLine_BoxFilter()
+{
+}
+void PipeLineManager::CreatePipeLine_Dissolve()
+{
+}
+void PipeLineManager::CreatePipeLine_GaussianFilter()
+{
+}
+void PipeLineManager::CreatePipeLine_Glitch()
+{
+}
+void PipeLineManager::CreatePipeLine_Grain()
+{
+}
+void PipeLineManager::CreatePipeLine_HSV()
+{
+}
+void PipeLineManager::CreatePipeLine_OutLine()
+{
+}
+void PipeLineManager::CreatePipeLine_RadialBlur()
+{
+}
+void PipeLineManager::CreatePipeLine_Random()
+{
+}
+void PipeLineManager::CreatePipeLine_RetroCRT()
+{
+}
+void PipeLineManager::CreatePipeLine_SepiaTone()
+{
+}
+void PipeLineManager::CreatePipeLine_Vignetting()
+{
+}
+void PipeLineManager::CreatePipeLine_CSParticle()
+{
 }
 

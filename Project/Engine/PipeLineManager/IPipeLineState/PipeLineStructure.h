@@ -25,12 +25,17 @@ namespace PipeLine {
 	
 	// 第一層 : 大まかな対象
 	enum class Container {
-		Graphic,
+		None,
+
+		Object,
+		PostEffect,
 		Compute,
 	};
 
 	// 第二層 : 対象の詳細カテゴリ
-	enum class CategoryModel {
+	enum class Category {
+		None,
+
 		Object2D,
 		Object3D,
 		SkinningObject3D,
@@ -61,8 +66,8 @@ namespace PipeLine {
 	enum class SubFilter {
 		None,
 
-		Cull_Mode_None,
 		Cull_Mode_Back,
+		Cull_Mode_None,
 
 		Blend_Model_Normal,
 		Blend_Model_Add,

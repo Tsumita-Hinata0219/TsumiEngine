@@ -35,7 +35,8 @@ void AbsentEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Absent);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Absent);
+
 
 	// RenderTex
 	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/

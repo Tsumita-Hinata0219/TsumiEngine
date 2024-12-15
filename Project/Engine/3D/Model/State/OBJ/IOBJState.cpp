@@ -75,7 +75,8 @@ void IOBJState::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Object3D);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object2D);
+
 
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);

@@ -191,7 +191,8 @@ void Skybox::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Skybox);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Skybox);
+
 
 	// VertexBufferView
 	buffers_.vetrices.IASetVertexBuffers(1);

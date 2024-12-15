@@ -69,7 +69,7 @@ void Tsumi::BeginFlame() {
 	DescriptorManager::BeginFrame();
 	RTVManager::BeginFrame();
 	//SRVManager::BeginFrame();
-	PipeLineManager::PipeLineTypeReset();
+	PipeLineManager::PipeLineReset();
 }
 
 

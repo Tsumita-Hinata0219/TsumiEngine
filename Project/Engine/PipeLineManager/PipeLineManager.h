@@ -42,36 +42,6 @@
 using namespace PipeLine;
 
 
-// PipeLineTypeのenum構造体
-enum class PipeLineType : uint32_t {
-	None,
-	Object2D,
-	Object3D,
-	SkinningObject3D,
-	Skybox,
-	CPUParticle,
-	GPUParticle_Init,
-	GPUParticle_Draw,
-	PostEffect,
-	Absent,
-	BoxFilter,
-	Dissolve,
-	GaussianFilter,
-	Glitch,
-	Grain,
-	GrayScale,
-	HSV,
-	OutLine,
-	RadialBlur,
-	Random,
-	RetroCRT,
-	SepiaTone,
-	Vignetting,
-	CSParticle,
-};
-
-
-
 /* PipeLineManagerクラス */
 class PipeLineManager {
 
@@ -87,19 +57,9 @@ public: // メンバ関数
 	}
 
 	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	static void Initialize();
-
-	/// <summary>
 	/// PipeLineを作成する
 	/// </summary>
 	static void CreatePipeLine();
-
-	/// <summary>
-	/// PipeLineのチェックと設定
-	/// </summary>
-	static void PipeLineCheckAndSet(const PipeLineType type, bool state = true);
 
 	/// <summary>
 	/// PipeLineの設定
@@ -109,18 +69,10 @@ public: // メンバ関数
 	/// <summary>
 	/// PipeLineTypeのリセット
 	/// </summary>
-	static void PipeLineTypeReset() {
-		nowPipeLineType_ = PipeLineType::None;
+	static void PipeLineReset() {
+		preCategory_ = Category::None;
+		preSubFilter_ = SubFilter::None;
 	}
-
-#pragma region Accessor アクセッサ
-
-	// PipeLineの取得
-	PsoProperty GetPipeLine(PipeLineType type) {
-		return pipeLineMap_[type];
-	}
-
-#pragma endregion
 
 
 private:
@@ -172,81 +124,6 @@ private: // メンバ変数
 	// それぞれの区分
 	static Category preCategory_;
 	static SubFilter preSubFilter_;
-
-
-
-	// PipeLineのタイプ
-	static PipeLineType nowPipeLineType_;
-
-	// PipeLineを保存しておくmapコンテナ
-	std::map<PipeLineType, PsoProperty> pipeLineMap_;
-
-	// Object2D
-	std::unique_ptr<Object2DPipeLine> object2DPipeLine_;
-
-	// Object3D
-	std::unique_ptr<Object3DPipeLine> object3DPipeLine_;
-
-	// SkinningObject3d
-	std::unique_ptr<SkinningObject3dPipeLine> skinningObject3DPipeLine_;
-
-	// Skybox
-	std::unique_ptr<SkyboxPipeLine> skyboxPipeLine_;
-
-	// CPUParticle
-	std::unique_ptr<CPUParticlePipeLine> cpuParticlePipeLine_;
-
-	// GPUParticle_ Draw
-	std::unique_ptr<GPUParticle_Draw_PipeLine> gParticle_Draw_PipeLine_;
-
-
-	// Absent
-	std::unique_ptr<AbsentPipeLine> absentPipeLine_;
-
-	// BoxFilter
-	std::unique_ptr<BoxFilterPipeLine> boxFilterPipeLine_;
-
-	// Dissolve
-	std::unique_ptr<DissolvePipeLine> dissolvePipeLine_;
-
-	// GaussianFilter
-	std::unique_ptr<GaussianFilterPipeLine> gaussianFilterPipeLine_;
-
-	// Glitch
-	std::unique_ptr<GlitchPipeLine> glitchPipeLine_;
-
-	// Grain
-	std::unique_ptr<GrainPipeLine> grainPipeLine_;
-
-	// GrayScale
-	std::unique_ptr<GrayScalePipeLine> grayScalePipeLine_;
-
-	// HSV
-	std::unique_ptr<HSVPipeLine> hsvPipeLine_;
-
-	// OutLine
-	std::unique_ptr<OutLinePipeLine> outLinePipeLine_;
-
-	// RadialBlur
-	std::unique_ptr<RadialBlurPipeLine> radialBlurPipeLine_;
-
-	// Random
-	std::unique_ptr<RandomPipeLine> randomPipeLine_;
-
-	// RetroCRT
-	std::unique_ptr<RetroCRTPipeLine> retroCRTPipeLine_;
-
-	// SepiaTone
-	std::unique_ptr<SepiaTonePipeLine> sepiaTonePipeLine_;
-
-	// Vignetting
-	std::unique_ptr<VignettingPipeLine> vignettingPipeLine_;
-
-	// CSParticle
-	std::unique_ptr<CSParticlePipeLine> csParticlePipeLine_;
-
-	// GPUParticle_Init
-	std::unique_ptr<GPUParticle_Init_PipeLine> gParticle_Init_PipeLine_;
 
 };
 

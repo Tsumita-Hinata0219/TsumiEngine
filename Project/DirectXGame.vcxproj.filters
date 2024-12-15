@@ -570,6 +570,7 @@
     <ClCompile Include="Application\Scene\SelectScene\SelectScene.cpp">
       <Filter>Application\Scene\SelectScene</Filter>
     </ClCompile>
+    <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h">
@@ -1451,6 +1452,7 @@
     <ClInclude Include="Application\Scene\IScene.h">
       <Filter>Application\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -219,6 +219,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Terrain\BoxManager\BoxManager.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Floor\Floor.cpp" />
+    <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp" />
     <ClCompile Include="Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
@@ -502,6 +503,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Terrain\BoxManager\Destructible\DestructibleBox.h" />
     <ClInclude Include="Application\GameObject\Terrain\BoxManager\Interface\IBoxObject.h" />
     <ClInclude Include="Application\GameObject\Terrain\Floor\Floor.h" />
+    <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h" />
     <ClInclude Include="Application\GameObject\Terrain\Skydome\Skydome.h" />
     <ClInclude Include="Application\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Application\Scene\GameScene\GameScene.h" />

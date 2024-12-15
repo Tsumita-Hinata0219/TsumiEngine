@@ -39,7 +39,7 @@ public:
 	~Player() {};
 
 	/// <summary>
-	/// 初期化
+	/// 初期化処理
 	/// </summary>
 	void Init() override;
 

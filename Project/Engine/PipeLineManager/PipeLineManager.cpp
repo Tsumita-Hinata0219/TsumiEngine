@@ -183,17 +183,17 @@ void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFil
 	// インスタンスの取得
 	PipeLineManager* instance = PipeLineManager::GetInstance();
 
-	// カテゴリーもしくはサブフィルターが値がければコマンドを積みなおす
+	// カテゴリーもしくはサブフィルターが異なればコマンドを積みなおす
 	if (instance->preCategory_ != category || instance->preSubFilter_ != subFilter) {
 
 		// カテゴリーとサブフィルターを再設定
 		instance->preCategory_ = category;
 		instance->preSubFilter_ = subFilter;
 
-		// コンテナでGraphicとComputeを分ける
+		// GraphicとComputeを分ける
 		if (cantainer == Container::Graphic) {
 
-			// 引数typeにあったPipeLineを積みなおす
+			// 引数にあったPipeLineを積みなおす
 			commands.List->SetGraphicsRootSignature(instance->pipeLineMaps_[category][subFilter].rootSignature);
 			commands.List->SetPipelineState(instance->pipeLineMaps_[category][subFilter].graphicsPipelineState);
 			// 形状を設定。基本PipeLineで設定したものと同じもの
@@ -201,7 +201,7 @@ void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFil
 		}
 		else if (cantainer == Container::Compute) {
 
-			// 引数typeにあったPipeLineを積みなおす
+			// 引数にあったPipeLineを積みなおす
 			commands.List->SetComputeRootSignature(instance->pipeLineMaps_[category][subFilter].rootSignature);
 			commands.List->SetPipelineState(instance->pipeLineMaps_[category][subFilter].graphicsPipelineState);
 		}

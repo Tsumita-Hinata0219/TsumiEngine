@@ -11,8 +11,7 @@
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
 
-#include "GameObject/Terrain/Skydome/Skydome.h"
-#include "3D/Skybox/Skybox.h"
+#include "GameObject/Terrain/SkyboxObj/SkyboxObj.h"
 #include "GameObject/Terrain/Floor/Floor.h"
 #include "GameObject/Terrain/BoxManager/BoxManager.h"
 
@@ -93,7 +92,7 @@ private: // クラス
 	std::unique_ptr<StartDirection> startDirection_;
 
 	// Skybox
-	std::unique_ptr<Skybox> skybox_;
+	std::unique_ptr<SkyboxObj> skybox_;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

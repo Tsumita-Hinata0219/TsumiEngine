@@ -13,7 +13,7 @@ GameScene::GameScene()
 	testPostEffect_ = make_unique<TestPostEffect>();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
-	skybox_ = std::make_unique<Skybox>();
+	skybox_ = std::make_unique<SkyboxObj>();
 	floor_ = std::make_unique<Floor>();
 	boxManager_ = std::make_unique<BoxManager>();
 	player_ = make_unique<Player>();
@@ -65,8 +65,7 @@ void GameScene::Initialize()
 	startDirection_->Init();
 
 	// ──────── Skybox
-	uint32_t dds = TextureManager::LoadTexture("Texture", "dot.dds");
-	skybox_->Init(dds);
+	skybox_->Init();
 
 	// ──────── Floor
 	floor_->Init();
@@ -187,7 +186,7 @@ void GameScene::BackSpriteDraw()
 void GameScene::ModelDraw()
 {
 	// ──────── Skybox
-	skybox_->Draw();
+	skybox_->Draw3D();
 
 	// ──────── Floor
 	floor_->Draw3D();

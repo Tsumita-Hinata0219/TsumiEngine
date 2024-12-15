@@ -102,6 +102,14 @@ void PipeLineManager::Initialize()
 }
 
 
+/// <summary>
+/// PipeLineを作成する
+/// </summary>
+void PipeLineManager::CreatePipeLine()
+{
+}
+
+
 // PipeLineのチェックと設定
 void PipeLineManager::PipeLineCheckAndSet(const PipeLineType type, bool state)
 {
@@ -177,9 +185,13 @@ void PipeLineManager::CreatePipeLine_CPUParticle()
 /// </summary>
 void PipeLineManager::CreatePipeLine_GPUParticle_Init()
 {
+	std::unique_ptr<GPUParticle_Init_PipeLine> pipeline = std::make_unique<GPUParticle_Init_PipeLine>();
+	pipeLineMaps_[Category::GPUParticle_Init][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
 {
+	std::unique_ptr<GPUParticle_Draw_PipeLine> pipeline = std::make_unique<GPUParticle_Draw_PipeLine>();
+	pipeLineMaps_[Category::GPUParticle_Draw][SubFilter::None] = pipeline->SetUpPso();
 }
 
 
@@ -188,44 +200,82 @@ void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
 /// </summary>
 void PipeLineManager::CreatePipeLine_Absent()
 {
+	std::unique_ptr<AbsentPipeLine> pipeline = std::make_unique<AbsentPipeLine>();
+	pipeLineMaps_[Category::Absent][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_BoxFilter()
 {
+	std::unique_ptr<BoxFilterPipeLine> pipeline = std::make_unique<BoxFilterPipeLine>();
+	pipeLineMaps_[Category::BoxFilter][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Dissolve()
 {
+	std::unique_ptr<DissolvePipeLine> pipeline = std::make_unique<DissolvePipeLine>();
+	pipeLineMaps_[Category::Dissolve][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_GaussianFilter()
 {
+	std::unique_ptr<GaussianFilterPipeLine> pipeline = std::make_unique<GaussianFilterPipeLine>();
+	pipeLineMaps_[Category::GaussianFilter][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Glitch()
 {
+	std::unique_ptr<GlitchPipeLine> pipeline = std::make_unique<GlitchPipeLine>();
+	pipeLineMaps_[Category::Glitch][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Grain()
 {
+	std::unique_ptr<GrainPipeLine> pipeline = std::make_unique<GrainPipeLine>();
+	pipeLineMaps_[Category::Grain][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_GrayScale()
+{
+	std::unique_ptr<GrayScalePipeLine> pipeline = std::make_unique<GrayScalePipeLine>();
+	pipeLineMaps_[Category::GrayScale][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_HSV()
 {
+	std::unique_ptr<HSVPipeLine> pipeline = std::make_unique<HSVPipeLine>();
+	pipeLineMaps_[Category::HSV][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_OutLine()
 {
+	std::unique_ptr<OutLinePipeLine> pipeline = std::make_unique<OutLinePipeLine>();
+	pipeLineMaps_[Category::OutLine][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_RadialBlur()
 {
+	std::unique_ptr<RadialBlurPipeLine> pipeline = std::make_unique<RadialBlurPipeLine>();
+	pipeLineMaps_[Category::RadialBlur][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Random()
 {
+	std::unique_ptr<RandomPipeLine> pipeline = std::make_unique<RandomPipeLine>();
+	pipeLineMaps_[Category::Random][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_RetroCRT()
 {
+	std::unique_ptr<RetroCRTPipeLine> pipeline = std::make_unique<RetroCRTPipeLine>();
+	pipeLineMaps_[Category::RetroCRT][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_SepiaTone()
 {
+	std::unique_ptr<SepiaTonePipeLine> pipeline = std::make_unique<SepiaTonePipeLine>();
+	pipeLineMaps_[Category::SepiaTone][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Vignetting()
 {
+	std::unique_ptr<VignettingPipeLine> pipeline = std::make_unique<VignettingPipeLine>();
+	pipeLineMaps_[Category::Vignetting][SubFilter::None] = pipeline->SetUpPso();
 }
+
+
+/// <summary>
+/// ComputeShader
+/// </summary>
 void PipeLineManager::CreatePipeLine_CSParticle()
 {
+	std::unique_ptr<CSParticlePipeLine> pipeline = std::make_unique<CSParticlePipeLine>();
+	pipeLineMaps_[Category::CSParticle][SubFilter::None] = pipeline->SetUpPso();
 }
 

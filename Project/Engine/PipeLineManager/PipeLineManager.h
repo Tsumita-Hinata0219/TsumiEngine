@@ -92,6 +92,11 @@ public: // メンバ関数
 	static void Initialize();
 
 	/// <summary>
+	/// PipeLineを作成する
+	/// </summary>
+	static void CreatePipeLine();
+
+	/// <summary>
 	/// PipeLineのチェックと設定
 	/// </summary>
 	static void PipeLineCheckAndSet(const PipeLineType type, bool state = true);
@@ -144,6 +149,7 @@ private:
 	void CreatePipeLine_GaussianFilter();
 	void CreatePipeLine_Glitch();
 	void CreatePipeLine_Grain();
+	void CreatePipeLine_GrayScale();
 	void CreatePipeLine_HSV();
 	void CreatePipeLine_OutLine();
 	void CreatePipeLine_RadialBlur();
@@ -151,6 +157,10 @@ private:
 	void CreatePipeLine_RetroCRT();
 	void CreatePipeLine_SepiaTone();
 	void CreatePipeLine_Vignetting();
+
+	/// <summary>
+	/// ComputeShader
+	/// </summary>
 	void CreatePipeLine_CSParticle();
 
 
@@ -193,6 +203,7 @@ private: // メンバ変数
 
 	// GPUParticle_ Draw
 	std::unique_ptr<GPUParticle_Draw_PipeLine> gParticle_Draw_PipeLine_;
+
 
 	// Absent
 	std::unique_ptr<AbsentPipeLine> absentPipeLine_;

@@ -27,8 +27,7 @@ namespace PipeLine {
 	enum class Container {
 		None,
 
-		Object,
-		PostEffect,
+		Graphic,
 		Compute,
 	};
 
@@ -59,6 +58,7 @@ namespace PipeLine {
 		RetroCRT,
 		SepiaTone,
 		Vignetting,
+
 		CSParticle,
 	};
 

@@ -59,10 +59,6 @@ void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFil
 		// インスタンスの取得
 		PipeLineManager* instance = PipeLineManager::GetInstance();
 
-		// カテゴリーとサブフィルターを再設定
-		instance->preCategory_ = category;
-		instance->preSubFilter_ = subFilter;
-
 		// GraphicとComputeを分ける
 		if (cantainer == Container::Graphic) {
 
@@ -78,6 +74,10 @@ void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFil
 			commands.List->SetComputeRootSignature(instance->pipeLineMaps_[category][subFilter].rootSignature);
 			commands.List->SetPipelineState(instance->pipeLineMaps_[category][subFilter].graphicsPipelineState);
 		}
+
+		// カテゴリーとサブフィルターを再設定
+		instance->preCategory_ = category;
+		instance->preSubFilter_ = subFilter;
 	}
 }
 

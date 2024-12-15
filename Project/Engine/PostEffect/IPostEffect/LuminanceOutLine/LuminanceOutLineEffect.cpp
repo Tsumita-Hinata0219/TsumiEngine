@@ -44,7 +44,8 @@ void LuminanceOutLineEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::OutLine);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::OutLine);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

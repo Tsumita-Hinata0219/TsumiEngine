@@ -47,7 +47,8 @@ void HSVEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::HSV);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::HSV);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

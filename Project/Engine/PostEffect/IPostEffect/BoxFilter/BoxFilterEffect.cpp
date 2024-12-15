@@ -44,7 +44,8 @@ void BoxFilterEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::BoxFilter);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::BoxFilter);
+
 
 	// RenderTex
 	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/

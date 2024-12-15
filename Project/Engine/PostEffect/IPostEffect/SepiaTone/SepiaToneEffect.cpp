@@ -44,7 +44,8 @@ void SepiaToneEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::SepiaTone);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::SepiaTone);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

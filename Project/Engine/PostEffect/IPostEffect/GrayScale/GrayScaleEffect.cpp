@@ -44,7 +44,8 @@ void GrayScaleEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GrayScale);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Grain);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

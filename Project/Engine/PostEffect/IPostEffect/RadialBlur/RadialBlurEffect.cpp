@@ -44,7 +44,8 @@ void RadialBlurEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::RadialBlur);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::RadialBlur);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

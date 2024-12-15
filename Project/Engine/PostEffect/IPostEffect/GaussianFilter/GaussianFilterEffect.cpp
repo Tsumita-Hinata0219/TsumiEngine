@@ -44,7 +44,8 @@ void GaussianFilterEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::GaussianFilter);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::GaussianFilter);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

@@ -24,7 +24,6 @@ void Tsumi::Initialize() {
 	ShaderManager::Initialize();
 
 	// PipeLineManagerの初期化処理
-	PipeLineManager::Initialize();
 	PipeLineManager::CreatePipeLine();
 
 	// TextureManagerの初期化処理

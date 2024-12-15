@@ -47,7 +47,8 @@ void RandomEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Random);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Random);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

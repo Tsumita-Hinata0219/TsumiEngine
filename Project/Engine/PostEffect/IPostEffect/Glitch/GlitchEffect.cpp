@@ -47,7 +47,8 @@ void GlitchEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Glitch);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Glitch);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

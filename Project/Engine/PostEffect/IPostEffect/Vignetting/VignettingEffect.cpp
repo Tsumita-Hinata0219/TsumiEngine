@@ -41,7 +41,8 @@ void VignettingEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::Vignetting);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Vignetting);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

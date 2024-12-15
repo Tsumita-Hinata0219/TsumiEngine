@@ -46,7 +46,8 @@ void RetroCRTEffect::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineの設定
-	PipeLineManager::PipeLineCheckAndSet(PipeLineType::RetroCRT);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::RetroCRT);
+
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);

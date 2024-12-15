@@ -59,6 +59,9 @@ private:
 	// モデル
 	std::unique_ptr<Model> model_;
 
+	// Light
+	DirectionalLightData light_;
+
 	// ワールドトランスフォーム
 	Transform trans_{};
 };

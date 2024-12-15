@@ -107,6 +107,35 @@ void PipeLineManager::Initialize()
 /// </summary>
 void PipeLineManager::CreatePipeLine()
 {
+	// オブジェクト関連
+	CreatePipeLine_Object3d();
+	CreatePipeLine_Object2d();
+	CreatePipeLine_SkinningObject3D();
+	CreatePipeLine_Skybox();
+	CreatePipeLine_CPUParticle();
+
+	// GPUパーティクル関連
+	CreatePipeLine_GPUParticle_Init();
+	CreatePipeLine_GPUParticle_Draw();
+
+	// ポストエフェクト
+	CreatePipeLine_Absent();
+	CreatePipeLine_BoxFilter();
+	CreatePipeLine_Dissolve();
+	CreatePipeLine_GaussianFilter();
+	CreatePipeLine_Glitch();
+	CreatePipeLine_Grain();
+	CreatePipeLine_GrayScale();
+	CreatePipeLine_HSV();
+	CreatePipeLine_OutLine();
+	CreatePipeLine_RadialBlur();
+	CreatePipeLine_Random();
+	CreatePipeLine_RetroCRT();
+	CreatePipeLine_SepiaTone();
+	CreatePipeLine_Vignetting();
+
+	// ComputeShader
+	CreatePipeLine_CSParticle();
 }
 
 

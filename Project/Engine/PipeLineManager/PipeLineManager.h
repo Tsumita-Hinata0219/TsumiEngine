@@ -94,7 +94,7 @@ public: // メンバ関数
 	/// <summary>
 	/// PipeLineを作成する
 	/// </summary>
-	static void CreatePipeLine();
+	void CreatePipeLine();
 
 	/// <summary>
 	/// PipeLineのチェックと設定

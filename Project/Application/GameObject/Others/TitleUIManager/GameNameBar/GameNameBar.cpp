@@ -10,6 +10,9 @@ void GameNameBar::Init()
 	modelManager_->LoadModel("Obj/GameNameBar", "GameNameBar.obj");
 	model_ = modelManager_->GetModel("GameNameBar");
 
+	uint32_t dds = TextureManager::LoadTexture("Obj/GameNameBar", "GameNameBar.dds");
+	model_->SetMaterialTexture(dds);
+
 	// Transformの初期化
 	trans_.Init();
 	float initScale = 6.0f;

@@ -9,7 +9,7 @@
 #include "Structure/ModelStructure.h"
 #include "Resources/ModelResources.h"
 
-#include "State/ModelState.h"
+#include "State/IModelState.h"
 #include "State/OBJ/IOBJState.h"
 #include "State/GLTF/IGLTFState.h"
 
@@ -55,7 +55,10 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// ModelResourcesの取得
+	// CullMode
+	void SetCullMode(const CullingMode& setMode) { this->modelState_->SetCullMode(setMode); }
+
+	// ModelResources
 	ModelDatas GetModelResources() const { return this->modelState_->GetModelDatas(); }
 
 	// Mesh
@@ -91,5 +94,5 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 
 	// State
-	ModelState* modelState_ = nullptr;
+	IModelState* modelState_ = nullptr;
 };

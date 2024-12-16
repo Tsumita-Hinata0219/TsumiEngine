@@ -69,8 +69,12 @@ void IGLTFState::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_Back);
-
+	if (cullMode_ == CullingMode::Back) { // 背面描画なし
+		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_Back);
+	}
+	else if (cullMode_ == CullingMode::None) { // 背面描画あり
+		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_None);
+	}
 
 	// VertexBufferView
 	buffers_.vertex.IASetVertexBuffers(1);

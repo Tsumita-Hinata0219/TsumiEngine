@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../ModelState.h"
+#include "../IModelState.h"
 
 
 /* OBJState */
-class IOBJState : public ModelState {
+class IOBJState : public IModelState {
 
 public:
 

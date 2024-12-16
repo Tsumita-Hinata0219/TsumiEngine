@@ -692,7 +692,7 @@
     <ClInclude Include="Engine\3D\Model\Resources\ModelResources.h">
       <Filter>Engine\3D\Model\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\State\ModelState.h">
+    <ClInclude Include="Engine\3D\Model\State\IModelState.h">
       <Filter>Engine\3D\Model\State</Filter>
     </ClInclude>
     <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h">

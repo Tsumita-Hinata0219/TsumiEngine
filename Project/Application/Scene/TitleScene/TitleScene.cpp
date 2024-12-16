@@ -93,8 +93,8 @@ void TitleScene::Update()
 
 #ifdef _DEBUG
 	ImGui::Begin("TitleScene");
-	retroEffectData_.DrawImGui();
-	ImGui::Text("");
+	//retroEffectData_.DrawImGui();
+	camera_.DrawImGui();
 	ImGui::End();
 #endif // _DEBUG
 }

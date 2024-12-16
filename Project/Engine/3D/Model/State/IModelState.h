@@ -14,7 +14,10 @@ enum StateType {
 	OBJ,
 	GLTF,
 };
-
+enum class CullingMode {
+	None,
+	Back,
+};
 
 // Modelの前方宣言
 class Model;
@@ -24,12 +27,12 @@ class CameraManager;
 
 
 /* ModelState モデルのステートパターン */
-class ModelState {
+class IModelState {
 
 public: // メンバ変数
 
 	// デストラクタ
-	virtual ~ModelState() {};
+	virtual ~IModelState() {};
 
 	// 描画処理
 	virtual void Draw(Transform& transform) = 0;
@@ -38,6 +41,9 @@ public: // メンバ変数
 	virtual void CommandCall() = 0;
 
 #pragma region Accessor アクセッサ
+
+	// カリングモード
+	void SetCullMode(const CullingMode& setMode) { this->cullMode_ = setMode; }
 
 	// データのセット
 	ModelDatas GetModelDatas() { return this->datas_; }
@@ -117,4 +123,7 @@ protected: // メンバ変数
 
 	// モデルステート
 	StateType stateType_ = NONE;
+
+	// カリングモード
+	CullingMode cullMode_ = CullingMode::Back;
 };

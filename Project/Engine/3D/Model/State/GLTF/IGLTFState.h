@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../ModelState.h"
+#include "../IModelState.h"
 
 
 /* GLTFState */
-class IGLTFState : public ModelState {
+class IGLTFState : public IModelState {
 
 public:
 

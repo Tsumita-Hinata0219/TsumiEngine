@@ -16,6 +16,9 @@ void TitleLabelObject::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel(file_.first, file_.second);
 	model_ = modelManager_->GetModel(RemoveExtension(file_.second)); // ファイル名だけを抽出
+	
+	uint32_t dds = TextureManager::LoadTexture(file_.first, RemoveExtension(file_.second) + ".dds");
+	model_->SetMaterialTexture(dds);
 
 	// 初期カラーは黒
 	model_->SetMaterialColor(Samp::Color::BLACK);

@@ -13,6 +13,9 @@ void SelectBar::Init()
 	modelManager_->LoadModel("Obj/SelectBar", "SelectBar.obj");
 	model_ = modelManager_->GetModel("SelectBar");
 
+	uint32_t dds = TextureManager::LoadTexture("Obj/SelectBar", "SelectBar.dds");
+	model_->SetMaterialTexture(dds);
+
 	// Transformの初期化
 	trans_.Init();
 	trans_.srt.scale.x = 2.0f;

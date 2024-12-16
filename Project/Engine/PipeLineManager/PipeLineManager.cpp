@@ -88,9 +88,13 @@ void PipeLineManager::SetPipeLine(Container cantainer, Category category, SubFil
 void PipeLineManager::CreatePipeLine_Object3d()
 {
 	std::unique_ptr<Object3DPipeLine> pipeline = std::make_unique<Object3DPipeLine>();
+
+	// 背面カリング
 	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_Back] = pipeline->SetUpPso();
 
-
+	// 背面描画
+	pipeline->SetCUllMode(D3D12_CULL_MODE_NONE); // CullModeを背面描画するように設定
+	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Object2d()
 {

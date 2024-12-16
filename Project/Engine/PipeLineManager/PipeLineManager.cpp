@@ -89,6 +89,8 @@ void PipeLineManager::CreatePipeLine_Object3d()
 {
 	std::unique_ptr<Object3DPipeLine> pipeline = std::make_unique<Object3DPipeLine>();
 	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_Back] = pipeline->SetUpPso();
+
+
 }
 void PipeLineManager::CreatePipeLine_Object2d()
 {

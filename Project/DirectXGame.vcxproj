@@ -523,6 +523,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
     <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
+    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
     <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Engine\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />

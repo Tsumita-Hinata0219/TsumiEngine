@@ -1457,6 +1457,7 @@
     <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -234,6 +234,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
+    <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
     <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Engine\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
@@ -259,6 +260,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp" />
+    <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
@@ -554,6 +556,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h" />
     <ClInclude Include="Engine\CommandManager\CommandManager.h" />
+    <ClInclude Include="Engine\Component\Interface\IComponent.h" />
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />

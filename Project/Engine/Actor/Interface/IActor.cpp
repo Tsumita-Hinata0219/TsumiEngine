@@ -54,3 +54,4 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 	}
 	componentList.insert(itr, component);
 }
+

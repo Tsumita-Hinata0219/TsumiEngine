@@ -39,11 +39,21 @@ public:
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+
+private:
+
+	/// <summary>
+	/// DrawImGuiの描画
+	/// </summary>
+	void DrawImGui();
 	
 private:
 
 	// モデル
 	std::unique_ptr<Model> model_;
+
+	// カラー　
+	Vector4 color_{};
 
 	// トランスフォーム
 	Transform trans_{};

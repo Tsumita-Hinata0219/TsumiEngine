@@ -27,6 +27,10 @@ void BossEnemy::Init()
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 
+	// シールドの初期化処理
+	shield_ = std::make_unique<EnemyShield>();
+	shield_->Init();
+
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -39,6 +43,10 @@ void BossEnemy::Init()
 /// </summary>
 void BossEnemy::Update()
 {
+	// シールドの更新
+	shield_->Update();
+
+	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
 }
 
@@ -52,6 +60,9 @@ void BossEnemy::Draw3D()
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
+
+	// シールドの描画処理
+	shield_->Draw3D();
 }
 void BossEnemy::Draw2DFront()
 {
@@ -66,4 +77,19 @@ void BossEnemy::Draw2DBack()
 /// </summary>
 void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 {
+}
+
+
+/// <summary>
+/// DrawImGuiの描画
+/// </summary>
+void BossEnemy::DrawImGui()
+{
+	if (ImGui::TreeNode("BossEnemy")) {
+
+		trans_.DrawImGui();
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
 }

@@ -4,7 +4,9 @@
 #include "GameObject/IObject/IObject.h"
 #include "Math/MyMath.h"
 
+#include "../../Shield/EnemyShield.h"
 #include "../../Bullet/EnemyBullet.h"
+
 
 /* ボスエネミー */
 class BossEnemy : public IEnemy {
@@ -63,6 +65,11 @@ public:
 
 private:
 
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
+
 
 
 private:
@@ -87,6 +94,9 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
+
+	// シールド　
+	std::unique_ptr<EnemyShield> shield_;
 
 	// BulletのList配列
 	std::list<std::shared_ptr<EnemyBullet>> bulletList_;

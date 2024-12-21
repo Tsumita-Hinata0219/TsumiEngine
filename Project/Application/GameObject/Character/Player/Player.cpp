@@ -53,7 +53,7 @@ void Player::Init()
 	// Colliderの初期化
 	aabb_ = std::make_unique<AABBCollider>(this);
 	aabb_->data_.center = trans_.GetWorldPos();
-	aabb_->data_.size = { 1.5f, 1.5f, 1.5f };
+	aabb_->data_.size = { 1.7f, 1.7f, 1.7f };
 
 
 	// キルカウントを0で初期化

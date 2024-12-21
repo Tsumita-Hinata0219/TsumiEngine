@@ -38,6 +38,7 @@ public:
 	/// 衝突判定コールバック関数
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
+
 	
 private:
 

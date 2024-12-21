@@ -57,6 +57,22 @@ private:
 
 private:
 
+	// プレイヤー
+	Player* player_ = nullptr;
 
+	// サイズ
+	Vector3 size_ = { 2.0f, 2.0f, 2.0f };
+
+	// 死亡フラグ
+	bool isDead_ = false;
+
+	// ライト
+	DirectionalLightData light_{};
+
+	// コライダー
+	std::unique_ptr<SphereCollider> sphere_;
+
+	// カラー
+	Vector4 modelColor_ = Vector4::one;
 
 };

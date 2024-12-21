@@ -575,6 +575,7 @@
     </ClCompile>
     <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
     <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h">

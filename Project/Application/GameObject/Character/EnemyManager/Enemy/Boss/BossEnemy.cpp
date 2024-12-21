@@ -7,6 +7,30 @@
 /// </summary>
 void BossEnemy::Init()
 {
+	// BodyModelのロードと初期化
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/Enemys/Boss", "Boss.obj");
+	model_ = modelManager_->GetModel("Boss");
+
+	// BodyTransfromの初期化
+	trans_.Init();
+
+	// ライトの初期設定
+	light_.enable = true;
+	light_.direction = Vector3::oneY;
+	light_.intensity = 0.7f;
+	model_->SetLightData(light_);
+
+	// 色加算の初期設定
+	colorAdd_.enable = true;
+	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.intensity = 0.0f;
+	model_->SetColorAddition(colorAdd_);
+
+	// Colliderの初期化
+	sphere_ = std::make_unique<SphereCollider>(this);
+	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.radius = 1.8f;
 }
 
 
@@ -23,6 +47,10 @@ void BossEnemy::Update()
 /// </summary>
 void BossEnemy::Draw3D()
 {
+	// BodyModelの描画
+	model_->SetLightData(light_);
+	model_->SetColorAddition(colorAdd_);
+	model_->Draw(trans_);
 }
 void BossEnemy::Draw2DFront()
 {

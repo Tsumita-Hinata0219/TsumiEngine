@@ -197,6 +197,21 @@ void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 	// リストに追加
 	enemys_.push_back(newEnemy);
 }
+void EnemyManager::CreateBossEnemy(const SRT& setSRT)
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
+
+	// newEnemyの初期化
+	newEnemy->Init();
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
+	newEnemy->SetRotate(setSRT.rotate);
+	newEnemy->SetTranslate(setSRT.translate);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
+}
 
 
 /// <summary>

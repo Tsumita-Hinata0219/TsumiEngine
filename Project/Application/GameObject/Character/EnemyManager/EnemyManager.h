@@ -9,6 +9,7 @@
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"
+#include "Enemy/Boss/BossEnemy.h"
 
 #include "Effect/Interface/IEnemyEffect.h"
 #include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
@@ -90,6 +91,7 @@ private:
 	/// </summary>
 	void CreateBasicEnemy(const SRT& setSRT);
 	void CreateStaticEnemy(const SRT& setSRT);
+	void CreateBossEnemy(const SRT& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する

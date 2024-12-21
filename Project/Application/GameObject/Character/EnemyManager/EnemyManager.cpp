@@ -127,6 +127,9 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 			else if (entityData->entityName == "StaticEnemy") {
 				CreateStaticEnemy(entityData->srt);
 			}
+			else if (entityData->entityName == "BossEnemy") {
+				CreateBossEnemy(entityData->srt);
+			}
 		}
 	}
 }

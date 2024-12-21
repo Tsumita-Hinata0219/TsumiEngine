@@ -46,7 +46,17 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// プレイヤー　
+	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
+	// 死亡フラグ
+	bool IsDead() const override { return this->isDead_; }
+	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
 
+	// BulletListの取得
+	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
+
+	// HP
+	uint32_t GetHP() override { return this->hp_; }
 
 #pragma endregion 
 
@@ -74,5 +84,11 @@ private:
 
 	// カラー
 	Vector4 modelColor_ = Vector4::one;
+
+	// HP
+	uint32_t hp_ = 0;
+
+	// BulletのList配列
+	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
 
 };

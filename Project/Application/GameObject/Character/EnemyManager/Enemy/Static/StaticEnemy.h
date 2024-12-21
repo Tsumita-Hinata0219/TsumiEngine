@@ -27,11 +27,6 @@ public:
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
-	/// <summary>
-	/// プールに返却前のリセット処理
-	/// </summary>
-	void Reset() override;
-
 
 #pragma region Accessor アクセッサ
 

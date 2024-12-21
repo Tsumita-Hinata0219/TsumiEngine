@@ -63,6 +63,6 @@ void BossEnemy::Draw2DBack()
 /// <summary>
 /// 衝突判定コールバック関数
 /// </summary>
-void BossEnemy::onCollision(IObject* object)
+void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 {
 }

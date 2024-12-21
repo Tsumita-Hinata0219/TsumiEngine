@@ -131,17 +131,6 @@ void StaticEnemy::onCollision(IObject* object)
 	}
 }
 
-
-/// <summary>
-/// プールに返却前のリセット処理
-/// </summary>
-void StaticEnemy::Reset()
-{
-	// コライダーを無効にしておく
-	sphere_->Deactivate();
-}
-
-
 // 射撃の処理
 void StaticEnemy::ExecutexShot()
 {

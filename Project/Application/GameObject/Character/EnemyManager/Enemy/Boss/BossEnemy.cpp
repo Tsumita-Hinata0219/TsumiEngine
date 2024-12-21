@@ -39,6 +39,7 @@ void BossEnemy::Init()
 /// </summary>
 void BossEnemy::Update()
 {
+	sphere_->data_.center = trans_.GetWorldPos();
 }
 
 

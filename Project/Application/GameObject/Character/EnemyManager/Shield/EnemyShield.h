@@ -10,12 +10,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyShield();
+	EnemyShield() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~EnemyShield();
+	~EnemyShield() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -47,6 +47,9 @@ private:
 
 	// トランスフォーム
 	Transform trans_{};
+
+	// コライダー
+	std::unique_ptr<SphereCollider> sphere_;
 
 };
 

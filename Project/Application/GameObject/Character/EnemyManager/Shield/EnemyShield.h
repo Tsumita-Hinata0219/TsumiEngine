@@ -69,5 +69,8 @@ private:
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;
 
+	// 破壊フラグ
+	bool isBroken_ = false;
+
 };
 

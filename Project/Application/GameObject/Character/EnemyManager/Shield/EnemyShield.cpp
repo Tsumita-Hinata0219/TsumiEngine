@@ -28,6 +28,9 @@ void EnemyShield::Init()
 	sphere_->data_.center = trans_.GetWorldPos();
 	sphere_->data_.radius = 2.0f * 5.0f;
 
+	// 破壊フラグは折っておく
+	isBroken_ = false;
+
 }
 
 
@@ -36,6 +39,9 @@ void EnemyShield::Init()
 /// </summary>
 void EnemyShield::Update()
 {
+	// 壊れていたら処理に入らない
+	if (isBroken_) { return; }
+
 	// uvTransformの更新
 	uvTrans_.UpdateMatrix();
 	// 少しずつ値を上げる
@@ -55,6 +61,9 @@ void EnemyShield::Update()
 /// </summary>
 void EnemyShield::Draw3D()
 {
+	// 壊れていたら処理に入らない
+	if (isBroken_) { return; }
+
 	// BodyModelの描画
 	model_->SetMaterialColor(color_);
 	model_->SetMaterialUVMat(uvTrans_.matWorld);
@@ -81,6 +90,11 @@ void EnemyShield::onCollision([[maybe_unused]]IObject* object)
 /// </summary>
 void EnemyShield::OnShieldBroken()
 {
+	// 破壊フラグ
+	isBroken_ = true;
+
+	// コライダーをマネージャーから除外
+	sphere_->Deactivate();
 }
 
 

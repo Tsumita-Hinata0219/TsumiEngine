@@ -105,6 +105,11 @@ void BossEnemy::DrawImGui()
 		trans_.DrawImGui();
 		ImGui::Text("");
 
+		if (ImGui::Button("Shield_Break")) {
+			CollapseShield();
+		}
+		ImGui::Text("");
+
 		ImGui::TreePop();
 	}
 }

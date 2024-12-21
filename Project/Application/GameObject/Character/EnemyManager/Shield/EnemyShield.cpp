@@ -17,6 +17,9 @@ void EnemyShield::Init()
 	color_ = Vector4::one;
 	color_.w = 0.5f;
 
+	// uvTransformの初期設定
+	uvTrans_.Init();
+
 	// BodyTransfromの初期化
 	trans_.Init();
 
@@ -33,6 +36,12 @@ void EnemyShield::Init()
 /// </summary>
 void EnemyShield::Update()
 {
+	// uvTransformの更新
+	uvTrans_.UpdateMatrix();
+	// 少しずつ値を上げる
+	uvTrans_.srt.translate.y += 0.005f;
+
+	// コライダー更新
 	sphere_->data_.center = trans_.GetWorldPos();
 
 #ifdef _DEBUG
@@ -49,6 +58,7 @@ void EnemyShield::Draw3D()
 {
 	// BodyModelの描画
 	model_->SetMaterialColor(color_);
+	model_->SetMaterialUVMat(uvTrans_.matWorld);
 	model_->Draw(trans_);
 }
 void EnemyShield::Draw2DFront()
@@ -78,6 +88,9 @@ void EnemyShield::DrawImGui()
 		ImGui::Text("");
 
 		ImGui::ColorEdit4("Color", &color_.x);
+		ImGui::Text("");
+
+		ImGui::DragFloat2("UVTrans_Translate", &uvTrans_.srt.translate.x, 0.01f);
 		ImGui::Text("");
 
 		ImGui::TreePop();

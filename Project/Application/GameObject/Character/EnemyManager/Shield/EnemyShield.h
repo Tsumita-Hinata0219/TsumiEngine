@@ -55,6 +55,9 @@ private:
 	// カラー　
 	Vector4 color_{};
 
+	// uvTransform
+	Transform uvTrans_{};
+
 	// トランスフォーム
 	Transform trans_{};
 

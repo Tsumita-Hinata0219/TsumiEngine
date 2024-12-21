@@ -47,7 +47,6 @@ void EnemyShield::Update()
 #ifdef _DEBUG
 	DrawImGui();
 #endif // _DEBUG
-
 }
 
 

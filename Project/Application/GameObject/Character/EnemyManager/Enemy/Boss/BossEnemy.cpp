@@ -48,6 +48,11 @@ void BossEnemy::Update()
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
+
+
+#ifdef _DEBUG
+	DrawImGui();
+#endif // _DEBUG
 }
 
 

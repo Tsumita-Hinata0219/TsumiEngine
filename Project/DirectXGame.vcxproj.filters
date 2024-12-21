@@ -1463,6 +1463,7 @@
     <ClInclude Include="Engine\Actor\Interface\IActor.h" />
     <ClInclude Include="Engine\Component\Interface\IComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

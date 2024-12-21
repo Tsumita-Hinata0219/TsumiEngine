@@ -79,7 +79,7 @@ void EnemyShield::onCollision([[maybe_unused]]IObject* object)
 /// <summary>
 /// バリアが壊れた時の処理
 /// </summary>
-void EnemyShield::OnBarrierBroken()
+void EnemyShield::OnShieldBroken()
 {
 }
 

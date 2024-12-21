@@ -88,8 +88,10 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 /// <summary>
 /// バリアを壊す処理
 /// </summary>
-void BossEnemy::CollapseBarrier()
+void BossEnemy::CollapseShield()
 {
+	// シールドが壊れた時の処理
+	shield_->OnShieldBroken();
 }
 
 

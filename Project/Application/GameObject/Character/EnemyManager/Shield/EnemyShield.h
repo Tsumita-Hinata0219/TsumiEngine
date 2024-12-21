@@ -42,7 +42,7 @@ public:
 	/// <summary>
 	/// バリアが壊れた時の処理
 	/// </summary>
-	void OnBarrierBroken();
+	void OnShieldBroken();
 
 
 private:

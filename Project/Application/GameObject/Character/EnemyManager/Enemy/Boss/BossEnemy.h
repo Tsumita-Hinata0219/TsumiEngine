@@ -48,7 +48,7 @@ public:
 	/// <summary>
 	/// バリアを壊す処理
 	/// </summary>
-	void CollapseBarrier();
+	void CollapseShield();
 
 
 #pragma region Accessor アクセッサ

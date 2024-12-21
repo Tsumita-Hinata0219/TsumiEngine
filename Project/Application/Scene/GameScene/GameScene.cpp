@@ -165,7 +165,6 @@ void GameScene::Update()
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
-	CollisionManager_->Update();
 	ImGui::End();
 #endif // _DEBUG
 }

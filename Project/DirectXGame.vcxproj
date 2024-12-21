@@ -463,6 +463,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\IPlayerBody.h" />

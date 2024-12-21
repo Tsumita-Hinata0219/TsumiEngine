@@ -34,7 +34,7 @@ void BossEnemy::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 1.8f;
+	sphere_->data_.radius = 1.8f * 1.5f;
 }
 
 

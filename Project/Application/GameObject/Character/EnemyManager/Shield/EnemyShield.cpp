@@ -30,7 +30,6 @@ void EnemyShield::Init()
 
 	// 破壊フラグは折っておく
 	isBroken_ = false;
-
 }
 
 
@@ -82,6 +81,11 @@ void EnemyShield::Draw2DBack()
 /// </summary>
 void EnemyShield::onCollision([[maybe_unused]]IObject* object)
 {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
+		Log("Hit\n");
+
+	}
 }
 
 

@@ -82,6 +82,10 @@ void BossEnemy::Draw2DBack()
 /// </summary>
 void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 {
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
+		Log("Hit\n");
+	}
 }
 
 

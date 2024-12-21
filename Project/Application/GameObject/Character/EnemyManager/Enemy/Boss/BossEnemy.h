@@ -45,6 +45,11 @@ public:
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// バリアを壊す処理
+	/// </summary>
+	void CollapseBarrier();
+
 
 #pragma region Accessor アクセッサ
 

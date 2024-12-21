@@ -86,6 +86,14 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 
 
 /// <summary>
+/// バリアを壊す処理
+/// </summary>
+void BossEnemy::CollapseBarrier()
+{
+}
+
+
+/// <summary>
 /// DrawImGuiの描画
 /// </summary>
 void BossEnemy::DrawImGui()

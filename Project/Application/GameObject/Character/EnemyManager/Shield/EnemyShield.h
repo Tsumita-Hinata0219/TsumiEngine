@@ -39,6 +39,11 @@ public:
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// バリアが壊れた時の処理
+	/// </summary>
+	void OnBarrierBroken();
+
 
 private:
 

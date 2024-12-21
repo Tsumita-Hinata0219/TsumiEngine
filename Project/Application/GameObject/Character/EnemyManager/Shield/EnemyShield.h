@@ -10,7 +10,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyShield() = default;
+	EnemyShield() { attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BODY }; };
 
 	/// <summary>
 	/// デストラクタ

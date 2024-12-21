@@ -26,7 +26,7 @@ void EnemyShield::Init()
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
-	sphere_->data_.radius = 2.0f * 5.0f;
+	sphere_->data_.radius = 5.0f;
 
 	// 破壊フラグは折っておく
 	isBroken_ = false;
@@ -84,7 +84,6 @@ void EnemyShield::onCollision([[maybe_unused]]IObject* object)
 	if (object->GetCategory() == Attributes::Category::PLAYER &&
 		object->GetType() == Attributes::Type::BULLET) {
 		Log("Hit\n");
-
 	}
 }
 

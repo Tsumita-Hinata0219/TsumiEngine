@@ -573,6 +573,8 @@
     <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClCompile>
+    <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
+    <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h">
@@ -1457,6 +1459,8 @@
     <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
+    <ClInclude Include="Engine\Component\Interface\IComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

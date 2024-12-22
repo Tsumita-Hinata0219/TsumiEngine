@@ -63,6 +63,9 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
+	// 無敵フラグ
+	void SetResistant(bool setState) { this->isResistant_ = setState; }
+
 
 #pragma endregion 
 
@@ -104,5 +107,9 @@ private: // メンバ変数
 
 	// 死亡フラグ
 	bool isDead_ = false;
+
+	// 無敵フラグ
+	bool isResistant_ = false;
+
 };
 

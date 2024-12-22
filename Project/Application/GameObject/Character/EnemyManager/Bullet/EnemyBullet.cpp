@@ -6,15 +6,7 @@
 void EnemyBullet::Init()
 {
 	// BodyModelのロードと初期化
-	// 設定されているTypeで読み込むモデルを変える
-	if (bulletType_ == EnemyBulletType::Normal) {
-		modelManager_->LoadModel("Obj/Enemys/Bullet/Normal", "EnemyBullet_Normal.obj");
-		model_ = modelManager_->GetModel("EnemyBullet_Normal");
-	}
-	else if (bulletType_ == EnemyBulletType::Resistant) {
-		modelManager_->LoadModel("Obj/Enemys/Bullet/Resistant", "EnemyBullet_Resistant.obj");
-		model_ = modelManager_->GetModel("EnemyBullet_Resistant");
-	}
+	model_ = modelManager_->GetModel("EnemyBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	trans_.Init();

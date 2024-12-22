@@ -110,6 +110,9 @@ private:
 
 private: // メンバ変数
 
+	// ModelManager
+	ModelManager* modelManager_ = nullptr;
+
 	// Player
 	Player* player_ = nullptr;
 

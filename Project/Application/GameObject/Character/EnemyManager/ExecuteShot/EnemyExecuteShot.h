@@ -3,6 +3,8 @@
 #include <memory>
 #include <functional>
 
+#include "../Bullet/EnemyBullet.h"
+
 #include "GameObject/GameObject.h"
 
 

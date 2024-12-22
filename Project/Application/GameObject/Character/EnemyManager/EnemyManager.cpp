@@ -7,6 +7,10 @@
 /// </summary>
 void EnemyManager::Init()
 {
+	// エネミー関連のモデルの読み込み
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
+
 	// Transformの初期化
 	transform_.Init();
 	transform_.srt.translate.z = 30.0f;

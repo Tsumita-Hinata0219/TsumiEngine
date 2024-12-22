@@ -577,6 +577,7 @@
     <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h">
@@ -1465,6 +1466,7 @@
     <ClInclude Include="Engine\Component\Interface\IComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -186,6 +186,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
@@ -468,6 +469,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\IPlayerBody.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />

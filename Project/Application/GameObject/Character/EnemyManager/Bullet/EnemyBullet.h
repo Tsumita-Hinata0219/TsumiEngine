@@ -66,7 +66,6 @@ public: // メンバ関数
 	// 無敵フラグ
 	void SetResistant(bool setState) { this->isResistant_ = setState; }
 
-
 #pragma endregion 
 
 

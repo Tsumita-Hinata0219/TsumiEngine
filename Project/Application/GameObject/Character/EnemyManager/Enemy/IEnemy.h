@@ -2,6 +2,7 @@
 
 #include <list>
 #include <memory>
+#include <functional>
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
@@ -103,6 +104,8 @@ protected:
 	// トランスフォーム
 	Transform trans_;
 
+	// 射撃処理
+	std::function<void()> executeShot_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

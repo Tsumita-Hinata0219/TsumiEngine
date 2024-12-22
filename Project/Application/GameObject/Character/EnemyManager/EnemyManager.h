@@ -57,7 +57,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 新しいEnemyBulletを追加する
 	/// </summary>
-	void AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void AddNewBullet(Vector3 initPos, Vector3 initVel);
 
 	/// <summary>
 	/// 新しいヒットエフェクトを追加する
@@ -96,7 +96,7 @@ private:
 	/// <summary>
 	/// 新しいEnemyBulletを生成する
 	/// </summary>
-	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void CreateEnemyBullet(Vector3 initPos, Vector3 initVel);
 
 	/// <summary>
 	/// 新しいEffectを生成する

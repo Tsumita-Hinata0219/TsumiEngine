@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// Bulletを新しく追加
 	/// </summary>
-	void AddNewBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
+	void AddNewBullet(const Vector3& initPos, const Vector3& initVel);
 
 
 #pragma region Accessor アクセッサ

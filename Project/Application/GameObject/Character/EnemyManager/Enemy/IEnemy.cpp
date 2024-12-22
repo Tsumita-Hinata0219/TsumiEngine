@@ -5,9 +5,9 @@
 /// <summary>
 /// Bulletを新しく追加
 /// </summary>
-void IEnemy::AddNewBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel)
+void IEnemy::AddNewBullet(const Vector3& initPos, const Vector3& initVel)
 {
-	enemyManager_->AddNewBullet(setType, initPos, initVel);
+	enemyManager_->AddNewBullet(initPos, initVel);
 }
 
 

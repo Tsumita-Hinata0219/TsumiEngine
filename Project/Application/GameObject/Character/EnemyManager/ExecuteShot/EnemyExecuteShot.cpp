@@ -9,6 +9,7 @@
 void EnemyExecuteShot::Init()
 {
 	// 関数設定
+	shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Forward, this);
 }
 
 
@@ -25,11 +26,10 @@ void EnemyExecuteShot::Update()
 /// <summary>
 /// 新しいバレットを追加
 /// </summary>
-void EnemyExecuteShot::AddNewBullet(EnemyBulletType setType, const Vector3& direction)
+void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 {
 	// 弾を追加
 	manager_->AddNewBullet(
-		setType,
 		owner_->GetWorldPos(), 
 		TransformNormal(Normalize(direction) * kBulletSpeed_, owner_->GetMatWorld())
 	);
@@ -41,6 +41,6 @@ void EnemyExecuteShot::AddNewBullet(EnemyBulletType setType, const Vector3& dire
 /// </summary>
 void EnemyExecuteShot::Shot_Forward()
 {
-	AddNewBullet(EnemyBulletType::Normal, Temp::Direction::Front);
+	AddNewBullet(Temp::Direction::Front);
 }
 

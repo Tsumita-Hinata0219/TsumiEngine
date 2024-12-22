@@ -306,7 +306,7 @@ void BasicEnemy::CreateNewBullet()
 	Vector3 initVel = Vector3::oneZ;
 	initVel.z = kBulletSpeed_;
 	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
+	enemyManager_->AddNewBullet(initPos, initVel);
 }
 
 

@@ -54,7 +54,7 @@ private:
 	/// <summary>
 	/// 新しいバレットを追加
 	/// </summary>
-	void AddNewBullet(EnemyBulletType setType, const Vector3& direction);
+	void AddNewBullet(const Vector3& direction);
 
 	/// <summary>
 	/// 前方射撃

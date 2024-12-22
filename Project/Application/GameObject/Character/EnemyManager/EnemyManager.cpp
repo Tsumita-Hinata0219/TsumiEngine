@@ -142,9 +142,9 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 /// <summary>
 /// 新しいEnemyBulletを追加する
 /// </summary>
-void EnemyManager::AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::AddNewBullet(Vector3 initPos, Vector3 initVel)
 {
-	CreateEnemyBullet(setType, initPos, initVel);
+	CreateEnemyBullet(initPos, initVel);
 }
 
 
@@ -224,13 +224,12 @@ void EnemyManager::CreateBossEnemy(const SRT& setSRT)
 /// <summary>
 /// 新しいEnemyBulletを生成する
 /// </summary>
-void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel)
 {
 	// オブジェクトプール空新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
-	newBullet->SetBulletType(setType);
 	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);

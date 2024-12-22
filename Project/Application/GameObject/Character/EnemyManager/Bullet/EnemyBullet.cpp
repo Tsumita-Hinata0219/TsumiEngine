@@ -60,7 +60,7 @@ void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 	if (object->GetCategory() == Attributes::Category::PLAYER) {
 
 		// タイプが消えない弾ならreturn
-		if (bulletType_ == EnemyBulletType::Resistant) { return; }
+		if (isResistant_) { return; }
 		// 死亡状態に設定
 		MarkAsDead();
 	}

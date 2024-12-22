@@ -60,7 +60,6 @@ private:
 	void Shot_Forward();
 
 
-
 private:
 
 	// バレットの速度

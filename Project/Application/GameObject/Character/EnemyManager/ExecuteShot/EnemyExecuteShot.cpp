@@ -41,7 +41,6 @@ void EnemyExecuteShot::AddNewBullet(EnemyBulletType setType, const Vector3& dire
 /// </summary>
 void EnemyExecuteShot::Shot_Forward()
 {
-
-
+	AddNewBullet(EnemyBulletType::Normal, Temp::Direction::Front);
 }
 

@@ -217,7 +217,7 @@ void Player::OnCollisionWithEnemyBullet()
 
 		// ボディモデルのカラーを赤にする
 		for (auto& body : this->iBodys_) {
-			body->SetModelColor(Samp::Color::RED);
+			body->SetModelColor(Temp::Color::RED);
 		}
 	}
 }
@@ -296,7 +296,7 @@ void Player::SubtructInvincibilityTime()
 
 		// モデルのカラーを白に戻す
 		for (auto& body : this->iBodys_) {
-			body->SetModelColor(Samp::Color::WHITE);
+			body->SetModelColor(Temp::Color::WHITE);
 		}
 	}
 

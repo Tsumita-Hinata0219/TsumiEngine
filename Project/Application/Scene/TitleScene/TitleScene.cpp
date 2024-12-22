@@ -36,7 +36,7 @@ void TitleScene::Initialize()
 	retroCRT_ = std::make_unique<RetroCRTEffect>();
 	retroCRT_->Init();
 	retroEffectData_ = {
-		Samp::Color::WHITE,
+		Temp::Color::WHITE,
 		0.15f, true,
 		{0.003f, 0.005f}, {-0.003f, -0.005f}, true,
 		0.15f, true,

@@ -25,7 +25,7 @@ void StageTransitionMenuResultUI::Init()
 	trans_.srt.translate.y = initPos_;
 
 	// カラー
-	color_ = color_ = Samp::Color::WHITE;
+	color_ = color_ = Temp::Color::WHITE;
 	color_.w = initAlpha_;
 
 	// タイマー(秒)

@@ -7,7 +7,7 @@
 
 
 // 前方宣言
-class EnemyMaanger;
+class EnemyManager;
 class IEnemy;
 
 /* エネミーの射撃処理 */
@@ -49,11 +49,28 @@ public:
 
 private:
 
+	/// <summary>
+	/// 新しいバレットを追加
+	/// </summary>
+	void AddNewBullet(EnemyBulletType setType, const Vector3& direction);
+
+	/// <summary>
+	/// 前方射撃
+	/// </summary>
+	void Shot_Forward();
+
+
+
+private:
+
+	// バレットの速度
+	const float kBulletSpeed_ = 0.25f;
+
 	// 射撃処理のfunction
 	std::function<void()> shotFunc_;
 
 	// EnemyManager
-	EnemyMaanger* manager_ = nullptr;
+	EnemyManager* manager_ = nullptr;
 
 	// オーナーエネミー
 	IEnemy* owner_ = nullptr;

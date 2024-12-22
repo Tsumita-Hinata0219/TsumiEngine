@@ -21,3 +21,27 @@ void EnemyExecuteShot::Update()
 	shotFunc_();
 }
 
+
+/// <summary>
+/// 新しいバレットを追加
+/// </summary>
+void EnemyExecuteShot::AddNewBullet(EnemyBulletType setType, const Vector3& direction)
+{
+	// 弾を追加
+	manager_->AddNewBullet(
+		setType,
+		owner_->GetWorldPos(), 
+		TransformNormal(Normalize(direction) * kBulletSpeed_, owner_->GetMatWorld())
+	);
+}
+
+
+/// <summary>
+/// 前方射撃
+/// </summary>
+void EnemyExecuteShot::Shot_Forward()
+{
+
+
+}
+

@@ -275,8 +275,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp" />
     <ClCompile Include="Engine\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp" />
-    <ClCompile Include="Engine\Math\MyColor\MyColor.cpp" />
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
+    <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
     <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp" />
     <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp" />
@@ -580,9 +580,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\MathQuaternion\MathQuaternion.h" />
     <ClInclude Include="Engine\Math\MathStructure\Matrix\Matrix.h" />
     <ClInclude Include="Engine\Math\MathStructure\Vector\Vector.h" />
-    <ClInclude Include="Engine\Math\MyColor\MyColor.h" />
     <ClInclude Include="Engine\Math\MyMath.h" />
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h" />
+    <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\Math\Struct.h" />
     <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Engine\Particle\IParticle.h" />

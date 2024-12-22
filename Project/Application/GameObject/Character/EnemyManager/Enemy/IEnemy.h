@@ -6,6 +6,7 @@
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
+#include "Transform/Transform.h"
 
 #include "../Bullet/EnemyBullet.h"
 
@@ -62,6 +63,12 @@ public:
 	// Translate
 	Vector3 GetTranslate() const { return this->trans_.srt.translate; }
 	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
+
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+
+	// MatWorld
+	Matrix4x4 GetMatWorld() const { return this->trans_.matWorld; }
 
 	// HP
 	virtual uint32_t GetHP() = 0;

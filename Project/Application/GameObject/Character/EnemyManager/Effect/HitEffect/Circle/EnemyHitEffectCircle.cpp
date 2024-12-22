@@ -21,7 +21,7 @@ void EnemyHitEffectCircle::Init()
 	isDead_ = false;
 
 	// 初期カラーは白
-	color_ = Samp::Color::WHITE;
+	color_ = Temp::Color::WHITE;
 
 	// 補間に使用するScaleの値
 	scale_.first = 2.0f;

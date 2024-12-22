@@ -14,7 +14,7 @@ void SceneTransition::Init()
 	// Textureの設定
 	sprite_->SetTexture(textureHandle_);
 	// Colorは黒
-	sprite_->SetColor(Samp::Color::BLACK);
+	sprite_->SetColor(Temp::Color::BLACK);
 
 	// トランスフォームの初期化
 	trans_.Init();

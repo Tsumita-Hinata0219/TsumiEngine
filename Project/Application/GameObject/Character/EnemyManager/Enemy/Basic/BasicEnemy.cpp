@@ -19,7 +19,7 @@ void BasicEnemy::Init()
 
 	// 色加算の初期設定
 	colorAdd_.enable = true;
-	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.addColor = Temp::Color::WHITE;
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 

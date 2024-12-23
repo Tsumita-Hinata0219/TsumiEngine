@@ -32,7 +32,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyExecuteShot() = default;
+	EnemyExecuteShot(EnemyManager* manager, IEnemy* owner);
 	
 	/// <summary>
 	/// デストラクタ

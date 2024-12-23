@@ -3,6 +3,17 @@
 #include "../Enemy/IEnemy.h"
 
 
+
+/// <summary>
+/// コンストラクタ
+/// </summary>
+EnemyExecuteShot::EnemyExecuteShot(EnemyManager* manager, IEnemy* owner)
+{
+	this->manager_ = manager;
+	this->owner_ = owner;
+}
+
+
 /// <summary>
 /// 初期化処理
 /// </summary>

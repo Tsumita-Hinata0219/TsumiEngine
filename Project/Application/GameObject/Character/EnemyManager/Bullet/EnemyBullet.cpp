@@ -8,6 +8,18 @@ void EnemyBullet::Init()
 	// BodyModelのロードと初期化
 	model_ = modelManager_->GetModel("EnemyBullet");
 
+	// 弾のタイプでカラーを変える
+	if (!isResistant_) {
+		// ノーマルはオレンジ
+		Vector4 orange = { 1.0f, 0.2f, 0.0f, 1.0f };
+		model_->SetMaterialColor(orange);
+	}
+	else {
+		// レジスタントは深紫
+		Vector4 purple = { 0.15f, 0.0f, 0.2f, 1.0f };
+		model_->SetMaterialColor(purple);
+	}
+
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	trans_.Init();
 

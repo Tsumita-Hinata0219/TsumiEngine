@@ -63,5 +63,12 @@ void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 void EnemyExecuteShot::Shot_Forward()
 {
 	AddNewBullet(Temp::Direction::Front);
+	AddNewBullet(Temp::Direction::Back);
+	AddNewBullet(Temp::Direction::Left);
+	AddNewBullet(Temp::Direction::Right);
+	AddNewBullet(Temp::Direction::FrontLeft);
+	AddNewBullet(Temp::Direction::FrontRight);
+	AddNewBullet(Temp::Direction::BackLeft);
+	AddNewBullet(Temp::Direction::BackRight);
 }
 

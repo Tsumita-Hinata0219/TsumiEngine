@@ -60,9 +60,6 @@ public:
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
 
-	// BulletListの取得
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
-
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
 
@@ -98,9 +95,6 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
-
-	// 射撃処理
-	std::unique_ptr<EnemyExecuteShot> exeShot_;
 
 	// シールド　
 	std::unique_ptr<EnemyShield> shield_;

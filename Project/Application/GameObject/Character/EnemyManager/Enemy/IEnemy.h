@@ -8,6 +8,7 @@
 #include "../../../GameObject.h"
 #include "Transform/Transform.h"
 
+#include "../ExecuteShot/EnemyExecuteShot.h"
 #include "../Bullet/EnemyBullet.h"
 
 
@@ -39,9 +40,6 @@ public:
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
 	virtual void SetDeadFlag(bool setFlag) = 0;
-
-	// BulletListの取得
-	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// SRT
 	SRT GetSRT() const { return this->trans_.srt; }
@@ -107,7 +105,7 @@ protected:
 	Transform trans_;
 
 	// 射撃処理
-	std::function<void()> executeShot_;
+	std::unique_ptr<EnemyExecuteShot> exeShot_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

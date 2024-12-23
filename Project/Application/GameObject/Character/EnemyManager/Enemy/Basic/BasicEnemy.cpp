@@ -23,13 +23,19 @@ void BasicEnemy::Init()
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 
+	// 射撃処理クラス
+	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
+	exeShot_->SetTimer(15.0f);
+	// 射撃方法とバレット挙動
+	exeShot_->Init(
+		EnemyExecuteShot::Direction::Forward,
+		EnemyExecuteShot::BulletBehavior::Normal
+	);
+
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
 	trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
-
-	// ShotFrameにIntervalを入れておく
-	shotFrame_ = kShotInterval_;
 
 	// HPの設定
 	hp_ = 15;
@@ -85,24 +91,9 @@ void BasicEnemy::Update()
 		// 移動処理
 		Move();
 
-		// 射撃の処理
-		ExecuteShot();
+		// 射撃処理
+		exeShot_->Update();
 	}
-
-	// Bullet更新処理
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
-		bullet->Update();
-	}
-
-	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
-		if (bullet->IsDead()) {
-			bullet.reset();
-			return true;
-		}
-		return false;
-		}
-	);
 
 	// ヒットリアクション
 	HitReaction();
@@ -124,11 +115,6 @@ void BasicEnemy::Draw3D()
 	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
-
-	// Bulletsの描画
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
-		bullet->Draw3D();
-	}
 }
 void BasicEnemy::Draw2DFront() {}
 void BasicEnemy::Draw2DBack() {}
@@ -223,9 +209,6 @@ void BasicEnemy::ToggleCombatState()
 
 		// 戦闘状態のフラグを折る
 		isCombatActive_ = false;
-
-		// 射撃までのフレームを設定
-		shotFrame_ = kShotInterval_;
 	}
 }
 
@@ -276,37 +259,6 @@ void BasicEnemy::CalcRotate()
 
 	// X軸周り角度(θx)
 	trans_.srt.rotate.x = std::atan2(height, velZ);
-}
-
-
-// 射撃の処理
-void BasicEnemy::ExecuteShot()
-{
-	// タイマーをデクリメント
-	shotFrame_--;
-
-	// 0以下になったら射撃&タイマーリセット
-	if (shotFrame_ <= 0) {
-
-		// バレット生成
-		CreateNewBullet();
-
-		// タイマー再設定
-		shotFrame_ = kShotInterval_;
-	}
-}
-
-
-// 新しいバレットを生成する
-void BasicEnemy::CreateNewBullet()
-{
-	// 初期座標
-	Vector3 initPos = trans_.GetWorldPos();
-	// 初期速度
-	Vector3 initVel = Vector3::oneZ;
-	initVel.z = kBulletSpeed_;
-	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewBullet(initPos, initVel, false);
 }
 
 

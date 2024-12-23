@@ -230,6 +230,7 @@ void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel)
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
+	newBullet->SetResistant(true);
 	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);

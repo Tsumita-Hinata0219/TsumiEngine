@@ -52,6 +52,7 @@ public: // メンバ関数
 	bool IsDead() const { return this->isDead_; }
 
 	// 無敵フラグ
+	bool IsResistant() const { return this->isResistant_; }
 	void SetResistant(bool setState) { this->isResistant_ = setState; }
 
 #pragma endregion 

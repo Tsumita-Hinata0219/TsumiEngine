@@ -29,7 +29,12 @@ void BossEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->Init(30.0f);
+	exeShot_->SetTimer(30.0f);
+	// 射撃方法とバレット挙動
+	exeShot_->Init(
+		EnemyExecuteShot::Direction::Forward, 
+		EnemyExecuteShot::BulletBehavior::Random
+	);
 
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();

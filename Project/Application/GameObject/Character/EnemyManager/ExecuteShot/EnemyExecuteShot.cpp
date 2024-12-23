@@ -17,18 +17,27 @@ EnemyExecuteShot::EnemyExecuteShot(EnemyManager* manager, IEnemy* owner)
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyExecuteShot::Init(float shotInterval)
+void EnemyExecuteShot::Init(Direction direction, BulletBehavior behavior)
 {
 	// 関数設定
-	//SetShotFunc(Direction::Forward);
-	//SetShotFunc(Direction::TripleForward);
-	//SetShotFunc(Direction::Cross);
-	//SetShotFunc(Direction::Omni_Four);
-	SetShotFunc(Direction::Omni_Five);
-	//SetShotFunc(Direction::Omni_Eight);
+	SetShotFunc(direction);
 
-	// 射撃タイマーの設定
-	shotTimer_.Init(0.0f, shotInterval);
+	// バレット挙動
+	behavior_ = behavior;
+	if (behavior_ == BulletBehavior::Normal) {
+		behabirState_ = false;
+	}
+	else if (behavior_ == BulletBehavior::Resistant) {
+		behabirState_ = true;
+	}
+
+	// ランダム生成器作成
+	std::random_device rd;
+	randEngine_ = std::mt19937(rd());
+	randDist_ = std::uniform_int_distribution<>(0, 1);
+
+	// タイマーの設定はアクセッサでやってる
+	// 射撃タイマー開始
 	shotTimer_.Start();
 }
 
@@ -54,10 +63,15 @@ void EnemyExecuteShot::Update()
 /// </summary>
 void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 {
+	if (behavior_ == BulletBehavior::Random) {
+		behabirState_ = randDist_(randEngine_) == 1;
+	}
+
 	// 弾を追加
 	manager_->AddNewBullet(
 		owner_->GetWorldPos(), 
-		TransformNormal(Normalize(direction) * kBulletSpeed_, owner_->GetMatWorld())
+		TransformNormal(Normalize(direction) * kBulletSpeed_, owner_->GetMatWorld()),
+		behabirState_
 	);
 }
 

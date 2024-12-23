@@ -7,6 +7,7 @@
 #include "Input/Input.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
 #include "Utilities/ObjectPool/ObjectPool.h"
+#include "Utilities/RandomGenerator/RandomGenerator.h"
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"

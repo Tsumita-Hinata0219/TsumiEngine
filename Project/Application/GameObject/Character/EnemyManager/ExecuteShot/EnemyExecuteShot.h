@@ -56,6 +56,7 @@ public:
 	/// </summary>
 	void Update();
 
+
 #pragma region Accessor アクセッサ
 
 	// Timer

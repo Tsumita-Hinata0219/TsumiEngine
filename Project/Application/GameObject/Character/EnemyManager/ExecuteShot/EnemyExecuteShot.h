@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <functional>
+#include <random>
 
 #include "../Bullet/EnemyBullet.h"
 
@@ -17,16 +18,17 @@ class EnemyExecuteShot {
 
 public:
 
-	enum Direction {
+	enum class Direction {
 		Forward,
 		TripleForward,
 		Cross,
 		Omni_Four,
 		Omni_Five,
 		Omni_Eight,
+		Random,
 	};
 
-	enum BulletBehavior {
+	enum class BulletBehavior {
 		Normal,
 		Resistant,
 		Random,
@@ -104,6 +106,11 @@ private:
 	/// </summary>
 	void Shot_Omni_Eight();
 
+	/// <summary>
+	/// ランダム
+	/// </summary>
+	void Shot_Random();
+
 
 private:
 
@@ -120,12 +127,13 @@ private:
 	IEnemy* owner_ = nullptr;
 
 	// バレット挙動
-	BulletBehavior behavior_;
-	bool behabirState_;
+	BulletBehavior behavior_ = BulletBehavior::Normal;
+	bool behabirState_ = false;
 
 	// 射撃タイマー
 	Timer shotTimer_{};
 
 	std::mt19937 randEngine_; // ランダムエンジン
-	std::uniform_int_distribution<> randDist_; // 0 or 1 の分布
+	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布
+	std::uniform_real_distribution<float> directionDist_; // 0 or 1 の分布
 };

@@ -34,7 +34,8 @@ void EnemyExecuteShot::Init(Direction direction, BulletBehavior behavior)
 	// ランダム生成器作成
 	std::random_device rd;
 	randEngine_ = std::mt19937(rd());
-	randDist_ = std::uniform_int_distribution<>(0, 1);
+	behabirDist_ = std::uniform_int_distribution<>(0, 1);
+	directionDist_ = std::uniform_real_distribution<float>(-1.0f, 1.0f);
 
 	// タイマーの設定はアクセッサでやってる
 	// 射撃タイマー開始
@@ -64,7 +65,7 @@ void EnemyExecuteShot::Update()
 void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 {
 	if (behavior_ == BulletBehavior::Random) {
-		behabirState_ = randDist_(randEngine_) == 1;
+		behabirState_ = behabirDist_(randEngine_) == 1;
 	}
 
 	// 弾を追加
@@ -83,23 +84,26 @@ void EnemyExecuteShot::SetShotFunc(Direction direction)
 {
 	switch (direction)
 	{
-	case EnemyExecuteShot::Forward:
+	case EnemyExecuteShot::Direction::Forward:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Forward, this);
 		break;
-	case EnemyExecuteShot::TripleForward:
+	case EnemyExecuteShot::Direction::TripleForward:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_TripleForward, this);
 		break;
-	case EnemyExecuteShot::Cross:
+	case EnemyExecuteShot::Direction::Cross:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Cross, this);
 		break;
-	case EnemyExecuteShot::Omni_Four:
+	case EnemyExecuteShot::Direction::Omni_Four:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Four, this);
 		break;
-	case EnemyExecuteShot::Omni_Five:
+	case EnemyExecuteShot::Direction::Omni_Five:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Five, this);
 		break;
-	case EnemyExecuteShot::Omni_Eight:
+	case EnemyExecuteShot::Direction::Omni_Eight:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Eight, this);
+		break;
+	case EnemyExecuteShot::Direction::Random:
+		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Random, this);
 		break;
 	default:
 		break;
@@ -177,5 +181,17 @@ void EnemyExecuteShot::Shot_Omni_Eight()
 	AddNewBullet(Temp::Direction::FrontRight);
 	AddNewBullet(Temp::Direction::BackLeft);
 	AddNewBullet(Temp::Direction::BackRight);
+}
+
+
+/// <summary>
+/// ランダム
+/// </summary>
+void EnemyExecuteShot::Shot_Random()
+{
+	Vector3 direction = Vector3::zero;
+	direction.x = directionDist_(randEngine_);
+	direction.z = directionDist_(randEngine_);
+	AddNewBullet(direction);
 }
 

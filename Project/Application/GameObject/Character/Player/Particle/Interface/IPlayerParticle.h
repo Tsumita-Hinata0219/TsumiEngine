@@ -69,6 +69,6 @@ protected:
 	Transform trans_{};
 
 	// カラー
-	Vector4 color_ = Samp::Color::WHITE;
+	Vector4 color_ = Temp::Color::WHITE;
 
 };

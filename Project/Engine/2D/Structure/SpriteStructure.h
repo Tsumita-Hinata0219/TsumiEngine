@@ -14,7 +14,7 @@ namespace SP {
 
 	// マテリアルデータ
 	struct MaterialData {
-		Vector4 color = Samp::Color::WHITE;
+		Vector4 color = Temp::Color::WHITE;
 		Matrix4x4 uvTransform = Matrix4x4::identity;
 		uint32_t textureHandle = 1u;
 	};

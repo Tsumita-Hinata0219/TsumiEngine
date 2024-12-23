@@ -201,7 +201,7 @@ private: // ボディ関連
 	std::vector<std::shared_ptr<IPlayerBody>> iBodys_;
 
 	// カラー　
-	Vector4 color_ = Samp::Color::WHITE;
+	Vector4 color_ = Temp::Color::WHITE;
 
 
 private: // パーティクル

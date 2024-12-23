@@ -216,9 +216,6 @@
     <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp">
       <Filter>Engine\Math\MathStructure\Vector</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Math\MyColor\MyColor.cpp">
-      <Filter>Engine\Math\MyColor</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
       <Filter>Engine\Math\MyParlinNoise</Filter>
     </ClCompile>
@@ -575,6 +572,10 @@
     </ClCompile>
     <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
     <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
+    <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameManager\GameManager.h">
@@ -852,9 +853,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\MathStructure\Vector\Vector.h">
       <Filter>Engine\Math\MathStructure\Vector</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Math\MyColor\MyColor.h">
-      <Filter>Engine\Math\MyColor</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
       <Filter>Engine\Math\MyParlinNoise</Filter>
@@ -1461,6 +1459,10 @@
     </ClInclude>
     <ClInclude Include="Engine\Actor\Interface\IActor.h" />
     <ClInclude Include="Engine\Component\Interface\IComponent.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
+    <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -5,6 +5,7 @@
 #include "../../../../IObject/IObject.h"
 #include "../../../../GameObject.h"
 
+#include "../../ExecuteShot/EnemyExecuteShot.h"
 #include "../../Bullet/EnemyBullet.h"
 
 #include "State/IBasicEnemyState.h"
@@ -33,11 +34,6 @@ public:
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
-	/// <summary>
-	/// プールに返却前のリセット処理
-	/// </summary>
-	void Reset() override;
-
 	// チェンジステート
 	void ChangeState(BasicEnemyStateType state) { this->stateNo_ = enum_val(state); }
 
@@ -58,9 +54,6 @@ public:
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
-
-	// BulletListの取得
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
 
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
@@ -92,12 +85,6 @@ private:
 
 	// 向きの計算処理
 	void CalcRotate();
-
-	// 射撃の処理
-	void ExecuteShot();
-
-	// 新しいバレットを生成する
-	void CreateNewBullet();
 
 	// マークを死亡状態に設定
 	void MarkAsDead();
@@ -141,14 +128,6 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-	const float kBulletSpeed_ = 0.25f;
-
-	// 射撃するまでのフレーム&インターバル
-	int shotFrame_ = 0;
-	int kShotInterval_ = 40;
 
 	// ステートパターン
 	std::vector<std::unique_ptr<IBasicEnemyState>> stateVector_; // ステートコンテナ

@@ -26,7 +26,7 @@ void StageTransitionMenuTextLine::Init()
 	trans_.Init();
 
 	// カラー
-	color_ = Samp::Color::WHITE;
+	color_ = Temp::Color::WHITE;
 	color_.w = initAlpha_;
 
 	// タイマー(10秒)

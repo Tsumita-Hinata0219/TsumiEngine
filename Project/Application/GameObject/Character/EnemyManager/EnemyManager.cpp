@@ -7,6 +7,10 @@
 /// </summary>
 void EnemyManager::Init()
 {
+	// エネミー関連のモデルの読み込み
+	modelManager_ = ModelManager::GetInstance();
+	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
+
 	// Transformの初期化
 	transform_.Init();
 	transform_.srt.translate.z = 30.0f;
@@ -127,6 +131,9 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 			else if (entityData->entityName == "StaticEnemy") {
 				CreateStaticEnemy(entityData->srt);
 			}
+			else if (entityData->entityName == "BossEnemy") {
+				CreateBossEnemy(entityData->srt);
+			}
 		}
 	}
 }
@@ -135,9 +142,9 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 /// <summary>
 /// 新しいEnemyBulletを追加する
 /// </summary>
-void EnemyManager::AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::AddNewBullet(Vector3 initPos, Vector3 initVel, bool isState)
 {
-	CreateEnemyBullet(setType, initPos, initVel);
+	CreateEnemyBullet(initPos, initVel, isState);
 }
 
 
@@ -173,9 +180,9 @@ void EnemyManager::CreateBasicEnemy(const SRT& setSRT)
 	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
 
 	// newEnemyの初期化
-	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
 	newEnemy->SetRotate(setSRT.rotate);
 	newEnemy->SetTranslate(setSRT.translate);
 
@@ -188,9 +195,24 @@ void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
 
 	// newEnemyの初期化
-	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
+	newEnemy->SetRotate(setSRT.rotate);
+	newEnemy->SetTranslate(setSRT.translate);
+
+	// リストに追加
+	enemys_.push_back(newEnemy);
+}
+void EnemyManager::CreateBossEnemy(const SRT& setSRT)
+{
+	// 新しいEnemyのインスタンス
+	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
+
+	// newEnemyの初期化
+	newEnemy->SetPlayer(this->player_);
+	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
 	newEnemy->SetRotate(setSRT.rotate);
 	newEnemy->SetTranslate(setSRT.translate);
 
@@ -202,13 +224,13 @@ void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 /// <summary>
 /// 新しいEnemyBulletを生成する
 /// </summary>
-void EnemyManager::CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel)
+void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState)
 {
 	// オブジェクトプール空新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
-	newBullet->SetBulletType(setType);
+	newBullet->SetResistant(isState);
 	newBullet->Init();
 	newBullet->SetPosition(initPos);
 	newBullet->SetVelocity(initVel);

@@ -183,8 +183,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Death\BasicEnemyDeathState.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Boby\Right\PlayerRightBody.cpp" />
@@ -272,8 +275,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp" />
     <ClCompile Include="Engine\Math\MathStructure\Matrix\Matrix.cpp" />
     <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp" />
-    <ClCompile Include="Engine\Math\MyColor\MyColor.cpp" />
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
+    <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
     <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp" />
     <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp" />
     <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp" />
@@ -463,8 +466,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\IBasicEnemyState.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Idle\BasicEnemyIdleState.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Basic\State\Spawn\BasicEnemySpawnState.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\IEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Static\StaticEnemy.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\IPlayerBody.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\Left\PlayerLeftBody.h" />
     <ClInclude Include="Application\GameObject\Character\Player\Boby\Main\PlayerMainBody.h" />
@@ -574,9 +580,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\MathQuaternion\MathQuaternion.h" />
     <ClInclude Include="Engine\Math\MathStructure\Matrix\Matrix.h" />
     <ClInclude Include="Engine\Math\MathStructure\Vector\Vector.h" />
-    <ClInclude Include="Engine\Math\MyColor\MyColor.h" />
     <ClInclude Include="Engine\Math\MyMath.h" />
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h" />
+    <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\Math\Struct.h" />
     <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h" />
     <ClInclude Include="Engine\Particle\IParticle.h" />

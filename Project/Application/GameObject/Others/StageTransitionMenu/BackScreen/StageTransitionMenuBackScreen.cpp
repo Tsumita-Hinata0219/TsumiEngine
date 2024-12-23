@@ -20,7 +20,7 @@ void StageTransitionMenuBackScreen::Init()
 	trans_.Init();
 
 	// カラー
-	color_ = Samp::Color::BLACK;
+	color_ = Temp::Color::BLACK;
 	color_.w = initAlpha_;
 
 	// タイマー(1秒)

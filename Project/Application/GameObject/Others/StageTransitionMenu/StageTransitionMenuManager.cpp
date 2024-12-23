@@ -80,12 +80,12 @@ void StageTransitionMenuManager::Update()
 		naviBack_->Update();
 
 		if (naviBack_->GetNowSelect() == MenuSelect::Back) {
-			menus_[int(STMenuType::Navigation_Back)]->SetColor(Samp::Color::BLACK);
-			menus_[int(STMenuType::Navigation_Next)]->SetColor(Samp::Color::WHITE);
+			menus_[int(STMenuType::Navigation_Back)]->SetColor(Temp::Color::BLACK);
+			menus_[int(STMenuType::Navigation_Next)]->SetColor(Temp::Color::WHITE);
 		}
 		else if (naviBack_->GetNowSelect() == MenuSelect::Next) {
-			menus_[int(STMenuType::Navigation_Back)]->SetColor(Samp::Color::WHITE);
-			menus_[int(STMenuType::Navigation_Next)]->SetColor(Samp::Color::BLACK);
+			menus_[int(STMenuType::Navigation_Back)]->SetColor(Temp::Color::WHITE);
+			menus_[int(STMenuType::Navigation_Next)]->SetColor(Temp::Color::BLACK);
 		}
 	}
 }

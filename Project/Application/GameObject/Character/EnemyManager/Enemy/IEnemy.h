@@ -2,10 +2,13 @@
 
 #include <list>
 #include <memory>
+#include <functional>
 
 #include "../../../IObject/IObject.h"
 #include "../../../GameObject.h"
+#include "Transform/Transform.h"
 
+#include "../ExecuteShot/EnemyExecuteShot.h"
 #include "../Bullet/EnemyBullet.h"
 
 
@@ -25,16 +28,6 @@ public:
 	/// </summary>
 	virtual ~IEnemy() = default;
 
-	/// <summary>
-	/// Bulletを新しく追加
-	/// </summary>
-	void AddNewBullet(EnemyBulletType setType, const Vector3& initPos, const Vector3& initVel);
-
-	/// <summary>
-	/// プールに返却前のリセット処理
-	/// </summary>
-	virtual void Reset() = 0;
-
 
 #pragma region Accessor アクセッサ
 
@@ -47,9 +40,6 @@ public:
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
 	virtual void SetDeadFlag(bool setFlag) = 0;
-
-	// BulletListの取得
-	virtual std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() = 0;
 
 	// SRT
 	SRT GetSRT() const { return this->trans_.srt; }
@@ -67,6 +57,12 @@ public:
 	Vector3 GetTranslate() const { return this->trans_.srt.translate; }
 	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
 
+	// WorldPos
+	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+
+	// MatWorld
+	Matrix4x4 GetMatWorld() const { return this->trans_.matWorld; }
+
 	// HP
 	virtual uint32_t GetHP() = 0;
 
@@ -82,7 +78,6 @@ protected:
 
 
 private:
-
 
 	/// <summary>
 	/// スケールのリアクション
@@ -109,6 +104,8 @@ protected:
 	// トランスフォーム
 	Transform trans_;
 
+	// 射撃処理
+	std::unique_ptr<EnemyExecuteShot> exeShot_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

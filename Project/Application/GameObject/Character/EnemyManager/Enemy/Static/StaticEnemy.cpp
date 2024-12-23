@@ -22,9 +22,18 @@ void StaticEnemy::Init()
 
 	// 色加算の初期設定
 	colorAdd_.enable = true;
-	colorAdd_.addColor = Samp::Color::WHITE;
+	colorAdd_.addColor = Temp::Color::WHITE;
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
+
+	// 射撃処理クラス
+	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
+	exeShot_->SetTimer(15.0f);
+	// 射撃方法とバレット挙動
+	exeShot_->Init(
+		EnemyExecuteShot::Direction::Omni_Four,
+		EnemyExecuteShot::BulletBehavior::Resistant
+	);
 
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ
@@ -56,23 +65,8 @@ void StaticEnemy::Update()
 	// オブジェクトの回転
 	trans_.srt.rotate.y += ToRadians(addRadSpeed_);
 
-	// 射撃の処理
-	ExecutexShot();
-		
-	// Bullet更新処理
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
-		bullet->Update();
-	}
-
-	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([](std::shared_ptr<EnemyBullet> bullet) {
-		if (bullet->IsDead()) {
-			bullet.reset();
-			return true;
-		}
-		return false;
-		}
-	);
+	// 射撃処理
+	exeShot_->Update();
 
 	// ヒットリアクション
 	HitReaction();
@@ -94,11 +88,6 @@ void StaticEnemy::Draw3D()
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
-
-	// Bulletsの描画
-	for (std::shared_ptr<EnemyBullet> bullet : bulletList_) {
-		bullet->Draw3D();
-	}
 }
 void StaticEnemy::Draw2DFront() {}
 void StaticEnemy::Draw2DBack() {}
@@ -129,61 +118,6 @@ void StaticEnemy::onCollision(IObject* object)
 			player_->AddKillCount();
 		}
 	}
-}
-
-
-/// <summary>
-/// プールに返却前のリセット処理
-/// </summary>
-void StaticEnemy::Reset()
-{
-	// コライダーを無効にしておく
-	sphere_->Deactivate();
-}
-
-
-// 射撃の処理
-void StaticEnemy::ExecutexShot()
-{
-	// タイマーをデクリメント
-	shotFrame_--;
-
-	// 0以下になったら射撃&タイマーリセット
-	if (shotFrame_ <= 0) {
-
-		// バレット生成
-		CreateNewBullet();
-		CreateNewBullet2();
-
-		// タイマー再設定
-		shotFrame_ = kShotInterval_;
-	}
-}
-
-
-// 新しいバレットを生成する
-void StaticEnemy::CreateNewBullet()
-{
-	// 初期座標
-	Vector3 initPos = trans_.GetWorldPos();
-	// 初期速度
-	Vector3 initVel = Vector3::oneZ;
-	initVel.z = kBulletSpeed_;
-	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewBullet(EnemyBulletType::Normal, initPos, initVel);
-}
-
-
-// 新しいバレットを生成する
-void StaticEnemy::CreateNewBullet2()
-{
-	// 初期座標
-	Vector3 initPos = trans_.GetWorldPos();
-	// 初期速度
-	Vector3 initVel = Vector3::oneZ;
-	initVel.z = -kBulletSpeed_;
-	initVel = TransformNormal(initVel, trans_.matWorld);
-	enemyManager_->AddNewBullet(EnemyBulletType::Resistant, initPos, initVel);
 }
 
 

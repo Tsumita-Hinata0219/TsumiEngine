@@ -34,8 +34,7 @@ void Timer::Update(bool roop)
 {
 	if (isFinish_) {
 		if (roop) {
-			this->Init(saveTimer_.first, saveTimer_.second);
-			this->Start();
+			ReStart();
 			return;
 		}
 		isActive_ = false;
@@ -70,4 +69,14 @@ void Timer::Clear()
 	frameRatio_ = 0.0f;
 	isActive_ = false;
 	isFinish_ = true;
+}
+
+
+// リスタート
+void Timer::ReStart()
+{
+	nowFrame_ = saveTimer_.first;
+	endFrame_ = saveTimer_.second;
+	isActive_ = true;
+	isFinish_ = false;
 }

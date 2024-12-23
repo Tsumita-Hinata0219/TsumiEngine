@@ -6,14 +6,18 @@
 void EnemyBullet::Init()
 {
 	// BodyModelのロードと初期化
-	// 設定されているTypeで読み込むモデルを変える
-	if (bulletType_ == EnemyBulletType::Normal) {
-		modelManager_->LoadModel("Obj/Enemys/Bullet/Normal", "EnemyBullet_Normal.obj");
-		model_ = modelManager_->GetModel("EnemyBullet_Normal");
+	model_ = modelManager_->GetModel("EnemyBullet");
+
+	// 弾のタイプでカラーを変える
+	if (!isResistant_) {
+		// ノーマルはオレンジ
+		Vector4 orange = { 1.0f, 0.2f, 0.0f, 1.0f };
+		model_->SetMaterialColor(orange);
 	}
-	else if (bulletType_ == EnemyBulletType::Resistant) {
-		modelManager_->LoadModel("Obj/Enemys/Bullet/Resistant", "EnemyBullet_Resistant.obj");
-		model_ = modelManager_->GetModel("EnemyBullet_Resistant");
+	else {
+		// レジスタントは深紫
+		Vector4 purple = { 0.15f, 0.0f, 0.2f, 1.0f };
+		model_->SetMaterialColor(purple);
 	}
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
@@ -68,7 +72,7 @@ void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 	if (object->GetCategory() == Attributes::Category::PLAYER) {
 
 		// タイプが消えない弾ならreturn
-		if (bulletType_ == EnemyBulletType::Resistant) { return; }
+		if (isResistant_) { return; }
 		// 死亡状態に設定
 		MarkAsDead();
 	}

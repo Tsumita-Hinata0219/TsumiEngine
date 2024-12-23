@@ -6,14 +6,6 @@
 #include "../../../GameObject.h"
 
 
-
-// EnemyのBulletのType
-enum class EnemyBulletType {
-	Normal,       // 消える弾
-	Resistant,    // 消えない弾
-};
-
-
 /* EnemyBulletクラス */
 class EnemyBullet : public IObject {
 
@@ -38,10 +30,6 @@ public: // メンバ関数
 
 #pragma region Accessor アクセッサ
 
-	// Type
-	EnemyBulletType GetBulletType() const { return this->bulletType_; }
-	void SetBulletType(EnemyBulletType setType) { this->bulletType_ = setType;	}
-
 	// 座標
 	void SetPosition(Vector3 setPos) { this->trans_.srt.translate = setPos; }
 
@@ -63,6 +51,9 @@ public: // メンバ関数
 	// 死亡フラグ
 	bool IsDead() const { return this->isDead_; }
 
+	// 無敵フラグ
+	bool IsResistant() const { return this->isResistant_; }
+	void SetResistant(bool setState) { this->isResistant_ = setState; }
 
 #pragma endregion 
 
@@ -80,9 +71,6 @@ private:
 
 
 private: // メンバ変数
-
-	// BulletType
-	EnemyBulletType bulletType_ = EnemyBulletType::Normal;
 
 	// モデル
 	std::unique_ptr<Model> model_;
@@ -104,5 +92,9 @@ private: // メンバ変数
 
 	// 死亡フラグ
 	bool isDead_ = false;
+
+	// 無敵フラグ
+	bool isResistant_ = false;
+
 };
 

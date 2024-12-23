@@ -86,7 +86,7 @@ void PlayerBullet::onCollision([[maybe_unused]] IObject* object)
 		EnemyBullet* bullet = dynamic_cast<EnemyBullet*>(object);
 		if (bullet) {
 			// 死なない弾とは当たらない
-			if (bullet->GetBulletType() == EnemyBulletType::Resistant) {
+			if (bullet->IsResistant()) {
 				return;
 			}
 			// 死亡状態に設定

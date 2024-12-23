@@ -25,7 +25,7 @@ void Skybox::Init(uint32_t dds)
 	transform_.srt.rotate.y = ToRadians(180.0f);
 
 	// カラー
-	datas_.color = Samp::Color::WHITE;
+	datas_.color = Temp::Color::WHITE;
 
 	// カメラマネージャーのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();

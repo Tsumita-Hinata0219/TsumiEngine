@@ -27,11 +27,6 @@ public:
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
-	/// <summary>
-	/// プールに返却前のリセット処理
-	/// </summary>
-	void Reset() override;
-
 
 #pragma region Accessor アクセッサ
 
@@ -49,9 +44,6 @@ public:
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }
 
-	// BulletListの取得
-	std::list<std::shared_ptr<EnemyBullet>>& GetBulletList() override { return this->bulletList_; }
-
 	// HP
 	uint32_t GetHP() override { return this->hp_; }
 
@@ -59,13 +51,6 @@ public:
 
 
 private:
-
-	// 射撃の処理
-	void ExecutexShot();
-
-	// 新しいバレットを生成する
-	void CreateNewBullet();
-	void CreateNewBullet2();
 
 	// マークを死亡状態に設定
 	void MarkAsDead();
@@ -95,14 +80,6 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
-	const float kBulletSpeed_ = 0.25f;
-
-	// 射撃するまでのフレーム&インターバル
-	int shotFrame_ = 0;
-	int kShotInterval_ = 30;
 
 };
 

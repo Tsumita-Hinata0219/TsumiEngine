@@ -9,6 +9,7 @@
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"
+#include "Enemy/Boss/BossEnemy.h"
 
 #include "Effect/Interface/IEnemyEffect.h"
 #include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
@@ -56,7 +57,7 @@ public: // メンバ関数
 	/// <summary>
 	/// 新しいEnemyBulletを追加する
 	/// </summary>
-	void AddNewBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void AddNewBullet(Vector3 initPos, Vector3 initVel, bool isState);
 
 	/// <summary>
 	/// 新しいヒットエフェクトを追加する
@@ -90,11 +91,12 @@ private:
 	/// </summary>
 	void CreateBasicEnemy(const SRT& setSRT);
 	void CreateStaticEnemy(const SRT& setSRT);
+	void CreateBossEnemy(const SRT& setSRT);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する
 	/// </summary>
-	void CreateEnemyBullet(EnemyBulletType setType, Vector3 initPos, Vector3 initVel);
+	void CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState);
 
 	/// <summary>
 	/// 新しいEffectを生成する
@@ -107,6 +109,9 @@ private:
 	void DrawimGui();
 
 private: // メンバ変数
+
+	// ModelManager
+	ModelManager* modelManager_ = nullptr;
 
 	// Player
 	Player* player_ = nullptr;

@@ -44,7 +44,7 @@ void DebugScene::Initialize()
 	}
 	materials_.resize(dParticleInstanceNum_);
 	for (auto& element : materials_) {
-		element.color = Samp::Color::WHITE;
+		element.color = Temp::Color::WHITE;
 		element.uvTransform = Matrix4x4::identity;
 	}
 }

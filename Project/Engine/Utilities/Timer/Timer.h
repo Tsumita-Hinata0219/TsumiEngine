@@ -44,6 +44,12 @@ public: // メンバ関数
 #pragma endregion 
 
 
+private:
+
+	// リスタート
+	void ReStart();
+
+
 private: // メンバ変数
 
 	float nowFrame_ = 0.0f;

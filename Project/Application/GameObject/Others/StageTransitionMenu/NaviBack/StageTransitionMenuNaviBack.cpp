@@ -31,7 +31,7 @@ void StageTransitionMenuNaviBack::Init()
 		spriteArr_[i]->Init(size_);
 		spriteArr_[i]->SetAnchor(SpriteAnchor::Center);
 		spriteArr_[i]->SetTexture(texHDArr_[i]);
-		spriteArr_[i]->SetColor(Samp::Color::WHITE);
+		spriteArr_[i]->SetColor(Temp::Color::WHITE);
 
 		// トランスフォーム
 		transArr_[i].Init();

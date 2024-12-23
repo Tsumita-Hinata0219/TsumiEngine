@@ -93,7 +93,7 @@ private:
 	Vector2 size_{};
 
 	// 色データ
-	Vector4 color_ = Samp::Color::WHITE;
+	Vector4 color_ = Temp::Color::WHITE;
 
 	// SRC
 	QuadVertex2 src_ = {

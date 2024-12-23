@@ -5,6 +5,7 @@
 #include "Math/MyMath.h"
 
 #include "../../Shield/EnemyShield.h"
+#include "../../ExecuteShot/EnemyExecuteShot.h"
 #include "../../Bullet/EnemyBullet.h"
 
 
@@ -75,8 +76,6 @@ private:
 	/// </summary>
 	void DrawImGui();
 
-
-
 private:
 
 	// プレイヤー
@@ -99,6 +98,9 @@ private:
 
 	// HP
 	uint32_t hp_ = 0;
+
+	// 射撃処理
+	std::unique_ptr<EnemyExecuteShot> exeShot_;
 
 	// シールド　
 	std::unique_ptr<EnemyShield> shield_;

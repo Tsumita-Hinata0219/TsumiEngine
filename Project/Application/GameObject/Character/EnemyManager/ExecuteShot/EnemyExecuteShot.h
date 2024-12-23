@@ -42,7 +42,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init();
+	void Init(float shotInterval);
 
 	/// <summary>
 	/// 更新処理
@@ -75,5 +75,8 @@ private:
 
 	// オーナーエネミー
 	IEnemy* owner_ = nullptr;
+
+	// 射撃タイマー
+	Timer shotTimer_{};
 };
 

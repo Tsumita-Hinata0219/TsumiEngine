@@ -17,10 +17,14 @@ EnemyExecuteShot::EnemyExecuteShot(EnemyManager* manager, IEnemy* owner)
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyExecuteShot::Init()
+void EnemyExecuteShot::Init(float shotInterval)
 {
 	// 関数設定
 	shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Forward, this);
+
+	// 射撃タイマーの設定
+	shotTimer_.Init(0.0f, shotInterval);
+	shotTimer_.Start();
 }
 
 
@@ -29,8 +33,14 @@ void EnemyExecuteShot::Init()
 /// </summary>
 void EnemyExecuteShot::Update()
 {
-	// 射撃処理
-	shotFunc_();
+	// タイマー更新。終了してもループする
+	shotTimer_.Update(true);
+
+	// タイマー終了で射撃
+	if (shotTimer_.IsFinish()) {
+		// 射撃処理
+		shotFunc_();
+	}
 }
 
 

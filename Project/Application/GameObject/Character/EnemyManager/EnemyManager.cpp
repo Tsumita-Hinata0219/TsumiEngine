@@ -180,9 +180,9 @@ void EnemyManager::CreateBasicEnemy(const SRT& setSRT)
 	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
 
 	// newEnemyの初期化
-	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
 	newEnemy->SetRotate(setSRT.rotate);
 	newEnemy->SetTranslate(setSRT.translate);
 
@@ -195,9 +195,9 @@ void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
 
 	// newEnemyの初期化
-	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
 	newEnemy->SetRotate(setSRT.rotate);
 	newEnemy->SetTranslate(setSRT.translate);
 
@@ -210,9 +210,9 @@ void EnemyManager::CreateBossEnemy(const SRT& setSRT)
 	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
 
 	// newEnemyの初期化
-	newEnemy->Init();
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->Init();
 	newEnemy->SetRotate(setSRT.rotate);
 	newEnemy->SetTranslate(setSRT.translate);
 

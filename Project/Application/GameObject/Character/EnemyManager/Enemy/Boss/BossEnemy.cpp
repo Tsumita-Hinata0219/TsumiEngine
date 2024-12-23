@@ -27,6 +27,10 @@ void BossEnemy::Init()
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 
+	// 射撃処理クラス
+	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
+	exeShot_->Init(30.0f);
+
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
 	shield_->Init();
@@ -45,6 +49,9 @@ void BossEnemy::Update()
 {
 	// シールドの更新
 	shield_->Update();
+
+	// 射撃処理
+	exeShot_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();

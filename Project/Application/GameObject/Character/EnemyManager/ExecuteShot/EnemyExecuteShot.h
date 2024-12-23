@@ -19,6 +19,11 @@ public:
 
 	enum Direction {
 		Forward,
+		TripleForward,
+		Cross,
+		Omni_Four,
+		Omni_Five,
+		Omni_Eight,
 	};
 
 	enum BulletBehavior {
@@ -57,9 +62,39 @@ private:
 	void AddNewBullet(const Vector3& direction);
 
 	/// <summary>
+	/// 射撃関数の設定
+	/// </summary>
+	void SetShotFunc(Direction direction);
+
+	/// <summary>
 	/// 前方射撃
 	/// </summary>
 	void Shot_Forward();
+
+	/// <summary>
+	/// 3Way前方
+	/// </summary>
+	void Shot_TripleForward();
+
+	/// <summary>
+	/// 4Way対角線
+	/// </summary>
+	void Shot_Cross();
+
+	/// <summary>
+	/// 4Way全方位
+	/// </summary>
+	void Shot_Omni_Four();
+
+	/// <summary>
+	/// 5Way全方位
+	/// </summary>
+	void Shot_Omni_Five();
+
+	/// <summary>
+	/// 8Way全方位
+	/// </summary>
+	void Shot_Omni_Eight();
 
 
 private:

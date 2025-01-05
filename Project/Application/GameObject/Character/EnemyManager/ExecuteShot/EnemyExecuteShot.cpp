@@ -24,7 +24,7 @@ void EnemyExecuteShot::Init(Direction direction, BulletBehavior behavior)
 
 	// バレット挙動
 	behavior_ = behavior;
-	if (behavior_ == BulletBehavior::Normal) {
+	if (behavior_ == BulletBehavior::Common) {
 		behabirState_ = false;
 	}
 	else if (behavior_ == BulletBehavior::Resistant) {

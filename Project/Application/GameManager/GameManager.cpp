@@ -58,6 +58,7 @@ void GameManager::Run() {
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();
+
 }
 
 

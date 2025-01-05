@@ -13,14 +13,8 @@
 #include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
+#include "JsonEntityData.h"
 
-
-struct EntityData {
-	std::string type;
-	std::string entityName;
-	SRT srt;
-	std::map<std::string, std::unique_ptr<EntityData>> children;
-};
 
 
 /* JsonManagerクラス */
@@ -95,6 +89,17 @@ private:
 	/// SRTの読み込み
 	/// </summary>
 	SRT ScanningSRT(nlohmann::json& object);
+
+	/// <summary>
+	/// PlayerDataの読み込み
+	/// </summary>
+	EntityPlayerData ScanningPlayerData(nlohmann::json& object);
+
+	/// <summary>
+	/// EnemyDataの読み込み
+	/// </summary>
+	EntityEnemyData ScanningEnemyData(nlohmann::json& object);
+
 
 
 private: // メンバ変数

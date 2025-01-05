@@ -92,7 +92,13 @@ std::unique_ptr<EntityData> JsonManager::ScanningEntityData(const std::string& p
 		result->srt = ScanningSRT(object);
 
 		/* ──────────── コライダーの読み込み ──────────── */
+		// TODO
 
+		/* ──────────── プレイヤー情報の読み込み ──────────── */
+		result->playerData = ScanningPlayerData(object);
+
+		/* ──────────── エネミー情報の読み込み ──────────── */
+		result->enemyData = ScanningEnemyData(object);
 
 		/* ──────────── ツリー構造の走査 ──────────── */
 		if (object.contains("children") && object["children"].is_array()) {
@@ -136,10 +142,10 @@ std::string JsonManager::ScanningEntityName(nlohmann::json& object)
 {
 	std::string entityName{};
 
-	if (object.contains("file_name")) {
+	if (object.contains("name")) {
 
 		// ファイル名
-		entityName = object["file_name"];
+		entityName = object["name"];
 	}
 
 	return entityName;
@@ -171,5 +177,81 @@ SRT JsonManager::ScanningSRT(nlohmann::json& object)
 	}
 
 	return srt;
+}
+
+
+/// <summary>
+/// PlayerDataの読み込み
+/// </summary>
+EntityPlayerData JsonManager::ScanningPlayerData(nlohmann::json& object)
+{
+	EntityPlayerData result{};
+
+	if (object.contains("category")) {
+
+		nlohmann::json& category = object["transform"];
+
+		// typeがPlayerでなければ終了
+		if (category["type"] != "PLAYER") { return result; }
+
+	}
+
+	return result;
+}
+
+
+/// <summary>
+/// EnemyDataの読み込み
+/// </summary>
+EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
+{
+	EntityEnemyData result{};
+
+	if (object.contains("category")) {
+
+		nlohmann::json& category = object["transform"];
+
+		// typeがEnemyでなければ終了
+		if (category["type"] != "ENEMY") { return result; }
+
+		// 射撃方向
+		if (category["shot_direction"] == "FORWARD") {
+			result.direction = EnemyExecuteShot::Direction::Forward;
+		}
+		else if (category["shot_direction"] == "TRIPLE_FORWARD") {
+			result.direction = EnemyExecuteShot::Direction::TripleForward;
+		}
+		else if (category["shot_direction"] == "CROSS") {
+			result.direction = EnemyExecuteShot::Direction::Cross;
+		}
+		else if (category["shot_direction"] == "OMNI_FOUR") {
+			result.direction = EnemyExecuteShot::Direction::Omni_Four;
+		}
+		else if (category["shot_direction"] == "OMNI_FIVE") {
+			result.direction = EnemyExecuteShot::Direction::Omni_Five;
+		}
+		else if (category["shot_direction"] == "OMNI_EIGHT") {
+			result.direction = EnemyExecuteShot::Direction::Omni_Eight;
+		}
+		else if (category["shot_direction"] == "RANDOM") {
+			result.direction = EnemyExecuteShot::Direction::Random;
+		}
+
+		// バレットタイプ
+		if (category["bullet_behavior"] == "COMMON") {
+			result.behavior = EnemyExecuteShot::BulletBehavior::Common;
+		}
+		else if (category["bullet_behavior"] == "RESISTANT") {
+			result.behavior = EnemyExecuteShot::BulletBehavior::Resistant;
+		}
+		else if (category["bullet_behavior"] == "RANDOM") {
+			result.behavior = EnemyExecuteShot::BulletBehavior::Random;
+		}
+
+		// 射撃間隔
+		result.shotInterval = (float)category["shoot_interval"];
+	}
+
+	return result;
 }
 

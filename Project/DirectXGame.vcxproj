@@ -571,6 +571,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h" />
     <ClInclude Include="Engine\Input\Input.h" />
+    <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />

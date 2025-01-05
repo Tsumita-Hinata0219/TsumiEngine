@@ -1463,6 +1463,7 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
+    <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -29,7 +29,7 @@ void BasicEnemy::Init()
 	// 射撃方法とバレット挙動
 	exeShot_->Init(
 		EnemyExecuteShot::Direction::Forward,
-		EnemyExecuteShot::BulletBehavior::Normal
+		EnemyExecuteShot::BulletBehavior::Common
 	);
 
 	// BodyTransformの初期化

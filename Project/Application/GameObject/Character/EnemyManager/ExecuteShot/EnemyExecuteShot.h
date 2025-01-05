@@ -29,7 +29,7 @@ public:
 	};
 
 	enum class BulletBehavior {
-		Normal,
+		Common,
 		Resistant,
 		Random,
 	};
@@ -128,7 +128,7 @@ private:
 	IEnemy* owner_ = nullptr;
 
 	// バレット挙動
-	BulletBehavior behavior_ = BulletBehavior::Normal;
+	BulletBehavior behavior_ = BulletBehavior::Common;
 	bool behabirState_ = false;
 
 	// 射撃タイマー

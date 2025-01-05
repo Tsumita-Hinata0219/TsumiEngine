@@ -17,6 +17,8 @@
 
 #include "Particle/Manager/PlayerParticleManager.h"
 
+#include "JsonManager/JsonEntityData.h"
+
 
 // 前方宣言
 class FollowCamera;

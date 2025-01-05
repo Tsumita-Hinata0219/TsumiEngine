@@ -5,6 +5,8 @@
 #include "Barrier/BarrierBox.h"
 #include "Destructible/DestructibleBox.h"
 
+#include "JsonManager/JsonEntityData.h"
+
 
 /* BoxManagerクラス */
 class BoxManager {

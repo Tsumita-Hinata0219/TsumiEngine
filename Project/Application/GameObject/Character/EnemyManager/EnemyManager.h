@@ -14,6 +14,8 @@
 #include "Effect/Interface/IEnemyEffect.h"
 #include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
 
+#include "JsonManager/JsonEntityData.h"
+
 
 // Player前方宣言
 class Player;

@@ -3,6 +3,8 @@
 #include "../../IObject/IObject.h"
 #include "../../GameObject.h"
 
+#include "JsonManager/JsonEntityData.h"
+
 
 /* Floorクラス */
 class Floor : public IObject {

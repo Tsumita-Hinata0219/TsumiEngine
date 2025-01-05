@@ -1,5 +1,5 @@
 #include "TitleScene.h"
-#include "../../GameManager/GameManager.h"
+#include "GameManager/GameManager.h"
 
 
 

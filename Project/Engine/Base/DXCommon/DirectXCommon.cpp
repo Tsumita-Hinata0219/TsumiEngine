@@ -428,59 +428,6 @@ void DirectXCommon::DebugErrorInfoQueue() {
 
 
 
-/* ----- コマンドキューを生成する ----- */
-
-//void DirectXCommon::CreateCommandQueue() {
-//
-//	// コマンドキューを生成する
-//	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
-//		&commandQueueDesc,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Queue));
-//
-//
-//	// コマンドキューの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
-
-
-
-/* ----- コマンドアロケータを生成する ----- */
-//void DirectXCommon::CreateCommandAllocator() {
-//
-//	// コマンドアロケータを生成する
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
-//		D3D12_COMMAND_LIST_TYPE_DIRECT,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Allocator));
-//
-//
-//	// コマンドアロケータの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
-
-
-
-/* ----- コマンドリストを生成する ----- */
-
-//void DirectXCommon::CreateCommandList() {
-//
-//	// コマンドリストを生成する
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandList(
-//		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-//		DirectXCommon::GetInstance()->commands_.Allocator.Get(),
-//		nullptr,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.List));
-//
-//
-//	// コマンドリストの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
-
-
-
 /* ----- スワップチェーンを生成する ----- */
 
 void DirectXCommon::CreateSwapChain() {

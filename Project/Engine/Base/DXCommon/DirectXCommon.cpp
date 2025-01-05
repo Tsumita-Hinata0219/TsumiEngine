@@ -206,58 +206,56 @@ void DirectXCommon::PreDrawForSwapChain() {
 /// </summary>
 void DirectXCommon::PostDrawForSwapChain() {
 
-	SwapChains swapChains = DirectXCommon::GetInstance()->swapChains_;
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
+	auto directXCommon = DirectXCommon::GetInstance();
+	auto commandManager = CommandManager::GetInstance();
 
-	// 状態を遷移
-	// 画面に描く処理はすべて終わり、画面に映すので、状態を遷移
-	// 今回はRenderTargetからPresentにする
+	// 必要な変数を取得
+	SwapChains& swapChains = directXCommon->swapChains_;
+	Commands commands = commandManager->GetCommands();
+	D3D12_RESOURCE_BARRIER& barrier = directXCommon->barrier_;
+
+	// 状態遷移：RenderTarget -> Present
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-
-	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 
-	DirectXCommon::GetInstance()->barrier_ = barrier;
-
-
-	// コマンドをキックする
-	// コマンドリストの内容を確定させる・全てのコマンドを積んでからCloseすること
-	HRESULT result;
-	result = commands.List->Close();
-	assert(SUCCEEDED(result));
-
-	// GPUにコマンドリストの実行を行わせる
-	ID3D12CommandList* commandLists[] = { commands.List.Get()};
-	commands.Queue->ExecuteCommandLists(1, commandLists);
-
-
-	// Fenceの値を更新
-	DirectXCommon::GetInstance()->fenceValue_++;
-
-	// GPUがここまで辿り着いたときに、Fenceの値を指定した値に代入するようにSignalを送る
-	commands.Queue->Signal(DirectXCommon::GetInstance()->fence_.Get(), DirectXCommon::GetInstance()->fenceValue_);
-
-	// Fenceの値が指定したSignal値にたどり着いているか確認するか
-	// GetCompletedValueの初期値はFence作成時に渡した初期値
-	if (DirectXCommon::GetInstance()->fence_->GetCompletedValue() < DirectXCommon::GetInstance()->fenceValue_) {
-		// 指定したSignalにたどりついていないので、辿り着くまで待つようにイベントを設定する
-		DirectXCommon::GetInstance()->fence_->SetEventOnCompletion(DirectXCommon::GetInstance()->fenceValue_, DirectXCommon::GetInstance()->fenceEvent_);
-		// イベントを待つ
-		WaitForSingleObject(DirectXCommon::GetInstance()->fenceEvent_, INFINITE);
+	// コマンドリストを閉じる
+	HRESULT result = commands.List->Close();
+	if (FAILED(result)) {
+		// エラーハンドリング（例：ログ出力）
+		assert(false && "Failed to close command list.");
 	}
 
+	// コマンドリストを実行
+	ID3D12CommandList* commandLists[] = { commands.List.Get() };
+	commands.Queue->ExecuteCommandLists(1, commandLists);
+
+	// フェンスの値を更新してSignal
+	directXCommon->fenceValue_++;
+	commands.Queue->Signal(directXCommon->fence_.Get(), directXCommon->fenceValue_);
+
+	// GPUが指定した値に達していない場合は待機
+	if (directXCommon->fence_->GetCompletedValue() < directXCommon->fenceValue_) {
+		directXCommon->fence_->SetEventOnCompletion(directXCommon->fenceValue_, directXCommon->fenceEvent_);
+		WaitForSingleObject(directXCommon->fenceEvent_, INFINITE);
+	}
+
+	// 画面に描画
 	swapChains.swapChain->Present(1, 0);
 
-	// 次のフレーム用のコマンドリストを準備
+	// 次のフレーム用にコマンドリストをリセット
 	result = commands.Allocator->Reset();
-	assert(SUCCEEDED(result));
-	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
-	assert(SUCCEEDED(result));
+	if (FAILED(result)) {
+		assert(false && "Failed to reset command allocator.");
+	}
 
-	CommandManager::GetInstance()->SetCommands(commands);
-	DirectXCommon::GetInstance()->swapChains_ = swapChains;
+	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
+	if (FAILED(result)) {
+		assert(false && "Failed to reset command list.");
+	}
+
+	// コマンド情報を更新
+	commandManager->SetCommands(commands);
 }
 
 

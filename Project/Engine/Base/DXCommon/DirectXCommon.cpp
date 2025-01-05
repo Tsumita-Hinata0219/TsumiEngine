@@ -119,20 +119,25 @@ void DirectXCommon::PreDrawForPostEffect() {
 void DirectXCommon::PostDrawForPostEffect() {
 
 	Commands commands = CommandManager::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier{};
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 
+	// リソースが無効でないか確認
+	if (rtv.Resources.Get() == nullptr) {
+		// エラーハンドリング（例：ログ出力）
+		assert(false && "Resource is null.");
+		return;
+	}
+
+	D3D12_RESOURCE_BARRIER barrier{};
 	// Barrierを設定する
-	// 今回のバリアはTransition
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+
 	// バリアを張る対象のリソース。現在のバックバッファに対して行う
 	barrier.Transition.pResource = rtv.Resources.Get();
-	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	// 遷移後のResourceState
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+
 	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 }

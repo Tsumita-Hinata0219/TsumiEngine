@@ -167,7 +167,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Application\GameManager\GameManager.cpp" />
+    <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\Camera.cpp" />
     <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
@@ -449,7 +449,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application\GameManager\GameManager.h" />
+    <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />

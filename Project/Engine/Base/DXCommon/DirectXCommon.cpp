@@ -62,54 +62,46 @@ void DirectXCommon::Initialize() {
 /// </summary>
 void DirectXCommon::PreDrawForPostEffect() {
 
-	Commands commands = CommandManager::GetInstance()->GetCommands();
+	auto commandManager = CommandManager::GetInstance();
+	Commands commands = commandManager->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
+
+	// RTV を取得
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
-	
+	if (rtv.Resources.Get() == nullptr) {
+		// RTV が無効な場合はエラー処理
+		assert(false && "Invalid RTV resource.");
+		return;
+	}
+
 	// Barrierを設定する
-	// 今回のバリアはTransition
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// バリアを張る対象のリソース。現在のバックバッファに対して行う
 	barrier.Transition.pResource = rtv.Resources.Get();
-	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	// 遷移後のResourceState
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
 	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 
-	// 描画先のRTVとDSVを設定する
+	// 描画先のRTVとDSVを設定
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+	commands.List->OMSetRenderTargets(1, &rtv.Handles, false, &dsvHandle);
 
-
-	// 描画先のRTVを設定する
-	commands.List->OMSetRenderTargets(
-		1, &rtv.Handles,
-		false,
-		&dsvHandle);
-
-
-	// 指定した色で画面全体をクリアする
+	// 色で画面全体をクリア
 	Vector4 color = rtv.color;
-	float clearColor[] = { color.x, color.y, color.z, color.w }; // 青っぽい色。RGBAの順
+	float clearColor[] = { color.x, color.y, color.z, color.w };
+	commands.List->ClearRenderTargetView(rtv.Handles, clearColor, 0, nullptr);
 
-
-	commands.List->ClearRenderTargetView(
-		rtv.Handles,
-		clearColor,
-		0, nullptr);
-
-
-	//指定した深度で画面全体をクリアする
+	// 深度で画面全体をクリア
 	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
+	// ビューポートとシザーを設定
+	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_);
+	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_);
 
-	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
-	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
-
-	CommandManager::GetInstance()->SetCommands(commands);
+	// コマンドを更新
+	commandManager->SetCommands(commands);
 }
 
 

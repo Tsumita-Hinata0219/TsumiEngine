@@ -58,7 +58,6 @@ void JsonManager::LoadSceneFile(const std::string& path, const std::string& file
 			entity = ScanningEntityData(path, object); // 走査
 
 			// 走査した情報をマップコンテナに追加
-			//entityMap_[entity->entityName].push_back(std::move(entity));
 			AddEntityData(std::move(entity));
 		}
 	}
@@ -189,7 +188,7 @@ EntityPlayerData JsonManager::ScanningPlayerData(nlohmann::json& object)
 
 	if (object.contains("category")) {
 
-		nlohmann::json& category = object["transform"];
+		nlohmann::json& category = object["category"];
 
 		// typeがPlayerでなければ終了
 		if (category["type"] != "PLAYER") { return result; }
@@ -209,7 +208,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 
 	if (object.contains("category")) {
 
-		nlohmann::json& category = object["transform"];
+		nlohmann::json& category = object["category"];
 
 		// typeがEnemyでなければ終了
 		if (category["type"] != "ENEMY") { return result; }

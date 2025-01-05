@@ -25,7 +25,10 @@
                 "type": "NONE"
             },
             "category": {
-                "type": "NONE"
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 30
             },
             "children": []
         },

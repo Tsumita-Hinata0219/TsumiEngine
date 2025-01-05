@@ -378,8 +378,6 @@ void DirectXCommon::CreateDevice() {
 /// ここまで↑
 /* ---DirectX初期化--- */
 
-
-
 /* ----- エラーと警告の抑制 ----- */
 
 void DirectXCommon::DebugErrorInfoQueue() {

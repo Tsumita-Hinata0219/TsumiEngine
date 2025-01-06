@@ -207,7 +207,7 @@
             "category": {
                 "type": "ENEMY",
                 "shot_direction": "TRIPLE_FORWARD",
-                "bullet_behavior": "RANDOM",
+                "bullet_behavior": "RESISTANT",
                 "shoot_interval": 15
             },
             "children": []

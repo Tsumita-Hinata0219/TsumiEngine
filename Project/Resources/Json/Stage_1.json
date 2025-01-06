@@ -82,9 +82,9 @@
             },
             "category": {
                 "type": "ENEMY",
-                "shot_direction": "FORWARD",
-                "bullet_behavior": "COMMON",
-                "shoot_interval": 20
+                "shot_direction": "OMNI_FOUR",
+                "bullet_behavior": "RANDOM",
+                "shoot_interval": 100
             },
             "children": []
         }

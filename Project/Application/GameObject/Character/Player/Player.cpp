@@ -55,6 +55,10 @@ void Player::Init()
 	aabb_->data_.center = trans_.GetWorldPos();
 	aabb_->data_.size = { 1.7f, 1.7f, 1.7f };
 
+	// スイープイレイサーの初期化
+	sweepEraser_ = std::make_unique<BulletSweepEraser>();
+	sweepEraser_->Init();
+	sweepEraser_->SetParent(&trans_); // ペアレントを結ぶ
 
 	// キルカウントを0で初期化
 	killCount_ =0;
@@ -104,6 +108,9 @@ void Player::Update()
 	// ColliderのSRTの設定
 	aabb_->data_.center = trans_.GetWorldPos();
 	aabb_->Update();
+
+	// スイープイレイサーの更新
+	sweepEraser_->Update();
 
 
 	// キルカウントが一定を超えていたら勝利フラグを立てる
@@ -167,19 +174,25 @@ void Player::Draw2DFront()
 /// </summary>
 void Player::onCollision([[maybe_unused]] IObject* object)
 {
-	// 地形もしくは敵ボディは押し出し
-	if (object->GetCategory() == Attributes::Category::TERRAIN || 
-		object->GetCategory() == Attributes::Category::ENEMY &&
-		object->GetType() == Attributes::Type::BODY) {
+	// 地形は押し出し
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
-		//// 押し出しの処理
+		// 押し出しの処理
 		trans_.srt.translate += Penetration::Execute(aabb_->GetData(), IObject::hitCollider_);
 		trans_.UpdateMatrix();
 	}
 	if (object->GetCategory() == Attributes::Category::ENEMY && 
 		object->GetType() == Attributes::Type::BULLET) {
 
+		// 体力が0以下なら通らない
+		if (hp_ <= HP_MIN) return;
+		// 無敵状態なら通らない
+		if (isInvincibility_) return;
+
 		//OnCollisionWithEnemyBullet();
+		
+		// 近くにある敵の弾を消す
+		sweepEraser_->StartSweep();
 	}
 }
 void Player::OnCollisionWithEnemy()
@@ -189,10 +202,6 @@ void Player::OnCollisionWithEnemy()
 }
 void Player::OnCollisionWithEnemyBullet()
 {
-	// 早期return
-	if (isInvincibility_) return; // 無敵時間
-	if (hp_ <= HP_MIN) return; // 体力が0以下
-
 	// 無敵時間にする
 	isInvincibility_ = true;
 

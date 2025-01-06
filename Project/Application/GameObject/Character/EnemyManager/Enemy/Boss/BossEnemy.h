@@ -56,6 +56,7 @@ public:
 
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
+
 	// 死亡フラグ
 	bool IsDead() const override { return this->isDead_; }
 	void SetDeadFlag(bool setFlag) override { this->isDead_ = setFlag; }

@@ -3,655 +3,7 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "Cube",
-            "transform": {
-                "translation": [
-                    0.0,
-                    -20.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "Player",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.001",
-            "transform": {
-                "translation": [
-                    0.0,
-                    -30.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.002",
-            "transform": {
-                "translation": [
-                    3.5,
-                    -30.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.003",
-            "transform": {
-                "translation": [
-                    -3.5,
-                    -30.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.005",
-            "transform": {
-                "translation": [
-                    7.0,
-                    -30.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.007",
-            "transform": {
-                "translation": [
-                    -7.0,
-                    -30.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.016",
-            "transform": {
-                "translation": [
-                    30.0,
-                    -6.999998092651367,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.018",
-            "transform": {
-                "translation": [
-                    30.0,
-                    7.0,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.020",
-            "transform": {
-                "translation": [
-                    30.0,
-                    -3.499998092651367,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.021",
-            "transform": {
-                "translation": [
-                    30.0,
-                    3.5,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.022",
-            "transform": {
-                "translation": [
-                    30.0,
-                    1.9073486328125e-06,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.023",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    -4.530032128968742e-06,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.024",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    -3.500002861022949,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.025",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    3.499995231628418,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.027",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    -7.000002861022949,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.029",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    6.999995231628418,
-                    0.4999999701976776
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    1.5
-                ]
-            },
-            "file_name": "BarrierBox",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "円柱",
-            "transform": {
-                "translation": [
-                    -10.0,
-                    10.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "StaticEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "円柱.001",
-            "transform": {
-                "translation": [
-                    10.0,
-                    10.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -179.99997768819966
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "StaticEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.011",
-            "transform": {
-                "translation": [
-                    0.0,
-                    0.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -179.99997768819966
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.012",
-            "transform": {
-                "translation": [
-                    -40.0,
-                    -0.024295806884765625,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -119.34385438649778
-                ],
-                "scaling": [
-                    0.9999999403953552,
-                    0.9999999403953552,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.014",
-            "transform": {
-                "translation": [
-                    0.0,
-                    -40.024295806884766,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.031",
-            "transform": {
-                "translation": [
-                    40.0,
-                    -0.024295806884765625,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    139.21320253114504
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.033",
-            "transform": {
-                "translation": [
-                    20.0,
-                    20.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -179.99997768819966
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体.034",
-            "transform": {
-                "translation": [
-                    -20.0,
-                    20.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -179.99997768819966
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体",
+            "name": "Floor",
             "transform": {
                 "translation": [
                     0.0,
@@ -669,11 +21,677 @@
                     1.0
                 ]
             },
-            "file_name": "Floor",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "Player",
+            "transform": {
+                "translation": [
+                    0.0,
+                    -20.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "PLAYER"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy",
+            "transform": {
+                "translation": [
+                    -20.0,
+                    20.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BossEnemy",
+            "transform": {
+                "translation": [
+                    0.0,
+                    10.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "OMNI_EIGHT",
+                "bullet_behavior": "RANDOM",
+                "shoot_interval": 15
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy.001",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy.002",
+            "transform": {
+                "translation": [
+                    -40.0,
+                    -0.024295806884765625,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -119.34385438649778
+                ],
+                "scaling": [
+                    0.9999999403953552,
+                    0.9999999403953552,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy.003",
+            "transform": {
+                "translation": [
+                    0.0,
+                    -40.024295806884766,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy.004",
+            "transform": {
+                "translation": [
+                    40.0,
+                    -0.024295806884765625,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    139.21320253114504
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BasicEnemy.005",
+            "transform": {
+                "translation": [
+                    20.0,
+                    20.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox",
+            "transform": {
+                "translation": [
+                    0.0,
+                    -30.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.001",
+            "transform": {
+                "translation": [
+                    3.5,
+                    -30.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.002",
+            "transform": {
+                "translation": [
+                    -3.5,
+                    -30.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.003",
+            "transform": {
+                "translation": [
+                    7.0,
+                    -30.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.004",
+            "transform": {
+                "translation": [
+                    -7.0,
+                    -30.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.005",
+            "transform": {
+                "translation": [
+                    30.0,
+                    -6.999998092651367,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.006",
+            "transform": {
+                "translation": [
+                    30.0,
+                    7.0,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.007",
+            "transform": {
+                "translation": [
+                    30.0,
+                    -3.499998092651367,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.008",
+            "transform": {
+                "translation": [
+                    30.0,
+                    3.5,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.009",
+            "transform": {
+                "translation": [
+                    30.0,
+                    1.9073486328125e-06,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.010",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    -4.530032128968742e-06,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.014",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    -3.500002861022949,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.011",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    3.499995231628418,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.012",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    -7.000002861022949,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.013",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    6.999995231628418,
+                    0.4999999701976776
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
             "children": []
         }
     ]

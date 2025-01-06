@@ -3,7 +3,7 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "立方体",
+            "name": "Floor",
             "transform": {
                 "translation": [
                     0.0,
@@ -21,16 +21,17 @@
                     1.0
                 ]
             },
-            "file_name": "Floor",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "NONE"
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "Cube",
+            "name": "Player",
             "transform": {
                 "translation": [
                     0.0,
@@ -48,16 +49,17 @@
                     1.0
                 ]
             },
-            "file_name": "Player",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "PLAYER"
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "立方体.001",
+            "name": "BasicEnemy.002",
             "transform": {
                 "translation": [
                     20.0,
@@ -75,16 +77,20 @@
                     1.0
                 ]
             },
-            "file_name": "BasicEnemy",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "立方体.002",
+            "name": "BasicEnemy.001",
             "transform": {
                 "translation": [
                     0.0,
@@ -102,16 +108,20 @@
                     1.0
                 ]
             },
-            "file_name": "BasicEnemy",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "立方体.003",
+            "name": "BasicEnemy",
             "transform": {
                 "translation": [
                     -20.0,
@@ -129,16 +139,20 @@
                     1.0
                 ]
             },
-            "file_name": "BasicEnemy",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "円柱",
+            "name": "StaticEnemy",
             "transform": {
                 "translation": [
                     0.0,
@@ -156,11 +170,15 @@
                     1.0
                 ]
             },
-            "file_name": "StaticEnemy",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "TRIPLE_FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
             "children": []
         }
     ]

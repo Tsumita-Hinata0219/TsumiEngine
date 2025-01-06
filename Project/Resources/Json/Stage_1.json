@@ -3,7 +3,7 @@
     "objects": [
         {
             "type": "MESH",
-            "name": "Cube",
+            "name": "Player",
             "transform": {
                 "translation": [
                     0.0,
@@ -21,43 +21,17 @@
                     1.0
                 ]
             },
-            "file_name": "Player",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "PLAYER"
+            },
             "children": []
         },
         {
             "type": "MESH",
-            "name": "立方体.001",
-            "transform": {
-                "translation": [
-                    0.0,
-                    10.0,
-                    0.0
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    -179.99997768819966
-                ],
-                "scaling": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "file_name": "BasicEnemy",
-            "collider": {
-                "type": "NONE"
-            },
-            "load_model": true,
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "立方体",
+            "name": "Floor",
             "transform": {
                 "translation": [
                     0.0,
@@ -75,11 +49,43 @@
                     1.0
                 ]
             },
-            "file_name": "Floor",
             "collider": {
                 "type": "NONE"
             },
-            "load_model": true,
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BossEnemy",
+            "transform": {
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 20
+            },
             "children": []
         }
     ]

@@ -29,12 +29,9 @@ void BossEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(30.0f);
+	exeShot_->SetTimer(shotInterval_);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(
-		EnemyExecuteShot::Direction::Random, 
-		EnemyExecuteShot::BulletBehavior::Random
-	);
+	exeShot_->Init(shotDirection_, bulletBehavior_);
 
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
@@ -44,6 +41,10 @@ void BossEnemy::Init()
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
 	sphere_->data_.radius = 1.8f * 1.0f;
+
+
+	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
+	CollapseShield();
 }
 
 

@@ -23,7 +23,7 @@ void BarrierBox::Init()
 	// Colliderの初期化
 	aabb_ = std::make_unique<AABBCollider>(this);
 	aabb_->data_.center = trans_.GetWorldPos();
-	aabb_->data_.size = { 2.0f, 2.0f,2.0f };
+	aabb_->data_.size = { 2.0f * 1.5f, 2.0f * 1.5f, 2.0f * 1.5f };
 }
 
 

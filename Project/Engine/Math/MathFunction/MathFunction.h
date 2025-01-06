@@ -34,7 +34,7 @@ void Log(const std::string& message);
 // ファイルパスから拡張子を抽出する関数
 std::string GetExtension(const std::string& path);
 // ファイルパスからファイル名を抽出する関数
-std::string RemoveExtension(const std::string& filePath);
+std::string RemoveNameSuffix(const std::string& filePath);
 // 指定されたディレクトリ内のファイル名を取得
 std::vector<std::string> GetFileNamesInDirectory(const std::string& directoryPath);
 // 指定されたディレクトリ内のサブディレクトリ名を取得

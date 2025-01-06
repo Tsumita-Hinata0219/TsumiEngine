@@ -62,54 +62,46 @@ void DirectXCommon::Initialize() {
 /// </summary>
 void DirectXCommon::PreDrawForPostEffect() {
 
-	Commands commands = CommandManager::GetInstance()->GetCommands();
+	auto commandManager = CommandManager::GetInstance();
+	Commands commands = commandManager->GetCommands();
 	D3D12_RESOURCE_BARRIER barrier{};
+
+	// RTV を取得
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
-	
+	if (rtv.Resources.Get() == nullptr) {
+		// RTV が無効な場合はエラー処理
+		assert(false && "Invalid RTV resource.");
+		return;
+	}
+
 	// Barrierを設定する
-	// 今回のバリアはTransition
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// バリアを張る対象のリソース。現在のバックバッファに対して行う
 	barrier.Transition.pResource = rtv.Resources.Get();
-	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
-	// 遷移後のResourceState
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
+
 	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 
-	// 描画先のRTVとDSVを設定する
+	// 描画先のRTVとDSVを設定
 	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+	commands.List->OMSetRenderTargets(1, &rtv.Handles, false, &dsvHandle);
 
-
-	// 描画先のRTVを設定する
-	commands.List->OMSetRenderTargets(
-		1, &rtv.Handles,
-		false,
-		&dsvHandle);
-
-
-	// 指定した色で画面全体をクリアする
+	// 色で画面全体をクリア
 	Vector4 color = rtv.color;
-	float clearColor[] = { color.x, color.y, color.z, color.w }; // 青っぽい色。RGBAの順
+	float clearColor[] = { color.x, color.y, color.z, color.w };
+	commands.List->ClearRenderTargetView(rtv.Handles, clearColor, 0, nullptr);
 
-
-	commands.List->ClearRenderTargetView(
-		rtv.Handles,
-		clearColor,
-		0, nullptr);
-
-
-	//指定した深度で画面全体をクリアする
+	// 深度で画面全体をクリア
 	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
+	// ビューポートとシザーを設定
+	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_);
+	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_);
 
-	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
-	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
-
-	CommandManager::GetInstance()->SetCommands(commands);
+	// コマンドを更新
+	commandManager->SetCommands(commands);
 }
 
 
@@ -119,20 +111,25 @@ void DirectXCommon::PreDrawForPostEffect() {
 void DirectXCommon::PostDrawForPostEffect() {
 
 	Commands commands = CommandManager::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier{};
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
 
+	// リソースが無効でないか確認
+	if (rtv.Resources.Get() == nullptr) {
+		// エラーハンドリング（例：ログ出力）
+		assert(false && "Resource is null.");
+		return;
+	}
+
+	D3D12_RESOURCE_BARRIER barrier{};
 	// Barrierを設定する
-	// 今回のバリアはTransition
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+
 	// バリアを張る対象のリソース。現在のバックバッファに対して行う
 	barrier.Transition.pResource = rtv.Resources.Get();
-	// 遷移前(現在)のResourceState
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	// 遷移後のResourceState
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PIXEL_SHADER_RESOURCE;
+
 	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 }
@@ -143,60 +140,86 @@ void DirectXCommon::PostDrawForPostEffect() {
 /// </summary>
 void DirectXCommon::PreDrawForSwapChain() {
 
+	// DirectXCommon インスタンス取得
+	auto directXCommon = DirectXCommon::GetInstance();
+	if (!directXCommon) {
+		// エラー処理: DirectXCommon インスタンスが取得できない場合
+		return;
+	}
+
+	// スワップチェインおよび関連リソース取得
 	SwapChains swapChains{};
-	swapChains.swapChain = DirectXCommon::GetInstance()->swapChains_.swapChain.Get();
-	swapChains.Resources[0] = DirectXCommon::GetInstance()->swapChains_.Resources[0].Get();
-	swapChains.Resources[1] = DirectXCommon::GetInstance()->swapChains_.Resources[1].Get();
+	swapChains.swapChain = directXCommon->swapChains_.swapChain.Get();
+	swapChains.Resources[0] = directXCommon->swapChains_.Resources[0].Get();
+	swapChains.Resources[1] = directXCommon->swapChains_.Resources[1].Get();
+
+	// スワップチェインが無効な場合は処理を中断
+	if (!swapChains.swapChain || !swapChains.Resources[0] || !swapChains.Resources[1]) {
+		// エラー処理: スワップチェインまたはリソースが無効
+		return;
+	}
+
+	// コマンド取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
-	RTVProperty rtv[2] = {
-		RTVManager::GetRTV("SwapChain0")->GetRTVPrope(),
-		RTVManager::GetRTV("SwapChain1")->GetRTVPrope(),
-	};
+	if (!commands.List) {
+		// エラー処理: コマンドリストが無効
+		return;
+	}
 
-	// コマンドを積み込んで確定させる
-	// これから書き込むバックバッファのインデックスを取得
-	UINT backBufferIndex_ = swapChains.swapChain->GetCurrentBackBufferIndex();
+	// RTVプロパティ取得
+	RTVProperty rtv[2];
+	for (int i = 0; i < 2; ++i) {
+		auto rtvManager = RTVManager::GetRTV("SwapChain" + std::to_string(i));
+		if (rtvManager) {
+			rtv[i] = rtvManager->GetRTVPrope();
+		}
+		else {
+			// エラー処理: RTVManager から取得できなかった場合
+			return;
+		}
+	}
 
+	// バックバッファのインデックス取得
+	UINT backBufferIndex = swapChains.swapChain->GetCurrentBackBufferIndex();
 
-	// Barrierを設定する
-	// 今回のバリアはTransition
+	// バリア設定
+	D3D12_RESOURCE_BARRIER barrier{};
 	barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
-	// Noneにしておく
 	barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	// バリアを張る対象のリソース。現在のバックバッファに対して行う
-	barrier.Transition.pResource = swapChains.Resources[backBufferIndex_].Get();
-	// 遷移前(現在)のResourceState
+	barrier.Transition.pResource = swapChains.Resources[backBufferIndex].Get();
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_PRESENT;
-	// 遷移後のResourceState
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_RENDER_TARGET;
-	// TransitionBarrierを張る
+
+	// リソースバリアをコマンドリストに設定
 	commands.List->ResourceBarrier(1, &barrier);
 
-	DirectXCommon::GetInstance()->barrier_ = barrier;
+	// 現在のバリアを保存（後で使用する場合）
+	directXCommon->barrier_ = barrier;
 
-
-	// 描画先のRTVを設定する
+	// 描画先のRTVを設定
 	commands.List->OMSetRenderTargets(
-		1, &rtv[backBufferIndex_].Handles,
+		1, &rtv[backBufferIndex].Handles,
 		false,
 		nullptr);
 
-	// 指定した色で画面全体をクリアする
-	float clearColor[] = { 
-		rtv[backBufferIndex_].color.x, 
-		rtv[backBufferIndex_].color.y, 
-		rtv[backBufferIndex_].color.z, 
-		rtv[backBufferIndex_].color.w }; // 青っぽい色。RGBAの順
+	// 指定した色で画面全体をクリア
+	float clearColor[] = {
+		rtv[backBufferIndex].color.x,
+		rtv[backBufferIndex].color.y,
+		rtv[backBufferIndex].color.z,
+		rtv[backBufferIndex].color.w
+	};
 
 	commands.List->ClearRenderTargetView(
-		rtv[backBufferIndex_].Handles,
+		rtv[backBufferIndex].Handles,
 		clearColor,
 		0, nullptr);
 
-	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_); // Viewportを設定
-	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_); // Scissorを設定
+	// ビューポートとシザー矩形を設定
+	commands.List->RSSetViewports(1, &directXCommon->viewport_);
+	commands.List->RSSetScissorRects(1, &directXCommon->scissorRect_);
 
+	// コマンドをCommandManagerにセット
 	CommandManager::GetInstance()->SetCommands(commands);
 }
 
@@ -206,58 +229,56 @@ void DirectXCommon::PreDrawForSwapChain() {
 /// </summary>
 void DirectXCommon::PostDrawForSwapChain() {
 
-	SwapChains swapChains = DirectXCommon::GetInstance()->swapChains_;
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-	D3D12_RESOURCE_BARRIER barrier = DirectXCommon::GetInstance()->barrier_;
+	auto directXCommon = DirectXCommon::GetInstance();
+	auto commandManager = CommandManager::GetInstance();
 
-	// 状態を遷移
-	// 画面に描く処理はすべて終わり、画面に映すので、状態を遷移
-	// 今回はRenderTargetからPresentにする
+	// 必要な変数を取得
+	SwapChains& swapChains = directXCommon->swapChains_;
+	Commands commands = commandManager->GetCommands();
+	D3D12_RESOURCE_BARRIER& barrier = directXCommon->barrier_;
+
+	// 状態遷移：RenderTarget -> Present
 	barrier.Transition.StateBefore = D3D12_RESOURCE_STATE_RENDER_TARGET;
 	barrier.Transition.StateAfter = D3D12_RESOURCE_STATE_PRESENT;
-
-	// TransitionBarrierを張る
 	commands.List->ResourceBarrier(1, &barrier);
 
-	DirectXCommon::GetInstance()->barrier_ = barrier;
-
-
-	// コマンドをキックする
-	// コマンドリストの内容を確定させる・全てのコマンドを積んでからCloseすること
-	HRESULT result;
-	result = commands.List->Close();
-	assert(SUCCEEDED(result));
-
-	// GPUにコマンドリストの実行を行わせる
-	ID3D12CommandList* commandLists[] = { commands.List.Get()};
-	commands.Queue->ExecuteCommandLists(1, commandLists);
-
-
-	// Fenceの値を更新
-	DirectXCommon::GetInstance()->fenceValue_++;
-
-	// GPUがここまで辿り着いたときに、Fenceの値を指定した値に代入するようにSignalを送る
-	commands.Queue->Signal(DirectXCommon::GetInstance()->fence_.Get(), DirectXCommon::GetInstance()->fenceValue_);
-
-	// Fenceの値が指定したSignal値にたどり着いているか確認するか
-	// GetCompletedValueの初期値はFence作成時に渡した初期値
-	if (DirectXCommon::GetInstance()->fence_->GetCompletedValue() < DirectXCommon::GetInstance()->fenceValue_) {
-		// 指定したSignalにたどりついていないので、辿り着くまで待つようにイベントを設定する
-		DirectXCommon::GetInstance()->fence_->SetEventOnCompletion(DirectXCommon::GetInstance()->fenceValue_, DirectXCommon::GetInstance()->fenceEvent_);
-		// イベントを待つ
-		WaitForSingleObject(DirectXCommon::GetInstance()->fenceEvent_, INFINITE);
+	// コマンドリストを閉じる
+	HRESULT result = commands.List->Close();
+	if (FAILED(result)) {
+		// エラーハンドリング（例：ログ出力）
+		assert(false && "Failed to close command list.");
 	}
 
+	// コマンドリストを実行
+	ID3D12CommandList* commandLists[] = { commands.List.Get() };
+	commands.Queue->ExecuteCommandLists(1, commandLists);
+
+	// フェンスの値を更新してSignal
+	directXCommon->fenceValue_++;
+	commands.Queue->Signal(directXCommon->fence_.Get(), directXCommon->fenceValue_);
+
+	// GPUが指定した値に達していない場合は待機
+	if (directXCommon->fence_->GetCompletedValue() < directXCommon->fenceValue_) {
+		directXCommon->fence_->SetEventOnCompletion(directXCommon->fenceValue_, directXCommon->fenceEvent_);
+		WaitForSingleObject(directXCommon->fenceEvent_, INFINITE);
+	}
+
+	// 画面に描画
 	swapChains.swapChain->Present(1, 0);
 
-	// 次のフレーム用のコマンドリストを準備
+	// 次のフレーム用にコマンドリストをリセット
 	result = commands.Allocator->Reset();
-	assert(SUCCEEDED(result));
-	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
-	assert(SUCCEEDED(result));
+	if (FAILED(result)) {
+		assert(false && "Failed to reset command allocator.");
+	}
 
-	CommandManager::GetInstance()->SetCommands(commands);
-	DirectXCommon::GetInstance()->swapChains_ = swapChains;
+	result = commands.List->Reset(commands.Allocator.Get(), nullptr);
+	if (FAILED(result)) {
+		assert(false && "Failed to reset command list.");
+	}
+
+	// コマンド情報を更新
+	commandManager->SetCommands(commands);
 }
 
 
@@ -357,8 +378,6 @@ void DirectXCommon::CreateDevice() {
 /// ここまで↑
 /* ---DirectX初期化--- */
 
-
-
 /* ----- エラーと警告の抑制 ----- */
 
 void DirectXCommon::DebugErrorInfoQueue() {
@@ -406,59 +425,6 @@ void DirectXCommon::DebugErrorInfoQueue() {
 
 #endif // _DEBUG
 }
-
-
-
-/* ----- コマンドキューを生成する ----- */
-
-//void DirectXCommon::CreateCommandQueue() {
-//
-//	// コマンドキューを生成する
-//	D3D12_COMMAND_QUEUE_DESC commandQueueDesc{};
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandQueue(
-//		&commandQueueDesc,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Queue));
-//
-//
-//	// コマンドキューの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
-
-
-
-/* ----- コマンドアロケータを生成する ----- */
-//void DirectXCommon::CreateCommandAllocator() {
-//
-//	// コマンドアロケータを生成する
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandAllocator(
-//		D3D12_COMMAND_LIST_TYPE_DIRECT,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.Allocator));
-//
-//
-//	// コマンドアロケータの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
-
-
-
-/* ----- コマンドリストを生成する ----- */
-
-//void DirectXCommon::CreateCommandList() {
-//
-//	// コマンドリストを生成する
-//	HRESULT result;
-//	result = DirectXCommon::GetInstance()->device_->CreateCommandList(
-//		0, D3D12_COMMAND_LIST_TYPE_DIRECT,
-//		DirectXCommon::GetInstance()->commands_.Allocator.Get(),
-//		nullptr,
-//		IID_PPV_ARGS(&DirectXCommon::GetInstance()->commands_.List));
-//
-//
-//	// コマンドリストの生成がうまくいかなかったので起動できない
-//	assert(SUCCEEDED(result));
-//}
 
 
 

@@ -28,12 +28,9 @@ void StaticEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(15.0f);
+	exeShot_->SetTimer(shotInterval_);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(
-		EnemyExecuteShot::Direction::Omni_Four,
-		EnemyExecuteShot::BulletBehavior::Resistant
-	);
+	exeShot_->Init(shotDirection_, bulletBehavior_);
 
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ

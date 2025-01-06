@@ -48,6 +48,14 @@ public:
 	void StartSweep();
 
 
+#pragma region Accessor アクセッサ
+
+	// ペアレントを結ぶ
+	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>

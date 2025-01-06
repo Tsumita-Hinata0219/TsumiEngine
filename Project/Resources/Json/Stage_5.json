@@ -115,7 +115,7 @@
                 "type": "ENEMY",
                 "shot_direction": "OMNI_EIGHT",
                 "bullet_behavior": "RANDOM",
-                "shoot_interval": 20
+                "shoot_interval": 60
             },
             "children": []
         },

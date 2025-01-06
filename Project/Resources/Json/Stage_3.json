@@ -177,7 +177,7 @@
                 "type": "ENEMY",
                 "shot_direction": "CROSS",
                 "bullet_behavior": "RANDOM",
-                "shoot_interval": 20
+                "shoot_interval": 25
             },
             "children": []
         }

@@ -10,7 +10,7 @@ void BulletSweepEraser::Init()
 	trans_.Init();
 
 	// 半径。firstが基本、secondが肥大化した半径
-	radius_ = std::make_pair(2.0f, 5.0f);
+	radius_ = std::make_pair(2.0f, 10.0f);
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
@@ -19,8 +19,10 @@ void BulletSweepEraser::Init()
 	sphere_->SetActive(false);
 
 	// スイープ時間の初期化
-	sweepTimer_.Init(0.0f, 0.8f * 60.0f);
+	sweepTimer_.Init(0.0f, 1.5f * 60.0f);
 
+	// スイープ中フラグをfalseにする
+	isSweeping_ = false;
 }
 
 
@@ -39,7 +41,7 @@ void BulletSweepEraser::Update()
 	if (isSweeping_)
 	{
 		// タイマー更新
-		sweepTimer_.Update();
+		sweepTimer_.Update(true);
 
 		// スイープ終了
 		if (sweepTimer_.IsFinish()) {

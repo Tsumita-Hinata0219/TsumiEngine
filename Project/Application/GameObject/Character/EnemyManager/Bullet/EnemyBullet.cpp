@@ -69,17 +69,25 @@ void EnemyBullet::Draw2DBack() {}
 // 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetCategory() == Attributes::Category::PLAYER) {
+	// PlayerのBodyかBulletと衝突したら
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BODY || 
+		object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// タイプが消えない弾ならreturn
 		if (isResistant_) { return; }
 		// 死亡状態に設定
 		MarkAsDead();
 	}
+	else if (object->GetCategory() == Attributes::Category::PLAYER && object->GetType() == Attributes::Type::SWEERER) {
+		// スイーパー相手なら死亡
+		// 死亡状態に設定
+		MarkAsDead();
+	}
 	else if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
-		// 衝突相手が地形ならタイプ構わずフラグを立てる
-		// 死亡状態に設定
+		// 地形相手なら死亡
 		MarkAsDead();
 	}
 }

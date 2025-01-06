@@ -71,7 +71,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 射撃処理
-	//exeShot_->Update();
+	exeShot_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();

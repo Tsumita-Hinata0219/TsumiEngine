@@ -208,7 +208,7 @@ void PlayerMovement::CalcBodyOrienation(Vector2 input, Vector3 direction)
 void PlayerMovement::MoveLimited()
 {
 	// 移動限界
-	const float kMoveMit = 50.0f;
+	const float kMoveMit = 50.0f / 2.0f;
 	pTrans_->srt.translate.x = max(pTrans_->srt.translate.x, -kMoveMit);
 	pTrans_->srt.translate.x = min(pTrans_->srt.translate.x, +kMoveMit);
 	pTrans_->srt.translate.z = max(pTrans_->srt.translate.z, -kMoveMit);

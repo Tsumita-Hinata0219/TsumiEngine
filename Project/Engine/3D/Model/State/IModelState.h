@@ -14,9 +14,10 @@ enum StateType {
 	OBJ,
 	GLTF,
 };
-enum class CullingMode {
-	None,
-	Back,
+enum class RenderState {
+	None,			        // 普通の描画 (背面カリング, 全て書き込み)
+	CullingMode_None,       //　カリングなし
+	DepthWriteMask_ZERO,    // DepthWriteMaskをZeroに設定
 };
 
 // Modelの前方宣言
@@ -42,10 +43,10 @@ public: // メンバ変数
 
 #pragma region Accessor アクセッサ
 
-	// カリングモード
-	void SetCullMode(const CullingMode& setMode) { this->cullMode_ = setMode; }
+	// RenderState
+	void SetRenderState(const RenderState& setState) { this->renderState_ = setState; }
 
-	// データのセット
+	// Data
 	ModelDatas GetModelDatas() { return this->datas_; }
 	void SetModelDatas(const ModelDatas& setData) { this->datas_ = setData; }
 	
@@ -124,6 +125,6 @@ protected: // メンバ変数
 	// モデルステート
 	StateType stateType_ = NONE;
 
-	// カリングモード
-	CullingMode cullMode_ = CullingMode::Back;
+	// レンダーステート
+	RenderState renderState_ = RenderState::None;
 };

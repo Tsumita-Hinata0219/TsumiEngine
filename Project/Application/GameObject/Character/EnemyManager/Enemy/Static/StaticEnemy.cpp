@@ -52,7 +52,7 @@ void StaticEnemy::Init()
 	addRadSpeed_ = 1.0f;
 	
 	// HPの設定
-	hp_ = 25;
+	hp_ = 10;
 }
 
 

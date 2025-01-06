@@ -35,7 +35,7 @@ void BasicEnemy::Init()
 	trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
 
 	// HPの設定
-	hp_ = 15;
+	hp_ = 5;
 
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ

@@ -11,7 +11,7 @@ void EnemyShield::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Shield", "Shield.obj");
 	model_ = modelManager_->GetModel("Shield");
-	model_->SetCullMode(CullingMode::None);
+	model_->SetRenderState(RenderState::None);
 
 	// カラーの初期設定
 	color_ = Vector4::one;

@@ -55,8 +55,8 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// CullMode
-	void SetCullMode(const CullingMode& setMode) { this->modelState_->SetCullMode(setMode); }
+	// RenderState
+	void SetRenderState(const RenderState& setState) { this->modelState_->SetRenderState(setState); }
 
 	// ModelResources
 	ModelDatas GetModelResources() const { return this->modelState_->GetModelDatas(); }

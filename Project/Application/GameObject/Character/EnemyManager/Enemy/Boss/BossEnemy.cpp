@@ -1,5 +1,6 @@
 #include "BossEnemy.h"
-
+#include "../../../Player/Player.h"
+#include "../../EnemyManager.h"
 
 
 /// <summary>
@@ -33,6 +34,17 @@ void BossEnemy::Init()
 	// 射撃方法とバレット挙動
 	exeShot_->Init(shotDirection_, bulletBehavior_);
 
+	// ヒットリアクション関連数値の初期設定
+	// ヒットリアクションフラグ
+	isHitReactioning_ = false;
+	// タイマー
+	hitReactionTimer_.Init(0.0f, 0.4f * 60.0f);
+	// スケール
+	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
+	// 色加算
+	hitReactionColor_.first = 0.8f;
+	hitReactionColor_.second = 0.0f;
+
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
 	shield_->Init();
@@ -42,6 +54,8 @@ void BossEnemy::Init()
 	sphere_->data_.center = trans_.GetWorldPos();
 	sphere_->data_.radius = 1.8f * 1.0f;
 
+	// HPの設定
+	hp_ = 15;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
 	CollapseShield();
@@ -57,7 +71,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 射撃処理
-	exeShot_->Update();
+	//exeShot_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -97,7 +111,25 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 {
 	if (object->GetCategory() == Attributes::Category::PLAYER &&
 		object->GetType() == Attributes::Type::BULLET) {
-		Log("Hit\n");
+
+		// HPを減らす
+		hp_--;
+
+		// ヒットリアクション中にする
+		isHitReactioning_ = true;
+
+		// ヒットリアクションのタイマースタート
+		hitReactionTimer_.Start();
+
+		// エフェクトを出す
+		enemyManager_->AddNewHitEffect(this);
+
+		// HPが0以下なら死亡
+		if (hp_ <= 0) {
+			// 死亡状態に設定
+			MarkAsDead();
+			player_->AddKillCount();
+		}
 	}
 }
 
@@ -109,6 +141,16 @@ void BossEnemy::CollapseShield()
 {
 	// シールドが壊れた時の処理
 	shield_->OnShieldBroken();
+}
+
+
+/// <summary>
+/// マークを死亡状態に設定
+/// </summary>
+void BossEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }
 
 

@@ -70,9 +70,15 @@ public:
 private:
 
 	/// <summary>
+	/// マークを死亡状態に設定
+	/// </summary>
+	void MarkAsDead();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();
+
 
 private:
 

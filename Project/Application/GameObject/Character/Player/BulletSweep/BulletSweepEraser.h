@@ -33,14 +33,14 @@ public:
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw3D() override;
-	void Draw2DFront() override;
-	void Draw2DBack() override;
+	void Draw3D() override {};
+	void Draw2DFront() override {};
+	void Draw2DBack() override {};
 
 	/// <summary>
 	/// 衝突判定コールバック関数
 	/// </summary>
-	void onCollision([[maybe_unused]] IObject* object) override;
+	void onCollision([[maybe_unused]] IObject* object) override {};
 
 	/// <summary>
 	/// スイープ開始

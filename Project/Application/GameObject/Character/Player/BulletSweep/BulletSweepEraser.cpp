@@ -59,28 +59,6 @@ void BulletSweepEraser::Update()
 
 
 /// <summary>
-/// 描画処理
-/// </summary>
-void BulletSweepEraser::Draw3D()
-{
-}
-void BulletSweepEraser::Draw2DFront()
-{
-}
-void BulletSweepEraser::Draw2DBack()
-{
-}
-
-
-/// <summary>
-/// 衝突判定コールバック関数
-/// </summary>
-void BulletSweepEraser::onCollision([[maybe_unused]]IObject* object)
-{
-}
-
-
-/// <summary>
 /// スイープ開始
 /// </summary>
 void BulletSweepEraser::StartSweep()

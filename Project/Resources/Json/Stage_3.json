@@ -84,7 +84,7 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 20
+                "shoot_interval": 30
             },
             "children": []
         },
@@ -115,7 +115,7 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 20
+                "shoot_interval": 30
             },
             "children": []
         },
@@ -146,7 +146,7 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 20
+                "shoot_interval": 30
             },
             "children": []
         },
@@ -175,8 +175,8 @@
             },
             "category": {
                 "type": "ENEMY",
-                "shot_direction": "TRIPLE_FORWARD",
-                "bullet_behavior": "RESISTANT",
+                "shot_direction": "CROSS",
+                "bullet_behavior": "RANDOM",
                 "shoot_interval": 20
             },
             "children": []

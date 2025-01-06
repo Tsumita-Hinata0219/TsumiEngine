@@ -70,6 +70,21 @@ public:
 private:
 
 	/// <summary>
+	/// 移動処理
+	/// </summary>
+	void Move();
+
+	/// <summary>
+	/// Velocityの計算処理
+	/// </summary>
+	void CalcVelocity();
+
+	/// <summary>
+	/// 向きの計算処理
+	/// </summary>
+	void CalcRotate();
+
+	/// <summary>
 	/// マークを死亡状態に設定
 	/// </summary>
 	void MarkAsDead();
@@ -93,20 +108,22 @@ private:
 
 	// ライト
 	DirectionalLightData light_{};
+	// カラー
+	Vector4 modelColor_ = Vector4::one;
 
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;
 
-	// カラー
-	Vector4 modelColor_ = Vector4::one;
-
 	// HP
 	uint32_t hp_ = 0;
 
+	// 移動速度
+	Vector3 velocity_{};
+	float moveVector_ = 0.05f;
+	// playerとの最低距離
+	float minToPlayer_ = 4.0f;
+
 	// シールド　
 	std::unique_ptr<EnemyShield> shield_;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
 
 };

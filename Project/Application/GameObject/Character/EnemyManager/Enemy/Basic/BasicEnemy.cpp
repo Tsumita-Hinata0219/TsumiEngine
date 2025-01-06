@@ -32,7 +32,7 @@ void BasicEnemy::Init()
 	// BodyTransformの初期化
 	trans_.Init();
 	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
-	trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
+	//trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
 
 	// HPの設定
 	hp_ = 5;
@@ -56,7 +56,7 @@ void BasicEnemy::Init()
 	stateVector_[enum_val(BasicEnemyStateType::APPROACH)] = std::make_unique<BasicEnemyApproachState>();
 	stateVector_[enum_val(BasicEnemyStateType::DEATH)] = std::make_unique<BasicEnemyDeathState>();
 	// 初期ステートの設定 && 初期ステートの初期化処理
-	stateNo_ = enum_val(BasicEnemyStateType::SPAWN);
+	stateNo_ = enum_val(BasicEnemyStateType::IDLE);
 	currentStateNo_ = stateNo_;
 	stateVector_[currentStateNo_]->Enter(this);
 

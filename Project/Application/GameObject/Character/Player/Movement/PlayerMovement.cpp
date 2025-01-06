@@ -71,7 +71,11 @@ void PlayerMovement::Update()
 	}
 	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 
-		if (pPlayer_->IsShooting()) {
+		// 射撃中 or RStickが入力されている場合は
+		// Rstickの入力方向に姿勢を合わせる
+		if (pPlayer_->IsShooting() ||
+			std::abs(iRStick_.x) >= DZone_ ||
+			std::abs(iRStick_.y) >= DZone_) {
 			// RStickからY軸の姿勢を合わせる
 			CalcBodyOrienation(iRStick_, RStickMoveDirection_);
 		}

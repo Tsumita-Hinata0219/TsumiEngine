@@ -78,7 +78,6 @@ private:
 	GameCamera* pGameCamera_ = nullptr;
 	Transform* pTrans_{};
 
-
 	// 移動方向
 	Vector3 LStickMoveDirection_{};
 	Vector3 RStickMoveDirection_{};

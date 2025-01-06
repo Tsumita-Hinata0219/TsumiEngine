@@ -145,6 +145,9 @@ std::string JsonManager::ScanningEntityName(nlohmann::json& object)
 
 		// ファイル名
 		entityName = object["name"];
+		
+		// 連番であれば、抽出
+		entityName = RemoveNameSuffix(entityName);
 	}
 
 	return entityName;

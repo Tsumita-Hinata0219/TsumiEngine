@@ -91,9 +91,9 @@ private:
 	/// <summary>
 	/// 新しいEnemyを生成する
 	/// </summary>
-	void CreateBasicEnemy(const SRT& setSRT);
-	void CreateStaticEnemy(const SRT& setSRT);
-	void CreateBossEnemy(const SRT& setSRT);
+	void CreateBasicEnemy(const EntityData& setEntityData);
+	void CreateStaticEnemy(const EntityData& setEntityData);
+	void CreateBossEnemy(const EntityData& setEntityData);
 
 	/// <summary>
 	/// 新しいEnemyBulletを生成する

@@ -69,7 +69,7 @@ public:
 	// ShotProperty
 	void SetShotProperty(EnemyExecuteShot::Direction direction, EnemyExecuteShot::BulletBehavior behavior, float interval) {
 		this->shotDirection_ = direction;
-		this->shotBehavior_ = behavior;
+		this->bulletBehavior_ = behavior;
 		this->shotInterval_ = interval;
 	}
 
@@ -116,7 +116,7 @@ protected:
 	// 射撃方向
 	EnemyExecuteShot::Direction shotDirection_ = EnemyExecuteShot::Direction::Forward;
 	// 弾のタイプ
-	EnemyExecuteShot::BulletBehavior shotBehavior_ = EnemyExecuteShot::BulletBehavior::Common;
+	EnemyExecuteShot::BulletBehavior bulletBehavior_ = EnemyExecuteShot::BulletBehavior::Common;
 	// 射撃インターバル
 	float shotInterval_ = 0.0f;
 

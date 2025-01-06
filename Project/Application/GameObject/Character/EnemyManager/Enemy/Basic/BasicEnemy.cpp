@@ -25,12 +25,9 @@ void BasicEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(15.0f);
+	exeShot_->SetTimer(shotInterval_);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(
-		EnemyExecuteShot::Direction::Forward,
-		EnemyExecuteShot::BulletBehavior::Common
-	);
+	exeShot_->Init(shotDirection_, bulletBehavior_);
 
 	// BodyTransformの初期化
 	trans_.Init();

@@ -126,13 +126,13 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 		if (entityData) {
 
 			if (entityData->entityName == "BasicEnemy") {
-				CreateBasicEnemy(entityData->srt);
+				CreateBasicEnemy(*entityData.get());
 			}
 			else if (entityData->entityName == "StaticEnemy") {
-				CreateStaticEnemy(entityData->srt);
+				CreateStaticEnemy(*entityData.get());
 			}
 			else if (entityData->entityName == "BossEnemy") {
-				CreateBossEnemy(entityData->srt);
+				CreateBossEnemy(*entityData.get());
 			}
 		}
 	}
@@ -174,7 +174,7 @@ void EnemyManager::EliminatedChecker()
 /// <summary>
 /// 新しいEnemyを生成する
 /// </summary>
-void EnemyManager::CreateBasicEnemy(const SRT& setSRT)
+void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
@@ -182,14 +182,18 @@ void EnemyManager::CreateBasicEnemy(const SRT& setSRT)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetShotProperty(
+		setEntityData.enemyData.direction,
+		setEntityData.enemyData.behavior,
+		setEntityData.enemyData.shotInterval);
 	newEnemy->Init();
-	newEnemy->SetRotate(setSRT.rotate);
-	newEnemy->SetTranslate(setSRT.translate);
+	newEnemy->SetRotate(setEntityData.srt.rotate);
+	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(newEnemy);
 }
-void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
+void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
@@ -197,14 +201,18 @@ void EnemyManager::CreateStaticEnemy(const SRT& setSRT)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetShotProperty(
+		setEntityData.enemyData.direction,
+		setEntityData.enemyData.behavior,
+		setEntityData.enemyData.shotInterval);
 	newEnemy->Init();
-	newEnemy->SetRotate(setSRT.rotate);
-	newEnemy->SetTranslate(setSRT.translate);
+	newEnemy->SetRotate(setEntityData.srt.rotate);
+	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(newEnemy);
 }
-void EnemyManager::CreateBossEnemy(const SRT& setSRT)
+void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
@@ -212,9 +220,13 @@ void EnemyManager::CreateBossEnemy(const SRT& setSRT)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetShotProperty(
+		setEntityData.enemyData.direction,
+		setEntityData.enemyData.behavior,
+		setEntityData.enemyData.shotInterval);
 	newEnemy->Init();
-	newEnemy->SetRotate(setSRT.rotate);
-	newEnemy->SetTranslate(setSRT.translate);
+	newEnemy->SetRotate(setEntityData.srt.rotate);
+	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(newEnemy);

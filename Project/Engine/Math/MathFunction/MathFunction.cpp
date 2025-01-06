@@ -53,7 +53,7 @@ std::string GetExtension(const std::string& path)
 }
 
 // ファイルパスからファイル名を抽出する関数
-std::string RemoveExtension(const std::string& filePath)
+std::string RemoveNameSuffix(const std::string& filePath)
 {
 	size_t lastDotPos = filePath.find_last_of('.');
 	if (lastDotPos != std::string::npos) {

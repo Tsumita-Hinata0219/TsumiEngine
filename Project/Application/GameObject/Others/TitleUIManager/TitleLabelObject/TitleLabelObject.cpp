@@ -15,9 +15,9 @@ void TitleLabelObject::Init()
 	// Modelの設定
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel(file_.first, file_.second);
-	model_ = modelManager_->GetModel(RemoveExtension(file_.second)); // ファイル名だけを抽出
+	model_ = modelManager_->GetModel(RemoveNameSuffix(file_.second)); // ファイル名だけを抽出
 	
-	uint32_t dds = TextureManager::LoadTexture(file_.first, RemoveExtension(file_.second) + ".dds");
+	uint32_t dds = TextureManager::LoadTexture(file_.first, RemoveNameSuffix(file_.second) + ".dds");
 	model_->SetMaterialTexture(dds);
 
 	// 初期カラーは黒
@@ -39,7 +39,7 @@ void TitleLabelObject::Update()
 
 	if (ImGui::TreeNode("TitleLabel")) {
 
-		trans_.DrawImGui(RemoveExtension(file_.second));
+		trans_.DrawImGui(RemoveNameSuffix(file_.second));
 		ImGui::TreePop();
 	}
 

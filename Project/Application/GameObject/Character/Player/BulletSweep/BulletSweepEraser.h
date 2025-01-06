@@ -42,6 +42,19 @@ public:
 	/// </summary>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// スイープ開始
+	/// </summary>
+	void StartSweep();
+
+
+private:
+
+	/// <summary>
+	/// 半径の計算
+	/// </summary>
+	void CalcRadius();
+
 
 private:
 
@@ -49,6 +62,15 @@ private:
 	Transform trans_{};
 
 	// コライダー
-	std::unique_ptr<AABBCollider> aabb_;
+	std::unique_ptr<SphereCollider> sphere_;
+
+	// 半径
+	std::pair<float, float> radius_;
+
+	// スイープ中かどうか
+	bool isSweeping_ = false;
+
+	// sweepの時間
+	Timer sweepTimer_{};
 
 };

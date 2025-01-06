@@ -69,6 +69,7 @@ public:
 
 	// アクティブ
 	virtual bool IsActive() const { return this->isActive_; }
+	virtual void SetActive(bool isActive) { this->isActive_ = isActive; }
 
 	// 属性
 	Attributes::Category GetCategory() const { return this->attribute_.first; }

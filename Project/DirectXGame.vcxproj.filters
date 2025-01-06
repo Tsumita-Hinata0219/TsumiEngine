@@ -576,6 +576,7 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1464,6 +1465,7 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

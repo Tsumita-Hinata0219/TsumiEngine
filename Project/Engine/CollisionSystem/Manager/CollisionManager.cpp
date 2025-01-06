@@ -81,6 +81,10 @@ void CollisionManager::CheckCollisions()
 			if ((*itr1)->GetCategory() == (*itr2)->GetCategory()) {
 				continue;
 			}
+			// どちらかが非アクティブなら判定をスキップする
+			if (!(*itr1)->IsActive() || !(*itr2)->IsActive()) {
+				continue;
+			}
 
 			// 衝突判定をとる
 			if ((*itr1)->Intersects((**itr2))) {

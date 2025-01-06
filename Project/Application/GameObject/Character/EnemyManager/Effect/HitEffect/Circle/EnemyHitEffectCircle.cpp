@@ -11,7 +11,7 @@ void EnemyHitEffectCircle::Init()
 	// モデルの設定
 	modelManager_->LoadModel("Obj/Enemys/Effect/HitCircle", "HitCircle.obj");
 	model_ = modelManager_->GetModel("HitCircle");
-	//model_->SetRenderState(RenderState::DepthWriteMask_ZERO);
+	model_->SetRenderState(RenderState::DepthWriteMask_ZERO);
 
 	// トランスフォームの初期化
 	trans_.Init();

@@ -37,7 +37,7 @@ private:
 	D3D12_CULL_MODE cullMode_ = D3D12_CULL_MODE_BACK;
 
 	// DepthWriteMask
-	D3D12_DEPTH_WRITE_MASK depthWriteMask_ = D3D12_DEPTH_WRITE_MASK_ALL;
+	bool depthWriteMask_ = D3D12_DEPTH_WRITE_MASK_ALL;
 
 };
 

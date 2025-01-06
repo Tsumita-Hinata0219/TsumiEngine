@@ -88,7 +88,7 @@ private:
 	float moveSpeed_ = 0.27f;
 
 	// 姿勢計算の補間速度
-	float orientationLerpSpeed_ = 0.1f;
+	float orientationLerpSpeed_ = 0.5f;
 
 	// Inputクラス
 	Input* input_ = nullptr;

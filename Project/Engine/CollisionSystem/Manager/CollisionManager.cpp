@@ -122,7 +122,6 @@ void CollisionManager::DrawImGui()
 /// <summary>
 /// Colliderのインスタンスの取得
 /// </summary>
-
 const std::unordered_map<std::type_index, ColliderFactory>& CollisionManager::GetColliderFactoryMap()
 {
 	static const std::unordered_map<std::type_index, ColliderFactory> factoryMap =

@@ -128,7 +128,6 @@ private: // メンバ変数
 	ObjectPool<EnemyBullet> bulletPool_;
 	// BulletのList配列
 	std::list<EnemyBullet*> bulletList_;
-	std::list<std::unique_ptr<EnemyBullet>> bulletList2_;
 
 	// EffectのPool
 	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;

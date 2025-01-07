@@ -56,7 +56,7 @@ void PlayerMovement::Update()
 	PadMove();
 	KeyMove();
 
-	// カメラのタイプで処理を分ける
+	// カメラタイプ : 三人称視点
 	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
 
 		if (pPlayer_->IsShooting()) {
@@ -69,6 +69,7 @@ void PlayerMovement::Update()
 			CalcBodyOrienation(iKeys_, keyMoveDirection_);
 		}
 	}
+	// カメラタイプ : 俯瞰視点
 	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 
 		// 射撃中 or RStickが入力されている場合は

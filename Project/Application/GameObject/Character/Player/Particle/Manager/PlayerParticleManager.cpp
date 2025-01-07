@@ -24,7 +24,7 @@ void PlayerParticleManager::Init()
 /// </summary>
 void PlayerParticleManager::Update()
 {
-	MovementParticle();
+	//MovementParticle();
 
 
 	// IParticle

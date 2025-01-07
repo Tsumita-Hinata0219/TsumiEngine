@@ -57,12 +57,9 @@ void EnemyManager::Update()
 	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
-	// 死亡フラグが立っていたら削除
+	// 死亡した弾丸を整理し、プールに返却
 	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
-			// 返却する前にリセット処理
-			bullet->Reset();
-			// プールに返却
 			bulletPool_.Return(bullet);
 			return true;
 		}

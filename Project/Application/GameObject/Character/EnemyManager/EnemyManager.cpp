@@ -54,16 +54,28 @@ void EnemyManager::Update()
 	);
 
 	// Bulletの更新処理
-	for (EnemyBullet* bullet : bulletList_) {
+	//for (EnemyBullet* bullet : bulletList_) {
+	//	bullet->Update();
+	//}
+	//// 死亡フラグが立っていたら削除
+	//bulletList_.remove_if([this](EnemyBullet* bullet) {
+	//	if (bullet->IsDead()) {
+	//		// 返却する前にリセット処理
+	//		bullet->Reset();
+	//		// プールに返却
+	//		bulletPool_.Return(bullet);
+	//		return true;
+	//	}
+	//	return false;
+	//	}
+	//);
+	for (auto& bullet : bulletList2_) {
 		bullet->Update();
 	}
-	// 死亡フラグが立っていたら削除
-	bulletList_.remove_if([this](EnemyBullet* bullet) {
+	bulletList2_.remove_if([this](std::unique_ptr<EnemyBullet> bullet) {
 		if (bullet->IsDead()) {
 			// 返却する前にリセット処理
 			bullet->Reset();
-			// プールに返却
-			bulletPool_.Return(bullet);
 			return true;
 		}
 		return false;
@@ -106,7 +118,10 @@ void EnemyManager::Draw3D()
 	}
 
 	// Bulletsの描画
-	for (EnemyBullet* bullet : bulletList_) {
+	/*for (EnemyBullet* bullet : bulletList_) {
+		bullet->Draw3D();
+	}*/
+	for (auto& bullet : bulletList2_) {
 		bullet->Draw3D();
 	}
 
@@ -239,7 +254,8 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState)
 {
 	// オブジェクトプール空新しいバレットを取得
-	EnemyBullet* newBullet = bulletPool_.Get();
+	//EnemyBullet* newBullet = bulletPool_.Get();
+	std::unique_ptr<EnemyBullet> newBullet = std::make_unique<EnemyBullet>();
 
 	// newBulletの初期化
 	newBullet->SetResistant(isState);
@@ -249,7 +265,8 @@ void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isSt
 	newBullet->SetRotationFromVelocity();
 
 	// リストに追加
-	bulletList_.push_back(newBullet);
+	//bulletList_.push_back(newBullet);
+	bulletList2_.push_back(newBullet);
 }
 
 

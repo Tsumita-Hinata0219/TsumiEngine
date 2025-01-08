@@ -17,13 +17,13 @@ EnemyExecuteShot::EnemyExecuteShot(EnemyManager* manager, IEnemy* owner)
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyExecuteShot::Init(enemy::ShotDirection direction, enemy::BulletBehavior behavior)
+void EnemyExecuteShot::Init(enemy::ShotFuncData data)
 {
 	// 関数設定
-	SetShotFunc(direction);
+	SetShotFunc(data.direction);
 
 	// バレット挙動
-	behavior_ = behavior;
+	behavior_ = data.behavior;
 	if (behavior_ == enemy::BulletBehavior::Common) {
 		behabirState_ = false;
 	}
@@ -39,6 +39,7 @@ void EnemyExecuteShot::Init(enemy::ShotDirection direction, enemy::BulletBehavio
 
 	// タイマーの設定はアクセッサでやってる
 	// 射撃タイマー開始
+	this->shotTimer_.Init(0.0f, data.shotInterval);
 	shotTimer_.Start();
 }
 

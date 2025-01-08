@@ -31,7 +31,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(enemy::MovementBehavior movement);
+	void Init(enemy::MovementFuncData data);
 
 	/// <summary>
 	/// 更新処理

@@ -9,6 +9,7 @@
 #include "Transform/Transform.h"
 
 #include "../ExecuteShot/EnemyExecuteShot.h"
+#include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
 
 
@@ -70,6 +71,9 @@ public:
 	// ShotProperty
 	void SetShotProperty(enemy::ShotFuncData data) { this->shotFuncData_ = data; }
 
+	// MovementProperty
+	void SetMovementProperty(enemy::MovementFuncData data) { this->movementData_ = data; }
+
 #pragma endregion 
 
 
@@ -112,6 +116,12 @@ protected:
 	std::unique_ptr<EnemyExecuteShot> exeShot_;
 	// 射撃データ
 	enemy::ShotFuncData shotFuncData_;
+
+	// 移動処理
+	std::unique_ptr<EnemyMovement> movement_;
+	// 移動データ
+	enemy::MovementFuncData movementData_;
+
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

@@ -33,7 +33,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(enemy::ShotDirection direction, enemy::BulletBehavior behavior);
+	void Init(enemy::ShotFuncData data);
 
 	/// <summary>
 	/// 更新処理
@@ -42,9 +42,6 @@ public:
 
 
 #pragma region Accessor アクセッサ
-
-	// Timer
-	void SetTimer(float interval) { this->shotTimer_.Init(0.0f, interval); }
 
 #pragma endregion
 

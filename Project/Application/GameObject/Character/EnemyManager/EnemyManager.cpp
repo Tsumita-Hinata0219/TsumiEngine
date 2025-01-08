@@ -181,6 +181,7 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);
@@ -197,6 +198,7 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);
@@ -213,6 +215,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);

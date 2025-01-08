@@ -18,10 +18,10 @@ EnemyMovement::EnemyMovement(EnemyManager* manager, IEnemy* owner, Player* playe
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyMovement::Init(enemy::MovementBehavior movement)
+void EnemyMovement::Init(enemy::MovementFuncData data)
 {
 	// 関数設定
-	SetMovementFunc(movement);
+	SetMovementFunc(data.behavior);
 }
 
 

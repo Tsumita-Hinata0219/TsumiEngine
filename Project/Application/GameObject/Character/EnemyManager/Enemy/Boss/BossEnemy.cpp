@@ -30,9 +30,12 @@ void BossEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(shotFuncData_.shotInterval);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(shotFuncData_.direction, shotFuncData_.behavior);
+	exeShot_->Init(shotFuncData_);
+
+	// 移動処理クラス
+	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
+	movement_->Init(movementData_);
 
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ

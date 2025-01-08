@@ -44,11 +44,12 @@ namespace enemy {
 		float shotInterval = 0.0f;
 	};
 	struct MovementFuncData {
-		MovementBehavior movement;
+		MovementBehavior behavior;
 		bool isTilt_ = false;
 		float velocity_ = 0.0f;
 		Vector3 horizontalStart{};
 		Vector3 horizontalEnd{};
+		Vector3 horizontalMiddle{};
 		Vector3 circular_Center{};
 	};
 

@@ -266,13 +266,13 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		// 移動タイプ
 		if (category["move_behavior"] == "STATIC") 
 		{
-			result.movementFuncData.movement = enemy::MovementBehavior::Static;
+			result.movementFuncData.behavior = enemy::MovementBehavior::Static;
 			// プレイヤーに体を向けるか
 			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
 		}
 		else if (category["move_behavior"] == "FOLLOW") 
 		{
-			result.movementFuncData.movement = enemy::MovementBehavior::Follow;
+			result.movementFuncData.behavior = enemy::MovementBehavior::Follow;
 			// プレイヤーに体を向けるか
 			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
 			// 移動速度
@@ -280,7 +280,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		}
 		else if (category["move_behavior"] == "HORIZONTAL") 
 		{
-			result.movementFuncData.movement = enemy::MovementBehavior::Horizontal;
+			result.movementFuncData.behavior = enemy::MovementBehavior::Horizontal;
 			// プレイヤーに体を向けるか
 			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
 			// 移動速度
@@ -292,7 +292,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 				(float)category["horizontal_start"][2],
 			};
 			// 終了地点
-			result.movementFuncData.horizontalEnd= {
+			result.movementFuncData.horizontalEnd = {
 				(float)category["horizontal_end"][0],
 				(float)category["horizontal_end"][1],
 				(float)category["horizontal_end"][2],
@@ -300,7 +300,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		}
 		else if (category["move_behavior"] == "CIRCULAR") 
 		{
-			result.movementFuncData.movement = enemy::MovementBehavior::Circular;
+			result.movementFuncData.behavior = enemy::MovementBehavior::Circular;
 			// プレイヤーに体を向けるか
 			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
 			// 移動速度

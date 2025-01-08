@@ -59,6 +59,8 @@ void EnemyManager::Update()
 	// 死亡した弾丸を整理し、プールに返却
 	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
+			// リセット処理を入れておく
+			bullet->Reset();
 			bulletPool_.Return(bullet);
 			return true;
 		}
@@ -234,7 +236,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 /// </summary>
 void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState)
 {
-	// オブジェクトプール空新しいバレットを取得
+	// オブジェクトプールから新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化

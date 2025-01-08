@@ -37,6 +37,21 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_ = std::make_unique<RetroCRTEffect>();
+	retroCRT_->Init();
+	retroEffectData_ = {
+		Temp::Color::WHITE,
+		0.01f, true,
+		{0.001f, 0.001f}, {-0.001f, -0.001f}, true,
+		0.0f, false,
+		0.08f, true,
+		0.0f, false,
+		WinApp::WindowSize(),
+		0.0f
+	};
+	retroCRT_->SetMtlData(retroEffectData_);
+
 	// ──────── クラスにポインタを渡す
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -164,6 +179,7 @@ void GameScene::Update()
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
+	retroEffectData_.DrawImGui("");
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -206,13 +222,11 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
-	absentEffect_->Draw();
-
-	// ──────── TestPostEffect
-	testPostEffect_->Draw();
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->SetMtlData(retroEffectData_);
+	retroCRT_->Draw();
 
 	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-
 		// ──────── Player
 		player_->Draw2DFront();
 	}

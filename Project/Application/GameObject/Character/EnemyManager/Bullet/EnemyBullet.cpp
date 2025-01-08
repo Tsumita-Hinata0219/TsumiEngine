@@ -2,12 +2,17 @@
 
 
 
+EnemyBullet::EnemyBullet()
+{
+	attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BULLET };
+
+	// BodyModelのロードと初期化
+	model_ = modelManager_->GetModel("EnemyBullet");
+}
+
 // 初期化処理
 void EnemyBullet::Init()
 {
-	// BodyModelのロードと初期化
-	model_ = modelManager_->GetModel("EnemyBullet");
-
 	// 弾のタイプでカラーを変える
 	Vector4 modelColor{};
 	if (!isResistant_) {

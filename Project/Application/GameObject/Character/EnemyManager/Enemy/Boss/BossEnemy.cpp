@@ -58,7 +58,7 @@ void BossEnemy::Init()
 	hp_ = 15;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
-	CollapseShield();
+	//CollapseShield();
 }
 
 
@@ -71,7 +71,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 射撃処理
-	//exeShot_->Update();
+	exeShot_->Update();
 
 	// 移動処理
 	Move();

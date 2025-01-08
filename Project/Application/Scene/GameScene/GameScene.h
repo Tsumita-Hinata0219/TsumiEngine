@@ -113,5 +113,9 @@ private: // クラス
 	Timer sceneChange_;
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;
+
+	// RetroCRT
+	std::unique_ptr<RetroCRTEffect> retroCRT_;
+	RetroCRTMtl retroEffectData_{};
 };
 

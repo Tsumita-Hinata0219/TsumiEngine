@@ -78,5 +78,9 @@ private:
 
 	// 一度訪れたかのフラグ
 	bool isVisited_ = false;
+
+	std::unique_ptr<Sprite> sprite_;
+	uint32_t texture_;
+	Transform trans_{};
 };
 

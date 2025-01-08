@@ -13,6 +13,7 @@
 class EnemyManager;
 class IEnemy;
 
+
 /* エネミーの射撃処理 */
 class EnemyExecuteShot {
 
@@ -115,21 +116,21 @@ private:
 
 private:
 
-	// バレットの速度
-	const float kBulletSpeed_ = 0.25f;
-
-	// 射撃処理のfunction
-	std::function<void()> shotFunc_;
-
 	// EnemyManager
 	EnemyManager* manager_ = nullptr;
 
 	// オーナーエネミー
 	IEnemy* owner_ = nullptr;
 
+	// 射撃処理のfunction
+	std::function<void()> shotFunc_;
+
 	// バレット挙動
 	BulletBehavior behavior_ = BulletBehavior::Common;
 	bool behabirState_ = false;
+
+	// バレットの速度
+	const float kBulletSpeed_ = 0.25f;
 
 	// 射撃タイマー
 	Timer shotTimer_{};

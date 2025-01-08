@@ -31,6 +31,46 @@
         },
         {
             "type": "MESH",
+            "name": "BossEnemy.001",
+            "transform": {
+                "translation": [
+                    6.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "CROSS",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 50,
+                "move_behavior": "CIRCULAR",
+                "tilt_body": true,
+                "move_speed": 3.0,
+                "circular_center": [
+                    15.0,
+                    0.0,
+                    0.0
+                ],
+                "circular_radius": 9.0
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
             "name": "Player",
             "transform": {
                 "translation": [
@@ -96,8 +136,8 @@
             "name": "BossEnemy",
             "transform": {
                 "translation": [
+                    -6.0,
                     0.0,
-                    10.0,
                     0.0
                 ],
                 "rotation": [
@@ -116,12 +156,18 @@
             },
             "category": {
                 "type": "ENEMY",
-                "shot_direction": "OMNI_EIGHT",
-                "bullet_behavior": "RANDOM",
-                "shoot_interval": 60,
-                "move_behavior": "FOLLOW",
+                "shot_direction": "CROSS",
+                "bullet_behavior": "RESISTANT",
+                "shoot_interval": 50,
+                "move_behavior": "CIRCULAR",
                 "tilt_body": true,
-                "move_speed": 3.0
+                "move_speed": -3.0,
+                "circular_center": [
+                    -15.0,
+                    0.0,
+                    0.0
+                ],
+                "circular_radius": 9.0
             },
             "children": []
         },
@@ -292,6 +338,72 @@
                 "move_behavior": "FOLLOW",
                 "tilt_body": true,
                 "move_speed": 5.0
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "StaticEnemy",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    -40.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "TRIPLE_FORWARD",
+                "bullet_behavior": "COMMON",
+                "shoot_interval": 30,
+                "move_behavior": "STATIC",
+                "tilt_body": true
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "StaticEnemy.001",
+            "transform": {
+                "translation": [
+                    30.0,
+                    -40.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "TRIPLE_FORWARD",
+                "bullet_behavior": "RESISTANT",
+                "shoot_interval": 30,
+                "move_behavior": "STATIC",
+                "tilt_body": true
             },
             "children": []
         },

@@ -84,10 +84,10 @@
                 "type": "ENEMY",
                 "shot_direction": "OMNI_FOUR",
                 "bullet_behavior": "RESISTANT",
-                "shoot_interval": 45,
+                "shoot_interval": 35,
                 "move_behavior": "HORIZONTAL",
                 "tilt_body": true,
-                "move_speed": 20.0,
+                "move_speed": 30.0,
                 "horizontal_start": [
                     -20.0,
                     -10.0,

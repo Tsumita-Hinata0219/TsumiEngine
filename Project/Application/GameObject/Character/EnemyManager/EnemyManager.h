@@ -76,7 +76,7 @@ public: // メンバ関数
 	bool IsEliminated() const { return this->isEliminated_; }
 
 	// EnemyListの取得
-	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
+	std::list<std::unique_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
 
 #pragma endregion 
 
@@ -122,7 +122,7 @@ private: // メンバ変数
 	Transform transform_{};
 
 	// EnemyのList配列
-	std::list<std::shared_ptr<IEnemy>> enemys_;
+	std::list<std::unique_ptr<IEnemy>> enemys_;
 
 	// BulletのPool
 	ObjectPool<EnemyBullet> bulletPool_;

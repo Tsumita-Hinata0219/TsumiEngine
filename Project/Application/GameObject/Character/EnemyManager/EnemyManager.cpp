@@ -22,7 +22,7 @@ void EnemyManager::Init()
 	circleEffectPool_.Create(100);
 
 	// EnemyListの更新処理
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+	for (auto& enemy : enemys_) {
 		enemy->Update();
 	}
 
@@ -40,13 +40,12 @@ void EnemyManager::Update()
 	if (isEliminated_) { return; }
 
 	// EnemyListの更新処理
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+	for (auto& enemy : enemys_) {
 		enemy->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
+	enemys_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
 		if (enemy->IsDead()) {
-			enemy.reset();
 			return true;
 		}
 		return false;
@@ -98,7 +97,7 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// EnemyListの描画
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+	for (auto& enemy : enemys_) {
 		enemy->Draw3D();
 	}
 
@@ -174,7 +173,7 @@ void EnemyManager::EliminatedChecker()
 void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
+	std::unique_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
@@ -188,12 +187,12 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	enemys_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
+	std::unique_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
@@ -207,12 +206,12 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	enemys_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
+	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
@@ -226,7 +225,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	enemys_.push_back(std::move(newEnemy));
 }
 
 

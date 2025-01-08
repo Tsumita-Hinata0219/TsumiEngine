@@ -1,4 +1,5 @@
 #include "StageTransitionMenuNaviBack.h"
+#include "GameData/GameData.h"
 
 
 
@@ -136,6 +137,8 @@ void StageTransitionMenuNaviBack::SelectOperation()
 	// 右入力
 	if (iLStick_.x > DZone_ || input_->Trigger(PadData::RIGHT) || 
 		input_->Trigger(DIK_RIGHT) || input_->Trigger(DIK_D)) {
+		int num = GameData::GetInstance()->Get_StageSelectNum();
+		if (num >= 5) { return; }
 		ChangeSelect(MenuSelect::Next);	
 	}
 }

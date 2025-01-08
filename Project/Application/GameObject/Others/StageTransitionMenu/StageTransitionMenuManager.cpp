@@ -1,5 +1,5 @@
 #include "StageTransitionMenuManager.h"
-
+#include "GameData/GameData.h"
 
 
 /// <summary>
@@ -104,7 +104,10 @@ void StageTransitionMenuManager::Draw2DFront()
 	// NavigationTextBackはNavigationの後ろに入れる
 	naviBack_->Draw2DFront();
 	menus_[int(STMenuType::Navigation_Back)]->Draw2DFront();
-	menus_[int(STMenuType::Navigation_Next)]->Draw2DFront();
+	int num = GameData::GetInstance()->Get_StageSelectNum();
+	if (num < 5) { 
+		menus_[int(STMenuType::Navigation_Next)]->Draw2DFront();
+	}
 	menus_[int(STMenuType::ResultUI)]->Draw2DFront();
 	menus_[int(STMenuType::TextLine)]->Draw2DFront();
 }

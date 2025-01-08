@@ -61,9 +61,6 @@ void CollisionManager::Update()
 void CollisionManager::Clear()
 {
 	// コライダーポインタリストの中身をクリア
-	for (auto collider : pColliders_) {
-		delete collider;  // 動的に割り当てられたメモリを解放
-	}
 	pColliders_.clear();  // リスト内の要素を削除
 }
 

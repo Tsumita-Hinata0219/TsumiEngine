@@ -145,7 +145,7 @@ void GameScene::Update()
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
-			//CollisionManager_->Clear();
+			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		}
 		return;

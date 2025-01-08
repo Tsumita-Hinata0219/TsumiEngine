@@ -79,7 +79,6 @@ void BossEnemy::Update()
 	exeShot_->Update();
 
 	// 移動処理
-	//Move();
 	movement_->Update();
 
 	// コライダーの更新
@@ -150,61 +149,6 @@ void BossEnemy::CollapseShield()
 {
 	// シールドが壊れた時の処理
 	shield_->OnShieldBroken();
-}
-
-
-/// <summary>
-/// 移動処理
-/// </summary>
-void BossEnemy::Move()
-{
-	// ある程度近ければ早期return
-	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= minToPlayer_) {
-		return;
-	}
-
-	// velocityを計算
-	CalcVelocity();
-
-	// 姿勢の計算
-	//CalcRotate();
-
-	// 座標にvelocityを加算
-	trans_.srt.translate += velocity_;
-}
-
-
-/// <summary>
-/// Velocityの計算処理
-/// </summary>
-void BossEnemy::CalcVelocity()
-{
-	// 差分をNormalize
-	Vector3 player2Enemy =
-		Normalize(player_->GetWorldPos() - trans_.GetWorldPos());
-
-	// 差分Normalizeに速度をかけてvelocityに設定
-	velocity_ = {
-		player2Enemy.x * moveVector_,
-		player2Enemy.y, // y軸は移動してほしくないのでそのまま
-		player2Enemy.z * moveVector_,
-	};
-}
-
-
-/// <summary>
-/// 向きの計算処理
-/// </summary>
-void BossEnemy::CalcRotate()
-{
-	// Y軸周り角度(θy)
-	trans_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
-
-	float velZ = std::sqrt((velocity_.x * velocity_.x) + (velocity_.z * velocity_.z));
-	float height = -velocity_.y;
-
-	// X軸周り角度(θx)
-	trans_.srt.rotate.x = std::atan2(height, velZ);
 }
 
 

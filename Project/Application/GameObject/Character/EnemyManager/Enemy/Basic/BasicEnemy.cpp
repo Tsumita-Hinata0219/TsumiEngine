@@ -69,29 +69,13 @@ void BasicEnemy::Init()
 void BasicEnemy::Update()
 {
 	// ステートパターン処理
-	FuncStatePattern();
+	//FuncStatePattern();
 
-	// アプローチ状態の時のみ入る処理
-	if (stateNo_ == int(BasicEnemyStateType::IDLE)) {
+	// 射撃処理
+	exeShot_->Update();
 
-		// 戦闘状態の切り替え処理
-		ToggleCombatState();
-		return;
-	}
-
-
-	// 戦闘状態に入っていたら入る処理
-	if (isCombatActive_) {
-
-		// 移動処理
-		Move();
-
-		// 射撃処理
-		exeShot_->Update();
-	}
-
-	// ヒットリアクション
-	HitReaction();
+	// 移動処理
+	movement_->Update();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();

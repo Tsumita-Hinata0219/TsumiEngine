@@ -70,21 +70,6 @@ public:
 private:
 
 	/// <summary>
-	/// 移動処理
-	/// </summary>
-	void Move();
-
-	/// <summary>
-	/// Velocityの計算処理
-	/// </summary>
-	void CalcVelocity();
-
-	/// <summary>
-	/// 向きの計算処理
-	/// </summary>
-	void CalcRotate();
-
-	/// <summary>
 	/// マークを死亡状態に設定
 	/// </summary>
 	void MarkAsDead();

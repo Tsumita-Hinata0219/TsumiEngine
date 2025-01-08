@@ -52,6 +52,7 @@ void BossEnemy::Init()
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
 	shield_->Init();
+	shield_->SetParent(&trans_);
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
@@ -62,7 +63,7 @@ void BossEnemy::Init()
 	hp_ = 15;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
-	CollapseShield();
+	//CollapseShield();
 }
 
 

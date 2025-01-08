@@ -37,7 +37,6 @@ public:
 	Vector4 GetModelColor() const { return this->modelColor_; }
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }
 
-
 	// プレイヤー　
 	void SetPlayer(Player* setPlayer) override { this->player_ = setPlayer; }
 	// 死亡フラグ

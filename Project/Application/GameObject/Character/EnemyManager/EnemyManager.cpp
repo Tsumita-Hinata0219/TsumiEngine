@@ -21,13 +21,9 @@ void EnemyManager::Init()
 	// EffectのPoolのインスタンスを先に作っておく
 	circleEffectPool_.Create(100);
 
-	// EnemyListの更新処理
-	for (auto& enemy : enemys_) {
-		enemy->Update();
-	}
-
-	// エネミーが全滅したかのフラグは折っておく
-	isEliminated_ = false;
+	// 全滅したかのフラグは折っておく
+	isCommonEliminated_ = false;
+	isBossEliminated_ = false;
 }
 
 
@@ -37,15 +33,28 @@ void EnemyManager::Init()
 void EnemyManager::Update()
 {
 	// 全滅していたら処理を通さない
-	if (isEliminated_) { return; }
+	if (isBossEliminated_) { return; }
 
 	// EnemyListの更新処理
-	for (auto& enemy : enemys_) {
+	for (auto& enemy : commonEnemies_) {
 		enemy->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	enemys_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
+	commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
 		if (enemy->IsDead()) {
+			return true;
+		}
+		return false;
+		}
+	);
+
+	// BossEnemyListの更新処理
+	for (auto& boss : bossEnemies_) {
+		boss->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
+		if (boss->IsDead()) {
 			return true;
 		}
 		return false;
@@ -83,8 +92,15 @@ void EnemyManager::Update()
 		}
 	);
 
-	// 全滅したかのチェック
-	EliminatedChecker();
+
+	// 通常エネミーが全滅したかのチェックをし、
+	// trueになったら、ボスエネミーのチェックに行く
+	if (!isCommonEliminated_) {
+		Common_EliminatedChecker();
+	}
+	else {
+		Boss_EliminatedChecker();
+	}
 
 
 #ifdef _DEBUG
@@ -99,8 +115,11 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// EnemyListの描画
-	for (auto& enemy : enemys_) {
+	for (auto& enemy : commonEnemies_) {
 		enemy->Draw3D();
+	}
+	for (auto& boss : bossEnemies_) {
+		boss->Draw3D();
 	}
 
 	// Bulletsの描画
@@ -156,15 +175,35 @@ void EnemyManager::AddNewHitEffect(IEnemy* enemyPtr)
 
 
 /// <summary>
-/// 全滅したかのチェック
+/// 通常エネミーが全滅したかのチェック
 /// </summary>
-void EnemyManager::EliminatedChecker()
+void EnemyManager::Common_EliminatedChecker()
 {
-	int instanceNum = int(enemys_.size());
+	int instanceNum = int(commonEnemies_.size());
 
 	// インスタンスが0なので全滅フラグを立てる
 	if (instanceNum <= 0) {
-		isEliminated_ = true;
+
+		isCommonEliminated_ = true;
+		
+		// ボスのシールドを破壊
+		for (auto& boss : bossEnemies_) {
+			boss->CollapseShield();
+		}
+	}
+}
+
+
+/// <summary>
+/// ボスエネミーが全滅したかのチェック
+/// </summary>
+void EnemyManager::Boss_EliminatedChecker()
+{
+	int instanceNum = int(bossEnemies_.size());
+
+	// インスタンスが0なので全滅フラグを立てる
+	if (instanceNum <= 0) {
+		isBossEliminated_ = true;
 	}
 }
 
@@ -186,7 +225,7 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	newEnemy->Init();
 
 	// リストに追加
-	enemys_.push_back(std::move(newEnemy));
+	commonEnemies_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
@@ -202,7 +241,7 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	newEnemy->Init();
 
 	// リストに追加
-	enemys_.push_back(std::move(newEnemy));
+	commonEnemies_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
@@ -218,7 +257,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	newEnemy->Init();
 
 	// リストに追加
-	enemys_.push_back(std::move(newEnemy));
+	bossEnemies_.push_back(std::move(newEnemy));
 }
 
 
@@ -272,7 +311,7 @@ void EnemyManager::DrawimGui()
 		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
 		ImGui::Text("");
 
-		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
+		ImGui::Text("IEnemyInstance = %d", int(commonEnemies_.size()));
 		ImGui::Text("");
 
 		ImGui::Text("Bullet");

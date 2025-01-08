@@ -89,4 +89,6 @@ private:
 	// 移動関数
 	std::function<void()> movementFunc_;
 
+	// 移動速度
+	float velocity_ = 0.0f;
 };

@@ -59,11 +59,151 @@
         },
         {
             "type": "MESH",
+            "name": "BarrierBox",
+            "transform": {
+                "translation": [
+                    -20.0,
+                    -15.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.001",
+            "transform": {
+                "translation": [
+                    20.0,
+                    -15.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.002",
+            "transform": {
+                "translation": [
+                    0.0,
+                    -15.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.003",
+            "transform": {
+                "translation": [
+                    40.0,
+                    -15.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.004",
+            "transform": {
+                "translation": [
+                    -40.0,
+                    -15.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
             "name": "BasicEnemy",
             "transform": {
                 "translation": [
                     -14.0,
-                    6.0,
+                    26.0,
                     0.0
                 ],
                 "rotation": [
@@ -84,7 +224,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -94,7 +237,7 @@
             "transform": {
                 "translation": [
                     14.0,
-                    6.0,
+                    26.0,
                     0.0
                 ],
                 "rotation": [
@@ -115,7 +258,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -125,7 +271,7 @@
             "transform": {
                 "translation": [
                     7.0,
-                    -7.0,
+                    13.0,
                     0.0
                 ],
                 "rotation": [
@@ -146,7 +292,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -156,7 +305,7 @@
             "transform": {
                 "translation": [
                     -7.0,
-                    -7.0,
+                    13.0,
                     0.0
                 ],
                 "rotation": [
@@ -177,7 +326,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -187,6 +339,46 @@
             "transform": {
                 "translation": [
                     0.0,
+                    24.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "TRIPLE_FORWARD",
+                "bullet_behavior": "RANDOM",
+                "shoot_interval": 45,
+                "move_behavior": "CIRCULAR",
+                "tilt_body": true,
+                "move_speed": 3.0,
+                "circular_center": [
+                    0.0,
+                    7.0,
+                    0.0
+                ],
+                "circular_radius": 17.0
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "StaticEnemy",
+            "transform": {
+                "translation": [
+                    -30.0,
                     0.0,
                     0.0
                 ],
@@ -206,9 +398,44 @@
             },
             "category": {
                 "type": "ENEMY",
-                "shot_direction": "OMNI_FIVE",
-                "bullet_behavior": "RESISTANT",
-                "shoot_interval": 20
+                "shot_direction": "CROSS",
+                "bullet_behavior": "NONE",
+                "shoot_interval": 50,
+                "move_behavior": "STATIC",
+                "tilt_body": false
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "StaticEnemy.001",
+            "transform": {
+                "translation": [
+                    30.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    -179.99997768819966
+                ],
+                "scaling": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "ENEMY",
+                "shot_direction": "CROSS",
+                "bullet_behavior": "NONE",
+                "shoot_interval": 50,
+                "move_behavior": "STATIC",
+                "tilt_body": false
             },
             "children": []
         }

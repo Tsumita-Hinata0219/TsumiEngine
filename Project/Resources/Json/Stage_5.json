@@ -84,7 +84,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -115,7 +118,10 @@
                 "type": "ENEMY",
                 "shot_direction": "OMNI_EIGHT",
                 "bullet_behavior": "RANDOM",
-                "shoot_interval": 60
+                "shoot_interval": 60,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 3.0
             },
             "children": []
         },
@@ -146,7 +152,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -177,7 +186,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -208,7 +220,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -239,7 +254,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },
@@ -270,7 +288,10 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "FOLLOW",
+                "tilt_body": true,
+                "move_speed": 5.0
             },
             "children": []
         },

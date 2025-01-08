@@ -39,6 +39,7 @@ public:
 
 	// SRT
 	virtual void SetSRT(const SRT& setSRT) = 0;
+	virtual void SetInitSRT(const SRT& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
 	virtual void SetScale(const Vector3& setScale) = 0;
@@ -56,6 +57,9 @@ protected:
 
 	// マネージャー
 	BoxManager* manager_ = nullptr;
+
+	// SRT
+	SRT initSRT_{};
 
 	// HP
 	int HP_ = 0;

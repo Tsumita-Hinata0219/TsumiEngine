@@ -75,7 +75,7 @@ private:
 	void Movement_Circular();
 
 	/// <summary>
-	/// 体を傾ける処理
+	/// プレイヤーに体を向ける処理
 	/// </summary>
 	void BodyTilt();
 
@@ -96,4 +96,7 @@ private:
 
 	// 移動速度
 	float velocity_ = 0.0f;
+
+	// プレイヤーに体を向けるか
+	bool isTilt_ = false;
 };

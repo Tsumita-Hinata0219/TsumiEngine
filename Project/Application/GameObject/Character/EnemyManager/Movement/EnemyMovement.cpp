@@ -32,6 +32,11 @@ void EnemyMovement::Update()
 {
 	// 移動処理
 	movementFunc_();
+
+	// フラグが立っていたら
+	if (isTilt_) {
+		BodyTilt();
+	}
 }
 
 
@@ -94,7 +99,7 @@ void EnemyMovement::Movement_Circular()
 
 
 /// <summary>
-/// 体を傾ける処理
+/// プレイヤーに体を向ける処理
 /// </summary>
 void EnemyMovement::BodyTilt()
 {
@@ -109,6 +114,6 @@ void EnemyMovement::BodyTilt()
 	};
 
 	// Y軸周り角度(θy)
-	pOwner_->SetRotate_Y(std::atan2(direction.x, direction.z));
+	pOwner_->SetRotate_Y(std::atan2(direction.x, direction.y));
 }
 

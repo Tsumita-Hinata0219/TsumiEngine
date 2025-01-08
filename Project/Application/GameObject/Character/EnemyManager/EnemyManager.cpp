@@ -182,9 +182,8 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(std::move(newEnemy));
@@ -199,9 +198,8 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(std::move(newEnemy));
@@ -216,9 +214,8 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
 	enemys_.push_back(std::move(newEnemy));

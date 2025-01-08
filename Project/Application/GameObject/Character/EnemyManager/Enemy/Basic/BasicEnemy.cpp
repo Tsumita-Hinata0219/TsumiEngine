@@ -17,6 +17,10 @@ void BasicEnemy::Init()
 	light_.intensity = 0.7f;
 	model_->SetLightData(light_);
 
+	// BodyTransformの初期化
+	trans_.Init();
+	trans_.srt = initSRT_;
+
 	// 色加算の初期設定
 	colorAdd_.enable = true;
 	colorAdd_.addColor = Temp::Color::WHITE;
@@ -27,11 +31,6 @@ void BasicEnemy::Init()
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
 	// 射撃方法とバレット挙動
 	exeShot_->Init(shotFuncData_);
-
-	// BodyTransformの初期化
-	trans_.Init();
-	// 0.0fだと行列計算でエラーが発生。限りなく0に近い数字で0.1f。
-	//trans_.srt.scale = { 0.1f, 0.1f, 0.1f };
 
 	// HPの設定
 	hp_ = 5;

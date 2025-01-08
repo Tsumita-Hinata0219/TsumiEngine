@@ -45,6 +45,7 @@ public:
 	// SRT
 	SRT GetSRT() const { return this->trans_.srt; }
 	void SetSRT(const SRT& setSRT) { this->trans_.srt = setSRT; }
+	void SetInitSRT(const SRT& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
 	Vector3 GetScale() const { return this->trans_.srt.scale; }
@@ -111,6 +112,8 @@ protected:
 
 	// トランスフォーム
 	Transform trans_;
+	// 初期値
+	SRT initSRT_{};
 
 	// 射撃処理
 	std::unique_ptr<EnemyExecuteShot> exeShot_;

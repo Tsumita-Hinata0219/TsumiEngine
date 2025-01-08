@@ -15,6 +15,7 @@ void BossEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
+	trans_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -61,7 +62,7 @@ void BossEnemy::Init()
 	hp_ = 15;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
-	//CollapseShield();
+	CollapseShield();
 }
 
 
@@ -77,7 +78,8 @@ void BossEnemy::Update()
 	exeShot_->Update();
 
 	// 移動処理
-	Move();
+	//Move();
+	movement_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();

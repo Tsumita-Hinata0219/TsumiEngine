@@ -288,14 +288,14 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 			// 開始地点
 			result.movementFuncData.horizontal_start = {
 				(float)category["horizontal_start"][0],
-				(float)category["horizontal_start"][1],
 				(float)category["horizontal_start"][2],
+				(float)category["horizontal_start"][1],
 			};
 			// 終了地点
 			result.movementFuncData.horizontal_end = {
 				(float)category["horizontal_end"][0],
-				(float)category["horizontal_end"][1],
 				(float)category["horizontal_end"][2],
+				(float)category["horizontal_end"][1],
 			};
 		}
 		else if (category["move_behavior"] == "CIRCULAR") 

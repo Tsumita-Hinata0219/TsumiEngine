@@ -13,6 +13,7 @@ void StaticEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
+	trans_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;

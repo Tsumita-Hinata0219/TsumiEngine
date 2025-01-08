@@ -22,22 +22,26 @@ void EnemyMovement::Init(const enemy::MovementFuncData& data)
 {
 	data_ = data;
 
+	data_.velocity /= 60.0f;
+
 	// 関数設定
 	SetMovementFunc(data_.behavior);
 
 	// behaviorがHorizontalなら中間点をOwnerの初期座標で初期化
 	if (data_.behavior == enemy::MovementBehavior::Horizontal) {
 		data_.horizontal_middle = pOwner_->GetWorldPos();
+		movePoints_.resize(4);
+		movePoints_ = {
+			data_.horizontal_middle,
+			data_.horizontal_start,
+			data_.horizontal_middle,
+			data_.horizontal_end,
+		};
 	}
 
 	// behaviorがCircularなら、3つの座標をvector配列に入れる
 	if (data_.behavior == enemy::MovementBehavior::Circular) {
-		movePoints_.resize(3);
-		movePoints_ = {
-			data_.horizontal_middle,
-			data_.horizontal_start,
-			data_.horizontal_end,
-		};
+		
 	}
 }
 

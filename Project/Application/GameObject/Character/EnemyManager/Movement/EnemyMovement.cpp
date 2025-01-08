@@ -27,6 +27,9 @@ void EnemyMovement::Init(const enemy::MovementFuncData& data)
 	// 関数設定
 	SetMovementFunc(data_.behavior);
 
+	// プレイヤーに体を向けるかのフラグ
+	isTilt_ = data_.isTilt;
+
 	// behaviorがHorizontalなら中間点をOwnerの初期座標で初期化
 	if (data_.behavior == enemy::MovementBehavior::Horizontal) {
 		data_.horizontal_middle = pOwner_->GetWorldPos();

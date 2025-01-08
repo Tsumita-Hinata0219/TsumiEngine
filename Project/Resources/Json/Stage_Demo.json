@@ -26,9 +26,22 @@
             },
             "category": {
                 "type": "ENEMY",
-                "shot_direction": "OMNI_EIGHT",
-                "bullet_behavior": "RANDOM",
-                "shoot_interval": 15
+                "shot_direction": "FORWARD",
+                "bullet_behavior": "NONE",
+                "shoot_interval": 15,
+                "move_behavior": "HORIZONTAL",
+                "tilt_body": true,
+                "move_speed": 2.0,
+                "horizontal_start": [
+                    -10.0,
+                    0.0,
+                    0.0
+                ],
+                "horizontal_end": [
+                    10.0,
+                    0.0,
+                    0.0
+                ]
             },
             "children": []
         },
@@ -59,7 +72,8 @@
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
                 "bullet_behavior": "COMMON",
-                "shoot_interval": 30
+                "shoot_interval": 30,
+                "move_behavior": "NONE"
             },
             "children": []
         },
@@ -69,7 +83,7 @@
             "transform": {
                 "translation": [
                     0.0,
-                    -40.0,
+                    -30.0,
                     0.0
                 ],
                 "rotation": [

@@ -6,7 +6,7 @@
             "name": "BossEnemy",
             "transform": {
                 "translation": [
-                    0.0,
+                    -9.33679485321045,
                     0.0,
                     0.0
                 ],
@@ -29,8 +29,15 @@
                 "shot_direction": "OMNI_FOUR",
                 "bullet_behavior": "RESISTANT",
                 "shoot_interval": 20,
-                "move_behavior": "STATIC",
-                "tilt_body": true
+                "move_behavior": "CIRCULAR",
+                "tilt_body": false,
+                "move_speed": -20.0,
+                "circular_center": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "circular_radius": 9.33679485321045
             },
             "children": []
         },

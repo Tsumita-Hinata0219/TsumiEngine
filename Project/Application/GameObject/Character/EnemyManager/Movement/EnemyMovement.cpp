@@ -44,7 +44,9 @@ void EnemyMovement::Init(const enemy::MovementFuncData& data)
 
 	// behaviorがCircularなら、3つの座標をvector配列に入れる
 	if (data_.behavior == enemy::MovementBehavior::Circular) {
-		angle_ = 0.0f;
+		// 初期位置と中心点から角度を計算
+		Vector3 position = pOwner_->GetWorldPos();
+		angle_ = atan2(position.z - data_.circular_center.z, position.x - data_.circular_center.x);  // 角度を計算
 	}
 }
 

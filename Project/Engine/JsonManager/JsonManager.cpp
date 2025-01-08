@@ -305,6 +305,8 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 			// 移動速度
 			result.movementFuncData.velocity = (float)category["move_speed"];
+			// 半径
+			result.movementFuncData.circular_radius = (float)category["circular_radius"];
 		}
 	}
 

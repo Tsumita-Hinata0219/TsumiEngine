@@ -7,7 +7,7 @@
             "transform": {
                 "translation": [
                     0.0,
-                    20.0,
+                    15.0,
                     0.0
                 ],
                 "rotation": [
@@ -29,19 +29,15 @@
                 "shot_direction": "OMNI_FOUR",
                 "bullet_behavior": "RESISTANT",
                 "shoot_interval": 20,
-                "move_behavior": "HORIZONTAL",
+                "move_behavior": "CIRCULAR",
                 "tilt_body": true,
                 "move_speed": 20.0,
-                "horizontal_start": [
-                    -20.0,
-                    -20.0,
+                "circular_center": [
+                    0.0,
+                    0.0,
                     0.0
                 ],
-                "horizontal_end": [
-                    20.0,
-                    -10.0,
-                    0.0
-                ]
+                "circular_radius": 15.0
             },
             "children": []
         },

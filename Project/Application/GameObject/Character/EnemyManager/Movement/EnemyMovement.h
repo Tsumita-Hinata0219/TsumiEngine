@@ -91,7 +91,10 @@ private:
 
 	// 直線移動の座標を保管しておく
 	std::vector<Vector3> movePoints_{};
-	uint32_t targetIndex_ = 0;
+	int targetIndex_ = 0;
+
+	// 
+	float angle_ = 0.0f;
 
 	// playerとの最低距離
 	float minToPlayer_ = 4.0f;

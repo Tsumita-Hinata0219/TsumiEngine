@@ -41,7 +41,7 @@ void EnemyMovement::Init(const enemy::MovementFuncData& data)
 
 	// behaviorがCircularなら、3つの座標をvector配列に入れる
 	if (data_.behavior == enemy::MovementBehavior::Circular) {
-		
+		angle_ = 0.0f;
 	}
 }
 
@@ -150,22 +150,25 @@ void EnemyMovement::Movement_Horizontal()
 /// </summary> 
 void EnemyMovement::Movement_Circular()
 {
-	static float angle = 0.0f; // 現在の角度を保持
+	// 円移動用にvelocityを調整（角速度に変換）
+	float angularVelocity = data_.velocity / data_.circular_radius; // 半径で割ることで適切な角速度を算出
 
-	// 角速度を計算 (velocity に依存)
-	angle += data_.velocity; // deltaTime はフレーム間の時間
+	// 角速度を直接使用
+	angle_ += angularVelocity;
 
 	// 角度が2πを超えたらリセット
-	if (angle > 2.0f * 3.14159265359f) {
-		angle -= 2.0f * 3.14159265359f;
+	if (angle_ > 2.0f * 3.14159265359f) {
+		angle_ -= 2.0f * 3.14159265359f; // 角度を0から2πに保つ
 	}
 
 	// 新しい位置を計算
 	Vector3 setTranslate = {
-		data_.circular_center.x + data_.circular_radius * cos(angle),
-		pOwner_->GetWorldPos().y,
-		data_.circular_center.z + data_.circular_radius * sin(angle),
+		data_.circular_center.x + data_.circular_radius * cos(angle_),
+		pOwner_->GetWorldPos().y, // y軸はそのまま
+		data_.circular_center.z + data_.circular_radius * sin(angle_),
 	};
+
+	// 新しい位置を設定
 	pOwner_->SetTranslate(setTranslate);
 }
 

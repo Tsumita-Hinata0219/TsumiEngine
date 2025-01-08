@@ -1,6 +1,6 @@
 #include "EnemyExecuteShot.h"
-#include "../EnemyManager.h"
-#include "../Enemy/IEnemy.h"
+	#include "../EnemyManager.h"
+	#include "../Enemy/IEnemy.h"
 
 
 

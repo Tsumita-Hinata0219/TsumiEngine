@@ -89,6 +89,9 @@ private:
 	// 移動速度
 	float velocity_ = 0.0f;
 
+	// playerとの最低距離
+	float minToPlayer_ = 4.0f;
+
 	// プレイヤーに体を向けるか
 	bool isTilt_ = false;
 };

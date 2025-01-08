@@ -71,6 +71,7 @@ void EnemyMovement::SetMovementFunc(enemy::MovementBehavior movement)
 void EnemyMovement::Movement_Static()
 {
 	// 不動型なので、何もしない
+
 }
 
 
@@ -79,6 +80,26 @@ void EnemyMovement::Movement_Static()
 /// </summary>
 void EnemyMovement::Movement_Follow()
 {
+	// ある程度近ければ早期return
+	if (std::abs(Length(pPlayer_->GetWorldPos() - pOwner_->GetWorldPos())) <= minToPlayer_) {
+		return;
+	}
+
+	// velocityを計算
+	// 差分をNormalize
+	Vector3 player2Enemy =
+		Normalize(pPlayer_->GetWorldPos() - pOwner_->GetWorldPos());
+
+	// 差分Normalizeに速度をかけてvelocityに設定
+	Vector3 moveVelocity = {
+		player2Enemy.x * velocity_,
+		player2Enemy.y, // y軸は移動してほしくないのでそのまま
+		player2Enemy.z * velocity_,
+	};
+
+	// 座標にvelocityを加算
+	Vector3 setTranslate = pOwner_->GetWorldPos() + moveVelocity;
+	pOwner_->SetTranslate(setTranslate);
 }
 
 

@@ -123,9 +123,6 @@ private: // メンバ変数
 	// Player
 	Player* player_ = nullptr;
 
-	// Transform
-	Transform transform_{};
-
 	// EnemyのList配列
 	std::list<std::unique_ptr<IEnemy>> commonEnemies_;
 

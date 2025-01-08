@@ -32,6 +32,10 @@ void StaticEnemy::Init()
 	// 射撃方法とバレット挙動
 	exeShot_->Init(shotFuncData_);
 
+	// 移動処理クラス
+	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
+	movement_->Init(movementData_);
+
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ
 	isHitReactioning_ = false;
@@ -65,8 +69,8 @@ void StaticEnemy::Update()
 	// 射撃処理
 	exeShot_->Update();
 
-	// ヒットリアクション
-	HitReaction();
+	// 移動処理
+	movement_->Update();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();

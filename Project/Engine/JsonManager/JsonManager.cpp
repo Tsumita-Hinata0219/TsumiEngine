@@ -223,27 +223,27 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		}
 		else if (category["shot_direction"] == "TRIPLE_FORWARD") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::TripleForward;
 		}
 		else if (category["shot_direction"] == "CROSS") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::Cross;
 		}
 		else if (category["shot_direction"] == "OMNI_FOUR") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::Omni_Four;
 		}
 		else if (category["shot_direction"] == "OMNI_FIVE") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::Omni_Five;
 		}
 		else if (category["shot_direction"] == "OMNI_EIGHT") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::Omni_Eight;
 		}
 		else if (category["shot_direction"] == "RANDOM") 
 		{
-			result.shotFuncData.direction = enemy::ShotDirection::Forward;
+			result.shotFuncData.direction = enemy::ShotDirection::Random;
 		}
 
 		// バレットタイプ

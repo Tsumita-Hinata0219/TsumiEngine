@@ -11,10 +11,6 @@ void EnemyManager::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
 
-	// Transformの初期化
-	transform_.Init();
-	transform_.srt.translate.z = 30.0f;
-
 	// BulletのPoolのインスタンスを先に作っておく
 	bulletPool_.Create(100);
 
@@ -304,12 +300,6 @@ void EnemyManager::CreateEffect(IEnemy* enemyPtr)
 void EnemyManager::DrawimGui()
 {
 	if (ImGui::TreeNode("EnemyManager")) {
-
-		ImGui::Text("Transform");
-		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
-		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
-		ImGui::Text("");
 
 		ImGui::Text("IEnemyInstance = %d", int(commonEnemies_.size()));
 		ImGui::Text("");

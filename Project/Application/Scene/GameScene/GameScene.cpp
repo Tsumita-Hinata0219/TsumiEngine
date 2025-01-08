@@ -148,6 +148,10 @@ void GameScene::Update()
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		}
+		else if (player_->IsDead()) {
+			CollisionManager_->Clear();
+			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+		}
 		return;
 	}
 	// 終了処理
@@ -250,9 +254,13 @@ void GameScene::FrontSpriteDraw()
 /// </summary>
 void GameScene::SceneChangeCheck()
 {
-	// プレイヤー死亡 or エネミー全滅でシーン遷移にに入る
-	if (player_->IsDead() || enemyManager_->IsEliminated()) {
+	// エネミー全滅でシーン遷移にに入る
+	if (enemyManager_->IsEliminated()) {
 		STMenuManager_->DirectionStart();
+	}
+	if (player_->IsDead()) {
+		STMenuManager_->EndDirectionStart(); // 終了演出開始
+		sceneTransition_->StartFadeOut(); // シーントランジション開始
 	}
 
 	// 演出が終了していれば押せる

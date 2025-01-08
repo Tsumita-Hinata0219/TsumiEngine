@@ -122,6 +122,7 @@ void Player::Update()
 	if (hp_ <= HP_MIN) {
 		isWin_ = false;
 		isLose_ = true;
+		isDead_ = true;
 	}
 
 	// 無敵状態のタイマーを減らす処理
@@ -189,7 +190,7 @@ void Player::onCollision([[maybe_unused]] IObject* object)
 		// 無敵状態なら通らない
 		if (isInvincibility_) return;
 
-		//OnCollisionWithEnemyBullet();
+		OnCollisionWithEnemyBullet();
 		
 		// 近くにある敵の弾を消す
 		sweepEraser_->StartSweep();
@@ -225,9 +226,7 @@ void Player::OnCollisionWithEnemyBullet()
 		);
 
 		// ボディモデルのカラーを赤にする
-		for (auto& body : this->iBodys_) {
-			body->SetModelColor(Temp::Color::RED);
-		}
+		color_ = Temp::Color::RED;
 	}
 }
 
@@ -304,9 +303,7 @@ void Player::SubtructInvincibilityTime()
 	if (invincibilityTime_ == invincibilityInterval_ - kColorResetThreshold) {
 
 		// モデルのカラーを白に戻す
-		for (auto& body : this->iBodys_) {
-			body->SetModelColor(Temp::Color::WHITE);
-		}
+		color_ = Temp::Color::WHITE;
 	}
 
 	if (invincibilityTime_ <= invincibilityResetTime_) {

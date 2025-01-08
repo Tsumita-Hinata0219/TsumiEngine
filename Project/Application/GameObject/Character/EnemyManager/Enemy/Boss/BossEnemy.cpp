@@ -71,7 +71,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 射撃処理
-	exeShot_->Update();
+	//exeShot_->Update();
 
 	// 移動処理
 	Move();

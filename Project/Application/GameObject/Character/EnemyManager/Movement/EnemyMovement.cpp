@@ -29,6 +29,16 @@ void EnemyMovement::Init(const enemy::MovementFuncData& data)
 	if (data_.behavior == enemy::MovementBehavior::Horizontal) {
 		data_.horizontal_middle = pOwner_->GetWorldPos();
 	}
+
+	// behaviorがCircularなら、3つの座標をvector配列に入れる
+	if (data_.behavior == enemy::MovementBehavior::Circular) {
+		movePoints_.resize(3);
+		movePoints_ = {
+			data_.horizontal_middle,
+			data_.horizontal_start,
+			data_.horizontal_end,
+		};
+	}
 }
 
 
@@ -111,6 +121,23 @@ void EnemyMovement::Movement_Follow()
 /// </summary>
 void EnemyMovement::Movement_Horizontal()
 {
+	// 現在のターゲット地点と移動先を取得
+	Vector3 target = movePoints_[targetIndex_];
+
+	// 目標地点までのベクトル（移動方向）
+	Vector3 direction = target - pOwner_->GetWorldPos();
+
+	// 移動速度を設定（方向ベクトルの単位ベクトルを求めて、velocityでスケーリング）
+	if (Length(direction) > data_.velocity) {
+		direction = Normalize(direction); // 単位ベクトルにする
+		Vector3 setTranslate = pOwner_->GetWorldPos() + direction * data_.velocity; // 移動
+		pOwner_->SetTranslate(setTranslate);
+	}
+	else {
+		// 目標地点に到達した場合、次のターゲットに切り替え
+		pOwner_->SetTranslate(target);  // 到達した位置を設定
+		targetIndex_ = (targetIndex_ + 1) % movePoints_.size(); // 次のポイントへ
+	}
 }
 
 

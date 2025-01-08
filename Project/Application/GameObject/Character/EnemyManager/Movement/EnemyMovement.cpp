@@ -18,10 +18,17 @@ EnemyMovement::EnemyMovement(EnemyManager* manager, IEnemy* owner, Player* playe
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyMovement::Init(enemy::MovementFuncData data)
+void EnemyMovement::Init(const enemy::MovementFuncData& data)
 {
+	data_ = data;
+
 	// 関数設定
-	SetMovementFunc(data.behavior);
+	SetMovementFunc(data_.behavior);
+
+	// behaviorがHorizontalなら中間点をOwnerの初期座標で初期化
+	if (data_.behavior == enemy::MovementBehavior::Horizontal) {
+		data_.horizontal_middle = pOwner_->GetWorldPos();
+	}
 }
 
 
@@ -68,11 +75,7 @@ void EnemyMovement::SetMovementFunc(enemy::MovementBehavior movement)
 /// <summary>
 /// 不動
 /// </summary>
-void EnemyMovement::Movement_Static()
-{
-	// 不動型なので、何もしない
-
-}
+void EnemyMovement::Movement_Static() {}
 
 
 /// <summary>
@@ -92,9 +95,9 @@ void EnemyMovement::Movement_Follow()
 
 	// 差分Normalizeに速度をかけてvelocityに設定
 	Vector3 moveVelocity = {
-		player2Enemy.x * velocity_,
+		player2Enemy.x * data_.velocity,
 		player2Enemy.y, // y軸は移動してほしくないのでそのまま
-		player2Enemy.z * velocity_,
+		player2Enemy.z * data_.velocity,
 	};
 
 	// 座標にvelocityを加算
@@ -116,6 +119,23 @@ void EnemyMovement::Movement_Horizontal()
 /// </summary> 
 void EnemyMovement::Movement_Circular()
 {
+	static float angle = 0.0f; // 現在の角度を保持
+
+	// 角速度を計算 (velocity に依存)
+	angle += data_.velocity; // deltaTime はフレーム間の時間
+
+	// 角度が2πを超えたらリセット
+	if (angle > 2.0f * 3.14159265359f) {
+		angle -= 2.0f * 3.14159265359f;
+	}
+
+	// 新しい位置を計算
+	Vector3 setTranslate = {
+		data_.circular_center.x + data_.circular_radius * cos(angle),
+		pOwner_->GetWorldPos().y,
+		data_.circular_center.z + data_.circular_radius * sin(angle),
+	};
+	pOwner_->SetTranslate(setTranslate);
 }
 
 

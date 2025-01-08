@@ -45,12 +45,13 @@ namespace enemy {
 	};
 	struct MovementFuncData {
 		MovementBehavior behavior;
-		bool isTilt_ = false;
-		float velocity_ = 0.0f;
-		Vector3 horizontalStart{};
-		Vector3 horizontalEnd{};
-		Vector3 horizontalMiddle{};
-		Vector3 circular_Center{};
+		bool isTilt = false;
+		float velocity = 0.0f;
+		Vector3 horizontal_start{};
+		Vector3 horizontal_end{};
+		Vector3 horizontal_middle{};
+		Vector3 circular_center{};
+		float circular_radius{};
 	};
 
 }

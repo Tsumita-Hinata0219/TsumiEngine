@@ -268,31 +268,31 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Static;
 			// プレイヤーに体を向けるか
-			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 		}
 		else if (category["move_behavior"] == "FOLLOW") 
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Follow;
 			// プレイヤーに体を向けるか
-			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 			// 移動速度
-			result.movementFuncData.velocity_ = (float)category["move_speed"];
+			result.movementFuncData.velocity = (float)category["move_speed"];
 		}
 		else if (category["move_behavior"] == "HORIZONTAL") 
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Horizontal;
 			// プレイヤーに体を向けるか
-			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 			// 移動速度
-			result.movementFuncData.velocity_ = (float)category["move_speed"];
+			result.movementFuncData.velocity = (float)category["move_speed"];
 			// 開始地点
-			result.movementFuncData.horizontalStart = {
+			result.movementFuncData.horizontal_start = {
 				(float)category["horizontal_start"][0],
 				(float)category["horizontal_start"][1],
 				(float)category["horizontal_start"][2],
 			};
 			// 終了地点
-			result.movementFuncData.horizontalEnd = {
+			result.movementFuncData.horizontal_end = {
 				(float)category["horizontal_end"][0],
 				(float)category["horizontal_end"][1],
 				(float)category["horizontal_end"][2],
@@ -302,9 +302,9 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Circular;
 			// プレイヤーに体を向けるか
-			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 			// 移動速度
-			result.movementFuncData.velocity_ = (float)category["move_speed"];
+			result.movementFuncData.velocity = (float)category["move_speed"];
 		}
 	}
 

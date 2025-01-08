@@ -31,7 +31,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(enemy::MovementFuncData data);
+	void Init(const enemy::MovementFuncData& data);
 
 	/// <summary>
 	/// 更新処理
@@ -86,8 +86,8 @@ private:
 	// 移動関数
 	std::function<void()> movementFunc_;
 
-	// 移動速度
-	float velocity_ = 0.0f;
+	// 移動データ
+	enemy::MovementFuncData data_{};
 
 	// playerとの最低距離
 	float minToPlayer_ = 4.0f;

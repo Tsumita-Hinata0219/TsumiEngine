@@ -74,6 +74,11 @@ private:
 	/// </summary>
 	void Movement_Circular();
 
+	/// <summary>
+	/// 体を傾ける処理
+	/// </summary>
+	void BodyTilt();
+
 
 private:
 

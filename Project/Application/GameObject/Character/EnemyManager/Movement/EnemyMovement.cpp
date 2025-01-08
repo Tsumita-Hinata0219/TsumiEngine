@@ -1,6 +1,7 @@
 #include "EnemyMovement.h"
 #include "../EnemyManager.h"
 #include "../Enemy/IEnemy.h"
+#include "../../Player/Player.h"
 
 
 /// <summary>
@@ -89,5 +90,25 @@ void EnemyMovement::Movement_Horizontal()
 /// </summary> 
 void EnemyMovement::Movement_Circular()
 {
+}
+
+
+/// <summary>
+/// 体を傾ける処理
+/// </summary>
+void EnemyMovement::BodyTilt()
+{
+	// 差分をNormalize
+	Vector3 player2Enemy =
+		Normalize(pPlayer_->GetWorldPos() - pOwner_->GetWorldPos());
+
+	// 差分Normalizeに速度をかけてvelocityに設定
+	Vector2 direction = {
+		player2Enemy.x,
+		player2Enemy.z,
+	};
+
+	// Y軸周り角度(θy)
+	pOwner_->SetRotate_Y(std::atan2(direction.x, direction.z));
 }
 

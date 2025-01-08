@@ -52,6 +52,7 @@ public:
 	// Rotate
 	Vector3 GetRotate() const { return this->trans_.srt.rotate; }
 	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
+	void SetRotate_Y(float setRotate){this->trans_.srt.rotate.y = setRotate;}
 
 	// Translate
 	Vector3 GetTranslate() const { return this->trans_.srt.translate; }

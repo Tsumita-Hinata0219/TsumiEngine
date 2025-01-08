@@ -89,14 +89,8 @@ void EnemyManager::Update()
 	);
 
 
-	// 通常エネミーが全滅したかのチェックをし、
-	// trueになったら、ボスエネミーのチェックに行く
-	if (!isCommonEliminated_) {
-		Common_EliminatedChecker();
-	}
-	else {
-		Boss_EliminatedChecker();
-	}
+	// 全滅したかのチェック
+	EliminatedChecker();
 
 
 #ifdef _DEBUG
@@ -167,6 +161,22 @@ void EnemyManager::AddNewBullet(Vector3 initPos, Vector3 initVel, bool isState)
 void EnemyManager::AddNewHitEffect(IEnemy* enemyPtr)
 {
 	CreateEffect(enemyPtr);
+}
+
+
+/// <summary>
+/// 全滅したかのチェック
+/// </summary>
+void EnemyManager::EliminatedChecker()
+{
+	// 通常エネミーが全滅したかのチェックをし、
+	// trueになったら、ボスエネミーのチェックに行く
+	if (!isCommonEliminated_) {
+		Common_EliminatedChecker();
+	}
+	else {
+		Boss_EliminatedChecker();
+	}
 }
 
 

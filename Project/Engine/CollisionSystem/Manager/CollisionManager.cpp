@@ -45,8 +45,6 @@ void CollisionManager::UnRegister(ICollider* pCollider)
 /// </summary>
 void CollisionManager::Update()
 {
-	// nullチェック
-	//RemoveNullColliders();
 
 	// コリジョン判定を行う
 	CheckCollisions();
@@ -54,6 +52,19 @@ void CollisionManager::Update()
 #ifdef _DEBUG
 	DrawImGui(); // Debug表示
 #endif // _DEBUG
+}
+
+
+/// <summary>
+/// 配列のクリア
+/// </summary>
+void CollisionManager::Clear()
+{
+	// コライダーポインタリストの中身をクリア
+	for (auto collider : pColliders_) {
+		delete collider;  // 動的に割り当てられたメモリを解放
+	}
+	pColliders_.clear();  // リスト内の要素を削除
 }
 
 

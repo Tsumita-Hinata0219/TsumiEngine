@@ -99,6 +99,7 @@ void GameScene::Initialize()
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BossEnemy"));
+	enemyManager_->EliminatedChecker();
 
 	// ──────── SceneTransition
 	STMenuManager_->Init();
@@ -139,10 +140,12 @@ void GameScene::Update()
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
+			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
+			//CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		}
 		return;

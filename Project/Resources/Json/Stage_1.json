@@ -93,62 +93,6 @@
         },
         {
             "type": "MESH",
-            "name": "BarrierBox",
-            "transform": {
-                "translation": [
-                    30.0,
-                    0.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    50.0
-                ]
-            },
-            "collider": {
-                "type": "NONE"
-            },
-            "category": {
-                "type": "NONE"
-            },
-            "children": []
-        },
-        {
-            "type": "MESH",
-            "name": "BarrierBox.001",
-            "transform": {
-                "translation": [
-                    -30.0,
-                    0.0,
-                    0.5
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scaling": [
-                    1.5,
-                    1.5,
-                    50.0
-                ]
-            },
-            "collider": {
-                "type": "NONE"
-            },
-            "category": {
-                "type": "NONE"
-            },
-            "children": []
-        },
-        {
-            "type": "MESH",
             "name": "BarrierBox.002",
             "transform": {
                 "translation": [
@@ -192,6 +136,62 @@
                 "scaling": [
                     50.0,
                     1.5,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox",
+            "transform": {
+                "translation": [
+                    30.0,
+                    0.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    50.0,
+                    1.5
+                ]
+            },
+            "collider": {
+                "type": "NONE"
+            },
+            "category": {
+                "type": "NONE"
+            },
+            "children": []
+        },
+        {
+            "type": "MESH",
+            "name": "BarrierBox.001",
+            "transform": {
+                "translation": [
+                    -30.0,
+                    0.0,
+                    0.5
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scaling": [
+                    1.5,
+                    50.0,
                     1.5
                 ]
             },

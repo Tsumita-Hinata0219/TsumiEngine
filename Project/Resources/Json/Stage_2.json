@@ -87,7 +87,7 @@
                 "shoot_interval": 45,
                 "move_behavior": "HORIZONTAL",
                 "tilt_body": true,
-                "move_speed": 5.0,
+                "move_speed": 20.0,
                 "horizontal_start": [
                     -20.0,
                     -10.0,

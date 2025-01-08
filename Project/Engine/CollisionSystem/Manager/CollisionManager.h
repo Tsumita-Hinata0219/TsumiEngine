@@ -57,6 +57,11 @@ public:
 	/// </summary>
 	void Update();
 
+	/// <summary>
+	/// 配列のクリア
+	/// </summary>
+	void Clear();
+
 
 #pragma region Accessor アクセッサ
 

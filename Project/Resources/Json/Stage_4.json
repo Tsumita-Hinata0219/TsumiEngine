@@ -360,7 +360,7 @@
                 "type": "ENEMY",
                 "shot_direction": "TRIPLE_FORWARD",
                 "bullet_behavior": "RANDOM",
-                "shoot_interval": 45,
+                "shoot_interval": 30,
                 "move_behavior": "CIRCULAR",
                 "tilt_body": true,
                 "move_speed": 3.0,
@@ -399,7 +399,7 @@
             "category": {
                 "type": "ENEMY",
                 "shot_direction": "CROSS",
-                "bullet_behavior": "NONE",
+                "bullet_behavior": "RESISTANT",
                 "shoot_interval": 50,
                 "move_behavior": "STATIC",
                 "tilt_body": false
@@ -432,7 +432,7 @@
             "category": {
                 "type": "ENEMY",
                 "shot_direction": "CROSS",
-                "bullet_behavior": "NONE",
+                "bullet_behavior": "RESISTANT",
                 "shoot_interval": 50,
                 "move_behavior": "STATIC",
                 "tilt_body": false

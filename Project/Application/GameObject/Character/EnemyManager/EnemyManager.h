@@ -66,6 +66,11 @@ public: // メンバ関数
 	/// </summary>
 	void AddNewHitEffect(IEnemy* enemyPtr);
 
+	/// <summary>
+	/// 全滅したかのチェック
+	/// </summary>
+	void EliminatedChecker();
+
 
 #pragma region Accessor アクセッサ
 

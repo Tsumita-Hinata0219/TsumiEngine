@@ -452,6 +452,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\Camera.h" />

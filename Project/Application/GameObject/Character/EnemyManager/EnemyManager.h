@@ -5,7 +5,7 @@
 
 #include "../../GameObject.h"
 
-
+#include "Property/EnemyProperty.h"
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"

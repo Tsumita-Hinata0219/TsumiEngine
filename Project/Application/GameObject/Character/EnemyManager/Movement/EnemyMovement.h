@@ -4,6 +4,7 @@
 #include <functional>
 
 #include "../../../GameObject.h"
+#include "../Property/EnemyProperty.h"
 
 
 // 前方宣言
@@ -14,15 +15,6 @@ class Player;
 
 /* エネミーの移動処理 */
 class EnemyMovement {
-
-public:
-
-	enum class Movement {
-		Static,
-		Follow,
-		Horizontal,
-		Circular,
-	};
 
 public:
 
@@ -39,7 +31,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(Movement movement);
+	void Init(enemy::MovementBehavior movement);
 
 	/// <summary>
 	/// 更新処理
@@ -52,7 +44,7 @@ private:
 	/// <summary>
 	/// 移動関数の設定
 	/// </summary>
-	void SetMovementFunc(Movement movement);
+	void SetMovementFunc(enemy::MovementBehavior movement);
 
 	/// <summary>
 	/// 不動

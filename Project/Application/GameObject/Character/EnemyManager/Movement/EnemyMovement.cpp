@@ -18,7 +18,7 @@ EnemyMovement::EnemyMovement(EnemyManager* manager, IEnemy* owner, Player* playe
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyMovement::Init(Movement movement)
+void EnemyMovement::Init(enemy::MovementBehavior movement)
 {
 	// 関数設定
 	SetMovementFunc(movement);
@@ -43,20 +43,20 @@ void EnemyMovement::Update()
 /// <summary>
 /// 移動関数の設定
 /// </summary>
-void EnemyMovement::SetMovementFunc(Movement movement)
+void EnemyMovement::SetMovementFunc(enemy::MovementBehavior movement)
 {
 	switch (movement)
 	{
-	case Movement::Static:
+	case enemy::MovementBehavior::Static:
 		movementFunc_ = std::bind(&EnemyMovement::Movement_Static, this);
 		break;
-	case Movement::Follow:
+	case enemy::MovementBehavior::Follow:
 		movementFunc_ = std::bind(&EnemyMovement::Movement_Follow, this);
 		break;
-	case Movement::Horizontal:
+	case enemy::MovementBehavior::Horizontal:
 		movementFunc_ = std::bind(&EnemyMovement::Movement_Horizontal, this);
 		break;
-	case Movement::Circular:
+	case enemy::MovementBehavior::Circular:
 		movementFunc_ = std::bind(&EnemyMovement::Movement_Circular, this);
 		break;
 	default:

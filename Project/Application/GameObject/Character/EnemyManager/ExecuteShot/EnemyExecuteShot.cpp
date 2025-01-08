@@ -17,17 +17,17 @@ EnemyExecuteShot::EnemyExecuteShot(EnemyManager* manager, IEnemy* owner)
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyExecuteShot::Init(Direction direction, BulletBehavior behavior)
+void EnemyExecuteShot::Init(enemy::ShotDirection direction, enemy::BulletBehavior behavior)
 {
 	// 関数設定
 	SetShotFunc(direction);
 
 	// バレット挙動
 	behavior_ = behavior;
-	if (behavior_ == BulletBehavior::Common) {
+	if (behavior_ == enemy::BulletBehavior::Common) {
 		behabirState_ = false;
 	}
-	else if (behavior_ == BulletBehavior::Resistant) {
+	else if (behavior_ == enemy::BulletBehavior::Resistant) {
 		behabirState_ = true;
 	}
 
@@ -64,7 +64,7 @@ void EnemyExecuteShot::Update()
 /// </summary>
 void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 {
-	if (behavior_ == BulletBehavior::Random) {
+	if (behavior_ == enemy::BulletBehavior::Random) {
 		behabirState_ = behabirDist_(randEngine_) == 1;
 	}
 
@@ -80,29 +80,29 @@ void EnemyExecuteShot::AddNewBullet(const Vector3& direction)
 /// <summary>
 /// 射撃関数の設定
 /// </summary>
-void EnemyExecuteShot::SetShotFunc(Direction direction)
+void EnemyExecuteShot::SetShotFunc(enemy::ShotDirection direction)
 {
 	switch (direction)
 	{
-	case EnemyExecuteShot::Direction::Forward:
+	case enemy::ShotDirection::Forward:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Forward, this);
 		break;
-	case EnemyExecuteShot::Direction::TripleForward:
+	case enemy::ShotDirection::TripleForward:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_TripleForward, this);
 		break;
-	case EnemyExecuteShot::Direction::Cross:
+	case enemy::ShotDirection::Cross:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Cross, this);
 		break;
-	case EnemyExecuteShot::Direction::Omni_Four:
+	case enemy::ShotDirection::Omni_Four:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Four, this);
 		break;
-	case EnemyExecuteShot::Direction::Omni_Five:
+	case enemy::ShotDirection::Omni_Five:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Five, this);
 		break;
-	case EnemyExecuteShot::Direction::Omni_Eight:
+	case enemy::ShotDirection::Omni_Eight:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Omni_Eight, this);
 		break;
-	case EnemyExecuteShot::Direction::Random:
+	case enemy::ShotDirection::Random:
 		shotFunc_ = std::bind(&EnemyExecuteShot::Shot_Random, this);
 		break;
 	default:

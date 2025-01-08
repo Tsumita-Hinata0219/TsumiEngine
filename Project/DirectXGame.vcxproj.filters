@@ -1468,6 +1468,7 @@
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

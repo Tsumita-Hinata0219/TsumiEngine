@@ -27,7 +27,7 @@
             "category": {
                 "type": "ENEMY",
                 "shot_direction": "FORWARD",
-                "bullet_behavior": "NONE",
+                "bullet_behavior": "COMMON",
                 "shoot_interval": 15,
                 "move_behavior": "HORIZONTAL",
                 "tilt_body": true,

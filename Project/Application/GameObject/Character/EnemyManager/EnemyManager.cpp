@@ -180,10 +180,7 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);
@@ -199,10 +196,7 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);
@@ -218,10 +212,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->Init();
 	newEnemy->SetRotate(setEntityData.srt.rotate);
 	newEnemy->SetTranslate(setEntityData.srt.translate);

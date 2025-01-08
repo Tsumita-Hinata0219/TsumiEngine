@@ -217,41 +217,95 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		if (category["type"] != "ENEMY") { return result; }
 
 		// 射撃方向
-		if (category["shot_direction"] == "FORWARD") {
-			result.direction = EnemyExecuteShot::Direction::Forward;
+		if (category["shot_direction"] == "FORWARD") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "TRIPLE_FORWARD") {
-			result.direction = EnemyExecuteShot::Direction::TripleForward;
+		else if (category["shot_direction"] == "TRIPLE_FORWARD") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "CROSS") {
-			result.direction = EnemyExecuteShot::Direction::Cross;
+		else if (category["shot_direction"] == "CROSS") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "OMNI_FOUR") {
-			result.direction = EnemyExecuteShot::Direction::Omni_Four;
+		else if (category["shot_direction"] == "OMNI_FOUR") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "OMNI_FIVE") {
-			result.direction = EnemyExecuteShot::Direction::Omni_Five;
+		else if (category["shot_direction"] == "OMNI_FIVE") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "OMNI_EIGHT") {
-			result.direction = EnemyExecuteShot::Direction::Omni_Eight;
+		else if (category["shot_direction"] == "OMNI_EIGHT") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "RANDOM") {
-			result.direction = EnemyExecuteShot::Direction::Random;
+		else if (category["shot_direction"] == "RANDOM") 
+		{
+			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
 
 		// バレットタイプ
-		if (category["bullet_behavior"] == "COMMON") {
-			result.behavior = EnemyExecuteShot::BulletBehavior::Common;
+		if (category["bullet_behavior"] == "COMMON") 
+		{
+			result.shotFuncData.behavior = enemy::BulletBehavior::Common;
 		}
-		else if (category["bullet_behavior"] == "RESISTANT") {
-			result.behavior = EnemyExecuteShot::BulletBehavior::Resistant;
+		else if (category["bullet_behavior"] == "RESISTANT") 
+		{
+			result.shotFuncData.behavior = enemy::BulletBehavior::Resistant;
 		}
-		else if (category["bullet_behavior"] == "RANDOM") {
-			result.behavior = EnemyExecuteShot::BulletBehavior::Random;
+		else if (category["bullet_behavior"] == "RANDOM") 
+		{
+			result.shotFuncData.behavior = enemy::BulletBehavior::Random;
 		}
 
 		// 射撃間隔
-		result.shotInterval = (float)category["shoot_interval"];
+		result.shotFuncData.shotInterval = (float)category["shoot_interval"];
+
+		// 移動タイプ
+		if (category["move_behavior"] == "STATIC") 
+		{
+			result.movementFuncData.movement = enemy::MovementBehavior::Static;
+			// プレイヤーに体を向けるか
+			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+		}
+		else if (category["move_behavior"] == "FOLLOW") 
+		{
+			result.movementFuncData.movement = enemy::MovementBehavior::Follow;
+			// プレイヤーに体を向けるか
+			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			// 移動速度
+			result.movementFuncData.velocity_ = (float)category["move_speed"];
+		}
+		else if (category["move_behavior"] == "HORIZONTAL") 
+		{
+			result.movementFuncData.movement = enemy::MovementBehavior::Horizontal;
+			// プレイヤーに体を向けるか
+			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			// 移動速度
+			result.movementFuncData.velocity_ = (float)category["move_speed"];
+			// 開始地点
+			result.movementFuncData.horizontalStart = {
+				(float)category["horizontal_start"][0],
+				(float)category["horizontal_start"][1],
+				(float)category["horizontal_start"][2],
+			};
+			// 終了地点
+			result.movementFuncData.horizontalEnd= {
+				(float)category["horizontal_end"][0],
+				(float)category["horizontal_end"][1],
+				(float)category["horizontal_end"][2],
+			};
+		}
+		else if (category["move_behavior"] == "CIRCULAR") 
+		{
+			result.movementFuncData.movement = enemy::MovementBehavior::Circular;
+			// プレイヤーに体を向けるか
+			result.movementFuncData.isTilt_ = (bool)category["tilt_body"];
+			// 移動速度
+			result.movementFuncData.velocity_ = (float)category["move_speed"];
+		}
 	}
 
 	return result;

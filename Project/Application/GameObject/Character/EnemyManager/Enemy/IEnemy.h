@@ -68,11 +68,7 @@ public:
 	virtual uint32_t GetHP() = 0;
 
 	// ShotProperty
-	void SetShotProperty(EnemyExecuteShot::Direction direction, EnemyExecuteShot::BulletBehavior behavior, float interval) {
-		this->shotDirection_ = direction;
-		this->bulletBehavior_ = behavior;
-		this->shotInterval_ = interval;
-	}
+	void SetShotProperty(enemy::ShotFuncData data) { this->shotFuncData_ = data; }
 
 #pragma endregion 
 
@@ -114,12 +110,8 @@ protected:
 
 	// 射撃処理
 	std::unique_ptr<EnemyExecuteShot> exeShot_;
-	// 射撃方向
-	EnemyExecuteShot::Direction shotDirection_ = EnemyExecuteShot::Direction::Forward;
-	// 弾のタイプ
-	EnemyExecuteShot::BulletBehavior bulletBehavior_ = EnemyExecuteShot::BulletBehavior::Common;
-	// 射撃インターバル
-	float shotInterval_ = 0.0f;
+	// 射撃データ
+	enemy::ShotFuncData shotFuncData_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

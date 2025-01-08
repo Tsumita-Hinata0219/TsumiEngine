@@ -5,6 +5,7 @@
 #include <random>
 
 #include "../Bullet/EnemyBullet.h"
+#include "../Property/EnemyProperty.h"
 
 #include "../../../GameObject.h"
 
@@ -16,24 +17,6 @@ class IEnemy;
 
 /* エネミーの射撃処理 */
 class EnemyExecuteShot {
-
-public:
-
-	enum class Direction {
-		Forward,
-		TripleForward,
-		Cross,
-		Omni_Four,
-		Omni_Five,
-		Omni_Eight,
-		Random,
-	};
-
-	enum class BulletBehavior {
-		Common,
-		Resistant,
-		Random,
-	};
 
 public:
 
@@ -50,7 +33,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(Direction direction, BulletBehavior behavior);
+	void Init(enemy::ShotDirection direction, enemy::BulletBehavior behavior);
 
 	/// <summary>
 	/// 更新処理
@@ -76,7 +59,7 @@ private:
 	/// <summary>
 	/// 射撃関数の設定
 	/// </summary>
-	void SetShotFunc(Direction direction);
+	void SetShotFunc(enemy::ShotDirection direction);
 
 	/// <summary>
 	/// 前方射撃
@@ -126,7 +109,7 @@ private:
 	std::function<void()> shotFunc_;
 
 	// バレット挙動
-	BulletBehavior behavior_ = BulletBehavior::Common;
+	enemy::BulletBehavior behavior_ = enemy::BulletBehavior::Common;
 	bool behabirState_ = false;
 
 	// バレットの速度

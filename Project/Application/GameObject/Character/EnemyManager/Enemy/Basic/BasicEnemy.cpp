@@ -32,6 +32,10 @@ void BasicEnemy::Init()
 	// 射撃方法とバレット挙動
 	exeShot_->Init(shotFuncData_);
 
+	// 移動処理クラス
+	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
+	movement_->Init(movementData_);
+
 	// HPの設定
 	hp_ = 5;
 

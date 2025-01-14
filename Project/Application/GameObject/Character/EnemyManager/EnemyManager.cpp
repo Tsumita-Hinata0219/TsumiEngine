@@ -11,23 +11,15 @@ void EnemyManager::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
 
-	// Transformの初期化
-	transform_.Init();
-	transform_.srt.translate.z = 30.0f;
-
 	// BulletのPoolのインスタンスを先に作っておく
 	bulletPool_.Create(100);
 
 	// EffectのPoolのインスタンスを先に作っておく
 	circleEffectPool_.Create(100);
 
-	// EnemyListの更新処理
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
-		enemy->Update();
-	}
-
-	// エネミーが全滅したかのフラグは折っておく
-	isEliminated_ = false;
+	// 全滅したかのフラグは折っておく
+	isCommonEliminated_ = false;
+	isBossEliminated_ = false;
 }
 
 
@@ -37,16 +29,28 @@ void EnemyManager::Init()
 void EnemyManager::Update()
 {
 	// 全滅していたら処理を通さない
-	if (isEliminated_) { return; }
+	if (isBossEliminated_) { return; }
 
 	// EnemyListの更新処理
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+	for (auto& enemy : commonEnemies_) {
 		enemy->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	enemys_.remove_if([](std::shared_ptr<IEnemy> enemy) {
+	commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
 		if (enemy->IsDead()) {
-			enemy.reset();
+			return true;
+		}
+		return false;
+		}
+	);
+
+	// BossEnemyListの更新処理
+	for (auto& boss : bossEnemies_) {
+		boss->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
+		if (boss->IsDead()) {
 			return true;
 		}
 		return false;
@@ -57,12 +61,11 @@ void EnemyManager::Update()
 	for (EnemyBullet* bullet : bulletList_) {
 		bullet->Update();
 	}
-	// 死亡フラグが立っていたら削除
+	// 死亡した弾丸を整理し、プールに返却
 	bulletList_.remove_if([this](EnemyBullet* bullet) {
 		if (bullet->IsDead()) {
-			// 返却する前にリセット処理
+			// リセット処理を入れておく
 			bullet->Reset();
-			// プールに返却
 			bulletPool_.Return(bullet);
 			return true;
 		}
@@ -85,6 +88,7 @@ void EnemyManager::Update()
 		}
 	);
 
+
 	// 全滅したかのチェック
 	EliminatedChecker();
 
@@ -101,8 +105,11 @@ void EnemyManager::Update()
 void EnemyManager::Draw3D()
 {
 	// EnemyListの描画
-	for (std::shared_ptr<IEnemy> enemy : enemys_) {
+	for (auto& enemy : commonEnemies_) {
 		enemy->Draw3D();
+	}
+	for (auto& boss : bossEnemies_) {
+		boss->Draw3D();
 	}
 
 	// Bulletsの描画
@@ -162,11 +169,47 @@ void EnemyManager::AddNewHitEffect(IEnemy* enemyPtr)
 /// </summary>
 void EnemyManager::EliminatedChecker()
 {
-	int instanceNum = int(enemys_.size());
+	// 通常エネミーが全滅したかのチェックをし、
+	// trueになったら、ボスエネミーのチェックに行く
+	if (!isCommonEliminated_) {
+		Common_EliminatedChecker();
+	}
+	else {
+		Boss_EliminatedChecker();
+	}
+}
+
+
+/// <summary>
+/// 通常エネミーが全滅したかのチェック
+/// </summary>
+void EnemyManager::Common_EliminatedChecker()
+{
+	int instanceNum = int(commonEnemies_.size());
 
 	// インスタンスが0なので全滅フラグを立てる
 	if (instanceNum <= 0) {
-		isEliminated_ = true;
+
+		isCommonEliminated_ = true;
+		
+		// ボスのシールドを破壊
+		for (auto& boss : bossEnemies_) {
+			boss->CollapseShield();
+		}
+	}
+}
+
+
+/// <summary>
+/// ボスエネミーが全滅したかのチェック
+/// </summary>
+void EnemyManager::Boss_EliminatedChecker()
+{
+	int instanceNum = int(bossEnemies_.size());
+
+	// インスタンスが0なので全滅フラグを立てる
+	if (instanceNum <= 0) {
+		isBossEliminated_ = true;
 	}
 }
 
@@ -177,59 +220,50 @@ void EnemyManager::EliminatedChecker()
 void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<BasicEnemy> newEnemy = std::make_shared<BasicEnemy>();
+	std::unique_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	commonEnemies_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<StaticEnemy> newEnemy = std::make_shared<StaticEnemy>();
+	std::unique_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	commonEnemies_.push_back(std::move(newEnemy));
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
-	std::shared_ptr<BossEnemy> newEnemy = std::make_shared<BossEnemy>();
+	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetShotProperty(
-		setEntityData.enemyData.direction,
-		setEntityData.enemyData.behavior,
-		setEntityData.enemyData.shotInterval);
+	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
+	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
+	newEnemy->SetInitSRT(setEntityData.srt);
 	newEnemy->Init();
-	newEnemy->SetRotate(setEntityData.srt.rotate);
-	newEnemy->SetTranslate(setEntityData.srt.translate);
 
 	// リストに追加
-	enemys_.push_back(newEnemy);
+	bossEnemies_.push_back(std::move(newEnemy));
 }
 
 
@@ -238,7 +272,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 /// </summary>
 void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState)
 {
-	// オブジェクトプール空新しいバレットを取得
+	// オブジェクトプールから新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
@@ -277,17 +311,12 @@ void EnemyManager::DrawimGui()
 {
 	if (ImGui::TreeNode("EnemyManager")) {
 
-		ImGui::Text("Transform");
-		ImGui::DragFloat3("Scale", &transform_.srt.scale.x, 0.01f, 0.0f, 20.0f);
-		ImGui::DragFloat3("Rotate", &transform_.srt.rotate.x, 0.01f);
-		ImGui::DragFloat3("Translate", &transform_.srt.translate.x, 0.1f);
+		ImGui::Text("IEnemyInstance = %d", int(commonEnemies_.size()));
 		ImGui::Text("");
 
-		ImGui::Text("IEnemyInstance = %d", int(enemys_.size()));
-		ImGui::Text("");
-
+		ImGui::Text("Bullet");
 		int instance = int(bulletList_.size());
-		ImGui::DragInt("Bullet_InstanceSize", &instance);
+		ImGui::DragInt("Bullet_InstanceSize", &instance, 0);
 		ImGui::Text("");
 
 		ImGui::TreePop();

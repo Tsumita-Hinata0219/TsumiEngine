@@ -75,8 +75,8 @@ void BoxManager::CreateNewBox(BoxType type, const SRT& setSRT)
 
 		// 初期化と設定
 		newBox->SetManager(this);
+		newBox->SetInitSRT(setSRT);
 		newBox->Init();
-		newBox->SetSRT(setSRT);
 
 		boxs_.push_back(newBox);
 	}
@@ -87,8 +87,8 @@ void BoxManager::CreateNewBox(BoxType type, const SRT& setSRT)
 
 		// 初期化と設定
 		newBox->SetManager(this);
+		newBox->SetInitSRT(setSRT);
 		newBox->Init();
-		newBox->SetSRT(setSRT);
 
 		boxs_.push_back(newBox);
 	}

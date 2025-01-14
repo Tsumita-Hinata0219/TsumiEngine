@@ -75,11 +75,14 @@ void IOBJState::CommandCall()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	if (cullMode_ == CullingMode::Back) { // 背面描画なし
+	if (renderState_ == RenderState::None) {
 		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_Back);
 	}
-	else if (cullMode_ == CullingMode::None) { // 背面描画あり
+	else if (renderState_ == RenderState::CullingMode_None) {
 		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_None);
+	}
+	else if (renderState_ == RenderState::DepthWriteMask_ZERO) {
+		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::DepthWriteMask_Zero);
 	}
 
 	// VertexBufferView

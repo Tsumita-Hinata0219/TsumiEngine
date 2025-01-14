@@ -9,6 +9,7 @@
 #include "Transform/Transform.h"
 
 #include "../ExecuteShot/EnemyExecuteShot.h"
+#include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
 
 
@@ -44,6 +45,7 @@ public:
 	// SRT
 	SRT GetSRT() const { return this->trans_.srt; }
 	void SetSRT(const SRT& setSRT) { this->trans_.srt = setSRT; }
+	void SetInitSRT(const SRT& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
 	Vector3 GetScale() const { return this->trans_.srt.scale; }
@@ -52,6 +54,7 @@ public:
 	// Rotate
 	Vector3 GetRotate() const { return this->trans_.srt.rotate; }
 	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
+	void SetRotate_Y(float setRotate){this->trans_.srt.rotate.y = setRotate;}
 
 	// Translate
 	Vector3 GetTranslate() const { return this->trans_.srt.translate; }
@@ -67,11 +70,10 @@ public:
 	virtual uint32_t GetHP() = 0;
 
 	// ShotProperty
-	void SetShotProperty(EnemyExecuteShot::Direction direction, EnemyExecuteShot::BulletBehavior behavior, float interval) {
-		this->shotDirection_ = direction;
-		this->bulletBehavior_ = behavior;
-		this->shotInterval_ = interval;
-	}
+	void SetShotProperty(enemy::ShotFuncData data) { this->shotFuncData_ = data; }
+
+	// MovementProperty
+	void SetMovementProperty(enemy::MovementFuncData data) { this->movementData_ = data; }
 
 #pragma endregion 
 
@@ -110,15 +112,19 @@ protected:
 
 	// トランスフォーム
 	Transform trans_;
+	// 初期値
+	SRT initSRT_{};
 
 	// 射撃処理
 	std::unique_ptr<EnemyExecuteShot> exeShot_;
-	// 射撃方向
-	EnemyExecuteShot::Direction shotDirection_ = EnemyExecuteShot::Direction::Forward;
-	// 弾のタイプ
-	EnemyExecuteShot::BulletBehavior bulletBehavior_ = EnemyExecuteShot::BulletBehavior::Common;
-	// 射撃インターバル
-	float shotInterval_ = 0.0f;
+	// 射撃データ
+	enemy::ShotFuncData shotFuncData_;
+
+	// 移動処理
+	std::unique_ptr<EnemyMovement> movement_;
+	// 移動データ
+	enemy::MovementFuncData movementData_;
+
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

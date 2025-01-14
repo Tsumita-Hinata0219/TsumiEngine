@@ -3,7 +3,7 @@
 #include "Math/MyMath.h"
 #include "GameObject/GameObject.h"
 
-#include "GameObject/Character/EnemyManager/ExecuteShot/EnemyExecuteShot.h"
+#include "GameObject/Character/EnemyManager/Property/EnemyProperty.h"
 
 
 /* JsonからよみとるPlayerのデータ */
@@ -13,10 +13,10 @@ struct EntityPlayerData {
 
 /* JsonからよみとるEnemyのデータ */
 struct EntityEnemyData {
-	EnemyExecuteShot::Direction direction;
-	EnemyExecuteShot::BulletBehavior behavior;
-	float shotInterval = 0.0f;
+	enemy::ShotFuncData shotFuncData{};
+	enemy::MovementFuncData movementFuncData{};
 };
+
 
 /* JsonからよみとるEntityData */
 struct EntityData {

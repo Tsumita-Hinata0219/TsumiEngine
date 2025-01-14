@@ -66,6 +66,7 @@ void GameManager::Run() {
 /// シーンチェンジ
 /// </summary>
 void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
+	scene_.reset();
 	scene_ = std::move(newScene);
 	scene_->SetManager(this);
 	scene_->Initialize();

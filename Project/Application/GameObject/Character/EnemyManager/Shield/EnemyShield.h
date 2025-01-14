@@ -45,6 +45,14 @@ public:
 	void OnShieldBroken();
 
 
+#pragma region Accessor アクセッサ
+
+	// ペアレント
+	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>

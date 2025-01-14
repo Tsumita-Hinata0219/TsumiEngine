@@ -45,8 +45,6 @@ void CollisionManager::UnRegister(ICollider* pCollider)
 /// </summary>
 void CollisionManager::Update()
 {
-	// nullチェック
-	//RemoveNullColliders();
 
 	// コリジョン判定を行う
 	CheckCollisions();
@@ -54,6 +52,16 @@ void CollisionManager::Update()
 #ifdef _DEBUG
 	DrawImGui(); // Debug表示
 #endif // _DEBUG
+}
+
+
+/// <summary>
+/// 配列のクリア
+/// </summary>
+void CollisionManager::Clear()
+{
+	// コライダーポインタリストの中身をクリア
+	pColliders_.clear();  // リスト内の要素を削除
 }
 
 
@@ -79,6 +87,10 @@ void CollisionManager::CheckCollisions()
 
 			// itr1とit2の属性が同じなら判定をスキップする
 			if ((*itr1)->GetCategory() == (*itr2)->GetCategory()) {
+				continue;
+			}
+			// どちらかが非アクティブなら判定をスキップする
+			if (!(*itr1)->IsActive() || !(*itr2)->IsActive()) {
 				continue;
 			}
 
@@ -118,7 +130,6 @@ void CollisionManager::DrawImGui()
 /// <summary>
 /// Colliderのインスタンスの取得
 /// </summary>
-
 const std::unordered_map<std::type_index, ColliderFactory>& CollisionManager::GetColliderFactoryMap()
 {
 	static const std::unordered_map<std::type_index, ColliderFactory> factoryMap =

@@ -19,6 +19,7 @@ namespace Attributes {
         BULLET,     // プレイヤーの弾
         SOLID,      // 固い地形（障害物）
         PASSABLE,   // 通れる地形
+        SWEERER,    // スイーパー
         OTHER       // その他
     };
 }

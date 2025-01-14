@@ -11,7 +11,7 @@ void StageSelectOperation::Init()
 	input_ = Input::GetInstance();
 
 	// ステージのセレクト番号
-	selectNum_ = 0;
+	selectNum_ = 1;
 
 	// 選択したかのフラグ
 	isSelect_ = false;

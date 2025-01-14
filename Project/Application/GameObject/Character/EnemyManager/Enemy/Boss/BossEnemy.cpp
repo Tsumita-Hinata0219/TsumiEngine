@@ -1,5 +1,6 @@
 #include "BossEnemy.h"
-
+#include "../../../Player/Player.h"
+#include "../../EnemyManager.h"
 
 
 /// <summary>
@@ -14,6 +15,7 @@ void BossEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
+	trans_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -29,22 +31,39 @@ void BossEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(shotInterval_);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(shotDirection_, bulletBehavior_);
+	exeShot_->Init(shotFuncData_);
+
+	// 移動処理クラス
+	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
+	movement_->Init(movementData_);
+
+	// ヒットリアクション関連数値の初期設定
+	// ヒットリアクションフラグ
+	isHitReactioning_ = false;
+	// タイマー
+	hitReactionTimer_.Init(0.0f, 0.4f * 60.0f);
+	// スケール
+	hitReactionScale_ = { 1.0f, 1.1f, 1.0f };
+	// 色加算
+	hitReactionColor_.first = 0.8f;
+	hitReactionColor_.second = 0.0f;
 
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
 	shield_->Init();
+	shield_->SetParent(&trans_);
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
 	sphere_->data_.center = trans_.GetWorldPos();
 	sphere_->data_.radius = 1.8f * 1.0f;
 
+	// HPの設定
+	hp_ = 15;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
-	CollapseShield();
+	//CollapseShield();
 }
 
 
@@ -58,6 +77,9 @@ void BossEnemy::Update()
 
 	// 射撃処理
 	exeShot_->Update();
+
+	// 移動処理
+	movement_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -95,9 +117,33 @@ void BossEnemy::Draw2DBack()
 /// </summary>
 void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 {
-	if (object->GetCategory() == Attributes::Category::PLAYER &&
+	// 地形は押し出し
+	if (object->GetCategory() == Attributes::Category::TERRAIN) {
+		// 押し出しの処理
+		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
+		trans_.UpdateMatrix();
+	}
+	else if (object->GetCategory() == Attributes::Category::PLAYER &&
 		object->GetType() == Attributes::Type::BULLET) {
-		Log("Hit\n");
+
+		// HPを減らす
+		hp_--;
+
+		// ヒットリアクション中にする
+		isHitReactioning_ = true;
+
+		// ヒットリアクションのタイマースタート
+		hitReactionTimer_.Start();
+
+		// エフェクトを出す
+		enemyManager_->AddNewHitEffect(this);
+
+		// HPが0以下なら死亡
+		if (hp_ <= 0) {
+			// 死亡状態に設定
+			MarkAsDead();
+			player_->AddKillCount();
+		}
 	}
 }
 
@@ -109,6 +155,16 @@ void BossEnemy::CollapseShield()
 {
 	// シールドが壊れた時の処理
 	shield_->OnShieldBroken();
+}
+
+
+/// <summary>
+/// マークを死亡状態に設定
+/// </summary>
+void BossEnemy::MarkAsDead()
+{
+	// 死亡フラグを立てる
+	isDead_ = true;
 }
 
 

@@ -17,6 +17,8 @@
 
 #include "Particle/Manager/PlayerParticleManager.h"
 
+#include "BulletSweep/BulletSweepEraser.h"
+
 #include "JsonManager/JsonEntityData.h"
 
 
@@ -236,6 +238,12 @@ private: // バレット関連
 	int shotPressFrame_ = 0;
 	int kShotInterval_ = 8;
 	const int kInitialShotPressFrame = 1;
+
+
+private: // スイープ関連
+
+	// スイープ
+	std::unique_ptr<BulletSweepEraser> sweepEraser_;
 
 
 private: // ゲームカメラ

@@ -56,7 +56,7 @@ void PlayerMovement::Update()
 	PadMove();
 	KeyMove();
 
-	// カメラのタイプで処理を分ける
+	// カメラタイプ : 三人称視点
 	if (pGameCamera_->GetCameraType() == GameCameraType::ORBITAL) {
 
 		if (pPlayer_->IsShooting()) {
@@ -69,9 +69,14 @@ void PlayerMovement::Update()
 			CalcBodyOrienation(iKeys_, keyMoveDirection_);
 		}
 	}
+	// カメラタイプ : 俯瞰視点
 	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 
-		if (pPlayer_->IsShooting()) {
+		// 射撃中 or RStickが入力されている場合は
+		// Rstickの入力方向に姿勢を合わせる
+		if (pPlayer_->IsShooting() ||
+			std::abs(iRStick_.x) >= DZone_ ||
+			std::abs(iRStick_.y) >= DZone_) {
 			// RStickからY軸の姿勢を合わせる
 			CalcBodyOrienation(iRStick_, RStickMoveDirection_);
 		}

@@ -70,9 +70,15 @@ public:
 private:
 
 	/// <summary>
+	/// マークを死亡状態に設定
+	/// </summary>
+	void MarkAsDead();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();
+
 
 private:
 
@@ -87,20 +93,22 @@ private:
 
 	// ライト
 	DirectionalLightData light_{};
+	// カラー
+	Vector4 modelColor_ = Vector4::one;
 
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;
 
-	// カラー
-	Vector4 modelColor_ = Vector4::one;
-
 	// HP
 	uint32_t hp_ = 0;
 
+	// 移動速度
+	Vector3 velocity_{};
+	float moveVector_ = 0.05f;
+	// playerとの最低距離
+	float minToPlayer_ = 4.0f;
+
 	// シールド　
 	std::unique_ptr<EnemyShield> shield_;
-
-	// BulletのList配列
-	std::list<std::shared_ptr<EnemyBullet>> bulletList_;
 
 };

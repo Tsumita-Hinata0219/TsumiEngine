@@ -22,6 +22,12 @@ void SelectScene::Initialize()
 		OnceInit();
 	}
 
+	texture_ = TextureManager::LoadTexture("Texture/Select", "selectnavi.png");
+	sprite_ = std::make_unique<Sprite>();
+	sprite_->Init({ 1280.0f, 720.0f });
+	sprite_->SetTexture(texture_);
+	trans_.Init();
+
 	// シーントランジション
 	sceneTransition_ = SceneTransition::GetInstance();
 	sceneTransition_->Init();
@@ -92,6 +98,8 @@ void SelectScene::ModelDraw()
 void SelectScene::FrontSpriteDraw()
 {
 	selectManager_->Draw2DFront();
+
+	sprite_->Draw(trans_);
 
 	// シーントランジション
 	sceneTransition_->Draw2DFront();

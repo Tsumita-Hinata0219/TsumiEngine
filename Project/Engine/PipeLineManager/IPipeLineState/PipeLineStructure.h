@@ -69,6 +69,8 @@ namespace PipeLine {
 		Cull_Mode_Back,
 		Cull_Mode_None,
 
+		DepthWriteMask_Zero,
+
 		Blend_Model_Normal,
 		Blend_Model_Add,
 		Blend_Model_Subtruct,

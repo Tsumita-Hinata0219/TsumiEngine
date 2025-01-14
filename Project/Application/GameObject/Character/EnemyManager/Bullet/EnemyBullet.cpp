@@ -2,23 +2,28 @@
 
 
 
+EnemyBullet::EnemyBullet()
+{
+	attribute_ = { Attributes::Category::ENEMY, Attributes::Type::BULLET };
+
+	// BodyModelのロードと初期化
+	model_ = modelManager_->GetModel("EnemyBullet");
+}
+
 // 初期化処理
 void EnemyBullet::Init()
 {
-	// BodyModelのロードと初期化
-	model_ = modelManager_->GetModel("EnemyBullet");
-
 	// 弾のタイプでカラーを変える
+	Vector4 modelColor{};
 	if (!isResistant_) {
 		// ノーマルはオレンジ
-		Vector4 orange = { 1.0f, 0.2f, 0.0f, 1.0f };
-		model_->SetMaterialColor(orange);
+		modelColor = { 1.0f, 0.2f, 0.0f, 1.0f };
 	}
 	else {
 		// レジスタントは深紫
-		Vector4 purple = { 0.15f, 0.0f, 0.2f, 1.0f };
-		model_->SetMaterialColor(purple);
+		modelColor = { 0.15f, 0.0f, 0.2f, 1.0f };
 	}
+	model_->SetMaterialColor(modelColor);
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
 	trans_.Init();
@@ -69,17 +74,25 @@ void EnemyBullet::Draw2DBack() {}
 // 衝突時コールバック関数
 void EnemyBullet::onCollision([[maybe_unused]] IObject* object)
 {
-	if (object->GetCategory() == Attributes::Category::PLAYER) {
+	// PlayerのBodyかBulletと衝突したら
+	if (object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BODY || 
+		object->GetCategory() == Attributes::Category::PLAYER &&
+		object->GetType() == Attributes::Type::BULLET) {
 
 		// タイプが消えない弾ならreturn
 		if (isResistant_) { return; }
 		// 死亡状態に設定
 		MarkAsDead();
 	}
+	else if (object->GetCategory() == Attributes::Category::PLAYER && object->GetType() == Attributes::Type::SWEERER) {
+		// スイーパー相手なら死亡
+		// 死亡状態に設定
+		MarkAsDead();
+	}
 	else if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
-		// 衝突相手が地形ならタイプ構わずフラグを立てる
-		// 死亡状態に設定
+		// 地形相手なら死亡
 		MarkAsDead();
 	}
 }

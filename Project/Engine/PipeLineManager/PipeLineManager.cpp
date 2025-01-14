@@ -95,6 +95,10 @@ void PipeLineManager::CreatePipeLine_Object3d()
 	// 背面描画
 	pipeline->SetCUllMode(D3D12_CULL_MODE_NONE); // CullModeを背面描画するように設定
 	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_None] = pipeline->SetUpPso();
+
+	// Depth Zero
+	pipeline->SetUpDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO); // DepthWriteMaskをZeroに設定
+	pipeLineMaps_[Category::Object3D][SubFilter::DepthWriteMask_Zero] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_Object2d()
 {

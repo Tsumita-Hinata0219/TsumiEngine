@@ -13,6 +13,7 @@ void StaticEnemy::Init()
 
 	// BodyTransfromの初期化
 	trans_.Init();
+	trans_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -28,9 +29,12 @@ void StaticEnemy::Init()
 
 	// 射撃処理クラス
 	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	exeShot_->SetTimer(shotInterval_);
 	// 射撃方法とバレット挙動
-	exeShot_->Init(shotDirection_, bulletBehavior_);
+	exeShot_->Init(shotFuncData_);
+
+	// 移動処理クラス
+	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
+	movement_->Init(movementData_);
 
 	// ヒットリアクション関連数値の初期設定
 	// ヒットリアクションフラグ
@@ -52,7 +56,7 @@ void StaticEnemy::Init()
 	addRadSpeed_ = 1.0f;
 	
 	// HPの設定
-	hp_ = 25;
+	hp_ = 10;
 }
 
 
@@ -65,8 +69,8 @@ void StaticEnemy::Update()
 	// 射撃処理
 	exeShot_->Update();
 
-	// ヒットリアクション
-	HitReaction();
+	// 移動処理
+	movement_->Update();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();

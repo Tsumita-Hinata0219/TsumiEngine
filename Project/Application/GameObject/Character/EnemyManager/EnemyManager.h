@@ -5,7 +5,7 @@
 
 #include "../../GameObject.h"
 
-
+#include "Property/EnemyProperty.h"
 #include "Enemy/IEnemy.h"
 #include "Enemy/Basic/BasicEnemy.h"
 #include "Enemy/Static/StaticEnemy.h"
@@ -66,6 +66,11 @@ public: // メンバ関数
 	/// </summary>
 	void AddNewHitEffect(IEnemy* enemyPtr);
 
+	/// <summary>
+	/// 全滅したかのチェック
+	/// </summary>
+	void EliminatedChecker();
+
 
 #pragma region Accessor アクセッサ
 
@@ -73,10 +78,10 @@ public: // メンバ関数
 	void SetPlayer(Player* setPlayer) { this->player_ = setPlayer; }
 
 	// 全滅したかのフラグ
-	bool IsEliminated() const { return this->isEliminated_; }
+	bool IsEliminated() const { return this->isBossEliminated_; }
 
 	// EnemyListの取得
-	std::list<std::shared_ptr<IEnemy>>& GetEnemys() { return this->enemys_; }
+	std::list<std::unique_ptr<IEnemy>>& GetEnemys() { return this->commonEnemies_; }
 
 #pragma endregion 
 
@@ -84,9 +89,14 @@ public: // メンバ関数
 private:
 
 	/// <summary>
-	/// 全滅したかのチェック
+	/// 通常エネミーが全滅したかのチェック
 	/// </summary>
-	void EliminatedChecker();
+	void Common_EliminatedChecker();
+
+	/// <summary>
+	/// ボスエネミーが全滅したかのチェック
+	/// </summary>
+	void Boss_EliminatedChecker();
 
 	/// <summary>
 	/// 新しいEnemyを生成する
@@ -118,11 +128,11 @@ private: // メンバ変数
 	// Player
 	Player* player_ = nullptr;
 
-	// Transform
-	Transform transform_{};
-
 	// EnemyのList配列
-	std::list<std::shared_ptr<IEnemy>> enemys_;
+	std::list<std::unique_ptr<IEnemy>> commonEnemies_;
+
+	// BossEnemyのList配列
+	std::list<std::unique_ptr<BossEnemy>> bossEnemies_;
 
 	// BulletのPool
 	ObjectPool<EnemyBullet> bulletPool_;
@@ -134,8 +144,10 @@ private: // メンバ変数
 	// EffectのList配列
 	std::list<EnemyHitEffectCircle*> circleEffectList_;
 
-	// エネミーが全滅したかのフラグ
-	bool isEliminated_ = false;
+	// 通常エネミーが全滅したかのフラグ
+	bool isCommonEliminated_ = false;
+	// ボスエネミーが全滅したかのフラグ
+	bool isBossEliminated_ = false;
 
 };
 

@@ -37,6 +37,21 @@ GameScene::~GameScene()
 /// </summary>
 void GameScene::Initialize()
 {
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_ = std::make_unique<RetroCRTEffect>();
+	retroCRT_->Init();
+	retroEffectData_ = {
+		Temp::Color::WHITE,
+		0.01f, true,
+		{0.001f, 0.001f}, {-0.001f, -0.001f}, true,
+		0.0f, false,
+		0.08f, true,
+		0.0f, false,
+		WinApp::WindowSize(),
+		0.0f
+	};
+	retroCRT_->SetMtlData(retroEffectData_);
+
 	// ──────── クラスにポインタを渡す
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -84,6 +99,7 @@ void GameScene::Initialize()
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BasicEnemy"));
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("StaticEnemy"));
 	enemyManager_->LoadEntityData(jsonManager->GetEntityData("BossEnemy"));
+	enemyManager_->EliminatedChecker();
 
 	// ──────── SceneTransition
 	STMenuManager_->Init();
@@ -124,11 +140,17 @@ void GameScene::Update()
 
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
+			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
+			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
+		}
+		else if (player_->IsDead()) {
+			CollisionManager_->Clear();
+			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
 		return;
 	}
@@ -164,6 +186,7 @@ void GameScene::Update()
 #ifdef _DEBUG
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
+	retroEffectData_.DrawImGui("");
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -206,13 +229,11 @@ void GameScene::ModelDraw()
 /// </summary>
 void GameScene::FrontSpriteDraw()
 {
-	absentEffect_->Draw();
-
-	// ──────── TestPostEffect
-	testPostEffect_->Draw();
+	/* ----- RetroCRT レトロエフェクト ----- */
+	retroCRT_->SetMtlData(retroEffectData_);
+	retroCRT_->Draw();
 
 	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-
 		// ──────── Player
 		player_->Draw2DFront();
 	}
@@ -233,9 +254,13 @@ void GameScene::FrontSpriteDraw()
 /// </summary>
 void GameScene::SceneChangeCheck()
 {
-	// プレイヤー死亡 or エネミー全滅でシーン遷移にに入る
-	if (player_->IsDead() || enemyManager_->IsEliminated()) {
+	// エネミー全滅でシーン遷移にに入る
+	if (enemyManager_->IsEliminated()) {
 		STMenuManager_->DirectionStart();
+	}
+	if (player_->IsDead()) {
+		STMenuManager_->EndDirectionStart(); // 終了演出開始
+		sceneTransition_->StartFadeOut(); // シーントランジション開始
 	}
 
 	// 演出が終了していれば押せる

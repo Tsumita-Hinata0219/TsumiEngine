@@ -28,8 +28,13 @@ public:
 
 #pragma region Accessor アクセッサ
 
+    // テクスチャハンドル
+    virtual void SetTextureHandle(int setTexHD) {
+        this->textureHandle_ = setTexHD;
+    }
+
     // カラー
-    virtual void SetColor(Vector4 setColor) {
+    virtual void SetColor(const Vector4& setColor) {
         this->sprite_->SetColor(setColor);
     }
 

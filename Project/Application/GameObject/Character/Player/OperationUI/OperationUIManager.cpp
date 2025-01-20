@@ -24,7 +24,7 @@ void OperationUIManager::Init()
     // 初期化
     for (int i = 0; i < opUIs_.size(); ++i) {
         opUIs_[i] = std::make_unique<IOperationUI>();
-
+        opUIs_[i]->SetTextureHandle(texHDs[i]);
         opUIs_[i]->Init();
     }
 }

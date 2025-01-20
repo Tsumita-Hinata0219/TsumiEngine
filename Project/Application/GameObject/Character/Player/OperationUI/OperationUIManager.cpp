@@ -45,7 +45,7 @@ void OperationUIManager::Update()
 /// </summary>
 void OperationUIManager::Draw2DFront() 
 {
-
-
-
+    for (auto &itr : opUIs_) {
+        itr->Draw2DFront();
+    }
 }

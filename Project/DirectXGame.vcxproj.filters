@@ -1471,6 +1471,7 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

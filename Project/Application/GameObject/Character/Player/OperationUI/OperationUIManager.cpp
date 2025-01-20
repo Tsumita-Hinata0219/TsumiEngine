@@ -6,11 +6,11 @@
 /// </summary>
 void OperationUIManager::Init() 
 {
-    const int size = EnumSize<OperationUIType>::value;
+    const int indexSize = EnumSize<OperationUIType>::value;
 
     // テクスチャの読み込み
     std::string rootPath = "Texture/Game/Operation_UI";
-    int texHDs[size] = {
+    uint32_t texHDs[indexSize] = {
         TextureManager::LoadTexture(rootPath, "Cont_Frame.png"),
         TextureManager::LoadTexture(rootPath, "Cont_Line.png"),
         TextureManager::LoadTexture(rootPath, "OP_LStick.png"),
@@ -18,13 +18,20 @@ void OperationUIManager::Init()
         TextureManager::LoadTexture(rootPath, "OP_RStick.png"),
     };
 
+    // 画像サイズ
+    Vector2 spriteSize = {296.0f, 166.5f};
+    // 初期座標
+    Vector2 initPos = {640.0f, 600.0f};
+
     // 配列のサイズ設定
-    opUIs_.resize(size);
+    opUIs_.resize(indexSize);
 
     // 初期化
-    for (int i = 0; i < opUIs_.size(); ++i) {
+    for (int i = 0; i < indexSize; ++i) {
         opUIs_[i] = std::make_unique<IOperationUI>();
         opUIs_[i]->SetTextureHandle(texHDs[i]);
+        opUIs_[i]->SetSize(spriteSize);
+        opUIs_[i]->SetInitPos(initPos);
         opUIs_[i]->Init();
     }
 }

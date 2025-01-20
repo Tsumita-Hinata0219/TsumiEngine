@@ -6,6 +6,8 @@
 /// </summary>
 void OperationUIManager::Init() 
 {
+    input_ = Input::GetInstance();
+
     const int indexSize = EnumSize<OperationUIType>::value;
 
     // テクスチャの読み込み
@@ -45,6 +47,23 @@ void OperationUIManager::Update()
     opUIs_[int(OperationUIType::LStick)]->SetColor(Temp::Color::WHITE);
     opUIs_[int(OperationUIType::RB)]->SetColor(Temp::Color::WHITE);
     opUIs_[int(OperationUIType::RStick)]->SetColor(Temp::Color::WHITE);
+
+
+    if (input_->Press(PadData::RIGHT_SHOULDER)) {
+        opUIs_[int(OperationUIType::RB)]->SetColor(Temp::Color::YELLOW);
+    }
+    
+    // stickの入力を取得
+    iLStick_ = input_->GetLStick();
+    iRStick_ = input_->GetRStick();
+
+    // 移動量の計算
+    if (std::abs(iLStick_.x) > DZone_ || std::abs(iLStick_.y) > DZone_) {
+        opUIs_[int(OperationUIType::LStick)]->SetColor(Temp::Color::YELLOW);
+    }
+    if (std::abs(iRStick_.x) > DZone_ || std::abs(iRStick_.y) > DZone_) {
+        opUIs_[int(OperationUIType::RStick)]->SetColor(Temp::Color::YELLOW);
+    }
 }
 
 

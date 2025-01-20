@@ -54,4 +54,14 @@ private:
 
     std::vector<std::unique_ptr<IOperationUI>> opUIs_;
 
+    // Inputクラス
+    Input *input_ = nullptr;
+    
+	// デッドゾーン
+    const float DZone_ = 0.2f;
+
+    // Stickの入力を取得
+    Vector2 iLStick_{};
+    Vector2 iRStick_{};
+
 };

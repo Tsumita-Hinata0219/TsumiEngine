@@ -19,9 +19,9 @@ void OperationUIManager::Init()
     };
 
     // 画像サイズ
-    Vector2 spriteSize = {296.0f, 166.5f};
+    Vector2 spriteSize = {320.0f, 180.5f};
     // 初期座標
-    Vector2 initPos = {640.0f, 600.0f};
+    Vector2 initPos = {640.0f, 640.0f};
 
     // 配列のサイズ設定
     opUIs_.resize(indexSize);
@@ -42,8 +42,9 @@ void OperationUIManager::Init()
 /// </summary>
 void OperationUIManager::Update() 
 {
-
-
+    opUIs_[int(OperationUIType::LStick)]->SetColor(Temp::Color::WHITE);
+    opUIs_[int(OperationUIType::RB)]->SetColor(Temp::Color::WHITE);
+    opUIs_[int(OperationUIType::RStick)]->SetColor(Temp::Color::WHITE);
 }
 
 

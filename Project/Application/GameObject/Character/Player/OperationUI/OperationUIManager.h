@@ -6,7 +6,6 @@
 #include "LStick/OperationUI_LStick.h"
 #include "RB/OperationUI_RB.h"
 #include "RStick/OperationUI_RStick.h"
-#include "Text/OperationUI_Text.h"
 
 
 /* 操作UIマネージャー */
@@ -20,7 +19,7 @@ public:
         LStick,
         RB,
         RStick,
-        Text,
+        Count,
     };
 
 public:

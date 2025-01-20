@@ -49,6 +49,8 @@ void OperationUIManager::Update()
     opUIs_[int(OperationUIType::RStick)]->SetColor(Temp::Color::WHITE);
 
 
+    /* 入力時は色を変える */
+
     if (input_->Press(PadData::RIGHT_SHOULDER)) {
         opUIs_[int(OperationUIType::RB)]->SetColor(Temp::Color::YELLOW);
     }

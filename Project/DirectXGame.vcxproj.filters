@@ -1473,6 +1473,12 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\ContFrame\OperationUI_ContFrame.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Line\OperationUI_Line.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\LStick\OperationUI_LStick.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Text\OperationUI_Text.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

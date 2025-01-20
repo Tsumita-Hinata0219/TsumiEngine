@@ -6,30 +6,36 @@
 class IOperationUI {
 
 public:
-
     /// <summary>
     /// 仮想デストラクタ
     /// </summary>
     virtual ~IOperationUI() = default;
 
     /// <summary>
-    /// 純粋仮想関数 : 初期化処理
+    /// 初期化処理
     /// </summary>
-    virtual void Init() = 0;
+    virtual void Init();
 
     /// <summary>
-    /// 純粋仮想関数 : 更新処理
+    /// 更新処理
     /// </summary>
-    virtual void Update() = 0;
+    virtual void Update();
 
     /// <summary>
-    /// 純粋仮想関数 : 描画処理
+    /// 描画処理
     /// </summary>
-    virtual void Draw2DFront() = 0;
+    virtual void Draw2DFront();
 
+#pragma region Accessor アクセッサ
+
+    // カラー
+    virtual void SetColor(Vector4 setColor) {
+        this->sprite_->SetColor(setColor);
+    }
+
+#pragma endregion
 
 private:
-
     // テクスチャハンドル
     uint32_t textureHandle_ = 0;
 
@@ -38,5 +44,4 @@ private:
 
     // トランスフォーム
     Transform trans_{};
-
 };

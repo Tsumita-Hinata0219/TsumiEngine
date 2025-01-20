@@ -21,9 +21,9 @@ void OperationUIManager::Init()
     };
 
     // 画像サイズ
-    Vector2 spriteSize = {320.0f, 180.5f};
+    Vector2 spriteSize = {340.0f, 191.25f};
     // 初期座標
-    Vector2 initPos = {640.0f, 640.0f};
+    Vector2 initPos = {1020.0f, 600.0f};
 
     // 配列のサイズ設定
     opUIs_.resize(indexSize);

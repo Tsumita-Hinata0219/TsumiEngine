@@ -23,30 +23,6 @@ void DebugScene::Initialize()
 	camera_.Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -5.0f });
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSetData(camera_);
-	
-	/* ----- Skybox 天箱 ----- */
-	skybox_ = std::make_unique<Skybox>();
-	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
-	skybox_->Init(dds);
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Init();
-
-	/* ----- DemoParticle デモパーティクル ----- */
-	dParticleInstanceNum_ = 10;
-	dParticle_ = std::make_unique<GPUParticle>();
-	dParticle_->Init(dParticleInstanceNum_);
-	transforms_.resize(dParticleInstanceNum_);
-	for (auto& element : transforms_) {
-		element.Init();
-		element.srt.translate.z = 5.0f;
-	}
-	materials_.resize(dParticleInstanceNum_);
-	for (auto& element : materials_) {
-		element.color = Temp::Color::WHITE;
-		element.uvTransform = Matrix4x4::identity;
-	}
 }
 
 
@@ -54,52 +30,22 @@ void DebugScene::Initialize()
 /// <summary>
 /// 更新処理
 /// </summary>
-void DebugScene::Update()
-{
-	/* ----- Camera カメラ ----- */
-	camera_.Update();
-
-	/* ----- Skybox 天箱 ----- */
-	skybox_->Update();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Update();
-
-#ifdef _DEBUG
-	ImGui::Begin("DebugScene");
-	camera_.DrawImGui();
-	ImGui::End();
-#endif // _DEBUG
-}
+void DebugScene::Update() {}
 
 
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void DebugScene::BackSpriteDraw()
-{
-
-}
+void DebugScene::BackSpriteDraw() {}
 
 
 /// <summary>
 /// ３Dオブジェクトの描画処理
 /// </summary>
-void DebugScene::ModelDraw()
-{
-	/* ----- Skybox 天箱 ----- */
-	//skybox_->Draw();
-
-	/* ----- DemoParticle デモパーティクル ----- */
-	dParticle_->Draw(transforms_, materials_);
-}
+void DebugScene::ModelDraw() {}
 
 
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void DebugScene::FrontSpriteDraw()
-{
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	//testPostEffect_->Draw();
-}
+void DebugScene::FrontSpriteDraw() {}

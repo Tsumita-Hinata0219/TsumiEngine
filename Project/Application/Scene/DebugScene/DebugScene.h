@@ -9,12 +9,6 @@
 
 #include "Camera/Manager/CameraManager.h"
 
-#include "GameObject/Terrain/Skydome/Skydome.h"
-#include "3D/Skybox/Skybox.h"
-#include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "GameObject/Others/TestHuman/TestHuman.h"
-#include "GameObject/Others/TestBaseObject/TestBaseObject.h"
-
 
 class DebugScene : public IScene {
 
@@ -62,16 +56,5 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	CameraResource camera_;
 
-	// Skybox
-	std::unique_ptr<Skybox> skybox_;
-
-	// PostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
-
-	// DemoParticle
-	std::unique_ptr<GPUParticle> dParticle_;
-	uint32_t dParticleInstanceNum_ = 0;
-	std::vector<Transform> transforms_;
-	std::vector<MaterialDataN> materials_;
 };
 

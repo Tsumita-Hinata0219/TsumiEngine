@@ -90,17 +90,6 @@ private:
 	/// </summary>
 	SRT ScanningSRT(nlohmann::json& object);
 
-	/// <summary>
-	/// PlayerDataの読み込み
-	/// </summary>
-	EntityPlayerData ScanningPlayerData(nlohmann::json& object);
-
-	/// <summary>
-	/// EnemyDataの読み込み
-	/// </summary>
-	EntityEnemyData ScanningEnemyData(nlohmann::json& object);
-
-
 
 private: // メンバ変数
 

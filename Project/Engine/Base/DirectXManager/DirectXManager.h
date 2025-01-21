@@ -9,6 +9,9 @@
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "dxcompiler.lib")
 
+#include <chrono>
+#include <thread>
+
 #include "../WinApp/WinApp.h"
 #include "CommandManager/CommandManager.h"
 #include "Math/MyMath.h"
@@ -232,4 +235,7 @@ private:
     // 深度ステンシルステート
     D3D12_DEPTH_STENCIL_DESC depthStencilDesc_{};
     ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap_ = nullptr;
+
+    // 記録時間(FPS固定用)
+    std::chrono::steady_clock::time_point reference_;
 };

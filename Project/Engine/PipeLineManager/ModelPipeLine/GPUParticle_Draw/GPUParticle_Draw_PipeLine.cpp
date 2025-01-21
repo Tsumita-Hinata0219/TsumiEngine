@@ -112,7 +112,7 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[3]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 	// ─── VS
 	// u0 : パラメータ
 	D3D12_DESCRIPTOR_RANGE transInstancing[1]{};
@@ -141,6 +141,11 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[2].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
+
+	// t1 : マテリアル
+    rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // DescriptorTableを使う
+    rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+    rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
 
 	// s0 : Samplerの設定
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};

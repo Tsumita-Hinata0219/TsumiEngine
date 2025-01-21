@@ -3,7 +3,7 @@
 #include <list>
 #include <memory>
 
-#include "GameObject/IObject/IObject.h"
+#include "IObject/IObject.h"
 #include "GameObject/GameObject.h"
 #include "Math/MyMath.h"
 

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "../../../IObject/IObject.h"
+#include "IObject/IObject.h"
 #include "../../../GameObject.h"
 
 

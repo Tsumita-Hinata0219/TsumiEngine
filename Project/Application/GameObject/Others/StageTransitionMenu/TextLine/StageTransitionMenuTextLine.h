@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../IObject/IObject.h"
+#include "IObject/IObject.h"
 #include "../../../GameObject.h"
 #include "../IStageTransitionMenu.h"
 #include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"

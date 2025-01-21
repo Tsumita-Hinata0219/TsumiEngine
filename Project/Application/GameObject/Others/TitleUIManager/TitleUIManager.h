@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
-#include "GameObject/IObject/IObject.h"
+#include "IObject/IObject.h"
 
 #include "GameNameBar/GameNameBar.h"
 #include "TitleLabelObject/TitleLabelObject.h"

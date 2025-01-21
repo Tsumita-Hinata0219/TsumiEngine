@@ -1,5 +1,5 @@
 #include "AABBCollider.h"
-#include "GameObject/IObject/IObject.h"
+#include "IObject/IObject.h"
 
 
 /// <summary>

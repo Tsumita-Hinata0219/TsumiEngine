@@ -5,7 +5,7 @@
 #include "JsonManager/JsonManager.h"
 #include "CollisionSystem/Manager/CollisionManager.h"
 
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/GameCamera/GameCamera.h"
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"

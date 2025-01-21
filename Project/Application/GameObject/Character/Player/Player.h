@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "../../GameObject.h"
-#include "../../IObject/IObject.h"
+#include "IObject/IObject.h"
 
 #include "Boby/IPlayerBody.h"
 #include "Boby/Left/PlayerLeftBody.h"

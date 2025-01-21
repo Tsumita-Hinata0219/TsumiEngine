@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
-#include "GameObject/IObject/IObject.h"
+#include "IObject/IObject.h"
 
 
 enum class SelectOption {

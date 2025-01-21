@@ -6,7 +6,7 @@
 #include "PipeLineManager/PipeLineManager.h"
 #include "DescriptorManager/DescriptorManager.h"
 #include "View/SRVManager/SRVManager.h"
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 

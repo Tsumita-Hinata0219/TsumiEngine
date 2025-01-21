@@ -1,7 +1,7 @@
 #pragma once
 
-#include "../GameObject.h"
-#include "../Config/AppComfig.h"
+#include "GameObject/GameObject.h"
+#include "GameObject/Config/AppComfig.h"
 #include "3D/Model/Model.h"
 #include "3D/Model/Manager/ModelManager.h"
 #include "Transform/Transform.h"

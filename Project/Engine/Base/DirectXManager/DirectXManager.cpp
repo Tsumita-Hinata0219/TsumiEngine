@@ -30,6 +30,8 @@ void DirectXManager::Initialize()
 
 #endif // _DEBUG
 
+	// FPS固定初期化処理
+	directX->InitFixFPS();
 
 	// DxgiFactoryを生成する
 	directX->CreateDxgiFactory();
@@ -264,6 +266,9 @@ void DirectXManager::PostDrawForSwapChain()
 		WaitForSingleObject(directXCommon->fenceEvent_, INFINITE);
 	}
 
+	// FPS固定更新処理
+	directXCommon->UpdateFixFPS();
+
 	// 画面に描画
 	swapChains.swapChain->Present(1, 0);
 
@@ -319,7 +324,7 @@ void DirectXManager::UpdateFixFPS()
 		std::chrono::duration_cast<std::chrono::microseconds>(now - reference_);
 
 	// 1/60秒(よりわずかに短い時間)立ってない場合
-	if (elapased < kMinTime) {
+	if (elapased < kMinCheckTime) {
 		while (std::chrono::steady_clock::now() - reference_ < kMinTime) {
 			// 1マイクロ秒スリープ
 			std::this_thread::sleep_for(std::chrono::microseconds(1));

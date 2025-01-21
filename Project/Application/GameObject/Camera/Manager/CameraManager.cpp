@@ -7,6 +7,10 @@ void CameraManager::Init()
 {
 	// データの初期化
 	resource_ = nullptr;
+	// カメラリソース
+	camera_.Init();
+	camera_.Update();
+	ReSetData(camera_);
 }
 
 

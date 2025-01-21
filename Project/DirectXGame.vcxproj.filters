@@ -5,12 +5,6 @@
     <ClCompile Include="Engine\GameManager\GameManager.cpp">
       <Filter>Application\GameManager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Camera\Camera.cpp">
-      <Filter>Application\GameObject\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp">
-      <Filter>Application\GameObject\Camera\FollowCamera</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp">
       <Filter>Application\GameObject\Camera\GameCamera</Filter>
     </ClCompile>
@@ -587,12 +581,6 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameObject.h">
       <Filter>Application\GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Camera\Camera.h">
-      <Filter>Application\GameObject\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h">
-      <Filter>Application\GameObject\Camera\FollowCamera</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h">
       <Filter>Application\GameObject\Camera\GameCamera</Filter>

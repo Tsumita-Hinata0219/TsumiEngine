@@ -172,8 +172,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
-    <ClCompile Include="Application\GameObject\Camera\Camera.cpp" />
-    <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
     <ClCompile Include="Application\GameObject\Camera\Manager\CameraManager.cpp" />
@@ -464,8 +462,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
-    <ClInclude Include="Application\GameObject\Camera\Camera.h" />
-    <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h" />
     <ClInclude Include="Application\GameObject\Camera\Manager\CameraManager.h" />

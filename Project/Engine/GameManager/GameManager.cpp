@@ -14,6 +14,8 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	scene_->SetManager(this);
 	scene_->Initialize();
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
+	copyImage_ = std::make_unique<AbsentEffect>();
+	copyImage_->Init();
 }
 
 
@@ -51,6 +53,7 @@ void GameManager::Run() {
 		// スワップチェーン
 		DirectXManager::PreDrawForSwapChain();
 
+		copyImage_->Draw();
 		scene_->FrontSpriteDraw();
 
 		Tsumi::EndFlame();

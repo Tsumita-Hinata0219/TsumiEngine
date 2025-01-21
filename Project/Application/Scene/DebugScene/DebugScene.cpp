@@ -101,5 +101,5 @@ void DebugScene::ModelDraw()
 void DebugScene::FrontSpriteDraw()
 {
 	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Draw();
+	//testPostEffect_->Draw();
 }

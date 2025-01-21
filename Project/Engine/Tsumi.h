@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Base/WinApp/WinApp.h"
-#include "Base/DXCommon/DirectXCommon.h"
+#include "Base/DirectXManager/DirectXManager.h"
 #include "ShaderManager/ShaderManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"

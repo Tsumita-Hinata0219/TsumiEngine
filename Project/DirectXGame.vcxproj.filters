@@ -150,7 +150,7 @@
     <ClCompile Include="Engine\Audio\Audio.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp">
+    <ClCompile Include="Engine\Base\DirectXManager\DirectXManager.cpp">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Base\WinApp\WinApp.cpp">
@@ -753,7 +753,7 @@
     <ClInclude Include="Engine\Audio\Audio.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Base\DXCommon\DirectXCommon.h">
+    <ClInclude Include="Engine\Base\DirectXManager\DirectXManager.h">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Base\WinApp\WinApp.h">

@@ -13,10 +13,10 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 3> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
-		//SetUpInputElementDescs("NORMAL"),
+		SetUpInputElementDescs("NORMAL"),
 		SetUpInputElementDescs("INSTANCEID"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
@@ -41,7 +41,7 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "GPUParticle_Draw");
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "CPUParticle");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
@@ -95,7 +95,7 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 
 	// 実際に生成
 	HRESULT hr{};
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
+	hr = DirectXManager::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
@@ -175,7 +175,7 @@ void CPUParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descript
 
 
 	// バイナリを元に生成
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
 		pso_.signatureBlob->GetBufferPointer(),
 		pso_.signatureBlob->GetBufferSize(),

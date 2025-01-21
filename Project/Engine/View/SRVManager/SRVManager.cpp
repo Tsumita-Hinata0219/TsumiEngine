@@ -5,7 +5,7 @@
 // 初期化処理
 void SRVManager::Initialize()
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	// DescriptorSizeの作成
@@ -43,7 +43,7 @@ void SRVManager::Clear()
 // SRVを作成する
 uint32_t SRVManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL::ComPtr<ID3D12Resource>& resource, UINT size)
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	// Indexをインクリメント
@@ -61,9 +61,9 @@ uint32_t SRVManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL:
 
 	// SRVを作成するHeapの場所を決める
 	instance->handleMap_[instance->index_]._CPU = instance->Get_CPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 	instance->handleMap_[instance->index_]._GPU = instance->Get_GPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 
 	// CPUとGPUの.ptrをずらす
 	instance->ShiftSRVHandlePtr();
@@ -75,7 +75,7 @@ uint32_t SRVManager::CreateInstancingSRV(uint32_t instancingNum, Microsoft::WRL:
 }
 uint32_t SRVManager::CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const DirectX::TexMetadata& metadata)
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	// Indexをインクリメント
@@ -100,9 +100,9 @@ uint32_t SRVManager::CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& re
 
 	// SRVを作成するHeapの場所を決める
 	instance->handleMap_[instance->index_]._CPU = instance->Get_CPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 	instance->handleMap_[instance->index_]._GPU = instance->Get_GPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 
 	// CPUとGPUの.ptrをずらす
 	instance->ShiftSRVHandlePtr();
@@ -114,7 +114,7 @@ uint32_t SRVManager::CreateTextureSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& re
 }
 uint32_t SRVManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource)
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	// Indexをインクリメント
@@ -129,9 +129,9 @@ uint32_t SRVManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>&
 
 	// SRVを作成するHeapの場所を決める
 	instance->handleMap_[instance->index_]._CPU = instance->Get_CPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 	instance->handleMap_[instance->index_]._GPU = instance->Get_GPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 
 	// CPUとGPUの.ptrをずらす
 	instance->ShiftSRVHandlePtr();
@@ -143,7 +143,7 @@ uint32_t SRVManager::CreatePostEffectSRV(Microsoft::WRL::ComPtr<ID3D12Resource>&
 }
 uint32_t SRVManager::CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>& resource, const Skeleton& skeleton)
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	// Indexをインクリメント
@@ -161,9 +161,9 @@ uint32_t SRVManager::CreateSkinClusterSRV(Microsoft::WRL::ComPtr<ID3D12Resource>
 
 	// SRVを作成するHeapの場所を決める
 	instance->handleMap_[instance->index_]._CPU = instance->Get_CPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 	instance->handleMap_[instance->index_]._GPU = instance->Get_GPUDescriptorHandle(
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(), instance->index_);
 
 	// CPUとGPUの.ptrをずらす
 	instance->ShiftSRVHandlePtr();
@@ -181,7 +181,7 @@ void SRVManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex, uint3
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	SRVManager* instance = SRVManager::GetInstance();
 
-	ID3D12DescriptorHeap* desc[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap()};
+	ID3D12DescriptorHeap* desc[] = { DirectXManager::GetInstance()->GetSrvDescriptorHeap()};
 	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(rootPatramerterIndex, instance->handleMap_[index]._GPU);
 }
@@ -205,7 +205,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE SRVManager::Get_GPUDescriptorHandle(Microsoft::WRL::
 // CPUとGPUの.ptrをずらす
 void SRVManager::ShiftSRVHandlePtr()
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	instance->handleMap_[instance->index_]._CPU.ptr +=
@@ -219,7 +219,7 @@ void SRVManager::ShiftSRVHandlePtr()
 // SRVの生成
 void SRVManager::CreateSRV(Microsoft::WRL::ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index)
 {
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 	SRVManager* instance = SRVManager::GetInstance();
 
 	device->CreateShaderResourceView(resource.Get(), &srvDesc, instance->handleMap_[index]._CPU);

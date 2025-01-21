@@ -79,7 +79,7 @@ void TextureManager::UnLoadTexture() {
 void TextureManager::CreateFence()
 {
 	// Deviceの取得
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 
 	// 初期値0でFenceを作る
 	HRESULT result{};
@@ -306,7 +306,7 @@ ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resour
 
 	ComPtr<ID3D12Resource> resource;
 	HRESULT result;
-	result = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	result = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&heapProperties,				   // Heapの設定
 		D3D12_HEAP_FLAG_NONE,			   // Heapの特殊な設定。特になし
 		&resourceDesc,					   // Resourceの設定
@@ -351,7 +351,7 @@ void TextureManager::UpdateTextureData(const DirectX::TexMetadata& metadata, Dir
 Microsoft::WRL::ComPtr<ID3D12Resource>  TextureManager::UploadTextureData(Microsoft::WRL::ComPtr<ID3D12Resource> texture, const DirectX::ScratchImage& mipImages)
 {
 	// Deviceの取得
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -392,7 +392,7 @@ Microsoft::WRL::ComPtr<ID3D12Resource>  TextureManager::UploadTextureData(Micros
 void TextureManager::ExeCommands()
 {
 	// Deviceの取得
-	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXCommon::GetInstance()->GetDevice();
+	Microsoft::WRL::ComPtr<ID3D12Device> device = DirectXManager::GetInstance()->GetDevice();
 
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();

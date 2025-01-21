@@ -117,8 +117,8 @@ void PipeLineManager::CreatePipeLine_Skybox()
 }
 void PipeLineManager::CreatePipeLine_CPUParticle()
 {
-	std::unique_ptr<CPUParticlePipeLine> pipeline = std::make_unique<CPUParticlePipeLine>();
-	pipeLineMaps_[Category::CPUParticle][SubFilter::None] = pipeline->SetUpPso();
+	/*std::unique_ptr<CPUParticlePipeLine> pipeline = std::make_unique<CPUParticlePipeLine>();
+	pipeLineMaps_[Category::CPUParticle][SubFilter::None] = pipeline->SetUpPso();*/
 }
 
 

@@ -1,4 +1,5 @@
 #include "WinApp.h"
+#pragma comment(lib, "winmm.lib")
 
 
 /// <summary>
@@ -18,6 +19,7 @@ WinApp* WinApp::GetInstance() {
 void WinApp::Initialize(const wchar_t* title) {
 
 	WinApp::GetInstance()->title_ = title;
+	timeBeginPeriod(1);
 	CreateGameWindow();
 }
 

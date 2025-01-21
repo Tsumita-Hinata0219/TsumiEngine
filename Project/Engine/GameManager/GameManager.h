@@ -54,4 +54,5 @@ private:
 
 	std::chrono::steady_clock::time_point startTime_;
 
+	std::unique_ptr<AbsentEffect> copyImage_;
 };

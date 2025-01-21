@@ -41,7 +41,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateBufferResource(size_t sizeInBytes) 
 
 	// 実際に頂点リソースを作る
 	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&resultResource));
@@ -76,7 +76,7 @@ void CreateResource::CreateBufferResource(size_t sizeInBytes, ComPtr<ID3D12Resou
 
 	// 実際に頂点リソースを作る
 	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&resource));
@@ -163,7 +163,7 @@ ComPtr<ID3D12Resource> CreateResource::CreateRenderTextureResource(uint32_t widt
 
 	// 実際に頂点リソースを作る
 	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, 
 		D3D12_HEAP_FLAG_NONE,
 		&resourceDesc, 

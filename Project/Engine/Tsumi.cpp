@@ -18,7 +18,7 @@ void Tsumi::Initialize() {
 	WinApp::Initialize(L"Shape Conquest");
 
 	// DirectXCommonの初期化処理
-	DirectXCommon::Initialize();
+	DirectXManager::Initialize();
 
 	// ShaderManagerの初期化処理
 	ShaderManager::Initialize();

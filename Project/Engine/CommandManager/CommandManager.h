@@ -14,7 +14,7 @@ using Microsoft::WRL::ComPtr;
 using namespace std;
 
 
-class DirectXCommon;
+class DirectXManager;
 
 
 // コマンド
@@ -88,7 +88,7 @@ private: // メンバ関数
 private: // メンバ変数
 
 	// DirectXCommon
-	DirectXCommon* dxCommon_ = nullptr;
+	DirectXManager* dxCommon_ = nullptr;
 
 	// コマンド
 	Commands commands_{};

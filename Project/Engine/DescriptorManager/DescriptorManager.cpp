@@ -20,7 +20,7 @@ void DescriptorManager::Init()
 	// DescriptorManagerのインスタンス取得
 	DescriptorManager* thisClass = DescriptorManager::GetInstance();
 	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 
 	thisClass->descriptorSize_.SRV =
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
@@ -304,7 +304,7 @@ void DescriptorManager::SetGraphicsRootDescriptorTable(UINT rootPatramerterIndex
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
-	ID3D12DescriptorHeap* desc[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap() };
+	ID3D12DescriptorHeap* desc[] = { DirectXManager::GetInstance()->GetSrvDescriptorHeap() };
 	commands.List->SetDescriptorHeaps(1, desc);
 	commands.List->SetGraphicsRootDescriptorTable(
 		rootPatramerterIndex,
@@ -335,7 +335,7 @@ D3D12_GPU_DESCRIPTOR_HANDLE DescriptorManager::GetGPUDescriptorHandle(ComPtr<ID3
 void DescriptorManager::AssignSRVHandles()
 {
 	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 
 	srvHandle_[index_]._CPU = GetCPUDescriptorHandle(
 		dxCommon->GetSrvDescriptorHeap(),
@@ -355,7 +355,7 @@ void DescriptorManager::AssignSRVHandles()
 void DescriptorManager::ShiftSRVHandlePtr()
 {
 	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 
 	srvHandle_[index_]._CPU.ptr +=
 		dxCommon->GetDevice()->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
@@ -380,7 +380,7 @@ void DescriptorManager::IncrementIndex()
 void DescriptorManager::CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc, uint32_t index)
 {
 	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 
 	dxCommon->GetDevice()->CreateShaderResourceView(
 		resource.Get(),
@@ -394,7 +394,7 @@ void DescriptorManager::CreateSRV(ComPtr<ID3D12Resource> resource, D3D12_SHADER_
 void DescriptorManager::RegisterUAV(ComPtr<ID3D12Resource> resource, D3D12_UNORDERED_ACCESS_VIEW_DESC uavDesc, uint32_t index)
 {
 	// DirectXCommonのインスタンス取得
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 
 	dxCommon->GetDevice()->CreateUnorderedAccessView(
 		resource.Get(),

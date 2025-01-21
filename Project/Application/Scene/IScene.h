@@ -1,5 +1,7 @@
 #pragma once
 
+#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+
 class GameManager;
 
 /* ISceneクラス */
@@ -10,12 +12,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IScene() {};
+	IScene() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	virtual ~IScene() {};
+	virtual ~IScene() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -51,7 +53,7 @@ public:
 
 protected:
 
+	// ゲームマネージャー
 	GameManager* Manager_ = nullptr;
-
 
 };

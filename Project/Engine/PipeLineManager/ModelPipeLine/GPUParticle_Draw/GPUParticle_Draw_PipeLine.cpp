@@ -94,7 +94,7 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 
 	// 実際に生成
 	HRESULT hr{};
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
+	hr = DirectXManager::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
@@ -112,7 +112,7 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[3]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 	// ─── VS
 	// u0 : パラメータ
 	D3D12_DESCRIPTOR_RANGE transInstancing[1]{};
@@ -141,6 +141,17 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
 	rootParameters[2].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
 	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
+
+	// t1 : マテリアル
+	D3D12_DESCRIPTOR_RANGE materialInstancing[1]{};
+	materialInstancing[0].BaseShaderRegister = 1; // 0から始まる
+	materialInstancing[0].NumDescriptors = 1;     // 数は1つ
+	materialInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	materialInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[3].DescriptorTable.pDescriptorRanges = materialInstancing; // Tableの中身の配列を指定
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materialInstancing); // Tableで利用する
 
 	// s0 : Samplerの設定
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};
@@ -174,7 +185,7 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 
 
 	// バイナリを元に生成
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
 		pso_.signatureBlob->GetBufferPointer(),
 		pso_.signatureBlob->GetBufferSize(),

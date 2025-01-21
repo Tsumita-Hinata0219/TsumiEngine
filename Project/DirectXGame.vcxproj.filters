@@ -2495,6 +2495,7 @@
     <FxCompile Include="externals\DirectXTex\Shaders\BC7Encode.hlsl">
       <Filter>externals\DirectXTex\Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

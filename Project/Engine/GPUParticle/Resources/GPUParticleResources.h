@@ -39,10 +39,10 @@ struct GPUParticleResources {
 	BufferResource<uint32_t> indeces;
 
 	// ParticleElement
-	BufferResource<GPUParticleCS> particleElement;
+	BufferResource<GpuParticle::PropertyCS> particleElement;
 
 	// PreView
-	BufferResource<GPUParticlePreView> preView;
+	BufferResource<GpuParticle::PreView> preView;
 
 	// Transform
 	BufferResource<TransformationMat> transform;

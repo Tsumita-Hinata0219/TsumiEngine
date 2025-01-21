@@ -44,9 +44,16 @@ struct PreView
     float32_t4x4 billboardMatrix;
 };
 
+// ƒJƒƒ‰
 struct ViewProjectionMatrix
 {
     float4x4 view;
     float4x4 projection;
     float3 cameraPosition;
+};
+
+// Emitter_Sphere
+struct GPUParticle_EmitterSphere
+{
+    
 };

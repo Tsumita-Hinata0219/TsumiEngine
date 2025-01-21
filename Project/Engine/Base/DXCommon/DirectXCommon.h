@@ -86,16 +86,6 @@ public: // メンバ関数
 	/// </summary>
 	ID3D12Device* const GetDevice() { return DirectXCommon::GetInstance()->device_.Get(); };
 
-	///// <summary>
-	///// 
-	///// </summary>
-	//Commands const GetCommands() { return DirectXCommon::GetInstance()->commands_; }
-
-	///// <summary>
-	///// 
-	///// </summary>
-	//ID3D12GraphicsCommandList* const GetCommandList() { return DirectXCommon::GetInstance()->commands_.List.Get(); }
-
 	/// <summary>
 	/// 
 	/// </summary>
@@ -126,66 +116,49 @@ public: // メンバ関数
 	/// </summary>
 	IDxcIncludeHandler* const GetIncludeHandler() { return DirectXCommon::GetInstance()->includeHandler_; }
 
-	/// <summary>
-	/// DescriptorHandleを取得する
-	/// </summary>
-	D3D12_CPU_DESCRIPTOR_HANDLE GetCPUDescriptorHandle(ID3D12DescriptorHeap* descriptorHeap, uint32_t descriptorSize, uint32_t index);
-	D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle(ID3D12DescriptorHeap* descriptorHeap, uint32_t descriptorSize, uint32_t index);
-
-#pragma endregion
-
-
-#pragma region Set 設定
-
-	/// <summary>
-	/// 
-	/// </summary>
-	void SetDepthStencilDesc(D3D12_DEPTH_STENCIL_DESC depthStencilDesc) { DirectXCommon::GetInstance()->depthStencilDesc_ = depthStencilDesc; }
-
 #pragma endregion
 
 
 private: // メンバ関数
 
+
+
 	// DXGIファクトリーの生成
-	static void CreateDxgiFactory();
+	void CreateDxgiFactory();
 
 	// D3D12Deviceの生成
-	static void CreateDevice();
-
-	// コマンドキューを生成する
-	//static void CreateCommandQueue();
+	void CreateDevice();
 
 	// エラーと警告の抑制
-	static void DebugErrorInfoQueue();
+	void DebugErrorInfoQueue();
 
 	// スワップチェーンを生成する
-	static void CreateSwapChain();
+	void CreateSwapChain();
 
 	// ディスクリプタヒープを生成する
-	static void SetDescriptorHeap();
+	void SetDescriptorHeap();
 
 	// SwapChainからResourceを引っ張ってくる
-	static void CreateSwapChainResources();
+	void CreateSwapChainResources();
 
 	// RTVを作る
-	static void CreateRTV();
+	void CreateRTV();
 
 	// 状態を遷移する
-	static void ChanegResourceState();
+	void ChanegResourceState();
 
 	// Fenceを生成する
-	static void MakeFence();
+	void MakeFence();
 
 
 	// ViewportとScissor
-	static void SetViewport();
+	void SetViewport();
 
-	static void SetScissor();
+	void SetScissor();
 
 
 	// 
-	static ID3D12DescriptorHeap* CreateDescriptorHeap(
+	ID3D12DescriptorHeap* CreateDescriptorHeap(
 		ID3D12Device* device,
 		D3D12_DESCRIPTOR_HEAP_TYPE heapType,
 		UINT numDescriptors,
@@ -193,11 +166,11 @@ private: // メンバ関数
 
 
 	// Textureの深度の設定をしていく
-	static ComPtr<ID3D12Resource> CreateDepthStencilTexturerResource(int32_t width, int32_t height);
+	ComPtr<ID3D12Resource> CreateDepthStencilTexturerResource(int32_t width, int32_t height);
 
 
 	// depthStencilResourceを作る
-	static void CreateDepthStencilResource();
+	void CreateDepthStencilResource();
 
 
 private: // メンバ変数

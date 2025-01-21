@@ -148,10 +148,10 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
     materialInstancing[0].NumDescriptors = 1;     // 数は1つ
     materialInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
     materialInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-    rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-    rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-    rootParameters[0].DescriptorTable.pDescriptorRanges = materialInstancing; // Tableの中身の配列を指定
-    rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(materialInstancing); // Tableで利用する
+    rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+    rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+    rootParameters[3].DescriptorTable.pDescriptorRanges = materialInstancing; // Tableの中身の配列を指定
+    rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materialInstancing); // Tableで利用する
 
 	// s0 : Samplerの設定
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};

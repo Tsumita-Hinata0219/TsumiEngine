@@ -42,5 +42,7 @@ private:
 
 	// カメラのリソース
 	const CameraResource* resource_ = nullptr;
+	// カメラ本体
+	CameraResource camera_{};
 };
 

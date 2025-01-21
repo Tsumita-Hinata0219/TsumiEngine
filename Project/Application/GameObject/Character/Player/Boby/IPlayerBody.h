@@ -3,7 +3,7 @@
 #include <list>
 #include <memory>
 
-#include "../../../IObject/IObject.h"
+#include "IObject/IObject.h"
 
 
 // PlayerBodyのタイプ

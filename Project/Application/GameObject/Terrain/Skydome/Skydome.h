@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../IObject/IObject.h"
+#include "IObject/IObject.h"
 
 
 /* Skydomeクラス */

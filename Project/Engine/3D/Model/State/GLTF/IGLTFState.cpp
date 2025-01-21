@@ -1,5 +1,5 @@
 #include "IGLTFState.h"
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 
 
 // コンストラクタ

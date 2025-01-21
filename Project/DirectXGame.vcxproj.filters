@@ -11,10 +11,10 @@
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp">
       <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Camera\Manager\CameraManager.cpp">
+    <ClCompile Include="Engine\Camera\Manager\CameraManager.cpp">
       <Filter>Application\GameObject\Camera\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Camera\Resources\CameraResource.cpp">
+    <ClCompile Include="Engine\Camera\Resources\CameraResource.cpp">
       <Filter>Application\GameObject\Camera\Resources</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EnemyManager.cpp">
@@ -471,7 +471,7 @@
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp">
       <Filter>Application\GameObject\Effect\TestPostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\IObject\IObject.cpp">
+    <ClCompile Include="Engine\IObject\IObject.cpp">
       <Filter>Application\GameObject\IObject</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Others\UI\Game\GameSceneUI.cpp">
@@ -588,10 +588,10 @@
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h">
       <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Camera\Manager\CameraManager.h">
+    <ClInclude Include="Engine\Camera\Manager\CameraManager.h">
       <Filter>Application\GameObject\Camera\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Camera\Resources\CameraResource.h">
+    <ClInclude Include="Engine\Camera\Resources\CameraResource.h">
       <Filter>Application\GameObject\Camera\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EnemyManager.h">
@@ -1347,7 +1347,7 @@
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h">
       <Filter>Application\GameObject\Effect\TestPostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\IObject\IObject.h">
+    <ClInclude Include="Engine\IObject\IObject.h">
       <Filter>Application\GameObject\IObject</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Others\UI\Game\GameSceneUI.h">

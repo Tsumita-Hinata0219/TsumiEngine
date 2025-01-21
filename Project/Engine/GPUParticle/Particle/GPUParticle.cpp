@@ -1,5 +1,5 @@
 #include "GPUParticle.h"
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 #include "3D/Model/Manager/ModelManager.h"
 
 

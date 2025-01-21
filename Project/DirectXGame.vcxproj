@@ -174,8 +174,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
-    <ClCompile Include="Application\GameObject\Camera\Manager\CameraManager.cpp" />
-    <ClCompile Include="Application\GameObject\Camera\Resources\CameraResource.cpp" />
+    <ClCompile Include="Engine\Camera\Manager\CameraManager.cpp" />
+    <ClCompile Include="Engine\Camera\Resources\CameraResource.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.cpp" />
@@ -199,7 +199,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
-    <ClCompile Include="Application\GameObject\IObject\IObject.cpp" />
+    <ClCompile Include="Engine\IObject\IObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
@@ -464,8 +464,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h" />
-    <ClInclude Include="Application\GameObject\Camera\Manager\CameraManager.h" />
-    <ClInclude Include="Application\GameObject\Camera\Resources\CameraResource.h" />
+    <ClInclude Include="Engine\Camera\Manager\CameraManager.h" />
+    <ClInclude Include="Engine\Camera\Resources\CameraResource.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Bullet\EnemyBullet.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\HitEffect\Circle\EnemyHitEffectCircle.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\Interface\IEnemyEffect.h" />
@@ -494,7 +494,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
-    <ClInclude Include="Application\GameObject\IObject\IObject.h" />
+    <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
     <ClInclude Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />

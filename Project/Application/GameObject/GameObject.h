@@ -11,7 +11,7 @@
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 
 #include "Math/MyMath.h"
 

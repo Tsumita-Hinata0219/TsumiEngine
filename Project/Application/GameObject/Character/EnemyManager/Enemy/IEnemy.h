@@ -4,7 +4,7 @@
 #include <memory>
 #include <functional>
 
-#include "../../../IObject/IObject.h"
+#include "IObject/IObject.h"
 #include "../../../GameObject.h"
 #include "Transform/Transform.h"
 

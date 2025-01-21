@@ -7,7 +7,7 @@
 #include "PipeLineManager/PipeLineManager.h"
 #include "ConfigManager/ConfigManager.h"
 
-#include "GameObject/Camera/Manager/CameraManager.h"
+#include "Camera/Manager/CameraManager.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "3D/Skybox/Skybox.h"

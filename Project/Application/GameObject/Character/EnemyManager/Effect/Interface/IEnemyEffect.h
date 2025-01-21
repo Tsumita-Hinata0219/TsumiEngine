@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameObject/IObject/IObject.h"
+#include "IObject/IObject.h"
 #include "GameObject/GameObject.h"
 
 

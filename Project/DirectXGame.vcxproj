@@ -169,6 +169,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
   <ItemGroup>
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
+    <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\Camera.cpp" />
     <ClCompile Include="Application\GameObject\Camera\FollowCamera\FollowCamera.cpp" />
@@ -454,6 +456,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\ContFrame\OperationUI_ContFrame.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\Line\OperationUI_Line.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\LStick\OperationUI_LStick.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
+    <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\Camera.h" />
     <ClInclude Include="Application\GameObject\Camera\FollowCamera\FollowCamera.h" />

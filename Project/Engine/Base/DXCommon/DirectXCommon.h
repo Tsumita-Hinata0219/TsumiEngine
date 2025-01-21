@@ -43,214 +43,193 @@ class DirectXCommon {
 
 public: // メンバ関数
 
-	/// <summary>
-	/// DirectXCommonのインスタンスの取得
-	/// </summary>
-	static DirectXCommon* GetInstance();
+    /// <summary>
+    /// インスタンスの取得
+    /// </summary>
+    static DirectXCommon* GetInstance();
 
-	/// <summary>
-	/// 初期化処理
-	/// </summary>
-	static void Initialize();
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
+    static void Initialize();
 
-	/// <summary>
-	/// 描画前処理 PostEffect用
-	/// </summary>
-	static void PreDrawForPostEffect();
+    /// <summary>
+    /// 描画前処理 PostEffect用
+    /// </summary>
+    static void PreDrawForPostEffect();
 
-	/// <summary>
-	/// 描画後処理 PostEffect用
-	/// </summary>
-	static void PostDrawForPostEffect();
+    /// <summary>
+    /// 描画後処理 PostEffect用
+    /// </summary>
+    static void PostDrawForPostEffect();
 
-	/// <summary>
-	/// 描画前処理 SwapChain用
-	/// </summary>
-	static void PreDrawForSwapChain();
+    /// <summary>
+    /// 描画前処理 SwapChain用
+    /// </summary>
+    static void PreDrawForSwapChain();
 
-	/// <summary>
-	/// 描画後処理 SwapChain用
-	/// </summary>
-	static void PostDrawForSwapChain();
+    /// <summary>
+    /// 描画後処理 SwapChain用
+    /// </summary>
+    static void PostDrawForSwapChain();
 
-	/// <summary>
-	/// 解放処理
-	/// </summary>
-	static void Release();
+    /// <summary>
+    /// 解放処理
+    /// </summary>
+    static void Release();
 
+#pragma region Accessor アクセッサ
 
-#pragma region Get 取得
+    // デバイスの取得
+    ID3D12Device* const GetDevice() { return device_.Get(); }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	ID3D12Device* const GetDevice() { return DirectXCommon::GetInstance()->device_.Get(); };
+    // スワップチェーンの取得
+    SwapChains const GetSwapChains() { return swapChains_; }
 
-	/// <summary>
-	/// 
-	/// </summary>
-	SwapChains const GetSwapChains() { return DirectXCommon::GetInstance()->swapChains_; }
-
-	/// <summary>
-	/// 
-	/// </summary>
-	ID3D12DescriptorHeap* const GetSrvDescriptorHeap() { return DirectXCommon::GetInstance()->srvDescriptorHeap_.Get(); }
-
-	/// <summary>
-	/// 
-	/// </summary>
-	D3D12_DEPTH_STENCIL_DESC const GetDepthStencilDesc() { return DirectXCommon::GetInstance()->depthStencilDesc_; }
-
-	/// <summary>
-	/// 
-	/// </summary>
-	IDxcUtils* const GetDxcUtils() { return DirectXCommon::GetInstance()->dxcUtils_; }
-
-	/// <summary>
-	/// 
-	/// </summary>
-	IDxcCompiler3* const GetDxcCompiler() { return DirectXCommon::GetInstance()->dxcCompiler_; }
-
-	/// <summary>
-	/// 
-	/// </summary>
-	IDxcIncludeHandler* const GetIncludeHandler() { return DirectXCommon::GetInstance()->includeHandler_; }
+    // SRVディスクリプタヒープの取得
+    ID3D12DescriptorHeap* const GetSrvDescriptorHeap() { return srvDescriptorHeap_.Get(); }
 
 #pragma endregion
 
+private:
 
-private: // メンバ関数
+    /// <summary>
+    /// FPS固定初期化処理
+    /// </summary>
+    void InitFixFPS();
 
+    /// <summary>
+    /// FPS固定更新処理
+    /// </summary>
+    void UpdateFixFPS();
 
+    /// <summary>
+    /// DXGIファクトリーの生成
+    /// </summary>
+    void CreateDxgiFactory();
 
-	// DXGIファクトリーの生成
-	void CreateDxgiFactory();
+    /// <summary>
+    /// D3D12Deviceの生成
+    /// </summary>
+    void CreateDevice();
 
-	// D3D12Deviceの生成
-	void CreateDevice();
+    /// <summary>
+    /// エラーと警告の抑制
+    /// </summary>
+    void DebugErrorInfoQueue();
 
-	// エラーと警告の抑制
-	void DebugErrorInfoQueue();
+    /// <summary>
+    /// スワップチェーンを生成する
+    /// </summary>
+    void CreateSwapChain();
 
-	// スワップチェーンを生成する
-	void CreateSwapChain();
+    /// <summary>
+    /// ディスクリプタヒープを生成する
+    /// </summary>
+    void SetDescriptorHeap();
 
-	// ディスクリプタヒープを生成する
-	void SetDescriptorHeap();
+    /// <summary>
+    /// SwapChainからResourceを引っ張ってくる
+    /// </summary>
+    void CreateSwapChainResources();
 
-	// SwapChainからResourceを引っ張ってくる
-	void CreateSwapChainResources();
+    /// <summary>
+    /// RTVを作る
+    /// </summary>
+    void CreateRTV();
 
-	// RTVを作る
-	void CreateRTV();
+    /// <summary>
+    /// 状態を遷移する
+    /// </summary>
+    void ChanegResourceState();
 
-	// 状態を遷移する
-	void ChanegResourceState();
+    /// <summary>
+    /// Fenceを生成する
+    /// </summary>
+    void MakeFence();
 
-	// Fenceを生成する
-	void MakeFence();
+    /// <summary>
+    /// ViewportとScissorの設定
+    /// </summary>
+    void SetViewport();
+    void SetScissor();
 
+    /// <summary>
+    /// ディスクリプタヒープの作成
+    /// </summary>
+    ID3D12DescriptorHeap* CreateDescriptorHeap(
+        ID3D12Device* device,
+        D3D12_DESCRIPTOR_HEAP_TYPE heapType,
+        UINT numDescriptors,
+        bool shaderVisible);
 
-	// ViewportとScissor
-	void SetViewport();
+    /// <summary>
+    /// 深度ステンシルテクスチャリソースの作成
+    /// </summary>
+    ComPtr<ID3D12Resource> CreateDepthStencilTexturerResource(int32_t width, int32_t height);
 
-	void SetScissor();
-
-
-	// 
-	ID3D12DescriptorHeap* CreateDescriptorHeap(
-		ID3D12Device* device,
-		D3D12_DESCRIPTOR_HEAP_TYPE heapType,
-		UINT numDescriptors,
-		bool shaderVisible);
-
-
-	// Textureの深度の設定をしていく
-	ComPtr<ID3D12Resource> CreateDepthStencilTexturerResource(int32_t width, int32_t height);
-
-
-	// depthStencilResourceを作る
-	void CreateDepthStencilResource();
-
-
-private: // メンバ変数
-
-	// デバッグレイヤー
-	ComPtr<ID3D12Debug1> debugController_ = nullptr;
-
-
-	// DXGIFactory
-	ComPtr<IDXGIFactory7> dxgiFactory_ = nullptr;
-
-
-	// 使用するアダプタ用の変数
-	ComPtr<IDXGIAdapter4> useAdapter_ = nullptr;
-
-	ComPtr<ID3D12Device> device_ = nullptr;
-
-
-	// エラー・警告・即ち停止
-	ComPtr<ID3D12InfoQueue> infoQueue_ = nullptr;
-
-	// なにこれ↓
-	D3D12_INFO_QUEUE_FILTER filter_{};
-
-
-	// バックバッファインデックス
-	UINT backBufferIndex_{};
-
-
-	// TransitionBarrierの設定
-	D3D12_RESOURCE_BARRIER barrier_{};
+    /// <summary>
+    /// 深度ステンシルリソースの作成
+    /// </summary>
+    void CreateDepthStencilResource();
 
 
-	// スワップチェーン
-	SwapChains swapChains_{};
+private:
 
+    // デバッグレイヤー
+    ComPtr<ID3D12Debug1> debugController_ = nullptr;
 
-	// ディスクリプタヒープ
-	ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap_ = nullptr;
+    // DXGIFactory
+    ComPtr<IDXGIFactory7> dxgiFactory_ = nullptr;
 
+    // 使用するアダプタ
+    ComPtr<IDXGIAdapter4> useAdapter_ = nullptr;
 
-	// Fence
-	ComPtr<ID3D12Fence> fence_ = nullptr;
-	uint64_t fenceValue_ = 0;
+    // D3D12デバイス
+    ComPtr<ID3D12Device> device_ = nullptr;
 
+    // エラー・警告情報
+    ComPtr<ID3D12InfoQueue> infoQueue_ = nullptr;
+    D3D12_INFO_QUEUE_FILTER filter_{};
 
-	// Event
-	HANDLE fenceEvent_{};
+    // バックバッファインデックス
+    UINT backBufferIndex_{};
 
+    // リソースバリア
+    D3D12_RESOURCE_BARRIER barrier_{};
 
-	// dxcCompilerを初期化
-	IDxcUtils* dxcUtils_ = nullptr;
+    // スワップチェーン
+    SwapChains swapChains_{};
 
-	IDxcCompiler3* dxcCompiler_ = nullptr;
+    // 
+    ComPtr<ID3D12DescriptorHeap> descriptorHeap_ = nullptr;
 
-	IDxcIncludeHandler* includeHandler_ = nullptr;
+    // ディスクリプタヒープ
+    ComPtr<ID3D12DescriptorHeap> srvDescriptorHeap_ = nullptr;
 
+    // ディスクリプターヒープデスク
+    D3D12_DESCRIPTOR_HEAP_DESC DescriptorHeapDesc_{};
 
-	// ビューポート
-	D3D12_VIEWPORT viewport_{};
+    // フェンス
+    ComPtr<ID3D12Fence> fence_ = nullptr;
+    uint64_t fenceValue_ = 0;
+    HANDLE fenceEvent_{};
 
+    // dxcコンパイラ
+    IDxcUtils* dxcUtils_ = nullptr;
+    IDxcCompiler3* dxcCompiler_ = nullptr;
+    IDxcIncludeHandler* includeHandler_ = nullptr;
 
-	// シザー矩形
-	D3D12_RECT scissorRect_{};
+    // ビューポート
+    D3D12_VIEWPORT viewport_{};
 
+    // シザー矩形
+    D3D12_RECT scissorRect_{};
 
-	// 
-	ComPtr<ID3D12DescriptorHeap> descriptorHeap_ = nullptr;
+    // 深度ステンシルリソース
+    ComPtr<ID3D12Resource> depthStencilResource_ = nullptr;
 
-	D3D12_DESCRIPTOR_HEAP_DESC DescriptorHeapDesc_{};
-
-
-	// 深度
-	ComPtr<ID3D12Resource> depthStencilResource_ = nullptr;
-
-
-	// DepthStencilState
-	D3D12_DEPTH_STENCIL_DESC depthStencilDesc_{};
-
-	ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap_ = nullptr;
-
-
+    // 深度ステンシルステート
+    D3D12_DEPTH_STENCIL_DESC depthStencilDesc_{};
+    ComPtr<ID3D12DescriptorHeap> dsvDescriptorHeap_ = nullptr;
 };

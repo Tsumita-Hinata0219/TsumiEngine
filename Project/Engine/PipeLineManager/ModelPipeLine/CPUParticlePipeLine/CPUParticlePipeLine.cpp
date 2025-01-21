@@ -13,10 +13,10 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 3> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
-		//SetUpInputElementDescs("NORMAL"),
+		SetUpInputElementDescs("NORMAL"),
 		SetUpInputElementDescs("INSTANCEID"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
@@ -41,7 +41,7 @@ PsoProperty CPUParticlePipeLine::SetUpPso()
 	// Shaderをコンパイルする
 	IDxcBlob* vertexShaderBlob = nullptr;
 	IDxcBlob* pixelShaderBlob = nullptr;
-	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "GPUParticle_Draw");
+	SetUpModelShader(vertexShaderBlob, pixelShaderBlob, "CPUParticle");
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};

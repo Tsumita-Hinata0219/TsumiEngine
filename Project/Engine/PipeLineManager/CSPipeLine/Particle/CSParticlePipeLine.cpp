@@ -24,7 +24,7 @@ PsoProperty CSParticlePipeLine::SetUpPso()
 
 	// 実際に生成
 	HRESULT hr{};
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateComputePipelineState(
+	hr = DirectXManager::GetInstance()->GetDevice()->CreateComputePipelineState(
 		&computePipelineStateDesc, IID_PPV_ARGS(&pso_.graphicsPipelineState));
 
     return pso_;
@@ -67,7 +67,7 @@ void CSParticlePipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descripti
 
 
 	// バイナリを元に生成
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
 		pso_.signatureBlob->GetBufferPointer(),
 		pso_.signatureBlob->GetBufferSize(),

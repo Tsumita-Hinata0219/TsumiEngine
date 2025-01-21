@@ -41,20 +41,20 @@ void GameManager::Run() {
 		scene_->Update();
 
 		//// ポストエフェクト
-		DirectXCommon::PreDrawForPostEffect();
+		DirectXManager::PreDrawForPostEffect();
 		
 		scene_->BackSpriteDraw();
 		scene_->ModelDraw();
 
-		DirectXCommon::PostDrawForPostEffect();
+		DirectXManager::PostDrawForPostEffect();
 
 		// スワップチェーン
-		DirectXCommon::PreDrawForSwapChain();
+		DirectXManager::PreDrawForSwapChain();
 
 		scene_->FrontSpriteDraw();
 
 		Tsumi::EndFlame();
-		DirectXCommon::PostDrawForSwapChain();
+		DirectXManager::PostDrawForSwapChain();
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();

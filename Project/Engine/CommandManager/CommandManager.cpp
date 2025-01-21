@@ -1,12 +1,12 @@
 #include "CommandManager.h"
-#include "../Base/DXCommon/DirectXCommon.h"
+#include "../Base/DirectXManager/DirectXManager.h"
 
 
 // 初期化処理
 void CommandManager::Initialize()
 {
 	// DirectXCommonのインスタンスの取得
-	dxCommon_ = DirectXCommon::GetInstance();
+	dxCommon_ = DirectXManager::GetInstance();
 
 	// コマンドキューを生成する
 	CreateCommandQueue();

@@ -37,12 +37,12 @@ void ImGuiManager::Initialize() {
 
 	ImGui_ImplWin32_Init(WinApp::GetInstance()->GetHwnd());
 	ImGui_ImplDX12_Init(
-		DirectXCommon::GetInstance()->GetDevice(),
-		DirectXCommon::GetInstance()->GetSwapChains().Desc.BufferCount,
+		DirectXManager::GetInstance()->GetDevice(),
+		DirectXManager::GetInstance()->GetSwapChains().Desc.BufferCount,
 		RTVManager::GetInstance()->GetDesc().Format,
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap(),
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap()->GetCPUDescriptorHandleForHeapStart(),
-		DirectXCommon::GetInstance()->GetSrvDescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap(),
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap()->GetCPUDescriptorHandleForHeapStart(),
+		DirectXManager::GetInstance()->GetSrvDescriptorHeap()->GetGPUDescriptorHandleForHeapStart());
 
 	// フォントテクスチャの作成
 	ImGui_ImplDX12_CreateDeviceObjects();
@@ -61,7 +61,7 @@ void ImGuiManager::EndFrame() {
 	ImGui::Render();
 
 	// 描画先のでDescriptorの設定
-	ID3D12DescriptorHeap* descriptorHeap[] = { DirectXCommon::GetInstance()->GetSrvDescriptorHeap() };
+	ID3D12DescriptorHeap* descriptorHeap[] = { DirectXManager::GetInstance()->GetSrvDescriptorHeap() };
 	CommandManager::GetInstance()->GetList()->SetDescriptorHeaps(1, descriptorHeap);
 
 	//実際のCommandListのImGuiの描画コマンドを進む

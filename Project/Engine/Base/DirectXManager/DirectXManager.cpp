@@ -1,12 +1,12 @@
-#include "DirectXCommon.h"
+#include "DirectXManager.h"
 
 
 /// <summary>
 /// DirectXCommonのインスタンス取得
 /// </summary>
-DirectXCommon* DirectXCommon::GetInstance() 
+DirectXManager* DirectXManager::GetInstance() 
 {
-	static DirectXCommon instance;
+	static DirectXManager instance;
 	return &instance;
 }
 
@@ -14,9 +14,9 @@ DirectXCommon* DirectXCommon::GetInstance()
 /// <summary>
 /// 初期化処理
 /// </summary>
-void DirectXCommon::Initialize() 
+void DirectXManager::Initialize() 
 {
-	DirectXCommon* directX = DirectXCommon::GetInstance();
+	DirectXManager* directX = DirectXManager::GetInstance();
 
 	/* ----- デバッグレイヤー -----*/
 #ifdef _DEBUG
@@ -61,7 +61,7 @@ void DirectXCommon::Initialize()
 /// <summary>
 /// 描画前処理 PostEffect用
 /// </summary>
-void DirectXCommon::PreDrawForPostEffect() 
+void DirectXManager::PreDrawForPostEffect() 
 {
 	auto commandManager = CommandManager::GetInstance();
 	Commands commands = commandManager->GetCommands();
@@ -86,7 +86,7 @@ void DirectXCommon::PreDrawForPostEffect()
 	commands.List->ResourceBarrier(1, &barrier);
 
 	// 描画先のRTVとDSVを設定
-	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXCommon::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
+	D3D12_CPU_DESCRIPTOR_HANDLE dsvHandle = DirectXManager::GetInstance()->dsvDescriptorHeap_->GetCPUDescriptorHandleForHeapStart();
 	commands.List->OMSetRenderTargets(1, &rtv.Handles, false, &dsvHandle);
 
 	// 色で画面全体をクリア
@@ -98,8 +98,8 @@ void DirectXCommon::PreDrawForPostEffect()
 	commands.List->ClearDepthStencilView(dsvHandle, D3D12_CLEAR_FLAG_DEPTH, 1.0f, 0, 0, nullptr);
 
 	// ビューポートとシザーを設定
-	commands.List->RSSetViewports(1, &DirectXCommon::GetInstance()->viewport_);
-	commands.List->RSSetScissorRects(1, &DirectXCommon::GetInstance()->scissorRect_);
+	commands.List->RSSetViewports(1, &DirectXManager::GetInstance()->viewport_);
+	commands.List->RSSetScissorRects(1, &DirectXManager::GetInstance()->scissorRect_);
 
 	// コマンドを更新
 	commandManager->SetCommands(commands);
@@ -109,7 +109,7 @@ void DirectXCommon::PreDrawForPostEffect()
 /// <summary>
 /// 描画後処理 PostEffect用
 /// </summary>
-void DirectXCommon::PostDrawForPostEffect() 
+void DirectXManager::PostDrawForPostEffect() 
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	RTVProperty rtv = RTVManager::GetRTV("PostEffect")->GetRTVPrope();
@@ -139,10 +139,10 @@ void DirectXCommon::PostDrawForPostEffect()
 /// <summary>
 /// 描画前処理 SwapChain用
 /// </summary>
-void DirectXCommon::PreDrawForSwapChain() 
+void DirectXManager::PreDrawForSwapChain() 
 {
 	// DirectXCommon インスタンス取得
-	auto directXCommon = DirectXCommon::GetInstance();
+	auto directXCommon = DirectXManager::GetInstance();
 	if (!directXCommon) {
 		// エラー処理: DirectXCommon インスタンスが取得できない場合
 		return;
@@ -228,9 +228,9 @@ void DirectXCommon::PreDrawForSwapChain()
 /// <summary>
 /// 描画後処理 SwapChain用
 /// </summary>
-void DirectXCommon::PostDrawForSwapChain() 
+void DirectXManager::PostDrawForSwapChain() 
 {
-	auto directXCommon = DirectXCommon::GetInstance();
+	auto directXCommon = DirectXManager::GetInstance();
 	auto commandManager = CommandManager::GetInstance();
 
 	// 必要な変数を取得
@@ -286,16 +286,16 @@ void DirectXCommon::PostDrawForSwapChain()
 /// <summary>
 /// 解放処理
 /// </summary>
-void DirectXCommon::Release() 
+void DirectXManager::Release() 
 {
-	CloseHandle(DirectXCommon::GetInstance()->fenceEvent_);
+	CloseHandle(DirectXManager::GetInstance()->fenceEvent_);
 }
 
 
 /// <summary>
 /// FPS固定初期化処理
 /// </summary>
-void DirectXCommon::InitFixFPS()
+void DirectXManager::InitFixFPS()
 {
 }
 
@@ -303,7 +303,7 @@ void DirectXCommon::InitFixFPS()
 /// <summary>
 /// FPS固定更新処理
 /// </summary>
-void DirectXCommon::UpdateFixFPS()
+void DirectXManager::UpdateFixFPS()
 {
 }
 
@@ -315,10 +315,10 @@ void DirectXCommon::UpdateFixFPS()
 /// <summary>
 /// DirectX初期化
 /// </summary>
-void DirectXCommon::CreateDxgiFactory() 
+void DirectXManager::CreateDxgiFactory() 
 {
-	IDXGIFactory7* dxgiFactory = DirectXCommon::GetInstance()->dxgiFactory_.Get();
-	IDXGIAdapter4* useAdapter = DirectXCommon::GetInstance()->useAdapter_.Get();
+	IDXGIFactory7* dxgiFactory = DirectXManager::GetInstance()->dxgiFactory_.Get();
+	IDXGIAdapter4* useAdapter = DirectXManager::GetInstance()->useAdapter_.Get();
 
 	// DXGIファクトリーの生成
 	// HRESULTはWindows系のエラーコードであり、
@@ -362,7 +362,7 @@ void DirectXCommon::CreateDxgiFactory()
 /// <summary>
 /// D3D12Deviceを生成する
 /// </summary>
-void DirectXCommon::CreateDevice() 
+void DirectXManager::CreateDevice() 
 {
 	// 昨日レベルとログ出力用の文字列
 	D3D_FEATURE_LEVEL featureLevels[] = {
@@ -378,7 +378,7 @@ void DirectXCommon::CreateDevice()
 	for (size_t i = 0; i < _countof(featureLevels); ++i) {
 		// 採用したアダプターでデバイスを生成
 		HRESULT result;
-		result = D3D12CreateDevice(this->useAdapter_.Get(), featureLevels[i], IID_PPV_ARGS(&DirectXCommon::GetInstance()->device_));
+		result = D3D12CreateDevice(this->useAdapter_.Get(), featureLevels[i], IID_PPV_ARGS(&DirectXManager::GetInstance()->device_));
 
 		// 指定した昨日レベルでデバイスが生成できたかを確認
 		if (SUCCEEDED(result)) {
@@ -402,7 +402,7 @@ void DirectXCommon::CreateDevice()
 /// <summary>
 /// エラーと警告の抑制
 /// </summary>
-void DirectXCommon::DebugErrorInfoQueue() 
+void DirectXManager::DebugErrorInfoQueue() 
 {
 #ifdef _DEBUG
 
@@ -452,7 +452,7 @@ void DirectXCommon::DebugErrorInfoQueue()
 /// <summary>
 /// スワップチェーンを生成する
 /// </summary>
-void DirectXCommon::CreateSwapChain() 
+void DirectXManager::CreateSwapChain() 
 {
 	HWND hwnd_ = WinApp::GetInstance()->GetHwnd();
 	SwapChains swapChains = this->swapChains_;
@@ -484,7 +484,7 @@ void DirectXCommon::CreateSwapChain()
 /// <summary>
 /// ディスクリプタヒープの生成
 /// </summary>
-void DirectXCommon::SetDescriptorHeap() 
+void DirectXManager::SetDescriptorHeap() 
 {
 	RTVManager::GetInstance()->SetDescriptorHeap(
 		CreateDescriptorHeap(this->device_.Get(), D3D12_DESCRIPTOR_HEAP_TYPE_RTV, 5, false)
@@ -510,7 +510,7 @@ void DirectXCommon::SetDescriptorHeap()
 /// <summary>
 /// SwapChainからResourceを引っ張ってくる
 /// </summary>
-void DirectXCommon::CreateSwapChainResources() 
+void DirectXManager::CreateSwapChainResources() 
 {
 	HRESULT result;
 	result = this->swapChains_.swapChain->GetBuffer(0, IID_PPV_ARGS(&this->swapChains_.Resources[0]));
@@ -529,7 +529,7 @@ void DirectXCommon::CreateSwapChainResources()
 /// <summary>
 /// RTVを作る
 /// </summary>
-void DirectXCommon::CreateRTV()
+void DirectXManager::CreateRTV()
 {
 	ComPtr<ID3D12Device> device = this->device_;
 	SwapChains swapChains = this->GetSwapChains();
@@ -592,7 +592,7 @@ void DirectXCommon::CreateRTV()
 /// <summary>
 /// 状態を遷移する
 /// </summary>
-void DirectXCommon::ChanegResourceState() 
+void DirectXManager::ChanegResourceState() 
 {
 	// 画面に描く処理はすべて終わり、画面に映すので、状態を遷移
 	// 今回はRenderTargetからPresentにする
@@ -607,7 +607,7 @@ void DirectXCommon::ChanegResourceState()
 /// <summary>
 /// Fenceを生成する
 /// </summary>
-void DirectXCommon::MakeFence() 
+void DirectXManager::MakeFence() 
 {
 	// 初期値0でFenceを作る
 	HRESULT result;
@@ -623,7 +623,7 @@ void DirectXCommon::MakeFence()
 /// <summary>
 /// ViewportとScissor
 /// </summary>
-void DirectXCommon::SetViewport() 
+void DirectXManager::SetViewport() 
 {
 	// ビューポート
 	// クライアント領域のサイズと一緒にして画面全体に表示
@@ -634,7 +634,7 @@ void DirectXCommon::SetViewport()
 	this->viewport_.MinDepth = 0.0f;
 	this->viewport_.MaxDepth = 1.0f;
 }
-void DirectXCommon::SetScissor() 
+void DirectXManager::SetScissor() 
 {
 	// シザー矩形
 	// 基本的にビューポートと同じ矩形が構成されるようにする
@@ -646,7 +646,7 @@ void DirectXCommon::SetScissor()
 
 
 
-ID3D12DescriptorHeap* DirectXCommon::CreateDescriptorHeap(
+ID3D12DescriptorHeap* DirectXManager::CreateDescriptorHeap(
 	ID3D12Device* device,
 	D3D12_DESCRIPTOR_HEAP_TYPE heapType,
 	UINT numDescriptors,
@@ -667,7 +667,7 @@ ID3D12DescriptorHeap* DirectXCommon::CreateDescriptorHeap(
 /// <summary>
 /// Textureの深度の設定をしていく
 /// </summary>
-ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTexturerResource(int32_t width, int32_t height) 
+ComPtr<ID3D12Resource> DirectXManager::CreateDepthStencilTexturerResource(int32_t width, int32_t height) 
 {
 	// 生成するResourceの設定
 	D3D12_RESOURCE_DESC resourceDesc{};
@@ -710,7 +710,7 @@ ComPtr<ID3D12Resource> DirectXCommon::CreateDepthStencilTexturerResource(int32_t
 /// <summary>
 /// depthStencilResourceを作る
 /// </summary>
-void DirectXCommon::CreateDepthStencilResource() 
+void DirectXManager::CreateDepthStencilResource() 
 {
 	// DepthStencilTextureをウィンドウサイズで作成
 	this->depthStencilResource_ = CreateDepthStencilTexturerResource(

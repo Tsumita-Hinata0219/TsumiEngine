@@ -13,7 +13,7 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 #include "../../DescriptorManager/DescriptorManager.h"
-#include "../../Base/DXCommon/DirectXCommon.h"
+#include "../../Base/DirectXManager/DirectXManager.h"
 
 #define RTV_Index_Max 16
 

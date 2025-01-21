@@ -7,7 +7,7 @@
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "../../Base/DXCommon/DirectXCommon.h"
+#include "../../Base/DirectXManager/DirectXManager.h"
 #include "PipeLineStructure.h"
 #include "../../ShaderManager/ShaderManager.h"
 

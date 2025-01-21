@@ -256,7 +256,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="Engine\Audio\Audio.cpp" />
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
-    <ClCompile Include="Engine\Base\DXCommon\DirectXCommon.cpp" />
+    <ClCompile Include="Engine\Base\DirectXManager\DirectXManager.cpp" />
     <ClCompile Include="Engine\Base\WinApp\WinApp.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
@@ -560,7 +560,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
     <ClInclude Include="Engine\Audio\Audio.h" />
     <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h" />
-    <ClInclude Include="Engine\Base\DXCommon\DirectXCommon.h" />
+    <ClInclude Include="Engine\Base\DirectXManager\DirectXManager.h" />
     <ClInclude Include="Engine\Base\WinApp\WinApp.h" />
     <ClInclude Include="Engine\BufferResource\BufferResource.h" />
     <ClInclude Include="Engine\CollisionSystem\Collider\ColliderConfig.h" />

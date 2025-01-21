@@ -106,7 +106,7 @@ PsoProperty SkinningObject3dPipeLine::SetUpPso()
 
 	// 実際に生成
 	HRESULT hr{};
-	hr = DirectXCommon::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
+	hr = DirectXManager::GetInstance()->GetDevice()->CreateGraphicsPipelineState(
 		&graphicsPipelineStateDesc,
 		IID_PPV_ARGS(&pso_.graphicsPipelineState));
 	assert(SUCCEEDED(hr));
@@ -204,7 +204,7 @@ void SkinningObject3dPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& des
 
 
 	// バイナリを元に生成
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateRootSignature(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateRootSignature(
 		0,
 		pso_.signatureBlob->GetBufferPointer(),
 		pso_.signatureBlob->GetBufferSize(),

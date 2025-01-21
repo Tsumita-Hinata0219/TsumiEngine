@@ -1,5 +1,5 @@
 #pragma once
-#include "../Base/DXCommon/DirectXCommon.h"
+#include "../Base/DirectXManager/DirectXManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 

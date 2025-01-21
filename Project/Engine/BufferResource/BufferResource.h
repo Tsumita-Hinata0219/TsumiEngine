@@ -11,7 +11,7 @@
 
 #include <assert.h>
 
-#include "../Base/DXCommon/DirectXCommon.h"
+#include "../Base/DirectXManager/DirectXManager.h"
 #include "../CommandManager/CommandManager.h"
 #include "DescriptorManager/DescriptorManager.h"
 #include "Math/MyMath.h"
@@ -251,7 +251,7 @@ inline void BufferResource<T>::GraphicsCommandCall(UINT number)
 template<typename T>
 inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t index)
 {
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
@@ -262,7 +262,7 @@ inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t inde
 template<typename T>
 inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
 {
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
@@ -280,7 +280,7 @@ inline void BufferResource<T>::ComputeCommandCall(UINT number)
 template<typename T>
 inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
 {
-	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
+	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	DescriptorManager* descriptor = DescriptorManager::GetInstance();
 	ID3D12DescriptorHeap* desc[] = { dxCommon->GetSrvDescriptorHeap() };
@@ -328,7 +328,7 @@ inline void BufferResource<T>::CreateCBVResource()
 
 	// 実際にBufferResourceを作る
 	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
@@ -365,7 +365,7 @@ inline void BufferResource<T>::CreateUAVResource()
 
 	// 実際にBufferResourceを作る
 	HRESULT hr_;
-	hr_ = DirectXCommon::GetInstance()->GetDevice()->CreateCommittedResource(
+	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
 		&resourceDesc, D3D12_RESOURCE_STATE_COMMON, nullptr,
 		IID_PPV_ARGS(&buffer_));

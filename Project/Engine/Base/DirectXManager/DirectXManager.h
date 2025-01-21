@@ -39,14 +39,14 @@ struct RTV {
 /// <summary>
 /// DirectXCommonクラス
 /// </summary>
-class DirectXCommon {
+class DirectXManager {
 
 public: // メンバ関数
 
     /// <summary>
     /// インスタンスの取得
     /// </summary>
-    static DirectXCommon* GetInstance();
+    static DirectXManager* GetInstance();
 
     /// <summary>
     /// 初期化処理

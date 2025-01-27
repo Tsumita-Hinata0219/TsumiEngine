@@ -196,10 +196,14 @@ void Player::onCollision([[maybe_unused]] IObject *object)
         if (isInvincibility_)
             return;
 
-        //OnCollisionWithEnemyBullet();
+		// 敵の弾との衝突処理
+        OnCollisionWithEnemyBullet();
 
         // 近くにある敵の弾を消す
         sweepEraser_->StartSweep();
+
+        // カメラのシェイク処理
+        gameCamera_->ActivateShake();
     }
 }
 void Player::OnCollisionWithEnemy() {}

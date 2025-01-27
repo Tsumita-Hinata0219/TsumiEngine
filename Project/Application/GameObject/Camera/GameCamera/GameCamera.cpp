@@ -34,6 +34,11 @@ void GameCamera::Update()
 	CalcForwardVec();
 	CalcRightVec();
 
+	// シェイク中
+	if (isShake_) {
+		ExecuteShake();
+	}
+
 #ifdef _DEBUG
 	// ImGuiの描画
 	DrawImGui();
@@ -59,6 +64,15 @@ void GameCamera::Draw2DBack()
 /// </summary>
 void GameCamera::onCollision([[maybe_unused]] IObject * object)
 {
+}
+
+
+/// <summary>
+/// カメラのシェイク開始
+/// </summary>
+void GameCamera::ActivateShake()
+{
+
 }
 
 
@@ -109,4 +123,12 @@ void GameCamera::DrawImGui()
 
 		ImGui::TreePop();
 	}
+}
+
+
+/// <summary>
+/// シェイク処理
+/// </summary>
+void GameCamera::ExecuteShake()
+{
 }

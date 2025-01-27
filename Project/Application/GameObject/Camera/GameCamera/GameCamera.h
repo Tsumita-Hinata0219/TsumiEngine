@@ -58,6 +58,11 @@ public: // メンバ関数
 	/// <param name="object"></param>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// カメラのシェイク開始
+	/// </summary>
+	void ActivateShake();
+
 
 #pragma region Accessor アクセッサ
 
@@ -97,6 +102,11 @@ private:
 	/// </summary>
 	void DrawImGui();
 
+	/// <summary>
+	/// シェイク処理
+	/// </summary>
+	void ExecuteShake();
+
 
 private:
 
@@ -119,6 +129,10 @@ private:
 	// 右方ベクトル
 	Vector3 rightVec_{};
 
+	// シェイク中
+	bool isShake_ = false;
+	// シェイクの時間
+	Timer shakeTimer_{};
 
 };
 

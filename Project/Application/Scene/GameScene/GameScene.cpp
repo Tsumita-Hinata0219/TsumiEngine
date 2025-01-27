@@ -124,15 +124,6 @@ void GameScene::Update()
 	// ──────── GameCamera
 	gameCamera_->Update();
 
-	// ──────── Skybox
-	skybox_->Update();
-	
-	// ──────── Floor
-	floor_->Update();
-
-	// ──────── BoxManager
-	boxManager_->Update();
-
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
@@ -172,6 +163,15 @@ void GameScene::Update()
 	if (STMenuManager_->GetState() == MenuDirectionState::Processing) {
 		return;
 	}
+
+	// ──────── Skybox
+	skybox_->Update();
+
+	// ──────── Floor
+	floor_->Update();
+
+	// ──────── BoxManager
+	boxManager_->Update();
 
 	// ──────── Player
 	player_->Update();

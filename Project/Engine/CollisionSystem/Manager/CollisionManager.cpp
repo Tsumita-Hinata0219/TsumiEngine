@@ -17,6 +17,16 @@ static std::unordered_map<std::type_index, ColliderFactory> CreateColliderFactor
 
 
 /// <summary>
+/// 初期化処理
+/// </summary>
+void CollisionManager::Init()
+{
+	Logger::GetInstance().Init("CollisionLog"); // ログファイルの初期化
+	
+}
+
+
+/// <summary>
 /// コライダー登録
 /// </summary>
 void CollisionManager::Register(ICollider* pCollider)
@@ -82,6 +92,9 @@ void CollisionManager::RemoveNullColliders()
 /// </summary>
 void CollisionManager::CheckCollisions()
 {
+	// 衝突判定のカウント用変数
+	int collisionCheckCount = 0;
+
 	for (auto itr1 = pColliders_.begin(); itr1 != pColliders_.end(); ++itr1) {
 		for (auto itr2 = std::next(itr1); itr2 != pColliders_.end(); ++itr2) {
 
@@ -93,6 +106,9 @@ void CollisionManager::CheckCollisions()
 			if (!(*itr1)->IsActive() || !(*itr2)->IsActive()) {
 				continue;
 			}
+
+			// 衝突判定の回数を増やす
+			collisionCheckCount++;
 
 			// 衝突判定をとる
 			if ((*itr1)->Intersects((**itr2))) {

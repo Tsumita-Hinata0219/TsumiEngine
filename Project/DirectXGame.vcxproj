@@ -331,6 +331,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
     <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
@@ -652,6 +653,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
+    <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
     <ClInclude Include="Engine\Utilities\ObjectPool\ObjectPool.h" />
     <ClInclude Include="Engine\Utilities\RandomGenerator\RandomGenerator.h" />
     <ClInclude Include="Engine\Utilities\TextLog\TextLog.h" />

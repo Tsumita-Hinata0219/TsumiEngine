@@ -197,7 +197,7 @@ void Player::onCollision([[maybe_unused]] IObject *object)
             return;
 
 		// 敵の弾との衝突処理
-        OnCollisionWithEnemyBullet();
+        //OnCollisionWithEnemyBullet();
 
         // 近くにある敵の弾を消す
         sweepEraser_->StartSweep();

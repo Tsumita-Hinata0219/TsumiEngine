@@ -574,6 +574,7 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
+    <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1466,6 +1467,7 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\LStick\OperationUI_LStick.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
+    <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

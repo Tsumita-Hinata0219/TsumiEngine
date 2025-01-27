@@ -3,6 +3,8 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
+#include "Utilities/Logger/Logger.h"
+
 #include "../Detect/CollisionDetect.h"
 #include "../Penetration/CollisionPenetration.h"
 
@@ -41,6 +43,11 @@ public:
 		static CollisionManager instance;
 		return &instance;
 	}
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	void Init();
 
 	/// <summary>
 	/// コライダー登録
@@ -96,4 +103,5 @@ private:
 
 	// コライダーポインタリスト
 	std::list<ICollider*> pColliders_;
+
 };

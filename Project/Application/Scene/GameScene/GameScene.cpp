@@ -101,6 +101,9 @@ void GameScene::Initialize()
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
 
+	// ──────── CollisionManager
+	CollisionManager_->Init();
+
 	jsonManager->Clear();
 }
 

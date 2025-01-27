@@ -9,8 +9,6 @@ GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
-	absentEffect_ = std::make_unique<AbsentEffect>();
-	testPostEffect_ = make_unique<TestPostEffect>();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	skybox_ = std::make_unique<SkyboxObj>();
@@ -66,12 +64,6 @@ void GameScene::Initialize()
 	JsonManager* jsonManager = JsonManager::GetInstance();
 	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
-	// ──────── AbsentEffect
-	absentEffect_->Init();
-
-	// ──────── TestPostEffect
-	testPostEffect_->Init();
-
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
 	gameCamera_->Init();
@@ -118,9 +110,6 @@ void GameScene::Initialize()
 /// </summary>
 void GameScene::Update()
 {
-	// ──────── TestPostEffect
-	testPostEffect_->Update();
-
 	// ──────── GameCamera
 	gameCamera_->Update();
 
@@ -164,19 +153,10 @@ void GameScene::Update()
 		return;
 	}
 
-	// ──────── Skybox
 	skybox_->Update();
-
-	// ──────── Floor
 	floor_->Update();
-
-	// ──────── BoxManager
 	boxManager_->Update();
-
-	// ──────── Player
 	player_->Update();
-
-	// ──────── EnemyManager
 	enemyManager_->Update();
 
 	// ──────── CollisionManager

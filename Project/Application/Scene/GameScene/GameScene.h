@@ -79,12 +79,6 @@ private: // クラス
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 
-	// AbsentEffect
-	std::unique_ptr<AbsentEffect> absentEffect_;
-
-	// PostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
-
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;
 

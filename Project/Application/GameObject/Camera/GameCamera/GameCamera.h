@@ -61,7 +61,7 @@ public: // メンバ関数
 	/// <summary>
 	/// カメラのシェイク開始
 	/// </summary>
-	void ActivateShake();
+	void ActivateShake(float intensity = 0.8f, float duration = 30.0f);
 
 
 #pragma region Accessor アクセッサ
@@ -98,14 +98,19 @@ private:
 	void CalcRightVec();
 
 	/// <summary>
-	/// ImGuiの描画
-	/// </summary>
-	void DrawImGui();
-
-	/// <summary>
 	/// シェイク処理
 	/// </summary>
 	void ExecuteShake();
+
+	/// <summary>
+	/// シェイクの強度を計算する（減衰）
+	/// </summary>
+	float CalculateShakeIntensity();
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
 
 
 private:
@@ -131,8 +136,12 @@ private:
 
 	// シェイク中
 	bool isShake_ = false;
+	// シェイクの強さ
+	float shakeIntensity_ = 0.0f;
 	// シェイクの時間
 	Timer shakeTimer_{};
+	// シェイク範囲
+	ScopeVec2 shakeScope_{};
 
 };
 

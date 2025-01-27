@@ -196,7 +196,7 @@ void Player::onCollision([[maybe_unused]] IObject *object)
         if (isInvincibility_)
             return;
 
-        OnCollisionWithEnemyBullet();
+        //OnCollisionWithEnemyBullet();
 
         // 近くにある敵の弾を消す
         sweepEraser_->StartSweep();

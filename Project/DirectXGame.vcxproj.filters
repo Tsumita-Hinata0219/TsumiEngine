@@ -1468,6 +1468,7 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

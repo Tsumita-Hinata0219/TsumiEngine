@@ -57,8 +57,8 @@ struct EmitterSphere
 {
     float32_t3 translate; // 位置
     float32_t radius; // 生成半径
-    uint count; // 生成数
+    uint32_t count; // 生成数
     float32_t frequency; // 生成頻度
     float32_t frequencyTime; // 経過時間
-    uint emit; // 生成フラグ
+    uint32_t emit; // 生成フラグ
 };

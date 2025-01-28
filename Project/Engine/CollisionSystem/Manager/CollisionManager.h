@@ -94,7 +94,7 @@ private:
 	void LogCollisionCheck();
 
 	/// <summary>
-	/// ImGuiの描画LD
+	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();
 

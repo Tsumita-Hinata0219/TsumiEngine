@@ -65,9 +65,6 @@ private:
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;
 
-	// PostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
-
 	// DemoParticle
 	std::unique_ptr<GPUParticle> dParticle_;
 	uint32_t dParticleInstanceNum_ = 0;

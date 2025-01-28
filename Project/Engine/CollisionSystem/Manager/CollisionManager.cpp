@@ -92,9 +92,6 @@ void CollisionManager::RemoveNullColliders()
 /// </summary>
 void CollisionManager::CheckCollisions()
 {
-	// 衝突判定のカウント用変数
-	int collisionCheckCount = 0;
-
 	for (auto itr1 = pColliders_.begin(); itr1 != pColliders_.end(); ++itr1) {
 		for (auto itr2 = std::next(itr1); itr2 != pColliders_.end(); ++itr2) {
 
@@ -107,8 +104,9 @@ void CollisionManager::CheckCollisions()
 				continue;
 			}
 
-			// 衝突判定の回数を増やす
-			collisionCheckCount++;
+			// 衝突判定を実行
+			totalCollisionChecks_++;
+			collisionCheckCount_++;
 
 			// 衝突判定をとる
 			if ((*itr1)->Intersects((**itr2))) {
@@ -122,6 +120,26 @@ void CollisionManager::CheckCollisions()
 			}
 		}
 	}
+
+	LogCollisionCheck(); // 衝突判定回数を記録する
+}
+
+
+/// <summary>
+/// 衝突判定回数のカウント
+/// </summary>
+void CollisionManager::LogCollisionCheck()
+{
+	if (collisionCheckCount_ >= 10) {
+		// ログに記録
+		Logger::GetInstance().Log("CollisionLog",
+			"Collision checks executed : " + std::to_string(totalCollisionChecks_));
+
+		// カウントをリセット
+		collisionCheckCount_ = 0;
+	}
+
+	totalCollisionChecks_ = 0;
 }
 
 

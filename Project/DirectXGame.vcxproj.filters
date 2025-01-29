@@ -213,24 +213,6 @@
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
       <Filter>Engine\Math\MyParlinNoise</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp">
-      <Filter>Engine\Particle\BaseParticle</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp">
-      <Filter>Engine\Particle\ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp">
-      <Filter>Engine\Particle\ParticleRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp">
-      <Filter>Engine\Particle\ParticleManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp">
-      <Filter>Engine\Particle\ParticleEmitter</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp">
-      <Filter>Engine\Particle\ParticleArray</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PipeLineManager\PipeLineManager.cpp">
       <Filter>Engine\PipeLineManager</Filter>
     </ClCompile>
@@ -849,27 +831,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
       <Filter>Engine\Math\MyParlinNoise</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\IParticle.h">
-      <Filter>Engine\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h">
-      <Filter>Engine\Particle\BaseParticle</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h">
-      <Filter>Engine\Particle\ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h">
-      <Filter>Engine\Particle\ParticleRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h">
-      <Filter>Engine\Particle\ParticleManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleEmitter\ParticleEmitter.h">
-      <Filter>Engine\Particle\ParticleEmitter</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h">
-      <Filter>Engine\Particle\ParticleArray</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\PipeLineManager.h">
       <Filter>Engine\PipeLineManager</Filter>

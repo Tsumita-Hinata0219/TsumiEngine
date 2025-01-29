@@ -32,6 +32,11 @@ public:
 
 private:
 
+	// 書き込み用のバッファー
+	BufferResource<T> writeBuffer_;
+
+	// エミッターデータ
+	T emitterData_;
 };
 
 

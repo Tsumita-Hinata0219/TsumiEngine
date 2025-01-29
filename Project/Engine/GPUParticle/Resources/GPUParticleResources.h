@@ -53,4 +53,3 @@ struct GPUParticleResources {
 	// ライト
 	//BufferResource<DirectionalLightData> light;
 };
-

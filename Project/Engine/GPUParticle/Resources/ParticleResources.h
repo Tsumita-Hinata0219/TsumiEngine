@@ -3,17 +3,20 @@
 #include "../../BufferResource/BufferResource.h"
 #include "../../Transform/Transform.h"
 #include "../../3D/Model/Structure/ModelStructure.h"
-#include "../Structure/GPUParticleStructure.h"
+#include "../Structure/ParticleStructure.h"
 
 
-struct ParticleData {
+
+namespace GpuParticle {
+
+struct InstanceProperties {
 	Matrix4x4 world;
 	Vector4 color;
 };
 
 
-struct GPUParticleDatas {
-	
+struct ModelData {
+
 	// モデルの名前
 	std::string name;
 
@@ -27,7 +30,7 @@ struct GPUParticleDatas {
 	//DirectionalLightData light{};
 };
 
-struct GPUParticleResources {
+struct ResourceHandles {
 
 	// メッシュ
 	BufferResource<MeshData> mesh;
@@ -53,3 +56,5 @@ struct GPUParticleResources {
 	// ライト
 	//BufferResource<DirectionalLightData> light;
 };
+}
+

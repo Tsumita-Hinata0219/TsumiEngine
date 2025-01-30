@@ -574,8 +574,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Engine\GameData\GameData.h" />
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h" />
-    <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h" />
-    <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\ParticleStructure.h" />
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />

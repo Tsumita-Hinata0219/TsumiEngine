@@ -787,10 +787,10 @@
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h">
       <Filter>Engine\GPUParticle\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h">
+    <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h">
       <Filter>Engine\GPUParticle\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h">
+    <ClInclude Include="Engine\GPUParticle\Structure\ParticleStructure.h">
       <Filter>Engine\GPUParticle\Structure</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Input\Input.h">

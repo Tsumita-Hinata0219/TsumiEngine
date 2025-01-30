@@ -5,7 +5,7 @@
 #include "Transform/Transform.h"
 #include "PipeLineManager/PipeLineManager.h"
 
-#include "../Resources/GPUParticleResources.h"
+#include "../Resources/ParticleResources.h"
 
 #include "Math/MyMath.h"
 
@@ -68,10 +68,10 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 
 	// バッファーに書き込むデータ
-	GPUParticleDatas datas_{};
+	GpuParticle::ModelData modelData_{};
 
 	// バッファー
-	GPUParticleResources buffers_{};
+	GpuParticle::ResourceHandles handles_{};
 
 	// パーティクルのインスタンス数
 	uint32_t instanceNum_ = 0;

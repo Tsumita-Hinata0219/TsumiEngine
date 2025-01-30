@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Resources/GPUParticleResources.h"
+#include "../Resources/ParticleResources.h"
 
 
 /* GPUParticleのエミッター */

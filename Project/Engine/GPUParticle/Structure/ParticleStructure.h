@@ -27,7 +27,7 @@ struct PreView {
 };
 
 // Emitter_Sphere
-struct EmitterSphere {
+struct SphereEmitter {
 	Vector3 translate{}; // 位置
 	float radius; // 射出半径
 	uint32_t count; // 射出数

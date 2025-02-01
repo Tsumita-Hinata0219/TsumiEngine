@@ -1,4 +1,4 @@
-#pragma once
+ #pragma once
 
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 

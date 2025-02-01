@@ -557,6 +557,7 @@
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
     <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1430,6 +1431,14 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Cross\EnemyShotCross.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Forward\EnemyShotForward.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Eight\EnemyShotOmniEight.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Five\EnemyShotOmniFive.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Four\EnemyShotOmniFour.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Random\EnemyShotRandom.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\TripleForward\EnemyShotTripleForward.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

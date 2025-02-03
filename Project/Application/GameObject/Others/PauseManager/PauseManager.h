@@ -69,10 +69,18 @@ public:
 	/// </summary>
 	void ToggleSelect(PauseSelect toggleSelect);
 
+	/// <summary>
+	/// ゲームから出る
+	/// </summary>
+	void ExitGame();
+
 #pragma region Accessor
 
 	// ポーズ中かどうか
 	bool IsPause() const { return m_isPause_; }
+
+	// Exitが選択されたか
+	bool IsSelectedExit() const { return m_isSelectedExit_; }
 
 	// ポーズ処理ステート
 	PauseState GetPauseState() const { return m_pauseState_; }
@@ -102,6 +110,8 @@ private:
 
 	// ポーズ中かどうか
 	bool m_isPause_ = false;
+	// exitが押されたか
+	bool m_isSelectedExit_ = false;
 
 	// ポーズ処理ステート
 	PauseState m_pauseState_ = PauseState::Pause;

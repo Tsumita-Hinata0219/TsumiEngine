@@ -53,5 +53,18 @@ void PauseController::Update()
 		{
 			m_pauseManager_->ToggleSelect(PauseSelect::GamePlay);
 		}
+
+		// 決定ボタン
+		if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) 
+		{
+			// ゲームに戻る
+			if (m_pauseManager_->GetPauseSelect() == PauseSelect::GamePlay) {
+				m_pauseManager_->OutPause();
+			}
+			// ゲームから出る
+			if (m_pauseManager_->GetPauseSelect() == PauseSelect::GameExit) {
+				m_pauseManager_->ExitGame();
+			}
+		}
 	}
 }

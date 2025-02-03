@@ -139,18 +139,28 @@ void GameScene::Update()
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
+		// PauseでExitが押されていたら、セレクトシーンへ
+		if (pauseManager_->IsSelectedExit()) {
+			CollisionManager_->Clear();
+			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+		}
 		return;
 	}
-	// ポーズ処理
-	pauseManager_->Update();
-	if (pauseManager_->IsPause()) {
-		return;
-	}
+
 	// 終了処理
 	STMenuManager_->FuncEndDirection();
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
+
+	// ポーズ処理
+	pauseManager_->Update();
+	if (pauseManager_->IsPause()) {
+		if (pauseManager_->IsSelectedExit()) {
+			sceneTransition_->StartFadeOut(); // シーントランジション開始
+		}
 		return;
 	}
 

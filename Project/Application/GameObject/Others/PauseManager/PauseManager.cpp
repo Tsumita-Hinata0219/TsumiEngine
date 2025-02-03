@@ -19,9 +19,9 @@ void PauseManager::Init()
 	m_funcTimer_.Init(0.0f, 0.5f * 60.0f);
 
 
-
 	// フラグは折っておく
 	m_isPause_ = false;
+	m_isSelectedExit_ = false;
 
 	// ポーズステートはポーズ解除中
 	m_pauseState_ = PauseState::UnPause;
@@ -107,6 +107,15 @@ void PauseManager::OutPause()
 void PauseManager::ToggleSelect(PauseSelect toggleSelect)
 {
 	m_pauseSelect_ = toggleSelect;
+}
+
+
+/// <summary>
+/// ゲームから出る
+/// </summary>
+void PauseManager::ExitGame()
+{
+	m_isSelectedExit_ = true;
 }
 
 

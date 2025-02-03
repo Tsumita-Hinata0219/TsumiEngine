@@ -16,7 +16,7 @@ public:
 	/// コンストラクタ
 	/// </summary>
 	PauseRenderer() = default;
-	PauseRenderer(PauseManager* pauseManager) : m_pauseManager(pauseManager) {}
+	PauseRenderer(PauseManager* pauseManager) : m_pauseManager_(pauseManager) {}
 
 	/// <summary>
 	/// デストラクタ
@@ -38,10 +38,35 @@ public:
 	/// </summary>
 	void Draw2DFront();
 
+	/// <summary>
+	/// ポーズをかける
+	/// </summary>
+	void InPause();
+
+	/// <summary>
+	/// ポーズを解除する
+	/// </summary>
+	void OutPause();
+
+
+private:
+
+	/// <summary>
+	/// BackのAlphaの計算
+	/// </summary>
+	void CalcBackAlpha();
+
+
 private:
 
 	// ポーズマネージャー
-	PauseManager* m_pauseManager = nullptr;
+	PauseManager* m_pauseManager_ = nullptr;
 
-
-};
+	// Back
+	std::unique_ptr<Sprite> m_BackSprite_;
+	Transform m_BackTransform_{};
+	Vector4 m_BackColor_{};
+	float m_BackUnPauseAlpha_ = 0.0f;
+	float m_BackPauseAlpha_ = 0.0f;
+	std::pair<float, float> m_BackCalcAlpha_{};
+}; 

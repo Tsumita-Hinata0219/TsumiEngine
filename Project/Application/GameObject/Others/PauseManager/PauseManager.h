@@ -47,7 +47,6 @@ public:
 	/// 描画処理
 	/// </summary>
 	void Draw2DFront();
-	void Draw2DBack();
 
 	/// <summary>
 	/// ポーズをかける

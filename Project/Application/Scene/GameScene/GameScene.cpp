@@ -233,6 +233,9 @@ void GameScene::FrontSpriteDraw()
 	// ──────── StartDirection
 	startDirection_->Draw2DFront();
 
+	// ──────── PauseManager
+	pauseManager_->Draw2DFront();
+
 	// ──────── StageTransitionMenuManager
 	STMenuManager_->Draw2DFront();
 

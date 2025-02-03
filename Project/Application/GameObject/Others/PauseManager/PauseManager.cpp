@@ -15,6 +15,11 @@ void PauseManager::Init()
 	m_pauseRenderer_ = std::make_unique<PauseRenderer>(this);
 	m_pauseRenderer_->Init();
 
+	// タイマーの設定
+	m_funcTimer_.Init(0.0f, 0.5f * 60.0f);
+
+
+
 	// フラグは折っておく
 	m_isPause_ = false;
 
@@ -51,6 +56,8 @@ void PauseManager::InPause()
 	{
 		// ポーズ中にする
 		m_pauseState_ = PauseState::Pausing;
+		// タイマースタート
+		m_funcTimer_.Start();
 	}
 }
 
@@ -64,5 +71,49 @@ void PauseManager::OutPause()
 	{
 		// ポーズ解除中にする
 		m_pauseState_ = PauseState::UnPausing;
+		// タイマースタート
+		m_funcTimer_.Start();
+	}
+}
+
+
+/// <summary>
+/// ポーズ処理
+/// </summary>
+void PauseManager::FuncPause()
+{
+	if (m_pauseState_ == PauseState::Pausing)
+	{
+		// タイマー更新
+		m_funcTimer_.Update();
+		// タイマー終了
+		if (m_funcTimer_.IsFinish())
+		{
+			// ポーズ中にする
+			m_pauseState_ = PauseState::Pause;
+			// タイマーリセット
+			m_funcTimer_.Clear();
+		}
+	}
+}
+
+
+/// <summary>
+/// ポーズ解除処理
+/// </summary>
+void PauseManager::FuncUnPause()
+{
+	if (m_pauseState_ == PauseState::UnPausing)
+	{
+		// タイマー更新
+		m_funcTimer_.Update();
+		// タイマー終了
+		if (m_funcTimer_.IsFinish())
+		{
+			// ポーズ中にする
+			m_pauseState_ = PauseState::UnPause;
+			// タイマーリセット
+			m_funcTimer_.Clear();
+		}
 	}
 }

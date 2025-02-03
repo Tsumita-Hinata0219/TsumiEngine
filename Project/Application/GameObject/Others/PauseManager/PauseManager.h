@@ -72,7 +72,15 @@ public:
 
 private:
 
+	/// <summary>
+	/// ポーズ処理
+	/// </summary>
+	void FuncPause();
 
+	/// <summary>
+	/// ポーズ解除処理
+	/// </summary>
+	void FuncUnPause();
 
 
 private:
@@ -87,4 +95,7 @@ private:
 	std::unique_ptr<PauseController> m_pauseController_ = nullptr;
 	// 描画クラス
 	std::unique_ptr<PauseRenderer> m_pauseRenderer_ = nullptr;
+
+	// タイマー
+	Timer m_funcTimer_;
 };

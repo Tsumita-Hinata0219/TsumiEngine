@@ -38,5 +38,4 @@ void PauseController::Update()
 		}
 	}
 
-	 
 }

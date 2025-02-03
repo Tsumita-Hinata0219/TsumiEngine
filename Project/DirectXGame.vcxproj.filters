@@ -558,6 +558,8 @@
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
     <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1439,6 +1441,9 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Four\EnemyShotOmniFour.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Random\EnemyShotRandom.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\TripleForward\EnemyShotTripleForward.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

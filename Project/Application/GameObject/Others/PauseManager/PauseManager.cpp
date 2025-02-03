@@ -149,9 +149,15 @@ void PauseManager::DrawImGui()
 			ImGui::Text("PauseState : UnPausing");
 		if (m_pauseState_ == PauseState::UnPause)
 			ImGui::Text("PauseState : UnPause");
+		ImGui::Text("");
 
 		ImGui::Checkbox("IsPause", &m_isPause_);
 		ImGui::Text("");
+
+		if (m_pauseSelect_ == PauseSelect::GamePlay)
+			ImGui::Text("PauseSelect : Play");
+		if (m_pauseSelect_ == PauseSelect::GameExit)
+			ImGui::Text("PauseSelect : Exit");
 
 		ImGui::TreePop();
 	}

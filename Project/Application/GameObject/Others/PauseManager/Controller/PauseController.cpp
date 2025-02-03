@@ -20,22 +20,38 @@ void PauseController::Init()
 /// </summary>
 void PauseController::Update()
 {
-	// ポーズ中でない場合にスタートボタンを押したらポーズ中にする
+	// ポーズ中でない場合
 	if (m_pauseManager_->GetPauseState() == PauseState::UnPause)
 	{
 		if (input_->Trigger(PadData::START) || 
-			input_->Trigger(DIK_ESCAPE) || input_->Trigger(DIK_TAB)) {
+			input_->Trigger(DIK_ESCAPE) || input_->Trigger(DIK_TAB))
+		{
 			m_pauseManager_->InPause();
 		}
 	}
 
-	// ポーズ中の場合にスタートボタンを押したらポーズ解除中にする
+	// ポーズ中の場合
 	if (m_pauseManager_->GetPauseState() == PauseState::Pause)
 	{
 		if (input_->Trigger(PadData::START) || 
-			input_->Trigger(DIK_ESCAPE) || input_->Trigger(DIK_TAB)) {
+			input_->Trigger(DIK_ESCAPE) || input_->Trigger(DIK_TAB)) 
+		{
 			m_pauseManager_->OutPause();
 		}
-	}
 
+		// LStickの入力を取得
+		Vector2 iLStick_ = input_->GetLStick();
+		// 左入力
+		if (iLStick_.x < -DZone_ || input_->Trigger(PadData::LEFT) ||
+			input_->Trigger(DIK_LEFT) || input_->Trigger(DIK_A)) 
+		{
+			m_pauseManager_->ToggleSelect(PauseSelect::GameExit);
+		}
+		// 右入力
+		if (iLStick_.x > DZone_ || input_->Trigger(PadData::RIGHT) ||
+			input_->Trigger(DIK_RIGHT) || input_->Trigger(DIK_D)) 
+		{
+			m_pauseManager_->ToggleSelect(PauseSelect::GamePlay);
+		}
+	}
 }

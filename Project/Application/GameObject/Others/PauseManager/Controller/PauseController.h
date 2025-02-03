@@ -45,4 +45,6 @@ private:
 
 	// 入力
 	Input* input_ = nullptr;
+	// デッドゾーン
+	const float DZone_ = 0.4f;
 };

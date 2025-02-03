@@ -1,20 +1,27 @@
 #pragma once
 
+#include "GameObject/GameObject.h"
+
+
+// 前方宣言
+class PauseManager;
+
 
 /* ポーズ時の描画クラス */
-class PuaseRenderer {
+class PauseRenderer {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	PuaseRenderer() = default;
+	PauseRenderer() = default;
+	PauseRenderer(PauseManager* pauseManager) : m_pauseManager(pauseManager) {}
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~PuaseRenderer() = default;
+	~PauseRenderer() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -27,5 +34,9 @@ public:
 	void Update();
 
 private:
+
+	// ポーズマネージャー
+	PauseManager* m_pauseManager = nullptr;
+
 
 };

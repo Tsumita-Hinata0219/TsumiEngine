@@ -5,7 +5,7 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void PuaseRenderer::Init()
+void PauseRenderer::Init()
 {
 }
 
@@ -13,6 +13,6 @@ void PuaseRenderer::Init()
 /// <summary>
 /// 更新処理
 /// </summary>
-void PuaseRenderer::Update()
+void PauseRenderer::Update()
 {
 }

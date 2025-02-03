@@ -15,11 +15,11 @@ void PauseRenderer::Init()
 	m_BackSprite_ = std::make_unique<Sprite>();
 	m_BackSprite_->Init({ 1280.0f, 720.0f });
 	m_BackSprite_->SetTexture(backTexHD);
-	m_BackSprite_->SetAnchor(SpriteAnchor::Center);
+	m_BackSprite_->SetAnchor(SpriteAnchor::TopLeft);
 	m_BackTransform_.Init();
 	// 初期カラーとターゲットカラー
 	m_BackUnPauseAlpha_ = 0.0f;
-	m_BackPauseAlpha_ = 0.5f;
+	m_BackPauseAlpha_ = 0.8f;
 	m_BackColor_ = Temp::Color::BLACK;
 	m_BackColor_.w = m_BackUnPauseAlpha_;
 

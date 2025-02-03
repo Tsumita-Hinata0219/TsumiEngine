@@ -23,7 +23,7 @@ void PauseController::Update()
 	// ポーズ中でない場合にスタートボタンを押したらポーズ中にする
 	if (m_pauseManager_->GetPauseState() == PauseState::UnPause)
 	{
-		if (input_->Trigger(PadData::START)) {
+		if (input_->Trigger(PadData::START) || input_->Trigger(DIK_ESCAPE)) {
 			m_pauseManager_->InPause();
 		}
 	}
@@ -31,7 +31,7 @@ void PauseController::Update()
 	// ポーズ中の場合にスタートボタンを押したらポーズ解除中にする
 	if (m_pauseManager_->GetPauseState() == PauseState::Pause)
 	{
-		if (input_->Trigger(PadData::START)) {
+		if (input_->Trigger(PadData::START) || input_->Trigger(DIK_ESCAPE)) {
 			m_pauseManager_->OutPause();
 		}
 	}

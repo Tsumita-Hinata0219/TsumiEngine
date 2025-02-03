@@ -70,6 +70,10 @@ void PauseManager::InPause()
 		m_targetState_ = PauseState::Pause;
 		// タイマースタート
 		m_funcTimer_.Start();
+
+		// 描画処理のポーズをかける処理
+		m_pauseRenderer_->InPause();
+
 		// ポーズ中のフラグを立てる
 		m_isPause_ = true;
 	}
@@ -89,6 +93,9 @@ void PauseManager::OutPause()
 		m_targetState_ = PauseState::UnPause;
 		// タイマースタート
 		m_funcTimer_.Start();
+
+		// 描画処理のポーズを解除する処理
+		m_pauseRenderer_->OutPause();
 	}
 }
 

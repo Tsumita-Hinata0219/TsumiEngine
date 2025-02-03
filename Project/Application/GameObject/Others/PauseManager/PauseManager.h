@@ -73,15 +73,14 @@ public:
 private:
 
 	/// <summary>
-	/// ポーズ処理
+	/// ポーズを切り替え
 	/// </summary>
-	void FuncPause();
+	void TogglePause();
 
 	/// <summary>
-	/// ポーズ解除処理
+	/// ImGuiの描画
 	/// </summary>
-	void FuncUnPause();
-
+	void DrawImGui();
 
 private:
 
@@ -90,6 +89,8 @@ private:
 
 	// ポーズ処理ステート
 	PauseState m_pauseState_ = PauseState::Pause;
+	// ターゲットステート
+	PauseState m_targetState_ = PauseState::Pause;
 
 	// 操作クラス
 	std::unique_ptr<PauseController> m_pauseController_ = nullptr;

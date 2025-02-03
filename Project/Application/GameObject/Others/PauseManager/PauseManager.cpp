@@ -16,7 +16,7 @@ void PauseManager::Init()
 	m_pauseRenderer_->Init();
 
 	// タイマーの設定
-	m_funcTimer_.Init(0.0f, 0.5f * 60.0f);
+	m_funcTimer_.Init(0.0f, 5.5f * 60.0f);
 
 
 
@@ -33,6 +33,16 @@ void PauseManager::Init()
 /// </summary>
 void PauseManager::Update()
 {
+	// 入力処理
+	m_pauseController_->Update();
+
+	// ポーズの切り替え処理
+	TogglePause();
+
+#ifdef _DEBUG
+	DrawImGui();
+#endif // _DEBUG
+
 }
 
 
@@ -56,8 +66,12 @@ void PauseManager::InPause()
 	{
 		// ポーズ中にする
 		m_pauseState_ = PauseState::Pausing;
+		// ターゲットステート
+		m_targetState_ = PauseState::Pause;
 		// タイマースタート
 		m_funcTimer_.Start();
+		// ポーズ中のフラグを立てる
+		m_isPause_ = true;
 	}
 }
 
@@ -71,6 +85,8 @@ void PauseManager::OutPause()
 	{
 		// ポーズ解除中にする
 		m_pauseState_ = PauseState::UnPausing;
+		// ターゲットステート
+		m_targetState_ = PauseState::UnPause;
 		// タイマースタート
 		m_funcTimer_.Start();
 	}
@@ -78,42 +94,50 @@ void PauseManager::OutPause()
 
 
 /// <summary>
-/// ポーズ処理
+/// ポーズを切り替え
 /// </summary>
-void PauseManager::FuncPause()
+void PauseManager::TogglePause()
 {
-	if (m_pauseState_ == PauseState::Pausing)
+	if (m_pauseState_ == PauseState::Pausing || 
+		m_pauseState_ == PauseState::UnPausing)
 	{
 		// タイマー更新
 		m_funcTimer_.Update();
 		// タイマー終了
 		if (m_funcTimer_.IsFinish())
 		{
-			// ポーズ中にする
-			m_pauseState_ = PauseState::Pause;
+			// ターゲットステートを設定
+			m_pauseState_ = m_targetState_;
+			// ステートがPauseならフラグを立てる
+			m_isPause_ = (m_pauseState_ == PauseState::Pause);
 			// タイマーリセット
-			m_funcTimer_.Clear();
+			m_funcTimer_.Reset();
 		}
 	}
 }
 
 
 /// <summary>
-/// ポーズ解除処理
+/// ImGuiの描画
 /// </summary>
-void PauseManager::FuncUnPause()
+void PauseManager::DrawImGui()
 {
-	if (m_pauseState_ == PauseState::UnPausing)
-	{
-		// タイマー更新
-		m_funcTimer_.Update();
-		// タイマー終了
-		if (m_funcTimer_.IsFinish())
-		{
-			// ポーズ中にする
-			m_pauseState_ = PauseState::UnPause;
-			// タイマーリセット
-			m_funcTimer_.Clear();
-		}
+	if (ImGui::TreeNode("PauseManager")) {
+
+		if (m_pauseState_ == PauseState::Pause)
+			ImGui::Text("PauseState : Pause");
+		if (m_pauseState_ == PauseState::Pausing)
+			ImGui::Text("PauseState : Pausing");
+		if (m_pauseState_ == PauseState::UnPausing)
+			ImGui::Text("PauseState : UnPausing");
+		if (m_pauseState_ == PauseState::UnPause)
+			ImGui::Text("PauseState : UnPause");
+
+		ImGui::Checkbox("IsPause", &m_isPause_);
+		ImGui::Text("");
+
+		ImGui::TreePop();
 	}
 }
+
+

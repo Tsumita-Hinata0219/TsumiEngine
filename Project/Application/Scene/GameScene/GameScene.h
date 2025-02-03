@@ -10,6 +10,7 @@
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
+#include "GameObject/Others/PauseManager/PauseManager.h"
 
 #include "GameObject/Terrain/SkyboxObj/SkyboxObj.h"
 #include "GameObject/Terrain/Floor/Floor.h"
@@ -84,6 +85,9 @@ private: // クラス
 
 	// StartDirection
 	std::unique_ptr<StartDirection> startDirection_;
+
+	// PauseManager
+	std::unique_ptr<PauseManager> pauseManager_;
 
 	// Skybox
 	std::unique_ptr<SkyboxObj> skybox_;

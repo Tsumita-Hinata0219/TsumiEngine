@@ -11,6 +11,7 @@ GameScene::GameScene()
 	CollisionManager_ = CollisionManager::GetInstance();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
+	pauseManager_ = std::make_unique<PauseManager>();
 	skybox_ = std::make_unique<SkyboxObj>();
 	floor_ = std::make_unique<Floor>();
 	boxManager_ = std::make_unique<BoxManager>();
@@ -96,6 +97,9 @@ void GameScene::Initialize()
 	// ──────── SceneTransition
 	STMenuManager_->Init();
 
+	// ──────── PauseManager
+	pauseManager_->Init();
+
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
@@ -119,8 +123,8 @@ void GameScene::Update()
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
-	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) 
+	{
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
@@ -135,6 +139,11 @@ void GameScene::Update()
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
+		return;
+	}
+	// ポーズ処理
+	pauseManager_->Update();
+	if (pauseManager_->IsPause()) {
 		return;
 	}
 	// 終了処理

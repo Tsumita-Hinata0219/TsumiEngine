@@ -67,6 +67,9 @@ public:
 	// ポーズ処理ステート
 	PauseState GetPauseState() const { return m_pauseState_; }
 
+	// タイマー
+	Timer GetFuncTimer() const { return m_funcTimer_; }
+
 #pragma endregion 
 
 

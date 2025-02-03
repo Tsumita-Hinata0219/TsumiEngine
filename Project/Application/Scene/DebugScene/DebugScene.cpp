@@ -29,10 +29,6 @@ void DebugScene::Initialize()
 	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
 	skybox_->Init(dds);
 
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_ = make_unique<TestPostEffect>();
-	testPostEffect_->Init();
-
 	/* ----- DemoParticle デモパーティクル ----- */
 	dParticleInstanceNum_ = 10;
 	dParticle_ = std::make_unique<GPUParticle>();
@@ -59,12 +55,6 @@ void DebugScene::Update()
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
 
-	/* ----- Skybox 天箱 ----- */
-	skybox_->Update();
-
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	testPostEffect_->Update();
-
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");
 	camera_.DrawImGui();
@@ -87,9 +77,6 @@ void DebugScene::BackSpriteDraw()
 /// </summary>
 void DebugScene::ModelDraw()
 {
-	/* ----- Skybox 天箱 ----- */
-	//skybox_->Draw();
-
 	/* ----- DemoParticle デモパーティクル ----- */
 	dParticle_->Draw(transforms_, materials_);
 }
@@ -100,6 +87,5 @@ void DebugScene::ModelDraw()
 /// </summary>
 void DebugScene::FrontSpriteDraw()
 {
-	/* ----- TestPostEffect テストポストエフェクト ----- */
-	//testPostEffect_->Draw();
+	
 }

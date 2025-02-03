@@ -32,9 +32,9 @@ void EnemyManager::Update()
 	if (isBossEliminated_) { return; }
 
 	// EnemyListの更新処理
-	for (auto& enemy : commonEnemies_) {
+	/*for (auto& enemy : commonEnemies_) {
 		enemy->Update();
-	}
+	}*/
 	// 死亡フラグが立っていたら削除
 	commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
 		if (enemy->IsDead()) {
@@ -45,9 +45,9 @@ void EnemyManager::Update()
 	);
 
 	// BossEnemyListの更新処理
-	for (auto& boss : bossEnemies_) {
+	/*for (auto& boss : bossEnemies_) {
 		boss->Update();
-	}
+	}*/
 	// 死亡フラグが立っていたら削除
 	bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
 		if (boss->IsDead()) {

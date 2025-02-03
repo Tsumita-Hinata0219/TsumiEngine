@@ -167,10 +167,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp" />
@@ -279,12 +283,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MathStructure\Vector\Vector.cpp" />
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
-    <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp" />
-    <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp" />
-    <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp" />
-    <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp" />
-    <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp" />
-    <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
@@ -331,6 +329,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
     <ClCompile Include="Engine\Utilities\ImGuiManager\ImGuiManager.cpp" />
+    <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
@@ -451,6 +450,14 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Cross\EnemyShotCross.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Forward\EnemyShotForward.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Eight\EnemyShotOmniEight.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Five\EnemyShotOmniFive.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Four\EnemyShotOmniFour.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Random\EnemyShotRandom.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\TripleForward\EnemyShotTripleForward.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />
@@ -461,6 +468,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\GameCamera.h" />
@@ -494,6 +504,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
     <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
@@ -578,8 +589,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Engine\GameData\GameData.h" />
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h" />
-    <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h" />
-    <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\ParticleStructure.h" />
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
@@ -595,13 +606,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\Math\Struct.h" />
-    <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h" />
-    <ClInclude Include="Engine\Particle\IParticle.h" />
-    <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h" />
-    <ClInclude Include="Engine\Particle\ParticleEmitter\ParticleEmitter.h" />
-    <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h" />
-    <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h" />
-    <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h" />
@@ -652,6 +656,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
+    <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
     <ClInclude Include="Engine\Utilities\ObjectPool\ObjectPool.h" />
     <ClInclude Include="Engine\Utilities\RandomGenerator\RandomGenerator.h" />
     <ClInclude Include="Engine\Utilities\TextLog\TextLog.h" />
@@ -1362,6 +1367,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.VS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">4.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

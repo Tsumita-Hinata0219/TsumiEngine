@@ -10,6 +10,7 @@
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"
 #include "GameObject/Others/StartDirection/StartDirection.h"
+#include "GameObject/Others/PauseManager/PauseManager.h"
 
 #include "GameObject/Terrain/SkyboxObj/SkyboxObj.h"
 #include "GameObject/Terrain/Floor/Floor.h"
@@ -79,17 +80,14 @@ private: // クラス
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
 
-	// AbsentEffect
-	std::unique_ptr<AbsentEffect> absentEffect_;
-
-	// PostEffect
-	std::unique_ptr<TestPostEffect> testPostEffect_;
-
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;
 
 	// StartDirection
 	std::unique_ptr<StartDirection> startDirection_;
+
+	// PauseManager
+	std::unique_ptr<PauseManager> pauseManager_;
 
 	// Skybox
 	std::unique_ptr<SkyboxObj> skybox_;

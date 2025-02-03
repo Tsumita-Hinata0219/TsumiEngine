@@ -84,7 +84,7 @@
                 "type": "ENEMY",
                 "shot_direction": "TRIPLE_FORWARD",
                 "bullet_behavior": "RANDOM",
-                "shoot_interval": 20,
+                "shoot_interval": 30,
                 "move_behavior": "FOLLOW",
                 "tilt_body": true,
                 "move_speed": 6.0

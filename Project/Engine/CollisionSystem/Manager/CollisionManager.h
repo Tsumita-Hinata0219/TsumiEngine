@@ -3,6 +3,8 @@
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
 
+#include "Utilities/Logger/Logger.h"
+
 #include "../Detect/CollisionDetect.h"
 #include "../Penetration/CollisionPenetration.h"
 
@@ -41,6 +43,11 @@ public:
 		static CollisionManager instance;
 		return &instance;
 	}
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	void Init();
 
 	/// <summary>
 	/// コライダー登録
@@ -82,7 +89,12 @@ private:
 	void CheckCollisions();
 
 	/// <summary>
-	/// ImGuiの描画LD
+	/// 衝突判定回数のカウント
+	/// </summary>
+	void LogCollisionCheck();
+
+	/// <summary>
+	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();
 
@@ -96,4 +108,7 @@ private:
 
 	// コライダーポインタリスト
 	std::list<ICollider*> pColliders_;
+
+	int collisionCheckCount_ = 0;        // 衝突判定の回数カウンター
+	int totalCollisionChecks_ = 0;      // 全体の衝突判定の総回数
 };

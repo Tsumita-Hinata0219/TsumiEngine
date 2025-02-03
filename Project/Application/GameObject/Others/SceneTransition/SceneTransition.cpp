@@ -41,7 +41,7 @@ void SceneTransition::Init()
 
 	// Delayの設定
 	inDelay_ = false;
-	delayTimer_.Init(0.0f, 1.0f * 60.0f);
+	delayTimer_.Init(0.0f, 1.0f * 30.0f);
 }
 
 

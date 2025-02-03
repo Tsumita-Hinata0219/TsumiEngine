@@ -55,21 +55,21 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 
 	// ここで書き込み
 	// VBV
-	buffers_.vertex.Map();
-	buffers_.vertex.WriteData(model_->GetMeshData().vertices.data());
-	buffers_.vertex.UnMap();
+	handles_.vertex.Map();
+	handles_.vertex.WriteData(model_->GetMeshData().vertices.data());
+	handles_.vertex.UnMap();
 	// IBV
-	buffers_.indeces.Map();
-	buffers_.indeces.WriteData(model_->GetMeshData().indices.data());
-	buffers_.indeces.UnMap();
+	handles_.indeces.Map();
+	handles_.indeces.WriteData(model_->GetMeshData().indices.data());
+	handles_.indeces.UnMap();
 	// Transform
-	buffers_.transform.Map();
-	buffers_.transform.WriteData(metaDataArray, instanceNum_);
-	buffers_.transform.UnMap();
+	handles_.transform.Map();
+	handles_.transform.WriteData(metaDataArray, instanceNum_);
+	handles_.transform.UnMap();
 	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(materials, instanceNum_);
-	buffers_.material.UnMap();
+	handles_.material.Map();
+	handles_.material.WriteData(materials, instanceNum_);
+	handles_.material.UnMap();
 	
 
 	// 描画コマンドコール
@@ -90,7 +90,7 @@ void GPUParticle::CommandCall_Init()
 
 
 	// Particleの要素の初期化値
-	buffers_.particleElement.ComputeCommandCallInstancingSRV(0);
+	handles_.particleElement.ComputeCommandCallInstancingSRV(0);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -108,19 +108,19 @@ void GPUParticle::CommandCall_Draw()
 	PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::GPUParticle_Draw);
 
 	// VertexBufferView
-	buffers_.vertex.IASetVertexBuffers(1);
+	handles_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
-	buffers_.indeces.IASetIndexBuffer();
+	handles_.indeces.IASetIndexBuffer();
 	// Transform
-	buffers_.transform.GraphicsCommandCallInstancingSRV(0);
+	handles_.transform.GraphicsCommandCallInstancingSRV(0);
 	// ParticleElement
-	buffers_.particleElement.GraphicsCommandCallInstancingSRV(0);
+	handles_.particleElement.GraphicsCommandCallInstancingSRV(0);
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	buffers_.material.GraphicsCommandCallInstancingSRV(3);
+	handles_.material.GraphicsCommandCallInstancingSRV(3);
 	// MaterialTexture
-	buffers_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
+	handles_.material.GraphicsCommandCallSRV(2, model_->GetMaterialData().textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!
@@ -134,23 +134,23 @@ void GPUParticle::CommandCall_Draw()
 void GPUParticle::CreateBufferResource()
 {
 	// mesh
-	buffers_.mesh.CreateResource(UINT(model_->GetMeshData().vertices.size()));
+	handles_.mesh.CreateResource(UINT(model_->GetMeshData().vertices.size()));
 	// vertexBufferView
-	buffers_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
-	buffers_.vertex.CreateVertexBufferView();
+	handles_.vertex.CreateResource(UINT(model_->GetMeshData().vertices.size()));
+	handles_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	buffers_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
-	buffers_.indeces.CreateIndexBufferView();
+	handles_.indeces.CreateResource(UINT(model_->GetMeshData().indices.size()));
+	handles_.indeces.CreateIndexBufferView();
 	// ParticleElement
-	buffers_.particleElement.CreateUAV(instanceNum_);
+	handles_.particleElement.CreateUAV(instanceNum_);
 	// PreView
-	buffers_.preView.CreateCBV();
+	handles_.preView.CreateCBV();
 	// transform
-	buffers_.transform.CreateResource(instanceNum_);
-	buffers_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる
+	handles_.transform.CreateResource(instanceNum_);
+	handles_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる
 	// material
-	buffers_.material.CreateResource(instanceNum_);
-	buffers_.material.CreateInstancingResource(instanceNum_);
+	handles_.material.CreateResource(instanceNum_);
+	handles_.material.CreateInstancingResource(instanceNum_);
 	// light
 	//buffers_.light.CreateResource();
 }

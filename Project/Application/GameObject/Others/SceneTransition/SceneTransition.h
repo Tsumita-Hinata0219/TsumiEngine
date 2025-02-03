@@ -7,15 +7,6 @@
 
 
 
-// TransitionState
-enum TransitionState {
-	Opened,
-	Cloased,
-	Opening,
-	Closing,
-};
-
-
 /* SceneTransitionクラス */
 class SceneTransition {
 

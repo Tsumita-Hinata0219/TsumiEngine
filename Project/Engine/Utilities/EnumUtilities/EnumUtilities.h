@@ -3,6 +3,16 @@
 #include <type_traits>
 
 
+// 汎用的なenum
+// TransitionState
+enum TransitionState {
+	Opened,
+	Cloased,
+	Opening,
+	Closing,
+};
+
+
 // Enumのサイズを取得するメタ関数
 template<typename E, typename = void>
 struct EnumSize;

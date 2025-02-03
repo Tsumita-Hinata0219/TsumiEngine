@@ -9,10 +9,9 @@ GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
-	absentEffect_ = std::make_unique<AbsentEffect>();
-	testPostEffect_ = make_unique<TestPostEffect>();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
+	pauseManager_ = std::make_unique<PauseManager>();
 	skybox_ = std::make_unique<SkyboxObj>();
 	floor_ = std::make_unique<Floor>();
 	boxManager_ = std::make_unique<BoxManager>();
@@ -66,12 +65,6 @@ void GameScene::Initialize()
 	JsonManager* jsonManager = JsonManager::GetInstance();
 	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
-	// ──────── AbsentEffect
-	absentEffect_->Init();
-
-	// ──────── TestPostEffect
-	testPostEffect_->Init();
-
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
 	gameCamera_->Init();
@@ -104,10 +97,16 @@ void GameScene::Initialize()
 	// ──────── SceneTransition
 	STMenuManager_->Init();
 
+	// ──────── PauseManager
+	pauseManager_->Init();
+
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Init();
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
+
+	// ──────── CollisionManager
+	CollisionManager_->Init();
 
 	jsonManager->Clear();
 }
@@ -118,26 +117,14 @@ void GameScene::Initialize()
 /// </summary>
 void GameScene::Update()
 {
-	// ──────── TestPostEffect
-	testPostEffect_->Update();
-
 	// ──────── GameCamera
 	gameCamera_->Update();
-
-	// ──────── Skybox
-	skybox_->Update();
-	
-	// ──────── Floor
-	floor_->Update();
-
-	// ──────── BoxManager
-	boxManager_->Update();
 
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
-	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased) 
+	{
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
@@ -152,13 +139,28 @@ void GameScene::Update()
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
 		}
+		// PauseでExitが押されていたら、セレクトシーンへ
+		if (pauseManager_->IsSelectedExit()) {
+			CollisionManager_->Clear();
+			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+		}
 		return;
 	}
+
 	// 終了処理
 	STMenuManager_->FuncEndDirection();
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
+		return;
+	}
+
+	// ポーズ処理
+	pauseManager_->Update();
+	if (pauseManager_->IsPause()) {
+		if (pauseManager_->IsSelectedExit()) {
+			sceneTransition_->StartFadeOut(); // シーントランジション開始
+		}
 		return;
 	}
 
@@ -173,10 +175,10 @@ void GameScene::Update()
 		return;
 	}
 
-	// ──────── Player
+	skybox_->Update();
+	floor_->Update();
+	boxManager_->Update();
 	player_->Update();
-
-	// ──────── EnemyManager
 	enemyManager_->Update();
 
 	// ──────── CollisionManager
@@ -240,6 +242,9 @@ void GameScene::FrontSpriteDraw()
 
 	// ──────── StartDirection
 	startDirection_->Draw2DFront();
+
+	// ──────── PauseManager
+	pauseManager_->Draw2DFront();
 
 	// ──────── StageTransitionMenuManager
 	STMenuManager_->Draw2DFront();

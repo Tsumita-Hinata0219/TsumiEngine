@@ -44,9 +44,21 @@ struct PreView
     float32_t4x4 billboardMatrix;
 };
 
+// カメラ
 struct ViewProjectionMatrix
 {
-    float4x4 view;
-    float4x4 projection;
-    float3 cameraPosition;
+    float32_t4x4 view;
+    float32_t4x4 projection;
+    float32_t3 cameraPosition;
+};
+
+// Emitter_Sphere
+struct EmitterSphere
+{
+    float32_t3 translate; // 位置
+    float32_t radius; // 生成半径
+    uint32_t count; // 生成数
+    float32_t frequency; // 生成頻度
+    float32_t frequencyTime; // 経過時間
+    uint32_t emit; // 生成フラグ
 };

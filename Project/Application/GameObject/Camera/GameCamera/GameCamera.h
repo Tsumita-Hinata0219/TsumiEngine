@@ -58,6 +58,11 @@ public: // メンバ関数
 	/// <param name="object"></param>
 	void onCollision([[maybe_unused]] IObject* object) override;
 
+	/// <summary>
+	/// カメラのシェイク開始
+	/// </summary>
+	void ActivateShake(float intensity = 0.8f, float duration = 30.0f);
+
 
 #pragma region Accessor アクセッサ
 
@@ -93,6 +98,16 @@ private:
 	void CalcRightVec();
 
 	/// <summary>
+	/// シェイク処理
+	/// </summary>
+	void ExecuteShake();
+
+	/// <summary>
+	/// シェイクの強度を計算する（減衰）
+	/// </summary>
+	float CalculateShakeIntensity();
+
+	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawImGui();
@@ -119,6 +134,14 @@ private:
 	// 右方ベクトル
 	Vector3 rightVec_{};
 
+	// シェイク中
+	bool isShake_ = false;
+	// シェイクの強さ
+	float shakeIntensity_ = 0.0f;
+	// シェイクの時間
+	Timer shakeTimer_{};
+	// シェイク範囲
+	ScopeVec2 shakeScope_{};
 
 };
 

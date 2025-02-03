@@ -213,24 +213,6 @@
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
       <Filter>Engine\Math\MyParlinNoise</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Particle\BaseParticle\BaseParticle.cpp">
-      <Filter>Engine\Particle\BaseParticle</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleSystem\ParticleSystem.cpp">
-      <Filter>Engine\Particle\ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleRenderer\ParticleRenderer.cpp">
-      <Filter>Engine\Particle\ParticleRenderer</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleManager\ParticleManager.cpp">
-      <Filter>Engine\Particle\ParticleManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleEmitter\ParticleEmitter.cpp">
-      <Filter>Engine\Particle\ParticleEmitter</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Particle\ParticleArray\ParticleArray.cpp">
-      <Filter>Engine\Particle\ParticleArray</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PipeLineManager\PipeLineManager.cpp">
       <Filter>Engine\PipeLineManager</Filter>
     </ClCompile>
@@ -574,6 +556,11 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
+    <ClCompile Include="Engine\Utilities\Logger\Logger.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
+    <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -804,10 +791,10 @@
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h">
       <Filter>Engine\GPUParticle\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Resources\GPUParticleResources.h">
+    <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h">
       <Filter>Engine\GPUParticle\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Structure\GPUParticleStructure.h">
+    <ClInclude Include="Engine\GPUParticle\Structure\ParticleStructure.h">
       <Filter>Engine\GPUParticle\Structure</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Input\Input.h">
@@ -848,27 +835,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
       <Filter>Engine\Math\MyParlinNoise</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\IParticle.h">
-      <Filter>Engine\Particle</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\BaseParticle\BaseParticle.h">
-      <Filter>Engine\Particle\BaseParticle</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleSystem\ParticleSystem.h">
-      <Filter>Engine\Particle\ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleRenderer\ParticleRenderer.h">
-      <Filter>Engine\Particle\ParticleRenderer</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleManager\ParticleManager.h">
-      <Filter>Engine\Particle\ParticleManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleEmitter\ParticleEmitter.h">
-      <Filter>Engine\Particle\ParticleEmitter</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Particle\ParticleArray\ParticleArray.h">
-      <Filter>Engine\Particle\ParticleArray</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\PipeLineManager.h">
       <Filter>Engine\PipeLineManager</Filter>
@@ -1466,6 +1432,19 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\LStick\OperationUI_LStick.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
+    <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\IEnemyExecuteShot.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Cross\EnemyShotCross.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Forward\EnemyShotForward.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Eight\EnemyShotOmniEight.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Five\EnemyShotOmniFive.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Omni_Four\EnemyShotOmniFour.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\Random\EnemyShotRandom.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\State\TripleForward\EnemyShotTripleForward.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
+    <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2495,6 +2474,7 @@
     <FxCompile Include="externals\DirectXTex\Shaders\BC7Encode.hlsl">
       <Filter>externals\DirectXTex\Shaders</Filter>
     </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

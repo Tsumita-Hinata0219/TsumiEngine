@@ -24,8 +24,8 @@ void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraResourc
 	}
 	else if (pGameCamera_->GetCameraType() == GameCameraType::TOPDOWN) {
 
-		initRotate_ = { 0.6f, 0.0f, 0.0f };
-		constOffset_ = { 0.0f, 65.0f, -90.0f };
+		initRotate_ = { 0.7f, 0.0f, 0.0f };
+		constOffset_ = { 0.0f, 60.0f, -60.0f };
 	}
 
 	// 姿勢

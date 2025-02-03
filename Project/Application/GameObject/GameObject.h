@@ -15,7 +15,6 @@
 
 #include "Math/MyMath.h"
 
-#include "Particle/ParticleManager/ParticleManager.h"
 #include "GPUParticle/Particle/GPUParticle.h"
 
 #include "Animation/AnimationManager/AnimationManager.h"

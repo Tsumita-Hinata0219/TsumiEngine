@@ -67,9 +67,10 @@ public:
 	Matrix4x4 GetMatWorld() const { return this->trans_.matWorld; }
 
 	// HP
-	virtual uint32_t GetHP() = 0;
+	virtual uint32_t GetHP() = 0;	
 
 	// ShotProperty
+	enemy::ShotFuncData GetShotProperty() { return this->shotFuncData_; }
 	void SetShotProperty(enemy::ShotFuncData data) { this->shotFuncData_ = data; }
 
 	// MovementProperty

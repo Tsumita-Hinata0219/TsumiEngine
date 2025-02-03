@@ -61,6 +61,11 @@ private:
 	/// </summary>
 	void CalcUIAlpha();
 
+	/// <summary>
+	/// UIの座標の計算
+	/// </summary>
+	void CalcUIPositionY();
+
 
 private:
 
@@ -70,8 +75,7 @@ private:
 	// 補間数値
 	std::pair<float, float> m_BackCalcAlpha_{};
 	std::pair<float, float> m_UICalcAlpha_{};
-	std::pair<float, float> m_CalcInPosition_{};
-	std::pair<float, float> m_CalcOutPosition_{};
+	std::pair<float, float> m_CalcPositionY_{};
 
 	// InOutのAlpha数値
 	// Back
@@ -80,6 +84,11 @@ private:
 	// UI
 	float m_UIUnPauseAlpha_ = 0.0f;
 	float m_UIPauseAlpha_ = 0.0f;
+
+	// InOutの座標
+	float m_UIUnPausePositionY_ = 0.0f;
+	float m_UIPausePositionY_ = 0.0f;
+
 
 	// カラー
 	// Back
@@ -94,4 +103,8 @@ private:
 	// PlayUI
 	std::unique_ptr<Sprite> m_PlayUISprite_;
 	Transform m_PlayUITransform_{};
+
+	// ExitUI
+	std::unique_ptr<Sprite> m_ExitUISprite_;
+	Transform m_ExitUITransform_{};
 }; 

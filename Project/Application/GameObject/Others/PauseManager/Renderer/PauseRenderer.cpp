@@ -31,8 +31,8 @@ void PauseRenderer::Init()
 
 
 	// InOutのY軸座標
-	m_UIUnPausePositionY_ = 100.0f;
-	m_UIPausePositionY_ = 0.0f;
+	m_UIUnPausePositionY_ = 500.0f;
+	m_UIPausePositionY_ = 440.0f;
 
 	
 	// Back
@@ -44,19 +44,23 @@ void PauseRenderer::Init()
 
 	// Play
 	m_PlayUISprite_ = std::make_unique<Sprite>();
-	m_PlayUISprite_->Init({ 1280.0f, 720.0f });
+	m_PlayUISprite_->Init({ 216.0f, 104.0f });
 	m_PlayUISprite_->SetTexture(Play_UITexHD);
-	m_PlayUISprite_->SetAnchor(SpriteAnchor::TopLeft);
+	m_PlayUISprite_->SetAnchor(SpriteAnchor::Center);
 	m_PlayUITransform_.Init();
+	// 初期X軸座標
+	m_PlayUITransform_.srt.translate.x = 760.0f;
 	// 初期Y軸座標
 	m_PlayUITransform_.srt.translate.y = m_UIPausePositionY_;
 
 	// Exit
 	m_ExitUISprite_ = std::make_unique<Sprite>();
-	m_ExitUISprite_->Init({ 1280.0f, 720.0f });
+	m_ExitUISprite_->Init({ 216.0f, 104.0f });
 	m_ExitUISprite_->SetTexture(Exit_UITexHD);
-	m_ExitUISprite_->SetAnchor(SpriteAnchor::TopLeft);
+	m_ExitUISprite_->SetAnchor(SpriteAnchor::Center);
 	m_ExitUITransform_.Init();
+	// 初期X軸座標
+	m_ExitUITransform_.srt.translate.x = 520.0f;
 	// 初期Y軸座標
 	m_ExitUITransform_.srt.translate.y = m_UIPausePositionY_;
 }

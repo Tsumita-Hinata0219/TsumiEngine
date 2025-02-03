@@ -16,7 +16,7 @@ void PauseManager::Init()
 	m_pauseRenderer_->Init();
 
 	// タイマーの設定
-	m_funcTimer_.Init(0.0f, 5.5f * 60.0f);
+	m_funcTimer_.Init(0.0f, 0.5f * 60.0f);
 
 
 

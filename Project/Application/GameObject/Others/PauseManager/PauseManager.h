@@ -16,6 +16,12 @@ enum class PauseState {
 	// ポーズ解除中
 	UnPause,
 };
+enum class PauseSelect {
+	// プレイに戻る
+	GamePlay,
+	// セレクトに戻る
+	GameExit,
+};
 
 
 /* ポーズ処理マネージャー */
@@ -57,6 +63,11 @@ public:
 	/// ポーズを解除する
 	/// </summary>
 	void OutPause();
+	
+	/// <summary>
+	/// 選択を切り替える
+	/// </summary>
+	void ToggleSelect(PauseSelect toggleSelect);
 
 #pragma region Accessor
 
@@ -65,6 +76,9 @@ public:
 
 	// ポーズ処理ステート
 	PauseState GetPauseState() const { return m_pauseState_; }
+
+	// ポーズセレクト
+	PauseSelect GetPauseSelect() const { return m_pauseSelect_; }
 
 	// タイマー
 	Timer GetFuncTimer() const { return m_funcTimer_; }
@@ -93,6 +107,9 @@ private:
 	PauseState m_pauseState_ = PauseState::Pause;
 	// ターゲットステート
 	PauseState m_targetState_ = PauseState::Pause;
+
+	// ポーズセレクト
+	PauseSelect m_pauseSelect_ = PauseSelect::GamePlay;
 
 	// 操作クラス
 	std::unique_ptr<PauseController> m_pauseController_ = nullptr;

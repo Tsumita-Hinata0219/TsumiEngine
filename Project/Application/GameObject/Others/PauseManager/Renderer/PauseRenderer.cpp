@@ -35,7 +35,7 @@ void PauseRenderer::Init()
 	m_UIUnPausePositionY_ = 580.0f;
 	m_UIPausePositionY_ = 500.0f;
 
-	
+
 	// Back
 	m_BackSprite_ = std::make_unique<Sprite>();
 	m_BackSprite_->Init({ 1280.0f, 720.0f });

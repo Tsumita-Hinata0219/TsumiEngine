@@ -102,6 +102,15 @@ void PauseManager::OutPause()
 
 
 /// <summary>
+/// 選択を切り替える
+/// </summary>
+void PauseManager::ToggleSelect(PauseSelect toggleSelect)
+{
+	m_pauseSelect_ = toggleSelect;
+}
+
+
+/// <summary>
 /// ポーズを切り替え
 /// </summary>
 void PauseManager::TogglePause()

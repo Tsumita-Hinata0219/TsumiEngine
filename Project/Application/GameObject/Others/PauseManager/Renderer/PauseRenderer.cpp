@@ -9,8 +9,9 @@ void PauseRenderer::Init()
 {
 	// テクスチャハンドル
 	uint32_t backTexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Pause_Back.png");
-	uint32_t Play_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Play_UI.png");
-	uint32_t Exit_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Exit_UI.png");
+	uint32_t gamePauseUIHD = TextureManager::LoadTexture("Texture/Game/Pause", "GamePause_UI.png");
+	uint32_t play_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Play_UI.png");
+	uint32_t exit_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Exit_UI.png");
 
 
 	// インとアウトのAlpha数値
@@ -31,8 +32,8 @@ void PauseRenderer::Init()
 
 
 	// InOutのY軸座標
-	m_UIUnPausePositionY_ = 500.0f;
-	m_UIPausePositionY_ = 440.0f;
+	m_UIUnPausePositionY_ = 580.0f;
+	m_UIPausePositionY_ = 500.0f;
 
 	
 	// Back
@@ -42,10 +43,17 @@ void PauseRenderer::Init()
 	m_BackSprite_->SetAnchor(SpriteAnchor::TopLeft);
 	m_BackTransform_.Init();
 
+	// GamePauseUI
+	m_GamePauseUISprite_ = std::make_unique<Sprite>();
+	m_GamePauseUISprite_->Init({ 1280.0f, 720.0f });
+	m_GamePauseUISprite_->SetTexture(gamePauseUIHD);
+	m_GamePauseUISprite_->SetAnchor(SpriteAnchor::TopLeft);
+	m_GamePauseUITransform_.Init();
+
 	// Play
 	m_PlayUISprite_ = std::make_unique<Sprite>();
 	m_PlayUISprite_->Init({ 216.0f, 104.0f });
-	m_PlayUISprite_->SetTexture(Play_UITexHD);
+	m_PlayUISprite_->SetTexture(play_UITexHD);
 	m_PlayUISprite_->SetAnchor(SpriteAnchor::Center);
 	m_PlayUITransform_.Init();
 	// 初期X軸座標
@@ -56,7 +64,7 @@ void PauseRenderer::Init()
 	// Exit
 	m_ExitUISprite_ = std::make_unique<Sprite>();
 	m_ExitUISprite_->Init({ 216.0f, 104.0f });
-	m_ExitUISprite_->SetTexture(Exit_UITexHD);
+	m_ExitUISprite_->SetTexture(exit_UITexHD);
 	m_ExitUISprite_->SetAnchor(SpriteAnchor::Center);
 	m_ExitUITransform_.Init();
 	// 初期X軸座標
@@ -99,6 +107,9 @@ void PauseRenderer::Draw2DFront()
 	m_BackSprite_->SetColor(m_BackColor_);
 	m_BackSprite_->Draw(m_BackTransform_);
 
+	// GamePauseUI
+	m_GamePauseUISprite_->SetColor(m_UIColor_);
+	m_GamePauseUISprite_->Draw(m_GamePauseUITransform_);
 	// PlayUI
 	m_PlayUISprite_->SetColor(m_UIColor_);
 	m_PlayUISprite_->Draw(m_PlayUITransform_);

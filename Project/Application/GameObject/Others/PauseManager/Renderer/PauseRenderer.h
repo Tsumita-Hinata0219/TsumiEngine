@@ -100,6 +100,10 @@ private:
 	std::unique_ptr<Sprite> m_BackSprite_;
 	Transform m_BackTransform_{};
 
+	// GamePauseUI
+	std::unique_ptr<Sprite> m_GamePauseUISprite_;
+	Transform m_GamePauseUITransform_{};
+
 	// PlayUI
 	std::unique_ptr<Sprite> m_PlayUISprite_;
 	Transform m_PlayUITransform_{};

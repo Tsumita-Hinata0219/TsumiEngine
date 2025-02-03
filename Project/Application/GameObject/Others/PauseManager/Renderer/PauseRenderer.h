@@ -62,9 +62,19 @@ private:
 	void CalcUIAlpha();
 
 	/// <summary>
+	/// UIのカラーを求める
+	/// </summary>
+	void CalcUIColor();
+
+	/// <summary>
 	/// UIの座標の計算
 	/// </summary>
 	void CalcUIPositionY();
+
+	/// <summary>
+	/// セレクトの座標
+	/// </summary>
+	void CalcSelectPosition();
 
 
 private:
@@ -94,7 +104,9 @@ private:
 	// Back
 	Vector4 m_BackColor_{};
 	// UI
-	Vector4 m_UIColor_{};
+	Vector4 m_GamePauseUIColor_{};
+	Vector4 m_PlayUIColor_{};
+	Vector4 m_ExitUIColor_{};
 
 	// Back
 	std::unique_ptr<Sprite> m_BackSprite_;
@@ -111,4 +123,8 @@ private:
 	// ExitUI
 	std::unique_ptr<Sprite> m_ExitUISprite_;
 	Transform m_ExitUITransform_{};
+
+	// Select
+	std::unique_ptr<Sprite> m_SelectSprite_;
+	Transform m_SelectTransform_{};
 }; 

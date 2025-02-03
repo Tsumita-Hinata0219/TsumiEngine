@@ -12,6 +12,7 @@ void PauseRenderer::Init()
 	uint32_t gamePauseUIHD = TextureManager::LoadTexture("Texture/Game/Pause", "GamePause_UI.png");
 	uint32_t play_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Play_UI.png");
 	uint32_t exit_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Exit_UI.png");
+	uint32_t selectTexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Select.png");
 
 
 	// インとアウトのAlpha数値
@@ -27,8 +28,12 @@ void PauseRenderer::Init()
 	m_BackColor_ = Temp::Color::BLACK;
 	m_BackColor_.w = m_BackUnPauseAlpha_;
 	// UI
-	m_UIColor_ = Temp::Color::WHITE;
-	m_UIColor_.w = m_UIUnPauseAlpha_;
+	m_GamePauseUIColor_ = Temp::Color::WHITE;
+	m_GamePauseUIColor_.w = m_UIUnPauseAlpha_;
+	m_PlayUIColor_ = Temp::Color::WHITE;
+	m_PlayUIColor_.w = m_UIUnPauseAlpha_;
+	m_ExitUIColor_ = Temp::Color::WHITE;
+	m_ExitUIColor_.w = m_UIUnPauseAlpha_;
 
 
 	// InOutのY軸座標
@@ -71,6 +76,16 @@ void PauseRenderer::Init()
 	m_ExitUITransform_.srt.translate.x = 520.0f;
 	// 初期Y軸座標
 	m_ExitUITransform_.srt.translate.y = m_UIPausePositionY_;
+
+	// Select
+	m_SelectSprite_ = std::make_unique<Sprite>();
+	m_SelectSprite_->Init({ 216.0f, 104.0f });
+	m_SelectSprite_->SetTexture(selectTexHD);
+	m_SelectSprite_->SetAnchor(SpriteAnchor::Center);
+	m_SelectTransform_.Init();
+	m_SelectTransform_.srt.scale.x = 1.1f;
+	m_SelectTransform_.srt.scale.y = 0.6f;
+	m_SelectTransform_.srt.translate.y = m_UIPausePositionY_;
 }
 
 
@@ -90,6 +105,17 @@ void PauseRenderer::Update()
 	CalcUIAlpha();
 	// UIの座標の計算
 	CalcUIPositionY();
+
+	m_PlayUIColor_.x = m_PlayUIColor_.y = m_PlayUIColor_.z = 1.0f;
+	m_ExitUIColor_.x = m_ExitUIColor_.y = m_ExitUIColor_.z = 1.0f;
+	// タイマーが終了
+	if (m_pauseManager_->GetPauseState() == PauseState::Pause) 
+	{
+		// UIのカラーを求める
+		CalcUIColor();
+		// セレクトの座標
+		CalcSelectPosition();
+	}
 }
 
 
@@ -107,14 +133,19 @@ void PauseRenderer::Draw2DFront()
 	m_BackSprite_->SetColor(m_BackColor_);
 	m_BackSprite_->Draw(m_BackTransform_);
 
+	// タイマーが終了していたら、セレクトの描画をする
+	if (m_pauseManager_->GetPauseState() == PauseState::Pause) {
+		m_SelectSprite_->Draw(m_SelectTransform_);
+	}
+
 	// GamePauseUI
-	m_GamePauseUISprite_->SetColor(m_UIColor_);
+	m_GamePauseUISprite_->SetColor(m_GamePauseUIColor_);
 	m_GamePauseUISprite_->Draw(m_GamePauseUITransform_);
 	// PlayUI
-	m_PlayUISprite_->SetColor(m_UIColor_);
+	m_PlayUISprite_->SetColor(m_PlayUIColor_);
 	m_PlayUISprite_->Draw(m_PlayUITransform_);
 	// ExitUI
-	m_ExitUISprite_->SetColor(m_UIColor_);
+	m_ExitUISprite_->SetColor(m_ExitUIColor_);
 	m_ExitUISprite_->Draw(m_ExitUITransform_);
 }
 
@@ -163,9 +194,33 @@ void PauseRenderer::CalcBackAlpha()
 /// </summary>
 void PauseRenderer::CalcUIAlpha()
 {
-	m_UIColor_.w = Interpolate(
+	m_GamePauseUIColor_.w = Interpolate(
 		m_UICalcAlpha_.first, m_UICalcAlpha_.second,
 		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutSine);
+	m_PlayUIColor_.w = Interpolate(
+		m_UICalcAlpha_.first, m_UICalcAlpha_.second,
+		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutSine);
+	m_ExitUIColor_.w = Interpolate(
+		m_UICalcAlpha_.first, m_UICalcAlpha_.second,
+		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutSine);
+}
+
+
+/// <summary>
+/// UIのカラーを求める
+/// </summary>
+void PauseRenderer::CalcUIColor()
+{
+	if (m_pauseManager_->GetPauseSelect() == PauseSelect::GamePlay) 
+	{
+		m_PlayUIColor_ = Temp::Color::BLACK;
+		m_ExitUIColor_ = Temp::Color::WHITE;
+	}
+	else if (m_pauseManager_->GetPauseSelect() == PauseSelect::GameExit)
+	{
+		m_PlayUIColor_ = Temp::Color::WHITE;
+		m_ExitUIColor_ = Temp::Color::BLACK;
+	}
 }
 
 
@@ -182,4 +237,21 @@ void PauseRenderer::CalcUIPositionY()
 	m_ExitUITransform_.srt.translate.y = Interpolate(
 		m_CalcPositionY_.first, m_CalcPositionY_.second,
 		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutExpo);
+}
+
+
+/// <summary>
+/// セレクトの座標
+/// </summary>
+void PauseRenderer::CalcSelectPosition()
+{
+	if (m_pauseManager_->GetPauseSelect() == PauseSelect::GamePlay)
+	{
+		m_SelectTransform_.srt.translate = m_PlayUITransform_.srt.translate;
+	}
+	else if (m_pauseManager_->GetPauseSelect() == PauseSelect::GameExit) 
+	{
+		m_SelectTransform_.srt.translate = m_ExitUITransform_.srt.translate;
+	}
+	
 }

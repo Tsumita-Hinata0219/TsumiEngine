@@ -10,7 +10,7 @@ void PauseRenderer::Init()
 	// テクスチャハンドル
 	uint32_t backTexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Pause_Back.png");
 	uint32_t Play_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Play_UI.png");
-	uint32_t Exit_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Exit_UI.png");
+	//uint32_t Exit_UITexHD = TextureManager::LoadTexture("Texture/Game/Pause", "Exit_UI.png");
 
 
 	// インとアウトのAlpha数値
@@ -27,6 +27,7 @@ void PauseRenderer::Init()
 	m_BackColor_ = Temp::Color::BLACK;
 	m_BackColor_.w = m_BackUnPauseAlpha_;
 	// UI
+	m_UIColor_ = Temp::Color::WHITE;
 	m_UIColor_.w = m_UIUnPauseAlpha_;
 
 	
@@ -56,9 +57,10 @@ void PauseRenderer::Update()
 		return;
 	}
 
-	// Back
+	// BackのAlpha
 	CalcBackAlpha();
-
+	// UIのAlpha
+	CalcUIAlpha();
 }
 
 
@@ -88,7 +90,9 @@ void PauseRenderer::Draw2DFront()
 void PauseRenderer::InPause()
 {
 	// BackのAlphaの設定
-	m_CalcAlpha_ = { m_BackUnPauseAlpha_, m_BackPauseAlpha_ };
+	m_BackCalcAlpha_ = { m_BackUnPauseAlpha_, m_BackPauseAlpha_ };
+	// UIのAlphaの設定
+	m_UICalcAlpha_ = { m_UIUnPauseAlpha_, m_UIPauseAlpha_ };
 }
 
 
@@ -98,7 +102,9 @@ void PauseRenderer::InPause()
 void PauseRenderer::OutPause()
 {
 	// BackのAlphaの設定
-	m_CalcAlpha_ = { m_BackPauseAlpha_, m_BackUnPauseAlpha_ };
+	m_BackCalcAlpha_ = { m_BackPauseAlpha_, m_BackUnPauseAlpha_ };
+	// UIのAlphaの設定
+	m_UICalcAlpha_ = { m_UIPauseAlpha_, m_UIUnPauseAlpha_ };
 }
 
 
@@ -108,6 +114,17 @@ void PauseRenderer::OutPause()
 void PauseRenderer::CalcBackAlpha()
 {
 	m_BackColor_.w = Interpolate(
-		m_CalcAlpha_.first, m_CalcAlpha_.second,
+		m_BackCalcAlpha_.first, m_BackCalcAlpha_.second,
+		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutSine);
+}
+
+
+/// <summary>
+/// UIのAlphaの計算
+/// </summary>
+void PauseRenderer::CalcUIAlpha()
+{
+	m_UIColor_.w = Interpolate(
+		m_UICalcAlpha_.first, m_UICalcAlpha_.second,
 		m_pauseManager_->GetFuncTimer().GetRatio(), Ease::OutSine);
 }

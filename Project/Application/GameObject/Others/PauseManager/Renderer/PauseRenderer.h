@@ -56,6 +56,11 @@ private:
 	/// </summary>
 	void CalcBackAlpha();
 
+	/// <summary>
+	/// UIのAlphaの計算
+	/// </summary>
+	void CalcUIAlpha();
+
 
 private:
 
@@ -63,7 +68,8 @@ private:
 	PauseManager* m_pauseManager_ = nullptr;
 
 	// 補間数値
-	std::pair<float, float> m_CalcAlpha_{};
+	std::pair<float, float> m_BackCalcAlpha_{};
+	std::pair<float, float> m_UICalcAlpha_{};
 	std::pair<float, float> m_CalcInPosition_{};
 	std::pair<float, float> m_CalcOutPosition_{};
 

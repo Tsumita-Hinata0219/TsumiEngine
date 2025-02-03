@@ -16,6 +16,7 @@ void Timer::Init(float setStart, float setEnd)
 	isFinish_ = true;
 }
 
+
 // スタート時に呼び出す処理
 void Timer::Start()
 {

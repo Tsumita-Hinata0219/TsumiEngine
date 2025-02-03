@@ -35,11 +35,12 @@ void PauseManager::Update()
 {
 	// 入力処理
 	m_pauseController_->Update();
-	// 描画処理
-	m_pauseRenderer_->Update();
 
 	// ポーズの切り替え処理
 	TogglePause();
+
+	// 描画処理
+	m_pauseRenderer_->Update();
 
 #ifdef _DEBUG
 	DrawImGui();

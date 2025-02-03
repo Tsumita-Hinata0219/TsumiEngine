@@ -62,11 +62,30 @@ private:
 	// ポーズマネージャー
 	PauseManager* m_pauseManager_ = nullptr;
 
+	// 補間数値
+	std::pair<float, float> m_CalcAlpha_{};
+	std::pair<float, float> m_CalcInPosition_{};
+	std::pair<float, float> m_CalcOutPosition_{};
+
+	// InOutのAlpha数値
+	// Back
+	float m_BackUnPauseAlpha_ = 0.0f;
+	float m_BackPauseAlpha_ = 0.0f;
+	// UI
+	float m_UIUnPauseAlpha_ = 0.0f;
+	float m_UIPauseAlpha_ = 0.0f;
+
+	// カラー
+	// Back
+	Vector4 m_BackColor_{};
+	// UI
+	Vector4 m_UIColor_{};
+
 	// Back
 	std::unique_ptr<Sprite> m_BackSprite_;
 	Transform m_BackTransform_{};
-	Vector4 m_BackColor_{};
-	float m_BackUnPauseAlpha_ = 0.0f;
-	float m_BackPauseAlpha_ = 0.0f;
-	std::pair<float, float> m_BackCalcAlpha_{};
+
+	// PlayUI
+	std::unique_ptr<Sprite> m_PlayUISprite_;
+	Transform m_PlayUITransform_{};
 }; 

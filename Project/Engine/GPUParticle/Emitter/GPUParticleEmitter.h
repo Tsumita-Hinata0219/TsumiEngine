@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Resources/ParticleResources.h"
+#include "../Particle/GPUParticle.h"
 
 
 /* GPUParticleのエミッター */
@@ -20,6 +21,11 @@ public:
 	~GPUParticleEmitter() = default;
 
 	/// <summary>
+	/// 生成
+	/// </summary>
+	void Create(std::unique_ptr<GPUParticle>& particle);
+
+	/// <summary>
 	/// 更新処理
 	/// </summary>
 	void Update();
@@ -27,7 +33,16 @@ public:
 	/// <summary>
 	/// Particleを沸かせる
 	/// </summary>
-	void Emit();
+	void Emit(std::unique_ptr<GPUParticle>& particle);
+
+
+#pragma region Accessor
+
+	// エミッターデータの設定
+	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
+
+
+#pragma endregion 
 
 
 private:
@@ -39,6 +54,16 @@ private:
 	T emitterData_;
 };
 
+
+
+/// <summary>
+/// 生成
+/// </summary>
+template<typename T>
+inline void GPUParticleEmitter<T>::Create(std::unique_ptr<GPUParticle>& particle)
+{
+
+}
 
 
 /// <summary>
@@ -54,6 +79,10 @@ inline void GPUParticleEmitter<T>::Update()
 /// Particleを沸かせる
 /// </summary>
 template<typename T>
-inline void GPUParticleEmitter<T>::Emit()
+inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 {
+
+
+
 }
+

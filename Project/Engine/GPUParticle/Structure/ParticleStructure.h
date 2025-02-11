@@ -26,14 +26,18 @@ struct PreView {
 	Matrix4x4 billboardMatrix;
 };
 
+// 射出に関する共通設定
+struct EmitterConfig {
+	uint32_t particleCount;  // 1回の射出で生成するパーティクル数
+	float emitInterval;      // パーティクルを射出する間隔（秒）
+	float intervalTime;      // 射出間隔調整用時間
+	uint32_t enableEmit;     // 射出許可フラグ (0: 停止, 1: 許可)
+};
+
 // Emitter_Sphere
 struct SphereEmitter {
-	Vector3 translate{}; // 位置
-	float radius; // 射出半径
-	uint32_t count; // 射出数
-	float requency; // 射出間隔
-	float frequencyTime; // 射出間隔調整用時間
-	uint32_t emit; // 射出許可
+	Vector3 translate{};     // 位置
+	float radius;            // 射出半径
 };
 
 }

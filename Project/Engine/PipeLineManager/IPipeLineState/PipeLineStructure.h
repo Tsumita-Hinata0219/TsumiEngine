@@ -60,6 +60,7 @@ namespace PipeLine {
 
 		GPUParticle_Init,
 		CSParticle,
+		Particle_EmitterSphere
 	};
 
 	// 第三層 : さらなる区分

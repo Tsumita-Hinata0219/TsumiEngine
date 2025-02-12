@@ -44,6 +44,10 @@ private:
 	/// </summary>
 	void TimeUpdate();
 
+	/// <summary>
+	/// Bufferへデータの書き込み
+	/// </summary>
+	void WriteData();
 
 #pragma region Accessor
 
@@ -57,7 +61,7 @@ private:
 private:
 
 	// 書き込み用のバッファー
-	BufferResource<T> writeBuffer_;
+	BufferResource<T> emitterBuffer_;
 
 	// エミッターデータ
 	T emitterData_;
@@ -74,7 +78,8 @@ private:
 template<typename T>
 inline void GPUParticleEmitter<T>::Create(std::unique_ptr<GPUParticle>& particle)
 {
-
+	// Emitterのバッファー作成
+	emitterBuffer_.CreateCBV();
 }
 
 
@@ -95,9 +100,20 @@ inline void GPUParticleEmitter<T>::Update()
 template<typename T>
 inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 {
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
+
+	// Emmiter
+	emitterBuffer_.ComputeCommandCall(0);
+
+	// Particle
 
 
-
+	// Dispach
+	commands.List->Dispatch(1, 1, 1)
 }
 
 
@@ -118,5 +134,21 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 	else {
 		emitConfig_.enableEmit = 0;
 	}
+}
+
+
+/// <summary>
+/// Bufferへデータの書き込み
+/// </summary>
+template<typename T>
+inline void GPUParticleEmitter<T>::WriteData()
+{
+	// Emitter
+	emitterBuffer_.Map();
+	emitterBuffer_.WriteData(&emitterData_);
+	emitterBuffer_.UnMap();
+
+
+
 }
 

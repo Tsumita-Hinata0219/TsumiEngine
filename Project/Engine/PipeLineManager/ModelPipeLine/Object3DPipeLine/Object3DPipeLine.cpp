@@ -108,7 +108,6 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	// マテリアルに関する
 	D3D12_ROOT_PARAMETER rootParameters[8]{};
 
 	// ─── VS

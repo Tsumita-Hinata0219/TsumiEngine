@@ -7,7 +7,7 @@ static const uint kMaclParticles = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
-// Emitterの射出に関する共通設定
+// Emitterの射出関連
 ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
 
 

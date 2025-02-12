@@ -47,6 +47,18 @@ public:
 	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
 
 
+
+#pragma region Accessor アクセッサ
+
+	/// <summary>
+	/// インスタンシング数
+	/// </summary>
+	uint32_t GetInstanceNum() const { return instanceNum_; }
+
+
+#pragma endregion 
+
+
 private:
 
 	/// <summary>

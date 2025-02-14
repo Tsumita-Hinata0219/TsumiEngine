@@ -35,33 +35,19 @@ void IOBJState::Draw(Transform& transform)
 
 	// ここで書き込み
 	// VBV
-	buffers_.vertex.Map();
-	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
-	buffers_.vertex.UnMap();
+	buffers_.vertex.UpdateData(datas_.mesh.vertices.data());
 	// IBV
-	buffers_.indices.Map();
-	buffers_.indices.WriteData(datas_.mesh.indices.data());
-	buffers_.indices.UnMap();
+	buffers_.indices.UpdateData(datas_.mesh.indices.data());
 	// Transform
-	buffers_.transform.Map();
-	buffers_.transform.WriteData((&transform.transformationMatData));
-	buffers_.transform.UnMap();
+	buffers_.transform.UpdateData((&transform.transformationMatData));
 	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(&datas_.material);
-	buffers_.material.UnMap();
+	buffers_.material.UpdateData(&datas_.material);
 	// Light
-	buffers_.light.Map();
-	buffers_.light.WriteData(&datas_.light);
-	buffers_.light.UnMap();
+	buffers_.light.UpdateData(&datas_.light);
 	// Environment
-	buffers_.enviroment.Map();
-	buffers_.enviroment.WriteData(&datas_.environment);
-	buffers_.enviroment.UnMap();
+	buffers_.enviroment.UpdateData(&datas_.environment);
 	// ColorAddition
-	buffers_.colorAddition.Map();
-	buffers_.colorAddition.WriteData(&datas_.colorAddition);
-	buffers_.colorAddition.UnMap();
+	buffers_.colorAddition.UpdateData(&datas_.colorAddition);
 
 	// コマンドコール
 	CommandCall();
@@ -90,21 +76,21 @@ void IOBJState::CommandCall()
 	// IndexBufferView
 	buffers_.indices.IASetIndexBuffer();
 	// Transform
-	buffers_.transform.GraphicsCommandCall(0);
+	buffers_.transform.BindGraphicsCBV(0);
 	// Material
-	buffers_.material.GraphicsCommandCall(1);
+	buffers_.material.BindGraphicsCBV(1);
 	// Camera
 	cameraManager_->CommandCall(2);
 	// Light
-	buffers_.light.GraphicsCommandCall(3);
+	buffers_.light.BindGraphicsCBV(3);
 	// Environment
-	buffers_.enviroment.GraphicsCommandCall(4);
+	buffers_.enviroment.BindGraphicsCBV(4);
 	// ColorAddition
-	buffers_.colorAddition.GraphicsCommandCall(5);
+	buffers_.colorAddition.BindGraphicsCBV(5);
 	// MaterialTexture
-	buffers_.material.GraphicsCommandCallSRV(6, datas_.material.textureHandle);
+	buffers_.material.BindGraphicsSRV(6, datas_.material.textureHandle);
 	// EnvironmentTexture
-	buffers_.material.GraphicsCommandCallSRV(7, datas_.environment.textureHandle);
+	buffers_.material.BindGraphicsSRV(7, datas_.environment.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

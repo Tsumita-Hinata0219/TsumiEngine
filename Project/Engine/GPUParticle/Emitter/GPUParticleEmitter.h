@@ -78,6 +78,8 @@ private:
 template<typename T>
 inline void GPUParticleEmitter<T>::Create(std::unique_ptr<GPUParticle>& particle)
 {
+	particle;
+
 	// Emitterのバッファー作成
 	emitterBuffer_.CreateCBV();
 }
@@ -106,14 +108,14 @@ inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
 
-	// Emmiter
-	emitterBuffer_.ComputeCommandCall(0);
-
 	// Particle
+	particle->Bind_ParticleProp();
 
+	// Emmiter
+	emitterBuffer_.BindComputeCBV(0);
 
 	// Dispach
-	commands.List->Dispatch(1, 1, 1)
+	commands.List->Dispatch(1, 1, 1);
 }
 
 

@@ -16,9 +16,7 @@ void BoxFilterEffect::Init()
 void BoxFilterEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
-	mtlBuffer_.Map();
-	mtlBuffer_.WriteData(&mtlData_);
-	mtlBuffer_.UnMap();
+	mtlBuffer_.UpdateData(&mtlData_);
 
 	// コマンドコール
 	CommandCall();
@@ -49,10 +47,10 @@ void BoxFilterEffect::CommandCall()
 
 	// RenderTex
 	/*SRVManager::SetGraphicsRootDescriptorTable(3, srv_);*/
-	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
+	renderTexBuffer_.BindGraphicsSRV(3, srv_);
 
 	// MtlBuffer
-	mtlBuffer_.GraphicsCommandCall(4);
+	mtlBuffer_.BindGraphicsCBV(4);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

@@ -19,9 +19,7 @@ void RandomEffect::Draw()
 	mtlData_.time = g_ElapsedTime;
 
 	// MtlBufferにMtlを書き込む
-	mtlBuffer_.Map();
-	mtlBuffer_.WriteData((&mtlData_));
-	mtlBuffer_.UnMap();
+	mtlBuffer_.UpdateData((&mtlData_));
 
 	// コマンドコール
 	CommandCall();
@@ -52,10 +50,10 @@ void RandomEffect::CommandCall()
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
-	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
+	renderTexBuffer_.BindGraphicsSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
-	mtlBuffer_.GraphicsCommandCall(4);
+	mtlBuffer_.BindGraphicsCBV(4);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

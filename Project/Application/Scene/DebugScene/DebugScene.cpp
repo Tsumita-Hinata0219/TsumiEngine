@@ -33,6 +33,11 @@ void DebugScene::Initialize()
 	dParticleInstanceNum_ = 10;
 	dParticle_ = std::make_unique<GPUParticle>();
 	dParticle_->Init(dParticleInstanceNum_);
+
+	dEmitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
+	dEmitter_->Create(dParticle_);
+
+
 	transforms_.resize(dParticleInstanceNum_);
 	for (auto& element : transforms_) {
 		element.Init();
@@ -43,6 +48,8 @@ void DebugScene::Initialize()
 		element.color = Temp::Color::WHITE;
 		element.uvTransform = Matrix4x4::identity;
 	}
+
+
 }
 
 
@@ -54,6 +61,9 @@ void DebugScene::Update()
 {
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
+
+	dEmitter_->Emit(dParticle_);
+	dEmitter_->Update();
 
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");

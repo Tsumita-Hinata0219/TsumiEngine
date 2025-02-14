@@ -1447,6 +1447,7 @@
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.h" />
+    <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

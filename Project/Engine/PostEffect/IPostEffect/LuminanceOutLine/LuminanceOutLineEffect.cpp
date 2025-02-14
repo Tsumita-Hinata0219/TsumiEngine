@@ -16,9 +16,7 @@ void LuminanceOutLineEffect::Init()
 void LuminanceOutLineEffect::Draw()
 {
 	// MtlBufferにMtlを書き込む
-	mtlBuffer_.Map();
-	mtlBuffer_.WriteData((&mtlData_));
-	mtlBuffer_.UnMap();
+	mtlBuffer_.UpdateData((&mtlData_));
 
 	// コマンドコール
 	CommandCall();
@@ -49,10 +47,10 @@ void LuminanceOutLineEffect::CommandCall()
 
 	// SRVをコマンドに積む
 	//SRVManager::SetGraphicsRootDescriptorTable(3, srv_);
-	renderTexBuffer_.GraphicsCommandCallSRV(3, srv_);
+	renderTexBuffer_.BindGraphicsSRV(3, srv_);
 
 	// MtlBufferをコマンドに積む
-	mtlBuffer_.GraphicsCommandCall(4);
+	mtlBuffer_.BindGraphicsCBV(4);
 
 	// 描画
 	commands.List->DrawInstanced(3, 1, 0, 0);

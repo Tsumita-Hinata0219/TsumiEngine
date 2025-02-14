@@ -67,6 +67,9 @@ private:
 
 	// DemoParticle
 	std::unique_ptr<GPUParticle> dParticle_;
+	std::unique_ptr<GPUParticleEmitter<GpuParticle::SphereEmitter>> dEmitter_;
+
+
 	uint32_t dParticleInstanceNum_ = 0;
 	std::vector<Transform> transforms_;
 	std::vector<MaterialDataN> materials_;

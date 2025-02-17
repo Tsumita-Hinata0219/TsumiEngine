@@ -32,9 +32,8 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-
-	emitter_->Emit(particle_);
-	emitter_->Update();
+	/*emitter_->Emit(particle_);
+	emitter_->Update();*/
 }
 
 

@@ -11,12 +11,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	DemoParticle();
+	DemoParticle() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~DemoParticle();
+	~DemoParticle() = default;
 
 	/// <summary>
 	/// 初期化処理

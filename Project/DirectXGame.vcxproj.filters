@@ -562,6 +562,8 @@
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.cpp" />
+    <ClCompile Include="Application\GameObject\Dev\DemoParticle\DemoParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1448,6 +1450,7 @@
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.h" />
     <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
+    <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

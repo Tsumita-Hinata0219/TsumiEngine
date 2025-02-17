@@ -54,7 +54,6 @@ private:
 	// エミッターデータの設定
 	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
 
-
 #pragma endregion 
 
 
@@ -67,7 +66,7 @@ private:
 	T emitterData_;
 
 	// 射出に関する
-	GpuParticle::EmitterConfig emitConfig_;
+	GpuParticle::EmitterConfig emitConfig_{};
 };
 
 
@@ -93,6 +92,9 @@ inline void GPUParticleEmitter<T>::Update()
 {
 	// タイマー更新
 	TimeUpdate();
+
+	// データの書き込み
+	WriteData();
 }
 
 
@@ -112,7 +114,7 @@ inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 	particle->Bind_ParticleProp();
 
 	// Emmiter
-	emitterBuffer_.BindComputeCBV(0);
+	emitterBuffer_.BindComputeCBV(1);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -146,11 +148,6 @@ template<typename T>
 inline void GPUParticleEmitter<T>::WriteData()
 {
 	// Emitter
-	emitterBuffer_.Map();
-	emitterBuffer_.WriteData(&emitterData_);
-	emitterBuffer_.UnMap();
-
-
-
+	emitterBuffer_.UpdateData(&emitterData_);
 }
 

@@ -24,6 +24,5 @@ void main(int3 DTid : SV_DispatchThreadID)
             gParticles[countIndex].translate = float32_t3(0.0f, 0.0f, 0.0f);
             gParticles[countIndex].color = float32_t4(1.0f, 0.0f, 0.0f, 1.0f);
         }
-
     }
 }

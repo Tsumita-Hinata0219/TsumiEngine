@@ -33,7 +33,7 @@ void IEnemyExecuteShot::AddNewBullet(const Vector3& direction, const float bulle
 
 
 /// <summary>
-/// 多摩の状態の取得
+/// 弾の状態の取得
 /// </summary>
 bool IEnemyExecuteShot::GetBulletBehabir()
 {

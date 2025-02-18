@@ -87,3 +87,21 @@ void EnemyBulletContainer::AddBulletInstance(Vector3 initPos, Vector3 initVel, b
 	// リストに追加
 	bulletList_.push_back(newBullet);
 }
+
+
+/// <summary>
+/// 射撃ステートの取得
+/// </summary>
+std::unordered_map<std::string_view, std::function<std::unique_ptr<IEnemyExecuteShot>()>> EnemyBulletContainer::CreateShootingStateFactory()
+{
+	return {
+		{"NONE", []() {return std::make_unique<EnemyShotCross>(); }},
+		{"FORWARD", []() {return std::make_unique<EnemyShotForward>(); }},
+		{"TRIPLE_FORWARD", []() {return std::make_unique<EnemyShotTripleForward>(); }},
+		{"CROSS", []() {return std::make_unique<EnemyShotCross>(); }},
+		{"OMNI_FOUR", []() {return std::make_unique<EnemyShotOmniFour>(); }},
+		{"OMNI_FIVE", []() {return std::make_unique<EnemyShotOmniFour>(); }},
+		{"OMNI_EIGHT", []() {return std::make_unique<EnemyShotOmniFour>(); }},
+		{"RANDOM", []() {return std::make_unique<EnemyShotRandom>(); }},
+	};
+}

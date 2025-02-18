@@ -1,7 +1,17 @@
 #pragma once
 
 #include "GameObject/GameObject.h"
+#include "../Property/EnemyProperty.h"
 #include "../Bullet/EnemyBullet.h"
+#include "State/IEnemyExecuteShot.h"
+#include "State/Cross/EnemyShotCross.h"
+#include "State/Forward/EnemyShotForward.h"
+#include "State/Omni_Eight/EnemyShotOmniEight.h"
+#include "State/Omni_Five/EnemyShotOmniFive.h"
+#include "State/Omni_Four/EnemyShotOmniFour.h"
+#include "State/Random/EnemyShotRandom.h"
+#include "State/TripleForward/EnemyShotTripleForward.h"
+
 
 
 // 前方宣言
@@ -54,6 +64,12 @@ private:
 	/// </summary>
 	void AddBulletInstance(Vector3 initPos, Vector3 initVel, bool isState);
 
+	/// <summary>
+	/// 射撃ステートの取得
+	/// </summary>
+	std::unordered_map<std::string_view, std::function<std::unique_ptr<IEnemyExecuteShot>()>> 
+		CreateShootingStateFactory();
+
 
 private:
 
@@ -68,5 +84,6 @@ private:
 	// 射撃タイマー
 	Timer shotTimer_{};
 
-
+	// 射撃クラス
+	std::unique_ptr<IEnemyExecuteShot> exeShot_;
 };

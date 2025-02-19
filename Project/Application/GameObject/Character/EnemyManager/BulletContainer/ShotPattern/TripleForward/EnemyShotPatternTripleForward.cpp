@@ -1,5 +1,5 @@
-//#include "EnemyShotPatternTripleForward.h"
-//
-//void EnemyShotPatternTripleForward::Execute()
-//{
-//}
+#include "EnemyShotPatternTripleForward.h"
+
+void EnemyShotPatternTripleForward::Execute()
+{
+}

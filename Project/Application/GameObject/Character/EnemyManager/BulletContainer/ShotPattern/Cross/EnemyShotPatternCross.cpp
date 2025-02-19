@@ -1,5 +1,5 @@
-//#include "EnemyShotPatternCross.h"
-//
-//void EnemyShotPatternCross::Execute()
-//{
-//}
+#include "EnemyShotPatternCross.h"
+
+void EnemyShotPatternCross::Execute()
+{
+}

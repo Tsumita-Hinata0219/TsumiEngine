@@ -145,7 +145,7 @@ std::string JsonManager::ScanningEntityName(nlohmann::json& object)
 
 		// ファイル名
 		entityName = object["name"];
-		
+
 		// 連番であれば、抽出
 		entityName = RemoveNameSuffix(entityName);
 	}
@@ -217,49 +217,47 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		if (category["type"] != "ENEMY") { return result; }
 
 		// 射撃方向
-		if (category["shot_direction"] == "FORWARD") 
+		if (category["shot_direction"] == "FORWARD")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Forward;
 		}
-		else if (category["shot_direction"] == "TRIPLE_FORWARD") 
+		else if (category["shot_direction"] == "TRIPLE_FORWARD")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::TripleForward;
 		}
-		else if (category["shot_direction"] == "CROSS") 
+		else if (category["shot_direction"] == "CROSS")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Cross;
 		}
-		else if (category["shot_direction"] == "OMNI_FOUR") 
+		else if (category["shot_direction"] == "OMNI_FOUR")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Omni_Four;
 		}
-		else if (category["shot_direction"] == "OMNI_FIVE") 
+		else if (category["shot_direction"] == "OMNI_FIVE")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Omni_Five;
 		}
-		else if (category["shot_direction"] == "OMNI_EIGHT") 
+		else if (category["shot_direction"] == "OMNI_EIGHT")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Omni_Eight;
 		}
-		else if (category["shot_direction"] == "RANDOM") 
+		else if (category["shot_direction"] == "RANDOM")
 		{
 			result.shotFuncData.direction = enemy::ShotDirection::Random;
 		}
 
-		/*if (category["shot_direction"]) {
-			result.shotFuncData.shotPattern = category["shot_direction"];
-		}*/
+		result.shotFuncData.shotPattern = category["shot_direction"];
 
 		// バレットタイプ
-		if (category["bullet_behavior"] == "COMMON") 
+		if (category["bullet_behavior"] == "COMMON")
 		{
 			result.shotFuncData.behavior = enemy::BulletBehavior::Common;
 		}
-		else if (category["bullet_behavior"] == "RESISTANT") 
+		else if (category["bullet_behavior"] == "RESISTANT")
 		{
 			result.shotFuncData.behavior = enemy::BulletBehavior::Resistant;
 		}
-		else if (category["bullet_behavior"] == "RANDOM") 
+		else if (category["bullet_behavior"] == "RANDOM")
 		{
 			result.shotFuncData.behavior = enemy::BulletBehavior::Random;
 		}
@@ -268,13 +266,13 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 		result.shotFuncData.shotInterval = (float)category["shoot_interval"];
 
 		// 移動タイプ
-		if (category["move_behavior"] == "STATIC") 
+		if (category["move_behavior"] == "STATIC")
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Static;
 			// プレイヤーに体を向けるか
 			result.movementFuncData.isTilt = (bool)category["tilt_body"];
 		}
-		else if (category["move_behavior"] == "FOLLOW") 
+		else if (category["move_behavior"] == "FOLLOW")
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Follow;
 			// プレイヤーに体を向けるか
@@ -282,7 +280,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 			// 移動速度
 			result.movementFuncData.velocity = (float)category["move_speed"];
 		}
-		else if (category["move_behavior"] == "HORIZONTAL") 
+		else if (category["move_behavior"] == "HORIZONTAL")
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Horizontal;
 			// プレイヤーに体を向けるか
@@ -302,7 +300,7 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 				(float)category["horizontal_end"][1],
 			};
 		}
-		else if (category["move_behavior"] == "CIRCULAR") 
+		else if (category["move_behavior"] == "CIRCULAR")
 		{
 			result.movementFuncData.behavior = enemy::MovementBehavior::Circular;
 			// プレイヤーに体を向けるか

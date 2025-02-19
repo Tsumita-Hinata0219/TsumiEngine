@@ -1,5 +1,5 @@
-//#include "EnemyShotPatternOmniFive.h"
-//
-//void EnemyShotPatternOmniFive::Execute()
-//{
-//}
+#include "EnemyShotPatternOmniFive.h"
+
+void EnemyShotPatternOmniFive::Execute()
+{
+}

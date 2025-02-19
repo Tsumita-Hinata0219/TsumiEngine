@@ -9,6 +9,7 @@
 #include "Transform/Transform.h"
 
 #include "../ExecuteShot/EnemyExecuteShot.h"
+#include "../BulletContainer/EnemyBulletContainer.h"
 #include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
 
@@ -126,6 +127,8 @@ protected:
 	// 移動データ
 	enemy::MovementFuncData movementData_;
 
+	// バレット管理クラス
+	std::unique_ptr<EnemyBulletContainer> bulletContainer_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

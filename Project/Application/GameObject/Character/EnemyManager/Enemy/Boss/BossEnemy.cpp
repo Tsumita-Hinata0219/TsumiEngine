@@ -34,6 +34,11 @@ void BossEnemy::Init()
 	// 射撃方法とバレット挙動
 	exeShot_->Init(shotFuncData_);
 
+	// 射撃処理クラス
+	bulletContainer_ = std::make_unique<EnemyBulletContainer>();
+	bulletContainer_->Init(shotFuncData_);
+
+
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
 	movement_->Init(movementData_);

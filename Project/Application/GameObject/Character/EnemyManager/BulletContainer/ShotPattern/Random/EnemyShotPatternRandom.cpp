@@ -1,5 +1,5 @@
-//#include "EnemyShotPatternRandom.h"
-//
-//void EnemyShotPatternRandom::Execute()
-//{
-//}
+#include "EnemyShotPatternRandom.h"
+
+void EnemyShotPatternRandom::Execute()
+{
+}

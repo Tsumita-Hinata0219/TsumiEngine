@@ -24,31 +24,31 @@ public:
 		}
 		else if (key == "CROSS")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternCross>();
 		}
 		else if (key == "FORWARD")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternForward>();
 		}
 		else if (key == "OMNI_EIGHT")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternOmniEight>();
 		}
 		else if (key == "OMNI_FIVE")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternOmniFive>();
 		}
 		else if (key == "OMNI_FOUR")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternOmniFour>();
 		}
 		else if (key == "RANDOM")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternRandom>();
 		}
 		else if (key == "TRIPLE_FORWARD")
 		{
-			return std::make_unique<EnemyShotPatternNone>();
+			return std::make_unique<EnemyShotPatternTripleForward>();
 		}
 
 		return nullptr;

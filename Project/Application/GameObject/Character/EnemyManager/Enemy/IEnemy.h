@@ -8,7 +8,6 @@
 #include "../../../GameObject.h"
 #include "Transform/Transform.h"
 
-#include "../ExecuteShot/EnemyExecuteShot.h"
 #include "../BulletContainer/EnemyBulletContainer.h"
 #include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
@@ -117,8 +116,6 @@ protected:
 	// 初期値
 	SRT initSRT_{};
 
-	// 射撃処理
-	std::unique_ptr<EnemyExecuteShot> exeShot_;
 	// 射撃データ
 	enemy::ShotFuncData shotFuncData_;
 

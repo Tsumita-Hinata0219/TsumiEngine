@@ -11,9 +11,6 @@ void EnemyManager::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
 
-	// BulletのPoolのインスタンスを先に作っておく
-	bulletPool_.Create(100);
-
 	// EffectのPoolのインスタンスを先に作っておく
 	circleEffectPool_.Create(100);
 
@@ -45,28 +42,12 @@ void EnemyManager::Update()
 	);
 
 	// BossEnemyListの更新処理
-	/*for (auto& boss : bossEnemies_) {
+	for (auto& boss : bossEnemies_) {
 		boss->Update();
-	}*/
+	}
 	// 死亡フラグが立っていたら削除
 	bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
 		if (boss->IsDead()) {
-			return true;
-		}
-		return false;
-		}
-	);
-
-	// Bulletの更新処理
-	for (EnemyBullet* bullet : bulletList_) {
-		bullet->Update();
-	}
-	// 死亡した弾丸を整理し、プールに返却
-	bulletList_.remove_if([this](EnemyBullet* bullet) {
-		if (bullet->IsDead()) {
-			// リセット処理を入れておく
-			bullet->Reset();
-			bulletPool_.Return(bullet);
 			return true;
 		}
 		return false;
@@ -112,11 +93,6 @@ void EnemyManager::Draw3D()
 		boss->Draw3D();
 	}
 
-	// Bulletsの描画
-	for (EnemyBullet* bullet : bulletList_) {
-		bullet->Draw3D();
-	}
-
 	// Effectの描画
 	for (EnemyHitEffectCircle* effect : circleEffectList_) {
 		effect->Draw3D();
@@ -143,15 +119,6 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 			}
 		}
 	}
-}
-
-
-/// <summary>
-/// 新しいEnemyBulletを追加する
-/// </summary>
-void EnemyManager::AddNewBullet(Vector3 initPos, Vector3 initVel, bool isState)
-{
-	CreateEnemyBullet(initPos, initVel, isState);
 }
 
 
@@ -268,26 +235,6 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 
 
 /// <summary>
-/// 新しいEnemyBulletを生成する
-/// </summary>
-void EnemyManager::CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState)
-{
-	// オブジェクトプールから新しいバレットを取得
-	EnemyBullet* newBullet = bulletPool_.Get();
-
-	// newBulletの初期化
-	newBullet->SetResistant(isState);
-	newBullet->Init();
-	newBullet->SetPosition(initPos);
-	newBullet->SetVelocity(initVel);
-	newBullet->SetRotationFromVelocity();
-
-	// リストに追加
-	bulletList_.push_back(newBullet);
-}
-
-
-/// <summary>
 /// 新しいEffectを生成する
 /// </summary>
 void EnemyManager::CreateEffect(IEnemy* enemyPtr)
@@ -312,11 +259,6 @@ void EnemyManager::DrawimGui()
 	if (ImGui::TreeNode("EnemyManager")) {
 
 		ImGui::Text("IEnemyInstance = %d", int(commonEnemies_.size()));
-		ImGui::Text("");
-
-		ImGui::Text("Bullet");
-		int instance = int(bulletList_.size());
-		ImGui::DragInt("Bullet_InstanceSize", &instance, 0);
 		ImGui::Text("");
 
 		ImGui::TreePop();

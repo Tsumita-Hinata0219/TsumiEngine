@@ -27,11 +27,6 @@ void BasicEnemy::Init()
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 
-	// 射撃処理クラス
-	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	// 射撃方法とバレット挙動
-	exeShot_->Init(shotFuncData_);
-
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
 	movement_->Init(movementData_);
@@ -72,12 +67,6 @@ void BasicEnemy::Init()
 // 更新処理
 void BasicEnemy::Update()
 {
-	// ステートパターン処理
-	//FuncStatePattern();
-
-	// 射撃処理
-	exeShot_->Update();
-
 	// 移動処理
 	movement_->Update();
 

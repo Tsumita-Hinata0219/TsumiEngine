@@ -550,7 +550,6 @@
     <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
-    <ClCompile Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
@@ -1430,7 +1429,6 @@
     <ClInclude Include="Engine\Component\Interface\IComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
-    <ClInclude Include="Application\GameObject\Character\EnemyManager\ExecuteShot\EnemyExecuteShot.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />

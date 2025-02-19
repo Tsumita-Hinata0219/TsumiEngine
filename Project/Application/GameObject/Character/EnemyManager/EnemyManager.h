@@ -57,11 +57,6 @@ public: // メンバ関数
 	void LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas);
 
 	/// <summary>
-	/// 新しいEnemyBulletを追加する
-	/// </summary>
-	void AddNewBullet(Vector3 initPos, Vector3 initVel, bool isState);
-
-	/// <summary>
 	/// 新しいヒットエフェクトを追加する
 	/// </summary>
 	void AddNewHitEffect(IEnemy* enemyPtr);
@@ -106,11 +101,6 @@ private:
 	void CreateBossEnemy(const EntityData& setEntityData);
 
 	/// <summary>
-	/// 新しいEnemyBulletを生成する
-	/// </summary>
-	void CreateEnemyBullet(Vector3 initPos, Vector3 initVel, bool isState);
-
-	/// <summary>
 	/// 新しいEffectを生成する
 	/// </summary>
 	void CreateEffect(IEnemy* enemyPtr);
@@ -133,11 +123,6 @@ private: // メンバ変数
 
 	// BossEnemyのList配列
 	std::list<std::unique_ptr<BossEnemy>> bossEnemies_;
-
-	// BulletのPool
-	ObjectPool<EnemyBullet> bulletPool_;
-	// BulletのList配列
-	std::list<EnemyBullet*> bulletList_;
 
 	// EffectのPool
 	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;

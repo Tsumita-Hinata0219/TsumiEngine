@@ -16,17 +16,14 @@ EnemyBulletContainer::EnemyBulletContainer()
 /// <summary>
 /// 初期化処理
 /// </summary>
-void EnemyBulletContainer::Init(const enemy::ShotFuncData& data)
+void EnemyBulletContainer::Init()
 {
 	// バレットの新スタンスを予め作っておく
 	bulletPool_.Create(50);
 
 	// 射撃タイマーの設定 & スタート
-	shotTimer_.Init(0.0f, data.shotInterval);
+	shotTimer_.Init(0.0f, owner_->GetShotProperty().shotInterval);
 	shotTimer_.Start();
-
-	// 射撃データの設定
-	shotData_ = data;
 
 	// ランダム生成器作成
 	std::random_device rd;
@@ -35,7 +32,7 @@ void EnemyBulletContainer::Init(const enemy::ShotFuncData& data)
 	directionDist_ = std::uniform_real_distribution<float>(-1.0f, 1.0f);
 
 	// 射撃ステートの設定
-	exeShot_ = EnemyShotPatternFactory::CreateShotPattern(shotData_.shotPattern);
+	exeShot_ = EnemyShotPatternFactory::CreateShotPattern(owner_->GetShotProperty().shotPattern);
 	exeShot_->Init(this);
 }
 
@@ -75,7 +72,7 @@ void EnemyBulletContainer::Update()
 void EnemyBulletContainer::Draw()
 {
 	for (EnemyBullet* bullet : bulletList_) {
-		bullet->Update();
+		bullet->Draw3D();
 	}
 }
 
@@ -105,15 +102,15 @@ void EnemyBulletContainer::AddBulletInstance(Vector3 initVel)
 /// </summary>
 bool EnemyBulletContainer::GetBulletState()
 {
-	if (shotData_.behavior == enemy::BulletBehavior::Common)
+	if (owner_->GetShotProperty().behavior == enemy::BulletBehavior::Common)
 	{
 		return false;
 	}
-	else if (shotData_.behavior == enemy::BulletBehavior::Resistant)
+	else if (owner_->GetShotProperty().behavior == enemy::BulletBehavior::Resistant)
 	{
 		return true;
 	}
-	else if (shotData_.behavior == enemy::BulletBehavior::Random)
+	else if (owner_->GetShotProperty().behavior == enemy::BulletBehavior::Random)
 	{
 		return behabirDist_(randEngine_) == 1;
 	}

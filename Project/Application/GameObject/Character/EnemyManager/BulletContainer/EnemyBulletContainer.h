@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(const enemy::ShotFuncData& data);
+	void Init();
 
 	/// <summary>
 	/// 更新処理
@@ -80,9 +80,6 @@ private:
 
 	// 射撃クラス
 	std::unique_ptr<IEnemyShotPattern> exeShot_;
-
-	// 射撃データ
-	enemy::ShotFuncData shotData_{};
 
 	std::mt19937 randEngine_; // ランダムエンジン
 	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布

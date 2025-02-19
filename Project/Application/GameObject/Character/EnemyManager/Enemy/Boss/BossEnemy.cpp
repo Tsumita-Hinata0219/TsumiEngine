@@ -30,14 +30,9 @@ void BossEnemy::Init()
 	model_->SetColorAddition(colorAdd_);
 
 	// 射撃処理クラス
-	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	// 射撃方法とバレット挙動
-	exeShot_->Init(shotFuncData_);
-
-	// 射撃処理クラス
 	bulletContainer_ = std::make_unique<EnemyBulletContainer>();
-	bulletContainer_->Init(shotFuncData_);
-
+	bulletContainer_->SetOwner(this);
+	bulletContainer_->Init();
 
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
@@ -80,11 +75,11 @@ void BossEnemy::Update()
 	// シールドの更新
 	shield_->Update();
 
-	// 射撃処理
-	exeShot_->Update();
-
 	// 移動処理
 	movement_->Update();
+
+	// 射撃処理
+	bulletContainer_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -105,6 +100,9 @@ void BossEnemy::Draw3D()
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
+
+	// バレットの描画
+	bulletContainer_->Draw();
 
 	// シールドの描画処理
 	shield_->Draw3D();

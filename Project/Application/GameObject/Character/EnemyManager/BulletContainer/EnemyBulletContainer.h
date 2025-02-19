@@ -30,7 +30,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(enemy::ShotFuncData data);
+	void Init(const enemy::ShotFuncData& data);
 
 	/// <summary>
 	/// 更新処理
@@ -59,6 +59,14 @@ public:
 
 private:
 
+	/// <summary>
+	/// バレットのタイプの取得
+	/// </summary>
+	bool GetBulletState();
+
+
+private:
+
 	// 親エネミー
 	IEnemy* owner_ = nullptr;
 
@@ -72,4 +80,11 @@ private:
 
 	// 射撃クラス
 	std::unique_ptr<IEnemyShotPattern> exeShot_;
+
+	// 射撃データ
+	enemy::ShotFuncData shotData_{};
+
+	std::mt19937 randEngine_; // ランダムエンジン
+	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布
+	std::uniform_real_distribution<float> directionDist_; // -1 ~ +1 の分布
 };

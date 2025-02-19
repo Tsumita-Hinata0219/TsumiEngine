@@ -18,6 +18,13 @@ public:
 	virtual ~IEnemyShotPattern() = default;
 
 	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	void Init(EnemyBulletContainer* owner) {
+		this->owner_ = owner;
+	}
+
+	/// <summary>
 	/// 射撃処理
 	/// </summary>
 	virtual void Execute() = 0;

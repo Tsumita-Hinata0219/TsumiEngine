@@ -27,6 +27,7 @@ void EnemyBulletContainer::Init(enemy::ShotFuncData data)
 
 	// 射撃ステートの設定
 	exeShot_ = EnemyShotPatternFactory::CreateShotPattern(data.shotPattern);
+	exeShot_->Init(this);
 }
 
 

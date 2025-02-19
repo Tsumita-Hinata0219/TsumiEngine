@@ -27,6 +27,11 @@ void BasicEnemy::Init()
 	colorAdd_.intensity = 0.0f;
 	model_->SetColorAddition(colorAdd_);
 
+	// 射撃処理クラス
+	bulletContainer_ = std::make_unique<EnemyBulletContainer>();
+	bulletContainer_->SetOwner(this);
+	bulletContainer_->Init();
+
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
 	movement_->Init(movementData_);
@@ -69,6 +74,9 @@ void BasicEnemy::Update()
 {
 	// 移動処理
 	movement_->Update();
+	
+	// 射撃処理
+	bulletContainer_->Update();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -87,6 +95,9 @@ void BasicEnemy::Draw3D()
 	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
+
+	// バレットの描画
+	bulletContainer_->Draw();
 }
 void BasicEnemy::Draw2DFront() {}
 void BasicEnemy::Draw2DBack() {}

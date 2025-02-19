@@ -1,6 +1,5 @@
 #pragma once
 
-#include "IObject/IObject.h"
 #include "3D/Model/Model.h"
 #include "2D/Sprite/Sprite.h"
 #include "TextureManager/TextureManager.h"

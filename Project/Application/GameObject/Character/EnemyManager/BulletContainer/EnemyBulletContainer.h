@@ -42,6 +42,12 @@ public:
 	/// </summary>
 	void Draw();
 
+	/// <summary>
+	/// バレット追加
+	/// </summary>
+	void AddBulletInstance(Vector3 initVel);
+
+
 
 #pragma region Accessor アクセッサ
 
@@ -49,14 +55,6 @@ public:
 	void SetOwner(IEnemy* pEnemy) { this->owner_ = pEnemy; }
 
 #pragma endregion
-
-
-private:
-
-	/// <summary>
-	/// バレット追加
-	/// </summary>
-	void AddBulletInstance(Vector3 initPos, Vector3 initVel, bool isState);
 
 
 private:

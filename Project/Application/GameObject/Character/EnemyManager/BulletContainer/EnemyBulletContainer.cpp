@@ -74,15 +74,15 @@ void EnemyBulletContainer::Draw()
 /// <summary>
 /// バレット追加
 /// </summary>
-void EnemyBulletContainer::AddBulletInstance(Vector3 initPos, Vector3 initVel, bool isState)
+void EnemyBulletContainer::AddBulletInstance(Vector3 initVel)
 {
 	// オブジェクトプールから新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
 
 	// newBulletの初期化
-	newBullet->SetResistant(isState);
+	newBullet->SetResistant(true);
 	newBullet->Init();
-	newBullet->SetPosition(initPos);
+	newBullet->SetPosition(owner_->GetWorldPos());
 	newBullet->SetVelocity(initVel);
 	newBullet->SetRotationFromVelocity();
 

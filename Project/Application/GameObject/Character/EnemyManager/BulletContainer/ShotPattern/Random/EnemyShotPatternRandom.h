@@ -10,7 +10,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyShotPatternRandom() = default;
+	EnemyShotPatternRandom();
 
 	/// <summary>
 	/// デストラクタ
@@ -25,5 +25,8 @@ public:
 
 private:
 
+	std::mt19937 randEngine_; // ランダムエンジン
+	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布
+	std::uniform_real_distribution<float> directionDist_; // -1 ~ +1 の分布
 
 };

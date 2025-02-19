@@ -78,10 +78,15 @@ private:
 	// 射撃タイマー
 	Timer shotTimer_{};
 
+	// バレットの速度
+	const float kBulletSpeed_ = 0.25f;
+
 	// 射撃クラス
 	std::unique_ptr<IEnemyShotPattern> exeShot_;
 
 	std::mt19937 randEngine_; // ランダムエンジン
 	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布
 	std::uniform_real_distribution<float> directionDist_; // -1 ~ +1 の分布
+
+
 };

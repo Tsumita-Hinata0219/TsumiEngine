@@ -84,12 +84,12 @@ void EnemyBulletContainer::AddBulletInstance(Vector3 initVel)
 {
 	// オブジェクトプールから新しいバレットを取得
 	EnemyBullet* newBullet = bulletPool_.Get();
-
+	
 	// newBulletの初期化
 	newBullet->SetResistant(GetBulletState());
 	newBullet->Init();
 	newBullet->SetPosition(owner_->GetWorldPos());
-	newBullet->SetVelocity(initVel);
+	newBullet->SetVelocity(TransformNormal(Normalize(initVel) * kBulletSpeed_, owner_->GetMatWorld()));
 	newBullet->SetRotationFromVelocity();
 
 	// リストに追加

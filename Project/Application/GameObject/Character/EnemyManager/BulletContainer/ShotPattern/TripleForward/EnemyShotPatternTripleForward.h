@@ -2,20 +2,20 @@
 //
 //#include "../IEnemyShotPattern.h"
 //
-///* 射撃タイプ : なし */
-//class EnemyShotPatternNone : public IEnemyShotPattern {
+///* 射撃タイプ : 前方3Way */
+//class EnemyShotPatternTripleForward : public IEnemyShotPattern {
 //
 //public:
 //
 //	/// <summary>
 //	/// コンストラクタ
 //	/// </summary>
-//	EnemyShotPatternNone() = default;
+//	EnemyShotPatternTripleForward() = default;
 //
 //	/// <summary>
 //	/// デストラクタ
 //	/// </summary>
-//	~EnemyShotPatternNone() = default;
+//	~EnemyShotPatternTripleForward() = default;
 //
 //	/// <summary>
 //	/// 射撃処理
@@ -27,4 +27,3 @@
 //
 //
 //};
-//

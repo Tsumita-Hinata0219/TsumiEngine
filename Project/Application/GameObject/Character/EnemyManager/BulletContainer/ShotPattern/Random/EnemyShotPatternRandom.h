@@ -2,20 +2,20 @@
 //
 //#include "../IEnemyShotPattern.h"
 //
-///* 射撃タイプ : なし */
-//class EnemyShotPatternNone : public IEnemyShotPattern {
+///* 射撃タイプ : ランダム */
+//class EnemyShotPatternRandom : public IEnemyShotPattern {
 //
 //public:
 //
 //	/// <summary>
 //	/// コンストラクタ
 //	/// </summary>
-//	EnemyShotPatternNone() = default;
+//	EnemyShotPatternRandom() = default;
 //
 //	/// <summary>
 //	/// デストラクタ
 //	/// </summary>
-//	~EnemyShotPatternNone() = default;
+//	~EnemyShotPatternRandom() = default;
 //
 //	/// <summary>
 //	/// 射撃処理
@@ -27,4 +27,3 @@
 //
 //
 //};
-//

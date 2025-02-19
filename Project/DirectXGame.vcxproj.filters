@@ -565,6 +565,13 @@
     <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\None\EnemyShotPatternNone.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Cross\EnemyShotPatternCross.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Forward\EnemyShotPatternForward.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniEight\EnemyShotPatternOmniEight.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFive\EnemyShotPatternOmniFive.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFour\EnemyShotPatternOmniFour.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1448,6 +1455,13 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotFactory\EnemyShotStateFactory.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\IEnemyShotPattern.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\None\EnemyShotPatternNone.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Cross\EnemyShotPatternCross.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Forward\EnemyShotPatternForward.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniEight\EnemyShotPatternOmniEight.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFive\EnemyShotPatternOmniFive.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFour\EnemyShotPatternOmniFour.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -1,1 +1,5 @@
-#include "EnemyShotPatternNone.h"
+//#include "EnemyShotPatternNone.h"
+//
+//void EnemyShotPatternNone::Execute()
+//{
+//}

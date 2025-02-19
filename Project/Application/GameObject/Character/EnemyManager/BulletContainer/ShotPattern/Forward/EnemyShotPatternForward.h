@@ -2,20 +2,20 @@
 //
 //#include "../IEnemyShotPattern.h"
 //
-///* 射撃タイプ : なし */
-//class EnemyShotPatternNone : public IEnemyShotPattern {
+///* 射撃タイプ : 前方 */
+//class EnemyShotPatternForward : public IEnemyShotPattern {
 //
 //public:
 //
 //	/// <summary>
 //	/// コンストラクタ
 //	/// </summary>
-//	EnemyShotPatternNone() = default;
+//	EnemyShotPatternForward() = default;
 //
 //	/// <summary>
 //	/// デストラクタ
 //	/// </summary>
-//	~EnemyShotPatternNone() = default;
+//	~EnemyShotPatternForward() = default;
 //
 //	/// <summary>
 //	/// 射撃処理

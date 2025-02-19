@@ -2,20 +2,20 @@
 //
 //#include "../IEnemyShotPattern.h"
 //
-///* 射撃タイプ : なし */
-//class EnemyShotPatternNone : public IEnemyShotPattern {
+///* 射撃タイプ : 全方位4Way */
+//class EnemyShotPatternOmniFour : public IEnemyShotPattern {
 //
 //public:
 //
 //	/// <summary>
 //	/// コンストラクタ
 //	/// </summary>
-//	EnemyShotPatternNone() = default;
+//	EnemyShotPatternOmniFour() = default;
 //
 //	/// <summary>
 //	/// デストラクタ
 //	/// </summary>
-//	~EnemyShotPatternNone() = default;
+//	~EnemyShotPatternOmniFour() = default;
 //
 //	/// <summary>
 //	/// 射撃処理
@@ -27,4 +27,3 @@
 //
 //
 //};
-//

@@ -246,6 +246,10 @@ EntityEnemyData JsonManager::ScanningEnemyData(nlohmann::json& object)
 			result.shotFuncData.direction = enemy::ShotDirection::Random;
 		}
 
+		/*if (category["shot_direction"]) {
+			result.shotFuncData.shotPattern = category["shot_direction"];
+		}*/
+
 		// バレットタイプ
 		if (category["bullet_behavior"] == "COMMON") 
 		{

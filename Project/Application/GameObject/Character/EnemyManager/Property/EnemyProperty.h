@@ -41,6 +41,7 @@ namespace enemy {
 	struct ShotFuncData {
 		ShotDirection direction;
 		BulletBehavior behavior;
+		//std::string shotPattern;
 		float shotInterval = 0.0f;
 	};
 	struct MovementFuncData {

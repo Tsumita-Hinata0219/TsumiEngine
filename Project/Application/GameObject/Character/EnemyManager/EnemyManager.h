@@ -57,11 +57,6 @@ public: // メンバ関数
 	void LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& datas);
 
 	/// <summary>
-	/// 新しいヒットエフェクトを追加する
-	/// </summary>
-	void AddNewHitEffect(IEnemy* enemyPtr);
-
-	/// <summary>
 	/// 全滅したかのチェック
 	/// </summary>
 	void EliminatedChecker();
@@ -101,11 +96,6 @@ private:
 	void CreateBossEnemy(const EntityData& setEntityData);
 
 	/// <summary>
-	/// 新しいEffectを生成する
-	/// </summary>
-	void CreateEffect(IEnemy* enemyPtr);
-
-	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
 	void DrawimGui();
@@ -123,11 +113,6 @@ private: // メンバ変数
 
 	// BossEnemyのList配列
 	std::list<std::unique_ptr<BossEnemy>> bossEnemies_;
-
-	// EffectのPool
-	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;
-	// EffectのList配列
-	std::list<EnemyHitEffectCircle*> circleEffectList_;
 
 	// 通常エネミーが全滅したかのフラグ
 	bool isCommonEliminated_ = false;

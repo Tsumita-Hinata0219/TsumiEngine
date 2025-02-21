@@ -11,9 +11,6 @@ void EnemyManager::Init()
 	modelManager_ = ModelManager::GetInstance();
 	modelManager_->LoadModel("Obj/Enemys/Bullet", "EnemyBullet.obj");
 
-	// EffectのPoolのインスタンスを先に作っておく
-	circleEffectPool_.Create(100);
-
 	// 全滅したかのフラグは折っておく
 	isCommonEliminated_ = false;
 	isBossEliminated_ = false;
@@ -54,22 +51,6 @@ void EnemyManager::Update()
 		}
 	);
 
-	// Effectの更新処理
-	for (EnemyHitEffectCircle* effect : circleEffectList_) {
-		effect->Update();
-	}
-	// 死亡フラグが立っていたら削除
-	circleEffectList_.remove_if([this](EnemyHitEffectCircle* effect) {
-		if (effect->IsDead()) {
-			// 死亡したエフェクトはプールに返却
-			circleEffectPool_.Return(effect);
-			return true;
-		}
-		return false;
-		}
-	);
-
-
 	// 全滅したかのチェック
 	EliminatedChecker();
 
@@ -91,11 +72,6 @@ void EnemyManager::Draw3D()
 	}
 	for (auto& boss : bossEnemies_) {
 		boss->Draw3D();
-	}
-
-	// Effectの描画
-	for (EnemyHitEffectCircle* effect : circleEffectList_) {
-		effect->Draw3D();
 	}
 }
 
@@ -119,15 +95,6 @@ void EnemyManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>
 			}
 		}
 	}
-}
-
-
-/// <summary>
-/// 新しいヒットエフェクトを追加する
-/// </summary>
-void EnemyManager::AddNewHitEffect(IEnemy* enemyPtr)
-{
-	CreateEffect(enemyPtr);
 }
 
 
@@ -231,23 +198,6 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	bossEnemies_.push_back(std::move(newEnemy));
-}
-
-
-/// <summary>
-/// 新しいEffectを生成する
-/// </summary>
-void EnemyManager::CreateEffect(IEnemy* enemyPtr)
-{
-	// プールから新しいエフェクトを取得
-	EnemyHitEffectCircle* newEffect = circleEffectPool_.Get();
-
-	// newEffectの初期化
-	newEffect->SetEnemyPtr(enemyPtr);
-	newEffect->Init();
-
-	// リストに追加
-	circleEffectList_.push_back(newEffect);
 }
 
 

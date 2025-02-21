@@ -49,7 +49,6 @@ void DebugScene::Update()
 	demoParticle_->Update();
 
 
-
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");
 	camera_.DrawImGui();

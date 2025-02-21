@@ -15,9 +15,9 @@ ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
 void main(int3 DTid : SV_DispatchThreadID)
 {
     // 射出許可が出たので射出
-    if (gEmitterConfig.enableEmit != 0)
+    //if (gEmitterConfig.enableEmit != 0)
     {
-        for (uint32_t countIndex = 0; countIndex < gEmitterConfig.particleCount; ++countIndex)
+        for (uint32_t countIndex = 0; countIndex < 10; ++countIndex)
         {
             // カウント分Particleを射出する
             gParticles[countIndex].scale = float32_t3(0.3f, 0.3f, 0.3f);

@@ -103,9 +103,10 @@ void GPUParticle::Bind_Draw()
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	handles_.material.BindGraphicsSRV_Instanced(3);
+	//handles_.material.BindGraphicsSRV_Instanced(3);
+	handles_.particleElement.BindGraphicsSRV_Instanced(2);
 	// MaterialTexture
-	handles_.material.BindGraphicsSRV(2, model_->GetMaterialData().textureHandle);
+	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
 	// Light
 	//buffers_.light.CommandCall(4);
 	// Draw!!

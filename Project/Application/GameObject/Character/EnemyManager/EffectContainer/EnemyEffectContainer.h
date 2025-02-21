@@ -48,21 +48,12 @@ public:
 	void AddEffectInstance();
 
 
-
 #pragma region Accessor アクセッサ
 
 	// 親エネミー
 	void SetOwner(IEnemy* pEnemy) { this->owner_ = pEnemy; }
 
 #pragma endregion
-
-
-private:
-
-	/// <summary>
-	/// バレットのタイプの取得
-	/// </summary>
-	bool GetBulletState();
 
 
 private:
@@ -74,6 +65,5 @@ private:
 	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;
 	// EffectのList配列
 	std::list<EnemyHitEffectCircle*> circleEffectList_;
-
 
 };

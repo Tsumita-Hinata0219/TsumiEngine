@@ -9,6 +9,7 @@
 #include "Transform/Transform.h"
 
 #include "../BulletContainer/EnemyBulletContainer.h"
+#include "../EffectContainer/EnemyEffectContainer.h"
 #include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
 
@@ -126,6 +127,9 @@ protected:
 
 	// バレット管理クラス
 	std::unique_ptr<EnemyBulletContainer> bulletContainer_;
+
+	// エフェクト管理クラス
+	std::unique_ptr<EnemyEffectContainer> effectContainer_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

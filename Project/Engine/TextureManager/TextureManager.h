@@ -113,7 +113,7 @@ private: // メンバ関数
 	/// <summary>
 	/// Resourceを生成する
 	/// </summary>
-	Microsoft::WRL::ComPtr<ID3D12Resource> CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties);
+	Microsoft::WRL::ComPtr<ID3D12Resource> CreateCBV(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties);
 
 	/// <summary>
 	/// TextureResourceにデータを転送する

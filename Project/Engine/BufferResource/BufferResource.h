@@ -37,7 +37,6 @@ public:
 	/// <summary>
 	/// Resource作成
 	/// </summary>
-	void CreateResource(UINT itemCount = 1);
 	void CreateCBV(UINT itemCount = 1);
 
 	/// <summary>
@@ -61,29 +60,19 @@ public:
 	void CreateUAV(UINT itemCount = 1);
 
 	/// <summary>
-	/// ResourceをマップしてCPUアクセスを可能にする
-	/// </summary>
-	void Map();
-
-	/// <summary>
-	/// Resourceのマップを解除してGPUアクセスを解除する
-	/// </summary>
-	void UnMap();
-
-	/// <summary>
 	/// データを書き込む
 	/// </summary>
-	void WriteData(const T* data);
-	void WriteData(const std::vector<T>& datas, uint32_t num);
+	void UpdateData(const T* data);
+	void UpdateData(const std::vector<T>& datas, uint32_t num);
 
 	/// <summary>
 	/// コマンドを積む
 	/// </summary>
-	void GraphicsCommandCall(UINT number);
-	void GraphicsCommandCallSRV(UINT number, uint32_t index);
-	void GraphicsCommandCallInstancingSRV(UINT number);
-	void ComputeCommandCall(UINT number);
-	void ComputeCommandCallInstancingSRV(UINT number);
+	void BindGraphicsCBV(UINT number);
+	void BindGraphicsSRV(UINT number, uint32_t index);
+	void BindGraphicsSRV_Instanced(UINT number);
+	void BindComputeCBV(UINT number);
+	void BindComputeSRV_Instanced(UINT number);
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
@@ -133,17 +122,6 @@ private:
 };
 
 
-// Resourceの作成
-template<typename T>
-inline void BufferResource<T>::CreateResource(UINT itemCount) 
-{
-	// 作成するResourceの要素数
-	this->itemCount_ = itemCount;
-
-	// BufferResourceの作成
-	CreateCBVResource();
-}
-
 // CBVの作成
 template<typename T>
 inline void BufferResource<T>::CreateCBV(UINT itemCount)
@@ -192,64 +170,76 @@ inline void BufferResource<T>::CreateUAV(UINT itemCount)
 	CreateUAVResource();
 }
 
-// ResourceをマップしてCPUアクセスを可能にする
+// データを書き込む
 template<typename T>
-inline void BufferResource<T>::Map()
+inline void BufferResource<T>::UpdateData(const T* data)
 {
 	// buffer_ が nullptr の場合はエラー
 	if (!buffer_) {
 		// ログを出力し、アサーションでプログラムを停止させる
-		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling Map.");
+		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling UpdateData.");
 		assert(false);
 		return;
 	}
 
+	// Map
 	HRESULT result;
 	result = buffer_->Map(0, nullptr, reinterpret_cast<void**>(&mappedData_));
 	assert(SUCCEEDED(result));
-}
 
-// Resourceのマップを解除してGPUアクセスを解除する
-template<typename T>
-inline void BufferResource<T>::UnMap()
-{
-	// buffer_ と mappedData_ が有効な時にUnMap
+	// WriteData
+	assert(data != nullptr); // ポインタが有効か確認
+	assert(mappedData_ != nullptr); // mappedData_ が初期化されているか確認
+	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
+
+	// UnMap
 	if (buffer_ && mappedData_) {
 		buffer_->Unmap(0, nullptr);
 		mappedData_ = nullptr;
 	}
 }
 
-// データを書き込む
 template<typename T>
-inline void BufferResource<T>::WriteData(const T* data)
+inline void BufferResource<T>::UpdateData(const std::vector<T>& datas, uint32_t num)
 {
-	assert(data != nullptr); // ポインタが有効か確認
-	assert(mappedData_ != nullptr); // mappedData_ が初期化されているか確認
-	std::memcpy(mappedData_, data, sizeof(T) * itemCount_);
-}
+	// buffer_ が nullptr の場合はエラー
+	if (!buffer_) {
+		// ログを出力し、アサーションでプログラムを停止させる
+		Log("constBuff_ is nullptr. Make sure to create constBuffer before calling UpdateData.");
+		assert(false);
+		return;
+	}
 
-template<typename T>
-inline void BufferResource<T>::WriteData(const std::vector<T>& datas, uint32_t num)
-{
+	// Map
+	HRESULT result;
+	result = buffer_->Map(0, nullptr, reinterpret_cast<void**>(&mappedData_));
+	assert(SUCCEEDED(result));
+
+	// WriteData
 	// ベクトルが空でないことを確認
 	assert(!datas.empty());
 	// データ数が一致しているか確認する
 	assert(num == itemCount_);
 	// 実際のデータを書き込む処理
 	std::memcpy(mappedData_, datas.data(), sizeof(T) * num);
+
+	// UnMap
+	if (buffer_ && mappedData_) {
+		buffer_->Unmap(0, nullptr);
+		mappedData_ = nullptr;
+	}
 }
 
 // コマンドを積む
 template<typename T>
-inline void BufferResource<T>::GraphicsCommandCall(UINT number)
+inline void BufferResource<T>::BindGraphicsCBV(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetGraphicsRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
-inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t index)
+inline void BufferResource<T>::BindGraphicsSRV(UINT number, uint32_t index)
 {
 	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -260,7 +250,7 @@ inline void BufferResource<T>::GraphicsCommandCallSRV(UINT number, uint32_t inde
 }
 
 template<typename T>
-inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
+inline void BufferResource<T>::BindGraphicsSRV_Instanced(UINT number)
 {
 	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -271,14 +261,14 @@ inline void BufferResource<T>::GraphicsCommandCallInstancingSRV(UINT number)
 }
 
 template<typename T>
-inline void BufferResource<T>::ComputeCommandCall(UINT number)
+inline void BufferResource<T>::BindComputeCBV(UINT number)
 {
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	commands.List->SetComputeRootConstantBufferView(number, buffer_->GetGPUVirtualAddress());
 }
 
 template<typename T>
-inline void BufferResource<T>::ComputeCommandCallInstancingSRV(UINT number)
+inline void BufferResource<T>::BindComputeSRV_Instanced(UINT number)
 {
 	DirectXManager* dxCommon = DirectXManager::GetInstance();
 	Commands commands = CommandManager::GetInstance()->GetCommands();

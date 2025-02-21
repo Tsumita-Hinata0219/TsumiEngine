@@ -30,19 +30,9 @@ void DebugScene::Initialize()
 	skybox_->Init(dds);
 
 	/* ----- DemoParticle デモパーティクル ----- */
-	dParticleInstanceNum_ = 10;
-	dParticle_ = std::make_unique<GPUParticle>();
-	dParticle_->Init(dParticleInstanceNum_);
-	transforms_.resize(dParticleInstanceNum_);
-	for (auto& element : transforms_) {
-		element.Init();
-		element.srt.translate.z = 5.0f;
-	}
-	materials_.resize(dParticleInstanceNum_);
-	for (auto& element : materials_) {
-		element.color = Temp::Color::WHITE;
-		element.uvTransform = Matrix4x4::identity;
-	}
+	demoParticle_ = std::make_unique<DemoParticle>();
+	demoParticle_->Init();
+
 }
 
 
@@ -54,6 +44,11 @@ void DebugScene::Update()
 {
 	/* ----- Camera カメラ ----- */
 	camera_.Update();
+
+	/* ----- DemoParticle デモパーティクル ----- */
+	demoParticle_->Update();
+
+
 
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");
@@ -78,7 +73,7 @@ void DebugScene::BackSpriteDraw()
 void DebugScene::ModelDraw()
 {
 	/* ----- DemoParticle デモパーティクル ----- */
-	dParticle_->Draw(transforms_, materials_);
+	demoParticle_->Draw();
 }
 
 

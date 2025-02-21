@@ -15,6 +15,8 @@
 #include "GameObject/Others/TestHuman/TestHuman.h"
 #include "GameObject/Others/TestBaseObject/TestBaseObject.h"
 
+#include "GameObject/Dev/DemoParticle/DemoParticle.h"
+
 
 class DebugScene : public IScene {
 
@@ -66,9 +68,6 @@ private:
 	std::unique_ptr<Skybox> skybox_;
 
 	// DemoParticle
-	std::unique_ptr<GPUParticle> dParticle_;
-	uint32_t dParticleInstanceNum_ = 0;
-	std::vector<Transform> transforms_;
-	std::vector<MaterialDataN> materials_;
+	std::unique_ptr<DemoParticle> demoParticle_;
 };
 

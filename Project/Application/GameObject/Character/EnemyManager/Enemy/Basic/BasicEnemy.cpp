@@ -28,9 +28,14 @@ void BasicEnemy::Init()
 	model_->SetColorAddition(colorAdd_);
 
 	// 射撃処理クラス
-	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	// 射撃方法とバレット挙動
-	exeShot_->Init(shotFuncData_);
+	bulletContainer_ = std::make_unique<EnemyBulletContainer>();
+	bulletContainer_->SetOwner(this);
+	bulletContainer_->Init();
+
+	// エフェクト管理クラス
+	effectContainer_ = std::make_unique<EnemyEffectContainer>();
+	effectContainer_->SetOwner(this);
+	effectContainer_->Init();
 
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
@@ -72,14 +77,14 @@ void BasicEnemy::Init()
 // 更新処理
 void BasicEnemy::Update()
 {
-	// ステートパターン処理
-	//FuncStatePattern();
-
-	// 射撃処理
-	exeShot_->Update();
-
 	// 移動処理
 	movement_->Update();
+	
+	// 射撃処理
+	bulletContainer_->Update();
+
+	// エフェクト処理
+	effectContainer_->Update();
 
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -98,6 +103,12 @@ void BasicEnemy::Draw3D()
 	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
+
+	// バレットの描画
+	bulletContainer_->Draw();
+
+	// エフェクトの描画
+	effectContainer_->Draw();
 }
 void BasicEnemy::Draw2DFront() {}
 void BasicEnemy::Draw2DBack() {}
@@ -125,7 +136,7 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		hitReactionTimer_.Start();
 
 		// エフェクトを出す
-		enemyManager_->AddNewHitEffect(this);
+		effectContainer_->AddEffectInstance();
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {

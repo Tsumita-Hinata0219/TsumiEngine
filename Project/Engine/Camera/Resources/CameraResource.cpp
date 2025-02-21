@@ -14,7 +14,7 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 
 	// バッファー作成
 	buffer = std::make_unique<BufferResource<TransformationViewMatrix>>();
-	buffer->CreateResource();
+	buffer->CreateCBV();
 
 	// 行列の計算を通しておく
 	Update();
@@ -83,9 +83,7 @@ void CameraResource::UpdateBuffer()
 	bufferData->cameraPosition = GetWorldPos();
 
 	// バッファーに書き込み
-	buffer->Map();
-	buffer->WriteData(bufferData);
-	buffer->UnMap();
+	buffer->UpdateData(bufferData);
 }
 
 

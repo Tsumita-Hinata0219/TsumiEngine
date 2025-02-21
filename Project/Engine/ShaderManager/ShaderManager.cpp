@@ -154,7 +154,7 @@ void ShaderManager::ComputeShadersCompiles()
 {
 	CSParticleShader();
 	GPUParticle_Init();
-	//GPUParticle_SphereEmit();
+	GPUParticle_SphereEmit();
 }
 
 

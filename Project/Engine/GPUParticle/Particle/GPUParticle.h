@@ -37,24 +37,34 @@ public:
 	void Init(uint32_t instanceNum = 0);
 
 	/// <summary>
-	/// 更新処理
-	/// </summary>
-	void Update();
-
-	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
+
+	/// <summary>
+	/// パーティクルの要素のバインド
+	/// </summary>
+	void Bind_ParticleProp();
+
+
+#pragma region Accessor アクセッサ
+
+	/// <summary>
+	/// インスタンシング数
+	/// </summary>
+	uint32_t GetInstanceNum() const { return instanceNum_; }
+
+
+#pragma endregion 
 
 
 private:
 
 	/// <summary>
-	/// コマンドコール
+	/// バインド
 	/// </summary>
-	void CommandCall_Init();
-	void CommandCall_Update();
-	void CommandCall_Draw();
+	void Bind_Init();
+	void Bind_Draw();
 
 	/// <summary>
 	/// BufferResourceの作成

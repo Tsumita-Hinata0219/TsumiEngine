@@ -52,7 +52,7 @@ protected:
 		srv_ = descriptor_->CreatePostEffectSRV(stv);
 
 		// バッファー作成
-		mtlBuffer_.CreateResource();
+		mtlBuffer_.CreateCBV();
 	}
 
 

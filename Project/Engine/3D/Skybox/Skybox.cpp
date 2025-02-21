@@ -85,21 +85,13 @@ void Skybox::Draw()
 
 	// ここで書き込み
 	// VBV
-	buffers_.vetrices.Map();
-	buffers_.vetrices.WriteData(datas_.vertices.data());
-	buffers_.vetrices.UnMap();
+	buffers_.vetrices.UpdateData(datas_.vertices.data());
 	// IBV
-	buffers_.indices.Map();
-	buffers_.indices.WriteData(datas_.indices.data());
-	buffers_.indices.UnMap();
+	buffers_.indices.UpdateData(datas_.indices.data());
 	// Transform
-	buffers_.transform.Map();
-	buffers_.transform.WriteData((&transform_.transformationMatData));
-	buffers_.transform.UnMap();
+	buffers_.transform.UpdateData((&transform_.transformationMatData));
 	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(&datas_.color);
-	buffers_.material.UnMap();
+	buffers_.material.UpdateData(&datas_.color);
 
 	// コマンドコール
 	CommandCall();
@@ -199,13 +191,13 @@ void Skybox::CommandCall()
 	// IndexBufferView
 	buffers_.indices.IASetIndexBuffer();
 	// Transform
-	buffers_.transform.GraphicsCommandCall(1);
+	buffers_.transform.BindGraphicsCBV(1);
 	// Material
-	buffers_.material.GraphicsCommandCall(0);
+	buffers_.material.BindGraphicsCBV(0);
 	// Camera
 	cameraManager_->CommandCall(2);
 	// MaterialTexture
-	buffers_.material.GraphicsCommandCallSRV(3, texture_);
+	buffers_.material.BindGraphicsSRV(3, texture_);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.indices.size()), 1, 0, 0, 0);
 }

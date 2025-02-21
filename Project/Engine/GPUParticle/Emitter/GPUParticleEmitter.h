@@ -44,12 +44,15 @@ private:
 	/// </summary>
 	void TimeUpdate();
 
+	/// <summary>
+	/// Bufferへデータの書き込み
+	/// </summary>
+	void WriteData();
 
 #pragma region Accessor
 
 	// エミッターデータの設定
 	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
-
 
 #pragma endregion 
 
@@ -57,13 +60,13 @@ private:
 private:
 
 	// 書き込み用のバッファー
-	BufferResource<T> writeBuffer_;
+	BufferResource<T> emitterBuffer_;
 
 	// エミッターデータ
 	T emitterData_;
 
 	// 射出に関する
-	GpuParticle::EmitterConfig emitConfig_;
+	GpuParticle::EmitterConfig emitConfig_{};
 };
 
 
@@ -74,7 +77,10 @@ private:
 template<typename T>
 inline void GPUParticleEmitter<T>::Create(std::unique_ptr<GPUParticle>& particle)
 {
+	particle;
 
+	// Emitterのバッファー作成
+	emitterBuffer_.CreateCBV();
 }
 
 
@@ -86,6 +92,9 @@ inline void GPUParticleEmitter<T>::Update()
 {
 	// タイマー更新
 	TimeUpdate();
+
+	// データの書き込み
+	WriteData();
 }
 
 
@@ -95,9 +104,20 @@ inline void GPUParticleEmitter<T>::Update()
 template<typename T>
 inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 {
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
 
+	// PipeLineCheck
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
 
+	// Particle
+	particle->Bind_ParticleProp();
 
+	// Emmiter
+	emitterBuffer_.BindComputeCBV(1);
+
+	// Dispach
+	commands.List->Dispatch(1, 1, 1);
 }
 
 
@@ -118,5 +138,16 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 	else {
 		emitConfig_.enableEmit = 0;
 	}
+}
+
+
+/// <summary>
+/// Bufferへデータの書き込み
+/// </summary>
+template<typename T>
+inline void GPUParticleEmitter<T>::WriteData()
+{
+	// Emitter
+	emitterBuffer_.UpdateData(&emitterData_);
 }
 

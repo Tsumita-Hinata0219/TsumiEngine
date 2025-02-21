@@ -46,25 +46,15 @@ void Sprite::Draw(Transform& transform)
 
 	// --- ここで書き込み ---
 	// VBV
-	buffers_.vertex.Map();
-	buffers_.vertex.WriteData(datas_.mesh.vertices.data());
-	buffers_.vertex.UnMap();
+	buffers_.vertex.UpdateData(datas_.mesh.vertices.data());
 	// IBV
-	buffers_.indeces.Map();
-	buffers_.indeces.WriteData(datas_.mesh.indices.data());
-	buffers_.indeces.UnMap();
+	buffers_.indeces.UpdateData(datas_.mesh.indices.data());
 	// Material
-	buffers_.material.Map();
-	buffers_.material.WriteData(&datas_.material);
-	buffers_.material.UnMap();
+	buffers_.material.UpdateData(&datas_.material);
 	// Dissolve
-	buffers_.dissolve.Map();
-	buffers_.dissolve.WriteData(&datas_.dissolve);
-	buffers_.dissolve.UnMap();
+	buffers_.dissolve.UpdateData(&datas_.dissolve);
 	// Transform
-	buffers_.transform.Map();
-	buffers_.transform.WriteData(&transform.transformationMatData);
-	buffers_.transform.UnMap();
+	buffers_.transform.UpdateData(&transform.transformationMatData);
 
 	// コマンドコール
 	CommandCall();
@@ -85,19 +75,19 @@ void Sprite::CommandCall()
 	// IndexBufferView
 	buffers_.indeces.IASetIndexBuffer();
 	// Material
-	buffers_.material.GraphicsCommandCall(0);
+	buffers_.material.BindGraphicsCBV(0);
 	// Dissolve
-	buffers_.dissolve.GraphicsCommandCall(4);
+	buffers_.dissolve.BindGraphicsCBV(4);
 	// Transform
-	buffers_.transform.GraphicsCommandCall(1);
+	buffers_.transform.BindGraphicsCBV(1);
 	// View
 	CameraManager::GetInstance()->CommandCall(2);
 	// MaterialTexture
 	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
-	buffers_.material.GraphicsCommandCallSRV(3, datas_.material.textureHandle);
+	buffers_.material.BindGraphicsSRV(3, datas_.material.textureHandle);
 	// MaskTexture
 	//SRVManager::SetGraphicsRootDescriptorTable(5, datas_.dissolve.maskTexHandle);
-	buffers_.material.GraphicsCommandCallSRV(5, datas_.dissolve.maskTexHandle);
+	buffers_.material.BindGraphicsSRV(5, datas_.dissolve.maskTexHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(6, 1, 0, 0, 0);
 }
@@ -111,19 +101,19 @@ void Sprite::CreateBufferResource()
 	datas_.mesh.indices.resize(indicesSize_);
 
 	// mesh
-	buffers_.mesh.CreateResource(UINT(datas_.mesh.vertices.size()));
+	buffers_.mesh.CreateCBV(UINT(datas_.mesh.vertices.size()));
 	// vertexBufferView
-	buffers_.vertex.CreateResource(UINT(datas_.mesh.vertices.size()));
+	buffers_.vertex.CreateCBV(UINT(datas_.mesh.vertices.size()));
 	buffers_.vertex.CreateVertexBufferView();
 	// indexBufferView
-	buffers_.indeces.CreateResource(UINT(datas_.mesh.indices.size()));
+	buffers_.indeces.CreateCBV(UINT(datas_.mesh.indices.size()));
 	buffers_.indeces.CreateIndexBufferView();
 	// material
-	buffers_.material.CreateResource();
+	buffers_.material.CreateCBV();
 	// Dissolve
-	buffers_.dissolve.CreateResource();
+	buffers_.dissolve.CreateCBV();
 	// transform
-	buffers_.transform.CreateResource();
+	buffers_.transform.CreateCBV();
 }
 
 

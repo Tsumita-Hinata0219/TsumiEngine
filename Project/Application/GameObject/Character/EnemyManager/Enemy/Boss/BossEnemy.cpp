@@ -30,9 +30,14 @@ void BossEnemy::Init()
 	model_->SetColorAddition(colorAdd_);
 
 	// 射撃処理クラス
-	exeShot_ = std::make_unique<EnemyExecuteShot>(enemyManager_, this);
-	// 射撃方法とバレット挙動
-	exeShot_->Init(shotFuncData_);
+	bulletContainer_ = std::make_unique<EnemyBulletContainer>();
+	bulletContainer_->SetOwner(this);
+	bulletContainer_->Init();
+
+	// エフェクト管理クラス
+	effectContainer_ = std::make_unique<EnemyEffectContainer>();
+	effectContainer_->SetOwner(this);
+	effectContainer_->Init();
 
 	// 移動処理クラス
 	movement_ = std::make_unique<EnemyMovement>(enemyManager_, this, player_);
@@ -75,11 +80,14 @@ void BossEnemy::Update()
 	// シールドの更新
 	shield_->Update();
 
-	// 射撃処理
-	exeShot_->Update();
-
 	// 移動処理
 	movement_->Update();
+
+	// 射撃処理
+	bulletContainer_->Update();
+
+	// エフェクト処理
+	effectContainer_->Update();
 
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
@@ -101,6 +109,12 @@ void BossEnemy::Draw3D()
 	model_->SetColorAddition(colorAdd_);
 	model_->Draw(trans_);
 
+	// バレットの描画
+	bulletContainer_->Draw();
+
+	// エフェクトの描画
+	effectContainer_->Draw();
+
 	// シールドの描画処理
 	shield_->Draw3D();
 }
@@ -115,7 +129,7 @@ void BossEnemy::Draw2DBack()
 /// <summary>
 /// 衝突判定コールバック関数
 /// </summary>
-void BossEnemy::onCollision([[maybe_unused]]IObject* object)
+void BossEnemy::onCollision([[maybe_unused]] IObject* object)
 {
 	// 地形は押し出し
 	if (object->GetCategory() == Attributes::Category::TERRAIN) {
@@ -123,8 +137,7 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
 		trans_.UpdateMatrix();
 	}
-	else if (object->GetCategory() == Attributes::Category::PLAYER &&
-		object->GetType() == Attributes::Type::BULLET) {
+	else if (object->GetCategory() == Attributes::Category::PLAYER && object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;
@@ -136,7 +149,7 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 		hitReactionTimer_.Start();
 
 		// エフェクトを出す
-		enemyManager_->AddNewHitEffect(this);
+		effectContainer_->AddEffectInstance();
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {

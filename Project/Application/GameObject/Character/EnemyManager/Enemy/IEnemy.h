@@ -8,7 +8,8 @@
 #include "../../../GameObject.h"
 #include "Transform/Transform.h"
 
-#include "../ExecuteShot/EnemyExecuteShot.h"
+#include "../BulletContainer/EnemyBulletContainer.h"
+#include "../EffectContainer/EnemyEffectContainer.h"
 #include "../Movement/EnemyMovement.h"
 #include "../Bullet/EnemyBullet.h"
 
@@ -110,14 +111,12 @@ protected:
 
 	// 色加算
 	ColorAddition colorAdd_{};
-
+	 
 	// トランスフォーム
 	Transform trans_;
 	// 初期値
 	SRT initSRT_{};
 
-	// 射撃処理
-	std::unique_ptr<EnemyExecuteShot> exeShot_;
 	// 射撃データ
 	enemy::ShotFuncData shotFuncData_;
 
@@ -126,6 +125,11 @@ protected:
 	// 移動データ
 	enemy::MovementFuncData movementData_;
 
+	// バレット管理クラス
+	std::unique_ptr<EnemyBulletContainer> bulletContainer_;
+
+	// エフェクト管理クラス
+	std::unique_ptr<EnemyEffectContainer> effectContainer_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;
@@ -134,5 +138,4 @@ protected:
 	// リアクション時に使用する値
 	Vector3 hitReactionScale_{};
 	std::pair<float, float> hitReactionColor_;
-
 };

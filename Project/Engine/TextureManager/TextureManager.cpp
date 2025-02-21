@@ -258,7 +258,7 @@ ComPtr<ID3D12Resource> TextureManager::CreateTextureResource(const DirectX::TexM
 	// 3. Resourceを作る
 	// Resourceを生成する
 	ComPtr<ID3D12Resource> resource{};
-	resource = CreateResource(resourceDesc, heapProperties);
+	resource = CreateCBV(resourceDesc, heapProperties);
 
 	return resource;
 }
@@ -302,7 +302,7 @@ D3D12_HEAP_PROPERTIES TextureManager::SettingUseHeap() {
 /// <summary>
 /// Resourceを生成する
 /// </summary>
-ComPtr<ID3D12Resource> TextureManager::CreateResource(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties) {
+ComPtr<ID3D12Resource> TextureManager::CreateCBV(D3D12_RESOURCE_DESC resourceDesc, D3D12_HEAP_PROPERTIES heapProperties) {
 
 	ComPtr<ID3D12Resource> resource;
 	HRESULT result;

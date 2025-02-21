@@ -84,29 +84,29 @@ protected:
 	// BufferResourceの生成
 	void CreateBufferResource(ModelDatas datas) {
 		// mesh
-		buffers_.mesh.CreateResource(UINT(datas.mesh.vertices.size()));
+		buffers_.mesh.CreateCBV(UINT(datas.mesh.vertices.size()));
 		// vertexBufferView
-		buffers_.vertex.CreateResource(UINT(datas.mesh.vertices.size()));
+		buffers_.vertex.CreateCBV(UINT(datas.mesh.vertices.size()));
 		buffers_.vertex.CreateVertexBufferView();
 		// indexBufferView
-		buffers_.indices.CreateResource(UINT(datas.mesh.indices.size()));
+		buffers_.indices.CreateCBV(UINT(datas.mesh.indices.size()));
 		buffers_.indices.CreateIndexBufferView();
 		// transform
-		buffers_.transform.CreateResource();
+		buffers_.transform.CreateCBV();
 		// material
-		buffers_.material.CreateResource();
+		buffers_.material.CreateCBV();
 		// light
-		buffers_.light.CreateResource();
+		buffers_.light.CreateCBV();
 		// encironment
-		buffers_.enviroment.CreateResource();
+		buffers_.enviroment.CreateCBV();
 		// colorAddition
-		buffers_.colorAddition.CreateResource();
+		buffers_.colorAddition.CreateCBV();
 
 		if (stateType_ == GLTF) {
 			// influence
-			buffers_.influence.CreateResource(UINT(datas.mesh.vertices.size()));
+			buffers_.influence.CreateCBV(UINT(datas.mesh.vertices.size()));
 			// palette
-			//buffers_.palette.CreateResource(UINT(datas_.skeleton.joints.size()));
+			//buffers_.palette.CreateCBV(UINT(datas_.skeleton.joints.size()));
 		}
 	}
 

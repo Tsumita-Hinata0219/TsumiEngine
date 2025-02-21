@@ -37,6 +37,7 @@
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
+#include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSphere.h"
 
 
 using namespace PipeLine;
@@ -114,6 +115,7 @@ private:
 	/// </summary>
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_CSParticle();
+	void CreatePipeLine_ParticleEmitterSphere();
 
 
 private: // メンバ変数

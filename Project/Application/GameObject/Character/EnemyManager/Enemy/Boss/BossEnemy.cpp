@@ -118,7 +118,7 @@ void BossEnemy::Draw2DBack()
 /// <summary>
 /// 衝突判定コールバック関数
 /// </summary>
-void BossEnemy::onCollision([[maybe_unused]]IObject* object)
+void BossEnemy::onCollision([[maybe_unused]] IObject* object)
 {
 	// 地形は押し出し
 	if (object->GetCategory() == Attributes::Category::TERRAIN) {
@@ -126,8 +126,7 @@ void BossEnemy::onCollision([[maybe_unused]]IObject* object)
 		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
 		trans_.UpdateMatrix();
 	}
-	else if (object->GetCategory() == Attributes::Category::PLAYER &&
-		object->GetType() == Attributes::Type::BULLET) {
+	else if (object->GetCategory() == Attributes::Category::PLAYER && object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
 		hp_--;

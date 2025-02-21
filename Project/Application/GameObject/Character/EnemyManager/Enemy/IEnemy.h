@@ -110,7 +110,7 @@ protected:
 
 	// 色加算
 	ColorAddition colorAdd_{};
-
+	 
 	// トランスフォーム
 	Transform trans_;
 	// 初期値
@@ -134,5 +134,4 @@ protected:
 	// リアクション時に使用する値
 	Vector3 hitReactionScale_{};
 	std::pair<float, float> hitReactionColor_;
-
 };

@@ -176,6 +176,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFour\EnemyShotPatternOmniFour.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
@@ -471,6 +472,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\OmniFour\EnemyShotPatternOmniFour.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Movement\EnemyMovement.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Property\EnemyProperty.h" />
     <ClInclude Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.h" />

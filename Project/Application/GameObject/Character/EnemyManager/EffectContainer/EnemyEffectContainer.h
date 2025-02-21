@@ -3,29 +3,29 @@
 #include "GameObject/GameObject.h"
 #include "../Property/EnemyProperty.h"
 #include "../Bullet/EnemyBullet.h"
-#include "ShotPattern/IEnemyShotPattern.h"
-#include "ShotFactory/EnemyShotStateFactory.h"
 
+#include "../Effect/Interface/IEnemyEffect.h"
+#include "../Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
 
 
 // 前方宣言
 class IEnemy;
 
 
-/* Enemyそれぞれが持つ、Bulletの管理クラス */
-class EnemyBulletContainer {
+/* Enemyそれぞれが持つ、Effectlletの管理クラス */
+class EnemyEffectContainer {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	EnemyBulletContainer() = default;
+	EnemyEffectContainer() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~EnemyBulletContainer() = default;
+	~EnemyEffectContainer() = default;
 
 	/// <summary>
 	/// 初期化処理
@@ -45,7 +45,7 @@ public:
 	/// <summary>
 	/// バレット追加
 	/// </summary>
-	void AddBulletInstance(Vector3 initVel);
+	void AddEffectInstance();
 
 
 
@@ -70,23 +70,10 @@ private:
 	// 親エネミー
 	IEnemy* owner_ = nullptr;
 
-	// BulletのPool
-	ObjectPool<EnemyBullet> bulletPool_;
-	// BulletのList配列
-	std::list<EnemyBullet*> bulletList_;
-
-	// 射撃タイマー
-	Timer shotTimer_{};
-
-	// バレットの速度
-	const float kBulletSpeed_ = 0.25f;
-
-	// 射撃クラス
-	std::unique_ptr<IEnemyShotPattern> exeShot_;
-
-	std::mt19937 randEngine_; // ランダムエンジン
-	std::uniform_int_distribution<> behabirDist_; // 0 or 1 の分布
-	std::uniform_real_distribution<float> directionDist_; // -1 ~ +1 の分布
+	// EffectのPool
+	ObjectPool<EnemyHitEffectCircle> circleEffectPool_;
+	// EffectのList配列
+	std::list<EnemyHitEffectCircle*> circleEffectList_;
 
 
 };

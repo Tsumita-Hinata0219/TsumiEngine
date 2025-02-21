@@ -4,16 +4,6 @@
 
 
 /// <summary>
-/// コンストラクタ
-/// </summary>
-EnemyBulletContainer::EnemyBulletContainer()
-{
-	
-
-}
-
-
-/// <summary>
 /// 初期化処理
 /// </summary>
 void EnemyBulletContainer::Init()

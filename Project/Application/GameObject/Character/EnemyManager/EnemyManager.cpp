@@ -29,9 +29,9 @@ void EnemyManager::Update()
 	if (isBossEliminated_) { return; }
 
 	// EnemyListの更新処理
-	/*for (auto& enemy : commonEnemies_) {
+	for (auto& enemy : commonEnemies_) {
 		enemy->Update();
-	}*/
+	}
 	// 死亡フラグが立っていたら削除
 	commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
 		if (enemy->IsDead()) {

@@ -40,7 +40,4 @@ private:
 	uint32_t particleInstanceNum_ = 0;
 	std::unique_ptr<GPUParticle> particle_;
 	std::unique_ptr<GPUParticleEmitter<GpuParticle::SphereEmitter>> emitter_;
-
-	std::vector<Transform> transforms_;
-	std::vector<MaterialDataN> materials_;
 };

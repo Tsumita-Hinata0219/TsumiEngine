@@ -37,9 +37,14 @@ public:
 	void Init(uint32_t instanceNum = 0);
 
 	/// <summary>
+	/// 更新処理
+	/// </summary>
+	void Update();
+
+	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
+	void Draw();
 
 	/// <summary>
 	/// パーティクルの要素のバインド
@@ -64,6 +69,7 @@ private:
 	/// バインド
 	/// </summary>
 	void Bind_Init();
+	void Bind_Update();
 	void Bind_Draw();
 
 	/// <summary>

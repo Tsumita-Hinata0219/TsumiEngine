@@ -37,6 +37,7 @@
 
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
+#include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
 #include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSphere.h"
 
 
@@ -114,6 +115,7 @@ private:
 	/// ComputeShader
 	/// </summary>
 	void CreatePipeLine_GPUParticle_Init();
+	void CreatePipeLine_GPUParticle_Update();
 	void CreatePipeLine_CSParticle();
 	void CreatePipeLine_ParticleEmitterSphere();
 

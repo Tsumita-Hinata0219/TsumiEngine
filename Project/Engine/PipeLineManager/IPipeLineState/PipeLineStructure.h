@@ -59,6 +59,7 @@ namespace PipeLine {
 		Vignetting,
 
 		GPUParticle_Init,
+		GPUParticle_Update,
 		CSParticle,
 		Particle_EmitterSphere
 	};

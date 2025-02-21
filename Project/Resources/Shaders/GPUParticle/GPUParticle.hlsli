@@ -67,3 +67,4 @@ struct EmitterSphere
     float32_t3 translate; // ˆÊ’u
     float32_t radius; // ¶¬”¼Œa
 };
+

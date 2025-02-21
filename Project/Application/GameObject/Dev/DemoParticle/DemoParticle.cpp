@@ -13,17 +13,6 @@ void DemoParticle::Init()
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
 	emitter_->Create(particle_);
 
-
-	transforms_.resize(particleInstanceNum_);
-	for (auto& element : transforms_) {
-		element.Init();
-		element.srt.translate.z = 5.0f;
-	}
-	materials_.resize(particleInstanceNum_);
-	for (auto& element : materials_) {
-		element.color = Temp::Color::WHITE;
-		element.uvTransform = Matrix4x4::identity;
-	}
 }
 
 
@@ -34,6 +23,7 @@ void DemoParticle::Update()
 {
 	emitter_->Emit(particle_);
 	emitter_->Update();
+	particle_->Update();
 }
 
 
@@ -43,6 +33,6 @@ void DemoParticle::Update()
 void DemoParticle::Draw()
 {
 	/* ----- DemoParticle デモパーティクル ----- */
-	particle_->Draw(transforms_, materials_);
+	particle_->Draw();
 }
 

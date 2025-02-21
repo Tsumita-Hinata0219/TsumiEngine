@@ -154,6 +154,7 @@ void ShaderManager::ComputeShadersCompiles()
 {
 	CSParticleShader();
 	GPUParticle_Init();
+	GPUParticle_Update();
 	GPUParticle_SphereEmit();
 }
 
@@ -373,6 +374,7 @@ void ShaderManager::VignettingShader()
 }
 
 
+
 void ShaderManager::CSParticleShader()
 {
 	ShadersMode shader = {
@@ -387,6 +389,14 @@ void ShaderManager::GPUParticle_Init()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Init/GPUParticle_Init.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Init"] = shader;
+}
+
+void ShaderManager::GPUParticle_Update()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Update/GPUParticle_Update.CS.hlsl"),
+	};
+	computeShadersMap_["GPUParticle_Update"] = shader;
 }
 
 void ShaderManager::GPUParticle_SphereEmit()

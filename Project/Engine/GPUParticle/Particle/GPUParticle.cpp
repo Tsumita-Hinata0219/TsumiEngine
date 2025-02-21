@@ -40,7 +40,6 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 		metaDataArray.push_back(element.transformationMatData);
 	}
 
-
 	// ここで書き込み
 	// VBV
 	handles_.vertex.UpdateData(model_->GetMeshData().vertices.data());
@@ -51,7 +50,6 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 	// Material
 	handles_.material.UpdateData(materials, instanceNum_);
 	
-
 	// 描画バインド
 	Bind_Draw();
 }
@@ -76,7 +74,6 @@ void GPUParticle::Bind_Init()
 
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Init);
-
 
 	// Particleの要素の初期化値
 	handles_.particleElement.BindComputeSRV_Instanced(0);
@@ -103,12 +100,9 @@ void GPUParticle::Bind_Draw()
 	// Camera
 	cameraManager_->CommandCall(1);
 	// Material
-	//handles_.material.BindGraphicsSRV_Instanced(3);
 	handles_.particleElement.BindGraphicsSRV_Instanced(2);
 	// MaterialTexture
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
-	// Light
-	//buffers_.light.CommandCall(4);
 	// Draw!!
 	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }
@@ -137,7 +131,5 @@ void GPUParticle::CreateBufferResource()
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
-	// light
-	//buffers_.light.CreateCBV();
 }
 

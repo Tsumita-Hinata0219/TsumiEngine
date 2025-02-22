@@ -2394,7 +2394,7 @@
     <None Include="externals\assimp\include\assimp\vector3.inl">
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
-    <None Include="Resources\Shaders\Math\Random.hlsli" />
+    <None Include="Resources\Shaders\Random\Random.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">

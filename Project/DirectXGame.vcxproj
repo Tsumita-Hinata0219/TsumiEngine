@@ -1355,7 +1355,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
     <None Include="Resources\Shaders\Math\Math.hlsli" />
-    <None Include="Resources\Shaders\Math\Random.hlsli" />
+    <None Include="Resources\Shaders\Random\Random.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />

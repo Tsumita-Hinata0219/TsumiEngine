@@ -11,16 +11,23 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 
 	// フレームワーク
 	tsumi_ = tsumi_->GetInstance();
+	tsumi_->Initialize();
+
 	// DirectX
 	dxManager_ = dxManager_->GetInstance();
+
 	// 時間記録
 	timeSys_ = TimeSystem::GetInstance();
+	timeSys_->Init();
 
-	tsumi_->Initialize();
+	// シーン初期化
 	scene_ = std::move(initScene);
 	scene_->SetManager(this);
 	scene_->Initialize();
+
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
+
+	// PostEffect : CopyImage
 	copyImage_ = std::make_unique<AbsentEffect>();
 	copyImage_->Init();
 }
@@ -45,6 +52,9 @@ void GameManager::Run() {
 
 		auto currentTime = std::chrono::steady_clock::now();
 		g_ElapsedTime = std::chrono::duration<float>(currentTime - startTime_).count();
+
+		// 時間記録
+		timeSys_->Update();
 
 		tsumi_->BeginFlame();
 		scene_->Update();

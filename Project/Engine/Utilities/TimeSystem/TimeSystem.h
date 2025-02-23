@@ -22,6 +22,11 @@ public:
 	}
 
 	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	void Init();
+
+	/// <summary>
 	/// 更新処理
 	/// </summary>
 	void Update();
@@ -32,6 +37,14 @@ public:
 	float Get_SinceStart()const { return this->timeSinceStart_; }
 
 #pragma endregion
+
+
+private:
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui();
 
 
 private:

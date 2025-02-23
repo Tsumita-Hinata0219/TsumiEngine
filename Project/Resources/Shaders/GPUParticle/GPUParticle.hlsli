@@ -69,3 +69,10 @@ struct EmitterSphere
     float32_t radius; // ¶¬”¼Œa
 };
 
+// —”‚ÌƒV[ƒhî•ñ
+struct RandomSeed
+{
+    float gameTime;
+    float dynamicTime;
+};
+

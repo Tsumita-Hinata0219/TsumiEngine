@@ -40,4 +40,10 @@ struct SphereEmitter {
 	float radius;            // 射出半径
 };
 
+// 乱数のシード情報
+struct RandomSeed {
+	float gameTime; 
+	float dynamicTime;
+};
+
 }

@@ -14,6 +14,14 @@ private:
 public:
 
 	/// <summary>
+	/// インスタンス取得
+	/// </summary>
+	static TimeSystem* GetInstance() {
+		TimeSystem instance;
+		return &instance;
+	}
+
+	/// <summary>
 	/// 更新処理
 	/// </summary>
 	void Update();
@@ -24,8 +32,6 @@ public:
 	float Get_SinceStart()const { return this->timeSinceStart_; }
 
 #pragma endregion
-
-
 
 
 private:

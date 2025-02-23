@@ -346,6 +346,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
+    <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
     <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="externals\DirectXTex\BC.cpp">

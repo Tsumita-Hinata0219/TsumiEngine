@@ -1466,6 +1466,7 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
+    <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

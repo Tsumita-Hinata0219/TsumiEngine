@@ -13,6 +13,7 @@ void DemoParticle::Init()
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
 	emitter_->Create(particle_);
 
+	emitData_ = emitter_->GetEmitData();
 }
 
 
@@ -21,7 +22,7 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	emitter_->Emit(particle_);
+	emitter_->Emit();
 	emitter_->Update();
 	particle_->Update();
 }

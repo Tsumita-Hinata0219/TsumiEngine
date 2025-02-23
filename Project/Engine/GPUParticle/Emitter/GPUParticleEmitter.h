@@ -27,7 +27,7 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create(std::unique_ptr<GPUParticle>& particle);
+	void Create(std::weak_ptr<GPUParticle> owner);
 
 	/// <summary>
 	/// 更新処理
@@ -37,7 +37,15 @@ public:
 	/// <summary>
 	/// Particleを沸かせる
 	/// </summary>
-	void Emit(std::unique_ptr<GPUParticle>& particle);
+	void Emit();
+
+#pragma region Accessor
+
+	// エミッターデータ
+	const std::weak_ptr<T> GetEmitData() { return this->emitterData2_; }
+	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
+
+#pragma endregion 
 
 
 private:
@@ -57,21 +65,18 @@ private:
 	/// </summary>
 	void WriteData();
 
-#pragma region Accessor
-
-	// エミッターデータの設定
-	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
-
-#pragma endregion 
-
 
 private:
+
+	// パーティクルのPtr
+	std::weak_ptr<GPUParticle> particlePtr_;
 
 	// 書き込み用のバッファー
 	BufferResource<T> emitterBuffer_;
 
 	// エミッターデータ
 	T emitterData_;
+	std::shared_ptr<T> emitterData2_;
 
 	// 射出に関する
 	GpuParticle::EmitterConfig emitConfig_{};
@@ -93,9 +98,9 @@ private:
 /// 生成
 /// </summary>
 template<typename T>
-inline void GPUParticleEmitter<T>::Create(std::unique_ptr<GPUParticle>& particle)
+inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 {
-	particle;
+	particlePtr_ = owner;
 
 	// TimeSystem
 	timeSys_ = TimeSystem::GetInstance();
@@ -132,7 +137,7 @@ inline void GPUParticleEmitter<T>::Update()
 /// Particleを沸かせる
 /// </summary>
 template<typename T>
-inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
+inline void GPUParticleEmitter<T>::Emit()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -141,7 +146,7 @@ inline void GPUParticleEmitter<T>::Emit(std::unique_ptr<GPUParticle>& particle)
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
 
 	// Particle
-	particle->Bind_ParticleProp();
+	particlePtr_.lock()->Bind_ParticleProp();
 
 	// Emmiter
 	emitterBuffer_.BindComputeCBV(1);
@@ -162,7 +167,7 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 {
 	emitConfig_.intervalTime += 1.0f / 60.0f; // δタイムを加算
 	// 射出間隔を上回ったら射出許可を出して時間を調整
-	if (emitConfig_.emitInterval <= emitConfig_.intervalTime) 
+	if (emitConfig_.emitInterval <= emitConfig_.intervalTime)
 	{
 		emitConfig_.intervalTime -= emitConfig_.intervalTime;
 		emitConfig_.enableEmit = 1;

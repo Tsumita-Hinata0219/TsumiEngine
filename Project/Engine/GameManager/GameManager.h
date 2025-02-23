@@ -11,7 +11,7 @@
 #include "GameData/GameData.h"
 
 #include "Utilities/TextLog/TextLog.h"
-
+#include "Utilities/TimeSystem/TimeSystem.h"
 
 #include <array>
 #include <string>
@@ -50,6 +50,16 @@ public:
 
 private:
 
+	// フレームワーク
+	Tsumi* tsumi_ = nullptr;
+
+	// DirectX
+	DirectXManager* dxManager_ = nullptr;
+
+	// 時間記録
+	TimeSystem* timeSys_ = nullptr;
+
+	// 現在のシーン
 	std::unique_ptr<IScene> scene_;
 
 	std::chrono::steady_clock::time_point startTime_;

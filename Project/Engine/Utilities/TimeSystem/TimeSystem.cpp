@@ -11,6 +11,6 @@ void TimeSystem::Update()
 
 	// 10万秒(約28時間)ごとにリセット
 	if (timeSinceStart_ >= 100000.0f) {
-		timeSinceStart_ = 0.0f;
+		timeSinceStart_ -= 100000.0f;
 	}
 }

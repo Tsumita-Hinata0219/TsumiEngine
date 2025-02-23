@@ -17,7 +17,7 @@ public:
 	/// インスタンス取得
 	/// </summary>
 	static TimeSystem* GetInstance() {
-		TimeSystem instance;
+		static TimeSystem instance;
 		return &instance;
 	}
 

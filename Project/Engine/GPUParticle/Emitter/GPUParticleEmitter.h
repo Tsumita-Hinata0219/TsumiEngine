@@ -42,7 +42,7 @@ public:
 #pragma region Accessor
 
 	// エミッターデータ
-	const std::weak_ptr<T> GetEmitData() { return this->emitterData2_; }
+	const std::weak_ptr<T> GetEmitData() { return this->emitterData_; }
 	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
 
 #pragma endregion 
@@ -71,12 +71,9 @@ private:
 	// パーティクルのPtr
 	std::weak_ptr<GPUParticle> particlePtr_;
 
-	// 書き込み用のバッファー
-	BufferResource<T> emitterBuffer_;
-
 	// エミッターデータ
-	T emitterData_;
-	std::shared_ptr<T> emitterData2_;
+	BufferResource<T> emitterBuffer_;
+	std::shared_ptr<T> emitterData_;
 
 	// 射出に関する
 	GpuParticle::EmitterConfig emitConfig_{};
@@ -100,18 +97,21 @@ private:
 template<typename T>
 inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 {
-	particlePtr_ = owner;
-
 	// TimeSystem
 	timeSys_ = TimeSystem::GetInstance();
 
-	// SeedData
+	// パーティクルのptrを受け取る
+	particlePtr_ = owner;
+
+	// シードデータの初期設定
 	seedData_.gameTime = timeSys_->Get_SinceStart();
 	seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-	// Seedのバッファー作成
+	// シードデータのバッファー作成
 	seedBuffer_.CreateCBV();
 
-	// Emitterのバッファー作成
+	// エミッター作成
+	emitterData_ = std::make_shared<T>();
+	// エミッターのバッファー作成
 	emitterBuffer_.CreateCBV();
 }
 
@@ -205,7 +205,7 @@ template<typename T>
 inline void GPUParticleEmitter<T>::WriteData()
 {
 	// Emitter
-	emitterBuffer_.UpdateData(&emitterData_);
+	emitterBuffer_.UpdateData(emitterData_.get());
 
 	// SeedData
 	seedBuffer_.UpdateData(&seedData_);

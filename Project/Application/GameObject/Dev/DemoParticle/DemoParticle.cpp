@@ -6,13 +6,16 @@
 /// </summary>
 void DemoParticle::Init()
 {
+	// パーティクルインスタンス数
 	particleInstanceNum_ = 10;
-	particle_ = std::make_unique<GPUParticle>();
+	// パーティクル作成
+	particle_ = std::make_shared<GPUParticle>();
 	particle_->Init(particleInstanceNum_);
 
+	// エミッター作成
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
 	emitter_->Create(particle_);
-
+	// エミッターのデータを取得
 	emitData_ = emitter_->GetEmitData();
 }
 

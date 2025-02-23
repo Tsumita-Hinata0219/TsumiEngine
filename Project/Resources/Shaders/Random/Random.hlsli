@@ -3,6 +3,28 @@ class RandomGenerator
     float3 seed3D;
     float2 seed2D;
     float4 seed4D;
+    
+    // シード値の設定
+    void InitSeed(float gameTime, float dynamicTime)
+    {
+        seed3D = float3(
+            sin(gameTime) * 43758.5453 + cos(dynamicTime) * 12345.6789,
+            cos(gameTime) * 29823.2345 + sin(dynamicTime) * 67890.1234,
+            sin(dynamicTime) * 15937.4512 + cos(gameTime) * 54321.9876
+        );
+
+        seed2D = float2(
+            sin(dynamicTime) * 98765.4321 + cos(gameTime) * 45678.1234,
+            cos(dynamicTime) * 87654.3210 + sin(gameTime) * 34567.9876
+        );
+
+        seed4D = float4(
+            sin(gameTime) * 76543.2109 + cos(dynamicTime) * 23456.8765,
+            cos(gameTime) * 65432.1098 + sin(dynamicTime) * 12345.7654,
+            sin(dynamicTime) * 54321.0987 + cos(gameTime) * 67890.6543,
+            cos(dynamicTime) * 43210.9876 + sin(gameTime) * 78901.5432
+        );
+    }
 
     // 1D ランダム値（0.0～1.0）
     float rand3dTo1d(float value, float3 dotDir = float3(12.9898, 78.233, 37.719))

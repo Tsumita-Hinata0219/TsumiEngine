@@ -22,10 +22,7 @@ void main(int3 DTid : SV_DispatchThreadID)
     {
         // 乱数生成器
         RandomGenerator rng;
-        // シードの設定
-        rng.seed3D = float3(1.0, 2.0, 3.0);
-        rng.seed2D = float2(4.0, 5.0);
-        rng.seed4D = float4(6.0, 7.0, 8.0, 9.0);
+        rng.InitSeed(gRandomSeed.gameTime, gRandomSeed.dynamicTime);
         // 範囲の設定
         // スケール
         float3 scaleMin = float3(0.2f, 0.2f, 1.0f);

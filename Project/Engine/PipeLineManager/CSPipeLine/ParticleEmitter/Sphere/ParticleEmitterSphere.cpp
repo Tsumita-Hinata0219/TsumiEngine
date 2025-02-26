@@ -34,7 +34,7 @@ PsoProperty ParticleEmitterSphere::SetUpPso()
 // RootSignatureのセットアップ
 void ParticleEmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	D3D12_ROOT_PARAMETER rootParameters[3]{};
+	D3D12_ROOT_PARAMETER rootParameters[4]{};
 
 	// u0 : Particleの要素
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
@@ -47,15 +47,27 @@ void ParticleEmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descri
 	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
 	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
 
-	// b0 : Emitterの射出関連
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[1].Descriptor.ShaderRegister = 0;// レジスタ番号
+	// u1 : カウンター
+	D3D12_DESCRIPTOR_RANGE counterDes[1]{};
+	counterDes[0].BaseShaderRegister = 1; // レジスター番号
+	counterDes[0].NumDescriptors = 1; // 数は1つ
+	counterDes[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	counterDes[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
+	rootParameters[1].DescriptorTable.pDescriptorRanges = counterDes; // Tableの中身の配列を指定
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(counterDes); // Tableで利用する
 
-	// b1 : RandomのSeedの値
+
+	// b0 : Emitterの射出関連
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[2].Descriptor.ShaderRegister = 1;// レジスタ番号
+	rootParameters[2].Descriptor.ShaderRegister = 0;// レジスタ番号
+
+	// b1 : RandomのSeedの値
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
+	rootParameters[3].Descriptor.ShaderRegister = 1;// レジスタ番号
 
 
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE; // コンピュートシェーダーに適用

@@ -49,8 +49,12 @@ public:
 	/// <summary>
 	/// パーティクルの要素のバインド
 	/// </summary>
-	void Bind_ParticleProp();
+	void Bind_ParticleProp(UINT num);
 
+	/// <summary>
+	/// フリーカウンターのバインド
+	/// </summary>
+	void Bind_FreeCounter(UINT num);
 
 #pragma region Accessor アクセッサ
 

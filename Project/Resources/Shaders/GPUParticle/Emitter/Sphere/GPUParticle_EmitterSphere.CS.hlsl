@@ -7,8 +7,8 @@ static const uint kMaclParticles = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
-//// カウンター
-//RWStructuredBuffer<uint> gFreeCounter : register(u1);
+// カウンター
+RWStructuredBuffer<uint> gFreeCounter : register(u1);
 
 
 // Emitterの射出関連

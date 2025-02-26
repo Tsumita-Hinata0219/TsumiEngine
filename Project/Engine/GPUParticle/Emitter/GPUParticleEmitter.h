@@ -155,13 +155,16 @@ inline void GPUParticleEmitter<T>::Emit()
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
 
 	// Particle
-	particlePtr_.lock()->Bind_ParticleProp();
+	particlePtr_.lock()->Bind_ParticleProp(0);
+
+	// FreeCounter
+	particlePtr_.lock()->Bind_FreeCounter(1);
 
 	// EmitterConfig
-	emitConfigBuffer_.BindComputeCBV(1);
+	emitConfigBuffer_.BindComputeCBV(2);
 
 	// RandomSeed
-	seedBuffer_.BindComputeCBV(2);
+	seedBuffer_.BindComputeCBV(3);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

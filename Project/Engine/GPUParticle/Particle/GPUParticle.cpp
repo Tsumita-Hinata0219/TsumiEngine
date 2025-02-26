@@ -55,9 +55,18 @@ void GPUParticle::Draw()
 /// <summary>
 /// パーティクルの要素のバインド
 /// </summary>
-void GPUParticle::Bind_ParticleProp()
+void GPUParticle::Bind_ParticleProp(UINT num)
 {
-	handles_.particleElement.BindComputeSRV_Instanced(0);
+	handles_.particleElement.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// フリーカウンターのバインド
+/// </summary>
+void GPUParticle::Bind_FreeCounter(UINT num)
+{
+	freeCounterBuffer_.BindComputeSRV_Instanced(num);
 }
 
 

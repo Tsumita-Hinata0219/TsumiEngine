@@ -40,7 +40,6 @@ private:
 	uint32_t particleInstanceNum_ = 0;
 
 	// パーティクル本体
-	//std::unique_ptr<GPUParticle> particle_;
 	std::shared_ptr<GPUParticle> particle_;
 
 	// エミッター
@@ -48,4 +47,7 @@ private:
 
 	// エミッターの情報
 	std::weak_ptr<GpuParticle::SphereEmitter> emitData_;
+
+	// エミッターコンフィグ
+	std::weak_ptr<GpuParticle::EmitterConfig> emitConfig_;
 };

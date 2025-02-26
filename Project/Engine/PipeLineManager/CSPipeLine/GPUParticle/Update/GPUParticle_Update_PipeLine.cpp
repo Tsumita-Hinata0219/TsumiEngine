@@ -34,19 +34,18 @@ PsoProperty GPUParticle_Update_PipeLine::SetUpPso()
 // RootSignatureのセットアップ
 void GPUParticle_Update_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
-	descriptorRange[0].BaseShaderRegister = 0; // 0から始まる
-	descriptorRange[0].NumDescriptors = 1; // 数は1つ
-	descriptorRange[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
-	descriptorRange[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-
 	D3D12_ROOT_PARAMETER rootParameters[1]{};
-	// Particleの要素
+
+	// u0 : Particleの要素
+	D3D12_DESCRIPTOR_RANGE particleElementDes[1]{};
+	particleElementDes[0].BaseShaderRegister = 0; // レジスター番号
+	particleElementDes[0].NumDescriptors = 1; // 数は1つ
+	particleElementDes[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	particleElementDes[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
 	rootParameters[0].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
 	rootParameters[0].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
-	rootParameters[0].DescriptorTable.pDescriptorRanges = descriptorRange; // Tableの中身の配列を指定
-	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(descriptorRange); // Tableで利用する
-
+	rootParameters[0].DescriptorTable.pDescriptorRanges = particleElementDes; // Tableの中身の配列を指定
+	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(particleElementDes); // Tableで利用する
 
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE; // コンピュートシェーダーに適用
 	descriptionRootSignature.NumParameters = _countof(rootParameters); // rootParametersの数を設定

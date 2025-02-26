@@ -83,11 +83,12 @@ private:
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 
-	// バッファーに書き込むデータ
+	// パーティクルの要素
 	GpuParticle::ModelData modelData_{};
-
-	// バッファー
 	GpuParticle::ResourceHandles handles_{};
+
+	// フリーカウンター
+	BufferResource<uint32_t> freeCounterBuffer_;
 
 	// パーティクルのインスタンス数
 	uint32_t instanceNum_ = 0;

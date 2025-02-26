@@ -17,6 +17,11 @@ void DemoParticle::Init()
 	emitter_->Create(particle_);
 	// エミッターのデータを取得
 	emitData_ = emitter_->GetEmitData();
+	// エミッターコンフィグを取得
+	emitConfig_ = emitter_->GetEmitConfig();
+	emitConfig_.lock()->spawnInterval = 1.0f;
+	emitConfig_.lock()->elapsedTime = 0.0f;
+	emitConfig_.lock()->isEmitting = 0;
 }
 
 

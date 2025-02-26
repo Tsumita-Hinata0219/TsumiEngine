@@ -75,6 +75,9 @@ void GPUParticle::Bind_Init()
 	// Particleの要素の初期化値
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
+	// FreeCounterの要素の初期化
+	freeCounterBuffer_.BindComputeSRV_Instanced(1);
+
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
 }
@@ -137,5 +140,8 @@ void GPUParticle::CreateBufferResource()
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
+
+	// FreeCounter
+	freeCounterBuffer_.CreateUAV(instanceNum_);
 }
 

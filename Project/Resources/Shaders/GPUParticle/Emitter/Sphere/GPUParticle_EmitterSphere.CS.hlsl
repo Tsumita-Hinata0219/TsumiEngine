@@ -7,6 +7,10 @@ static const uint kMaclParticles = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
+//// カウンター
+//RWStructuredBuffer<uint> gFreeCounter : register(u1);
+
+
 // Emitterの射出関連
 ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
 
@@ -18,7 +22,7 @@ ConstantBuffer<RandomSeed> gRandomSeed : register(b1);
 void main(int3 DTid : SV_DispatchThreadID)
 {
     // 射出許可が出たので射出
-    if (gEmitterConfig.enableEmit != 0)
+    if (gEmitterConfig.isEmitting != 0)
     {
         // 乱数生成器
         RandomGenerator rng;
@@ -26,7 +30,7 @@ void main(int3 DTid : SV_DispatchThreadID)
         // 範囲の設定
         // スケール
         float3 scaleMin = float3(0.2f, 0.2f, 1.0f);
-        float3 scaleMax = float3(1.0f, 1.0f, 1.0f);
+        float3 scaleMax = float3(0.6f, 0.6f, 0.6f);
         // 座標
         float3 translateMin = float3(-3.0f, -3.0f, -3.0f);
         float3 translateMax = float3(3.0f, 3.0f, 3.0f);

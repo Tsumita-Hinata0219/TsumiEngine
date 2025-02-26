@@ -45,6 +45,9 @@ public:
 	const std::weak_ptr<T> GetEmitData() { return this->emitterData_; }
 	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
 
+	// エミッターコンフィグ
+	const std::weak_ptr<GpuParticle::EmitterConfig> GetEmitConfig() { return this->emitConfigData_; }
+
 #pragma endregion 
 
 
@@ -76,7 +79,8 @@ private:
 	std::shared_ptr<T> emitterData_;
 
 	// 射出に関する
-	GpuParticle::EmitterConfig emitConfig_{};
+	std::shared_ptr<GpuParticle::EmitterConfig> emitConfigData_;
+	BufferResource<GpuParticle::EmitterConfig> emitConfigBuffer_;
 
 	// GPUに使う乱数シード情報
 	GpuParticle::RandomSeed seedData_{};
@@ -113,6 +117,11 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 	emitterData_ = std::make_shared<T>();
 	// エミッターのバッファー作成
 	emitterBuffer_.CreateCBV();
+
+	// エミッターコンフィグ作成
+	emitConfigData_ = std::make_shared<GpuParticle::EmitterConfig>();
+	// エミッターコンフィグのバッファー作成
+	emitConfigBuffer_.CreateCBV();
 }
 
 
@@ -148,8 +157,8 @@ inline void GPUParticleEmitter<T>::Emit()
 	// Particle
 	particlePtr_.lock()->Bind_ParticleProp();
 
-	// Emmiter
-	emitterBuffer_.BindComputeCBV(1);
+	// EmitterConfig
+	emitConfigBuffer_.BindComputeCBV(1);
 
 	// RandomSeed
 	seedBuffer_.BindComputeCBV(2);
@@ -165,16 +174,16 @@ inline void GPUParticleEmitter<T>::Emit()
 template<typename T>
 inline void GPUParticleEmitter<T>::TimeUpdate()
 {
-	emitConfig_.intervalTime += 1.0f / 60.0f; // δタイムを加算
+	emitConfigData_->elapsedTime += 1.0f / 60.0f; // δタイムを加算
 	// 射出間隔を上回ったら射出許可を出して時間を調整
-	if (emitConfig_.emitInterval <= emitConfig_.intervalTime)
+	if (emitConfigData_->spawnInterval <= emitConfigData_->elapsedTime)
 	{
-		emitConfig_.intervalTime -= emitConfig_.intervalTime;
-		emitConfig_.enableEmit = 1;
+		emitConfigData_->elapsedTime -= emitConfigData_->elapsedTime;
+		emitConfigData_->isEmitting = 1;
 		// 射出間隔を上回っていないので、射出許可は出せない
 	}
 	else {
-		emitConfig_.enableEmit = 0;
+		emitConfigData_->isEmitting = 0;
 	}
 }
 
@@ -204,6 +213,9 @@ inline void GPUParticleEmitter<T>::UpdateSeedData()
 template<typename T>
 inline void GPUParticleEmitter<T>::WriteData()
 {
+	// EmitterConfig
+	emitConfigBuffer_.UpdateData(emitConfigData_.get());
+
 	// Emitter
 	emitterBuffer_.UpdateData(emitterData_.get());
 

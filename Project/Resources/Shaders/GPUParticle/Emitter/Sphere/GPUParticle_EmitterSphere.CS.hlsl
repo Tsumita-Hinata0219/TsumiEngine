@@ -40,11 +40,19 @@ void main(int3 DTid : SV_DispatchThreadID)
         
         for (uint countIndex = 0; countIndex < 10; ++countIndex)
         {
-            // カウント分Particleを射出する
-            gParticles[countIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
-            gParticles[countIndex].translate = rng.RandomRange3D(translateMin, translateMax);
-            gParticles[countIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
-            gParticles[countIndex].color.a = 1.0f;
+            uint particleIndex;
+            // gFreeCounter[0]に1を足し、足す前の値をparticleIndexに格納する
+            InterlockedAdd(gFreeCounter[0], 1, particleIndex); 
+            
+            // 最大数よりもparticleの数が少なければ射出可能
+            if (particleIndex < kMaclParticles)
+            {
+                // カウント分Particleを射出する
+                gParticles[countIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
+                gParticles[countIndex].translate = rng.RandomRange3D(translateMin, translateMax);
+                gParticles[countIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
+                gParticles[countIndex].color.a = 1.0f;
+            }
         }
     }
 }

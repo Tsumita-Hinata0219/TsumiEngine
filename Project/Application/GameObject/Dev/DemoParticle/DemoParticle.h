@@ -36,6 +36,14 @@ public:
 
 private:
 
+	/// <summary>
+	/// ImGui描画
+	/// </summary>
+	void DrawImGui();
+
+
+private:
+
 	// DemoParticle
 	uint32_t particleInstanceNum_ = 0;
 

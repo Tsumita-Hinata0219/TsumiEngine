@@ -30,9 +30,13 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	emitter_->Emit();
+	//emitter_->Emit();
 	emitter_->Update();
 	particle_->Update();
+
+#ifdef _DEBUG
+	DrawImGui();
+#endif // _DEBUG
 }
 
 
@@ -43,4 +47,21 @@ void DemoParticle::Draw()
 {
 	/* ----- DemoParticle デモパーティクル ----- */
 	particle_->Draw();
+}
+
+
+/// <summary>
+/// ImGui描画
+/// </summary>
+void DemoParticle::DrawImGui()
+{
+	if (ImGui::TreeNode("Demo Particle")) {
+
+		if(ImGui::Button("Emit")) {
+			emitter_->Emit();
+		}
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
 }

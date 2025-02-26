@@ -39,4 +39,3 @@ void DemoParticle::Draw()
 	/* ----- DemoParticle デモパーティクル ----- */
 	particle_->Draw();
 }
-

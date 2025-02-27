@@ -474,12 +474,6 @@
     <ClCompile Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp">
       <Filter>Application\GameObject\Others\TitleBackGround</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\TestHuman\TestHuman.cpp">
-      <Filter>Application\GameObject\Others\TestHuman</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp">
-      <Filter>Application\GameObject\Others\TestBaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Others\StartDirection\StartDirection.cpp">
       <Filter>Application\GameObject\Others\StartDirection</Filter>
     </ClCompile>
@@ -1347,12 +1341,6 @@
     </ClInclude>
     <ClInclude Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.h">
       <Filter>Application\GameObject\Others\TitleBackGround</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h">
-      <Filter>Application\GameObject\Others\TestHuman</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h">
-      <Filter>Application\GameObject\Others\TestBaseObject</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Others\StartDirection\StartDirection.h">
       <Filter>Application\GameObject\Others\StartDirection</Filter>

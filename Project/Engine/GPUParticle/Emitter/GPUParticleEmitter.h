@@ -75,8 +75,8 @@ private:
 	std::weak_ptr<GPUParticle> particlePtr_;
 
 	// エミッターデータ
-	BufferResource<T> emitterBuffer_;
 	std::shared_ptr<T> emitterData_;
+	BufferResource<T> emitterBuffer_;
 
 	// 射出に関する
 	std::shared_ptr<GpuParticle::EmitterConfig> emitConfigData_;
@@ -107,12 +107,6 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 	// パーティクルのptrを受け取る
 	particlePtr_ = owner;
 
-	// シードデータの初期設定
-	seedData_.gameTime = timeSys_->Get_SinceStart();
-	seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-	// シードデータのバッファー作成
-	seedBuffer_.CreateCBV();
-
 	// エミッター作成
 	emitterData_ = std::make_shared<T>();
 	// エミッターのバッファー作成
@@ -122,6 +116,12 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 	emitConfigData_ = std::make_shared<GpuParticle::EmitterConfig>();
 	// エミッターコンフィグのバッファー作成
 	emitConfigBuffer_.CreateCBV();
+
+	// シードデータの初期設定
+	seedData_.gameTime = timeSys_->Get_SinceStart();
+	seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+	// シードデータのバッファー作成
+	seedBuffer_.CreateCBV();
 }
 
 
@@ -148,6 +148,9 @@ inline void GPUParticleEmitter<T>::Update()
 template<typename T>
 inline void GPUParticleEmitter<T>::Emit()
 {
+	// データの書き込み
+	WriteData();
+
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
@@ -160,11 +163,14 @@ inline void GPUParticleEmitter<T>::Emit()
 	// FreeCounter
 	particlePtr_.lock()->Bind_FreeCounter(1);
 
+	// Emitter
+	emitterBuffer_.BindComputeCBV(2);
+
 	// EmitterConfig
-	emitConfigBuffer_.BindComputeCBV(2);
+	emitConfigBuffer_.BindComputeCBV(3);
 
 	// RandomSeed
-	seedBuffer_.BindComputeCBV(3);
+	seedBuffer_.BindComputeCBV(4);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -216,11 +222,11 @@ inline void GPUParticleEmitter<T>::UpdateSeedData()
 template<typename T>
 inline void GPUParticleEmitter<T>::WriteData()
 {
-	// EmitterConfig
-	emitConfigBuffer_.UpdateData(emitConfigData_.get());
-
 	// Emitter
 	emitterBuffer_.UpdateData(emitterData_.get());
+
+	// EmitterConfig
+	emitConfigBuffer_.UpdateData(emitConfigData_.get());
 
 	// SeedData
 	seedBuffer_.UpdateData(&seedData_);

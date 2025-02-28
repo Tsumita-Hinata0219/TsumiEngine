@@ -44,9 +44,6 @@ private:
 
 private:
 
-	// DemoParticle
-	uint32_t particleInstanceNum_ = 0;
-
 	// パーティクル本体
 	std::shared_ptr<GPUParticle> particle_;
 

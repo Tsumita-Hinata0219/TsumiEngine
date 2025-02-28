@@ -6,17 +6,17 @@
 /// </summary>
 void DemoParticle::Init()
 {
-	// パーティクルインスタンス数
-	particleInstanceNum_ = 10;
 	// パーティクル作成
 	particle_ = std::make_shared<GPUParticle>();
-	particle_->Init(particleInstanceNum_);
+	particle_->Init(10);
 
 	// エミッター作成
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
 	emitter_->Create(particle_);
 	// エミッターのデータを取得
 	emitData_ = emitter_->GetEmitData();
+	emitData_.lock()->translate = Vector3::one;
+	emitData_.lock()->radius = 1.0f;
 	// エミッターコンフィグを取得
 	emitConfig_ = emitter_->GetEmitConfig();
 	emitConfig_.lock()->spawnInterval = 1.0f;
@@ -30,7 +30,7 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	//emitter_->Emit();
+	emitter_->Emit();
 	emitter_->Update();
 	particle_->Update();
 

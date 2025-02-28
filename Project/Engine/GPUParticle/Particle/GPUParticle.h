@@ -34,7 +34,7 @@ public:
 	/// 初期化処理
 	/// </summary>
 	/// <param name="instanceNum">インスタンス数</param>
-	void Init(uint32_t instanceNum = 0);
+	void Init(uint32_t instanceNum = 1);
 
 	/// <summary>
 	/// 更新処理
@@ -87,15 +87,16 @@ private:
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 
+	// パーティクルのインスタンス数
+	uint32_t instanceNum_ = 0;
+	const uint32_t minInstanceNum_ = 1024; // 最低数
+
 	// パーティクルの要素
 	GpuParticle::ModelData modelData_{};
 	GpuParticle::ResourceHandles handles_{};
 
 	// フリーカウンター
 	BufferResource<uint32_t> freeCounterBuffer_;
-
-	// パーティクルのインスタンス数
-	uint32_t instanceNum_ = 0;
 
 	// 使用するモデル
 	std::unique_ptr<Model> model_;

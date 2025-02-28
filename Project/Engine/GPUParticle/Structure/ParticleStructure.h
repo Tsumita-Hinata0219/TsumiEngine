@@ -34,6 +34,10 @@ struct EmitterConfig {
 	uint32_t isEmitting;     // 射出許可フラグ (0: 停止, 1: 許可)
 };
 
+struct IEmitter {
+	uint32_t aliveCount; // 生存しているパーティクル数
+};
+
 // Emitter_Sphere
 struct SphereEmitter {
 	Vector3 translate{};     // 位置

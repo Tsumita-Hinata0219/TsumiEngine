@@ -12,8 +12,6 @@
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "3D/Skybox/Skybox.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
-#include "GameObject/Others/TestHuman/TestHuman.h"
-#include "GameObject/Others/TestBaseObject/TestBaseObject.h"
 
 #include "GameObject/Dev/DemoParticle/DemoParticle.h"
 

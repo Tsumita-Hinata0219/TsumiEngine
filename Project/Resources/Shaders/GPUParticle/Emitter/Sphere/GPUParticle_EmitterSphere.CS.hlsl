@@ -11,11 +11,14 @@ RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 RWStructuredBuffer<uint> gFreeCounter : register(u1);
 
 
+// EmitterSphereの設定
+ConstantBuffer<EmitterSphere> gEmitterSphere : register(b0);
+
 // Emitterの射出関連
-ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
+ConstantBuffer<EmitterConfig> gEmitterConfig : register(b1);
 
 // RandomのSeedの値
-ConstantBuffer<RandomSeed> gRandomSeed : register(b1);
+ConstantBuffer<RandomSeed> gRandomSeed : register(b2);
 
 
 [numthreads(1, 1, 1)]
@@ -26,7 +29,7 @@ void main(int3 DTid : SV_DispatchThreadID)
     {
         // 乱数生成器
         RandomGenerator rng;
-        rng.InitSeed(gRandomSeed.gameTime, gRandomSeed.dynamicTime);
+        rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime));
         // 範囲の設定
         // スケール
         float3 scaleMin = float3(0.2f, 0.2f, 1.0f);

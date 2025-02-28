@@ -34,7 +34,7 @@ PsoProperty ParticleEmitterSphere::SetUpPso()
 // RootSignatureのセットアップ
 void ParticleEmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	D3D12_ROOT_PARAMETER rootParameters[4]{};
+	D3D12_ROOT_PARAMETER rootParameters[5]{};
 
 	// u0 : Particleの要素
 	D3D12_DESCRIPTOR_RANGE descriptorRange[1]{};
@@ -58,16 +58,20 @@ void ParticleEmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descri
 	rootParameters[1].DescriptorTable.pDescriptorRanges = counterDes; // Tableの中身の配列を指定
 	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(counterDes); // Tableで利用する
 
-
-	// b0 : Emitterの射出関連
+	// b0 : Emitterの数値
 	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
 	rootParameters[2].Descriptor.ShaderRegister = 0;// レジスタ番号
 
-	// b1 : RandomのSeedの値
+	// b1 : Emitterの射出関連
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
 	rootParameters[3].Descriptor.ShaderRegister = 1;// レジスタ番号
+
+	// b2 : RandomのSeedの値
+	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
+	rootParameters[4].Descriptor.ShaderRegister = 2;// レジスタ番号
 
 
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE; // コンピュートシェーダーに適用

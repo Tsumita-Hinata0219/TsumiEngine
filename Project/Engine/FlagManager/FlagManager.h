@@ -3,6 +3,9 @@
 #include <cstdint>
 #include <string>
 #include <map>
+#include <fstream>
+#include <iostream>
+#include <filesystem>
 #include <unordered_map>
 #include <mutex>
 #include <../externals/json/json.hpp>
@@ -59,7 +62,7 @@ public:
 	/// <summary>
 	/// JSONファイルにフラグを保存
 	/// </summary>
-	bool SaveFlagToJson(const std::string& rootPath, const std::string& fileName);
+	void SaveFlagToJson(const std::string& rootPath, const std::string& fileName);
 
 
 };

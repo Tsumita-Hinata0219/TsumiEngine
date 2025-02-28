@@ -9,7 +9,7 @@ using json = nlohmann::json;
 void FlagManager::LoadFlagFromJson(const std::string& rootPath, const std::string& fileName)
 {
     // パスを組み立てる
-    std::string filePath = rootPath + "/" + fileName;
+    std::string filePath = "Resources/" + rootPath + "/" + fileName;
 
     // ファイルの存在チェック
     if (!std::filesystem::exists(filePath)) {
@@ -65,7 +65,7 @@ void FlagManager::SetFlag(const std::string& key, bool value)
 /// <summary>
 /// 全フラグをリセット
 /// </summary>
-void FlagManager::ClearFlag(const std::string& key)
+void FlagManager::ClearFlag()
 {
 	m_flags.clear();
 }

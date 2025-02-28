@@ -10,7 +10,6 @@
 #include <mutex>
 #include <../externals/json/json.hpp>
 
-#include "FlagData.h"
 
 /* フラグ管理クラス */
 class FlagManager {
@@ -34,9 +33,9 @@ public:
 	/// <summary>
 	/// インスタンスの取得
 	/// </summary>
-	static FlagManager& GetInstance() {
+	static FlagManager* GetInstance() {
 		static FlagManager instance;
-		return instance;
+		return &instance;
 	}
 
 	/// <summary>
@@ -57,7 +56,7 @@ public:
 	/// <summary>
 	/// 全フラグをリセット
 	/// </summary>
-	void ClearFlag(const std::string& key);
+	void ClearFlag();
 
 	/// <summary>
 	/// JSONファイルにフラグを保存

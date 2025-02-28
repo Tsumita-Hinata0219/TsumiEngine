@@ -109,6 +109,11 @@ void GameScene::Initialize()
 	CollisionManager_->Init();
 
 	jsonManager->Clear();
+
+	// ──────── FlagManager
+	flagManager_ = FlagManager::GetInstance();
+	flagManager_->LoadFlagFromJson("FlagData", "Demo.json");
+	flagManager_->SetFlag("Game_Start", true);
 }
 
 

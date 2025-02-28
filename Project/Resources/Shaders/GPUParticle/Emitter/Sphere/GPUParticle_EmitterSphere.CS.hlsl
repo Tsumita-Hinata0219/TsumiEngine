@@ -59,6 +59,9 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[countIndex].translate = rng.RandomRange3D(translateMin, translateMax);
                 gParticles[countIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
                 gParticles[countIndex].color.a = 1.0f;
+                
+                // ¶‘¶ƒtƒ‰ƒO‚ğ—§‚Ä‚é
+                gParticles[countIndex].isAlive = true;
             }
         }
     }

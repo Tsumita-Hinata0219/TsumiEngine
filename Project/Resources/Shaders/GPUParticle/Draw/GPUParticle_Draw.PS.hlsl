@@ -15,7 +15,7 @@ PixcelShaderOutput main(VertexShaderOutput input)
     float4 transUV = float4(input.texCoord, 0.0f, 1.0f);
     float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
     
-    if (textureColor.a <= 0.5f)
+    if (textureColor.a <= 0.0f)
     {
         discard;
     }

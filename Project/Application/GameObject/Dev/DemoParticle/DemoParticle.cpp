@@ -30,13 +30,7 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	ImGui::Begin("Demo Particle");
-
-	ImGui::DragFloat3("Translate", &emitData_.lock()->translate.x, 0.1f);
-
-	ImGui::End();
-
-	emitter_->Emit();
+	//emitter_->Emit();
 	emitter_->Update();
 	particle_->Update();
 

@@ -36,6 +36,7 @@ struct ParticleCS
     float3 translate;
     float4x4 matWorld;
     float4 color;
+    uint isAlive;
 };
 
 // PreView

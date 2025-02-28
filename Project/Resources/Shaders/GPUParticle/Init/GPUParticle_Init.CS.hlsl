@@ -10,6 +10,7 @@ RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 // カウンター
 RWStructuredBuffer<uint> gFreeCounter : register(u1);
 
+
 [numthreads(1024, 1, 1)]
 void main(int3 DTid : SV_DispatchThreadID)
 {
@@ -29,5 +30,7 @@ void main(int3 DTid : SV_DispatchThreadID)
         gParticles[particleIndex].scale = float3(0.5f, 0.5f, 0.5f);
         gParticles[particleIndex].color = float4(1.0f, 1.0f, 1.0f, 1.0f);
         gParticles[particleIndex].matWorld = Mat4x4Identity();
+        // 生存フラグは折っておく
+        gParticles[particleIndex].isAlive = false;
     }
 }

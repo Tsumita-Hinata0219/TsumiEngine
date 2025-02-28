@@ -41,7 +41,11 @@ void main(int3 DTid : SV_DispatchThreadID)
         float3 colorMin = float3(0.0f, 0.0f, 0.0f);
         float3 colorMax = float3(1.0f, 1.0f, 1.0f);
         
-        for (uint countIndex = 0; countIndex < 10; ++countIndex)
+        // 現在の生存しているパーティクル数
+        uint aliveCount = gEmitterSphere.aliveCount;
+        
+        
+        for (uint countIndex = 0; countIndex < aliveCount; ++countIndex)
         {
             uint particleIndex;
             // gFreeCounter[0]に1を足し、足す前の値をparticleIndexに格納する

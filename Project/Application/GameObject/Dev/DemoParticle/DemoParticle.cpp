@@ -8,7 +8,7 @@ void DemoParticle::Init()
 {
 	// パーティクル作成
 	particle_ = std::make_shared<GPUParticle>();
-	particle_->Init(10);
+	particle_->Init();
 
 	// エミッター作成
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();

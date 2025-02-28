@@ -16,8 +16,7 @@ void GPUParticle::Init(uint32_t instanceNum)
 	cameraManager_ = CameraManager::GetInstance();
 
 	// インスタンス数の設定
-	//instanceNum_ = instanceNum * minInstanceNum_;
-	instanceNum_ = instanceNum;
+	instanceNum_ = instanceNum * minInstanceNum_;
 
 	// BufferResourceを作成
 	CreateBufferResource();

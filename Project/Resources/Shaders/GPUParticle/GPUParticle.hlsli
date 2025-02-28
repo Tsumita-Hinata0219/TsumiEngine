@@ -66,7 +66,6 @@ struct EmitterConfig
 struct EmitterSphere
 {
     uint aliveCount; // 現在生存しているパーティクル数
-    float padding; // パディングを入れてアライメント調整
     float3 translate; // 位置
     float radius; // 生成半径
 };

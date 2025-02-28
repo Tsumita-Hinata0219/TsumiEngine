@@ -2,7 +2,7 @@
 
 
 // Particle‚Ì—v‘f
-StructuredBuffer<ParticleCS> gParticles : register(t0);
+RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 // PreView
 ConstantBuffer<PreView> gPreView : register(b0);
 

@@ -36,11 +36,23 @@ public:
 
 private:
 
-	// DemoParticle
-	uint32_t particleInstanceNum_ = 0;
-	std::unique_ptr<GPUParticle> particle_;
+	/// <summary>
+	/// ImGui描画
+	/// </summary>
+	void DrawImGui();
+
+
+private:
+
+	// パーティクル本体
+	std::shared_ptr<GPUParticle> particle_;
+
+	// エミッター
 	std::unique_ptr<GPUParticleEmitter<GpuParticle::SphereEmitter>> emitter_;
 
-	std::vector<Transform> transforms_;
-	std::vector<MaterialDataN> materials_;
+	// エミッターの情報
+	std::weak_ptr<GpuParticle::SphereEmitter> emitData_;
+
+	// エミッターコンフィグ
+	std::weak_ptr<GpuParticle::EmitterConfig> emitConfig_;
 };

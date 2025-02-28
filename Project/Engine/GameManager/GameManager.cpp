@@ -9,11 +9,25 @@ float g_ElapsedTime = 0.0f;
 /// </summary>
 GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 
-	Tsumi::Initialize();
+	// フレームワーク
+	tsumi_ = tsumi_->GetInstance();
+	tsumi_->Initialize();
+
+	// DirectX
+	dxManager_ = dxManager_->GetInstance();
+
+	// 時間記録
+	timeSys_ = TimeSystem::GetInstance();
+	timeSys_->Init();
+
+	// シーン初期化
 	scene_ = std::move(initScene);
 	scene_->SetManager(this);
 	scene_->Initialize();
+
 	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
+
+	// PostEffect : CopyImage
 	copyImage_ = std::make_unique<AbsentEffect>();
 	copyImage_->Init();
 }
@@ -23,7 +37,7 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 /// デストラクタ
 /// </summary>
 GameManager::~GameManager() {
-	Tsumi::Finalize();
+	tsumi_->Finalize();
 }
 
 
@@ -34,34 +48,36 @@ void GameManager::Run() {
 
 	TextLog::Init();
 	TextLog::Load("Run_Start");
-	while (Tsumi::ProcessMessage() == 0) {
+	while (tsumi_->ProcessMessage() == 0) {
 
 		auto currentTime = std::chrono::steady_clock::now();
 		g_ElapsedTime = std::chrono::duration<float>(currentTime - startTime_).count();
 
-		Tsumi::BeginFlame();
+		// 時間記録
+		timeSys_->Update();
+
+		tsumi_->BeginFlame();
 		scene_->Update();
 
-		//// ポストエフェクト
-		DirectXManager::PreDrawForPostEffect();
+		// ポストエフェクト
+		dxManager_->PreDrawForPostEffect();
 		
 		scene_->BackSpriteDraw();
 		scene_->ModelDraw();
 
-		DirectXManager::PostDrawForPostEffect();
+		dxManager_->PostDrawForPostEffect();
 
 		// スワップチェーン
-		DirectXManager::PreDrawForSwapChain();
+		dxManager_->PreDrawForSwapChain();
 
 		copyImage_->Draw();
 		scene_->FrontSpriteDraw();
 
-		Tsumi::EndFlame();
-		DirectXManager::PostDrawForSwapChain();
+		tsumi_->EndFlame();
+		dxManager_->PostDrawForSwapChain();
 	}
 	TextLog::Load("Run_End");
 	TextLog::Close();
-
 }
 
 

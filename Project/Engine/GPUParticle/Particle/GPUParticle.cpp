@@ -16,7 +16,7 @@ void GPUParticle::Init(uint32_t instanceNum)
 	cameraManager_ = CameraManager::GetInstance();
 
 	// インスタンス数の設定
-	instanceNum_ = instanceNum;
+	instanceNum_ = instanceNum * minInstanceNum_;
 
 	// BufferResourceを作成
 	CreateBufferResource();
@@ -26,32 +26,27 @@ void GPUParticle::Init(uint32_t instanceNum)
 }
 
 
+/// <summary>
+/// 更新処理
+/// </summary>
+void GPUParticle::Update()
+{
+	// 更新バインド
+	Bind_Update();
+}
+
 
 /// <summary>
 /// 描画処理
 /// </summary>
-void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials)
+void GPUParticle::Draw()
 {
-	// 計算と抽出
-	std::vector<TransformationMat> metaDataArray;
-	for (auto& element : transforms) {
-		element.UpdateMatrix();
-		element.transformationMatData.World = element.matWorld;
-		metaDataArray.push_back(element.transformationMatData);
-	}
-
-
 	// ここで書き込み
 	// VBV
 	handles_.vertex.UpdateData(model_->GetMeshData().vertices.data());
 	// IBV
 	handles_.indeces.UpdateData(model_->GetMeshData().indices.data());
-	// Transform
-	handles_.transform.UpdateData(metaDataArray, instanceNum_);
-	// Material
-	handles_.material.UpdateData(materials, instanceNum_);
 	
-
 	// 描画バインド
 	Bind_Draw();
 }
@@ -60,9 +55,18 @@ void GPUParticle::Draw(std::vector<Transform>& transforms, const std::vector<Mat
 /// <summary>
 /// パーティクルの要素のバインド
 /// </summary>
-void GPUParticle::Bind_ParticleProp()
+void GPUParticle::Bind_ParticleProp(UINT num)
 {
-	handles_.particleElement.BindComputeSRV_Instanced(0);
+	handles_.particleElement.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// フリーカウンターのバインド
+/// </summary>
+void GPUParticle::Bind_FreeCounter(UINT num)
+{
+	freeCounterBuffer_.BindComputeSRV_Instanced(num);
 }
 
 
@@ -77,6 +81,22 @@ void GPUParticle::Bind_Init()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Init);
 
+	// Particleの要素の初期化値
+	handles_.particleElement.BindComputeSRV_Instanced(0);
+
+	// FreeCounterの要素の初期化
+	freeCounterBuffer_.BindComputeSRV_Instanced(1);
+
+	// Dispach
+	commands.List->Dispatch(1, 1, 1);
+}
+void GPUParticle::Bind_Update()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Update);
 
 	// Particleの要素の初期化値
 	handles_.particleElement.BindComputeSRV_Instanced(0);
@@ -96,18 +116,14 @@ void GPUParticle::Bind_Draw()
 	handles_.vertex.IASetVertexBuffers(1);
 	// IndexBufferView
 	handles_.indeces.IASetIndexBuffer();
-	// Transform
-	handles_.transform.BindGraphicsSRV_Instanced(0);
-	// ParticleElement
+	// ParticleElement : VS
 	handles_.particleElement.BindGraphicsSRV_Instanced(0);
 	// Camera
 	cameraManager_->CommandCall(1);
-	// Material
-	handles_.material.BindGraphicsSRV_Instanced(3);
+	// ParticleElement : PS
+	handles_.particleElement.BindGraphicsSRV_Instanced(2);
 	// MaterialTexture
-	handles_.material.BindGraphicsSRV(2, model_->GetMaterialData().textureHandle);
-	// Light
-	//buffers_.light.CommandCall(4);
+	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
 	// Draw!!
 	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }
@@ -130,13 +146,11 @@ void GPUParticle::CreateBufferResource()
 	handles_.particleElement.CreateUAV(instanceNum_);
 	// PreView
 	handles_.preView.CreateCBV();
-	// transform
-	handles_.transform.CreateCBV(instanceNum_);
-	handles_.transform.CreateInstancingResource(instanceNum_); // インスタンス数分つくる
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
-	// light
-	//buffers_.light.CreateCBV();
+
+	// FreeCounter
+	freeCounterBuffer_.CreateUAV(instanceNum_);
 }
 

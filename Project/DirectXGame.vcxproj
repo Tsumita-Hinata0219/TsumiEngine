@@ -227,8 +227,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.cpp" />
     <ClCompile Include="Application\GameObject\Others\StartDirection\StartDirection.cpp" />
-    <ClCompile Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp" />
-    <ClCompile Include="Application\GameObject\Others\TestHuman\TestHuman.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.cpp" />
@@ -295,6 +293,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
@@ -345,6 +344,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp" />
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
+    <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
     <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp" />
     <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="externals\DirectXTex\BC.cpp">
@@ -537,8 +537,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\TextLine\StageTransitionMenuTextLine.h" />
     <ClInclude Include="Application\GameObject\Others\StartDirection\StartDirection.h" />
-    <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h" />
-    <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h" />
     <ClInclude Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\GameNameBar\GameNameBar.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\SelectBar\SelectBar.h" />
@@ -625,6 +623,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
     <ClInclude Include="Engine\Math\Struct.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h" />
@@ -673,6 +672,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Transform\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
+    <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
     <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
@@ -1353,6 +1353,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
     <None Include="Resources\Shaders\Math\Math.hlsli" />
+    <None Include="Resources\Shaders\Random\Random.hlsli" />
     <None Include="Resources\Shaders\Object2d\Object2d.hlsli" />
     <None Include="Resources\Shaders\Object3d\Object3d.hlsli" />
     <None Include="Resources\Shaders\PostEffect\PostEffect.hlsli" />
@@ -1412,6 +1413,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Init\GPUParticle_Init.CS.hlsl">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">4.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

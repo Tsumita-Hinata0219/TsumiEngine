@@ -6,24 +6,22 @@
 /// </summary>
 void DemoParticle::Init()
 {
-	particleInstanceNum_ = 10;
-	particle_ = std::make_unique<GPUParticle>();
-	particle_->Init(particleInstanceNum_);
+	// パーティクル作成
+	particle_ = std::make_shared<GPUParticle>();
+	particle_->Init();
 
+	// エミッター作成
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
 	emitter_->Create(particle_);
-
-
-	transforms_.resize(particleInstanceNum_);
-	for (auto& element : transforms_) {
-		element.Init();
-		element.srt.translate.z = 5.0f;
-	}
-	materials_.resize(particleInstanceNum_);
-	for (auto& element : materials_) {
-		element.color = Temp::Color::WHITE;
-		element.uvTransform = Matrix4x4::identity;
-	}
+	// エミッターのデータを取得
+	emitData_ = emitter_->GetEmitData();
+	emitData_.lock()->translate = Vector3::one;
+	emitData_.lock()->radius = 1.0f;
+	// エミッターコンフィグを取得
+	emitConfig_ = emitter_->GetEmitConfig();
+	emitConfig_.lock()->spawnInterval = 1.0f;
+	emitConfig_.lock()->elapsedTime = 0.0f;
+	emitConfig_.lock()->isEmitting = 0;
 }
 
 
@@ -32,8 +30,13 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	emitter_->Emit(particle_);
+	emitter_->Emit();
 	emitter_->Update();
+	particle_->Update();
+
+#ifdef _DEBUG
+	DrawImGui();
+#endif // _DEBUG
 }
 
 
@@ -43,6 +46,22 @@ void DemoParticle::Update()
 void DemoParticle::Draw()
 {
 	/* ----- DemoParticle デモパーティクル ----- */
-	particle_->Draw(transforms_, materials_);
+	particle_->Draw();
 }
 
+
+/// <summary>
+/// ImGui描画
+/// </summary>
+void DemoParticle::DrawImGui()
+{
+	if (ImGui::TreeNode("Demo Particle")) {
+
+		if(ImGui::Button("Emit")) {
+			emitter_->Emit();
+		}
+		ImGui::Text("");
+
+		ImGui::TreePop();
+	}
+}

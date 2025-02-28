@@ -131,27 +131,27 @@ void GPUParticle_Draw_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& de
 	rootParameters[1].Descriptor.ShaderRegister = 0; // レジスタ番号
 
 	// ─── PS
+	// u0 : パラメータ
+	D3D12_DESCRIPTOR_RANGE paramerterInstance[1]{};
+	paramerterInstance[0].BaseShaderRegister = 0; // 0から始まる
+	paramerterInstance[0].NumDescriptors = 1; // 数は1つ
+	paramerterInstance[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	paramerterInstance[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
+	rootParameters[2].DescriptorTable.pDescriptorRanges = paramerterInstance; // Tableの中身の配列を指定
+	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(paramerterInstance); // Tableで利用する
+	
 	// t0 : テクスチャ
 	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
 	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
 	materiaTexture[0].NumDescriptors = 1; // 数は1つ
 	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[2].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
-	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
-
-	// t1 : マテリアル
-	D3D12_DESCRIPTOR_RANGE materialInstancing[1]{};
-	materialInstancing[0].BaseShaderRegister = 1; // 0から始まる
-	materialInstancing[0].NumDescriptors = 1;     // 数は1つ
-	materialInstancing[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
-	materialInstancing[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
 	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL;
-	rootParameters[3].DescriptorTable.pDescriptorRanges = materialInstancing; // Tableの中身の配列を指定
-	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materialInstancing); // Tableで利用する
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[3].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
 
 	// s0 : Samplerの設定
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};

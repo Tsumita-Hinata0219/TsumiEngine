@@ -23,9 +23,6 @@ struct ModelData {
 	// メッシュ
 	MeshData mesh;
 
-	// マテリアル
-	MaterialDataN material{};
-
 	// ライト
 	//DirectionalLightData light{};
 };

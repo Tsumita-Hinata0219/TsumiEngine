@@ -34,18 +34,27 @@ public:
 	/// 初期化処理
 	/// </summary>
 	/// <param name="instanceNum">インスタンス数</param>
-	void Init(uint32_t instanceNum = 0);
+	void Init(uint32_t instanceNum = 1);
+
+	/// <summary>
+	/// 更新処理
+	/// </summary>
+	void Update();
 
 	/// <summary>
 	/// 描画処理
 	/// </summary>
-	void Draw(std::vector<Transform>& transforms, const std::vector<MaterialDataN>& materials);
+	void Draw();
 
 	/// <summary>
 	/// パーティクルの要素のバインド
 	/// </summary>
-	void Bind_ParticleProp();
+	void Bind_ParticleProp(UINT num);
 
+	/// <summary>
+	/// フリーカウンターのバインド
+	/// </summary>
+	void Bind_FreeCounter(UINT num);
 
 #pragma region Accessor アクセッサ
 
@@ -64,6 +73,7 @@ private:
 	/// バインド
 	/// </summary>
 	void Bind_Init();
+	void Bind_Update();
 	void Bind_Draw();
 
 	/// <summary>
@@ -77,14 +87,16 @@ private:
 	// カメラマネージャー
 	CameraManager* cameraManager_ = nullptr;
 
-	// バッファーに書き込むデータ
-	GpuParticle::ModelData modelData_{};
-
-	// バッファー
-	GpuParticle::ResourceHandles handles_{};
-
 	// パーティクルのインスタンス数
 	uint32_t instanceNum_ = 0;
+	const uint32_t minInstanceNum_ = 1024; // 最低数
+
+	// パーティクルの要素
+	GpuParticle::ModelData modelData_{};
+	GpuParticle::ResourceHandles handles_{};
+
+	// フリーカウンター
+	BufferResource<uint32_t> freeCounterBuffer_;
 
 	// 使用するモデル
 	std::unique_ptr<Model> model_;

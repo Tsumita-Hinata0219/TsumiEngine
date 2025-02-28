@@ -474,12 +474,6 @@
     <ClCompile Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.cpp">
       <Filter>Application\GameObject\Others\TitleBackGround</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\TestHuman\TestHuman.cpp">
-      <Filter>Application\GameObject\Others\TestHuman</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.cpp">
-      <Filter>Application\GameObject\Others\TestBaseObject</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Others\StartDirection\StartDirection.cpp">
       <Filter>Application\GameObject\Others\StartDirection</Filter>
     </ClCompile>
@@ -573,6 +567,8 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.cpp" />
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
+    <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1346,12 +1342,6 @@
     <ClInclude Include="Application\GameObject\Others\TitleBackGround\TitleBackGround.h">
       <Filter>Application\GameObject\Others\TitleBackGround</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\TestHuman\TestHuman.h">
-      <Filter>Application\GameObject\Others\TestHuman</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\TestBaseObject\TestBaseObject.h">
-      <Filter>Application\GameObject\Others\TestBaseObject</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Others\StartDirection\StartDirection.h">
       <Filter>Application\GameObject\Others\StartDirection</Filter>
     </ClInclude>
@@ -1464,6 +1454,8 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
+    <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2392,6 +2384,7 @@
     <None Include="externals\assimp\include\assimp\vector3.inl">
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
+    <None Include="Resources\Shaders\Random\Random.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
@@ -2494,6 +2487,7 @@
       <Filter>externals\DirectXTex\Shaders</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

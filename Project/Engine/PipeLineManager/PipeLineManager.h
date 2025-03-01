@@ -38,7 +38,7 @@
 #include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
-#include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSphere.h"
+#include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSpherePipeLine.h"
 
 
 using namespace PipeLine;

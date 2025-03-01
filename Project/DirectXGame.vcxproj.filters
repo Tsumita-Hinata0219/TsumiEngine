@@ -553,7 +553,7 @@
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSpherePipeLine.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DemoParticle\DemoParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.cpp" />
@@ -1438,7 +1438,7 @@
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSpherePipeLine.h" />
     <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.h" />
@@ -2243,9 +2243,6 @@
     <None Include="Resources\Shaders\Math\Math.hlsli">
       <Filter>Resources\Shaders\Math</Filter>
     </None>
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
-    </None>
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli">
       <Filter>Resources\Shaders\GPUParticle</Filter>
     </None>
@@ -2385,6 +2382,7 @@
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
     <None Include="Resources\Shaders\Random\Random.hlsli" />
+    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">

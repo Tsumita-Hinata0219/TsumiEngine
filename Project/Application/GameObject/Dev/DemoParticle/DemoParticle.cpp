@@ -22,6 +22,7 @@ void DemoParticle::Init()
 	emitConfig_.lock()->spawnInterval = 1.0f;
 	emitConfig_.lock()->elapsedTime = 0.0f;
 	emitConfig_.lock()->isEmitting = 0;
+	emitConfig_.lock()->spawnCount = 5;
 }
 
 
@@ -30,7 +31,7 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	//emitter_->Emit();
+	emitter_->Emit();
 	emitter_->Update();
 	particle_->Update();
 

@@ -62,11 +62,20 @@ void GPUParticle::Bind_ParticleProp(UINT num)
 
 
 /// <summary>
-/// フリーカウンターのバインド
+/// フリーリストのバインド
 /// </summary>
-void GPUParticle::Bind_FreeCounter(UINT num)
+void GPUParticle::Bind_FreeList(UINT num)
 {
-	freeCounterBuffer_.BindComputeSRV_Instanced(num);
+	freeListBuffer_.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// フリーリストインデックスのバインド
+/// </summary>
+void GPUParticle::Bind_FreeListIndex(UINT num)
+{
+	freeListIndexBuffer_.BindComputeSRV_Instanced(num);
 }
 
 
@@ -81,11 +90,14 @@ void GPUParticle::Bind_Init()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Init);
 
-	// Particleの要素の初期化値
+	// Particleの初期化値
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
-	// FreeCounterの要素の初期化
-	freeCounterBuffer_.BindComputeSRV_Instanced(1);
+	// FreeListの初期化
+	freeListBuffer_.BindComputeSRV_Instanced(1);
+
+	// FreeListIndexの初期化
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -149,8 +161,9 @@ void GPUParticle::CreateBufferResource()
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
-
-	// FreeCounter
-	freeCounterBuffer_.CreateUAV(instanceNum_);
+	// FreeList
+	freeListBuffer_.CreateUAV(instanceNum_);
+	// FreeListIndex
+	freeListIndexBuffer_.CreateUAV(instanceNum_);
 }
 

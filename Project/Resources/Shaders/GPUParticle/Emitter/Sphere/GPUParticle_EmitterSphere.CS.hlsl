@@ -2,13 +2,15 @@
 
 
 // パーティクル最大インスタンス数
-static const uint kMaclParticles = 1024;
+static const uint kParticleInstanceMax = 1024;
 
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
-// カウンター
-RWStructuredBuffer<uint> gFreeCounter : register(u1);
+// FreeList
+RWStructuredBuffer<int> gFreeList : register(u1);
+// FreeListのIndex
+RWStructuredBuffer<int> gFreeListIndex : register(u2);
 
 
 // EmitterSphereの設定
@@ -42,26 +44,27 @@ void main(int3 DTid : SV_DispatchThreadID)
         float3 colorMax = float3(1.0f, 1.0f, 1.0f);
         
         // 現在の生存しているパーティクル数
-        uint aliveCount = gEmitterSphere.aliveCount;
+        uint spawnCount = gEmitterConfig.spawnCount;
         
-        
-        for (uint countIndex = 0; countIndex < aliveCount; ++countIndex)
+        //個数
+        for (uint countIndex = 0; countIndex < spawnCount; ++countIndex)
         {
-            uint particleIndex;
-            // gFreeCounter[0]に1を足し、足す前の値をparticleIndexに格納する
-            InterlockedAdd(gFreeCounter[0], 1, particleIndex); 
+            int freeListIndex;
+            InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
             
             // 最大数よりもparticleの数が少なければ射出可能
-            if (particleIndex < kMaclParticles)
+            if (0 <= freeListIndex && freeListIndex < kParticleInstanceMax)
             {
+                int particleIndex = gFreeList[freeListIndex];
                 // カウント分Particleを射出する
-                gParticles[countIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
-                gParticles[countIndex].translate = rng.RandomRange3D(translateMin, translateMax);
-                gParticles[countIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
-                gParticles[countIndex].color.a = 1.0f;
+                gParticles[particleIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
+                gParticles[particleIndex].translate = rng.RandomRange3D(translateMin, translateMax);
+                gParticles[particleIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
+                gParticles[particleIndex].color.a = 1.0f;
                 
                 // 生存フラグを立てる
-                gParticles[countIndex].isAlive = true;
+                gParticles[particleIndex].isAlive = true;
+                
             }
         }
     }

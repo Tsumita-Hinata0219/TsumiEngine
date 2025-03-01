@@ -10,8 +10,14 @@ SamplerState gSampler : register(s0);
 
 // Main
 PixcelShaderOutput main(VertexShaderOutput input)
-{
+{    
     PixcelShaderOutput output;
+    
+    if (gParticles[input.instanceID].isAlive == 0)
+    {
+        discard;
+    }  
+    
     float4 transUV = float4(input.texCoord, 0.0f, 1.0f);
     float4 textureColor = gTexture.Sample(gSampler, input.texCoord);
     

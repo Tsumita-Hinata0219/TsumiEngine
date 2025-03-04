@@ -45,6 +45,7 @@ void main(int3 DTid : SV_DispatchThreadID)
         for (uint countIndex = 0; countIndex < spawnCount; ++countIndex)
         {
             int freeListIndex;
+            // FreeListのIndexを1つ前に設定し、現在のIndexを取得する
             InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
             
             // 最大数よりもparticleの数が少なければ射出
@@ -61,7 +62,10 @@ void main(int3 DTid : SV_DispatchThreadID)
             }
             else
             {
-                
+                // 発生させられなかったので、減らしてしまった分もとに戻す
+                InterlockedAdd(gFreeListIndex[0], 1);
+                // Emit中にParticleは消えないので、この後発生することはないためbrekaして終わらせる
+                break;
             }
         }
     }

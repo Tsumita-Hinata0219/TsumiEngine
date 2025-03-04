@@ -295,7 +295,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSpherePipeLine.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
     <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp" />
@@ -523,6 +522,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
     <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
@@ -625,7 +625,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSpherePipeLine.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\PipeLineStructure.h" />
     <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
@@ -1350,7 +1349,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </None>
     <None Include="Resources\Shaders\CPUParticle\CPUParticle.hlsli" />
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli" />
     <None Include="Resources\Shaders\Math\Math.hlsli" />
     <None Include="Resources\Shaders\Random\Random.hlsli" />
@@ -1398,16 +1396,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Compute</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">4.0</ShaderModel>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

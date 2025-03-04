@@ -61,6 +61,12 @@ public:
 	/// </summary>
 	void Bind_FreeListIndex(UINT num);
 
+	/// <summary>
+	/// UAVBarrierを設定
+	/// </summary>
+	void SetUAVBarrier();
+
+
 #pragma region Accessor アクセッサ
 
 	/// <summary>

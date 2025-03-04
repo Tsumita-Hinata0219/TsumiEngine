@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Structure/EmitterStructure.h"
 #include "../Structure/ParticleStructure.h"
 #include "../Resources/ParticleResources.h"
 #include "../Particle/GPUParticle.h"
@@ -27,7 +28,7 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create(std::weak_ptr<GPUParticle> owner);
+	void Create(std::weak_ptr<GPUParticle> pParticle);
 
 	/// <summary>
 	/// 更新処理
@@ -46,7 +47,7 @@ public:
 	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
 
 	// エミッターコンフィグ
-	const std::weak_ptr<GpuParticle::EmitterConfig> GetEmitConfig() { return this->emitConfigData_; }
+	const std::weak_ptr<GpuEmitter::EmitterConfig> GetEmitConfig() { return this->emitConfigData_; }
 
 #pragma endregion 
 
@@ -79,12 +80,12 @@ private:
 	BufferResource<T> emitterBuffer_;
 
 	// 射出に関する
-	std::shared_ptr<GpuParticle::EmitterConfig> emitConfigData_;
-	BufferResource<GpuParticle::EmitterConfig> emitConfigBuffer_;
+	std::shared_ptr<GpuEmitter::EmitterConfig> emitConfigData_;
+	BufferResource<GpuEmitter::EmitterConfig> emitConfigBuffer_;
 
 	// GPUに使う乱数シード情報
-	GpuParticle::RandomSeed seedData_{};
-	BufferResource<GpuParticle::RandomSeed> seedBuffer_;
+	GpuEmitter::RandomSeed seedData_{};
+	BufferResource<GpuEmitter::RandomSeed> seedBuffer_;
 
 	// 前回リセットした時点の時間
 	float lastResetTime_ = 0.0f;
@@ -99,13 +100,13 @@ private:
 /// 生成
 /// </summary>
 template<typename T>
-inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
+inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> pParticle)
 {
 	// TimeSystem
 	timeSys_ = TimeSystem::GetInstance();
 
 	// パーティクルのptrを受け取る
-	particlePtr_ = owner;
+	particlePtr_ = pParticle;
 
 	// エミッター作成
 	emitterData_ = std::make_shared<T>();
@@ -113,7 +114,7 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> owner)
 	emitterBuffer_.CreateCBV();
 
 	// エミッターコンフィグ作成
-	emitConfigData_ = std::make_shared<GpuParticle::EmitterConfig>();
+	emitConfigData_ = std::make_shared<GpuEmitter::EmitterConfig>();
 	// エミッターコンフィグのバッファー作成
 	emitConfigBuffer_.CreateCBV();
 
@@ -177,6 +178,9 @@ inline void GPUParticleEmitter<T>::Emit()
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	particlePtr_.lock()->SetUAVBarrier();
 }
 
 
@@ -192,7 +196,6 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 	{
 		emitConfigData_->elapsedTime -= emitConfigData_->elapsedTime;
 		emitConfigData_->isEmitting = 1;
-		// 射出間隔を上回っていないので、射出許可は出せない
 	}
 	else {
 		emitConfigData_->isEmitting = 0;

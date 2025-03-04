@@ -219,9 +219,6 @@
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp">
       <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp">
       <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
     </ClCompile>
@@ -850,9 +847,6 @@
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h">
       <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h">
-      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h">
       <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
     </ClInclude>
@@ -1456,6 +1450,7 @@
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2382,7 +2377,6 @@
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
     <None Include="Resources\Shaders\Random\Random.hlsli" />
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
@@ -2390,12 +2384,6 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl">
       <Filter>Resources\Shaders\CPUParticle</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl">
       <Filter>Resources\Shaders\GPUParticle\Draw</Filter>

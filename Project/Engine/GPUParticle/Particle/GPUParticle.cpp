@@ -80,6 +80,22 @@ void GPUParticle::Bind_FreeListIndex(UINT num)
 
 
 /// <summary>
+/// UAVBarrierを設定
+/// </summary>
+void GPUParticle::SetUAVBarrier()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	// UAVBarrier
+	D3D12_RESOURCE_BARRIER uavBarrier{};
+	uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+	uavBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	uavBarrier.UAV.pResource = handles_.particleElement.GetResource();
+	commands.List->ResourceBarrier(1, &uavBarrier);
+}
+
+
+/// <summary>
 /// バインド
 /// </summary>
 void GPUParticle::Bind_Init()
@@ -101,6 +117,9 @@ void GPUParticle::Bind_Init()
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	this->SetUAVBarrier();
 }
 void GPUParticle::Bind_Update()
 {
@@ -115,6 +134,9 @@ void GPUParticle::Bind_Update()
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	this->SetUAVBarrier();
 }
 void GPUParticle::Bind_Draw()
 {
@@ -126,16 +148,22 @@ void GPUParticle::Bind_Draw()
 
 	// VertexBufferView
 	handles_.vertex.IASetVertexBuffers(1);
+
 	// IndexBufferView
 	handles_.indeces.IASetIndexBuffer();
+
 	// ParticleElement : VS
 	handles_.particleElement.BindGraphicsSRV_Instanced(0);
+
 	// Camera
 	cameraManager_->CommandCall(1);
+
 	// ParticleElement : PS
 	handles_.particleElement.BindGraphicsSRV_Instanced(2);
+
 	// MaterialTexture
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
+
 	// Draw!!
 	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }

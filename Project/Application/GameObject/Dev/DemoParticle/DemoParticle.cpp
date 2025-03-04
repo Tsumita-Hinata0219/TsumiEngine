@@ -11,12 +11,14 @@ void DemoParticle::Init()
 	particle_->Init();
 
 	// エミッター作成
-	emitter_ = std::make_unique<GPUParticleEmitter<GpuParticle::SphereEmitter>>();
+	emitter_ = std::make_unique<GPUParticleEmitter<GpuEmitter::SphereEmitter>>();
 	emitter_->Create(particle_);
+
 	// エミッターのデータを取得
 	emitData_ = emitter_->GetEmitData();
 	emitData_.lock()->translate = Vector3::one;
 	emitData_.lock()->radius = 1.0f;
+
 	// エミッターコンフィグを取得
 	emitConfig_ = emitter_->GetEmitConfig();
 	emitConfig_.lock()->spawnInterval = 1.0f;
@@ -46,7 +48,6 @@ void DemoParticle::Update()
 /// </summary>
 void DemoParticle::Draw()
 {
-	/* ----- DemoParticle デモパーティクル ----- */
 	particle_->Draw();
 }
 

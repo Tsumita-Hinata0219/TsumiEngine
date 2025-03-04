@@ -15,7 +15,6 @@ void main(int3 DTid : SV_DispatchThreadID)
     if (particleIndex < kMaclParticles)
     {
         // Particle‚ÌMatWorld‚ÌXVˆ—
-        gParticles[particleIndex].matWorld = AffineMatrix(
-        gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
+        gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
     }
 }

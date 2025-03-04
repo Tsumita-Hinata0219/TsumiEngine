@@ -48,11 +48,11 @@ private:
 	std::shared_ptr<GPUParticle> particle_;
 
 	// エミッター
-	std::unique_ptr<GPUParticleEmitter<GpuParticle::SphereEmitter>> emitter_;
+	std::unique_ptr<GPUParticleEmitter<GpuEmitter::SphereEmitter>> emitter_;
 
 	// エミッターの情報
-	std::weak_ptr<GpuParticle::SphereEmitter> emitData_;
+	std::weak_ptr<GpuEmitter::SphereEmitter> emitData_;
 
 	// エミッターコンフィグ
-	std::weak_ptr<GpuParticle::EmitterConfig> emitConfig_;
+	std::weak_ptr<GpuEmitter::EmitterConfig> emitConfig_;
 };

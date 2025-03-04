@@ -78,6 +78,9 @@ public:
 
 #pragma region Accessor アクセッサ
 
+	// Resource
+	ID3D12Resource* GetResource() { return this->buffer_.Get(); }
+
 	// VertexBufferView
 	D3D12_VERTEX_BUFFER_VIEW GetVBV() { return this->vertexBufferView_; }
 

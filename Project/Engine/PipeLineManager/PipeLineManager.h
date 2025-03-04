@@ -35,7 +35,6 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
-#include "CSPipeLine/Particle/CSParticlePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
 #include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSpherePipeLine.h"
@@ -116,7 +115,6 @@ private:
 	/// </summary>
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Update();
-	void CreatePipeLine_CSParticle();
 	void CreatePipeLine_ParticleEmitterSphere();
 
 

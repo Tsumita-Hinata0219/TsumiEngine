@@ -152,7 +152,6 @@ void ShaderManager::PostEffectShadersCompiles()
 }
 void ShaderManager::ComputeShadersCompiles()
 {
-	CSParticleShader();
 	GPUParticle_Init();
 	GPUParticle_Update();
 	GPUParticle_SphereEmit();
@@ -374,14 +373,6 @@ void ShaderManager::VignettingShader()
 }
 
 
-
-void ShaderManager::CSParticleShader()
-{
-	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/GPUParticle.CS.hlsli"),
-	};
-	computeShadersMap_["CSParticle"] = shader;
-}
 
 void ShaderManager::GPUParticle_Init()
 {

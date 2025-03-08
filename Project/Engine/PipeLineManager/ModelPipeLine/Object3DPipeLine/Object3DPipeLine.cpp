@@ -41,13 +41,9 @@ PsoProperty Object3DPipeLine::SetUpPso()
 
 
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC graphicsPipelineStateDesc{};
-
 	graphicsPipelineStateDesc.pRootSignature = pso_.rootSignature; // RootSignature
-
 	graphicsPipelineStateDesc.InputLayout = inputLayoutDesc; // InputLayout
-
 	graphicsPipelineStateDesc.BlendState = blendDesc; // BlendState
-
 	graphicsPipelineStateDesc.RasterizerState = rasterizerDesc; // RasterizeState
 
 	graphicsPipelineStateDesc.VS = {
@@ -69,7 +65,6 @@ PsoProperty Object3DPipeLine::SetUpPso()
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	pso_.primitiveTopologyType =
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
 
 
 	// どのように画面に色を打ち込むかの設定(気にしなくて良い)

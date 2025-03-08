@@ -2,8 +2,8 @@
 
 #include "../../../IPipeLineState/IPipeLineState.h"
 
-/*  */
-class ParticleEmitterSphere : public IPipeLineState {
+/* EmitterSphere */
+class EmitterSphere : public IPipeLineState {
 
 public:
 

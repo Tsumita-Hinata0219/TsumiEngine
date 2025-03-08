@@ -1,9 +1,9 @@
-#include "ParticleEmitterSpherePipeLine.h"
+#include "EmitterSpherePipeLine.h"
 
 
 
 // Psoを構築する
-PsoProperty ParticleEmitterSphere::SetUpPso()
+PsoProperty EmitterSphere::SetUpPso()
 {
 	/* --- RootSignatureを作成 --- */
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
@@ -13,7 +13,7 @@ PsoProperty ParticleEmitterSphere::SetUpPso()
 	/* --- Shaderを設定する --- */
 	ShaderManager* shaderManager = ShaderManager::GetInstance();
 	IDxcBlob* shaderBlob =
-		shaderManager->GetComputeShader("GPUParticle_EmitterSphere").ComputeBlob; // shaderの取得
+		shaderManager->GetComputeShader("SphereEmitter").ComputeBlob; // shaderの取得
 	D3D12_COMPUTE_PIPELINE_STATE_DESC computePipelineStateDesc{};
 	computePipelineStateDesc.CS = {
 		.pShaderBytecode = shaderBlob->GetBufferPointer(),
@@ -32,7 +32,7 @@ PsoProperty ParticleEmitterSphere::SetUpPso()
 
 
 // RootSignatureのセットアップ
-void ParticleEmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
+void EmitterSphere::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
 	D3D12_ROOT_PARAMETER rootParameters[7]{};
 

@@ -163,7 +163,7 @@ inline void GPUParticleEmitter<T>::Emit()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::Particle_EmitterSphere);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::EmitterSphere);
 
 	// Particle
 	particlePtr_.lock()->Bind_ParticleProp(0);

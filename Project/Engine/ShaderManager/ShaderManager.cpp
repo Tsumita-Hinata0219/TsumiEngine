@@ -152,9 +152,10 @@ void ShaderManager::PostEffectShadersCompiles()
 }
 void ShaderManager::ComputeShadersCompiles()
 {
+	SphereEmitter();
+	ConstantField();
 	GPUParticle_Init();
 	GPUParticle_Update();
-	GPUParticle_SphereEmit();
 }
 
 
@@ -374,6 +375,23 @@ void ShaderManager::VignettingShader()
 
 
 
+void ShaderManager::SphereEmitter()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Emitter/Sphere/SphereEmitter.CS.hlsl"),
+	};
+	computeShadersMap_["SphereEmitter"] = shader;
+}
+
+void ShaderManager::ConstantField()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Field/Constant/ConstantField.CS.hlsl"),
+	};
+	computeShadersMap_["ConstantField"] = shader;
+}
+
+
 void ShaderManager::GPUParticle_Init()
 {
 	ShadersMode shader = {
@@ -388,12 +406,4 @@ void ShaderManager::GPUParticle_Update()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Update/GPUParticle_Update.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Update"] = shader;
-}
-
-void ShaderManager::GPUParticle_SphereEmit()
-{
-	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Emitter/Sphere/GPUParticle_EmitterSphere.CS.hlsl"),
-	};
-	computeShadersMap_["GPUParticle_EmitterSphere"] = shader;
 }

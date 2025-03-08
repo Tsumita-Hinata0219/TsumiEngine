@@ -35,9 +35,9 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
+#include "CSPipeLine/Emitter/Sphere/EmitterSpherePipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
-#include "CSPipeLine/ParticleEmitter/Sphere/ParticleEmitterSpherePipeLine.h"
 
 
 using namespace PipeLine;
@@ -113,9 +113,9 @@ private:
 	/// <summary>
 	/// ComputeShader
 	/// </summary>
+	void CreatePipeLine_EmitterSphere();
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Update();
-	void CreatePipeLine_ParticleEmitterSphere();
 
 
 private: // メンバ変数

@@ -5,11 +5,13 @@
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+// パーティクルの挙動要素
+RWStructuredBuffer<ParticleMotion> gPartMotion : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u1);
+RWStructuredBuffer<int> gFreeList : register(u2);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u2);
+RWStructuredBuffer<int> gFreeListIndex : register(u3);
 
 
 [numthreads(1024, 1, 1)]

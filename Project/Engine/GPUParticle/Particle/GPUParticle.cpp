@@ -144,11 +144,14 @@ void GPUParticle::Bind_Update()
 	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
+	// Particleの挙動要素
+	partMotionBuffer_.BindComputeSRV_Instanced(1);
+
 	// FreeList
-	freeListBuffer_.BindComputeSRV_Instanced(1);
+	freeListBuffer_.BindComputeSRV_Instanced(2);
 
 	// FreeListIndex
-	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
+	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

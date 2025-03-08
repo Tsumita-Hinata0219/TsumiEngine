@@ -25,18 +25,12 @@ void main(int3 DTid : SV_DispatchThreadID)
         // freeListの初期化
         gFreeList[particleIndex] = particleIndex;
         
-        // particle構造体の全要素を0で埋める
+        // 全要素を0で埋める
         gParticles[particleIndex] = (ParticleCS) 0;
         gParticles[particleIndex].matWorld = Mat4x4Identity();
         
-        // 生存フラグは折っておく
-        gParticles[particleIndex].isAlive = false;
-        
-        // 生存時間は0で初期化
-        gParticles[particleIndex].lifeTime = 0;
-        
-        // Velocityは0で初期化
-        gPartMotion[particleIndex].velocity = float3(0.0f, 0.0f, 0.0f);
+        // 全要素を0で埋める
+        gPartMotion[particleIndex] = (ParticleMotion) 0;
     }
     // カウンター初期化
     if (particleIndex == 0)

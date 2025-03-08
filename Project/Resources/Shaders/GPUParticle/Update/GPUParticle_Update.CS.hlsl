@@ -5,13 +5,11 @@
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
-// パーティクルの挙動要素
-RWStructuredBuffer<ParticleMotion> gPartMotion : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u2);
+RWStructuredBuffer<int> gFreeList : register(u1);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u3);
+RWStructuredBuffer<int> gFreeListIndex : register(u2);
 
 
 [numthreads(1024, 1, 1)]
@@ -36,7 +34,7 @@ void main(int3 DTid : SV_DispatchThreadID)
             }
             
             // velocityを加算
-            gParticles[particleIndex].translate += gPartMotion[particleIndex].velocity;
+            gParticles[particleIndex].translate += gParticles[particleIndex].velocity;
             
             // ParticleのMatWorldの更新処理
             gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);

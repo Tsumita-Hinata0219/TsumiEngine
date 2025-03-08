@@ -62,15 +62,6 @@ void GPUParticle::Bind_ParticleProp(UINT num)
 
 
 /// <summary>
-/// パーティクルの挙動要素のバインド
-/// </summary>
-void GPUParticle::Bind_MotionProp(UINT num)
-{
-	partMotionBuffer_.BindComputeSRV_Instanced(num);
-}
-
-
-/// <summary>
 /// フリーリストのバインド
 /// </summary>
 void GPUParticle::Bind_FreeList(UINT num)
@@ -118,14 +109,11 @@ void GPUParticle::Bind_Init()
 	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
-	// Particleの挙動要素
-	partMotionBuffer_.BindComputeSRV_Instanced(1);
-
 	// FreeList
-	freeListBuffer_.BindComputeSRV_Instanced(2);
+	freeListBuffer_.BindComputeSRV_Instanced(1);
 
 	// FreeListIndex
-	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -144,14 +132,11 @@ void GPUParticle::Bind_Update()
 	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
-	// Particleの挙動要素
-	partMotionBuffer_.BindComputeSRV_Instanced(1);
-
 	// FreeList
-	freeListBuffer_.BindComputeSRV_Instanced(2);
+	freeListBuffer_.BindComputeSRV_Instanced(1);
 
 	// FreeListIndex
-	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -215,9 +200,6 @@ void GPUParticle::CreateBufferResource()
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
-
-	// ParticleMotion
-	partMotionBuffer_.CreateUAV(instanceNum_);
 
 	// FreeList
 	freeListBuffer_.CreateUAV(instanceNum_);

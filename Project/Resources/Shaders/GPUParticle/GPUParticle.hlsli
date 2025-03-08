@@ -36,6 +36,7 @@ struct ParticleCS
     float3 translate;
     float4x4 matWorld;
     float4 color;
+    float3 velocity;
     uint isAlive;
     uint lifeTime;
 };
@@ -43,7 +44,6 @@ struct ParticleCS
 // パーティクルの挙動に関する構造体
 struct ParticleMotion
 {
-    float3 velocity; // 移動速度
     float3 acceleration; // 加速度
     float damping; // 速度の減衰率（0.0～1.0）
     float3 angularVelocity; // 角速度

@@ -5,13 +5,11 @@
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
-// パーティクルの挙動要素
-RWStructuredBuffer<ParticleMotion> gPartMotion : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u2);
+RWStructuredBuffer<int> gFreeList : register(u1);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u3);
+RWStructuredBuffer<int> gFreeListIndex : register(u2);
 
 // Emitter emission related
 ConstantBuffer<EmitterConfig> gEmitConfig : register(b0);
@@ -61,7 +59,7 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[particleIndex].lifeTime = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
 
                 // Velocity
-                gPartMotion[particleIndex].velocity = rng.RandomRange3D(gEmitRange.velocityMin.xyz, gEmitRange.velocityMax.xyz);
+                gParticles[particleIndex].velocity = rng.RandomRange3D(gEmitRange.velocityMin.xyz, gEmitRange.velocityMax.xyz);
 
             }
             else

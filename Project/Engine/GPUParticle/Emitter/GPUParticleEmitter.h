@@ -168,26 +168,23 @@ inline void GPUParticleEmitter<T>::Emit()
 	// Particle
 	particlePtr_.lock()->Bind_ParticleProp(0);
 
-	// ParticleMotion
-	particlePtr_.lock()->Bind_MotionProp(1);
-
 	// FreeList
-	particlePtr_.lock()->Bind_FreeList(2);
+	particlePtr_.lock()->Bind_FreeList(1);
 
 	// FreeListIndex
-	particlePtr_.lock()->Bind_FreeListIndex(3);
+	particlePtr_.lock()->Bind_FreeListIndex(2);
 
 	// EmitterConfig
-	emitConfigBuffer_.BindComputeCBV(4);
+	emitConfigBuffer_.BindComputeCBV(3);
 
 	// Emitter
-	emitterBuffer_.BindComputeCBV(5);
+	emitterBuffer_.BindComputeCBV(4);
 
 	// EmitterRange
-	emitterRangeBuffer_.BindComputeCBV(6);
+	emitterRangeBuffer_.BindComputeCBV(5);
 
 	// RandomSeed
-	seedBuffer_.BindComputeCBV(7);
+	seedBuffer_.BindComputeCBV(6);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

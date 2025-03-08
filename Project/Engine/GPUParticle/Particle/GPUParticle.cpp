@@ -106,13 +106,13 @@ void GPUParticle::Bind_Init()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Init);
 
-	// Particleの初期化値
+	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
-	// FreeListの初期化
+	// FreeList
 	freeListBuffer_.BindComputeSRV_Instanced(1);
 
-	// FreeListIndexの初期化
+	// FreeListIndex
 	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
@@ -129,8 +129,14 @@ void GPUParticle::Bind_Update()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Update);
 
-	// Particleの要素の初期化値
+	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
+
+	// FreeList
+	freeListBuffer_.BindComputeSRV_Instanced(1);
+
+	// FreeListIndex
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

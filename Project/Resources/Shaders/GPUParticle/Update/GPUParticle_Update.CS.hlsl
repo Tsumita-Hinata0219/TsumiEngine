@@ -2,8 +2,7 @@
 
 
 // パーティクル最大インスタンス数
-static const uint kMaclParticles = 1024;
-
+static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
@@ -18,20 +17,24 @@ void main(int3 DTid : SV_DispatchThreadID)
 {
     int particleIndex = DTid.x;
     
-    if (particleIndex < kMaclParticles)
+    if (particleIndex < kParticleInstanceMax)
     {
         // 生存中の処理
-        if (gParticles[particleIndex].isAlive == 0)
+        if (gParticles[particleIndex].isAlive != 0)
         {
+            // 生存時間の減算処理
+            gParticles[particleIndex].lifeTime -= 1;
+            // 生存時間が0以下
+            if (gParticles[particleIndex].lifeTime <= 0)
+            {
+                // 生存フラグを折る
+                gParticles[particleIndex].isAlive = false;
+                // 生存時間は0を入れておく
+                gParticles[particleIndex].lifeTime = 0;
+            }
+            
             // ParticleのMatWorldの更新処理
             gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
-            
-            
-            
-            
-            
-            
-            
         }
         else
         {
@@ -39,14 +42,15 @@ void main(int3 DTid : SV_DispatchThreadID)
             gParticles[particleIndex].scale = float3(0.0f, 0.0f, 0.0f);
             uint freeListIndex;
             InterlockedAdd(gFreeListIndex[0], 1, freeListIndex);
+            
             // 最新のFreeListIndexの場所に死んだPaticleのIndexを設定する
-            if ((freeListIndex + 1) < kMaclParticles)
+            if ((freeListIndex + 1) < kParticleInstanceMax)
             {
                 gFreeList[freeListIndex + 1] = particleIndex;
             }
             else
             {
-                // ここに来るはずはない。きたら何かが間違っているが、安全策をうっておく
+                // インデックスが範囲外になるのを防ぐ
                 InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
             }
         }

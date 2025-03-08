@@ -3,7 +3,6 @@
 
 // パーティクル最大インスタンス数
 static const uint kParticleInstanceMax = 1024;
-
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
 
@@ -32,8 +31,10 @@ void main(int3 DTid : SV_DispatchThreadID)
         
         // 生存フラグは折っておく
         gParticles[particleIndex].isAlive = false;
+        
+        // 生存時間は0で初期化
+        gParticles[particleIndex].lifeTime = 0;
     }
-    
     // カウンター初期化
     if (particleIndex == 0)
     {

@@ -12,6 +12,8 @@ struct PropertyCS {
 	Vector3 translate{};
 	Matrix4x4 matWorld{};
 	Vector4 color{};
+	uint32_t isAlive;
+	uint32_t lifeTime;
 };
 
 // Particleの運動に関する構造体

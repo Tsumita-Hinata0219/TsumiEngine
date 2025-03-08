@@ -23,17 +23,17 @@ ConstantBuffer<RandomSeed> gRandomSeed : register(b2);
 void main(int3 DTid : SV_DispatchThreadID)
 {
     // 射出許可が出たので射出
-    if (gEmitterConfig.isEmitting != 0)
+    //if (gEmitterConfig.isEmitting != 0)
     {
        // Random generator
         RandomGenerator rng;
         rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime));
         // Set range Scale
-        float3 scaleMin = float3(0.2f, 0.2f, 1.0f);
+        float3 scaleMin = float3(0.2f, 0.2f, 2.0f);
         float3 scaleMax = float3(0.6f, 0.6f, 0.6f);
         // Set translate range
-        float3 translateMin = float3(-3.0f, -3.0f, -3.0f);
-        float3 translateMax = float3(3.0f, 3.0f, 3.0f);
+        float3 translateMin = float3(-2.0f, -2.0f, -2.0f);
+        float3 translateMax = float3(2.0f, 2.0f, 2.0f);
         // Set ColorRGB range
         float3 colorMin = float3(0.0f, 0.0f, 0.0f);
         float3 colorMax = float3(1.0f, 1.0f, 1.0f);
@@ -52,13 +52,21 @@ void main(int3 DTid : SV_DispatchThreadID)
             if (0 <= freeListIndex && freeListIndex < kParticleInstanceMax)
             {
                 int particleIndex = gFreeList[freeListIndex];
+                // SRT
                 gParticles[particleIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
+                gParticles[particleIndex].rotate = float3(0.0f, 0.0f, 0.0f);
                 gParticles[particleIndex].translate = rng.RandomRange3D(translateMin, translateMax);
-                gParticles[particleIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
-                gParticles[particleIndex].color.a = 1.0f;
+                gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
                 
-                // 生存フラグを立てる
+                // Color
+                gParticles[particleIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
+                gParticles[particleIndex].color.a = 1.0f; // Alphaは不透明固定
+                
+                // 生存フラグ
                 gParticles[particleIndex].isAlive = true;
+                
+                // 生存時間
+                gParticles[particleIndex].lifeTime = 1 * 60;
             }
             else
             {

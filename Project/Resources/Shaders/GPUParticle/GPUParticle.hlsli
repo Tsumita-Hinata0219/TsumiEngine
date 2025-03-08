@@ -37,6 +37,7 @@ struct ParticleCS
     float4x4 matWorld;
     float4 color;
     uint isAlive;
+    uint lifeTime;
 };
 
 // PreView

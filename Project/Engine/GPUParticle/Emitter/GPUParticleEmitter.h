@@ -62,7 +62,7 @@ private:
 	/// <summary>
 	/// シードの更新
 	/// </summary>
-	void UpdateSeedData();
+	void UpdateRandomSeed();
 
 	/// <summary>
 	/// Bufferへデータの書き込み
@@ -132,14 +132,11 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> pParticle)
 template<typename T>
 inline void GPUParticleEmitter<T>::Update()
 {
+	// シードデータの更新
+	UpdateRandomSeed();
+
 	// タイマー更新
 	TimeUpdate();
-
-	// シードデータの更新
-	UpdateSeedData();
-
-	// データの書き込み
-	WriteData();
 }
 
 
@@ -190,15 +187,15 @@ inline void GPUParticleEmitter<T>::Emit()
 template<typename T>
 inline void GPUParticleEmitter<T>::TimeUpdate()
 {
-	emitConfigData_->elapsedTime += 1.0f / 60.0f; // δタイムを加算
+	emitConfigData_->elapsedTime -= 1.0f / 60.0f; // δタイムを加算
 	// 射出間隔を上回ったら射出許可を出して時間を調整
-	if (emitConfigData_->spawnInterval <= emitConfigData_->elapsedTime)
+	if (emitConfigData_->elapsedTime <= 0.0f)
 	{
-		emitConfigData_->elapsedTime -= emitConfigData_->elapsedTime;
-		emitConfigData_->isEmitting = 1;
-	}
-	else {
-		emitConfigData_->isEmitting = 0;
+		// 次の射出間隔を設定
+		emitConfigData_->elapsedTime = emitConfigData_->spawnInterval;
+
+		// パーティクルを沸かせる
+		Emit();
 	}
 }
 
@@ -207,11 +204,12 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 /// シードの更新
 /// </summary>
 template<typename T>
-inline void GPUParticleEmitter<T>::UpdateSeedData()
+inline void GPUParticleEmitter<T>::UpdateRandomSeed()
 {
 	// ゲーム開始からの時間を取得
 	seedData_.gameTime = timeSys_->Get_SinceStart();
 	// 初期乱数値 + 開始からの時間
+	seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
 	seedData_.dynamicTime += seedData_.gameTime;
 
 	// 600秒（10分）ごとにリセット

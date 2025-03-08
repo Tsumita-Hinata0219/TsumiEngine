@@ -566,6 +566,7 @@
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1451,6 +1452,7 @@
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

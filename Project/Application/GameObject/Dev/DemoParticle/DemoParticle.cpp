@@ -21,10 +21,10 @@ void DemoParticle::Init()
 
 	// エミッターコンフィグを取得
 	emitConfig_ = emitter_->GetEmitConfig();
-	emitConfig_.lock()->spawnInterval = 1.0f;
-	emitConfig_.lock()->elapsedTime = 0.0f;
-	emitConfig_.lock()->isEmitting = 0;
+	emitConfig_.lock()->spawnInterval = 2.0f;
+	emitConfig_.lock()->elapsedTime = emitConfig_.lock()->spawnInterval;
 	emitConfig_.lock()->spawnCount = 5;
+	emitConfig_.lock()->isEmitting = 0;
 }
 
 
@@ -33,8 +33,10 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	emitter_->Emit();
+	// エミッター更新処理
 	emitter_->Update();
+
+	// パーティクル更新
 	particle_->Update();
 
 #ifdef _DEBUG
@@ -64,6 +66,12 @@ void DemoParticle::DrawImGui()
 		}
 		ImGui::Text("");
 
+		auto time = emitConfig_.lock()->elapsedTime;
+		ImGui::Text("Emit Time : %.2f", float(time));
+		ImGui::Text("");
+
+
 		ImGui::TreePop();
 	}
 }
+

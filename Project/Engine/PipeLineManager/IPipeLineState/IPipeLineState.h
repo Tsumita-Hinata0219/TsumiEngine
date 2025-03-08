@@ -43,12 +43,9 @@ protected: // メンバ関数
 	/// </summary>
 	D3D12_ROOT_PARAMETER SetUpRootParam(RootParam::BuffType buffType, RootParam::ShaderType shaderType, UINT registerNum);
 
-	D3D12_STATIC_SAMPLER_DESC SetUp
-
 	/// <summary>
 	/// RootSignatureの設定
 	/// </summary
-	void SetUpRootSignature1(const D3D12_ROOT_PARAMETER* rootParameters, UINT rootParametersNum);
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
 
 	/// <summary>

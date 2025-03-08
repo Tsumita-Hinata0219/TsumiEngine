@@ -35,6 +35,9 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[particleIndex].lifeTime = 0.0f;
             }
             
+            // velocity‚ğ‰ÁZ
+            gParticles[particleIndex].translate += gPartMotion[particleIndex].velocity;
+            
             // Particle‚ÌMatWorld‚ÌXVˆ—
             gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
         }

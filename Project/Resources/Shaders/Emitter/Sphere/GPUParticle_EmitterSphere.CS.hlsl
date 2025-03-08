@@ -1,4 +1,7 @@
-#include "../../GPUParticle.hlsli"
+#include "../Emitter.hlsli"
+#include "../../GPUParticle/GPUParticle.hlsli"
+#include "../../Math/Math.hlsli"
+#include "../../Random/Random.hlsli"
 
 
 // パーティクルの最大インスタンス数

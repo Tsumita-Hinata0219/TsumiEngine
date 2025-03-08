@@ -393,7 +393,7 @@ void ShaderManager::GPUParticle_Update()
 void ShaderManager::GPUParticle_SphereEmit()
 {
 	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Emitter/Sphere/GPUParticle_EmitterSphere.CS.hlsl"),
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Emitter/Sphere/GPUParticle_EmitterSphere.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_EmitterSphere"] = shader;
 }

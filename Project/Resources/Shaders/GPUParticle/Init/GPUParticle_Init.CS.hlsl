@@ -1,4 +1,6 @@
 #include "../GPUParticle.hlsli"
+#include "../../Math/Math.hlsli"
+#include "../../Random/Random.hlsli"
 
 
 // パーティクル最大インスタンス数

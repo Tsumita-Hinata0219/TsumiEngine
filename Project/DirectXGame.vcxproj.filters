@@ -2379,6 +2379,8 @@
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
     <None Include="Resources\Shaders\Random\Random.hlsli" />
+    <None Include="Resources\Shaders\Emitter\Emitter.hlsli" />
+    <None Include="Resources\Shaders\Field\Field.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
@@ -2474,8 +2476,9 @@
     <FxCompile Include="externals\DirectXTex\Shaders\BC7Encode.hlsl">
       <Filter>externals\DirectXTex\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

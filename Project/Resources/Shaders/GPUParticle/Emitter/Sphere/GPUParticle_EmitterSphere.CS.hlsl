@@ -25,7 +25,7 @@ ConstantBuffer<RandomSeed> gRandomSeed : register(b3);
 void main(int3 DTid : SV_DispatchThreadID)
 {
     // Ëo‹–‰Â‚ªo‚½‚Ì‚ÅËo
-    //if (gEmitterConfig.isEmitting != 0)
+    if (gEmitterConfig.isEmitting != 0)
     {
         // Random generator
         RandomGenerator rng;

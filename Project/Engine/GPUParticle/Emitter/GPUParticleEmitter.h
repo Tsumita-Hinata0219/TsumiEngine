@@ -206,9 +206,13 @@ inline void GPUParticleEmitter<T>::TimeUpdate()
 	{
 		// 次の射出間隔を設定
 		emitConfigData_->elapsedTime = emitConfigData_->spawnInterval;
+		emitConfigData_->isEmitting = true;
 
 		// パーティクルを沸かせる
-		Emit();
+		//Emit();
+	}
+	else {
+		emitConfigData_->isEmitting = false;
 	}
 }
 

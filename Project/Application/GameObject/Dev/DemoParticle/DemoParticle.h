@@ -50,9 +50,12 @@ private:
 	// エミッター
 	std::unique_ptr<GPUParticleEmitter<GpuEmitter::SphereEmitter>> emitter_;
 
-	// エミッターの情報
-	std::weak_ptr<GpuEmitter::SphereEmitter> emitData_;
 
-	// エミッターコンフィグ
+	// Emit Config
 	std::weak_ptr<GpuEmitter::EmitterConfig> emitConfig_;
+	// Emit Data
+	std::weak_ptr<GpuEmitter::SphereEmitter> emitData_;
+	// Emit Range
+	std::weak_ptr<GpuEmitter::EmitterRange> emitRange_;
+
 };

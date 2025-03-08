@@ -23,14 +23,14 @@ void main(int3 DTid : SV_DispatchThreadID)
         if (gParticles[particleIndex].isAlive != 0)
         {
             // 生存時間の減算処理
-            gParticles[particleIndex].lifeTime -= 1;
+            gParticles[particleIndex].lifeTime -= 1.0f;
             // 生存時間が0以下
-            if (gParticles[particleIndex].lifeTime <= 0)
+            if (gParticles[particleIndex].lifeTime <= 0.0f)
             {
                 // 生存フラグを折る
                 gParticles[particleIndex].isAlive = false;
                 // 生存時間は0を入れておく
-                gParticles[particleIndex].lifeTime = 0;
+                gParticles[particleIndex].lifeTime = 0.0f;
             }
             
             // ParticleのMatWorldの更新処理

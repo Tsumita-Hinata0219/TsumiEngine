@@ -5,18 +5,20 @@
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+// パーティクルの挙動要素
+RWStructuredBuffer<ParticleMotion> gPartMotion : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u1);
+RWStructuredBuffer<int> gFreeList : register(u2);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u2);
+RWStructuredBuffer<int> gFreeListIndex : register(u3);
 
 // Emitter emission related
-ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
+ConstantBuffer<EmitterConfig> gEmitConfig : register(b0);
 // Emitter Sphere
-ConstantBuffer<EmitterSphere> gEmitterSphere : register(b1);
+ConstantBuffer<EmitterSphere> gEmitSphere : register(b1);
 // Emitter Range
-ConstantBuffer<EmitterRange> gEmitterRange : register(b2);
+ConstantBuffer<EmitterRange> gEmitRange : register(b2);
 // Random seed value
 ConstantBuffer<RandomSeed> gRandomSeed : register(b3);
 
@@ -25,26 +27,14 @@ ConstantBuffer<RandomSeed> gRandomSeed : register(b3);
 void main(int3 DTid : SV_DispatchThreadID)
 {
     // 射出許可が出たので射出
-    if (gEmitterConfig.isEmitting != 0)
+    if (gEmitConfig.isEmitting != 0)
     {
         // Random generator
         RandomGenerator rng;
         rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime));
-        // Set range Scale
-        float3 scaleMin = float3(0.2f, 0.2f, 2.0f);
-        float3 scaleMax = float3(0.6f, 0.6f, 0.6f);
-        // Set translate range
-        float3 translateMin = float3(-2.0f, -2.0f, -2.0f);
-        float3 translateMax = float3(2.0f, 2.0f, 2.0f);
-        // Set ColorRGB range
-        float3 colorMin = float3(0.0f, 0.0f, 0.0f);
-        float3 colorMax = float3(1.0f, 1.0f, 1.0f);
-        
-        // 射出するパーティクル数
-        uint spawnCount = gEmitterConfig.spawnCount;
         
         // Number of particles
-        for (uint countIndex = 0; countIndex < spawnCount; ++countIndex)
+        for (uint countIndex = 0; countIndex < gEmitConfig.spawnCount; ++countIndex)
         {
             int freeListIndex;
             // FreeListのIndexを1つ前に設定し、現在のIndexを取得する
@@ -55,20 +45,24 @@ void main(int3 DTid : SV_DispatchThreadID)
             {
                 int particleIndex = gFreeList[freeListIndex];
                 // SRT
-                gParticles[particleIndex].scale = rng.RandomRange3D(scaleMin, scaleMax);
+                gParticles[particleIndex].scale = rng.RandomRange3D(gEmitRange.scaleMin.xyz, gEmitRange.scaleMax.xyz);
                 gParticles[particleIndex].rotate = float3(0.0f, 0.0f, 0.0f);
-                gParticles[particleIndex].translate = rng.RandomRange3D(translateMin, translateMax);
+                gParticles[particleIndex].translate = rng.RandomRange3D(gEmitRange.translateMin.xyz, gEmitRange.translateMax.xyz);
                 gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
                 
                 // Color
-                gParticles[particleIndex].color.rgb = rng.RandomRange3D(colorMin, colorMax);
+                gParticles[particleIndex].color.rgb = rng.RandomRange3D(gEmitRange.colorMin.xyz, gEmitRange.colorMax.xyz);
                 gParticles[particleIndex].color.a = 1.0f; // Alphaは不透明固定
                 
                 // 生存フラグ
                 gParticles[particleIndex].isAlive = true;
                 
                 // 生存時間
-                gParticles[particleIndex].lifeTime = 1 * 60;
+                gParticles[particleIndex].lifeTime = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
+
+                // Velocity
+                gPartMotion[particleIndex].velocity = rng.RandomRange3D(gEmitRange.velocityMin.xyz, gEmitRange.velocityMax.xyz);
+
             }
             else
             {

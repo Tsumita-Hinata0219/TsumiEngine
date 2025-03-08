@@ -8,8 +8,8 @@ namespace GpuEmitter {
 // 射出に関する共通設定
 struct EmitterConfig {
 	uint32_t spawnCount;  // 1回の射出で生成するパーティクル数
-	float spawnInterval;      // パーティクルを射出する間隔（秒）
-	float elapsedTime;      // 射出間隔調整用時間
+	float spawnInterval = 0.0f;      // パーティクルを射出する間隔（秒）
+	float elapsedTime = 0.0f;      // 射出間隔調整用時間
 	uint32_t isEmitting;     // 射出許可フラグ (0: 停止, 1: 許可)
 };
 
@@ -21,35 +21,35 @@ struct IEmitter {
 // Emitter_Sphere
 struct SphereEmitter : IEmitter {
 	Vector3 translate{};     // 位置
-	float radius;            // 射出半径
+	float radius = 0.0f;            // 射出半径
 };
 
 // エミッターの範囲
 struct EmitterRange
 {
     // SRT
-    Vector3 scaleMin;
-    Vector3 scaleMax;
-    Vector3 rotateMin;
-    Vector3 rotateMax;
-    Vector3 translateMin;
-    Vector3 translateMax;
+    Vector4 scaleMin;
+    Vector4 scaleMax;
+    Vector4 rotateMin;
+    Vector4 rotateMax;
+    Vector4 translateMin;
+    Vector4 translateMax;
     // Color
     Vector4 colorMin;
     Vector4 colorMax;
     // Motion
-    Vector3 velocityMin;
-    Vector3 velocityMax;
+    Vector4 velocityMin;
+    Vector4 velocityMax;
     // Life
-    uint32_t baseLifeTime;
-    uint32_t lifeTimeMin;
-    uint32_t lifeTimeMax;
+    float baseLifeTime = 0.0f;
+    float lifeTimeMin = 0.0f;
+    float lifeTimeMax = 0.0f;
 };
 
 // 乱数のシード情報
 struct RandomSeed {
-	float gameTime;
-	float dynamicTime;
+	float gameTime = 0.0f;
+	float dynamicTime = 0.0f;
 };
 
 }

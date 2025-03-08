@@ -28,6 +28,19 @@ void DemoParticle::Init()
 
 	// Emit Rangeを取得
 	emitRange_ = emitter_->GetEmitRange();
+	emitRange_.lock()->scaleMin = { 0.2f, 0.2f, 0.2f, 0.0f };
+	emitRange_.lock()->scaleMax = { 0.6f, 0.6f, 0.6f, 0.0f };
+	emitRange_.lock()->rotateMin = { 0.0f, 0.0f, 0.0f, 0.0f };
+	emitRange_.lock()->rotateMax = { 0.0f, 0.0f, 0.0f, 0.0f };
+	emitRange_.lock()->translateMin = { -2.0f, -2.0f, -2.0f, 0.0f };
+	emitRange_.lock()->translateMax = { 2.0f, 2.0f, 2.0f, 0.0f };
+	emitRange_.lock()->colorMin = { 0.0f, 0.0f, 0.0f, 1.0f };
+	emitRange_.lock()->colorMax = { 1.0f, 1.0f, 1.0f, 1.0f };
+	emitRange_.lock()->velocityMin = { 0.0f, 0.0f, 0.0f, 0.0f };
+	emitRange_.lock()->velocityMax = { 1.0f, 1.0f, 1.0f, 0.0f };
+	emitRange_.lock()->baseLifeTime = 1.0f * 60.0f;
+	emitRange_.lock()->lifeTimeMin = 0;
+	emitRange_.lock()->lifeTimeMax = 0;
 
 }
 

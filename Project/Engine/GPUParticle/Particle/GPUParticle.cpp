@@ -62,6 +62,15 @@ void GPUParticle::Bind_ParticleProp(UINT num)
 
 
 /// <summary>
+/// パーティクルの挙動要素のバインド
+/// </summary>
+void GPUParticle::Bind_MotionProp(UINT num)
+{
+	partMotionBuffer_.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
 /// フリーリストのバインド
 /// </summary>
 void GPUParticle::Bind_FreeList(UINT num)
@@ -109,11 +118,14 @@ void GPUParticle::Bind_Init()
 	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
+	// Particleの挙動要素
+	partMotionBuffer_.BindComputeSRV_Instanced(1);
+
 	// FreeList
-	freeListBuffer_.BindComputeSRV_Instanced(1);
+	freeListBuffer_.BindComputeSRV_Instanced(2);
 
 	// FreeListIndex
-	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
+	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -182,21 +194,31 @@ void GPUParticle::CreateBufferResource()
 {
 	// mesh
 	handles_.mesh.CreateCBV(UINT(model_->GetMeshData().vertices.size()));
+
 	// vertexBufferView
 	handles_.vertex.CreateCBV(UINT(model_->GetMeshData().vertices.size()));
 	handles_.vertex.CreateVertexBufferView();
+
 	// indexBufferView
 	handles_.indeces.CreateCBV(UINT(model_->GetMeshData().indices.size()));
 	handles_.indeces.CreateIndexBufferView();
+
 	// ParticleElement
 	handles_.particleElement.CreateUAV(instanceNum_);
+
 	// PreView
 	handles_.preView.CreateCBV();
+
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
+
+	// ParticleMotion
+	partMotionBuffer_.CreateUAV(instanceNum_);
+
 	// FreeList
 	freeListBuffer_.CreateUAV(instanceNum_);
+
 	// FreeListIndex
 	freeListIndexBuffer_.CreateUAV(instanceNum_);
 }

@@ -18,8 +18,12 @@ struct PropertyCS {
 
 // Particleの運動に関する構造体
 struct ParticleMotion {
-	Vector3 velocity; // 速度
+	Vector3 velocity; // 移動速度
 	Vector3 acceleration; // 加速度
+	float damping; // 速度の減衰率（0.0～1.0）
+	Vector3 angularVelocity; // 角速度
+	Vector3 force; // 外力
+	float drag; // 空気抵抗
 };
 
 // Material

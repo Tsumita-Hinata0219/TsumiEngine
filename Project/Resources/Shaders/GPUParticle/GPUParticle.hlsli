@@ -40,6 +40,17 @@ struct ParticleCS
     uint lifeTime;
 };
 
+// パーティクルの挙動に関する構造体
+struct ParticleMotion
+{
+    float3 velocity; // 移動速度
+    float3 acceleration; // 加速度
+    float damping; // 速度の減衰率（0.0～1.0）
+    float3 angularVelocity; // 角速度
+    float3 force; // 外力
+    float drag; // 空気抵抗
+};
+
 // PreView
 struct PreView
 {
@@ -76,22 +87,22 @@ struct EmitterSphere
 struct EmitterRange
 {
     // SRT
-    float3 scaleMin;
-    float3 scaleMax;
-    float3 rotateMin;
-    float3 rotateMax;
-    float3 translateMin;
-    float3 translateMax;
+    float4 scaleMin;
+    float4 scaleMax;
+    float4 rotateMin;
+    float4 rotateMax;
+    float4 translateMin;
+    float4 translateMax;
     // Color
     float4 colorMin;
     float4 colorMax;
     // Motion
-    float3 velocityMin;
-    float3 velocityMax;
+    float4 velocityMin;
+    float4 velocityMax;
     // Life
-    uint baseLifeTime;
-    uint lifeTimeMin;
-    uint lifeTimeMax;
+    float baseLifeTime;
+    float lifeTimeMin;
+    float lifeTimeMax;
 };
 
 // 乱数のシード情報

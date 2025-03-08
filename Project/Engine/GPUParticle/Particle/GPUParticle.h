@@ -52,6 +52,11 @@ public:
 	void Bind_ParticleProp(UINT num);
 
 	/// <summary>
+	/// パーティクルの挙動要素のバインド
+	/// </summary>
+	void Bind_MotionProp(UINT num);
+
+	/// <summary>
 	/// フリーリストのバインド
 	/// </summary>
 	void Bind_FreeList(UINT num);
@@ -105,6 +110,9 @@ private:
 	// パーティクルの要素
 	GpuParticle::ModelData modelData_{};
 	GpuParticle::ResourceHandles handles_{};
+
+	// パーティクルの挙動
+	BufferResource<GpuParticle::ParticleMotion> partMotionBuffer_;
 
 	// フリーリスト
 	BufferResource<uint32_t> freeListBuffer_;

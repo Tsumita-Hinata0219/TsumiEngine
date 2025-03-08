@@ -42,12 +42,14 @@ public:
 
 #pragma region Accessor
 
-	// エミッターデータ
+	// Emitter
 	const std::weak_ptr<T> GetEmitData() { return this->emitterData_; }
-	void SetEmitData(const T& setData) { this->emitterData_ = setData; }
 
-	// エミッターコンフィグ
+	// Emitter Config
 	const std::weak_ptr<GpuEmitter::EmitterConfig> GetEmitConfig() { return this->emitConfigData_; }
+
+	// Emitter Range
+	const std::weak_ptr<GpuEmitter::EmitterRange> GetEmitRange() { return this->emitterRangeData_; }
 
 #pragma endregion 
 
@@ -75,13 +77,17 @@ private:
 	// パーティクルのPtr
 	std::weak_ptr<GPUParticle> particlePtr_;
 
-	// エミッターデータ
+	// 射出関連
+	std::shared_ptr<GpuEmitter::EmitterConfig> emitConfigData_;
+	BufferResource<GpuEmitter::EmitterConfig> emitConfigBuffer_;
+
+	// Emitter
 	std::shared_ptr<T> emitterData_;
 	BufferResource<T> emitterBuffer_;
 
-	// 射出に関する
-	std::shared_ptr<GpuEmitter::EmitterConfig> emitConfigData_;
-	BufferResource<GpuEmitter::EmitterConfig> emitConfigBuffer_;
+	// 範囲関連
+	std::shared_ptr<GpuEmitter::EmitterRange> emitterRangeData_;
+	BufferResource<GpuEmitter::EmitterRange> emitterRangeBuffer_;
 
 	// GPUに使う乱数シード情報
 	GpuEmitter::RandomSeed seedData_{};
@@ -89,7 +95,6 @@ private:
 
 	// 前回リセットした時点の時間
 	float lastResetTime_ = 0.0f;
-
 	// 時間記録クラス
 	TimeSystem* timeSys_ = nullptr;
 };
@@ -108,15 +113,20 @@ inline void GPUParticleEmitter<T>::Create(std::weak_ptr<GPUParticle> pParticle)
 	// パーティクルのptrを受け取る
 	particlePtr_ = pParticle;
 
-	// エミッター作成
+	// 射出関連データ作成
+	emitConfigData_ = std::make_shared<GpuEmitter::EmitterConfig>();
+	// 射出関連データのバッファー作成
+	emitConfigBuffer_.CreateCBV();
+
+	// Emitterデータ作成
 	emitterData_ = std::make_shared<T>();
-	// エミッターのバッファー作成
+	// Emitterデータのバッファー作成
 	emitterBuffer_.CreateCBV();
 
-	// エミッターコンフィグ作成
-	emitConfigData_ = std::make_shared<GpuEmitter::EmitterConfig>();
-	// エミッターコンフィグのバッファー作成
-	emitConfigBuffer_.CreateCBV();
+	// Rangeデータ作成
+	emitterRangeData_ = std::make_shared<GpuEmitter::EmitterRange>();
+	// Range関連データのバッファー作成
+	emitterRangeBuffer_.CreateCBV();
 
 	// シードデータの初期設定
 	seedData_.gameTime = timeSys_->Get_SinceStart();
@@ -164,14 +174,17 @@ inline void GPUParticleEmitter<T>::Emit()
 	// FreeListIndex
 	particlePtr_.lock()->Bind_FreeListIndex(2);
 
-	// Emitter
-	emitterBuffer_.BindComputeCBV(3);
-
 	// EmitterConfig
-	emitConfigBuffer_.BindComputeCBV(4);
+	emitConfigBuffer_.BindComputeCBV(3);
+
+	// Emitter
+	emitterBuffer_.BindComputeCBV(4);
+
+	// EmitterRange
+	emitterRangeBuffer_.BindComputeCBV(5);
 
 	// RandomSeed
-	seedBuffer_.BindComputeCBV(5);
+	seedBuffer_.BindComputeCBV(6);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -226,11 +239,11 @@ inline void GPUParticleEmitter<T>::UpdateRandomSeed()
 template<typename T>
 inline void GPUParticleEmitter<T>::WriteData()
 {
-	// Emitter
-	emitterBuffer_.UpdateData(emitterData_.get());
-
 	// EmitterConfig
 	emitConfigBuffer_.UpdateData(emitConfigData_.get());
+
+	// Emitter
+	emitterBuffer_.UpdateData(emitterData_.get());
 
 	// SeedData
 	seedBuffer_.UpdateData(&seedData_);

@@ -72,6 +72,28 @@ struct EmitterSphere
     float radius; // 生成半径
 };
 
+// エミッターの範囲
+struct EmitterRange
+{
+    // SRT
+    float3 scaleMin;
+    float3 scaleMax;
+    float3 rotateMin;
+    float3 rotateMax;
+    float3 translateMin;
+    float3 translateMax;
+    // Color
+    float4 colorMin;
+    float4 colorMax;
+    // Motion
+    float3 velocityMin;
+    float3 velocityMax;
+    // Life
+    uint baseLifeTime;
+    uint lifeTimeMin;
+    uint lifeTimeMax;
+};
+
 // 乱数のシード情報
 struct RandomSeed
 {

@@ -24,6 +24,28 @@ struct SphereEmitter : IEmitter {
 	float radius;            // 射出半径
 };
 
+// エミッターの範囲
+struct EmitterRange
+{
+    // SRT
+    Vector3 scaleMin;
+    Vector3 scaleMax;
+    Vector3 rotateMin;
+    Vector3 rotateMax;
+    Vector3 translateMin;
+    Vector3 translateMax;
+    // Color
+    Vector4 colorMin;
+    Vector4 colorMax;
+    // Motion
+    Vector3 velocityMin;
+    Vector3 velocityMax;
+    // Life
+    uint32_t baseLifeTime;
+    uint32_t lifeTimeMin;
+    uint32_t lifeTimeMax;
+};
+
 // 乱数のシード情報
 struct RandomSeed {
 	float gameTime;

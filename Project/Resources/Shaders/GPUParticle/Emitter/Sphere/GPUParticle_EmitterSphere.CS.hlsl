@@ -11,12 +11,14 @@ RWStructuredBuffer<int> gFreeList : register(u1);
 // FreeListIndex
 RWStructuredBuffer<int> gFreeListIndex : register(u2);
 
-// Emitter_Sphere
-ConstantBuffer<EmitterSphere> gEmitterSphere : register(b0);
 // Emitter emission related
-ConstantBuffer<EmitterConfig> gEmitterConfig : register(b1);
+ConstantBuffer<EmitterConfig> gEmitterConfig : register(b0);
+// Emitter Sphere
+ConstantBuffer<EmitterSphere> gEmitterSphere : register(b1);
+// Emitter Range
+ConstantBuffer<EmitterRange> gEmitterRange : register(b2);
 // Random seed value
-ConstantBuffer<RandomSeed> gRandomSeed : register(b2);
+ConstantBuffer<RandomSeed> gRandomSeed : register(b3);
 
 
 [numthreads(1, 1, 1)]
@@ -25,7 +27,7 @@ void main(int3 DTid : SV_DispatchThreadID)
     // Ëo‹–‰Â‚ªo‚½‚Ì‚ÅËo
     //if (gEmitterConfig.isEmitting != 0)
     {
-       // Random generator
+        // Random generator
         RandomGenerator rng;
         rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime));
         // Set range Scale

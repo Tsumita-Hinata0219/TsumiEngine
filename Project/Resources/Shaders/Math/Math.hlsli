@@ -73,9 +73,12 @@ float4x4 AffineMatrix(float3 scale, float3 rotate, float3 translate)
     float4x4 rotationMatrixY = RotateMatrixY(rotate.y);
     float4x4 rotationMatrixZ = RotateMatrixZ(rotate.z);
     float4x4 translationMatrix = TranslateMatrix(translate);
-    float4x4 rotateXYZ = Mat4x4Identity();
-    rotateXYZ = mul(rotateXYZ, mul(rotationMatrixX, mul(rotationMatrixY, rotationMatrixZ)));
-    return mul(scalingMatrix, mul(rotateXYZ, translationMatrix));
+
+    // ‰ñ“]‚Ì‡”Ô‚Í X ¨ Y ¨ Z ‚Ì‚Ü‚Ü‚ÅOK
+    float4x4 rotateXYZ = mul(rotationMatrixZ, mul(rotationMatrixY, rotationMatrixX));
+
+    // ‡”ÔC³FƒXƒP[ƒ‹ ¨ ‰ñ“] ¨ ˆÚ“®
+    return mul(translationMatrix, mul(rotateXYZ, scalingMatrix));
 
 }
 

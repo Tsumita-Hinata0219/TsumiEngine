@@ -15,6 +15,7 @@ struct ViewProjectionMatrix
 {
     float4x4 view;
     float4x4 projection;
+    float4x4 orthoGraphic;
     float3 cameraPosition;
 };
 ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);

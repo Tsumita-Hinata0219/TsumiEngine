@@ -28,7 +28,6 @@ void main(int3 DTid : SV_DispatchThreadID)
         // 全要素を0で埋める
         gParticles[particleIndex] = (ParticleCS) 0;
         gParticles[particleIndex].matWorld = Mat4x4Identity();
-        
     }
     // カウンター初期化
     if (particleIndex == 0)

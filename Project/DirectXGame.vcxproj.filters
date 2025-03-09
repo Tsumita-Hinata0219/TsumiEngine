@@ -1455,6 +1455,7 @@
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
+    <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

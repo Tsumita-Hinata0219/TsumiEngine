@@ -41,7 +41,5 @@ void main(int3 DTid : SV_DispatchThreadID)
             float dragForce = 1.0f - gField.drag;
             gParticles[particleIndex].velocity *= max(dragForce, 0.0f);
         }
-        
-        gParticles[particleIndex].velocity = float3(0.0f, 0.0f, 0.0f);
     }
 }

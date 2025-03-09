@@ -13,6 +13,7 @@
 #include "3D/Skybox/Skybox.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
+#include "GameObject/Terrain/Floor/Floor.h"
 #include "GameObject/Dev/DemoParticle/DemoParticle.h"
 
 
@@ -67,5 +68,8 @@ private:
 
 	// DemoParticle
 	std::unique_ptr<DemoParticle> demoParticle_;
+
+	// Floor
+	std::unique_ptr<Floor> floor_;
 };
 

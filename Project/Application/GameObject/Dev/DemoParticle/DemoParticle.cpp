@@ -21,24 +21,26 @@ void DemoParticle::Init()
 
 	// Emit Configを取得
 	emitConfig_ = emitter_->GetEmitConfig();
-	emitConfig_.lock()->spawnInterval = 0.3f; // second
+	emitConfig_.lock()->spawnInterval = 0.1f; // second
 	emitConfig_.lock()->elapsedTime = emitConfig_.lock()->spawnInterval;
-	emitConfig_.lock()->spawnCount = 150;
+	emitConfig_.lock()->spawnCount = 50;
 	emitConfig_.lock()->isEmitting = 0;
 
 	// Emit Rangeを取得
 	emitRange_ = emitter_->GetEmitRange();
-	emitRange_.lock()->scaleMin = { 0.2f, 0.2f, 0.2f, 0.0f };
-	emitRange_.lock()->scaleMax = { 0.6f, 0.6f, 0.6f, 0.0f };
+	emitRange_.lock()->scaleMin = { 0.25f, 0.25f, 0.25f, 0.0f };
+	emitRange_.lock()->scaleMax = { 0.25f, 0.25f, 0.25f, 0.0f };
 	emitRange_.lock()->rotateMin = { 0.0f, 0.0f, 0.0f, 0.0f };
 	emitRange_.lock()->rotateMax = { 0.0f, 0.0f, 0.0f, 0.0f };
 	emitRange_.lock()->translateMin = { -2.0f, -2.0f, -2.0f, 0.0f };
 	emitRange_.lock()->translateMax = { 2.0f, 2.0f, 2.0f, 0.0f };
 	emitRange_.lock()->colorMin = { 0.0f, 0.0f, 0.0f, 1.0f };
 	emitRange_.lock()->colorMax = { 1.0f, 1.0f, 1.0f, 1.0f };
-	emitRange_.lock()->velocityMin = { -1.0f, 0.0f, -1.0f, 0.0f };
-	emitRange_.lock()->velocityMax = { 1.0f, 1.0f, 1.0f, 0.0f };
-	emitRange_.lock()->baseLifeTime = 1.0f * 60.0f;
+
+	emitRange_.lock()->velocityMin = { -0.3f, 0.0f, -0.3f, 0.0f };
+	emitRange_.lock()->velocityMax = { 0.3f, 1.0f, 0.3f, 0.0f };
+
+	emitRange_.lock()->baseLifeTime = 0.5f * 60.0f;
 	emitRange_.lock()->lifeTimeMin = 0;
 	emitRange_.lock()->lifeTimeMax = 0;
 
@@ -48,13 +50,13 @@ void DemoParticle::Init()
 
 	// Field Dataの取得
 	fieldData_ = field_->GetFieldData();
-	fieldData_.lock()->acceleration = Vector3::one;
-	fieldData_.lock()->damping = 0.0f;
-	fieldData_.lock()->angularVelocity = Vector3::oneX;
-	fieldData_.lock()->drag = 0.0f;
-	fieldData_.lock()->force = Vector3::oneY;
+	fieldData_.lock()->acceleration = Vector3::zero;
+	fieldData_.lock()->damping = 1.0f;
+	fieldData_.lock()->angularVelocity = Vector3::zero;
+	fieldData_.lock()->drag = 0.1f;
+	fieldData_.lock()->force = Vector3::zero;
 	fieldData_.lock()->mass = 0.0f;
-	fieldData_.lock()->isUse = false;
+	fieldData_.lock()->isUse = true;
 }
 
 

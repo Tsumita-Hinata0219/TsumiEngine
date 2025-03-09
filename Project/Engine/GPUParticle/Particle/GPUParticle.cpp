@@ -46,7 +46,7 @@ void GPUParticle::Draw()
 	handles_.vertex.UpdateData(model_->GetMeshData().vertices.data());
 	// IBV
 	handles_.indeces.UpdateData(model_->GetMeshData().indices.data());
-	
+
 	// 描画バインド
 	Bind_Draw();
 }

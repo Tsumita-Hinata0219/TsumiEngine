@@ -44,18 +44,23 @@ private:
 
 private:
 
-	// パーティクル本体
+	// Particle
 	std::shared_ptr<GPUParticle> particle_;
 
-	// エミッター
+	// Emitter
 	std::unique_ptr<GPUParticleEmitter<GpuEmitter::SphereEmitter>> emitter_;
-
+	// Emit Data
+	std::weak_ptr<GpuEmitter::SphereEmitter> emitData_;
 
 	// Emit Config
 	std::weak_ptr<GpuEmitter::EmitterConfig> emitConfig_;
-	// Emit Data
-	std::weak_ptr<GpuEmitter::SphereEmitter> emitData_;
+
 	// Emit Range
 	std::weak_ptr<GpuEmitter::EmitterRange> emitRange_;
+
+	// Field
+	std::unique_ptr<GPUParticleField<GpuField::ConstantField>> field_;
+	// Field Data
+	std::weak_ptr<GpuField::ConstantField> fieldData_;
 
 };

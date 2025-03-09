@@ -525,8 +525,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\GPUParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
     <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />

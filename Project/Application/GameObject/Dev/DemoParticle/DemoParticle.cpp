@@ -23,7 +23,7 @@ void DemoParticle::Init()
 	emitConfig_ = emitter_->GetEmitConfig();
 	emitConfig_.lock()->spawnInterval = 0.1f; // second
 	emitConfig_.lock()->elapsedTime = emitConfig_.lock()->spawnInterval;
-	emitConfig_.lock()->spawnCount = 50;
+	emitConfig_.lock()->spawnCount = 250;
 	emitConfig_.lock()->isEmitting = 0;
 
 	// Emit Rangeを取得

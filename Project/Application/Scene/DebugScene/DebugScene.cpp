@@ -23,7 +23,7 @@ void DebugScene::Initialize()
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({0.15f, 0.0f, 0.0f}, {0.0f, 4.0f, -23.0f});
+	cameraData_.lock()->Init({0.15f, -0.3f, 0.0f}, {7.0f, 4.0f, -20.0f});
 	
 	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();

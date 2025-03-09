@@ -73,13 +73,13 @@ void Skybox::Update()
 void Skybox::Draw()
 {
 	// CameraResourceの取得
-	auto cameraResource = cameraManager_->GetResource();
+	auto cameraResource = cameraManager_->GetCameraDataWeak();
 
 	// 諸々の計算
 	transform_.UpdateMatrix();
 	transform_.transformationMatData.World = transform_.matWorld;
 	transform_.transformationMatData.WVP =
-		transform_.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+		transform_.transformationMatData.World * cameraResource.lock()->viewMatrix * cameraResource.lock()->projectionMatrix;
 	transform_.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform_.matWorld));
 
 
@@ -195,7 +195,7 @@ void Skybox::CommandCall()
 	// Material
 	buffers_.material.BindGraphicsCBV(0);
 	// Camera
-	cameraManager_->CommandCall(2);
+	cameraManager_->Bind_CameraData(2);
 	// MaterialTexture
 	buffers_.material.BindGraphicsSRV(3, texture_);
 	// Draw!!

@@ -107,8 +107,8 @@ void EnemyHitEffectCircle::CalcAlpha()
 void EnemyHitEffectCircle::CalcRotate()
 {
 	// カメラ座標の取得
-	auto camera = CameraManager::GetInstance()->GetResource();
-	Vector3 cameraPos = camera->srt.translate;
+	auto camera = CameraManager::GetInstance()->GetCameraDataWeak();
+	Vector3 cameraPos = camera.lock()->srt.translate;
 
 	// 正規化
 	Vector3 diffRotate = Normalize(trans_.GetWorldPos() - cameraPos);
@@ -119,6 +119,4 @@ void EnemyHitEffectCircle::CalcRotate()
 	float height = -diffRotate.y;
 	trans_.srt.rotate.x = atan2(height, vecZ);
 }
-
-
 

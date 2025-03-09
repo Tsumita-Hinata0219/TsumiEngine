@@ -162,7 +162,7 @@ void GPUParticle::Bind_Draw()
 	handles_.particleElement.BindGraphicsSRV_Instanced(0);
 
 	// Camera
-	cameraManager_->CommandCall(1);
+	cameraManager_->Bind_CameraData(1);
 
 	// ParticleElement : PS
 	handles_.particleElement.BindGraphicsSRV_Instanced(2);

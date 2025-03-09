@@ -57,19 +57,8 @@ void CameraData::Update()
 	// ビュー・投影・ビューポート行列の逆行列を作成
 	inverseViewProjectionViewportMatrix = Inverse(viewProjectionViewportMatrix);
 
-
 	// 行列に書き込むデータの設定
 	UpdateBuffer();
-}
-
-
-// ImGuiの描画
-void CameraData::DrawImGui()
-{
-	ImGui::Text("Camera");
-	ImGui::DragFloat3("Scale", &srt.scale.x, 0.01f, 0.01f, 100.0f);
-	ImGui::DragFloat3("Rotate", &srt.rotate.x, 0.01f);
-	ImGui::DragFloat3("Translate", &srt.translate.x, 0.01f);
 }
 
 
@@ -87,8 +76,26 @@ void CameraData::UpdateBuffer()
 }
 
 
+// カメラデータをバンドする
+void CameraData::Bind_CameraData(UINT num)
+{
+	Update(); // 値を更新しておく
+	buffer->BindGraphicsCBV(num);
+}
+
+
 // ワールド座標の取得
 Vector3 CameraData::GetWorldPos()
 {
 	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
+}
+
+
+// ImGuiの描画
+void CameraData::DrawImGui()
+{
+	ImGui::Text("Camera");
+	ImGui::DragFloat3("Scale", &srt.scale.x, 0.01f, 0.01f, 100.0f);
+	ImGui::DragFloat3("Rotate", &srt.rotate.x, 0.01f);
+	ImGui::DragFloat3("Translate", &srt.translate.x, 0.01f);
 }

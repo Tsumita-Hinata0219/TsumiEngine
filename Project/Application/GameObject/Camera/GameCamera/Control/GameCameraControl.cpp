@@ -6,12 +6,12 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraData* pData)
+void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer)
 {
 	// 各ポインターの設定
 	pGameCamera_ = pCamera;
 	pPlayer_ = pPlayer;
-	pData_ = pData;
+	pCameraData_ = CameraManager::GetInstance()->GetCameraDataWeak();
 
 	// Inputクラス
 	input_ = Input::GetInstance();
@@ -29,7 +29,7 @@ void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraData* p
 	}
 
 	// 姿勢
-	pData_->srt.rotate = initRotate_;
+	pCameraData_.lock()->srt.rotate = initRotate_;
 	// オフセットの設定
 	playerOffset_ = constOffset_;
 }
@@ -65,11 +65,11 @@ void GameCameraControl::FuncOrientation()
 		float addAngle = iRStick_.x * addOrientationSpeed_;
 
 		// 現在の角度と目標角度の計算
-		float targetAngle = pData_->srt.rotate.y + addAngle;
+		float targetAngle = pCameraData_.lock()->srt.rotate.y + addAngle;
 
 		// 現在の角度を目標角度の間を補間
-		pData_->srt.rotate.y =
-			Lerp(pData_->srt.rotate.y, targetAngle, orientationLerpSpeed_);
+		pCameraData_.lock()->srt.rotate.y =
+			Lerp(pCameraData_.lock()->srt.rotate.y, targetAngle, orientationLerpSpeed_);
 	}
 }
 
@@ -84,14 +84,14 @@ void GameCameraControl::FuncFollow()
 
 	// カメラの前方方向に基づいてカメラのオフセットを回転させる
 	Matrix4x4 rotateMat = Matrix4x4::identity;
-	rotateMat = MakeRotateYMatrix(pData_->srt.rotate.y);
+	rotateMat = MakeRotateYMatrix(pCameraData_.lock()->srt.rotate.y);
 
 	// カメラのオフセットの回転
 	playerOffset_ = TransformWithPerspective(playerOffset_, rotateMat);
 
 	// プレイヤーの位置にオフセットを加えてカメラの位置を更新
-	pData_->srt.translate = pPlayer_->GetWorldPos() + playerOffset_;
+	pCameraData_.lock()->srt.translate = pPlayer_->GetWorldPos() + playerOffset_;
 
 	// Yの位置だけ固定
-	pData_->srt.translate.y = constOffset_.y;
+	pCameraData_.lock()->srt.translate.y = constOffset_.y;
 }

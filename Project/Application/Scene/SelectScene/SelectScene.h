@@ -64,11 +64,9 @@ private:
 	// Input
 	Input* input_ = nullptr;
 
-	// カメラマネージャー
+	// カメラ
 	CameraManager* cameraManager_ = nullptr;
-
-	// カメラ本体
-	CameraData camera_{};
+	std::weak_ptr<CameraData> cameraData_;
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;

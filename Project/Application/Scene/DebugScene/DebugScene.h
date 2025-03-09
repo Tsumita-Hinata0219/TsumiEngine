@@ -58,9 +58,9 @@ public:
 
 private:
 
-	// メインカメラ
+	// カメラ
 	CameraManager* cameraManager_ = nullptr;
-	CameraData camera_;
+	std::weak_ptr<CameraData> cameraData_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

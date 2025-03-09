@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(GameCamera* pCamera, Player* setPlayer, CameraData* pData);
+	void Init(GameCamera* pCamera, Player* setPlayer);
 
 	/// <summary>
 	/// 更新処理
@@ -51,7 +51,7 @@ private:
 	// 各ポインター
 	GameCamera* pGameCamera_ = nullptr;
 	Player* pPlayer_ = nullptr;
-	CameraData* pData_;
+	std::weak_ptr<CameraData> pCameraData_;
 
 	// 入力
 	Input* input_ = nullptr;

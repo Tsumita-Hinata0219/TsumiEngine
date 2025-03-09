@@ -21,9 +21,9 @@ void DemoParticle::Init()
 
 	// Emit Configを取得
 	emitConfig_ = emitter_->GetEmitConfig();
-	emitConfig_.lock()->spawnInterval = 0.5f;
+	emitConfig_.lock()->spawnInterval = 0.3f; // second
 	emitConfig_.lock()->elapsedTime = emitConfig_.lock()->spawnInterval;
-	emitConfig_.lock()->spawnCount = 5;
+	emitConfig_.lock()->spawnCount = 150;
 	emitConfig_.lock()->isEmitting = 0;
 
 	// Emit Rangeを取得
@@ -36,8 +36,8 @@ void DemoParticle::Init()
 	emitRange_.lock()->translateMax = { 2.0f, 2.0f, 2.0f, 0.0f };
 	emitRange_.lock()->colorMin = { 0.0f, 0.0f, 0.0f, 1.0f };
 	emitRange_.lock()->colorMax = { 1.0f, 1.0f, 1.0f, 1.0f };
-	emitRange_.lock()->velocityMin = { 0.0f, 0.0f, 0.0f, 0.0f };
-	emitRange_.lock()->velocityMax = { 0.0f, 0.0f, 0.0f, 0.0f };
+	emitRange_.lock()->velocityMin = { -1.0f, 0.0f, -1.0f, 0.0f };
+	emitRange_.lock()->velocityMax = { 1.0f, 1.0f, 1.0f, 0.0f };
 	emitRange_.lock()->baseLifeTime = 1.0f * 60.0f;
 	emitRange_.lock()->lifeTimeMin = 0;
 	emitRange_.lock()->lifeTimeMax = 0;

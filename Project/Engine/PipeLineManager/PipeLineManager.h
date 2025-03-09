@@ -36,6 +36,7 @@
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
 #include "CSPipeLine/Emitter/Sphere/EmitterSpherePipeLine.h"
+#include "CSPipeLine/Field/Constant/ConstantFieldPipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
 
@@ -86,10 +87,6 @@ private:
 	void CreatePipeLine_SkinningObject3D();
 	void CreatePipeLine_Skybox();
 	void CreatePipeLine_CPUParticle();
-
-	/// <summary>
-	/// GPUパーティクル関連
-	/// </summary>
 	void CreatePipeLine_GPUParticle_Draw();
 
 	/// <summary>
@@ -114,6 +111,7 @@ private:
 	/// ComputeShader
 	/// </summary>
 	void CreatePipeLine_EmitterSphere();
+	void CreatePipeLine_ConstantField();
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Update();
 

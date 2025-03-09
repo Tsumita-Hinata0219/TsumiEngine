@@ -23,9 +23,6 @@ VertexShaderOutput main(VertexShaderInput input, uint instanceID : SV_InstanceID
     // テクスチャ座標はそのまま渡す
     output.texCoord = input.texCoord;
     
-    // 法線ベクトルをワールド行列の逆転置行列で変換し、正規化する
-    //output.normal = normalize(mul(input.normal, (float3x3) wvpMat));
-    
     // InstanceIDはそのまま渡す
     output.instanceID = instanceID;
     

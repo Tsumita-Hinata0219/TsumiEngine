@@ -60,7 +60,7 @@ private:
 
 	// メインカメラ
 	CameraManager* cameraManager_ = nullptr;
-	CameraResource camera_;
+	CameraData camera_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;

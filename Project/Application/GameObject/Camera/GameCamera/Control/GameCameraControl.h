@@ -4,7 +4,7 @@
 
 // 前方宣言
 class GameCamera;
-struct CameraResource;
+struct CameraData;
 class Player;
 
 /* GameCameraの操作処理のクラス */
@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	void Init(GameCamera* pCamera, Player* setPlayer, CameraResource* pData);
+	void Init(GameCamera* pCamera, Player* setPlayer, CameraData* pData);
 
 	/// <summary>
 	/// 更新処理
@@ -51,7 +51,7 @@ private:
 	// 各ポインター
 	GameCamera* pGameCamera_ = nullptr;
 	Player* pPlayer_ = nullptr;
-	CameraResource* pData_;
+	CameraData* pData_;
 
 	// 入力
 	Input* input_ = nullptr;

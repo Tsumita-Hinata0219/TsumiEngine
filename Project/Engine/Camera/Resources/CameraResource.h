@@ -19,7 +19,7 @@ struct TransformationViewMatrix {
 		CameraResource構造体
 		カメラに必要な値をまとめた構造体
 --------------------------------------*/
-struct CameraResource {
+struct CameraData {
 
 public:
 

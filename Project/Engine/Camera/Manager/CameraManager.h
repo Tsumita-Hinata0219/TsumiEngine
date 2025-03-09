@@ -25,7 +25,7 @@ public:
 	void Init();
 
 	// データをセットする
-	void ReSetData(const CameraResource& data);
+	void ReSetData(const CameraData& data);
 
 	// コマンドコール
 	void CommandCall(UINT number);
@@ -33,7 +33,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// カメラのリソースの取得
-	const CameraResource* GetResource() { return this->resource_; }
+	const CameraData* GetResource() { return this->resource_; }
 
 #pragma endregion 
 
@@ -41,8 +41,8 @@ public:
 private:
 
 	// カメラのリソース
-	const CameraResource* resource_ = nullptr;
+	const CameraData* resource_ = nullptr;
 	// カメラ本体
-	CameraResource camera_{};
+	CameraData camera_{};
 };
 

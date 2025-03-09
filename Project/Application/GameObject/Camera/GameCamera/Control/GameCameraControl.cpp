@@ -6,7 +6,7 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraResource* pData)
+void GameCameraControl::Init(GameCamera* pCamera, Player* pPlayer, CameraData* pData)
 {
 	// 各ポインターの設定
 	pGameCamera_ = pCamera;

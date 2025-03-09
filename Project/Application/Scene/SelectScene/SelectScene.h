@@ -68,7 +68,7 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 
 	// カメラ本体
-	CameraResource camera_{};
+	CameraData camera_{};
 
 	// SceneTransition
 	SceneTransition* sceneTransition_ = nullptr;

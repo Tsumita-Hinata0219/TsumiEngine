@@ -15,7 +15,7 @@ void CameraManager::Init()
 
 
 // バッファーに書き込む
-void CameraManager::ReSetData(const CameraResource& data)
+void CameraManager::ReSetData(const CameraData& data)
 {
 	resource_ = nullptr;
 	resource_ = &data;

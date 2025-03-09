@@ -3,7 +3,7 @@
 
 
 // 初期化処理
-void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
+void CameraData::Init(Vector3 initRotate, Vector3 initTranslate)
 {
 	// 初期姿勢と座標
 	srt.rotate = initRotate;
@@ -22,7 +22,7 @@ void CameraResource::Init(Vector3 initRotate, Vector3 initTranslate)
 
 
 // 行列の更新
-void CameraResource::Update()
+void CameraData::Update()
 {
 	// 回転行列を作成
 	rotateMat = MakeRotateXYZMatrix(srt.rotate);
@@ -64,7 +64,7 @@ void CameraResource::Update()
 
 
 // ImGuiの描画
-void CameraResource::DrawImGui()
+void CameraData::DrawImGui()
 {
 	ImGui::Text("Camera");
 	ImGui::DragFloat3("Scale", &srt.scale.x, 0.01f, 0.01f, 100.0f);
@@ -74,7 +74,7 @@ void CameraResource::DrawImGui()
 
 
 // 行列に書き込むデータの設定
-void CameraResource::UpdateBuffer()
+void CameraData::UpdateBuffer()
 {
 	// バッファーに書き込むデータの設定
 	bufferData->view = viewMatrix;
@@ -88,7 +88,7 @@ void CameraResource::UpdateBuffer()
 
 
 // ワールド座標の取得
-Vector3 CameraResource::GetWorldPos()
+Vector3 CameraData::GetWorldPos()
 {
 	return { matWorld.m[3][0], matWorld.m[3][1], matWorld.m[3][2] };
 }

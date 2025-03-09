@@ -64,7 +64,7 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 
 	// カメラ本体
-	CameraResource camera_{};
+	CameraData camera_{};
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;

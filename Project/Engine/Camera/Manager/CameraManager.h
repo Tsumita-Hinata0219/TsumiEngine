@@ -30,7 +30,13 @@ public:
 	// コマンドコール
 	void CommandCall(UINT number);
 
+	// カメラデータのバインド
+	void Bind_CameraData(UINT num);
+
 #pragma region Accessor アクセッサ
+
+	// カメラデータの取得
+	std::weak_ptr<CameraData> GetCameraData() { return this->cameraData_; }
 
 	// カメラのリソースの取得
 	const CameraData* GetResource() { return this->resource_; }
@@ -39,6 +45,11 @@ public:
 
 
 private:
+
+	// カメラデータのバッファー
+	BufferResource<CameraData> cameraBuffer_;
+	// カメラデータ本体
+	std::shared_ptr<CameraData> cameraData_;
 
 	// カメラのリソース
 	const CameraData* resource_ = nullptr;

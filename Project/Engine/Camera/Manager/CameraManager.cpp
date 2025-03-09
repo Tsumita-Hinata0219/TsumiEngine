@@ -11,6 +11,12 @@ void CameraManager::Init()
 	camera_.Init();
 	camera_.Update();
 	ReSetData(camera_);
+
+	// データ作成
+	cameraData_ = std::make_shared<CameraData>();
+	cameraData_->Init();
+	// バッファー作成
+	cameraBuffer_.CreateCBV();
 }
 
 
@@ -26,4 +32,12 @@ void CameraManager::ReSetData(const CameraData& data)
 void CameraManager::CommandCall(UINT number)
 {
 	resource_->buffer->BindGraphicsCBV(number);
+}
+
+
+// カメラデータのバインド
+void CameraManager::Bind_CameraData(UINT num)
+{
+	cameraBuffer_.UpdateData(cameraData_.get());
+	cameraBuffer_.BindComputeCBV(num);
 }

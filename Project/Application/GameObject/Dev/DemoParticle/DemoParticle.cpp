@@ -43,12 +43,18 @@ void DemoParticle::Init()
 	emitRange_.lock()->lifeTimeMax = 0;
 
 	// Field生成
-	field_ = std::unique_ptr<GPUParticleField<GpuField::ConstantField>>();
+	field_ = std::make_unique<GPUParticleField<GpuField::ConstantField>>();
 	field_->Create(particle_);
 
 	// Field Dataの取得
 	fieldData_ = field_->GetFieldData();
-
+	fieldData_.lock()->acceleration = Vector3::one;
+	fieldData_.lock()->damping = 0.0f;
+	fieldData_.lock()->angularVelocity = Vector3::oneX;
+	fieldData_.lock()->drag = 0.0f;
+	fieldData_.lock()->force = Vector3::oneY;
+	fieldData_.lock()->mass = 0.0f;
+	fieldData_.lock()->isUse = false;
 }
 
 
@@ -57,12 +63,15 @@ void DemoParticle::Init()
 /// </summary>
 void DemoParticle::Update()
 {
-	// エミッター更新処理
+	// Particle更新
+	particle_->Update();
+
+	// Emitter更新処理
 	emitter_->Update();
 	emitter_->Emit();
 
-	// パーティクル更新
-	particle_->Update();
+	// Field
+	field_->Update();
 
 #ifdef _DEBUG
 	DrawImGui();

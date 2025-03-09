@@ -18,32 +18,30 @@ void main(int3 DTid : SV_DispatchThreadID)
 {
     int particleIndex = DTid.x;
     
+    
     // フィールド使用中
     if (gField.isUse)
     {
-        ParticleCS particle = gParticles[particleIndex];
-
         // 加速度による速度変化
-        particle.velocity += gField.acceleration;
+        gParticles[particleIndex].velocity += gField.acceleration;
         
         // 外力適用
-        particle.velocity += gField.force;
+        gParticles[particleIndex].velocity += gField.force;
 
         // 角速度適用（方向を考慮した影響を与える）
-        particle.velocity += cross(gField.angularVelocity, particle.velocity);
+        gParticles[particleIndex].velocity += cross(gField.angularVelocity, gParticles[particleIndex].velocity);
 
         // 速度の減衰（damping は 0.0 ～ 1.0 の範囲）
-        particle.velocity *= gField.damping;
+        gParticles[particleIndex].velocity *= gField.damping;
 
         // 空気抵抗の影響（速度が速いほど抵抗が大きくなる）
-        float speed = length(particle.velocity);
-        if (speed > 0.0)
+        float speed = length(gParticles[particleIndex].velocity);
+        if (speed > 0.0f)
         {
-            float dragForce = 1.0 - gField.drag;
-            particle.velocity *= max(dragForce, 0.0);
+            float dragForce = 1.0f - gField.drag;
+            gParticles[particleIndex].velocity *= max(dragForce, 0.0f);
         }
-
-        // 更新したパーティクルデータを保存
-        gParticles[particleIndex] = particle;
+        
+        gParticles[particleIndex].velocity = float3(0.0f, 0.0f, 0.0f);
     }
 }

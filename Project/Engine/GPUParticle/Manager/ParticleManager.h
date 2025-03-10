@@ -6,6 +6,8 @@
 #include <memory>
 
 #include "../Particle/GPUParticle.h"
+#include "../Emitter/GPUParticleEmitter.h"
+#include "../Field/GPUParticleField.h"
 
 
 /* パーティクルマネージャ */
@@ -51,7 +53,6 @@ private:
 
 private:
 
-	// パーティクルのリスト
-	std::map < std::string, std::shared_ptr<GPUParticle>> particleMaps_;
+	
 };
 

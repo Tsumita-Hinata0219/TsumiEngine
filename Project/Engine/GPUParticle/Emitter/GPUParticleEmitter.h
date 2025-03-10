@@ -43,7 +43,7 @@ public:
 	/// <summary>
 	/// データファイルの読み込み
 	/// </summary>
-	void LoadScriptFile(const std::string& rootPath, const std::string& fileName);
+	//void LoadScriptFile(const std::string& rootPath, const std::string& fileName);
 
 
 #pragma region Accessor
@@ -80,7 +80,7 @@ private:
 	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
-	void DrawImGui(std::string label = "");
+	//void DrawImGui(std::string label = "");
 
 
 private:
@@ -160,7 +160,7 @@ inline void GPUParticleEmitter<T>::Update()
 	TimeUpdate();
 
 #ifdef _DEBUG
-	DrawImGui();
+	//DrawImGui();
 #endif // _DEBUG
 
 }
@@ -210,16 +210,16 @@ inline void GPUParticleEmitter<T>::Emit()
 }
 
 
-/// <summary>
-/// データファイルの読み込み
-/// </summary>
-template<typename T>
-inline void GPUParticleEmitter<T>::LoadScriptFile(const std::string& rootPath, const std::string& fileName)
-{
-
-
-
-}
+///// <summary>
+///// データファイルの読み込み
+///// </summary>
+//template<typename T>
+//inline void GPUParticleEmitter<T>::LoadScriptFile(const std::string& rootPath, const std::string& fileName)
+//{
+//
+//
+//
+//}
 
 
 /// <summary>
@@ -285,13 +285,13 @@ inline void GPUParticleEmitter<T>::WriteData()
 }
 
 
-/// <summary>
-/// ImGuiの描画
-/// </summary>
-template<typename T>
-inline void GPUParticleEmitter<T>::DrawImGui(std::string label)
-{
-	if (ImGui::TreeNode((label + "Emitter"))) {
-
-	}
-}
+///// <summary>
+///// ImGuiの描画
+///// </summary>
+//template<typename T>
+//inline void GPUParticleEmitter<T>::DrawImGui(std::string label)
+//{
+//	if (ImGui::TreeNode((label + "Emitter"))) {
+//
+//	}
+//}

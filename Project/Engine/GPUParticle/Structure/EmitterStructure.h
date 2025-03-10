@@ -21,7 +21,7 @@ struct IEmitter {
 // Emitter_Sphere
 struct SphereEmitter : IEmitter {
 	Vector3 translate{};     // 位置
-	float radius = 0.0f;            // 射出半径
+	float radius = 0.0f;     // 射出半径
 };
 
 // エミッターの範囲

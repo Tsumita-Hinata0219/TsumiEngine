@@ -40,6 +40,12 @@ public:
 	/// </summary>
 	void Emit();
 
+	/// <summary>
+	/// データファイルの読み込み
+	/// </summary>
+	void LoadScriptFile(const std::string& rootPath, const std::string& fileName);
+
+
 #pragma region Accessor
 
 	// Emitter
@@ -70,6 +76,11 @@ private:
 	/// Bufferへデータの書き込み
 	/// </summary>
 	void WriteData();
+
+	/// <summary>
+	/// ImGuiの描画
+	/// </summary>
+	void DrawImGui(std::string label = "");
 
 
 private:
@@ -147,6 +158,11 @@ inline void GPUParticleEmitter<T>::Update()
 
 	// タイマー更新
 	TimeUpdate();
+
+#ifdef _DEBUG
+	DrawImGui();
+#endif // _DEBUG
+
 }
 
 
@@ -191,6 +207,18 @@ inline void GPUParticleEmitter<T>::Emit()
 
 	// Barrierを張る
 	particlePtr_.lock()->SetUAVBarrier();
+}
+
+
+/// <summary>
+/// データファイルの読み込み
+/// </summary>
+template<typename T>
+inline void GPUParticleEmitter<T>::LoadScriptFile(const std::string& rootPath, const std::string& fileName)
+{
+
+
+
 }
 
 
@@ -256,3 +284,14 @@ inline void GPUParticleEmitter<T>::WriteData()
 	seedBuffer_.UpdateData(&seedData_);
 }
 
+
+/// <summary>
+/// ImGuiの描画
+/// </summary>
+template<typename T>
+inline void GPUParticleEmitter<T>::DrawImGui(std::string label)
+{
+	if (ImGui::TreeNode((label + "Emitter"))) {
+
+	}
+}

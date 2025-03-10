@@ -32,7 +32,7 @@ void main(int3 DTid : SV_DispatchThreadID)
     {
         // Random generator
         RandomGenerator rng;
-        rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime));
+        rng.InitSeed(gRandomSeed.gameTime, (gRandomSeed.dynamicTime + DTid.x * 0.5f));
         
         // Number of particles
         for (uint countIndex = 0; countIndex < gEmitConfig.spawnCount; ++countIndex)

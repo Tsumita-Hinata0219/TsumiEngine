@@ -9,10 +9,12 @@ void DemoParticle::Init()
 	// Particle生成
 	particle_ = std::make_shared<GPUParticle>();
 	particle_->Init();
-
 	// Emitter生成
 	emitter_ = std::make_unique<GPUParticleEmitter<GpuEmitter::SphereEmitter>>();
 	emitter_->Create(particle_);
+	// Field生成
+	field_ = std::make_unique<GPUParticleField<GpuField::ConstantField>>();
+	field_->Create(particle_);
 
 	// Emit Dataを取得
 	emitData_ = emitter_->GetEmitData();
@@ -43,10 +45,6 @@ void DemoParticle::Init()
 	emitRange_.lock()->baseLifeTime = 0.5f * 60.0f;
 	emitRange_.lock()->lifeTimeMin = 0;
 	emitRange_.lock()->lifeTimeMax = 0;
-
-	// Field生成
-	field_ = std::make_unique<GPUParticleField<GpuField::ConstantField>>();
-	field_->Create(particle_);
 
 	// Field Dataの取得
 	fieldData_ = field_->GetFieldData();

@@ -550,8 +550,6 @@
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\EmitterSpherePipeLine.cpp" />
-    <ClCompile Include="Application\GameObject\Dev\DemoParticle\DemoParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\None\EnemyShotPatternNone.cpp" />
@@ -1431,12 +1429,9 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
-    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\EmitterSpherePipeLine.h" />
-    <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotFactory\EnemyShotStateFactory.h" />
@@ -2489,7 +2484,6 @@
     <FxCompile Include="Resources\Shaders\Emitter\Sphere\SphereEmitter.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
-    <FxCompile Include="Resources\Shaders\Emitter\Sphere\EmitterSphere.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

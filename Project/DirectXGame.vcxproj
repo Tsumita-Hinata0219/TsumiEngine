@@ -181,7 +181,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\BulletSweep\BulletSweepEraser.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\Interface\IOperationUI.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.cpp" />
-    <ClCompile Include="Application\GameObject\Dev\DemoParticle\DemoParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
@@ -297,7 +296,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\EmitterSpherePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
     <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp" />
@@ -486,7 +484,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\OperationUIManager.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
-    <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
@@ -526,7 +523,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Config\AppComfig.h" />
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h" />
     <ClInclude Include="Application\GameObject\GameObject.h" />
-    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Field\GPUParticleField.h" />
@@ -636,7 +632,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\EmitterSpherePipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\PipeLineStructure.h" />
     <ClInclude Include="Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
@@ -1389,17 +1384,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\Emitter\Sphere\EmitterSphere.CS.hlsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Compute</ShaderType>
-      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">4.0</ShaderModel>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>

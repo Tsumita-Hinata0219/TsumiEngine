@@ -35,7 +35,6 @@
 #include "PostEffectPipeLine/VignettingPipeLine/VignettingPipeLine.h"
 #include "PostEffectPipeLine/GrainPipeLine/GrainPipeLine.h"
 
-#include "CSPipeLine/Emitter/Sphere/EmitterSpherePipeLine.h"
 #include "CSPipeLine/Emitter/Sphere/SphereEmitterPipeLine.h"
 #include "CSPipeLine/Field/Constant/ConstantFieldPipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
@@ -111,7 +110,6 @@ private:
 	/// <summary>
 	/// ComputeShader
 	/// </summary>
-	void CreatePipeLine_EmitterSphere();
 	void CreatePipeLine_SphereEmitter();
 	void CreatePipeLine_ConstantField();
 	void CreatePipeLine_GPUParticle_Init();

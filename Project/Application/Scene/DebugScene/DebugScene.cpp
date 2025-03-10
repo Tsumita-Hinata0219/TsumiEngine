@@ -28,9 +28,6 @@ void DebugScene::Initialize()
 	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
 	skybox_->Init(dds);
 
-	demoParticle_ = std::make_unique<DemoParticle>();
-	demoParticle_->Init();
-
 	dummyParticle_ = std::make_unique<DummyParticle>();
 	dummyParticle_->Init();
 
@@ -47,7 +44,6 @@ void DebugScene::Initialize()
 void DebugScene::Update()
 {
 	cameraData_.lock()->Update();
-	demoParticle_->Update();
 	dummyParticle_->Update();
 	floor_->Update();
 
@@ -73,7 +69,6 @@ void DebugScene::BackSpriteDraw()
 /// </summary>
 void DebugScene::ModelDraw()
 {
-	//demoParticle_->Draw();
 	dummyParticle_->Draw();
 	floor_->Draw3D();
 }

@@ -89,6 +89,13 @@ private:
 	void WriteData();
 
 
+protected:
+
+	// PipeLineの種類
+	PipeLine::Category pipeLine_Category = PipeLine::Category::None;
+	PipeLine::SubFilter pipeLine_SubFileter = PipeLine::SubFilter::None;
+
+
 private:
 	
 	// パーティクル
@@ -182,7 +189,7 @@ inline void IEmitter<T>::Emit()
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 
 	// PipeLineCheck
-	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::EmitterSphere);
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, pipeLine_Category, pipeLine_SubFileter);
 
 	// Particle
 	particle_->Bind_ParticleProp(0);

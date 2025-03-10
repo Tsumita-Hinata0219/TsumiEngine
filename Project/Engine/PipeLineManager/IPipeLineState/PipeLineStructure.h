@@ -64,6 +64,7 @@ enum class Category {
 	Vignetting,
 
 	EmitterSphere,
+	SphereEmitter,
 	ConstantField,
 	GPUParticle_Init,
 	GPUParticle_Update,

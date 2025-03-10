@@ -6,7 +6,7 @@
 #include <memory>
 
 #include "../Particle/GPUParticle.h"
-#include "../Emitter/GPUParticleEmitter.h"
+#include "../Emitter/Interface/IEmitter.h"
 #include "../Field/GPUParticleField.h"
 
 

@@ -63,7 +63,6 @@ enum class Category {
 	SepiaTone,
 	Vignetting,
 
-	EmitterSphere,
 	SphereEmitter,
 	ConstantField,
 	GPUParticle_Init,

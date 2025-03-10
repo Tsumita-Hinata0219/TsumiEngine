@@ -49,6 +49,9 @@ public:
 
 #pragma region Accessor
 
+	// Particle
+	const std::weak_ptr<GPUParticle> GetWeak_Particle() { return this->particle_; }
+
 	// Emitter
 	const std::weak_ptr<T> GetWeak_EmitData() { return this->emitData_; }
 
@@ -99,7 +102,7 @@ protected:
 private:
 	
 	// パーティクル
-	std::unique_ptr<GPUParticle> particle_;
+	std::shared_ptr<GPUParticle> particle_;
 
 	// エミッター
 	std::shared_ptr<T> emitData_;
@@ -228,7 +231,7 @@ template<typename T>
 inline void IEmitter<T>::CreateData()
 {
 	// Particle
-	particle_ = std::make_unique<GPUParticle>();
+	particle_ = std::make_shared<GPUParticle>();
 	// Emitter
 	emitData_ = std::make_shared<T>();
 	// Range

@@ -7,7 +7,7 @@
 
 #include "../Particle/GPUParticle.h"
 #include "../Emitter/Interface/IEmitter.h"
-#include "../Field/GPUParticleField.h"
+#include "../Field/ParticleField.h"
 
 
 /* パーティクルマネージャ */

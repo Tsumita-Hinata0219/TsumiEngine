@@ -17,7 +17,7 @@
 #include "Math/MyMath.h"
 
 #include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/GPUParticleField.h"
+#include "GPUParticle/Field/ParticleField.h"
 
 #include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
 

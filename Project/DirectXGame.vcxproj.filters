@@ -1452,7 +1452,7 @@
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
-    <ClInclude Include="Engine\GPUParticle\Field\GPUParticleField.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />

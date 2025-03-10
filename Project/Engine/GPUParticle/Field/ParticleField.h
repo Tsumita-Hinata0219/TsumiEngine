@@ -12,19 +12,19 @@
 
 /* GPUParticleのフィールド */
 template <typename T>
-class GPUParticleField {
+class ParticleField {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	GPUParticleField() = default;
+	ParticleField() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~GPUParticleField() = default;
+	~ParticleField() = default;
 
 	/// <summary>
 	/// 生成
@@ -39,7 +39,7 @@ public:
 #pragma region Accessor
 
 	// Emitter
-	const std::weak_ptr<T> GetFieldData() { return this->fieldData_; }
+	const std::weak_ptr<T> GetWeak_FieldData() { return this->fieldData_; }
 
 #pragma endregion 
 
@@ -74,7 +74,7 @@ private:
 /// 生成
 /// </summary>
 template<typename T>
-inline void GPUParticleField<T>::Create(std::weak_ptr<GPUParticle> pParticle)
+inline void ParticleField<T>::Create(std::weak_ptr<GPUParticle> pParticle)
 {
 	// パーティクルのptrを受け取る
 	particlePtr_ = pParticle;
@@ -90,7 +90,7 @@ inline void GPUParticleField<T>::Create(std::weak_ptr<GPUParticle> pParticle)
 /// 更新処理
 /// </summary>
 template<typename T>
-inline void GPUParticleField<T>::Update()
+inline void ParticleField<T>::Update()
 {
 
 
@@ -104,7 +104,7 @@ inline void GPUParticleField<T>::Update()
 /// データ書き込み
 /// </summary>
 template<typename T>
-inline void GPUParticleField<T>::WriteData()
+inline void ParticleField<T>::WriteData()
 {
 	// FieldData
 	fieldBuffer_.UpdateData(fieldData_.get());
@@ -115,7 +115,7 @@ inline void GPUParticleField<T>::WriteData()
 /// バインド & ディスパッチ
 /// </summary>
 template<typename T>
-inline void GPUParticleField<T>::Bind_and_Dispatch()
+inline void ParticleField<T>::Bind_and_Dispatch()
 {
 	// データの書き込み
 	WriteData();

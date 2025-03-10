@@ -190,14 +190,14 @@ inline void GPUParticleEmitter<T>::Emit()
 	// FreeListIndex
 	particlePtr_.lock()->Bind_FreeListIndex(2);
 
-	// EmitterConfig
-	emitConfigBuffer_.BindComputeCBV(3);
-
 	// Emitter
-	emitterBuffer_.BindComputeCBV(4);
+	emitterBuffer_.BindComputeCBV(3);
 
 	// EmitterRange
-	emitterRangeBuffer_.BindComputeCBV(5);
+	emitterRangeBuffer_.BindComputeCBV(4);
+
+	// EmitterConfig
+	emitConfigBuffer_.BindComputeCBV(5);
 
 	// RandomSeed
 	seedBuffer_.BindComputeCBV(6);

@@ -40,6 +40,7 @@ void PipeLineManager::CreatePipeLine()
 
 	// ComputeShader
 	instance->CreatePipeLine_EmitterSphere();
+	instance->CreatePipeLine_SphereEmitter();
 	instance->CreatePipeLine_ConstantField();
 	instance->CreatePipeLine_GPUParticle_Init();
 	instance->CreatePipeLine_GPUParticle_Update();
@@ -214,6 +215,11 @@ void PipeLineManager::CreatePipeLine_EmitterSphere()
 {
 	std::unique_ptr<EmitterSphere> pipeline = std::make_unique<EmitterSphere>();
 	pipeLineMaps_[Category::EmitterSphere][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_SphereEmitter()
+{
+	std::unique_ptr<SphereEmitterPipeLine> pipeline = std::make_unique<SphereEmitterPipeLine>();
+	pipeLineMaps_[Category::SphereEmitter][SubFilter::None] = pipeline->SetUpPso();
 }
 void PipeLineManager::CreatePipeLine_ConstantField()
 {

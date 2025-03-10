@@ -20,6 +20,8 @@
 #include "GPUParticle/Emitter/GPUParticleEmitter.h"
 #include "GPUParticle/Field/GPUParticleField.h"
 
+#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
+
 #include "Animation/AnimationManager/AnimationManager.h"
 #include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 

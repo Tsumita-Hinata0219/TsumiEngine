@@ -568,6 +568,7 @@
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1460,6 +1461,8 @@
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
+    <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2486,6 +2489,7 @@
     <FxCompile Include="Resources\Shaders\Emitter\Sphere\SphereEmitter.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Emitter\Sphere\EmitterSphere.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

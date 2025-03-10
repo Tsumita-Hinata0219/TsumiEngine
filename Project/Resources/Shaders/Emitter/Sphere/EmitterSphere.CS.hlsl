@@ -15,11 +15,11 @@ RWStructuredBuffer<int> gFreeList : register(u1);
 RWStructuredBuffer<int> gFreeListIndex : register(u2);
 
 // Emitter Sphere
-ConstantBuffer<SphereEmit> gEmitSphere : register(b0);
+ConstantBuffer<EmitterSphere> gEmitSphere : register(b0);
 // Emitter Range
-ConstantBuffer<EmitRange> gEmitRange : register(b1);
+ConstantBuffer<EmitterRange> gEmitRange : register(b1);
 // Emitter emission related
-ConstantBuffer<EmitConfig> gEmitConfig : register(b2);
+ConstantBuffer<EmitterConfig> gEmitConfig : register(b2);
 // Random seed value
 ConstantBuffer<RandomSeed> gRandomSeed : register(b3);
 
@@ -45,18 +45,10 @@ void main(int3 DTid : SV_DispatchThreadID)
             if (0 <= freeListIndex && freeListIndex < kParticleInstanceMax)
             {
                 int particleIndex = gFreeList[freeListIndex];
-                
-                // Translate
-                float3 diff = rng.RandomRange3D(-gEmitSphere.radius.xyz, gEmitSphere.radius.xyz);
-                gParticles[particleIndex].translate.xyz = gEmitSphere.translate.xyz + diff;
-                
-                // Scale
+                // SRT
                 gParticles[particleIndex].scale = rng.RandomRange3D(gEmitRange.scaleMin.xyz, gEmitRange.scaleMax.xyz);
-                
-                // Rotate
                 gParticles[particleIndex].rotate = float3(0.0f, 0.0f, 0.0f);
-                
-                // MatWorld
+                gParticles[particleIndex].translate = rng.RandomRange3D(gEmitRange.translateMin.xyz, gEmitRange.translateMax.xyz);
                 gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
                 
                 // Color

@@ -10,7 +10,10 @@ public:
 	/// <summary>
 	/// コンストラク
 	/// </summary>
-	SphereEmitter() = default;
+	SphereEmitter() 
+	{
+		pipeLine_Category = PipeLine::Category::SphereEmitter;
+	}
 
 	/// <summary>
 	/// デストラクタ

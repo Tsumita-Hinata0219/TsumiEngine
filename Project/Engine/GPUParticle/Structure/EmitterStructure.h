@@ -58,18 +58,18 @@ namespace Emitter {
 
 // Emitterの基底構造体
 struct IEmitData {
-    Vector3 translate{}; // 座標
+    Vector4 translate{}; // 座標
 };
 
 // Sphere 派生構造体
 struct SphereEmit : IEmitData {
-    float radius = { 0 }; // 半径
+    Vector4 radius{}; // 半径
 };
 
 // Box 派生構造体
 struct BoxEmit : IEmitData {
-    Vector3 min{}; // 
-    Vector3 max{}; // 
+    Vector4 min{}; // 
+    Vector4 max{}; // 
 };
 
 // 範囲

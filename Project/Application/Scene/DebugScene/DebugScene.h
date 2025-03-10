@@ -15,6 +15,7 @@
 
 #include "GameObject/Terrain/Floor/Floor.h"
 #include "GameObject/Dev/DemoParticle/DemoParticle.h"
+#include "GameObject/Dev/DummyParticle/DummyParticle.h"
 
 
 class DebugScene : public IScene {
@@ -68,6 +69,9 @@ private:
 
 	// DemoParticle
 	std::unique_ptr<DemoParticle> demoParticle_;
+
+	// DummyParticle
+	std::unique_ptr<DummyParticle> dummyParticle_;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

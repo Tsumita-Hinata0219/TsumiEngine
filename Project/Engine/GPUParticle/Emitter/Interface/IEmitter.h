@@ -50,13 +50,13 @@ public:
 #pragma region Accessor
 
 	// Emitter
-	const std::weak_ptr<T> GetEmitData() { return this->emitData_; }
+	const std::weak_ptr<T> GetWeak_EmitData() { return this->emitData_; }
 
 	// Emitter Range
-	const std::weak_ptr<Emitter::EmitRange> Get_RangeDataWeak() { return this->rangeData_; }
+	const std::weak_ptr<Emitter::EmitRange> GetWeak_RangeData() { return this->rangeData_; }
 
 	// Emitter Config
-	const std::weak_ptr<Emitter::EmitConfig> Get_ConfigDataWeak() { return this->configData_; }
+	const std::weak_ptr<Emitter::EmitConfig> GetWeak_ConfigData() { return this->configData_; }
 
 #pragma endregion 
 
@@ -237,6 +237,8 @@ inline void IEmitter<T>::CreateData()
 	configData_ = std::make_shared<Emitter::EmitConfig>();
 	// RandomSeed
 	randSeedData_ = std::make_shared<Emitter::RandomSeed>();
+	randSeedData_->gameTime = timeSys_->Get_SinceStart();
+	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
 }
 
 
@@ -286,16 +288,16 @@ template<typename T>
 inline void IEmitter<T>::Update_RandomSeedData()
 {
 	// ゲーム開始からの時間を取得
-	seedData_.gameTime = timeSys_->Get_SinceStart();
+	randSeedData_->gameTime = timeSys_->Get_SinceStart();
 
 	// 初期乱数値 + 開始からの時間
-	seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-	seedData_.dynamicTime += seedData_.gameTime;
+	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+	randSeedData_->dynamicTime += randSeedData_->gameTime;
 
 	// 600秒（10分）ごとにリセット
-	if (seedData_.gameTime - lastResetTime_ >= 600.0f) {
-		seedData_.dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-		lastResetTime_ = seedData_.gameTime;
+	if (randSeedData_->gameTime - lastResetTime_ >= 600.0f) {
+		randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+		lastResetTime_ = randSeedData_->gameTime;
 	}
 }
 

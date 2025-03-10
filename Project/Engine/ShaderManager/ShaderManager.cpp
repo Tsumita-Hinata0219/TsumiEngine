@@ -378,6 +378,10 @@ void ShaderManager::VignettingShader()
 void ShaderManager::SphereEmitter()
 {
 	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Emitter/Sphere/EmitterSphere.CS.hlsl"),
+	};
+	computeShadersMap_["EmitterSphere"] = shader;
+	shader = {
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/Emitter/Sphere/SphereEmitter.CS.hlsl"),
 	};
 	computeShadersMap_["SphereEmitter"] = shader;

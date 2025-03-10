@@ -1458,6 +1458,11 @@
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
+    <ClInclude Include="externals\LuaJIT\lauxlib.h" />
+    <ClInclude Include="externals\LuaJIT\lua.h" />
+    <ClInclude Include="externals\LuaJIT\lua.hpp" />
+    <ClInclude Include="externals\LuaJIT\luajit.h" />
+    <ClInclude Include="externals\LuaJIT\lualib.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

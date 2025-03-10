@@ -1458,6 +1458,7 @@
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\GPUParticle\Field\GPUParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -14,12 +14,12 @@ public:
 	/// <summary>
 	/// コンストラク
 	/// </summary>
-	LuaScript();
+	LuaScript() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~LuaScript();
+	~LuaScript() = default;
 
 	/// <summary>
 	/// スクリプトの読み込み

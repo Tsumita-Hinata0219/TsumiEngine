@@ -13,12 +13,12 @@ public:
 	/// <summary>
 	/// コンストラク
 	/// </summary>
-	LuaManager();
+	LuaManager() = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~LuaManager();
+	~LuaManager() = default;
 
 	/// <summary>
 	/// 指定したLuaスクリプトの読み込み

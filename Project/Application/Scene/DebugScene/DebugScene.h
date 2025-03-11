@@ -13,7 +13,8 @@
 #include "3D/Skybox/Skybox.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "GameObject/Dev/DemoParticle/DemoParticle.h"
+#include "GameObject/Terrain/Floor/Floor.h"
+#include "GameObject/Dev/DummyParticle/DummyParticle.h"
 
 
 class DebugScene : public IScene {
@@ -58,14 +59,17 @@ public:
 
 private:
 
-	// メインカメラ
+	// カメラ
 	CameraManager* cameraManager_ = nullptr;
-	CameraResource camera_;
+	std::weak_ptr<CameraData> cameraData_;
 
 	// Skybox
 	std::unique_ptr<Skybox> skybox_;
 
-	// DemoParticle
-	std::unique_ptr<DemoParticle> demoParticle_;
+	// DummyParticle
+	std::unique_ptr<DummyParticle> dummyParticle_;
+
+	// Floor
+	std::unique_ptr<Floor> floor_;
 };
 

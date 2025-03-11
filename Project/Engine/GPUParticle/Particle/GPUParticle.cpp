@@ -9,8 +9,8 @@
 void GPUParticle::Init(uint32_t instanceNum)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
-	modelManager->LoadModel("Obj/Plane", "Plane.obj");
-	model_ = modelManager->GetModel("Plane");
+	modelManager->LoadModel("Obj/Dev/Test", "Test.obj");
+	model_ = modelManager->GetModel("Test");
 
 	// CameraManagerのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();
@@ -46,7 +46,7 @@ void GPUParticle::Draw()
 	handles_.vertex.UpdateData(model_->GetMeshData().vertices.data());
 	// IBV
 	handles_.indeces.UpdateData(model_->GetMeshData().indices.data());
-	
+
 	// 描画バインド
 	Bind_Draw();
 }
@@ -62,11 +62,36 @@ void GPUParticle::Bind_ParticleProp(UINT num)
 
 
 /// <summary>
-/// フリーカウンターのバインド
+/// フリーリストのバインド
 /// </summary>
-void GPUParticle::Bind_FreeCounter(UINT num)
+void GPUParticle::Bind_FreeList(UINT num)
 {
-	freeCounterBuffer_.BindComputeSRV_Instanced(num);
+	freeListBuffer_.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// フリーリストインデックスのバインド
+/// </summary>
+void GPUParticle::Bind_FreeListIndex(UINT num)
+{
+	freeListIndexBuffer_.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// UAVBarrierを設定
+/// </summary>
+void GPUParticle::SetUAVBarrier()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	// UAVBarrier
+	D3D12_RESOURCE_BARRIER uavBarrier{};
+	uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+	uavBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	uavBarrier.UAV.pResource = handles_.particleElement.GetResource();
+	commands.List->ResourceBarrier(1, &uavBarrier);
 }
 
 
@@ -81,14 +106,20 @@ void GPUParticle::Bind_Init()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Init);
 
-	// Particleの要素の初期化値
+	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
-	// FreeCounterの要素の初期化
-	freeCounterBuffer_.BindComputeSRV_Instanced(1);
+	// FreeList
+	freeListBuffer_.BindComputeSRV_Instanced(1);
+
+	// FreeListIndex
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	this->SetUAVBarrier();
 }
 void GPUParticle::Bind_Update()
 {
@@ -98,11 +129,20 @@ void GPUParticle::Bind_Update()
 	// PipeLineCheck
 	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_Update);
 
-	// Particleの要素の初期化値
+	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
+
+	// FreeList
+	freeListBuffer_.BindComputeSRV_Instanced(1);
+
+	// FreeListIndex
+	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	this->SetUAVBarrier();
 }
 void GPUParticle::Bind_Draw()
 {
@@ -114,16 +154,22 @@ void GPUParticle::Bind_Draw()
 
 	// VertexBufferView
 	handles_.vertex.IASetVertexBuffers(1);
+
 	// IndexBufferView
 	handles_.indeces.IASetIndexBuffer();
+
 	// ParticleElement : VS
 	handles_.particleElement.BindGraphicsSRV_Instanced(0);
+
 	// Camera
-	cameraManager_->CommandCall(1);
+	cameraManager_->Bind_CameraData(1);
+
 	// ParticleElement : PS
 	handles_.particleElement.BindGraphicsSRV_Instanced(2);
+
 	// MaterialTexture
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
+
 	// Draw!!
 	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 }
@@ -136,21 +182,29 @@ void GPUParticle::CreateBufferResource()
 {
 	// mesh
 	handles_.mesh.CreateCBV(UINT(model_->GetMeshData().vertices.size()));
+
 	// vertexBufferView
 	handles_.vertex.CreateCBV(UINT(model_->GetMeshData().vertices.size()));
 	handles_.vertex.CreateVertexBufferView();
+
 	// indexBufferView
 	handles_.indeces.CreateCBV(UINT(model_->GetMeshData().indices.size()));
 	handles_.indeces.CreateIndexBufferView();
+
 	// ParticleElement
 	handles_.particleElement.CreateUAV(instanceNum_);
+
 	// PreView
 	handles_.preView.CreateCBV();
+
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
 
-	// FreeCounter
-	freeCounterBuffer_.CreateUAV(instanceNum_);
+	// FreeList
+	freeListBuffer_.CreateUAV(instanceNum_);
+
+	// FreeListIndex
+	freeListIndexBuffer_.CreateUAV(instanceNum_);
 }
 

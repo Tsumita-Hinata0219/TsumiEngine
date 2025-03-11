@@ -2,9 +2,31 @@
 #include "../../ShaderManager/ShaderManager.h"
 
 
+/// <summary>
+/// RootParameterのセットアップ
+/// </summary>
+D3D12_ROOT_PARAMETER IPipeLineState::SetUpRootParam(RootParam::BuffType buffType, RootParam::ShaderType shaderType, UINT registerNum)
+{
+	D3D12_ROOT_PARAMETER rootParam{};
+
+	// Resourceのタイプ
+	if (buffType == RootParam::BuffType::CBV) {
+		SetUpRootParam_CBV(rootParam, shaderType, registerNum);
+	}
+	else if (buffType == RootParam::BuffType::SRV) {
+		SetUpRootParam_SRV(rootParam, shaderType, registerNum);
+	}
+	else if (buffType == RootParam::BuffType::UAV) {
+		SetUpRootParam_UAV(rootParam, shaderType, registerNum);
+	}
+
+	return rootParam;
+}
 
 
-// InputLayoutのセットアップ
+/// <summary>
+/// RootSignatureのセットアップ
+/// </summary>
 D3D12_INPUT_ELEMENT_DESC IPipeLineState::SetUpInputElementDescs(LPCSTR SemanticName)
 {
 	D3D12_INPUT_ELEMENT_DESC inputElementDescs{};
@@ -84,6 +106,11 @@ D3D12_INPUT_ELEMENT_DESC IPipeLineState::SetUpInputElementDescs(LPCSTR SemanticN
 
 	return inputElementDescs;
 }
+
+
+/// <summary>
+/// InputLayoutのセットアップ
+/// </summary>
 void IPipeLineState::SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements)
 {
 	inputLayoutDesc.pInputElementDescs = inputElementDescs;
@@ -91,7 +118,9 @@ void IPipeLineState::SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, 
 }
 
 
-// BlendStateのセットアップ
+/// <summary>
+/// BlendStateのセットアップ
+/// </summary>
 void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode)
 {
 	blendDesc.RenderTargetWriteMask =
@@ -152,7 +181,9 @@ void IPipeLineState::SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, 
 }
 
 
-// RasterizerStateのセットアップ
+/// <summary>
+/// RasterizerStateのセットアップ
+/// </summary>
 void IPipeLineState::SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE Cull, D3D12_FILL_MODE fill)
 {
 	// 裏面(時計回り)を表示しない
@@ -162,7 +193,9 @@ void IPipeLineState::SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc,
 }
 
 
-// Shadersのコンパイル
+/// <summary>
+/// Shadersのコンパイル
+/// </summary>
 void IPipeLineState::SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key)
 {
 	vertexShaderBlob = ShaderManager::GetInstance()->GetModelShader(key).VertexBlob;
@@ -178,5 +211,59 @@ void IPipeLineState::SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob
 
 	pixelShaderBlob = ShaderManager::GetInstance()->GetPostEffectShader(key).PixelBlob;
 	assert(pixelShaderBlob != nullptr);
+}
+
+
+/// <summary>
+/// 各ルートパラメーターの設定
+/// </summary>
+void IPipeLineState::SetUpRootParam_CBV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum)
+{
+	rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // ResourceType
+	rootParam.ShaderVisibility = GetShaderVisibility(shaderType); // Shader使用場所
+	rootParam.Descriptor.ShaderRegister = registerNum; // Register番号
+}
+void IPipeLineState::SetUpRootParam_SRV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum)
+{
+	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
+	materiaTexture[0].BaseShaderRegister = registerNum; // Register番号
+	materiaTexture[0].NumDescriptors = 1;
+	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV; // ResourceType
+	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParam.ShaderVisibility = GetShaderVisibility(shaderType); // Shader使用場所
+	rootParam.DescriptorTable.pDescriptorRanges = materiaTexture;
+	rootParam.DescriptorTable.NumDescriptorRanges = _countof(materiaTexture);
+}
+void IPipeLineState::SetUpRootParam_UAV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum)
+{
+	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
+	materiaTexture[0].BaseShaderRegister = registerNum; // Register番号
+	materiaTexture[0].NumDescriptors = 1;
+	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV; // ResourceType
+	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
+	rootParam.ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParam.ShaderVisibility = GetShaderVisibility(shaderType); // Shader使用場所
+	rootParam.DescriptorTable.pDescriptorRanges = materiaTexture;
+	rootParam.DescriptorTable.NumDescriptorRanges = _countof(materiaTexture);
+}
+
+
+/// <summary>
+/// ShaderVisibilityの取得
+/// </summary>
+D3D12_SHADER_VISIBILITY IPipeLineState::GetShaderVisibility(RootParam::ShaderType shaderType)
+{
+	if (shaderType == RootParam::ShaderType::VERTEX) {
+		return D3D12_SHADER_VISIBILITY_VERTEX;
+	}
+	else if (shaderType == RootParam::ShaderType::PIXEL) {
+		return D3D12_SHADER_VISIBILITY_PIXEL;
+	}
+	else if (shaderType == RootParam::ShaderType::COMPUTE) {
+		return D3D12_SHADER_VISIBILITY_ALL;
+	}
+
+	return D3D12_SHADER_VISIBILITY_ALL;
 }
 

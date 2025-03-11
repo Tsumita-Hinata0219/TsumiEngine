@@ -60,11 +60,9 @@ private:
 	// Input
 	Input* input_ = nullptr;
 
-	// カメラマネージャー
+	// カメラ
 	CameraManager* cameraManager_ = nullptr;
-
-	// カメラ本体
-	CameraResource camera_{};
+	std::weak_ptr<CameraData> cameraData_;
 
 	// AbsentEffect
 	std::unique_ptr<AbsentEffect> absentEffect_;

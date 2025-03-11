@@ -219,9 +219,6 @@
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp">
       <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp">
       <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
     </ClCompile>
@@ -553,8 +550,6 @@
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.cpp" />
-    <ClCompile Include="Application\GameObject\Dev\DemoParticle\DemoParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\Demo\Demo.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\None\EnemyShotPatternNone.cpp" />
@@ -569,6 +564,9 @@
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -849,9 +847,6 @@
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h">
       <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Particle\CSParticlePipeLine.h">
-      <Filter>Engine\PipeLineManager\CSPipeLine\Particle</Filter>
     </ClInclude>
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h">
       <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
@@ -1434,12 +1429,9 @@
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Engine\Utilities\Logger\Logger.h" />
-    <ClInclude Include="Engine\GPUParticle\Emitter\GPUParticleEmitter.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\ParticleEmitter\Sphere\ParticleEmitterSphere.h" />
-    <ClInclude Include="Application\GameObject\Dev\DemoParticle\DemoParticle.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\EnemyBulletContainer.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotFactory\EnemyShotStateFactory.h" />
@@ -1456,6 +1448,21 @@
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
+    <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
+    <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
+    <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
+    <ClInclude Include="externals\LuaJIT\lauxlib.h" />
+    <ClInclude Include="externals\LuaJIT\lua.h" />
+    <ClInclude Include="externals\LuaJIT\lua.hpp" />
+    <ClInclude Include="externals\LuaJIT\luajit.h" />
+    <ClInclude Include="externals\LuaJIT\lualib.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2243,9 +2250,6 @@
     <None Include="Resources\Shaders\Math\Math.hlsli">
       <Filter>Resources\Shaders\Math</Filter>
     </None>
-    <None Include="Resources\Shaders\GPUParticle\GPUParticle.CS.hlsli">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
-    </None>
     <None Include="Resources\Shaders\GPUParticle\GPUParticle.hlsli">
       <Filter>Resources\Shaders\GPUParticle</Filter>
     </None>
@@ -2385,6 +2389,8 @@
       <Filter>externals\assimp\include\assimp</Filter>
     </None>
     <None Include="Resources\Shaders\Random\Random.hlsli" />
+    <None Include="Resources\Shaders\Emitter\Emitter.hlsli" />
+    <None Include="Resources\Shaders\Field\Field.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
@@ -2392,12 +2398,6 @@
     </FxCompile>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.VS.hlsl">
       <Filter>Resources\Shaders\CPUParticle</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.PS.hlsl">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
-    </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\GPUParticle.VS.hlsl">
-      <Filter>Resources\Shaders\GPUParticle</Filter>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Draw\GPUParticle_Draw.PS.hlsl">
       <Filter>Resources\Shaders\GPUParticle\Draw</Filter>
@@ -2486,8 +2486,9 @@
     <FxCompile Include="externals\DirectXTex\Shaders\BC7Encode.hlsl">
       <Filter>externals\DirectXTex\Shaders</Filter>
     </FxCompile>
-    <FxCompile Include="Resources\Shaders\GPUParticle\Emitter\Sphere\GPUParticle_EmitterSphere.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Emitter\Sphere\SphereEmitter.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

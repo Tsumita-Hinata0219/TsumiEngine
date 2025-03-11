@@ -4,6 +4,7 @@
 #include "GameManager/GameManager.h"
 #include "JsonManager/JsonManager.h"
 #include "CollisionSystem/Manager/CollisionManager.h"
+#include "FlagManager/FlagManager.h"
 
 #include "Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/GameCamera/GameCamera.h"
@@ -79,6 +80,9 @@ private: // クラス
 
 	// CollisionManager
 	CollisionManager* CollisionManager_ = nullptr; // シングルトン
+
+	// FlagManager
+	FlagManager* flagManager_ = nullptr; // シングルトン
 
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;

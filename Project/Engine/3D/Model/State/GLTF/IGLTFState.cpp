@@ -22,13 +22,13 @@ IGLTFState::IGLTFState(ModelDatas datas)
 void IGLTFState::Draw(Transform& transform)
 {
 	// CameraResourceの取得
-	auto cameraResource = cameraManager_->GetResource();
+	auto cameraResource = cameraManager_->GetCameraDataWeak();
 
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
 	transform.transformationMatData.WVP =
-		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+		transform.transformationMatData.World * cameraResource.lock()->viewMatrix * cameraResource.lock()->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 	// ここで書き込み
@@ -76,7 +76,7 @@ void IGLTFState::CommandCall()
 	// TransformationMatrix
 	buffers_.transform.BindGraphicsCBV(1);
 	// Camera
-	cameraManager_->CommandCall(2);
+	cameraManager_->Bind_CameraData(2);
 	// MaterialTexture
 	//SRVManager::SetGraphicsRootDescriptorTable(3, datas_.material.textureHandle);
 	buffers_.material.BindGraphicsSRV(3, datas_.material.textureHandle);

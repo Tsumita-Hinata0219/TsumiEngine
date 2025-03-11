@@ -12,6 +12,18 @@ struct PropertyCS {
 	Vector3 translate{};
 	Matrix4x4 matWorld{};
 	Vector4 color{};
+	Vector3 velocity;
+	uint32_t isAlive;
+	uint32_t lifeTime;
+};
+
+// Particleの運動に関する構造体
+struct ParticleMotion {
+	Vector3 acceleration; // 加速度
+	float damping; // 速度の減衰率（0.0～1.0）
+	Vector3 angularVelocity; // 角速度
+	Vector3 force; // 外力
+	float drag; // 空気抵抗
 };
 
 // Material
@@ -24,31 +36,6 @@ struct Material {
 struct PreView {
 	Matrix4x4 viewProjection;
 	Matrix4x4 billboardMatrix;
-};
-
-// 射出に関する共通設定
-struct EmitterConfig {
-	uint32_t spawnCount;  // 1回の射出で生成するパーティクル数
-	float spawnInterval;      // パーティクルを射出する間隔（秒）
-	float elapsedTime;      // 射出間隔調整用時間
-	uint32_t isEmitting;     // 射出許可フラグ (0: 停止, 1: 許可)
-};
-
-// Emitterの基底構造体
-struct IEmitter {
-	uint32_t aliveCount; // 生存しているパーティクル数
-};
-
-// Emitter_Sphere
-struct SphereEmitter : IEmitter {
-	Vector3 translate{};     // 位置
-	float radius;            // 射出半径
-};
-
-// 乱数のシード情報
-struct RandomSeed {
-	float gameTime; 
-	float dynamicTime;
 };
 
 }

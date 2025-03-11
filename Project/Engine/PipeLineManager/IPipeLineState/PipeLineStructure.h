@@ -22,61 +22,83 @@ enum  BlendMode {
 };
 
 namespace PipeLine {
-	
-	// 第一層 : 大まかな対象
-	enum class Container {
-		None,
 
-		Graphic,
-		Compute,
-	};
+enum class Type {
+	Graphics,    // グラフィックスパイプライン
+	Compute,     // コンピュートパイプライン
+	RayTracing   // レイトレーシングパイプライン
+};
 
-	// 第二層 : 対象の詳細カテゴリ
-	enum class Category {
-		None,
+// 第一層 : 大まかな対象
+enum class Container {
+	None,
+	Graphic,
+	Compute,
+};
 
-		Object2D,
-		Object3D,
-		SkinningObject3D,
-		Skybox,
+// 第二層 : 対象の詳細カテゴリ
+enum class Category {
+	None,
 
-		CPUParticle,
-		GPUParticle_Draw,
+	Object2D,
+	Object3D,
+	SkinningObject3D,
+	Skybox,
 
-		Absent,
-		BoxFilter,
-		Dissolve,
-		GaussianFilter,
-		Glitch,
-		Grain,
-		GrayScale,
-		HSV,
-		OutLine,
-		RadialBlur,
-		Random,
-		RetroCRT,
-		SepiaTone,
-		Vignetting,
+	CPUParticle,
+	GPUParticle_Draw,
 
-		GPUParticle_Init,
-		GPUParticle_Update,
-		CSParticle,
-		Particle_EmitterSphere
-	};
+	Absent,
+	BoxFilter,
+	Dissolve,
+	GaussianFilter,
+	Glitch,
+	Grain,
+	GrayScale,
+	HSV,
+	OutLine,
+	RadialBlur,
+	Random,
+	RetroCRT,
+	SepiaTone,
+	Vignetting,
 
-	// 第三層 : さらなる区分
-	enum class SubFilter {
-		None,
+	SphereEmitter,
+	ConstantField,
+	GPUParticle_Init,
+	GPUParticle_Update,
+};
 
-		Cull_Mode_Back,
-		Cull_Mode_None,
+// 第三層 : さらなる区分
+enum class SubFilter {
+	None,
 
-		DepthWriteMask_Zero,
+	Cull_Mode_Back,
+	Cull_Mode_None,
 
-		Blend_Model_Normal,
-		Blend_Model_Add,
-		Blend_Model_Subtruct,
-		Blend_Model_Multiply,
-		Blend_Model_Screen,
-	};
+	DepthWriteMask_Zero,
+
+	Blend_Model_Normal,
+	Blend_Model_Add,
+	Blend_Model_Subtruct,
+	Blend_Model_Multiply,
+	Blend_Model_Screen,
+};
+
+}
+
+
+
+namespace RootParam {
+
+enum class BuffType {
+	CBV,
+	SRV,
+	UAV,
+};
+enum class ShaderType {
+	VERTEX,
+	PIXEL,
+	COMPUTE,
+};
 }

@@ -52,9 +52,20 @@ public:
 	void Bind_ParticleProp(UINT num);
 
 	/// <summary>
-	/// フリーカウンターのバインド
+	/// フリーリストのバインド
 	/// </summary>
-	void Bind_FreeCounter(UINT num);
+	void Bind_FreeList(UINT num);
+
+	/// <summary>
+	/// フリーリストインデックスのバインド
+	/// </summary>
+	void Bind_FreeListIndex(UINT num);
+
+	/// <summary>
+	/// UAVBarrierを設定
+	/// </summary>
+	void SetUAVBarrier();
+
 
 #pragma region Accessor アクセッサ
 
@@ -95,8 +106,10 @@ private:
 	GpuParticle::ModelData modelData_{};
 	GpuParticle::ResourceHandles handles_{};
 
-	// フリーカウンター
-	BufferResource<uint32_t> freeCounterBuffer_;
+	// フリーリスト
+	BufferResource<uint32_t> freeListBuffer_;
+	// フリーリストインデックス
+	BufferResource<uint32_t> freeListIndexBuffer_;
 
 	// 使用するモデル
 	std::unique_ptr<Model> model_;

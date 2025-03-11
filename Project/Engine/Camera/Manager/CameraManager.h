@@ -15,34 +15,37 @@ private: // シングルトンデザインパターン
 
 public:
 
-	// インスタンスの取得
+	/// <summary>
+	/// インスタンスの取得
+	/// </summary>
 	static CameraManager* GetInstance() {
 		static CameraManager instance;
 		return &instance;
 	}
 
-	// 初期化
-	void Init();
+	/// <summary>
+	/// データをセットする
+	/// </summary>
+	void ReSet();
 
-	// データをセットする
-	void ReSetData(const CameraResource& data);
+	/// <summary>
+	/// カメラデータのバインド
+	/// </summary>
+	void Bind_CameraData(UINT num);
 
-	// コマンドコール
-	void CommandCall(UINT number);
 
-#pragma region Accessor アクセッサ
+#pragma region Accessor
 
-	// カメラのリソースの取得
-	const CameraResource* GetResource() { return this->resource_; }
+	// カメラデータの Ptr を取得
+	std::weak_ptr<CameraData> GetCameraDataWeak() { return camera_; }
 
-#pragma endregion 
+#pragma endregion
 
 
 private:
 
-	// カメラのリソース
-	const CameraResource* resource_ = nullptr;
-	// カメラ本体
-	CameraResource camera_{};
+	// カメラデータ本体
+	std::shared_ptr<CameraData> camera_;
+
 };
 

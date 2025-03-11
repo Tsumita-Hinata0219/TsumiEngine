@@ -7,15 +7,15 @@
 /// </summary>
 void GameCamera::Init()
 {
-	// カメラマネージャーのインスタンス取得
+	// Camera カメラ 
 	cameraManager_ = CameraManager::GetInstance();
-	// カメラリソース
-	camera_.Init();
-	cameraManager_->ReSetData(camera_);
+	cameraManager_->ReSet();
+	camera_ = cameraManager_->GetCameraDataWeak();
+	camera_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
 
 	// 操作処理クラス
 	control_ = std::make_unique<GameCameraControl>();
-	control_->Init(this, player_, &camera_);
+	control_->Init(this, player_);
 
 	// シェイクの範囲
 	shakeScope_.X = { -1.0f, 1.0f };
@@ -29,7 +29,7 @@ void GameCamera::Init()
 void GameCamera::Update()
 {
 	// カメラデータの更新
-	camera_.Update();
+	camera_.lock()->Update();
 
 	// 操作処理
 	control_->Update();
@@ -96,7 +96,7 @@ void GameCamera::CalcForwardVec()
 
 	// Y軸の回転行列
 	Matrix4x4 rotateYMat =
-		MakeRotateYMatrix(camera_.srt.rotate.y);
+		MakeRotateYMatrix(camera_.lock()->srt.rotate.y);
 
 	// 前方ベクトルを求める
 	forwardVec_ =
@@ -114,7 +114,7 @@ void GameCamera::CalcRightVec()
 
 	// Y軸の回転行列
 	Matrix4x4 rotateYMat =
-		MakeRotateYMatrix(camera_.srt.rotate.y);
+		MakeRotateYMatrix(camera_.lock()->srt.rotate.y);
 
 	// 前方ベクトルを求める
 	rightVec_ =
@@ -138,8 +138,8 @@ void GameCamera::ExecuteShake()
 	shakeOff *= intensity;
 
 	// カメラ座標の加算
-	camera_.srt.translate.x += shakeOff.x;
-	camera_.srt.translate.y += shakeOff.y;
+	camera_.lock()->srt.translate.x += shakeOff.x;
+	camera_.lock()->srt.translate.y += shakeOff.y;
 
 	// タイマー終了
 	if (shakeTimer_.IsFinish()) {
@@ -180,7 +180,7 @@ void GameCamera::DrawImGui()
 {
 	if (ImGui::TreeNode("GameCamera")) {
 
-		camera_.DrawImGui();
+		camera_.lock()->DrawImGui();
 
 		if (ImGui::Button("Shake")) {
 			ActivateShake();

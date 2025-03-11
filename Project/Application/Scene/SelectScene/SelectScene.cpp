@@ -7,11 +7,11 @@
 /// </summary>
 void SelectScene::Initialize()
 {
-	// カメラ
+	// Camera カメラ
 	cameraManager_ = CameraManager::GetInstance();
-	camera_.Init();
-	cameraManager_->ReSetData(camera_);
-	camera_.Update();
+	cameraManager_->ReSet();
+	cameraData_ = cameraManager_->GetCameraDataWeak();
+	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
 
 	// セレクト
 	selectManager_ = std::make_unique<StageSelectManager>();
@@ -42,7 +42,7 @@ void SelectScene::Initialize()
 void SelectScene::Update()
 {
 	// カメラ
-	camera_.Update();
+	cameraData_.lock()->Update();
 
 	// シーントランジション
 	sceneTransition_->Update();

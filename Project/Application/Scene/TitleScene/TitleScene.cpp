@@ -25,8 +25,9 @@ void TitleScene::Initialize()
 
 	/* ----- Camera カメラ ----- */
 	cameraManager_ = CameraManager::GetInstance();
-	camera_.Init();
-	cameraManager_->ReSetData(camera_);
+	cameraManager_->ReSet();
+	cameraData_ = cameraManager_->GetCameraDataWeak();
+	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();
@@ -69,7 +70,7 @@ void TitleScene::Initialize()
 void TitleScene::Update()
 {
 	/* ----- Camera カメラ ----- */
-	camera_.Update();
+	cameraData_.lock()->Update();
 
 	/* ----- TitleBackGround タイトルバックグラウンド ----- */
 	titleBG_->Update();
@@ -94,7 +95,7 @@ void TitleScene::Update()
 #ifdef _DEBUG
 	ImGui::Begin("TitleScene");
 	//retroEffectData_.DrawImGui();
-	camera_.DrawImGui();
+	cameraData_.lock()->DrawImGui();
 	ImGui::End();
 #endif // _DEBUG
 }

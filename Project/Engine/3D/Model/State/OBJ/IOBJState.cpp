@@ -23,13 +23,13 @@ IOBJState::IOBJState(ModelDatas datas)
 void IOBJState::Draw(Transform& transform)
 {
 	// CameraResourceの取得
-	auto cameraResource = cameraManager_->GetResource();
+	auto cameraResource = cameraManager_->GetCameraDataWeak();
 
 	// 諸々の計算
 	transform.UpdateMatrix();
 	transform.transformationMatData.World = transform.matWorld;
 	transform.transformationMatData.WVP = 
-		transform.transformationMatData.World * cameraResource->viewMatrix * cameraResource->projectionMatrix;
+		transform.transformationMatData.World * cameraResource.lock()->viewMatrix * cameraResource.lock()->projectionMatrix;
 	transform.transformationMatData.WorldInverseTranspose = Transpose(Inverse(transform.matWorld));
 
 
@@ -80,7 +80,7 @@ void IOBJState::CommandCall()
 	// Material
 	buffers_.material.BindGraphicsCBV(1);
 	// Camera
-	cameraManager_->CommandCall(2);
+	cameraManager_->Bind_CameraData(2);
 	// Light
 	buffers_.light.BindGraphicsCBV(3);
 	// Environment

@@ -19,7 +19,7 @@ struct TransformationViewMatrix {
 		CameraResource構造体
 		カメラに必要な値をまとめた構造体
 --------------------------------------*/
-struct CameraResource {
+struct CameraData {
 
 public:
 
@@ -28,6 +28,12 @@ public:
 
 	// 行列の更新
 	void Update();
+
+	// バッファーの更新
+	void UpdateBuffer();
+
+	// カメラデータをバンドする
+	void Bind_CameraData(UINT num);
 
 	// ImGuiの描画
 	void DrawImGui();
@@ -38,12 +44,6 @@ public:
 	Vector3 GetWorldPos();
 
 #pragma endregion 
-
-
-private:
-
-	// バッファーの更新
-	void UpdateBuffer();
 
 
 public:

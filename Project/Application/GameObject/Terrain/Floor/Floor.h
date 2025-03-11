@@ -56,6 +56,10 @@ public:
 		}
 	}
 
+
+	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
+	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
+
 private:
 
 	// モデル

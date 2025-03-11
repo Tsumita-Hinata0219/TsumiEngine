@@ -2,28 +2,21 @@
 
 
 
-// 初期化処理
-void CameraManager::Init()
+/// <summary>
+/// データをセットする
+/// </summary>
+void CameraManager::ReSet()
 {
-	// データの初期化
-	resource_ = nullptr;
-	// カメラリソース
-	camera_.Init();
-	camera_.Update();
-	ReSetData(camera_);
+	// カメラデータを完全にリセット（再生成）
+	camera_ = std::make_shared<CameraData>();
+	camera_->Init();
 }
 
 
-// バッファーに書き込む
-void CameraManager::ReSetData(const CameraResource& data)
+/// <summary>
+/// カメラデータのバインド
+/// </summary>
+void CameraManager::Bind_CameraData(UINT num)
 {
-	resource_ = nullptr;
-	resource_ = &data;
-}
-
-
-// コマンドコール
-void CameraManager::CommandCall(UINT number)
-{
-	resource_->buffer->BindGraphicsCBV(number);
+	camera_->Bind_CameraData(num);
 }

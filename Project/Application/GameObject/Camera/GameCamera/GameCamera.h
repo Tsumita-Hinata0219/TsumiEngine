@@ -73,9 +73,6 @@ public: // メンバ関数
 	// Player
 	void SetPlayer(Player* player) { this->player_ = player; }
 
-	// CameraResouce
-	CameraResource* GetCameraResourcePtr() { return &this->camera_; }
-
 	// ForwardVec
 	Vector3& GetForwardVec() { return this->forwardVec_; }
 
@@ -118,10 +115,9 @@ private:
 	// プレイヤー
 	Player* player_ = nullptr;
 
-	// カメラマネージャー
+	// カメラ
 	CameraManager* cameraManager_ = nullptr;
-	// カメラ本体
-	CameraResource camera_{};
+	std::weak_ptr<CameraData> camera_;
 
 	// カメラのタイプ
 	GameCameraType cametaType_ = GameCameraType::ORBITAL;

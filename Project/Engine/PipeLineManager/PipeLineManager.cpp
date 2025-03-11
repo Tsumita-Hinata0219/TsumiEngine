@@ -20,8 +20,6 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_SkinningObject3D();
 	instance->CreatePipeLine_Skybox();
 	instance->CreatePipeLine_CPUParticle();
-
-	// GPUパーティクル関連
 	instance->CreatePipeLine_GPUParticle_Draw();
 
 	// ポストエフェクト
@@ -41,10 +39,10 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_Vignetting();
 
 	// ComputeShader
+	instance->CreatePipeLine_SphereEmitter();
+	instance->CreatePipeLine_ConstantField();
 	instance->CreatePipeLine_GPUParticle_Init();
 	instance->CreatePipeLine_GPUParticle_Update();
-	instance->CreatePipeLine_CSParticle();
-	instance->CreatePipeLine_ParticleEmitterSphere();
 }
 
 
@@ -122,15 +120,15 @@ void PipeLineManager::CreatePipeLine_CPUParticle()
 	/*std::unique_ptr<CPUParticlePipeLine> pipeline = std::make_unique<CPUParticlePipeLine>();
 	pipeLineMaps_[Category::CPUParticle][SubFilter::None] = pipeline->SetUpPso();*/
 }
-
-
-/// <summary>
-/// GPUパーティクル関連
-/// </summary>
 void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
 {
+	// 背面カリング
 	std::unique_ptr<GPUParticle_Draw_PipeLine> pipeline = std::make_unique<GPUParticle_Draw_PipeLine>();
 	pipeLineMaps_[Category::GPUParticle_Draw][SubFilter::None] = pipeline->SetUpPso();
+
+	// Depth Zero
+	pipeline->SetUpDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO); // DepthWriteMaskをZeroに設定
+	pipeLineMaps_[Category::GPUParticle_Draw][SubFilter::DepthWriteMask_Zero] = pipeline->SetUpPso();
 }
 
 
@@ -212,6 +210,16 @@ void PipeLineManager::CreatePipeLine_Vignetting()
 /// <summary>
 /// ComputeShader
 /// </summary>
+void PipeLineManager::CreatePipeLine_SphereEmitter()
+{
+	std::unique_ptr<SphereEmitterPipeLine> pipeline = std::make_unique<SphereEmitterPipeLine>();
+	pipeLineMaps_[Category::SphereEmitter][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_ConstantField()
+{
+	std::unique_ptr<ConstantFieldPipeLine> pipeline = std::make_unique<ConstantFieldPipeLine>();
+	pipeLineMaps_[Category::ConstantField][SubFilter::None] = pipeline->SetUpPso();
+}
 void PipeLineManager::CreatePipeLine_GPUParticle_Init()
 {
 	std::unique_ptr<GPUParticle_Init_PipeLine> pipeline = std::make_unique<GPUParticle_Init_PipeLine>();
@@ -221,15 +229,5 @@ void PipeLineManager::CreatePipeLine_GPUParticle_Update()
 {
 	std::unique_ptr<GPUParticle_Update_PipeLine> pipeline = std::make_unique<GPUParticle_Update_PipeLine>();
 	pipeLineMaps_[Category::GPUParticle_Update][SubFilter::None] = pipeline->SetUpPso();
-}
-void PipeLineManager::CreatePipeLine_CSParticle()
-{
-	std::unique_ptr<CSParticlePipeLine> pipeline = std::make_unique<CSParticlePipeLine>();
-	pipeLineMaps_[Category::CSParticle][SubFilter::None] = pipeline->SetUpPso();
-}
-void PipeLineManager::CreatePipeLine_ParticleEmitterSphere()
-{
-	std::unique_ptr<ParticleEmitterSphere> pipeline = std::make_unique<ParticleEmitterSphere>();
-	pipeLineMaps_[Category::Particle_EmitterSphere][SubFilter::None] = pipeline->SetUpPso();
 }
 

@@ -19,22 +19,23 @@ DebugScene::~DebugScene() {}
 /// </summary>
 void DebugScene::Initialize()
 {
-	/* ----- Camera カメラ ----- */
-	camera_.Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
 	cameraManager_ = CameraManager::GetInstance();
-	cameraManager_->ReSetData(camera_);
+	cameraManager_->ReSet();
+	cameraData_ = cameraManager_->GetCameraDataWeak();
+	cameraData_.lock()->Init({0.15f, -0.3f, 0.0f}, {7.0f, 4.0f, -20.0f});
 	
-	/* ----- Skybox 天箱 ----- */
 	skybox_ = std::make_unique<Skybox>();
 	uint32_t dds = TextureManager::LoadTexture("Texture", "DemoSkybox.dds");
 	skybox_->Init(dds);
 
-	/* ----- DemoParticle デモパーティクル ----- */
-	demoParticle_ = std::make_unique<DemoParticle>();
-	demoParticle_->Init();
+	dummyParticle_ = std::make_unique<DummyParticle>();
+	dummyParticle_->Init();
 
+	floor_ = std::make_unique<Floor>();
+	floor_->Init();
+	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
+	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
 }
-
 
 
 /// <summary>
@@ -42,16 +43,13 @@ void DebugScene::Initialize()
 /// </summary>
 void DebugScene::Update()
 {
-	/* ----- Camera カメラ ----- */
-	camera_.Update();
-
-	/* ----- DemoParticle デモパーティクル ----- */
-	demoParticle_->Update();
-
+	cameraData_.lock()->Update();
+	dummyParticle_->Update();
+	floor_->Update();
 
 #ifdef _DEBUG
 	ImGui::Begin("DebugScene");
-	camera_.DrawImGui();
+	cameraData_.lock()->DrawImGui();
 	ImGui::End();
 #endif // _DEBUG
 }
@@ -71,8 +69,8 @@ void DebugScene::BackSpriteDraw()
 /// </summary>
 void DebugScene::ModelDraw()
 {
-	/* ----- DemoParticle デモパーティクル ----- */
-	demoParticle_->Draw();
+	dummyParticle_->Draw();
+	floor_->Draw3D();
 }
 
 

@@ -11,7 +11,6 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 	D3D12_ROOT_SIGNATURE_DESC descriptionRootSignature{};
 	SetUpRootSignature(descriptionRootSignature);
 
-
 	/* --- InputLayoutを設定する --- */
 	std::array<D3D12_INPUT_ELEMENT_DESC, 3> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
@@ -31,9 +30,7 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	//SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
-	SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_FRONT, D3D12_FILL_MODE_SOLID);
-	//SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_NONE, D3D12_FILL_MODE_SOLID);
+	SetUpRasterizerState(rasterizerDesc, cullMode_, D3D12_FILL_MODE_SOLID);
 
 
 	/* --- Shaderを設定する --- */
@@ -81,7 +78,7 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 
 	D3D12_DEPTH_STENCIL_DESC depthStencilDesc{};
 	// Depthの機能を有効化する
-	depthStencilDesc.DepthEnable = true;
+	depthStencilDesc.DepthEnable = depthWriteMask_;
 	// 書き込む
 	depthStencilDesc.DepthWriteMask = D3D12_DEPTH_WRITE_MASK_ALL;
 	// 比較関数はLessEqual。つまり、近ければ描画される

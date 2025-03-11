@@ -17,10 +17,15 @@ class IPipeLineState {
 
 public: // メンバ関数
 
-	// デストラクタ
+	/// <summary>
+	/// デストラクタ
+	/// </summary>
 	~IPipeLineState() = default;
 
-	// Psoを構築する
+	/// <summary>
+	/// Psoを構築する
+	/// </summary>
+	/// <returns></returns>
 	virtual PsoProperty SetUpPso() = 0;
 
 #pragma region Accessor アクセッサ
@@ -33,26 +38,58 @@ public: // メンバ関数
 
 protected: // メンバ関数
 
-	// RootSignatureのセットアップ
+	/// <summary>
+	/// RootParameterの設定
+	/// </summary>
+	D3D12_ROOT_PARAMETER SetUpRootParam(RootParam::BuffType buffType, RootParam::ShaderType shaderType, UINT registerNum);
+
+	/// <summary>
+	/// RootSignatureの設定
+	/// </summary
 	virtual void SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature) = 0;
 
-	// InputLayoutのセットアップ
+	/// <summary>
+	/// InputLayoutの設定
+	/// </summary>
 	D3D12_INPUT_ELEMENT_DESC SetUpInputElementDescs(LPCSTR SemanticName);
 	void SetUpInputLayout(D3D12_INPUT_LAYOUT_DESC& inputLayoutDesc, const D3D12_INPUT_ELEMENT_DESC* inputElementDescs, UINT numInputElements);
 
-	// BlendStateのセットアップ
+	/// <summary>
+	/// BlendStateの設定
+	/// </summary>
 	void SetUpBlendState(D3D12_RENDER_TARGET_BLEND_DESC& blendDesc, BlendMode blendMode);
 
-	// RasterizerStateのセットアップ
+	/// <summary>
+	/// RasterizerStateの設定
+	/// </summary>
 	void SetUpRasterizerState(D3D12_RASTERIZER_DESC& rasterizerDesc, D3D12_CULL_MODE Cull, D3D12_FILL_MODE fill);
 
-	// Shadersのコンパイル
+	/// <summary>
+	/// Shadersのコンパイル
+	/// </summary>
 	void SetUpModelShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key);
 	void SetUpPostEffectShader(IDxcBlob*& vertexShaderBlob, IDxcBlob*& pixelShaderBlob, const std::string key);
 
 
+private:
+
+	/// <summary>
+	/// 各ルートパラメーターの設定
+	/// </summary>
+	void SetUpRootParam_CBV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum);
+	void SetUpRootParam_SRV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum);
+	void SetUpRootParam_UAV(D3D12_ROOT_PARAMETER& rootParam, RootParam::ShaderType shaderType, UINT registerNum);
+
+	/// <summary>
+	/// ShaderVisibilityの取得
+	/// </summary>
+	D3D12_SHADER_VISIBILITY GetShaderVisibility(RootParam::ShaderType shaderType);
+
+
 protected: // メンバ変数
 
+	// PipeLineのデータ
 	PsoProperty pso_{};
+
 };
 

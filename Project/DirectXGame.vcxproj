@@ -617,6 +617,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
+    <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
+    <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />
     <ClInclude Include="Engine\Math\MathGeometry\MathGeometry.h" />

@@ -1463,6 +1463,8 @@
     <ClInclude Include="externals\LuaJIT\lua.hpp" />
     <ClInclude Include="externals\LuaJIT\luajit.h" />
     <ClInclude Include="externals\LuaJIT\lualib.h" />
+    <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
+    <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

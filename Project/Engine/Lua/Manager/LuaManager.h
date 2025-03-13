@@ -8,27 +8,34 @@
 /* Luaスクリプトの管理を一元化するクラス */
 class LuaManager {
 
+private:
+
+	// コンストラク、デストラクタ
+	LuaManager() = default;
+	~LuaManager() = default;
+	LuaManager(const LuaManager&) = delete;
+	const LuaManager& operator=(const LuaManager&) = delete;
+
+
 public:
 
 	/// <summary>
-	/// コンストラク
+	/// インスタンス取得
 	/// </summary>
-	LuaManager() = default;
-
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~LuaManager() = default;
+	static LuaManager* GetInstance() {
+		static LuaManager instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// 指定したLuaスクリプトの読み込み
 	/// </summary>
-	std::shared_ptr<LuaScript> LoadScript(const std::string& scriptName, const std::string& fileName);
+	void LoadScript(const std::string& rootPath, const std::string& fileName);
 
 	/// <summary>
 	/// 指定したスクリプトを取得
 	/// </summary>
-	std::shared_ptr<LuaScript> GetScript(const std::string& scriptName);
+	std::weak_ptr<LuaScript> GetScript(const std::string& scriptName);
 
 	/// <summary>
 	/// 指定したスクリプトを解放

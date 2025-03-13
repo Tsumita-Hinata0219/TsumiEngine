@@ -3,13 +3,23 @@
 
 
 /// <summary>
+/// コンストラク
+/// </summary>
+LuaScript::LuaScript() : L_(luaL_newstate(), &lua_close)
+{
+    luaL_openlibs(L.get());  // Luaライブラリを開く
+}
+
+/// <summary>
 /// スクリプトの読み込み
 /// </summary>
-bool LuaScript::LoadScript(const string& fileName)
+bool LuaScript::LoadScript(const string& file)
 {
-    fileName;
-
-    return false;
+    if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
+        std::cerr << "Error loading Lua script: " << lua_tostring(L_.get(), -1) << std::endl;
+        return false;
+    }
+    return true;
 }
 
 
@@ -25,30 +35,26 @@ bool LuaScript::ExeFunction(const string& funcName, int arg)
 
 
 /// <summary>
-/// Lua側の数値変数を取得
+/// Lua側の変数を取得
 /// </summary>
-float LuaScript::GetNumber(const std::string& verName)
+int LuaScript::GetInt(const std::string& varName)
 {
-    verName;
-
-    return 0.0f;
+    varName;
+    return 0;
+}
+float LuaScript::GetFloat(const std::string& varName)
+{
+    varName;
+    return 0;
+}
+bool LuaScript::GetBool(const std::string& varName)
+{
+    varName;
+    return 0;
+}
+std::string LuaScript::GetString(const std::string& varName)
+{
+    varName;
+    return "";
 }
 
-
-/// <summary>
-/// Lua側の文字列変数を取得
-/// </summary>
-std::string LuaScript::GetString(const std::string& verName)
-{
-    verName;
-
-    return std::string();
-}
-
-
-/// <summary>
-/// Luaステートを閉じる(メモリ解放)
-/// </summary>
-void LuaScript::Close()
-{
-}

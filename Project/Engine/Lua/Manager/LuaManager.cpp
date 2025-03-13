@@ -5,22 +5,40 @@
 /// <summary>
 /// 指定したLuaスクリプトの読み込み
 /// </summary>
-std::shared_ptr<LuaScript> LuaManager::LoadScript(const std::string& scriptName, const std::string& fileName)
+void LuaManager::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-    scriptName; fileName;
+    // 1. スクリプトファイルのフルパスを組み立てる
+    std::filesystem::path fullPath = std::filesystem::path(rootPath) / fileName;
 
-    return std::shared_ptr<LuaScript>();
+    if (!std::filesystem::exists(fullPath)) {
+        std::cerr << "Error: Script file does not exist: " << fullPath << std::endl;
+        return;
+    }
+
+    // 2. Luaスクリプトのインスタンスを作成
+    auto script = std::make_shared<LuaScript>();
+    if (script->LoadScript(fullPath.string())) {
+        // 3. スクリプトをマップに登録
+        scripts_[fileName] = script;
+        std::cout << "Loaded script: " << fullPath << std::endl;
+    }
+    else {
+        std::cerr << "Failed to load script: " << fullPath << std::endl;
+    }
 }
 
 
 /// <summary>
 /// 指定したスクリプトを取得
 /// </summary>
-std::shared_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
+std::weak_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
 {
-    scriptName;
+    if (scripts_.find(scriptName) != scripts_.end()) {
+        return scripts_[scriptName];
+    }
 
-    return std::shared_ptr<LuaScript>();
+    // 存在しない場合は empty weal_ptr を返す
+    return std::weak_ptr<LuaScript>();
 }
 
 
@@ -29,5 +47,5 @@ std::shared_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
 /// </summary>
 void LuaManager::UnLoadScript(const std::string& scriptName)
 {
-    scriptName;
+    scripts_.erase(scriptName);
 }

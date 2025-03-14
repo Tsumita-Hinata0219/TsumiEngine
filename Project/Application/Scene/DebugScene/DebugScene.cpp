@@ -35,6 +35,16 @@ void DebugScene::Initialize()
 	floor_->Init();
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
 	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
+
+	luaManager_ = LuaManager::GetInstance();
+	luaManager_->LoadScript("LuaScript", "Test.lua");
+
+	luaScript_ = luaManager_->GetScript("Test");
+
+	int test1 = luaScript_.lock()->GetVariable<int>("intValue");
+	test1;
+	float test2 = luaScript_.lock()->GetVariable<float>("floatValue");
+	test2;
 }
 
 

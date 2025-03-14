@@ -24,3 +24,5 @@
 #include "Animation/AnimationManager/AnimationManager.h"
 #include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
+#include "Lua/Manager/LuaManager.h"
+#include "Lua/Script/LuaScript.h"

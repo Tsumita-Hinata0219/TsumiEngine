@@ -71,5 +71,9 @@ private:
 
 	// Floor
 	std::unique_ptr<Floor> floor_;
+
+	// Lua
+	LuaManager* luaManager_ = nullptr;
+	std::weak_ptr<LuaScript> luaScript_;
 };
 

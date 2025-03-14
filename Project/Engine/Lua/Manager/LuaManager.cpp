@@ -7,11 +7,14 @@
 /// </summary>
 void LuaManager::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-    std::filesystem::path fullPath = rootPath + fileName;
+    // フルパス
+    std::filesystem::path fullPath = "Resources/" + rootPath + "/" + fileName;
+    // ファイル名から拡張子を除外したものをKeyに設定
+    std::string key = RemoveNameSuffix(fileName);
 
     // すでにロード済みならスキップ
-    if (scripts_.find(fileName) != scripts_.end()) {
-        std::cerr << "Warning: Script already loaded: " << fileName << std::endl;
+    if (scripts_.find(key) != scripts_.end()) {
+        std::cerr << "Warning: Script already loaded: " << key << std::endl;
         return;
     }
 
@@ -23,8 +26,8 @@ void LuaManager::LoadScript(const std::string& rootPath, const std::string& file
     }
 
     // マップに登録
-    scripts_[fileName] = script;
-    scriptPaths_[fileName] = fullPath;
+    scripts_[key] = script;
+    scriptPaths_[key] = fullPath;
 }
 
 

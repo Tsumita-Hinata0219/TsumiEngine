@@ -27,25 +27,25 @@ public:
 		return &instance;
 	}
 
-	///// <summary>
-	///// 指定したLuaスクリプトの読み込み
-	///// </summary>
-	//void LoadScript(const std::string& rootPath, const std::string& fileName);
+	/// <summary>
+	/// 指定したLuaスクリプトの読み込み
+	/// </summary>
+	void LoadScript(const std::string& rootPath, const std::string& fileName);
 
-	///// <summary>
-	///// スクリプトのリロード
-	///// </summary>
-	//void ReLoadScript(const std::string& scriptName);
+	/// <summary>
+	/// スクリプトのリロード
+	/// </summary>
+	void ReLoadScript(const std::string& scriptName);
 
-	///// <summary>
-	///// 指定したスクリプトを取得
-	///// </summary>
-	//std::weak_ptr<LuaScript> GetScript(const std::string& scriptName);
+	/// <summary>
+	/// 指定したスクリプトを取得
+	/// </summary>
+	std::weak_ptr<LuaScript> GetScript(const std::string& scriptName);
 
-	///// <summary>
-	///// 指定したスクリプトを解放
-	///// </summary>
-	//void UnLoadScript(const std::string& scriptName);
+	/// <summary>
+	/// 指定したスクリプトを解放
+	/// </summary>
+	void UnLoadScript(const std::string& scriptName);
 
 
 private:

@@ -41,10 +41,21 @@ void DebugScene::Initialize()
 
 	luaScript_ = luaManager_->GetScript("Test");
 
-	int test1 = luaScript_.lock()->GetVariable<int>("intValue");
-	test1;
-	float test2 = luaScript_.lock()->GetVariable<float>("floatValue");
-	test2;
+	int testInt = luaScript_.lock()->GetVariable<int>("intValue");
+	testInt;
+	float testFloat = luaScript_.lock()->GetVariable<float>("floatValue");
+	testFloat;
+	bool testBool = luaScript_.lock()->GetVariable<bool>("boolValue");
+	testBool;
+	std::string testString = luaScript_.lock()->GetVariable<std::string>("stringValue");
+	testString;
+	Vector2 testVec2 = luaScript_.lock()->GetVariable<Vector2>("position2D");
+	testVec2;
+	Vector3 testVec3 = luaScript_.lock()->GetVariable<Vector3>("position3D");
+	testVec3;
+	Vector4 testColor = luaScript_.lock()->GetVariable<Vector4>("color");
+	testColor;
+
 }
 
 

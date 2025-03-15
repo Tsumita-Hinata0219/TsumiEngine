@@ -17,5 +17,5 @@ GpuField::Data::ConstantField GpuField::ConstantField::LoadFieldData(const std::
     result.mass = lScript.lock()->GetVariable<float>("");
     result.isUse = lScript.lock()->GetVariable<int>("");
 
-    return result
+    return result;
 }

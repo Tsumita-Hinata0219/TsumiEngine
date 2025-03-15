@@ -7,8 +7,8 @@
 class DummyParticle
 {
 private:
-	std::unique_ptr<SphereEmitter> sEmit_;
-	//std::unique_ptr<ParticleField<GpuField::ConstantField>> cField_;
+	std::unique_ptr<Emitter::SphereEmitter> sEmit_;
+	std::unique_ptr<GpuField::ConstantField> cField_;
 
 public:
 
@@ -17,7 +17,7 @@ public:
 
 	void Init()
 	{
-		sEmit_ = std::make_unique<SphereEmitter>();
+		sEmit_ = std::make_unique<Emitter::SphereEmitter>();
 		sEmit_->Create();
 
 		/*cField_ = std::make_unique<ParticleField<GpuField::ConstantField>>();

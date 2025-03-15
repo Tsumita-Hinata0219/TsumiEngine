@@ -3,7 +3,9 @@
 #include "../Interface/IParticleField.h"
 
 
-class ConstantField : public IParticleField<GpuField::ConstantField> {
+namespace GpuField {
+
+class ConstantField : public IParticleField<GpuField::Data::ConstantField> {
 
 public:
 
@@ -20,8 +22,9 @@ public:
 	/// <summary>
 	/// Fieldデータの取得
 	/// </summary>
-	GpuField::ConstantField LoadFieldData(const std::weak_ptr<LuaScript>& lScript) override;
+	GpuField::Data::ConstantField LoadFieldData(const std::weak_ptr<LuaScript>& lScript) override;
 
 private:
 
 };
+}

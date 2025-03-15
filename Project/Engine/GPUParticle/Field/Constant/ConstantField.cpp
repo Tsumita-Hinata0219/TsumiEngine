@@ -5,9 +5,9 @@
 /// <summary>
 /// Fieldデータの取得
 /// </summary>
-GpuField::ConstantField ConstantField::LoadFieldData(const std::weak_ptr<LuaScript>& lScript)
+GpuField::Data::ConstantField GpuField::ConstantField::LoadFieldData(const std::weak_ptr<LuaScript>& lScript)
 {
     lScript;
 
-    return GpuField::ConstantField();
+    return GpuField::Data::ConstantField();
 }

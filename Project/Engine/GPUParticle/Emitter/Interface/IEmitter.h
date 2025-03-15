@@ -56,10 +56,10 @@ public:
 	const std::weak_ptr<T> GetWeak_EmitData() { return this->emitData_; }
 
 	// Emitter Range
-	const std::weak_ptr<Emitter::EmitRange> GetWeak_RangeData() { return this->rangeData_; }
+	const std::weak_ptr<Emitter::Data::EmitRange> GetWeak_RangeData() { return this->rangeData_; }
 
 	// Emitter Config
-	const std::weak_ptr<Emitter::EmitConfig> GetWeak_ConfigData() { return this->configData_; }
+	const std::weak_ptr<Emitter::Data::EmitConfig> GetWeak_ConfigData() { return this->configData_; }
 
 #pragma endregion 
 
@@ -109,16 +109,16 @@ private:
 	BufferResource<T> emitBuff_;
 
 	// 範囲
-	std::shared_ptr<Emitter::EmitRange> rangeData_;
-	BufferResource<Emitter::EmitRange> rangeBuff_;
+	std::shared_ptr<Emitter::Data::EmitRange> rangeData_;
+	BufferResource<Emitter::Data::EmitRange> rangeBuff_;
 
 	// 射出
-	std::shared_ptr<Emitter::EmitConfig> configData_;
-	BufferResource<Emitter::EmitConfig> configBuff_;
+	std::shared_ptr<Emitter::Data::EmitConfig> configData_;
+	BufferResource<Emitter::Data::EmitConfig> configBuff_;
 
 	// 乱数シード
-	std::shared_ptr<Emitter::RandomSeed> randSeedData_;
-	BufferResource<Emitter::RandomSeed> randSeedBuff_;
+	std::shared_ptr<Emitter::Data::RandomSeed> randSeedData_;
+	BufferResource<Emitter::Data::RandomSeed> randSeedBuff_;
 
 	// 前回リセットした時点の時間
 	float lastResetTime_ = 0.0f;
@@ -235,11 +235,11 @@ inline void IEmitter<T>::CreateData()
 	// Emitter
 	emitData_ = std::make_shared<T>();
 	// Range
-	rangeData_ = std::make_shared<Emitter::EmitRange>();
+	rangeData_ = std::make_shared<Emitter::Data::EmitRange>();
 	// Congig
-	configData_ = std::make_shared<Emitter::EmitConfig>();
+	configData_ = std::make_shared<Emitter::Data::EmitConfig>();
 	// RandomSeed
-	randSeedData_ = std::make_shared<Emitter::RandomSeed>();
+	randSeedData_ = std::make_shared<Emitter::Data::RandomSeed>();
 	randSeedData_->gameTime = timeSys_->Get_SinceStart();
 	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
 }

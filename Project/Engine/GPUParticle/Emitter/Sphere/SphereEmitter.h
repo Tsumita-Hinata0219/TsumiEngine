@@ -3,14 +3,16 @@
 #include "../Interface/IEmitter.h"
 
 
-class SphereEmitter : public IEmitter<Emitter::SphereEmit> {
+namespace Emitter {
+
+class SphereEmitter : public IEmitter<Emitter::Data::SphereEmit> {
 
 public:
 
 	/// <summary>
 	/// コンストラク
 	/// </summary>
-	SphereEmitter() 
+	SphereEmitter()
 	{
 		pipeLine_Category = PipeLine::Category::SphereEmitter;
 	}
@@ -24,3 +26,5 @@ public:
 private:
 
 };
+
+}

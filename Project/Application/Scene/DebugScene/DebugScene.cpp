@@ -36,26 +36,6 @@ void DebugScene::Initialize()
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
 	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
 
-	luaManager_ = LuaManager::GetInstance();
-	luaManager_->LoadScript("LuaScript", "Test.lua");
-
-	luaScript_ = luaManager_->GetScript("Test");
-
-	int testInt = luaScript_.lock()->GetVariable<int>("intValue");
-	testInt;
-	float testFloat = luaScript_.lock()->GetVariable<float>("floatValue");
-	testFloat;
-	bool testBool = luaScript_.lock()->GetVariable<bool>("boolValue");
-	testBool;
-	std::string testString = luaScript_.lock()->GetVariable<std::string>("stringValue");
-	testString;
-	Vector2 testVec2 = luaScript_.lock()->GetVariable<Vector2>("position2D");
-	testVec2;
-	Vector3 testVec3 = luaScript_.lock()->GetVariable<Vector3>("position3D");
-	testVec3;
-	Vector4 testColor = luaScript_.lock()->GetVariable<Vector4>("color");
-	testColor;
-
 }
 
 

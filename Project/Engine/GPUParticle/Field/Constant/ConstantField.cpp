@@ -9,13 +9,16 @@ GpuField::Data::ConstantField GpuField::ConstantField::LoadFieldData(const std::
 {
     GpuField::Data::ConstantField result;
 
-    result.acceleration = lScript.lock()->GetVariable<Vector3>("");
-    result.damping = lScript.lock()->GetVariable<float>("");
-    result.angularVelocity = lScript.lock()->GetVariable<Vector3>("");
-    result.drag = lScript.lock()->GetVariable<float>("");
-    result.force = lScript.lock()->GetVariable<Vector3>("");
-    result.mass = lScript.lock()->GetVariable<float>("");
-    result.isUse = lScript.lock()->GetVariable<int>("");
+    if (auto lockedData = lScript.lock()) {
+
+        result.acceleration = lockedData->GetVariable<Vector3>("");
+        result.damping = lockedData->GetVariable<float>("");
+        result.angularVelocity = lockedData->GetVariable<Vector3>("");
+        result.drag = lockedData->GetVariable<float>("");
+        result.force = lockedData->GetVariable<Vector3>("");
+        result.mass = lockedData->GetVariable<float>("");
+        result.isUse = lockedData->GetVariable<int>("");
+    }
 
     return result;
 }

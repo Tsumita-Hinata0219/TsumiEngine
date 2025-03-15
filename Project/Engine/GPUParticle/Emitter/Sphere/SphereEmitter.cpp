@@ -2,15 +2,17 @@
 
 
 /// <summary>
-/// Emitのデータの取得
+/// LuaScriptからEmitterデータの読み込み
 /// </summary>
-Emitter::SphereEmit SphereEmitter::LoadEmitData(const std::weak_ptr<LuaScript>& lScript)
+Emitter::Data::SphereEmit Emitter::SphereEmitter::Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua)
 {
-    Emitter::SphereEmit result;
+	Emitter::Data::SphereEmit result;
 
-    result.translate = lScript.lock()->GetVariable<Vector4>("translate");
-    result.radius = lScript.lock()->GetVariable<Vector4>("radius");
+	if (auto lockedData = lua.lock()) {
 
-    return result;
+		result.translate = lockedData->GetVariable<Vector4>("SphereEmitter.translate");
+		result.radius = lockedData->GetVariable<Vector4>("SphereEmitter.radius");
+	}
+
+	return result;
 }
-

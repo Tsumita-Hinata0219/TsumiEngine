@@ -9,6 +9,8 @@ class DummyParticle
 private:
 	std::unique_ptr<Emitter::SphereEmitter> sEmit_;
 	std::unique_ptr<GpuField::ConstantField> cField_;
+	std::weak_ptr<LuaScript> lua_;
+	LuaManager* luaManager_ = nullptr;
 
 public:
 
@@ -22,6 +24,10 @@ public:
 
 		cField_ = std::make_unique<GpuField::ConstantField>();
 		cField_->Create(sEmit_->GetWeak_Particle());
+
+		luaManager_ = LuaManager::GetInstance();
+		luaManager_->LoadScript("LuaScript", "Test.lua");
+		lua_ = luaManager_->GetScript("Test");
 
 		// Emitter
 		if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
@@ -65,6 +71,7 @@ public:
 			lokedData->mass = 0.0f;
 			lokedData->isUse = true;
 		}
+
 	}
 
 	void Update()

@@ -570,6 +570,7 @@
     <ClCompile Include="Engine\Lua\Script\LuaScript.cpp" />
     <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">

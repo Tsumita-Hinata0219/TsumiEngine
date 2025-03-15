@@ -5,6 +5,7 @@
 #include "../../Structure/ParticleStructure.h"
 #include "../../Structure/FieldStructure.h"
 #include "../../Particle/GPUParticle.h"
+#include "Lua/Script/LuaScript.h"
 
 #include  "Utilities/RandomGenerator/RandomGenerator.h"
 #include "Utilities/TimeSystem/TimeSystem.h"
@@ -45,6 +46,21 @@ public:
 	/// 発生
 	/// </summary>
 	void Emit();
+
+	/// <summary>
+	/// LuaScriptからEmitterデータの読み込み
+	/// </summary>
+	virtual T Load_EmitDataFromLua(const std::weak_ptr<LuaScript>& lua) = 0;
+
+	/// <summary>
+	/// LuaScriptからEmitRangeデータの読み込み
+	/// </summary>
+	Emitter::Data::EmitRange Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+
+	/// <summary>
+	/// LuaScriptからEmitConfigデータの読み込み
+	/// </summary>
+	Emitter::Data::EmitConfig Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua);
 
 
 #pragma region Accessor
@@ -221,6 +237,57 @@ inline void IEmitter<T>::Emit()
 	// Barrierを張る
 	particle_->SetUAVBarrier();
 
+}
+
+
+/// <summary>
+/// LuaScriptからEmitRangeデータの読み込み
+/// </summary>
+template<typename T>
+inline Emitter::Data::EmitRange IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+{
+	Emitter::Data::EmitRange result;
+
+	if (auto lockedData = lua.lock()) {
+
+		result.scaleMin = lockedData->GetVariable<Vector4>("EmitterRange.scaleMin");
+		result.scaleMax = lockedData->GetVariable<Vector4>("EmitterRange.scaleMax");
+
+		result.rotateMin = lockedData->GetVariable<Vector4>("EmitterRange.rotateMin");
+		result.rotateMax = lockedData->GetVariable<Vector4>("EmitterRange.rotateMax");
+
+		result.colorMin = lockedData->GetVariable<Vector4>("EmitterRange.colorMin");
+		result.colorMax = lockedData->GetVariable<Vector4>("EmitterRange.colorMax");
+
+		result.velocityMin = lockedData->GetVariable<Vector4>("EmitterRange.velocityMin");
+		result.velocityMax = lockedData->GetVariable<Vector4>("EmitterRange.velocityMax");
+
+		result.baseLifeTime = lockedData->GetVariable<float>("EmitterRange.baseLifeTime");
+		result.lifeTimeMin = lockedData->GetVariable<float>("EmitterRange.lifeTimeMin");
+		result.lifeTimeMax = lockedData->GetVariable<float>("EmitterRange.lifeTimeMax");
+	}
+
+	return result;
+}
+
+
+/// <summary>
+/// LuaScriptからEmitConfigデータの読み込み
+/// </summary>
+template<typename T>
+inline Emitter::Data::EmitConfig IEmitter<T>::Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+{
+	Emitter::Data::EmitConfig result;
+
+	if (auto lockedData = lua.lock()) {
+
+		result.spawnInterval = lockedData->GetVariable<float>("EmitConfig.spawnInterval");
+		result.elapsedTime = lockedData->GetVariable<float>("EmitConfig.elapsedTime");
+		result.spawnCount = lockedData->GetVariable<int>("EmitConfig.spawnCount");
+		result.isEmitting = lockedData->GetVariable<int>("EmitConfig.isEmitting");
+	}
+
+	return Emitter::Data::EmitConfig();
 }
 
 

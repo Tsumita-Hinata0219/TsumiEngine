@@ -217,6 +217,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\IObject\IObject.cpp" />

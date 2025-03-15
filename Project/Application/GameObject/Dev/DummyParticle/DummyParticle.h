@@ -8,7 +8,7 @@ class DummyParticle
 {
 private:
 	std::unique_ptr<SphereEmitter> sEmit_;
-	std::unique_ptr<ParticleField<GpuField::ConstantField>> cField_;
+	//std::unique_ptr<ParticleField<GpuField::ConstantField>> cField_;
 
 public:
 
@@ -20,8 +20,8 @@ public:
 		sEmit_ = std::make_unique<SphereEmitter>();
 		sEmit_->Create();
 
-		cField_ = std::make_unique<ParticleField<GpuField::ConstantField>>();
-		cField_->Create(sEmit_->GetWeak_Particle());
+		/*cField_ = std::make_unique<ParticleField<GpuField::ConstantField>>();
+		cField_->Create(sEmit_->GetWeak_Particle());*/
 
 		// Emitter
 		if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
@@ -55,22 +55,22 @@ public:
 			lockedData->isEmitting = false;
 		}
 
-		// ConstantField
-		if (auto lokedData = cField_->GetWeak_FieldData().lock()) {
-			lokedData->acceleration = Vector3::zero;
-			lokedData->damping = 1.0f;
-			lokedData->angularVelocity = Vector3::zero;
-			lokedData->drag = 0.1f;
-			lokedData->force = Vector3::zero;
-			lokedData->mass = 0.0f;
-			lokedData->isUse = true;
-		}
+		//// ConstantField
+		//if (auto lokedData = cField_->GetWeak_FieldData().lock()) {
+		//	lokedData->acceleration = Vector3::zero;
+		//	lokedData->damping = 1.0f;
+		//	lokedData->angularVelocity = Vector3::zero;
+		//	lokedData->drag = 0.1f;
+		//	lokedData->force = Vector3::zero;
+		//	lokedData->mass = 0.0f;
+		//	lokedData->isUse = true;
+		//}
 	}
 
 	void Update()
 	{
 		sEmit_->Update();
-		cField_->Update();
+		//cField_->Update();
 	}
 
 	void Draw()

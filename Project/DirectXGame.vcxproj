@@ -217,6 +217,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\Player\Player.cpp" />
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\IObject\IObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
@@ -531,6 +532,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\GameObject.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />

@@ -7,25 +7,25 @@
 /// </summary>
 void LuaManager::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-    // フルパス
-    std::filesystem::path fullPath = "Resources/" + rootPath + "/" + fileName;
-    // ファイル名から拡張子を除外したものをKeyに設定
+    std::filesystem::path fullPath = std::filesystem::path("Resources") / rootPath / fileName;
     std::string key = RemoveNameSuffix(fileName);
 
-    // すでにロード済みならスキップ
+    if (!std::filesystem::exists(fullPath)) {
+        std::cerr << "[Lua Error] Script file not found: " << fullPath << std::endl;
+        return;
+    }
+
     if (scripts_.find(key) != scripts_.end()) {
-        std::cerr << "Warning: Script already loaded: " << key << std::endl;
+        std::cerr << "[Lua Warning] Script already loaded: " << key << std::endl;
         return;
     }
 
-    // 新しいスクリプトを読み込む
-    std::shared_ptr<LuaScript> script = std::make_shared<LuaScript>();
+    auto script = std::make_shared<LuaScript>();
     if (!script->LoadScript(fullPath.string())) {
-        std::cerr << "Error: Failed to load script: " << fullPath << std::endl;
+        std::cerr << "[Lua Error] Failed to load script: " << fullPath << std::endl;
         return;
     }
 
-    // マップに登録
     scripts_[key] = script;
     scriptPaths_[key] = fullPath;
 }
@@ -60,12 +60,12 @@ void LuaManager::ReLoadScript(const std::string& scriptName)
 /// </summary>
 std::weak_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
 {
-    if (scripts_.find(scriptName) != scripts_.end()) {
-        return scripts_[scriptName];
+    try {
+        return scripts_.at(scriptName);
     }
-
-    // 存在しない場合は empty weal_ptr を返す
-    return std::weak_ptr<LuaScript>();
+    catch (const std::out_of_range&) {
+        return std::weak_ptr<LuaScript>();
+    }
 }
 
 

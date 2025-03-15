@@ -17,7 +17,9 @@ LuaScript::LuaScript() : L_(luaL_newstate(), &lua_close)
 bool LuaScript::LoadScript(const string& file)
 {
     if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
-        std::cerr << "Error loading Lua script: " << lua_tostring(L_.get(), -1) << std::endl;
+        std::cerr << "[Lua Error] Failed to load script: " << file << "\n"
+            << lua_tostring(L_.get(), -1) << std::endl;
+        lua_pop(L_.get(), 1); // スタックからエラーメッセージを削除
         return false;
     }
     return true;
@@ -29,9 +31,23 @@ bool LuaScript::LoadScript(const string& file)
 /// </summary>
 bool LuaScript::ExeFunction(const string& funcName, int arg)
 {
-    funcName; arg;
+    lua_getglobal(L_.get(), funcName.c_str()); // 関数を取得
 
-    return false;
+    if (!lua_isfunction(L_.get(), -1)) {
+        std::cerr << "[Lua Error] Function not found: " << funcName << std::endl;
+        lua_pop(L_.get(), 1);
+        return false;
+    }
+
+    lua_pushinteger(L_.get(), arg); // 引数をプッシュ
+
+    if (lua_pcall(L_.get(), 1, 0, 0) != LUA_OK) { // 1引数、戻り値なし
+        std::cerr << "[Lua Error] Error calling function " << funcName << ": "
+            << lua_tostring(L_.get(), -1) << std::endl;
+        lua_pop(L_.get(), 1);
+        return false;
+    }
+    return true;
 }
 
 
@@ -71,6 +87,63 @@ T LuaScript::GetVariable(const std::string& varName) {
             return value;
         }
     }
+    else if constexpr (std::is_same<T, Vector2>::value) {
+        if (lua_istable(L_.get(), -1)) {
+            Vector2 vec;
+            lua_getfield(L_.get(), -1, "x");
+            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "y");
+            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_pop(L_.get(), 1); // テーブル自体をポップ
+            return vec;
+        }
+    }
+    else if constexpr (std::is_same<T, Vector3>::value) {
+        if (lua_istable(L_.get(), -1)) {
+            Vector3 vec;
+            lua_getfield(L_.get(), -1, "x");
+            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "y");
+            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "z");
+            vec.z = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_pop(L_.get(), 1); // テーブル自体をポップ
+            return vec;
+        }
+    }
+    else if constexpr (std::is_same<T, Vector4>::value) {
+        if (lua_istable(L_.get(), -1)) {
+            Vector4 vec;
+            lua_getfield(L_.get(), -1, "x");
+            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "y");
+            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "z");
+            vec.z = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_getfield(L_.get(), -1, "w");
+            vec.w = static_cast<float>(lua_tonumber(L_.get(), -1));
+            lua_pop(L_.get(), 1);
+
+            lua_pop(L_.get(), 1); // テーブル自体をポップ
+            return vec;
+        }
+    }
 
     lua_pop(L_.get(), 1);  // 失敗した場合はスタックをポップ
     return T();  // デフォルト値を返す
@@ -81,3 +154,6 @@ template int LuaScript::GetVariable<int>(const std::string&);
 template float LuaScript::GetVariable<float>(const std::string&);
 template bool LuaScript::GetVariable<bool>(const std::string&);
 template std::string LuaScript::GetVariable<std::string>(const std::string&);
+template Vector2 LuaScript::GetVariable<Vector2>(const std::string&);
+template Vector3 LuaScript::GetVariable<Vector3>(const std::string&);
+template Vector4 LuaScript::GetVariable<Vector4>(const std::string&);

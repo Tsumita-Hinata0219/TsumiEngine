@@ -17,6 +17,7 @@ enum StateType {
 enum class RenderState {
 	None,			        // 普通の描画 (背面カリング, 全て書き込み)
 	CullingMode_None,       //　カリングなし
+	FillMode_WireFrame,     // ワイヤーフレーム
 	DepthWriteMask_ZERO,    // DepthWriteMaskをZeroに設定
 };
 

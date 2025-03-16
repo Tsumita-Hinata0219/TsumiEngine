@@ -55,8 +55,8 @@ public:
 
 		if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
 
-			Vector4 vel = { 0.0f, 0.0f, 0.1f, 0.0f };
-			if (lua_.lock()->ExeFunction("Move", vel)) {
+			Vector4 vel = { 0.0f, 0.0f, 0.01f, 0.0f };
+			if (lua_.lock()->ExeFunction("MoveCircular", vel)) {
 				lockedData->translate = lua_.lock()->GetVariable<Vector4>("position");
 			}
 

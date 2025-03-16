@@ -50,17 +50,17 @@ public:
 	/// <summary>
 	/// LuaScriptからEmitterデータの読み込み
 	/// </summary>
-	virtual T Load_EmitDataFromLua(const std::weak_ptr<LuaScript>& lua) = 0;
+	virtual void Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua) = 0;
 
 	/// <summary>
 	/// LuaScriptからEmitRangeデータの読み込み
 	/// </summary>
-	Emitter::Data::EmitRange Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+	void Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua);
 
 	/// <summary>
 	/// LuaScriptからEmitConfigデータの読み込み
 	/// </summary>
-	Emitter::Data::EmitConfig Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+	void Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua);
 
 
 #pragma region Accessor
@@ -115,7 +115,7 @@ protected:
 	PipeLine::SubFilter pipeLine_SubFileter = PipeLine::SubFilter::None;
 
 
-private:
+protected:
 	
 	// パーティクル
 	std::shared_ptr<GPUParticle> particle_;
@@ -244,7 +244,7 @@ inline void IEmitter<T>::Emit()
 /// LuaScriptからEmitRangeデータの読み込み
 /// </summary>
 template<typename T>
-inline Emitter::Data::EmitRange IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+inline void IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua)
 {
 	Emitter::Data::EmitRange result;
 
@@ -267,7 +267,7 @@ inline Emitter::Data::EmitRange IEmitter<T>::Load_EmitRangeData_From_Lua(const s
 		result.lifeTimeMax = lockedData->GetVariable<float>("EmitterRange.lifeTimeMax");
 	}
 
-	return result;
+	*rangeData_ = result;
 }
 
 
@@ -275,7 +275,7 @@ inline Emitter::Data::EmitRange IEmitter<T>::Load_EmitRangeData_From_Lua(const s
 /// LuaScriptからEmitConfigデータの読み込み
 /// </summary>
 template<typename T>
-inline Emitter::Data::EmitConfig IEmitter<T>::Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+inline void IEmitter<T>::Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua)
 {
 	Emitter::Data::EmitConfig result;
 
@@ -287,7 +287,7 @@ inline Emitter::Data::EmitConfig IEmitter<T>::Load_EmitConfigData_From_Lua(const
 		result.isEmitting = lockedData->GetVariable<int>("EmitConfig.isEmitting");
 	}
 
-	return Emitter::Data::EmitConfig();
+	*configData_ = result;
 }
 
 

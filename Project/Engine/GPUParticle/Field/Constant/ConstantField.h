@@ -22,7 +22,7 @@ public:
 	/// <summary>
 	/// Fieldデータの取得
 	/// </summary>
-	GpuField::Data::ConstantField LoadFieldData(const std::weak_ptr<LuaScript>& lScript) override;
+	void Load_FieldData_From_Lua(const std::weak_ptr<LuaScript>& lScript) override;
 
 private:
 

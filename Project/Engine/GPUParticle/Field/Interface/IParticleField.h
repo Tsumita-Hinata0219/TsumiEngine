@@ -40,7 +40,7 @@ public:
 	/// <summary>
 	/// Fieldデータの取得
 	/// </summary>
-	virtual T LoadFieldData(const std::weak_ptr<LuaScript>& lScript) = 0;
+	virtual void Load_FieldData_From_Lua(const std::weak_ptr<LuaScript>& lScript) = 0;
 
 
 #pragma region Accessor
@@ -64,7 +64,7 @@ private:
 	void Bind_and_Dispatch();
 
 
-private:
+protected:
 
 	// パーティクルのPtr
 	std::weak_ptr<GPUParticle> particlePtr_;

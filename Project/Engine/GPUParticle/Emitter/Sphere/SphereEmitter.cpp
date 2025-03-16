@@ -4,7 +4,7 @@
 /// <summary>
 /// LuaScriptからEmitterデータの読み込み
 /// </summary>
-Emitter::Data::SphereEmit Emitter::SphereEmitter::Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+void Emitter::SphereEmitter::Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua)
 {
 	Emitter::Data::SphereEmit result;
 
@@ -14,5 +14,5 @@ Emitter::Data::SphereEmit Emitter::SphereEmitter::Load_EmitData_From_Lua(const s
 		result.radius = lockedData->GetVariable<Vector4>("SphereEmitter.radius");
 	}
 
-	return result;
+	*emitData_ = result;
 }

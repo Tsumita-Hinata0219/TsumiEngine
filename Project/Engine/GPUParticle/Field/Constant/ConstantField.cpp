@@ -5,7 +5,7 @@
 /// <summary>
 /// Fieldデータの取得
 /// </summary>
-GpuField::Data::ConstantField GpuField::ConstantField::LoadFieldData(const std::weak_ptr<LuaScript>& lScript)
+void GpuField::ConstantField::Load_FieldData_From_Lua(const std::weak_ptr<LuaScript>& lScript)
 {
     GpuField::Data::ConstantField result;
 
@@ -20,5 +20,5 @@ GpuField::Data::ConstantField GpuField::ConstantField::LoadFieldData(const std::
         result.isUse = lockedData->GetVariable<int>("");
     }
 
-    return result;
+    *fieldData_ = result;
 }

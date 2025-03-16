@@ -56,7 +56,22 @@ bool LuaScript::ExeFunction(const string& funcName, int arg)
 /// </summary>
 template <typename T>
 T LuaScript::GetVariable(const std::string& varName) {
-    lua_getglobal(L_.get(), varName.c_str());  // Luaのグローバル変数をスタックにプッシュ
+    std::istringstream ss(varName);
+    std::string token;
+
+    // 最初の変数名を取得
+    std::getline(ss, token, '.');
+    lua_getglobal(L_.get(), token.c_str()); // グローバル変数取得
+
+    while (std::getline(ss, token, '.')) {
+        if (!lua_istable(L_.get(), -1)) {
+            lua_pop(L_.get(), 1);
+            return T();  // 失敗時はデフォルト値を返す
+        }
+
+        lua_getfield(L_.get(), -1, token.c_str());  // 次のフィールドを取得
+        lua_remove(L_.get(), -2); // 1つ前のテーブルを削除せずに保持する
+    }
 
     // 型による処理を分ける
     if constexpr (std::is_same<T, int>::value) {

@@ -29,9 +29,10 @@ bool LuaScript::LoadScript(const string& file)
 /// <summary>
 /// Lua側の関数を実行
 /// </summary>
-bool LuaScript::ExeFunction(const string& funcName, int arg)
+template<typename ...Args>
+bool LuaScript::ExeFunction(const std::string& funcName, Args ...args)
 {
-    lua_getglobal(L_.get(), funcName.c_str()); // 関数を取得
+    lua_getglobal(L_.get(), funcName.c_str());
 
     if (!lua_isfunction(L_.get(), -1)) {
         std::cerr << "[Lua Error] Function not found: " << funcName << std::endl;
@@ -39,14 +40,17 @@ bool LuaScript::ExeFunction(const string& funcName, int arg)
         return false;
     }
 
-    lua_pushinteger(L_.get(), arg); // 引数をプッシュ
+    // 可変引数を Lua にプッシュ
+    (PushToLua(args), ...);
 
-    if (lua_pcall(L_.get(), 1, 0, 0) != LUA_OK) { // 1引数、戻り値なし
+    constexpr int argCount = sizeof...(args);
+    if (lua_pcall(L_.get(), argCount, 0, 0) != LUA_OK) {
         std::cerr << "[Lua Error] Error calling function " << funcName << ": "
             << lua_tostring(L_.get(), -1) << std::endl;
         lua_pop(L_.get(), 1);
         return false;
     }
+
     return true;
 }
 
@@ -172,3 +176,42 @@ template std::string LuaScript::GetVariable<std::string>(const std::string&);
 template Vector2 LuaScript::GetVariable<Vector2>(const std::string&);
 template Vector3 LuaScript::GetVariable<Vector3>(const std::string&);
 template Vector4 LuaScript::GetVariable<Vector4>(const std::string&);
+
+
+/// <summary>
+/// 可変引数を Lua にプッシュする
+/// </summary>
+void LuaScript::PushToLua(int value)
+{
+    lua_pushinteger(L_.get(), value);
+}
+void LuaScript::PushToLua(float value)
+{
+    lua_pushnumber(L_.get(), value);
+}
+void LuaScript::PushToLua(double value)
+{
+    lua_pushnumber(L_.get(), value);
+}
+void LuaScript::PushToLua(const std::string& value)
+{
+    lua_pushstring(L_.get(), value.c_str());
+}
+void LuaScript::PushToLua(const Vector2& value)
+{
+    lua_pushnumber(L_.get(), value.x);
+    lua_pushnumber(L_.get(), value.y);
+}
+void LuaScript::PushToLua(const Vector3& value)
+{
+    lua_pushnumber(L_.get(), value.x);
+    lua_pushnumber(L_.get(), value.y);
+    lua_pushnumber(L_.get(), value.z);
+}
+void LuaScript::PushToLua(const Vector4& value)
+{
+    lua_pushnumber(L_.get(), value.x);
+    lua_pushnumber(L_.get(), value.y);
+    lua_pushnumber(L_.get(), value.z);
+    lua_pushnumber(L_.get(), value.w);
+}

@@ -29,13 +29,28 @@ public:
 	/// <summary>
 	/// Lua側の関数を実行
 	/// </summary>
-	bool ExeFunction(const string& funcName, int arg = 0);
+	template <typename... Args>
+	bool ExeFunction(const std::string& funcName, Args... args);
 
 	/// <summary>
 	/// Lua側の変数を取得
 	/// </summary>
 	template <typename T>
 	T GetVariable(const std::string& varName);
+
+
+private:
+
+	/// <summary>
+	/// 可変引数を Lua にプッシュする
+	/// </summary>
+	void PushToLua(int value);
+	void PushToLua(float value);
+	void PushToLua(double value);
+	void PushToLua(const std::string& value);
+	void PushToLua(const Vector2& value);
+	void PushToLua(const Vector3& value);
+	void PushToLua(const Vector4& value);
 
 
 private:

@@ -19,6 +19,7 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	sceneTransition_ = SceneTransition::GetInstance();
 	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
+	dummyParticle_ = std::make_unique<DummyParticle>();
 }
 
 
@@ -108,12 +109,15 @@ void GameScene::Initialize()
 	// ──────── CollisionManager
 	CollisionManager_->Init();
 
-	jsonManager->Clear();
-
 	// ──────── FlagManager
 	flagManager_ = FlagManager::GetInstance();
 	flagManager_->LoadFlagFromJson("FlagData", "Demo.json");
 	flagManager_->SetFlag("Game_Start", true);
+
+	// ──────── DummyParticle
+	dummyParticle_->Init();
+
+	jsonManager->Clear();
 }
 
 
@@ -185,6 +189,7 @@ void GameScene::Update()
 	boxManager_->Update();
 	player_->Update();
 	enemyManager_->Update();
+	dummyParticle_->Update();
 
 	// ──────── CollisionManager
 	CollisionManager_->Update();
@@ -228,6 +233,9 @@ void GameScene::ModelDraw()
 
 	// ──────── Player
 	player_->Draw3D();
+
+	// ──────── DummyParticle
+	dummyParticle_->Draw();
 }
 
 

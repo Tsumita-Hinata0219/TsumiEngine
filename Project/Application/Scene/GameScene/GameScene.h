@@ -25,6 +25,8 @@
 
 #include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
 
+#include "GameObject/Dev/DummyParticle/DummyParticle.h"
+
 
 class GameScene : public IScene {
 
@@ -119,5 +121,8 @@ private: // クラス
 	// RetroCRT
 	std::unique_ptr<RetroCRTEffect> retroCRT_;
 	RetroCRTMtl retroEffectData_{};
+
+	// DummyParticle
+	std::unique_ptr<DummyParticle> dummyParticle_;
 };
 

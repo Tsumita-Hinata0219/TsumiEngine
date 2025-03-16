@@ -46,37 +46,10 @@ ConstantField = {
 
 
 
-
-
--- 円運動のパラメータ
-local radius = 10.0      -- 半径
-local speed = 0.5       -- 移動速度（角速度）
-local cx, cz = 0, 0     -- 円の中心（x軸, z軸）
-
--- 移動を管理する変数
-local angle = 0         -- 現在の角度（ラジアン）
-local position = { x = cx + radius, z = cz }
-
--- 毎フレーム更新する関数
-function UpdateMovement(deltaTime)
-    -- 角度の更新（角速度 * 時間経過）
-    angle = angle + speed * deltaTime
-
-    -- 角度が2πを超えたらリセット
-    if angle > math.pi * 2 then
-        angle = angle - math.pi * 2
-    end
-
-    -- 新しい位置を計算（円運動の式）
-    position.x = cx + radius * math.cos(angle)
-    position.z = cz + radius * math.sin(angle)
-
-    -- 結果を返す
-    return position
-end
+_G.position = { x = 0.0, y = 0.0, z = 0.0, w = 0.0}
 
 -- 位置と速度を引数に取る移動処理
-function Move(position, velocity)
+function Move(velocity)
     -- 移動処理（位置に速度を加算）
     position.x = position.x + velocity.x
     position.y = position.y + velocity.y

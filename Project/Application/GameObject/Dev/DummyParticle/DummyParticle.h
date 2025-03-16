@@ -48,8 +48,6 @@ public:
 			if (lua_.lock()->ExeFunction("Move", vel)) {
 				lockedData->translate = lua_.lock()->GetVariable<Vector4>("position");
 			}
-			//lockedData->translate += vel;
-
 		}
 	}
 

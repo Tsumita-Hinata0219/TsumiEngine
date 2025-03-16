@@ -49,8 +49,8 @@ ConstantField = {
 
 
 -- 円運動のパラメータ
-local radius = 5.0      -- 半径
-local speed = 1.0       -- 移動速度（角速度）
+local radius = 10.0      -- 半径
+local speed = 0.5       -- 移動速度（角速度）
 local cx, cz = 0, 0     -- 円の中心（x軸, z軸）
 
 -- 移動を管理する変数
@@ -73,4 +73,13 @@ function UpdateMovement(deltaTime)
 
     -- 結果を返す
     return position
+end
+
+-- 位置と速度を引数に取る移動処理
+function Move(position, velocity)
+    -- 移動処理（位置に速度を加算）
+    position.x = position.x + velocity.x
+    position.y = position.y + velocity.y
+    position.z = position.z + velocity.z
+    position.w = 0.0
 end

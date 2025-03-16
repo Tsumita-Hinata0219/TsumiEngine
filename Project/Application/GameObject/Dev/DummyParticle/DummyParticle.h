@@ -44,11 +44,11 @@ public:
 
 		if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
 
-			float deltaTime = 0.016f;  // フレーム更新時間（16ms）
-			if (lua_.lock()->ExeFunction("UpdateMovement", deltaTime)) {
-				Vector3 pos = lua_.lock()->GetVariable<Vector3>("position");
-				lockedData->translate = { pos.x, pos.y, pos.z, 0.0f };
+			Vector4 vel = { 0.0f, 0.0f, 0.5f, 0.0f };
+			if (lua_.lock()->ExeFunction("Move", vel)) {
+				lockedData->translate = lua_.lock()->GetVariable<Vector4>("position");
 			}
+
 		}
 	}
 

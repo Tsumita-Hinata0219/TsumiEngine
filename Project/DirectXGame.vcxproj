@@ -292,7 +292,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\JsonManager\JsonManager.cpp" />
     <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
-    <ClCompile Include="Engine\Lua\Script\LuaScript.cpp" />
     <ClCompile Include="Engine\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -626,6 +625,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Input\Input.h" />
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
+    <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
     <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />

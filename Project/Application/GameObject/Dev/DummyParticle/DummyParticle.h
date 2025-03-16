@@ -8,6 +8,8 @@ class DummyParticle
 {
 private:
 	std::unique_ptr<Emitter::SphereEmitter> sEmit_;
+	std::weak_ptr<Emitter::Data::SphereEmit> sEmitData_;
+
 	std::unique_ptr<GpuField::ConstantField> cField_;
 	std::weak_ptr<LuaScript> lua_;
 	LuaManager* luaManager_ = nullptr;
@@ -39,6 +41,15 @@ public:
 	{
 		sEmit_->Update();
 		cField_->Update();
+
+		if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
+
+			float deltaTime = 0.016f;  // フレーム更新時間（16ms）
+			if (lua_.lock()->ExeFunction("UpdateMovement", deltaTime)) {
+				Vector3 pos = lua_.lock()->GetVariable<Vector3>("position");
+				lockedData->translate = { pos.x, pos.y, pos.z, 0.0f };
+			}
+		}
 	}
 
 	void Draw()

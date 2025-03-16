@@ -567,7 +567,6 @@
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
-    <ClCompile Include="Engine\Lua\Script\LuaScript.cpp" />
     <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
@@ -1471,6 +1470,7 @@
     <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
+    <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -16,7 +16,9 @@ public:
 #pragma region Accessor アクセッサ
 
 	// CullModeの設定
-	void SetCUllMode(const D3D12_CULL_MODE& setMode) { this->cullMode_ = setMode; }
+	void SetCullMode(const D3D12_CULL_MODE& setMode) { this->cullMode_ = setMode; }
+
+	void SetFillMode(const D3D12_FILL_MODE& setMode) { this->fillMode_ = setMode; }
 
 	// DepthWriteMask
 	void SetUpDepthWriteMask(const D3D12_DEPTH_WRITE_MASK& depthWriteMask) {this->depthWriteMask_ = depthWriteMask; }
@@ -36,6 +38,9 @@ private:
 
 	// Cull_Mode
 	D3D12_CULL_MODE cullMode_ = D3D12_CULL_MODE_BACK;
+
+	// Fill_Mode
+	D3D12_FILL_MODE fillMode_ = D3D12_FILL_MODE_SOLID;
 
 	// DepthWriteMask
 	bool depthWriteMask_ = D3D12_DEPTH_WRITE_MASK_ALL;

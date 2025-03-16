@@ -76,6 +76,9 @@ enum class SubFilter {
 	Cull_Mode_Back,
 	Cull_Mode_None,
 
+	Fill_Mode_Solid,
+	Fill_Mode_Wireframe,
+
 	DepthWriteMask_Zero,
 
 	Blend_Model_Normal,

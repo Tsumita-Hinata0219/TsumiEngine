@@ -47,6 +47,14 @@ void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 
 
 /// <summary>
+/// 描画処理
+/// </summary>
+void IActor::Render()
+{
+}
+
+
+/// <summary>
 /// コンポーネントの追加
 /// </summary>
 void IActor::AddComponent(std::shared_ptr<IComponent> component)

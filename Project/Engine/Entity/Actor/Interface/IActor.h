@@ -56,7 +56,18 @@ public:
     void RemoveComponent(std::shared_ptr<IComponent> component);
 
 
+#pragma region Accessor 
+    
+    // 名前
+    std::string GetName() const { return name_; }
+
+#pragma endregion 
+
+
 private:
+
+    // 名前
+    std::string name_;
 
     // 状態
     State state;

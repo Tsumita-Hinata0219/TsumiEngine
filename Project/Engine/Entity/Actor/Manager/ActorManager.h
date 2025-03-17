@@ -20,7 +20,8 @@ public:
 	/// <summary>
 	/// Actorの更新処理
 	/// </summary>
-	void UpdateActors(float deltaTime) {
+	void UpdateActors() {
+		float deltaTime = 1.0f / 60.0f;
 		for (auto& actor : actors_) {
 			actor->Update(deltaTime);
 		}

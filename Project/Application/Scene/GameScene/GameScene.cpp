@@ -5,7 +5,7 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() 
+GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
@@ -19,6 +19,7 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	sceneTransition_ = SceneTransition::GetInstance();
 	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
+	opUIManager_ = std::make_unique<OperationUIManager>();
 	dummyParticle_ = std::make_unique<DummyParticle>();
 }
 
@@ -26,7 +27,7 @@ GameScene::GameScene()
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() 
+GameScene::~GameScene()
 {
 
 }
@@ -106,6 +107,10 @@ void GameScene::Initialize()
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
 
+	// ──────── OperationUIManager
+	opUIManager_->Init();
+
+
 	// ──────── CollisionManager
 	CollisionManager_->Init();
 
@@ -132,7 +137,7 @@ void GameScene::Update()
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
-	if (sceneTransition_->GetNowState() == TransitionState::Cloased) 
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased)
 	{
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
@@ -176,7 +181,7 @@ void GameScene::Update()
 	// ──────── StartDirection
 	startDirection_->Update();
 	if (!startDirection_->IsFinish()) { return; }
-	
+
 	// ──────── StageTransitionMenuManager
 	STMenuManager_->Update();
 	SceneChangeCheck();
@@ -190,6 +195,7 @@ void GameScene::Update()
 	player_->Update();
 	enemyManager_->Update();
 	dummyParticle_->Update();
+	opUIManager_->Update();
 
 	// ──────── CollisionManager
 	CollisionManager_->Update();
@@ -248,13 +254,14 @@ void GameScene::FrontSpriteDraw()
 	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();
 
-	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-		// ──────── Player
-		player_->Draw2DFront();
-	}
+	// ──────── Player
+	player_->Draw2DFront();
 
 	// ──────── StartDirection
 	startDirection_->Draw2DFront();
+
+	// ──────── OperationUIManager
+	opUIManager_->Draw2DFront();
 
 	// ──────── PauseManager
 	pauseManager_->Draw2DFront();

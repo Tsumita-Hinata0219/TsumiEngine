@@ -62,10 +62,6 @@ void Player::Init()
     sweepEraser_->Init();
     sweepEraser_->SetParent(&trans_); // ペアレントを結ぶ
 
-    // 操作UI
-    opUIManager_ = std::make_unique<OperationUIManager>();
-    opUIManager_->Init();
-
     // キルカウントを0で初期化
     killCount_ = 0;
 
@@ -137,8 +133,6 @@ void Player::Update()
         isWin_ = true;
     }
 
-    // 操作UI
-    opUIManager_->Update();
 
 #ifdef _DEBUG
     // ImGuiの描画
@@ -167,11 +161,7 @@ void Player::Draw3D()
     }
 }
 void Player::Draw2DBack() {}
-void Player::Draw2DFront() 
-{
-    // 操作UI
-    opUIManager_->Draw2DFront();
-}
+void Player::Draw2DFront() {}
 
 /// <summary>
 /// 衝突判定コールバック関数

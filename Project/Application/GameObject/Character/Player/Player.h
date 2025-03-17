@@ -249,13 +249,6 @@ private:
 #pragma endregion
 
     
-#pragma region 操作UI
-
-    std::unique_ptr<OperationUIManager> opUIManager_;
-
-#pragma endregion
-
-    
 #pragma region ゲームカメラ
 
     GameCamera *gameCamera_ = nullptr;

@@ -24,6 +24,7 @@
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
+#include "GameObject/Character/Player/OperationUI/OperationUIManager.h"
 
 #include "GameObject/Dev/DummyParticle/DummyParticle.h"
 
@@ -112,6 +113,9 @@ private: // クラス
 
 	// StageTransitionMenuManager
 	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
+
+	// 操作UI
+	std::unique_ptr<OperationUIManager> opUIManager_;
 
 	// シーンチェンジにかかる時間
 	Timer sceneChange_;

@@ -189,6 +189,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
+    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
@@ -258,7 +259,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
-    <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
+    <ClCompile Include="Engine\Entity\Actor\Interface\IActor.cpp" />
     <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Engine\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
@@ -284,9 +285,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp" />
-    <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Interface\IComponent.cpp" />
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp" />
-    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
@@ -497,6 +497,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
+    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
@@ -583,7 +585,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
     <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
-    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
+    <ClInclude Include="Engine\Entity\Actor\Interface\IActor.h" />
     <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Engine\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
@@ -614,9 +616,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h" />
     <ClInclude Include="Engine\CommandManager\CommandManager.h" />
-    <ClInclude Include="Engine\Component\Interface\IComponent.h" />
+    <ClInclude Include="Engine\Entity\Component\Interface\IComponent.h" />
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h" />
-    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Engine\GameData\GameData.h" />
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h" />

@@ -26,7 +26,7 @@ public:
     /// <summary>
     /// デストラクタ
     /// </summary>
-    ~IActor();
+    virtual ~IActor();
 
     /// <summary>
     /// 初期化処理
@@ -45,7 +45,14 @@ public:
     /// </summary>
     void AddComponent(std::shared_ptr<IComponent> component);
 
+    /// <summary>
+    /// コンポーネント削除
+    /// </summary>
+    void RemoveComponent(std::shared_ptr<IComponent> component);
+
+
 private:
+
     // 状態
     State state;
 

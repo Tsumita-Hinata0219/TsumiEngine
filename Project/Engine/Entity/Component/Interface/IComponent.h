@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "Actor/Interface/IActor.h"
+#include "../../Actor/Interface/IActor.h"
 
 
 /* Actor クラスに対して機能を追加するためのモジュール */
@@ -18,7 +18,7 @@ public:
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	virtual ~IComponent();
+	virtual ~IComponent() = default;
 
 	/// <summary>
 	/// 更新処理
@@ -40,15 +40,3 @@ protected:
 	int updateOrder;
 
 };
-
-
-template <class T, class... Types>
-std::weak_ptr<IComponent> CreateComponent(std::weak_ptr<IActor> actor, Types... values)
-{
-	std::shared_ptr<IComponent> component;
-	if (auto pActor = actor.lock()) {
-		component = std::make_shared<T>(actor, values...);
-		pActor->AddComponent(component);
-	}
-	return component;
-}

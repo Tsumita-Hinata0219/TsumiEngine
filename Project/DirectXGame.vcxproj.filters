@@ -180,9 +180,6 @@
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp">
       <Filter>Engine\ConfigManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\CreateResource\CreateResource.cpp">
-      <Filter>Engine\CreateResource</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp">
       <Filter>Engine\DescriptorManager</Filter>
     </ClCompile>
@@ -537,8 +534,8 @@
     <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
-    <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Actor\Interface\IActor.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Interface\IComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
@@ -570,6 +567,7 @@
     <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
+    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -787,9 +785,6 @@
     </ClInclude>
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h">
       <Filter>Engine\ConfigManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\CreateResource\CreateResource.h">
-      <Filter>Engine\CreateResource</Filter>
     </ClInclude>
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h">
       <Filter>Engine\DescriptorManager</Filter>
@@ -1415,8 +1410,8 @@
     <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
-    <ClInclude Include="Engine\Component\Interface\IComponent.h" />
+    <ClInclude Include="Engine\Entity\Actor\Interface\IActor.h" />
+    <ClInclude Include="Engine\Entity\Component\Interface\IComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
@@ -1471,6 +1466,8 @@
     <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
+    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

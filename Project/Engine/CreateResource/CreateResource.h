@@ -25,7 +25,6 @@ struct ResourcePeroperty {
 	ComPtr<ID3D12Resource> Well;
 };
 
-
 class CreateResource {
 
 public:

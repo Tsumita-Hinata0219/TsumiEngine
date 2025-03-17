@@ -7,11 +7,11 @@
 /// </summary>
 IActor::IActor()
 {
-	// Transformの初期化
-	transform.Init();
-
 	// ステートはActiveに
 	state = State::Active;
+
+	// Transformの初期化
+	transform.Init();
 }
 
 
@@ -36,7 +36,13 @@ void IActor::Update(float deltaTime)
 		UpdateActor(deltaTime);
 	}
 }
-void IActor::UpdateComponents([[maybe_unused]] float deltaTime) {}
+void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 
+{
+	for (auto& component : componentList) {
+		component->Update(deltaTime);
+	}
+
+}
 void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 
 
@@ -53,5 +59,17 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 		}
 	}
 	componentList.insert(itr, component);
+}
+
+
+/// <summary>
+/// コンポーネント削除
+/// </summary>
+void IActor::RemoveComponent(std::shared_ptr<IComponent> component)
+{
+	auto itr = std::find(componentList.begin(), componentList.end(), component);
+	if (itr != componentList.end()) {
+		componentList.erase(itr);
+	}
 }
 

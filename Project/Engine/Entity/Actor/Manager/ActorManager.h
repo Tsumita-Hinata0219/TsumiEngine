@@ -13,7 +13,7 @@ public:
 	/// Actorの追加処理
 	/// </summary>
 	void AddActor(std::shared_ptr<IActor> actor) {
-		actors_.push_back(actor);
+		actors_[actor->GetName()] = actor;
 	}
 
 
@@ -23,7 +23,7 @@ public:
 	void UpdateActors() {
 		float deltaTime = 1.0f / 60.0f;
 		for (auto& actor : actors_) {
-			actor->Update(deltaTime);
+			actor.second->Update(deltaTime);
 		}
 	}
 
@@ -33,13 +33,26 @@ public:
 	/// </summary>
 	void RenderActors() {
 		for (auto& actor : actors_) {
-			actor->Render();
+			actor.second->Render();
 		}
+	}
+
+	/// <summary>
+	/// 名前によるActorの取得
+	/// </summary>
+	/// <param name="name"></param>
+	/// <returns></returns>
+	std::shared_ptr<IActor> GetActorByName(const std::string& name) {
+		auto it = actors_.find(name);
+		if (it != actors_.end()) {
+			return it->second;
+		}
+		return nullptr; // 見つからなければnullptr
 	}
 
 
 private:
 
-	std::vector<std::shared_ptr<IActor>> actors_;
+	std::unordered_map<std::string, std::shared_ptr<IActor>> actors_;
 
 };

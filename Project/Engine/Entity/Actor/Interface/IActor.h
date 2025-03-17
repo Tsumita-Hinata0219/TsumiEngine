@@ -41,6 +41,11 @@ public:
     virtual void UpdateActor(float deltaTime);
 
     /// <summary>
+    /// 描画処理
+    /// </summary>
+    void Render();
+
+    /// <summary>
     /// コンポーネントの追加
     /// </summary>
     void AddComponent(std::shared_ptr<IComponent> component);

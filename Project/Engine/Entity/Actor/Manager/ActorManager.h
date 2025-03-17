@@ -27,6 +27,16 @@ public:
 	}
 
 
+	/// <summary>
+	/// 描画処理
+	/// </summary>
+	void RenderActors() {
+		for (auto& actor : actors_) {
+			actor->Render();
+		}
+	}
+
+
 private:
 
 	std::vector<std::shared_ptr<IActor>> actors_;

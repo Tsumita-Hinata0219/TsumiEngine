@@ -31,7 +31,7 @@ public:
     /// <summary>
     /// 初期化処理
     /// </summary>
-    virtual void Init() = 0;
+    virtual void Init(std::string name = "") = 0;
 
     /// <summary>
     /// 更新処理関係

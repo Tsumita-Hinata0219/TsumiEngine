@@ -8,10 +8,10 @@
 IActor::IActor()
 {
 	// ステートはActiveに
-	state = State::Active;
+	state_ = State::Active;
 
 	// Transformの初期化
-	transform.Init();
+	transform_.Init();
 }
 
 
@@ -21,7 +21,7 @@ IActor::IActor()
 IActor::~IActor()
 {
 	// ComponentListのClear
-	componentList.clear();
+	componentList_.clear();
 }
 
 
@@ -31,14 +31,14 @@ IActor::~IActor()
 void IActor::Update(float deltaTime)
 {
 	// ステートアクティブ時、更新
-	if (state == State::Active) {
+	if (state_ == State::Active) {
 		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
 	}
 }
 void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 
 {
-	for (auto& component : componentList) {
+	for (auto& component : componentList_) {
 		component->Update(deltaTime);
 	}
 
@@ -60,13 +60,13 @@ void IActor::Render()
 void IActor::AddComponent(std::shared_ptr<IComponent> component)
 {
 	int myOrder = component->GetUpdateOrder();
-	auto itr = componentList.begin();
-	for (; itr != componentList.end(); itr++) {
+	auto itr = componentList_.begin();
+	for (; itr != componentList_.end(); itr++) {
 		if (myOrder < (*itr)->GetUpdateOrder()) {
 			break;
 		}
 	}
-	componentList.insert(itr, component);
+	componentList_.insert(itr, component);
 }
 
 
@@ -75,9 +75,9 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 /// </summary>
 void IActor::RemoveComponent(std::shared_ptr<IComponent> component)
 {
-	auto itr = std::find(componentList.begin(), componentList.end(), component);
-	if (itr != componentList.end()) {
-		componentList.erase(itr);
+	auto itr = std::find(componentList_.begin(), componentList_.end(), component);
+	if (itr != componentList_.end()) {
+		componentList_.erase(itr);
 	}
 }
 

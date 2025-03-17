@@ -70,14 +70,15 @@ private:
     std::string name_;
 
     // 状態
-    State state;
+    State state_;
 
     // Transform
-    Transform transform{};
+    Transform transform_{};
 
     // ComponentList
-    std::vector<std::shared_ptr<IComponent>> componentList;
+    std::vector<std::shared_ptr<IComponent>> componentList_;
+    std::vector<std::shared_ptr<IComponent>> renderComponentList_;
 
     // 親シーン
-    IScene *pScene = nullptr;
+    IScene *pScene_ = nullptr;
 };

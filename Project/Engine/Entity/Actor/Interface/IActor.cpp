@@ -71,6 +71,22 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 
 
 /// <summary>
+/// Renderコンポーネントの追加
+/// </summary>
+void IActor::AddRenderComponent(std::shared_ptr<IComponent> component)
+{
+	int myOrder = component->GetUpdateOrder();
+	auto itr = renderComponentList_.begin();
+	for (; itr != renderComponentList_.end(); itr++) {
+		if (myOrder < (*itr)->GetUpdateOrder()) {
+			break;
+		}
+	}
+	renderComponentList_.insert(itr, component);
+}
+
+
+/// <summary>
 /// コンポーネント削除
 /// </summary>
 void IActor::RemoveComponent(std::shared_ptr<IComponent> component)

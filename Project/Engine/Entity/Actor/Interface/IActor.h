@@ -51,6 +51,11 @@ public:
     void AddComponent(std::shared_ptr<IComponent> component);
 
     /// <summary>
+    /// Renderコンポーネントの追加
+    /// </summary>
+    void AddRenderComponent(std::shared_ptr<IComponent> component);
+    
+    /// <summary>
     /// コンポーネント削除
     /// </summary>
     void RemoveComponent(std::shared_ptr<IComponent> component);

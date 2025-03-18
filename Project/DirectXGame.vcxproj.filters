@@ -1468,6 +1468,7 @@
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
+    <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

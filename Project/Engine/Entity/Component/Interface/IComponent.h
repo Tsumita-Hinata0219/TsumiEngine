@@ -16,7 +16,7 @@ public:
 	IComponent(IComponent& component);
 
 	/// <summary>
-	/// デストラクタ
+	/// 仮想デストラクタ
 	/// </summary>
 	virtual ~IComponent() = default;
 

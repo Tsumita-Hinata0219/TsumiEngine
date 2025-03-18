@@ -51,6 +51,7 @@ void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 /// </summary>
 void IActor::Render()
 {
+
 }
 
 

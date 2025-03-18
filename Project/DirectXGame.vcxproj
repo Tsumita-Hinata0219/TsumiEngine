@@ -499,6 +499,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
+    <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />

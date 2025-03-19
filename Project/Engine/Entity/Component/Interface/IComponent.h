@@ -12,8 +12,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IComponent(std::weak_ptr<IActor> owner, int updateOrder = 100);
-	IComponent(IComponent& component);
+	IComponent(std::weak_ptr<IActor> owner);
 
 	/// <summary>
 	/// 仮想デストラクタ
@@ -25,18 +24,10 @@ public:
 	/// </summary>
 	virtual void Update(float deltaTime);
 
-	/// <summary>
-	/// 更新順の取得
-	/// </summary>
-	int GetUpdateOrder() const { return this->updateOrder; }
-
 
 protected:
 
 	// Componentを持つ親Actor
 	std::weak_ptr<IActor> owner;
-
-	// 更新順
-	int updateOrder;
 
 };

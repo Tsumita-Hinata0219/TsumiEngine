@@ -21,7 +21,7 @@ IActor::IActor()
 IActor::~IActor()
 {
 	// ComponentListのClear
-	componentList_.clear();
+	components_.clear();
 }
 
 
@@ -38,7 +38,7 @@ void IActor::Update(float deltaTime)
 }
 void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 
 {
-	for (auto& component : componentList_) {
+	for (auto& component : components_) {
 		component->Update(deltaTime);
 	}
 
@@ -60,14 +60,7 @@ void IActor::Render()
 /// </summary>
 void IActor::AddComponent(std::shared_ptr<IComponent> component)
 {
-	int myOrder = component->GetUpdateOrder();
-	auto itr = componentList_.begin();
-	for (; itr != componentList_.end(); itr++) {
-		if (myOrder < (*itr)->GetUpdateOrder()) {
-			break;
-		}
-	}
-	componentList_.insert(itr, component);
+	components_.push_back(component);
 }
 
 
@@ -76,14 +69,7 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 /// </summary>
 void IActor::AddRenderComponent(std::shared_ptr<IComponent> component)
 {
-	int myOrder = component->GetUpdateOrder();
-	auto itr = renderComponentList_.begin();
-	for (; itr != renderComponentList_.end(); itr++) {
-		if (myOrder < (*itr)->GetUpdateOrder()) {
-			break;
-		}
-	}
-	renderComponentList_.insert(itr, component);
+	renderComponent_.push_back(component);
 }
 
 
@@ -92,9 +78,9 @@ void IActor::AddRenderComponent(std::shared_ptr<IComponent> component)
 /// </summary>
 void IActor::RemoveComponent(std::shared_ptr<IComponent> component)
 {
-	auto itr = std::find(componentList_.begin(), componentList_.end(), component);
-	if (itr != componentList_.end()) {
-		componentList_.erase(itr);
+	auto itr = std::find(components_.begin(), components_.end(), component);
+	if (itr != components_.end()) {
+		components_.erase(itr);
 	}
 }
 

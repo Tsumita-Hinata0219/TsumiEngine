@@ -13,7 +13,7 @@ public:
 	/// Actorの追加処理
 	/// </summary>
 	void AddActor(std::shared_ptr<IActor> actor) {
-		actors_[actor->GetName()] = actor;
+		actors_[actor->Get_Name()] = actor;
 	}
 
 

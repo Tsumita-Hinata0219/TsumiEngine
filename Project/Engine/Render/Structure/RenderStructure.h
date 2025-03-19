@@ -1,0 +1,115 @@
+#pragma once
+
+#include "Math/MyMath.h"
+#include "BufferResource/BufferResource.h"
+#include "Transform/Transform.h"
+
+
+namespace RenderSystem {
+namespace Data {
+
+// メッシュデータ
+struct MeshData {
+	std::map<std::string, JointWeightData> skinClusterData;
+	std::vector<VertexData> vertices;
+	std::vector<uint32_t> indices;
+	Node rootNode;
+};
+
+// マテリアルデータ
+struct MaterialDataN {
+	Vector4 color = Vector4::one;
+	Matrix4x4 uvTransform = Matrix4x4::identity;
+	uint32_t textureHandle = 1u;
+	std::string name = "default";
+};
+
+// ライトデータ
+struct LightData
+{
+	Vector4 color = Vector4::one; // 色(RGBA)
+	Vector3 direction = { 0.0f, 1.0f, 0.0f }; // ライトの向き
+	float intensity = 1.0f; // 輝度
+	float shininess = 1.0f; // 光沢
+	int enable = false; // フラグ
+
+	void DrawImGui(std::string label = "") {
+		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
+		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
+		ImGui::ColorEdit4((label + "_color").c_str(), &color.x);
+		ImGui::DragFloat3((label + "_direction").c_str(), &direction.x, 0.01f, -1.0f, 1.0f);
+		ImGui::DragFloat((label + "_intennsity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
+		ImGui::DragFloat((label + "_shininess").c_str(), &shininess, 0.01f, 0.0f, 1.0f);
+	}
+};
+
+// 環境マップデータ
+struct EnvironmentData {
+	float scale = 0.0f;
+	int enable = false;
+	int textureHandle = 1u;
+
+	void DrawImGui(std::string label = "") {
+		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
+		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
+		ImGui::DragFloat((label + "_Scale").c_str(), &scale, 0.01f, 0.0f, 1.0f);
+	}
+};
+
+// 色加算
+struct ColorAddition {
+	Vector4 addColor{};
+	float intensity = 0.0f;
+	int enable = false;
+
+	void DrawImGui(std::string label = "") {
+		ImGui::RadioButton((label + "_Disabled").c_str(), &enable, 0); ImGui::SameLine();
+		ImGui::RadioButton((label + "_Enabled").c_str(), &enable, 1);
+		ImGui::ColorEdit4((label + "_Color").c_str(), &addColor.x);
+		ImGui::DragFloat((label + "_Intensity").c_str(), &intensity, 0.01f, 0.0f, 1.0f);
+	}
+};
+}
+
+
+namespace Rendering {
+
+struct Datas {
+
+	// モデルの名前
+	std::string name;
+	// モデルファイルのフォーマット
+	std::string fileFormat;
+	// メッシュ
+	Data::MeshData mesh;
+	// マテリアル
+	Data::MaterialDataN material{};
+	// ライト
+	Data::LightData light{};
+	// 環境マップ
+	Data::EnvironmentData environment{};
+	// 色加算
+	Data::ColorAddition colorAddition{};
+};
+
+struct Buffers {
+
+	// メッシュ
+	BufferResource<Data::MeshData> mesh;
+	// VertexDataBuffer
+	BufferResource<VertexData> vertex;
+	// IndexDataBuffer
+	BufferResource<uint32_t> indices;
+	// マテリアル
+	BufferResource<Data::MaterialDataN> material;
+	// Transform
+	BufferResource<TransformationMat> transform;
+	// ライト
+	BufferResource<Data::LightData> light;
+	// 環境マップ
+	BufferResource<Data::EnvironmentData> enviroment;
+	// 色加算
+	BufferResource<Data::ColorAddition> colorAddition;
+};
+}
+}

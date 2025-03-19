@@ -20,12 +20,16 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	timeSys_ = TimeSystem::GetInstance();
 	timeSys_->Init();
 
+	// Testモデルを読み込んでおく
+	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");
+
 	// シーン初期化
 	scene_ = std::move(initScene);
 	scene_->SetManager(this);
 	scene_->Initialize();
 
-	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
+	// 開始時間を記録
+	startTime_ = std::chrono::steady_clock::now(); 
 
 	// PostEffect : CopyImage
 	copyImage_ = std::make_unique<AbsentEffect>();

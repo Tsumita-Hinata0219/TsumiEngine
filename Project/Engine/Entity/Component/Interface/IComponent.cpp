@@ -5,14 +5,9 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-IComponent::IComponent(std::weak_ptr<IActor> owner, int updateOrder)
-	: owner(owner), updateOrder(updateOrder)
+IComponent::IComponent(std::weak_ptr<IActor> owner)
+	: owner(owner)
 {
-}
-IComponent::IComponent(IComponent& component)
-{
-	this->owner = component.owner;
-	this->updateOrder = component.updateOrder;
 }
 
 

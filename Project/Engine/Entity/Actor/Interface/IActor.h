@@ -64,7 +64,10 @@ public:
 #pragma region Accessor 
     
     // 名前
-    std::string GetName() const { return name_; }
+    std::string Get_Name() const { return name_; }
+
+    // Transform
+    Transform Get_Transform() const { return transform_; }
 
 #pragma endregion 
 
@@ -81,8 +84,8 @@ private:
     Transform transform_{};
 
     // ComponentList
-    std::vector<std::shared_ptr<IComponent>> componentList_;
-    std::vector<std::shared_ptr<IComponent>> renderComponentList_;
+    std::vector<std::shared_ptr<IComponent>> components_;
+    std::vector<std::shared_ptr<IComponent>> renderComponent_;
 
     // 親シーン
     IScene *pScene_ = nullptr;

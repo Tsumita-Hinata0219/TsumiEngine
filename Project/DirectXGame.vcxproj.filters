@@ -568,6 +568,7 @@
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Render\RenderComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1469,6 +1470,8 @@
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
     <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
+    <ClInclude Include="Engine\Render\State\RenderState .h" />
+    <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

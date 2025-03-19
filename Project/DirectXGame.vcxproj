@@ -342,6 +342,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
+    <ClCompile Include="Engine\Render\State\RenderState .cpp" />
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Engine\Transform\Transform.cpp" />

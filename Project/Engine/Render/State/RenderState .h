@@ -54,9 +54,20 @@ private:
 	void Update_RenderData();
 
 	/// <summary>
+	/// PipeLineのチェック
+	/// </summary>
+	void Check_PipeLine();
+
+	/// <summary>
 	/// 描画データのバインド
 	/// </summary>
 	void Bind_RenderData();
+
+	/// <summary>
+	/// 描画
+	/// </summary>
+	void Execute_DrawCommand();
+
 
 };
 

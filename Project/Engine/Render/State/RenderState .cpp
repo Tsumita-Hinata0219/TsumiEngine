@@ -19,6 +19,14 @@ RenderSystem::RenderState::RenderState()
 /// </summary>
 void RenderSystem::RenderState::Draw3D()
 {
+	// 描画データの更新
+	Update_RenderData();
+	// PipeLineのチェック
+	Check_PipeLine();
+	// 描画データのバインド
+	Bind_RenderData();
+	// Draw!
+	Execute_DrawCommand();
 }
 
 
@@ -84,6 +92,15 @@ void RenderSystem::RenderState::Update_RenderData()
 
 
 /// <summary>
+/// PipeLineのチェック
+/// </summary>
+void RenderSystem::RenderState::Check_PipeLine()
+{
+
+}
+
+
+/// <summary>
 /// 描画データのバインド
 /// </summary>
 void RenderSystem::RenderState::Bind_RenderData()
@@ -117,4 +134,16 @@ void RenderSystem::RenderState::Bind_RenderData()
 
 	// Environment Texture
 	buffers_->material.BindGraphicsSRV(7, datas_->environment.textureHandle);
+}
+
+
+/// <summary>
+/// 描画
+/// </summary>
+void RenderSystem::RenderState::Execute_DrawCommand()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	// Draw!!
+	commands.List->DrawIndexedInstanced(UINT(datas_->mesh.indices.size()), 1, 0, 0, 0);
 }

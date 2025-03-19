@@ -1,5 +1,6 @@
 #include "RenderState .h"
 #include "Camera/Manager/CameraManager.h"
+#include "PipeLineManager/PipeLineManager.h"
 
 
 /// <summary>
@@ -11,6 +12,7 @@ RenderSystem::RenderState::RenderState()
 	buffers_ = std::make_unique<RenderSystem::Rendering::Buffers>();
 
 	cameraManager_ = CameraManager::GetInstance();
+	pipeLine_ = PipeLineManager::GetInstance();
 }
 
 
@@ -96,7 +98,24 @@ void RenderSystem::RenderState::Update_RenderData()
 /// </summary>
 void RenderSystem::RenderState::Check_PipeLine()
 {
+	int a = 0;
 
+	if (a == 0) { // 背面カリング
+		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+			PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_Back);
+	}
+	else if (a == 2) { // カリングなし
+		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+			PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_None);
+	}
+	else if (a == 3) { // ワイヤーフレーム
+		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+			PipeLine::Category::Object3D, PipeLine::SubFilter::Fill_Mode_Wireframe);
+	}
+	else if (a == 4) { // Depth 0
+		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+			PipeLine::Category::Object3D, PipeLine::SubFilter::DepthWriteMask_Zero);
+	}
 }
 
 

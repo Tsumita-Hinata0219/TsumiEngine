@@ -4,8 +4,11 @@
 #include "../Structure/RenderStructure.h"
 
 
-// CameraManagerの前方宣言
+// 前方宣言
+// CameraManager
 class CameraManager;
+// PipeLineManager
+class PipeLineManager;
 
 
 namespace RenderSystem {
@@ -22,6 +25,8 @@ private:
 
 	// CameraManager
 	CameraManager* cameraManager_ = nullptr;
+	// PipeLineManager
+	PipeLineManager* pipeLine_ = nullptr;
 
 public:
 

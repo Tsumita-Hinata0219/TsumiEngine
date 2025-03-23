@@ -16,6 +16,8 @@ class LuaScript {
 
 public:
 
+    using ReloadCallback = std::function<void()>;  // コールバック型定義
+
 	/// <summary>
 	/// コンストラク
 	/// </summary>
@@ -36,6 +38,11 @@ public:
     /// </summary>
     bool Reload(const std::string& file);
 
+    /// <summary>
+    /// コールバックを登録
+    /// </summary>
+    void SetReloadCallback(ReloadCallback callback);
+
 	/// <summary>
 	/// Lua側の変数を取得
 	/// </summary>
@@ -49,9 +56,11 @@ public:
     bool ExeFunction(const std::string& funcName, Args... args);
 
 
+
 private:
 
-	std::unique_ptr<lua_State, decltype(&lua_close)> L_;
+    std::unique_ptr<lua_State, decltype(&lua_close)> L_;
+    ReloadCallback reloadCallback_ = nullptr;  // コールバック関数
 
 };
 
@@ -91,7 +100,22 @@ inline bool LuaScript::Reload(const std::string& file)
         lua_pop(L_.get(), 1); // エラーメッセージをスタックから削除
         return false;
     }
+
+    // コールバックが設定されていれば実行
+    if (reloadCallback_) {
+        reloadCallback_();
+    }
+
     return true;
+}
+
+
+/// <summary>
+/// コールバックを登録
+/// </summary>
+inline void LuaScript::SetReloadCallback(ReloadCallback callback)
+{
+    reloadCallback_ = callback;
 }
 
 

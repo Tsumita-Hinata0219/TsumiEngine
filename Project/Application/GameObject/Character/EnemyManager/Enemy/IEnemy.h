@@ -6,7 +6,7 @@
 
 #include "IObject/IObject.h"
 #include "../../../GameObject.h"
-#include "Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 
 #include "../BulletContainer/EnemyBulletContainer.h"
 #include "../EffectContainer/EnemyEffectContainer.h"

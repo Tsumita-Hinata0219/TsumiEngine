@@ -28,6 +28,8 @@ void LuaManager::LoadScript(const std::string& rootPath, const std::string& file
 
     scripts_[key] = script;
     scriptPaths_[key] = fullPath;
+    // 初回ロード時の更新時刻も記録
+    scriptUpdateTimes_[key] = std::filesystem::last_write_time(fullPath);
 }
 
 
@@ -36,22 +38,24 @@ void LuaManager::LoadScript(const std::string& rootPath, const std::string& file
 /// </summary>
 void LuaManager::ReLoadScript(const std::string& scriptName)
 {
-    auto it = scriptPaths_.find(scriptName);
-    if (it == scriptPaths_.end()) {
-        std::cerr << "Script not found: " << scriptName << std::endl;
+    auto it = scripts_.find(scriptName);
+    if (it == scripts_.end()) {
+        std::cerr << "[Lua Error] Script not found: " << scriptName << std::endl;
         return;
     }
 
-    std::filesystem::path fullPath = it->second;
-
-    auto script = std::make_shared<LuaScript>();
-    if (!script->LoadScript(fullPath.string())) {
-        std::cerr << "Failed to reload Lua script: " << fullPath << std::endl;
+    auto pathIt = scriptPaths_.find(scriptName);
+    if (pathIt == scriptPaths_.end()) {
+        std::cerr << "[Lua Error] Script path not found: " << scriptName << std::endl;
         return;
     }
 
-    scripts_[scriptName] = script;  // 更新
-    std::cout << "Reloaded script: " << scriptName << std::endl;
+    if (!it->second->Reload(pathIt->second.string())) {
+        std::cerr << "[Lua Error] Failed to reload script: " << pathIt->second << std::endl;
+        return;
+    }
+
+    std::cout << "[Lua Info] Reloaded script: " << scriptName << std::endl;
 }
 
 
@@ -75,4 +79,30 @@ std::weak_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
 void LuaManager::UnLoadScript(const std::string& scriptName)
 {
     scripts_.erase(scriptName);
+}
+
+
+/// <summary>
+/// 毎フレームまたは一定間隔で呼び出し、ホットリロードの更新チェックを行う
+/// </summary>
+void LuaManager::Update()
+{
+    for (const auto& [scriptName, path] : scriptPaths_) {
+        // 現在のファイル更新時刻を取得
+        auto currentTime = std::filesystem::last_write_time(path);
+
+        // 初回記録がなければ記録する（通常はLoadScript時に設定されるので不要なはず）
+        if (scriptUpdateTimes_.find(scriptName) == scriptUpdateTimes_.end()) {
+            scriptUpdateTimes_[scriptName] = currentTime;
+            continue;
+        }
+
+        // 前回記録と異なっていればリロード
+        if (scriptUpdateTimes_[scriptName] != currentTime) {
+            std::cout << "Detected change in script: " << scriptName << std::endl;
+            ReLoadScript(scriptName);
+            // 更新後は時刻を更新
+            scriptUpdateTimes_[scriptName] = currentTime;
+        }
+    }
 }

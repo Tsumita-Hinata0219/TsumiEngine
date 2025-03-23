@@ -2,7 +2,7 @@
 
 #include "Math/MyMath.h"
 #include "Scene/IScene.h"
-#include "Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 
 // 前方宣言
 class IComponent;

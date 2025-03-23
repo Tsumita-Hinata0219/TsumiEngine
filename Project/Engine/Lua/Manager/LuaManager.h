@@ -47,10 +47,19 @@ public:
 	/// </summary>
 	void UnLoadScript(const std::string& scriptName);
 
+	/// <summary>
+	/// 毎フレームまたは一定間隔で呼び出し、ホットリロードの更新チェックを行う
+	/// </summary>
+	void Update();
+
 
 private:
 
+	// 管理中の LuaScript オブジェクト（キーはファイル名など任意の識別子）
 	std::unordered_map<std::string, std::shared_ptr<LuaScript>> scripts_;
+	// 各スクリプトのファイルパス
 	std::unordered_map<std::string, std::filesystem::path> scriptPaths_;
+	// 最終更新時刻の保持
+	std::unordered_map<std::string, std::filesystem::file_time_type> scriptUpdateTimes_;
 
 };

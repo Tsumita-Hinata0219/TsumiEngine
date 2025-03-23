@@ -31,6 +31,11 @@ public:
 	/// </summary>
 	bool LoadScript(const string& file);
 
+    /// <summary>
+    /// スクリプトの再評価
+    /// </summary>
+    bool Reload(const std::string& file);
+
 	/// <summary>
 	/// Lua側の変数を取得
 	/// </summary>
@@ -42,7 +47,6 @@ public:
     /// </summary>
     template <typename... Args>
     bool ExeFunction(const std::string& funcName, Args... args);
-
 
 
 private:
@@ -74,6 +78,20 @@ inline bool LuaScript::LoadScript(const string& file)
 		return false;
 	}
 	return true;
+}
+
+
+/// <summary>
+/// スクリプトの再評価
+/// </summary>
+inline bool LuaScript::Reload(const std::string& file)
+{
+    if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
+        std::cerr << "[Lua Error] " << lua_tostring(L_.get(), -1) << std::endl;
+        lua_pop(L_.get(), 1); // エラーメッセージをスタックから削除
+        return false;
+    }
+    return true;
 }
 
 

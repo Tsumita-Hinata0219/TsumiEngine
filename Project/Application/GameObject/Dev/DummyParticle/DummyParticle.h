@@ -83,6 +83,10 @@ public:
 
 		sEmit_->Update();
 		cField_->Update();
+
+#ifdef _DEBUG
+		luaManager_->MonitorScript();
+#endif // _DEBUG
 	}
 
 	void Draw()

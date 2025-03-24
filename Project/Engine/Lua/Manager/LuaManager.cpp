@@ -83,9 +83,9 @@ void LuaManager::UnLoadScript(const std::string& scriptName)
 
 
 /// <summary>
-/// 毎フレームまたは一定間隔で呼び出し、ホットリロードの更新チェックを行う
+/// スクリプトの変更を監視
 /// </summary>
-void LuaManager::Update()
+void LuaManager::MonitorScript()
 {
     for (const auto& [scriptName, path] : scriptPaths_) {
         // 現在のファイル更新時刻を取得

@@ -48,9 +48,9 @@ public:
 	void UnLoadScript(const std::string& scriptName);
 
 	/// <summary>
-	/// 毎フレームまたは一定間隔で呼び出し、ホットリロードの更新チェックを行う
+	/// スクリプトの変更を監視
 	/// </summary>
-	void Update();
+	void MonitorScript();
 
 
 private:

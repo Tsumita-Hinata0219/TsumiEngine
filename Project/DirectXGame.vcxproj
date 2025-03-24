@@ -695,6 +695,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Component\Manager\TransComponentManager.h" />
     <ClInclude Include="Engine\Transform\Component\Structure\TransComponent.h" />
+    <ClInclude Include="Engine\Transform\Manager\TransformManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />

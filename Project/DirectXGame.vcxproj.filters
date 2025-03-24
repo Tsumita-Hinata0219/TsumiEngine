@@ -1475,6 +1475,7 @@
     <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Transform\Component\Structure\TransComponent.h" />
     <ClInclude Include="Engine\Transform\Component\Manager\TransComponentManager.h" />
+    <ClInclude Include="Engine\Transform\Manager\TransformManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

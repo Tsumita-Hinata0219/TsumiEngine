@@ -26,6 +26,7 @@ struct SRT {
 };
 
 
+/* シーン上にあるActorの座標関係 */
 class TransformNode {
 
 public:

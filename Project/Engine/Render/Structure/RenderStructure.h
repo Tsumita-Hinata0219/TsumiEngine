@@ -100,8 +100,6 @@ struct Buffers {
 	BufferResource<VertexData> vertex;
 	// IndexDataBuffer
 	BufferResource<uint32_t> indices;
-	// Transform
-	BufferResource<TransformationMat> transform;
 	// マテリアル
 	BufferResource<Data::MaterialDataN> material;
 	// ライト

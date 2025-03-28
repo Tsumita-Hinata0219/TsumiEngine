@@ -1,18 +1,21 @@
 #include "RenderState .h"
 #include "Camera/Manager/CameraManager.h"
+#include "Entity/TransformNode/Manager/TransformNodeManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-RenderSystem::RenderState::RenderState()
+RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
 	datas_ = std::make_unique<RenderSystem::Rendering::Datas>();
 	buffers_ = std::make_unique<RenderSystem::Rendering::Buffers>();
+	owner_ = owner;
 
 	cameraManager_ = CameraManager::GetInstance();
-	pipeLine_ = PipeLineManager::GetInstance();
+	transformNodeManager_ = TransformNodeManager::GetInstance();
+	pipeLineManager_ = PipeLineManager::GetInstance();
 }
 
 
@@ -47,9 +50,6 @@ void RenderSystem::RenderState::Create_RenderBuffer()
 	// IBV
 	buffers_->indices.CreateCBV(UINT(datas_->mesh.indices.size()));
 	buffers_->indices.CreateIndexBufferView();
-	
-	// Transform
-	buffers_->transform.CreateCBV();
 
 	// Material
 	buffers_->material.CreateCBV();
@@ -76,9 +76,6 @@ void RenderSystem::RenderState::Update_RenderData()
 	// IBV
 	buffers_->indices.UpdateData(datas_->mesh.indices.data());
 
-	// Transform
-	//buffers_->transform.UpdateData((&transform.transformationMatData));
-
 	// Material
 	buffers_->material.UpdateData(&datas_->material);
 
@@ -101,19 +98,19 @@ void RenderSystem::RenderState::Check_PipeLine()
 	int a = 0;
 
 	if (a == 0) { // 背面カリング
-		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+		pipeLineManager_->SetPipeLine(PipeLine::Container::Graphic, 
 			PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_Back);
 	}
 	else if (a == 2) { // カリングなし
-		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+		pipeLineManager_->SetPipeLine(PipeLine::Container::Graphic, 
 			PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_None);
 	}
 	else if (a == 3) { // ワイヤーフレーム
-		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+		pipeLineManager_->SetPipeLine(PipeLine::Container::Graphic, 
 			PipeLine::Category::Object3D, PipeLine::SubFilter::Fill_Mode_Wireframe);
 	}
 	else if (a == 4) { // Depth 0
-		pipeLine_->SetPipeLine(PipeLine::Container::Graphic, 
+		pipeLineManager_->SetPipeLine(PipeLine::Container::Graphic, 
 			PipeLine::Category::Object3D, PipeLine::SubFilter::DepthWriteMask_Zero);
 	}
 }
@@ -131,7 +128,7 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->indices.IASetIndexBuffer();
 
 	// Transform
-	buffers_->transform.BindGraphicsCBV(1);
+	transformNodeManager_->Bind_CBV(owner_.lock()->Get_Name(), 1);
 
 	// Material
 	buffers_->material.BindGraphicsCBV(2);

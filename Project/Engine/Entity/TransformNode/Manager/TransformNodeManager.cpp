@@ -52,3 +52,20 @@ std::weak_ptr<TransformNode> TransformNodeManager::GetTransform(const std::strin
 
 	return it->second;
 }
+
+
+/// <summary>
+/// CBVのバインド
+/// </summary>
+void TransformNodeManager::Bind_CBV(const std::string& key, UINT num)
+{
+	// 名前で検索をかける
+	auto it = transformMap_.find(key);
+	// なければ空のweak_ptrを返す
+	if (it == transformMap_.end())
+	{
+		return;
+	}
+
+	it->second->Bind_CBV(num);
+}

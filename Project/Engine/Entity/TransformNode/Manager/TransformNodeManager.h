@@ -45,4 +45,8 @@ public:
 	/// </summary>
 	std::weak_ptr<TransformNode> GetTransform(const std::string& key);
 
+	/// <summary>
+	/// CBVのバインド
+	/// </summary>
+	void Bind_CBV(const std::string& key, UINT num);
 };

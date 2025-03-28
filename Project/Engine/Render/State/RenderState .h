@@ -2,12 +2,12 @@
 
 #include "Math/MyMath.h"
 #include "../Structure/RenderStructure.h"
+#include "Entity/Actor/Interface/IActor.h"
 
 
 // 前方宣言
-// CameraManager
 class CameraManager;
-// PipeLineManager
+class TransformNodeManager;
 class PipeLineManager;
 
 
@@ -23,17 +23,22 @@ private:
 	// GPUに送るBuffer
 	std::unique_ptr<RenderSystem::Rendering::Buffers> buffers_;
 
+	// 親Actor
+	std::weak_ptr<IActor> owner_;
+
 	// CameraManager
 	CameraManager* cameraManager_ = nullptr;
+	// TransformNodeManager
+	TransformNodeManager* transformNodeManager_ = nullptr;
 	// PipeLineManager
-	PipeLineManager* pipeLine_ = nullptr;
+	PipeLineManager* pipeLineManager_ = nullptr;
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	RenderState();
+	RenderState(std::weak_ptr<IActor> owner);
 
 	/// <summary>
 	/// デストラクタ

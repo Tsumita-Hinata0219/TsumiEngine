@@ -64,7 +64,7 @@ void BoxManager::LoadEntityData(const std::vector<std::unique_ptr<EntityData>>& 
 /// <summary>
 /// 新しいボックスを作る
 /// </summary>
-void BoxManager::CreateNewBox(BoxType type, const SRT& setSRT)
+void BoxManager::CreateNewBox(BoxType type, const SRTData& setSRT)
 {
 	type, setSRT;
 

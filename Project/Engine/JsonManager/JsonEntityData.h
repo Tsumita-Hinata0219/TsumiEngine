@@ -22,7 +22,7 @@ struct EntityEnemyData {
 struct EntityData {
 	std::string type;
 	std::string entityName;
-	SRT srt{};
+	SRTData srt{};
 	EntityPlayerData playerData{};
 	EntityEnemyData enemyData{};
 	std::map<std::string, std::unique_ptr<EntityData>> children;

@@ -14,11 +14,11 @@ struct TransformationMat {
 	Matrix4x4 WorldInverseTranspose;
 };
 // SRT
-struct SRT {
+struct SRTData {
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;
-	SRT() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
+	SRTData() : scale(1.0f, 1.0f, 1.0f), rotate(0.0f, 0.0f, 0.0f), translate(0.0f, 0.0f, 0.0f) {}
 };
 
 
@@ -29,7 +29,7 @@ struct Transform
 	Transform() : srt() {};
 
 	// SRT
-	SRT srt{};
+	SRTData srt{};
 
 	// ローカル -> ワールド変換行列
 	Matrix4x4 matWorld{};

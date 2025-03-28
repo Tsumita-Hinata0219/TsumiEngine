@@ -50,7 +50,7 @@ public:
 
 #pragma region ビュー行列の設定
 
-	SRT srt{};
+	SRTData srt{};
 
 	// バッファーに書き込むデータ
 	TransformationViewMatrix* bufferData = nullptr;

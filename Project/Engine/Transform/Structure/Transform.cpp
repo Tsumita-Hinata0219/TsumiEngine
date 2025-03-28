@@ -42,7 +42,7 @@ Vector3 Transform::GetWorldPos()
 
 
 // 親子関係を結ぶ
-void Transform::SetParent(const Transform* parentTransform)
+void Transform::SetParent(const Transform* parentTransform)	
 {
 	parent = parentTransform;
 }

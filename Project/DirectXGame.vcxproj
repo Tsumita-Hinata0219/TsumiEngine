@@ -345,6 +345,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
+    <ClCompile Include="Engine\Transform\Component\Structure\TransComponent.cpp" />
+    <ClCompile Include="Engine\Transform\Manager\TransformManager.cpp" />
     <ClCompile Include="Engine\Transform\Structure\Transform.cpp" />
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />

@@ -1,10 +1,15 @@
 #pragma once
 
 #include "../Structure/Transform.h"
+#include "../Component/Structure/TransComponent.h"
 
 
 /* Transformを一元管理するクラス */
 class TransformManager {
+
+private:
+
+	std::unordered_map<std::string, std::shared_ptr<TransformComponent>> transformMap_;
 
 private: // シングルトン
 
@@ -28,7 +33,7 @@ private:
 	/// <summary>
 	/// Transformを新しく作る
 	/// </summary>
-	std::weak_ptr<Transform> Create(const std::string& name);
+	std::weak_ptr<TransformComponent> Create(const std::string& name);
 
 	/// <summary>
 	/// 更新処理
@@ -38,6 +43,6 @@ private:
 	/// <summary>
 	/// 取得
 	/// </summary>
-	std::weak_ptr<Transform> GetTransform(const std::string& key);
+	std::weak_ptr<TransformComponent> GetTransform(const std::string& key);
 
 };

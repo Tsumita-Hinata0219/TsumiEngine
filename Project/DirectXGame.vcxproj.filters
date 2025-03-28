@@ -570,6 +570,8 @@
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\RenderComponent.cpp" />
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
+    <ClCompile Include="Engine\Transform\Manager\TransformManager.cpp" />
+    <ClCompile Include="Engine\Transform\Component\Structure\TransComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">

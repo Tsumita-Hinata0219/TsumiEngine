@@ -17,7 +17,7 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
-struct SRT;
+struct SRTData;
 
 
 /* Enemyの基底クラス */
@@ -44,9 +44,9 @@ public:
 	virtual void SetDeadFlag(bool setFlag) = 0;
 
 	// SRT
-	SRT GetSRT() const { return this->trans_.srt; }
-	void SetSRT(const SRT& setSRT) { this->trans_.srt = setSRT; }
-	void SetInitSRT(const SRT& setSRT) { this->initSRT_ = setSRT; }
+	SRTData GetSRT() const { return this->trans_.srt; }
+	void SetSRT(const SRTData& setSRT) { this->trans_.srt = setSRT; }
+	void SetInitSRT(const SRTData& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
 	Vector3 GetScale() const { return this->trans_.srt.scale; }
@@ -115,7 +115,7 @@ protected:
 	// トランスフォーム
 	Transform trans_;
 	// 初期値
-	SRT initSRT_{};
+	SRTData initSRT_{};
 
 	// 射撃データ
 	enemy::ShotFuncData shotFuncData_;

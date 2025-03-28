@@ -1,11 +1,11 @@
-#include "TransComponent.h"
+#include "TransformNode.h"
 #include "Camera/Manager/CameraManager.h"
 
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-TransformComponent::TransformComponent(const std::string& name)
+TransformNode::TransformNode(const std::string& name)
 {
 	// 名前に適当に入れておく
 	name_ = name;
@@ -26,7 +26,7 @@ TransformComponent::TransformComponent(const std::string& name)
 /// <summary>
 /// 更新処理
 /// </summary>
-void TransformComponent::Update()
+void TransformNode::Update()
 {
 	// World行列の計算
 	objMatrices_.World = MakeAffineMatrix(srt.scale, srt.rotate, srt.translate);
@@ -37,8 +37,8 @@ void TransformComponent::Update()
 	}
 
 	// WVP行列の計算
-	objMatrices_.WVP = 
-		objMatrices_.World * 
+	objMatrices_.WVP =
+		objMatrices_.World *
 		cameraManager_->GetCameraDataWeak().lock()->viewMatrix *
 		cameraManager_->GetCameraDataWeak().lock()->projectionMatrix;
 
@@ -50,7 +50,7 @@ void TransformComponent::Update()
 /// <summary>
 /// ワールド座標の取得
 /// </summary>
-Vector3 TransformComponent::GetWorldPos()
+Vector3 TransformNode::GetWorldPos()
 {
 	Update();
 	return { objMatrices_.World.m[3][0], objMatrices_.World.m[3][1], objMatrices_.World.m[3][2] };
@@ -60,11 +60,11 @@ Vector3 TransformComponent::GetWorldPos()
 /// <summary>
 /// 親子関係の設定
 /// </summary>
-void TransformComponent::AttachToParent(std::weak_ptr<TransformComponent> parent)
+void TransformNode::AttachToParent(std::weak_ptr<TransformNode> parent)
 {
 	parent_ = parent;
 }
-void TransformComponent::DetachFromParent()
+void TransformNode::DetachFromParent()
 {
 	parent_.reset();
 }
@@ -73,7 +73,7 @@ void TransformComponent::DetachFromParent()
 /// <summary>
 /// データをバインドする
 /// </summary>
-void TransformComponent::Bind_CBV(UINT num)
+void TransformNode::Bind_CBV(UINT num)
 {
 	// データ書き込み
 	buffer_.UpdateData(&objMatrices_);
@@ -85,7 +85,7 @@ void TransformComponent::Bind_CBV(UINT num)
 /// <summary>
 /// ImGuiの描画
 /// </summary>
-void TransformComponent::DrawImGui(std::string label)
+void TransformNode::DrawImGui(std::string label)
 {
 	ImGui::DragFloat3((label + "_Scale").c_str(), &srt.scale.x, 0.1f);
 	ImGui::DragFloat3((label + "_Rotate").c_str(), &srt.rotate.x, 0.001f);

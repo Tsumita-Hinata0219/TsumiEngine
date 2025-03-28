@@ -570,8 +570,8 @@
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\RenderComponent.cpp" />
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
-    <ClCompile Include="Engine\Transform\Manager\TransformManager.cpp" />
-    <ClCompile Include="Engine\Transform\Component\Structure\TransComponent.cpp" />
+    <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
+    <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1475,9 +1475,8 @@
     <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
     <ClInclude Include="Engine\Render\State\RenderState .h" />
     <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
-    <ClInclude Include="Engine\Transform\Component\Structure\TransComponent.h" />
-    <ClInclude Include="Engine\Transform\Component\Manager\TransComponentManager.h" />
-    <ClInclude Include="Engine\Transform\Manager\TransformManager.h" />
+    <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />
+    <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

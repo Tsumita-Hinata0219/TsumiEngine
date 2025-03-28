@@ -191,6 +191,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\RenderComponent.cpp" />
+    <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
+    <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\GameManager\GameManager.cpp" />
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp" />
@@ -345,8 +347,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
-    <ClCompile Include="Engine\Transform\Component\Structure\TransComponent.cpp" />
-    <ClCompile Include="Engine\Transform\Manager\TransformManager.cpp" />
     <ClCompile Include="Engine\Transform\Structure\Transform.cpp" />
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
@@ -504,6 +504,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
     <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
+    <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />
+    <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\GameManager\GameManager.h" />
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h" />
@@ -695,9 +697,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
-    <ClInclude Include="Engine\Transform\Component\Manager\TransComponentManager.h" />
-    <ClInclude Include="Engine\Transform\Component\Structure\TransComponent.h" />
-    <ClInclude Include="Engine\Transform\Manager\TransformManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />

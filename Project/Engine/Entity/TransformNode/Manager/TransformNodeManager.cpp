@@ -1,25 +1,25 @@
-#include "TransformManager.h"
+#include "TransformNodeManager.h"
 
 
 
 /// <summary>
-/// TransformComponentを新しく作る
+/// TransformNodeを新しく作る
 /// </summary>
-std::weak_ptr<TransformComponent> TransformManager::Create(const std::string& name)
+std::weak_ptr<TransformNode> TransformNodeManager::Create(const std::string& name)
 {
 	// 名前で検索をかける
 	auto it = transformMap_.find(name);
 	// 既に存在していたら早期return
 	if (it != transformMap_.end())
 	{
-		return std::weak_ptr<TransformComponent>();
-	} 
+		return std::weak_ptr<TransformNode>();
+	}
 
 	// ないので新しく作る
-	std::shared_ptr<TransformComponent> newTransform = std::make_shared<TransformComponent>();
+	std::shared_ptr<TransformNode> newTransform = std::make_shared<TransformNode>();
 	transformMap_[name] = newTransform;
 
-	// 作ったTransformComponentを返す
+	// 作ったTransformNodeを返す
 	return transformMap_[name];
 }
 
@@ -27,9 +27,9 @@ std::weak_ptr<TransformComponent> TransformManager::Create(const std::string& na
 /// <summary>
 /// 更新処理
 /// </summary>
-void TransformManager::Update()
+void TransformNodeManager::Update()
 {
-	// 全てのTransformComponentを更新
+	// 全てのTransformNodeを更新
 	for (auto& it : transformMap_)
 	{
 		it.second->Update();
@@ -40,14 +40,14 @@ void TransformManager::Update()
 /// <summary>
 /// 取得
 /// </summary>
-std::weak_ptr<TransformComponent> TransformManager::GetTransform(const std::string& key)
+std::weak_ptr<TransformNode> TransformNodeManager::GetTransform(const std::string& key)
 {
 	// 名前で検索をかける
 	auto it = transformMap_.find(key);
 	// なければ空のweak_ptrを返す
 	if (it == transformMap_.end())
 	{
-		return std::weak_ptr<TransformComponent>();
+		return std::weak_ptr<TransformNode>();
 	}
 
 	return it->second;

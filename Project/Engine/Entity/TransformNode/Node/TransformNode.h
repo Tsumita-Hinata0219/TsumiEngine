@@ -18,14 +18,15 @@ struct SRT {
 	Vector3 scale;
 	Vector3 rotate;
 	Vector3 translate;
-	SRT() : 
-		scale(1.0f, 1.0f, 1.0f), 
-		rotate(0.0f, 0.0f, 0.0f), 
-		translate(0.0f, 0.0f, 0.0f) {}
+	SRT() :
+		scale(1.0f, 1.0f, 1.0f),
+		rotate(0.0f, 0.0f, 0.0f),
+		translate(0.0f, 0.0f, 0.0f) {
+	}
 };
 
 
-class TransformComponent {
+class TransformNode {
 
 public:
 
@@ -41,8 +42,8 @@ private:
 	BufferResource<ObjectMatrices> buffer_;
 
 	// 親子関係
-	std::weak_ptr<TransformComponent> parent_;
-	std::vector<std::weak_ptr<TransformComponent>> children_;
+	std::weak_ptr<TransformNode> parent_;
+	std::vector<std::weak_ptr<TransformNode>> children_;
 
 	// カメラ管理クラスのポインタ
 	CameraManager* cameraManager_;
@@ -52,12 +53,12 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	TransformComponent(const std::string& name = "default");
+	TransformNode(const std::string& name = "default");
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~TransformComponent() = default;
+	~TransformNode() = default;
 
 	/// <summary>
 	/// 更新処理
@@ -72,7 +73,7 @@ public:
 	/// <summary>
 	/// 親の設定
 	/// </summary>
-	void AttachToParent(std::weak_ptr<TransformComponent> parent);
+	void AttachToParent(std::weak_ptr<TransformNode> parent);
 	void DetachFromParent();
 
 	/// <summary>

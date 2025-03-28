@@ -20,7 +20,7 @@ private: // シングルトン
 	const TransformNodeManager& operator=(const TransformNodeManager&) = delete;
 
 
-private:
+public:
 
 	/// <summary>
 	/// インスタンス取得

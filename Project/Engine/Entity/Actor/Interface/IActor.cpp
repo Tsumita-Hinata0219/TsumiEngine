@@ -1,5 +1,6 @@
 #include "IActor.h"
 #include "../../Component/Interface/IComponent.h"
+#include "Entity/TransformNode/Manager/TransformNodeManager.h"
 
 
 /// <summary>
@@ -9,9 +10,6 @@ IActor::IActor()
 {
 	// ステートはActiveに
 	state_ = State::Active;
-
-	// Transformの初期化
-	transform_.Init();
 }
 
 
@@ -22,6 +20,20 @@ IActor::~IActor()
 {
 	// ComponentListのClear
 	components_.clear();
+}
+
+
+/// <summary>
+/// 生成
+/// </summary>
+void IActor::Create(std::string name)
+{
+	// 名前の設定
+	name_ = name;
+
+	// TransformNodeの作成
+	auto manager = TransformNodeManager::GetInstance();
+	transNode_ = manager->Create(name_);
 }
 
 

@@ -2,7 +2,7 @@
 
 #include "Math/MyMath.h"
 #include "Scene/IScene.h"
-#include "Transform/Structure/Transform.h"
+#include "../../TransformNode/Node/TransformNode.h"
 
 // 前方宣言
 class IComponent;
@@ -29,9 +29,14 @@ public:
     virtual ~IActor();
 
     /// <summary>
+    /// 生成
+    /// </summary>
+    void Create(std::string name = "");
+
+    /// <summary>
     /// 初期化処理
     /// </summary>
-    virtual void Init(std::string name = "") = 0;
+    virtual void Init() = 0;
 
     /// <summary>
     /// 更新処理関係
@@ -66,9 +71,6 @@ public:
     // 名前
     std::string Get_Name() const { return name_; }
 
-    // Transform
-    Transform Get_Transform() const { return transform_; }
-
 #pragma endregion 
 
 
@@ -81,7 +83,7 @@ private:
     State state_;
 
     // Transform
-    Transform transform_{};
+    std::weak_ptr<TransformNode> transNode_;
 
     // ComponentList
     std::vector<std::shared_ptr<IComponent>> components_;

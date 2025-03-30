@@ -572,6 +572,7 @@
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
+    <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1477,6 +1478,8 @@
     <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
+    <ClInclude Include="Engine\Entity\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

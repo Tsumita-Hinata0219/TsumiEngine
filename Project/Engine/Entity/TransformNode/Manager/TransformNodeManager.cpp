@@ -69,3 +69,12 @@ void TransformNodeManager::Bind_CBV(const std::string& key, UINT num)
 
 	it->second->Bind_CBV(num);
 }
+
+
+/// <summary>
+/// transformMap_のクリア
+/// </summary>
+void TransformNodeManager::Clear()
+{
+	transformMap_.clear();
+}

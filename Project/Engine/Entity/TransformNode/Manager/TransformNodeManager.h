@@ -49,4 +49,9 @@ public:
 	/// CBVのバインド
 	/// </summary>
 	void Bind_CBV(const std::string& key, UINT num);
+
+	/// <summary>
+	/// transformMap_のクリア
+	/// </summary>
+	void Clear();
 };

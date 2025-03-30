@@ -12,6 +12,7 @@ class IRenderComponent;
 class IActor {
 
 public:
+
     // 状態
     enum class State {
         Active,
@@ -97,7 +98,7 @@ private:
 	std::unordered_map<std::string, std::shared_ptr<IComponent>> componentMap_;
 
     // 描画フラグ
-	bool isRender_ = true;
+	bool isRender_ = false;
 	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
 	std::weak_ptr<IRenderComponent> renderComponent_;
 

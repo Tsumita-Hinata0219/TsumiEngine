@@ -20,6 +20,12 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	timeSys_ = TimeSystem::GetInstance();
 	timeSys_->Init();
 
+	// ActorManagerのインスタンスを取得
+	actorManager_ = ActorManager::GetInstance();
+
+	// TransformNodeManagerのインスタンスを取得
+	transformNodeManager_ = TransformNodeManager::GetInstance();
+
 	// Testモデルを読み込んでおく
 	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");
 
@@ -89,9 +95,19 @@ void GameManager::Run() {
 /// シーンチェンジ
 /// </summary>
 void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
+	
+	// actorManagerのクリア
+	actorManager_->Clear();
+	// transformNodeManagerのクリア
+	transformNodeManager_->Clear();
+
+	// シーンの変更
 	scene_.reset();
 	scene_ = std::move(newScene);
 	scene_->SetManager(this);
+
+	// シーンの初期化
 	scene_->Initialize();
+	
 	return;
 }

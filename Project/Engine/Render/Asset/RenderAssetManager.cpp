@@ -45,17 +45,18 @@ void RenderSystem::RenderAssetManager::LoadData(const std::string& path, const s
 /// <summary>
 /// SceneDataの取得
 /// </summary>
-RenderSystem::Rendering::SceneData RenderSystem::RenderAssetManager::GetSceneData(const std::string& name) const
+const RenderSystem::Rendering::SceneData* RenderSystem::RenderAssetManager::GetSceneData(const std::string& name) const
 {
-	// 指定された名前で検索をかける
-	const auto& model = sceneDataMap_.find(name);
-	// なかったらリターン
-	if (model == sceneDataMap_.end()) {
-		return {};
+	// 指定された名前で検索
+	auto it = sceneDataMap_.find(name);
+
+	// なかったら nullptr を返す
+	if (it == sceneDataMap_.end()) {
+		return nullptr;
 	}
 
-	// ヒットしたら返す
-	return model->second;
+	// ヒットしたらポインタを返す（コピー不要）
+	return &it->second;
 }
 
 

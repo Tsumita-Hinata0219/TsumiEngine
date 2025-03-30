@@ -38,12 +38,31 @@ public:
 	/// <summary>
 	/// 名前によるActorの取得
 	/// </summary>
-	std::shared_ptr<IActor> GetActorByName(const std::string& name) {
+	std::shared_ptr<IActor> Get_ActorByName(const std::string& name) {
 		auto it = actors_.find(name);
 		if (it != actors_.end()) {
 			return it->second;
 		}
 		return nullptr; // 見つからなければnullptr
+	}
+
+	/// <summary>
+	/// 特定のActorの状態を設定
+	/// </summary>
+	void Set_ActorState(const std::string& name, IActor::State state) {
+		auto actor = Get_ActorByName(name);
+		if (actor) {
+			actor->Set_State(state);
+		}
+	}
+
+	/// <summary>
+	/// すべてのActorの状態を設定
+	/// </summary>
+	void Set_AllActorState(IActor::State state) {
+		for (auto& actor : actors_) {
+			actor.second->Set_State(state);
+		}
 	}
 
 

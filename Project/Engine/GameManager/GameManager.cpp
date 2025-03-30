@@ -26,6 +26,9 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	// TransformNodeManagerのインスタンスを取得
 	transformNodeManager_ = TransformNodeManager::GetInstance();
 
+	// RenderAssetManagerのインスタンスを取得
+	renderAssetManager = RenderSystem::RenderAssetManager::GetInstance();
+
 	// Testモデルを読み込んでおく
 	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");
 
@@ -100,6 +103,8 @@ void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
 	actorManager_->Clear();
 	// transformNodeManagerのクリア
 	transformNodeManager_->Clear();
+	// renderAssetManagerのクリア
+	renderAssetManager->Clear();
 
 	// シーンの変更
 	scene_.reset();

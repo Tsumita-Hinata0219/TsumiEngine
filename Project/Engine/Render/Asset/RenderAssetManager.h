@@ -48,7 +48,7 @@ public:
 	/// <summary>
 	/// 全てのモデルデータの破棄
 	/// </summary>
-	void AllRemove();
+	void Clear();
 
 };
 

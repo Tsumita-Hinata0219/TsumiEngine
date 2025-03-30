@@ -11,6 +11,7 @@
 #include "GameData/GameData.h"
 #include "Entity/Actor/Manager/ActorManager.h"
 #include "Entity/TransformNode/Manager/TransformNodeManager.h"
+#include "Render/Asset/RenderAssetManager.h"
 
 #include "Scene/DebugScene/DebugScene.h"
 #include "Scene/DevScene/DevScene.h"
@@ -66,6 +67,9 @@ private:
 
 	// TransformNodeManager
 	TransformNodeManager* transformNodeManager_ = nullptr;
+
+	// RenderAssetManager
+	RenderSystem::RenderAssetManager* renderAssetManager = nullptr;
 
 	// 現在のシーン
 	std::unique_ptr<IScene> scene_;

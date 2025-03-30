@@ -575,6 +575,7 @@
     <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
     <ClCompile Include="Engine\Render\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\Render\Loader\RenderDataLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">

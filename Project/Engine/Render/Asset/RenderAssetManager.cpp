@@ -79,7 +79,7 @@ void RenderSystem::RenderAssetManager::ModelRemove(std::string name)
 /// <summary>
 /// 全てのモデルデータの破棄
 /// </summary>
-void RenderSystem::RenderAssetManager::AllRemove()
+void RenderSystem::RenderAssetManager::Clear()
 {
 	sceneDataMap_.clear();
 }

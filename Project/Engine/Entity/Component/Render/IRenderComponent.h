@@ -2,6 +2,7 @@
 
 #include "Entity/Actor/Interface/IActor.h"
 #include "3D/Model/Model.h"
+#include "Render/State/RenderState .h"
 
 
 /* 描画用のコンポーネント */
@@ -12,7 +13,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IRenderComponent();
+	IRenderComponent(std::weak_ptr<IActor> owner);
 
 	/// <summary>
 	/// 仮想デストラクタ
@@ -28,9 +29,12 @@ public:
 protected:
 
 	// Componentを持つ親Actor
-	std::weak_ptr<IActor> owner;
+	std::weak_ptr<IActor> owner_;
 
 	// モデル
 	std::unique_ptr<Model> model_;
+
+	// レンダーステート
+	std::unique_ptr<RenderSystem::RenderState> renderState_;
 
 };

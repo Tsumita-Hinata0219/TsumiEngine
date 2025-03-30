@@ -568,7 +568,7 @@
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
-    <ClCompile Include="Engine\Entity\Component\Render\RenderComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Render\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
@@ -1472,7 +1472,7 @@
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
-    <ClInclude Include="Engine\Entity\Component\Render\RenderComponent.h" />
+    <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Render\State\RenderState .h" />
     <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />

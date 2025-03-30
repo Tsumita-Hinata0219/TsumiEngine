@@ -25,9 +25,19 @@ public:
 	virtual void Update(float deltaTime);
 
 
+#pragma region Accessor 
+
+	// 名前
+	std::string Get_Name() const { return name; }
+
+#pragma endregion 
+
 protected:
 
 	// Componentを持つ親Actor
 	std::weak_ptr<IActor> owner;
+
+	// Componentの名前
+	std::string name;
 
 };

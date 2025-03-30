@@ -6,6 +6,7 @@
 
 // 前方宣言
 class IComponent;
+class IRenderComponent;
 
 /* ゲーム内オブジェクトの基底クラス */
 class IActor {
@@ -51,25 +52,27 @@ public:
     void Render();
 
     /// <summary>
-    /// コンポーネントの追加
+    /// Componentの追加
     /// </summary>
-    void AddComponent(std::shared_ptr<IComponent> component);
+    void Add_Component(std::shared_ptr<IComponent> component);
 
     /// <summary>
-    /// Renderコンポーネントの追加
+    /// RenderComponentの追加
     /// </summary>
-    void AddRenderComponent(std::shared_ptr<IComponent> component);
-    
-    /// <summary>
-    /// コンポーネント削除
-    /// </summary>
-    void RemoveComponent(std::shared_ptr<IComponent> component);
+    void Add_RenderComponent(std::weak_ptr<IRenderComponent> component);
 
 
 #pragma region Accessor 
+
+	// 状態
+	State Get_State() const { return state_; }
+	void Set_State(State state) { state_ = state; }
     
     // 名前
     std::string Get_Name() const { return name_; }
+
+    // 描画フラグ
+    void Toggle_Render(bool state) { isRender_ = state; }
 
 #pragma endregion 
 
@@ -86,8 +89,12 @@ private:
     std::weak_ptr<TransformNode> transNode_;
 
     // ComponentList
-    std::vector<std::shared_ptr<IComponent>> components_;
-    std::vector<std::shared_ptr<IComponent>> renderComponent_;
+	std::unordered_map<std::string, std::shared_ptr<IComponent>> componentMap_;
+
+    // 描画フラグ
+	bool isRender_ = true;
+	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
+	std::weak_ptr<IRenderComponent> renderComponent_;
 
     // 親シーン
     IScene *pScene_ = nullptr;

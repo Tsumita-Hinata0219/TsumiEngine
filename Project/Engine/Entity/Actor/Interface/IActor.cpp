@@ -1,5 +1,6 @@
 #include "IActor.h"
 #include "../../Component/Interface/IComponent.h"
+#include "../../Component/Render/IRenderComponent.h"
 #include "Entity/TransformNode/Manager/TransformNodeManager.h"
 
 
@@ -18,8 +19,8 @@ IActor::IActor()
 /// </summary>
 IActor::~IActor()
 {
-	// ComponentListのClear
-	components_.clear();
+	// ComponentMapのClear
+	componentMap_.clear();
 }
 
 
@@ -50,10 +51,9 @@ void IActor::Update(float deltaTime)
 }
 void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 
 {
-	for (auto& component : components_) {
-		component->Update(deltaTime);
+	for (auto& component : componentMap_) {
+		component.second->Update(deltaTime);
 	}
-
 }
 void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 
@@ -63,36 +63,35 @@ void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 /// </summary>
 void IActor::Render()
 {
-
+	if (isRender_) {
+		renderComponent_.lock()->Draw();
+	}
 }
 
 
 /// <summary>
 /// コンポーネントの追加
 /// </summary>
-void IActor::AddComponent(std::shared_ptr<IComponent> component)
+void IActor::Add_Component(std::shared_ptr<IComponent> component)
 {
-	components_.push_back(component);
+	// 名前で検索をかける
+	auto it = componentMap_.find(component->Get_Name());
+	// 既に存在していたら早期return
+	if (it != componentMap_.end())
+	{
+		return;
+	}
+
+	// なければMapに追加
+	componentMap_[component->Get_Name()] = component;
 }
 
 
 /// <summary>
 /// Renderコンポーネントの追加
 /// </summary>
-void IActor::AddRenderComponent(std::shared_ptr<IComponent> component)
+void IActor::Add_RenderComponent(std::weak_ptr<IRenderComponent> component)
 {
-	renderComponent_.push_back(component);
+	renderComponent_ = component;
+	isRender_ = true;
 }
-
-
-/// <summary>
-/// コンポーネント削除
-/// </summary>
-void IActor::RemoveComponent(std::shared_ptr<IComponent> component)
-{
-	auto itr = std::find(components_.begin(), components_.end(), component);
-	if (itr != components_.end()) {
-		components_.erase(itr);
-	}
-}
-

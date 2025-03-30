@@ -16,7 +16,6 @@ public:
 		actors_[actor->Get_Name()] = actor;
 	}
 
-
 	/// <summary>
 	/// Actorの更新処理
 	/// </summary>
@@ -26,7 +25,6 @@ public:
 			actor.second->Update(deltaTime);
 		}
 	}
-
 
 	/// <summary>
 	/// 描画処理
@@ -40,8 +38,6 @@ public:
 	/// <summary>
 	/// 名前によるActorの取得
 	/// </summary>
-	/// <param name="name"></param>
-	/// <returns></returns>
 	std::shared_ptr<IActor> GetActorByName(const std::string& name) {
 		auto it = actors_.find(name);
 		if (it != actors_.end()) {

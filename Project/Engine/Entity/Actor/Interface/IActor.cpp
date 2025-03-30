@@ -95,3 +95,20 @@ void IActor::Add_RenderComponent(std::weak_ptr<IRenderComponent> component)
 	renderComponent_ = component;
 	isRender_ = true;
 }
+
+
+/// <summary>
+/// ComponentのWeakPtr取得
+/// </summary>
+std::weak_ptr<IComponent> IActor::Get_Component(const std::string& name)
+{
+	// 名前で検索をかける
+	auto it = componentMap_.find(name);
+	// なければ空のweak_ptrを返す
+	if (it == componentMap_.end())
+	{
+		return std::weak_ptr<IComponent>();
+	}
+
+	return it->second;
+}

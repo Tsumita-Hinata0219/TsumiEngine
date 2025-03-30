@@ -61,6 +61,11 @@ public:
     /// </summary>
     void Add_RenderComponent(std::weak_ptr<IRenderComponent> component);
 
+    /// <summary>
+	/// ComponentのWeakPtr取得
+    /// </summary>
+    std::weak_ptr<IComponent> Get_Component(const std::string& name);
+
 
 #pragma region Accessor 
 

@@ -38,7 +38,7 @@ public:
 	/// <summary>
 	/// SceneDataの取得
 	/// </summary>
-	const Rendering::SceneData* GetSceneData(const std::string& name) const;
+	std::optional<Rendering::SceneData> GetSceneData(const std::string& name) const;
 
 	/// <summary>
 	/// 指定のモデルデータの破棄

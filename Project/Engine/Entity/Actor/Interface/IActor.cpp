@@ -11,6 +11,9 @@ IActor::IActor()
 {
 	// ステートはActiveに
 	state_ = State::Active;
+
+	// 名前はdefaultで初期化
+	name_ = "default";
 }
 
 

@@ -8,6 +8,8 @@
 IComponent::IComponent(std::weak_ptr<IActor> owner)
 	: owner(owner)
 {
+	// 名前はdefaultで初期化
+	name = "default";
 }
 
 

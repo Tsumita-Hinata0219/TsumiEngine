@@ -9,13 +9,16 @@
 /// </summary>
 RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
-	datas_ = std::make_unique<RenderSystem::Rendering::Datas>();
-	buffers_ = std::make_unique<RenderSystem::Rendering::Buffers>();
+	datas_ = std::make_unique<RenderSystem::Rendering::SceneData>();
+	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
 	owner_ = owner;
 
 	cameraManager_ = CameraManager::GetInstance();
 	transformNodeManager_ = TransformNodeManager::GetInstance();
 	pipeLineManager_ = PipeLineManager::GetInstance();
+
+	// Buffer生成
+	Create_RenderBuffer();
 }
 
 
@@ -58,7 +61,7 @@ void RenderSystem::RenderState::Create_RenderBuffer()
 	buffers_->light.CreateCBV();
 
 	// Environment
-	buffers_->enviroment.CreateCBV();
+	buffers_->environment.CreateCBV();
 
 	// ColorAddition
 	buffers_->colorAddition.CreateCBV();
@@ -83,7 +86,7 @@ void RenderSystem::RenderState::Update_RenderData()
 	buffers_->light.UpdateData(&datas_->light);
 
 	// Environment
-	buffers_->enviroment.UpdateData(&datas_->environment);
+	buffers_->environment.UpdateData(&datas_->environment);
 
 	// ColorAddition
 	buffers_->colorAddition.UpdateData(&datas_->colorAddition);
@@ -140,7 +143,7 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->light.BindGraphicsCBV(3);
 
 	// Environment
-	buffers_->enviroment.BindGraphicsCBV(4);
+	buffers_->environment.BindGraphicsCBV(4);
 
 	// ColorAddition
 	buffers_->colorAddition.BindGraphicsCBV(5);

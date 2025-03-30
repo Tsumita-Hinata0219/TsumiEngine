@@ -18,10 +18,10 @@ class RenderState {
 private:
 
 	// 描画に必要なDeta
-	std::unique_ptr<RenderSystem::Rendering::Datas> datas_;
+	std::unique_ptr<RenderSystem::Rendering::SceneData> datas_;
 
 	// GPUに送るBuffer
-	std::unique_ptr<RenderSystem::Rendering::Buffers> buffers_;
+	std::unique_ptr<RenderSystem::Rendering::BufferResources> buffers_;
 
 	// 親Actor
 	std::weak_ptr<IActor> owner_;

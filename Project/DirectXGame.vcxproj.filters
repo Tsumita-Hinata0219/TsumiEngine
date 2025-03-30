@@ -573,6 +573,8 @@
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
+    <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
+    <ClCompile Include="Engine\Render\Asset\RenderAssetManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1480,6 +1482,9 @@
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
+    <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
+    <ClInclude Include="Engine\Render\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\Render\Asset\RenderAssetManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

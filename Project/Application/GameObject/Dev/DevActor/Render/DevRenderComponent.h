@@ -7,8 +7,8 @@ class DevRenderComponent : public IRenderComponent
 {
 public:
 
-	DevRenderComponent();
-	~DevRenderComponent();
+	DevRenderComponent() = default;
+	~DevRenderComponent() = default;
 
 	void Create() override;
 	void Update() override;
@@ -16,14 +16,6 @@ public:
 private:
 
 };
-
-DevRenderComponent::DevRenderComponent()
-{
-}
-
-DevRenderComponent::~DevRenderComponent()
-{
-}
 
 inline void DevRenderComponent::Create()
 {

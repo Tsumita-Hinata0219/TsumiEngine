@@ -21,9 +21,9 @@ RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 
 
 /// <summary>
-/// 初期化処理
+/// データの設定
 /// </summary>
-void RenderSystem::RenderState::Init(const std::string& assetName)
+void RenderSystem::RenderState::SetRenderData(const std::string& assetName)
 {
 	// SceneDataを取得してdatas_に代入
 	auto sceneDataOpt = renderAssetManager_->GetSceneData(assetName);
@@ -31,8 +31,6 @@ void RenderSystem::RenderState::Init(const std::string& assetName)
 	if (sceneDataOpt.has_value()) {
 		datas_ = sceneDataOpt.value();
 	}
-
-
 }
 
 

@@ -50,9 +50,9 @@ public:
 	~RenderState() = default;
 
 	/// <summary>
-	/// 初期化処理
+	/// データの設定
 	/// </summary>
-	void Init(const std::string& assetName);
+	void SetRenderData(const std::string& assetName);
 
 	/// <summary>
 	/// 描画処理

@@ -87,7 +87,8 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 		return;
 	}
 
-	// なければMapに追加
+	// なければComponentにOwnerを設定して、Mapに追加
+	component->SetOwner(GetSharedPtr());
 	componentMap_[component->Get_Name()] = component;
 }
 
@@ -97,6 +98,7 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 /// </summary>
 void IActor::AddRenderComponent(std::shared_ptr<IRenderComponent> component)
 {
+	renderComponent_->SetOwner(GetSharedPtr());
 	renderComponent_ = component;
 	isRender_ = true;
 }

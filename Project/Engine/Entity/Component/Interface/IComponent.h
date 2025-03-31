@@ -12,7 +12,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IComponent(std::weak_ptr<IActor> owner);
+	IComponent();
 
 	/// <summary>
 	/// 仮想デストラクタ
@@ -28,16 +28,20 @@ public:
 #pragma region Accessor 
 
 	// 名前
-	std::string Get_Name() const { return name; }
+	std::string Get_Name() const { return name_; }
+
+	// Owner
+	void SetOwner(std::weak_ptr<IActor> setOwner) { owner_ = setOwner; }
 
 #pragma endregion 
+
 
 protected:
 
 	// Componentを持つ親Actor
-	std::weak_ptr<IActor> owner;
+	std::weak_ptr<IActor> owner_;
 
 	// Componentの名前
-	std::string name;
+	std::string name_;
 
 };

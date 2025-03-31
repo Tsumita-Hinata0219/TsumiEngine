@@ -5,9 +5,8 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-IRenderComponent::IRenderComponent(std::weak_ptr<IActor> owner)
+IRenderComponent::IRenderComponent()
 {
-	owner_ = owner;
 	renderState_ = std::make_unique<RenderSystem::RenderState>(owner_);
 }
 

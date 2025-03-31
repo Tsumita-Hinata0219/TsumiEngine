@@ -11,11 +11,6 @@ class IRenderComponent {
 public:
 
 	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	IRenderComponent(std::weak_ptr<IActor> owner);
-
-	/// <summary>
 	/// 仮想デストラクタ
 	/// </summary>
 	virtual ~IRenderComponent() = default;
@@ -36,9 +31,16 @@ public:
 	void Draw();
 
 
+#pragma region Accessor 
+
+	void SetOwner(std::weak_ptr<IActor> owner) { owner_ = owner; }
+
+#pragma endregion 
+
+
 protected:
 
-	// Componentを持つ親Actor
+	// Componentを持つ親Actor 
 	std::weak_ptr<IActor> owner_;
 
 	// レンダーステート

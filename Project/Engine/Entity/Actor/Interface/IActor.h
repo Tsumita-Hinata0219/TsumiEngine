@@ -9,7 +9,7 @@ class IComponent;
 class IRenderComponent;
 
 /* ゲーム内オブジェクトの基底クラス */
-class IActor {
+class IActor : public std::enable_shared_from_this<IActor> {
 
 public:
 
@@ -86,6 +86,17 @@ public:
     void ToggleRender(bool state) { isRender_ = state; }
 
 #pragma endregion 
+
+
+private:
+
+    /// <summary>
+    /// 共有ポインタを取得する関数
+    /// </summary>
+    /// <returns></returns>
+    std::shared_ptr<IActor> GetSharedPtr() {
+        return shared_from_this();
+    }
 
 
 private:

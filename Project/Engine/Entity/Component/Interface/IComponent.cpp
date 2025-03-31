@@ -5,11 +5,10 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-IComponent::IComponent(std::weak_ptr<IActor> owner)
-	: owner(owner)
+IComponent::IComponent()
 {
 	// 名前はdefaultで初期化
-	name = "default";
+	name_ = "default";
 }
 
 

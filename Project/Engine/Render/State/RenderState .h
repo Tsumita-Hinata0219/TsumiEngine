@@ -37,6 +37,7 @@ private:
 	// RenderAssetManager
 	RenderAssetManager* renderAssetManager_ = nullptr;
 
+
 public:
 
 	/// <summary>

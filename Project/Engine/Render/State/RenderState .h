@@ -3,12 +3,14 @@
 #include "Math/MyMath.h"
 #include "../Structure/RenderStructure.h"
 #include "Entity/Actor/Interface/IActor.h"
+#include "Render/Asset/RenderAssetManager.h"
 
 
 // 前方宣言
 class CameraManager;
 class TransformNodeManager;
 class PipeLineManager;
+class RenderAssetManager;
 
 
 namespace RenderSystem {
@@ -18,7 +20,7 @@ class RenderState {
 private:
 
 	// 描画に必要なDeta
-	std::unique_ptr<RenderSystem::Rendering::SceneData> datas_;
+	RenderSystem::Rendering::SceneData datas_;
 
 	// GPUに送るBuffer
 	std::unique_ptr<RenderSystem::Rendering::BufferResources> buffers_;
@@ -32,6 +34,8 @@ private:
 	TransformNodeManager* transformNodeManager_ = nullptr;
 	// PipeLineManager
 	PipeLineManager* pipeLineManager_ = nullptr;
+	// RenderAssetManager
+	RenderAssetManager* renderAssetManager_ = nullptr;
 
 public:
 
@@ -44,6 +48,11 @@ public:
 	/// デストラクタ
 	/// </summary>
 	~RenderState() = default;
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	void Init(const std::string& assetName);
 
 	/// <summary>
 	/// 描画処理

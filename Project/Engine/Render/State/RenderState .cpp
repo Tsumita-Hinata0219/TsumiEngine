@@ -2,6 +2,7 @@
 #include "Camera/Manager/CameraManager.h"
 #include "Entity/TransformNode/Manager/TransformNodeManager.h"
 #include "PipeLineManager/PipeLineManager.h"
+#include "Render/Asset/RenderAssetManager.h"
 
 
 /// <summary>
@@ -9,16 +10,29 @@
 /// </summary>
 RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
-	datas_ = std::make_unique<RenderSystem::Rendering::SceneData>();
 	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
 	owner_ = owner;
 
 	cameraManager_ = CameraManager::GetInstance();
 	transformNodeManager_ = TransformNodeManager::GetInstance();
 	pipeLineManager_ = PipeLineManager::GetInstance();
+	renderAssetManager_ = RenderSystem::RenderAssetManager::GetInstance();
+}
 
-	// Buffer生成
-	Create_RenderBuffer();
+
+/// <summary>
+/// 初期化処理
+/// </summary>
+void RenderSystem::RenderState::Init(const std::string& assetName)
+{
+	// SceneDataを取得してdatas_に代入
+	auto sceneDataOpt = renderAssetManager_->GetSceneData(assetName);
+
+	if (sceneDataOpt.has_value()) {
+		datas_ = sceneDataOpt.value();
+	}
+
+
 }
 
 
@@ -44,14 +58,14 @@ void RenderSystem::RenderState::Draw3D()
 void RenderSystem::RenderState::Create_RenderBuffer()
 {
 	// mesh
-	buffers_->mesh.CreateCBV(UINT(datas_->mesh.vertices.size()));
+	buffers_->mesh.CreateCBV(UINT(datas_.mesh.vertices.size()));
 
 	// VBV
-	buffers_->vertex.CreateCBV(UINT(datas_->mesh.vertices.size()));
+	buffers_->vertex.CreateCBV(UINT(datas_.mesh.vertices.size()));
 	buffers_->vertex.CreateVertexBufferView();
 
 	// IBV
-	buffers_->indices.CreateCBV(UINT(datas_->mesh.indices.size()));
+	buffers_->indices.CreateCBV(UINT(datas_.mesh.indices.size()));
 	buffers_->indices.CreateIndexBufferView();
 
 	// Material
@@ -74,22 +88,22 @@ void RenderSystem::RenderState::Create_RenderBuffer()
 void RenderSystem::RenderState::Update_RenderData()
 {
 	// VBV
-	buffers_->vertex.UpdateData(datas_->mesh.vertices.data());
+	buffers_->vertex.UpdateData(datas_.mesh.vertices.data());
 
 	// IBV
-	buffers_->indices.UpdateData(datas_->mesh.indices.data());
+	buffers_->indices.UpdateData(datas_.mesh.indices.data());
 
 	// Material
-	buffers_->material.UpdateData(&datas_->material);
+	buffers_->material.UpdateData(&datas_.material);
 
 	// Light
-	buffers_->light.UpdateData(&datas_->light);
+	buffers_->light.UpdateData(&datas_.light);
 
 	// Environment
-	buffers_->environment.UpdateData(&datas_->environment);
+	buffers_->environment.UpdateData(&datas_.environment);
 
 	// ColorAddition
-	buffers_->colorAddition.UpdateData(&datas_->colorAddition);
+	buffers_->colorAddition.UpdateData(&datas_.colorAddition);
 }
 
 
@@ -149,10 +163,10 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->colorAddition.BindGraphicsCBV(5);
 
 	// Material Texture
-	buffers_->material.BindGraphicsSRV(6, datas_->material.textureHandle);
+	buffers_->material.BindGraphicsSRV(6, datas_.material.textureHandle);
 
 	// Environment Texture
-	buffers_->material.BindGraphicsSRV(7, datas_->environment.textureHandle);
+	buffers_->material.BindGraphicsSRV(7, datas_.environment.textureHandle);
 }
 
 
@@ -164,5 +178,5 @@ void RenderSystem::RenderState::Execute_DrawCommand()
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 	// Draw!!
-	commands.List->DrawIndexedInstanced(UINT(datas_->mesh.indices.size()), 1, 0, 0, 0);
+	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

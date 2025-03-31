@@ -55,7 +55,7 @@ std::optional<RenderSystem::Rendering::SceneData> RenderSystem::RenderAssetManag
 		return std::nullopt;
 	}
 
-	// 見つかった場合、コピーを返す（個々が独立）
+	// 見つかった場合、コピーを返す
 	return it->second;
 }
 

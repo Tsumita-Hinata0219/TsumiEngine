@@ -79,5 +79,6 @@ void DevScene::FrontSpriteDraw()
 /// </summary>
 void DevScene::LoadData()
 {
-
+	auto assetManager = RenderSystem::RenderAssetManager::GetInstance();
+	assetManager->LoadData("", "");
 }

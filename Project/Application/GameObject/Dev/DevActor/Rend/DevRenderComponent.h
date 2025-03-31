@@ -19,6 +19,7 @@ private:
 
 inline void DevRenderComponent::Create()
 {
+	renderState_->SetRenderData("Dev");
 }
 
 inline void DevRenderComponent::Update()

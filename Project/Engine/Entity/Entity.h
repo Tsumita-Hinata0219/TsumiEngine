@@ -4,6 +4,7 @@
 
 #include "Entity/Actor/Interface/IActor.h"
 #include "Entity/Component/Interface/IComponent.h"
+#include "Entity/Component/Render/IRenderComponent.h"
 
 #include "GPUParticle/Particle/GPUParticle.h"
 #include "GPUParticle/Field/ParticleField.h"

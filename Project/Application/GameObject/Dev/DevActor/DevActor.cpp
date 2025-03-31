@@ -6,3 +6,8 @@ void DevActor::Init()
 
 
 }
+
+void DevActor::UpdateActor(float deltaTime)
+{
+	deltaTime;
+}

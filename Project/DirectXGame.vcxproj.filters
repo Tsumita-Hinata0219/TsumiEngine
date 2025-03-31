@@ -1486,6 +1486,7 @@
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
     <ClInclude Include="Engine\Render\Loader\RenderDataLoader.h" />
     <ClInclude Include="Engine\Render\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Render\DevRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

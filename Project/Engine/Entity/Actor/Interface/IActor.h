@@ -38,14 +38,14 @@ public:
     /// <summary>
     /// 初期化処理
     /// </summary>
-    virtual void Init() = 0;
+    virtual void Init() {};
 
     /// <summary>
     /// 更新処理関係
     /// </summary>
     void Update(float deltaTime);
     void UpdateComponents(float deltaTime);
-    virtual void UpdateActor(float deltaTime);
+    virtual void UpdateActor([[maybe_unused]]float deltaTime) {};
 
     /// <summary>
     /// 描画処理
@@ -55,30 +55,35 @@ public:
     /// <summary>
     /// Componentの追加
     /// </summary>
-    void Add_Component(std::shared_ptr<IComponent> component);
+    void AddComponent(std::shared_ptr<IComponent> component);
 
     /// <summary>
     /// RenderComponentの追加
     /// </summary>
-    void Add_RenderComponent(std::weak_ptr<IRenderComponent> component);
+    void AddRenderComponent(std::shared_ptr<IRenderComponent> component);
 
     /// <summary>
 	/// ComponentのWeakPtr取得
     /// </summary>
-    std::weak_ptr<IComponent> Get_Component(const std::string& name);
+    std::weak_ptr<IComponent> GetComponent(const std::string& name);
+
+    /// <summary>
+    /// RenderComponentのWeakPtr取得
+    /// </summary>
+    std::weak_ptr<IRenderComponent> GetRenderComponent();
 
 
 #pragma region Accessor 
 
 	// 状態
-	State Get_State() const { return state_; }
-	void Set_State(State state) { state_ = state; }
+	State GetState() const { return state_; }
+	void SetState(State state) { state_ = state; }
     
     // 名前
-    std::string Get_Name() const { return name_; }
+    std::string GetName() const { return name_; }
 
     // 描画フラグ
-    void Toggle_Render(bool state) { isRender_ = state; }
+    void ToggleRender(bool state) { isRender_ = state; }
 
 #pragma endregion 
 
@@ -100,7 +105,7 @@ private:
     // 描画フラグ
 	bool isRender_ = false;
 	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
-	std::weak_ptr<IRenderComponent> renderComponent_;
+	std::shared_ptr<IRenderComponent> renderComponent_;
 
     // 親シーン
     IScene *pScene_ = nullptr;

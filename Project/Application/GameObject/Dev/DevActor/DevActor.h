@@ -14,6 +14,7 @@ public:
 	~DevActor() = default;
 
 	void Init() override;
+	void UpdateActor(float deltaTime) override;
 
 };
 

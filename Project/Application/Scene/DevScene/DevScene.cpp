@@ -26,6 +26,8 @@ DevScene::~DevScene()
 /// </summary>
 void DevScene::Initialize()
 {
+	LoadData();
+
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
 	cameraData_.lock()->Init({ 0.15f, -0.3f, 0.0f }, { 7.0f, 4.0f, -20.0f });
@@ -69,4 +71,13 @@ void DevScene::ModelDraw()
 /// </summary>
 void DevScene::FrontSpriteDraw()
 {
+}
+
+
+/// <summary>
+/// データのロード
+/// </summary>
+void DevScene::LoadData()
+{
+
 }

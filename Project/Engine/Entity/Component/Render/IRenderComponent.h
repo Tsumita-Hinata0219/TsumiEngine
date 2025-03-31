@@ -21,18 +21,20 @@ public:
 	virtual ~IRenderComponent() = default;
 
 	/// <summary>
+	/// 生成
+	/// </summary>
+	virtual void Create() {};
+
+	/// <summary>
 	/// 描画処理
 	/// </summary>
-	virtual void Draw();
+	void Draw();
 
 
 protected:
 
 	// Componentを持つ親Actor
 	std::weak_ptr<IActor> owner_;
-
-	// モデル
-	std::unique_ptr<Model> model_;
 
 	// レンダーステート
 	std::unique_ptr<RenderSystem::RenderState> renderState_;

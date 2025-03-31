@@ -29,7 +29,7 @@ public:
 	/// Actorの追加処理
 	/// </summary>
 	void AddActor(std::shared_ptr<IActor> actor) {
-		actorMap_[actor->Get_Name()] = actor;
+		actorMap_[actor->GetName()] = actor;
 	}
 
 	/// <summary>
@@ -68,7 +68,7 @@ public:
 	void Set_ActorState(const std::string& name, IActor::State state) {
 		auto actor = Get_ActorByName(name);
 		if (actor) {
-			actor->Set_State(state);
+			actor->SetState(state);
 		}
 	}
 
@@ -77,7 +77,7 @@ public:
 	/// </summary>
 	void Set_AllActorState(IActor::State state) {
 		for (auto& actor : actorMap_) {
-			actor.second->Set_State(state);
+			actor.second->SetState(state);
 		}
 	}
 

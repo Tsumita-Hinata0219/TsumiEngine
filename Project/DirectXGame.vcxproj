@@ -501,6 +501,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Render\DevRenderComponent.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />

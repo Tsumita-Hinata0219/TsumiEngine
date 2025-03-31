@@ -58,7 +58,6 @@ void IActor::UpdateComponents([[maybe_unused]] float deltaTime)
 		component.second->Update(deltaTime);
 	}
 }
-void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 
 
 /// <summary>
@@ -67,7 +66,7 @@ void IActor::UpdateActor([[maybe_unused]] float deltaTime) {}
 void IActor::Render()
 {
 	if (isRender_) {
-		renderComponent_.lock()->Draw();
+		renderComponent_->Draw();
 	}
 }
 
@@ -75,7 +74,7 @@ void IActor::Render()
 /// <summary>
 /// コンポーネントの追加
 /// </summary>
-void IActor::Add_Component(std::shared_ptr<IComponent> component)
+void IActor::AddComponent(std::shared_ptr<IComponent> component)
 {
 	// 名前で検索をかける
 	auto it = componentMap_.find(component->Get_Name());
@@ -93,7 +92,7 @@ void IActor::Add_Component(std::shared_ptr<IComponent> component)
 /// <summary>
 /// Renderコンポーネントの追加
 /// </summary>
-void IActor::Add_RenderComponent(std::weak_ptr<IRenderComponent> component)
+void IActor::AddRenderComponent(std::shared_ptr<IRenderComponent> component)
 {
 	renderComponent_ = component;
 	isRender_ = true;
@@ -103,7 +102,7 @@ void IActor::Add_RenderComponent(std::weak_ptr<IRenderComponent> component)
 /// <summary>
 /// ComponentのWeakPtr取得
 /// </summary>
-std::weak_ptr<IComponent> IActor::Get_Component(const std::string& name)
+std::weak_ptr<IComponent> IActor::GetComponent(const std::string& name)
 {
 	// 名前で検索をかける
 	auto it = componentMap_.find(name);
@@ -114,4 +113,18 @@ std::weak_ptr<IComponent> IActor::Get_Component(const std::string& name)
 	}
 
 	return it->second;
+}
+
+
+/// <summary>
+/// RenderComponentのWeakPtr取得
+/// </summary>
+std::weak_ptr<IRenderComponent> IActor::GetRenderComponent()
+{
+	// componentがnullなら空のweak_ptrを返す
+	if (!renderComponent_) {
+		return std::weak_ptr<IRenderComponent>();
+	}
+
+	return renderComponent_;
 }

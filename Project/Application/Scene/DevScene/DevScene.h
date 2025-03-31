@@ -45,6 +45,15 @@ public:
 	/// </summary>
 	void FrontSpriteDraw() override;
 
+
+private:
+
+	/// <summary>
+	/// データのロード
+	/// </summary>
+	void LoadData();
+
+
 private:
 
 	// カメラ

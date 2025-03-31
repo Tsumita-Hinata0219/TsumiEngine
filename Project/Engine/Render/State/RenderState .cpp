@@ -131,7 +131,7 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->indices.IASetIndexBuffer();
 
 	// Transform
-	transformNodeManager_->Bind_CBV(owner_.lock()->Get_Name(), 1);
+	transformNodeManager_->Bind_CBV(owner_.lock()->GetName(), 1);
 
 	// Material
 	buffers_->material.BindGraphicsCBV(2);

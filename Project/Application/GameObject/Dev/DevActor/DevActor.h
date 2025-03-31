@@ -2,6 +2,7 @@
 
 #include "Entity/Entity.h"
 
+#include "Rend/DevRenderComponent.h"
 
 class DevActor : public IActor {
 

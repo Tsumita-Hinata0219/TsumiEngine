@@ -569,13 +569,13 @@
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
-    <ClCompile Include="Engine\Render\State\RenderState .cpp" />
+    <ClCompile Include="Engine\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
-    <ClCompile Include="Engine\Render\Asset\RenderAssetManager.cpp" />
-    <ClCompile Include="Engine\Render\Loader\RenderDataLoader.cpp" />
+    <ClCompile Include="Engine\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\RenderSystem\Loader\RenderDataLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1477,16 +1477,16 @@
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
-    <ClInclude Include="Engine\Render\State\RenderState .h" />
-    <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
+    <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
-    <ClInclude Include="Engine\Render\Loader\RenderDataLoader.h" />
-    <ClInclude Include="Engine\Render\Asset\RenderAssetManager.h" />
-    <ClInclude Include="Application\GameObject\Dev\DevActor\Render\DevRenderComponent.h" />
+    <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

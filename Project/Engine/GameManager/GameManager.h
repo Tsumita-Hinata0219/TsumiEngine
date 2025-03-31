@@ -11,7 +11,7 @@
 #include "GameData/GameData.h"
 #include "Entity/Actor/Manager/ActorManager.h"
 #include "Entity/TransformNode/Manager/TransformNodeManager.h"
-#include "Render/Asset/RenderAssetManager.h"
+#include "RenderSystem/Asset/RenderAssetManager.h"
 
 #include "Scene/DebugScene/DebugScene.h"
 #include "Scene/DevScene/DevScene.h"

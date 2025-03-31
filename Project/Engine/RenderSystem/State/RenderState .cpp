@@ -2,7 +2,7 @@
 #include "Camera/Manager/CameraManager.h"
 #include "Entity/TransformNode/Manager/TransformNodeManager.h"
 #include "PipeLineManager/PipeLineManager.h"
-#include "Render/Asset/RenderAssetManager.h"
+#include "RenderSystem/Asset/RenderAssetManager.h"
 
 
 /// <summary>

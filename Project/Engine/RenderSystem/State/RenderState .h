@@ -3,17 +3,19 @@
 #include "Math/MyMath.h"
 #include "../Structure/RenderStructure.h"
 #include "Entity/Actor/Interface/IActor.h"
-#include "Render/Asset/RenderAssetManager.h"
 
 
 // 前方宣言
 class CameraManager;
 class TransformNodeManager;
 class PipeLineManager;
-class RenderAssetManager;
 
 
 namespace RenderSystem {
+
+// 前方宣言
+class RenderAssetManager;
+
 
 class RenderState {
 

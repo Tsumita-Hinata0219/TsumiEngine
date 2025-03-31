@@ -2,13 +2,18 @@
 
 #include "Entity/Actor/Interface/IActor.h"
 #include "3D/Model/Model.h"
-#include "Render/State/RenderState .h"
+#include "RenderSystem/State/RenderState .h"
 
 
 /* 描画用のコンポーネント */
 class IRenderComponent {
 
 public:
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	IRenderComponent();
 
 	/// <summary>
 	/// 仮想デストラクタ

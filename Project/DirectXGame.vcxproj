@@ -346,9 +346,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
-    <ClCompile Include="Engine\Render\Asset\RenderAssetManager.cpp" />
-    <ClCompile Include="Engine\Render\Loader\RenderDataLoader.cpp" />
-    <ClCompile Include="Engine\Render\State\RenderState .cpp" />
+    <ClCompile Include="Engine\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\RenderSystem\Loader\RenderDataLoader.cpp" />
+    <ClCompile Include="Engine\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Engine\Transform\Structure\Transform.cpp" />
@@ -501,7 +501,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
-    <ClInclude Include="Application\GameObject\Dev\DevActor\Render\DevRenderComponent.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
@@ -701,10 +701,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Engine\PostEffect\Materials\PostEffectMaterials.h" />
-    <ClInclude Include="Engine\Render\Asset\RenderAssetManager.h" />
-    <ClInclude Include="Engine\Render\Loader\RenderDataLoader.h" />
-    <ClInclude Include="Engine\Render\State\RenderState .h" />
-    <ClInclude Include="Engine\Render\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
+    <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />

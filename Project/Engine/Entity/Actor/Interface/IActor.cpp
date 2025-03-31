@@ -57,6 +57,9 @@ void IActor::UpdateComponents([[maybe_unused]] float deltaTime)
 	for (auto& component : componentMap_) {
 		component.second->Update(deltaTime);
 	}
+	if (isRender_) {
+		renderComponent_->Update();
+	}
 }
 
 

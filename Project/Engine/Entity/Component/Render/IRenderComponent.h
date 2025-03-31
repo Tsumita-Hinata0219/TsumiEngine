@@ -26,6 +26,11 @@ public:
 	virtual void Create() {};
 
 	/// <summary>
+	/// 更新処理
+	/// </summary>
+	virtual void Update() {};
+
+	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw();

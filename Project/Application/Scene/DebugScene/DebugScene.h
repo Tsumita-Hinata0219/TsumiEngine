@@ -17,6 +17,8 @@
 #include "GameObject/Dev/DummyParticle/DummyParticle.h"
 
 
+class LuaManager;
+
 class DebugScene : public IScene {
 
 public:
@@ -63,8 +65,8 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
 
-	// Skybox
-	std::unique_ptr<Skybox> skybox_;
+	// LuaManager
+	LuaManager* luaManager_ = nullptr;
 
 	// DummyParticle
 	std::unique_ptr<DummyParticle> dummyParticle_;

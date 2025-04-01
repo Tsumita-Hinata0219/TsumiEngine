@@ -82,7 +82,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 移動処理
-	//movement_->Update();
+	movement_->Update();
 
 	// 射撃処理
 	bulletContainer_->Update();
@@ -95,6 +95,8 @@ void BossEnemy::Update()
 
 	// particleEmitterの座標更新
 	wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+	wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+
 
 #ifdef _DEBUG
 	DrawImGui();

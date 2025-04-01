@@ -1,5 +1,5 @@
 ConstantField = {
-    acceleration = { x = 0.3, y = 0.3, z = 0.3 },
+    acceleration = { x = 0.1, y = 0.1, z = 0.1 },
     damping = 1.0,
     angularVelocity = { x = 0.0, y = 0.0, z = 0.0 },
     drag = 0.7,

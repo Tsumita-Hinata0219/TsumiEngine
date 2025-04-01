@@ -577,6 +577,7 @@
     <ClCompile Include="Engine\RenderSystem\Asset\RenderAssetManager.cpp" />
     <ClCompile Include="Engine\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">

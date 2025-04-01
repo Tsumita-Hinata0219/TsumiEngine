@@ -14,6 +14,7 @@
 #include "Effect/Interface/IEnemyEffect.h"
 #include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
 #include "Effect/OmniBarst/EnemyOmniBarstParticle.h"
+#include "Effect/OmniExplosion/EnemyOmniExplosionParticle.h"
 
 #include "JsonManager/JsonEntityData.h"
 
@@ -117,6 +118,7 @@ private: // メンバ変数
 
 	// OmniParticleのList配列
 	std::list<std::shared_ptr<EnemyOmniBarstParticle>> barstParticles_;
+	std::list<std::shared_ptr<EnemyOmniExplosionParticle>> explosionParticles_;
 
 	// 通常エネミーが全滅したかのフラグ
 	bool isCommonEliminated_ = false;

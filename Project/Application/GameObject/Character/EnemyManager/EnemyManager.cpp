@@ -55,6 +55,10 @@ void EnemyManager::Update()
 	for (auto& particle : barstParticles_) {
 		particle->Update();
 	}
+	// OmniExplosionParticleの更新処理
+	for (auto& particle : explosionParticles_) {
+		particle->Update();
+	}
 
 	// 全滅したかのチェック
 	EliminatedChecker();
@@ -80,6 +84,10 @@ void EnemyManager::Draw3D()
 	}
 	// OmniBarstParticleListの描画
 	for (auto& particle : barstParticles_) {
+		particle->Draw();
+	}
+	// OmniExplosionParticleの更新処理
+	for (auto& particle : explosionParticles_) {
 		particle->Draw();
 	}
 }
@@ -197,13 +205,17 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	// 新しいインスタンス
 	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
 	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
+	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
 	newBarstPart->Init();
 	newBarstPart->Update();
+	newexplosionPart->Init();
+	newexplosionPart->Update();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
 	newEnemy->SetOmniBarstParticle(newBarstPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -212,6 +224,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	// リストに追加
 	bossEnemies_.push_back(std::move(newEnemy));
 	barstParticles_.push_back(std::move(newBarstPart));
+	explosionParticles_.push_back(std::move(newexplosionPart));
 }
 
 

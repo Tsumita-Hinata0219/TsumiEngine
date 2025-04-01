@@ -18,6 +18,7 @@
 class Player;
 class EnemyManager;
 class EnemyOmniBarstParticle;
+class EnemyOmniExplosionParticle;
 struct SRTData;
 
 
@@ -42,6 +43,9 @@ public:
 
 	// OmniBarstParticleの設定
 	virtual void SetOmniBarstParticle(std::weak_ptr<EnemyOmniBarstParticle> ptr) { this->wp_BarstParticle_ = ptr; }
+
+	// OmniExplosionParticleの設定
+	virtual void SetOmniExplosionParticle(std::weak_ptr<EnemyOmniExplosionParticle> ptr) { this->wp_explosionParticle_ = ptr; }
 
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
@@ -137,6 +141,8 @@ protected:
 
 	// バーストパーティクル
 	std::weak_ptr<EnemyOmniBarstParticle> wp_BarstParticle_;
+	// エクスプロージョンパーティクル
+	std::weak_ptr<EnemyOmniExplosionParticle> wp_explosionParticle_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

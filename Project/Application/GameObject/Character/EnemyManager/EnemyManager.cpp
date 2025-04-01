@@ -172,10 +172,18 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::unique_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
+	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
+	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
+	newBarstPart->Init();
+	newBarstPart->Update();
+	newexplosionPart->Init();
+	newexplosionPart->Update();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetOmniBarstParticle(newBarstPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -183,15 +191,25 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	commonEnemies_.push_back(std::move(newEnemy));
+	barstParticles_.push_back(std::move(newBarstPart));
+	explosionParticles_.push_back(std::move(newexplosionPart));
 }
 void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::unique_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
+	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
+	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
+	newBarstPart->Init();
+	newBarstPart->Update();
+	newexplosionPart->Init();
+	newexplosionPart->Update();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetOmniBarstParticle(newBarstPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -199,6 +217,8 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	commonEnemies_.push_back(std::move(newEnemy));
+	barstParticles_.push_back(std::move(newBarstPart));
+	explosionParticles_.push_back(std::move(newexplosionPart));
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {

@@ -83,6 +83,10 @@ void StaticEnemy::Update()
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
 
+	// particleEmitterの座標更新
+	wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+	wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+
 
 #ifdef _DEBUG
 

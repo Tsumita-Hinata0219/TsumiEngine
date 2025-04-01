@@ -51,6 +51,11 @@ void EnemyManager::Update()
 		}
 	);
 
+	// OmniBarstParticleの更新処理
+	for (auto& particle : barstParticles_) {
+		particle->Update();
+	}
+
 	// 全滅したかのチェック
 	EliminatedChecker();
 
@@ -72,6 +77,10 @@ void EnemyManager::Draw3D()
 	}
 	for (auto& boss : bossEnemies_) {
 		boss->Draw3D();
+	}
+	// OmniBarstParticleListの描画
+	for (auto& particle : barstParticles_) {
+		particle->Draw();
 	}
 }
 
@@ -185,9 +194,11 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
-	// 新しいEnemyのインスタンス
+	// 新しいインスタンス
 	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
 	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
+	newBarstPart->Init();
+	newBarstPart->Update();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);

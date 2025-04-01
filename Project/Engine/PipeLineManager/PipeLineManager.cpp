@@ -102,6 +102,7 @@ void PipeLineManager::CreatePipeLine_Object3d()
 	pipeLineMaps_[Category::Object3D][SubFilter::Fill_Mode_Wireframe] = pipeline->SetUpPso();
 
 	// Depth Zero
+	pipeline->SetFillMode(D3D12_FILL_MODE_SOLID); // 塗りつぶし
 	pipeline->SetUpDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO); // DepthWriteMaskをZeroに設定
 	pipeLineMaps_[Category::Object3D][SubFilter::DepthWriteMask_Zero] = pipeline->SetUpPso();
 }

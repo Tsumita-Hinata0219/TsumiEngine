@@ -1,6 +1,7 @@
 #include "BossEnemy.h"
 #include "../../../Player/Player.h"
 #include "../../EnemyManager.h"
+#include "../../Effect/OmniBarst/EnemyOmniBarstParticle.h"
 
 
 /// <summary>
@@ -92,6 +93,8 @@ void BossEnemy::Update()
 	// コライダーの更新
 	sphere_->data_.center = trans_.GetWorldPos();
 
+	// particleEmitterの座標更新
+	wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
 
 #ifdef _DEBUG
 	DrawImGui();

@@ -12,10 +12,10 @@ void EnemyOmniBarstParticle::Init()
 	luaManager->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniBarst_EmitterRange.lua");
 	luaManager->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniBarst_EmitConfig.lua");
 	luaManager->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniBarst_ConstantField.lua");
-	sEmitLua_ = luaManager->GetScript("Duumy_SphereEmitter");
-	rangeLua_ = luaManager->GetScript("Dummy_EmitterRange");
-	configLua_ = luaManager->GetScript("Dummy_EmitConfig");
-	cFieldLua_ = luaManager->GetScript("Dummy_ConstantField");
+	sEmitLua_ = luaManager->GetScript("EnemyOmniBarst_SphereEmitter");
+	rangeLua_ = luaManager->GetScript("EnemyOmniBarst_EmitterRange");
+	configLua_ = luaManager->GetScript("EnemyOmniBarst_EmitConfig");
+	cFieldLua_ = luaManager->GetScript("EnemyOmniBarst_ConstantField");
 
 
 	emitter_->Load_EmitData_From_Lua(sEmitLua_);

@@ -179,21 +179,21 @@ void Player::onCollision([[maybe_unused]] IObject *object)
     if (object->GetCategory() == Attributes::Category::ENEMY &&
         object->GetType() == Attributes::Type::BULLET) {
 
-        // 体力が0以下なら通らない
-        if (hp_ <= HP_MIN)
-            return;
-        // 無敵状態なら通らない
-        if (isInvincibility_)
-            return;
+  //      // 体力が0以下なら通らない
+  //      if (hp_ <= HP_MIN)
+  //          return;
+  //      // 無敵状態なら通らない
+  //      if (isInvincibility_)
+  //          return;
 
-		// 敵の弾との衝突処理
-        OnCollisionWithEnemyBullet();
+		//// 敵の弾との衝突処理
+  //      OnCollisionWithEnemyBullet();
 
-        // 近くにある敵の弾を消す
-        sweepEraser_->StartSweep();
+  //      // 近くにある敵の弾を消す
+  //      sweepEraser_->StartSweep();
 
-        // カメラのシェイク処理
-        gameCamera_->ActivateShake();
+  //      // カメラのシェイク処理
+  //      gameCamera_->ActivateShake();
     }
 }
 void Player::OnCollisionWithEnemy() {}

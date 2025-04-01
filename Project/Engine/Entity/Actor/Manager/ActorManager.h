@@ -29,6 +29,8 @@ public:
 	/// Actorの追加処理
 	/// </summary>
 	void AddActor(std::shared_ptr<IActor> actor) {
+		// 初期化してMapに追加
+		actor->Init();
 		actorMap_[actor->GetName()] = actor;
 	}
 

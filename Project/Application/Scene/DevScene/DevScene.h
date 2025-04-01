@@ -5,6 +5,8 @@
 
 #include "GameObject/Terrain/Floor/Floor.h"
 
+#include "GameObject/Dev/DevActor/DevActor.h"
+
 
 class DevScene : public IScene {
 
@@ -59,6 +61,9 @@ private:
 	// カメラ
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
+
+	ActorManager* actorManager_ = nullptr;
+	TransformNodeManager* transNodeManager_ = nullptr;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

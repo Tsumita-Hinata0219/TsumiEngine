@@ -8,6 +8,8 @@
 DevScene::DevScene()
 {
 	cameraManager_ = CameraManager::GetInstance();
+	actorManager_ = ActorManager::GetInstance();
+	transNodeManager_ = TransformNodeManager::GetInstance();
 
 	floor_ = std::make_unique<Floor>();
 }
@@ -35,6 +37,8 @@ void DevScene::Initialize()
 	floor_->Init();
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
 	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
+
+	actorManager_->AddActor(std::make_shared<DevActor>());
 }
 
 
@@ -80,5 +84,5 @@ void DevScene::FrontSpriteDraw()
 void DevScene::LoadData()
 {
 	auto assetManager = RenderSystem::RenderAssetManager::GetInstance();
-	assetManager->LoadData("", "");
+	assetManager->LoadData("Obj/Dev/Axis", "Axis.obj");
 }

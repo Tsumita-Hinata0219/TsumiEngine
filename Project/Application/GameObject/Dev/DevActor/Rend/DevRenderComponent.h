@@ -19,7 +19,7 @@ private:
 
 inline void DevRenderComponent::Create()
 {
-	renderState_->SetRenderData("Dev");
+	renderState_->SetRenderData("Axis");
 }
 
 inline void DevRenderComponent::Update()

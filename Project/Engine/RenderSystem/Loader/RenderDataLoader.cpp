@@ -17,10 +17,24 @@ RenderSystem::Rendering::SceneData RenderSystem::Loader::LoadObj(const std::stri
 	Assimp::Importer importer;
 	string file = ("Resources/" + path + "/" + fileName);
 
-	//三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene =
-		importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
+	// 読み込む前にファイルの存在をチェック
+	std::ifstream f(file);
+	if (!f.good()) {
+		throw std::runtime_error("Error: Could not open file " + file);
+	}
+
+	// 三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+
+	// ファイル読み込みエラーチェック
+	if (!scene) {
+		throw std::runtime_error("Error: " + std::string(importer.GetErrorString()));
+	}
+
+	// メッシュが存在しない場合のエラーチェック
+	if (!scene->HasMeshes()) {
+		throw std::runtime_error("Error: The file does not contain any meshes.");
+	}
 
 	// mesh & indicesを解析する
 	result.mesh = ParseMeshData(scene, result.fileFormat);
@@ -51,10 +65,24 @@ RenderSystem::Rendering::SceneData RenderSystem::Loader::LoadGLTF(const std::str
 	Assimp::Importer importer;
 	string file = ("Resources/" + path + "/" + fileName);
 
-	//三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
-	const aiScene* scene =
-		importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
-	assert(scene->HasMeshes()); // メッシュがないのは対応しない
+	// 読み込む前にファイルの存在をチェック
+	std::ifstream f(file);
+	if (!f.good()) {
+		throw std::runtime_error("Error: Could not open file " + file);
+	}
+
+	// 三角形の並び順を逆にする。UVをフリップする(texcoord.y = 1.0f - texcoord.y;の処理)
+	const aiScene* scene = importer.ReadFile(file.c_str(), aiProcess_FlipWindingOrder | aiProcess_FlipUVs);
+
+	// ファイル読み込みエラーチェック
+	if (!scene) {
+		throw std::runtime_error("Error: " + std::string(importer.GetErrorString()));
+	}
+
+	// メッシュが存在しない場合のエラーチェック
+	if (!scene->HasMeshes()) {
+		throw std::runtime_error("Error: The file does not contain any meshes.");
+	}
 
 	// mesh & indicesを解析する
 	result.mesh = ParseMeshData(scene, result.fileFormat);

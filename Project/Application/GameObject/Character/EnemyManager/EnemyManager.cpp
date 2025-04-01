@@ -25,31 +25,31 @@ void EnemyManager::Update()
 	// 全滅していたら処理を通さない
 	if (isBossEliminated_) { return; }
 
-	//// EnemyListの更新処理
-	//for (auto& enemy : commonEnemies_) {
-	//	enemy->Update();
-	//}
-	//// 死亡フラグが立っていたら削除
-	//commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
-	//	if (enemy->IsDead()) {
-	//		return true;
-	//	}
-	//	return false;
-	//	}
-	//);
+	// EnemyListの更新処理
+	for (auto& enemy : commonEnemies_) {
+		enemy->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	commonEnemies_.remove_if([](std::unique_ptr<IEnemy>& enemy) {
+		if (enemy->IsDead()) {
+			return true;
+		}
+		return false;
+		}
+	);
 
-	//// BossEnemyListの更新処理
-	//for (auto& boss : bossEnemies_) {
-	//	boss->Update();
-	//}
-	//// 死亡フラグが立っていたら削除
-	//bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
-	//	if (boss->IsDead()) {
-	//		return true;
-	//	}
-	//	return false;
-	//	}
-	//);
+	// BossEnemyListの更新処理
+	for (auto& boss : bossEnemies_) {
+		boss->Update();
+	}
+	// 死亡フラグが立っていたら削除
+	bossEnemies_.remove_if([](std::unique_ptr<BossEnemy>& boss) {
+		if (boss->IsDead()) {
+			return true;
+		}
+		return false;
+		}
+	);
 
 	// 全滅したかのチェック
 	EliminatedChecker();

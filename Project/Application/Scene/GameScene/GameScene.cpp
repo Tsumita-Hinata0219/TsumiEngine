@@ -166,7 +166,7 @@ void GameScene::Update()
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
-		return;
+		//return;
 	}
 
 	// ポーズ処理

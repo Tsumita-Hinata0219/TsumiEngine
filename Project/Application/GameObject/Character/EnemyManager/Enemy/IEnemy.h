@@ -17,6 +17,7 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
+class EnemyOmniBarstParticle;
 struct SRTData;
 
 
@@ -38,6 +39,9 @@ public:
 
 	// EnemyManagerの設定
 	virtual void SetEnemyManager(EnemyManager* setManager) { this->enemyManager_ = setManager; }
+
+	// OmniBarstParticleの設定
+	virtual void SetOmniBarstParticle(std::weak_ptr<EnemyOmniBarstParticle> ptr) { this->wp_BarstParticle_ = ptr; }
 
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
@@ -130,6 +134,9 @@ protected:
 
 	// エフェクト管理クラス
 	std::unique_ptr<EnemyEffectContainer> effectContainer_;
+
+	// バーストパーティクル
+	std::weak_ptr<EnemyOmniBarstParticle> wp_BarstParticle_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

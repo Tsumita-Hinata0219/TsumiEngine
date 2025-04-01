@@ -38,3 +38,13 @@ void EnemyOmniBarstParticle::Draw()
 void EnemyOmniBarstParticle::Emit()
 {
 }
+
+void EnemyOmniBarstParticle::SetEmitPos(Vector3 setPos)
+{
+	if (auto lokedData = emitter_->GetWeak_EmitData().lock()) {
+		Vector4 newPos = {
+			setPos.x, setPos.y, setPos.z, 0.0f
+		};
+		lokedData->translate = newPos;
+	}
+}

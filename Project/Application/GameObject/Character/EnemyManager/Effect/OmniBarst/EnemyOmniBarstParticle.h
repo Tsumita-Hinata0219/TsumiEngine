@@ -18,6 +18,8 @@ public:
 	
 	void Emit();
 
+	void SetEmitPos(Vector3 setPos);
+
 private:
 
 	std::unique_ptr<Emitter::SphereEmitter> emitter_;

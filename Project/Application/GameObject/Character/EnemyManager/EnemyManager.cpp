@@ -187,10 +187,12 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
+	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
+	newEnemy->SetOmniBarstParticle(newBarstPart);
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -198,6 +200,7 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	bossEnemies_.push_back(std::move(newEnemy));
+	barstParticles_.push_back(std::move(newBarstPart));
 }
 
 

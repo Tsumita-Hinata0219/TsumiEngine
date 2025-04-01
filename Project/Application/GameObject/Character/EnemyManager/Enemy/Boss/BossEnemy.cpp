@@ -82,7 +82,7 @@ void BossEnemy::Update()
 	shield_->Update();
 
 	// 移動処理
-	movement_->Update();
+	//movement_->Update();
 
 	// 射撃処理
 	bulletContainer_->Update();

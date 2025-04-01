@@ -61,10 +61,7 @@ void DebugScene::Update()
 /// <summary>
 /// 背景スプライトの描画処理
 /// </summary>
-void DebugScene::BackSpriteDraw()
-{
-
-}
+void DebugScene::BackSpriteDraw() {}
 
 
 /// <summary>
@@ -80,7 +77,4 @@ void DebugScene::ModelDraw()
 /// <summary>
 /// 前景スプライトの描画処理
 /// </summary>
-void DebugScene::FrontSpriteDraw()
-{
-	
-}
+void DebugScene::FrontSpriteDraw() {}

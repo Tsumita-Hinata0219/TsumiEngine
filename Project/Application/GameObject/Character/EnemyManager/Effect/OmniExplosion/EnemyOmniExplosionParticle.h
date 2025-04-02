@@ -20,6 +20,12 @@ public:
 
 	void SetEmitPos(Vector3 setPos);
 
+
+	void ReLoad_EmitData();
+	void ReLoad_RangeData();
+	void ReLoad_ComfigData();
+	void ReLoad_FieldData();
+
 private:
 
 	std::unique_ptr<Emitter::SphereEmitter> emitter_;

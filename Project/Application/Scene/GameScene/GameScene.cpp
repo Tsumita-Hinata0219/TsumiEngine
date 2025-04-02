@@ -9,6 +9,7 @@ GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
+	luaManager_ = LuaManager::GetInstance();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	pauseManager_ = std::make_unique<PauseManager>();
@@ -166,7 +167,6 @@ void GameScene::Update()
 	// シーントランジション中は以下の処理に入らない
 	if (sceneTransition_->GetNowState() == TransitionState::Opening ||
 		sceneTransition_->GetNowState() == TransitionState::Closing) {
-		enemyManager_->Update();
 		return;
 	}
 
@@ -203,6 +203,7 @@ void GameScene::Update()
 
 
 #ifdef _DEBUG
+	luaManager_->MonitorScript();
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
 	retroEffectData_.DrawImGui("");

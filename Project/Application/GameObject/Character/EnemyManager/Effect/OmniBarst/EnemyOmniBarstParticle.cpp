@@ -18,10 +18,18 @@ void EnemyOmniBarstParticle::Init()
 	cFieldLua_ = luaManager->GetScript("EnemyOmniBarst_ConstantField");
 
 
+	// Luaから値を受け取る
 	emitter_->Load_EmitData_From_Lua(sEmitLua_);
+	sEmitLua_.lock()->SetReloadCallback([this]() { ReLoad_EmitData(); });
+
 	emitter_->Load_EmitRangeData_From_Lua(rangeLua_);
+	rangeLua_.lock()->SetReloadCallback([this]() { ReLoad_RangeData(); });
+
 	emitter_->Load_EmitConfigData_From_Lua(configLua_);
+	configLua_.lock()->SetReloadCallback([this]() { ReLoad_ComfigData(); });
+
 	field_->Load_FieldData_From_Lua(cFieldLua_);
+	cFieldLua_.lock()->SetReloadCallback([this]() { ReLoad_FieldData(); });
 }
 
 void EnemyOmniBarstParticle::Update()
@@ -47,4 +55,25 @@ void EnemyOmniBarstParticle::SetEmitPos(Vector3 setPos)
 		};
 		lokedData->translate = newPos;
 	}
+}
+
+
+void EnemyOmniBarstParticle::ReLoad_EmitData()
+{
+	emitter_->Load_EmitData_From_Lua(sEmitLua_);
+}
+
+void EnemyOmniBarstParticle::ReLoad_RangeData()
+{
+	emitter_->Load_EmitRangeData_From_Lua(rangeLua_);
+}
+
+void EnemyOmniBarstParticle::ReLoad_ComfigData()
+{
+	emitter_->Load_EmitConfigData_From_Lua(configLua_);
+}
+
+void EnemyOmniBarstParticle::ReLoad_FieldData()
+{
+	field_->Load_FieldData_From_Lua(cFieldLua_);
 }

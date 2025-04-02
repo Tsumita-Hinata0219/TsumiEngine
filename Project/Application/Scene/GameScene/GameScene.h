@@ -87,6 +87,9 @@ private: // クラス
 	// FlagManager
 	FlagManager* flagManager_ = nullptr; // シングルトン
 
+	// LuaManager
+	LuaManager* luaManager_ = nullptr;
+
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;
 

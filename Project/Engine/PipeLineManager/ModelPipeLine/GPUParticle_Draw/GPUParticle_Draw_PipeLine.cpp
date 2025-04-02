@@ -30,7 +30,7 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SetUpRasterizerState(rasterizerDesc, cullMode_, D3D12_FILL_MODE_SOLID);
+	SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 
 	/* --- Shaderを設定する --- */

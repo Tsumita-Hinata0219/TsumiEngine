@@ -9,7 +9,7 @@
 void GPUParticle::Init(uint32_t instanceNum)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
-	modelManager->LoadModel("Obj/Dev/Test", "Test.obj");
+	modelManager->LoadModel("Obj/Dev/Axis", "Axis.obj");
 	model_ = modelManager->GetModel("Test");
 
 	// CameraManagerのインスタンス取得

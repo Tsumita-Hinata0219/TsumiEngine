@@ -10,6 +10,7 @@ DebugScene::DebugScene()
 	cameraManager_ = CameraManager::GetInstance();
 	luaManager_ = LuaManager::GetInstance();
 	dummyParticle_ = std::make_unique<DummyParticle>();
+	modelManager_ = ModelManager::GetInstance();
 	floor_ = std::make_unique<Floor>();
 }
 
@@ -27,13 +28,19 @@ void DebugScene::Initialize()
 {
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({0.15f, -0.3f, 0.0f}, {7.0f, 4.0f, -20.0f});
+	cameraData_.lock()->Init({0.45f, 0.0f, 0.0f}, {0.0f, 25.0f, -50.0f});
 
 	floor_->Init();
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
-	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
+	floor_->SetTranslate(Vector3{ 0.0f, -2.5f, 0.0f });
 
 	dummyParticle_->Init();
+
+
+	// 確認用Emitterの描画用
+	model_ = modelManager_->GetModel("Test");
+	trans_.Init();
+	trans_.srt.translate.y = 1.0f;
 }
 
 
@@ -47,6 +54,8 @@ void DebugScene::Update()
 	floor_->Update();
 
 	dummyParticle_->Update();
+
+	//trans_.srt.rotate.y += 0.01f;
 
 
 #ifdef _DEBUG
@@ -70,6 +79,7 @@ void DebugScene::BackSpriteDraw() {}
 void DebugScene::ModelDraw()
 {
 	floor_->Draw3D();
+	model_->Draw(trans_);
 	dummyParticle_->Draw();
 }
 

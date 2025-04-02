@@ -204,6 +204,9 @@ inline void IEmitter<T>::Draw3D()
 template<typename T>
 inline void IEmitter<T>::Emit()
 {
+	// データ書き込み
+	WriteData();
+
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 

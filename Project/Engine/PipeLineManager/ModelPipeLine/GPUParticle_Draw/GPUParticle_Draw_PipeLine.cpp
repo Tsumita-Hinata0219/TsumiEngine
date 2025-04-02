@@ -71,7 +71,6 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 
 
-
 	// どのように画面に色を打ち込むかの設定(気にしなくて良い)
 	graphicsPipelineStateDesc.SampleDesc.Count = 1;
 	graphicsPipelineStateDesc.SampleMask = D3D12_DEFAULT_SAMPLE_MASK;

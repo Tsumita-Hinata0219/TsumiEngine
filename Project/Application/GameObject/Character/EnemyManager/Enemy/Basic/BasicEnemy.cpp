@@ -144,6 +144,11 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
+
+			// particleを出す
+			wp_BarstParticle_.lock()->Emit();
+			wp_explosionParticle_.lock()->Emit();
+
 			// 死亡状態に設定
 			MarkAsDead();
 			player_->AddKillCount();

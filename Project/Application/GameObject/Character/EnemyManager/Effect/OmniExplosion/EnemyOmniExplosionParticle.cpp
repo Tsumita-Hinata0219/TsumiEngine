@@ -34,7 +34,6 @@ void EnemyOmniExplosionParticle::Init()
 
 void EnemyOmniExplosionParticle::Update()
 {
-	emitter_->Update();
 	field_->Update();
 }
 
@@ -45,6 +44,7 @@ void EnemyOmniExplosionParticle::Draw()
 
 void EnemyOmniExplosionParticle::Emit()
 {
+	emitter_->Update();
 }
 
 void EnemyOmniExplosionParticle::SetEmitPos(Vector3 setPos)

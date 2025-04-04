@@ -83,11 +83,6 @@ void StaticEnemy::Update()
 	// ColliderのSRTの設定
 	sphere_->data_.center = trans_.GetWorldPos();
 
-	// particleEmitterの座標更新
-	wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-	wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-
-
 #ifdef _DEBUG
 
 #endif // _DEBUG
@@ -132,6 +127,14 @@ void StaticEnemy::onCollision(IObject* object)
 
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
+
+			// particleEmitterの座標更新
+			wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+
+			// particleを出す
+			wp_BarstParticle_.lock()->Update();
+			wp_explosionParticle_.lock()->Update();
 
 			// particleを出す
 			wp_BarstParticle_.lock()->Emit();

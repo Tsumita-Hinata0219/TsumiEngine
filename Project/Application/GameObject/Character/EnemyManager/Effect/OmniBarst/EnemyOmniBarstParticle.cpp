@@ -34,6 +34,7 @@ void EnemyOmniBarstParticle::Init()
 
 void EnemyOmniBarstParticle::Update()
 {
+	emitter_->Update();
 	field_->Update();
 }
 
@@ -44,7 +45,7 @@ void EnemyOmniBarstParticle::Draw()
 
 void EnemyOmniBarstParticle::Emit()
 {
-	emitter_->Update();
+	emitter_->Emit();
 }
 
 void EnemyOmniBarstParticle::SetEmitPos(Vector3 setPos)

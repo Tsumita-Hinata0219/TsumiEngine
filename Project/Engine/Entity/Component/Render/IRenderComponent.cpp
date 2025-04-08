@@ -3,9 +3,9 @@
 
 
 /// <summary>
-/// コンストラクタ
+/// 生成
 /// </summary>
-IRenderComponent::IRenderComponent()
+void IRenderComponent::Create()
 {
 	renderState_ = std::make_unique<RenderSystem::RenderState>(owner_);
 }

@@ -29,8 +29,17 @@ public:
 	/// Actorの追加処理
 	/// </summary>
 	void AddActor(std::shared_ptr<IActor> actor) {
-		// 初期化してMapに追加
+
+		// 名前で検索をかける
+		auto it = actorMap_.find(actor->GetName());
+		// 既に存在していたら早期return	
+		if (it != actorMap_.end()) {
+			return;
+		}
+
+		// 初期化処理
 		actor->Init();
+		// Mapに登録して所有者を決める
 		actorMap_[actor->GetName()] = actor;
 	}
 

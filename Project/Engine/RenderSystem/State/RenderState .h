@@ -21,14 +21,13 @@ class RenderState {
 
 private:
 
+	// 親Actorの名前
+	std::string ownerName_;
+
 	// 描画に必要なDeta
 	RenderSystem::Rendering::SceneData datas_;
-
 	// GPUに送るBuffer
 	std::unique_ptr<RenderSystem::Rendering::BufferResources> buffers_;
-
-	// 親Actor
-	std::weak_ptr<IActor> owner_;
 
 	// CameraManager
 	CameraManager* cameraManager_ = nullptr;

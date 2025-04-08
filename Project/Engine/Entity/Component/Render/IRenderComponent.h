@@ -13,7 +13,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IRenderComponent();
+	IRenderComponent() = default;
 
 	/// <summary>
 	/// 仮想デストラクタ
@@ -23,7 +23,12 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	virtual void Create() {};
+	void Create();
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	virtual void Init() {};
 
 	/// <summary>
 	/// 更新処理
@@ -38,7 +43,10 @@ public:
 
 #pragma region Accessor 
 
-	void SetOwner(std::weak_ptr<IActor> owner) { owner_ = owner; }
+	void SetOwner(std::weak_ptr<IActor> owner) 
+	{ 
+		owner_ = owner;
+	}
 
 #pragma endregion 
 

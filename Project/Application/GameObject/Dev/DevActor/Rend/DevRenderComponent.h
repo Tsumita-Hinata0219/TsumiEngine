@@ -10,15 +10,16 @@ public:
 	DevRenderComponent() = default;
 	~DevRenderComponent() = default;
 
-	void Create() override;
+	void Init() override;
 	void Update() override;
 
 private:
 
 };
 
-inline void DevRenderComponent::Create()
+inline void DevRenderComponent::Init()
 {
+	IRenderComponent::Create();
 	renderState_->SetRenderData("Axis");
 }
 

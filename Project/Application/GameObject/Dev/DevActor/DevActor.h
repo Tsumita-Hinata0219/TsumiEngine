@@ -11,7 +11,7 @@ private:
 
 public:
 
-	DevActor() = default;
+	DevActor();
 	~DevActor() = default;
 
 	void Init() override;

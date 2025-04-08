@@ -19,6 +19,12 @@ public:
 	/// </summary>
 	virtual ~IComponent() = default;
 
+
+	/// <summary>
+	/// 初期化処理
+	/// </summary>
+	virtual void Init() {};
+
 	/// <summary>
 	/// 更新処理
 	/// </summary>

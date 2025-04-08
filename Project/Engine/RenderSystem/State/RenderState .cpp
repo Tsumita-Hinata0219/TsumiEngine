@@ -10,8 +10,9 @@
 /// </summary>
 RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
+	ownerName_ = owner.lock()->GetName();
+
 	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
-	owner_ = owner;
 
 	cameraManager_ = CameraManager::GetInstance();
 	transformNodeManager_ = TransformNodeManager::GetInstance();
@@ -143,7 +144,7 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->indices.IASetIndexBuffer();
 
 	// Transform
-	transformNodeManager_->Bind_CBV(owner_.lock()->GetName(), 1);
+	transformNodeManager_->Bind_CBV("", 1);
 
 	// Material
 	buffers_->material.BindGraphicsCBV(2);

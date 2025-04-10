@@ -99,7 +99,7 @@ private:
     }
 
 
-private:
+protected:
 
     // 名前
     std::string name_;

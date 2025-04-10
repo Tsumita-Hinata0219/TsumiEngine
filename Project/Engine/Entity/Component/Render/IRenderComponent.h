@@ -23,7 +23,7 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create();
+	void Create(const std::string& renderDataName = "Test");
 
 	/// <summary>
 	/// 初期化処理

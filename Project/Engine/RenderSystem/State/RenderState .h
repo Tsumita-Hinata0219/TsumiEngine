@@ -57,17 +57,17 @@ public:
 	void SetRenderData(const std::string& assetName);
 
 	/// <summary>
+	/// Buffer生成
+	/// </summary>
+	void Create_RenderBuffer();
+
+	/// <summary>
 	/// 描画処理
 	/// </summary>
 	void Draw3D();
 
 
 private:
-
-	/// <summary>
-	/// Buffer生成
-	/// </summary>
-	void Create_RenderBuffer();
 
 	/// <summary>
 	/// 描画データの更新

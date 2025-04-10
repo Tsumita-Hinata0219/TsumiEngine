@@ -48,8 +48,8 @@ void IActor::Update(float deltaTime)
 {
 	// ステートアクティブ時、更新
 	if (state_ == State::Active) {
-		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
+		UpdateComponents(deltaTime);
 	}
 }
 void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 

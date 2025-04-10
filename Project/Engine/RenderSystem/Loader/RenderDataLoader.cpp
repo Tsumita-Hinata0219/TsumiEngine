@@ -197,10 +197,6 @@ RenderSystem::Material::MaterialData RenderSystem::Loader::ParseMaterialData(con
 				result.textureHandle = TextureManager::LoadTexture(filePath, textureFilePath.C_Str());
 			}
 		}
-
-		// マテリアルの名前の設定
-		// 複数マテリアルは今は非対応。ファイルの名前をそのままマテリアルの名前へ
-		result.name = material->GetName().C_Str();
 	}
 
 	return result;

@@ -5,9 +5,11 @@
 /// <summary>
 /// 生成
 /// </summary>
-void IRenderComponent::Create()
+void IRenderComponent::Create(const std::string& renderDataName)
 {
 	renderState_ = std::make_unique<RenderSystem::RenderState>(owner_);
+	renderState_->SetRenderData(renderDataName);
+	renderState_->Create_RenderBuffer();
 }
 
 

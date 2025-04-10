@@ -10,14 +10,13 @@
 /// </summary>
 RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
-	ownerName_ = owner.lock()->GetName();
-
-	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
-
 	cameraManager_ = CameraManager::GetInstance();
 	transformNodeManager_ = TransformNodeManager::GetInstance();
 	pipeLineManager_ = PipeLineManager::GetInstance();
 	renderAssetManager_ = RenderSystem::RenderAssetManager::GetInstance();
+
+	ownerName_ = owner.lock()->GetName();
+	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
 }
 
 
@@ -32,22 +31,6 @@ void RenderSystem::RenderState::SetRenderData(const std::string& assetName)
 	if (sceneDataOpt.has_value()) {
 		datas_ = sceneDataOpt.value();
 	}
-}
-
-
-/// <summary>
-/// 描画処理
-/// </summary>
-void RenderSystem::RenderState::Draw3D()
-{
-	// 描画データの更新
-	Update_RenderData();
-	// PipeLineのチェック
-	Check_PipeLine();
-	// 描画データのバインド
-	Bind_RenderData();
-	// Draw!
-	Execute_DrawCommand();
 }
 
 
@@ -79,6 +62,23 @@ void RenderSystem::RenderState::Create_RenderBuffer()
 	// ColorAddition
 	buffers_->colorAddition.CreateCBV();
 }
+
+
+/// <summary>
+/// 描画処理
+/// </summary>
+void RenderSystem::RenderState::Draw3D()
+{
+	// 描画データの更新
+	Update_RenderData();
+	// PipeLineのチェック
+	Check_PipeLine();
+	// 描画データのバインド
+	Bind_RenderData();
+	// Draw!
+	Execute_DrawCommand();
+}
+
 
 
 /// <summary>
@@ -144,10 +144,10 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->indices.IASetIndexBuffer();
 
 	// Transform
-	transformNodeManager_->Bind_CBV("", 1);
+	transformNodeManager_->Bind_CBV(ownerName_, 0);
 
 	// Material
-	buffers_->material.BindGraphicsCBV(2);
+	buffers_->material.BindGraphicsCBV(1);
 
 	// Camera
 	cameraManager_->Bind_CameraData(2);

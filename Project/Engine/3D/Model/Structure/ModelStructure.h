@@ -18,7 +18,6 @@ struct MaterialDataN {
 	Vector4 color = Vector4::one;
 	Matrix4x4 uvTransform = Matrix4x4::identity;
 	uint32_t textureHandle = 1u;
-	std::string name = "default";
 };
 
 // ライトデータ

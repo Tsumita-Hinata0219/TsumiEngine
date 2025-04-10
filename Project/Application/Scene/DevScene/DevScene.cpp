@@ -32,7 +32,7 @@ void DevScene::Initialize()
 
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({ 0.15f, -0.3f, 0.0f }, { 7.0f, 4.0f, -20.0f });
+	cameraData_.lock()->Init({ 0.15f, 0.0f, 0.0f }, { 0.0f, 4.0f, -20.0f });
 
 	floor_->Init();
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
@@ -48,8 +48,13 @@ void DevScene::Initialize()
 void DevScene::Update()
 {
 	cameraData_.lock()->Update();
+	cameraData_.lock()->DrawImGui();
 
 	floor_->Update();
+
+
+	actorManager_->UpdateActors();
+	transNodeManager_->Update();
 }
 
 
@@ -67,6 +72,7 @@ void DevScene::BackSpriteDraw()
 void DevScene::ModelDraw()
 {
 	floor_->Draw3D();
+	actorManager_->RenderActors();
 }
 
 

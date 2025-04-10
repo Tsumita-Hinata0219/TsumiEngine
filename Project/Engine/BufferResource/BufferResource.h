@@ -122,6 +122,9 @@ private:
 	// Index
 	uint32_t srvIndex_ = 0;
 	//uint32_t uavIndex_ = 0;
+
+	// Size
+	uint32_t resourceSize_ = 0;
 };
 
 
@@ -304,26 +307,27 @@ inline void BufferResource<T>::CreateCBVResource()
 	uploadHeapProperties_.Type = D3D12_HEAP_TYPE_UPLOAD; // UploadHeapを使う
 
 	// BufferResource。Textureの場合はまた別の設定をする
-	D3D12_RESOURCE_DESC vertexResourceDesc_{};
-	vertexResourceDesc_.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
+	D3D12_RESOURCE_DESC resourceDesc{};
+	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 
 	// Resourceのサイズ
-	vertexResourceDesc_.Width = sizeof(T) * itemCount_;
+	this->resourceSize_ = sizeof(T) * itemCount_;
+	resourceDesc.Width = resourceSize_;
 
 	// Bufferの場合はこれらは1にする決まり
-	vertexResourceDesc_.Height = 1;
-	vertexResourceDesc_.DepthOrArraySize = 1;
-	vertexResourceDesc_.MipLevels = 1;
-	vertexResourceDesc_.SampleDesc.Count = 1;
+	resourceDesc.Height = 1;
+	resourceDesc.DepthOrArraySize = 1;
+	resourceDesc.MipLevels = 1;
+	resourceDesc.SampleDesc.Count = 1;
 
 	// Bufferの場合はこれにする決まり
-	vertexResourceDesc_.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
+	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 
 	// 実際にBufferResourceを作る
 	HRESULT hr_;
 	hr_ = DirectXManager::GetInstance()->GetDevice()->CreateCommittedResource(
 		&uploadHeapProperties_, D3D12_HEAP_FLAG_NONE,
-		&vertexResourceDesc_, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
+		&resourceDesc, D3D12_RESOURCE_STATE_GENERIC_READ, nullptr,
 		IID_PPV_ARGS(&buffer_));
 	assert(SUCCEEDED(hr_));
 	if (FAILED(hr_)) {
@@ -346,13 +350,17 @@ inline void BufferResource<T>::CreateUAVResource()
 	resourceDesc.Dimension = D3D12_RESOURCE_DIMENSION_BUFFER;
 	// 専用のフラグを立てる
 	resourceDesc.Flags = D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
+
 	// Resourceのサイズ
-	resourceDesc.Width = sizeof(T) * itemCount_;
+	this->resourceSize_ = sizeof(T) * itemCount_;
+	resourceDesc.Width = resourceSize_;
+
 	// Bufferの場合はこれらは1にする決まり
 	resourceDesc.Height = 1;
 	resourceDesc.DepthOrArraySize = 1;
 	resourceDesc.MipLevels = 1;
 	resourceDesc.SampleDesc.Count = 1;
+
 	// Bufferの場合はこれにする決まり
 	resourceDesc.Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR;
 

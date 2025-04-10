@@ -196,6 +196,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
@@ -518,6 +519,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Entity\Actor\Manager\ActorManager.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
+    <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Manager\TransformNodeManager.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />

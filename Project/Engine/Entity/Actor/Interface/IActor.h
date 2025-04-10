@@ -15,6 +15,7 @@ public:
 
     // 状態
     enum class State {
+        None = -1,
         Active,
         Paused,
         Dead,

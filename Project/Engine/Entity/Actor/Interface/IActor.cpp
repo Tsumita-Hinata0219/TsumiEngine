@@ -87,27 +87,30 @@ void IActor::AddComponent(std::shared_ptr<IComponent> component)
 		return;
 	}
 
-	// なければComponentにOwnerを設定して、Mapに追加
-	component->SetOwner(GetSharedPtr());
-	component->Init();
-	componentMap_[component->Get_Name()] = component;
+	std::string name = component->Get_Name();
+	auto& newComponent = component;
+
+	newComponent->SetOwner(GetSharedPtr()); // Ownerの設定
+	newComponent->Init();                   // 初期化処理
+	componentMap_[name] = newComponent;     // Mapに追加
 }
 
 
 /// <summary>
 /// Renderコンポーネントの追加
 /// </summary>
-void IActor::AddRenderComponent(std::shared_ptr<IRenderComponent> component)
+void IActor::AddComponent(std::shared_ptr<IRenderComponent> component)
 {
 	// 既に存在していたら早期return
 	if (renderComponent_) {
 		return;
 	}
 
-	// なければComponentを設定
-	renderComponent_ = component;
-	renderComponent_->SetOwner(GetSharedPtr());
-	renderComponent_->Init();
+	auto& newComponent = component;
+
+	newComponent->SetOwner(GetSharedPtr()); // Ownerの設定
+	newComponent->Init();                   // 初期化処理
+	renderComponent_ = newComponent;
 	isRender_ = true;
 }
 

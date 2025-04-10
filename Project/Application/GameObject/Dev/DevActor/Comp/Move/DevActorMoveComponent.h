@@ -21,10 +21,10 @@ private:
 
 inline void DevActorMoveComponent::Init()
 {
-	IComponent::Init();
+	IComponent::Create("DevActorMove");
 }
 
 inline void DevActorMoveComponent::Update(float deltaTime)
 {
-	
+	deltaTime;
 }

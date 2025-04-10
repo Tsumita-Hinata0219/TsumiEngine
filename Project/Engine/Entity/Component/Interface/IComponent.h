@@ -19,6 +19,10 @@ public:
 	/// </summary>
 	virtual ~IComponent() = default;
 
+	/// <summary>
+	/// 生成
+	/// </summary>
+	void Create(const std::string& name);
 
 	/// <summary>
 	/// 初期化処理

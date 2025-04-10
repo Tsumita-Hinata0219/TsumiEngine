@@ -7,7 +7,8 @@ DevActor::DevActor()
 
 void DevActor::Init()
 {
-	IActor::AddRenderComponent(std::make_shared<DevRenderComponent>());
+	IActor::AddComponent(std::make_shared<DevActorMoveComponent>());
+	IActor::AddComponent(std::make_shared<DevRenderComponent>());
 }
 
 void DevActor::UpdateActor(float deltaTime)

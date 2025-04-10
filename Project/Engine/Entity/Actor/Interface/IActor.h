@@ -60,7 +60,7 @@ public:
     /// <summary>
     /// RenderComponentの追加
     /// </summary>
-    void AddRenderComponent(std::shared_ptr<IRenderComponent> component);
+    void AddComponent(std::shared_ptr<IRenderComponent> component);
 
     /// <summary>
 	/// ComponentのWeakPtr取得

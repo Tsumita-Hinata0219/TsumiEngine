@@ -6,11 +6,6 @@
 #include "Entity/Component/Interface/IComponent.h"
 #include "Entity/Component/Render/IRenderComponent.h"
 
-#include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/ParticleField.h"
-#include "GPUParticle/Field/Constant/ConstantField.h"
-#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
-
 #include "Lua/Manager/LuaManager.h"
 #include "Lua/Script/LuaScript.h"
 
@@ -20,6 +15,11 @@
 #include "TextureManager/TextureManager.h"
 #include "Audio/Audio.h"
 #include "Input/Input.h"
+
+#include "GPUParticle/Particle/GPUParticle.h"
+#include "GPUParticle/Field/ParticleField.h"
+#include "GPUParticle/Field/Constant/ConstantField.h"
+#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
 
 #include "Utilities/ImGuiManager/ImGuiManager.h"
 #include "Utilities/ObjectPool/ObjectPool.h"

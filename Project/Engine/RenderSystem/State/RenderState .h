@@ -2,14 +2,13 @@
 
 #include "Math/MyMath.h"
 #include "../Structure/RenderStructure.h"
-#include "Entity/Actor/Interface/IActor.h"
+#include "Entity/TransformNode/Node/TransformNode.h"
 
 
 // 前方宣言
+class IActor;
 class CameraManager;
-class TransformNodeManager;
 class PipeLineManager;
-
 
 namespace RenderSystem {
 
@@ -21,8 +20,8 @@ class RenderState {
 
 private:
 
-	// 親Actorの名前
-	std::string ownerName_;
+	// 親ActorのTransformNode
+	std::weak_ptr<TransformNode> transNode_;
 
 	// 描画に必要なDeta
 	RenderSystem::Rendering::SceneData datas_;
@@ -31,8 +30,6 @@ private:
 
 	// CameraManager
 	CameraManager* cameraManager_ = nullptr;
-	// TransformNodeManager
-	TransformNodeManager* transformNodeManager_ = nullptr;
 	// PipeLineManager
 	PipeLineManager* pipeLineManager_ = nullptr;
 	// RenderAssetManager

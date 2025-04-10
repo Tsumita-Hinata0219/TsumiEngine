@@ -1,8 +1,8 @@
 #include "RenderState .h"
 #include "Camera/Manager/CameraManager.h"
-#include "Entity/TransformNode/Manager/TransformNodeManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "RenderSystem/Asset/RenderAssetManager.h"
+#include "Entity/Actor/Interface/IActor.h"
 
 
 /// <summary>
@@ -11,11 +11,10 @@
 RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
 	cameraManager_ = CameraManager::GetInstance();
-	transformNodeManager_ = TransformNodeManager::GetInstance();
 	pipeLineManager_ = PipeLineManager::GetInstance();
 	renderAssetManager_ = RenderSystem::RenderAssetManager::GetInstance();
 
-	ownerName_ = owner.lock()->GetName();
+	transNode_ = owner.lock()->GetTransformNode();
 	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();
 }
 
@@ -144,7 +143,7 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->indices.IASetIndexBuffer();
 
 	// Transform
-	transformNodeManager_->Bind_CBV(ownerName_, 0);
+	transNode_.lock()->Bind_CBV(0);
 
 	// Material
 	buffers_->material.BindGraphicsCBV(1);

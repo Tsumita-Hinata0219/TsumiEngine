@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "Scene/IScene.h"
 #include "../../TransformNode/Node/TransformNode.h"
 
 // 前方宣言
 class IComponent;
 class IRenderComponent;
+//class GameEntityManager;
 
 /* ゲーム内オブジェクトの基底クラス */
 class IActor : public std::enable_shared_from_this<IActor> {
@@ -83,8 +83,14 @@ public:
     // 名前
     std::string GetName() const { return name_; }
 
+	// TransformNode
+	std::weak_ptr<TransformNode> GetTransformNode() const { return transNode_; }
+
     // 描画フラグ
     void ToggleRender(bool state) { isRender_ = state; }
+
+    // 親マネージャー
+	//void SetManager(GameEntityManager* pManager) { pManager_ = pManager; }
 
 #pragma endregion 
 
@@ -109,7 +115,7 @@ protected:
     State state_;
 
     // Transform
-    std::weak_ptr<TransformNode> transNode_;
+    std::shared_ptr<TransformNode> transNode_;
 
     // ComponentList
 	std::unordered_map<std::string, std::shared_ptr<IComponent>> componentMap_;
@@ -119,6 +125,7 @@ protected:
 	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
 	std::shared_ptr<IRenderComponent> renderComponent_;
 
-    // 親シーン
-    IScene *pScene_ = nullptr;
+	// 親マネージャー
+	//GameEntityManager* pManager_ = nullptr;
+
 };

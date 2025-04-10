@@ -1,7 +1,7 @@
 #include "IActor.h"
 #include "../../Component/Interface/IComponent.h"
 #include "../../Component/Render/IRenderComponent.h"
-#include "Entity/TransformNode/Manager/TransformNodeManager.h"
+//#include "../../Manager/GameEntityManager.h"
 
 
 /// <summary>
@@ -36,8 +36,7 @@ void IActor::Create(std::string name)
 	name_ = name;
 
 	// TransformNodeの作成
-	auto manager = TransformNodeManager::GetInstance();
-	transNode_ = manager->Create(name_);
+	transNode_ = std::make_shared<TransformNode>();
 }
 
 
@@ -51,6 +50,7 @@ void IActor::Update(float deltaTime)
 		UpdateActor(deltaTime);
 		UpdateComponents(deltaTime);
 	}
+	transNode_->Update(); // TransformNodeの更新
 }
 void IActor::UpdateComponents([[maybe_unused]] float deltaTime) 
 {

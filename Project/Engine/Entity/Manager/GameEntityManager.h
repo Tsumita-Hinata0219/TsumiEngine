@@ -1,27 +1,15 @@
 #pragma once
 
 #include "../Actor/Interface/IActor.h"
-#include "../Component/Interface/IComponent.h"
-#include "../Component/Render/IRenderComponent.h"
-#include "../TransformNode/Node/TransformNode.h"
 
 
 /* ゲーム内のEntityを一元管理するクラス */
 class GameEntityManager {
 
-public:
-
-	struct Entity {
-		std::string name;
-		std::shared_ptr<IActor> actor;
-		std::shared_ptr<TransformNode> transformNode;
-	};
-
 private:
 	
 	// EntityのMap
-	std::unordered_map<std::string, std::shared_ptr<Entity>> eneityMap_;
-
+	std::unordered_map<std::string, std::shared_ptr<IActor>> actorManp_;
 
 public:
 

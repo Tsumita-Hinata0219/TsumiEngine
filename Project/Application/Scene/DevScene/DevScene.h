@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "GameManager/GameManager.h"
 
 #include "GameObject/Terrain/Floor/Floor.h"
 
@@ -61,9 +60,6 @@ private:
 	// カメラ
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
-
-	ActorManager* actorManager_ = nullptr;
-	TransformNodeManager* transNodeManager_ = nullptr;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

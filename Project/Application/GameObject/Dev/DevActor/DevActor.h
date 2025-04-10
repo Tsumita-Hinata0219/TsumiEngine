@@ -5,6 +5,7 @@
 #include "Comp/Move/DevActorMoveComponent.h"
 #include "Rend/DevRenderComponent.h"
 
+
 class DevActor : public IActor {
 
 private:

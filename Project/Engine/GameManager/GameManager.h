@@ -9,8 +9,6 @@
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/TimeSystem/TimeSystem.h"
 #include "GameData/GameData.h"
-#include "Entity/Actor/Manager/ActorManager.h"
-#include "Entity/TransformNode/Manager/TransformNodeManager.h"
 #include "RenderSystem/Asset/RenderAssetManager.h"
 
 #include "Scene/DebugScene/DebugScene.h"
@@ -61,12 +59,6 @@ private:
 
 	// 時間記録
 	TimeSystem* timeSys_ = nullptr;
-
-	// ActorManager
-	ActorManager* actorManager_ = nullptr;
-
-	// TransformNodeManager
-	TransformNodeManager* transformNodeManager_ = nullptr;
 
 	// RenderAssetManager
 	RenderSystem::RenderAssetManager* renderAssetManager = nullptr;

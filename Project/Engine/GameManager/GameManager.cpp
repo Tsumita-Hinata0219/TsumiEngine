@@ -20,12 +20,6 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	timeSys_ = TimeSystem::GetInstance();
 	timeSys_->Init();
 
-	// ActorManagerのインスタンスを取得
-	actorManager_ = ActorManager::GetInstance();
-
-	// TransformNodeManagerのインスタンスを取得
-	transformNodeManager_ = TransformNodeManager::GetInstance();
-
 	// RenderAssetManagerのインスタンスを取得
 	renderAssetManager = RenderSystem::RenderAssetManager::GetInstance();
 
@@ -99,10 +93,6 @@ void GameManager::Run() {
 /// </summary>
 void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
 	
-	// actorManagerのクリア
-	actorManager_->Clear();
-	// transformNodeManagerのクリア
-	transformNodeManager_->Clear();
 	// renderAssetManagerのクリア
 	renderAssetManager->Clear();
 

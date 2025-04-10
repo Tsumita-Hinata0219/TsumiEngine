@@ -10,29 +10,23 @@ void GameEntityManager::Add_NewEntity(std::shared_ptr<IActor> actor)
 	std::string name = actor->GetName();
 
 	// 名前で検索をかける
-	auto it = eneityMap_.find(name);
+	auto it = actorManp_.find(name);
 	// 既に存在していたら早期return	
-	if (it != eneityMap_.end())
+	if (it != actorManp_.end())
 	{
 		return;
 	}
 
 	// ないので新しく作る
-	std::shared_ptr<Entity> newEntity = std::make_shared<Entity>();
+	std::shared_ptr<IActor> newActor = std::make_shared<IActor>();
 
-	// 名前の設定
-	newEntity->name = name;
-
-	// Actorの設定と初期化
-	newEntity->actor = actor;
-	newEntity->actor->Init();
-
-	// TransformNodeの生成
-	newEntity->transformNode = std::make_shared<TransformNode>(name);
-
+	// Actorの設定
+	newActor = actor;
+	//newActor->SetManager(this); // マネージャーの設定
+	newActor->Init();            // 初期化処理
 
 	// Mapに追加
-	this->eneityMap_[name] = newEntity;
+	this->actorManp_[name] = newActor;
 }
 
 
@@ -43,12 +37,10 @@ void GameEntityManager::Update_Entity()
 {
 	float deltaTime = 1.0f / 60.0f;
 
-	for(auto& entity : this->eneityMap_)
+	for(auto& actor : this->actorManp_)
 	{
 		// Actorの更新
-		entity.second->actor->Update(deltaTime);
-		// TransformNodeの更新
-		entity.second->transformNode->Update();
+		actor.second->Update(deltaTime);
 	}
 }
 
@@ -58,10 +50,10 @@ void GameEntityManager::Update_Entity()
 /// </summary>
 void GameEntityManager::Render_Entity()
 {
-	for (auto& entity : this->eneityMap_)
+	for (auto& actor : this->actorManp_)
 	{
 		// Actorの描画
-		entity.second->actor->Render();
+		actor.second->Render();
 	}
 }
 
@@ -71,7 +63,7 @@ void GameEntityManager::Render_Entity()
 /// </summary>
 void GameEntityManager::Clear_Entity()
 {
-	this->eneityMap_.clear();
+	this->actorManp_.clear();
 }
 
 
@@ -80,10 +72,10 @@ void GameEntityManager::Clear_Entity()
 /// </summary>
 std::weak_ptr<IActor> GameEntityManager::Get_Actor(const std::string& key)
 {
-	auto it = this->eneityMap_.find(key);
-	if (it != this->eneityMap_.end())
+	auto it = this->actorManp_.find(key);
+	if (it != this->actorManp_.end())
 	{
-		return it->second->actor;
+		return it->second;
 	}
 	return std::weak_ptr<IActor>(); // 見つからなければ空を返す
 }
@@ -94,10 +86,10 @@ std::weak_ptr<IActor> GameEntityManager::Get_Actor(const std::string& key)
 /// </summary>
 IActor::State GameEntityManager::Get_ActorState(const std::string& key)
 {
-	auto it = this->eneityMap_.find(key);
-	if (it != this->eneityMap_.end())
+	auto it = this->actorManp_.find(key);
+	if (it != this->actorManp_.end())
 	{
-		return it->second->actor->GetState();
+		return it->second->GetState();
 	}
 	return IActor::State::None; // 見つからなければNoneを返す
 }
@@ -108,10 +100,10 @@ IActor::State GameEntityManager::Get_ActorState(const std::string& key)
 /// </summary>
 void GameEntityManager::Set_ActorState(const std::string& key, IActor::State state)
 {
-	auto it = this->eneityMap_.find(key);
-	if (it != this->eneityMap_.end())
+	auto it = this->actorManp_.find(key);
+	if (it != this->actorManp_.end())
 	{
-		it->second->actor->SetState(state);
+		it->second->SetState(state);
 	}
 	return; // 見つからなければ何もしない
 }
@@ -122,9 +114,9 @@ void GameEntityManager::Set_ActorState(const std::string& key, IActor::State sta
 /// </summary>
 void GameEntityManager::Set_AllActorState(IActor::State state)
 {
-	for (auto& entity : this->eneityMap_)
+	for (auto& actor : this->actorManp_)
 	{
-		entity.second->actor->SetState(state);
+		actor.second->SetState(state);
 	}
 }
 
@@ -134,10 +126,10 @@ void GameEntityManager::Set_AllActorState(IActor::State state)
 /// </summary>
 std::weak_ptr<TransformNode> GameEntityManager::Get_TransformNode(const std::string& key)
 {
-	auto it = this->eneityMap_.find(key);
-	if (it != this->eneityMap_.end())
+	auto it = this->actorManp_.find(key);
+	if (it != this->actorManp_.end())
 	{
-		return it->second->transformNode;
+		return it->second->GetTransformNode();
 	}
 	return std::weak_ptr<TransformNode>(); // 見つからなければ空を返す
 }

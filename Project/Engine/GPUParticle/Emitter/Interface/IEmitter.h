@@ -178,12 +178,6 @@ inline void IEmitter<T>::Update()
 
 	// 射出更新
 	Update_ConfigData();
-
-	//// データ書き込み
-	//WriteData();
-
-	//// 発生処理
-	//Emit();
 }
 
 

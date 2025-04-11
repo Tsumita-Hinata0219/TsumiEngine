@@ -347,6 +347,7 @@ inline void IEmitter<T>::Update_ConfigData()
 		// タイマーリセット
 		configData_->elapsedTime = configData_->spawnInterval;
 		configData_->isEmitting = true;
+		Emit(); // 発生
 	}
 	else {
 		configData_->isEmitting = false;

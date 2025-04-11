@@ -1,7 +1,7 @@
 EmitConfig = {
-    spawnInterval = 1.5,
-    elapsedTime = 1.5,
-    spawnCount = 3,
+    spawnInterval = 0.5,
+    elapsedTime = 0.5,
+    spawnCount = 1,
     isEmitting = false,
 }
 return EmitConfig

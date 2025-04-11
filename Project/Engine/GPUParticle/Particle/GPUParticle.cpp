@@ -171,7 +171,8 @@ void GPUParticle::Bind_Draw()
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
 
 	// Draw!!
-	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
+	//commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
+	commands.List->DrawIndexedInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0, 0);
 }
 
 

@@ -12,9 +12,11 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 	SetUpRootSignature(descriptionRootSignature);
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 3> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
+
+		SetUpInputElementDescs("NORMAL"),
 		SetUpInputElementDescs("INSTANCEID"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};

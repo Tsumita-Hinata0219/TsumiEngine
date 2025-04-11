@@ -17,11 +17,8 @@ void GameEntityManager::Add_NewEntity(std::shared_ptr<IActor> actor)
 		return;
 	}
 
-	// ないので新しく作る
-	std::shared_ptr<IActor> newActor = std::make_shared<IActor>();
-
 	// Actorの設定
-	newActor = actor;
+	auto& newActor = actor;
 	//newActor->SetManager(this); // マネージャーの設定
 	newActor->Init();            // 初期化処理
 

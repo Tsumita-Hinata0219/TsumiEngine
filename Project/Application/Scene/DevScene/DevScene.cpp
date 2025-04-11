@@ -8,6 +8,7 @@
 DevScene::DevScene()
 {
 	cameraManager_ = CameraManager::GetInstance();
+	gameEntityManager_ = std::make_unique<GameEntityManager>();
 
 	floor_ = std::make_unique<Floor>();
 }
@@ -36,6 +37,7 @@ void DevScene::Initialize()
 	floor_->SetScale(Vector3{ 20.0f, 1.0f, 20.0f });
 	floor_->SetTranslate(Vector3{ 0.0f, -2.0f, 0.0f });
 
+	gameEntityManager_->Add_NewEntity(std::make_shared<DevActor>());
 }
 
 
@@ -49,6 +51,7 @@ void DevScene::Update()
 
 	floor_->Update();
 
+	gameEntityManager_->Update_Entity();
 
 }
 
@@ -67,6 +70,7 @@ void DevScene::BackSpriteDraw()
 void DevScene::ModelDraw()
 {
 	floor_->Draw3D();
+	gameEntityManager_->Render_Entity();
 }
 
 

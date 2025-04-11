@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Scene/IScene.h"
+#include "GameManager/GameManager.h"
+#include "Entity/Manager/GameEntityManager.h"
 
 #include "GameObject/Terrain/Floor/Floor.h"
 
@@ -60,6 +62,8 @@ private:
 	// カメラ
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
+
+	std::unique_ptr<GameEntityManager> gameEntityManager_;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

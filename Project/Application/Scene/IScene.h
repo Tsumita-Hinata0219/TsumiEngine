@@ -1,10 +1,5 @@
 #pragma once
 
-#include "Entity/Manager/GameEntityManager.h"
-#include "GameManager/GameManager.h"
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
-
 class GameManager;
 
 /* ISceneクラス */

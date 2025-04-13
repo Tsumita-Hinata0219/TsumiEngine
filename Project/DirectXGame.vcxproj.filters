@@ -1494,6 +1494,7 @@
     <ClInclude Include="Application\GameObject\Dev\DevActor\Comp\Move\DevActorMoveComponent.h" />
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Engine\ECS\Entity\Entity.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

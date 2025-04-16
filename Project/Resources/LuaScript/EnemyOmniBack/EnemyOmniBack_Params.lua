@@ -13,8 +13,8 @@ EmitterRange = {
     colorMin = { x = 0.0, y = 0.0, z = 0.0, w = 1.0 },
     colorMax = { x = 1.0, y = 1.0, z = 1.0, w = 1.0 },
 
-    velocityMin = { x = -1.8, y = 0.0, z = -1.8, w = 0.0 },
-    velocityMax = { x = 1.8, y = 1.8, z = 1.8, w = 0.0 },
+    velocityMin = { x = -0.1, y = 0.0, z = -0.1, w = 0.0 },
+    velocityMax = { x = 0.1, y = 0.1, z = 0.1, w = 0.0 },
 
     baseLifeTime = 1.5 * 60.0,
     lifeTimeMin = 0.0,

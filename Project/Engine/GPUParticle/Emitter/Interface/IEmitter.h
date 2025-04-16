@@ -108,9 +108,19 @@ private:
 	void Update_RandomSeedData();
 
 	/// <summary>
+	/// 発生させるかのフラグチェック
+	/// </summary>
+	void Check_Emitting();
+
+	/// <summary>
 	/// Bufferへデータ書き込み
 	/// </summary>
 	void WriteData();
+
+	/// <summary>
+	/// パーティクルを発生させる
+	/// </summary>
+	void DispatchEmitCompute();
 
 
 protected:
@@ -180,6 +190,12 @@ inline void IEmitter<T>::Update()
 
 	// 乱数シード更新
 	Update_RandomSeedData();
+
+	// 発生フラグチェック
+	Check_Emitting();
+
+	// Dispatch
+	DispatchEmitCompute();
 }
 
 
@@ -211,42 +227,9 @@ inline void IEmitter<T>::Draw3D()
 template<typename T>
 inline void IEmitter<T>::Emit()
 {
-	// データ書き込み
-	WriteData();
+	configData_->isEmitting = true;
 
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-
-	// PipeLineCheck
-	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, pipeLine_Category, pipeLine_SubFileter);
-
-	// Particle
-	particle_->Bind_ParticleProp(0);
-
-	// FreeList
-	particle_->Bind_FreeList(1);
-
-	// FreeListIndex
-	particle_->Bind_FreeListIndex(2);
-
-	// Emitter
-	emitBuff_.BindComputeCBV(3);
-
-	// Range
-	rangeBuff_.BindComputeCBV(4);
-
-	// EmitConfig
-	configBuff_.BindComputeCBV(5);
-
-	// RandomSeed
-	randSeedBuff_.BindComputeCBV(6);
-
-	// Dispatch
-	commands.List->Dispatch(1, 1, 1);
-
-	// Barrierを張る
-	particle_->SetUAVBarrier();
-
+	DispatchEmitCompute();
 }
 
 
@@ -336,7 +319,6 @@ inline void IEmitter<T>::CreateBuffer()
 	configBuff_.CreateCBV();
 	// RandomSeed
 	randSeedBuff_.CreateCBV();
-
 }
 
 
@@ -347,18 +329,6 @@ template<typename T>
 inline void IEmitter<T>::Update_ConfigData()
 {
 	configData_->elapsedTime -= 1.0f / 60.0f; // 減算
-
-	// タイマー0以下で
-	// 射出許可 & タイマーリセット
-	if (configData_->elapsedTime <= 0.0f) {
-		// タイマーリセット
-		configData_->elapsedTime = configData_->spawnInterval;
-		configData_->isEmitting = true;
-		Emit(); // 発生
-	}
-	else {
-		configData_->isEmitting = false;
-	}
 }
 
 
@@ -384,6 +354,25 @@ inline void IEmitter<T>::Update_RandomSeedData()
 
 
 /// <summary>
+/// 発生させるかのフラグチェック
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Check_Emitting()
+{
+	// タイマー0以下で
+	// 射出許可 & タイマーリセット
+	if (configData_->elapsedTime <= 0.0f) {
+		// タイマーリセット
+		configData_->elapsedTime = configData_->spawnInterval;
+		configData_->isEmitting = true;
+	}
+	else {
+		configData_->isEmitting = false;
+	}
+}
+
+
+/// <summary>
 /// Bufferへデータ書き込み
 /// </summary>
 template<typename T>
@@ -400,4 +389,48 @@ inline void IEmitter<T>::WriteData()
 
 	// randomSeed
 	randSeedBuff_.UpdateData(randSeedData_.get());
+}
+
+
+/// <summary>
+/// パーティクルを発生させる
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::DispatchEmitCompute()
+{
+	// データ書き込み
+	WriteData();
+
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, pipeLine_Category, pipeLine_SubFileter);
+
+	// Particle
+	particle_->Bind_ParticleProp(0);
+
+	// FreeList
+	particle_->Bind_FreeList(1);
+
+	// FreeListIndex
+	particle_->Bind_FreeListIndex(2);
+
+	// Emitter
+	emitBuff_.BindComputeCBV(3);
+
+	// Range
+	rangeBuff_.BindComputeCBV(4);
+
+	// EmitConfig
+	configBuff_.BindComputeCBV(5);
+
+	// RandomSeed
+	randSeedBuff_.BindComputeCBV(6);
+
+	// Dispatch
+	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	particle_->SetUAVBarrier();
 }

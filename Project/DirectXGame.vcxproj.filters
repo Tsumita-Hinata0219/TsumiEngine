@@ -581,6 +581,7 @@
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1496,6 +1497,7 @@
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

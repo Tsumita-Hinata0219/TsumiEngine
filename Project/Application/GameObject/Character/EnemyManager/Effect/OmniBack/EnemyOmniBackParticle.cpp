@@ -1,15 +1,15 @@
-#include "EnemyOmniExplosionParticle.h"
+#include "EnemyOmniBackParticle.h"
 
-void EnemyOmniExplosionParticle::Init()
+void EnemyOmniBackParticle::Init()
 {
 	emitter_ = std::make_unique<Emitter::SphereEmitter>();
-	emitter_->Create("Obj/Enemys/Effect/ExplosionParticle", "ExplosionParticle.obj");
+	emitter_->Create("Obj/Enemys/Effect/BackParticle", "BackParticle.obj");
 	field_ = std::make_unique<GpuField::ConstantField>();
 	field_->Create(emitter_->GetWeak_Particle());
 
 	auto luaManager = LuaManager::GetInstance();
-	luaManager->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniExplosion_Params.lua");
-	particlePropeLua_ = luaManager->GetScript("EnemyOmniExplosion_Params");
+	luaManager->LoadScript("LuaScript/EnemyOmniBack", "EnemyOmniBack_Params.lua");
+	particlePropeLua_ = luaManager->GetScript("EnemyOmniBack_Params");
 
 
 	// Luaから値を受け取る
@@ -17,26 +17,26 @@ void EnemyOmniExplosionParticle::Init()
 	emitter_->Load_EmitRangeData_From_Lua(particlePropeLua_);
 	emitter_->Load_EmitConfigData_From_Lua(particlePropeLua_);
 	field_->Load_FieldData_From_Lua(particlePropeLua_);
-	//particlePropeLua_.lock()->SetReloadCallback([this]() { ReLoad_ParticlePrope(); });
+	particlePropeLua_.lock()->SetReloadCallback([this]() { ReLoad_ParticlePrope(); });
 }
 
-void EnemyOmniExplosionParticle::Update()
+void EnemyOmniBackParticle::Update()
 {
 	emitter_->Update();
 	field_->Update();
 }
 
-void EnemyOmniExplosionParticle::Draw()
+void EnemyOmniBackParticle::Draw()
 {
 	emitter_->Draw3D();
 }
 
-void EnemyOmniExplosionParticle::Emit()
+void EnemyOmniBackParticle::Emit()
 {
 	emitter_->Emit();
 }
 
-void EnemyOmniExplosionParticle::SetEmitPos(Vector3 setPos)
+void EnemyOmniBackParticle::SetEmitPos(Vector3 setPos)
 {
 	if (auto lokedData = emitter_->GetWeak_EmitData().lock()) {
 		Vector4 newPos = {
@@ -46,7 +46,7 @@ void EnemyOmniExplosionParticle::SetEmitPos(Vector3 setPos)
 	}
 }
 
-void EnemyOmniExplosionParticle::ReLoad_ParticlePrope()
+void EnemyOmniBackParticle::ReLoad_ParticlePrope()
 {
 	emitter_->Load_EmitData_From_Lua(particlePropeLua_);
 	emitter_->Load_EmitRangeData_From_Lua(particlePropeLua_);

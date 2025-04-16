@@ -17,6 +17,7 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
+class EnemyOmniBackParticle;
 class EnemyOmniBarstParticle;
 class EnemyOmniExplosionParticle;
 struct SRTData;
@@ -40,6 +41,9 @@ public:
 
 	// EnemyManagerの設定
 	virtual void SetEnemyManager(EnemyManager* setManager) { this->enemyManager_ = setManager; }
+
+	// OmniBackParticleの設定
+	virtual void SetOmniBackParticle(std::weak_ptr<EnemyOmniBackParticle> ptr) {this->wp_BackParticle_ = ptr;}
 
 	// OmniBarstParticleの設定
 	virtual void SetOmniBarstParticle(std::weak_ptr<EnemyOmniBarstParticle> ptr) { this->wp_BarstParticle_ = ptr; }
@@ -139,6 +143,8 @@ protected:
 	// エフェクト管理クラス
 	std::unique_ptr<EnemyEffectContainer> effectContainer_;
 
+	// バックパーティクル
+	std::weak_ptr<EnemyOmniBackParticle> wp_BackParticle_;
 	// バーストパーティクル
 	std::weak_ptr<EnemyOmniBarstParticle> wp_BarstParticle_;
 	// エクスプロージョンパーティクル

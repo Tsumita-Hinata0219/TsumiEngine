@@ -13,6 +13,7 @@
 
 #include "Effect/Interface/IEnemyEffect.h"
 #include "Effect/HitEffect/Circle/EnemyHitEffectCircle.h"
+#include "Effect/OmniBack/EnemyOmniBackParticle.h"
 #include "Effect/OmniBarst/EnemyOmniBarstParticle.h"
 #include "Effect/OmniExplosion/EnemyOmniExplosionParticle.h"
 
@@ -117,6 +118,7 @@ private: // メンバ変数
 	std::list<std::unique_ptr<BossEnemy>> bossEnemies_;
 
 	// OmniParticleのList配列
+	std::list<std::shared_ptr<EnemyOmniBackParticle>> backParticles_;
 	std::list<std::shared_ptr<EnemyOmniBarstParticle>> barstParticles_;
 	std::list<std::shared_ptr<EnemyOmniExplosionParticle>> explosionParticles_;
 

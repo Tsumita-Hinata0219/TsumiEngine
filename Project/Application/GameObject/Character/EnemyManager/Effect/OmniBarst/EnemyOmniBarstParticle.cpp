@@ -3,7 +3,7 @@
 void EnemyOmniBarstParticle::Init()
 {
 	emitter_ = std::make_unique<Emitter::SphereEmitter>();
-	emitter_->Create("Obj/Dev/Axis", "Axis.obj");
+	emitter_->Create("Obj/Enemys/Effect/BarstParticle", "BarstParticle.obj");
 	field_ = std::make_unique<GpuField::ConstantField>();
 	field_->Create(emitter_->GetWeak_Particle());
 	

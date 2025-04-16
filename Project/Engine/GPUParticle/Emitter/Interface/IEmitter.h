@@ -30,12 +30,17 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create();
+	void Create(const std::string& rootPath, const std::string& fileName);
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// タイマー更新
+	/// </summary>
+	void TimerUpdate();
 
 	/// <summary>
 	/// 描画処理
@@ -148,7 +153,7 @@ protected:
 /// 生成
 /// </summary>
 template<typename T>
-inline void IEmitter<T>::Create()
+inline void IEmitter<T>::Create(const std::string& rootPath, const std::string& fileName)
 {
 	// TimeSystem
 	timeSys_ = TimeSystem::GetInstance();
@@ -160,7 +165,7 @@ inline void IEmitter<T>::Create()
 	CreateBuffer();
 
 	// パーティクル初期化
-	particle_->Init();
+	particle_->Init(rootPath, fileName);
 }
 
 
@@ -175,7 +180,15 @@ inline void IEmitter<T>::Update()
 
 	// 乱数シード更新
 	Update_RandomSeedData();
+}
 
+
+/// <summary>
+/// タイマー更新
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::TimerUpdate()
+{
 	// 射出更新
 	Update_ConfigData();
 }

@@ -6,11 +6,11 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GPUParticle::Init(uint32_t instanceNum)
+void GPUParticle::Init(const std::string& rootPath, const std::string& fileName, uint32_t instanceNum)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
-	modelManager->LoadModel("Obj/Dev/Axis", "Axis.obj");
-	model_ = modelManager->GetModel("Test");
+	modelManager->LoadModel(rootPath, fileName);
+	model_ = modelManager->GetModel(RemoveNameSuffix(fileName));
 
 	// CameraManagerのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();

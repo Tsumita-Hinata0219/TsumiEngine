@@ -12,7 +12,7 @@ DummyParticle::DummyParticle()
 void DummyParticle::Init()
 {
 	// Emitter生成
-	sEmit_->Create();
+	sEmit_->Create("Obj/Dev/Axis", "Axis.obj");
 	// ParticleField生成
 	cField_->Create(sEmit_->GetWeak_Particle());
 

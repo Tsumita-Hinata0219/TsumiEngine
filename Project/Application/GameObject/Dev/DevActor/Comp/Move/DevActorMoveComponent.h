@@ -3,7 +3,7 @@
 #include "Entity/Entity.h"
 
 
-class DevActorMoveComponent : public IComponent
+class DevActorMoveComponent : public IBaseComponent
 {
 public:
 
@@ -21,7 +21,7 @@ private:
 
 inline void DevActorMoveComponent::Init()
 {
-	IComponent::Create("DevActorMove");
+	IBaseComponent::Create("DevActorMove");
 }
 
 inline void DevActorMoveComponent::Update(float deltaTime)

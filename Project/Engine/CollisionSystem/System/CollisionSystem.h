@@ -1,15 +1,15 @@
-#pragma once
-
-#include "Math/MyMath.h"
-
-#include "../Util/CollisionUtilities.h"
-#include "../Detect/CollisionDetect.h"
-#include "../Penetration/CollisionPenetration.h"
-
-#include "../Collider/Interface/ICollider.h"
-#include "../Collider/Shape/Sphere/SphereCollider.h"
-#include "../Collider/Shape/AABB/AABBCollider.h"
-
+//#pragma once
+//
+//#include "Math/MyMath.h"
+//
+//#include "../Util/CollisionUtilities.h"
+//#include "../Detect/CollisionDetect.h"
+//#include "../Penetration/CollisionPenetration.h"
+//
+//#include "../Collider/Interface/ICollider.h"
+//#include "../Collider/Shape/Sphere/SphereCollider.h"
+//#include "../Collider/Shape/AABB/AABBCollider.h"
+//
 //
 ///* 衝突判定システム */
 //class CollisionSystem {

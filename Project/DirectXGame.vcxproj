@@ -196,6 +196,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
@@ -294,7 +295,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Util\CollisionUtilities.cpp" />
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp" />
-    <ClCompile Include="Engine\Entity\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Base\IBaseComponent.cpp" />
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp" />
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
@@ -517,6 +518,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
@@ -638,7 +640,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Engine\CollisionSystem\Util\CollisionUtilities.h" />
     <ClInclude Include="Engine\CommandManager\CommandManager.h" />
-    <ClInclude Include="Engine\Entity\Component\Interface\IComponent.h" />
+    <ClInclude Include="Engine\Entity\Component\Base\IBaseComponent.h" />
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h" />
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Engine\GameData\GameData.h" />

@@ -4,7 +4,7 @@
 #include "../../TransformNode/Node/TransformNode.h"
 
 // 前方宣言
-class IComponent;
+class IBaseComponent;
 class IRenderComponent;
 //class GameEntityManager;
 
@@ -56,7 +56,7 @@ public:
     /// <summary>
     /// Componentの追加
     /// </summary>
-    void AddComponent(std::shared_ptr<IComponent> component);
+    void AddComponent(std::shared_ptr<IBaseComponent> component);
 
     /// <summary>
     /// RenderComponentの追加
@@ -66,7 +66,7 @@ public:
     /// <summary>
 	/// ComponentのWeakPtr取得
     /// </summary>
-    std::weak_ptr<IComponent> GetComponent(const std::string& name);
+    std::weak_ptr<IBaseComponent> GetComponent(const std::string& name);
 
     /// <summary>
     /// RenderComponentのWeakPtr取得
@@ -118,7 +118,7 @@ protected:
     std::shared_ptr<TransformNode> transNode_;
 
     // ComponentList
-	std::unordered_map<std::string, std::shared_ptr<IComponent>> componentMap_;
+	std::unordered_map<std::string, std::shared_ptr<IBaseComponent>> componentMap_;
 
     // 描画フラグ
 	bool isRender_ = false;

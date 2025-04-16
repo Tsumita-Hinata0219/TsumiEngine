@@ -28,7 +28,7 @@ public:
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
-	virtual void Init() {};
+	virtual void Init() = 0;
 
 	/// <summary>
 	/// 更新処理

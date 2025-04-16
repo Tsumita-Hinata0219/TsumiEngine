@@ -3,7 +3,7 @@
 #include "Math/MyMath.h"
 
 #include "Entity/Actor/Interface/IActor.h"
-#include "Entity/Component/Interface/IComponent.h"
+#include "Entity/Component/Base/IBaseComponent.h"
 #include "Entity/Component/Render/IRenderComponent.h"
 
 #include "Lua/Manager/LuaManager.h"

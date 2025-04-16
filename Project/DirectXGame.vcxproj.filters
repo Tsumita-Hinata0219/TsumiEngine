@@ -535,7 +535,7 @@
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Entity\Actor\Interface\IActor.cpp" />
-    <ClCompile Include="Engine\Entity\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Base\IBaseComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
@@ -580,6 +580,7 @@
     <ClCompile Include="Application\GameObject\Dev\DummyParticle\DummyParticle.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1423,7 +1424,7 @@
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Entity\Actor\Interface\IActor.h" />
-    <ClInclude Include="Engine\Entity\Component\Interface\IComponent.h" />
+    <ClInclude Include="Engine\Entity\Component\Base\IBaseComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
@@ -1494,6 +1495,7 @@
     <ClInclude Include="Application\GameObject\Dev\DevActor\Comp\Move\DevActorMoveComponent.h" />
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

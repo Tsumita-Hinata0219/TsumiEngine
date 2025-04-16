@@ -1,5 +1,5 @@
 #include "IActor.h"
-#include "../../Component/Interface/IComponent.h"
+#include "../../Component/Base/IBaseComponent.h"
 #include "../../Component/Render/IRenderComponent.h"
 //#include "../../Manager/GameEntityManager.h"
 
@@ -77,7 +77,7 @@ void IActor::Render()
 /// <summary>
 /// コンポーネントの追加
 /// </summary>
-void IActor::AddComponent(std::shared_ptr<IComponent> component)
+void IActor::AddComponent(std::shared_ptr<IBaseComponent> component)
 {
 	// 名前で検索をかける
 	auto it = componentMap_.find(component->Get_Name());
@@ -118,14 +118,14 @@ void IActor::AddComponent(std::shared_ptr<IRenderComponent> component)
 /// <summary>
 /// ComponentのWeakPtr取得
 /// </summary>
-std::weak_ptr<IComponent> IActor::GetComponent(const std::string& name)
+std::weak_ptr<IBaseComponent> IActor::GetComponent(const std::string& name)
 {
 	// 名前で検索をかける
 	auto it = componentMap_.find(name);
 	// なければ空のweak_ptrを返す
 	if (it == componentMap_.end())
 	{
-		return std::weak_ptr<IComponent>();
+		return std::weak_ptr<IBaseComponent>();
 	}
 
 	return it->second;

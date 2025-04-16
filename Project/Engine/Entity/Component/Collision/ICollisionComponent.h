@@ -4,26 +4,26 @@
 #include "../../Actor/Interface/IActor.h"
 
 
-/* Actor クラスに対して機能を追加するためのモジュール */
-class IComponent {
+/* 衝突判定用のコンポーネント */
+class ICollisionComponent {
 
 public:
 
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	IComponent();
+	ICollisionComponent();
 
 	/// <summary>
-	/// 仮想デストラクタ
+	/// デストラクタ
 	/// </summary>
-	virtual ~IComponent() = default;
+	virtual ~ICollisionComponent() = default;
 
 	/// <summary>
 	/// 生成
 	/// </summary>
 	void Create(const std::string& name);
-
+	
 	/// <summary>
 	/// 初期化処理
 	/// </summary>
@@ -32,7 +32,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	virtual void Update(float deltaTime);
+	virtual void Update(float deltaTime) { deltaTime; };
 
 
 #pragma region Accessor 

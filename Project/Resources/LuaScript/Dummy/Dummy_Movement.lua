@@ -1,7 +1,7 @@
 
 _G.position = { x = 10.0, y = 0.0, z = 0.0, w = 0.0 } -- 初期位置
 _G.angle = 0.0 -- 角度
-_G.radius = 5.0 -- 初期半径
+_G.radius = 10.0 -- 初期半径
 _G.base_speed = 0.01 -- 最低回転速度
 
 

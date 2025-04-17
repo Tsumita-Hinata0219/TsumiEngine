@@ -194,6 +194,9 @@ inline void IEmitter<T>::Update()
 	// 発生フラグチェック
 	Check_Emitting();
 
+	// データ書き込み
+	WriteData();
+
 	// Dispatch
 	DispatchEmitCompute();
 }
@@ -229,6 +232,10 @@ inline void IEmitter<T>::Emit()
 {
 	configData_->isEmitting = true;
 
+	// データ書き込み
+	WriteData();
+
+	// Dispatch
 	DispatchEmitCompute();
 }
 
@@ -398,9 +405,6 @@ inline void IEmitter<T>::WriteData()
 template<typename T>
 inline void IEmitter<T>::DispatchEmitCompute()
 {
-	// データ書き込み
-	WriteData();
-
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
 

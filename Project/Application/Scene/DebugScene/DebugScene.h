@@ -73,10 +73,5 @@ private:
 
 	// Floor
 	std::unique_ptr<Floor> floor_;
-
-	// 確認用
-	std::unique_ptr<Model> model_;
-	ModelManager* modelManager_ = nullptr;
-	Transform trans_{};
 };
 

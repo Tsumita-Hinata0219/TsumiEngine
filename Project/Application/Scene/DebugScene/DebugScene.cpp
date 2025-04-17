@@ -10,7 +10,6 @@ DebugScene::DebugScene()
 	cameraManager_ = CameraManager::GetInstance();
 	luaManager_ = LuaManager::GetInstance();
 	dummyParticle_ = std::make_unique<DummyParticle>();
-	modelManager_ = ModelManager::GetInstance();
 	floor_ = std::make_unique<Floor>();
 }
 
@@ -35,12 +34,6 @@ void DebugScene::Initialize()
 	floor_->SetTranslate(Vector3{ 0.0f, -2.5f, 0.0f });
 
 	dummyParticle_->Init();
-
-
-	// 確認用Emitterの描画用
-	model_ = modelManager_->GetModel("Test");
-	trans_.Init();
-	trans_.srt.translate.y = 1.0f;
 }
 
 
@@ -54,9 +47,6 @@ void DebugScene::Update()
 	floor_->Update();
 
 	dummyParticle_->Update();
-
-	//trans_.srt.rotate.y += 0.01f;
-
 
 #ifdef _DEBUG
 	luaManager_->MonitorScript();
@@ -79,7 +69,6 @@ void DebugScene::BackSpriteDraw() {}
 void DebugScene::ModelDraw()
 {
 	floor_->Draw3D();
-	model_->Draw(trans_);
 	dummyParticle_->Draw();
 }
 

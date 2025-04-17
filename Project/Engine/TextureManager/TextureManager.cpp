@@ -23,7 +23,7 @@ void TextureManager::Finalize() {
 	CoUninitialize();
 
 	// コンテナ内のResourceを削除
-	UnLoadTexture();
+	TextureManager::GetInstance()->UnLoadTexture();
 
 	CloseHandle(TextureManager::GetInstance()->fenceEvent_);
 }
@@ -69,7 +69,10 @@ uint32_t TextureManager::LoadTexture(const std::string& filePath, const std::str
 /// </summary>
 void TextureManager::UnLoadTexture() {
 
-	TextureManager::GetInstance()->textureMaps_.clear();
+	for (auto& pair : textureMaps_) {
+		pair.second.resource.Reset();  // ComPtrの解放
+	}
+	textureMaps_.clear();
 }
 
 

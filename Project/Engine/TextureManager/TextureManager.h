@@ -68,7 +68,7 @@ public: // メンバ関数
 	/// <summary>
 	/// Textureデータの解放
 	/// </summary>
-	static void UnLoadTexture();
+	void UnLoadTexture();
 
 
 private: // メンバ関数

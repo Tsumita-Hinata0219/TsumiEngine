@@ -8,7 +8,7 @@
 void EnemyEffectContainer::Init()
 {
 	// EffectのPoolのインスタンスを先に作っておく
-	circleEffectPool_.Create(100);
+	circleEffectPool_.Create(20);
 
 }
 

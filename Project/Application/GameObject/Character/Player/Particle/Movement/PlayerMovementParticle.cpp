@@ -7,6 +7,8 @@
 /// </summary>
 void PlayerMovementParticle::Init()
 {
+	isDead_ = false;
+
 	// トランスフォームの初期化
 	trans_.Init();
 

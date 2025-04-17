@@ -27,7 +27,7 @@ void TitleScene::Initialize()
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
+	cameraData_.lock()->Init({ 0.15f, 0.0f, 0.0f }, { 0.0f, 3.0f, -5.0f });
 
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_ = std::make_unique<RetroCRTEffect>();
@@ -90,7 +90,6 @@ void TitleScene::Update()
 
 #ifdef _DEBUG
 	ImGui::Begin("TitleScene");
-	retroEffectData_.DrawImGui();
 	cameraData_.lock()->DrawImGui();
 	ImGui::End();
 #endif // _DEBUG

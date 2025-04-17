@@ -67,6 +67,9 @@ void IOBJState::CommandCall()
 	else if (renderState_ == RenderState::CullingMode_None) {
 		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Cull_Mode_None);
 	}
+	else if (renderState_ == RenderState::FillMode_WireFrame) {
+		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::Fill_Mode_Wireframe);
+	}
 	else if (renderState_ == RenderState::DepthWriteMask_ZERO) {
 		PipeLineManager::SetPipeLine(PipeLine::Container::Graphic, PipeLine::Category::Object3D, PipeLine::SubFilter::DepthWriteMask_Zero);
 	}

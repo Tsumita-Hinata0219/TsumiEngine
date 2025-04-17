@@ -6,6 +6,7 @@ struct Material
 {
     float4 color;
     float4x4 uvTransform;
+    uint textureIndex;
 };
 ConstantBuffer<Material> gMaterial : register(b0);
 Texture2D<float4> gTexture : register(t0);

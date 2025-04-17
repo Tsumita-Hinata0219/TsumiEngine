@@ -29,7 +29,7 @@ private:
 private:
 
 	// SRT
-	SRT srt_{};
+	SRTData srt_{};
 
 	// スケールの開始値と終了値。(0.0f, 1.0f)
 	std::pair<float, float> scalePair_ = { 0.0f, 1.1f };

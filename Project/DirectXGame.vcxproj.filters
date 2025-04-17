@@ -180,9 +180,6 @@
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp">
       <Filter>Engine\ConfigManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\CreateResource\CreateResource.cpp">
-      <Filter>Engine\CreateResource</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp">
       <Filter>Engine\DescriptorManager</Filter>
     </ClCompile>
@@ -336,7 +333,7 @@
     <ClCompile Include="Engine\TextureManager\TextureManager.cpp">
       <Filter>Engine\TextureManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Transform\Transform.cpp">
+    <ClCompile Include="Engine\Transform\Structure\Transform.cpp">
       <Filter>Engine\Transform</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp">
@@ -537,8 +534,8 @@
     <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Actor\Interface\IActor.cpp" />
-    <ClCompile Include="Engine\Component\Interface\IComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Actor\Interface\IActor.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Base\IBaseComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.cpp" />
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
@@ -567,8 +564,24 @@
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
-    <ClCompile Include="Engine\Lua\Script\LuaScript.cpp" />
     <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
+    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
+    <ClCompile Include="Engine\RenderSystem\State\RenderState .cpp" />
+    <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
+    <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
+    <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
+    <ClCompile Include="Engine\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\RenderSystem\Loader\RenderDataLoader.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Dev\DummyParticle\DummyParticle.cpp" />
+    <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
+    <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
+    <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -787,9 +800,6 @@
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h">
       <Filter>Engine\ConfigManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\CreateResource\CreateResource.h">
-      <Filter>Engine\CreateResource</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h">
       <Filter>Engine\DescriptorManager</Filter>
     </ClInclude>
@@ -976,7 +986,7 @@
     <ClInclude Include="Engine\TextureManager\TextureManager.h">
       <Filter>Engine\TextureManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Transform\Transform.h">
+    <ClInclude Include="Engine\Transform\Structure\Transform.h">
       <Filter>Engine\Transform</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h">
@@ -1414,8 +1424,8 @@
     <ClInclude Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.h">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Actor\Interface\IActor.h" />
-    <ClInclude Include="Engine\Component\Interface\IComponent.h" />
+    <ClInclude Include="Engine\Entity\Actor\Interface\IActor.h" />
+    <ClInclude Include="Engine\Entity\Component\Base\IBaseComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Enemy\Boss\BossEnemy.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Shield\EnemyShield.h" />
     <ClInclude Include="Engine\Math\MyTemplate\MyTemplate.h" />
@@ -1467,6 +1477,27 @@
     <ClInclude Include="externals\LuaJIT\lualib.h" />
     <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
     <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
+    <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
+    <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
+    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
+    <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
+    <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
+    <ClInclude Include="Engine\Entity\Entity.h" />
+    <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
+    <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Comp\Move\DevActorMoveComponent.h" />
+    <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
+    <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
+    <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

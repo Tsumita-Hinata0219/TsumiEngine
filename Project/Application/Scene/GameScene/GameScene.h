@@ -24,6 +24,9 @@
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"
+#include "GameObject/Character/Player/OperationUI/OperationUIManager.h"
+
+#include "GameObject/Dev/DummyParticle/DummyParticle.h"
 
 
 class GameScene : public IScene {
@@ -84,6 +87,9 @@ private: // クラス
 	// FlagManager
 	FlagManager* flagManager_ = nullptr; // シングルトン
 
+	// LuaManager
+	LuaManager* luaManager_ = nullptr;
+
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;
 
@@ -111,6 +117,9 @@ private: // クラス
 	// StageTransitionMenuManager
 	std::unique_ptr<StageTransitionMenuManager> STMenuManager_;
 
+	// 操作UI
+	std::unique_ptr<OperationUIManager> opUIManager_;
+
 	// シーンチェンジにかかる時間
 	Timer sceneChange_;
 	// SceneTransition
@@ -119,5 +128,8 @@ private: // クラス
 	// RetroCRT
 	std::unique_ptr<RetroCRTEffect> retroCRT_;
 	RetroCRTMtl retroEffectData_{};
+
+	// DummyParticle
+	std::unique_ptr<DummyParticle> dummyParticle_;
 };
 

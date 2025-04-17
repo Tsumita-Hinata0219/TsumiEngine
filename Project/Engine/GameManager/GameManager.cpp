@@ -20,12 +20,19 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	timeSys_ = TimeSystem::GetInstance();
 	timeSys_->Init();
 
+	// RenderAssetManagerのインスタンスを取得
+	renderAssetManager = RenderSystem::RenderAssetManager::GetInstance();
+
+	// Testモデルを読み込んでおく
+	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");
+
 	// シーン初期化
 	scene_ = std::move(initScene);
 	scene_->SetManager(this);
 	scene_->Initialize();
 
-	startTime_ = std::chrono::steady_clock::now();  // 開始時間を記録
+	// 開始時間を記録
+	startTime_ = std::chrono::steady_clock::now(); 
 
 	// PostEffect : CopyImage
 	copyImage_ = std::make_unique<AbsentEffect>();
@@ -85,9 +92,17 @@ void GameManager::Run() {
 /// シーンチェンジ
 /// </summary>
 void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
+	
+	// renderAssetManagerのクリア
+	renderAssetManager->Clear();
+
+	// シーンの変更
 	scene_.reset();
 	scene_ = std::move(newScene);
 	scene_->SetManager(this);
+
+	// シーンの初期化
 	scene_->Initialize();
+	
 	return;
 }

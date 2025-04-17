@@ -6,11 +6,11 @@
 /// <summary>
 /// 初期化処理
 /// </summary>
-void GPUParticle::Init(uint32_t instanceNum)
+void GPUParticle::Init(const std::string& rootPath, const std::string& fileName, uint32_t instanceNum)
 {
 	ModelManager* modelManager = ModelManager::GetInstance();
-	modelManager->LoadModel("Obj/Dev/Test", "Test.obj");
-	model_ = modelManager->GetModel("Test");
+	modelManager->LoadModel(rootPath, fileName);
+	model_ = modelManager->GetModel(RemoveNameSuffix(fileName));
 
 	// CameraManagerのインスタンス取得
 	cameraManager_ = CameraManager::GetInstance();
@@ -171,7 +171,8 @@ void GPUParticle::Bind_Draw()
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
 
 	// Draw!!
-	commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
+	//commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
+	commands.List->DrawIndexedInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0, 0);
 }
 
 

@@ -5,6 +5,9 @@
 
 namespace GpuField {
 
+namespace Data {
+
+
 // ConstantFieldの構造体
 struct ConstantField
 {
@@ -17,4 +20,5 @@ struct ConstantField
     uint32_t isUse; // 使用するか
 };
 
+}
 }

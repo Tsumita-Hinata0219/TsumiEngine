@@ -1,6 +1,4 @@
- #pragma once
-
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#pragma once
 
 class GameManager;
 

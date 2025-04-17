@@ -62,10 +62,6 @@ void Player::Init()
     sweepEraser_->Init();
     sweepEraser_->SetParent(&trans_); // ペアレントを結ぶ
 
-    // 操作UI
-    opUIManager_ = std::make_unique<OperationUIManager>();
-    opUIManager_->Init();
-
     // キルカウントを0で初期化
     killCount_ = 0;
 
@@ -137,8 +133,6 @@ void Player::Update()
         isWin_ = true;
     }
 
-    // 操作UI
-    opUIManager_->Update();
 
 #ifdef _DEBUG
     // ImGuiの描画
@@ -167,11 +161,7 @@ void Player::Draw3D()
     }
 }
 void Player::Draw2DBack() {}
-void Player::Draw2DFront() 
-{
-    // 操作UI
-    opUIManager_->Draw2DFront();
-}
+void Player::Draw2DFront() {}
 
 /// <summary>
 /// 衝突判定コールバック関数
@@ -189,21 +179,21 @@ void Player::onCollision([[maybe_unused]] IObject *object)
     if (object->GetCategory() == Attributes::Category::ENEMY &&
         object->GetType() == Attributes::Type::BULLET) {
 
-        // 体力が0以下なら通らない
-        if (hp_ <= HP_MIN)
-            return;
-        // 無敵状態なら通らない
-        if (isInvincibility_)
-            return;
+  //      // 体力が0以下なら通らない
+  //      if (hp_ <= HP_MIN)
+  //          return;
+  //      // 無敵状態なら通らない
+  //      if (isInvincibility_)
+  //          return;
 
-		// 敵の弾との衝突処理
-        OnCollisionWithEnemyBullet();
+		//// 敵の弾との衝突処理
+  //      OnCollisionWithEnemyBullet();
 
-        // 近くにある敵の弾を消す
-        sweepEraser_->StartSweep();
+  //      // 近くにある敵の弾を消す
+  //      sweepEraser_->StartSweep();
 
-        // カメラのシェイク処理
-        gameCamera_->ActivateShake();
+  //      // カメラのシェイク処理
+  //      gameCamera_->ActivateShake();
     }
 }
 void Player::OnCollisionWithEnemy() {}

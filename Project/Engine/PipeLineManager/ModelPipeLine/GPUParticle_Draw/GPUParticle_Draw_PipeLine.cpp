@@ -12,9 +12,11 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 	SetUpRootSignature(descriptionRootSignature);
 
 	/* --- InputLayoutを設定する --- */
-	std::array<D3D12_INPUT_ELEMENT_DESC, 3> inputElementDesc = {
+	std::array<D3D12_INPUT_ELEMENT_DESC, 4> inputElementDesc = {
 		SetUpInputElementDescs("POSITION"),
 		SetUpInputElementDescs("TEXCOORD"),
+
+		SetUpInputElementDescs("NORMAL"),
 		SetUpInputElementDescs("INSTANCEID"),
 	};
 	D3D12_INPUT_LAYOUT_DESC inputLayoutDesc{};
@@ -30,7 +32,7 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SetUpRasterizerState(rasterizerDesc, cullMode_, D3D12_FILL_MODE_SOLID);
+	SetUpRasterizerState(rasterizerDesc, D3D12_CULL_MODE_BACK, D3D12_FILL_MODE_SOLID);
 
 
 	/* --- Shaderを設定する --- */
@@ -69,7 +71,6 @@ PsoProperty GPUParticle_Draw_PipeLine::SetUpPso()
 		D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
 	pso_.primitiveTopologyType =
 		D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-
 
 
 	// どのように画面に色を打ち込むかの設定(気にしなくて良い)

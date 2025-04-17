@@ -88,7 +88,7 @@ private:
 	/// <summary>
 	/// SRTの読み込み
 	/// </summary>
-	SRT ScanningSRT(nlohmann::json& object);
+	SRTData ScanningSRT(nlohmann::json& object);
 
 	/// <summary>
 	/// PlayerDataの読み込み

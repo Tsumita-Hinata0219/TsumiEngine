@@ -5,6 +5,8 @@
 
 namespace Emitter {
 
+namespace Data {
+
 // Emitterの基底構造体
 struct IEmitData {
     Vector4 translate{}; // 座標
@@ -54,4 +56,5 @@ struct RandomSeed {
     float dynamicTime = 0.0f;
 };
 
+}
 }

@@ -5,10 +5,11 @@
 /// <summary>
 /// コンストラクタ
 /// </summary>
-GameScene::GameScene() 
+GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
+	luaManager_ = LuaManager::GetInstance();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	pauseManager_ = std::make_unique<PauseManager>();
@@ -19,13 +20,14 @@ GameScene::GameScene()
 	enemyManager_ = std::make_unique<EnemyManager>();
 	sceneTransition_ = SceneTransition::GetInstance();
 	STMenuManager_ = std::make_unique<StageTransitionMenuManager>();
+	opUIManager_ = std::make_unique<OperationUIManager>();
 }
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
-GameScene::~GameScene() 
+GameScene::~GameScene()
 {
 
 }
@@ -105,15 +107,19 @@ void GameScene::Initialize()
 	sceneTransition_->SetState(Cloased);
 	sceneTransition_->StartFadeIn();
 
+	// ──────── OperationUIManager
+	opUIManager_->Init();
+
+
 	// ──────── CollisionManager
 	CollisionManager_->Init();
-
-	jsonManager->Clear();
 
 	// ──────── FlagManager
 	flagManager_ = FlagManager::GetInstance();
 	flagManager_->LoadFlagFromJson("FlagData", "Demo.json");
 	flagManager_->SetFlag("Game_Start", true);
+
+	jsonManager->Clear();
 }
 
 
@@ -128,7 +134,7 @@ void GameScene::Update()
 	// ──────── StageTransitionMenuManager
 	sceneTransition_->Update();
 	// 画面が閉じたらシーン変更
-	if (sceneTransition_->GetNowState() == TransitionState::Cloased) 
+	if (sceneTransition_->GetNowState() == TransitionState::Cloased)
 	{
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
@@ -172,7 +178,7 @@ void GameScene::Update()
 	// ──────── StartDirection
 	startDirection_->Update();
 	if (!startDirection_->IsFinish()) { return; }
-	
+
 	// ──────── StageTransitionMenuManager
 	STMenuManager_->Update();
 	SceneChangeCheck();
@@ -185,12 +191,14 @@ void GameScene::Update()
 	boxManager_->Update();
 	player_->Update();
 	enemyManager_->Update();
+	opUIManager_->Update();
 
 	// ──────── CollisionManager
 	CollisionManager_->Update();
 
 
 #ifdef _DEBUG
+	luaManager_->MonitorScript();
 	ImGui::Begin("GameScene");
 	ImGui::Text("");
 	retroEffectData_.DrawImGui("");
@@ -240,13 +248,14 @@ void GameScene::FrontSpriteDraw()
 	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();
 
-	if (STMenuManager_->GetState() != MenuDirectionState::Processing) {
-		// ──────── Player
-		player_->Draw2DFront();
-	}
+	// ──────── Player
+	player_->Draw2DFront();
 
 	// ──────── StartDirection
 	startDirection_->Draw2DFront();
+
+	// ──────── OperationUIManager
+	opUIManager_->Draw2DFront();
 
 	// ──────── PauseManager
 	pauseManager_->Draw2DFront();

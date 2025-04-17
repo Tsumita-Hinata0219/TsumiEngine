@@ -157,9 +157,9 @@ std::string JsonManager::ScanningEntityName(nlohmann::json& object)
 /// <summary>
 /// SRTの読み込み
 /// </summary>
-SRT JsonManager::ScanningSRT(nlohmann::json& object)
+SRTData JsonManager::ScanningSRT(nlohmann::json& object)
 {
-	SRT srt{};
+	SRTData srt{};
 
 	if (object.contains("transform")) {
 

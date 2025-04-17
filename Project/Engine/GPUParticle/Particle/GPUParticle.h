@@ -2,7 +2,7 @@
 
 #include "BufferResource/BufferResource.h"
 #include "CommandManager/CommandManager.h"
-#include "Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 #include "PipeLineManager/PipeLineManager.h"
 
 #include "../Resources/ParticleResources.h"
@@ -34,7 +34,7 @@ public:
 	/// 初期化処理
 	/// </summary>
 	/// <param name="instanceNum">インスタンス数</param>
-	void Init(uint32_t instanceNum = 1);
+	void Init(const std::string& rootPath, const std::string& fileName, uint32_t instanceNum = 1);
 
 	/// <summary>
 	/// 更新処理

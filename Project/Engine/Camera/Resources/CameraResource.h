@@ -2,7 +2,7 @@
 
 #include "Base/WinApp/WinApp.h"
 #include "BufferResource/BufferResource.h"
-#include "Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 #include "Math/MyMath.h"
 
 
@@ -50,7 +50,7 @@ public:
 
 #pragma region ビュー行列の設定
 
-	SRT srt{};
+	SRTData srt{};
 
 	// バッファーに書き込むデータ
 	TransformationViewMatrix* bufferData = nullptr;

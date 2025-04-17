@@ -6,7 +6,7 @@
 
 #include "IObject/IObject.h"
 #include "../../../GameObject.h"
-#include "Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 
 #include "../BulletContainer/EnemyBulletContainer.h"
 #include "../EffectContainer/EnemyEffectContainer.h"
@@ -17,7 +17,10 @@
 // Player前方宣言
 class Player;
 class EnemyManager;
-struct SRT;
+class EnemyOmniBackParticle;
+class EnemyOmniBarstParticle;
+class EnemyOmniExplosionParticle;
+struct SRTData;
 
 
 /* Enemyの基底クラス */
@@ -39,14 +42,23 @@ public:
 	// EnemyManagerの設定
 	virtual void SetEnemyManager(EnemyManager* setManager) { this->enemyManager_ = setManager; }
 
+	// OmniBackParticleの設定
+	virtual void SetOmniBackParticle(std::weak_ptr<EnemyOmniBackParticle> ptr) {this->wp_BackParticle_ = ptr;}
+
+	// OmniBarstParticleの設定
+	virtual void SetOmniBarstParticle(std::weak_ptr<EnemyOmniBarstParticle> ptr) { this->wp_BarstParticle_ = ptr; }
+
+	// OmniExplosionParticleの設定
+	virtual void SetOmniExplosionParticle(std::weak_ptr<EnemyOmniExplosionParticle> ptr) { this->wp_explosionParticle_ = ptr; }
+
 	// 死亡フラグ
 	virtual bool IsDead() const = 0;
 	virtual void SetDeadFlag(bool setFlag) = 0;
 
 	// SRT
-	SRT GetSRT() const { return this->trans_.srt; }
-	void SetSRT(const SRT& setSRT) { this->trans_.srt = setSRT; }
-	void SetInitSRT(const SRT& setSRT) { this->initSRT_ = setSRT; }
+	SRTData GetSRT() const { return this->trans_.srt; }
+	void SetSRT(const SRTData& setSRT) { this->trans_.srt = setSRT; }
+	void SetInitSRT(const SRTData& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
 	Vector3 GetScale() const { return this->trans_.srt.scale; }
@@ -115,7 +127,7 @@ protected:
 	// トランスフォーム
 	Transform trans_;
 	// 初期値
-	SRT initSRT_{};
+	SRTData initSRT_{};
 
 	// 射撃データ
 	enemy::ShotFuncData shotFuncData_;
@@ -130,6 +142,13 @@ protected:
 
 	// エフェクト管理クラス
 	std::unique_ptr<EnemyEffectContainer> effectContainer_;
+
+	// バックパーティクル
+	std::weak_ptr<EnemyOmniBackParticle> wp_BackParticle_;
+	// バーストパーティクル
+	std::weak_ptr<EnemyOmniBarstParticle> wp_BarstParticle_;
+	// エクスプロージョンパーティクル
+	std::weak_ptr<EnemyOmniExplosionParticle> wp_explosionParticle_;
 
 	// ヒットリアクションフラグ
 	bool isHitReactioning_ = false;

@@ -73,7 +73,7 @@ void EnemyHitEffectCircle::Update()
 void EnemyHitEffectCircle::Draw3D()
 {
 	model_->SetMaterialColor(color_);
-	model_->Draw(trans_);
+    	model_->Draw(trans_);
 }
 
 

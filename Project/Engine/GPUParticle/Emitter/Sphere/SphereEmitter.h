@@ -3,14 +3,16 @@
 #include "../Interface/IEmitter.h"
 
 
-class SphereEmitter : public IEmitter<Emitter::SphereEmit> {
+namespace Emitter {
+
+class SphereEmitter : public IEmitter<Emitter::Data::SphereEmit> {
 
 public:
 
 	/// <summary>
 	/// コンストラク
 	/// </summary>
-	SphereEmitter() 
+	SphereEmitter()
 	{
 		pipeLine_Category = PipeLine::Category::SphereEmitter;
 	}
@@ -20,7 +22,14 @@ public:
 	/// </summary>
 	~SphereEmitter() = default;
 
+	/// <summary>
+	/// LuaScriptからEmitterデータの読み込み
+	/// </summary>
+	void Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua) override;
+
 
 private:
 
 };
+
+}

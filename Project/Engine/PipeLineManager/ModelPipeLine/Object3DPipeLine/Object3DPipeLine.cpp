@@ -30,7 +30,7 @@ PsoProperty Object3DPipeLine::SetUpPso()
 
 	/* --- RasiterzerStateを設定する --- */
 	D3D12_RASTERIZER_DESC rasterizerDesc{};
-	SetUpRasterizerState(rasterizerDesc, cullMode_, D3D12_FILL_MODE_SOLID);
+	SetUpRasterizerState(rasterizerDesc, cullMode_, fillMode_);
 
 
 	/* --- Shaderを設定する --- */

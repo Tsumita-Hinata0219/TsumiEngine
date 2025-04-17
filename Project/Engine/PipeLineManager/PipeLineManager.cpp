@@ -93,10 +93,16 @@ void PipeLineManager::CreatePipeLine_Object3d()
 	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_Back] = pipeline->SetUpPso();
 
 	// 背面描画
-	pipeline->SetCUllMode(D3D12_CULL_MODE_NONE); // CullModeを背面描画するように設定
+	pipeline->SetCullMode(D3D12_CULL_MODE_NONE); // CullModeを背面描画するように設定
 	pipeLineMaps_[Category::Object3D][SubFilter::Cull_Mode_None] = pipeline->SetUpPso();
 
+	// ワイヤーフレーム
+	pipeline->SetCullMode(D3D12_CULL_MODE_BACK); // 背面カリングに戻しておく
+	pipeline->SetFillMode(D3D12_FILL_MODE_WIREFRAME); // ワイヤーフレーム
+	pipeLineMaps_[Category::Object3D][SubFilter::Fill_Mode_Wireframe] = pipeline->SetUpPso();
+
 	// Depth Zero
+	pipeline->SetFillMode(D3D12_FILL_MODE_SOLID); // 塗りつぶし
 	pipeline->SetUpDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO); // DepthWriteMaskをZeroに設定
 	pipeLineMaps_[Category::Object3D][SubFilter::DepthWriteMask_Zero] = pipeline->SetUpPso();
 }

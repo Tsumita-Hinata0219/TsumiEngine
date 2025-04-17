@@ -5,6 +5,7 @@
 #include "../../Structure/ParticleStructure.h"
 #include "../../Structure/FieldStructure.h"
 #include "../../Particle/GPUParticle.h"
+#include "Lua/Script/LuaScript.h"
 
 #include  "Utilities/RandomGenerator/RandomGenerator.h"
 #include "Utilities/TimeSystem/TimeSystem.h"
@@ -29,12 +30,17 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create();
+	void Create(const std::string& rootPath, const std::string& fileName);
 
 	/// <summary>
 	/// 更新処理
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// タイマー更新
+	/// </summary>
+	void TimerUpdate();
 
 	/// <summary>
 	/// 描画処理
@@ -46,6 +52,21 @@ public:
 	/// </summary>
 	void Emit();
 
+	/// <summary>
+	/// LuaScriptからEmitterデータの読み込み
+	/// </summary>
+	virtual void Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua) = 0;
+
+	/// <summary>
+	/// LuaScriptからEmitRangeデータの読み込み
+	/// </summary>
+	void Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+
+	/// <summary>
+	/// LuaScriptからEmitConfigデータの読み込み
+	/// </summary>
+	void Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+
 
 #pragma region Accessor
 
@@ -56,10 +77,10 @@ public:
 	const std::weak_ptr<T> GetWeak_EmitData() { return this->emitData_; }
 
 	// Emitter Range
-	const std::weak_ptr<Emitter::EmitRange> GetWeak_RangeData() { return this->rangeData_; }
+	const std::weak_ptr<Emitter::Data::EmitRange> GetWeak_RangeData() { return this->rangeData_; }
 
 	// Emitter Config
-	const std::weak_ptr<Emitter::EmitConfig> GetWeak_ConfigData() { return this->configData_; }
+	const std::weak_ptr<Emitter::Data::EmitConfig> GetWeak_ConfigData() { return this->configData_; }
 
 #pragma endregion 
 
@@ -87,9 +108,19 @@ private:
 	void Update_RandomSeedData();
 
 	/// <summary>
+	/// 発生させるかのフラグチェック
+	/// </summary>
+	void Check_Emitting();
+
+	/// <summary>
 	/// Bufferへデータ書き込み
 	/// </summary>
 	void WriteData();
+
+	/// <summary>
+	/// パーティクルを発生させる
+	/// </summary>
+	void DispatchEmitCompute();
 
 
 protected:
@@ -99,7 +130,7 @@ protected:
 	PipeLine::SubFilter pipeLine_SubFileter = PipeLine::SubFilter::None;
 
 
-private:
+protected:
 	
 	// パーティクル
 	std::shared_ptr<GPUParticle> particle_;
@@ -109,16 +140,16 @@ private:
 	BufferResource<T> emitBuff_;
 
 	// 範囲
-	std::shared_ptr<Emitter::EmitRange> rangeData_;
-	BufferResource<Emitter::EmitRange> rangeBuff_;
+	std::shared_ptr<Emitter::Data::EmitRange> rangeData_;
+	BufferResource<Emitter::Data::EmitRange> rangeBuff_;
 
 	// 射出
-	std::shared_ptr<Emitter::EmitConfig> configData_;
-	BufferResource<Emitter::EmitConfig> configBuff_;
+	std::shared_ptr<Emitter::Data::EmitConfig> configData_;
+	BufferResource<Emitter::Data::EmitConfig> configBuff_;
 
 	// 乱数シード
-	std::shared_ptr<Emitter::RandomSeed> randSeedData_;
-	BufferResource<Emitter::RandomSeed> randSeedBuff_;
+	std::shared_ptr<Emitter::Data::RandomSeed> randSeedData_;
+	BufferResource<Emitter::Data::RandomSeed> randSeedBuff_;
 
 	// 前回リセットした時点の時間
 	float lastResetTime_ = 0.0f;
@@ -132,7 +163,7 @@ private:
 /// 生成
 /// </summary>
 template<typename T>
-inline void IEmitter<T>::Create()
+inline void IEmitter<T>::Create(const std::string& rootPath, const std::string& fileName)
 {
 	// TimeSystem
 	timeSys_ = TimeSystem::GetInstance();
@@ -144,7 +175,7 @@ inline void IEmitter<T>::Create()
 	CreateBuffer();
 
 	// パーティクル初期化
-	particle_->Init();
+	particle_->Init(rootPath, fileName);
 }
 
 
@@ -157,17 +188,28 @@ inline void IEmitter<T>::Update()
 	// パーティクル更新
 	particle_->Update();
 
-	// 射出更新
-	Update_ConfigData();
-
 	// 乱数シード更新
 	Update_RandomSeedData();
+
+	// 発生フラグチェック
+	Check_Emitting();
 
 	// データ書き込み
 	WriteData();
 
-	// 発生処理
-	Emit();
+	// Dispatch
+	DispatchEmitCompute();
+}
+
+
+/// <summary>
+/// タイマー更新
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::TimerUpdate()
+{
+	// 射出更新
+	Update_ConfigData();
 }
 
 
@@ -187,6 +229,181 @@ inline void IEmitter<T>::Draw3D()
 /// </summary>
 template<typename T>
 inline void IEmitter<T>::Emit()
+{
+	configData_->isEmitting = true;
+
+	// データ書き込み
+	WriteData();
+
+	// Dispatch
+	DispatchEmitCompute();
+}
+
+
+/// <summary>
+/// LuaScriptからEmitRangeデータの読み込み
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+{
+	Emitter::Data::EmitRange result;
+
+	if (auto lockedData = lua.lock()) {
+
+		result.scaleMin = lockedData->GetVariable<Vector4>("EmitterRange.scaleMin");
+		result.scaleMax = lockedData->GetVariable<Vector4>("EmitterRange.scaleMax");
+
+		result.rotateMin = lockedData->GetVariable<Vector4>("EmitterRange.rotateMin");
+		result.rotateMax = lockedData->GetVariable<Vector4>("EmitterRange.rotateMax");
+
+		result.colorMin = lockedData->GetVariable<Vector4>("EmitterRange.colorMin");
+		result.colorMax = lockedData->GetVariable<Vector4>("EmitterRange.colorMax");
+
+		result.velocityMin = lockedData->GetVariable<Vector4>("EmitterRange.velocityMin");
+		result.velocityMax = lockedData->GetVariable<Vector4>("EmitterRange.velocityMax");
+
+		result.baseLifeTime = lockedData->GetVariable<float>("EmitterRange.baseLifeTime");
+		result.lifeTimeMin = lockedData->GetVariable<float>("EmitterRange.lifeTimeMin");
+		result.lifeTimeMax = lockedData->GetVariable<float>("EmitterRange.lifeTimeMax");
+	}
+
+	*rangeData_ = result;
+}
+
+
+/// <summary>
+/// LuaScriptからEmitConfigデータの読み込み
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+{
+	Emitter::Data::EmitConfig result;
+
+	if (auto lockedData = lua.lock()) {
+
+		result.spawnInterval = lockedData->GetVariable<float>("EmitConfig.spawnInterval");
+		result.elapsedTime = lockedData->GetVariable<float>("EmitConfig.elapsedTime");
+		result.spawnCount = lockedData->GetVariable<int>("EmitConfig.spawnCount");
+		result.isEmitting = lockedData->GetVariable<int>("EmitConfig.isEmitting");
+	}
+
+	*configData_ = result;
+}
+
+
+/// <summary>
+/// Data生成
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::CreateData()
+{
+	// Particle
+	particle_ = std::make_shared<GPUParticle>();
+	// Emitter
+	emitData_ = std::make_shared<T>();
+	// Range
+	rangeData_ = std::make_shared<Emitter::Data::EmitRange>();
+	// Congig
+	configData_ = std::make_shared<Emitter::Data::EmitConfig>();
+	// RandomSeed
+	randSeedData_ = std::make_shared<Emitter::Data::RandomSeed>();
+	randSeedData_->gameTime = timeSys_->Get_SinceStart();
+	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+}
+
+
+/// <summary>
+/// Buffer生成
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::CreateBuffer()
+{
+	// Emitter
+	emitBuff_.CreateCBV();
+	// Range
+	rangeBuff_.CreateCBV();
+	// Congig
+	configBuff_.CreateCBV();
+	// RandomSeed
+	randSeedBuff_.CreateCBV();
+}
+
+
+/// <summary>
+/// 射出データの更新
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Update_ConfigData()
+{
+	configData_->elapsedTime -= 1.0f / 60.0f; // 減算
+}
+
+
+/// <summary>
+/// 乱数シードデータの更新
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Update_RandomSeedData()
+{
+	// ゲーム開始からの時間を取得
+	randSeedData_->gameTime = timeSys_->Get_SinceStart();
+
+	// 初期乱数値 + 開始からの時間
+	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+	randSeedData_->dynamicTime += randSeedData_->gameTime;
+
+	// 600秒（10分）ごとにリセット
+	if (randSeedData_->gameTime - lastResetTime_ >= 600.0f) {
+		randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
+		lastResetTime_ = randSeedData_->gameTime;
+	}
+}
+
+
+/// <summary>
+/// 発生させるかのフラグチェック
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::Check_Emitting()
+{
+	// タイマー0以下で
+	// 射出許可 & タイマーリセット
+	if (configData_->elapsedTime <= 0.0f) {
+		// タイマーリセット
+		configData_->elapsedTime = configData_->spawnInterval;
+		configData_->isEmitting = true;
+	}
+	else {
+		configData_->isEmitting = false;
+	}
+}
+
+
+/// <summary>
+/// Bufferへデータ書き込み
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::WriteData()
+{
+	// Emitter
+	emitBuff_.UpdateData(emitData_.get());
+
+	// range
+	rangeBuff_.UpdateData(rangeData_.get());
+
+	// config
+	configBuff_.UpdateData(configData_.get());
+
+	// randomSeed
+	randSeedBuff_.UpdateData(randSeedData_.get());
+}
+
+
+/// <summary>
+/// パーティクルを発生させる
+/// </summary>
+template<typename T>
+inline void IEmitter<T>::DispatchEmitCompute()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -220,106 +437,4 @@ inline void IEmitter<T>::Emit()
 
 	// Barrierを張る
 	particle_->SetUAVBarrier();
-
-}
-
-
-/// <summary>
-/// Data生成
-/// </summary>
-template<typename T>
-inline void IEmitter<T>::CreateData()
-{
-	// Particle
-	particle_ = std::make_shared<GPUParticle>();
-	// Emitter
-	emitData_ = std::make_shared<T>();
-	// Range
-	rangeData_ = std::make_shared<Emitter::EmitRange>();
-	// Congig
-	configData_ = std::make_shared<Emitter::EmitConfig>();
-	// RandomSeed
-	randSeedData_ = std::make_shared<Emitter::RandomSeed>();
-	randSeedData_->gameTime = timeSys_->Get_SinceStart();
-	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-}
-
-
-/// <summary>
-/// Buffer生成
-/// </summary>
-template<typename T>
-inline void IEmitter<T>::CreateBuffer()
-{
-	// Emitter
-	emitBuff_.CreateCBV();
-	// Range
-	rangeBuff_.CreateCBV();
-	// Congig
-	configBuff_.CreateCBV();
-	// RandomSeed
-	randSeedBuff_.CreateCBV();
-
-}
-
-
-/// <summary>
-/// 射出データの更新
-/// </summary>
-template<typename T>
-inline void IEmitter<T>::Update_ConfigData()
-{
-	configData_->elapsedTime -= 1.0f / 60.0f; // 減算
-
-	// タイマー0以下で
-	// 射出許可 & タイマーリセット
-	if (configData_->elapsedTime <= 0.0f) {
-		// タイマーリセット
-		configData_->elapsedTime = configData_->spawnInterval;
-		configData_->isEmitting = true;
-	}
-	else {
-		configData_->isEmitting = false;
-	}
-}
-
-
-/// <summary>
-/// 乱数シードデータの更新
-/// </summary>
-template<typename T>
-inline void IEmitter<T>::Update_RandomSeedData()
-{
-	// ゲーム開始からの時間を取得
-	randSeedData_->gameTime = timeSys_->Get_SinceStart();
-
-	// 初期乱数値 + 開始からの時間
-	randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-	randSeedData_->dynamicTime += randSeedData_->gameTime;
-
-	// 600秒（10分）ごとにリセット
-	if (randSeedData_->gameTime - lastResetTime_ >= 600.0f) {
-		randSeedData_->dynamicTime = RandomGenerator::getRandom(Scope(0.0f, 1000.0f));
-		lastResetTime_ = randSeedData_->gameTime;
-	}
-}
-
-
-/// <summary>
-/// Bufferへデータ書き込み
-/// </summary>
-template<typename T>
-inline void IEmitter<T>::WriteData()
-{
-	// Emitter
-	emitBuff_.UpdateData(emitData_.get());
-
-	// range
-	rangeBuff_.UpdateData(rangeData_.get());
-
-	// config
-	configBuff_.UpdateData(configData_.get());
-
-	// randomSeed
-	randSeedBuff_.UpdateData(randSeedData_.get());
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include"FlagManager/FlagManager.h"
+#include "FlagManager/FlagManager.h"
 #include "3D/Model/Model.h"
 #include "2D/Sprite/Sprite.h"
 #include "TextureManager/TextureManager.h"
@@ -16,13 +16,13 @@
 
 #include "Math/MyMath.h"
 
-#include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/ParticleField.h"
-
-#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
-
 #include "Animation/AnimationManager/AnimationManager.h"
 #include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+
+#include "GPUParticle/Particle/GPUParticle.h"
+#include "GPUParticle/Field/ParticleField.h"
+#include "GPUParticle/Field/Constant/ConstantField.h"
+#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
 
 #include "Lua/Manager/LuaManager.h"
 #include "Lua/Script/LuaScript.h"

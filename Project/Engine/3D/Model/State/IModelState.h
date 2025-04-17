@@ -3,7 +3,7 @@
 #include "../../../BufferResource/BufferResource.h"
 #include "../../../CommandManager/CommandManager.h"
 #include "../../../View/SRVManager/SRVManager.h"
-#include "../../../Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 #include "../../../PipeLineManager/PipeLineManager.h"
 #include "../Structure/ModelStructure.h"
 #include "../Resources/ModelResources.h"
@@ -17,6 +17,7 @@ enum StateType {
 enum class RenderState {
 	None,			        // 普通の描画 (背面カリング, 全て書き込み)
 	CullingMode_None,       //　カリングなし
+	FillMode_WireFrame,     // ワイヤーフレーム
 	DepthWriteMask_ZERO,    // DepthWriteMaskをZeroに設定
 };
 

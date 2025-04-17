@@ -1,21 +1,23 @@
 #pragma once
 
+#include <array>
+#include <string>
+#include <memory>
+
 #include "Tsumi.h"
 #include "Scene/IScene.h"
-#include "Scene/DebugScene/DebugScene.h"
+#include "Utilities/TextLog/TextLog.h"
+#include "Utilities/TimeSystem/TimeSystem.h"
+#include "GameData/GameData.h"
+#include "RenderSystem/Asset/RenderAssetManager.h"
+#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
+#include "Scene/DebugScene/DebugScene.h"
+#include "Scene/DevScene/DevScene.h"
 #include "Scene/TitleScene/TitleScene.h"
 #include "Scene/SelectScene/SelectScene.h"
 #include "Scene/GameScene/GameScene.h"
 
-#include "GameData/GameData.h"
-
-#include "Utilities/TextLog/TextLog.h"
-#include "Utilities/TimeSystem/TimeSystem.h"
-
-#include <array>
-#include <string>
-#include <memory>
 
 
 // グローバル変数の定義
@@ -59,10 +61,11 @@ private:
 	// 時間記録
 	TimeSystem* timeSys_ = nullptr;
 
+	// RenderAssetManager
+	RenderSystem::RenderAssetManager* renderAssetManager = nullptr;
+
 	// 現在のシーン
 	std::unique_ptr<IScene> scene_;
-
 	std::chrono::steady_clock::time_point startTime_;
-
 	std::unique_ptr<AbsentEffect> copyImage_;
 };

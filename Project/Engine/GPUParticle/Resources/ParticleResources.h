@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../../BufferResource/BufferResource.h"
-#include "../../Transform/Transform.h"
+#include "Transform/Structure/Transform.h"
 #include "../../3D/Model/Structure/ModelStructure.h"
 #include "../Structure/ParticleStructure.h"
 

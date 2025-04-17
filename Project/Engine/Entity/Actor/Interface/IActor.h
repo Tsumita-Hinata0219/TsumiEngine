@@ -3,10 +3,11 @@
 #include "Math/MyMath.h"
 #include "../../TransformNode/Node/TransformNode.h"
 
+
 // 前方宣言
 class IBaseComponent;
 class IRenderComponent;
-//class GameEntityManager;
+class ICollisionComponent;
 
 /* ゲーム内オブジェクトの基底クラス */
 class IActor : public std::enable_shared_from_this<IActor> {

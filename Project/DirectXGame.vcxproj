@@ -520,6 +520,11 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\AABBCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\SphereCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
@@ -721,6 +726,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
+    <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />

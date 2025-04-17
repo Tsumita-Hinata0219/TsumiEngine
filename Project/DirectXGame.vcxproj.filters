@@ -1498,6 +1498,12 @@
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\SphereCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\AABBCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
+    <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

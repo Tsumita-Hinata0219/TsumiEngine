@@ -2,6 +2,7 @@
 
 #include "Math/MyMath.h"
 #include "../../Actor/Interface/IActor.h"
+#include "../../TransformNode/Node/TransformNode.h"
 
 
 /* 衝突判定用のコンポーネント */
@@ -12,7 +13,7 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	ICollisionComponent();
+	ICollisionComponent() = default;
 
 	/// <summary>
 	/// デストラクタ
@@ -22,7 +23,7 @@ public:
 	/// <summary>
 	/// 生成
 	/// </summary>
-	void Create(const std::string& name);
+	void Create(const std::string& name) {name;}
 	
 	/// <summary>
 	/// 初期化処理
@@ -50,8 +51,11 @@ protected:
 
 	// Componentを持つ親Actor
 	std::weak_ptr<IActor> owner_;
+	// OwnerのTransform
+	std::weak_ptr<TransformNode> transNode_;
 
 	// Componentの名前
 	std::string name_;
 
 };
+

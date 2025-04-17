@@ -51,18 +51,18 @@ void EnemyManager::Update()
 		}
 	);
 
-	// OmniBackParticleの更新処理
-	for (auto& particle : backParticles_) {
-		particle->Update();
-	}
-	// OmniBarstParticleの更新処理
-	for (auto& particle : barstParticles_) {
-		particle->Update();
-	}
-	// OmniExplosionParticleの更新処理
-	for (auto& particle : explosionParticles_) {
-		particle->Update();
-	}
+	//// OmniBackParticleの更新処理
+	//for (auto& particle : backParticles_) {
+	//	particle->Update();
+	//}
+	//// OmniBarstParticleの更新処理
+	//for (auto& particle : barstParticles_) {
+	//	particle->Update();
+	//}
+	//// OmniExplosionParticleの更新処理
+	//for (auto& particle : explosionParticles_) {
+	//	particle->Update();
+	//}
 
 	// 全滅したかのチェック
 	EliminatedChecker();
@@ -86,18 +86,18 @@ void EnemyManager::Draw3D()
 	for (auto& boss : bossEnemies_) {
 		boss->Draw3D();
 	}
-	// OmniBackParticleの描画処理
-	for (auto& particle : backParticles_) {
-		particle->Draw();
-	}
-	// OmniBarstParticleListの描画
-	for (auto& particle : barstParticles_) {
-		particle->Draw();
-	}
-	// OmniExplosionParticleの更新処理
-	for (auto& particle : explosionParticles_) {
-		particle->Draw();
-	}
+	//// OmniBackParticleの描画処理
+	//for (auto& particle : backParticles_) {
+	//	particle->Draw();
+	//}
+	//// OmniBarstParticleListの描画
+	//for (auto& particle : barstParticles_) {
+	//	particle->Draw();
+	//}
+	//// OmniExplosionParticleの更新処理
+	//for (auto& particle : explosionParticles_) {
+	//	particle->Draw();
+	//}
 }
 
 
@@ -180,7 +180,7 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::unique_ptr<BasicEnemy> newEnemy = std::make_unique<BasicEnemy>();
-	std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
+	/*std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
  	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
 	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
 	newBackPart->Init();
@@ -188,14 +188,14 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 	newBarstPart->Init();
 	newBarstPart->Update();
 	newexplosionPart->Init();
-	newexplosionPart->Update();
+	newexplosionPart->Update();*/
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetOmniBackParticle(newBackPart);
+	/*newEnemy->SetOmniBackParticle(newBackPart);
 	newEnemy->SetOmniBarstParticle(newBarstPart);
-	newEnemy->SetOmniExplosionParticle(newexplosionPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);*/
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -203,15 +203,15 @@ void EnemyManager::CreateBasicEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	commonEnemies_.push_back(std::move(newEnemy));
-	backParticles_.push_back(std::move(newBackPart));
+	/*backParticles_.push_back(std::move(newBackPart));
 	barstParticles_.push_back(std::move(newBarstPart));
-	explosionParticles_.push_back(std::move(newexplosionPart));
+	explosionParticles_.push_back(std::move(newexplosionPart));*/
 }
 void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 {
 	// 新しいEnemyのインスタンス
 	std::unique_ptr<StaticEnemy> newEnemy = std::make_unique<StaticEnemy>();
-	std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
+	/*std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
 	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
 	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
 	newBackPart->Init();
@@ -219,14 +219,14 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 	newBarstPart->Init();
 	newBarstPart->Update();
 	newexplosionPart->Init();
-	newexplosionPart->Update();
+	newexplosionPart->Update();*/
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetOmniBackParticle(newBackPart);
+	/*newEnemy->SetOmniBackParticle(newBackPart);
 	newEnemy->SetOmniBarstParticle(newBarstPart);
-	newEnemy->SetOmniExplosionParticle(newexplosionPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);*/
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -234,15 +234,15 @@ void EnemyManager::CreateStaticEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	commonEnemies_.push_back(std::move(newEnemy));
-	backParticles_.push_back(std::move(newBackPart));
-	barstParticles_.push_back(std::move(newBarstPart));
-	explosionParticles_.push_back(std::move(newexplosionPart));
+	//backParticles_.push_back(std::move(newBackPart));
+	//barstParticles_.push_back(std::move(newBarstPart));
+	//explosionParticles_.push_back(std::move(newexplosionPart));
 }
 void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 {
 	// 新しいインスタンス
 	std::unique_ptr<BossEnemy> newEnemy = std::make_unique<BossEnemy>();
-	std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
+	/*std::shared_ptr<EnemyOmniBackParticle> newBackPart = std::make_unique<EnemyOmniBackParticle>();
 	std::shared_ptr<EnemyOmniBarstParticle> newBarstPart = std::make_shared<EnemyOmniBarstParticle>();
 	std::shared_ptr<EnemyOmniExplosionParticle> newexplosionPart = std::make_shared<EnemyOmniExplosionParticle>();
 	newBackPart->Init();
@@ -250,14 +250,14 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 	newBarstPart->Init();
 	newBarstPart->Update();
 	newexplosionPart->Init();
-	newexplosionPart->Update();
+	newexplosionPart->Update();*/
 
 	// newEnemyの初期化
 	newEnemy->SetPlayer(this->player_);
 	newEnemy->SetEnemyManager(this);
-	newEnemy->SetOmniBackParticle(newBackPart);
+	/*newEnemy->SetOmniBackParticle(newBackPart);
 	newEnemy->SetOmniBarstParticle(newBarstPart);
-	newEnemy->SetOmniExplosionParticle(newexplosionPart);
+	newEnemy->SetOmniExplosionParticle(newexplosionPart);*/
 	newEnemy->SetShotProperty(setEntityData.enemyData.shotFuncData);
 	newEnemy->SetMovementProperty(setEntityData.enemyData.movementFuncData);
 	newEnemy->SetInitSRT(setEntityData.srt);
@@ -265,9 +265,9 @@ void EnemyManager::CreateBossEnemy(const EntityData& setEntityData)
 
 	// リストに追加
 	bossEnemies_.push_back(std::move(newEnemy));
-	backParticles_.push_back(std::move(newBackPart));
+	/*backParticles_.push_back(std::move(newBackPart));
 	barstParticles_.push_back(std::move(newBarstPart));
-	explosionParticles_.push_back(std::move(newexplosionPart));
+	explosionParticles_.push_back(std::move(newexplosionPart));*/
 }
 
 

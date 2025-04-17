@@ -128,17 +128,17 @@ void StaticEnemy::onCollision(IObject* object)
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
 
-			// particleEmitterの座標更新
-			wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-			wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			//// particleEmitterの座標更新
+			//wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			//wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
 
-			// particleを出す
-			wp_BackParticle_.lock()->Update();
-			wp_BarstParticle_.lock()->Update();
-			wp_explosionParticle_.lock()->Update();
-			wp_BackParticle_.lock()->Emit();
-			wp_BarstParticle_.lock()->Emit();
-			wp_explosionParticle_.lock()->Emit();
+			//// particleを出す
+			//wp_BackParticle_.lock()->Update();
+			//wp_BarstParticle_.lock()->Update();
+			//wp_explosionParticle_.lock()->Update();
+			//wp_BackParticle_.lock()->Emit();
+			//wp_BarstParticle_.lock()->Emit();
+			//wp_explosionParticle_.lock()->Emit();
 
 			// 死亡状態に設定
 			MarkAsDead();

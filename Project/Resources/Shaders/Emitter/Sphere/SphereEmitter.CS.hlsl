@@ -45,6 +45,7 @@ void main(int3 DTid : SV_DispatchThreadID)
             if (0 <= freeListIndex && freeListIndex < kParticleInstanceMax)
             {
                 int particleIndex = gFreeList[freeListIndex];
+                rng.seed3D += countIndex;
                 
                 // Translate
                 float3 diff = rng.RandomRange3D(-gEmitSphere.radius.xyz, gEmitSphere.radius.xyz);

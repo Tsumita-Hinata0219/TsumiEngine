@@ -4,6 +4,7 @@
 
 #include "Entity/Actor/Interface/IActor.h"
 #include "Entity/Component/Base/IBaseComponent.h"
+#include "Entity/Component/Collision/ICollisionComponent.h"
 #include "Entity/Component/Render/IRenderComponent.h"
 
 #include "Lua/Manager/LuaManager.h"
@@ -27,5 +28,6 @@
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"
+#include "Utilities/PtrUtilities/PtrUtilities.h"
 
 #include "Camera/Manager/CameraManager.h"

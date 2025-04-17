@@ -1504,6 +1504,7 @@
     <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

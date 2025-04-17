@@ -64,9 +64,6 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
 
-	// AbsentEffect
-	std::unique_ptr<AbsentEffect> absentEffect_;
-
 	// RetroCRT
 	std::unique_ptr<RetroCRTEffect> retroCRT_;
 	RetroCRTMtl retroEffectData_{};

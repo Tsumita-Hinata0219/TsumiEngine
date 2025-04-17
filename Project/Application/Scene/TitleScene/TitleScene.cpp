@@ -29,10 +29,6 @@ void TitleScene::Initialize()
 	cameraData_ = cameraManager_->GetCameraDataWeak();
 	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
 
-	/* ----- AbsentEffect アブセントエフェクト ----- */
-	absentEffect_ = std::make_unique<AbsentEffect>();
-	absentEffect_->Init();
-
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_ = std::make_unique<RetroCRTEffect>();
 	retroCRT_->Init();
@@ -126,9 +122,6 @@ void TitleScene::ModelDraw()
 /// </summary>
 void TitleScene::FrontSpriteDraw()
 {
-	/* ----- AbsentEffect アブセントエフェクト----- */
-	absentEffect_->Draw();
-
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();

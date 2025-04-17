@@ -79,11 +79,14 @@ void TitleScene::Update()
 
 	// ボタン押下でトランジション開始
 	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+
+		// GameDataに選択したステージ番号を保存しておく
+		GameData::GetInstance()->Set_StageSelectNum(uiManager_->GetStageSelectNum());
 		sceneTransition_->StartFadeOut();
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+		Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		return;
 	}
 

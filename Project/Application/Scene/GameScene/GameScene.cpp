@@ -145,21 +145,25 @@ void GameScene::Update()
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
+			return;
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
+			return;
 		}
 		else if (player_->IsDead()) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
+			return;
 		}
 		// PauseでExitが押されていたら、セレクトシーンへ
 		if (pauseManager_->IsSelectedExit()) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
+			return;
 		}
 		return;
 	}

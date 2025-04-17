@@ -34,6 +34,8 @@ public:
 	void Draw2DFront();
 	void Draw2DBack();
 
+	int GetStageSelectNum() const { return stageSelect_->GetSelectNum(); }
+
 
 private:
 

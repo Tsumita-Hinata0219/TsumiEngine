@@ -25,11 +25,11 @@ void Transform::UpdateMatrix()
 
 
 // モデルの読み込み
-void Transform::DrawImGui(std::string label)
+void Transform::DrawImGui(std::string label, float diff)
 {
-	ImGui::DragFloat3((label + "_Scale").c_str(), &srt.scale.x, 0.1f);
+	ImGui::DragFloat3((label + "_Scale").c_str(), &srt.scale.x, diff);
 	ImGui::DragFloat3((label + "_Rotate").c_str(), &srt.rotate.x, 0.001f);
-	ImGui::DragFloat3((label + "_Translate").c_str(), &srt.translate.x, 0.1f);
+	ImGui::DragFloat3((label + "_Translate").c_str(), &srt.translate.x, diff);
 }
 
 

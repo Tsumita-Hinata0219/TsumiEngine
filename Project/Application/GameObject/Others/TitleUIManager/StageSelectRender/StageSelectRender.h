@@ -5,13 +5,13 @@
 
 
 /* ステージセレクト */
-class StageSelect : public IObject {
+class StageSelectRender : public IObject {
 
 public:
 
 	// コンストラク、デストラクタ
-	StageSelect() = default;
-	~StageSelect() = default;
+	StageSelectRender() = default;
+	~StageSelectRender() = default;
 
 	// 初期化処理　更新処理　描画処理
 	void Init() override;
@@ -23,12 +23,9 @@ public:
 	// 衝突判定コールバック関数
 	void onCollision([[maybe_unused]] IObject* object) override;
 
-	int GetSelectNum() const { return selectNum_; }
+	void UVUpdate(uint32_t num = 1);
 
 private:
-
-	// セレクト操作
-	void OperationSelect();
 
 	// ImGuiの描画
 	void DrawImGui();
@@ -38,20 +35,15 @@ private:
 	// Input
 	Input* input_ = nullptr;
 
-	// ステージのセレクト番号
-	int selectNum_ = 0;
+	// モデル
+	std::unique_ptr<Model> selectModel_;
+	std::unique_ptr<Model> bracketsModel_;
 
-	//Stickの入力を取得
-	Vector2 iLStick_{};
-	// デッドゾーン
-	const float DZone_ = 0.4f;
+	// トランスフォーム
+	Transform selectTrans_{};
+	Transform selectUVTrans_{};
+	Transform bracketsTrans_{};
 
-	// 操作を行ったかのフラグ
-	bool isOperationFunc_ = false;
-
-	// 選択したか
-	bool isSelect_ = false;
-
-
+	Vector4 color_{};
 
 };

@@ -7,6 +7,7 @@
 #include "TitleLabelObject/TitleLabelObject.h"
 #include "SelectBar/SelectBar.h"
 #include "StageSelect/StageSelect.h"
+#include "StageSelectRender/StageSelectRender.h"
 
 
 // Labelの種類
@@ -62,6 +63,7 @@ private:
 
 	// ステージセレクト
 	std::unique_ptr<StageSelect> stageSelect_;
+	std::unique_ptr<StageSelectRender> stageSelectRender_;
 
 };
 

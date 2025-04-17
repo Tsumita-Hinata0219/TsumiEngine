@@ -44,6 +44,11 @@ void TitleUIManager::Init()
     /* ----- StageSelect ステージセレクト ----- */
     stageSelect_ = std::make_unique<StageSelect>();
     stageSelect_->Init();
+
+
+    /* ----- StageSelectRender ステージセレクトレンダー ----- */
+    stageSelectRender_ = std::make_unique<StageSelectRender>();
+    stageSelectRender_->Init();
 }
 
 
@@ -64,6 +69,10 @@ void TitleUIManager::Update()
     /* ----- StageSelect ステージセレクト ----- */
     stageSelect_->Update();
 
+    /* ----- StageSelectRender ステージセレクトレンダー ----- */
+    stageSelectRender_->Update();
+    stageSelectRender_->UVUpdate(stageSelect_->GetSelectNum());
+
     // 何をセレクトしているかによって生じる処理
     CheckNowSelect();
 }
@@ -83,8 +92,8 @@ void TitleUIManager::Draw3D()
         element->Draw3D();
     }
 
-    /* ----- StageSelect ステージセレクト ----- */
-    stageSelect_->Draw3D();
+    /* ----- StageSelectRender ステージセレクトレンダー ----- */
+    stageSelectRender_->Draw3D();
 }
 void TitleUIManager::Draw2DFront()
 {

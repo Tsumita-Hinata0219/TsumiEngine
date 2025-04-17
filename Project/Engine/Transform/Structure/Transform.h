@@ -53,7 +53,7 @@ struct Transform
 	/// <summary>
 	/// ImGuiの描画
 	/// </summary>
-	void DrawImGui(std::string label = "");
+	void DrawImGui(std::string label = "", float diff = 0.1f);
 
 
 #pragma region Get

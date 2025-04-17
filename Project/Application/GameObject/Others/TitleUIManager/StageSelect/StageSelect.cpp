@@ -7,13 +7,6 @@ void StageSelect::Init()
 	/* ----- Input インプット ----- */
 	input_ = Input::GetInstance();
 
-	// Modelの設定
-	modelManager_ = ModelManager::GetInstance();
-
-	// Transformの初期化
-	trans_.Init();
-
-
 	// ステージのセレクト番号
 	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
 	selectNum_ = stageNum;

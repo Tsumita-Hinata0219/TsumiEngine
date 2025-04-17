@@ -36,7 +36,7 @@ void TitleScene::Initialize()
 		Temp::Color::WHITE,
 		0.15f, true,
 		{0.003f, 0.005f}, {-0.003f, -0.005f}, true,
-		0.15f, true,
+		0.0f, false,
 		0.3f, true,
 		0.0f, false,
 		WinApp::WindowSize(),

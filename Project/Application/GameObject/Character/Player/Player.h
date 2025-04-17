@@ -236,7 +236,7 @@ private:
 
     // 射撃ボタン押下フレーム&インターバル
     int shotPressFrame_ = 0;
-    int kShotInterval_ = 8;
+    int kShotInterval_ = 5;
     const int kInitialShotPressFrame = 1;
 
 #pragma endregion

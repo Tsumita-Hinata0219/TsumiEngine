@@ -27,7 +27,7 @@ void TitleScene::Initialize()
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, -30.0f });
+	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
 
 	/* ----- AbsentEffect アブセントエフェクト ----- */
 	absentEffect_ = std::make_unique<AbsentEffect>();

@@ -71,6 +71,7 @@ void GameScene::Initialize()
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
 	gameCamera_->Init();
 
+
 	// ──────── StartDirection
 	startDirection_->Init();
 
@@ -140,20 +141,24 @@ void GameScene::Update()
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			return;
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
 			GameData::GetInstance()->NextStageSet();
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<GameScene>());
+			return;
 		}
 		else if (player_->IsDead()) {
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			return;
 		}
 		// PauseでExitが押されていたら、セレクトシーンへ
 		if (pauseManager_->IsSelectedExit()) {
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			return;
 		}
 		return;
 	}

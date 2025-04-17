@@ -56,14 +56,13 @@ void GameScene::Initialize()
 	// LuaからStage情報のあるJsonファイル名を取得する
 	luaManager_->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
 	stageMapLua_ = luaManager_->GetScript("MapFileSelector");
-	auto result = stageMapLua_.lock()->CallFunction<std::string>("GetStageFileName", 0);
-	result;
+	// 選択したステージ番号を取得
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	std::optional<std::string> result = stageMapLua_.lock()->CallFunction<std::string>("GetStageFileName", stageNum);
 
 	// ──────── JsonManager
-	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", stageJsonFileName);
+	jsonManager->LoadSceneFile("Json", result.value());
 
 
 	// ──────── クラスにポインタを渡す

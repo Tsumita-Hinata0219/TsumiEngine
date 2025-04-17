@@ -44,12 +44,14 @@ public:
 	/// <summary>
 	/// ディスパッチ
 	/// </summary>
-	bool IntersectsWith(const SphereCollider& other) const override {
+	bool IntersectsWith(const SphereCollider& other) const override;
+	/*{
 		return Detect::Intersects(*this, other);
-	}
-	bool IntersectsWith(const AABBCollider& other) const override {
+	}*/
+	bool IntersectsWith(const AABBCollider& other) const override;
+	/*{
 		return Detect::Intersects(*this, other);
-	}
+	}*/
 
 };
 }

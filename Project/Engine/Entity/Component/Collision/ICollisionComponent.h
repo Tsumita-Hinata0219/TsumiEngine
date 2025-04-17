@@ -36,7 +36,7 @@ public:
 	/// <summary>
 	/// 更新処理
 	/// </summary>
-	virtual void Update(float deltaTime) {};
+	virtual void Update(float deltaTime) { deltaTime; };
 
 
 #pragma region Accessor 

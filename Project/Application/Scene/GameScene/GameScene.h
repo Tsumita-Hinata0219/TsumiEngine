@@ -89,6 +89,7 @@ private: // クラス
 
 	// LuaManager
 	LuaManager* luaManager_ = nullptr;
+	std::weak_ptr<LuaScript> stageMapLua_;
 
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;

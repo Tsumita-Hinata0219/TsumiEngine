@@ -55,6 +55,12 @@ public:
     template <typename... Args>
     bool ExeFunction(const std::string& funcName, Args... args);
 
+    /// <summary>
+    /// Lua側の関数を実行し、戻り値を受け取る
+    /// </summary>
+    template<typename Ret, typename ...Args>
+    std::optional<Ret> CallFunction(const std::string& funcName, Args ...args);
+
 
 
 private:
@@ -266,4 +272,52 @@ inline bool LuaScript::ExeFunction(const std::string& funcName, Args ...args)
         return false;
     }
     return true;
+}
+
+
+/// <summary>
+/// Lua側の関数を実行し、戻り値を受け取る
+/// </summary>
+template<typename Ret, typename ...Args>
+inline std::optional<Ret> LuaScript::CallFunction(const std::string& funcName, Args ...args)
+{
+    lua_State* L = L_.get();
+    lua_getglobal(L, funcName.c_str());
+
+    if (!lua_isfunction(L, -1)) {
+        std::cerr << "[Lua Error] Function not found: " << funcName << std::endl;
+        lua_pop(L, 1);
+        return std::nullopt;
+    }
+
+    PushAll(L, args...);
+
+    if (lua_pcall(L, sizeof...(Args), 1, 0) != LUA_OK) {
+        std::cerr << "[Lua Error] Error calling function " << funcName << ": "
+            << lua_tostring(L, -1) << std::endl;
+        lua_pop(L, 1);
+        return std::nullopt;
+    }
+
+    Ret result{};
+    if constexpr (std::is_same_v<Ret, int>) {
+        result = static_cast<Ret>(lua_tointeger(L, -1));
+    }
+    else if constexpr (std::is_same_v<Ret, float>) {
+        result = static_cast<Ret>(lua_tonumber(L, -1));
+    }
+    else if constexpr (std::is_same_v<Ret, double>) {
+        result = static_cast<Ret>(lua_tonumber(L, -1));
+    }
+    else if constexpr (std::is_same_v<Ret, std::string>) {
+        result = std::string(lua_tostring(L, -1));
+    }
+    else {
+        std::cerr << "[Lua Error] Unsupported return type" << std::endl;
+        lua_pop(L, 1);
+        return std::nullopt;
+    }
+
+    lua_pop(L, 1);
+    return result;
 }

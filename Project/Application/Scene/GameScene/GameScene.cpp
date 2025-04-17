@@ -53,6 +53,19 @@ void GameScene::Initialize()
 	};
 	retroCRT_->SetMtlData(retroEffectData_);
 
+	// LuaからStage情報のあるJsonファイル名を取得する
+	luaManager_->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
+	stageMapLua_ = luaManager_->GetScript("MapFileSelector");
+	auto result = stageMapLua_.lock()->CallFunction<std::string>("GetStageFileName", 0);
+	result;
+
+	// ──────── JsonManager
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
+	JsonManager* jsonManager = JsonManager::GetInstance();
+	jsonManager->LoadSceneFile("Json", stageJsonFileName);
+
+
 	// ──────── クラスにポインタを渡す
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -60,12 +73,6 @@ void GameScene::Initialize()
 	gameCamera_->SetPlayer(player_.get());
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());
-
-	// ──────── JsonManager
-	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
-	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);

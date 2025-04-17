@@ -4,8 +4,8 @@ SphereEmitter = {
 }
 
 EmitterRange = {
-    scaleMin = { x = 0.3, y = 0.3, z = 0.3, w = 0.5 },
-    scaleMax = { x = 0.8, y = 0.8, z = 0.8, w = 0.5 },
+    scaleMin = { x = 0.5, y = 0.5, z = 0.5, w = 0.0 },
+    scaleMax = { x = 0.5, y = 0.5, z = 0.5, w = 0.0 },
 
     rotateMin = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
     rotateMax = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
@@ -13,8 +13,8 @@ EmitterRange = {
     colorMin = { x = 0.0, y = 0.0, z = 0.0, w = 1.0 },
     colorMax = { x = 1.0, y = 1.0, z = 1.0, w = 1.0 },
 
-    velocityMin = { x = -0.1, y = 0.0, z = -0.1, w = 0.0 },
-    velocityMax = { x = 0.5, y = 0.5, z = 0.5, w = 0.0 },
+    velocityMin = { x = -0.2, y = 0.0, z = -0.2, w = 0.0 },
+    velocityMax = { x = 0.2, y = 0.2, z = 0.2, w = 0.0 },
 
     baseLifeTime = 1.0 * 60.0,
     lifeTimeMin = 0.0,

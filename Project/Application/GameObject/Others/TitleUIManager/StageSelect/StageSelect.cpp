@@ -1,4 +1,6 @@
 #include "StageSelect.h"
+#include "GameData/GameData.h"
+
 
 void StageSelect::Init()
 {
@@ -13,7 +15,8 @@ void StageSelect::Init()
 
 
 	// ステージのセレクト番号
-	selectNum_ = 1;
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	selectNum_ = stageNum;
 
 	// 選択したかのフラグ
 	isSelect_ = false;
@@ -48,7 +51,6 @@ void StageSelect::Update()
 #ifdef _DEBUG
 	DrawImGui();
 #endif // _DEBUG
-
 }
 
 void StageSelect::Draw3D()

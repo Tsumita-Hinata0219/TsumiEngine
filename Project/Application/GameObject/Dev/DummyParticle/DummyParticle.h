@@ -15,10 +15,7 @@ public:
 	void Update();
 	void Draw();
 
-	void ReLoad_EmitData();
-	void ReLoad_RangeData();
-	void ReLoad_ComfigData();
-	void ReLoad_FieldData();
+	void ReLoad_ParticlePrope();
 
 private:
 	// パーティクルに必要なもの
@@ -27,10 +24,7 @@ private:
 	std::unique_ptr<GpuField::ConstantField> cField_;
 
 	// Luaスクリプト
-	std::weak_ptr<LuaScript> sEmitLua_;
-	std::weak_ptr<LuaScript> rangeLua_;
-	std::weak_ptr<LuaScript> configLua_;
-	std::weak_ptr<LuaScript> cFieldLua_;
+	std::weak_ptr<LuaScript> particlePropeLua_;
 	std::weak_ptr<LuaScript> movementLua_;
 
 	// 確認用

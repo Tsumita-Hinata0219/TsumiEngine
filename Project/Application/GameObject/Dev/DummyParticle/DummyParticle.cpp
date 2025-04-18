@@ -35,34 +35,24 @@ void DummyParticle::Init()
 	model_ = modelManager_->GetModel("SphereEmitter");
 	model_->SetRenderState(RenderState::FillMode_WireFrame);
 	trans_.Init();
-	trans_.srt.translate = { -10.0f, 0.0f, -10.0f };
 }
 
 void DummyParticle::Update()
 {
-	//// Emitterの座標を動かす処理
-	//if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
-
-	//	Vector4 vel = { 0.0f, 0.0f, 0.01f, 0.0f };
-	//	// Lua側の関数でEmitterを動かす
-	//	if (movementLua_.lock()->ExeFunction("MoveCircular", vel)) {
-	//		lockedData->translate = movementLua_.lock()->GetVariable<Vector4>("position");
-	//	}
-
-	//	// 確認用Emitterの座標更新
-	//	trans_.srt.translate = {
-	//		lockedData->translate.x,
-	//		lockedData->translate.y,
-	//		lockedData->translate.z,
-	//	};
-	//}
-
+	// Emitterの座標を動かす処理
 	if (auto lockedData = sEmit_->GetWeak_EmitData().lock()) {
-		lockedData->translate = {
-			trans_.srt.translate.x,
-			trans_.srt.translate.y,
-			trans_.srt.translate.z,
-			0.0f,
+
+		Vector4 vel = { 0.0f, 0.0f, 0.01f, 0.0f };
+		// Lua側の関数でEmitterを動かす
+		if (movementLua_.lock()->ExeFunction("MoveCircular", vel)) {
+			lockedData->translate = movementLua_.lock()->GetVariable<Vector4>("position");
+		}
+
+		// 確認用Emitterの座標更新
+		trans_.srt.translate = {
+			lockedData->translate.x,
+			lockedData->translate.y,
+			lockedData->translate.z,
 		};
 	}
 

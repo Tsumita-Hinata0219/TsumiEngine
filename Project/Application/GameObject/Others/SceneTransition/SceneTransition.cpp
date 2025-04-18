@@ -36,12 +36,12 @@ void SceneTransition::Init()
 	}
 
 	// TransitionTimerの初期設定
-	transitionDuration_ = 2.0f * 60.0f; // 2秒
+	transitionDuration_ = 0.5f * 60.0f; // 2秒
 	transitionTimer_.Init(0.0f, transitionDuration_);
 
 	// Delayの設定
 	inDelay_ = false;
-	delayTimer_.Init(0.0f, 1.0f * 30.0f);
+	delayTimer_.Init(0.0f, 0.0f * 1.0f);
 }
 
 

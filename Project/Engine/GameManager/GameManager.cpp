@@ -97,6 +97,7 @@ void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
 	renderAssetManager->Clear();
 	
 	ModelManager::GetInstance()->AllRemove();
+	LuaManager::GetInstance()->UnLoadAllScripts();
 
 	// Testモデルを読み込んでおく
 	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");

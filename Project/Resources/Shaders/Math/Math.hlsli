@@ -78,7 +78,7 @@ float4x4 AffineMatrix(float3 scale, float3 rotate, float3 translate)
     float4x4 rotateXYZ = mul(rotationMatrixZ, mul(rotationMatrixY, rotationMatrixX));
 
     // 順番修正：スケール → 回転 → 移動
-    return mul(translationMatrix, mul(rotateXYZ, scalingMatrix));
+    return mul(scalingMatrix, mul(rotateXYZ, translationMatrix));
 
 }
 

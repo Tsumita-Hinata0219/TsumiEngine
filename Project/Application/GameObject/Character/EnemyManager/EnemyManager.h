@@ -118,9 +118,9 @@ private: // メンバ変数
 	std::list<std::unique_ptr<BossEnemy>> bossEnemies_;
 
 	// OmniParticleのList配列
-	/*std::list<std::shared_ptr<EnemyOmniBackParticle>> backParticles_;
+	std::list<std::shared_ptr<EnemyOmniBackParticle>> backParticles_;
 	std::list<std::shared_ptr<EnemyOmniBarstParticle>> barstParticles_;
-	std::list<std::shared_ptr<EnemyOmniExplosionParticle>> explosionParticles_;*/
+	std::list<std::shared_ptr<EnemyOmniExplosionParticle>> explosionParticles_;
 
 	// 通常エネミーが全滅したかのフラグ
 	bool isCommonEliminated_ = false;

@@ -78,7 +78,21 @@ std::weak_ptr<LuaScript> LuaManager::GetScript(const std::string& scriptName)
 /// </summary>
 void LuaManager::UnLoadScript(const std::string& scriptName)
 {
-    scripts_.erase(scriptName);
+    // スクリプトが見つかる場合に解放
+    auto it = scripts_.find(scriptName);
+    if (it != scripts_.end()) {
+        scripts_.erase(it); // shared_ptrの参照カウントがゼロになれば、リソースは解放される
+    }
+}
+
+
+/// <summary>
+/// 全てのスクリプトを解放
+/// </summary>
+void LuaManager::UnLoadAllScripts()
+{
+    // 全てのスクリプトを解放
+    scripts_.clear(); // これで全ての shared_ptr が解放される
 }
 
 

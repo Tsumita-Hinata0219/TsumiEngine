@@ -48,6 +48,11 @@ public:
 	void UnLoadScript(const std::string& scriptName);
 
 	/// <summary>
+	/// 全てのスクリプトを解放
+	/// </summary>
+	void UnLoadAllScripts();
+
+	/// <summary>
 	/// スクリプトの変更を監視
 	/// </summary>
 	void MonitorScript();

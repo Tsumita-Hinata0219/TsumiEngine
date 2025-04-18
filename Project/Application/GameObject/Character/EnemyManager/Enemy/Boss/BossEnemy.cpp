@@ -85,7 +85,7 @@ void BossEnemy::Update()
 	movement_->Update();
 
 	// 射撃処理
-	//bulletContainer_->Update();
+	bulletContainer_->Update();
 
 	// エフェクト処理
 	effectContainer_->Update();

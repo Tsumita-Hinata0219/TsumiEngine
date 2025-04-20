@@ -7,8 +7,8 @@ namespace Entity {
 namespace Collision {
 
 // 前方宣言
-class SphereCollider;
-class AABBCollider;
+class CollisionSphere;
+class CollisionAABB;
 
 // 型識別用
 enum class ColliderTypeID {
@@ -45,8 +45,8 @@ public:
 	/// <summary>
 	/// ダブルディスパッチ
 	/// </summary>
-	virtual bool IntersectsWith(const SphereCollider& other) const = 0;
-	virtual bool IntersectsWith(const AABBCollider& other) const  = 0;
+	virtual bool IntersectsWith(const CollisionSphere& other) const = 0;
+	virtual bool IntersectsWith(const CollisionAABB& other) const  = 0;
 
 private:
 

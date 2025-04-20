@@ -236,9 +236,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\IObject\IObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
@@ -261,7 +258,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
-    <ClCompile Include="Application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\2D\Sprite\Sprite.cpp" />
@@ -525,9 +521,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
-    <ClInclude Include="Engine\Entity\Collision\Collider\AABBCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
-    <ClInclude Include="Engine\Entity\Collision\Collider\SphereCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
     <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
@@ -578,9 +574,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\IStageTransitionMenu.h" />
@@ -606,7 +599,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
-    <ClInclude Include="Application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Engine\2D\Sprite\Sprite.h" />

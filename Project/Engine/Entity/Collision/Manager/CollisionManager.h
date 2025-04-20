@@ -1,8 +1,8 @@
 #pragma once
 
 #include "../Collider/IEntityCollider.h"
-#include "../Collider/SphereCollider.h"
-#include "../Collider/AABBCollider.h"
+#include "../Collider/CollisionSphere.h"
+#include "../Collider/CollisionAABB.h"
 
 
 namespace Entity{

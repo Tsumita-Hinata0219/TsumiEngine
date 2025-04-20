@@ -7,12 +7,12 @@
 namespace Entity {
 namespace Collision {
 
-class AABBCollider : public IEntityCollider {
+class CollisionSphere  : public IEntityCollider {
 
 public:
 
-	Vector3 m_Min{};
-	Vector3 m_Max{};
+	Vector3 m_Center{};
+	float m_Radius = 0.0f;
 
 
 public:
@@ -20,35 +20,35 @@ public:
 	/// <summary>
 	/// コンストラクタ
 	/// </summary>
-	AABBCollider() = default;
+	CollisionSphere () = default;
 
 	/// <summary>
 	/// デストラクタ
 	/// </summary>
-	~AABBCollider() = default;
+	~CollisionSphere () = default;
 
 	/// <summary>
 	/// 識別IDのGetter
 	/// </summary>
 	ColliderTypeID GetTypeID() const override {
-		return ColliderTypeID::AABB;
+		return ColliderTypeID::Sphere;	
 	}
 
 	/// <summary>
 	/// 判定処理
 	/// </summary>
 	bool Intersects(const IEntityCollider& other) const override {
-		return other.Intersects(*this);
+		//return other.IntersectsWith(*this);
 	}
 
 	/// <summary>
 	/// ディスパッチ
 	/// </summary>
-	bool IntersectsWith(const SphereCollider& other) const override;
+	bool IntersectsWith(const CollisionSphere& other) const override;
 	/*{
 		return Detect::Intersects(*this, other);
 	}*/
-	bool IntersectsWith(const AABBCollider& other) const override;
+	bool IntersectsWith(const CollisionAABB& other) const override;
 	/*{
 		return Detect::Intersects(*this, other);
 	}*/

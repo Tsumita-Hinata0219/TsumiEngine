@@ -492,15 +492,6 @@
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp">
       <Filter>Application\GameObject\Others\StageTransitionMenu</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Operation</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp">
       <Filter>Application\GameObject\Others\SceneTransition</Filter>
     </ClCompile>
@@ -527,9 +518,6 @@
     </ClCompile>
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Application\Scene\TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Scene\SelectScene\SelectScene.cpp">
-      <Filter>Application\Scene\SelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
@@ -1378,15 +1366,6 @@
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h">
       <Filter>Application\GameObject\Others\StageTransitionMenu</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h">
-      <Filter>Application\GameObject\Others\StageSelect\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h">
-      <Filter>Application\GameObject\Others\StageSelect\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h">
-      <Filter>Application\GameObject\Others\StageSelect\Operation</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h">
       <Filter>Application\GameObject\Others\SceneTransition</Filter>
     </ClInclude>
@@ -1416,9 +1395,6 @@
     </ClInclude>
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h">
       <Filter>Application\Scene\TitleScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Scene\SelectScene\SelectScene.h">
-      <Filter>Application\Scene\SelectScene</Filter>
     </ClInclude>
     <ClInclude Include="Application\Scene\IScene.h">
       <Filter>Application\Scene</Filter>
@@ -1501,8 +1477,8 @@
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
-    <ClInclude Include="Engine\Entity\Collision\Collider\SphereCollider.h" />
-    <ClInclude Include="Engine\Entity\Collision\Collider\AABBCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
     <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />

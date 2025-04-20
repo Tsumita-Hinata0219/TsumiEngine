@@ -47,9 +47,8 @@ void DebugScene::Update()
 	floor_->Update();
 
 	dummyParticle_->Update();
-
-#ifdef _DEBUG
 	luaManager_->MonitorScript();
+#ifdef _DEBUG
 	ImGui::Begin("DebugScene");
 	cameraData_.lock()->DrawImGui();
 	ImGui::End();

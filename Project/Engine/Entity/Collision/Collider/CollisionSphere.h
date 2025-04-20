@@ -1,7 +1,6 @@
 #pragma once
 
 #include "IEntityCollider.h"
-#include "../Detect/CollisionIntersects.h"
 
 
 namespace Entity {
@@ -37,22 +36,13 @@ public:
 	/// <summary>
 	/// 判定処理
 	/// </summary>
-	bool Intersects(const IEntityCollider& other) const override {
-		//return other.IntersectsWith(*this);
-	}
+	bool Intersects(const IEntityCollider& other) const override;
 
 	/// <summary>
 	/// ディスパッチ
 	/// </summary>
 	bool IntersectsWith(const CollisionSphere& other) const override;
-	/*{
-		return Detect::Intersects(*this, other);
-	}*/
 	bool IntersectsWith(const CollisionAABB& other) const override;
-	/*{
-		return Detect::Intersects(*this, other);
-	}*/
-
 };
 }
 }

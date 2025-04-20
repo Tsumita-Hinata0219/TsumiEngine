@@ -572,6 +572,8 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1479,7 +1481,7 @@
     <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
-    <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Intersects\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />

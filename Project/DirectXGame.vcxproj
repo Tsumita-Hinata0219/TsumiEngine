@@ -199,6 +199,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
@@ -524,7 +526,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
     <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
-    <ClInclude Include="Engine\Entity\Collision\Detect\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Intersects\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />

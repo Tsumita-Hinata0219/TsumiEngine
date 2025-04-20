@@ -5,14 +5,15 @@
 #include "../Collider/CollisionAABB.h"
 
 
-namespace Entity{
+namespace Entity {
 namespace Collision {
-namespace Detect{
+namespace Detect {
 
 /// <summary>
 /// Sphere x Sphere
 /// </summary>
-inline bool Intersects(const CollisionSphere& s1, const CollisionSphere& s2) {
+inline bool Intersects(const CollisionSphere& s1, const CollisionSphere& s2)
+{
     // 中心からの距離
     float distance = Length(s2.m_Center - s1.m_Center);
     // 距離を半径を比較
@@ -28,7 +29,8 @@ inline bool Intersects(const CollisionSphere& s1, const CollisionSphere& s2) {
 /// <summary>
 /// AABB x AABB
 /// </summary>
-inline bool Intersects(const CollisionAABB& a1, const CollisionAABB& a2) {
+inline bool Intersects(const CollisionAABB& a1, const CollisionAABB& a2)
+{
     if ((a1.m_Min.x <= a2.m_Min.x && a1.m_Max.x >= a2.m_Min.x) &&
         (a1.m_Min.y <= a2.m_Max.y && a1.m_Max.y >= a2.m_Min.y) &&
         (a1.m_Min.z <= a2.m_Max.z && a1.m_Max.z >= a2.m_Min.z)
@@ -45,7 +47,8 @@ inline bool Intersects(const CollisionAABB& a1, const CollisionAABB& a2) {
 /// <summary>
 /// Sphere x AABB
 /// </summary>
-inline bool Intersects(const CollisionSphere& s, const CollisionAABB& a) {
+inline bool Intersects(const CollisionSphere& s, const CollisionAABB& a)
+{
     // 最近接点
     const Vector3 closestPoint = {
         std::clamp(s.m_Center.x, a.m_Min.x, a.m_Max.x),
@@ -62,7 +65,8 @@ inline bool Intersects(const CollisionSphere& s, const CollisionAABB& a) {
     // 非衝突
     return false;
 }
-inline bool Intersects(const CollisionAABB& a, const CollisionSphere& s) {
+inline bool Intersects(const CollisionAABB& a, const CollisionSphere& s)
+{
     return Intersects(s, a);
 }
 

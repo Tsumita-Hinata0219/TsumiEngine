@@ -4,8 +4,8 @@
 #include "../../Actor/Interface/IActor.h"
 #include "../../TransformNode/Node/TransformNode.h"
 #include "../../Collision/Collider/IEntityCollider.h"
-#include "../../Collision/Collider/SphereCollider.h"
-#include "../../Collision/Collider/AABBCollider.h"
+#include "../../Collision/Collider/CollisionSphere.h"
+#include "../../Collision/Collider/CollisionAABB.h"
 
 
 /* 衝突判定用のコンポーネント */

@@ -19,19 +19,6 @@ struct PixcelShaderOutput
     float4 color : SV_TARGET0;
 };
 
-// Particleを表す構造体
-struct ParticleCS
-{
-    float3 scale;
-    float3 rotate;
-    float3 translate;
-    float4x4 matWorld;
-    float4 color;
-    float3 velocity;
-    uint isAlive;
-    uint lifeTime;
-};
-
 // 生存時間に関する構造体
 struct ParticleLifeTime
 {
@@ -57,6 +44,19 @@ struct ParticleMotion
     float drag; // 空気抵抗
 };
 
+
+// Particleを表す構造体
+struct ParticleCS
+{
+    float3 scale;
+    float3 rotate;
+    float3 translate;
+    float4x4 matWorld;
+    float4 color;
+    float3 velocity;
+    uint isAlive;
+    uint lifeTime;
+};
 
 
 

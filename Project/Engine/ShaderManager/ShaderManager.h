@@ -140,6 +140,7 @@ private: // メンバ関数
 	void ConstantField();
 	void GPUParticle_Init();
 	void GPUParticle_Update();
+	void GPUParitcle_LifeTime();
 
 #pragma endregion
 

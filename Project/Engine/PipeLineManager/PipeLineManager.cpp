@@ -43,6 +43,7 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_ConstantField();
 	instance->CreatePipeLine_GPUParticle_Init();
 	instance->CreatePipeLine_GPUParticle_Update();
+	instance->CreatePipeLine_GPUParticle_LifeTime();
 }
 
 
@@ -235,5 +236,10 @@ void PipeLineManager::CreatePipeLine_GPUParticle_Update()
 {
 	std::unique_ptr<GPUParticle_Update_PipeLine> pipeline = std::make_unique<GPUParticle_Update_PipeLine>();
 	pipeLineMaps_[Category::GPUParticle_Update][SubFilter::None] = pipeline->SetUpPso();
+}
+void PipeLineManager::CreatePipeLine_GPUParticle_LifeTime()
+{
+	std::unique_ptr<GPUParticle_LifeTime_PipeLine> pipeline = std::make_unique<GPUParticle_LifeTime_PipeLine>();
+	pipeLineMaps_[Category::GPUParticle_LifeTime][SubFilter::None] = pipeline->SetUpPso();
 }
 

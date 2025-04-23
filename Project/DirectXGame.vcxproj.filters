@@ -2513,6 +2513,7 @@
     <FxCompile Include="Resources\Shaders\Emitter\Sphere\SphereEmitter.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Material\FadeOut\GPUParticle_FadeOut.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

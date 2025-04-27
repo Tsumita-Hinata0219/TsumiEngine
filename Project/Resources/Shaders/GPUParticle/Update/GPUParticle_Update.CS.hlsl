@@ -6,12 +6,14 @@
 // パーティクル最大インスタンス数
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
-RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+RWStructuredBuffer<ParticleCS> gParticles : register(u0); 
+// パーティクルの生存時間
+RWStructuredBuffer<ParticleLifeTime> gLifeTime : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u1);
+RWStructuredBuffer<int> gFreeList : register(u2);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u2);
+RWStructuredBuffer<int> gFreeListIndex : register(u3);
 
 
 [numthreads(1024, 1, 1)]
@@ -24,15 +26,11 @@ void main(int3 DTid : SV_DispatchThreadID)
         // 生存中の処理
         if (gParticles[particleIndex].isAlive != 0)
         {
-            // 生存時間の減算処理
-            gParticles[particleIndex].lifeTime -= 1.0f;
             // 生存時間が0以下
-            if (gParticles[particleIndex].lifeTime <= 0.0f)
+            if (gLifeTime[particleIndex].current <= 0.0f)
             {
                 // 生存フラグを折る
                 gParticles[particleIndex].isAlive = false;
-                // 生存時間は0を入れておく
-                gParticles[particleIndex].lifeTime = 0.0f;
             }
             
             // velocityを加算

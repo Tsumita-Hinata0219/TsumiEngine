@@ -52,6 +52,11 @@ public:
 	void Bind_ParticleProp(UINT num);
 
 	/// <summary>
+	/// パーティクルの生存時間のバインド
+	/// </summary>
+	void Bind_ParticleLifeTime(UINT num);
+
+	/// <summary>
 	/// フリーリストのバインド
 	/// </summary>
 	void Bind_FreeList(UINT num);
@@ -81,11 +86,16 @@ public:
 private:
 
 	/// <summary>
-	/// バインド
+	/// バインド&ディスパッチ
 	/// </summary>
-	void Bind_Init();
-	void Bind_Update();
-	void Bind_Draw();
+	void Prope_Bind_Dispatch_Init();
+	void Prope_Bind_Dispatch_Update();
+	void LifeTime_Bind_Dispatch_Update();
+
+	/// <summary>
+	/// バインド&ドローコマンド
+	/// </summary>
+	void Bind_ExeDrawCommand();
 
 	/// <summary>
 	/// BufferResourceの作成
@@ -106,6 +116,9 @@ private:
 	GpuParticle::ModelData modelData_{};
 	GpuParticle::ResourceHandles handles_{};
 
+	// 生存時間
+	BufferResource<GpuParticle::ParticleLifeTime> lifeTimeBuffer_;
+
 	// フリーリスト
 	BufferResource<uint32_t> freeListBuffer_;
 	// フリーリストインデックス
@@ -113,5 +126,6 @@ private:
 
 	// 使用するモデル
 	std::unique_ptr<Model> model_;
+
 };
 

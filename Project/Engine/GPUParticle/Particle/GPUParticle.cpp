@@ -22,7 +22,7 @@ void GPUParticle::Init(const std::string& rootPath, const std::string& fileName,
 	CreateBufferResource();
 
 	// 初期化バインド
-	Bind_Init(); 
+	Prope_Bind_Dispatch_Init(); 
 }
 
 
@@ -31,8 +31,11 @@ void GPUParticle::Init(const std::string& rootPath, const std::string& fileName,
 /// </summary>
 void GPUParticle::Update()
 {
-	// 更新バインド
-	Bind_Update();
+	// 生存時間
+	LifeTime_Bind_Dispatch_Update();
+
+	// パーティクル要素
+	Prope_Bind_Dispatch_Update();
 }
 
 
@@ -48,7 +51,7 @@ void GPUParticle::Draw()
 	handles_.indeces.UpdateData(model_->GetMeshData().indices.data());
 
 	// 描画バインド
-	Bind_Draw();
+	Bind_ExeDrawCommand();
 }
 
 
@@ -58,6 +61,15 @@ void GPUParticle::Draw()
 void GPUParticle::Bind_ParticleProp(UINT num)
 {
 	handles_.particleElement.BindComputeSRV_Instanced(num);
+}
+
+
+/// <summary>
+/// パーティクルの生存時間のバインド
+/// </summary>
+void GPUParticle::Bind_ParticleLifeTime(UINT num)
+{
+	lifeTimeBuffer_.BindComputeSRV_Instanced(num);
 }
 
 
@@ -98,7 +110,7 @@ void GPUParticle::SetUAVBarrier()
 /// <summary>
 /// バインド
 /// </summary>
-void GPUParticle::Bind_Init()
+void GPUParticle::Prope_Bind_Dispatch_Init()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -121,7 +133,7 @@ void GPUParticle::Bind_Init()
 	// Barrierを張る
 	this->SetUAVBarrier();
 }
-void GPUParticle::Bind_Update()
+void GPUParticle::Prope_Bind_Dispatch_Update()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -132,11 +144,14 @@ void GPUParticle::Bind_Update()
 	// Particleの要素
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
+	// 生存時間
+	lifeTimeBuffer_.BindComputeSRV_Instanced(1);
+
 	// FreeList
-	freeListBuffer_.BindComputeSRV_Instanced(1);
+	freeListBuffer_.BindComputeSRV_Instanced(2);
 
 	// FreeListIndex
-	freeListIndexBuffer_.BindComputeSRV_Instanced(2);
+	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);
@@ -144,7 +159,32 @@ void GPUParticle::Bind_Update()
 	// Barrierを張る
 	this->SetUAVBarrier();
 }
-void GPUParticle::Bind_Draw()
+void GPUParticle::LifeTime_Bind_Dispatch_Update()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+
+	// PipeLineCheck
+	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_LifeTime);
+
+	// Particle要素
+	handles_.particleElement.BindComputeSRV_Instanced(0);
+
+	// 生存時間
+	lifeTimeBuffer_.BindComputeSRV_Instanced(1);
+
+	// Dispach
+	commands.List->Dispatch(1, 1, 1);
+
+	// Barrierを張る
+	this->SetUAVBarrier();
+}
+
+
+/// <summary>
+/// バインド&ドローコマンド
+/// </summary>
+void GPUParticle::Bind_ExeDrawCommand()
 {
 	// Commandの取得
 	Commands commands = CommandManager::GetInstance()->GetCommands();
@@ -171,7 +211,6 @@ void GPUParticle::Bind_Draw()
 	handles_.material.BindGraphicsSRV(3, model_->GetMaterialData().textureHandle);
 
 	// Draw!!
-	//commands.List->DrawInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0);
 	commands.List->DrawIndexedInstanced(UINT(model_->GetMeshData().indices.size()), instanceNum_, 0, 0, 0);
 }
 
@@ -201,6 +240,9 @@ void GPUParticle::CreateBufferResource()
 	// material
 	handles_.material.CreateCBV(instanceNum_);
 	handles_.material.CreateInstancingResource(instanceNum_);
+
+	// LifeTime
+	lifeTimeBuffer_.CreateUAV(instanceNum_);
 
 	// FreeList
 	freeListBuffer_.CreateUAV(instanceNum_);

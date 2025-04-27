@@ -46,7 +46,7 @@ void GPUParticle_LifeTime_PipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC
 	rootParameters[0].DescriptorTable.pDescriptorRanges = particleElementDes; // Tableの中身の配列を指定
 	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(particleElementDes); // Tableで利用する
 	
-	// u0 : Particleの要素
+	// u1 : Particleの生存時間
 	D3D12_DESCRIPTOR_RANGE parilceLifeTimeDes[1]{};
 	parilceLifeTimeDes[0].BaseShaderRegister = 1; // レジスター番号
 	parilceLifeTimeDes[0].NumDescriptors = 1; // 数は1つ

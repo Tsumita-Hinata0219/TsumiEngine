@@ -23,8 +23,7 @@ struct PixcelShaderOutput
 struct ParticleLifeTime
 {
     float current;
-    float start;
-    float end;
+    float initTime;
     float ratio;
 };
 
@@ -55,7 +54,6 @@ struct ParticleCS
     float4 color;
     float3 velocity;
     uint isAlive;
-    uint lifeTime;
 };
 
 

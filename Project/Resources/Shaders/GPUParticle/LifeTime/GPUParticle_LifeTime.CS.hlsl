@@ -23,7 +23,7 @@ void main(int3 DTid : SV_DispatchThreadID)
             gLifeTime[particleIndex].current = max(gLifeTime[particleIndex].current - 1.0f, 0.0f);
             
             // 進行具合の計算
-            gLifeTime[particleIndex].ratio = saturate(1.0f - gLifeTime[particleIndex].current / gLifeTime[particleIndex].end);
+            gLifeTime[particleIndex].ratio = saturate(1.0f - gLifeTime[particleIndex].current / gLifeTime[particleIndex].initTime);
 
             // タイマー終了
             if (gLifeTime[particleIndex].current <= 0.0f)

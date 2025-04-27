@@ -414,23 +414,26 @@ inline void IEmitter<T>::DispatchEmitCompute()
 	// Particle
 	particle_->Bind_ParticleProp(0);
 
+	// LifeTime
+	particle_->Bind_ParticleLifeTime(1);
+
 	// FreeList
-	particle_->Bind_FreeList(1);
+	particle_->Bind_FreeList(2);
 
 	// FreeListIndex
-	particle_->Bind_FreeListIndex(2);
+	particle_->Bind_FreeListIndex(3);
 
 	// Emitter
-	emitBuff_.BindComputeCBV(3);
+	emitBuff_.BindComputeCBV(4);
 
 	// Range
-	rangeBuff_.BindComputeCBV(4);
+	rangeBuff_.BindComputeCBV(5);
 
 	// EmitConfig
-	configBuff_.BindComputeCBV(5);
+	configBuff_.BindComputeCBV(6);
 
 	// RandomSeed
-	randSeedBuff_.BindComputeCBV(6);
+	randSeedBuff_.BindComputeCBV(7);
 
 	// Dispatch
 	commands.List->Dispatch(1, 1, 1);

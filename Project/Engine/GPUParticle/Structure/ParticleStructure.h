@@ -14,7 +14,6 @@ struct PropertyCS {
 	Vector4 color{};
 	Vector3 velocity;
 	uint32_t isAlive;
-	uint32_t lifeTime;
 };
 
 // Particleの運動に関する構造体
@@ -26,11 +25,14 @@ struct ParticleMotion {
 	float drag; // 空気抵抗
 };
 
-// Material
-struct Material {
-	Vector4 color;
-	Matrix4x4 uvTransform;
+// Particleの生存時間に関する構造体
+struct ParticleLifeTime {
+	float current; // 現在の時間
+	float start;   // スタート時の時間
+	float end;	   // 終了時間
+	float ratio;   // 進行具合
 };
+
 
 // PreView
 struct PreView {

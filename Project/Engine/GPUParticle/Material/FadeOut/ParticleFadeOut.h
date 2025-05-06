@@ -9,6 +9,8 @@
 #include "../../Structure/MaterialStructure.h"
 #include "../../Particle/GPUParticle.h"
 
+#include "Lua/Script/LuaScript.h"
+
 #include "Math/MyMath.h"
 
 
@@ -16,7 +18,10 @@ namespace GpuParticle {
 
 namespace Material {
 
+/* GPUParticleのFadeOut */
 class ParticleFadeOut {
+
+public:
 
 	/// <summary>
 	/// コンストラクタ
@@ -37,6 +42,12 @@ class ParticleFadeOut {
 	/// 更新処理
 	/// </summary>
 	void Update();
+
+	/// <summary>
+	/// LuaScriptからFadeOutデータの読み込み
+	/// </summary>
+	void Load_Data_From_Lua(const std::weak_ptr<LuaScript>& lua);
+
 
 
 #pragma region Accessor
@@ -65,7 +76,6 @@ protected:
 	// FadeOut
 	std::shared_ptr<FadeOut> data_;
 	BufferResource<FadeOut> buffer_;
-
 
 };
 

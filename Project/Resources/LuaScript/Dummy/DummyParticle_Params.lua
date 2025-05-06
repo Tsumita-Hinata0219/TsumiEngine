@@ -13,7 +13,7 @@ EmitterRange = {
     colorMin = { x = 0.0, y = 0.0, z = 0.0, w = 1.0 },
     colorMax = { x = 1.0, y = 1.0, z = 1.0, w = 1.0 },
 
-    velocityMin = { x = -0.1, y = -0.1, z = -0.0, w = 0.0 },
+    velocityMin = { x = -0.1, y = 0.0, z = -0.0, w = 0.0 },
     velocityMax = { x = 0.1, y = 0.1, z = 0.1, w = 0.0 },
 
     baseLifeTime = 1.0 * 60.0,
@@ -22,9 +22,9 @@ EmitterRange = {
 }
 
 EmitConfig = {
-    spawnInterval = 1.0,
-    elapsedTime = 1.0,
-    spawnCount = 2,
+    spawnInterval = 0.5,
+    elapsedTime = 0.5,
+    spawnCount = 3,
     isEmitting = false,
 }
 

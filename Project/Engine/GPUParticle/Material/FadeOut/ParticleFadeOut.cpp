@@ -27,6 +27,24 @@ void GpuParticle::Material::ParticleFadeOut::Update()
 
 
 /// <summary>
+/// LuaScriptからFadeOutデータの読み込み
+/// </summary>
+void GpuParticle::Material::ParticleFadeOut::Load_Data_From_Lua(const std::weak_ptr<LuaScript>& lua)
+{
+	GpuParticle::Material::FadeOut result{};
+
+	if (auto lockedData = lua.lock()) {
+
+		result.start = lockedData->GetVariable<float>("FadeOut.fadeStart");
+		result.end = lockedData->GetVariable<float>("FadeOut.fadeEnd");
+		result.power = lockedData->GetVariable<float>("FadeOut.fadePower");
+	}
+
+	*data_ = result;
+}
+
+
+/// <summary>
 /// データ書き込み
 /// </summary>
 void GpuParticle::Material::ParticleFadeOut::WriteData()
@@ -57,7 +75,7 @@ void GpuParticle::Material::ParticleFadeOut::Bind_and_Dispatch()
 	particlePtr_.lock()->Bind_ParticleLifeTime(1);
 
 	// FadeOut
-	buffer_.BindComputeCBV(3);
+	buffer_.BindComputeCBV(2);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

@@ -39,7 +39,6 @@
 #include "CSPipeLine/Field/Constant/ConstantFieldPipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
-#include "CSPipeLine/GPUParticle/LifeTime/GPUParticle_LifeTime_PipeLine.h"
 
 
 using namespace PipeLine;
@@ -115,7 +114,6 @@ private:
 	void CreatePipeLine_ConstantField();
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Update();
-	void CreatePipeLine_GPUParticle_LifeTime();
 
 
 private: // メンバ変数

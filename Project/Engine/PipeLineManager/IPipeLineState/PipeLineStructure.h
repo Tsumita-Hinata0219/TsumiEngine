@@ -67,7 +67,6 @@ enum class Category {
 	ConstantField,
 	GPUParticle_Init,
 	GPUParticle_Update,
-	GPUParticle_LifeTime,
 };
 
 // 第三層 : さらなる区分

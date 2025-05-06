@@ -156,7 +156,6 @@ void ShaderManager::ComputeShadersCompiles()
 	ConstantField();
 	GPUParticle_Init();
 	GPUParticle_Update();
-	GPUParitcle_LifeTime();
 }
 
 
@@ -407,12 +406,4 @@ void ShaderManager::GPUParticle_Update()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Update/GPUParticle_Update.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Update"] = shader;
-}
-
-void ShaderManager::GPUParitcle_LifeTime()
-{
-	ShadersMode shader = {
-		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/LifeTime/GPUParticle_LifeTime.CS.hlsl"),
-	};
-	computeShadersMap_["GPUParticle_LifeTime"] = shader;
 }

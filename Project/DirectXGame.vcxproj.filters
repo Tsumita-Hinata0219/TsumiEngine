@@ -574,7 +574,6 @@
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
-    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\LifeTime\GPUParticle_LifeTime_PipeLine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1488,7 +1487,6 @@
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
-    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\LifeTime\GPUParticle_LifeTime_PipeLine.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2516,7 +2514,6 @@
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Material\FadeOut\GPUParticle_FadeOut.CS.hlsl" />
-    <FxCompile Include="Resources\Shaders\GPUParticle\LifeTime\GPUParticle_LifeTime.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

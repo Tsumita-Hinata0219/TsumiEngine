@@ -90,7 +90,6 @@ private:
 	/// </summary>
 	void Prope_Bind_Dispatch_Init();
 	void Prope_Bind_Dispatch_Update();
-	void LifeTime_Bind_Dispatch_Update();
 
 	/// <summary>
 	/// バインド&ドローコマンド

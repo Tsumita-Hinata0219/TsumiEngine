@@ -185,9 +185,6 @@ inline void IEmitter<T>::Create(const std::string& rootPath, const std::string& 
 template<typename T>
 inline void IEmitter<T>::Update()
 {
-	// パーティクル更新
-	particle_->Update();
-
 	// 乱数シード更新
 	Update_RandomSeedData();
 
@@ -199,6 +196,9 @@ inline void IEmitter<T>::Update()
 
 	// Dispatch
 	DispatchEmitCompute();
+
+	// パーティクル更新
+	particle_->Update();
 }
 
 

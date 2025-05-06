@@ -209,10 +209,6 @@ void GameScene::Update()
 
 #ifdef _DEBUG
 	luaManager_->MonitorScript();
-	ImGui::Begin("GameScene");
-	ImGui::Text("");
-	retroEffectData_.DrawImGui("");
-	ImGui::End();
 #endif // _DEBUG
 }
 

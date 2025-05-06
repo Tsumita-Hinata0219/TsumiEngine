@@ -33,6 +33,19 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[particleIndex].isAlive = false;
             }
             
+            // 生存時間の計算
+            gLifeTime[particleIndex].current = max(gLifeTime[particleIndex].current - 1.0f, 0.0f);
+            
+            // 進行具合の計算
+            gLifeTime[particleIndex].ratio = saturate(1.0f - gLifeTime[particleIndex].current / gLifeTime[particleIndex].initTime);
+
+            // タイマー終了
+            if (gLifeTime[particleIndex].current <= 0.0f)
+            {
+                gParticles[particleIndex].isAlive = false;
+                gLifeTime[particleIndex].ratio = 1.0f;
+            }
+            
             // velocityを加算
             gParticles[particleIndex].translate += gParticles[particleIndex].velocity;
             

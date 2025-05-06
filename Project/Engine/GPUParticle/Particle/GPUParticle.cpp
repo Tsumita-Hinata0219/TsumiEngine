@@ -31,9 +31,6 @@ void GPUParticle::Init(const std::string& rootPath, const std::string& fileName,
 /// </summary>
 void GPUParticle::Update()
 {
-	// 生存時間
-	LifeTime_Bind_Dispatch_Update();
-
 	// パーティクル要素
 	Prope_Bind_Dispatch_Update();
 }
@@ -152,26 +149,6 @@ void GPUParticle::Prope_Bind_Dispatch_Update()
 
 	// FreeListIndex
 	freeListIndexBuffer_.BindComputeSRV_Instanced(3);
-
-	// Dispach
-	commands.List->Dispatch(1, 1, 1);
-
-	// Barrierを張る
-	this->SetUAVBarrier();
-}
-void GPUParticle::LifeTime_Bind_Dispatch_Update()
-{
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-
-	// PipeLineCheck
-	PipeLineManager::SetPipeLine(PipeLine::Container::Compute, PipeLine::Category::GPUParticle_LifeTime);
-
-	// Particle要素
-	handles_.particleElement.BindComputeSRV_Instanced(0);
-
-	// 生存時間
-	lifeTimeBuffer_.BindComputeSRV_Instanced(1);
 
 	// Dispach
 	commands.List->Dispatch(1, 1, 1);

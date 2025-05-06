@@ -575,6 +575,7 @@
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1489,6 +1490,8 @@
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
+    <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -33,7 +33,6 @@ struct ParticleLifeTime {
 	float ratio;   // 進行具合
 };
 
-
 // PreView
 struct PreView {
 	Matrix4x4 viewProjection;

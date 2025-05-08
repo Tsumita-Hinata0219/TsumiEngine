@@ -28,5 +28,5 @@ private:
 	std::unique_ptr<GpuField::ConstantField> field_;
 
 
-	std::weak_ptr<LuaScript> particlePropeLua_;
+	std::unique_ptr<LuaScript> particlePropeLua_;
 };

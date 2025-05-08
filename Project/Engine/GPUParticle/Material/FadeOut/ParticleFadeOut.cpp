@@ -29,16 +29,13 @@ void GpuParticle::Material::ParticleFadeOut::Update()
 /// <summary>
 /// LuaScriptからFadeOutデータの読み込み
 /// </summary>
-void GpuParticle::Material::ParticleFadeOut::Load_Data_From_Lua(const std::weak_ptr<LuaScript>& lua)
+void GpuParticle::Material::ParticleFadeOut::Load_Data_From_Lua(const LuaScript& lua)
 {
 	GpuParticle::Material::FadeOut result{};
 
-	if (auto lockedData = lua.lock()) {
-
-		result.start = lockedData->GetVariable<float>("FadeOut.fadeStart");
-		result.end = lockedData->GetVariable<float>("FadeOut.fadeEnd");
-		result.power = lockedData->GetVariable<float>("FadeOut.fadePower");
-	}
+	result.start = lua.GetVariable<float>("FadeOut.fadeStart");
+	result.end = lua.GetVariable<float>("FadeOut.fadeEnd");
+	result.power = lua.GetVariable<float>("FadeOut.fadePower");
 
 	*data_ = result;
 }

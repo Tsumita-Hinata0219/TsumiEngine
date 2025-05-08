@@ -25,5 +25,4 @@
 #include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
 #include "GPUParticle/Material/FadeOut/ParticleFadeOut.h"
 
-#include "Lua/Manager/LuaManager.h"
 #include "Lua/Script/LuaScript.h"

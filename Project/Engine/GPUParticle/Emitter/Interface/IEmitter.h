@@ -55,17 +55,17 @@ public:
 	/// <summary>
 	/// LuaScriptからEmitterデータの読み込み
 	/// </summary>
-	virtual void Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua) = 0;
+	virtual void Load_EmitData_From_Lua(const LuaScript& lua) = 0;
 
 	/// <summary>
 	/// LuaScriptからEmitRangeデータの読み込み
 	/// </summary>
-	void Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+	void Load_EmitRangeData_From_Lua(const LuaScript& lua);
 
 	/// <summary>
 	/// LuaScriptからEmitConfigデータの読み込み
 	/// </summary>
-	void Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua);
+	void Load_EmitConfigData_From_Lua(const LuaScript& lua);
 
 
 #pragma region Accessor
@@ -131,7 +131,7 @@ protected:
 
 
 protected:
-	
+
 	// パーティクル
 	std::shared_ptr<GPUParticle> particle_;
 
@@ -244,28 +244,25 @@ inline void IEmitter<T>::Emit()
 /// LuaScriptからEmitRangeデータの読み込み
 /// </summary>
 template<typename T>
-inline void IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+inline void IEmitter<T>::Load_EmitRangeData_From_Lua(const LuaScript& lua)
 {
 	Emitter::Data::EmitRange result;
 
-	if (auto lockedData = lua.lock()) {
+	result.scaleMin = lua.GetVariable<Vector4>("EmitterRange.scaleMin");
+	result.scaleMax = lua.GetVariable<Vector4>("EmitterRange.scaleMax");
 
-		result.scaleMin = lockedData->GetVariable<Vector4>("EmitterRange.scaleMin");
-		result.scaleMax = lockedData->GetVariable<Vector4>("EmitterRange.scaleMax");
+	result.rotateMin = lua.GetVariable<Vector4>("EmitterRange.rotateMin");
+	result.rotateMax = lua.GetVariable<Vector4>("EmitterRange.rotateMax");
 
-		result.rotateMin = lockedData->GetVariable<Vector4>("EmitterRange.rotateMin");
-		result.rotateMax = lockedData->GetVariable<Vector4>("EmitterRange.rotateMax");
+	result.colorMin = lua.GetVariable<Vector4>("EmitterRange.colorMin");
+	result.colorMax = lua.GetVariable<Vector4>("EmitterRange.colorMax");
 
-		result.colorMin = lockedData->GetVariable<Vector4>("EmitterRange.colorMin");
-		result.colorMax = lockedData->GetVariable<Vector4>("EmitterRange.colorMax");
+	result.velocityMin = lua.GetVariable<Vector4>("EmitterRange.velocityMin");
+	result.velocityMax = lua.GetVariable<Vector4>("EmitterRange.velocityMax");
 
-		result.velocityMin = lockedData->GetVariable<Vector4>("EmitterRange.velocityMin");
-		result.velocityMax = lockedData->GetVariable<Vector4>("EmitterRange.velocityMax");
-
-		result.baseLifeTime = lockedData->GetVariable<float>("EmitterRange.baseLifeTime");
-		result.lifeTimeMin = lockedData->GetVariable<float>("EmitterRange.lifeTimeMin");
-		result.lifeTimeMax = lockedData->GetVariable<float>("EmitterRange.lifeTimeMax");
-	}
+	result.baseLifeTime = lua.GetVariable<float>("EmitterRange.baseLifeTime");
+	result.lifeTimeMin = lua.GetVariable<float>("EmitterRange.lifeTimeMin");
+	result.lifeTimeMax = lua.GetVariable<float>("EmitterRange.lifeTimeMax");
 
 	*rangeData_ = result;
 }
@@ -275,17 +272,14 @@ inline void IEmitter<T>::Load_EmitRangeData_From_Lua(const std::weak_ptr<LuaScri
 /// LuaScriptからEmitConfigデータの読み込み
 /// </summary>
 template<typename T>
-inline void IEmitter<T>::Load_EmitConfigData_From_Lua(const std::weak_ptr<LuaScript>& lua)
+inline void IEmitter<T>::Load_EmitConfigData_From_Lua(const LuaScript& lua)
 {
 	Emitter::Data::EmitConfig result;
 
-	if (auto lockedData = lua.lock()) {
-
-		result.spawnInterval = lockedData->GetVariable<float>("EmitConfig.spawnInterval");
-		result.elapsedTime = lockedData->GetVariable<float>("EmitConfig.elapsedTime");
-		result.spawnCount = lockedData->GetVariable<int>("EmitConfig.spawnCount");
-		result.isEmitting = lockedData->GetVariable<int>("EmitConfig.isEmitting");
-	}
+	result.spawnInterval = lua.GetVariable<float>("EmitConfig.spawnInterval");
+	result.elapsedTime = lua.GetVariable<float>("EmitConfig.elapsedTime");
+	result.spawnCount = lua.GetVariable<int>("EmitConfig.spawnCount");
+	result.isEmitting = lua.GetVariable<int>("EmitConfig.isEmitting");
 
 	*configData_ = result;
 }

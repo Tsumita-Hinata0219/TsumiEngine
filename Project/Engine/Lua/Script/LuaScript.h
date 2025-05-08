@@ -53,7 +53,7 @@ public:
     /// </summary>
     /// <typeparam name="T"> 取得変数の型 </typeparam>
     /// <param name="varName"> Lua側にある変数名 </param>
-    template <typename T> T GetVariable(const std::string& varName);
+    template <typename T> T GetVariable(const std::string& varName) const; 
 
     /// <summary>
     /// Lua側の関数を実行
@@ -206,7 +206,7 @@ inline bool LuaScript::LoadFromFile(const std::string& file)
 /// Lua側の変数を取得
 /// </summary>
 template<typename T>
-inline T LuaScript::GetVariable(const std::string& varName)
+inline T LuaScript::GetVariable(const std::string& varName) const
 {
     std::istringstream ss(varName);
     std::string token;
@@ -316,13 +316,13 @@ inline T LuaScript::GetVariable(const std::string& varName)
     return T();  // デフォルト値を返す
 }
 // 明示的なインスタンス化
-template int LuaScript::GetVariable<int>(const std::string&);
-template float LuaScript::GetVariable<float>(const std::string&);
-template bool LuaScript::GetVariable<bool>(const std::string&);
-template std::string LuaScript::GetVariable<std::string>(const std::string&);
-template Vector2 LuaScript::GetVariable<Vector2>(const std::string&);
-template Vector3 LuaScript::GetVariable<Vector3>(const std::string&);
-template Vector4 LuaScript::GetVariable<Vector4>(const std::string&);
+template int LuaScript::GetVariable<int>(const std::string&) const;
+template float LuaScript::GetVariable<float>(const std::string&) const;
+template bool LuaScript::GetVariable<bool>(const std::string&) const;
+template std::string LuaScript::GetVariable<std::string>(const std::string&) const;
+template Vector2 LuaScript::GetVariable<Vector2>(const std::string&) const;
+template Vector3 LuaScript::GetVariable<Vector3>(const std::string&) const;
+template Vector4 LuaScript::GetVariable<Vector4>(const std::string&) const;
 
 
 /// <summary>

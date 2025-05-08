@@ -27,9 +27,9 @@ private:
 	std::unique_ptr<GpuParticle::Material::ParticleFadeOut> fadeOut_;
 
 	// Luaスクリプト
-	std::weak_ptr<LuaScript> particlePropeLua_;
-	std::weak_ptr<LuaScript> movementLua_;
-	std::weak_ptr<LuaScript> fadeOutLua_;
+	std::unique_ptr<LuaScript> particlePropeLua_;
+	std::unique_ptr<LuaScript> movementLua_;
+	std::unique_ptr<LuaScript> fadeOutLua_;
 
 	// 確認用
 	std::unique_ptr<Model> model_;

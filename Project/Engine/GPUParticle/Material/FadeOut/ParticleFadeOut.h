@@ -46,7 +46,7 @@ public:
 	/// <summary>
 	/// LuaScriptからFadeOutデータの読み込み
 	/// </summary>
-	void Load_Data_From_Lua(const std::weak_ptr<LuaScript>& lua);
+	void Load_Data_From_Lua(const LuaScript& lua);
 
 
 

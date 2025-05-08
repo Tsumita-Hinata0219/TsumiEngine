@@ -7,7 +7,6 @@
 #include "Entity/Component/Collision/ICollisionComponent.h"
 #include "Entity/Component/Render/IRenderComponent.h"
 
-#include "Lua/Manager/LuaManager.h"
 #include "Lua/Script/LuaScript.h"
 
 #include "FlagManager/FlagManager.h"

@@ -25,7 +25,7 @@ public:
 	/// <summary>
 	/// LuaScriptからEmitterデータの読み込み
 	/// </summary>
-	void Load_EmitData_From_Lua(const std::weak_ptr<LuaScript>& lua) override;
+	void Load_EmitData_From_Lua(const LuaScript& lua) override;
 
 
 private:

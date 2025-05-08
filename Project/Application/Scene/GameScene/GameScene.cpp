@@ -9,7 +9,6 @@ GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
-	luaManager_ = LuaManager::GetInstance();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	pauseManager_ = std::make_unique<PauseManager>();
@@ -54,11 +53,11 @@ void GameScene::Initialize()
 	retroCRT_->SetMtlData(retroEffectData_);
 
 	// LuaからStage情報のあるJsonファイル名を取得する
-	luaManager_->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
-	stageMapLua_ = luaManager_->GetScript("MapFileSelector");
+	std::unique_ptr<LuaScript> stageMap = std::make_unique<LuaScript>();
+	stageMap->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
 	// 選択したステージ番号を取得
 	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::optional<std::string> result = stageMapLua_.lock()->CallFunction<std::string>("GetStageFileName", stageNum);
+	std::optional<std::string> result = stageMap->CallFunction<std::string>("GetStageFileName", stageNum);
 
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();
@@ -205,11 +204,6 @@ void GameScene::Update()
 
 	// ──────── CollisionManager
 	CollisionManager_->Update();
-
-
-#ifdef _DEBUG
-	luaManager_->MonitorScript();
-#endif // _DEBUG
 }
 
 

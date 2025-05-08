@@ -28,10 +28,15 @@ public:
 	/// </summary>
 	~LuaScript() = default;
 
-	/// <summary>
-	/// スクリプトの読み込み
-	/// </summary>
-	bool LoadScript(const string& file);
+    /// <summary>
+    /// スクリプトの読み込み
+    /// </summary>
+    void LoadScript(const std::string& rootPath, const std::string& fileName);
+
+    /// <summary>
+    /// スクリプトの変更を監視
+    /// </summary>
+    void MonitorScript();
 
     /// <summary>
     /// スクリプトの再評価
@@ -39,21 +44,23 @@ public:
     bool Reload(const std::string& file);
 
     /// <summary>
-    /// コールバックを登録
+    /// リロード時のコールバックの登録
     /// </summary>
-    void SetReloadCallback(ReloadCallback callback);
-
-	/// <summary>
-	/// Lua側の変数を取得
-	/// </summary>
-	template <typename T>
-	T GetVariable(const std::string& varName);
+    void SetReloadCallBack(ReloadCallback callback);
 
     /// <summary>
-    /// Lua側の関数を実行（可変引数版）
+    /// Lua側の変数を取得
     /// </summary>
-    template <typename... Args>
-    bool ExeFunction(const std::string& funcName, Args... args);
+    /// <typeparam name="T"> 取得変数の型 </typeparam>
+    /// <param name="varName"> Lua側にある変数名 </param>
+    template <typename T> T GetVariable(const std::string& varName);
+
+    /// <summary>
+    /// Lua側の関数を実行
+    /// </summary>
+    /// <param name="funcName"> Lua側にある関数名 </param>
+    /// <param name="...args"> 引数 </param>
+    template <typename... Args> bool ExeFunction(const std::string& funcName, Args... args);
 
     /// <summary>
     /// Lua側の関数を実行し、戻り値を受け取る
@@ -62,44 +69,99 @@ public:
     std::optional<Ret> CallFunction(const std::string& funcName, Args ...args);
 
 
-
 private:
 
-    std::unique_ptr<lua_State, decltype(&lua_close)> L_;
-    ReloadCallback reloadCallback_ = nullptr;  // コールバック関数
+    /// <summary>
+    /// スクリプトの読み込み＆エラーハンドリング処理
+    /// </summary>
+    bool LoadFromFile(const std::string& file);
 
+
+private:
+    // ステート
+    std::unique_ptr<lua_State, decltype(&lua_close)> L_;
+
+    // スクリプトのフルパス
+    std::filesystem::path fullPath_;
+    // 最終更新
+    std::filesystem::file_time_type updateTime_;
+
+    // コールバック関数
+    ReloadCallback reloadCallback_ = nullptr;
 };
 
 
 
 /// <summary>
-/// コンストラク
+/// コンストラクタ
 /// </summary>
 inline LuaScript::LuaScript() : L_(luaL_newstate(), &lua_close)
 {
-	luaL_openlibs(L_.get());  // Luaライブラリを開く
+    luaL_openlibs(L_.get()); // Luaライブラリを開く
 }
 
 
 /// <summary>
 /// スクリプトの読み込み
 /// </summary>
-inline bool LuaScript::LoadScript(const string& file)
+inline void LuaScript::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-	if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
-		std::cerr << "[Lua Error] Failed to load script: " << file << "\n"
-			<< lua_tostring(L_.get(), -1) << std::endl;
-		lua_pop(L_.get(), 1); // スタックからエラーメッセージを削除
-		return false;
-	}
-	return true;
+    // フルパスを構築
+    std::filesystem::path fullPath = std::filesystem::path("Resources") / rootPath / fileName;
+
+    // ファイルが存在するか確認
+    if (!std::filesystem::exists(fullPath)) {
+        std::string errorMsg = "[Lua Error] Script file not found: " + fullPath.string();
+        std::cerr << errorMsg << std::endl;
+        throw std::runtime_error(errorMsg);
+    }
+
+    // 実際のLuaファイルの読み込み
+    if (!LoadFromFile(fullPath.string())) {
+        std::string errorMsg = "[Lua Error] Failed to load script: " + fullPath.string();
+        std::cerr << errorMsg << std::endl;
+        throw std::runtime_error(errorMsg);
+    }
+
+    // 読み込み成功時の情報保存
+    fullPath_ = fullPath;
+    updateTime_ = std::filesystem::last_write_time(fullPath);
+}
+
+
+/// <summary>
+/// スクリプトの変更を監視
+/// </summary>
+inline void LuaScript::MonitorScript()
+{
+    // 現在のファイル更新時刻を取得
+    auto currentTime = std::filesystem::last_write_time(fullPath_);
+
+    // 以前と異なっていれば変更とみなす
+    if (updateTime_ != currentTime) {
+        std::cout << "[Lua] Detected change in script: " << fullPath_ << std::endl;
+
+        // スクリプト再読み込み（LoadScriptは更新済みのファイルパスを再利用）
+        if (Reload(fullPath_.string())) {
+            // 読み込み成功時のみ時刻を更新
+            updateTime_ = currentTime;
+
+            // コールバックがあれば呼び出す
+            if (reloadCallback_) {
+                reloadCallback_();
+            }
+        }
+        else {
+            std::cerr << "[Lua Error] Failed to reload script: " << fullPath_ << std::endl;
+        }
+    }
 }
 
 
 /// <summary>
 /// スクリプトの再評価
 /// </summary>
-inline bool LuaScript::Reload(const std::string& file)
+inline bool LuaScript::Reload([[maybe_unused]] const std::string& file)
 {
     if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
         std::cerr << "[Lua Error] " << lua_tostring(L_.get(), -1) << std::endl;
@@ -117,11 +179,26 @@ inline bool LuaScript::Reload(const std::string& file)
 
 
 /// <summary>
-/// コールバックを登録
+/// リロード時のコールバックの登録
 /// </summary>
-inline void LuaScript::SetReloadCallback(ReloadCallback callback)
+inline void LuaScript::SetReloadCallBack(ReloadCallback callback)
 {
     reloadCallback_ = callback;
+}
+
+
+/// <summary>
+/// スクリプトの読み込み＆エラーハンドリング処理
+/// </summary>
+inline bool LuaScript::LoadFromFile(const std::string& file)
+{
+    if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
+        std::cerr << "[Lua Error] Failed to load script: " << file << "\n" << lua_tostring(L_.get(), -1) << std::endl;
+        lua_pop(L_.get(), 1); // スタックからエラーメッセージを削除
+        return false;
+    }
+    return true;
+
 }
 
 
@@ -251,8 +328,9 @@ template Vector4 LuaScript::GetVariable<Vector4>(const std::string&);
 /// <summary>
 /// Lua側の関数を実行
 /// </summary>
-template<typename ...Args>
-inline bool LuaScript::ExeFunction(const std::string& funcName, Args ...args)
+/// <param name="funcName"> Lua側にある関数名 </param>
+/// <param name="...args"> 引数 </param>
+template <typename... Args> inline bool LuaScript::ExeFunction(const std::string& funcName, Args... args)
 {
     lua_State* L = L_.get();
     // グローバル関数を取得

@@ -18,7 +18,6 @@ void main(int3 DTid : SV_DispatchThreadID)
 {
     int particleIndex = DTid.x;
     
-    
     // フィールド使用中
     if (gField.isUse)
     {

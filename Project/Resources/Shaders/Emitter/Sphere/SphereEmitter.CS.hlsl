@@ -70,9 +70,9 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[particleIndex].isAlive = true;
                 
                 // ê∂ë∂éûä‘
-                gParticleLifeTime[particleIndex].current = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
-                gParticleLifeTime[particleIndex].initTime = gParticleLifeTime[particleIndex].current;
-                gParticleLifeTime[particleIndex].ratio = saturate(1.0f - gParticleLifeTime[particleIndex].current / gParticleLifeTime[particleIndex].initTime);
+                float life = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
+                gParticleLifeTime[particleIndex].current = life;
+                gParticleLifeTime[particleIndex].initTime = max(1.0f, life); // Å© Ç±ÇÍèdóv
                 
                 // Velocity
                 gParticles[particleIndex].velocity = rng.RandomRange3D(gEmitRange.velocityMin.xyz, gEmitRange.velocityMax.xyz);

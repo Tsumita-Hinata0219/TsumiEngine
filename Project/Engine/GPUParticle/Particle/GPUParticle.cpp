@@ -66,7 +66,7 @@ void GPUParticle::Bind_ParticleProp(UINT num)
 /// </summary>
 void GPUParticle::Bind_ParticleLifeTime(UINT num)
 {
-	lifeTimeBuffer_.BindComputeSRV_Instanced(num);
+	handles_.lifeTimeBuffer_.BindComputeSRV_Instanced(num);
 }
 
 
@@ -93,14 +93,10 @@ void GPUParticle::Bind_FreeListIndex(UINT num)
 /// </summary>
 void GPUParticle::SetUAVBarrier()
 {
-	// Commandの取得
-	Commands commands = CommandManager::GetInstance()->GetCommands();
-	// UAVBarrier
-	D3D12_RESOURCE_BARRIER uavBarrier{};
-	uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
-	uavBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
-	uavBarrier.UAV.pResource = handles_.particleElement.GetResource();
-	commands.List->ResourceBarrier(1, &uavBarrier);
+	handles_.particleElement.SetUAVBarrier();
+	handles_.lifeTimeBuffer_.SetUAVBarrier();
+	freeListBuffer_.SetUAVBarrier();
+	freeListIndexBuffer_.SetUAVBarrier();
 }
 
 
@@ -142,7 +138,7 @@ void GPUParticle::Prope_Bind_Dispatch_Update()
 	handles_.particleElement.BindComputeSRV_Instanced(0);
 
 	// 生存時間
-	lifeTimeBuffer_.BindComputeSRV_Instanced(1);
+	handles_.lifeTimeBuffer_.BindComputeSRV_Instanced(1);
 
 	// FreeList
 	freeListBuffer_.BindComputeSRV_Instanced(2);
@@ -219,7 +215,7 @@ void GPUParticle::CreateBufferResource()
 	handles_.material.CreateInstancingResource(instanceNum_);
 
 	// LifeTime
-	lifeTimeBuffer_.CreateUAV(instanceNum_);
+	handles_.lifeTimeBuffer_.CreateUAV(instanceNum_);
 
 	// FreeList
 	freeListBuffer_.CreateUAV(instanceNum_);

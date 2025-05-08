@@ -2,73 +2,87 @@
 #include "../../Math/Math.hlsli"
 #include "../../Random/Random.hlsli"
 
-
-// パーティクル最大インスタンス数
 static const uint kParticleInstanceMax = 1024;
-// パーティクルの要素
-RWStructuredBuffer<ParticleCS> gParticles : register(u0); 
-// パーティクルの生存時間
-RWStructuredBuffer<ParticleLifeTime> gLifeTime : register(u1);
 
-// FreeList
+RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+RWStructuredBuffer<ParticleLifeTime> gLifeTime : register(u1);
 RWStructuredBuffer<int> gFreeList : register(u2);
-// FreeListIndex
 RWStructuredBuffer<int> gFreeListIndex : register(u3);
+
+
+// 生存時間の更新とratio計算
+void UpdateLifeTime(uint index)
+{
+    gLifeTime[index].current = max(gLifeTime[index].current - 1.0f, 0.0f);
+    gLifeTime[index].ratio = saturate(1.0f - gLifeTime[index].current / gLifeTime[index].initTime);
+
+    // 寿命終了時の処理
+    if (gLifeTime[index].current <= 0.0f)
+    {
+        gParticles[index] = (ParticleCS) 0;
+        gLifeTime[index] = (ParticleLifeTime) 0;
+    }
+}
+
+// パーティクルのワールド座標更新
+void UpdateParticleTransform(uint index)
+{
+    gParticles[index].translate += gParticles[index].velocity;
+    gParticles[index].matWorld = AffineMatrix(
+        gParticles[index].scale,
+        gParticles[index].rotate,
+        gParticles[index].translate
+    );
+}
+
+// フェードアウト α 計算
+void UpdateFadeOutAlpha(uint index)
+{
+    float ratio = gLifeTime[index].ratio;
+    gParticles[index].color.a = 1.0f - ratio;
+}
+
+// 死亡したパーティクルをFreeListに戻す
+void RecycleDeadParticle(uint index)
+{
+    gParticles[index].scale = float3(0.0f, 0.0f, 0.0f);
+
+    uint freeListIndex;
+    InterlockedAdd(gFreeListIndex[0], 1, freeListIndex);
+
+    if ((freeListIndex + 1) < kParticleInstanceMax)
+    {
+        gFreeList[freeListIndex + 1] = index;
+    }
+    else
+    {
+        // 範囲外になったら巻き戻す
+        InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
+    }
+}
 
 
 [numthreads(1024, 1, 1)]
 void main(int3 DTid : SV_DispatchThreadID)
 {
-    int particleIndex = DTid.x;
-    
-    if (particleIndex < kParticleInstanceMax)
-    {
-        // 生存中の処理
-        if (gParticles[particleIndex].isAlive != 0)
-        {
-            // 生存時間が0以下
-            if (gLifeTime[particleIndex].current <= 0.0f)
-            {
-                // 生存フラグを折る
-                gParticles[particleIndex].isAlive = false;
-            }
-            
-            // 生存時間の計算
-            gLifeTime[particleIndex].current = max(gLifeTime[particleIndex].current - 1.0f, 0.0f);
-            
-            // 進行具合の計算
-            gLifeTime[particleIndex].ratio = saturate(1.0f - gLifeTime[particleIndex].current / gLifeTime[particleIndex].initTime);
+    uint index = DTid.x;
 
-            // タイマー終了
-            if (gLifeTime[particleIndex].current <= 0.0f)
-            {
-                gParticles[particleIndex].isAlive = false;
-                gLifeTime[particleIndex].ratio = 1.0f;
-            }
-            
-            // velocityを加算
-            gParticles[particleIndex].translate += gParticles[particleIndex].velocity;
-            
-            // ParticleのMatWorldの更新処理
-            gParticles[particleIndex].matWorld = AffineMatrix(gParticles[particleIndex].scale, gParticles[particleIndex].rotate, gParticles[particleIndex].translate);
-        }
-        else
+    if (index >= kParticleInstanceMax)
+        return;
+
+    if (gParticles[index].isAlive != 0)
+    {
+        if (gLifeTime[index].current <= 0.0f)
         {
-            // スケールに0を入れて、VertexShader出力で棄却されるようにする
-            gParticles[particleIndex].scale = float3(0.0f, 0.0f, 0.0f);
-            uint freeListIndex;
-            InterlockedAdd(gFreeListIndex[0], 1, freeListIndex);
-            
-            // 最新のFreeListIndexの場所に死んだPaticleのIndexを設定する
-            if ((freeListIndex + 1) < kParticleInstanceMax)
-            {
-                gFreeList[freeListIndex + 1] = particleIndex;
-            }
-            else
-            {
-                // インデックスが範囲外になるのを防ぐ
-                InterlockedAdd(gFreeListIndex[0], -1, freeListIndex);
-            }
+            gParticles[index].isAlive = false;
         }
+
+        UpdateLifeTime(index);
+        UpdateParticleTransform(index);
+        //UpdateFadeOutAlpha(index);
+    }
+    else
+    {
+        RecycleDeadParticle(index);
     }
 }

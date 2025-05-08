@@ -50,6 +50,9 @@ struct ResourceHandles {
 	// マテリアル
 	BufferResource<MaterialDataN> material;
 
+	// 生存時間
+	BufferResource<GpuParticle::ParticleLifeTime> lifeTimeBuffer_;
+
 	// ライト
 	//BufferResource<DirectionalLightData> light;
 };

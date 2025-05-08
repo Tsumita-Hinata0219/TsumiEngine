@@ -18,32 +18,19 @@ ConstantBuffer<ParticleFadeOut> gFadeOut : register(b0);
 [numthreads(1024, 1, 1)]
 void main(int3 DTid : SV_DispatchThreadID)
 {
-    int particleIndex = DTid.x;
+    uint index = DTid.x;
+
+    //if (particleIndex >= kParticleInstanceMax)
+    //    return;
+    //if (gParticles[particleIndex].isAlive == 0)
+    //    return;
+
+    //// ratio（進行度）が1.0に近づくにつれてαが0に近づく
+    //float ratio = gLifeTime[particleIndex].ratio;
+
+    //// 単純な線形フェード
+    //gParticles[particleIndex].color.a = 1.0f - ratio;
     
-    if (particleIndex < kParticleInstanceMax)
-    {
-        // 生存中の処理
-        if (gParticles[particleIndex].isAlive != 0)
-        {
-            float ratio = gLifeTime[particleIndex].ratio;
-            float fadeStart = gFadeOut.fadeStart;
-            float fadeEnd = gFadeOut.fadeEnd;
-            float fadePower = gFadeOut.fadePower;
-
-            // 初期値：不透明
-            float fadeAlpha = 1.0f;
-
-            // ratio が fadeStart を超えたらフェード開始
-            if (ratio >= fadeStart)
-            {
-                float fadeRange = fadeEnd - fadeStart;
-                float localT = saturate((ratio - fadeStart) / fadeRange);
-
-                // フェード値（e.g. powでカーブ調整）
-                fadeAlpha = pow(1.0f - localT, fadePower);
-            }
-
-            gParticles[particleIndex].color.a = fadeAlpha;
-        }
-    }
+    float ratio = gLifeTime[index].ratio;
+    gParticles[index].color.a = 1.0f - ratio;
 }

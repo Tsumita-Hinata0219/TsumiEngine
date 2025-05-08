@@ -18,13 +18,13 @@ EmitterRange = {
 
     baseLifeTime = 1.0 * 60.0,
     lifeTimeMin = 0.0,
-    lifeTimeMax = 0.0,
+    lifeTimeMax = 1.0 * 60.0,
 }
 
 EmitConfig = {
     spawnInterval = 0.5,
     elapsedTime = 0.5,
-    spawnCount = 3,
+    spawnCount = 10,
     isEmitting = false,
 }
 

@@ -115,9 +115,6 @@ private:
 	GpuParticle::ModelData modelData_{};
 	GpuParticle::ResourceHandles handles_{};
 
-	// 生存時間
-	BufferResource<GpuParticle::ParticleLifeTime> lifeTimeBuffer_;
-
 	// フリーリスト
 	BufferResource<uint32_t> freeListBuffer_;
 	// フリーリストインデックス

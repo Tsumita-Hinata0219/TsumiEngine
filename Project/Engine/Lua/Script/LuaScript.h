@@ -1,6 +1,5 @@
 #pragma once
 
-#include <lua.hpp>
 #include <sol/sol.hpp>
 #include <memory>
 #include <iostream>
@@ -79,8 +78,9 @@ private:
 
 
 private:
+
     // ステート
-    std::unique_ptr<lua_State, decltype(&lua_close)> L_;
+    sol::state lua_;
 
     // スクリプトのフルパス
     std::filesystem::path fullPath_;
@@ -96,9 +96,9 @@ private:
 /// <summary>
 /// コンストラクタ
 /// </summary>
-inline LuaScript::LuaScript() : L_(luaL_newstate(), &lua_close)
+inline LuaScript::LuaScript()
 {
-    luaL_openlibs(L_.get()); // Luaライブラリを開く
+    lua_.open_libraries(sol::lib::base, sol::lib::package, sol::lib::math);
 }
 
 
@@ -107,26 +107,21 @@ inline LuaScript::LuaScript() : L_(luaL_newstate(), &lua_close)
 /// </summary>
 inline void LuaScript::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-    // フルパスを構築
-    std::filesystem::path fullPath = std::filesystem::path("Resources") / rootPath / fileName;
+    fullPath_ = std::filesystem::path("Resources") / rootPath / fileName;
 
-    // ファイルが存在するか確認
-    if (!std::filesystem::exists(fullPath)) {
-        std::string errorMsg = "[Lua Error] Script file not found: " + fullPath.string();
-        std::cerr << errorMsg << std::endl;
-        throw std::runtime_error(errorMsg);
+    if (!std::filesystem::exists(fullPath_)) {
+        throw std::runtime_error("Lua file not found: " + fullPath_.string());
     }
 
-    // 実際のLuaファイルの読み込み
-    if (!LoadFromFile(fullPath.string())) {
-        std::string errorMsg = "[Lua Error] Failed to load script: " + fullPath.string();
-        std::cerr << errorMsg << std::endl;
-        throw std::runtime_error(errorMsg);
+    sol::load_result result = lua_.load_file(fullPath_.string());
+    if (!result.valid()) {
+        sol::error err = result;
+        std::cerr << "[Lua Error] " << err.what() << std::endl;
+        throw std::runtime_error(err.what());
     }
 
-    // 読み込み成功時の情報保存
-    fullPath_ = fullPath;
-    updateTime_ = std::filesystem::last_write_time(fullPath);
+    lua_.script_file(fullPath_.string());  // 実行
+    updateTime_ = std::filesystem::last_write_time(fullPath_);
 }
 
 
@@ -162,20 +157,17 @@ inline void LuaScript::MonitorScript()
 /// <summary>
 /// スクリプトの再評価
 /// </summary>
-inline bool LuaScript::Reload([[maybe_unused]] const std::string& file)
+inline bool LuaScript::Reload(const std::string& file)
 {
-    if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
-        std::cerr << "[Lua Error] " << lua_tostring(L_.get(), -1) << std::endl;
-        lua_pop(L_.get(), 1); // エラーメッセージをスタックから削除
+    try {
+        lua_.script_file(file);
+        if (reloadCallback_) reloadCallback_();
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "[Lua Error] Reload failed: " << e.what() << std::endl;
         return false;
     }
-
-    // コールバックが設定されていれば実行
-    if (reloadCallback_) {
-        reloadCallback_();
-    }
-
-    return true;
 }
 
 
@@ -193,13 +185,14 @@ inline void LuaScript::SetReloadCallBack(ReloadCallback callback)
 /// </summary>
 inline bool LuaScript::LoadFromFile(const std::string& file)
 {
-    if (luaL_dofile(L_.get(), file.c_str()) != LUA_OK) {
-        std::cerr << "[Lua Error] Failed to load script: " << file << "\n" << lua_tostring(L_.get(), -1) << std::endl;
-        lua_pop(L_.get(), 1); // スタックからエラーメッセージを削除
+    try {
+        lua_.script_file(file);
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "[Lua Error] Failed to load script: " << file << "\n" << e.what() << std::endl;
         return false;
     }
-    return true;
-
 }
 
 
@@ -209,112 +202,13 @@ inline bool LuaScript::LoadFromFile(const std::string& file)
 template<typename T>
 inline T LuaScript::GetVariable(const std::string& varName) const
 {
-    std::istringstream ss(varName);
-    std::string token;
-
-    // 最初の変数名を取得
-    std::getline(ss, token, '.');
-    lua_getglobal(L_.get(), token.c_str()); // グローバル変数取得
-
-    while (std::getline(ss, token, '.')) {
-        if (!lua_istable(L_.get(), -1)) {
-            lua_pop(L_.get(), 1);
-            return T();  // 失敗時はデフォルト値を返す
-        }
-
-        lua_getfield(L_.get(), -1, token.c_str());  // 次のフィールドを取得
-        lua_remove(L_.get(), -2); // 1つ前のテーブルを削除せずに保持する
+    sol::object obj = lua_[varName];
+    if (!obj.valid()) {
+        std::cerr << "[Lua Error] Variable not found: " << varName << std::endl;
+        return T(); // デフォルト
     }
 
-    // 型による処理を分ける
-    if constexpr (std::is_same<T, int>::value || std::is_same<T, uint32_t>::value) {
-        if (lua_isnumber(L_.get(), -1)) {
-            int value = static_cast<int>(lua_tointeger(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-            return value;
-        }
-    }
-    else if constexpr (std::is_same<T, float>::value) {
-        if (lua_isnumber(L_.get(), -1)) {
-            float value = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-            return value;
-        }
-    }
-    else if constexpr (std::is_same<T, bool>::value) {
-        if (lua_isboolean(L_.get(), -1)) {
-            bool value = lua_toboolean(L_.get(), -1);
-            lua_pop(L_.get(), 1);
-            return value;
-        }
-    }
-    else if constexpr (std::is_same<T, std::string>::value) {
-        if (lua_isstring(L_.get(), -1)) {
-            std::string value = lua_tostring(L_.get(), -1);
-            lua_pop(L_.get(), 1);
-            return value;
-        }
-    }
-    else if constexpr (std::is_same<T, Vector2>::value) {
-        if (lua_istable(L_.get(), -1)) {
-            Vector2 vec;
-            lua_getfield(L_.get(), -1, "x");
-            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "y");
-            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_pop(L_.get(), 1); // テーブル自体をポップ
-            return vec;
-        }
-    }
-    else if constexpr (std::is_same<T, Vector3>::value) {
-        if (lua_istable(L_.get(), -1)) {
-            Vector3 vec;
-            lua_getfield(L_.get(), -1, "x");
-            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "y");
-            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "z");
-            vec.z = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_pop(L_.get(), 1); // テーブル自体をポップ
-            return vec;
-        }
-    }
-    else if constexpr (std::is_same<T, Vector4>::value) {
-        if (lua_istable(L_.get(), -1)) {
-            Vector4 vec;
-            lua_getfield(L_.get(), -1, "x");
-            vec.x = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "y");
-            vec.y = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "z");
-            vec.z = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_getfield(L_.get(), -1, "w");
-            vec.w = static_cast<float>(lua_tonumber(L_.get(), -1));
-            lua_pop(L_.get(), 1);
-
-            lua_pop(L_.get(), 1); // テーブル自体をポップ
-            return vec;
-        }
-    }
-
-    lua_pop(L_.get(), 1);  // 失敗した場合はスタックをポップ
-    return T();  // デフォルト値を返す
+    return obj.as<T>();
 }
 // 明示的なインスタンス化
 template int LuaScript::GetVariable<int>(const std::string&) const;
@@ -331,25 +225,22 @@ template Vector4 LuaScript::GetVariable<Vector4>(const std::string&) const;
 /// </summary>
 /// <param name="funcName"> Lua側にある関数名 </param>
 /// <param name="...args"> 引数 </param>
-template <typename... Args> inline bool LuaScript::ExeFunction(const std::string& funcName, Args... args)
+template <typename... Args>
+inline bool LuaScript::ExeFunction(const std::string& funcName, Args... args)
 {
-    lua_State* L = L_.get();
-    // グローバル関数を取得
-    lua_getglobal(L, funcName.c_str());
-    if (!lua_isfunction(L, -1)) {
+    sol::function func = lua_[funcName];
+    if (!func.valid()) {
         std::cerr << "[Lua Error] Function not found: " << funcName << std::endl;
-        lua_pop(L, 1);
         return false;
     }
-    // 可変引数をスタックにプッシュ
-    PushAll(L, args...);
-    // 引数の数は sizeof...(Args)
-    if (lua_pcall(L, sizeof...(Args), 0, 0) != LUA_OK) {
-        std::cerr << "[Lua Error] Error calling function " << funcName << ": "
-            << lua_tostring(L, -1) << std::endl;
-        lua_pop(L, 1);
+
+    sol::protected_function_result result = func(args...);
+    if (!result.valid()) {
+        sol::error err = result;
+        std::cerr << "[Lua Error] Function call failed: " << err.what() << std::endl;
         return false;
     }
+
     return true;
 }
 
@@ -360,43 +251,18 @@ template <typename... Args> inline bool LuaScript::ExeFunction(const std::string
 template<typename Ret, typename ...Args>
 inline std::optional<Ret> LuaScript::CallFunction(const std::string& funcName, Args ...args)
 {
-    lua_State* L = L_.get();
-    lua_getglobal(L, funcName.c_str());
-
-    if (!lua_isfunction(L, -1)) {
+    sol::function func = lua_[funcName];
+    if (!func.valid()) {
         std::cerr << "[Lua Error] Function not found: " << funcName << std::endl;
-        lua_pop(L, 1);
         return std::nullopt;
     }
 
-    PushAll(L, args...);
-
-    if (lua_pcall(L, sizeof...(Args), 1, 0) != LUA_OK) {
-        std::cerr << "[Lua Error] Error calling function " << funcName << ": "
-            << lua_tostring(L, -1) << std::endl;
-        lua_pop(L, 1);
+    sol::protected_function_result result = func(args...);
+    if (!result.valid()) {
+        sol::error err = result;
+        std::cerr << "[Lua Error] Error calling function " << funcName << ": " << err.what() << std::endl;
         return std::nullopt;
     }
 
-    Ret result{};
-    if constexpr (std::is_same_v<Ret, int>) {
-        result = static_cast<Ret>(lua_tointeger(L, -1));
-    }
-    else if constexpr (std::is_same_v<Ret, float>) {
-        result = static_cast<Ret>(lua_tonumber(L, -1));
-    }
-    else if constexpr (std::is_same_v<Ret, double>) {
-        result = static_cast<Ret>(lua_tonumber(L, -1));
-    }
-    else if constexpr (std::is_same_v<Ret, std::string>) {
-        result = std::string(lua_tostring(L, -1));
-    }
-    else {
-        std::cerr << "[Lua Error] Unsupported return type" << std::endl;
-        lua_pop(L, 1);
-        return std::nullopt;
-    }
-
-    lua_pop(L, 1);
-    return result;
+    return result.get<Ret>();
 }

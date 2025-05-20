@@ -8,7 +8,7 @@ void EnemyOmniExplosionParticle::Init()
 	field_->Create(emitter_->GetWeak_Particle());
 
 	particlePropeLua_ = std::make_unique<LuaScript>();
-	particlePropeLua_->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniExplosion_Params.lua");
+	particlePropeLua_->LoadScript("LuaScript/EnemyOmniExplosion", "EnemyOmniExplosion_Params.lua");
 
 	// Luaから値を受け取る
 	emitter_->Load_EmitData_From_Lua(*particlePropeLua_);

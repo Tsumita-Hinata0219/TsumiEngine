@@ -34,6 +34,6 @@ void main(int3 DTid : SV_DispatchThreadID)
     float ratio = gLifeTime[index].ratio;
     // ratioを赤、alphaを緑に出力 → 画面で確認しやすい
     gParticles[index].color.rgb = float3(ratio, gParticles[index].color.a, 0.0f);
-    //gParticles[index].color.a = 1.0f - ratio;
+    gParticles[index].color.a = 1.0f - ratio;
 
 }

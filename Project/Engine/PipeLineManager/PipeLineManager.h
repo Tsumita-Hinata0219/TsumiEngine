@@ -39,6 +39,7 @@
 #include "CSPipeLine/Field/Constant/ConstantFieldPipeLine.h"
 #include "CSPipeLine/GPUParticle/Init/GPUParticle_Init_PipeLine.h"
 #include "CSPipeLine/GPUParticle/Update/GPUParticle_Update_PipeLine.h"
+#include "CSPipeLine/GPUParticle/FadeOut/GPUParticle_FadeOut_PipeLine.h"
 
 
 using namespace PipeLine;
@@ -114,6 +115,7 @@ private:
 	void CreatePipeLine_ConstantField();
 	void CreatePipeLine_GPUParticle_Init();
 	void CreatePipeLine_GPUParticle_Update();
+	void CreatePipeLine_GPUParticle_FadeOut();
 
 
 private: // メンバ変数

@@ -19,25 +19,18 @@ struct PixcelShaderOutput
     float4 color : SV_TARGET0;
 };
 
-
-// Material
-struct Material
+// 生存時間に関する構造体
+struct ParticleLifeTime
 {
-    float4 color;
-    float4x4 uvTransform;
+    float current;
+    float initTime;
+    float ratio;
 };
 
-// Particleを表す構造体
-struct ParticleCS
+// Particleの見た目関連の構造体
+struct ParticleVisual
 {
-    float3 scale;
-    float3 rotate;
-    float3 translate;
-    float4x4 matWorld;
     float4 color;
-    float3 velocity;
-    uint isAlive;
-    uint lifeTime;
 };
 
 // パーティクルの挙動に関する構造体
@@ -49,6 +42,29 @@ struct ParticleMotion
     float3 force; // 外力
     float drag; // 空気抵抗
 };
+
+// ParticleのFadeOutに関する構造体
+struct ParticleFadeOut
+{
+    float fadeStart; // フェード開始時の ratio（例: 0.7）
+    float fadeEnd; // フェード終了時の ratio（例: 1.0）
+    float fadePower; // フェードの強さ（ease調整用、例: 1.0 = 線形, 2.0 = 緩やか, 0.5 = 急）
+};
+
+
+// Particleを表す構造体
+struct ParticleCS
+{
+    float3 scale;
+    float3 rotate;
+    float3 translate;
+    float4x4 matWorld;
+    float4 color;
+    float3 velocity;
+    uint isAlive;
+};
+
+
 
 // PreView
 struct PreView

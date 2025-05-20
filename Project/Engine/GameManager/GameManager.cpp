@@ -95,6 +95,12 @@ void GameManager::ChangeSceneState(std::unique_ptr<IScene> newScene) {
 	
 	// renderAssetManagerのクリア
 	renderAssetManager->Clear();
+	
+	ModelManager::GetInstance()->AllRemove();
+
+	// Testモデルを読み込んでおく
+	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");
+
 
 	// シーンの変更
 	scene_.reset();

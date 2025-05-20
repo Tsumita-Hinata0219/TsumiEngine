@@ -194,9 +194,13 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\PauseManager\Controller\PauseController.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\PauseManager.cpp" />
     <ClCompile Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.cpp" />
+    <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
+    <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
@@ -232,11 +236,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
     <ClCompile Include="Engine\IObject\IObject.cpp" />
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp" />
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.cpp" />
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\NaviBack\StageTransitionMenuNaviBack.cpp" />
@@ -259,7 +261,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Terrain\Skydome\Skydome.cpp" />
     <ClCompile Include="Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
-    <ClCompile Include="Application\Scene\SelectScene\SelectScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp" />
     <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\2D\Sprite\Sprite.cpp" />
@@ -302,7 +303,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\JsonManager\JsonManager.cpp" />
-    <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
     <ClCompile Include="Engine\Math\MathEasing\MathEasing.cpp" />
     <ClCompile Include="Engine\Math\MathFunction\MathFunction.cpp" />
     <ClCompile Include="Engine\Math\MathQuaternion\MathQuaternion.cpp" />
@@ -312,6 +312,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Math\MyTemplate\MyTemplate.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
@@ -509,6 +510,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RB\OperationUI_RB.h" />
     <ClInclude Include="Application\GameObject\Character\Player\OperationUI\RStick\OperationUI_RStick.h" />
     <ClInclude Include="Application\GameObject\Dev\Demo\Demo.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Comp\Move\DevActorMoveComponent.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
@@ -516,10 +518,17 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Others\PauseManager\Controller\PauseController.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\PauseManager.h" />
     <ClInclude Include="Application\GameObject\Others\PauseManager\Renderer\PauseRenderer.h" />
+    <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
+    <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
+    <ClInclude Include="Engine\Entity\Collision\Intersects\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
@@ -564,13 +573,12 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
+    <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="Engine\IObject\IObject.h" />
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h" />
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\BackScreen\StageTransitionMenuBackScreen.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\Blur\StageTransitionMenuBlur.h" />
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\IStageTransitionMenu.h" />
@@ -596,7 +604,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Scene\DebugScene\DebugScene.h" />
     <ClInclude Include="Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
-    <ClInclude Include="Application\Scene\SelectScene\SelectScene.h" />
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h" />
     <ClInclude Include="Engine\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Engine\2D\Sprite\Sprite.h" />
@@ -653,7 +660,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\JsonManager\JsonEntityData.h" />
     <ClInclude Include="Engine\JsonManager\JsonManager.h" />
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
-    <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
     <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
     <ClInclude Include="Engine\Math\MathEasing\MathEasing.h" />
     <ClInclude Include="Engine\Math\MathFunction\MathFunction.h" />
@@ -669,6 +675,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Math\Struct.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\PipeLineManager\IPipeLineState\IPipeLineState.h" />
@@ -721,6 +728,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
+    <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\ImGuiManager.h" />
     <ClInclude Include="Engine\Utilities\ImGuiManager\JapaneseGlyphArray.h" />
@@ -1472,6 +1480,15 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </FxCompile>
+    <FxCompile Include="Resources\Shaders\GPUParticle\Material\FadeOut\GPUParticle_FadeOut.CS.hlsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">4.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">Compute</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">4.0</ShaderModel>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </FxCompile>
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Compute</ShaderType>

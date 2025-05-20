@@ -27,11 +27,8 @@ void TitleScene::Initialize()
 	cameraManager_ = CameraManager::GetInstance();
 	cameraManager_->ReSet();
 	cameraData_ = cameraManager_->GetCameraDataWeak();
-	cameraData_.lock()->Init({ 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f });
+	cameraData_.lock()->Init({ 0.15f, 0.0f, 0.0f }, { 0.0f, 3.0f, -5.0f });
 
-	/* ----- AbsentEffect アブセントエフェクト ----- */
-	absentEffect_ = std::make_unique<AbsentEffect>();
-	absentEffect_->Init();
 
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_ = std::make_unique<RetroCRTEffect>();
@@ -40,7 +37,7 @@ void TitleScene::Initialize()
 		Temp::Color::WHITE,
 		0.15f, true,
 		{0.003f, 0.005f}, {-0.003f, -0.005f}, true,
-		0.15f, true,
+		0.0f, false,
 		0.3f, true,
 		0.0f, false,
 		WinApp::WindowSize(),
@@ -83,18 +80,20 @@ void TitleScene::Update()
 
 	// ボタン押下でトランジション開始
 	if (input_->Trigger(PadData::A) || input_->Trigger(DIK_SPACE)) {
+
+		// GameDataに選択したステージ番号を保存しておく
+		GameData::GetInstance()->Set_StageSelectNum(uiManager_->GetStageSelectNum());
 		sceneTransition_->StartFadeOut();
 	}
 	// 画面が閉じたらシーン変更
 	if (sceneTransition_->GetNowState() == TransitionState::Cloased) {
-		Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+		Manager_->ChangeSceneState(std::make_unique<GameScene>());
 		return;
 	}
 
 
 #ifdef _DEBUG
 	ImGui::Begin("TitleScene");
-	//retroEffectData_.DrawImGui();
 	cameraData_.lock()->DrawImGui();
 	ImGui::End();
 #endif // _DEBUG
@@ -126,9 +125,6 @@ void TitleScene::ModelDraw()
 /// </summary>
 void TitleScene::FrontSpriteDraw()
 {
-	/* ----- AbsentEffect アブセントエフェクト----- */
-	absentEffect_->Draw();
-
 	/* ----- RetroCRT レトロエフェクト ----- */
 	retroCRT_->SetMtlData(retroEffectData_);
 	retroCRT_->Draw();

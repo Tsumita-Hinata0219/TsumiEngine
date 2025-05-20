@@ -12,6 +12,7 @@ void PlayerParticleManager::Init()
 	modelManager_->LoadModel("Obj/MovementParticle1", "MovementParticle1.obj");
 	modelManager_->LoadModel("Obj/MovementParticle2", "MovementParticle2.obj");
 
+	particlePool_.Create(30);
 
 	// タイマー
 	movement1Timer_.Init(0.0f, 0.5f * 60.0f); // (0.5秒)
@@ -31,8 +32,10 @@ void PlayerParticleManager::Update()
 		element->Update();
 	}
 	// 死亡フラグが立っていたら削除
-	particleList_.remove_if([](std::shared_ptr<IPlayerParticle> particle) {
+	particleList_.remove_if([this](PlayerMovementParticle* particle) {
 		if (particle->IsDead()) {
+			// 死亡したバレットをプールに返却
+			particlePool_.Return(particle);
 			return true;
 		}
 		return false;
@@ -81,8 +84,7 @@ void PlayerParticleManager::MovementParticle()
 void PlayerParticleManager::AddMovementPartiucle1()
 {
 	// 追加するインスタンス
-	std::shared_ptr<PlayerMovementParticle> newParticle =
-		std::make_unique<PlayerMovementParticle>();
+	PlayerMovementParticle* newParticle = particlePool_.Get();
 
 	newParticle->Init(); // 初期化
 	newParticle->SetModel(modelManager_->GetModel("MovementParticle1"));
@@ -95,13 +97,12 @@ void PlayerParticleManager::AddMovementPartiucle1()
 	newParticle->SetTranslate(player_->GetWorldPos() + diff);
 	newParticle->SetRotate(diff);
 
-	this->particleList_.push_back(std::move(newParticle));
+	this->particleList_.push_back(newParticle);
 }
 void PlayerParticleManager::AddMovementPartiucle2()
 {
 	// 追加するインスタンス
-	std::shared_ptr<PlayerMovementParticle> newParticle =
-		std::make_unique<PlayerMovementParticle>();
+	PlayerMovementParticle* newParticle = particlePool_.Get();
 
 	newParticle->Init(); // 初期化
 	newParticle->SetModel(modelManager_->GetModel("MovementParticle2"));
@@ -114,7 +115,7 @@ void PlayerParticleManager::AddMovementPartiucle2()
 	newParticle->SetTranslate(player_->GetWorldPos() + diff);
 	newParticle->SetRotate(diff);
 
-	this->particleList_.push_back(std::move(newParticle));
+	this->particleList_.push_back(newParticle);
 }
 
 

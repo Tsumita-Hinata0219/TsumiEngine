@@ -6,18 +6,16 @@ void EnemyOmniBarstParticle::Init()
 	emitter_->Create("Obj/Enemys/Effect/BarstParticle", "BarstParticle.obj");
 	field_ = std::make_unique<GpuField::ConstantField>();
 	field_->Create(emitter_->GetWeak_Particle());
-	
-	auto luaManager = LuaManager::GetInstance();
-	luaManager->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniBarst_Params.lua");
-	particlePropeLua_  = luaManager->GetScript("EnemyOmniBarst_Params");
 
+	particlePropeLua_ = std::make_unique<LuaScript>();
+	particlePropeLua_->LoadScript("LuaScript/EnemyOmniBarst", "EnemyOmniBarst_Params.lua");
 
 	// Luaから値を受け取る
-	emitter_->Load_EmitData_From_Lua(particlePropeLua_);
-	emitter_->Load_EmitRangeData_From_Lua(particlePropeLua_);
-	emitter_->Load_EmitConfigData_From_Lua(particlePropeLua_);
-	field_->Load_FieldData_From_Lua(particlePropeLua_);
-	particlePropeLua_.lock()->SetReloadCallback([this]() { ReLoad_ParticlePrope(); });
+	emitter_->Load_EmitData_From_Lua(*particlePropeLua_);
+	emitter_->Load_EmitRangeData_From_Lua(*particlePropeLua_);
+	emitter_->Load_EmitConfigData_From_Lua(*particlePropeLua_);
+	field_->Load_FieldData_From_Lua(*particlePropeLua_);
+	particlePropeLua_->SetReloadCallBack([this]() { ReLoad_ParticlePrope(); });
 }
 
 void EnemyOmniBarstParticle::Update()
@@ -48,8 +46,8 @@ void EnemyOmniBarstParticle::SetEmitPos(Vector3 setPos)
 
 void EnemyOmniBarstParticle::ReLoad_ParticlePrope()
 {
-	emitter_->Load_EmitData_From_Lua(particlePropeLua_);
-	emitter_->Load_EmitRangeData_From_Lua(particlePropeLua_);
-	emitter_->Load_EmitConfigData_From_Lua(particlePropeLua_);
-	field_->Load_FieldData_From_Lua(particlePropeLua_);
+	emitter_->Load_EmitData_From_Lua(*particlePropeLua_);
+	emitter_->Load_EmitRangeData_From_Lua(*particlePropeLua_);
+	emitter_->Load_EmitConfigData_From_Lua(*particlePropeLua_);
+	field_->Load_FieldData_From_Lua(*particlePropeLua_);
 }

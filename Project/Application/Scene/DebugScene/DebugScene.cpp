@@ -1,5 +1,4 @@
 #include "DebugScene.h"
-#include "Lua/Manager/LuaManager.h"
 
 
 /// <summary>
@@ -8,7 +7,6 @@
 DebugScene::DebugScene() 
 {
 	cameraManager_ = CameraManager::GetInstance();
-	luaManager_ = LuaManager::GetInstance();
 	dummyParticle_ = std::make_unique<DummyParticle>();
 	floor_ = std::make_unique<Floor>();
 }
@@ -47,9 +45,7 @@ void DebugScene::Update()
 	floor_->Update();
 
 	dummyParticle_->Update();
-
 #ifdef _DEBUG
-	luaManager_->MonitorScript();
 	ImGui::Begin("DebugScene");
 	cameraData_.lock()->DrawImGui();
 	ImGui::End();

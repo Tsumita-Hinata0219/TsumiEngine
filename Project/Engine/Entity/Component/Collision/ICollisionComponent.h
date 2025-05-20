@@ -2,6 +2,10 @@
 
 #include "Math/MyMath.h"
 #include "../../Actor/Interface/IActor.h"
+#include "../../TransformNode/Node/TransformNode.h"
+#include "../../Collision/Collider/IEntityCollider.h"
+#include "../../Collision/Collider/CollisionSphere.h"
+#include "../../Collision/Collider/CollisionAABB.h"
 
 
 /* 衝突判定用のコンポーネント */
@@ -43,6 +47,9 @@ public:
 	// Owner
 	void SetOwner(std::weak_ptr<IActor> setOwner) { owner_ = setOwner; }
 
+	// Collider
+	virtual std::shared_ptr<Entity::Collision::IEntityCollider> GetCollider() const = 0;
+
 #pragma endregion 
 
 
@@ -55,3 +62,4 @@ protected:
 	std::string name_;
 
 };
+

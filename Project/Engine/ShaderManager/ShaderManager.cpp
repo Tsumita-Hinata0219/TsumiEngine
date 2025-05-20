@@ -156,6 +156,7 @@ void ShaderManager::ComputeShadersCompiles()
 	ConstantField();
 	GPUParticle_Init();
 	GPUParticle_Update();
+	GPUParticle_FadeOut();
 }
 
 
@@ -406,4 +407,12 @@ void ShaderManager::GPUParticle_Update()
 		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Update/GPUParticle_Update.CS.hlsl"),
 	};
 	computeShadersMap_["GPUParticle_Update"] = shader;
+}
+
+void ShaderManager::GPUParticle_FadeOut()
+{
+	ShadersMode shader = {
+		.ComputeBlob = SetShader(CS, L"Resources/Shaders/GPUParticle/Material/FadeOut/GPUParticle_FadeOut.CS.hlsl"),
+	};
+	computeShadersMap_["GPUParticle_FadeOut"] = shader;
 }

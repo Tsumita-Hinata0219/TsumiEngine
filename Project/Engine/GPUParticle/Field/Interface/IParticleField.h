@@ -40,7 +40,7 @@ public:
 	/// <summary>
 	/// Fieldデータの取得
 	/// </summary>
-	virtual void Load_FieldData_From_Lua(const std::weak_ptr<LuaScript>& lScript) = 0;
+	virtual void Load_FieldData_From_Lua(const LuaScript& lua) = 0;
 
 
 #pragma region Accessor

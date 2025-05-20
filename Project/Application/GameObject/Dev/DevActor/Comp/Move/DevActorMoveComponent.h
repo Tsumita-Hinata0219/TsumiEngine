@@ -3,8 +3,8 @@
 #include "Entity/Entity.h"
 
 
-class DevActorMoveComponent : public IBaseComponent
-{
+class DevActorMoveComponent : public IBaseComponent {
+
 public:
 
 	DevActorMoveComponent() = default;

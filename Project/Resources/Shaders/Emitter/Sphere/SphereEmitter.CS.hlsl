@@ -8,11 +8,13 @@
 static const uint kParticleInstanceMax = 1024;
 // パーティクルの要素
 RWStructuredBuffer<ParticleCS> gParticles : register(u0);
+// パーティクルの生存時間
+RWStructuredBuffer<ParticleLifeTime> gParticleLifeTime : register(u1);
 
 // FreeList
-RWStructuredBuffer<int> gFreeList : register(u1);
+RWStructuredBuffer<int> gFreeList : register(u2);
 // FreeListIndex
-RWStructuredBuffer<int> gFreeListIndex : register(u2);
+RWStructuredBuffer<int> gFreeListIndex : register(u3);
 
 // Emitter Sphere
 ConstantBuffer<SphereEmit> gEmitSphere : register(b0);
@@ -45,6 +47,7 @@ void main(int3 DTid : SV_DispatchThreadID)
             if (0 <= freeListIndex && freeListIndex < kParticleInstanceMax)
             {
                 int particleIndex = gFreeList[freeListIndex];
+                rng.seed3D += countIndex;
                 
                 // Translate
                 float3 diff = rng.RandomRange3D(-gEmitSphere.radius.xyz, gEmitSphere.radius.xyz);
@@ -67,8 +70,10 @@ void main(int3 DTid : SV_DispatchThreadID)
                 gParticles[particleIndex].isAlive = true;
                 
                 // 生存時間
-                gParticles[particleIndex].lifeTime = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
-
+                float life = gEmitRange.baseLifeTime + rng.RandomRange1D(gEmitRange.lifeTimeMin, gEmitRange.lifeTimeMax);
+                gParticleLifeTime[particleIndex].current = life;
+                gParticleLifeTime[particleIndex].initTime = max(1.0f, life); // ← これ重要
+                
                 // Velocity
                 gParticles[particleIndex].velocity = rng.RandomRange3D(gEmitRange.velocityMin.xyz, gEmitRange.velocityMax.xyz);
 

@@ -133,6 +133,23 @@ std::weak_ptr<IBaseComponent> IActor::GetComponent(const std::string& name)
 
 
 /// <summary>
+/// 衝突判定
+/// </summary>
+std::weak_ptr<ICollisionComponent> IActor::GetCollisionComponent(const std::string& name)
+{
+	// 名前で検索をかける
+	auto it = colComponentMap_.find(name);
+	// なければ空のweak_ptrを返す
+	if (it == colComponentMap_.end())
+	{
+		return std::weak_ptr<ICollisionComponent>();
+	}
+
+	return it->second;
+}
+
+
+/// <summary>
 /// RenderComponentのWeakPtr取得
 /// </summary>
 std::weak_ptr<IRenderComponent> IActor::GetRenderComponent()

@@ -23,6 +23,6 @@
 #include "GPUParticle/Field/ParticleField.h"
 #include "GPUParticle/Field/Constant/ConstantField.h"
 #include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
+#include "GPUParticle/Material/FadeOut/ParticleFadeOut.h"
 
-#include "Lua/Manager/LuaManager.h"
 #include "Lua/Script/LuaScript.h"

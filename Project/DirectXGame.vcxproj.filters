@@ -492,15 +492,6 @@
     <ClCompile Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.cpp">
       <Filter>Application\GameObject\Others\StageTransitionMenu</Filter>
     </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Navigation</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.cpp">
-      <Filter>Application\GameObject\Others\StageSelect\Operation</Filter>
-    </ClCompile>
     <ClCompile Include="Application\GameObject\Others\SceneTransition\SceneTransition.cpp">
       <Filter>Application\GameObject\Others\SceneTransition</Filter>
     </ClCompile>
@@ -527,9 +518,6 @@
     </ClCompile>
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp">
       <Filter>Application\Scene\TitleScene</Filter>
-    </ClCompile>
-    <ClCompile Include="Application\Scene\SelectScene\SelectScene.cpp">
-      <Filter>Application\Scene\SelectScene</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Terrain\SkyboxObj\SkyboxObj.cpp">
       <Filter>Application\GameObject\Terrain\SkyboxObj</Filter>
@@ -564,7 +552,6 @@
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
-    <ClCompile Include="Engine\Lua\Manager\LuaManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
@@ -582,6 +569,12 @@
     <ClCompile Include="Engine\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
+    <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
+    <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
+    <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
+    <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1376,15 +1369,6 @@
     <ClInclude Include="Application\GameObject\Others\StageTransitionMenu\StageTransitionMenuManager.h">
       <Filter>Application\GameObject\Others\StageTransitionMenu</Filter>
     </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Manager\StageSelectManager.h">
-      <Filter>Application\GameObject\Others\StageSelect\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Navigation\StageSelectNavigation.h">
-      <Filter>Application\GameObject\Others\StageSelect\Navigation</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\GameObject\Others\StageSelect\Operation\StageSelectOperation.h">
-      <Filter>Application\GameObject\Others\StageSelect\Operation</Filter>
-    </ClInclude>
     <ClInclude Include="Application\GameObject\Others\SceneTransition\SceneTransition.h">
       <Filter>Application\GameObject\Others\SceneTransition</Filter>
     </ClInclude>
@@ -1414,9 +1398,6 @@
     </ClInclude>
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h">
       <Filter>Application\Scene\TitleScene</Filter>
-    </ClInclude>
-    <ClInclude Include="Application\Scene\SelectScene\SelectScene.h">
-      <Filter>Application\Scene\SelectScene</Filter>
     </ClInclude>
     <ClInclude Include="Application\Scene\IScene.h">
       <Filter>Application\Scene</Filter>
@@ -1476,7 +1457,6 @@
     <ClInclude Include="externals\LuaJIT\luajit.h" />
     <ClInclude Include="externals\LuaJIT\lualib.h" />
     <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
-    <ClInclude Include="Engine\Lua\Manager\LuaManager.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
@@ -1498,6 +1478,18 @@
     <ClInclude Include="Engine\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\IEntityCollider.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
+    <ClInclude Include="Engine\Entity\Collision\Collider\CollisionAABB.h" />
+    <ClInclude Include="Engine\Entity\Collision\Intersects\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
+    <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
+    <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
+    <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
+    <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
+    <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
+    <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
+    <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">
@@ -2524,6 +2516,7 @@
     <FxCompile Include="Resources\Shaders\Emitter\Sphere\SphereEmitter.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\GPUParticle\Material\FadeOut\GPUParticle_FadeOut.CS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

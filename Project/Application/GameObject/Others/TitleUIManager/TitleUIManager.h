@@ -6,6 +6,8 @@
 #include "GameNameBar/GameNameBar.h"
 #include "TitleLabelObject/TitleLabelObject.h"
 #include "SelectBar/SelectBar.h"
+#include "StageSelect/StageSelect.h"
+#include "StageSelectRender/StageSelectRender.h"
 
 
 // Labelの種類
@@ -31,6 +33,8 @@ public:
 	void Draw3D();
 	void Draw2DFront();
 	void Draw2DBack();
+
+	int GetStageSelectNum() const { return stageSelect_->GetSelectNum(); }
 
 
 private:
@@ -58,6 +62,10 @@ private:
 
 	// セレクトバー
 	std::unique_ptr<SelectBar> selectBar_;
+
+	// ステージセレクト
+	std::unique_ptr<StageSelect> stageSelect_;
+	std::unique_ptr<StageSelectRender> stageSelectRender_;
 
 };
 

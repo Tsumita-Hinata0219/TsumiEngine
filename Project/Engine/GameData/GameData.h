@@ -52,7 +52,7 @@ public:
 private:	
 
 	// 選択したステージ番号
-	int stageSelectNum_ = 0;
+	int stageSelectNum_ = 1;
 
 	// ステージのJsonファイル名
 	std::vector<std::string> stageJsonFilePaths_;

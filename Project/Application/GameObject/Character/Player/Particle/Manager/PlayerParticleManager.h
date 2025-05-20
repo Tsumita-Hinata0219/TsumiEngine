@@ -73,7 +73,11 @@ private:
 	ModelManager* modelManager_ = nullptr;
 
 	// パーティクルの配列
-	std::list<std::shared_ptr<IPlayerParticle>> particleList_;
+	std::list<PlayerMovementParticle*> particleList_;
+
+	// オブジェクトプール
+	ObjectPool<PlayerMovementParticle> particlePool_;
+
 
 	// タイマー
 	Timer movement1Timer_{};

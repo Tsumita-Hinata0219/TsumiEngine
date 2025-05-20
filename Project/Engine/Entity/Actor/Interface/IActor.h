@@ -3,10 +3,11 @@
 #include "Math/MyMath.h"
 #include "../../TransformNode/Node/TransformNode.h"
 
+
 // 前方宣言
 class IBaseComponent;
 class IRenderComponent;
-//class GameEntityManager;
+class ICollisionComponent;
 
 /* ゲーム内オブジェクトの基底クラス */
 class IActor : public std::enable_shared_from_this<IActor> {
@@ -59,6 +60,12 @@ public:
     void AddComponent(std::shared_ptr<IBaseComponent> component);
 
     /// <summary>
+    /// 衝突判定コンポーネントの追加
+    /// </summary>
+    /// <param name="component"></param>
+    void AddComponent(std::shared_ptr<ICollisionComponent> component);
+
+    /// <summary>
     /// RenderComponentの追加
     /// </summary>
     void AddComponent(std::shared_ptr<IRenderComponent> component);
@@ -67,6 +74,11 @@ public:
 	/// ComponentのWeakPtr取得
     /// </summary>
     std::weak_ptr<IBaseComponent> GetComponent(const std::string& name);
+
+    /// <summary>
+    /// 衝突判定
+    /// </summary>
+    std::weak_ptr<ICollisionComponent> GetCollisionComponent(const std::string& name);
 
     /// <summary>
     /// RenderComponentのWeakPtr取得
@@ -117,13 +129,17 @@ protected:
     // Transform
     std::shared_ptr<TransformNode> transNode_;
 
-    // ComponentList
+    // 通常コンポーネント
 	std::unordered_map<std::string, std::shared_ptr<IBaseComponent>> componentMap_;
 
-    // 描画フラグ
-	bool isRender_ = false;
+    // 衝突判定コンポーネント
+    std::unordered_map<std::string, std::shared_ptr<ICollisionComponent>> colComponentMap_;
+
 	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
 	std::shared_ptr<IRenderComponent> renderComponent_;
+
+    // 描画フラグ
+    bool isRender_ = false;
 
 	// 親マネージャー
 	//GameEntityManager* pManager_ = nullptr;

@@ -52,8 +52,8 @@ private:
 
 private: // メンバ変数
 
-	float nowFrame_ = 0.0f;
-	float endFrame_ = 0.0f;
+	float nowFrame_ = 1.0f;
+	float endFrame_ = 1.0f;
 	float frameRatio_ = 0.0f;
 	bool isActive_ = false;
 	bool isFinish_ = true;

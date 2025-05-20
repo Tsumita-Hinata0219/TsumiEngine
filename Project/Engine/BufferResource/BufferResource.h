@@ -76,6 +76,11 @@ public:
 	void IASetVertexBuffers(UINT number);
 	void IASetIndexBuffer();
 
+	/// <summary>
+	/// UAVのBarrierを張る
+	/// </summary>
+	void SetUAVBarrier();
+
 #pragma region Accessor アクセッサ
 
 	// Resource
@@ -128,7 +133,10 @@ private:
 };
 
 
-// CBVの作成
+
+/// <summary>
+/// Resource作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateCBV(UINT itemCount)
 {
@@ -139,7 +147,10 @@ inline void BufferResource<T>::CreateCBV(UINT itemCount)
 	CreateCBVResource();
 }
 
-// VertexBufferViewの作成
+
+/// <summary>
+/// VertexBufferViewの作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateVertexBufferView()
 {
@@ -148,7 +159,10 @@ inline void BufferResource<T>::CreateVertexBufferView()
 	vertexBufferView_.StrideInBytes = UINT(sizeof(T));
 }
 
-// IndexBufferViewの作成
+
+/// <summary>
+/// IndexBufferViewの作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateIndexBufferView()
 {
@@ -157,7 +171,10 @@ inline void BufferResource<T>::CreateIndexBufferView()
 	indexBufferView_.Format = DXGI_FORMAT_R32_UINT;
 }
 
-// InstancingResourceの作成
+
+/// <summary>
+/// InstancingResourceの作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum)
 {
@@ -165,7 +182,10 @@ inline void BufferResource<T>::CreateInstancingResource(uint32_t instancingNum)
 	srvIndex_ = descriptor->CreateInstancingSRV(instancingNum, this->buffer_, UINT(sizeof(T)));
 }
 
-// UAVの作成
+
+/// <summary>
+/// UAVの作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateUAV(UINT itemCount)
 {
@@ -176,7 +196,10 @@ inline void BufferResource<T>::CreateUAV(UINT itemCount)
 	CreateUAVResource();
 }
 
-// データを書き込む
+
+/// <summary>
+/// データを書き込む
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::UpdateData(const T* data)
 {
@@ -236,7 +259,10 @@ inline void BufferResource<T>::UpdateData(const std::vector<T>& datas, uint32_t 
 	}
 }
 
-// コマンドを積む
+
+/// <summary>
+/// コマンドを積む
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::BindGraphicsCBV(UINT number)
 {
@@ -298,7 +324,27 @@ inline void BufferResource<T>::IASetIndexBuffer()
 	commands.List->IASetIndexBuffer(&indexBufferView_);
 }
 
-// BufferResourceの生成
+
+/// <summary>
+/// UAVのBarrierを張る
+/// </summary>
+template<typename T>
+inline void BufferResource<T>::SetUAVBarrier()
+{
+	// Commandの取得
+	Commands commands = CommandManager::GetInstance()->GetCommands();
+	// UAVBarrier
+	D3D12_RESOURCE_BARRIER uavBarrier{};
+	uavBarrier.Type = D3D12_RESOURCE_BARRIER_TYPE_UAV;
+	uavBarrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
+	uavBarrier.UAV.pResource = buffer_.Get();
+	commands.List->ResourceBarrier(1, &uavBarrier);
+}
+
+
+/// <summary>
+/// CBVの生成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateCBVResource()
 {
@@ -336,7 +382,10 @@ inline void BufferResource<T>::CreateCBVResource()
 	}
 }
 
-// UAVの作成
+
+/// <summary>
+/// UAVの作成
+/// </summary>
 template<typename T>
 inline void BufferResource<T>::CreateUAVResource()
 {

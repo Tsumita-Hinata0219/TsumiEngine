@@ -10,7 +10,13 @@ void Timer::Init(float setStart, float setEnd)
 
 	saveTimer_ = { setStart, setEnd };
 
-	frameRatio_ = nowFrame_ / endFrame_;
+	// 0除算を防ぐ
+	if (endFrame_ != 0.0f) {
+		frameRatio_ = nowFrame_ / endFrame_;
+	}
+	else {
+		frameRatio_ = 0.0f; // または適切なデフォルト値
+	}
 
 	isActive_ = false;
 	isFinish_ = true;

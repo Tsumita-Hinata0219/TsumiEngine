@@ -57,22 +57,19 @@ void ModelManager::AllRemove()
 /// </summary>
 void ModelManager::LoadModel(const std::string& path, const std::string fileName)
 {
-	// ファイル名で検索を掛ける
-	auto it = modelsMap_.find(fileName.substr(0, fileName.size() - 4));
-
-	if (it != modelsMap_.end()) { // 既に存在していれば早期return
-		return;
+	// 拡張子なしの名前で検索
+	std::string modelName = fileName.substr(0, fileName.size() - 4);
+	auto it = modelsMap_.find(modelName);
+	if (it != modelsMap_.end()) {
+		return; // すでに存在していたらreturn
 	}
 
-	// ないので新しく作る
-	// 今回作るModelDatas
-	ModelDatas* newData = new ModelDatas();
+	// モデルローダー
+	ModelFileLoader* loader = ModelFileLoader::GetInstance();
 	std::string format = GetExtension(fileName);
 
-	// ローダーのインスタンス取得
-	ModelFileLoader* loader = ModelFileLoader::GetInstance();
-
-	// フォーマットを取得して分岐
+	// モデルデータの読み込み
+	ModelDatas* newData = nullptr;
 	if (format == ModelFileFormat::OBJ.first) {
 		newData = loader->ParseLoadObj(path, fileName);
 	}
@@ -80,8 +77,16 @@ void ModelManager::LoadModel(const std::string& path, const std::string fileName
 		newData = loader->ParseLoadGLTF(path, fileName);
 	}
 
-	// マップコンテナに追加
+	// nullチェック
+	if (!newData) {
+		return;
+	}
+
+	// モデルデータを格納
 	modelsMap_[newData->name] = (*newData);
+
+	// メモリ解放（ここが重要）
+	delete newData;
 }
 
 

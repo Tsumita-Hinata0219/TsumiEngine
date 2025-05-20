@@ -88,7 +88,7 @@ private: // クラス
 	FlagManager* flagManager_ = nullptr; // シングルトン
 
 	// LuaManager
-	LuaManager* luaManager_ = nullptr;
+	std::weak_ptr<LuaScript> stageMapLua_;
 
 	// GameCamera
 	std::unique_ptr<GameCamera> gameCamera_;

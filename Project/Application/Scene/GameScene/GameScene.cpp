@@ -9,7 +9,6 @@ GameScene::GameScene()
 {
 	input_ = Input::GetInstance();
 	CollisionManager_ = CollisionManager::GetInstance();
-	luaManager_ = LuaManager::GetInstance();
 	gameCamera_ = std::make_unique<GameCamera>();
 	startDirection_ = std::make_unique<StartDirection>();
 	pauseManager_ = std::make_unique<PauseManager>();
@@ -53,6 +52,18 @@ void GameScene::Initialize()
 	};
 	retroCRT_->SetMtlData(retroEffectData_);
 
+	// LuaからStage情報のあるJsonファイル名を取得する
+	std::unique_ptr<LuaScript> stageMap = std::make_unique<LuaScript>();
+	stageMap->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
+	// 選択したステージ番号を取得
+	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	std::optional<std::string> result = stageMap->CallFunction<std::string>("GetStageFileName", stageNum);
+
+	// ──────── JsonManager
+	JsonManager* jsonManager = JsonManager::GetInstance();
+	jsonManager->LoadSceneFile("Json", result.value());
+
+
 	// ──────── クラスにポインタを渡す
 	// プレイヤーにカメラを渡す
 	player_->SetGameCamera(gameCamera_.get());
@@ -60,12 +71,6 @@ void GameScene::Initialize()
 	gameCamera_->SetPlayer(player_.get());
 	// エネミーにプレイヤーを渡す
 	enemyManager_->SetPlayer(player_.get());
-
-	// ──────── JsonManager
-	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::string stageJsonFileName = GameData::GetInstance()->GetStageJsonFilePathAt(stageNum);
-	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", stageJsonFileName);
 
 	// ──────── GameCamera
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
@@ -140,7 +145,8 @@ void GameScene::Update()
 		// セレクトバーが何を選択したかでチェンジ先シーンを変える
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
+
 			return;
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {
@@ -151,13 +157,13 @@ void GameScene::Update()
 		}
 		else if (player_->IsDead()) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
 			return;
 		}
 		// PauseでExitが押されていたら、セレクトシーンへ
 		if (pauseManager_->IsSelectedExit()) {
 			CollisionManager_->Clear();
-			Manager_->ChangeSceneState(std::make_unique<SelectScene>());
+			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
 			return;
 		}
 		return;
@@ -200,15 +206,6 @@ void GameScene::Update()
 
 	// ──────── CollisionManager
 	CollisionManager_->Update();
-
-
-#ifdef _DEBUG
-	luaManager_->MonitorScript();
-	ImGui::Begin("GameScene");
-	ImGui::Text("");
-	retroEffectData_.DrawImGui("");
-	ImGui::End();
-#endif // _DEBUG
 }
 
 

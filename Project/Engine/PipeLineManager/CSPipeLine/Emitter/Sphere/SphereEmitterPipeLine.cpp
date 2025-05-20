@@ -34,7 +34,7 @@ PsoProperty SphereEmitterPipeLine::SetUpPso()
 // RootSignatureのセットアップ
 void SphereEmitterPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descriptionRootSignature)
 {
-	D3D12_ROOT_PARAMETER rootParameters[7]{};
+	D3D12_ROOT_PARAMETER rootParameters[8]{};
 
 	// u0 : Particleの要素
 	D3D12_DESCRIPTOR_RANGE particleRange[1]{};
@@ -47,47 +47,58 @@ void SphereEmitterPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& descri
 	rootParameters[0].DescriptorTable.pDescriptorRanges = particleRange; // Tableの中身の配列を指定
 	rootParameters[0].DescriptorTable.NumDescriptorRanges = _countof(particleRange); // Tableで利用する
 
-	// u1 : フリーリスト
+	// u1 : Particleの生存時間
+	D3D12_DESCRIPTOR_RANGE parilceLifeTimeDes[1]{};
+	parilceLifeTimeDes[0].BaseShaderRegister = 1; // レジスター番号
+	parilceLifeTimeDes[0].NumDescriptors = 1; // 数は1つ
+	parilceLifeTimeDes[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
+	parilceLifeTimeDes[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
+	rootParameters[1].DescriptorTable.pDescriptorRanges = parilceLifeTimeDes; // Tableの中身の配列を指定
+	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(parilceLifeTimeDes); // Tableで利用する
+
+	// u2 : フリーリスト
 	D3D12_DESCRIPTOR_RANGE freelistDes[1]{};
-	freelistDes[0].BaseShaderRegister = 1; // レジスター番号
+	freelistDes[0].BaseShaderRegister = 2; // レジスター番号
 	freelistDes[0].NumDescriptors = 1; // 数は1つ
 	freelistDes[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
 	freelistDes[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[1].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[1].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
-	rootParameters[1].DescriptorTable.pDescriptorRanges = freelistDes; // Tableの中身の配列を指定
-	rootParameters[1].DescriptorTable.NumDescriptorRanges = _countof(freelistDes); // Tableで利用する
+	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
+	rootParameters[2].DescriptorTable.pDescriptorRanges = freelistDes; // Tableの中身の配列を指定
+	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(freelistDes); // Tableで利用する
 
-	// u2 : フリーリストインデックス
+	// u3 : フリーリストインデックス
 	D3D12_DESCRIPTOR_RANGE freeListIndexDes[1]{};
-	freeListIndexDes[0].BaseShaderRegister = 2; // レジスター番号
+	freeListIndexDes[0].BaseShaderRegister = 3; // レジスター番号
 	freeListIndexDes[0].NumDescriptors = 1; // 数は1つ
 	freeListIndexDes[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
 	freeListIndexDes[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[2].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
-	rootParameters[2].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
-	rootParameters[2].DescriptorTable.pDescriptorRanges = freeListIndexDes; // Tableの中身の配列を指定
-	rootParameters[2].DescriptorTable.NumDescriptorRanges = _countof(freeListIndexDes); // Tableで利用する
+	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE;
+	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL; // ALLにする
+	rootParameters[3].DescriptorTable.pDescriptorRanges = freeListIndexDes; // Tableの中身の配列を指定
+	rootParameters[3].DescriptorTable.NumDescriptorRanges = _countof(freeListIndexDes); // Tableで利用する
 
 	// b0 : Emitterの数値
-	rootParameters[3].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
-	rootParameters[3].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[3].Descriptor.ShaderRegister = 0;// レジスタ番号
-
-	// b1 : Emitterの範囲関連
 	rootParameters[4].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[4].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[4].Descriptor.ShaderRegister = 1;// レジスタ番号
+	rootParameters[4].Descriptor.ShaderRegister = 0;// レジスタ番号
 
-	// b2 : Emitterの射出関連
+	// b1 : Emitterの範囲関連
 	rootParameters[5].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[5].Descriptor.ShaderRegister = 2;// レジスタ番号
+	rootParameters[5].Descriptor.ShaderRegister = 1;// レジスタ番号
 
-	// b3 : RandomのSeedの値
+	// b2 : Emitterの射出関連
 	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
 	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
-	rootParameters[6].Descriptor.ShaderRegister = 3;// レジスタ番号
+	rootParameters[6].Descriptor.ShaderRegister = 2;// レジスタ番号
+
+	// b3 : RandomのSeedの値
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;// ComputeShaderで使う
+	rootParameters[7].Descriptor.ShaderRegister = 3;// レジスタ番号
 
 
 	descriptionRootSignature.Flags = D3D12_ROOT_SIGNATURE_FLAG_NONE; // コンピュートシェーダーに適用

@@ -64,7 +64,6 @@ public:
     /// <summary>
     /// 衝突判定コンポーネントの追加
     /// </summary>
-    /// <param name="component"></param>
     void AddComponent(std::shared_ptr<ICollisionComponent> component);
 
     /// <summary>

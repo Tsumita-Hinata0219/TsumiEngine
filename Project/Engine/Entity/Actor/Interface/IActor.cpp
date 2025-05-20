@@ -1,7 +1,8 @@
 #include "IActor.h"
 #include "../../Component/Base/IBaseComponent.h"
+#include "../../Component/Collision/ICollisionComponent.h"
 #include "../../Component/Render/IRenderComponent.h"
-//#include "../../Manager/GameEntityManager.h"
+#include "../../Manager/GameEntityManager.h"
 
 
 /// <summary>
@@ -93,6 +94,28 @@ void IActor::AddComponent(std::shared_ptr<IBaseComponent> component)
 	newComponent->SetOwner(GetSharedPtr()); // Ownerの設定
 	newComponent->Init();                   // 初期化処理
 	componentMap_[name] = newComponent;     // Mapに追加
+}
+
+
+/// <summary>
+/// 衝突判定コンポーネントの追加
+/// </summary>
+void IActor::AddComponent(std::shared_ptr<ICollisionComponent> component)
+{
+	// 名前で検索をかける
+	auto it = colComponentMap_.find(component->Get_Name());
+	// 既に存在していたら早期return
+	if (it != colComponentMap_.end()) 
+	{
+		return;
+	}
+
+	std::string name = component->Get_Name();
+	auto& newComponent = component;
+
+	newComponent->SetOwner(GetSharedPtr()); // Ownerの設定
+	newComponent->Init();					// 初期化処理
+	colComponentMap_[name] = newComponent;	// Mapに追加
 }
 
 

@@ -76,6 +76,7 @@ void GameScene::Initialize()
 	gameCamera_->SetCameraType(GameCameraType::TOPDOWN);
 	gameCamera_->Init();
 
+
 	// ──────── StartDirection
 	startDirection_->Init();
 
@@ -145,6 +146,7 @@ void GameScene::Update()
 		if (STMenuManager_->GetSelect() == MenuSelect::Back) {
 			CollisionManager_->Clear();
 			Manager_->ChangeSceneState(std::make_unique<TitleScene>());
+
 			return;
 		}
 		else if (STMenuManager_->GetSelect() == MenuSelect::Next) {

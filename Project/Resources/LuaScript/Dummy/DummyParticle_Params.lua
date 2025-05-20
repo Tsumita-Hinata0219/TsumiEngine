@@ -5,6 +5,7 @@ SphereEmitter = {
 
 EmitterRange = {
     scaleMin = { x = 0.3, y = 0.3, z = 0.3, w = 0.0 },
+
     scaleMax = { x = 0.5, y = 0.5, z = 0.5, w = 0.0 },
 
     rotateMin = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },

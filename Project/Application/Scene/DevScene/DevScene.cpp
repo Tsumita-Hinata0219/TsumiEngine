@@ -88,5 +88,5 @@ void DevScene::FrontSpriteDraw()
 void DevScene::LoadData()
 {
 	auto assetManager = RenderSystem::RenderAssetManager::GetInstance();
-	assetManager->LoadData("Obj/Dev/Axis", "Axis.obj");
+	assetManager->LoadData("Obj/Dev/Axis", "Axis.obj"); 
 }

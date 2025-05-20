@@ -2,7 +2,7 @@
 
 
 #include <iostream>
-#include <lua.hpp>
+#include <sol/sol.hpp>
 
 #include "Math/MyMath.h"
 
@@ -56,6 +56,33 @@ inline void PushValue(lua_State* L, const Vector4& value) {
     lua_pushnumber(L, value.w);
     lua_setfield(L, -2, "w");
 }
+
+
+// --- Lua テーブル → Vector 変換 ---
+inline Vector2 LuaTableToVector2(const sol::table& tbl) {
+    return Vector2{
+        tbl.get_or("x", tbl.get_or(1, 0.0f)),
+        tbl.get_or("y", tbl.get_or(2, 0.0f))
+    };
+}
+
+inline Vector3 LuaTableToVector3(const sol::table& tbl) {
+    return Vector3{
+        tbl.get_or("x", tbl.get_or(1, 0.0f)),
+        tbl.get_or("y", tbl.get_or(2, 0.0f)),
+        tbl.get_or("z", tbl.get_or(3, 0.0f))
+    };
+}
+
+inline Vector4 LuaTableToVector4(const sol::table& tbl) {
+    return Vector4{
+        tbl.get_or("x", tbl.get_or(1, 0.0f)),
+        tbl.get_or("y", tbl.get_or(2, 0.0f)),
+        tbl.get_or("z", tbl.get_or(3, 0.0f)),
+        tbl.get_or("w", tbl.get_or(4, 0.0f))
+    };
+}
+
 
 // --- 可変引数を一括でプッシュするための再帰テンプレート関数 ---
 // 最後の引数を処理する

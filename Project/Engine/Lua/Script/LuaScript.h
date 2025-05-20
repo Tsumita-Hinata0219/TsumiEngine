@@ -18,15 +18,15 @@ public:
 
     using ReloadCallback = std::function<void()>;  // コールバック型定義
 
-	/// <summary>
-	/// コンストラク
-	/// </summary>
-	LuaScript();
+    /// <summary>
+    /// コンストラク
+    /// </summary>
+    LuaScript();
 
-	/// <summary>
-	/// デストラクタ
-	/// </summary>
-	~LuaScript() = default;
+    /// <summary>
+    /// デストラクタ
+    /// </summary>
+    ~LuaScript() = default;
 
     /// <summary>
     /// スクリプトの読み込み
@@ -44,6 +44,11 @@ public:
     bool Reload(const std::string& file);
 
     /// <summary>
+    /// テキストバッファの再評価
+    /// </summary>
+    bool ReloadFromBuffer();
+
+    /// <summary>
     /// リロード時のコールバックの登録
     /// </summary>
     void SetReloadCallBack(ReloadCallback callback);
@@ -53,7 +58,7 @@ public:
     /// </summary>
     /// <typeparam name="T"> 取得変数の型 </typeparam>
     /// <param name="varName"> Lua側にある変数名 </param>
-    template <typename T> T GetVariable(const std::string& varName) const; 
+    template <typename T> T GetVariable(const std::string& varName) const;
 
     /// <summary>
     /// Lua側の関数を実行
@@ -68,8 +73,22 @@ public:
     template<typename Ret, typename ...Args>
     std::optional<Ret> CallFunction(const std::string& funcName, Args ...args);
 
+    /// <summary>
+    /// Luaエディタウィンドウを表示します。
+    /// </summary>
+    void ShowLuaEditorWindow();
 
 private:
+
+    /// <summary>
+    /// テキストを読み込む関数
+    /// </summary>
+    void LoadFileToBuffer(const std::string& path);
+
+    /// <summary>
+    /// ファイル保存用関数
+    /// </summary>
+    void SaveBufferToFile();
 
     /// <summary>
     /// スクリプトの読み込み＆エラーハンドリング処理
@@ -89,6 +108,10 @@ private:
 
     // コールバック関数
     ReloadCallback reloadCallback_ = nullptr;
+
+    // スクリプトテキストをImGui編集用に保持
+    char luaBuffer_[8192] = {};
+    bool hasUnsavedChanges_ = false;
 };
 
 
@@ -113,6 +136,7 @@ inline void LuaScript::LoadScript(const std::string& rootPath, const std::string
         throw std::runtime_error("Lua file not found: " + fullPath_.string());
     }
 
+    // スクリプトをロードして、すぐに実行
     sol::load_result result = lua_.load_file(fullPath_.string());
     if (!result.valid()) {
         sol::error err = result;
@@ -120,8 +144,12 @@ inline void LuaScript::LoadScript(const std::string& rootPath, const std::string
         throw std::runtime_error(err.what());
     }
 
-    lua_.script_file(fullPath_.string());  // 実行
+    // 実行する
+    result();
+
     updateTime_ = std::filesystem::last_write_time(fullPath_);
+
+    LoadFileToBuffer(fullPath_.string());
 }
 
 
@@ -159,13 +187,30 @@ inline void LuaScript::MonitorScript()
 /// </summary>
 inline bool LuaScript::Reload(const std::string& file)
 {
+    LoadFileToBuffer(file);
+    return ReloadFromBuffer();
+}
+
+
+/// <summary>
+/// テキストバッファの再評価
+/// </summary>
+inline bool LuaScript::ReloadFromBuffer()
+{
     try {
-        lua_.script_file(file);
+        sol::load_result result = lua_.load(luaBuffer_);
+        if (!result.valid()) {
+            sol::error err = result;
+            std::cerr << "[Lua Error] Lua code compile error: " << err.what() << std::endl;
+            return false;
+        }
+        result(); // 実行（関数定義や変数設定が有効になる）
         if (reloadCallback_) reloadCallback_();
+        std::cout << "[Lua] Reloaded from buffer." << std::endl;
         return true;
     }
     catch (const sol::error& e) {
-        std::cerr << "[Lua Error] Reload failed: " << e.what() << std::endl;
+        std::cerr << "[Lua Error] ReloadFromBuffer failed: " << e.what() << std::endl;
         return false;
     }
 }
@@ -177,6 +222,70 @@ inline bool LuaScript::Reload(const std::string& file)
 inline void LuaScript::SetReloadCallBack(ReloadCallback callback)
 {
     reloadCallback_ = callback;
+}
+
+
+/// <summary>
+/// Luaエディタウィンドウを表示します。
+/// </summary>
+inline void LuaScript::ShowLuaEditorWindow()
+{
+    ImGui::Begin("Lua Script Editor");
+
+    if (ImGui::InputTextMultiline("##LuaScript", luaBuffer_, sizeof(luaBuffer_),
+        ImVec2(700, 500))) {
+        hasUnsavedChanges_ = true;
+    }
+
+    if (ImGui::Button("Save")) {
+        SaveBufferToFile();
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Reload")) {
+        ReloadFromBuffer();
+    }
+    ImGui::SameLine();
+    if (hasUnsavedChanges_) {
+        ImGui::TextColored(ImVec4(1, 0.4f, 0.4f, 1.0f), "*Unsaved changes");
+    }
+
+    ImGui::End();
+}
+
+
+/// <summary>
+/// テキストを読み込む関数
+/// </summary>
+inline void LuaScript::LoadFileToBuffer(const std::string& path)
+{
+    std::ifstream file(path);
+    if (!file.is_open()) {
+        std::cerr << "[Lua Error] Failed to open file: " << path << std::endl;
+        return;
+    }
+    std::string content((std::istreambuf_iterator<char>(file)),
+        std::istreambuf_iterator<char>());
+    memset(luaBuffer_, 0, sizeof(luaBuffer_));
+    strncpy(luaBuffer_, content.c_str(), sizeof(luaBuffer_) - 1);
+    hasUnsavedChanges_ = false;
+}
+
+
+/// <summary>
+/// ファイル保存用関数
+/// </summary>
+inline void LuaScript::SaveBufferToFile()
+{
+    if (!hasUnsavedChanges_) return;
+    std::ofstream file(fullPath_);
+    if (!file.is_open()) {
+        std::cerr << "[Lua Error] Failed to save file: " << fullPath_ << std::endl;
+        return;
+    }
+    file << luaBuffer_;
+    file.close();
+    hasUnsavedChanges_ = false;
+    std::cout << "[Lua] Script saved: " << fullPath_ << std::endl;
 }
 
 
@@ -202,13 +311,49 @@ inline bool LuaScript::LoadFromFile(const std::string& file)
 template<typename T>
 inline T LuaScript::GetVariable(const std::string& varName) const
 {
-    sol::object obj = lua_[varName];
-    if (!obj.valid()) {
-        std::cerr << "[Lua Error] Variable not found: " << varName << std::endl;
-        return T(); // デフォルト
+    sol::object obj;
+    sol::table current = lua_.globals();
+    std::istringstream ss(varName);
+    std::string token;
+
+    while (std::getline(ss, token, '.')) {
+        std::cout << "[Debug] token = '" << token << "'" << std::endl;
+
+        obj = current[token];
+
+        if (!obj.valid()) {
+            std::cerr << "[Lua Error] Variable part not found: " << token << std::endl;
+            return T(); // ここで無効な場合は即終了
+        }
+
+        if (obj.is<sol::table>()) {
+            current = obj.as<sol::table>();  // テーブルならcurrentを更新
+            std::cout << "[Debug] token is table, updating current table" << std::endl;
+        }
+        else if (ss.peek() != EOF) {
+            std::cerr << "[Lua Error] Intermediate token is not a table: " << token << std::endl;
+            return T();
+        }
     }
 
-    return obj.as<T>();
+    try {
+        if constexpr (std::is_same_v<T, Vector4>) {
+            return LuaTableToVector4(obj.as<sol::table>());
+        }
+        else if constexpr (std::is_same_v<T, Vector3>) {
+            return LuaTableToVector3(obj.as<sol::table>());
+        }
+        else if constexpr (std::is_same_v<T, Vector2>) {
+            return LuaTableToVector2(obj.as<sol::table>());
+        }
+        else {
+            return obj.as<T>();
+        }
+    }
+    catch (const sol::error& e) {
+        std::cerr << "[Lua Error] Failed to convert '" << varName << "' : " << e.what() << std::endl;
+        return T();
+    }
 }
 // 明示的なインスタンス化
 template int LuaScript::GetVariable<int>(const std::string&) const;

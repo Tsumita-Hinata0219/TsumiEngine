@@ -1,6 +1,7 @@
 #pragma once
 
 #include <lua.hpp>
+#include <sol/sol.hpp>
 #include <memory>
 #include <iostream>
 #include <sstream>

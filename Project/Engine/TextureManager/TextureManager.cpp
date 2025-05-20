@@ -151,6 +151,7 @@ void TextureManager::CreateTextureDataFormatPng(std::string filePath, std::strin
 }
 void TextureManager::CreateTextureDataFormatJpeg(std::string filePath, std::string key)
 {
+	filePath, key;
 }
 void TextureManager::CreateTextureDataFormatDDS(std::string filePath, std::string key)
 {

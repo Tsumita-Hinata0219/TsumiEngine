@@ -1,5 +1,5 @@
 SphereEmitter = {
-    translate = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
+    translate = { x = 1.0, y = 20, z = 3.0, w = 4.0 },
     radius = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
 }
 

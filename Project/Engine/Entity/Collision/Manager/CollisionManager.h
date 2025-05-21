@@ -16,22 +16,28 @@ private:
 
 	std::list<std::weak_ptr<IEntityCollider>> colliders_;
 
+private:
+
+	// シングルトン
+	CollisionManager() = default;
+	~CollisionManager() = default;
+	CollisionManager(const CollisionManager&) = delete;
+	const CollisionManager& operator=(const CollisionManager&) = delete;
+
 public:
 
 	/// <summary>
-	/// コンストラクタ
+	/// インスタンスの取得
 	/// </summary>
-	CollisionManager() = default;
-
-	/// <summary>
-	/// デストラク
-	/// </summary>
-	~CollisionManager() = default;
+	static CollisionManager* GetInstance() {
+		static CollisionManager instance;
+		return &instance;
+	}
 
 	/// <summary>
 	/// Listに登録
 	/// </summary>
-	void Register(const std::shared_ptr<IEntityCollider>& col) {
+	void Register(const std::weak_ptr<IEntityCollider>& col) {
 		colliders_.push_back(col);
 	
 	}

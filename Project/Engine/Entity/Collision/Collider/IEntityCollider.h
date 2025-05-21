@@ -7,6 +7,7 @@ namespace Entity {
 namespace Collision {
 
 // 前方宣言
+class CollisionManager;
 class CollisionSphere;
 class CollisionAABB;
 
@@ -20,12 +21,22 @@ enum class ColliderTypeID {
 
 
 /* Colliderの基底クラス */
-class IEntityCollider {
+class IEntityCollider : public std::enable_shared_from_this<IEntityCollider> {
 
 protected:
 
+	// 親マネージャー
+	CollisionManager* pManager_ = nullptr;
+	// 活動フラグ
+	bool isActive_ = false;
+
 
 public:
+
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	IEntityCollider();
 
 	/// <summary>
 	/// 仮想デストラクタ
@@ -48,7 +59,17 @@ public:
 	virtual bool IntersectsWith(const CollisionSphere& other) const = 0;
 	virtual bool IntersectsWith(const CollisionAABB& other) const  = 0;
 
-private:
+
+#pragma region Accessor
+
+	/// <summary>
+	/// 共有ポインタを取得する関数
+	/// </summary>
+	std::shared_ptr<IEntityCollider> GetSharedPtr() {
+		return shared_from_this();
+	}
+
+#pragma endregion
 
 };
 }

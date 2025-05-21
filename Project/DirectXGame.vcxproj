@@ -210,7 +210,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\CollisionSphere.cpp" />
-    <ClCompile Include="Engine\Entity\Component\Collision\ICollisionComponent.cpp" />
+    <ClCompile Include="Engine\Entity\Collision\Collider\IEntityCollider.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
@@ -280,7 +280,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp" />
     <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp" />
     <ClCompile Include="Engine\3D\Skybox\Skybox.cpp" />
-    <ClCompile Include="Engine\Entity\Actor\Interface\IActor.cpp" />
+    <ClCompile Include="Engine\Entity\Actor\IActor.cpp" />
     <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp" />
     <ClCompile Include="Engine\Animation\AnimationManager\AnimationManager.cpp" />
     <ClCompile Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
@@ -538,7 +538,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Entity\Collision\Collider\CollisionSphere.h" />
     <ClInclude Include="Engine\Entity\Collision\Intersects\CollisionIntersects.h" />
     <ClInclude Include="Engine\Entity\Collision\Manager\CollisionManager.h" />
-    <ClInclude Include="Engine\Entity\Component\Collision\ICollisionComponent.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
@@ -627,7 +626,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h" />
     <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h" />
     <ClInclude Include="Engine\3D\Skybox\Skybox.h" />
-    <ClInclude Include="Engine\Entity\Actor\Interface\IActor.h" />
+    <ClInclude Include="Engine\Entity\Actor\IActor.h" />
     <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h" />
     <ClInclude Include="Engine\Animation\AnimationManager\AnimationManager.h" />
     <ClInclude Include="Engine\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />

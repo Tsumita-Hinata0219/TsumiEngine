@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Actor/Interface/IActor.h"
+#include "../Actor/IActor.h"
 
 
 /* ゲーム内のEntityを一元管理するクラス */

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity/Actor/Interface/IActor.h"
+#include "Entity/Actor/IActor.h"
 #include "3D/Model/Model.h"
 #include "RenderSystem/State/RenderState .h"
 

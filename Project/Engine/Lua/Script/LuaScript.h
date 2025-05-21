@@ -17,8 +17,6 @@ class LuaScript {
 
 public:
 
-    using ReloadCallback = std::function<void()>;  // コールバック型定義
-
     /// <summary>
     /// コンストラク
     /// </summary>
@@ -41,10 +39,16 @@ public:
     T GetVariable(const std::string& varName) const;
 
     /// <summary>
-    /// Lua側の関数を呼び出す
+    /// Lua側の関数の呼び出し
     /// </summary>
     template <typename... Args>
     bool CallFunction(const std::string& functionName, Args&&... args);
+
+    /// <summary>
+    /// 返り値付きLua側の関数の呼び出し
+    /// </summary>
+    template <typename Ret, typename... Args>
+    std::optional<Ret> CallFunctionWithReturn(const std::string& function, Args&&... args);
 
     /// <summary>
     /// ImGui上でLuaスクリプトを編集・保存・再読込
@@ -200,7 +204,7 @@ T LuaScript::GetVariable(const std::string& varName) const
 
 
 /// <summary>
-/// Lua側の関数を呼び出す
+/// Lua側の関数の呼び出し
 /// </summary>
 template<typename ...Args>
 inline bool LuaScript::CallFunction(const std::string& functionName, Args && ...args)
@@ -223,6 +227,35 @@ inline bool LuaScript::CallFunction(const std::string& functionName, Args && ...
     catch (const sol::error& e) {
         std::cerr << "[Lua Error] Exception during call: " << e.what() << std::endl;
         return false;
+    }
+}
+
+
+/// <summary>
+/// 返り値付きLua側の関数の呼び出し
+/// </summary>
+template<typename Ret, typename ...Args>
+inline std::optional<Ret> LuaScript::CallFunctionWithReturn(const std::string& functionName, Args && ...args)
+{
+    sol::function func = lua_[functionName];
+    if (!func.valid()) {
+        std::cerr << "[Lua Error] Function not found: " << functionName << std::endl;
+        return std::nullopt;
+    }
+
+    sol::protected_function_result result = func(std::forward<Args>(args)...);
+    if (!result.valid()) {
+        sol::error err = result;
+        std::cerr << "[Lua Error] Call failed: " << err.what() << std::endl;
+        return std::nullopt;
+    }
+
+    try {
+        return result.get<Ret>();
+    }
+    catch (const sol::error& e) {
+        std::cerr << "[Lua Error] Failed to get return value: " << e.what() << std::endl;
+        return std::nullopt;
     }
 }
 

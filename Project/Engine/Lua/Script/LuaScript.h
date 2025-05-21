@@ -35,21 +35,6 @@ public:
     bool LoadScript(const std::string& rootPath, const std::string& fileName);
 
     /// <summary>
-    /// ファイルを読み込んでバッファにセット
-    /// </summary>
-    bool LoadFileToBuffer(const std::filesystem::path& path);
-
-    /// <summary>
-    /// バッファ内容をファイルへ保存
-    /// </summary>
-    bool SaveBufferToFile(const std::filesystem::path& path);
-
-    /// <summary>
-    /// luaBuffer_の内容でスクリプトを再読み込み
-    /// </summary>
-    bool ReloadFromBuffer();
-
-    /// <summary>
     /// 変数取得
     /// </summary>
     template<typename T>
@@ -65,13 +50,28 @@ public:
     /// </summary>
     void SetReloadCallback(std::function<void()> cb);
 
+
+private:
+
+    /// <summary>
+    /// ファイルを読み込んでバッファにセット
+    /// </summary>
+    bool LoadFileToBuffer(const std::filesystem::path& path);
+
+    /// <summary>
+    /// バッファ内容をファイルへ保存
+    /// </summary>
+    bool SaveBufferToFile(const std::filesystem::path& path);
+
+    /// <summary>
+    /// luaBuffer_の内容でスクリプトを再読み込み
+    /// </summary>
+    bool ReloadFromBuffer();
+
     /// <summary>
     /// ファイルパス設定
     /// </summary>
     void SetCurrentFilePath(const std::filesystem::path& path);
-
-
-private:
 
     /// <summary>
     /// ユーティリティ関数
@@ -114,58 +114,6 @@ inline bool LuaScript::LoadScript(const std::string& rootPath, const std::string
 
 
 /// <summary>
-/// ファイルを読み込んでバッファにセット
-/// </summary>
-inline bool LuaScript::LoadFileToBuffer(const std::filesystem::path& path)
-{
-    try {
-        luaBuffer_ = LoadFileToString(path);
-        hasUnsavedChanges_ = false;
-        return true;
-    }
-    catch (const std::exception& e) {
-        std::cerr << "[LuaScript] LoadFileToBuffer failed: " << e.what() << std::endl;
-        return false;
-    }
-}
-
-
-/// <summary>
-/// バッファ内容をファイルへ保存
-/// </summary>
-inline bool LuaScript::SaveBufferToFile(const std::filesystem::path& path)
-{
-    try {
-        SaveStringToFile(path, luaBuffer_);
-        hasUnsavedChanges_ = false;
-        return true;
-    }
-    catch (const std::exception& e) {
-        std::cerr << "[LuaScript] SaveBufferToFile failed: " << e.what() << std::endl;
-        return false;
-    }
-}
-
-
-/// <summary>
-/// luaBuffer_の内容でスクリプトを再読み込み
-/// </summary>
-inline bool LuaScript::ReloadFromBuffer()
-{
-    sol::load_result result = lua_.load(luaBuffer_);
-    if (!result.valid()) {
-        sol::error err = result;
-        std::cerr << "[Lua Error] Lua code compile error: " << err.what() << std::endl;
-        return false;
-    }
-    result(); // 実行
-    if (reloadCallback_) reloadCallback_();
-    std::cout << "[Lua] Reloaded from buffer." << std::endl;
-    return true;
-}
-
-
-/// <summary>
 /// 変数取得
 /// </summary>
 template<typename T>
@@ -200,6 +148,18 @@ T LuaScript::GetVariable(const std::string& varName) const
         }
         else if constexpr (std::is_same_v<T, Vector2>) {
             return LuaTableToVector2(obj.as<sol::table>());
+        }
+        else if constexpr (std::is_same_v<T, float>) {
+            return static_cast<float>(obj.as<double>());
+        }
+        else if constexpr (std::is_same_v<T, int>) {
+            return static_cast<int>(obj.as<int>());
+        }
+        else if constexpr (std::is_same_v<T, std::string>) {
+            return obj.as<std::string>();
+        }
+        else if constexpr (std::is_same_v<T, bool>) {
+            return obj.as<bool>();
         }
         else {
             return obj.as<T>();
@@ -277,6 +237,59 @@ inline void LuaScript::SetReloadCallback(std::function<void()> cb)
 {
     reloadCallback_ = std::move(cb);
 }
+
+
+/// <summary>
+/// ファイルを読み込んでバッファにセット
+/// </summary>
+inline bool LuaScript::LoadFileToBuffer(const std::filesystem::path& path)
+{
+    try {
+        luaBuffer_ = LoadFileToString(path);
+        hasUnsavedChanges_ = false;
+        return true;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "[LuaScript] LoadFileToBuffer failed: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+
+/// <summary>
+/// バッファ内容をファイルへ保存
+/// </summary>
+inline bool LuaScript::SaveBufferToFile(const std::filesystem::path& path)
+{
+    try {
+        SaveStringToFile(path, luaBuffer_);
+        hasUnsavedChanges_ = false;
+        return true;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "[LuaScript] SaveBufferToFile failed: " << e.what() << std::endl;
+        return false;
+    }
+}
+
+
+/// <summary>
+/// luaBuffer_の内容でスクリプトを再読み込み
+/// </summary>
+inline bool LuaScript::ReloadFromBuffer()
+{
+    sol::load_result result = lua_.load(luaBuffer_);
+    if (!result.valid()) {
+        sol::error err = result;
+        std::cerr << "[Lua Error] Lua code compile error: " << err.what() << std::endl;
+        return false;
+    }
+    result(); // 実行
+    if (reloadCallback_) reloadCallback_();
+    std::cout << "[Lua] Reloaded from buffer." << std::endl;
+    return true;
+}
+
 
 
 /// <summary>

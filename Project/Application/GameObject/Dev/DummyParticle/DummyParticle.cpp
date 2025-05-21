@@ -84,9 +84,9 @@ void DummyParticle::Draw()
 
 void DummyParticle::ReLoad_ParticlePrope()
 {
-	/*sEmit_->Load_EmitData_From_Lua(*particlePropeLua_);
+	sEmit_->Load_EmitData_From_Lua(*particlePropeLua_);
 	sEmit_->Load_EmitRangeData_From_Lua(*particlePropeLua_);
-	sEmit_->Load_EmitConfigData_From_Lua(*particlePropeLua_);*/
+	sEmit_->Load_EmitConfigData_From_Lua(*particlePropeLua_);
 	//cField_->Load_FieldData_From_Lua(*particlePropeLua_);
 }
 

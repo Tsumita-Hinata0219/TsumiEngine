@@ -56,12 +56,12 @@ void GameScene::Initialize()
 	std::unique_ptr<LuaScript> stageMap = std::make_unique<LuaScript>();
 	stageMap->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
 	// 選択したステージ番号を取得
-	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::optional<std::string> result = stageMap->CallFunction<std::string>("GetStageFileName", stageNum);
+	//int stageNum = GameData::GetInstance()->Get_StageSelectNum();
+	//std::optional<std::string> result = stageMap->CallFunction<std::string>("GetStageFileName", stageNum);
 
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();
-	jsonManager->LoadSceneFile("Json", result.value());
+	//jsonManager->LoadSceneFile("Json", result.value());
 
 
 	// ──────── クラスにポインタを渡す

@@ -15,7 +15,7 @@ void EnemyOmniBackParticle::Init()
 	emitter_->Load_EmitRangeData_From_Lua(*particlePropeLua_);
 	emitter_->Load_EmitConfigData_From_Lua(*particlePropeLua_);
 	field_->Load_FieldData_From_Lua(*particlePropeLua_);
-	particlePropeLua_->SetReloadCallBack([this]() { ReLoad_ParticlePrope(); });
+	particlePropeLua_->SetReloadCallback([this]() { ReLoad_ParticlePrope(); });
 }
 
 void EnemyOmniBackParticle::Update()

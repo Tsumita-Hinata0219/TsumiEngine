@@ -279,7 +279,7 @@ inline void IEmitter<T>::Load_EmitConfigData_From_Lua(const LuaScript& lua)
 	result.spawnInterval = lua.GetVariable<float>("EmitConfig.spawnInterval");
 	result.elapsedTime = lua.GetVariable<float>("EmitConfig.elapsedTime");
 	result.spawnCount = lua.GetVariable<int>("EmitConfig.spawnCount");
-	result.isEmitting = lua.GetVariable<int>("EmitConfig.isEmitting");
+	result.isEmitting = lua.GetVariable<bool>("EmitConfig.isEmitting");
 
 	*configData_ = result;
 }

@@ -52,9 +52,9 @@ void DummyParticle::Update()
 
 		Vector4 vel = { 0.0f, 0.0f, 0.01f, 0.0f };
 		// Lua側の関数でEmitterを動かす
-		/*if (movementLua_->ExeFunction("MoveCircular", vel)) {
+		if (movementLua_->CallFunction("MoveCircular", vel)) {
 			lockedData->translate = movementLua_->GetVariable<Vector4>("position");
-		}*/
+		}
 
 		// 確認用Emitterの座標更新
 		trans_.srt.translate = {

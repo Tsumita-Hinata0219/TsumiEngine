@@ -41,6 +41,12 @@ public:
     T GetVariable(const std::string& varName) const;
 
     /// <summary>
+    /// Lua側の関数を呼び出す
+    /// </summary>
+    template <typename... Args>
+    bool CallFunction(const std::string& functionName, Args&&... args);
+
+    /// <summary>
     /// ImGui上でLuaスクリプトを編集・保存・再読込
     /// </summary>
     void ShowLuaEditorWindow();
@@ -98,6 +104,27 @@ private:
 inline LuaScript::LuaScript()
 {
     lua_.open_libraries(sol::lib::base, sol::lib::package, sol::lib::math);
+
+    // Vector4 構造体を Lua に登録
+    lua_.new_usertype<Vector4>("Vector4",
+        sol::constructors<Vector4(), Vector4(float, float, float, float)>(),
+        "x", &Vector4::x,
+        "y", &Vector4::y,
+        "z", &Vector4::z,
+        "w", &Vector4::w
+    );
+
+    // 他の型も登録可能（必要に応じて）
+    lua_.new_usertype<Vector3>("Vector3",
+        "x", &Vector3::x,
+        "y", &Vector3::y,
+        "z", &Vector3::z
+    );
+
+    lua_.new_usertype<Vector2>("Vector2",
+        "x", &Vector2::x,
+        "y", &Vector2::y
+    );
 }
 
 
@@ -168,6 +195,34 @@ T LuaScript::GetVariable(const std::string& varName) const
     catch (const sol::error& e) {
         std::cerr << "[Lua Error] Failed to convert '" << varName << "' : " << e.what() << std::endl;
         return T{};
+    }
+}
+
+
+/// <summary>
+/// Lua側の関数を呼び出す
+/// </summary>
+template<typename ...Args>
+inline bool LuaScript::CallFunction(const std::string& functionName, Args && ...args)
+{
+    sol::function func = lua_[functionName];
+    if (!func.valid()) {
+        std::cerr << "[Lua Error] Function not found: " << functionName << std::endl;
+        return false;
+    }
+
+    try {
+        sol::protected_function_result result = func(std::forward<Args>(args)...);
+        if (!result.valid()) {
+            sol::error err = result;
+            std::cerr << "[Lua Error] Call failed: " << err.what() << std::endl;
+            return false;
+        }
+        return true;
+    }
+    catch (const sol::error& e) {
+        std::cerr << "[Lua Error] Exception during call: " << e.what() << std::endl;
+        return false;
     }
 }
 

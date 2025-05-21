@@ -3,34 +3,37 @@
 #include "Entity/Entity.h"
 
 
-class DevActorSphereColComponent: public ICollisionComponent {
+class DevActorSphereColComponent: public IBaseComponent {
 
 public:
 
-	DevActorSphereColComponent() = default;
+	DevActorSphereColComponent();
 	~DevActorSphereColComponent() = default;
 
 	void Init() override;
 	void Update(float deltaTime) override;
 
-	std::shared_ptr<Entity::Collision::IEntityCollider> GetCollider() const override{
-		return sphereCol_;
-	}
-
 
 private:
 
-	std::shared_ptr<Entity::Collision::SphereCollider> sphereCol_;
+	std::shared_ptr<Entity::Collision::CollisionSphere> sphereCol_;
 
 };
 
 
-inline void DevActorSphereColComponent::Init()
+inline DevActorSphereColComponent::DevActorSphereColComponent()
 {
-	ICollisionComponent::Create("DevActorSphereComponent");
+	sphereCol_ = std::make_shared<Entity::Collision::CollisionSphere>();
 }
 
-inline void DevActorSphereColComponent::Update(float deltaTime)
+inline void DevActorSphereColComponent::Init()
 {
-	deltaTime;
+	IBaseComponent::Create("DevActorSphereColComponent");
+	sphereCol_->OnRegister();
+}
+
+inline void DevActorSphereColComponent::Update([[maybe_unused]]float deltaTime)
+{
+
+
 }

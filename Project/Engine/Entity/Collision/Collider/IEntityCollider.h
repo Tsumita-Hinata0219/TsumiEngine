@@ -34,11 +34,6 @@ protected:
 public:
 
 	/// <summary>
-	/// コンストラクタ
-	/// </summary>
-	IEntityCollider();
-
-	/// <summary>
 	/// 仮想デストラクタ
 	/// </summary>
 	virtual  ~IEntityCollider() = default;
@@ -47,6 +42,11 @@ public:
 	/// 識別IDのGetter
 	/// </summary>
 	virtual ColliderTypeID GetTypeID() const = 0;
+
+	/// <summary>
+	/// 登録処理
+	/// </summary>
+	void OnRegister();
 
 	/// <summary>
 	/// 判定処理

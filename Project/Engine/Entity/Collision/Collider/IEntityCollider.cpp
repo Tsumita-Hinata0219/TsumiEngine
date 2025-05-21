@@ -3,11 +3,13 @@
 
 
 /// <summary>
-/// コンストラクタ
+/// 登録処理
 /// </summary>
-Entity::Collision::IEntityCollider::IEntityCollider()
+void Entity::Collision::IEntityCollider::OnRegister()
 {
-	pManager_ = CollisionManager::GetInstance();
+	if (!pManager_) {
+		pManager_ = CollisionManager::GetInstance();
+	}
 	pManager_->Register(GetSharedPtr());
 	isActive_ = true;
 }

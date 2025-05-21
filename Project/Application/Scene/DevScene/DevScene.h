@@ -3,6 +3,7 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "Entity/Manager/GameEntityManager.h"
+//#include "Entity/Collision/Manager:Collisionanager;"
 
 #include "GameObject/Terrain/Floor/Floor.h"
 
@@ -63,7 +64,11 @@ private:
 	CameraManager* cameraManager_ = nullptr;
 	std::weak_ptr<CameraData> cameraData_;
 
+	// EntityManager
 	std::unique_ptr<GameEntityManager> gameEntityManager_;
+
+	// CollisionManager
+	Entity::Collision::CollisionManager* collisionManager_ = nullptr;
 
 	// Floor
 	std::unique_ptr<Floor> floor_;

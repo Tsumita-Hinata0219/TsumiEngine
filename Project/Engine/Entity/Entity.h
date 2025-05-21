@@ -2,9 +2,14 @@
 
 #include "Math/MyMath.h"
 
-#include "Entity/Actor/IActor.h"
-#include "Entity/Component/Base/IBaseComponent.h"
-#include "Entity/Component/Render/IRenderComponent.h"
+#include "Actor/IActor.h"
+
+#include "Collision/Collider/IEntityCollider.h"
+#include "Collision/Collider/CollisionSphere.h"
+#include "Collision/Collider/CollisionAABB.h"
+
+#include "Component/Base/IBaseComponent.h"
+#include "Component/Render/IRenderComponent.h"
 
 #include "Lua/Script/LuaScript.h"
 

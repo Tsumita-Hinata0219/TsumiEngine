@@ -24,7 +24,7 @@ void GrayScaleEffect::Draw()
 
 
 // ImGuiの描画
-void GrayScaleEffect::DrawImGui(std::string name)
+void GrayScaleEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "GrayScale").c_str())) {

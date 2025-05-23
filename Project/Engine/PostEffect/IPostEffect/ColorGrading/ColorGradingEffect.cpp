@@ -24,7 +24,7 @@ void ColorGradingEffect::Draw()
 
 
 // ImGuiの描画
-void ColorGradingEffect::DrawImGui(std::string name)
+void ColorGradingEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "ColorGrading").c_str())) {

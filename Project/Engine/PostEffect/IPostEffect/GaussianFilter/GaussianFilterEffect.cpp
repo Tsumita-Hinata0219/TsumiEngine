@@ -24,7 +24,7 @@ void GaussianFilterEffect::Draw()
 
 
 // ImGuiの描画
-void GaussianFilterEffect::DrawImGui(std::string name)
+void GaussianFilterEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "GaussianFilter").c_str())) {

@@ -18,7 +18,7 @@ void AbsentEffect::Draw()
 
 
 // ImGuiの描画
-void AbsentEffect::DrawImGui(std::string name)
+void AbsentEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "Absent").c_str())) {

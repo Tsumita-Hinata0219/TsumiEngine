@@ -24,7 +24,7 @@ void RadialBlurEffect::Draw()
 
 
 // ImGuiの描画
-void RadialBlurEffect::DrawImGui(std::string name)
+void RadialBlurEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "RadialBlur").c_str())) {

@@ -21,7 +21,7 @@ void VignettingEffect::Draw()
 
 
 // ImGuiの描画
-void VignettingEffect::DrawImGui(std::string name)
+void VignettingEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "Vignetting").c_str())) {

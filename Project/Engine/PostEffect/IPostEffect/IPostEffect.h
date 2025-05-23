@@ -29,7 +29,7 @@ public: // メンバ関数
 	virtual void Draw() = 0;
 
 	// ImGuiの描画
-	virtual void DrawImGui(std::string name = "") = 0;
+	virtual void DrawImGui([[maybe_unused]] std::string name = "") = 0;
 
 	// MtlDataの設定
 	virtual void SetMtlData(T setData) { this->mtlData_ = setData; }

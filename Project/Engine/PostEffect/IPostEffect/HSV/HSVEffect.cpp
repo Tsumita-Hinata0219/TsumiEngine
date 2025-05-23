@@ -27,7 +27,7 @@ void HSVEffect::Draw()
 
 
 // ImGuiの描画
-void HSVEffect::DrawImGui(std::string name)
+void HSVEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "HSV").c_str())) {

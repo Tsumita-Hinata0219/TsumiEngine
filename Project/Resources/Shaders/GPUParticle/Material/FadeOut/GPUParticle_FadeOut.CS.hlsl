@@ -30,7 +30,9 @@ void main(int3 DTid : SV_DispatchThreadID)
 
     //// 単純な線形フェード
     //gParticles[particleIndex].color.a = 1.0f - ratio;
-    
+    gFadeOut.fadeStart = 0.0f;
+    gFadeOut.fadeEnd = 0.0f;
+    gFadeOut.fadePower = 0.0f;
     float ratio = gLifeTime[index].ratio;
     // ratioを赤、alphaを緑に出力 → 画面で確認しやすい
     gParticles[index].color.rgb = float3(ratio, gParticles[index].color.a, 0.0f);

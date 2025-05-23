@@ -27,7 +27,7 @@ void GlitchEffect::Draw()
 
 
 // ImGuiの描画
-void GlitchEffect::DrawImGui(std::string name)
+void GlitchEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "Glitch").c_str())) {

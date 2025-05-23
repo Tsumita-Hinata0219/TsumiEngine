@@ -27,7 +27,7 @@ void RandomEffect::Draw()
 
 
 // ImGuiの描画
-void RandomEffect::DrawImGui(std::string name)
+void RandomEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "Random").c_str())) {

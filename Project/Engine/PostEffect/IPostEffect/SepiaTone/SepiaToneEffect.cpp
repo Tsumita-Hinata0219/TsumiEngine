@@ -24,7 +24,7 @@ void SepiaToneEffect::Draw()
 
 
 // ImGuiの描画
-void SepiaToneEffect::DrawImGui(std::string name)
+void SepiaToneEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "SepiaTone").c_str())) {

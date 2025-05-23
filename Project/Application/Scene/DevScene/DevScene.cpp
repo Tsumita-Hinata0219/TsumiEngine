@@ -8,7 +8,7 @@ DevScene::DevScene()
 {
 	cameraManager_ = CameraManager::GetInstance();
 	gameEntityManager_ = std::make_unique<GameEntityManager>();
-	//collisionManager_ = Entity::Collision::CollisionManager::GetInstance();
+	collisionManager_ = Entity::Collision::CollisionManager::GetInstance();
 
 	floor_ = std::make_unique<Floor>();
 }

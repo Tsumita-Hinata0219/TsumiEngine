@@ -3,7 +3,7 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "Entity/Manager/GameEntityManager.h"
-//#include "Entity/Collision/Manager:Collisionanager;"
+#include "Entity/Collision/Manager/CollisionManager.h"
 
 #include "GameObject/Terrain/Floor/Floor.h"
 

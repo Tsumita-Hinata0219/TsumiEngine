@@ -8,7 +8,7 @@ EmitterRange = {
     scaleMax = { x = 0.7, y = 0.7, z = 0.7, w = 0.0 },
 
     rotateMin = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
-    rotateMax = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
+    rotateMax = { x = 4.0, y = 4.0, z = 4.0, w = .0 },
 
     colorMin = { x = 0.0, y = 0.0, z = 0.0, w = 1.0 },
     colorMax = { x = 1.0, y = 1.0, z = 1.0, w = 1.0 },
@@ -24,7 +24,7 @@ EmitterRange = {
 EmitConfig = {
     spawnInterval = 0.1,
     elapsedTime = 0.1,
-    spawnCount = 250,
+    spawnCount = 25,
     isEmitting = false,
 }
 

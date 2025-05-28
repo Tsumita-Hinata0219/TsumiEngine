@@ -25,7 +25,7 @@ EmitterRange = {
 EmitConfig = {
     spawnInterval = 0.5,
     elapsedTime = 0.5,
-    spawnCount = 10,
+    spawnCount = 100,
     isEmitting = false,
 }
 

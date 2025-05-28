@@ -2,7 +2,7 @@
 #include "Camera/Manager/CameraManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "RenderSystem/Asset/RenderAssetManager.h"
-#include "Entity/Actor/Interface/IActor.h"
+#include "Entity/Actor/IActor.h"
 
 
 /// <summary>

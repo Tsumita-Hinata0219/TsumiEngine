@@ -1,7 +1,7 @@
 #include "IActor.h"
-#include "../../Component/Base/IBaseComponent.h"
-#include "../../Component/Render/IRenderComponent.h"
-//#include "../../Manager/GameEntityManager.h"
+#include "../Component/Base/IBaseComponent.h"
+#include "../Component/Render/IRenderComponent.h"
+#include "../Manager/GameEntityManager.h"
 
 
 /// <summary>
@@ -112,52 +112,4 @@ void IActor::AddComponent(std::shared_ptr<IRenderComponent> component)
 	newComponent->Init();                   // 初期化処理
 	renderComponent_ = newComponent;
 	isRender_ = true;
-}
-
-
-/// <summary>
-/// ComponentのWeakPtr取得
-/// </summary>
-std::weak_ptr<IBaseComponent> IActor::GetComponent(const std::string& name)
-{
-	// 名前で検索をかける
-	auto it = componentMap_.find(name);
-	// なければ空のweak_ptrを返す
-	if (it == componentMap_.end())
-	{
-		return std::weak_ptr<IBaseComponent>();
-	}
-
-	return it->second;
-}
-
-
-/// <summary>
-/// 衝突判定
-/// </summary>
-std::weak_ptr<ICollisionComponent> IActor::GetCollisionComponent(const std::string& name)
-{
-	// 名前で検索をかける
-	auto it = colComponentMap_.find(name);
-	// なければ空のweak_ptrを返す
-	if (it == colComponentMap_.end())
-	{
-		return std::weak_ptr<ICollisionComponent>();
-	}
-
-	return it->second;
-}
-
-
-/// <summary>
-/// RenderComponentのWeakPtr取得
-/// </summary>
-std::weak_ptr<IRenderComponent> IActor::GetRenderComponent()
-{
-	// componentがnullなら空のweak_ptrを返す
-	if (!renderComponent_) {
-		return std::weak_ptr<IRenderComponent>();
-	}
-
-	return renderComponent_;
 }

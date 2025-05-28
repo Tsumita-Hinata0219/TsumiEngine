@@ -1,13 +1,14 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "../../TransformNode/Node/TransformNode.h"
+#include "../TransformNode/Node/TransformNode.h"
 
 
 // 前方宣言
 class IBaseComponent;
 class IRenderComponent;
-class ICollisionComponent;
+class GameEntityManager;
+
 
 /* ゲーム内オブジェクトの基底クラス */
 class IActor : public std::enable_shared_from_this<IActor> {
@@ -45,8 +46,8 @@ public:
     /// <summary>
     /// 更新処理関係
     /// </summary>
-    void Update(float deltaTime);
-    void UpdateComponents(float deltaTime);
+    virtual void Update(float deltaTime);
+    virtual void UpdateComponents(float deltaTime);
     virtual void UpdateActor([[maybe_unused]]float deltaTime) {};
 
     /// <summary>
@@ -60,30 +61,14 @@ public:
     void AddComponent(std::shared_ptr<IBaseComponent> component);
 
     /// <summary>
-    /// 衝突判定コンポーネントの追加
-    /// </summary>
-    /// <param name="component"></param>
-    void AddComponent(std::shared_ptr<ICollisionComponent> component);
-
-    /// <summary>
     /// RenderComponentの追加
     /// </summary>
     void AddComponent(std::shared_ptr<IRenderComponent> component);
 
     /// <summary>
-	/// ComponentのWeakPtr取得
+    /// 衝突時コールバック関数
     /// </summary>
-    std::weak_ptr<IBaseComponent> GetComponent(const std::string& name);
-
-    /// <summary>
-    /// 衝突判定
-    /// </summary>
-    std::weak_ptr<ICollisionComponent> GetCollisionComponent(const std::string& name);
-
-    /// <summary>
-    /// RenderComponentのWeakPtr取得
-    /// </summary>
-    std::weak_ptr<IRenderComponent> GetRenderComponent();
+    virtual void OnCollision([[maybe_unused]] const std::string& name) {};
 
 
 #pragma region Accessor 
@@ -102,7 +87,7 @@ public:
     void ToggleRender(bool state) { isRender_ = state; }
 
     // 親マネージャー
-	//void SetManager(GameEntityManager* pManager) { pManager_ = pManager; }
+    void SetManager(GameEntityManager* ptr) { this->pManager_ = ptr; }
 
 #pragma endregion 
 
@@ -132,9 +117,6 @@ protected:
     // 通常コンポーネント
 	std::unordered_map<std::string, std::shared_ptr<IBaseComponent>> componentMap_;
 
-    // 衝突判定コンポーネント
-    std::unordered_map<std::string, std::shared_ptr<ICollisionComponent>> colComponentMap_;
-
 	// 描画コンポーネント : 1つのActorが持てるRenderは1つまで
 	std::shared_ptr<IRenderComponent> renderComponent_;
 
@@ -142,6 +124,5 @@ protected:
     bool isRender_ = false;
 
 	// 親マネージャー
-	//GameEntityManager* pManager_ = nullptr;
-
+    GameEntityManager* pManager_ = nullptr;
 };

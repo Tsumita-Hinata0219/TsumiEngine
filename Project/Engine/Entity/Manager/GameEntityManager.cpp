@@ -19,7 +19,7 @@ void GameEntityManager::Add_NewEntity(std::shared_ptr<IActor> actor)
 
 	// Actorの設定
 	auto& newActor = actor;
-	//newActor->SetManager(this); // マネージャーの設定
+	newActor->SetManager(this); // マネージャーの設定
 	newActor->Init();            // 初期化処理
 
 	// Mapに追加

@@ -24,7 +24,7 @@ void LuminanceOutLineEffect::Draw()
 
 
 // ImGuiの描画
-void LuminanceOutLineEffect::DrawImGui(std::string name)
+void LuminanceOutLineEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "LuminanceOutLine").c_str())) {

@@ -2,6 +2,7 @@
 
 #include "Entity/Entity.h"
 
+#include "Col/DevActorSphereColComponent.h"
 #include "Comp/Move/DevActorMoveComponent.h"
 #include "Rend/DevRenderComponent.h"
 

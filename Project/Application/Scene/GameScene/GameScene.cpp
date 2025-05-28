@@ -57,7 +57,7 @@ void GameScene::Initialize()
 	stageMap->LoadScript("LuaScript/MapFileSelector", "MapFileSelector.lua");
 	// 選択したステージ番号を取得
 	int stageNum = GameData::GetInstance()->Get_StageSelectNum();
-	std::optional<std::string> result = stageMap->CallFunction<std::string>("GetStageFileName", stageNum);
+	std::optional<std::string> result = stageMap->CallFunctionWithReturn<std::string>("GetStageFileName", stageNum);
 
 	// ──────── JsonManager
 	JsonManager* jsonManager = JsonManager::GetInstance();

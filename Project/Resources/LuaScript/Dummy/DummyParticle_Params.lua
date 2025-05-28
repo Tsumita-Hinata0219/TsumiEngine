@@ -1,5 +1,5 @@
 SphereEmitter = {
-    translate = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
+    translate = { x = 1.0, y = 2.0, z = 30.0, w = 40.0 },
     radius = { x = 0.0, y = 0.0, z = 0.0, w = 0.0 },
 }
 
@@ -25,7 +25,7 @@ EmitterRange = {
 EmitConfig = {
     spawnInterval = 0.5,
     elapsedTime = 0.5,
-    spawnCount = 10,
+    spawnCount = 100,
     isEmitting = false,
 }
 

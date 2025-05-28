@@ -1,7 +1,6 @@
 #include "DevScene.h"
 
 
-
 /// <summary>
 /// コンストラクタ
 /// </summary>
@@ -9,6 +8,7 @@ DevScene::DevScene()
 {
 	cameraManager_ = CameraManager::GetInstance();
 	gameEntityManager_ = std::make_unique<GameEntityManager>();
+	collisionManager_ = Entity::Collision::CollisionManager::GetInstance();
 
 	floor_ = std::make_unique<Floor>();
 }
@@ -88,5 +88,5 @@ void DevScene::FrontSpriteDraw()
 void DevScene::LoadData()
 {
 	auto assetManager = RenderSystem::RenderAssetManager::GetInstance();
-	assetManager->LoadData("Obj/Dev/Axis", "Axis.obj");
+	assetManager->LoadData("Obj/Dev/Axis", "Axis.obj"); 
 }

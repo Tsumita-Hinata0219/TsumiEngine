@@ -16,7 +16,7 @@ public:
 	void Draw() override;
 
 	// ImGuiの描画
-	void DrawImGui(std::string name = "") override;
+	void DrawImGui([[maybe_unused]] std::string name = "") override;
 
 protected:
 

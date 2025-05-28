@@ -23,7 +23,7 @@ void DissolveEffect::Draw()
 
 
 // ImGuiの描画
-void DissolveEffect::DrawImGui(std::string name)
+void DissolveEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG	
 	if (ImGui::TreeNode((name + "Dissolve").c_str())) {

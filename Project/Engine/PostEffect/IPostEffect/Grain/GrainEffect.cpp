@@ -24,7 +24,7 @@ void GrainEffect::Draw()
 
 
 // ImGuiの描画
-void GrainEffect::DrawImGui(std::string name)
+void GrainEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "Grain").c_str())) {

@@ -37,7 +37,6 @@ public:
 	/// 判定処理
 	/// </summary>
 	bool Intersects(const IEntityCollider& other) const override;
-	
 
 	/// <summary>
 	/// ディスパッチ

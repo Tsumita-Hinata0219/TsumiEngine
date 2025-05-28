@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "../../Actor/Interface/IActor.h"
+#include "../../Actor/IActor.h"
 
 
 /* 機能を追加するためのコンポーネント */

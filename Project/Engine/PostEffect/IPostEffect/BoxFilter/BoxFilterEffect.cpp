@@ -24,7 +24,7 @@ void BoxFilterEffect::Draw()
 
 
 // ImGuiの描画
-void BoxFilterEffect::DrawImGui(std::string name)
+void BoxFilterEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "BoxFilter").c_str())) {

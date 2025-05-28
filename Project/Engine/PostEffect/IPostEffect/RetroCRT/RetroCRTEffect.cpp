@@ -26,7 +26,7 @@ void RetroCRTEffect::Draw()
 
 
 // ImGuiの描画
-void RetroCRTEffect::DrawImGui(std::string name)
+void RetroCRTEffect::DrawImGui([[maybe_unused]] std::string name)
 {
 #ifdef _DEBUG
 	if (ImGui::TreeNode((name + "RetroCRT").c_str())) {

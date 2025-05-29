@@ -68,6 +68,18 @@ public:
 	}
 
 
+	void DrawimGui() {
+		if (ImGui::TreeNode("Entity Collision Manager")) {
+
+			size_t colCount = colliders_.size();
+			ImGui::Text("Collider Count = %d", int(colCount));
+
+
+			ImGui::TreePop();
+		}
+	}
+
+
 private:
 
 };

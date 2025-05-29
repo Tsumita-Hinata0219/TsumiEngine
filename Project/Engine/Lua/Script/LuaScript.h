@@ -7,6 +7,7 @@
 #include <string>
 #include <fstream>
 #include <type_traits>
+#include <imgui_stdlib.h>
 
 #include "Math/MyMath.h"
 #include "../Helpers/LuaHelpers.h"
@@ -56,6 +57,11 @@ public:
     void ShowLuaEditorWindow();
 
     /// <summary>
+    /// Tableの中身の編集
+    /// </summary>
+    void ShowLuaTableRecursive(sol::table& table, const std::string& prefix = "");
+
+    /// <summary>
     /// コールバック登録
     /// </summary>
     void SetReloadCallback(std::function<void()> cb);
@@ -74,20 +80,19 @@ private:
     bool SaveBufferToFile(const std::filesystem::path& path);
 
     /// <summary>
+    /// ファイルに保存する処理
+    /// </summary>
+    void SaveStringToFile(const std::filesystem::path& path, const std::string& data);
+
+    /// <summary>
     /// luaBuffer_の内容でスクリプトを再読み込み
     /// </summary>
     bool ReloadFromBuffer();
 
     /// <summary>
-    /// ファイルパス設定
-    /// </summary>
-    void SetCurrentFilePath(const std::filesystem::path& path);
-
-    /// <summary>
-    /// ユーティリティ関数
+    /// ファイルを読んで、中身をstd::stringで返す
     /// </summary>
     std::string LoadFileToString(const std::filesystem::path& path);
-    void SaveStringToFile(const std::filesystem::path& path, const std::string& data);
 
 
 private:
@@ -97,7 +102,7 @@ private:
     bool hasUnsavedChanges_ = false;
     std::function<void()> reloadCallback_;
     std::string saveErrorMessage_;
-
+    sol::table rootTable;
 };
 
 
@@ -137,9 +142,17 @@ inline LuaScript::LuaScript()
 /// </summary>
 inline bool LuaScript::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
-    std::filesystem::path fullPath = std::filesystem::path("Resources") / rootPath / fileName;
-    SetCurrentFilePath(fullPath);
+    // フルパスを組み立てる
+    std::filesystem::path fullPath = 
+        std::filesystem::path("Resources") / rootPath / fileName;
+
+    // ファイルパスを設定
+    currentFilePath_ = fullPath;
+
+    // ファイルを読み込んでバッファにセット
     if (!LoadFileToBuffer(fullPath)) return false;
+
+    // スクリプト再読み込み
     return ReloadFromBuffer();
 }
 
@@ -268,9 +281,9 @@ inline void LuaScript::ShowLuaEditorWindow()
     ImGui::Begin("Lua Script Editor");
 
     // ImGui用編集バッファ（luaBuffer_をコピー）
-    static std::string editBuffer = luaBuffer_;
+    std::string editBuffer = luaBuffer_;
     // バッファ拡張用（InputTextMultilineは固定長が前提なので少し工夫が必要）
-    static std::vector<char> tmpBuffer;
+    std::vector<char> tmpBuffer;
 
     if (tmpBuffer.size() < editBuffer.size() + 1) {
         tmpBuffer.resize(editBuffer.size() + 1024);
@@ -319,6 +332,48 @@ inline void LuaScript::ShowLuaEditorWindow()
 
 
 /// <summary>
+/// Tableの中身の編集
+/// </summary>
+inline void LuaScript::ShowLuaTableRecursive(sol::table& table, const std::string& prefix)
+{
+    for (auto&& [keyObj, valObj] : table) {
+        std::string key = keyObj.as<std::string>();
+        std::string label = prefix.empty() ? key : prefix + "." + key;
+
+        if (valObj.is<sol::table>()) {
+            if (ImGui::TreeNode(label.c_str())) {
+                sol::table subTable = valObj.as<sol::table>();
+                ShowLuaTableRecursive(subTable, label);
+                ImGui::TreePop();
+            }
+        } else if (valObj.is<double>()) {
+            float value = static_cast<float>(valObj.as<double>());
+            if (ImGui::DragFloat(label.c_str(), &value, 0.1f)) {
+                table[key] = value;
+            }
+        } else if (valObj.is<int>()) {
+            int value = valObj.as<int>();
+            if (ImGui::DragInt(label.c_str(), &value)) {
+                table[key] = value;
+            }
+        } else if (valObj.is<bool>()) {
+            bool value = valObj.as<bool>();
+            if (ImGui::Checkbox(label.c_str(), &value)) {
+                table[key] = value;
+            }
+        } else if (valObj.is<std::string>()) {
+            std::string value = valObj.as<std::string>();
+            char buffer[256];
+            strncpy_s (buffer, value.c_str(), sizeof(buffer));
+            if (ImGui::InputText(label.c_str(), buffer, sizeof(buffer))) {
+                table[key] = std::string(buffer);
+            }
+        }
+    }
+}
+
+
+/// <summary>
 /// コールバック登録
 /// </summary>
 inline void LuaScript::SetReloadCallback(std::function<void()> cb)
@@ -333,6 +388,7 @@ inline void LuaScript::SetReloadCallback(std::function<void()> cb)
 inline bool LuaScript::LoadFileToBuffer(const std::filesystem::path& path)
 {
     try {
+        // ファイルを読んで、中身をstd::stringで返す受け取る
         luaBuffer_ = LoadFileToString(path);
         hasUnsavedChanges_ = false;
         return true;
@@ -362,6 +418,17 @@ inline bool LuaScript::SaveBufferToFile(const std::filesystem::path& path)
 
 
 /// <summary>
+/// ファイルに保存する処理
+/// </summary>
+inline void LuaScript::SaveStringToFile(const std::filesystem::path& path, const std::string& data)
+{
+    std::ofstream file(path, std::ios::binary);
+    if (!file) throw std::runtime_error("Failed to open file for writing: " + path.string());
+    file.write(data.data(), data.size());
+}
+
+
+/// <summary>
 /// luaBuffer_の内容でスクリプトを再読み込み
 /// </summary>
 inline bool LuaScript::ReloadFromBuffer()
@@ -379,18 +446,8 @@ inline bool LuaScript::ReloadFromBuffer()
 }
 
 
-
 /// <summary>
-/// ファイルパス設定
-/// </summary>
-inline void LuaScript::SetCurrentFilePath(const std::filesystem::path& path)
-{
-    currentFilePath_ = path;
-}
-
-
-/// <summary>
-/// ユーティリティ関数
+/// ファイルを読んで、中身をstd::stringで返す
 /// </summary>
 inline std::string LuaScript::LoadFileToString(const std::filesystem::path& path)
 {
@@ -400,11 +457,3 @@ inline std::string LuaScript::LoadFileToString(const std::filesystem::path& path
     ss << file.rdbuf();
     return ss.str();
 }
-inline void LuaScript::SaveStringToFile(const std::filesystem::path& path, const std::string& data)
-{
-    std::ofstream file(path, std::ios::binary);
-    if (!file) throw std::runtime_error("Failed to open file for writing: " + path.string());
-    file.write(data.data(), data.size());
-}
-
-

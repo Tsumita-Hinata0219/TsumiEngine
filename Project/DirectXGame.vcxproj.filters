@@ -575,6 +575,7 @@
     <ClCompile Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
     <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
     <ClCompile Include="Engine\Entity\Collision\Collider\IEntityCollider.cpp" />
+    <ClCompile Include="externals\imgui\imgui_stdlib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -1489,6 +1490,7 @@
     <ClInclude Include="Engine\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
     <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
+    <ClInclude Include="externals\imgui\imgui_stdlib.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

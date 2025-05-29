@@ -73,7 +73,6 @@ void DummyParticle::Update()
 	trans_.DrawImGui();
 
 	particlePropeLua_->ShowLuaEditorWindow();
-
 }
 
 void DummyParticle::Draw()

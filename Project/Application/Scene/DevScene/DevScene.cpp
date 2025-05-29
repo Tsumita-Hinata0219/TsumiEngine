@@ -53,6 +53,16 @@ void DevScene::Update()
 
 	gameEntityManager_->Update_Entity();
 
+#ifdef _DEBUG
+
+	ImGui::Begin("DevScene");
+
+	collisionManager_->DrawimGui();
+
+	ImGui::End();
+
+#endif // _DEBUG
+
 }
 
 

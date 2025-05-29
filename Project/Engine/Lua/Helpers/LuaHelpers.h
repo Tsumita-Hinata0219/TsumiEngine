@@ -130,3 +130,15 @@ inline bool EditVector4InGui(const char* label, Vector4& vec) {
 	ImGui::PushID((void*)&vec.w); changed |= ImGui::DragFloat("w", &vec.w, 0.01f); ImGui::PopID();
 	return changed;
 }
+
+inline std::string ReadFileToString(const std::string& path) {
+	std::ifstream inFile(path);
+	if (!inFile) {
+		std::cerr << "[LuaHelpers] Failed to open file: " << path << std::endl;
+		return "";
+	}
+
+	std::ostringstream ss;
+	ss << inFile.rdbuf();
+	return ss.str();
+}

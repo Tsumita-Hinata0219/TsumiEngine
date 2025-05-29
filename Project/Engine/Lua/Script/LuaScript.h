@@ -70,6 +70,11 @@ public:
 private:
 
     /// <summary>
+    /// 型をLuaに登録
+    /// </summary>
+    void RegisterType();
+
+    /// <summary>
     /// ファイルを読み込んでバッファにセット
     /// </summary>
     bool LoadFileToBuffer(const std::filesystem::path& path);
@@ -88,11 +93,6 @@ private:
     /// luaBuffer_の内容でスクリプトを再読み込み
     /// </summary>
     bool ReloadFromBuffer();
-
-    /// <summary>
-    /// ファイルを読んで、中身をstd::stringで返す
-    /// </summary>
-    std::string LoadFileToString(const std::filesystem::path& path);
 
 
 private:
@@ -114,26 +114,8 @@ inline LuaScript::LuaScript()
 {
     lua_.open_libraries(sol::lib::base, sol::lib::package, sol::lib::math);
 
-    // Vector4 構造体を Lua に登録
-    lua_.new_usertype<Vector4>("Vector4",
-        sol::constructors<Vector4(), Vector4(float, float, float, float)>(),
-        "x", &Vector4::x,
-        "y", &Vector4::y,
-        "z", &Vector4::z,
-        "w", &Vector4::w
-    );
-
-    // 他の型も登録可能（必要に応じて）
-    lua_.new_usertype<Vector3>("Vector3",
-        "x", &Vector3::x,
-        "y", &Vector3::y,
-        "z", &Vector3::z
-    );
-
-    lua_.new_usertype<Vector2>("Vector2",
-        "x", &Vector2::x,
-        "y", &Vector2::y
-    );
+    // 型をLuaに登録
+    RegisterType();
 }
 
 
@@ -143,7 +125,7 @@ inline LuaScript::LuaScript()
 inline bool LuaScript::LoadScript(const std::string& rootPath, const std::string& fileName)
 {
     // フルパスを組み立てる
-    std::filesystem::path fullPath = 
+    std::filesystem::path fullPath =
         std::filesystem::path("Resources") / rootPath / fileName;
 
     // ファイルパスを設定
@@ -346,25 +328,29 @@ inline void LuaScript::ShowLuaTableRecursive(sol::table& table, const std::strin
                 ShowLuaTableRecursive(subTable, label);
                 ImGui::TreePop();
             }
-        } else if (valObj.is<double>()) {
+        }
+        else if (valObj.is<double>()) {
             float value = static_cast<float>(valObj.as<double>());
             if (ImGui::DragFloat(label.c_str(), &value, 0.1f)) {
                 table[key] = value;
             }
-        } else if (valObj.is<int>()) {
+        }
+        else if (valObj.is<int>()) {
             int value = valObj.as<int>();
             if (ImGui::DragInt(label.c_str(), &value)) {
                 table[key] = value;
             }
-        } else if (valObj.is<bool>()) {
+        }
+        else if (valObj.is<bool>()) {
             bool value = valObj.as<bool>();
             if (ImGui::Checkbox(label.c_str(), &value)) {
                 table[key] = value;
             }
-        } else if (valObj.is<std::string>()) {
+        }
+        else if (valObj.is<std::string>()) {
             std::string value = valObj.as<std::string>();
             char buffer[256];
-            strncpy_s (buffer, value.c_str(), sizeof(buffer));
+            strncpy_s(buffer, value.c_str(), sizeof(buffer));
             if (ImGui::InputText(label.c_str(), buffer, sizeof(buffer))) {
                 table[key] = std::string(buffer);
             }
@@ -383,13 +369,50 @@ inline void LuaScript::SetReloadCallback(std::function<void()> cb)
 
 
 /// <summary>
+/// 型をLuaに登録
+/// </summary>
+inline void LuaScript::RegisterType()
+{
+
+    // Vector4 構造体を Lua に登録
+    lua_.new_usertype<Vector4>("Vector4",
+        sol::constructors<Vector4(), Vector4(float, float, float, float)>(),
+        "x", &Vector4::x,
+        "y", &Vector4::y,
+        "z", &Vector4::z,
+        "w", &Vector4::w
+    );
+
+    // 他の型も登録可能（必要に応じて）
+    lua_.new_usertype<Vector3>("Vector3",
+        "x", &Vector3::x,
+        "y", &Vector3::y,
+        "z", &Vector3::z
+    );
+
+    lua_.new_usertype<Vector2>("Vector2",
+        "x", &Vector2::x,
+        "y", &Vector2::y
+    );
+}
+
+
+/// <summary>
 /// ファイルを読み込んでバッファにセット
 /// </summary>
 inline bool LuaScript::LoadFileToBuffer(const std::filesystem::path& path)
 {
     try {
-        // ファイルを読んで、中身をstd::stringで返す受け取る
-        luaBuffer_ = LoadFileToString(path);
+        // ファイルを開く
+        std::ifstream file(path, std::ios::binary);
+        if (!file) throw std::runtime_error("Failed to open file: " + path.string());
+
+        // ファイルの中身を解析ssに受け取る
+        std::ostringstream ss;
+        ss << file.rdbuf();
+
+        // ファイルの中身をbufferにコピー
+        luaBuffer_ = ss.str();
         hasUnsavedChanges_ = false;
         return true;
     }
@@ -443,17 +466,4 @@ inline bool LuaScript::ReloadFromBuffer()
     if (reloadCallback_) reloadCallback_();
     std::cout << "[Lua] Reloaded from buffer." << std::endl;
     return true;
-}
-
-
-/// <summary>
-/// ファイルを読んで、中身をstd::stringで返す
-/// </summary>
-inline std::string LuaScript::LoadFileToString(const std::filesystem::path& path)
-{
-    std::ifstream file(path, std::ios::binary);
-    if (!file) throw std::runtime_error("Failed to open file: " + path.string());
-    std::ostringstream ss;
-    ss << file.rdbuf();
-    return ss.str();
 }

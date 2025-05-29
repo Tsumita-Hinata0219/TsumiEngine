@@ -11,6 +11,8 @@ class DevActor : public IActor {
 
 private:
 
+	std::unique_ptr<LuaScript> lua_;
+
 
 public:
 
@@ -19,6 +21,11 @@ public:
 
 	void Init() override;
 	void UpdateActor(float deltaTime) override;
+
+
+private:
+
+	void LoadData_From_Lua();
 
 };
 

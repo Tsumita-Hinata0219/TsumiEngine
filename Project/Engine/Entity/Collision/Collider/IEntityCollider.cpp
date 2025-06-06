@@ -13,3 +13,23 @@ void Entity::Collision::IEntityCollider::OnRegister()
 	pManager_->Register(GetSharedPtr());
 	isActive_ = true;
 }
+
+
+/// <summary>
+/// 衝突時コールバック
+/// </summary>
+void Entity::Collision::IEntityCollider::OnCollision(const std::string& key)
+{
+	if (onColFunc_) {
+		onColFunc_(key);
+	}
+}
+
+
+/// <summary>
+/// 関数登録
+/// </summary>
+void Entity::Collision::IEntityCollider::SetFunction(std::function<void(const std::string&)> func)
+{
+	onColFunc_ = std::move(func);
+}

@@ -60,8 +60,6 @@ public:
 
 				// 判定
 				if (colliderA->Intersects(*colliderB)) {
-					int a = 0;
-					a;
 				}
 			}
 		}

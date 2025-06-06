@@ -29,6 +29,8 @@ protected:
 	CollisionManager* pManager_ = nullptr;
 	// 活動フラグ
 	bool isActive_ = false;
+	// コールバック関数
+	std::function<void(const std::string&)> onColFunc_;
 
 
 public:
@@ -54,11 +56,20 @@ public:
 	virtual bool Intersects(const IEntityCollider&  other) const = 0;
 
 	/// <summary>
+	/// 衝突時コールバック
+	/// </summary>
+	void OnCollision(const std::string& key);
+
+	/// <summary>
 	/// ダブルディスパッチ
 	/// </summary>
 	virtual bool IntersectsWith(const CollisionSphere& other) const = 0;
 	virtual bool IntersectsWith(const CollisionAABB& other) const  = 0;
 
+	/// <summary>
+	/// 関数登録
+	/// </summary>
+	void SetFunction(std::function<void(const std::string&)> func);
 
 #pragma region Accessor
 

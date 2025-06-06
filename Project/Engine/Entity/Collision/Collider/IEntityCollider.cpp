@@ -5,13 +5,14 @@
 /// <summary>
 /// 登録処理
 /// </summary>
-void Entity::Collision::IEntityCollider::OnRegister()
+void Entity::Collision::IEntityCollider::OnRegister(const std::string& name)
 {
 	if (!pManager_) {
 		pManager_ = CollisionManager::GetInstance();
 	}
 	pManager_->Register(GetSharedPtr());
 	isActive_ = true;
+	ownersName_ = name;
 }
 
 

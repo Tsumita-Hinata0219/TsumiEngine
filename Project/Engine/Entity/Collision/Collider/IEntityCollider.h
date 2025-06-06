@@ -31,6 +31,8 @@ protected:
 	bool isActive_ = false;
 	// コールバック関数
 	std::function<void(const std::string&)> onColFunc_;
+	// Ownerの名前
+	std::string ownersName_ = "default";
 
 
 public:
@@ -48,7 +50,7 @@ public:
 	/// <summary>
 	/// 登録処理
 	/// </summary>
-	void OnRegister();
+	void OnRegister(const std::string& name ="default");
 
 	/// <summary>
 	/// 判定処理
@@ -79,6 +81,11 @@ public:
 	std::shared_ptr<IEntityCollider> GetSharedPtr() {
 		return shared_from_this();
 	}
+
+	/// <summary>
+	/// ownerの名前の取得
+	/// </summary>
+	std::string GetOwnersName() const { return this->ownersName_; }
 
 #pragma endregion
 

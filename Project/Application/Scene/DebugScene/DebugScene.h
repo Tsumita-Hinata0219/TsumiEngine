@@ -3,14 +3,14 @@
 #include "Scene/IScene.h"
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
-#include "3D/Model/Manager/ModelManager.h"
+#include "Graphics/3D/Model/Manager/ModelManager.h"
 #include "PipeLineManager/PipeLineManager.h"
 #include "ConfigManager/ConfigManager.h"
 
 #include "Camera/Manager/CameraManager.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
-#include "3D/Skybox/Skybox.h"
+#include "Graphics/3D/Skybox/Skybox.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Terrain/Floor/Floor.h"

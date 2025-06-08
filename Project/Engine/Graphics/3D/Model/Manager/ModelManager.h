@@ -2,7 +2,7 @@
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "../../../TextureManager/TextureManager.h"
+#include "TextureManager/TextureManager.h"
 #include "../Loader/ModelFileLoader.h"
 #include "../Model.h"
 

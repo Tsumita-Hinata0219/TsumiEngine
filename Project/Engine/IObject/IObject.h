@@ -2,8 +2,8 @@
 
 #include "GameObject/GameObject.h"
 #include "GameObject/Config/AppComfig.h"
-#include "3D/Model/Model.h"
-#include "3D/Model/Manager/ModelManager.h"
+#include "Graphics/3D/Model/Model.h"
+#include "Graphics/3D/Model/Manager/ModelManager.h"
 #include "Transform/Structure/Transform.h"
 
 #include "CollisionSystem/Manager/CollisionManager.h"

@@ -1,8 +1,8 @@
 #pragma once
 
 #include "FlagManager/FlagManager.h"
-#include "3D/Model/Model.h"
-#include "2D/Sprite/Sprite.h"
+#include "Graphics/3D/Model/Model.h"
+#include "Graphics/2D/Sprite/Sprite.h"
 #include "TextureManager/TextureManager.h"
 #include "Audio/Audio.h"
 #include "Input/Input.h"

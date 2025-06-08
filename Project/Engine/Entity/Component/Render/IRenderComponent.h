@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Entity/Actor/IActor.h"
-#include "3D/Model/Model.h"
-#include "RenderSystem/State/RenderState .h"
+#include "Graphics/3D/Model/Model.h"
+#include "Graphics/RenderSystem/State/RenderState .h"
 
 
 /* 描画用のコンポーネント */

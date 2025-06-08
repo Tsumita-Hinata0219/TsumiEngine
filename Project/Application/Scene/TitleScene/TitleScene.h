@@ -7,7 +7,7 @@
 #include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "3D/Skybox/Skybox.h"
+#include "Graphics/3D/Skybox/Skybox.h"
 
 #include "GameObject/Others/TitleBackGround/TitleBackGround.h"
 #include "GameObject/Others/TitleUIManager/TitleUIManager.h"

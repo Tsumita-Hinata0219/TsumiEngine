@@ -75,31 +75,31 @@
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Engine\2D\Sprite\Sprite.cpp">
+    <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp">
       <Filter>Engine\2D\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\2D\SpriteResource\SpriteResource.cpp">
+    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp">
       <Filter>Engine\2D\SpriteResource</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\2D\Structure\SpriteStructure.cpp">
+    <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp">
       <Filter>Engine\2D\Structure</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Skybox\Skybox.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Skybox\Skybox.cpp">
       <Filter>Engine\3D\Skybox</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Model\Loader\ModelFileLoader.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.cpp">
       <Filter>Engine\3D\Model\Loader</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Model\Manager\ModelManager.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Model\Manager\ModelManager.cpp">
       <Filter>Engine\3D\Model\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Model\State\GLTF\IGLTFState.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.cpp">
       <Filter>Engine\3D\Model\State\GLTF</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Model\State\OBJ\IOBJState.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.cpp">
       <Filter>Engine\3D\Model\State\OBJ</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\3D\Model\Model.cpp">
+    <ClCompile Include="Engine\Graphics\3D\Model\Model.cpp">
       <Filter>Engine\3D\Model</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Animation\AnimationDataArray\AnimationDataArray.cpp">
@@ -556,12 +556,12 @@
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
-    <ClCompile Include="Engine\RenderSystem\State\RenderState .cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
-    <ClCompile Include="Engine\RenderSystem\Asset\RenderAssetManager.cpp" />
-    <ClCompile Include="Engine\RenderSystem\Loader\RenderDataLoader.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DummyParticle\DummyParticle.cpp" />
@@ -662,43 +662,43 @@
     <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h">
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\2D\Sprite\Sprite.h">
+    <ClInclude Include="Engine\Graphics\2D\Sprite\Sprite.h">
       <Filter>Engine\2D\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\2D\SpriteResource\SpriteResource.h">
+    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h">
       <Filter>Engine\2D\SpriteResource</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\2D\Structure\SpriteStructure.h">
+    <ClInclude Include="Engine\Graphics\2D\Structure\SpriteStructure.h">
       <Filter>Engine\2D\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Skybox\Skybox.h">
+    <ClInclude Include="Engine\Graphics\3D\Skybox\Skybox.h">
       <Filter>Engine\3D\Skybox</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Skybox\Resource\SkyBoxResource.h">
+    <ClInclude Include="Engine\Graphics\3D\Skybox\Resource\SkyBoxResource.h">
       <Filter>Engine\3D\Skybox\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\Loader\ModelFileLoader.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.h">
       <Filter>Engine\3D\Model\Loader</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\Manager\ModelManager.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\Manager\ModelManager.h">
       <Filter>Engine\3D\Model\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\Structure\ModelStructure.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\Structure\ModelStructure.h">
       <Filter>Engine\3D\Model\Structure</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\Resources\ModelResources.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\Resources\ModelResources.h">
       <Filter>Engine\3D\Model\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\State\IModelState.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\State\IModelState.h">
       <Filter>Engine\3D\Model\State</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\State\GLTF\IGLTFState.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.h">
       <Filter>Engine\3D\Model\State\GLTF</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\State\OBJ\IOBJState.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.h">
       <Filter>Engine\3D\Model\State\OBJ</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\3D\Model\Model.h">
+    <ClInclude Include="Engine\Graphics\3D\Model\Model.h">
       <Filter>Engine\3D\Model</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Animation\AnimationDataArray\AnimationDataArray.h">
@@ -1463,14 +1463,14 @@
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
-    <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
-    <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
-    <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
-    <ClInclude Include="Engine\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.h" />

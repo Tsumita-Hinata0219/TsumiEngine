@@ -1491,6 +1491,9 @@
     <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
+    <ClInclude Include="Engine\ResourceManager\SceneResourceManager\SceneResourceManager.h" />
+    <ClInclude Include="Engine\ResourceManager\ResourceHandle\ResourceHandle.h" />
+    <ClInclude Include="Engine\ResourceManager\BufferResource\BufferResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

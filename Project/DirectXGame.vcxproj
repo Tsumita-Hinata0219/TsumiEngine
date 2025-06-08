@@ -732,6 +732,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
     <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\ResourceManager\BufferResource\BufferResource.h" />
+    <ClInclude Include="Engine\ResourceManager\ResourceHandle\ResourceHandle.h" />
+    <ClInclude Include="Engine\ResourceManager\SceneResourceManager\SceneResourceManager.h" />
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />

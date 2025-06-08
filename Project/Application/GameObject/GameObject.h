@@ -19,10 +19,10 @@
 #include "Graphics/Animation/AnimationManager/AnimationManager.h"
 #include "Graphics/Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
-#include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/ParticleField.h"
-#include "GPUParticle/Field/Constant/ConstantField.h"
-#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
-#include "GPUParticle/Material/FadeOut/ParticleFadeOut.h"
+#include "Graphics/GPUParticle/Particle/GPUParticle.h"
+#include "Graphics/GPUParticle/Field/ParticleField.h"
+#include "Graphics/GPUParticle/Field/Constant/ConstantField.h"
+#include "Graphics/GPUParticle/Emitter/Sphere/SphereEmitter.h"
+#include "Graphics/GPUParticle/Material/FadeOut/ParticleFadeOut.h"
 
 #include "Lua/Script/LuaScript.h"

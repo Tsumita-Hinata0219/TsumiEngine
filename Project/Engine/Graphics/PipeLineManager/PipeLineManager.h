@@ -8,7 +8,7 @@
 #include "Math/Struct.h"
 #include "Core/DirectXManager/DirectXManager.h"
 #include "Graphics/ShaderManager/ShaderManager.h"
-#include "CommandManager/CommandManager.h"
+#include "Graphics/CommandManager/CommandManager.h"
 
 #include "IPipeLineState/IPipeLineState.h"
 #include "IPipeLineState/PipeLineStructure.h"

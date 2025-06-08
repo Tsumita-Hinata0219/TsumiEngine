@@ -84,7 +84,7 @@
     <ClCompile Include="Engine\Core\DirectXManager\DirectXManager.cpp">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\CommandManager\CommandManager.cpp">
+    <ClCompile Include="Engine\Graphics\CommandManager\CommandManager.cpp">
       <Filter>Engine\CommandManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Utilities\ConfigManager\ConfigManager.cpp">
@@ -93,7 +93,7 @@
     <ClCompile Include="Engine\Resource\DescriptorManager\DescriptorManager.cpp">
       <Filter>Engine\DescriptorManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp">
+    <ClCompile Include="Engine\Graphics\GPUParticle\Particle\GPUParticle.cpp">
       <Filter>Engine\GPUParticle\Particle</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Input\Input.cpp">
@@ -338,9 +338,9 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.cpp" />
     <ClCompile Include="Engine\Utilities\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
-    <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
-    <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
-    <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
+    <ClCompile Include="Engine\Graphics\GPUParticle\Manager\ParticleManager.cpp" />
+    <ClCompile Include="Engine\Graphics\GPUParticle\Field\Constant\ConstantField.cpp" />
+    <ClCompile Include="Engine\Graphics\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\Resource\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
@@ -353,7 +353,7 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
-    <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
+    <ClCompile Include="Engine\Graphics\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
     <ClCompile Include="externals\imgui\imgui_stdlib.cpp" />
     <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
@@ -534,7 +534,7 @@
     <ClInclude Include="Engine\Resource\BufferResource\BufferResource.h">
       <Filter>Engine\BufferResource</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\CommandManager\CommandManager.h">
+    <ClInclude Include="Engine\Graphics\CommandManager\CommandManager.h">
       <Filter>Engine\CommandManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Utilities\ConfigManager\ConfigManager.h">
@@ -546,13 +546,13 @@
     <ClInclude Include="Application\System\GameData\GameData.h">
       <Filter>Engine\GameData</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h">
+    <ClInclude Include="Engine\Graphics\GPUParticle\Particle\GPUParticle.h">
       <Filter>Engine\GPUParticle\Particle</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h">
+    <ClInclude Include="Engine\Graphics\GPUParticle\Resources\ParticleResources.h">
       <Filter>Engine\GPUParticle\Resources</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GPUParticle\Structure\ParticleStructure.h">
+    <ClInclude Include="Engine\Graphics\GPUParticle\Structure\ParticleStructure.h">
       <Filter>Engine\GPUParticle\Structure</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Input\Input.h">
@@ -1058,13 +1058,13 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
     <ClInclude Include="Engine\Utilities\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
-    <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
-    <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Structure\EmitterStructure.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Manager\ParticleManager.h" />
     <ClInclude Include="Application\System\Camera\Interface\ICamera.h" />
-    <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
-    <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
-    <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
-    <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Field\ParticleField.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Structure\FieldStructure.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Emitter\Interface\IEmitter.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
     <ClInclude Include="externals\LuaJIT\lauxlib.h" />
     <ClInclude Include="externals\LuaJIT\lua.h" />
@@ -1072,8 +1072,8 @@
     <ClInclude Include="externals\LuaJIT\luajit.h" />
     <ClInclude Include="externals\LuaJIT\lualib.h" />
     <ClInclude Include="Engine\Lua\Script\LuaScript.h" />
-    <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
-    <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Field\Interface\IParticleField.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Field\Constant\ConstantField.h" />
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\Resource\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
@@ -1091,8 +1091,8 @@
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
-    <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
-    <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
+    <ClInclude Include="Engine\Graphics\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
     <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\CollisionAABB.h" />

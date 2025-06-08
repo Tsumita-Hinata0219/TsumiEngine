@@ -20,10 +20,10 @@
 #include "Audio/Audio.h"
 #include "Input/Input.h"
 
-#include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/ParticleField.h"
-#include "GPUParticle/Field/Constant/ConstantField.h"
-#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
+#include "Graphics/GPUParticle/Particle/GPUParticle.h"
+#include "Graphics/GPUParticle/Field/ParticleField.h"
+#include "Graphics/GPUParticle/Field/Constant/ConstantField.h"
+#include "Graphics/GPUParticle/Emitter/Sphere/SphereEmitter.h"
 
 #include "Utilities/ImGuiManager/ImGuiManager.h"
 #include "Utilities/ObjectPool/ObjectPool.h"

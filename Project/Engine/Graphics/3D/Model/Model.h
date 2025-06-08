@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Resource/BufferResource/BufferResource.h"
-#include "CommandManager/CommandManager.h"
+#include "Graphics/CommandManager/CommandManager.h"
 #include "Resource/DescriptorManager/DescriptorManager.h"
 #include "Transform/Structure/Transform.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"

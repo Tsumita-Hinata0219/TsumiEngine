@@ -4,7 +4,7 @@
 #include <memory>
 
 #include "Resource/BufferResource/BufferResource.h"
-#include "CommandManager/CommandManager.h"
+#include "Graphics/CommandManager/CommandManager.h"
 #include "Resource/View/SRVManager/SRVManager.h"
 #include "Resource/View/RTVManager/RTVManager.h"
 #include "Resource/DescriptorManager/DescriptorManager.h"

@@ -12,7 +12,7 @@
 #include <assert.h>
 
 #include "Core/DirectXManager/DirectXManager.h"
-#include "CommandManager/CommandManager.h"
+#include "Graphics/CommandManager/CommandManager.h"
 #include "Resource/DescriptorManager/DescriptorManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"

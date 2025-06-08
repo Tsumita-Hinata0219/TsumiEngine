@@ -9,7 +9,7 @@
 #pragma comment(lib,"xinput.lib")
 #pragma comment(lib, "dxguid.lib")
 
-#include "../Base/WinApp/WinApp.h"
+#include "Platform/WinApp/WinApp.h"
 #include "Math/Struct.h"
 #include "Math/MyMath.h"
 

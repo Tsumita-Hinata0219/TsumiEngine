@@ -2,9 +2,9 @@
 
 #include "DirectXTex.h"
 #include "Math/MyMath.h"
-#include "../Base/DirectXManager/DirectXManager.h"
-#include "../CommandManager/CommandManager.h"
-#include "../CreateResource/CreateResource.h"
+#include "Core/DirectXManager/DirectXManager.h"
+#include "CommandManager/CommandManager.h"
+#include "CreateResource/CreateResource.h"
 
 
 struct DescriptorSize {

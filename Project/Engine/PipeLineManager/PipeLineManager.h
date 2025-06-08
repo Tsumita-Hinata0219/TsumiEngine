@@ -6,7 +6,7 @@
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "../Base/DirectXManager/DirectXManager.h"
+#include "Core/DirectXManager/DirectXManager.h"
 #include "../ShaderManager/ShaderManager.h"
 #include "../CommandManager/CommandManager.h"
 

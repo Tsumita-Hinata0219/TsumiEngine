@@ -12,7 +12,7 @@
 #include <chrono>
 #include <thread>
 
-#include "../WinApp/WinApp.h"
+#include "Platform/WinApp/WinApp.h"
 #include "CommandManager/CommandManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"

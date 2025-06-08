@@ -11,7 +11,7 @@
 
 #include <assert.h>
 
-#include "../Base/DirectXManager/DirectXManager.h"
+#include "Core/DirectXManager/DirectXManager.h"
 #include "../CommandManager/CommandManager.h"
 #include "DescriptorManager/DescriptorManager.h"
 #include "Math/MyMath.h"

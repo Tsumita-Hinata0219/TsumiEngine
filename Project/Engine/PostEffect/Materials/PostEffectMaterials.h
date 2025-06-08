@@ -2,7 +2,7 @@
 
 #include <sstream>
 
-#include "Base/WinApp/WinApp.h"
+#include "Platform/WinApp/WinApp.h"
 #include "BufferResource/BufferResource.h"
 
 #include "Math/MyMath.h"

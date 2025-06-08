@@ -295,8 +295,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
     <ClCompile Include="Engine\Audio\Audio.cpp" />
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp" />
-    <ClCompile Include="Engine\Base\DirectXManager\DirectXManager.cpp" />
-    <ClCompile Include="Engine\Base\WinApp\WinApp.cpp" />
+    <ClCompile Include="Engine\Core\DirectXManager\DirectXManager.cpp" />
+    <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Collider\Interface\ICollider.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
     <ClCompile Include="Engine\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp" />
@@ -642,8 +642,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
     <ClInclude Include="Engine\Audio\Audio.h" />
     <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h" />
-    <ClInclude Include="Engine\Base\DirectXManager\DirectXManager.h" />
-    <ClInclude Include="Engine\Base\WinApp\WinApp.h" />
+    <ClInclude Include="Engine\Core\DirectXManager\DirectXManager.h" />
+    <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
     <ClInclude Include="Engine\BufferResource\BufferResource.h" />
     <ClInclude Include="Engine\CollisionSystem\Collider\ColliderConfig.h" />
     <ClInclude Include="Engine\CollisionSystem\Collider\Interface\ICollider.h" />
@@ -732,9 +732,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\RenderSystem\Loader\RenderDataLoader.h" />
     <ClInclude Include="Engine\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\RenderSystem\Structure\RenderStructure.h" />
-    <ClInclude Include="Engine\ResourceManager\BufferResource\BufferResource.h" />
-    <ClInclude Include="Engine\ResourceManager\ResourceHandle\ResourceHandle.h" />
-    <ClInclude Include="Engine\ResourceManager\SceneResourceManager\SceneResourceManager.h" />
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />

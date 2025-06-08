@@ -144,10 +144,10 @@
     <ClCompile Include="Engine\Audio\Audio.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Base\DirectXManager\DirectXManager.cpp">
+    <ClCompile Include="Engine\Core\DirectXManager\DirectXManager.cpp">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Base\WinApp\WinApp.cpp">
+    <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp">
       <Filter>Engine\Base\WinApp</Filter>
     </ClCompile>
     <ClCompile Include="Engine\CollisionSystem\Collider\Interface\ICollider.cpp">
@@ -743,10 +743,10 @@
     <ClInclude Include="Engine\Audio\Audio.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Base\DirectXManager\DirectXManager.h">
+    <ClInclude Include="Engine\Core\DirectXManager\DirectXManager.h">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Base\WinApp\WinApp.h">
+    <ClInclude Include="Engine\Platform\WinApp\WinApp.h">
       <Filter>Engine\Base\WinApp</Filter>
     </ClInclude>
     <ClInclude Include="Engine\BufferResource\BufferResource.h">
@@ -1491,9 +1491,6 @@
     <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
-    <ClInclude Include="Engine\ResourceManager\SceneResourceManager\SceneResourceManager.h" />
-    <ClInclude Include="Engine\ResourceManager\ResourceHandle\ResourceHandle.h" />
-    <ClInclude Include="Engine\ResourceManager\BufferResource\BufferResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

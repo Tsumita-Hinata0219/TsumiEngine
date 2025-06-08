@@ -1,5 +1,5 @@
 #include "TransformNode.h"
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 
 
 /// <summary>

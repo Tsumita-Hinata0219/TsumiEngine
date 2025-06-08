@@ -1,5 +1,5 @@
 #include "IOBJState.h"
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 
 
 // コンストラクタ

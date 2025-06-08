@@ -11,7 +11,7 @@
 #include "Graphics/PipeLineManager/PipeLineManager.h"
 #include "Resource/TextureManager/TextureManager.h"
 #include "../Materials/PostEffectMaterials.h"
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 #include "Math/MyMath.h"
 
 

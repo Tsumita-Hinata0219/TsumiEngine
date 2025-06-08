@@ -3,7 +3,7 @@
 #include <list>
 #include <memory>
 
-#include "IObject/IObject.h"
+#include "System/IObject/IObject.h"
 #include "../../GameObject.h"
 
 #include "Control/GameCameraControl.h"

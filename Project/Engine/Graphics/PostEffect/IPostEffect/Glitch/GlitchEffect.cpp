@@ -1,5 +1,5 @@
 #include "GlitchEffect.h"
-#include "GameManager/GameManager.h"
+#include "System/GameManager/GameManager.h"
 
 
 // 初期化処理

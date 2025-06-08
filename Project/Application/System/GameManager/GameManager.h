@@ -8,7 +8,7 @@
 #include "Scene/IScene.h"
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/TimeSystem/TimeSystem.h"
-#include "GameData/GameData.h"
+#include "System/GameData/GameData.h"
 #include "Graphics/RenderSystem/Asset/RenderAssetManager.h"
 #include "Graphics/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 

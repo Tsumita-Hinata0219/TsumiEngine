@@ -13,7 +13,7 @@
 
 #include "Lua/Script/LuaScript.h"
 
-#include "FlagManager/FlagManager.h"
+#include "Utilities/FlagManager/FlagManager.h"
 #include "Graphics/3D/Model/Model.h"
 #include "Graphics/2D/Sprite/Sprite.h"
 #include "Resource/TextureManager/TextureManager.h"
@@ -33,4 +33,4 @@
 #include "Utilities/EnumUtilities/EnumUtilities.h"
 #include "Utilities/PtrUtilities/PtrUtilities.h"
 
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "GameManager/GameManager.h"
+#include "System/GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 
 #include "Graphics/PostEffect/IPostEffect/Absent/AbsentEffect.h"

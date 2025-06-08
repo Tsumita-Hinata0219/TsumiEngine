@@ -2,7 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Engine\GameManager\GameManager.cpp">
+    <ClCompile Include="Application\System\GameManager\GameManager.cpp">
       <Filter>Application\GameManager</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Camera\GameCamera\GameCamera.cpp">
@@ -11,10 +11,10 @@
     <ClCompile Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.cpp">
       <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Camera\Manager\CameraManager.cpp">
+    <ClCompile Include="Application\System\Camera\Manager\CameraManager.cpp">
       <Filter>Application\GameObject\Camera\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Camera\Resources\CameraResource.cpp">
+    <ClCompile Include="Application\System\Camera\Resources\CameraResource.cpp">
       <Filter>Application\GameObject\Camera\Resources</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EnemyManager.cpp">
@@ -87,7 +87,7 @@
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp">
       <Filter>Engine\CommandManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp">
+    <ClCompile Include="Engine\Utilities\ConfigManager\ConfigManager.cpp">
       <Filter>Engine\ConfigManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Resource\DescriptorManager\DescriptorManager.cpp">
@@ -237,7 +237,7 @@
     <ClCompile Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.cpp">
       <Filter>Application\GameObject\Effect\TestPostEffect</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\IObject\IObject.cpp">
+    <ClCompile Include="Application\System\IObject\IObject.cpp">
       <Filter>Application\GameObject\IObject</Filter>
     </ClCompile>
     <ClCompile Include="Application\GameObject\Others\UI\Game\GameSceneUI.cpp">
@@ -336,7 +336,7 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.cpp" />
-    <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
+    <ClCompile Include="Engine\Utilities\FlagManager\FlagManager.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
@@ -438,7 +438,7 @@
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Engine\GameManager\GameManager.h">
+    <ClInclude Include="Application\System\GameManager\GameManager.h">
       <Filter>Application\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\GameObject.h">
@@ -450,10 +450,10 @@
     <ClInclude Include="Application\GameObject\Camera\GameCamera\Control\GameCameraControl.h">
       <Filter>Application\GameObject\Camera\GameCamera\Control</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Camera\Manager\CameraManager.h">
+    <ClInclude Include="Application\System\Camera\Manager\CameraManager.h">
       <Filter>Application\GameObject\Camera\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Camera\Resources\CameraResource.h">
+    <ClInclude Include="Application\System\Camera\Resources\CameraResource.h">
       <Filter>Application\GameObject\Camera\Resources</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EnemyManager.h">
@@ -537,13 +537,13 @@
     <ClInclude Include="Engine\CommandManager\CommandManager.h">
       <Filter>Engine\CommandManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\ConfigManager\ConfigManager.h">
+    <ClInclude Include="Engine\Utilities\ConfigManager\ConfigManager.h">
       <Filter>Engine\ConfigManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Resource\DescriptorManager\DescriptorManager.h">
       <Filter>Engine\DescriptorManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\GameData\GameData.h">
+    <ClInclude Include="Application\System\GameData\GameData.h">
       <Filter>Engine\GameData</Filter>
     </ClInclude>
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h">
@@ -939,7 +939,7 @@
     <ClInclude Include="Application\GameObject\Effect\TestPostEffect\TestPostEffect.h">
       <Filter>Application\GameObject\Effect\TestPostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\IObject\IObject.h">
+    <ClInclude Include="Application\System\IObject\IObject.h">
       <Filter>Application\GameObject\IObject</Filter>
     </ClInclude>
     <ClInclude Include="Application\GameObject\Others\UI\Game\GameSceneUI.h">
@@ -1056,11 +1056,11 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\Random\EnemyShotPatternRandom.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
-    <ClInclude Include="Engine\FlagManager\FlagManager.h" />
+    <ClInclude Include="Engine\Utilities\FlagManager\FlagManager.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
-    <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
+    <ClInclude Include="Application\System\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />

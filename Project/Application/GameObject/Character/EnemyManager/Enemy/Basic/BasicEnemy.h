@@ -2,7 +2,7 @@
 
 #include "../IEnemy.h"
 
-#include "IObject/IObject.h"
+#include "System/IObject/IObject.h"
 #include "../../../../GameObject.h"
 
 #include "../../Bullet/EnemyBullet.h"

@@ -1,5 +1,5 @@
 #include "StageTransitionMenuNaviBack.h"
-#include "GameData/GameData.h"
+#include "System/GameData/GameData.h"
 
 
 

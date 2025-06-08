@@ -1,7 +1,7 @@
 #include "Model.h"
 #include "Manager/ModelManager.h"
 #include "Graphics/Animation/KeyFrameAnimation/KeyFrameAnimation.h"
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 
 
 /// <summary>

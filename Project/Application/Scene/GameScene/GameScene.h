@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "GameManager/GameManager.h"
+#include "System/GameManager/GameManager.h"
 #include "JsonManager/JsonManager.h"
 #include "Physics/CollisionSystem/Manager/CollisionManager.h"
-#include "FlagManager/FlagManager.h"
+#include "Utilities/FlagManager/FlagManager.h"
 
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 #include "GameObject/Camera/GameCamera/GameCamera.h"
 
 #include "GameObject/Others/SceneTransition/SceneTransition.h"

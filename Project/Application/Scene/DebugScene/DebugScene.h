@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "GameManager/GameManager.h"
+#include "System/GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 #include "Graphics/3D/Model/Manager/ModelManager.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
-#include "ConfigManager/ConfigManager.h"
+#include "Utilities/ConfigManager/ConfigManager.h"
 
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 
 #include "GameObject/Terrain/Skydome/Skydome.h"
 #include "Graphics/3D/Skybox/Skybox.h"

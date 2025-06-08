@@ -16,7 +16,7 @@
 #include "FlagManager/FlagManager.h"
 #include "Graphics/3D/Model/Model.h"
 #include "Graphics/2D/Sprite/Sprite.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "Audio/Audio.h"
 #include "Input/Input.h"
 

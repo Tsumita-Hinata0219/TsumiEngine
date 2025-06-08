@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Platform/WinApp/WinApp.h"
-#include "BufferResource/BufferResource.h"
+#include "Resource/BufferResource/BufferResource.h"
 #include "Transform/Structure/Transform.h"
 #include "Math/MyMath.h"
 

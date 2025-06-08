@@ -5,12 +5,12 @@
 #include "Graphics/ShaderManager/ShaderManager.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "Input/Input.h"
 #include "Audio/Audio.h"
-#include "DescriptorManager/DescriptorManager.h"
-#include "View/RTVManager/RTVManager.h"
-#include "View/SRVManager/SRVManager.h"
+#include "Resource/DescriptorManager/DescriptorManager.h"
+#include "Resource/View/RTVManager/RTVManager.h"
+#include "Resource/View/SRVManager/SRVManager.h"
 
 
 /* Tsumiクラス */

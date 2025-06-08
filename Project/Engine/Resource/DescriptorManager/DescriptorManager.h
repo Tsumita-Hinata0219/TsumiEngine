@@ -4,7 +4,7 @@
 #include "Math/MyMath.h"
 #include "Core/DirectXManager/DirectXManager.h"
 #include "CommandManager/CommandManager.h"
-#include "CreateResource/CreateResource.h"
+#include "Resource/CreateResource/CreateResource.h"
 
 
 struct DescriptorSize {

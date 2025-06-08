@@ -5,9 +5,9 @@
 #include "DirectXTex.h"
 #include "Math/Struct.h"
 #include "Core/DirectXManager/DirectXManager.h"
-#include "../../CommandManager/CommandManager.h"
-#include "../../DescriptorManager/DescriptorManager.h"
-#include "../../CreateResource/CreateResource.h"
+#include "CommandManager/CommandManager.h"
+#include "Resource/DescriptorManager/DescriptorManager.h"
+#include "Resource/CreateResource/CreateResource.h"
 
 #define SRV_DESCRIPTOR_MAX 640
 

@@ -3,7 +3,7 @@
 #include "Math/MyMath.h"
 
 #include "../Structure/RenderStructure.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 
 #include <unordered_map>
 #include <fstream>

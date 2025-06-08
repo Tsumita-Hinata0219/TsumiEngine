@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Math/MyMath.h"
-#include "BufferResource/BufferResource.h"
+#include "Resource/BufferResource/BufferResource.h"
 
 
 // 前方宣言

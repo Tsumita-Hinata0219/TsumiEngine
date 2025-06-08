@@ -1,7 +1,7 @@
 #pragma once
 
 #include "CommandManager/CommandManager.h"
-#include "CreateResource/CreateResource.h"
+#include "Resource/CreateResource/CreateResource.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
 
 #include "GameObject/GameObject.h"

@@ -206,8 +206,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
+    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\Physics\CollisionSystem\System\CollisionSystem.cpp" />
-    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Resource\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
@@ -271,7 +272,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\Scene\DebugScene\DebugScene.cpp" />
     <ClCompile Include="Application\Scene\GameScene\GameScene.cpp" />
     <ClCompile Include="Application\Scene\TitleScene\TitleScene.cpp" />
-    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp" />
     <ClCompile Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.cpp" />
@@ -308,7 +308,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp" />
     <ClCompile Include="Engine\Entity\Component\Base\IBaseComponent.cpp" />
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp" />
-    <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp" />
+    <ClCompile Include="Engine\Resource\DescriptorManager\DescriptorManager.cpp" />
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp" />
     <ClCompile Include="Engine\Input\Input.cpp" />
     <ClCompile Include="Engine\JsonManager\JsonManager.cpp" />
@@ -366,7 +366,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
-    <ClCompile Include="Engine\TextureManager\TextureManager.cpp" />
+    <ClCompile Include="Engine\Resource\TextureManager\TextureManager.cpp" />
     <ClCompile Include="Engine\Transform\Structure\Transform.cpp" />
     <ClCompile Include="Engine\Tsumi.cpp" />
     <ClCompile Include="Engine\Utilities\EnumUtilities\EnumUtilities.cpp" />
@@ -376,8 +376,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Utilities\TimedCall\TimedCall.cpp" />
     <ClCompile Include="Engine\Utilities\Timer\Timer.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
-    <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp" />
-    <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp" />
+    <ClCompile Include="Engine\Resource\View\RTVManager\RTVManager.cpp" />
+    <ClCompile Include="Engine\Resource\View\SRVManager\SRVManager.cpp" />
     <ClCompile Include="externals\DirectXTex\BC.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>
@@ -532,8 +532,10 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
+    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\System\CollisionSystem.h" />
-    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Resource\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\CollisionAABB.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\IEntityCollider.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\CollisionSphere.h" />
@@ -614,7 +616,6 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Application\Scene\GameScene\GameScene.h" />
     <ClInclude Include="Application\Scene\IScene.h" />
     <ClInclude Include="Application\Scene\TitleScene\TitleScene.h" />
-    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Engine\Graphics\2D\Sprite\Sprite.h" />
     <ClInclude Include="Engine\Graphics\2D\Structure\SpriteStructure.h" />
     <ClInclude Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.h" />
@@ -644,7 +645,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h" />
     <ClInclude Include="Engine\Core\DirectXManager\DirectXManager.h" />
     <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
-    <ClInclude Include="Engine\BufferResource\BufferResource.h" />
+    <ClInclude Include="Engine\Resource\BufferResource\BufferResource.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\Collider\ColliderConfig.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
@@ -660,7 +661,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\CommandManager\CommandManager.h" />
     <ClInclude Include="Engine\Entity\Component\Base\IBaseComponent.h" />
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h" />
-    <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h" />
+    <ClInclude Include="Engine\Resource\DescriptorManager\DescriptorManager.h" />
     <ClInclude Include="Engine\GameData\GameData.h" />
     <ClInclude Include="Engine\GPUParticle\Particle\GPUParticle.h" />
     <ClInclude Include="Engine\GPUParticle\Resources\ParticleResources.h" />
@@ -731,9 +732,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="Engine\TextureManager\TextureManager.h" />
+    <ClInclude Include="Engine\Resource\TextureManager\TextureManager.h" />
     <ClInclude Include="Engine\Transform\Structure\Transform.h" />
     <ClInclude Include="Engine\Tsumi.h" />
     <ClInclude Include="Engine\Utilities\EnumUtilities\EnumUtilities.h" />
@@ -747,8 +747,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Utilities\TextLog\TextLog.h" />
     <ClInclude Include="Engine\Utilities\TimedCall\TimedCall.h" />
     <ClInclude Include="Engine\Utilities\Timer\Timer.h" />
-    <ClInclude Include="Engine\View\RTVManager\RTVManager.h" />
-    <ClInclude Include="Engine\View\SRVManager\SRVManager.h" />
+    <ClInclude Include="Engine\Resource\View\RTVManager\RTVManager.h" />
+    <ClInclude Include="Engine\Resource\View\SRVManager\SRVManager.h" />
     <ClInclude Include="externals\assimp\include\assimp\aabb.h">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Demo|x64'">true</ExcludedFromBuild>

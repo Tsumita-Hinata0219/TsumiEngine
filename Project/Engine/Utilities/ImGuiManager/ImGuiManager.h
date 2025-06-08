@@ -4,8 +4,8 @@
 
 #include "Platform/WinApp/WinApp.h"
 #include "Core/DirectXManager/DirectXManager.h"
-#include "../../CommandManager/CommandManager.h"
-#include "../../View/RTVManager/RTVManager.h"
+#include "CommandManager/CommandManager.h"
+#include "Resource/View/RTVManager/RTVManager.h"
 #include "JapaneseGlyphArray.h"
 
 class ImGuiManager {

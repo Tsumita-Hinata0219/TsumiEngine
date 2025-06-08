@@ -78,9 +78,6 @@
     <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp">
       <Filter>Engine\2D\Sprite</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp">
-      <Filter>Engine\2D\SpriteResource</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp">
       <Filter>Engine\2D\Structure</Filter>
     </ClCompile>
@@ -180,7 +177,7 @@
     <ClCompile Include="Engine\ConfigManager\ConfigManager.cpp">
       <Filter>Engine\ConfigManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\DescriptorManager\DescriptorManager.cpp">
+    <ClCompile Include="Engine\Resource\DescriptorManager\DescriptorManager.cpp">
       <Filter>Engine\DescriptorManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\GPUParticle\Particle\GPUParticle.cpp">
@@ -330,7 +327,7 @@
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp">
       <Filter>Engine\ShaderManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\TextureManager\TextureManager.cpp">
+    <ClCompile Include="Engine\Resource\TextureManager\TextureManager.cpp">
       <Filter>Engine\TextureManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Transform\Structure\Transform.cpp">
@@ -351,10 +348,10 @@
     <ClCompile Include="Engine\Utilities\TextLog\TextLog.cpp">
       <Filter>Engine\Utilities\TextLog</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\View\RTVManager\RTVManager.cpp">
+    <ClCompile Include="Engine\Resource\View\RTVManager\RTVManager.cpp">
       <Filter>Engine\View\RTVManager</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\View\SRVManager\SRVManager.cpp">
+    <ClCompile Include="Engine\Resource\View\SRVManager\SRVManager.cpp">
       <Filter>Engine\View\SRVManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Tsumi.cpp">
@@ -554,7 +551,7 @@
     <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
-    <ClCompile Include="Engine\CreateResource\CreateResource.cpp" />
+    <ClCompile Include="Engine\Resource\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
@@ -576,6 +573,7 @@
     <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
     <ClCompile Include="externals\imgui\imgui_stdlib.cpp" />
+    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -665,9 +663,6 @@
     <ClInclude Include="Engine\Graphics\2D\Sprite\Sprite.h">
       <Filter>Engine\2D\Sprite</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h">
-      <Filter>Engine\2D\SpriteResource</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Graphics\2D\Structure\SpriteStructure.h">
       <Filter>Engine\2D\Structure</Filter>
     </ClInclude>
@@ -749,7 +744,7 @@
     <ClInclude Include="Engine\Platform\WinApp\WinApp.h">
       <Filter>Engine\Base\WinApp</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\BufferResource\BufferResource.h">
+    <ClInclude Include="Engine\Resource\BufferResource\BufferResource.h">
       <Filter>Engine\BufferResource</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Physics\CollisionSystem\Collider\ColliderConfig.h">
@@ -794,7 +789,7 @@
     <ClInclude Include="Engine\ConfigManager\ConfigManager.h">
       <Filter>Engine\ConfigManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\DescriptorManager\DescriptorManager.h">
+    <ClInclude Include="Engine\Resource\DescriptorManager\DescriptorManager.h">
       <Filter>Engine\DescriptorManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\GameData\GameData.h">
@@ -977,7 +972,7 @@
     <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h">
       <Filter>Engine\ShaderManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\TextureManager\TextureManager.h">
+    <ClInclude Include="Engine\Resource\TextureManager\TextureManager.h">
       <Filter>Engine\TextureManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Transform\Structure\Transform.h">
@@ -1007,10 +1002,10 @@
     <ClInclude Include="Engine\Utilities\ObjectPool\ObjectPool.h">
       <Filter>Engine\Utilities\ObjectPool</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\View\RTVManager\RTVManager.h">
+    <ClInclude Include="Engine\Resource\View\RTVManager\RTVManager.h">
       <Filter>Engine\View\RTVManager</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\View\SRVManager\SRVManager.h">
+    <ClInclude Include="Engine\Resource\View\SRVManager\SRVManager.h">
       <Filter>Engine\View\SRVManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Tsumi.h">
@@ -1461,10 +1456,9 @@
     <ClInclude Include="Engine\GPUParticle\Field\Interface\IParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Field\Constant\ConstantField.h" />
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
-    <ClInclude Include="Engine\CreateResource\CreateResource.h" />
+    <ClInclude Include="Engine\Resource\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
@@ -1491,6 +1485,8 @@
     <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
+    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -3,13 +3,13 @@
 #include <iostream>
 #include <memory>
 
-#include "BufferResource/BufferResource.h"
+#include "Resource/BufferResource/BufferResource.h"
 #include "CommandManager/CommandManager.h"
-#include "View/SRVManager/SRVManager.h"
-#include "View/RTVManager/RTVManager.h"
-#include "DescriptorManager/DescriptorManager.h"
+#include "Resource/View/SRVManager/SRVManager.h"
+#include "Resource/View/RTVManager/RTVManager.h"
+#include "Resource/DescriptorManager/DescriptorManager.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "../Materials/PostEffectMaterials.h"
 #include "Camera/Manager/CameraManager.h"
 #include "Math/MyMath.h"

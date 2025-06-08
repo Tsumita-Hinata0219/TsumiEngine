@@ -2,10 +2,10 @@
 
 #include "Platform/WinApp/WinApp.h"
 #include "Core/DirectXManager/DirectXManager.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
-#include "DescriptorManager/DescriptorManager.h"
-#include "View/SRVManager/SRVManager.h"
+#include "Resource/DescriptorManager/DescriptorManager.h"
+#include "Resource/View/SRVManager/SRVManager.h"
 #include "Camera/Manager/CameraManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"

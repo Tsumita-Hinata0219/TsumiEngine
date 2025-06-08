@@ -16,8 +16,8 @@
 #include "CommandManager/CommandManager.h"
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "CreateResource/CreateResource.h"
-#include "View/RTVManager/RTVManager.h"
+#include "Resource/CreateResource/CreateResource.h"
+#include "Resource/View/RTVManager/RTVManager.h"
 
 
 // スワップチェーン

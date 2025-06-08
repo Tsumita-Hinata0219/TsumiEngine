@@ -3,7 +3,7 @@
 
 #include "Math/MyMath.h"
 #include "Math/Struct.h"
-#include "TextureManager/TextureManager.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "../Model.h"
 #include "../Manager/ModelManager.h"
 

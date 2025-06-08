@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BufferResource/BufferResource.h"
+#include "Resource/BufferResource/BufferResource.h"
 #include "CommandManager/CommandManager.h"
 #include "Transform/Structure/Transform.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "BufferResource/BufferResource.h"
+#include "Resource/BufferResource/BufferResource.h"
 #include "../../Structure/EmitterStructure.h"
 #include "../../Structure/ParticleStructure.h"
 #include "../../Structure/FieldStructure.h"

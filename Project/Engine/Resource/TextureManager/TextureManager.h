@@ -12,8 +12,8 @@
 
 #include "Core/DirectXManager/DirectXManager.h"
 #include "CommandManager/CommandManager.h"
-#include "CreateResource/CreateResource.h"
-#include "View/SRVManager/SRVManager.h"
+#include "Resource/CreateResource/CreateResource.h"
+#include "Resource/View/SRVManager/SRVManager.h"
 #include "Math/MyMath.h"
 
 

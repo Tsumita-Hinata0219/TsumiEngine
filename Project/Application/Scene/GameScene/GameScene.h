@@ -20,7 +20,7 @@
 #include "GameObject/Character/Player/Player.h"
 #include "GameObject/Character/EnemyManager/EnemyManager.h"
 
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "Graphics/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
 #include "GameObject/Others/StageTransitionMenu/StageTransitionMenuManager.h"

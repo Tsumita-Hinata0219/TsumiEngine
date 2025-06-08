@@ -282,49 +282,49 @@
     <ClCompile Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp">
       <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp">
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp">
       <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
     </ClCompile>
     <ClCompile Include="Engine\ShaderManager\ShaderManager.cpp">
@@ -923,55 +923,55 @@
     <ClInclude Include="Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h">
       <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\Materials\PostEffectMaterials.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\Materials\PostEffectMaterials.h">
       <Filter>Engine\PostEffect\Materials</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\IPostEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\IPostEffect.h">
       <Filter>Engine\PostEffect\IPostEffect</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Absent\AbsentEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Dissolve\DissolveEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Glitch\GlitchEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Grain\GrainEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\HSV\HSVEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Vignetting\VignettingEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\Random\RandomEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h">
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h">
       <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
     </ClInclude>
     <ClInclude Include="Engine\ShaderManager\ShaderManager.h">

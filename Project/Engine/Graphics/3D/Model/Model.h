@@ -4,8 +4,8 @@
 #include "CommandManager/CommandManager.h"
 #include "DescriptorManager/DescriptorManager.h"
 #include "Transform/Structure/Transform.h"
-#include "PipeLineManager/PipeLineManager.h"
-#include "Animation/AnimationManager/AnimationManager.h"
+#include "Graphics/PipeLineManager/PipeLineManager.h"
+#include "Graphics/Animation/AnimationManager/AnimationManager.h"
 #include "Structure/ModelStructure.h"
 #include "Resources/ModelResources.h"
 

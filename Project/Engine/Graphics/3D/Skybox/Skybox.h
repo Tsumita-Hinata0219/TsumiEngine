@@ -2,7 +2,7 @@
 
 #include "CommandManager/CommandManager.h"
 #include "CreateResource/CreateResource.h"
-#include "PipeLineManager/PipeLineManager.h"
+#include "Graphics/PipeLineManager/PipeLineManager.h"
 
 #include "GameObject/GameObject.h"
 

@@ -16,8 +16,8 @@
 
 #include "Math/MyMath.h"
 
-#include "Animation/AnimationManager/AnimationManager.h"
-#include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "Graphics/Animation/AnimationManager/AnimationManager.h"
+#include "Graphics/Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
 #include "GPUParticle/Particle/GPUParticle.h"
 #include "GPUParticle/Field/ParticleField.h"

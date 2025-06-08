@@ -1,5 +1,5 @@
 #include "IObject.h"
-#include "CollisionSystem/Collider/Interface/ICollider.h"
+#include "Physics/CollisionSystem/Collider/Interface/ICollider.h"
 
 
 /// <summary>

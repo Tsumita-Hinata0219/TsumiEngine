@@ -4,7 +4,7 @@
 #include "GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 #include "Graphics/3D/Model/Manager/ModelManager.h"
-#include "PipeLineManager/PipeLineManager.h"
+#include "Graphics/PipeLineManager/PipeLineManager.h"
 #include "ConfigManager/ConfigManager.h"
 
 #include "Camera/Manager/CameraManager.h"

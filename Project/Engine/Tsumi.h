@@ -2,8 +2,8 @@
 
 #include "Platform/WinApp/WinApp.h"
 #include "Core/DirectXManager/DirectXManager.h"
-#include "ShaderManager/ShaderManager.h"
-#include "PipeLineManager/PipeLineManager.h"
+#include "Graphics/ShaderManager/ShaderManager.h"
+#include "Graphics/PipeLineManager/PipeLineManager.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
 #include "TextureManager/TextureManager.h"
 #include "Input/Input.h"

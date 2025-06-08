@@ -4,9 +4,9 @@
 
 #include "Actor/IActor.h"
 
-#include "Collision/Collider/IEntityCollider.h"
-#include "Collision/Collider/CollisionSphere.h"
-#include "Collision/Collider/CollisionAABB.h"
+#include "Physics/Collision/Collider/IEntityCollider.h"
+#include "Physics/Collision/Collider/CollisionSphere.h"
+#include "Physics/Collision/Collider/CollisionAABB.h"
 
 #include "Component/Base/IBaseComponent.h"
 #include "Component/Render/IRenderComponent.h"

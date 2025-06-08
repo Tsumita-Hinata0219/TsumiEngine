@@ -6,7 +6,7 @@
 #include "Graphics/3D/Model/Manager/ModelManager.h"
 #include "Transform/Structure/Transform.h"
 
-#include "CollisionSystem/Manager/CollisionManager.h"
+#include "Physics/CollisionSystem/Manager/CollisionManager.h"
 
 #include <unordered_set>
 

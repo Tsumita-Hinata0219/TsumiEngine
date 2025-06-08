@@ -144,30 +144,6 @@
     <ClCompile Include="Engine\Core\DirectXManager\DirectXManager.cpp">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.cpp">
-      <Filter>Engine\CollisionSystem\Collider\Interface</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp">
-      <Filter>Engine\CollisionSystem\Collider\Shape\AABB</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp">
-      <Filter>Engine\CollisionSystem\Collider\Shape\Sphere</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Geometry\GeometryCollision.cpp">
-      <Filter>Engine\CollisionSystem\Geometry</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\IsCollision\IsCollision.cpp">
-      <Filter>Engine\CollisionSystem\IsCollision</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Manager\CollisionManager.cpp">
-      <Filter>Engine\CollisionSystem\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.cpp">
-      <Filter>Engine\CollisionSystem\Util</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Physics\CollisionSystem\Penetration\CollisionPenetration.cpp">
-      <Filter>Engine\CollisionSystem\Penetration</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\CommandManager\CommandManager.cpp">
       <Filter>Engine\CommandManager</Filter>
     </ClCompile>
@@ -560,7 +536,6 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DummyParticle\DummyParticle.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
-    <ClCompile Include="Engine\Physics\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
@@ -572,6 +547,15 @@
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Shape\AABB\AABBCollider.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Shape\Sphere\SphereCollider.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Geometry\GeometryCollision.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\IsCollision\IsCollision.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Manager\CollisionManager.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Penetration\CollisionPenetration.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\System\CollisionSystem.cpp" />
+    <ClCompile Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -741,42 +725,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Resource\BufferResource\BufferResource.h">
       <Filter>Engine\BufferResource</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\ColliderConfig.h">
-      <Filter>Engine\CollisionSystem\Collider</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.h">
-      <Filter>Engine\CollisionSystem\Collider\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Structure\ColliderStructure.h">
-      <Filter>Engine\CollisionSystem\Collider\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Shape\AABB\AABBCollider.h">
-      <Filter>Engine\CollisionSystem\Collider\Shape\AABB</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h">
-      <Filter>Engine\CollisionSystem\Collider\Shape\Sphere</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Detect\CollisionDetect.h">
-      <Filter>Engine\CollisionSystem\Detect</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Geometry\GeometryCollision.h">
-      <Filter>Engine\CollisionSystem\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\IsCollision\IsCollision.h">
-      <Filter>Engine\CollisionSystem\IsCollision</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Manager\CollisionManager.h">
-      <Filter>Engine\CollisionSystem\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.h">
-      <Filter>Engine\CollisionSystem\Util</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Structure\CollisionStructures.h">
-      <Filter>Engine\CollisionSystem\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Physics\CollisionSystem\Penetration\CollisionPenetration.h">
-      <Filter>Engine\CollisionSystem\Penetration</Filter>
     </ClInclude>
     <ClInclude Include="Engine\CommandManager\CommandManager.h">
       <Filter>Engine\CommandManager</Filter>
@@ -1465,7 +1413,6 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Comp\Move\DevActorMoveComponent.h" />
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
-    <ClInclude Include="Engine\Physics\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
     <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
@@ -1483,6 +1430,19 @@
     <ClInclude Include="Engine\Physics\Collision\Collider\IEntityCollider.h" />
     <ClInclude Include="Engine\Physics\Collision\Intersects\CollisionIntersects.h" />
     <ClInclude Include="Engine\Physics\Collision\Manager\CollisionManager.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Shape\AABB\AABBCollider.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Shape\Sphere\SphereCollider.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\Structure\ColliderStructure.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Collider\ColliderConfig.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Detect\CollisionDetect.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Geometry\GeometryCollision.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\IsCollision\IsCollision.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Manager\CollisionManager.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Penetration\CollisionPenetration.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Structure\CollisionStructures.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\System\CollisionSystem.h" />
+    <ClInclude Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

@@ -75,66 +75,6 @@
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp">
-      <Filter>Engine\2D\Sprite</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp">
-      <Filter>Engine\2D\Structure</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Skybox\Skybox.cpp">
-      <Filter>Engine\3D\Skybox</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.cpp">
-      <Filter>Engine\3D\Model\Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Model\Manager\ModelManager.cpp">
-      <Filter>Engine\3D\Model\Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.cpp">
-      <Filter>Engine\3D\Model\State\GLTF</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.cpp">
-      <Filter>Engine\3D\Model\State\OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\3D\Model\Model.cpp">
-      <Filter>Engine\3D\Model</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationDataArray\AnimationDataArray.cpp">
-      <Filter>Engine\Animation\AnimationDataArray</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationManager\AnimationManager.cpp">
-      <Filter>Engine\Animation\AnimationManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp">
-      <Filter>Engine\Animation\KeyFrameAnimation</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Joint\Joint.cpp">
-      <Filter>Engine\Animation\AnimationStructure\Joint</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp">
-      <Filter>Engine\Animation\AnimationStructure\JointWeightData</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp">
-      <Filter>Engine\Animation\AnimationStructure\WellForGPU</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp">
-      <Filter>Engine\Animation\AnimationStructure\VertexWeightData</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp">
-      <Filter>Engine\Animation\AnimationStructure\VertexInfluence</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp">
-      <Filter>Engine\Animation\AnimationStructure\SkinCluster</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Skeleton\Skeleton.cpp">
-      <Filter>Engine\Animation\AnimationStructure\Skeleton</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp">
-      <Filter>Engine\Animation\AnimationStructure\QuaternionTransform</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Node\Node.cpp">
-      <Filter>Engine\Animation\AnimationStructure\Node</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Audio\AudioDataResource\AudioDataResource.cpp">
       <Filter>Engine\Audio\AudioDataResource</Filter>
     </ClCompile>
@@ -179,126 +119,6 @@
     </ClCompile>
     <ClCompile Include="Engine\Math\MyParlinNoise\ParlinNoise.cpp">
       <Filter>Engine\Math\MyParlinNoise</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PipeLineManager.cpp">
-      <Filter>Engine\PipeLineManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp">
-      <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\IPipeLineState\IPipeLineState.cpp">
-      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp">
-      <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
-    </ClCompile>
-    <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp">
-      <Filter>Engine\ShaderManager</Filter>
     </ClCompile>
     <ClCompile Include="Engine\Resource\TextureManager\TextureManager.cpp">
       <Filter>Engine\TextureManager</Filter>
@@ -517,21 +337,15 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.cpp" />
     <ClCompile Include="Engine\FlagManager\FlagManager.cpp" />
-    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
     <ClCompile Include="Engine\Utilities\TimeSystem\TimeSystem.cpp" />
     <ClCompile Include="Engine\GPUParticle\Manager\ParticleManager.cpp" />
-    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
-    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
     <ClCompile Include="Engine\GPUParticle\Field\Constant\ConstantField.cpp" />
     <ClCompile Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.cpp" />
     <ClCompile Include="Engine\Resource\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
-    <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Entity\TransformNode\Node\TransformNode.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DevActor\DevActor.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
-    <ClCompile Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.cpp" />
-    <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.cpp" />
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.cpp" />
     <ClCompile Include="Application\GameObject\Dev\DummyParticle\DummyParticle.cpp" />
@@ -539,10 +353,8 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
-    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
     <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
     <ClCompile Include="externals\imgui\imgui_stdlib.cpp" />
-    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
     <ClCompile Include="Engine\Physics\Collision\Collider\CollisionSphere.cpp" />
@@ -556,6 +368,74 @@
     <ClCompile Include="Engine\Physics\CollisionSystem\Penetration\CollisionPenetration.cpp" />
     <ClCompile Include="Engine\Physics\CollisionSystem\System\CollisionSystem.cpp" />
     <ClCompile Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.cpp" />
+    <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp" />
+    <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Model\Manager\ModelManager.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Model\Model.cpp" />
+    <ClCompile Include="Engine\Graphics\3D\Skybox\Skybox.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationDataArray\AnimationDataArray.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationManager\AnimationManager.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Joint\Joint.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\JointWeightData\JointWeightData.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Node\Node.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\Skeleton\Skeleton.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\SkinCluster\SkinCluster.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\VertexInfluence\VertexInfluence.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\VertexWeightData\VertexWeightData.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\AnimationStructure\WellForGPU\WellForGPU.cpp" />
+    <ClCompile Include="Engine\Graphics\Animation\KeyFrameAnimation\KeyFrameAnimation.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\IPipeLineState\IPipeLineState.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\PipeLineManager.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
+    <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -642,78 +522,6 @@
     <ClInclude Include="Application\GameObject\Character\Player\Particle\Movement\PlayerMovementParticle.h">
       <Filter>Application\GameObject\Character\Player\Particle\Movement</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\Graphics\2D\Sprite\Sprite.h">
-      <Filter>Engine\2D\Sprite</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\2D\Structure\SpriteStructure.h">
-      <Filter>Engine\2D\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Skybox\Skybox.h">
-      <Filter>Engine\3D\Skybox</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Skybox\Resource\SkyBoxResource.h">
-      <Filter>Engine\3D\Skybox\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.h">
-      <Filter>Engine\3D\Model\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\Manager\ModelManager.h">
-      <Filter>Engine\3D\Model\Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\Structure\ModelStructure.h">
-      <Filter>Engine\3D\Model\Structure</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\Resources\ModelResources.h">
-      <Filter>Engine\3D\Model\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\State\IModelState.h">
-      <Filter>Engine\3D\Model\State</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.h">
-      <Filter>Engine\3D\Model\State\GLTF</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.h">
-      <Filter>Engine\3D\Model\State\OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\3D\Model\Model.h">
-      <Filter>Engine\3D\Model</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationDataArray\AnimationDataArray.h">
-      <Filter>Engine\Animation\AnimationDataArray</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationManager\AnimationManager.h">
-      <Filter>Engine\Animation\AnimationManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\KeyFrameAnimation\KeyFrameAnimation.h">
-      <Filter>Engine\Animation\KeyFrameAnimation</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Joint\Joint.h">
-      <Filter>Engine\Animation\AnimationStructure\Joint</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\JointWeightData\JointWeightData.h">
-      <Filter>Engine\Animation\AnimationStructure\JointWeightData</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\WellForGPU\WellForGPU.h">
-      <Filter>Engine\Animation\AnimationStructure\WellForGPU</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h">
-      <Filter>Engine\Animation\AnimationStructure\VertexWeightData</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h">
-      <Filter>Engine\Animation\AnimationStructure\VertexInfluence</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\SkinCluster\SkinCluster.h">
-      <Filter>Engine\Animation\AnimationStructure\SkinCluster</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Skeleton\Skeleton.h">
-      <Filter>Engine\Animation\AnimationStructure\Skeleton</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h">
-      <Filter>Engine\Animation\AnimationStructure\QuaternionTransform</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Node\Node.h">
-      <Filter>Engine\Animation\AnimationStructure\Node</Filter>
-    </ClInclude>
     <ClInclude Include="Engine\Audio\AudioDataResource\AudioDataResource.h">
       <Filter>Engine\Audio\AudioDataResource</Filter>
     </ClInclude>
@@ -785,135 +593,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Math\MyParlinNoise\ParlinNoise.h">
       <Filter>Engine\Math\MyParlinNoise</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PipeLineManager.h">
-      <Filter>Engine\PipeLineManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h">
-      <Filter>Engine\PipeLineManager\CSPipeLine\GPUParticle\Init</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\IPipeLineState.h">
-      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\PipeLineStructure.h">
-      <Filter>Engine\PipeLineManager\IPipeLineState</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\CPUParticlePipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\GPUParticle_Draw</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\SkyboxPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\Object3DPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h">
-      <Filter>Engine\PipeLineManager\ModelPipeLine\Object2DPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\AbsentPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\DissolvePipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GlitchPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrainPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\HSVPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\VignettingPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RandomPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h">
-      <Filter>Engine\PipeLineManager\PostEffectPipeLine\OutLinePipeLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\Materials\PostEffectMaterials.h">
-      <Filter>Engine\PostEffect\Materials</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\IPostEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Absent</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\BoxFilter</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\ColorGrading</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Dissolve</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\GaussianFilter</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Glitch</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Grain</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\GrayScale</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\HSV</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\LuminanceOutLine</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Vignetting</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\SepiaTone</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\RetroCRT</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\Random</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h">
-      <Filter>Engine\PostEffect\IPostEffect\RadialBlur</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h">
-      <Filter>Engine\ShaderManager</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Resource\TextureManager\TextureManager.h">
       <Filter>Engine\TextureManager</Filter>
@@ -1378,18 +1057,15 @@
     <ClInclude Include="Application\GameObject\Character\EnemyManager\BulletContainer\ShotPattern\TripleForward\EnemyShotPatternTripleForward.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\EffectContainer\EnemyEffectContainer.h" />
     <ClInclude Include="Engine\FlagManager\FlagManager.h" />
-    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
     <ClInclude Include="Engine\Utilities\TimeSystem\TimeSystem.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\EmitterStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Manager\ParticleManager.h" />
-    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
     <ClInclude Include="Engine\Camera\Interface\ICamera.h" />
     <ClInclude Include="Engine\GPUParticle\Field\ParticleField.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\FieldStructure.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Interface\IEmitter.h" />
     <ClInclude Include="Engine\GPUParticle\Emitter\Sphere\SphereEmitter.h" />
     <ClInclude Include="Application\GameObject\Dev\DummyParticle\DummyParticle.h" />
-    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
     <ClInclude Include="externals\LuaJIT\lauxlib.h" />
     <ClInclude Include="externals\LuaJIT\lua.h" />
     <ClInclude Include="externals\LuaJIT\lua.hpp" />
@@ -1401,13 +1077,10 @@
     <ClInclude Include="Engine\Lua\Helpers\LuaHelpers.h" />
     <ClInclude Include="Engine\Resource\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\Entity\TransformNode\Node\TransformNode.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\DevActor.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />
     <ClInclude Include="Application\Scene\DevScene\DevScene.h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Rend\DevRenderComponent.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBarst\EnemyOmniBarstParticle.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniExplosion\EnemyOmniExplosionParticle.h" />
@@ -1418,12 +1091,9 @@
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.h" />
-    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
     <ClInclude Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.h" />
     <ClInclude Include="Engine\GPUParticle\Structure\MaterialStructure.h" />
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
-    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\CollisionAABB.h" />
     <ClInclude Include="Engine\Physics\Collision\Collider\CollisionSphere.h" />
@@ -1443,6 +1113,82 @@
     <ClInclude Include="Engine\Physics\CollisionSystem\Structure\CollisionStructures.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\Util\CollisionUtilities.h" />
+    <ClInclude Include="Engine\Graphics\2D\Sprite\Sprite.h" />
+    <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
+    <ClInclude Include="Engine\Graphics\2D\Structure\SpriteStructure.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\Loader\ModelFileLoader.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\Manager\ModelManager.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\Resources\ModelResources.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\State\GLTF\IGLTFState.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\State\OBJ\IOBJState.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\State\IModelState.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\Structure\ModelStructure.h" />
+    <ClInclude Include="Engine\Graphics\3D\Model\Model.h" />
+    <ClInclude Include="Engine\Graphics\3D\Skybox\Resource\SkyBoxResource.h" />
+    <ClInclude Include="Engine\Graphics\3D\Skybox\Skybox.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationDataArray\AnimationDataArray.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationManager\AnimationManager.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Joint\Joint.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\JointWeightData\JointWeightData.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Node\Node.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\QuaternionTransform\QuaternionTransform.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\Skeleton\Skeleton.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\SkinCluster\SkinCluster.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\VertexInfluence\VertexInfluence.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
+    <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
+    <ClInclude Include="Engine\Graphics\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Init\GPUParticle_Init_PipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\Update\GPUParticle_Update_PipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\IPipeLineState.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\PipeLineStructure.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkinningObject3dPipeLine\SkinningObject3dPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\SkyboxPipeLine\SkyboxPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\AbsentPipeLine\AbsentPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\BoxFilterPipeLine\BoxFilterPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\ColorGradingPipeLine\ColorGradingPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\DissolvePipeLine\DissolvePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GaussianFilterPipeLine\GaussianFilterPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GlitchPipeLine\GlitchPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrainPipeLine\GrainPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\GrayScalePipeLine\GrayScalePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\HSVPipeLine\HSVPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\OutLinePipeLine\OutLinePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RadialBlurPipeLine\RadialBlurPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RandomPipeLine\RandomPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\RetroCRTPipeLine\RetroCRTPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\SepiaTonePipeLine\SepiaTonePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PostEffectPipeLine\VignettingPipeLine\VignettingPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\PipeLineManager.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Absent\AbsentEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\BoxFilter\BoxFilterEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\ColorGrading\ColorGradingEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Dissolve\DissolveEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GaussianFilter\GaussianFilterEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Glitch\GlitchEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Grain\GrainEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\GrayScale\GrayScaleEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\HSV\HSVEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\LuminanceOutLine\LuminanceOutLineEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RadialBlur\RadialBlurEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Random\RandomEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\IPostEffect.h" />
+    <ClInclude Include="Engine\Graphics\PostEffect\Materials\PostEffectMaterials.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

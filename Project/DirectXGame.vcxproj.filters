@@ -144,9 +144,6 @@
     <ClCompile Include="Engine\Core\DirectXManager\DirectXManager.cpp">
       <Filter>Engine\Base\DXCommon</Filter>
     </ClCompile>
-    <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp">
-      <Filter>Engine\Base\WinApp</Filter>
-    </ClCompile>
     <ClCompile Include="Engine\Physics\CollisionSystem\Collider\Interface\ICollider.cpp">
       <Filter>Engine\CollisionSystem\Collider\Interface</Filter>
     </ClCompile>
@@ -567,13 +564,14 @@
     <ClCompile Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
-    <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
-    <ClCompile Include="Engine\Physics\Collision\Collider\CollisionSphere.cpp" />
     <ClCompile Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.cpp" />
     <ClCompile Include="Engine\GPUParticle\Material\FadeOut\ParticleFadeOut.cpp" />
-    <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
     <ClCompile Include="externals\imgui\imgui_stdlib.cpp" />
     <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
+    <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp" />
+    <ClCompile Include="Engine\Physics\Collision\Collider\CollisionAABB.cpp" />
+    <ClCompile Include="Engine\Physics\Collision\Collider\CollisionSphere.cpp" />
+    <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Engine\GameManager\GameManager.h">
@@ -740,9 +738,6 @@
     </ClInclude>
     <ClInclude Include="Engine\Core\DirectXManager\DirectXManager.h">
       <Filter>Engine\Base\DXCommon</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\Platform\WinApp\WinApp.h">
-      <Filter>Engine\Base\WinApp</Filter>
     </ClInclude>
     <ClInclude Include="Engine\Resource\BufferResource\BufferResource.h">
       <Filter>Engine\BufferResource</Filter>
@@ -1472,11 +1467,6 @@
     <ClInclude Include="Engine\Entity\Manager\GameEntityManager.h" />
     <ClInclude Include="Engine\Physics\CollisionSystem\System\CollisionSystem.h" />
     <ClInclude Include="Application\GameObject\Character\EnemyManager\Effect\OmniBack\EnemyOmniBackParticle.h" />
-    <ClInclude Include="Engine\Physics\Collision\Collider\IEntityCollider.h" />
-    <ClInclude Include="Engine\Physics\Collision\Collider\CollisionSphere.h" />
-    <ClInclude Include="Engine\Physics\Collision\Collider\CollisionAABB.h" />
-    <ClInclude Include="Engine\Physics\Collision\Intersects\CollisionIntersects.h" />
-    <ClInclude Include="Engine\Physics\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Utilities\PtrUtilities\PtrUtilities.h" />
     <ClInclude Include="Application\GameObject\Dev\DevActor\Col\DevActorSphereColComponent.h" />
     <ClInclude Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.h" />
@@ -1487,6 +1477,12 @@
     <ClInclude Include="externals\imgui\imgui_stdlib.h" />
     <ClInclude Include="Engine\Graphics\2D\SpriteResource\SpriteResource.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
+    <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
+    <ClInclude Include="Engine\Physics\Collision\Collider\CollisionAABB.h" />
+    <ClInclude Include="Engine\Physics\Collision\Collider\CollisionSphere.h" />
+    <ClInclude Include="Engine\Physics\Collision\Collider\IEntityCollider.h" />
+    <ClInclude Include="Engine\Physics\Collision\Intersects\CollisionIntersects.h" />
+    <ClInclude Include="Engine\Physics\Collision\Manager\CollisionManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

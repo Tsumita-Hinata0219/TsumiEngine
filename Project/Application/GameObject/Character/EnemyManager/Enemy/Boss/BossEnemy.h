@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../IEnemy.h"
-#include "IObject/IObject.h"
+#include "System/IObject/IObject.h"
 #include "Math/MyMath.h"
 
 #include "../../Shield/EnemyShield.h"

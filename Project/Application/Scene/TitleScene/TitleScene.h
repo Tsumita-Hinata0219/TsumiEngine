@@ -1,13 +1,13 @@
 #pragma once
 
 #include "Scene/IScene.h"
-#include "GameManager/GameManager.h"
+#include "System/GameManager/GameManager.h"
 #include "GameObject/GameObject.h"
 
-#include "PostEffect/IPostEffect/Absent/AbsentEffect.h"
+#include "Graphics/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 #include "GameObject/Effect/TestPostEffect/TestPostEffect.h"
 
-#include "3D/Skybox/Skybox.h"
+#include "Graphics/3D/Skybox/Skybox.h"
 
 #include "GameObject/Others/TitleBackGround/TitleBackGround.h"
 #include "GameObject/Others/TitleUIManager/TitleUIManager.h"

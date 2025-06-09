@@ -1,5 +1,5 @@
 #include "StageSelect.h"
-#include "GameData/GameData.h"
+#include "System/GameData/GameData.h"
 
 
 void StageSelect::Init()

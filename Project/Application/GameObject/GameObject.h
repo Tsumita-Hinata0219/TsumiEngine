@@ -1,9 +1,9 @@
 #pragma once
 
-#include "FlagManager/FlagManager.h"
-#include "3D/Model/Model.h"
-#include "2D/Sprite/Sprite.h"
-#include "TextureManager/TextureManager.h"
+#include "Utilities/FlagManager/FlagManager.h"
+#include "Graphics/3D/Model/Model.h"
+#include "Graphics/2D/Sprite/Sprite.h"
+#include "Resource/TextureManager/TextureManager.h"
 #include "Audio/Audio.h"
 #include "Input/Input.h"
 #include "Utilities/ImGuiManager/ImGuiManager.h"
@@ -12,17 +12,17 @@
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/Timer/Timer.h"
 #include "Utilities/EnumUtilities/EnumUtilities.h"
-#include "Camera/Manager/CameraManager.h"
+#include "System/Camera/Manager/CameraManager.h"
 
 #include "Math/MyMath.h"
 
-#include "Animation/AnimationManager/AnimationManager.h"
-#include "Animation/KeyFrameAnimation/KeyFrameAnimation.h"
+#include "Graphics/Animation/AnimationManager/AnimationManager.h"
+#include "Graphics/Animation/KeyFrameAnimation/KeyFrameAnimation.h"
 
-#include "GPUParticle/Particle/GPUParticle.h"
-#include "GPUParticle/Field/ParticleField.h"
-#include "GPUParticle/Field/Constant/ConstantField.h"
-#include "GPUParticle/Emitter/Sphere/SphereEmitter.h"
-#include "GPUParticle/Material/FadeOut/ParticleFadeOut.h"
+#include "Graphics/GPUParticle/Particle/GPUParticle.h"
+#include "Graphics/GPUParticle/Field/ParticleField.h"
+#include "Graphics/GPUParticle/Field/Constant/ConstantField.h"
+#include "Graphics/GPUParticle/Emitter/Sphere/SphereEmitter.h"
+#include "Graphics/GPUParticle/Material/FadeOut/ParticleFadeOut.h"
 
 #include "Lua/Script/LuaScript.h"

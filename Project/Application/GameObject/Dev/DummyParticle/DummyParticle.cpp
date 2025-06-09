@@ -1,5 +1,5 @@
 #include "DummyParticle.h"
-#include "3D/Model/Manager/ModelManager.h"
+#include "Graphics/3D/Model/Manager/ModelManager.h"
 
 
 DummyParticle::DummyParticle()

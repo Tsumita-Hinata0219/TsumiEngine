@@ -18,7 +18,7 @@
 #include <filesystem>
 
 #include "Math/MyMath.h"
-#include "CollisionSystem/Structure/CollisionStructures.h"
+#include "Physics/CollisionSystem/Structure/CollisionStructures.h"
 
 
 /// -------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 #pragma once
 
-#include "IObject/IObject.h"
+#include "System/IObject/IObject.h"
 #include "../../../GameObject.h"
 #include "../IStageTransitionMenu.h"
-#include "PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
+#include "Graphics/PostEffect/IPostEffect/RadialBlur/RadialBlurEffect.h"
 
 
 /* ゲーム終了メニューのテキストライン */

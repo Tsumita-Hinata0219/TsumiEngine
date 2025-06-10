@@ -1192,6 +1192,9 @@
     <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h" />
     <ClInclude Include="Engine\Resources\Common\ResourceBase.h" />
     <ClInclude Include="Engine\Resources\Common\ResourceTypes.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\DescriptorHandle.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\DescriptorHeapManager.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\DescriptorAllocator.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

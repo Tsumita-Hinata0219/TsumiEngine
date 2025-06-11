@@ -2,7 +2,7 @@
 #include <d3d12.h>
 #include <wrl.h>
 #include <vector>
-#include "DescriptorHandle.h"
+#include "../Handle/DescriptorHandle.h"
 
 /* 各種ヒープ（SRV/CBV/UAV/RTV/DSV）を生成・割当 */
 class DescriptorHeapManager {
@@ -14,11 +14,24 @@ public:
         Count
     };
 
-    void Initialize(ID3D12Device* device);
+    /// <summary>
+    /// 初期化処理
+    /// </summary>
+    void Init(ID3D12Device* device);
+
+    /// <summary>
+    /// 指定したタイプのハンドルを1つ割り当てる
+    /// </summary>
     DescriptorHandle Allocate(Type type);
 
+    /// <summary>
+    /// ヒープの取得
+    /// </summary>
     ID3D12DescriptorHeap* GetHeap(Type type) const;
 
+    /// <summary>
+    /// サイズの取得
+    /// </summary>
     UINT GetDescriptorSize(Type type) const;
 
 private:

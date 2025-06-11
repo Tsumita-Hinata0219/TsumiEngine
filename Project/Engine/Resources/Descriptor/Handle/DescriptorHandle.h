@@ -3,6 +3,7 @@
 
 /* CPU/GPU ハンドル＋Indexをまとめて持つ構造体 */
 struct DescriptorHandle {
+
     D3D12_CPU_DESCRIPTOR_HANDLE CPU{};
     D3D12_GPU_DESCRIPTOR_HANDLE GPU{};
     UINT Index = 0;

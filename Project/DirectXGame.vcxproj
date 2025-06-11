@@ -288,6 +288,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Physics\Collision\Collider\IEntityCollider.cpp" />
     <ClCompile Include="Engine\Platform\WinApp\WinApp.cpp" />
     <ClCompile Include="Engine\Resources\Common\ResourceBase.cpp" />
+    <ClCompile Include="Engine\Resources\Descriptor\Manager\DescriptorHeapManager.cpp" />
     <ClCompile Include="Engine\Resource\CreateResource\CreateResource.cpp" />
     <ClCompile Include="Engine\Entity\Component\Render\IRenderComponent.cpp" />
     <ClCompile Include="Engine\Entity\Manager\GameEntityManager.cpp" />
@@ -629,9 +630,9 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Physics\Collision\Manager\CollisionManager.h" />
     <ClInclude Include="Engine\Platform\WinApp\WinApp.h" />
     <ClInclude Include="Engine\Resources\Common\ResourceBase.h" />
-    <ClInclude Include="Engine\Resources\Descriptor\DescriptorAllocator.h" />
-    <ClInclude Include="Engine\Resources\Descriptor\DescriptorHandle.h" />
-    <ClInclude Include="Engine\Resources\Descriptor\DescriptorHeapManager.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\Allocator\DescriptorAllocator.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\Handle\DescriptorHandle.h" />
+    <ClInclude Include="Engine\Resources\Descriptor\Manager\DescriptorHeapManager.h" />
     <ClInclude Include="Engine\Resource\CreateResource\CreateResource.h" />
     <ClInclude Include="Engine\Entity\Component\Render\IRenderComponent.h" />
     <ClInclude Include="Engine\Entity\Entity.h" />

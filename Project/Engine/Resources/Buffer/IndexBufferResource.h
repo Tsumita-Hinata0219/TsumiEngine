@@ -1,11 +1,11 @@
 #pragma once
-#include"../Base/BaseResource.h"
+#include "../Base/BaseResource.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
 
 
 /* インデックスバッファ(IBV) */
 template<typename IndexType = uint32_t>
-class IndexBufferResource : public BaseResource {
+class IndexBufferResource : public BaseResurce {
 
 public:
 

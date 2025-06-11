@@ -4,7 +4,7 @@
 
 /* インスタンス描画バッファ */
 template<typename T>
-class InstancingBufferResource : public BaseResource {
+class InstancingBufferResource : public BaseResurce {
 
 public:
 

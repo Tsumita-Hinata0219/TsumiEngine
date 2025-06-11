@@ -1,12 +1,12 @@
 #pragma once
-#include"../Base/BaseResource.h"
+#include "../Base/BaseResource.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
 #include "../Descriptor/Allocator/DescriptorAllocator.h"
 
 
 /* 読み取り専用バッファ(SRV) */
 template<typename T>
-class StructuredBufferResource : public BaseResource {
+class StructuredBufferResource : public BaseResurce {
 
 public:
 

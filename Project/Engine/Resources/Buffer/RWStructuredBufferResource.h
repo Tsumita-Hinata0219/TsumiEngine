@@ -4,7 +4,7 @@
 
 /* 読み取り&書き込みバッファ(UAV) */
 template<typename T>
-class RWStructuredBufferResource : public BaseResource {
+class RWStructuredBufferResource : public BaseResurce {
 
 public:
 

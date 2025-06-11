@@ -633,6 +633,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Resources\Buffer\ConstantBufferResource.h" />
     <ClInclude Include="Engine\Resources\Base\BaseResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\IndexBufferResource.h" />
+    <ClInclude Include="Engine\Resources\Buffer\InstancingBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\RWStructuredBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\StructuredBufferResource.h" />
     <ClInclude Include="Engine\Resources\Descriptor\Allocator\DescriptorAllocator.h" />

@@ -1201,6 +1201,7 @@
     <ClInclude Include="Engine\Resources\Buffer\IndexBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\StructuredBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\RWStructuredBufferResource.h" />
+    <ClInclude Include="Engine\Resources\Buffer\InstancingBufferResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

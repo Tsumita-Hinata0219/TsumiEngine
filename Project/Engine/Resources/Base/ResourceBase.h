@@ -7,19 +7,19 @@
 
 
 /* リソースの基底クラス */
-class ResourceBase {
+class BaseResurce {
 
 public:
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    ResourceBase() = default;
+    BaseResurce() = default;
 
     /// <summary>
     /// 仮想デストラクタ
     /// </summary>
-    virtual ~ResourceBase() = default;
+    virtual ~BaseResurce() = default;
 
     /// <summary>
     /// リソースを設定

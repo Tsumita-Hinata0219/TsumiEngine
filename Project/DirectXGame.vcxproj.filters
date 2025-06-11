@@ -438,6 +438,7 @@
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\Resources\Common\ResourceBase.cpp" />
     <ClCompile Include="Engine\Resources\Descriptor\Manager\DescriptorHeapManager.cpp" />
+    <ClCompile Include="Engine\Resources\Descriptor\Allocator\DescriptorAllocator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\System\GameManager\GameManager.h">

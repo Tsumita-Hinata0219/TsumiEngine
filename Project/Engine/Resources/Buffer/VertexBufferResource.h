@@ -2,8 +2,9 @@
 #include <d3d12.h>
 #include <wrl.h>
 #include <vector>
-#include"../Base/ResourceBase.h"
+#include"../Base/BaseResource.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
+#include "IndexBufferResource.h"
 
 
 /* 頂点バッファクラス */
@@ -54,18 +55,14 @@ private:
 /// コンストラクタ
 /// </summary>
 template<typename VertexType>
-inline VertexBufferResource<VertexType>::VertexBufferResource()
-{
-}
+inline VertexBufferResource<VertexType>::VertexBufferResource() {}
 
 
 /// <summary>
 /// デストラクタ
 /// </summary>
 template<typename VertexType>
-inline VertexBufferResource<VertexType>::~VertexBufferResource()
-{
-}
+inline VertexBufferResource<VertexType>::~VertexBufferResource() {}
 
 
 /// <summary>

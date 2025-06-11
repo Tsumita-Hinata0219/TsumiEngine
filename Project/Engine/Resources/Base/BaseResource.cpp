@@ -1,4 +1,4 @@
-#include "ResourceBase.h"
+#include "BaseResource.h"
 
 
 /// <summary>

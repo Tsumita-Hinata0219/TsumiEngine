@@ -436,7 +436,7 @@
     <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
-    <ClCompile Include="Engine\Resources\Base\ResourceBase.cpp" />
+    <ClCompile Include="Engine\Resources\Base\BaseResource.cpp" />
     <ClCompile Include="Engine\Resources\Descriptor\Manager\DescriptorHeapManager.cpp" />
     <ClCompile Include="Engine\Resources\Descriptor\Allocator\DescriptorAllocator.cpp" />
   </ItemGroup>
@@ -1192,7 +1192,7 @@
     <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h" />
-    <ClInclude Include="Engine\Resources\Base\ResourceBase.h" />
+    <ClInclude Include="Engine\Resources\Base\BaseResource.h" />
     <ClInclude Include="Engine\Resources\Descriptor\Handle\DescriptorHandle.h" />
     <ClInclude Include="Engine\Resources\Descriptor\Manager\DescriptorHeapManager.h" />
     <ClInclude Include="Engine\Resources\Descriptor\Allocator\DescriptorAllocator.h" />

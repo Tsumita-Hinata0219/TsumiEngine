@@ -1,5 +1,5 @@
 #pragma once
-#include "../Base/Resourcebase.h"
+#include "../Base/BaseResource.h"
 #include "../Descriptor/Allocator/DescriptorAllocator.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
 #include <d3d12.h>

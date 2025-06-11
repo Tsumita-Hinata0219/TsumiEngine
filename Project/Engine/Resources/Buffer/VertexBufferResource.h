@@ -1,13 +1,11 @@
 #pragma once
-#include <d3d12.h>
-#include <wrl.h>
-#include <vector>
 #include"../Base/BaseResource.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
 #include "IndexBufferResource.h"
+#include "StructuredBufferResource.h"
 
 
-/* 頂点バッファクラス */
+/* 頂点バッファ(VBV) */
 template <typename VertexType>
 class VertexBufferResource : public BaseResurce {
 

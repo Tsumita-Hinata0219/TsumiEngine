@@ -2,11 +2,9 @@
 #include "../Base/BaseResource.h"
 #include "../Descriptor/Allocator/DescriptorAllocator.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
-#include <d3d12.h>
-#include <wrl.h>
 
 
-/* 定数バッファクラス */
+/* 定数バッファ(CBV) */
 template <typename T>
 class ConstantoBufferResource : public BaseResurce {
 

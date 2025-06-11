@@ -1199,6 +1199,7 @@
     <ClInclude Include="Engine\Resources\Buffer\ConstantBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\VertexBufferResource.h" />
     <ClInclude Include="Engine\Resources\Buffer\IndexBufferResource.h" />
+    <ClInclude Include="Engine\Resources\Buffer\StructuredBufferResource.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

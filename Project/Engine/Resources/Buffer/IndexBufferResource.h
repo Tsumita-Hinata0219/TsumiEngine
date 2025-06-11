@@ -1,13 +1,9 @@
 #pragma once
-#include <d3d12.h>
-#include <wrl.h>
-#include <vector>
 #include"../Base/BaseResource.h"
 #include "../../Graphics/CommandManager/CommandManager.h"
 
 
-
-/* インデックスバッファクラス */
+/* インデックスバッファ(IBV) */
 template<typename IndexType = uint32_t>
 class IndexBufferResource : public BaseResource {
 

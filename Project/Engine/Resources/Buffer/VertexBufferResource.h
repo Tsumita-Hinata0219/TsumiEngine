@@ -42,7 +42,6 @@ public:
     D3D12_VERTEX_BUFFER_VIEW GetView() const { return vbView_; }
 
 private:
-
     std::vector<VertexType> vertices_;
     D3D12_VERTEX_BUFFER_VIEW vbView_;
 };

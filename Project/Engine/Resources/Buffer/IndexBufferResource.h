@@ -41,7 +41,6 @@ public:
 	D3D12_INDEX_BUFFER_VIEW GetView() const { return ibView_; }
 
 private:
-
 	std::vector<IndexType> indices_;
 	D3D12_INDEX_BUFFER_VIEW ibView_{};
 };

@@ -40,15 +40,12 @@ public:
 	/// </summary>
 	T* GetMappedData(UINT index = 0) const { return mappedData_[index]; }
 
-
 private:
-
 	DescriptorAllocator& allocator_;
 	std::vector<D3D12_GPU_VIRTUAL_ADDRESS> gpuAddresses_;
 	std::vector<T*> mappedData_;
 	std::vector<DescriptorHandle> cbvHandles_;
 	UINT itemCount_ = 0;
-
 };
 
 

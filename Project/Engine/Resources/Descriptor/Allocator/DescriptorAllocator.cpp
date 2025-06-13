@@ -1,57 +1,65 @@
 #include "DescriptorAllocator.h"
-
+#include <cassert>
 
 
 /// <summary>
 /// コンストラクタ
 /// </summary>
-DescriptorAllocator::DescriptorAllocator(DescriptorHeapManager& heapMgr, DescriptorHeapManager::Type type)
-	: heapManager_(heapMgr), type_(type), currentIndex_(0) {
+DescriptorAllocator::DescriptorAllocator()
+    : type_(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV),
+    baseCPU_({}),
+    baseGPU_({}),
+    descriptorSize_(0),
+    maxDescriptors_(0),
+    currentIndex_(0) {
 }
 
 
 /// <summary>
-/// 空きがあれば再利用。なければ新規確保
+/// 初期化
 /// </summary>
-DescriptorHandle DescriptorAllocator::Allocate()
+void DescriptorAllocator::Init(D3D12_DESCRIPTOR_HEAP_TYPE type, D3D12_CPU_DESCRIPTOR_HANDLE baseCPU, D3D12_GPU_DESCRIPTOR_HANDLE baseGPU, UINT descriptorSize, UINT maxDescriptors)
 {
-	UINT index;
-
-	if (!freeIndices_.empty()) {
-		index = freeIndices_.front();
-		freeIndices_.pop();
-	}
-	else {
-		index = currentIndex_++;
-	}
-
-	D3D12_CPU_DESCRIPTOR_HANDLE cpu = heapManager_.GetHeap(type_)->GetCPUDescriptorHandleForHeapStart();
-	D3D12_GPU_DESCRIPTOR_HANDLE gpu = heapManager_.GetHeap(type_)->GetGPUDescriptorHandleForHeapStart();
-	UINT size = heapManager_.GetDescriptorSize(type_);
-
-	cpu.ptr += index * size;
-	gpu.ptr += index * size;
-
-	return DescriptorHandle(cpu, gpu, index);
+    type_ = type;
+    baseCPU_ = baseCPU;
+    baseGPU_ = baseGPU;
+    descriptorSize_ = descriptorSize;
+    maxDescriptors_ = maxDescriptors;
+    currentIndex_ = 0;
 }
 
 
 /// <summary>
-/// 解放されたインデックスを再利用待ちに追加
+/// 次のディスクリプタを割り当てて返す（インクリメント）
 /// </summary>
-void DescriptorAllocator::Free(UINT index)
+D3D12_CPU_DESCRIPTOR_HANDLE DescriptorAllocator::AllocateCPUHandle()
 {
-	freeIndices_.push(index);
+    if (currentIndex_ >= maxDescriptors_) {
+        throw std::runtime_error("DescriptorAllocator: Exceeded descriptor heap size!");
+    }
+
+    D3D12_CPU_DESCRIPTOR_HANDLE handle = baseCPU_;
+    handle.ptr += descriptorSize_ * currentIndex_;
+    return handle;
+}
+
+D3D12_GPU_DESCRIPTOR_HANDLE DescriptorAllocator::AllocateGPUHandle()
+{
+    if (currentIndex_ >= maxDescriptors_) {
+        throw std::runtime_error("DescriptorAllocator: Exceeded descriptor heap size!");
+    }
+
+    D3D12_GPU_DESCRIPTOR_HANDLE handle = baseGPU_;
+    handle.ptr += descriptorSize_ * currentIndex_;
+    ++currentIndex_;
+    return handle;
 }
 
 
 /// <summary>
-/// 全解放
+/// リセットして再利用（フレームバッファなどに）
 /// </summary>
-void DescriptorAllocator::Reset()
+void DescriptorAllocator::Reset() 
 {
-	while (!freeIndices_.empty()) {
-		freeIndices_.pop();
-	}
 	currentIndex_ = 0;
 }

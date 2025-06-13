@@ -1,5 +1,6 @@
 #include "DescriptorHeapManager.h"
 #include <cassert>
+#include "DescriptorAllocator.h"
 
 
 /// <summary>

@@ -92,12 +92,5 @@ inline void TextureResource::CreateSRV()
 }
 inline void TextureResource::CreateUAV()
 {
-	auto device = DirectXManager::GetInstance()->GetDevice();
-	uavHandle_ = DescriptorAllocator::AllocateUAV();
-
-	D3D12_UNORDERED_ACCESS_VIEW_DESC desc = {};
-	desc.Format = resources_[0]->GetDesc().Format;
-	desc.ViewDimension = D3D12_UAV_DIMENSION_TEXTURE2D;
-
-	device->CreateUnorderedAccessView(resources_[0].Get(), nullptr, &desc, uavHandle_.cpuHandle);
+	
 }

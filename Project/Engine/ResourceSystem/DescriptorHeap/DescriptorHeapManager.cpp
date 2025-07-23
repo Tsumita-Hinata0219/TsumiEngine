@@ -44,7 +44,7 @@ D3D12_CPU_DESCRIPTOR_HANDLE DescriptorHeapManager::Allocate()
 
 void DescriptorHeapManager::Free(D3D12_CPU_DESCRIPTOR_HANDLE handle)
 {
-    UINT start = descriptorHeap_->GetCPUDescriptorHandleForHeapStart().ptr;
+    UINT start = UINT(descriptorHeap_->GetCPUDescriptorHandleForHeapStart().ptr);
     UINT ptr = static_cast<UINT>(handle.ptr);
 
     UINT index = (ptr - start) / descriptorSize_;

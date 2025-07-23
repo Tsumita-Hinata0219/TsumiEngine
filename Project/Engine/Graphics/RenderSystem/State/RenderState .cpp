@@ -1,7 +1,7 @@
 #include "RenderState .h"
 #include "System/Camera/Manager/CameraManager.h"
 #include "Graphics/PipeLineManager/PipeLineManager.h"
-#include "Graphics/RenderSystem/Asset/RenderAssetManager.h"
+#include "Graphics/RenderSystem/Asset/GraphicAssetManager.h"
 #include "Entity/Actor/IActor.h"
 
 
@@ -12,7 +12,7 @@ RenderSystem::RenderState::RenderState(std::weak_ptr<IActor> owner)
 {
 	cameraManager_ = CameraManager::GetInstance();
 	pipeLineManager_ = PipeLineManager::GetInstance();
-	renderAssetManager_ = RenderSystem::RenderAssetManager::GetInstance();
+	renderAssetManager_ = RenderSystem::GraphicAssetManager::GetInstance();
 
 	transNode_ = owner.lock()->GetTransformNode();
 	buffers_ = std::make_unique<RenderSystem::Rendering::BufferResources>();

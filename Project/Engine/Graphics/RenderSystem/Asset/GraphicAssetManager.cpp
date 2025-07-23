@@ -1,13 +1,13 @@
-#include "RenderAssetManager.h"
+#include "GraphicAssetManager.h"
 
 
 
 /// <summary>
 /// インスタンスの取得
 /// </summary>
-RenderSystem::RenderAssetManager* RenderSystem::RenderAssetManager::GetInstance()
+RenderSystem::GraphicAssetManager* RenderSystem::GraphicAssetManager::GetInstance()
 {
-	static RenderAssetManager instance;
+	static GraphicAssetManager instance;
 	return &instance;
 }
 
@@ -15,7 +15,7 @@ RenderSystem::RenderAssetManager* RenderSystem::RenderAssetManager::GetInstance(
 /// <summary>
 /// ファイルを読み込む
 /// </summary>
-void RenderSystem::RenderAssetManager::LoadData(const std::string& path, const std::string fileName)
+void RenderSystem::GraphicAssetManager::LoadData(const std::string& path, const std::string fileName)
 {
 	// ファイル名で検索を掛ける
 	auto it = sceneDataMap_.find(fileName.substr(0, fileName.size() - 4));
@@ -45,7 +45,7 @@ void RenderSystem::RenderAssetManager::LoadData(const std::string& path, const s
 /// <summary>
 /// SceneDataの取得
 /// </summary>
-std::optional<RenderSystem::Rendering::SceneData> RenderSystem::RenderAssetManager::GetSceneData(const std::string& name) const
+std::optional<RenderSystem::Rendering::SceneData> RenderSystem::GraphicAssetManager::GetSceneData(const std::string& name) const
 {
 	// 指定された名前で検索をかける
 	const auto it = sceneDataMap_.find(name);
@@ -63,7 +63,7 @@ std::optional<RenderSystem::Rendering::SceneData> RenderSystem::RenderAssetManag
 /// <summary>
 /// 指定のモデルデータの破棄
 /// </summary>
-void RenderSystem::RenderAssetManager::ModelRemove(std::string name)
+void RenderSystem::GraphicAssetManager::ModelRemove(std::string name)
 {
 	// 指定された名前で検索をかける
 	const auto& model = sceneDataMap_.find(name);
@@ -79,7 +79,7 @@ void RenderSystem::RenderAssetManager::ModelRemove(std::string name)
 /// <summary>
 /// 全てのモデルデータの破棄
 /// </summary>
-void RenderSystem::RenderAssetManager::Clear()
+void RenderSystem::GraphicAssetManager::Clear()
 {
 	sceneDataMap_.clear();
 }

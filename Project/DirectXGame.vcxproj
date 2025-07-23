@@ -270,7 +270,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\RetroCRT\RetroCRTEffect.cpp" />
     <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.cpp" />
     <ClCompile Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.cpp" />
-    <ClCompile Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.cpp" />
+    <ClCompile Include="Engine\Graphics\RenderSystem\Asset\GraphicAssetManager.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
@@ -603,7 +603,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\SepiaTone\SepiaToneEffect.h" />
     <ClInclude Include="Engine\Graphics\PostEffect\IPostEffect\Vignetting\VignettingEffect.h" />
     <ClInclude Include="Engine\Graphics\PostEffect\Materials\PostEffectMaterials.h" />
-    <ClInclude Include="Engine\Graphics\RenderSystem\Asset\RenderAssetManager.h" />
+    <ClInclude Include="Engine\Graphics\RenderSystem\Asset\GraphicAssetManager.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />

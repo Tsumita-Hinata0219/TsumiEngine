@@ -13,7 +13,7 @@ class PipeLineManager;
 namespace RenderSystem {
 
 // 前方宣言
-class RenderAssetManager;
+class GraphicAssetManager;
 
 
 class RenderState {
@@ -33,7 +33,7 @@ private:
 	// PipeLineManager
 	PipeLineManager* pipeLineManager_ = nullptr;
 	// RenderAssetManager
-	RenderAssetManager* renderAssetManager_ = nullptr;
+	GraphicAssetManager* renderAssetManager_ = nullptr;
 
 
 public:

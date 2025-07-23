@@ -6,7 +6,7 @@
 
 namespace RenderSystem {
 
-class RenderAssetManager {
+class GraphicAssetManager {
 
 private:
 
@@ -17,10 +17,10 @@ private:
 private: // シングルトン
 
 	// コンストラクタ、デストラクタ
-	RenderAssetManager() = default;
-	~RenderAssetManager() = default;
-	RenderAssetManager(const RenderAssetManager&) = delete;
-	const RenderAssetManager& operator=(const RenderAssetManager&) = delete;
+	GraphicAssetManager() = default;
+	~GraphicAssetManager() = default;
+	GraphicAssetManager(const GraphicAssetManager&) = delete;
+	const GraphicAssetManager& operator=(const GraphicAssetManager&) = delete;
 
 
 public:
@@ -28,7 +28,7 @@ public:
 	/// <summary>
 	/// インスタンスの取得
 	/// </summary>
-	static RenderAssetManager* GetInstance();
+	static GraphicAssetManager* GetInstance();
 
 	/// <summary>
 	/// ファイルを読み込む

@@ -9,7 +9,7 @@
 #include "Utilities/TextLog/TextLog.h"
 #include "Utilities/TimeSystem/TimeSystem.h"
 #include "System/GameData/GameData.h"
-#include "Graphics/RenderSystem/Asset/RenderAssetManager.h"
+#include "Graphics/RenderSystem/Asset/GraphicAssetManager.h"
 #include "Graphics/PostEffect/IPostEffect/Absent/AbsentEffect.h"
 
 #include "Scene/DebugScene/DebugScene.h"
@@ -61,7 +61,7 @@ private:
 	TimeSystem* timeSys_ = nullptr;
 
 	// RenderAssetManager
-	RenderSystem::RenderAssetManager* renderAssetManager = nullptr;
+	RenderSystem::GraphicAssetManager* renderAssetManager = nullptr;
 
 	// 現在のシーン
 	std::unique_ptr<IScene> scene_;

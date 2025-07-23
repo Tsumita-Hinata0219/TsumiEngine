@@ -21,7 +21,7 @@ GameManager::GameManager(std::unique_ptr<IScene> initScene) {
 	timeSys_->Init();
 
 	// RenderAssetManagerのインスタンスを取得
-	renderAssetManager = RenderSystem::RenderAssetManager::GetInstance();
+	renderAssetManager = RenderSystem::GraphicAssetManager::GetInstance();
 
 	// Testモデルを読み込んでおく
 	ModelManager::GetInstance()->LoadModel("Obj/Dev/Test", "Test.obj");

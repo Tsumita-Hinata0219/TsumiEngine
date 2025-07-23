@@ -436,6 +436,7 @@
     <ClCompile Include="Engine\Graphics\RenderSystem\Loader\RenderDataLoader.cpp" />
     <ClCompile Include="Engine\Graphics\RenderSystem\State\RenderState .cpp" />
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
+    <ClCompile Include="Engine\ResourceSystem\DescriptorHeap\DescriptorHeapManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\System\GameManager\GameManager.h">
@@ -1189,6 +1190,7 @@
     <ClInclude Include="Engine\Graphics\RenderSystem\State\RenderState .h" />
     <ClInclude Include="Engine\Graphics\RenderSystem\Structure\RenderStructure.h" />
     <ClInclude Include="Engine\Graphics\ShaderManager\ShaderManager.h" />
+    <ClInclude Include="Engine\ResourceSystem\DescriptorHeap\DescriptorHeapManager.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

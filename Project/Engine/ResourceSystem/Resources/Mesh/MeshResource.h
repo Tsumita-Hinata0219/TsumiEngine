@@ -33,7 +33,7 @@ public:
     /// <summary>
     /// 
     /// </summary>
-    void CreateDescriptors() override{}; // メッシュは通常SRVは使わないこと多いので空実装でもOK
+    void CreateDescriptors() override{}; // 空実装
 
 #pragma region 
 

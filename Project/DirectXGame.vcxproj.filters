@@ -438,6 +438,8 @@
     <ClCompile Include="Engine\Graphics\ShaderManager\ShaderManager.cpp" />
     <ClCompile Include="Engine\ResourceSystem\DescriptorHeap\DescriptorHeapManager.cpp" />
     <ClCompile Include="Engine\ResourceSystem\Resources\Mesh\MeshResource.cpp" />
+    <ClCompile Include="Engine\ResourceSystem\Resources\Tex\TextureResource.cpp" />
+    <ClCompile Include="Engine\ResourceSystem\TextureLoader\TextureLoader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\System\GameManager\GameManager.h">
@@ -1194,6 +1196,8 @@
     <ClInclude Include="Engine\ResourceSystem\DescriptorHeap\DescriptorHeapManager.h" />
     <ClInclude Include="Engine\ResourceSystem\Resources\IBaseResource.h" />
     <ClInclude Include="Engine\ResourceSystem\Resources\Mesh\MeshResource.h" />
+    <ClInclude Include="Engine\ResourceSystem\Resources\Tex\TextureResource.h" />
+    <ClInclude Include="Engine\ResourceSystem\TextureLoader\TextureLoader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

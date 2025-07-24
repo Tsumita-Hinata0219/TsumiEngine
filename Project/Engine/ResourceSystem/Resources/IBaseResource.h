@@ -11,15 +11,15 @@ public:
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    BaseResource() = default;
+    IBaseResource() = default;
 
     /// <summary>
     /// デストラクタ
     /// </summary>
-    virtual ~BaseResource() = default;
+    virtual ~IBaseResource() = default;
 
     /// <summary>
-    /// リソースの生成（デバイスやデータに応じてオーバーライド）
+    /// リソースの生成
     /// </summary>
     virtual bool Create(ID3D12Device* device) = 0;
 
@@ -29,7 +29,7 @@ public:
     virtual void CreateDescriptors() = 0;
 
     /// <summary>
-    /// リソースのアクセス用ハンドル（例：SRVハンドル）
+    /// リソースのアクセス用ハンドル
     /// </summary>
     virtual D3D12_GPU_DESCRIPTOR_HANDLE GetGPUDescriptorHandle() const = 0;
 

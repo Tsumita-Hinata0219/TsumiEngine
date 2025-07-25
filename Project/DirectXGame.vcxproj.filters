@@ -2126,6 +2126,7 @@
     <None Include="Resources\Shaders\Random\Random.hlsli" />
     <None Include="Resources\Shaders\Emitter\Emitter.hlsli" />
     <None Include="Resources\Shaders\Field\Field.hlsli" />
+    <None Include="Resources\Shaders\Decal\Decal.hlsli" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Resources\Shaders\CPUParticle\CPUParticle.PS.hlsl">
@@ -2225,6 +2226,8 @@
     <FxCompile Include="Resources\Shaders\GPUParticle\Update\GPUParticle_Update.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\Field\Constant\ConstantField.CS.hlsl" />
     <FxCompile Include="Resources\Shaders\GPUParticle\Material\FadeOut\GPUParticle_FadeOut.CS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Decal\Decal.VS.hlsl" />
+    <FxCompile Include="Resources\Shaders\Decal\Decal.PS.hlsl" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="externals\imgui\LICENSE.txt">

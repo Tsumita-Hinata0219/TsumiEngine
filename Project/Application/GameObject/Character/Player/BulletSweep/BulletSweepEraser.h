@@ -51,7 +51,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// ペアレントを結ぶ
-	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
+	void SetParent(Transform* parent) { this->transform_.SetParent(parent); }
 
 #pragma endregion 
 
@@ -65,10 +65,6 @@ private:
 
 
 private:
-
-	// トランスフォーム
-	Transform trans_{};
-
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;
 

@@ -18,8 +18,8 @@ void BasicEnemy::Init()
 	model_->SetLightData(light_);
 
 	// BodyTransformの初期化
-	trans_.Init();
-	trans_.srt = initSRT_;
+	transform_.Init();
+	transform_.srt = initSRT_;
 
 	// 色加算の初期設定
 	colorAdd_.enable = true;
@@ -69,7 +69,7 @@ void BasicEnemy::Init()
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 1.8f;
 }
 
@@ -87,7 +87,7 @@ void BasicEnemy::Update()
 	effectContainer_->Update();
 
 	// ColliderのSRTの設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 
 #ifdef _DEBUG
@@ -102,7 +102,7 @@ void BasicEnemy::Draw3D()
 	// BodyModelの描画
 	model_->SetMaterialColor(modelColor_);
 	model_->SetColorAddition(colorAdd_);
-	model_->Draw(trans_);
+	model_->Draw(transform_);
 
 	// バレットの描画
 	bulletContainer_->Draw();
@@ -120,8 +120,8 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 	// 地形は押し出し
 	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 		// 押し出しの処理
-		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
-		trans_.UpdateMatrix();
+		transform_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
+		transform_.UpdateMatrix();
 	}
 	if (object->GetCategory() == Attributes::Category::PLAYER &&
 		object->GetType() == Attributes::Type::BULLET) {
@@ -142,8 +142,8 @@ void BasicEnemy::onCollision([[maybe_unused]] IObject* object)
 		if (hp_ <= 0) {
 
 			// particleEmitterの座標更新
-			wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-			wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			wp_BarstParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
+			wp_explosionParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
 
 			// particleを出す
 			wp_BarstParticle_.lock()->Update();
@@ -202,7 +202,7 @@ void BasicEnemy::ToggleCombatState()
 {
 	// プレイヤーとの距離で戦闘状態のフラグを管理する
 	// 設定した距離よりも近くにいたらフラグを立てる
-	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= combatTriggerDistance_) {
+	if (std::abs(Length(player_->GetWorldPos() - transform_.GetWorldPos())) <= combatTriggerDistance_) {
 
 		// 戦闘状態のフラグを立てる
 		isCombatActive_ = true;
@@ -222,7 +222,7 @@ void BasicEnemy::ToggleCombatState()
 void BasicEnemy::Move()
 {
 	// ある程度近ければ早期return
-	if (std::abs(Length(player_->GetWorldPos() - trans_.GetWorldPos())) <= minToPlayer_) {
+	if (std::abs(Length(player_->GetWorldPos() - transform_.GetWorldPos())) <= minToPlayer_) {
 		return;
 	}
 
@@ -233,7 +233,7 @@ void BasicEnemy::Move()
 	CalcRotate();
 
 	// 座標にvelocityを加算
-	trans_.srt.translate += velocity_;
+	transform_.srt.translate += velocity_;
 }
 
 
@@ -242,7 +242,7 @@ void BasicEnemy::CalcVelocity()
 {
 	// 差分をNormalize
 	Vector3 player2Enemy =
-		Normalize(player_->GetWorldPos() - trans_.GetWorldPos());
+		Normalize(player_->GetWorldPos() - transform_.GetWorldPos());
 
 	// 差分Normalizeに速度をかけてvelocityに設定
 	velocity_ = {
@@ -257,13 +257,13 @@ void BasicEnemy::CalcVelocity()
 void BasicEnemy::CalcRotate()
 {
 	// Y軸周り角度(θy)
-	trans_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
+	transform_.srt.rotate.y = std::atan2(velocity_.x, velocity_.z);
 
 	float velZ = std::sqrt((velocity_.x * velocity_.x) + (velocity_.z * velocity_.z));
 	float height = -velocity_.y;
 
 	// X軸周り角度(θx)
-	trans_.srt.rotate.x = std::atan2(height, velZ);
+	transform_.srt.rotate.x = std::atan2(height, velZ);
 }
 
 

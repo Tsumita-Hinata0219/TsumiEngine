@@ -48,7 +48,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// ペアレント
-	void SetParent(Transform* parent) { this->trans_.SetParent(parent); }
+	void SetParent(Transform* parent) { this->transform_.SetParent(parent); }
 
 #pragma endregion 
 
@@ -69,10 +69,7 @@ private:
 	Vector4 color_{};
 
 	// uvTransform
-	Transform uvTrans_{};
-
-	// トランスフォーム
-	Transform trans_{};
+	Transform uvtransform_{};
 
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;

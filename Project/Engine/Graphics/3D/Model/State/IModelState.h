@@ -77,6 +77,14 @@ public: // メンバ変数
 	ColorAddition GetColorAddition() const { return this->datas_.colorAddition; }
 	void SetColorAddition(const ColorAddition& setData) { this->datas_.colorAddition = setData; }
 
+	// NormalMap
+	NormalMap GetNormalMap() const { return this->datas_.normalMap; }
+	void SetNormalMap(const NormalMap& setData) { this->datas_.normalMap = setData; }
+
+	// Decal
+	Decal GetDecal() const { return this->datas_.decal; }
+	void SetDecal(const Decal& setData) { this->datas_.decal = setData; }
+
 #pragma endregion 
 
 
@@ -102,6 +110,10 @@ protected:
 		buffers_.enviroment.CreateCBV();
 		// colorAddition
 		buffers_.colorAddition.CreateCBV();
+		// normalMap
+		buffers_.normalMap.CreateCBV();
+		// decal
+		buffers_.decal.CreateCBV();
 
 		if (stateType_ == GLTF) {
 			// influence

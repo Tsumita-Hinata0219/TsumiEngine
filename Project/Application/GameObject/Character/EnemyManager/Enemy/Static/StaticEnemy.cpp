@@ -12,8 +12,8 @@ void StaticEnemy::Init()
 	model_ = modelManager_->GetModel("Static");
 
 	// BodyTransfromの初期化
-	trans_.Init();
-	trans_.srt = initSRT_;
+	transform_.Init();
+	transform_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -54,7 +54,7 @@ void StaticEnemy::Init()
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 1.8f;
 
 	// 回転スピード(ラジアン)
@@ -69,7 +69,7 @@ void StaticEnemy::Init()
 void StaticEnemy::Update()
 {
 	// オブジェクトの回転
-	trans_.srt.rotate.y += ToRadians(addRadSpeed_);
+	transform_.srt.rotate.y += ToRadians(addRadSpeed_);
 
 	// 移動処理
 	movement_->Update();
@@ -81,7 +81,7 @@ void StaticEnemy::Update()
 	effectContainer_->Update();
 
 	// ColliderのSRTの設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 #ifdef _DEBUG
 
@@ -95,7 +95,7 @@ void StaticEnemy::Draw3D()
 	// BodyModelの描画
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
-	model_->Draw(trans_);
+	model_->Draw(transform_);
 
 	// バレットの描画
 	bulletContainer_->Draw();
@@ -129,8 +129,8 @@ void StaticEnemy::onCollision(IObject* object)
 		if (hp_ <= 0) {
 
 			// particleEmitterの座標更新
-			wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-			wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			wp_BarstParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
+			wp_explosionParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
 
 			// particleを出す
 			wp_BarstParticle_.lock()->Update();

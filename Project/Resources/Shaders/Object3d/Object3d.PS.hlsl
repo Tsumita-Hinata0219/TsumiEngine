@@ -50,6 +50,24 @@ struct ColorAddition
 };
 ConstantBuffer<ColorAddition> gColorAddition : register(b4);
 
+// NormalMap
+struct NormalMapSettings
+{
+    int enable;
+};
+ConstantBuffer<NormalMapSettings> gNormalMapSettings : register(b5);
+Texture2D<float4> gNormalMap : register(t2);
+
+// デカール
+struct DecalSettings
+{
+    float4x4 decalMatrix; // デカールの位置、回転、スケールを決定する行列
+    float4 decalColor; // デカールの色
+    float decalStrength; // デカールの適用強度
+    int enable;
+};
+ConstantBuffer<DecalSettings> gDecalSettings : register(b6);
+Texture2D<float4> gDecalTexture : register(t3);
 
 
 SamplerState gSampler : register(s0);
@@ -75,12 +93,19 @@ PixelShaderOutput main(VertexShaderOutput input)
         discard;
     }
     
-    // ライト処理
-    if (gDirectionalLight.eneble) // ライトが有効な場合
+    float3 normal = normalize(input.normal);
+
+    // --- Normal Map ---
+    if (gNormalMapSettings.enable != 0)
     {
-        // 法線ベクトルの計算
-        float3 normal = normalize(input.normal);
-        
+        float3 normalSample = gNormalMap.Sample(gSampler, transformedUV.xy).rgb;
+        normalSample = normalSample * 2.0f - 1.0f; // [0,1] → [-1,1]
+        normal = normalize(normalSample);
+    }
+    
+    // --- Lighting ---
+    if (gDirectionalLight.eneble)
+    {
         // ライトの方向ベクトルを正規化
         float3 lightDir = normalize(gDirectionalLight.direction);
         
@@ -121,7 +146,33 @@ PixelShaderOutput main(VertexShaderOutput input)
         output.color.rgb = gMaterial.color.rgb * textureColor.rgb;
     }
     
-    // 環境マップ
+    // --- Decal ---
+    if (gDecalSettings.enable != 0)
+    {
+        // ワールド座標からデカール空間への変換
+        float4 decalPos = mul(float4(input.worldPos, 1.0f), gDecalSettings.decalMatrix);
+
+        // デカールUV座標の計算 (0.0～1.0の範囲に正規化)
+        float2 decalUV = decalPos.xy * 0.5f + 0.5f;
+
+        // デカールが範囲外であればスキップ (デカールテクスチャの範囲外のピクセルを描画しない)
+        if (decalUV.x < 0.0f || decalUV.x > 1.0f || decalUV.y < 0.0f || decalUV.y > 1.0f)
+        {
+            // デカールが適用されるべき領域外のピクセルは元の色を保持
+        }
+        else
+        {
+            // デカールテクスチャをサンプリング
+            float4 decalSample = gDecalTexture.Sample(gSampler, decalUV);
+
+            // デカールのアルファ値に基づいて元の色とデカールの色をブレンド
+            // ひび割れ表現の場合、デカールテクスチャのひび割れ部分が不透明 (アルファ値が高い) になるようにする
+            // デカールの色 (gDecalSettings.decalColor) と元のオブジェクトの色を、デカールテクスチャのアルファ値で補間する
+            output.color.rgb = lerp(output.color.rgb, gDecalSettings.decalColor.rgb, decalSample.a * gDecalSettings.decalStrength);
+        }
+    }
+    
+    // --- Environment ---
     if (gEnvironment.enable)
     {
         float3 cameraToPos = normalize(input.worldPos - gViewProjectionMat.cameraPosition);
@@ -131,7 +182,7 @@ PixelShaderOutput main(VertexShaderOutput input)
         output.color.rgb += environmentColor.rgb;
     }
     
-    // 色加算
+    // --- ColorAddition ---
     if (gColorAddition.enable)
     {
         output.color.rgb += gColorAddition.addColor.rgb * gColorAddition.intensity;

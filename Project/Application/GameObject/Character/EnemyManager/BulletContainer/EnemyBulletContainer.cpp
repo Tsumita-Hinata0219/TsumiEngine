@@ -78,7 +78,7 @@ void EnemyBulletContainer::AddBulletInstance(Vector3 initVel)
 	// newBulletの初期化
 	newBullet->SetResistant(GetBulletState());
 	newBullet->Init();
-	newBullet->SetPosition(owner_->GetWorldPos());
+	newBullet->SetTranslate(owner_->GetWorldPos());
 	newBullet->SetVelocity(TransformNormal(Normalize(initVel) * kBulletSpeed_, owner_->GetMatWorld()));
 	newBullet->SetRotationFromVelocity();
 

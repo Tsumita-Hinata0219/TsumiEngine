@@ -32,11 +32,11 @@ void IEnemy::HitReaction()
 /// </summary>
 void IEnemy::HitReaction_Scale()
 {
-	trans_.srt.scale.x =
+	transform_.srt.scale.x =
 		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
-	trans_.srt.scale.y =
+	transform_.srt.scale.y =
 		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
-	trans_.srt.scale.z =
+	transform_.srt.scale.z =
 		InterpolateWithPeak(hitReactionScale_.x, hitReactionScale_.y, hitReactionScale_.z, hitReactionTimer_.GetRatio(), Ease::WithPeak);
 }
 

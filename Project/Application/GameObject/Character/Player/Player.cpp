@@ -28,7 +28,7 @@ void Player::Init()
         std::make_unique<PlayerRightBody>();
     for (std::shared_ptr<IPlayerBody> body : iBodys_) {
         body->Init();
-        body->SetParent(&trans_);
+        body->SetParent(&transform_);
     }
 
     // ライトの初期設定
@@ -37,8 +37,8 @@ void Player::Init()
     light_.intensity = 0.7f;
 
     // Transformの初期化
-    trans_.Init();
-    trans_.srt.translate.z = -5.0f;
+    transform_.Init();
+    transform_.srt.translate.z = -5.0f;
 
     // パーティクルマネージャー
     particleManager_ = std::make_unique<PlayerParticleManager>();
@@ -47,20 +47,20 @@ void Player::Init()
 
     // 移動処理クラス
     movement_ = std::make_unique<PlayerMovement>();
-    movement_->Init(this, gameCamera_, &trans_);
+    movement_->Init(this, gameCamera_, &transform_);
 
     // BulletのObjectPoolを先に作っておく
     bulletPool_.Create(50);
 
     // Colliderの初期化
     aabb_ = std::make_unique<AABBCollider>(this);
-    aabb_->data_.center = trans_.GetWorldPos();
+    aabb_->data_.center = transform_.GetWorldPos();
     aabb_->data_.size = {1.7f, 1.7f, 1.7f};
 
     // スイープイレイサーの初期化
     sweepEraser_ = std::make_unique<BulletSweepEraser>();
     sweepEraser_->Init();
-    sweepEraser_->SetParent(&trans_); // ペアレントを結ぶ
+    sweepEraser_->SetParent(&transform_); // ペアレントを結ぶ
 
     // キルカウントを0で初期化
     killCount_ = 0;
@@ -78,7 +78,7 @@ void Player::Init()
 void Player::Update() 
 {
     // Transformの更新処理
-    trans_.UpdateMatrix();
+    transform_.UpdateMatrix();
 
     // パーティクルマネージャー
     particleManager_->Update();
@@ -106,7 +106,7 @@ void Player::Update()
     });
 
     // ColliderのSRTの設定
-    aabb_->data_.center = trans_.GetWorldPos();
+    aabb_->data_.center = transform_.GetWorldPos();
     aabb_->Update();
 
     // スイープイレイサーの更新
@@ -172,9 +172,9 @@ void Player::onCollision([[maybe_unused]] IObject *object)
     if (object->GetCategory() == Attributes::Category::TERRAIN) {
 
         // 押し出しの処理
-        trans_.srt.translate +=
+        transform_.srt.translate +=
             Penetration::Execute(aabb_->GetData(), IObject::hitCollider_);
-        trans_.UpdateMatrix();
+        transform_.UpdateMatrix();
     }
     if (object->GetCategory() == Attributes::Category::ENEMY &&
         object->GetType() == Attributes::Type::BULLET) {
@@ -266,14 +266,14 @@ void Player::CreateNewBullet()
     PlayerBullet *newBullet = bulletPool_.Get();
 
     // 初期座標
-    Vector3 initPos = trans_.GetWorldPos();
+    Vector3 initPos = transform_.GetWorldPos();
     // 初期速度
     Vector3 initVel = Vector3::oneZ;
-    initVel = TransformNormal(initVel, trans_.matWorld);
+    initVel = TransformNormal(initVel, transform_.matWorld);
 
     // newBulletの初期化
     newBullet->Init();
-    newBullet->SetPosition(initPos);
+    newBullet->SetTranslate(initPos);
     newBullet->SetVelocity(initVel);
     newBullet->SetRotationFromVelocity();
     newBullet->SetPlayer(this);
@@ -317,7 +317,7 @@ void Player::DrawImGui()
     if (ImGui::TreeNode("Player")) {
 
         ImGui::Text("Transform");
-        trans_.DrawImGui();
+        transform_.DrawImGui();
         ImGui::Text("");
 
         ImGui::Text("BodyColor");

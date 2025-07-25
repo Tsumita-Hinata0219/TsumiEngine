@@ -7,14 +7,14 @@
 void BulletSweepEraser::Init()
 {
 	// Transformの初期化
-	trans_.Init();
+	transform_.Init();
 
 	// 半径。firstが基本、secondが肥大化した半径
 	radius_ = std::make_pair(2.0f, 10.0f);
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = radius_.first; // 基本波形で初期化
 	sphere_->SetActive(false);
 
@@ -32,10 +32,10 @@ void BulletSweepEraser::Init()
 void BulletSweepEraser::Update()
 {
 	// Transformの更新処理
-	trans_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 	// Colliderの座標の設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 	// スイープ中なら
 	if (isSweeping_)

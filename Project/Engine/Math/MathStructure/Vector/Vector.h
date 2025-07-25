@@ -30,6 +30,14 @@ struct Vector2 final {
 	inline constexpr bool operator!=(const Vector2& rhs) noexcept { 
 		return !(*this == rhs); 
 	}
+
+	// スカラー代入
+	Vector2& operator=(float f) {
+		x = f;
+		y = f;
+		return *this;
+	}
+
 };
 
 
@@ -62,6 +70,14 @@ struct Vector3 final {
 	// != 演算子のオーバーロード 
 	inline constexpr bool operator!=(const Vector3& rhs) noexcept {
 		return !(*this == rhs);
+	}
+
+	// スカラー代入
+	Vector3& operator=(float f) {
+		x = f;
+		y = f;
+		z = f;
+		return *this;
 	}
 };
 
@@ -96,5 +112,14 @@ struct Vector4 final {
 	// != 演算子のオーバーロード 
 	inline constexpr bool operator!=(const Vector4& rhs) noexcept {
 		return !(*this == rhs);
+	}
+
+	// スカラー代入
+	Vector4& operator=(float f) {
+		x = f;
+		y = f;
+		z = f;
+		w = f;
+		return *this;
 	}
 };

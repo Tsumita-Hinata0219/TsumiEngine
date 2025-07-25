@@ -28,6 +28,12 @@ struct ModelDatas {
 	// 色加算
 	ColorAddition colorAddition{};
 
+	// 法線マップ
+	NormalMap normalMap{};
+
+	// デカール
+	Decal decal{};
+
 	// ジョイントウェイト
 	JointWeightData jointWeight{};
 
@@ -63,6 +69,12 @@ struct ModelBuffers {
 
 	// 色加算
 	BufferResource<ColorAddition> colorAddition;
+
+	// 法線マップ
+	BufferResource<NormalMap> normalMap;
+
+	// デカール
+	BufferResource<Decal> decal;
 
 	// インフルエンス
 	BufferResource<VertexInfluence> influence;

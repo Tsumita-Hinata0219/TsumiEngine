@@ -72,7 +72,7 @@ public:
         for (const auto &entityData : data) {
             if (entityData) {
                 // SRTの設定
-                trans_.srt = entityData->srt;
+                transform_.srt = entityData->srt;
             }
         }
     }
@@ -81,9 +81,6 @@ public:
 
     // ゲームカメラ
     void SetGameCamera(GameCamera *setCamera) { this->gameCamera_ = setCamera; }
-
-    // WorldPos
-    Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
 
     // 射撃フラグ
     bool IsShooting() const { return this->isShooting_; }
@@ -142,9 +139,6 @@ private:
     void DrawImGui();
 
 private:
-
-    // トランスフォーム
-    Transform trans_{};
 
     // Light
     DirectionalLightData light_;

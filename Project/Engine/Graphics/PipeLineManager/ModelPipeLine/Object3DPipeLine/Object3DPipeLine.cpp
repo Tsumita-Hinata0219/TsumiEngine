@@ -103,7 +103,7 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 		D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
 
-	D3D12_ROOT_PARAMETER rootParameters[8]{};
+	D3D12_ROOT_PARAMETER rootParameters[12]{};
 
 	// ─── VS
 	// b0 : 頂点位置
@@ -137,27 +137,59 @@ void Object3DPipeLine::SetUpRootSignature(D3D12_ROOT_SIGNATURE_DESC& description
 	rootParameters[5].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
 	rootParameters[5].Descriptor.ShaderRegister = 4; // レジスタ番号
 
+	// b5 : 法線マップ
+	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[6].Descriptor.ShaderRegister = 5; // レジスタ番号
+
+	// b6 : デカール
+	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV; // CBVを使う
+	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixelShaderで使う
+	rootParameters[7].Descriptor.ShaderRegister = 6; // レジスタ番号
+
 	// t0 : モデルテクスチャ
 	D3D12_DESCRIPTOR_RANGE materiaTexture[1]{};
-	materiaTexture[0].BaseShaderRegister = 0; // 0から始まる
+	materiaTexture[0].BaseShaderRegister = 0; // レジスタ番号
 	materiaTexture[0].NumDescriptors = 1; // 数は1つ
 	materiaTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	materiaTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[6].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[6].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[6].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
-	rootParameters[6].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
+	rootParameters[8].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[8].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[8].DescriptorTable.pDescriptorRanges = materiaTexture; // Tableの中身の配列を指定
+	rootParameters[8].DescriptorTable.NumDescriptorRanges = _countof(materiaTexture); // Tableで利用する
 
 	// t1 : 環境マップテクスチャ
 	D3D12_DESCRIPTOR_RANGE environmentTexture[1]{};
-	environmentTexture[0].BaseShaderRegister = 1; // 1から始まる
+	environmentTexture[0].BaseShaderRegister = 1; // レジスタ番号
 	environmentTexture[0].NumDescriptors = 1; // 数は1つ
 	environmentTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 	environmentTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
-	rootParameters[7].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
-	rootParameters[7].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
-	rootParameters[7].DescriptorTable.pDescriptorRanges = environmentTexture; // Tableの中身の配列を指定
-	rootParameters[7].DescriptorTable.NumDescriptorRanges = _countof(environmentTexture); // Tableで利用する
+	rootParameters[9].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[9].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[9].DescriptorTable.pDescriptorRanges = environmentTexture; // Tableの中身の配列を指定
+	rootParameters[9].DescriptorTable.NumDescriptorRanges = _countof(environmentTexture); // Tableで利用する
+
+	// t2 : 法線マップテクスチャ
+	D3D12_DESCRIPTOR_RANGE normalMapTexture[1]{};
+	normalMapTexture[0].BaseShaderRegister = 2; // レジスタ番号
+	normalMapTexture[0].NumDescriptors = 1; // 数は1つ
+	normalMapTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	normalMapTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[10].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[10].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[10].DescriptorTable.pDescriptorRanges = normalMapTexture; // Tableの中身の配列を指定
+	rootParameters[10].DescriptorTable.NumDescriptorRanges = _countof(normalMapTexture); // Tableで利用する
+
+	// t3 : デカールテクスチャ
+	D3D12_DESCRIPTOR_RANGE decalTexture[1]{};
+	decalTexture[0].BaseShaderRegister = 3; // レジスタ番号
+	decalTexture[0].NumDescriptors = 1; // 数は1つ
+	decalTexture[0].RangeType = D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
+	decalTexture[0].OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND; // offsetを自動計算
+	rootParameters[11].ParameterType = D3D12_ROOT_PARAMETER_TYPE_DESCRIPTOR_TABLE; // DescriptorTableを使う
+	rootParameters[11].ShaderVisibility = D3D12_SHADER_VISIBILITY_PIXEL; // PixShaderで使う
+	rootParameters[11].DescriptorTable.pDescriptorRanges = decalTexture; // Tableの中身の配列を指定
+	rootParameters[11].DescriptorTable.NumDescriptorRanges = _countof(decalTexture); // Tableで利用する
 
 	// s0 : サンプラー
 	D3D12_STATIC_SAMPLER_DESC staticSamplers[1]{};

@@ -15,8 +15,8 @@ void BossEnemy::Init()
 	model_ = modelManager_->GetModel("Boss");
 
 	// BodyTransfromの初期化
-	trans_.Init();
-	trans_.srt = initSRT_;
+	transform_.Init();
+	transform_.srt = initSRT_;
 
 	// ライトの初期設定
 	light_.enable = true;
@@ -58,15 +58,21 @@ void BossEnemy::Init()
 	// シールドの初期化処理
 	shield_ = std::make_unique<EnemyShield>();
 	shield_->Init();
-	shield_->SetParent(&trans_);
+	shield_->SetParent(&transform_);
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 1.8f * 1.0f;
 
 	// HPの設定
 	hp_ = 15;
+
+	// デカールの初期設定
+	decalData_.decalColor = Vector4(0.2f, 0.2f, 0.2f, 1.0f); // ひび割れの色 (濃いグレー)
+	decalData_.decalStrength = 1.0f;                       // 強度
+	decalData_.enable = 0;                                 // 初期状態ではデカールを無効に設定
+	isDecalEnabled_ = false;
 
 	// バリア関係まだちゃんと処理を作っていないので、ここで破壊しておく
 	//CollapseShield();
@@ -85,18 +91,34 @@ void BossEnemy::Update()
 	movement_->Update();
 
 	// 射撃処理
-	bulletContainer_->Update();
+	//bulletContainer_->Update();
 
 	// エフェクト処理
 	effectContainer_->Update();
 
 	// コライダーの更新
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 	// particleEmitterの座標更新
-	wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-	wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+	wp_BarstParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
+	wp_explosionParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
 
+	if (isDecalEnabled_) {
+		// デカール行列を更新（ここではボスのワールド座標に合わせる）
+		// MakeAffineMatrix はあなたのエンジンでMatrix4x4を生成する関数に置き換えてください
+		Matrix4x4 decalWorldMatrix = MakeAffineMatrix(transform_.srt.scale, transform_.srt.rotate, transform_.srt.translate);
+
+		// シェーダーのデカールUV計算 (decalPos.xy * 0.5f + 0.5f) に合わせるため、
+		// ワールド座標をデカール空間に変換する行列 (デカールのワールド行列の逆行列) を設定します。
+		decalData_.decalMatrix = Inverse(decalWorldMatrix);
+
+		// デカールを有効化
+		decalData_.enable = 1;
+	}
+	else {
+		// デカールを無効化
+		decalData_.enable = 0;
+	}
 
 #ifdef _DEBUG
 	DrawImGui();
@@ -112,7 +134,8 @@ void BossEnemy::Draw3D()
 	// BodyModelの描画
 	model_->SetLightData(light_);
 	model_->SetColorAddition(colorAdd_);
-	model_->Draw(trans_);
+	model_->SetDecal(decalData_);
+	model_->Draw(transform_);
 
 	// バレットの描画
 	bulletContainer_->Draw();
@@ -139,13 +162,13 @@ void BossEnemy::onCollision([[maybe_unused]] IObject* object)
 	// 地形は押し出し
 	if (object->GetCategory() == Attributes::Category::TERRAIN) {
 		// 押し出しの処理
-		trans_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
-		trans_.UpdateMatrix();
+		transform_.srt.translate += Penetration::Execute(sphere_->GetData(), IObject::hitCollider_);
+		transform_.UpdateMatrix();
 	}
 	else if (object->GetCategory() == Attributes::Category::PLAYER && object->GetType() == Attributes::Type::BULLET) {
 
 		// HPを減らす
-		hp_--;
+		//hp_--;
 
 		// ヒットリアクション中にする
 		isHitReactioning_ = true;
@@ -156,12 +179,14 @@ void BossEnemy::onCollision([[maybe_unused]] IObject* object)
 		// エフェクトを出す
 		effectContainer_->AddEffectInstance();
 
+		isDecalEnabled_ = true;
+
 		// HPが0以下なら死亡
 		if (hp_ <= 0) {
 
 			// particleEmitterの座標更新
-			wp_BarstParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
-			wp_explosionParticle_.lock()->SetEmitPos(trans_.GetWorldPos());
+			wp_BarstParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
+			wp_explosionParticle_.lock()->SetEmitPos(transform_.GetWorldPos());
 
 			// particleを出す
 			wp_BarstParticle_.lock()->Update();
@@ -204,7 +229,7 @@ void BossEnemy::DrawImGui()
 {
 	if (ImGui::TreeNode("BossEnemy")) {
 
-		trans_.DrawImGui();
+		transform_.DrawImGui();
 		ImGui::Text("");
 
 		if (ImGui::Button("Shield_Break")) {

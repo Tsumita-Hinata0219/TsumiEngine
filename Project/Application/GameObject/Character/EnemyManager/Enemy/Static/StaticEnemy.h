@@ -30,9 +30,6 @@ public:
 
 #pragma region Accessor アクセッサ
 
-	// WorldPos
-	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
-
 	// カラー
 	Vector4 GetModelColor() const { return this->modelColor_; }
 	void SetModelColor(Vector4 setColor) { this->modelColor_ = setColor; }

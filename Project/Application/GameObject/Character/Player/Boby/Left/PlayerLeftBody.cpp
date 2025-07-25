@@ -10,7 +10,7 @@ void PlayerLeftBody::Init()
 	model_ = modelManager_->GetModel("Player_Left_Body");
 
 	// Transformの初期化
-	trans_.Init();
+	transform_.Init();
 }
 
 
@@ -21,7 +21,7 @@ void PlayerLeftBody::Update() {}
 // 描画処理
 void PlayerLeftBody::Draw3D()
 {
-	model_->Draw(trans_);
+	model_->Draw(transform_);
 }
 void PlayerLeftBody::Draw2DFront() {}
 void PlayerLeftBody::Draw2DBack() {}

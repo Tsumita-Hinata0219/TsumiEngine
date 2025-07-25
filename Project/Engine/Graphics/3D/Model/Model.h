@@ -84,6 +84,13 @@ public:
 	ColorAddition GetColorAddition() const { return this->modelState_->GetColorAddition(); }
 	void SetColorAddition(const ColorAddition& setData) { this->modelState_->SetColorAddition(setData); }
 
+	// NormalMap
+	NormalMap GetNormalMap() const { return this->modelState_->GetNormalMap(); }
+	void SetNormalMap(const NormalMap& setData) { this->modelState_->SetNormalMap(setData); }
+
+	// Decal
+	Decal GetDecal() const { return this->modelState_->GetDecal(); }
+	void SetDecal(const Decal& setData) { this->modelState_->SetDecal(setData); }
 
 #pragma endregion 
 

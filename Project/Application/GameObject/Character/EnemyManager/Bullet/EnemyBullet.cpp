@@ -26,7 +26,7 @@ void EnemyBullet::Init()
 	model_->SetMaterialColor(modelColor);
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	trans_.Init();
+	transform_.Init();
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -36,7 +36,7 @@ void EnemyBullet::Init()
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 1.3f;
 
 	// 死亡フラグは折っておく
@@ -48,7 +48,7 @@ void EnemyBullet::Init()
 void EnemyBullet::Update()
 {
 	// Transformの更新処理
-	trans_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -57,7 +57,7 @@ void EnemyBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 }
 
@@ -65,7 +65,7 @@ void EnemyBullet::Update()
 // 描画処理
 void EnemyBullet::Draw3D()
 {
-	model_->Draw(trans_);
+	model_->Draw(transform_);
 }
 void EnemyBullet::Draw2DFront() {}
 void EnemyBullet::Draw2DBack() {}
@@ -109,7 +109,7 @@ void EnemyBullet::Reset()
 // 移動処理
 void EnemyBullet::Move()
 {
-	trans_.srt.translate += velocity_;
+	transform_.srt.translate += velocity_;
 }
 
 

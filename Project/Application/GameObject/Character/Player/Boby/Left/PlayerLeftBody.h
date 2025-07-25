@@ -28,7 +28,7 @@ public:
 #pragma region Accessor アクセッサ
 
 	// ペアレント
-	void SetParent(Transform* parent) override { this->trans_.SetParent(parent); }
+	void SetParent(Transform* parent) override { this->transform_.SetParent(parent); }
 
 	// モデルのカラーの設定
 	void SetModelColor(const Vector4& setColor) override { this->model_->SetMaterialColor(setColor); }
@@ -43,7 +43,4 @@ private:
 
 	// モデル
 	std::unique_ptr<Model> model_;
-
-	// トランスフォーム
-	Transform trans_{};
 };

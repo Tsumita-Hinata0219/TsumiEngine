@@ -161,10 +161,10 @@ void RenderSystem::RenderState::Bind_RenderData()
 	buffers_->colorAddition.BindGraphicsCBV(5);
 
 	// Material Texture
-	buffers_->material.BindGraphicsSRV(6, datas_.material.textureHandle);
+	buffers_->material.BindGraphicsSRV(8, datas_.material.textureHandle);
 
 	// Environment Texture
-	buffers_->material.BindGraphicsSRV(7, datas_.environment.textureHandle);
+	buffers_->material.BindGraphicsSRV(9, datas_.environment.textureHandle);
 }
 
 

@@ -95,6 +95,10 @@ private:
 	// カラー
 	Vector4 modelColor_ = Vector4::one;
 
+	// デカール
+	Decal decalData_; // デカール設定データ
+	bool isDecalEnabled_;     // デカールが現在表示されているかどうかのフラグ
+
 	// コライダー
 	std::unique_ptr<SphereCollider> sphere_;
 

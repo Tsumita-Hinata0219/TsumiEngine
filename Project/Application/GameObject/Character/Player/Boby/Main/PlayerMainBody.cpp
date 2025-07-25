@@ -12,7 +12,7 @@ void PlayerMainBody::Init()
 	models_[1] = modelManager_->GetModel("Player_Center_Body");
 
 	// Transformの初期化
-	trans_.Init();
+	transform_.Init();
 }
 
 
@@ -24,7 +24,7 @@ void PlayerMainBody::Update() {}
 void PlayerMainBody::Draw3D()
 {
 	for (int i = 0; i < 2; ++i) {
-		models_[i]->Draw(trans_);
+		models_[i]->Draw(transform_);
 	}
 }
 void PlayerMainBody::Draw2DFront() {}

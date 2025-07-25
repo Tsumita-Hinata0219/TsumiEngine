@@ -48,6 +48,10 @@ void IOBJState::Draw(Transform& transform)
 	buffers_.enviroment.UpdateData(&datas_.environment);
 	// ColorAddition
 	buffers_.colorAddition.UpdateData(&datas_.colorAddition);
+	// NormalMap
+	buffers_.normalMap.UpdateData(&datas_.normalMap);
+	// Decal
+	buffers_.decal.UpdateData(&datas_.decal);
 
 	// コマンドコール
 	CommandCall();
@@ -90,10 +94,18 @@ void IOBJState::CommandCall()
 	buffers_.enviroment.BindGraphicsCBV(4);
 	// ColorAddition
 	buffers_.colorAddition.BindGraphicsCBV(5);
+	// NormalMap
+	buffers_.normalMap.BindGraphicsCBV(6);
+	// Decal
+	buffers_.decal.BindGraphicsCBV(7);
 	// MaterialTexture
-	buffers_.material.BindGraphicsSRV(6, datas_.material.textureHandle);
+	buffers_.material.BindGraphicsSRV(8, datas_.material.textureHandle);
 	// EnvironmentTexture
-	buffers_.material.BindGraphicsSRV(7, datas_.environment.textureHandle);
+	buffers_.enviroment.BindGraphicsSRV(9, datas_.environment.textureHandle);
+	// NormalMapTexture
+	buffers_.normalMap.BindGraphicsSRV(10, datas_.normalMap.textureHandle);
+	// DecalMapTexture
+	buffers_.decal.BindGraphicsSRV(11, datas_.decal.textureHandle);
 	// Draw!!
 	commands.List->DrawIndexedInstanced(UINT(datas_.mesh.indices.size()), 1, 0, 0, 0);
 }

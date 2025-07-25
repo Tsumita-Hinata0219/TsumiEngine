@@ -56,28 +56,28 @@ public:
 	virtual void SetDeadFlag(bool setFlag) = 0;
 
 	// SRT
-	SRTData GetSRT() const { return this->trans_.srt; }
-	void SetSRT(const SRTData& setSRT) { this->trans_.srt = setSRT; }
+	SRTData GetSRT() const { return this->transform_.srt; }
+	void SetSRT(const SRTData& setSRT) { this->transform_.srt = setSRT; }
 	void SetInitSRT(const SRTData& setSRT) { this->initSRT_ = setSRT; }
 
 	// Scale
-	Vector3 GetScale() const { return this->trans_.srt.scale; }
-	void SetScale(const Vector3& setScale) { this->trans_.srt.scale = setScale; }
+	Vector3 GetScale() const { return this->transform_.srt.scale; }
+	void SetScale(const Vector3& setScale) { this->transform_.srt.scale = setScale; }
 
 	// Rotate
-	Vector3 GetRotate() const { return this->trans_.srt.rotate; }
-	void SetRotate(const Vector3& setRotate) { this->trans_.srt.rotate = setRotate; }
-	void SetRotate_Y(float setRotate){this->trans_.srt.rotate.y = setRotate;}
+	Vector3 GetRotate() const { return this->transform_.srt.rotate; }
+	void SetRotate(const Vector3& setRotate) { this->transform_.srt.rotate = setRotate; }
+	void SetRotate_Y(float setRotate){this->transform_.srt.rotate.y = setRotate;}
 
 	// Translate
-	Vector3 GetTranslate() const { return this->trans_.srt.translate; }
-	void SetTranslate(const Vector3& setTranslate) { this->trans_.srt.translate = setTranslate; }
+	Vector3 GetTranslate() const { return this->transform_.srt.translate; }
+	void SetTranslate(const Vector3& setTranslate) { this->transform_.srt.translate = setTranslate; }
 
 	// WorldPos
-	Vector3 GetWorldPos() { return this->trans_.GetWorldPos(); }
+	Vector3 GetWorldPos() { return this->transform_.GetWorldPos(); }
 
 	// MatWorld
-	Matrix4x4 GetMatWorld() const { return this->trans_.matWorld; }
+	Matrix4x4 GetMatWorld() const { return this->transform_.matWorld; }
 
 	// HP
 	virtual uint32_t GetHP() = 0;	
@@ -124,8 +124,6 @@ protected:
 	// 色加算
 	ColorAddition colorAdd_{};
 	 
-	// トランスフォーム
-	Transform trans_;
 	// 初期値
 	SRTData initSRT_{};
 

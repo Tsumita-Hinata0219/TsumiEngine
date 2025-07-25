@@ -18,14 +18,14 @@ void EnemyShield::Init()
 	color_.w = 0.5f;
 
 	// uvTransformの初期設定
-	uvTrans_.Init();
+	uvtransform_.Init();
 
 	// BodyTransfromの初期化
-	trans_.Init();
+	transform_.Init();
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 5.0f;
 
 	// 破壊フラグは折っておく
@@ -42,12 +42,12 @@ void EnemyShield::Update()
 	if (isBroken_) { return; }
 
 	// uvTransformの更新
-	uvTrans_.UpdateMatrix();
+	uvtransform_.UpdateMatrix();
 	// 少しずつ値を上げる
-	uvTrans_.srt.translate.y += 0.005f;
+	uvtransform_.srt.translate.y += 0.005f;
 
 	// コライダー更新
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 
 #ifdef _DEBUG
 	DrawImGui();
@@ -65,8 +65,8 @@ void EnemyShield::Draw3D()
 
 	// BodyModelの描画
 	model_->SetMaterialColor(color_);
-	model_->SetMaterialUVMat(uvTrans_.matWorld);
-	model_->Draw(trans_);
+	model_->SetMaterialUVMat(uvtransform_.matWorld);
+	model_->Draw(transform_);
 }
 void EnemyShield::Draw2DFront()
 {
@@ -108,13 +108,13 @@ void EnemyShield::DrawImGui()
 {
 	if (ImGui::TreeNode("EnemyShield")) {
 
-		trans_.DrawImGui();
+		transform_.DrawImGui();
 		ImGui::Text("");
 
 		ImGui::ColorEdit4("Color", &color_.x);
 		ImGui::Text("");
 
-		ImGui::DragFloat2("UVTrans_Translate", &uvTrans_.srt.translate.x, 0.01f);
+		ImGui::DragFloat2("UVtransform_Translate", &uvtransform_.srt.translate.x, 0.01f);
 		ImGui::Text("");
 
 		ImGui::TreePop();

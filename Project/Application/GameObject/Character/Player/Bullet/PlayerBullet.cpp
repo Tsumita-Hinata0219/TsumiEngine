@@ -11,8 +11,8 @@ void PlayerBullet::Init()
 	model_ = modelManager_->GetModel("PlayerBullet");
 
 	// Transformの初期化。座標や姿勢の設定は呼び出し先でaccessorで設定
-	trans_.Init();
-	trans_.srt.rotate = Vector3::zero;
+	transform_.Init();
+	transform_.srt.rotate = Vector3::zero;
 
 	// 速度の設定。呼び出し先でaccessorで設定
 
@@ -29,7 +29,7 @@ void PlayerBullet::Init()
 
 	// Colliderの初期化
 	sphere_ = std::make_unique<SphereCollider>(this);
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 	sphere_->data_.radius = 1.7f;
 
 	// 死亡フラグは折っておく
@@ -41,7 +41,7 @@ void PlayerBullet::Init()
 void PlayerBullet::Update()
 {
 	// Transformの更新処理
-	trans_.UpdateMatrix();
+	transform_.UpdateMatrix();
 
 	// 移動処理
 	Move();
@@ -53,7 +53,7 @@ void PlayerBullet::Update()
 	RemoveAfterlifeTime();
 
 	// ColliderのSRTの設定
-	sphere_->data_.center = trans_.GetWorldPos();
+	sphere_->data_.center = transform_.GetWorldPos();
 }
 
 
@@ -61,7 +61,7 @@ void PlayerBullet::Update()
 void PlayerBullet::Draw3D()
 {
 	//model_->SetLightData(light_);
-	model_->Draw(trans_);
+	model_->Draw(transform_);
 }
 void PlayerBullet::Draw2DFront() {}
 void PlayerBullet::Draw2DBack() {}
@@ -107,14 +107,14 @@ void PlayerBullet::Reset()
 // 移動処理
 void PlayerBullet::Move()
 {
-	trans_.srt.translate += velocity_;
+	transform_.srt.translate += velocity_;
 }
 
 
 // Z軸を回転させる
 void PlayerBullet::ZRotate()
 {
-	trans_.srt.rotate.z += ToRadians(addRotateZ_);
+	transform_.srt.rotate.z += ToRadians(addRotateZ_);
 }
 
 

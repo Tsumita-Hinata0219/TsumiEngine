@@ -19,6 +19,7 @@
 #include "ModelPipeLine/SkyboxPipeLine/SkyboxPipeLine.h"
 #include "ModelPipeLine/CPUParticlePipeLine/CPUParticlePipeLine.h"
 #include "ModelPipeLine/GPUParticle_Draw/GPUParticle_Draw_PipeLine.h"
+#include "ModelPipeLine/Decal/DecalPipeLine.h"
 
 #include "PostEffectPipeLine/AbsentPipeLine/AbsentPipeLine.h"
 #include "PostEffectPipeLine/BoxFilterPipeLine/BoxFilterPipeLine.h"
@@ -89,6 +90,7 @@ private:
 	void CreatePipeLine_Skybox();
 	void CreatePipeLine_CPUParticle();
 	void CreatePipeLine_GPUParticle_Draw();
+	void CreatePipeLine_Decal();
 
 	/// <summary>
 	/// ポストエフェクト

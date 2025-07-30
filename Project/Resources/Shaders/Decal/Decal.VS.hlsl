@@ -1,9 +1,10 @@
 #include "Decal.hlsli"
 
 // カメラ情報 
-ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b1);
+ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b0);
+
 // デカール設定
-ConstantBuffer<DecalSettings> gDecalSettings : register(b2);
+ConstantBuffer<DecalSettings> gDecalSettings : register(b1);
 
 struct DecalVertexShaderInput
 {

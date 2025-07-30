@@ -111,6 +111,7 @@ private: // メンバ関数
 	void SkyboxShader();
 	void CPUParticleShader();
 	void GPUParticle_Draw();
+	void Decal();
 
 #pragma endregion
 

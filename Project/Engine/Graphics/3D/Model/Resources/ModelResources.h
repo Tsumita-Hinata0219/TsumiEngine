@@ -32,7 +32,7 @@ struct ModelDatas {
 	NormalMap normalMap{};
 
 	// デカール
-	Decal decal{};
+	DecalSetting decal{};
 
 	// ジョイントウェイト
 	JointWeightData jointWeight{};
@@ -74,7 +74,7 @@ struct ModelBuffers {
 	BufferResource<NormalMap> normalMap;
 
 	// デカール
-	BufferResource<Decal> decal;
+	BufferResource<DecalSetting> decal;
 
 	// インフルエンス
 	BufferResource<VertexInfluence> influence;

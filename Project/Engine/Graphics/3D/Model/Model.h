@@ -89,8 +89,8 @@ public:
 	void SetNormalMap(const NormalMap& setData) { this->modelState_->SetNormalMap(setData); }
 
 	// Decal
-	Decal GetDecal() const { return this->modelState_->GetDecal(); }
-	void SetDecal(const Decal& setData) { this->modelState_->SetDecal(setData); }
+	DecalSetting GetDecal() const { return this->modelState_->GetDecal(); }
+	void SetDecal(const DecalSetting& setData) { this->modelState_->SetDecal(setData); }
 
 #pragma endregion 
 

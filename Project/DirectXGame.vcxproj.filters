@@ -440,6 +440,8 @@
     <ClCompile Include="Engine\ResourceSystem\Resources\Mesh\MeshResource.cpp" />
     <ClCompile Include="Engine\ResourceSystem\Resources\Tex\TextureResource.cpp" />
     <ClCompile Include="Engine\ResourceSystem\TextureLoader\TextureLoader.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Decal\DecalPipeLine.cpp" />
+    <ClCompile Include="Engine\Graphics\Material\Decal\Decal.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application\System\GameManager\GameManager.h">
@@ -1198,6 +1200,8 @@
     <ClInclude Include="Engine\ResourceSystem\Resources\Mesh\MeshResource.h" />
     <ClInclude Include="Engine\ResourceSystem\Resources\Tex\TextureResource.h" />
     <ClInclude Include="Engine\ResourceSystem\TextureLoader\TextureLoader.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Decal\DecalPipeLine.h" />
+    <ClInclude Include="Engine\Graphics\Material\Decal\Decal.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Application">

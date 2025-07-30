@@ -82,8 +82,8 @@ public: // メンバ変数
 	void SetNormalMap(const NormalMap& setData) { this->datas_.normalMap = setData; }
 
 	// Decal
-	Decal GetDecal() const { return this->datas_.decal; }
-	void SetDecal(const Decal& setData) { this->datas_.decal = setData; }
+	DecalSetting GetDecal() const { return this->datas_.decal; }
+	void SetDecal(const DecalSetting& setData) { this->datas_.decal = setData; }
 
 #pragma endregion 
 

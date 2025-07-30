@@ -1,21 +1,16 @@
-#include "Decal.hlsli"
+ï»¿#include "Decal.hlsli"
 
-// ƒ}ƒeƒŠƒAƒ‹ (ƒfƒJ[ƒ‹ê—p‚È‚Ì‚ÅÅ¬ŒÀ)
-struct Material // Šù‘¶‚ÌMaterial\‘¢‘Ì‚ğ—¬—p‚·‚é‚±‚Æ‚à‰Â”\
-{
-    float4 color;
-    // float4x4 uvTransform; // ƒfƒJ[ƒ‹ƒeƒNƒXƒ`ƒƒ‚ÉŒÂ•Ê‚ÌUV•ÏŠ·‚ª•s—v‚È‚ç•s—v
-    // uint textureIndex;
-};
-ConstantBuffer<Material> gMaterial : register(b0); 
-Texture2D<float4> gTexture : register(t0); 
+// ã‚«ãƒ¡ãƒ©æƒ…å ± 
+ConstantBuffer<ViewProjectionMatrix> gViewProjectionMat : register(b0);
 
-// ƒfƒJ[ƒ‹İ’è
-ConstantBuffer<DecalSettings> gDecalSettings : register(b6);
-Texture2D<float4> gDecalTexture : register(t1); // ƒfƒJ[ƒ‹ƒeƒNƒXƒ`ƒƒ
+// ãƒ‡ã‚«ãƒ¼ãƒ«è¨­å®š
+ConstantBuffer<DecalSettings> gDecalSettings : register(b1);
+ // ãƒ‡ã‚«ãƒ¼ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£
+Texture2D<float4> gDecalTexture : register(t1);
 
-// ƒTƒ“ƒvƒ‰[
+// ã‚µãƒ³ãƒ—ãƒ©ãƒ¼
 SamplerState gSampler : register(s0);
+
 
 struct PixelShaderOutput
 {
@@ -27,40 +22,40 @@ PixelShaderOutput main(VertexShaderOutput input)
 {
     PixelShaderOutput output;
 
-    // ƒfƒJ[ƒ‹‚ª–³Œø‚È‚ç•`‰æ‚ğƒXƒLƒbƒv
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ãŒç„¡åŠ¹ãªã‚‰æç”»ã‚’ã‚¹ã‚­ãƒƒãƒ—
     if (gDecalSettings.enable == 0)
     {
         discard;
     }
 
-    // ƒ[ƒ‹ƒhÀ•W‚ğƒfƒJ[ƒ‹‹óŠÔ‚Ö•ÏŠ· (VS‚Å“n‚µ’¼‚µ‚½decalMatrix‚ğg‚¤)
-    // ‚±‚ÌdecalMatrix‚ÍAƒAƒvƒŠƒP[ƒVƒ‡ƒ“‘¤‚ÅuƒfƒJ[ƒ‹‚Ìƒ[ƒ‹ƒhs—ñ‚Ì‹ts—ñv‚Æ‚µ‚Äİ’è‚³‚ê‚Ä‚¢‚é‚Æ‰¼’è
+    // ãƒ¯ãƒ¼ãƒ«ãƒ‰åº§æ¨™ã‚’ãƒ‡ã‚«ãƒ¼ãƒ«ç©ºé–“ã¸å¤‰æ› (VSã§æ¸¡ã—ç›´ã—ãŸdecalMatrixã‚’ä½¿ã†)
+    // ã“ã®decalMatrixã¯ã€ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³å´ã§ã€Œãƒ‡ã‚«ãƒ¼ãƒ«ã®ãƒ¯ãƒ¼ãƒ«ãƒ‰è¡Œåˆ—ã®é€†è¡Œåˆ—ã€ã¨ã—ã¦è¨­å®šã•ã‚Œã¦ã„ã‚‹ã¨ä»®å®š
     float4 decalPos = mul(float4(input.worldPos, 1.0f), gDecalSettings.decalMatrix);
 
-    // ƒfƒJ[ƒ‹UVÀ•W‚ÌŒvZ (ƒfƒJ[ƒ‹‹óŠÔ‚Ìxy‚ğ0.0`1.0‚Ì”ÍˆÍ‚É³‹K‰»)
-    // ‚±‚ê‚É‚æ‚èAƒfƒJ[ƒ‹ƒ{ƒbƒNƒX‚Ì-1.0?1.0‚Ì”ÍˆÍ‚ªƒeƒNƒXƒ`ƒƒ‚Ì0.0?1.0‚Éƒ}ƒbƒsƒ“ƒO‚³‚ê‚é
+    // ãƒ‡ã‚«ãƒ¼ãƒ«UVåº§æ¨™ã®è¨ˆç®— (ãƒ‡ã‚«ãƒ¼ãƒ«ç©ºé–“ã®xyã‚’0.0ï½1.0ã®ç¯„å›²ã«æ­£è¦åŒ–)
+    // ã“ã‚Œã«ã‚ˆã‚Šã€ãƒ‡ã‚«ãƒ¼ãƒ«ãƒœãƒƒã‚¯ã‚¹ã®-1.0ã€œ1.0ã®ç¯„å›²ãŒãƒ†ã‚¯ã‚¹ãƒãƒ£ã®0.0ã€œ1.0ã«ãƒãƒƒãƒ”ãƒ³ã‚°ã•ã‚Œã‚‹
     float2 decalUV = decalPos.xy * 0.5f + 0.5f;
 
-    // ƒfƒJ[ƒ‹‚ª”ÍˆÍŠO‚Å‚ ‚ê‚ÎƒsƒNƒZƒ‹‚ğ”jŠü
-    // ƒfƒJ[ƒ‹ƒ{ƒbƒNƒX‚Ì”ÍˆÍŠO‚É“Š‰e‚³‚ê‚½ƒsƒNƒZƒ‹‚ğ•`‰æ‚µ‚È‚¢‚æ‚¤‚É‚µ‚Ü‚·
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ãŒç¯„å›²å¤–ã§ã‚ã‚Œã°ãƒ”ã‚¯ã‚»ãƒ«ã‚’ç ´æ£„
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ãƒœãƒƒã‚¯ã‚¹ã®ç¯„å›²å¤–ã«æŠ•å½±ã•ã‚ŒãŸãƒ”ã‚¯ã‚»ãƒ«ã‚’æç”»ã—ãªã„ã‚ˆã†ã«ã—ã¾ã™
     if (decalUV.x < 0.0f || decalUV.x > 1.0f || decalUV.y < 0.0f || decalUV.y > 1.0f ||
-        decalPos.z < -1.0f || decalPos.z > 1.0f) // Z²•ûŒü‚Ì”ÍˆÍƒ`ƒFƒbƒN‚à’Ç‰Á
+        decalPos.z < -1.0f || decalPos.z > 1.0f) // Zè»¸æ–¹å‘ã®ç¯„å›²ãƒã‚§ãƒƒã‚¯ã‚‚è¿½åŠ 
     {
         discard;
     }
 
-    // ƒfƒJ[ƒ‹ƒeƒNƒXƒ`ƒƒ‚ğƒTƒ“ƒvƒŠƒ“ƒO
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã‚’ã‚µãƒ³ãƒ—ãƒªãƒ³ã‚°
     float4 decalSample = gDecalTexture.Sample(gSampler, decalUV);
 
-    // ƒfƒJ[ƒ‹ƒeƒNƒXƒ`ƒƒ‚ÌƒAƒ‹ƒtƒ@‚ª0‚È‚ç”jŠü (‚Ğ‚ÑŠ„‚ê‚Ì“§–¾•”•ª)
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¢ãƒ«ãƒ•ã‚¡ãŒ0ãªã‚‰ç ´æ£„ (ã²ã³å‰²ã‚Œã®é€æ˜éƒ¨åˆ†)
     if (decalSample.a == 0.0f)
     {
         discard;
     }
     
-    // ƒfƒJ[ƒ‹‚ÌF‚ğƒfƒJ[ƒ‹ƒeƒNƒXƒ`ƒƒ‚ÌƒAƒ‹ƒtƒ@’l‚Æ‹­“x‚ÅæZ
+    // ãƒ‡ã‚«ãƒ¼ãƒ«ã®è‰²ã‚’ãƒ‡ã‚«ãƒ¼ãƒ«ãƒ†ã‚¯ã‚¹ãƒãƒ£ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã¨å¼·åº¦ã§ä¹—ç®—
     output.color.rgb = gDecalSettings.decalColor.rgb * decalSample.a * gDecalSettings.decalStrength;
-    output.color.a = decalSample.a; // ƒfƒJ[ƒ‹‚ÌƒAƒ‹ƒtƒ@’l‚ğ‚»‚Ì‚Ü‚Üg‚¤
+    output.color.a = decalSample.a; // ãƒ‡ã‚«ãƒ¼ãƒ«ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã‚’ãã®ã¾ã¾ä½¿ã†
 
     return output;
 }

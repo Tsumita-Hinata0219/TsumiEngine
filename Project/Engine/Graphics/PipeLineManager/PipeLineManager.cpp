@@ -21,6 +21,7 @@ void PipeLineManager::CreatePipeLine()
 	instance->CreatePipeLine_Skybox();
 	instance->CreatePipeLine_CPUParticle();
 	instance->CreatePipeLine_GPUParticle_Draw();
+	instance->CreatePipeLine_Decal();
 
 	// ポストエフェクト
 	instance->CreatePipeLine_Absent();
@@ -136,6 +137,12 @@ void PipeLineManager::CreatePipeLine_GPUParticle_Draw()
 	// Depth Zero
 	pipeline->SetUpDepthWriteMask(D3D12_DEPTH_WRITE_MASK_ZERO); // DepthWriteMaskをZeroに設定
 	pipeLineMaps_[Category::GPUParticle_Draw][SubFilter::DepthWriteMask_Zero] = pipeline->SetUpPso();
+}
+
+void PipeLineManager::CreatePipeLine_Decal()
+{
+	std::unique_ptr<DecalPipeLine> pipeline = std::make_unique<DecalPipeLine>();
+	pipeLineMaps_[Category::Decal][SubFilter::None] = pipeline->SetUpPso();
 }
 
 

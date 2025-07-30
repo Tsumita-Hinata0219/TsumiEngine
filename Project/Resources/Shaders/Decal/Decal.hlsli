@@ -1,7 +1,7 @@
 struct VertexShaderOutput
 {
     float4 position : SV_POSITION;
-    float3 worldPos : WORLDPOS;
+    float3 worldPos : WORLDPOSITION;
     float2 decalUV : TEXCOORD;
 };
 

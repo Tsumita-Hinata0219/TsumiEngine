@@ -44,6 +44,7 @@ enum class Category {
 	Object3D,
 	SkinningObject3D,
 	Skybox,
+	Decal,
 
 	CPUParticle,
 	GPUParticle_Draw,

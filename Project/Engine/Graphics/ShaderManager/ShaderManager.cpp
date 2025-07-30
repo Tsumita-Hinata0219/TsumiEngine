@@ -132,6 +132,7 @@ void ShaderManager::ModelShadersCompiles()
 	SkyboxShader();
 	CPUParticleShader();
 	GPUParticle_Draw();
+	Decal();
 }
 void ShaderManager::PostEffectShadersCompiles()
 {
@@ -235,6 +236,15 @@ void ShaderManager::GPUParticle_Draw()
 		.PixelBlob = SetShader(PS, L"Resources/Shaders/GPUParticle/Draw/GPUParticle_Draw.PS.hlsl"),
 	};
 	modelShadersMap_["GPUParticle_Draw"] = shader;
+}
+
+void ShaderManager::Decal()
+{
+	ShadersMode shader{
+		   .VertexBlob = SetShader(VS, L"Resources/Shaders/Decal/Decal.VS.hlsl"),
+		   .PixelBlob = SetShader(PS, L"Resources/Shaders/Decal/Decal.PS.hlsl"),
+	};
+	modelShadersMap_["Decal"] = shader;
 }
 
 

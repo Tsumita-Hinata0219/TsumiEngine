@@ -77,7 +77,7 @@ struct NormalMap {
 };
 
 // デカール
-struct Decal {
+struct DecalSetting {
 	Matrix4x4 decalMatrix; // デカールの位置、回転、スケールを決定する行列
 	Vector4 decalColor; // デカールの色
 	float decalStrength; // デカールの適用強度

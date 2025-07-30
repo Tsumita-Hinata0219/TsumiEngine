@@ -206,6 +206,8 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelectRender\StageSelectRender.cpp" />
     <ClCompile Include="Application\GameObject\Others\TitleUIManager\StageSelect\StageSelect.cpp" />
     <ClCompile Include="Application\Scene\DevScene\DevScene.cpp" />
+    <ClCompile Include="Engine\Graphics\Material\Decal\Decal.cpp" />
+    <ClCompile Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Decal\DecalPipeLine.cpp" />
     <ClCompile Include="Engine\Graphics\2D\SpriteResource\SpriteResource.cpp" />
     <ClCompile Include="Engine\Graphics\2D\Sprite\Sprite.cpp" />
     <ClCompile Include="Engine\Graphics\2D\Structure\SpriteStructure.cpp" />
@@ -561,6 +563,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\VertexWeightData\VertexWeightData.h" />
     <ClInclude Include="Engine\Graphics\Animation\AnimationStructure\WellForGPU\WellForGPU.h" />
     <ClInclude Include="Engine\Graphics\Animation\KeyFrameAnimation\KeyFrameAnimation.h" />
+    <ClInclude Include="Engine\Graphics\Material\Decal\Decal.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Emitter\Sphere\SphereEmitterPipeLine.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\Field\Constant\ConstantFieldPipeLine.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\CSPipeLine\GPUParticle\FadeOut\GPUParticle_FadeOut_PipeLine.h" />
@@ -569,6 +572,7 @@ copy "$(WindowsSdkDir)bin\$(TargetPlatformVersion)\x64\dxil.dll" "$(TargetDir)dx
     <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\IPipeLineState.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\IPipeLineState\PipeLineStructure.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\CPUParticlePipeLine\CPUParticlePipeLine.h" />
+    <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Decal\DecalPipeLine.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\GPUParticle_Draw\GPUParticle_Draw_PipeLine.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object2DPipeLine\Object2DPipeLine.h" />
     <ClInclude Include="Engine\Graphics\PipeLineManager\ModelPipeLine\Object3DPipeLine\Object3DPipeLine.h" />
